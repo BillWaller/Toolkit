@@ -26,46 +26,11 @@ var NAVTREE =
 [
   [ "C-Menu", "index.html", [
     [ "A User Interface Toolkit", "index.html", "index" ],
-    [ "A User Interface Toolkit", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html", [
-      [ "Table of Contents", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#table-of-contents", null ],
-      [ "<b><em>NEW</em></b> - Complete C-Menu HTML Documentation", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#_new_---complete-c-menu-html-documentation", null ],
-      [ "C-Menu Exercises", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#c-menu-exercises", null ],
-      [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#menu-form-pick-view-c-keys-rsh-and-lf", [
-        [ "Elements of C-Menu", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#elements-of-c-menu", null ],
-        [ "Key Features", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#key-features", null ],
-        [ "Highlights (Pun Intended)", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#highlights-pun-intended", null ],
-        [ "Just Do It!", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#just-do-it", null ],
-        [ "Menu", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#menu", null ],
-        [ "C-Keys - Diagnose Keyboard/Mouse Input", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#c-keys---diagnose-keyboardmouse-input", null ],
-        [ "Pick - A Picker", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#pick---a-picker", null ],
-        [ "Form for Data Entry and Editing", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#form-for-data-entry-and-editing", null ],
-        [ "Form Key Features", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#form-key-features", null ],
-        [ "Form Data Types", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#form-data-types", null ],
-        [ "Sample Menu Description File", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#sample-menu-description-file", null ],
-        [ "View", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#view", [
-          [ "Log File With Editor", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#log-file-with-editor", null ],
-          [ "Screenshot of the Same File With View", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#screenshot-of-the-same-file-with-view", null ]
-        ] ],
-        [ "View and Color Manual Pages", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#view-and-color-manual-pages", null ],
-        [ "Example Manual Page Using Editor", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#example-manual-page-using-editor", null ],
-        [ "Example Manual Page", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#example-manual-page", null ],
-        [ "Demand Paged Virtual Address Space", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#demand-paged-virtual-address-space", null ],
-        [ "View - Other Features", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#view---other-features", null ],
-        [ "3-Channel Gamma Correction", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#autotoc_md3-channel-gamma-correction", null ],
-        [ "Gray Gamma", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#gray-gamma", null ],
-        [ "RSH", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#rsh", null ],
-        [ "Maintaining Security with RSH", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#maintaining-security-with-rsh", null ],
-        [ "lf - List Files Using Regular Expressions", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#lf---list-files-using-regular-expressions", null ]
-      ] ],
-      [ "Features", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#features", null ],
-      [ "Configuration", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#configuration", null ],
-      [ "MIT License", "d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#mit-license", null ]
-    ] ],
     [ "API", "d7/d7a/md_API.html", [
       [ "Introduction", "d7/d7a/md_API.html#introduction", null ]
     ] ],
     [ "User guide", "de/d82/md_C-Menu-UG.html", [
-      [ "Table of Contents", "de/d82/md_C-Menu-UG.html#table-of-contents-1", null ],
+      [ "Table of Contents", "de/d82/md_C-Menu-UG.html#table-of-contents", null ],
       [ "Introduction", "de/d82/md_C-Menu-UG.html#introduction-1", null ],
       [ "Prerequisites", "de/d82/md_C-Menu-UG.html#prerequisites", [
         [ "Not Required, But Recommended", "de/d82/md_C-Menu-UG.html#not-required-but-recommended", null ]
@@ -73,7 +38,7 @@ var NAVTREE =
       [ "Getting Started", "de/d82/md_C-Menu-UG.html#getting-started", [
         [ "RSH Safety Features", "de/d82/md_C-Menu-UG.html#rsh-safety-features", null ]
       ] ],
-      [ "Menu", "de/d82/md_C-Menu-UG.html#menu-1", [
+      [ "Menu", "de/d82/md_C-Menu-UG.html#menu", [
         [ "Menu Example", "de/d82/md_C-Menu-UG.html#menu-example", null ],
         [ "Menu Description File Format", "de/d82/md_C-Menu-UG.html#menu-description-file-format", null ]
       ] ],
@@ -81,7 +46,7 @@ var NAVTREE =
         [ "Form Description File Example", "de/d82/md_C-Menu-UG.html#form-description-file-example", [
           [ "Form Line Type Specifiers", "de/d82/md_C-Menu-UG.html#form-line-type-specifiers", null ],
           [ "Form Field Delimiters", "de/d82/md_C-Menu-UG.html#form-field-delimiters", null ],
-          [ "Form Data Types", "de/d82/md_C-Menu-UG.html#form-data-types-1", null ],
+          [ "Form Data Types", "de/d82/md_C-Menu-UG.html#form-data-types", null ],
           [ "Form Line Syntax", "de/d82/md_C-Menu-UG.html#form-line-syntax", null ],
           [ "Form Options", "de/d82/md_C-Menu-UG.html#form-options", null ]
         ] ]
@@ -123,7 +88,7 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Augmenting C-Menu", "dc/db0/md_extras.html", [
-      [ "Table of Contents", "dc/db0/md_extras.html#table-of-contents-2", null ],
+      [ "Table of Contents", "dc/db0/md_extras.html#table-of-contents-1", null ],
       [ "Introduction", "dc/db0/md_extras.html#introduction-2", null ],
       [ "Installing Rust", "dc/db0/md_extras.html#installing-rust", [
         [ "Installing Rust On Linux and macOS", "dc/db0/md_extras.html#installing-rust-on-linux-and-macos", null ]
@@ -186,7 +151,7 @@ var NAVTREE =
       [ "Conclusion", "dc/db0/md_extras.html#conclusion", null ]
     ] ],
     [ "Frequently Asked Questions", "d5/d77/md_FAQ.html", [
-      [ "Table of Contents", "d5/d77/md_FAQ.html#table-of-contents-3", null ],
+      [ "Table of Contents", "d5/d77/md_FAQ.html#table-of-contents-2", null ],
       [ "Sorted lf Output", "d5/d77/md_FAQ.html#sorted-lf-output", null ],
       [ "Multiple Executables", "d5/d77/md_FAQ.html#multiple-executables", null ],
       [ "Static Executables", "d5/d77/md_FAQ.html#static-executables", null ],
@@ -231,9 +196,8 @@ var NAVTREE =
       [ "<img src=\"screenshots/mainmenu.png\" alt=\"C-Menu Running\" class=\"inline\"/>", "d4/def/md_INSTALL.html#c-menu-runningscreenshotsmainmenupng", null ],
       [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d4/def/md_INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository", null ]
     ] ],
-    [ "MIT License", "da/d19/md_LICENSE.html", null ],
     [ "Configuration snippets", "d7/da4/md_snippets.html", [
-      [ "Table of Contents", "d7/da4/md_snippets.html#table-of-contents-5", null ],
+      [ "Table of Contents", "d7/da4/md_snippets.html#table-of-contents-4", null ],
       [ "C-Menu Desktop Files", "d7/da4/md_snippets.html#c-menu-desktop-files", null ],
       [ "C-Menu bashrc Configuration", "d7/da4/md_snippets.html#c-menu-bashrc-configuration", [
         [ "Shell Logging", "d7/da4/md_snippets.html#shell-logging", null ],
@@ -280,9 +244,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "d0/d59/futil_8c.html",
-"d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#example-manual-page-using-editor",
-"dc/d40/dwin_8c.html#aeb07b69a39f8759a6c32d7536c067ef3",
-"index.html#autotoc_md3-channel-gamma-correction-1"
+"d7/d72/scriou_8c.html#ab69b11814964ea732c1e8e0ca6d22c1c",
+"dc/db0/md_extras.html#ghostty-on-macos"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

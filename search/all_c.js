@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['gamma_0',['Gamma',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#gray-gamma',1,'Gray Gamma'],['../index.html#gray-gamma-1',1,'Gray Gamma']]],
-  ['gamma_20correction_1',['Gamma Correction',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#autotoc_md3-channel-gamma-correction',1,'3-Channel Gamma Correction'],['../index.html#autotoc_md3-channel-gamma-correction-1',1,'3-Channel Gamma Correction']]],
+  ['gamma_0',['Gray Gamma',['../index.html#gray-gamma',1,'']]],
+  ['gamma_20correction_1',['3-Channel Gamma Correction',['../index.html#autotoc_md3-channel-gamma-correction',1,'']]],
   ['gawk_2',['High Precision Math With C-Menu and Gawk',['../d5/d77/md_FAQ.html#high-precision-math-with-c-menu-and-gawk',1,'']]],
   ['gdb_20debugging_20setup_3',['GDB Debugging Setup',['../d7/da4/md_snippets.html#gdb-debugging-setup',1,'']]],
   ['get_5fchyron_5fkey_4',['get_chyron_key',['../dc/d40/dwin_8c.html#a4298f891699300bfc4e6e56fd2a8d574',1,'dwin.c']]],
@@ -28,7 +28,7 @@ var searchData=
   ['go_5fto_5fmark_25',['go_to_mark',['../d0/d8e/view__engine_8c.html#ada77a15a548ce444426d43fd39a1cce4',1,'view_engine.c']]],
   ['go_5fto_5fpercent_26',['go_to_percent',['../d0/d8e/view__engine_8c.html#ae6623cc4892a014fc9c40b3bca1db7d9',1,'view_engine.c']]],
   ['go_5fto_5fposition_27',['go_to_position',['../d0/d8e/view__engine_8c.html#a5f74dca8730faaa3ff362fc1e01b12ce',1,'view_engine.c']]],
-  ['gray_20gamma_28',['Gray Gamma',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#gray-gamma',1,'Gray Gamma'],['../index.html#gray-gamma-1',1,'Gray Gamma']]],
+  ['gray_20gamma_28',['Gray Gamma',['../index.html#gray-gamma',1,'']]],
   ['gray_5fgamma_29',['GRAY_GAMMA',['../dc/d40/dwin_8c.html#ac50ec3418398b22cb857da67d17b4a9d',1,'dwin.c']]],
   ['green_30',['green',['../df/dcd/opts_8c.html#a7027592d032f7d20b38a1304ae3da2a2',1,'opts.c']]],
   ['green_5fgamma_31',['GREEN_GAMMA',['../dc/d40/dwin_8c.html#ae73f509d37ed68f90fda73b039a914b8',1,'dwin.c']]],

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['page_0',['Page',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#example-manual-page',1,'Example Manual Page'],['../index.html#example-manual-page-1',1,'Example Manual Page']]],
-  ['page_20using_20editor_1',['Page Using Editor',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#example-manual-page-using-editor',1,'Example Manual Page Using Editor'],['../index.html#example-manual-page-using-editor-1',1,'Example Manual Page Using Editor']]],
-  ['paged_20virtual_20address_20space_2',['Paged Virtual Address Space',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#demand-paged-virtual-address-space',1,'Demand Paged Virtual Address Space'],['../index.html#demand-paged-virtual-address-space-1',1,'Demand Paged Virtual Address Space']]],
+  ['page_0',['Example Manual Page',['../index.html#example-manual-page',1,'']]],
+  ['page_20using_20editor_1',['Example Manual Page Using Editor',['../index.html#example-manual-page-using-editor',1,'']]],
+  ['paged_20virtual_20address_20space_2',['Demand Paged Virtual Address Space',['../index.html#demand-paged-virtual-address-space',1,'']]],
   ['pagers_5feditors_3',['pagers_editors',['../db/ddc/pick__engine_8c.html#a8f93294009502446912fa64f33731029',1,'pick_engine.c']]],
-  ['pages_4',['Pages',['../d5/d77/md_FAQ.html#view---how-to-colorize-manual-pages',1,'View - How to Colorize Manual Pages'],['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#view-and-color-manual-pages',1,'View and Color Manual Pages'],['../index.html#view-and-color-manual-pages-1',1,'View and Color Manual Pages']]],
+  ['pages_4',['Pages',['../d5/d77/md_FAQ.html#view---how-to-colorize-manual-pages',1,'View - How to Colorize Manual Pages'],['../index.html#view-and-color-manual-pages',1,'View and Color Manual Pages']]],
   ['parse_5fansi_5fstr_5',['parse_ansi_str',['../d0/d8e/view__engine_8c.html#a9fc984ba8ce6c4059b33a915d526357f',1,'view_engine.c']]],
   ['parse_5fconfig_6',['parse_config',['../d8/d60/init_8c.html#a5836f1ea8f972e3ca12e2772dc76fb32',1,'init.c']]],
   ['parse_5fmenu_5fdesc_2ec_7',['parse_menu_desc.c',['../d1/db0/parse__menu__desc_8c.html',1,'']]],
@@ -21,17 +21,17 @@ var searchData=
   ['pg_5flines_18',['pg_lines',['../db/ddc/pick__engine_8c.html#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d',1,'pick_engine.c']]],
   ['pick_19',['C-Menu Pick',['../de/d82/md_C-Menu-UG.html#c-menu-pick',1,'']]],
   ['pick_20',['pick',['../d3/d8f/mem_8c.html#aa0984c16af72bfdf57c5d88de1d314f9',1,'mem.c']]],
-  ['pick_20a_20picker_21',['Pick A Picker',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#pick---a-picker',1,'Pick - A Picker'],['../index.html#pick---a-picker-1',1,'Pick - A Picker']]],
+  ['pick_20a_20picker_21',['Pick - A Picker',['../index.html#pick---a-picker',1,'']]],
   ['pick_20and_20view_20api_22',['Menu, Form, Pick, and View API',['../d5/d77/md_FAQ.html#menu-form-pick-and-view-api',1,'']]],
   ['pick_20options_23',['Pick Options',['../de/d82/md_C-Menu-UG.html#pick-options',1,'']]],
   ['pick_20selecting_20multiple_20files_24',['Pick - Selecting Multiple Files',['../d5/d77/md_FAQ.html#pick---selecting-multiple-files',1,'']]],
   ['pick_20usage_25',['Pick Usage',['../de/d82/md_C-Menu-UG.html#pick-usage',1,'']]],
-  ['pick_20view_20c_20keys_20rsh_20and_20lf_26',['Pick View C Keys RSH and lf',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf'],['../index.html#menu-form-pick-view-c-keys-rsh-and-lf-1',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf']]],
+  ['pick_20view_20c_20keys_20rsh_20and_20lf_26',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../index.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
   ['pick_2ec_27',['pick.c',['../de/d7c/pick_8c.html',1,'']]],
   ['pick_5fdisplay_5fchyron_28',['pick_display_chyron',['../db/ddc/pick__engine_8c.html#aed5ddd88212281d12281a15bf8fc7b8b',1,'pick_engine.c']]],
   ['pick_5fengine_29',['pick_engine',['../db/ddc/pick__engine_8c.html#ab97dcab41017c5132f52b682437a151e',1,'pick_engine.c']]],
   ['pick_5fengine_2ec_30',['pick_engine.c',['../db/ddc/pick__engine_8c.html',1,'']]],
-  ['picker_31',['Picker',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#pick---a-picker',1,'Pick - A Picker'],['../index.html#pick---a-picker-1',1,'Pick - A Picker']]],
+  ['picker_31',['Pick - A Picker',['../index.html#pick---a-picker',1,'']]],
   ['picker_32',['picker',['../db/ddc/pick__engine_8c.html#abb0969a6d1c7e78be46c3b325754c802',1,'pick_engine.c']]],
   ['pipe_5ffd_33',['pipe_fd',['../db/ddc/pick__engine_8c.html#ac7ac4adf3c3409d847a57c140700f334',1,'pick_engine.c']]],
   ['pipe_5fin_34',['pipe_in',['../dc/d40/dwin_8c.html#a1d03ed849591d8ab81c3b0e6b0a81ab8',1,'dwin.c']]],
@@ -48,5 +48,5 @@ var searchData=
   ['prompt_5fstr_5fto_5fint_45',['prompt_str_to_int',['../d8/d60/init_8c.html#a182e8ea82f7f61825c2258be419212da',1,'init.c']]],
   ['prompts_46',['Privilege Indicator Shell Prompts',['../d7/da4/md_snippets.html#privilege-indicator-shell-prompts',1,'']]],
   ['provided_20scripts_47',['Option 2 - Build C-Menu with Provided Scripts',['../d4/def/md_INSTALL.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
-  ['pun_20intended_48',['Pun Intended',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#highlights-pun-intended',1,'Highlights (Pun Intended)'],['../index.html#highlights-pun-intended-1',1,'Highlights (Pun Intended)']]]
+  ['pun_20intended_48',['Highlights (Pun Intended)',['../index.html#highlights-pun-intended',1,'']]]
 ];

@@ -3,7 +3,7 @@ var searchData=
   ['navigation_0',['View Navigation',['../de/d82/md_C-Menu-UG.html#view-navigation',1,'']]],
   ['neovim_1',['Neovim',['../dc/db0/md_extras.html#neovim',1,'']]],
   ['neovim_20linkage_20to_20the_20c_20menu_20api_2',['Neovim Linkage to the C-Menu API',['../dc/db0/md_extras.html#neovim-linkage-to-the-c-menu-api',1,'']]],
-  ['new_20complete_20c_20menu_20html_20documentation_3',['NEW Complete C Menu HTML Documentation',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#_new_---complete-c-menu-html-documentation',1,'&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation'],['../index.html#_new_---complete-c-menu-html-documentation-1',1,'&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation']]],
+  ['new_20complete_20c_20menu_20html_20documentation_3',['&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation',['../index.html#_new_---complete-c-menu-html-documentation',1,'']]],
   ['new_5fchyron_4',['new_chyron',['../dc/d40/dwin_8c.html#ad37d5808ff30ae6894780425d865abae',1,'dwin.c']]],
   ['new_5fform_5',['new_form',['../d3/d8f/mem_8c.html#a625c89a0ff0ede7fbac1b40c7ac9dbda',1,'mem.c']]],
   ['new_5finit_6',['new_init',['../d3/d8f/mem_8c.html#a75cffbfad8930c347fa9ae68b69f3bdf',1,'mem.c']]],
