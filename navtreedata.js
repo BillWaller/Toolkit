@@ -25,205 +25,239 @@
 var NAVTREE =
 [
   [ "C-Menu", "index.html", [
-    [ "A User Interface Toolkit", "index.html", "index" ],
-    [ "API", "d3/d7c/md__2srv_2www_2htdocs_2C-Menu_2API.html", [
-      [ "Introduction", "d3/d7c/md__2srv_2www_2htdocs_2C-Menu_2API.html#introduction", null ]
+    [ "API", "d7/d7a/md_API.html", [
+      [ "Introduction", "d7/d7a/md_API.html#introduction", null ]
     ] ],
-    [ "User guide", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html", [
-      [ "Table of Contents", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#table-of-contents", null ],
-      [ "Introduction", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#introduction-1", null ],
-      [ "Prerequisites", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#prerequisites", [
-        [ "Not Required, But Recommended", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#not-required-but-recommended", null ]
+    [ "User guide", "de/d82/md_C-Menu-UG.html", [
+      [ "Table of Contents", "de/d82/md_C-Menu-UG.html#table-of-contents", null ],
+      [ "Introduction", "de/d82/md_C-Menu-UG.html#introduction-1", null ],
+      [ "Prerequisites", "de/d82/md_C-Menu-UG.html#prerequisites", [
+        [ "Not Required, But Recommended", "de/d82/md_C-Menu-UG.html#not-required-but-recommended", null ]
       ] ],
-      [ "Getting Started", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#getting-started", [
-        [ "RSH Safety Features", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#rsh-safety-features", null ]
+      [ "Getting Started", "de/d82/md_C-Menu-UG.html#getting-started", [
+        [ "RSH Safety Features", "de/d82/md_C-Menu-UG.html#rsh-safety-features", null ]
       ] ],
-      [ "Menu", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#menu", [
-        [ "Menu Example", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#menu-example", null ],
-        [ "Menu Description File Format", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#menu-description-file-format", null ]
+      [ "Menu", "de/d82/md_C-Menu-UG.html#menu", [
+        [ "Menu Example", "de/d82/md_C-Menu-UG.html#menu-example", null ],
+        [ "Menu Description File Format", "de/d82/md_C-Menu-UG.html#menu-description-file-format", null ]
       ] ],
-      [ "C-Menu Form", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#c-menu-form", [
-        [ "Form Description File Example", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#form-description-file-example", [
-          [ "Form Line Type Specifiers", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#form-line-type-specifiers", null ],
-          [ "Form Field Delimiters", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#form-field-delimiters", null ],
-          [ "Form Data Types", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#form-data-types", null ],
-          [ "Form Line Syntax", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#form-line-syntax", null ],
-          [ "Form Options", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#form-options", null ]
+      [ "C-Menu Form", "de/d82/md_C-Menu-UG.html#c-menu-form", [
+        [ "Form Description File Example", "de/d82/md_C-Menu-UG.html#form-description-file-example", [
+          [ "Form Line Type Specifiers", "de/d82/md_C-Menu-UG.html#form-line-type-specifiers", null ],
+          [ "Form Field Delimiters", "de/d82/md_C-Menu-UG.html#form-field-delimiters", null ],
+          [ "Form Data Types", "de/d82/md_C-Menu-UG.html#form-data-types", null ],
+          [ "Form Line Syntax", "de/d82/md_C-Menu-UG.html#form-line-syntax", null ],
+          [ "Form Options", "de/d82/md_C-Menu-UG.html#form-options", null ]
         ] ]
       ] ],
-      [ "C-Menu Pick", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#c-menu-pick", [
-        [ "Pick Usage", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#pick-usage", [
-          [ "Selecting Items", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#selecting-items", null ]
+      [ "C-Menu Pick", "de/d82/md_C-Menu-UG.html#c-menu-pick", [
+        [ "Pick Usage", "de/d82/md_C-Menu-UG.html#pick-usage", [
+          [ "Selecting Items", "de/d82/md_C-Menu-UG.html#selecting-items", null ]
         ] ],
-        [ "Pick Options", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#pick-options", null ]
+        [ "Pick Options", "de/d82/md_C-Menu-UG.html#pick-options", null ]
       ] ],
-      [ "C-Menu View", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#c-menu-view", [
-        [ "View Options", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#view-options", [
-          [ "View Navigation", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#view-navigation", null ],
-          [ "Searching Forward", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#searching-forward", null ],
-          [ "Searching Backward", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#searching-backward", null ],
-          [ "Horizontal Scrolling", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#horizontal-scrolling", null ],
-          [ "Motion Keys", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#motion-keys", null ]
+      [ "C-Menu View", "de/d82/md_C-Menu-UG.html#c-menu-view", [
+        [ "View Options", "de/d82/md_C-Menu-UG.html#view-options", [
+          [ "View Navigation", "de/d82/md_C-Menu-UG.html#view-navigation", null ],
+          [ "Searching Forward", "de/d82/md_C-Menu-UG.html#searching-forward", null ],
+          [ "Searching Backward", "de/d82/md_C-Menu-UG.html#searching-backward", null ],
+          [ "Horizontal Scrolling", "de/d82/md_C-Menu-UG.html#horizontal-scrolling", null ],
+          [ "Motion Keys", "de/d82/md_C-Menu-UG.html#motion-keys", null ]
         ] ],
-        [ "C-Menu Options", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#c-menu-options", null ],
-        [ "lf", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#lf", null ]
+        [ "C-Menu Options", "de/d82/md_C-Menu-UG.html#c-menu-options", null ],
+        [ "lf", "de/d82/md_C-Menu-UG.html#lf", null ]
       ] ],
-      [ "Troubleshooting", "dc/d8c/md__2srv_2www_2htdocs_2C-Menu_2C-Menu-UG.html#troubleshooting", null ]
+      [ "Troubleshooting", "de/d82/md_C-Menu-UG.html#troubleshooting", null ]
     ] ],
-    [ "Changelog", "d5/d19/md__2srv_2www_2htdocs_2C-Menu_2CHANGELOG.html", [
-      [ "[Released] - 2026-02-04", "d5/d19/md__2srv_2www_2htdocs_2C-Menu_2CHANGELOG.html#released---2026-02-04", [
-        [ "Fixed", "d5/d19/md__2srv_2www_2htdocs_2C-Menu_2CHANGELOG.html#fixed", null ]
+    [ "Changelog", "d4/d40/md_CHANGELOG.html", [
+      [ "[Released] - 2026-02-04", "d4/d40/md_CHANGELOG.html#released---2026-02-04", [
+        [ "Fixed", "d4/d40/md_CHANGELOG.html#fixed", null ]
       ] ],
-      [ "[0.2.8]- 2026-02-04", "d5/d19/md__2srv_2www_2htdocs_2C-Menu_2CHANGELOG.html#autotoc_md028--2026-02-04", [
-        [ "Added", "d5/d19/md__2srv_2www_2htdocs_2C-Menu_2CHANGELOG.html#added", null ]
+      [ "[0.2.8]- 2026-02-04", "d4/d40/md_CHANGELOG.html#autotoc_md028--2026-02-04", [
+        [ "Added", "d4/d40/md_CHANGELOG.html#added", null ]
       ] ]
     ] ],
-    [ "EXERCISES", "db/d1c/md__2srv_2www_2htdocs_2C-Menu_2exercises.html", [
-      [ "Exercise 1: System Configurations", "db/d1c/md__2srv_2www_2htdocs_2C-Menu_2exercises.html#exercise-1-system-configurations", [
-        [ "SDDM Background Configuration", "db/d1c/md__2srv_2www_2htdocs_2C-Menu_2exercises.html#sddm-background-configuration", [
-          [ "Requisites", "db/d1c/md__2srv_2www_2htdocs_2C-Menu_2exercises.html#requisites", null ]
+    [ "EXERCISES", "d3/d8e/md_exercises.html", [
+      [ "Exercise 1: System Configurations", "d3/d8e/md_exercises.html#exercise-1-system-configurations", [
+        [ "SDDM Background Configuration", "d3/d8e/md_exercises.html#sddm-background-configuration", [
+          [ "Requisites", "d3/d8e/md_exercises.html#requisites", null ]
         ] ],
-        [ "Ghostty Configuration", "db/d1c/md__2srv_2www_2htdocs_2C-Menu_2exercises.html#ghostty-configuration", null ],
-        [ "Alacritty and Kitty", "db/d1c/md__2srv_2www_2htdocs_2C-Menu_2exercises.html#alacritty-and-kitty", null ]
+        [ "Ghostty Configuration", "d3/d8e/md_exercises.html#ghostty-configuration", null ],
+        [ "Alacritty and Kitty", "d3/d8e/md_exercises.html#alacritty-and-kitty", null ]
       ] ]
     ] ],
-    [ "Augmenting C-Menu", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html", [
-      [ "Table of Contents", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#table-of-contents-1", null ],
-      [ "Introduction", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#introduction-2", null ],
-      [ "Installing Rust", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#installing-rust", [
-        [ "Installing Rust On Linux and macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#installing-rust-on-linux-and-macos", null ]
+    [ "Augmenting C-Menu", "dc/db0/md_extras.html", [
+      [ "Table of Contents", "dc/db0/md_extras.html#table-of-contents-1", null ],
+      [ "Introduction", "dc/db0/md_extras.html#introduction-2", null ],
+      [ "Installing Rust", "dc/db0/md_extras.html#installing-rust", [
+        [ "Installing Rust On Linux and macOS", "dc/db0/md_extras.html#installing-rust-on-linux-and-macos", null ]
       ] ],
-      [ "About C-Menu and R-Menu", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#about-c-menu-and-r-menu", null ],
-      [ "Installing Bat", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#installing-bat", [
-        [ "Bat On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#bat-on-linux", null ],
-        [ "Bat On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#bat-on-macos", null ],
-        [ "Bat On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#bat-on-windows", null ]
+      [ "About C-Menu and R-Menu", "dc/db0/md_extras.html#about-c-menu-and-r-menu", null ],
+      [ "Installing Bat", "dc/db0/md_extras.html#installing-bat", [
+        [ "Bat On Linux", "dc/db0/md_extras.html#bat-on-linux", null ],
+        [ "Bat On macOS", "dc/db0/md_extras.html#bat-on-macos", null ],
+        [ "Bat On Windows", "dc/db0/md_extras.html#bat-on-windows", null ]
       ] ],
-      [ "Installing Ripgrep", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#installing-ripgrep", [
-        [ "Ripgrep On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ripgrep-on-linux", null ],
-        [ "Ripgrep On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ripgrep-on-macos", null ],
-        [ "Ripgrep On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ripgrep-on-windows", null ]
+      [ "Installing Ripgrep", "dc/db0/md_extras.html#installing-ripgrep", [
+        [ "Ripgrep On Linux", "dc/db0/md_extras.html#ripgrep-on-linux", null ],
+        [ "Ripgrep On macOS", "dc/db0/md_extras.html#ripgrep-on-macos", null ],
+        [ "Ripgrep On Windows", "dc/db0/md_extras.html#ripgrep-on-windows", null ]
       ] ],
-      [ "lsd", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#lsd", [
-        [ "lsd On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#lsd-on-linux", null ],
-        [ "lsd On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#lsd-on-macos", null ],
-        [ "lsd On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#lsd-on-windows", null ]
+      [ "lsd", "dc/db0/md_extras.html#lsd", [
+        [ "lsd On Linux", "dc/db0/md_extras.html#lsd-on-linux", null ],
+        [ "lsd On macOS", "dc/db0/md_extras.html#lsd-on-macos", null ],
+        [ "lsd On Windows", "dc/db0/md_extras.html#lsd-on-windows", null ]
       ] ],
-      [ "Highlighting", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#highlighting", null ],
-      [ "Tree-Sitter", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter", [
-        [ "Tree-Sitter On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-on-linux", null ],
-        [ "Tree-Sitter On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-on-macos", null ],
-        [ "Tree-Sitter On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-on-windows", null ]
+      [ "Highlighting", "dc/db0/md_extras.html#highlighting", null ],
+      [ "Tree-Sitter", "dc/db0/md_extras.html#tree-sitter", [
+        [ "Tree-Sitter On Linux", "dc/db0/md_extras.html#tree-sitter-on-linux", null ],
+        [ "Tree-Sitter On macOS", "dc/db0/md_extras.html#tree-sitter-on-macos", null ],
+        [ "Tree-Sitter On Windows", "dc/db0/md_extras.html#tree-sitter-on-windows", null ]
       ] ],
-      [ "Tree-Sitter-CLI", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-cli", [
-        [ "Tree-Sitter-CLI On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-cli-on-linux", null ],
-        [ "Tree-Sitter-CLI On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-cli-on-macos", null ],
-        [ "Tree-Sitter-CLI On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-cli-on-windows", null ]
+      [ "Tree-Sitter-CLI", "dc/db0/md_extras.html#tree-sitter-cli", [
+        [ "Tree-Sitter-CLI On Linux", "dc/db0/md_extras.html#tree-sitter-cli-on-linux", null ],
+        [ "Tree-Sitter-CLI On macOS", "dc/db0/md_extras.html#tree-sitter-cli-on-macos", null ],
+        [ "Tree-Sitter-CLI On Windows", "dc/db0/md_extras.html#tree-sitter-cli-on-windows", null ]
       ] ],
-      [ "Tree-Sitter Parsers", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-parsers", [
-        [ "Tree-Sitter Parsers On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-parsers-on-linux", null ],
-        [ "Tree-Sitter Parsers On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-parsers-on-macos", null ],
-        [ "Tree-Sitter Parsers On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#tree-sitter-parsers-on-windows", null ],
-        [ "Testing Tree-Sitter", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#testing-tree-sitter", null ]
+      [ "Tree-Sitter Parsers", "dc/db0/md_extras.html#tree-sitter-parsers", [
+        [ "Tree-Sitter Parsers On Linux", "dc/db0/md_extras.html#tree-sitter-parsers-on-linux", null ],
+        [ "Tree-Sitter Parsers On macOS", "dc/db0/md_extras.html#tree-sitter-parsers-on-macos", null ],
+        [ "Tree-Sitter Parsers On Windows", "dc/db0/md_extras.html#tree-sitter-parsers-on-windows", null ],
+        [ "Testing Tree-Sitter", "dc/db0/md_extras.html#testing-tree-sitter", null ]
       ] ],
-      [ "Rustlings", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#rustlings", null ],
-      [ "Neovim", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#neovim", null ],
-      [ "Lazyvim", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#lazyvim", null ],
-      [ "Neovim Linkage to the C-Menu API", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#neovim-linkage-to-the-c-menu-api", null ],
-      [ "Ghostty", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ghostty", [
-        [ "Ghostty On Linux", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ghostty-on-linux", null ],
-        [ "Ghostty On macOS", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ghostty-on-macos", null ],
-        [ "Ghostty On Windows", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ghostty-on-windows", null ]
+      [ "Rustlings", "dc/db0/md_extras.html#rustlings", null ],
+      [ "Neovim", "dc/db0/md_extras.html#neovim", null ],
+      [ "Lazyvim", "dc/db0/md_extras.html#lazyvim", null ],
+      [ "Neovim Linkage to the C-Menu API", "dc/db0/md_extras.html#neovim-linkage-to-the-c-menu-api", null ],
+      [ "Ghostty", "dc/db0/md_extras.html#ghostty", [
+        [ "Ghostty On Linux", "dc/db0/md_extras.html#ghostty-on-linux", null ],
+        [ "Ghostty On macOS", "dc/db0/md_extras.html#ghostty-on-macos", null ],
+        [ "Ghostty On Windows", "dc/db0/md_extras.html#ghostty-on-windows", null ]
       ] ],
-      [ "Useful Configurations", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#useful-configurations", [
-        [ "Alternate Bash Executable", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#alternate-bash-executable", null ],
-        [ "Shell Configuration", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#shell-configuration", null ],
-        [ "Customize Your Terminal Emulator", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#customize-your-terminal-emulator", [
-          [ "Fonts", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#fonts", null ],
-          [ "Example Terminal Configurations", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#example-terminal-configurations", [
-            [ "Ghostty Configuration", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#ghostty-configuration-1", null ],
-            [ "Kitty Configuration", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#kitty-configuration", null ],
-            [ "Alacritty Configuration", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#alacritty-configuration", null ]
+      [ "Useful Configurations", "dc/db0/md_extras.html#useful-configurations", [
+        [ "Alternate Bash Executable", "dc/db0/md_extras.html#alternate-bash-executable", null ],
+        [ "Shell Configuration", "dc/db0/md_extras.html#shell-configuration", null ],
+        [ "Customize Your Terminal Emulator", "dc/db0/md_extras.html#customize-your-terminal-emulator", [
+          [ "Fonts", "dc/db0/md_extras.html#fonts", null ],
+          [ "Example Terminal Configurations", "dc/db0/md_extras.html#example-terminal-configurations", [
+            [ "Ghostty Configuration", "dc/db0/md_extras.html#ghostty-configuration-1", null ],
+            [ "Kitty Configuration", "dc/db0/md_extras.html#kitty-configuration", null ],
+            [ "Alacritty Configuration", "dc/db0/md_extras.html#alacritty-configuration", null ]
           ] ]
         ] ]
       ] ],
-      [ "Additional Resources", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#additional-resources", null ],
-      [ "Conclusion", "d4/d5e/md__2srv_2www_2htdocs_2C-Menu_2extras.html#conclusion", null ]
+      [ "Additional Resources", "dc/db0/md_extras.html#additional-resources", null ],
+      [ "Conclusion", "dc/db0/md_extras.html#conclusion", null ]
     ] ],
-    [ "Frequently Asked Questions", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html", [
-      [ "Table of Contents", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#table-of-contents-2", null ],
-      [ "Sorted lf Output", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#sorted-lf-output", null ],
-      [ "Multiple Executables", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#multiple-executables", null ],
-      [ "Static Executables", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#static-executables", null ],
-      [ "What's the Icon?", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#whats-the-icon", null ],
-      [ "C-Menu's File Structure", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#c-menus-file-structure", null ],
-      [ "Some Menu Selections Don't work", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#some-menu-selections-dont-work", [
-        [ "Visual Aids Soap-box", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#visual-aids-soap-box", null ]
+    [ "Frequently Asked Questions", "d5/d77/md_FAQ.html", [
+      [ "Table of Contents", "d5/d77/md_FAQ.html#table-of-contents-2", null ],
+      [ "Sorted lf Output", "d5/d77/md_FAQ.html#sorted-lf-output", null ],
+      [ "Multiple Executables", "d5/d77/md_FAQ.html#multiple-executables", null ],
+      [ "Static Executables", "d5/d77/md_FAQ.html#static-executables", null ],
+      [ "What's the Icon?", "d5/d77/md_FAQ.html#whats-the-icon", null ],
+      [ "C-Menu's File Structure", "d5/d77/md_FAQ.html#c-menus-file-structure", null ],
+      [ "Some Menu Selections Don't work", "d5/d77/md_FAQ.html#some-menu-selections-dont-work", [
+        [ "Visual Aids Soap-box", "d5/d77/md_FAQ.html#visual-aids-soap-box", null ]
       ] ],
-      [ "High Precision Math With C-Menu and Gawk", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#high-precision-math-with-c-menu-and-gawk", null ],
-      [ "TrueColor Support", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#truecolor-support", null ],
-      [ "Why View Displays Question Marks", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#why-view-displays-question-marks", null ],
-      [ "View - How to Colorize Manual Pages", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#view---how-to-colorize-manual-pages", null ],
-      [ "View - How to Colorize HTML Color Codes", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#view---how-to-colorize-html-color-codes", null ],
-      [ "View - How to Customize Colors", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#view---how-to-customize-colors", null ],
-      [ "Menu, Form, Pick, and View API", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu-form-pick-and-view-api", null ],
-      [ "View - How to Use Tree-Sitter with View", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#view---how-to-use-tree-sitter-with-view", null ],
-      [ "Install Tree-Sitter-CLI", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#install-tree-sitter-cli", [
-        [ "Download From Github", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#download-from-github", null ]
+      [ "High Precision Math With C-Menu and Gawk", "d5/d77/md_FAQ.html#high-precision-math-with-c-menu-and-gawk", null ],
+      [ "TrueColor Support", "d5/d77/md_FAQ.html#truecolor-support", null ],
+      [ "Why View Displays Question Marks", "d5/d77/md_FAQ.html#why-view-displays-question-marks", null ],
+      [ "View - How to Colorize Manual Pages", "d5/d77/md_FAQ.html#view---how-to-colorize-manual-pages", null ],
+      [ "View - How to Colorize HTML Color Codes", "d5/d77/md_FAQ.html#view---how-to-colorize-html-color-codes", null ],
+      [ "View - How to Customize Colors", "d5/d77/md_FAQ.html#view---how-to-customize-colors", null ],
+      [ "Menu, Form, Pick, and View API", "d5/d77/md_FAQ.html#menu-form-pick-and-view-api", null ],
+      [ "View - How to Use Tree-Sitter with View", "d5/d77/md_FAQ.html#view---how-to-use-tree-sitter-with-view", null ],
+      [ "Install Tree-Sitter-CLI", "d5/d77/md_FAQ.html#install-tree-sitter-cli", [
+        [ "Download From Github", "d5/d77/md_FAQ.html#download-from-github", null ]
       ] ],
-      [ "Menu Form - Integrating External Executables", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu-form---integrating-external-executables", null ],
-      [ "Menu - Using the Installment Loan Calculator", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu---using-the-installment-loan-calculator", null ],
-      [ "Menu Form - Line Type Speecifiers (H, T, F, and ?)", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu-form---line-type-speecifiers-h-t-f-and-", null ],
-      [ "Menu Form - Field Delimiters", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu-form---field-delimiters", null ],
-      [ "Menu Form - Data Types", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu-form---data-types", null ],
-      [ "Menu - Interprocess Communications", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu---interprocess-communications", null ],
-      [ "Menu - What Happened to Delete by Inode", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu---what-happened-to-delete-by-inode", null ],
-      [ "Pick - Selecting Multiple Files", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#pick---selecting-multiple-files", null ],
-      [ "Menu lf - Where Are My Header Files?", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#menu-lf---where-are-my-header-files", null ],
-      [ "View In a Box Window", "dd/d9a/md__2srv_2www_2htdocs_2C-Menu_2FAQ.html#view-in-a-box-window", null ]
+      [ "Menu Form - Integrating External Executables", "d5/d77/md_FAQ.html#menu-form---integrating-external-executables", null ],
+      [ "Menu - Using the Installment Loan Calculator", "d5/d77/md_FAQ.html#menu---using-the-installment-loan-calculator", null ],
+      [ "Menu Form - Line Type Speecifiers (H, T, F, and ?)", "d5/d77/md_FAQ.html#menu-form---line-type-speecifiers-h-t-f-and-", null ],
+      [ "Menu Form - Field Delimiters", "d5/d77/md_FAQ.html#menu-form---field-delimiters", null ],
+      [ "Menu Form - Data Types", "d5/d77/md_FAQ.html#menu-form---data-types", null ],
+      [ "Menu - Interprocess Communications", "d5/d77/md_FAQ.html#menu---interprocess-communications", null ],
+      [ "Menu - What Happened to Delete by Inode", "d5/d77/md_FAQ.html#menu---what-happened-to-delete-by-inode", null ],
+      [ "Pick - Selecting Multiple Files", "d5/d77/md_FAQ.html#pick---selecting-multiple-files", null ],
+      [ "Menu lf - Where Are My Header Files?", "d5/d77/md_FAQ.html#menu-lf---where-are-my-header-files", null ],
+      [ "View In a Box Window", "d5/d77/md_FAQ.html#view-in-a-box-window", null ]
     ] ],
-    [ "Installation Guide", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html", [
-      [ "To Install C-Menu", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#to-install-c-menu", [
-        [ "Build C-Menu", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#build-c-menu", [
-          [ "RSH Static Linking", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#rsh-static-linking", null ],
-          [ "Prerequisites", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#prerequisites-1", null ],
-          [ "Option 1 - Build C-Menu Using CMake Directly", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#option-1---build-c-menu-using-cmake-directly", null ],
-          [ "Option 2 - Build C-Menu with Provided Scripts", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#option-2---build-c-menu-with-provided-scripts", null ],
-          [ "Option 3 - Build C-Menu Using Makefile", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#option-3---build-c-menu-using-makefile", null ]
+    [ "Installation Guide", "d4/def/md_INSTALL.html", [
+      [ "To Install C-Menu", "d4/def/md_INSTALL.html#to-install-c-menu", [
+        [ "Build C-Menu", "d4/def/md_INSTALL.html#build-c-menu", [
+          [ "RSH Static Linking", "d4/def/md_INSTALL.html#rsh-static-linking", null ],
+          [ "Prerequisites", "d4/def/md_INSTALL.html#prerequisites-1", null ],
+          [ "Option 1 - Build C-Menu Using CMake Directly", "d4/def/md_INSTALL.html#option-1---build-c-menu-using-cmake-directly", null ],
+          [ "Option 2 - Build C-Menu with Provided Scripts", "d4/def/md_INSTALL.html#option-2---build-c-menu-with-provided-scripts", null ],
+          [ "Option 3 - Build C-Menu Using Makefile", "d4/def/md_INSTALL.html#option-3---build-c-menu-using-makefile", null ]
         ] ],
-        [ "Finish the installation", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#finish-the-installation", null ]
+        [ "Finish the installation", "d4/def/md_INSTALL.html#finish-the-installation", null ]
       ] ],
-      [ "c-menu-runningscreenshotsmainmenupng", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#c-menu-runningscreenshotsmainmenupng", null ],
-      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository", null ]
+      [ "<img src=\"screenshots/mainmenu.png\" alt=\"C-Menu Running\" class=\"inline\"/>", "d4/def/md_INSTALL.html#c-menu-runningscreenshotsmainmenupng", null ],
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d4/def/md_INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository", null ]
     ] ],
-    [ "MIT License", "d1/dd8/md__2srv_2www_2htdocs_2C-Menu_2LICENSE.html", null ],
-    [ "Configuration snippets", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html", [
-      [ "Table of Contents", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#table-of-contents-4", null ],
-      [ "C-Menu Desktop Files", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#c-menu-desktop-files", null ],
-      [ "C-Menu bashrc Configuration", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#c-menu-bashrc-configuration", [
-        [ "Shell Logging", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#shell-logging", null ],
-        [ "Prepend Path", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#prepend-path", null ],
-        [ "Helpful C-Menu Environment Variables", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#helpful-c-menu-environment-variables", null ],
-        [ "Security Through Obscurity", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#security-through-obscurity", null ],
-        [ "RSH Helpers", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#rsh-helpers", null ],
-        [ "Privilege Indicator Shell Prompts", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#privilege-indicator-shell-prompts", null ],
-        [ "Terminal and Editor Settings", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#terminal-and-editor-settings", null ],
-        [ "GDB Debugging Setup", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#gdb-debugging-setup", null ],
-        [ "If You Can't Stop Typing \"vi\"", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#if-you-cant-stop-typing-vi", null ],
-        [ "C-Menu Startup with \"mm\"", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#c-menu-startup-with-mm", null ],
-        [ "Curses Escape Delay", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#curses-escape-delay", null ],
-        [ "Use lsd instead of ls", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#use-lsd-instead-of-ls", null ],
-        [ "Locale Settings", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#locale-settings", null ],
-        [ "System Specific Environment Variables", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#system-specific-environment-variables", null ]
+    [ "MIT License", "da/d19/md_LICENSE.html", null ],
+    [ "A User Interface Toolkit", "d0/d30/md_README.html", [
+      [ "Table of Contents", "d0/d30/md_README.html#table-of-contents-3", null ],
+      [ "<b><em>NEW</em></b> - Complete C-Menu HTML Documentation", "d0/d30/md_README.html#_new_---complete-c-menu-html-documentation", null ],
+      [ "C-Menu Exercises", "d0/d30/md_README.html#c-menu-exercises", null ],
+      [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "d0/d30/md_README.html#menu-form-pick-view-c-keys-rsh-and-lf", [
+        [ "Elements of C-Menu", "d0/d30/md_README.html#elements-of-c-menu", null ],
+        [ "Key Features", "d0/d30/md_README.html#key-features", null ],
+        [ "Highlights (Pun Intended)", "d0/d30/md_README.html#highlights-pun-intended", null ],
+        [ "Just Do It!", "d0/d30/md_README.html#just-do-it", null ],
+        [ "Menu", "d0/d30/md_README.html#menu-1", null ],
+        [ "C-Keys - Diagnose Keyboard/Mouse Input", "d0/d30/md_README.html#c-keys---diagnose-keyboardmouse-input", null ],
+        [ "Pick - A Picker", "d0/d30/md_README.html#pick---a-picker", null ],
+        [ "Form for Data Entry and Editing", "d0/d30/md_README.html#form-for-data-entry-and-editing", null ],
+        [ "Form Key Features", "d0/d30/md_README.html#form-key-features", null ],
+        [ "Form Data Types", "d0/d30/md_README.html#form-data-types-1", null ],
+        [ "Sample Menu Description File", "d0/d30/md_README.html#sample-menu-description-file", null ],
+        [ "View", "d0/d30/md_README.html#view", [
+          [ "Log File With Editor", "d0/d30/md_README.html#log-file-with-editor", null ],
+          [ "Screenshot of the Same File With View", "d0/d30/md_README.html#screenshot-of-the-same-file-with-view", null ]
+        ] ],
+        [ "View and Color Manual Pages", "d0/d30/md_README.html#view-and-color-manual-pages", null ],
+        [ "Example Manual Page Using Editor", "d0/d30/md_README.html#example-manual-page-using-editor", null ],
+        [ "Example Manual Page", "d0/d30/md_README.html#example-manual-page", null ],
+        [ "Demand Paged Virtual Address Space", "d0/d30/md_README.html#demand-paged-virtual-address-space", null ],
+        [ "View - Other Features", "d0/d30/md_README.html#view---other-features", null ],
+        [ "3-Channel Gamma Correction", "d0/d30/md_README.html#autotoc_md3-channel-gamma-correction", null ],
+        [ "Gray Gamma", "d0/d30/md_README.html#gray-gamma", null ],
+        [ "RSH", "d0/d30/md_README.html#rsh", null ],
+        [ "Maintaining Security with RSH", "d0/d30/md_README.html#maintaining-security-with-rsh", null ],
+        [ "lf - List Files Using Regular Expressions", "d0/d30/md_README.html#lf---list-files-using-regular-expressions", null ]
       ] ],
-      [ "C-Menu Configuration", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#c-menu-configuration", null ],
-      [ "Terminal Configurations", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#terminal-configurations", [
-        [ "Ghostty", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#ghostty-1", null ],
-        [ "Kitty", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#kitty", null ],
-        [ "Alacritty", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#alacritty", null ]
+      [ "Features", "d0/d30/md_README.html#features", null ],
+      [ "Configuration", "d0/d30/md_README.html#configuration", null ],
+      [ "MIT License", "d0/d30/md_README.html#mit-license-1", null ]
+    ] ],
+    [ "Configuration snippets", "d7/da4/md_snippets.html", [
+      [ "Table of Contents", "d7/da4/md_snippets.html#table-of-contents-4", null ],
+      [ "C-Menu Desktop Files", "d7/da4/md_snippets.html#c-menu-desktop-files", null ],
+      [ "C-Menu bashrc Configuration", "d7/da4/md_snippets.html#c-menu-bashrc-configuration", [
+        [ "Shell Logging", "d7/da4/md_snippets.html#shell-logging", null ],
+        [ "Prepend Path", "d7/da4/md_snippets.html#prepend-path", null ],
+        [ "Helpful C-Menu Environment Variables", "d7/da4/md_snippets.html#helpful-c-menu-environment-variables", null ],
+        [ "Security Through Obscurity", "d7/da4/md_snippets.html#security-through-obscurity", null ],
+        [ "RSH Helpers", "d7/da4/md_snippets.html#rsh-helpers", null ],
+        [ "Privilege Indicator Shell Prompts", "d7/da4/md_snippets.html#privilege-indicator-shell-prompts", null ],
+        [ "Terminal and Editor Settings", "d7/da4/md_snippets.html#terminal-and-editor-settings", null ],
+        [ "GDB Debugging Setup", "d7/da4/md_snippets.html#gdb-debugging-setup", null ],
+        [ "If You Can't Stop Typing \"vi\"", "d7/da4/md_snippets.html#if-you-cant-stop-typing-vi", null ],
+        [ "C-Menu Startup with \"mm\"", "d7/da4/md_snippets.html#c-menu-startup-with-mm", null ],
+        [ "Curses Escape Delay", "d7/da4/md_snippets.html#curses-escape-delay", null ],
+        [ "Use lsd instead of ls", "d7/da4/md_snippets.html#use-lsd-instead-of-ls", null ],
+        [ "Locale Settings", "d7/da4/md_snippets.html#locale-settings", null ],
+        [ "System Specific Environment Variables", "d7/da4/md_snippets.html#system-specific-environment-variables", null ]
       ] ],
-      [ "Tree-Sitter", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#tree-sitter-1", [
-        [ "Tree-Sitter config.json", "d7/dc9/md__2srv_2www_2htdocs_2C-Menu_2snippets.html#tree-sitter-configjson", null ]
+      [ "C-Menu Configuration", "d7/da4/md_snippets.html#c-menu-configuration", null ],
+      [ "Terminal Configurations", "d7/da4/md_snippets.html#terminal-configurations", [
+        [ "Ghostty", "d7/da4/md_snippets.html#ghostty-1", null ],
+        [ "Kitty", "d7/da4/md_snippets.html#kitty", null ],
+        [ "Alacritty", "d7/da4/md_snippets.html#alacritty", null ]
+      ] ],
+      [ "Tree-Sitter", "d7/da4/md_snippets.html#tree-sitter-1", [
+        [ "Tree-Sitter config.json", "d7/da4/md_snippets.html#tree-sitter-configjson", null ]
       ] ]
     ] ],
     [ "Deprecated List", "da/d58/deprecated.html", null ],
@@ -244,9 +278,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"d0/d59/futil_8c.html",
-"d6/d1a/md__2srv_2www_2htdocs_2C-Menu_2INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository",
-"dc/d40/dwin_8c.html#afe05b547e64abc42a760ec6c9470bbbf"
+"d0/d30/md_README.html",
+"d5/d77/md_FAQ.html#sorted-lf-output",
+"dc/d40/dwin_8c.html#aeb07b69a39f8759a6c32d7536c067ef3"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
