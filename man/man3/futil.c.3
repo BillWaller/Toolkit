@@ -1,0 +1,2523 @@
+.TH "src/futil.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/futil.c \- General utility functions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <cm\&.h>\fP
+.br
+\fR#include <ctype\&.h>\fP
+.br
+\fR#include <dirent\&.h>\fP
+.br
+\fR#include <errno\&.h>\fP
+.br
+\fR#include <fcntl\&.h>\fP
+.br
+\fR#include <grp\&.h>\fP
+.br
+\fR#include <pwd\&.h>\fP
+.br
+\fR#include <regex\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <sys/stat\&.h>\fP
+.br
+\fR#include <sys/types\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+\fR#include <wait\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBlf_find\fP (const char *base_path, const char *re, const char *ere, int max_depth, int flags)"
+.br
+.RI "Find files in a directory matching a regular expression\&. "
+.ti -1c
+.RI "bool \fBlf_process\fP (const char *base_path, regex_t *compiled_re, regex_t *compiled_ere, int depth, int max_depth, int flags)"
+.br
+.RI "logic for \fBlf_find()\fP "
+.ti -1c
+.RI "size_t \fBstrip_ansi\fP (char *d, char *s)"
+.br
+.RI "Strips ANSI SGR escape sequences (ending in 'm') from string s to d\&. "
+.ti -1c
+.RI "int \fBa_toi\fP (char *s, bool *a_toi_error)"
+.br
+.RI "a safer alternative to atoi() for converting ASCII strings to integers\&. "
+.ti -1c
+.RI "bool \fBchrep\fP (char *s, char old_chr, char new_chr)"
+.br
+.RI "Replaces all occurrences of old_chr in s with new_chr in place\&. "
+.ti -1c
+.RI "size_t \fBtrim\fP (char *s)"
+.br
+.RI "Trims leading and trailing spaces from string s in place\&. "
+.ti -1c
+.RI "size_t \fBrtrim\fP (char *s)"
+.br
+.RI "Trims trailing spaces from string s in place\&. "
+.ti -1c
+.RI "bool \fBstripz_quotes\fP (char *s)"
+.br
+.RI "removes leading and trailing double quotes if present "
+.ti -1c
+.RI "bool \fBstrip_quotes\fP (char *s)"
+.br
+.RI "removes leading and trailing double quotes if present "
+.ti -1c
+.RI "bool \fBstr_to_bool\fP (const char *s)"
+.br
+.RI "Converts String to boolean true or false\&. "
+.ti -1c
+.RI "int \fBstr_to_args\fP (char **argv, char *arg_str, int max_args)"
+.br
+.RI "Converts a string into an array of argument strings\&. "
+.ti -1c
+.RI "double \fBstr_to_double\fP (char *s)"
+.br
+.RI "converts string to double "
+.ti -1c
+.RI "bool \fBstr_to_lower\fP (char *s)"
+.br
+.RI "Converts a string to lowercase\&. "
+.ti -1c
+.RI "bool \fBstr_to_upper\fP (char *s)"
+.br
+.RI "Converts a string to uppercase\&. "
+.ti -1c
+.RI "size_t \fBstrz\fP (char *s)"
+.br
+.RI "Terminates string at new line or carriage return\&. "
+.ti -1c
+.RI "size_t \fBstrnz\fP (char *s, size_t max_len)"
+.br
+.RI "terminates string at New Line, Carriage Return, or max_len "
+.ti -1c
+.RI "size_t \fBstrnlf\fP (char *s, size_t max_len)"
+.br
+.RI "terminates string with line feed "
+.ti -1c
+.RI "bool \fBstr_subc\fP (char *d, char *s, char ReplaceChr, char *Withstr, int l)"
+.br
+.RI "Replaces "ReplaceChr" in "s" with "Withstr" in "d" won't copy more than "l" bytes to "d" Replaces all occurrences of a character in a string with another string, copying the result to a destination buffer\&. It ensures that the total length of the resulting string does not exceed the specified limit, and that the result is null-terminated\&. This function is useful for simple string substitutions where you want to replace a single character with a longer string, such as replacing spaces with underscores or tabs with spaces\&. "
+.ti -1c
+.RI "char * \fBrep_substring\fP (const char *org_s, const char *tgt_s, const char *rep_s)"
+.br
+.RI "Replace all occurrences of "tgt_s" in "org_s" with "rep_s"\&. "
+.ti -1c
+.RI "bool \fBnormalize_file_spec\fP (char *fs)"
+.br
+.RI "replace backslashes with forward lashes "
+.ti -1c
+.RI "bool \fBfile_spec_path\fP (char *fp, char *fs)"
+.br
+.RI "extracts the path component of a file specification "
+.ti -1c
+.RI "bool \fBfile_spec_name\fP (char *\fBfn\fP, char *fs)"
+.br
+.RI "extracts the file name component of a file specification "
+.ti -1c
+.RI "bool \fBverify_file\fP (char *in_spec, int imode)"
+.br
+.RI "Verifies that the file specified by "in_spec" exists and is accessible with the permissions specified by "imode"\&. "
+.ti -1c
+.RI "bool \fBverify_dir\fP (char *spec, int imode)"
+.br
+.RI "Verifies that the directory specified by "spec" exists and is accessible with the permissions specified by "imode"\&. "
+.ti -1c
+.RI "bool \fBlocate_file_in_path\fP (char *file_spec, char *\fBfile_name\fP)"
+.br
+.RI "Locates a file in the system PATH\&. "
+.ti -1c
+.RI "size_t \fBcanonicalize_file_spec\fP (char *spec)"
+.br
+.RI "Removes quotes and trims at first space\&. "
+.ti -1c
+.RI "size_t \fBssnprintf\fP (char *buf, size_t buf_size, const char *format,\&.\&.\&.)"
+.br
+.RI "ssnprintf was designed to be a safer alternative to snprintf\&. "
+.ti -1c
+.RI "size_t \fBstrnz__cpy\fP (char *d, const char *s, size_t max_len)"
+.br
+.RI "safer alternative to strncpy "
+.ti -1c
+.RI "size_t \fBstrnz__cat\fP (char *d, const char *s, size_t max_len)"
+.br
+.RI "safer alternative to strncat "
+.ti -1c
+.RI "size_t \fBstring_cpy\fP (String *dest, const String *src)"
+.br
+.RI "Copy src String to dest String, allocating additional memory for dest String if necessary\&. "
+.ti -1c
+.RI "size_t \fBstring_cat\fP (String *dest, const String *src)"
+.br
+.RI "Concatenates src String to dest String, allocating additional memory for dest String if necessary\&. "
+.ti -1c
+.RI "size_t \fBstring_ncat\fP (String *dest, const String *src, size_t n)"
+.br
+.RI "Concatenates up to n characters from src String to dest String, allocating additional memory for dest String if necessary\&. "
+.ti -1c
+.RI "size_t \fBstring_ncpy\fP (String *dest, const String *src, size_t n)"
+.br
+.RI "copies up to n characters from src String to dest String, allocating additional memory for dest String if necessary "
+.ti -1c
+.RI "String \fBto_string\fP (const char *s)"
+.br
+.RI "Convert C string to String struct\&. "
+.ti -1c
+.RI "String \fBmk_string\fP (size_t l)"
+.br
+.RI "Create a String struct with a dynamically allocated string\&. "
+.ti -1c
+.RI "String \fBfree_string\fP (String string)"
+.br
+.RI "Free the dynamically allocated String\&. "
+.ti -1c
+.RI "char * \fBstrnz_dup\fP (char *s, size_t l)"
+.br
+.RI "Allocates memory for and duplicates string s up to length l or until line feed or carriage return\&. "
+.ti -1c
+.RI "bool \fBstrnfill\fP (char *s, char c, int n)"
+.br
+.RI "Fills string s with character c n\&. "
+.ti -1c
+.RI "bool \fBexpand_tilde\fP (char *path, int path_maxlen)"
+.br
+.RI "Replace Leading Tilde With Home Directory\&. "
+.ti -1c
+.RI "bool \fBtrim_path\fP (char *dir)"
+.br
+.RI "Trims trailing spaces and slashes from directory path in place\&. "
+.ti -1c
+.RI "bool \fBtrim_ext\fP (char *buf, char *filename)"
+.br
+.RI "trims the file extension from "filename" and copies the result to "buf" "
+.ti -1c
+.RI "bool \fBbase_name\fP (char *buf, char *path)"
+.br
+.RI "Returns the base name of a file specification\&. "
+.ti -1c
+.RI "bool \fBdir_name\fP (char *buf, char *path)"
+.br
+.RI "Returns the directory name of a file specification\&. "
+.ti -1c
+.RI "bool \fBmk_dir\fP (char *dir)"
+.br
+.RI "If directory doesn't exist, make it\&. "
+.ti -1c
+.RI "int \fBsegmentation_fault\fP ()"
+.br
+.RI "Function to intentionally cause a segmentation fault for testing purposes\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBerrmsg\fP [\fBMAXLEN\fP]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+General utility functions\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBfutil\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int a_toi (char * s, bool * a_toi_error)"
+
+.PP
+a safer alternative to atoi() for converting ASCII strings to integers\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP is the input string 
+.br
+\fIa_toi_error\fP is a pointer to a boolean that will be set to true if an error occurs during conversion, or false if the conversion is successful\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+accepts positive integers only\&. 
+
+.PP
+sets a_toi_error to (-1) on error 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+converted integer value, or -1 if an error occurs 
+.RE
+.PP
+
+.PP
+Definition at line \fB438\fP of file \fBfutil\&.c\fP\&.
+.nf
+438                                       {
+439     int rc = \-1;
+440     *a_toi_error = false;
+441     errno = 0;
+442     if (s && *s != 0)
+443         rc = (int)strtol(s, nullptr, 10);
+444     if (rc < 0 || errno) {
+445         rc = \-1;
+446         *a_toi_error = true;
+447     }
+448     return rc;
+449 }
+.PP
+.fi
+
+.PP
+Referenced by \fBparse_ansi_str()\fP\&.
+.SS "bool base_name (char * buf, char * path)"
+
+.PP
+Returns the base name of a file specification\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuf\fP - buffer to receive result 
+.br
+\fIpath\fP - file specification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller is responsible for ensuring that "buf" has enough space to receive the result\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB699\fP of file \fBfutil\&.c\fP\&.
+.nf
+700                                       {
+701     if (!path || !*path || !buf)
+702         return false;
+703     char *s = path;
+704     char *d = buf;
+705     *d = '\\0';
+706     while (*s) {
+707         if (*s == '/' || *s == '\\\\') {
+708             d = buf;
+709         } else {
+710             *d++ = *s;
+711         }
+712         s++;
+713     }
+714     *d = '\\0';
+715     if (d == buf)
+716         return false;
+717     return true;
+.PP
+.fi
+
+.PP
+Referenced by \fBbuild_prompt()\fP, \fBexec_objects()\fP, \fBform_calculate()\fP, \fBinit_form_files()\fP, \fBinit_pick_files()\fP, \fBparse_opt_args()\fP, and \fBview_init_input()\fP\&.
+.SS "size_t canonicalize_file_spec (char * spec)"
+
+.PP
+Removes quotes and trims at first space\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIspec\fP - file specification to canonicalize 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of resulting string 
+.RE
+.PP
+
+.PP
+Definition at line \fB1083\fP of file \fBfutil\&.c\fP\&.
+.nf
+1084                                           {
+1085     if (spec == nullptr || *spec == '\\0')
+1086         return 0;
+1087     char tmp_s[MAXLEN];
+1088     char *s;
+1089     s = spec;
+1090     char *d;
+1091     d = tmp_s;
+1092     int l = 0;
+1093     while (*s != '\\0') {
+1094         if (*s == ' ')
+1095             break;
+1096         if (*s == '\\"' || *s == '\\'') {
+1097             s++;
+1098             continue;
+1099             ;
+1100         }
+1101         *d++ = *s++;
+1102         l++;
+1103     }
+1104     *d = '\\0';
+1105     strnz__cpy(spec, tmp_s, MAXLEN \- 1);
+1106     l = strlen(spec);
+1107     return l;
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBlocate_file_in_path()\fP, \fBverify_file()\fP, and \fBverify_spec_arg()\fP\&.
+.SS "bool chrep (char * s, char old_chr, char new_chr)"
+
+.PP
+Replaces all occurrences of old_chr in s with new_chr in place\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to modify 
+.br
+\fIold_chr\fP - character to replace 
+.br
+\fInew_chr\fP - character to insert 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful or false if string s is null 
+.RE
+.PP
+
+.PP
+Definition at line \fB420\fP of file \fBfutil\&.c\fP\&.
+.nf
+420                                                 {
+421     if (s == nullptr)
+422         return false;
+423     while (*s != '\\0') {
+424         if (*s == old_chr)
+425             *s = new_chr;
+426         s++;
+427     }
+428     return true;
+429 }
+.PP
+.fi
+
+.PP
+Referenced by \fBparse_menu_description()\fP\&.
+.SS "bool dir_name (char * buf, char * path)"
+
+.PP
+Returns the directory name of a file specification\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuf\fP - buffer to receive result 
+.br
+\fIpath\fP - file specification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller is responsible for ensuring that "buf" has enough space to receive the result\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB724\fP of file \fBfutil\&.c\fP\&.
+.nf
+725                                      {
+726     if (!path || !*path || !buf)
+727         return false;
+728     char tmp_str[MAXLEN];
+729     strnz__cpy(tmp_str, path, MAXLEN);
+730     char *s = tmp_str;
+731     while (*s++)
+732         ;
+733     while (tmp_str < \-\-s) {
+734         if (*s == '/' || *s == '\\\\') {
+735             *s = '\\0';
+736             break;
+737         }
+738     }
+739     while (tmp_str < \-\-s && (*s == '/' || *s == '\\\\'))
+740         *s = '\\0';
+741     char *d = buf;
+742     *d = '\\0';
+743     s = tmp_str;
+744     while (*s) {
+745         *d++ = *s++;
+746     }
+747     *d = '\\0';
+748     if (d == buf)
+749         return false;
+750     return true;
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.SS "bool expand_tilde (char * path, int path_maxlen)"
+
+.PP
+Replace Leading Tilde With Home Directory\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP - path to expand 
+.br
+\fIpath_maxlen\fP - maximum length of path 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller is responsible for ensuring that "path" has enough space to receive the result, and that "path_maxlen" is sufficient to hold the result\&. This function does not perform any bounds checking on "path", so it is the caller's responsibility to ensure that it is valid and that "path_maxlen" is appropriate for the operation\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+
+.PP
+Definition at line \fB611\fP of file \fBfutil\&.c\fP\&.
+.nf
+612                                                {
+613     if (path == nullptr || *path == '\\0' || path_maxlen == 0)
+614         return false;
+615     char *e;
+616     char ts[MAXLEN];
+617     char *tp;
+618 
+619     if (!path || !*path || !path_maxlen)
+620         return false;
+621     tp = path;
+622     if (*tp == '~') {
+623         tp++;
+624         while (*tp == '/') {
+625             tp++;
+626         }
+627         e = getenv("HOME");
+628         if (e) {
+629             strnz__cpy(ts, e, path_maxlen \- 1);
+630             strnz__cat(ts, "/", path_maxlen \- 1);
+631             strnz__cat(ts, tp, path_maxlen \- 1);
+632             strnz__cpy(path, ts, path_maxlen \- 1);
+633         }
+634     }
+635     return true;
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, \fBstrnz__cat()\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP, \fBform_engine()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBmk_dir()\fP, \fBparse_config()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBverify_spec_arg()\fP, \fBview_display_help()\fP, and \fBview_init_input()\fP\&.
+.SS "bool file_spec_name (char * fn, char * fs)"
+
+.PP
+extracts the file name component of a file specification 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBfn\fP\fP - name component to return 
+.br
+\fIfs\fP - full file specification 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller is responsible for ensuring that "fn" has enough space to receive the result\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB534\fP of file \fBfutil\&.c\fP\&.
+.nf
+535                                         {
+536     if (fs == nullptr || *fs == '\\0' || fn == nullptr) {
+537         if (fn != nullptr)
+538             *fn = '\\0';
+539         return false;
+540     }
+541     char *d, *l, *s;
+542     l = nullptr;
+543     s = fs;
+544     while (*s != '\\0') {
+545         if (*s == '/')
+546             l = s;
+547         s++;
+548     }
+549     if (l == nullptr)
+550         s = fs;
+551     else
+552         s = ++l;
+553     d = fn;
+554     while (*s != '\\0')
+555         *d++ = *s++;
+556     *d = '\\0';
+557     return true;
+.PP
+.fi
+
+.PP
+References \fBfn\fP\&.
+.SS "bool file_spec_path (char * fp, char * fs)"
+
+.PP
+extracts the path component of a file specification 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfp\fP - path component to return 
+.br
+\fIfs\fP - full file specification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller is responsible for ensuring that "fp" has enough space to receive the result\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB508\fP of file \fBfutil\&.c\fP\&.
+.nf
+509                                         {
+510     if (fs == nullptr || *fs == '\\0' || fp == nullptr) {
+511         if (fp != nullptr)
+512             *fp = '\\0';
+513         return false;
+514     }
+515     char *d, *l, *s;
+516     s = fp;
+517     d = fs;
+518     l = nullptr;
+519     while (*s != '\\0') {
+520         if (*s == '/')
+521             l = d;
+522         *d++ = *s++;
+523     }
+524     if (l == nullptr)
+525         *fp = '\\0'; // no slash, so no path
+526     else
+527         *l = '\\0';
+528     return true;
+.PP
+.fi
+
+.SS "String free_string (String string)"
+
+.PP
+Free the dynamically allocated String\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIstring\fP to free 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+string with nullptr pointer and length 0 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Frees the dynamically allocated string and sets length to 0\&. 
+.RE
+.PP
+
+.PP
+\fBExamples\fP
+.in +1c
+\fBstrings_test1\&.c\fP\&.
+.PP
+Definition at line \fB1256\fP of file \fBfutil\&.c\fP\&.
+.nf
+1257                                   {
+1258     if (string\&.s == nullptr)
+1259         return string;
+1260     free(string\&.s);
+1261     string\&.l = 0;
+1262     string\&.s = nullptr;
+1263     return string;
+.PP
+.fi
+
+.SS "bool lf_find (const char * base_path, const char * re, const char * ere, int max_depth, int flags)"
+
+.PP
+Find files in a directory matching a regular expression\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbase_path\fP directory to search 
+.br
+\fIere\fP regular expression match to exclude 
+.br
+\fIre\fP regular expression match to include 
+.br
+\fImax_depth\fP depth of directories to scan 
+.br
+\fIflags\fP search flags 
+.PP
+.nf
+               flags = LF_ALL | LF_ICASE | LF_FILES
+               flags = LF_ALL | LF_ICASE | LF_DIRS
+LF_ALL      =  1,  List all files including hidden files
+LF_ICASE    =  2,  Ignore case in search
+LF_FILES    =  4,  list files (exclude directories)
+LF_DIRS     =  8,  list directories (exclude files)
+LF_EXCLUDE  =  16, exclude files matching "ere" pattern
+LF_REGEX    =  32, re is a regular expression pattern to match
+
+.fi
+.PP
+ return true if successful, false otherwise 
+.RE
+.PP
+
+.PP
+Definition at line \fB905\fP of file \fBfutil\&.c\fP\&.
+.nf
+907                                        {
+908     int reti;
+909     regex_t compiled_re;
+910     regex_t compiled_ere;
+911     int REG_FLAGS = REG_EXTENDED;
+912 
+913     if (flags & LF_ICASE)
+914         REG_FLAGS |= REG_ICASE;
+915     if (flags & LF_REGEX) {
+916         reti = regcomp(&compiled_re, re, REG_FLAGS);
+917         if (reti) {
+918             ssnprintf(em0, MAXLEN \- 1, "lf: \\'%s\\' Invalid pattern\\n", re);
+919             ssnprintf(em1, MAXLEN \- 1, "for example: \\'\&.*\\\\\&.c$\\'\\n\\n");
+920             regerror(reti, &compiled_re, em2, sizeof(em2));
+921             display_error(em0, em1, em2, nullptr);
+922             regfree(&compiled_re);
+923             return false;
+924         }
+925     }
+926     if (flags & LF_EXCLUDE) {
+927         regcomp(&compiled_ere, "^$", REG_FLAGS);
+928         reti = regcomp(&compiled_ere, ere, REG_FLAGS);
+929         if (reti) {
+930             ssnprintf(em0, MAXLEN \- 1, "lf: \\'%s\\' Invalid exclude pattern\\n",
+931                       re);
+932             ssnprintf(em1, MAXLEN \- 1, "for example: \\'\&.*\\\\\&.c$\\'\\n\\n");
+933             regerror(reti, &compiled_ere, em2, sizeof(em2));
+934             display_error(em0, em1, em2, nullptr);
+935             regfree(&compiled_ere);
+936             return false;
+937         }
+938     }
+939     reti =
+940         lf_process(base_path, &compiled_re, &compiled_ere, 0, max_depth, flags);
+941     if (flags &= LF_REGEX)
+942         regfree(&compiled_re);
+943     if (flags & LF_EXCLUDE)
+944         regfree(&compiled_ere);
+945     if (reti)
+946         return false;
+947     return true;
+.PP
+.fi
+
+.PP
+References \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBlf_process()\fP, \fBMAXLEN\fP, and \fBssnprintf()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "bool lf_process (const char * base_path, regex_t * compiled_re, regex_t * compiled_ere, int depth, int max_depth, int flags)"
+
+.PP
+logic for \fBlf_find()\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbase_path\fP directory to search 
+.br
+\fIcompiled_ere\fP compiled regular expression to exclude 
+.br
+\fIcompiled_re\fP compiled regular expression to include 
+.br
+\fIdepth\fP recursion counter 
+.br
+\fImax_depth\fP how deep to descend into the directory structure 
+.br
+\fIflags\fP 
+.PP
+.nf
+               flags = LF_ALL | LF_ICASE | LF_FILES
+               flags = LF_ALL | LF_ICASE | LF_DIRS
+LF_ALL      =  1,  List hidden files
+LF_ICASE    =  2,  Ignore case in search
+LF_FILES    =  4,  list files (exclude directories)
+LF_DIRS     =  8,  list directories (exclude files)
+LF_EXCLUDE  =  16, exclude files matching "ere" pattern
+LF_REGEX    =  32, re is a regular expression pattern to match
+
+.fi
+.PP
+ return true if successful, false otherwise 
+.RE
+.PP
+
+.PP
+Definition at line \fB966\fP of file \fBfutil\&.c\fP\&.
+.nf
+968                                                                             {
+969     char tmp_str[MAXLEN];
+970     struct stat sb;
+971     struct dirent *dir_st;
+972     DIR *dir;
+973     int REG_FLAGS = REG_EXTENDED;
+974     int reti;
+975     regmatch_t pmatch[1];
+976     char file_spec[1024];
+977     bool is_dir;
+978     bool suppress;
+979     int j, i;
+980 
+981     if ((dir = opendir(base_path)) == 0)
+982         return false;
+983     while ((dir_st = readdir(dir)) != nullptr) {
+984         if (dir_st\->d_name[0] == '\&.')
+985             continue;
+986         ssnprintf(file_spec, sizeof(file_spec), "%s/%s", base_path,
+987                   dir_st\->d_name);
+988         if (lstat(file_spec, &sb) == \-1)
+989             return false;
+990         suppress = false;
+991         if (S_ISLNK(sb\&.st_mode)) {
+992             if (flags & LF_DIRS)
+993                 suppress = true;
+994             is_dir = false;
+995         } else if (S_ISDIR(sb\&.st_mode)) {
+996             if (flags & LF_FILES)
+997                 suppress = true;
+998             is_dir = true;
+999         } else if (S_ISREG(sb\&.st_mode)) {
+1000             if (flags & LF_DIRS)
+1001                 suppress = true;
+1002             is_dir = false;
+1003         } else {
+1004             if (flags & LF_DIRS)
+1005                 suppress = true;
+1006             if (flags & LF_FILES)
+1007                 suppress = true;
+1008             is_dir = false;
+1009         }
+1010         if (file_spec[0] == '\&.' && file_spec[1] == '/') {
+1011             i = 2;
+1012             j = 0;
+1013             while (file_spec[i])
+1014                 file_spec[j++] = file_spec[i++];
+1015             file_spec[j] = '\\0';
+1016         }
+1017         if (file_spec[0] == '\&.' && !(flags & LF_ALL))
+1018             suppress = true;
+1019         if (!suppress) {
+1020             reti = regexec(compiled_re, file_spec, compiled_re\->re_nsub + 1,
+1021                            pmatch, REG_FLAGS);
+1022             if (reti == REG_NOMATCH) {
+1023                 suppress = true;
+1024             } else if (reti) {
+1025                 char msgbuf[100];
+1026                 regerror(reti, compiled_re, msgbuf, sizeof(msgbuf));
+1027                 strnz__cpy(tmp_str, "Regex match failed: ", MAXLEN \- 1);
+1028                 strnz__cat(tmp_str, msgbuf, MAXLEN \- 1);
+1029                 Perror(tmp_str);
+1030                 return false;
+1031             }
+1032         }
+1033         if (!suppress && (flags & LF_EXCLUDE)) {
+1034             reti = regexec(compiled_ere, file_spec, compiled_re\->re_nsub + 1,
+1035                            pmatch, REG_FLAGS);
+1036             if (reti == 0)
+1037                 suppress = true;
+1038             else if (reti == REG_NOMATCH)
+1039                 suppress = false;
+1040             else if (reti) {
+1041                 char msgbuf[100];
+1042                 regerror(reti, compiled_re, msgbuf, sizeof(msgbuf));
+1043                 strnz__cpy(tmp_str, "Regex match failed: ", MAXLEN \- 1);
+1044                 strnz__cat(tmp_str, msgbuf, MAXLEN \- 1);
+1045                 Perror(tmp_str);
+1046                 return false;
+1047             }
+1048         }
+1049         if (!suppress)
+1050             printf("%s\\n", file_spec);
+1051         if (is_dir && (depth + 1 < max_depth)) {
+1052             depth++;
+1053             lf_process(file_spec, compiled_re, compiled_ere, depth, max_depth,
+1054                        flags);
+1055             depth\-\-;
+1056         }
+1057     }
+1058     closedir(dir);
+1059     return true;
+.PP
+.fi
+
+.PP
+References \fBlf_process()\fP, \fBMAXLEN\fP, \fBPerror()\fP, \fBssnprintf()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBlf_find()\fP, and \fBlf_process()\fP\&.
+.SS "bool locate_file_in_path (char * file_spec, char * file_name)"
+
+.PP
+Locates a file in the system PATH\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_spec\fP - buffer to receive located file specification 
+.br
+\fI\fBfile_name\fP\fP - name of file to locate 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if file is located 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+file_spec must be large enough to receive the result 
+.RE
+.PP
+
+.PP
+Definition at line \fB859\fP of file \fBfutil\&.c\fP\&.
+.nf
+860                                                            {
+861     if (file_name == nullptr || *file_name == '\\0' || file_spec == nullptr)
+862         return false;
+863     char path[MAXLEN];
+864     char fn[MAXLEN];
+865     char *p, *fnp, *dir;
+866 
+867     canonicalize_file_spec(file_name);
+868     strnz__cpy(fn, file_name, MAXLEN \- 1);
+869     fnp = fn;
+870     while (*fnp && *fnp != '/')
+871         fnp++;
+872     if (*fnp == '/')
+873         return false;
+874     if ((p = getenv("PATH")) == nullptr)
+875         return false;
+876     strnz__cpy(path, p, MAXLEN \- 1);
+877     dir = strtok(path, ":");
+878     while (dir != nullptr) {
+879         strnz__cpy(file_spec, dir, MAXLEN \- 1);
+880         strnz__cat(file_spec, "/", MAXLEN \- 1);
+881         strnz__cat(file_spec, file_name, MAXLEN \- 1);
+882         if (access(file_spec, F_OK) == 0) {
+883             return true;
+884         }
+885         dir = strtok(nullptr, ":");
+886     }
+887     return false;
+.PP
+.fi
+
+.PP
+References \fBcanonicalize_file_spec()\fP, \fBfile_name\fP, \fBfn\fP, \fBMAXLEN\fP, \fBstrnz__cat()\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBinit_form_files()\fP, \fBinit_pick_files()\fP, and \fBverify_spec_arg()\fP\&.
+.SS "bool mk_dir (char * dir)"
+
+.PP
+If directory doesn't exist, make it\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdir\fP directory name 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if directory now exists or false otherwise 
+.RE
+.PP
+Directory does not exist and unable to create
+.PP
+Definition at line \fB1063\fP of file \fBfutil\&.c\fP\&.
+.nf
+1064                        {
+1065     expand_tilde(dir, MAXLEN \- 1);
+1066     if (!verify_dir(dir, S_WCOK | S_QUIET)) {
+1067         if (!mkdir(dir, 0755)) {
+1069             ssnprintf(em0, MAXLEN \- 1, "%s, line: %d", __FILE__, __LINE__ \- 2);
+1070             strnz__cpy(em1, "mkdir ", MAXLEN \- 1);
+1071             strnz__cat(em1, dir, MAXLEN \- 1);
+1072             strnz__cat(em1, " failed", MAXLEN \- 1);
+1073             strerror_r(errno, em2, MAXLEN \- 1);
+1074             display_error(em0, em1, em2, nullptr);
+1075             return false;
+1076         }
+1077         return true;
+1078     }
+1079     return true;
+.PP
+.fi
+
+.PP
+References \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBexpand_tilde()\fP, \fBMAXLEN\fP, \fBssnprintf()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBverify_dir()\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP\&.
+.SS "String mk_string (size_t l)"
+
+.PP
+Create a String struct with a dynamically allocated string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIl\fP length of string to create including null terminator 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+String struct 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The returned String struct contains a dynamically allocated string of he specified length 
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBfree_string\fP 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for calling free_string to free the allocated memory\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB1238\fP of file \fBfutil\&.c\fP\&.
+.nf
+1239                            {
+1240     if (l == 0) {
+1241         String str;
+1242         str\&.l = 0;
+1243         str\&.s = nullptr;
+1244         return str;
+1245     }
+1246     String str;
+1247     str\&.l = l + 1;
+1248     str\&.s = (char *)malloc(str\&.l);
+1249     str\&.s[0] = '\\0';
+1250     return str;
+.PP
+.fi
+
+.SS "bool normalize_file_spec (char * fs)"
+
+.PP
+replace backslashes with forward lashes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfs\fP - file specification to normalize 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if fs is nullptr or empty 
+.RE
+.PP
+
+.PP
+Definition at line \fB492\fP of file \fBfutil\&.c\fP\&.
+.nf
+493                                    {
+494     if (fs == nullptr || *fs == '\\0')
+495         return false;
+496     while (*fs != '\\0') {
+497         if (*fs == '\\\\')
+498             *fs = '/';
+499         fs++;
+500     }
+501     return true;
+.PP
+.fi
+
+.SS "char * rep_substring (const char * org_s, const char * tgt_s, const char * rep_s)"
+
+.PP
+Replace all occurrences of "tgt_s" in "org_s" with "rep_s"\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIorg_s\fP - original string 
+.br
+\fItgt_s\fP - target substring to replace 
+.br
+\fIrep_s\fP - replacement substring 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the newly allocated string with replacements or a copy of the replacement string if original string is the same as target string This is a special case that allows for replacing the entire original string\&. If any parameter is nullptr, the function returns nullptr\&. If "tgt_s" is not found in "org_s", the function returns a copy of "org_s"\&. If target substring is not found the function returns a copy of the original string\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The function allocates memory for the return value, so the caller is responsible for freeing this memory when it is no longer needed to avoid memory leaks\&. 
+
+.PP
+The function does not modify the original string "org_s"\&. 
+
+.PP
+The function assumes that "tgt_s" and "rep_s" are null-terminated strings\&. If they are not, the behavior is undefined\&. 
+
+.PP
+The function does not perform any bounds checking on the input strings, so it is the caller's responsibility to ensure that they are valid and that the resulting string does not exceed available memory\&. 
+
+.PP
+The function uses the standard library functions strlen, strstr, malloc, and strcpy, which may have their own limitations and behaviors that the caller should be aware of\&. 
+
+.PP
+The function does not handle overlapping occurrences of "tgt_s" in "org_s"\&. If "tgt_s" can overlap with itself in "org_s", the behavior may be unexpected\&. The caller should ensure that "tgt_s" does not contain overlapping patterns to avoid this issue\&. 
+
+.PP
+The function does not handle cases where "tgt_s" is a substring of "rep_s", which could lead to unintended consequences if "tgt_s" appears in "rep_s"\&. The caller should ensure that "tgt_s" and "rep_s" are distinct to avoid this issue\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB1138\fP of file \fBfutil\&.c\fP\&.
+.nf
+1139                                                                              {
+1140     if (org_s == nullptr || tgt_s == nullptr || rep_s == nullptr)
+1141         return nullptr;
+1142     if (*org_s == '\\0' || *tgt_s == '\\0' || *rep_s == '\\0')
+1143         return nullptr;
+1144     if (strstr(org_s, tgt_s) == nullptr)
+1145         return strdup(org_s);
+1146     if (strstr(rep_s, tgt_s) != nullptr)
+1147         return nullptr;
+1148     if (tgt_s == rep_s || tgt_s == org_s || rep_s == org_s)
+1149         return strdup(org_s);
+1150     if (strcmp(org_s, tgt_s) == 0)
+1151         return strdup(rep_s);
+1152     char *out_s, *ip, *tmp;
+1153     int tgt_l = strlen(tgt_s);
+1154     int rep_l = strlen(rep_s);
+1155     int head_l;
+1156     int n = 0;
+1157     ip = (char *)org_s;
+1158     while ((tmp = strstr(ip, tgt_s)) != nullptr) {
+1159         n++;
+1160         ip = tmp + tgt_l;
+1161     }
+1162     out_s = malloc(strlen(org_s) + (rep_l \- tgt_l) * n + 1);
+1163     if (!out_s) {
+1164         return nullptr;
+1165     }
+1166     tmp = out_s;
+1167     ip = (char *)org_s;
+1168     while (n\-\-) {
+1169         char *p = strstr(ip, tgt_s);
+1170         head_l = p \- ip;
+1171         strnz__cpy(tmp, ip, head_l);
+1172         tmp += head_l;
+1173         strnz__cpy(tmp, rep_s, MAXLEN \- 1);
+1174         tmp += rep_l;
+1175         ip += head_l + tgt_l;
+1176     }
+1177     strnz__cpy(tmp, ip, MAXLEN \- 1);
+1178     return out_s;
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBexec_objects()\fP\&.
+.SS "size_t rtrim (char * s)"
+
+.PP
+Trims trailing spaces from string s in place\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to trim 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of trimmed string 
+.RE
+.PP
+
+.PP
+Definition at line \fB68\fP of file \fBfutil\&.c\fP\&.
+.nf
+68                       {
+69     if (s == nullptr || *s == '\\0')
+70         return 0;
+71     char *p = s;
+72     char *d = s;
+73     while (*p != '\\0')
+74         *d++ = *p++;
+75     while (*(d \- 1) == ' ' && d > s)
+76         d\-\-;
+77     *d = '\\0';
+78     return (size_t)(d \- s);
+79 }
+.PP
+.fi
+
+.PP
+Referenced by \fBfmt_line()\fP\&.
+.SS "int segmentation_fault ()"
+
+.PP
+Function to intentionally cause a segmentation fault for testing purposes\&. 
+.PP
+\fBReturns\fP
+.RS 4
+0 (this line will not be reached due to the segmentation fault) 
+.RE
+.PP
+
+.PP
+Definition at line \fB1341\fP of file \fBfutil\&.c\fP\&.
+.nf
+1342                          {
+1343     int *p = NULL;
+1344     *p = 100;
+1345 
+1346     return 0;
+.PP
+.fi
+
+.SS "size_t ssnprintf (char * buf, size_t buf_size, const char * format,  \&.\&.\&.)"
+
+.PP
+ssnprintf was designed to be a safer alternative to snprintf\&. It ensures that the buffer is not overflowed by taking the buffer size as a parameter and using vsnprintf internally\&. It also returns the number of characters that would have been written if enough space had been available, allowing the caller to detect truncation\&. This function is particularly useful in situations where the formatted string may exceed the buffer size, as it prevents buffer overflows and provides a way to handle such cases gracefully\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuf\fP - buffer to receive formatted string 
+.br
+\fIbuf_size\fP - size of buffer 
+.br
+\fIformat\fP - printf-style format string 
+.br
+\fI\&.\&.\&.\fP - arguments 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+number of characters that would have been written if enough space had been available 
+.RE
+.PP
+
+.PP
+Definition at line \fB111\fP of file \fBfutil\&.c\fP\&.
+.nf
+111                                                                       {
+112     size_t n;
+113     va_list args;
+114 
+115     va_start(args, format);
+116     n = vsnprintf(buf, buf_size, format, args);
+117     va_end(args);
+118 
+119     return n;
+120 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdisplay_error()\fP, \fBenter_file_spec()\fP, \fBfork_exec()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_parse_desc()\fP, \fBform_write()\fP, \fBget_clr_pair()\fP, \fBhandle_signal()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_full_screen()\fP, \fBlf_find()\fP, \fBlf_process()\fP, \fBmapp_initialization()\fP, \fBmenu_engine()\fP, \fBmk_dir()\fP, \fBnew_init()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBopen_pick_win()\fP, \fBparse_menu_description()\fP, \fBPerror()\fP, \fBpick_display_chyron()\fP, \fBsearch()\fP, \fBset_chyron_key()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, and \fBwrite_view_buffer()\fP\&.
+.SS "bool str_subc (char * d, char * s, char ReplaceChr, char * Withstr, int l)"
+
+.PP
+Replaces "ReplaceChr" in "s" with "Withstr" in "d" won't copy more than "l" bytes to "d" Replaces all occurrences of a character in a string with another string, copying the result to a destination buffer\&. It ensures that the total length of the resulting string does not exceed the specified limit, and that the result is null-terminated\&. This function is useful for simple string substitutions where you want to replace a single character with a longer string, such as replacing spaces with underscores or tabs with spaces\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP - destination string 
+.br
+\fIs\fP - source string 
+.br
+\fIReplaceChr\fP - character to replace 
+.br
+\fIWithstr\fP - string to insert 
+.br
+\fIl\fP - maximum length to copy 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if any parameter is invalid 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller must ensure that "d" has enough space to receive the result, and that "l" is sufficient to hold the result\&. This function does not perform any bounds checking on "d" or "Withstr", so it is the caller's responsibility to ensure that they are valid and that "l" is appropriate for the operation\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB353\fP of file \fBfutil\&.c\fP\&.
+.nf
+353                                                                        {
+354     char *e;
+355     if (s == nullptr || d == nullptr || Withstr == nullptr || l == 0) {
+356         if (d != nullptr && l > 0)
+357             *d = '\\0';
+358         return false;
+359     }
+360     e = d + l;
+361     while (*s != '\\0' && d < e) {
+362         if (*s == ReplaceChr) {
+363             while (*Withstr != '\\0' && d < e)
+364                 *d++ = *Withstr++;
+365             s++;
+366         } else
+367             *d++ = *s++;
+368     }
+369     *d = '\\0';
+370     return true;
+371 }
+.PP
+.fi
+
+.PP
+Referenced by \fBview_cmd_processor()\fP\&.
+.SS "int str_to_args (char ** argv, char * arg_str, int max_args)"
+
+.PP
+Converts a string into an array of argument strings\&. 
+.PP
+\fBNote\fP
+.RS 4
+Handles quoted strings and escaped quotes, preserving text inside quotes as individual arguments\&. It has been in service for many years without problems\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIargv\fP - array of pointers to arguments 
+.br
+\fIarg_str\fP - string containing arguments 
+.br
+\fImax_args\fP - maximum number of arguments to parse 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+argc, a count of allocated vectors in argv 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for deallocating the strings in argv 
+.RE
+.PP
+
+.PP
+Definition at line \fB130\fP of file \fBfutil\&.c\fP\&.
+.nf
+130                                                           {
+131     if (arg_str == nullptr || *arg_str == '\\0')
+132         return 0;
+133     int argc = 0;
+134     char *p = arg_str;
+135     char tmp_str[MAXLEN];
+136     int in_quotes = 0;
+137     char *d = tmp_str;
+138 
+139     while (*p != '\\0' && argc < max_args) {
+140         while (isspace((unsigned char)*p))
+141             p++;
+142         if (*p == '\\0')
+143             break;
+144         if (*p == '"') {
+145             in_quotes = 1;
+146             p++;
+147         }
+148         while (*p != '\\0') {
+149             if (in_quotes) {
+150                 if (*p == '\\\\' && *(p + 1) == '"') {
+151                     *d++ = '"';
+152                     p += 2;
+153                 } else if (*p == '"') {
+154                     *d++ = '\\0';
+155                     p++;
+156                     in_quotes = 0;
+157                     break;
+158                 } else
+159                     *d++ = *p++;
+160             } else {
+161                 if (isspace((unsigned char)*p)) {
+162                     *d++ = '\\0';
+163                     p++;
+164                     break;
+165                 } else
+166                     *d++ = *p++;
+167             }
+168         }
+169         *d = '\\0';
+170         d = tmp_str;
+171         argv[argc++] = strdup(tmp_str);
+172     }
+173     argv[argc] = nullptr;
+174     return argc;
+175 }
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_calculate()\fP, \fBinit_pick()\fP, \fBmenu_cmd_processor()\fP, and \fBview_init_input()\fP\&.
+.SS "bool str_to_bool (const char * s)"
+
+.PP
+Converts String to boolean true or false\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to convert 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+boolean true or false 
+.RE
+.PP
+
+.PP
+Definition at line \fB577\fP of file \fBfutil\&.c\fP\&.
+.nf
+578                                 {
+579     if (s == nullptr || *s == '\\0')
+580         return false;
+581     switch (s[0]) {
+582     case 't':
+583     case 'T':
+584     case 'y':
+585     case 'Y':
+586     case '1':
+587         return true;
+588     case 'o':
+589     case 'O':
+590         switch (s[1]) {
+591         case 'n':
+592         case 'N':
+593             return true;
+594         default:
+595             break;
+596         }
+597     default:
+598         break;
+599     }
+600     return false;
+.PP
+.fi
+
+.PP
+Referenced by \fBparse_config()\fP\&.
+.SS "double str_to_double (char * s)"
+
+.PP
+converts string to double 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to convert 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+converted double value, or 0\&.0 if s is nullptr, empty, or invalid 
+.RE
+.PP
+\fBDeprecated\fP
+.RS 4
+If the string is invalid, this function returns 0\&.0, with no indication of error\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller must ensure that the string is a valid representation of a double before calling this function\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB565\fP of file \fBfutil\&.c\fP\&.
+.nf
+566                               {
+567     char *e;
+568     double d;
+569 
+570     if (!s || !*s)
+571         return false;
+572     d = strtod(s, &e);
+573     return d;
+.PP
+.fi
+
+.PP
+Referenced by \fBparse_config()\fP, and \fBparse_opt_args()\fP\&.
+.SS "bool str_to_lower (char * s)"
+
+.PP
+Converts a string to lowercase\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to convert 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if s is nullptr or empty 
+.RE
+.PP
+
+.PP
+Definition at line \fB179\fP of file \fBfutil\&.c\fP\&.
+.nf
+179                            {
+180     if (s == nullptr || *s == '\\0')
+181         return false;
+182     while (*s != '\\0') {
+183         if (*s >= 'A' && *s <= 'Z')
+184             *s = *s + 'a' \- 'A';
+185         s++;
+186     }
+187     return true;
+188 }
+.PP
+.fi
+
+.PP
+Referenced by \fBclr_name_to_idx()\fP, \fBform_parse_desc()\fP, and \fBprompt_str_to_int()\fP\&.
+.SS "bool str_to_upper (char * s)"
+
+.PP
+Converts a string to uppercase\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to convert 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if s is nullptr or empty 
+.RE
+.PP
+
+.PP
+Definition at line \fB192\fP of file \fBfutil\&.c\fP\&.
+.nf
+192                            {
+193     if (s == nullptr || *s == '\\0')
+194         return false;
+195     while (*s != '\\0') {
+196         if (*s >= 'a' && *s <= 'z')
+197             *s = *s + 'A' \- 'a';
+198         s++;
+199     }
+200     return true;
+201 }
+.PP
+.fi
+
+.SS "size_t string_cat (String * dest, const String * src)"
+
+.PP
+Concatenates src String to dest String, allocating additional memory for dest String if necessary\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP - destination String struct 
+.br
+\fIsrc\fP - source String struct 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+new length of dest String after concatenation 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for freeing the allocated memory\&. 
+.RE
+.PP
+
+.PP
+\fBExamples\fP
+.in +1c
+\fBstrings_test1\&.c\fP\&.
+.PP
+Definition at line \fB1286\fP of file \fBfutil\&.c\fP\&.
+.nf
+1287                                                    {
+1288     if (dest == nullptr || src == nullptr || src\->s == nullptr)
+1289         return 0;
+1290     size_t new_len = strlen(dest\->s) + strlen(src\->s) + 1;
+1291     if (dest\->l < new_len) {
+1292         dest\->s = (char *)realloc(dest\->s, new_len);
+1293         dest\->l = new_len;
+1294     }
+1295     strcat(dest\->s, src\->s);
+1296     return new_len;
+.PP
+.fi
+
+.SS "size_t string_cpy (String * dest, const String * src)"
+
+.PP
+Copy src String to dest String, allocating additional memory for dest String if necessary\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP - destination String struct 
+.br
+\fIsrc\fP - source String struct 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of dest String 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for freeing the allocated memory\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB1270\fP of file \fBfutil\&.c\fP\&.
+.nf
+1271                                                    {
+1272     if (dest == nullptr || src == nullptr || src\->s == nullptr)
+1273         return 0;
+1274     if (dest\->l < src\->l) {
+1275         dest\->s = (char *)realloc(dest\->s, src\->l);
+1276         dest\->l = src\->l;
+1277     }
+1278     strcpy(dest\->s, src\->s);
+1279     return src\->l;
+.PP
+.fi
+
+.SS "size_t string_ncat (String * dest, const String * src, size_t n)"
+
+.PP
+Concatenates up to n characters from src String to dest String, allocating additional memory for dest String if necessary\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP - destination String struct 
+.br
+\fIsrc\fP - source String struct 
+.br
+\fIn\fP - maximum number of characters to concatenate 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+new length of dest String after concatenation 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for freeing the allocated memory\&. 
+.RE
+.PP
+
+.PP
+\fBExamples\fP
+.in +1c
+\fBstrings_test1\&.c\fP\&.
+.PP
+Definition at line \fB1304\fP of file \fBfutil\&.c\fP\&.
+.nf
+1305                                                               {
+1306     if (dest == nullptr || src == nullptr || src\->s == nullptr)
+1307         return 0;
+1308     size_t dest_len = strlen(dest\->s);
+1309     size_t src_len = strlen(src\->s);
+1310     size_t cat_len = (n < src_len) ? n : src_len;
+1311     size_t new_len = dest_len + cat_len + 1;
+1312     if (dest\->l < new_len) {
+1313         dest\->s = (char *)realloc(dest\->s, new_len);
+1314         dest\->l = new_len;
+1315     }
+1316     strncat(dest\->s, src\->s, cat_len);
+1317     return new_len;
+.PP
+.fi
+
+.SS "size_t string_ncpy (String * dest, const String * src, size_t n)"
+
+.PP
+copies up to n characters from src String to dest String, allocating additional memory for dest String if necessary 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP - destination String struct 
+.br
+\fIsrc\fP - source String struct 
+.br
+\fIn\fP - maximum number of characters to copy 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for freeing the allocated memory\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB1324\fP of file \fBfutil\&.c\fP\&.
+.nf
+1325                                                               {
+1326     if (dest == nullptr || src == nullptr || src\->s == nullptr)
+1327         return 0;
+1328     size_t src_len = strlen(src\->s);
+1329     size_t cpy_len = (n < src_len) ? n : src_len;
+1330     size_t new_len = cpy_len + 1;
+1331     if (dest\->l < new_len) {
+1332         dest\->s = (char *)realloc(dest\->s, new_len);
+1333         dest\->l = new_len;
+1334     }
+1335     strncpy(dest\->s, src\->s, cpy_len);
+1336     dest\->s[cpy_len] = '\\0';
+1337     return new_len;
+.PP
+.fi
+
+.SS "size_t strip_ansi (char * d, char * s)"
+
+.PP
+Strips ANSI SGR escape sequences (ending in 'm') from string s to d\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP Destination string 
+.br
+\fIs\fP Source string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Length of stripped string 
+.PP
+.nf
+    char dest[1024];
+    char src[] = "\\033[31mThis is red text\\033[0m
+    size_t len = strip_ansi(dest, src);
+    Result: dest = "This is red text", len = 17
+@example stripansi\&.c
+
+.fi
+.PP
+ 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Only handles SGR sequences ending in 'm' or 'K' 
+
+.PP
+Skips non-ASCII characters 
+
+.PP
+The caller must ensure that d has enough space to hold the stripped string 
+
+.PP
+This function does not allocate memory; it assumes d is pre-allocated 
+
+.PP
+This function processes the entire string until the null terminator 
+
+.PP
+This function does not modify the source string s 
+.RE
+.PP
+
+.PP
+Definition at line \fB469\fP of file \fBfutil\&.c\fP\&.
+.nf
+470                                     {
+471     size_t l = 0;
+472     while (*s) {
+473         if (*s == '\\033') {
+474             while (*s && *s != 'm' && *s != 'K')
+475                 s++;
+476             if (*s == 'm' || *s == 'K')
+477                 s++;
+478             continue;
+479         } else {
+480             if ((unsigned char)*s <= 127) {
+481                 *d++ = *s++;
+482                 l++;
+483             } else
+484                 s++;
+485         }
+486     }
+487     *d = '\\0';
+488     return l;
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP, and \fBwrite_view_buffer()\fP\&.
+.SS "bool strip_quotes (char * s)"
+
+.PP
+removes leading and trailing double quotes if present 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to strip quotes from 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if s is nullptr or empty 
+.RE
+.PP
+
+.PP
+Definition at line \fB390\fP of file \fBfutil\&.c\fP\&.
+.nf
+390                            {
+391     if (s == nullptr)
+392         return false;
+393     int l = strlen(s);
+394     if (l > 1 && s[l \- 1] == '\\"') {
+395         memmove(s, s + 1, l \- 2);
+396         s[l \- 2] = '\\0';
+397     }
+398     return true;
+399 }
+.PP
+.fi
+
+.PP
+Referenced by \fBinit_form_files()\fP, and \fBinit_view_files()\fP\&.
+.SS "bool stripz_quotes (char * s)"
+
+.PP
+removes leading and trailing double quotes if present 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to strip quotes from 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if quotes were removed 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Same as STRIP_QUOTES but returns true if quotes were removed 
+.RE
+.PP
+
+.PP
+Definition at line \fB404\fP of file \fBfutil\&.c\fP\&.
+.nf
+404                             {
+405     if (s == nullptr || strlen(s) < 2)
+406         return false;
+407     int l = strlen(s);
+408     if (l > 1 && s[0] == '\\"' && s[l \- 1] == '\\"') {
+409         memmove(s, s + 1, l \- 2);
+410         s[l \- 2] = '\\0';
+411         return true;
+412     }
+413     return false;
+414 }
+.PP
+.fi
+
+.PP
+Referenced by \fBverify_spec_arg()\fP\&.
+.SS "bool strnfill (char * s, char c, int n)"
+
+.PP
+Fills string s with character c n\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to fill 
+.br
+\fIc\fP - character to fill with 
+.br
+\fIn\fP - number of characters to fill 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if s is nullptr or n is non-positive 
+.RE
+.PP
+
+.PP
+Definition at line \fB377\fP of file \fBfutil\&.c\fP\&.
+.nf
+377                                       {
+378     if (s == nullptr || n <= 0)
+379         return false;
+380     char *e;
+381     e = s + n;
+382     while (s < e)
+383         *s++ = c;
+384     *s = '\\0';
+385     return true;
+386 }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_display_fields()\fP\&.
+.SS "size_t strnlf (char * s, size_t max_len)"
+
+.PP
+terminates string with line feed 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP string to terminate 
+.br
+\fImax_len\fP maximum length to scan 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of resulting string 
+.RE
+.PP
+
+.PP
+Definition at line \fB298\fP of file \fBfutil\&.c\fP\&.
+.nf
+298                                        {
+299     char *e;
+300     size_t len = 0;
+301     if (s == nullptr || *s == '\\0' || max_len == 0)
+302         return 0;
+303     e = s + max_len;
+304     while (*s != '\\0' && *s != '\\n' && *s != '\\r' && s < e) {
+305         s++;
+306         len++;
+307     }
+308     *s++ = '\\n';
+309     len++;
+310     *s = '\\0';
+311     return (len);
+312 }
+.PP
+.fi
+
+.PP
+Referenced by \fBwrite_view_buffer()\fP\&.
+.SS "size_t strnz (char * s, size_t max_len)"
+
+.PP
+terminates string at New Line, Carriage Return, or max_len 
+.PP
+\fBNote\fP
+.RS 4
+The use case is to ensure that strings read from files or user input do not contain embedded newlines or carriage returns\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP string to terminate 
+.br
+\fImax_len\fP - maximum length to scan 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of resulting string 
+.RE
+.PP
+
+.PP
+Definition at line \fB281\fP of file \fBfutil\&.c\fP\&.
+.nf
+281                                       {
+282     char *e;
+283     size_t len = 0;
+284     if (s == nullptr || *s == '\\0' || max_len == 0)
+285         return 0;
+286     e = s + max_len;
+287     while (*s != '\\0' && *s != '\\n' && *s != '\\r' && s < e) {
+288         s++;
+289         len++;
+290     }
+291     *s = '\\0';
+292     return (len);
+293 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdisplay_error()\fP, \fBenter_file_spec()\fP, \fBform_display_fields()\fP, \fBform_display_screen()\fP, \fBform_fmt_field()\fP, and \fBpick_engine()\fP\&.
+.SS "size_t strnz__cat (char * d, const char * s, size_t max_len)"
+
+.PP
+safer alternative to strncat 
+.PP
+\fBNote\fP
+.RS 4
+It appends string s to d, ensuring that the total length of d does not exceed max_len, and that the resulting string is null-terminated\&. It also treats newline and carriage return characters as string terminators, preventing them from being included in the result\&. This is particularly useful when concatenating user input or file data, where embedded newlines could cause issues\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP - destination string 
+.br
+\fIs\fP - source string 
+.br
+\fImax_len\fP - maximum length to copy 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of resulting string 
+.RE
+.PP
+
+.PP
+Definition at line \fB241\fP of file \fBfutil\&.c\fP\&.
+.nf
+241                                                           {
+242     char *e;
+243     size_t len = 0;
+244     if (s == nullptr || d == nullptr || max_len == 0) {
+245         if (d != nullptr && max_len > 0)
+246             *d = '\\0';
+247         return 0;
+248     }
+249     e = d + max_len;
+250     while (*d != '\\0' && *d != '\\n' && *d != '\\r' && d < e) {
+251         d++;
+252         len++;
+253     }
+254     while (*s != '\\0' && *s != '\\n' && *s != '\\r' && d < e) {
+255         *d++ = *s++;
+256         len++;
+257     }
+258     *d = '\\0';
+259     return len;
+260 }
+.PP
+.fi
+
+.PP
+Referenced by \fBbuild_prompt()\fP, \fBcompile_chyron()\fP, \fBderive_file_spec()\fP, \fBdisplay_curses_keys()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBexpand_tilde()\fP, \fBfile_spec_parts()\fP, \fBform_calculate()\fP, \fBform_display_screen()\fP, \fBform_exec_cmd()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBinit_form()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBlf_process()\fP, \fBlocate_file_in_path()\fP, \fBmenu_cmd_processor()\fP, \fBmk_dir()\fP, \fBopen_curses()\fP, \fBoutput_objects()\fP, \fBparse_menu_description()\fP, \fBsearch()\fP, \fBverify_spec_arg()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, \fBwhence()\fP, \fBwrite_config()\fP, and \fBwrite_view_buffer()\fP\&.
+.SS "size_t strnz__cpy (char * d, const char * s, size_t max_len)"
+
+.PP
+safer alternative to strncpy 
+.PP
+\fBNote\fP
+.RS 4
+It copies string s to d, ensuring that the total length of d does not exceed max_len, and that the resulting string is null-terminated\&. It also treats newline and carriage return characters as string terminators, preventing them from being included in the result\&. This is particularly useful when copying user input or file data, where embedded newlines could cause issues\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP - destination string 
+.br
+\fIs\fP - source string 
+.br
+\fImax_len\fP - maximum length to copy 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of resulting string 
+.RE
+.PP
+
+.PP
+Definition at line \fB213\fP of file \fBfutil\&.c\fP\&.
+.nf
+213                                                           {
+214     char *e;
+215     size_t len = 0;
+216     if (s == nullptr || d == nullptr || max_len == 0) {
+217         if (d != nullptr && max_len > 0)
+218             *d = '\\0';
+219         return 0;
+220     }
+221     e = d + max_len;
+222     while (*s != '\\0' && *s != '\\n' && *s != '\\r' && d < e) {
+223         *d++ = *s++;
+224         len++;
+225     }
+226     *d = '\\0';
+227     return len;
+228 }
+.PP
+.fi
+
+.PP
+Referenced by \fBbuild_prompt()\fP, \fBcanonicalize_file_spec()\fP, \fBcmd_line_prompt()\fP, \fBderive_file_spec()\fP, \fBdir_name()\fP, \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBexpand_tilde()\fP, \fBfile_spec_parts()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_display_screen()\fP, \fBform_engine()\fP, \fBform_exec_cmd()\fP, \fBform_fmt_field()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBget_cmd_arg()\fP, \fBhandle_signal()\fP, \fBinit_form()\fP, \fBinit_form_files()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBinit_pick_files()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_files()\fP, \fBlf_process()\fP, \fBlocate_file_in_path()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBmk_dir()\fP, \fBnew_form()\fP, \fBopen_curses()\fP, \fBoutput_objects()\fP, \fBparse_config()\fP, \fBparse_menu_description()\fP, \fBparse_opt_args()\fP, \fBPerror()\fP, \fBprompt_int_to_str()\fP, \fBrep_substring()\fP, \fBsave_object()\fP, \fBsearch()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBverify_spec_arg()\fP, \fBview_cmd_processor()\fP, \fBview_display_help()\fP, \fBview_init_input()\fP, \fBwhence()\fP, \fBwin_new()\fP, \fBwrite_config()\fP, and \fBwrite_view_buffer()\fP\&.
+.SS "char * strnz_dup (char * s, size_t l)"
+
+.PP
+Allocates memory for and duplicates string s up to length l or until line feed or carriage return\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to duplicate 
+.br
+\fIl\fP - maximum length to copy 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+pointer to allocated memory 
+.RE
+.PP
+
+.PP
+Definition at line \fB318\fP of file \fBfutil\&.c\fP\&.
+.nf
+318                                    {
+319     char *p, *rs, *e;
+320     size_t m;
+321     if (s == nullptr || *s == '\\0' || l == 0)
+322         return nullptr;
+323     for (p = s, m = 1; *p != '\\0'; p++, m++)
+324         ;
+325     rs = p = (char *)malloc(m);
+326     if (rs != nullptr) {
+327         e = rs + l;
+328         while (*s != '\\0' && *s != '\\n' && *s != '\\r' && p < e)
+329             *p++ = *s++;
+330         *p = '\\0';
+331     }
+332     return rs;
+333 }
+.PP
+.fi
+
+.SS "size_t strz (char * s)"
+
+.PP
+Terminates string at new line or carriage return\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP string to terminate 
+.RE
+.PP
+
+.PP
+Definition at line \fB264\fP of file \fBfutil\&.c\fP\&.
+.nf
+264                      {
+265     size_t l = 0;
+266     if (s == nullptr || *s == '\\0')
+267         return 0;
+268     while (*s != '\\0' && *s != '\\n' && *s != '\\r') {
+269         s++;
+270         l++;
+271     }
+272     *s = '\\0';
+273     return l;
+274 }
+.PP
+.fi
+
+.SS "String to_string (const char * s)"
+
+.PP
+Convert C string to String struct\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP C string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+String struct containing dynamically allocated copy of input string 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+the caller is responsible for freeing the allocated memory\&. 
+.RE
+.PP
+
+.PP
+\fBExamples\fP
+.in +1c
+\fBstrings_test1\&.c\fP\&.
+.PP
+Definition at line \fB1217\fP of file \fBfutil\&.c\fP\&.
+.nf
+1218                                 {
+1219     if (s == nullptr) {
+1220         String str;
+1221         str\&.l = 0;
+1222         str\&.s = nullptr;
+1223         return str;
+1224     }
+1225     String str;
+1226     str\&.l = strlen(s) + 1;
+1227     str\&.s = (char *)malloc(str\&.l);
+1228     strcpy(str\&.s, s);
+1229     return str;
+.PP
+.fi
+
+.SS "size_t trim (char * s)"
+
+.PP
+Trims leading and trailing spaces from string s in place\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - string to trim 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+length of trimmed string 
+.RE
+.PP
+
+.PP
+Definition at line \fB83\fP of file \fBfutil\&.c\fP\&.
+.nf
+83                      {
+84     if (s == nullptr || *s == '\\0')
+85         return 0;
+86     char *p = s;
+87     char *d = s;
+88     while (*p == ' ')
+89         p++;
+90     while (*p != '\\0')
+91         *d++ = *p++;
+92     while (*(d \- 1) == ' ' && d > s)
+93         d\-\-;
+94     *d = '\\0';
+95     return (size_t)(d \- s);
+96 }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_fmt_field()\fP, \fBform_parse_desc()\fP, \fBleft_justify()\fP, \fBparse_menu_description()\fP, and \fBright_justify()\fP\&.
+.SS "bool trim_ext (char * buf, char * filename)"
+
+.PP
+trims the file extension from "filename" and copies the result to "buf" 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuf\fP - buffer to receive result 
+.br
+\fIfilename\fP - filename to trim 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The caller is responsible for ensuring that "buf" has enough space to receive the result\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB666\fP of file \fBfutil\&.c\fP\&.
+.nf
+667                                          {
+668     if (!filename || !*filename || !buf)
+669         return false;
+670     char *s = filename;
+671     char *d = buf;
+672     *d = '\\0';
+673     while (*s)
+674         s++;
+675     while (filename < \-\-s) {
+676         if (*s == '\&.') {
+677             break;
+678         }
+679     }
+680     if (*s != '\&.') {
+681         while (*filename)
+682             *d++ = *filename++;
+683     } else {
+684         while (filename < s) {
+685             *d++ = *filename++;
+686         }
+687     }
+688     *d = '\\0';
+689     if (d == buf)
+690         return false;
+691     return true;
+.PP
+.fi
+
+.SS "bool trim_path (char * dir)"
+
+.PP
+Trims trailing spaces and slashes from directory path in place\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdir\fP - directory path to trim 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+
+.PP
+Definition at line \fB639\fP of file \fBfutil\&.c\fP\&.
+.nf
+640                           {
+641     if (!dir)
+642         return false;
+643     char *p;
+644 
+645     if (!dir || !*dir)
+646         return false;
+647     p = dir;
+648     while (*p++ != '\\0') {
+649         if (*p == ' ' || *p == '\\t' || *p == '\\n') {
+650             *p = '\\0';
+651             break;
+652         }
+653     }
+654     \-\-p;
+655     while (\-\-p > dir && *p == '/') {
+656         if (*(p \- 1) != '~')
+657             *p = '\\0';
+658     }
+659     return true;
+.PP
+.fi
+
+.PP
+Referenced by \fBderive_file_spec()\fP\&.
+.SS "bool verify_dir (char * spec, int imode)"
+
+.PP
+Verifies that the directory specified by "spec" exists and is accessible with the permissions specified by "imode"\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIspec\fP - directory specification 
+.br
+\fIimode\fP - access mode F_OK - existence R_OK - read W_OK - Write X_OK - Execute S_WCOK - Write or Create S_QUIET - Suppress Error Messages 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+S_WCOK and S_QUIET are stripped before calling faccessat 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+
+.PP
+Definition at line \fB763\fP of file \fBfutil\&.c\fP\&.
+.nf
+764                                        {
+765     if (spec == nullptr || *spec == '\\0')
+766         return false;
+767     expand_tilde(spec, MAXLEN);
+768     struct stat sb;
+769     errno = 0;
+770     src_line = 0;
+771     int mode = imode & ~(S_WCOK | S_QUIET);
+772     if (faccessat(AT_FDCWD, spec, mode, AT_EACCESS) != 0) {
+773         src_line = __LINE__ \- 2;
+774         src_name = __FILE__;
+775         strnz__cpy(fn, "faccessat", MAXLEN \- 1);
+776     } else {
+777         if (fstatat(AT_FDCWD, spec, &sb, 0) != 0) {
+778             src_line = __LINE__ \- 1;
+779             src_name = __FILE__;
+780             strnz__cpy(fn, "fstatat", MAXLEN \- 1);
+781         } else {
+782             if ((sb\&.st_mode & S_IFMT) != S_IFDIR) {
+783                 src_line = __LINE__ \- 1;
+784                 src_name = __FILE__;
+785                 strnz__cpy(fn, "verify_file", MAXLEN \- 1);
+786                 strnz__cpy(em2, "Not a regular file\&.", MAXLEN \- 1);
+787             }
+788         }
+789     }
+790     if (src_line != 0) {
+791         if (!(mode & S_QUIET)) {
+792             ssnprintf(em0, MAXLEN \- 1, "%s failed in %s at line %d", fn,
+793                       src_name, src_line);
+794             strnz__cpy(em1, spec, MAXLEN \- 1);
+795             strnz__cpy(em3, "Check the file", MAXLEN \- 1);
+796             display_error(em0, em1, em2, em3);
+797         }
+798         return false;
+799     }
+800     return true;
+.PP
+.fi
+
+.PP
+References \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBem3\fP, \fBexpand_tilde()\fP, \fBfn\fP, \fBMAXLEN\fP, \fBsrc_line\fP, \fBsrc_name\fP, \fBssnprintf()\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP, \fBmk_dir()\fP, and \fBverify_spec_arg()\fP\&.
+.SS "bool verify_file (char * in_spec, int imode)"
+
+.PP
+Verifies that the file specified by "in_spec" exists and is accessible with the permissions specified by "imode"\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin_spec\fP - directory specification 
+.br
+\fIimode\fP - access mode F_OK - existence R_OK - read W_OK - Write X_OK - Execute S_WCOK - Write or Create S_QUIET - Suppress Error Messages 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+S_WCOK and S_QUIET are stripped before calling faccessat 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful 
+.RE
+.PP
+
+.PP
+Definition at line \fB813\fP of file \fBfutil\&.c\fP\&.
+.nf
+814                                            {
+815     if (in_spec == nullptr || *in_spec == '\\0')
+816         return false;
+817     struct stat sb;
+818     char spec[MAXLEN];
+819     strnz__cpy(spec, in_spec, MAXLEN \- 1);
+820     int mode = imode & ~(S_WCOK | S_QUIET);
+821     errno = 0;
+822     src_line = 0;
+823     canonicalize_file_spec(spec);
+824     expand_tilde(spec, MAXLEN);
+825     if ((faccessat(AT_FDCWD, spec, mode, AT_EACCESS)) != 0) {
+826         src_line = __LINE__ \- 1;
+827         src_name = __FILE__;
+828         strnz__cpy(fn, "faccessat", MAXLEN \- 1);
+829     } else {
+830         if ((fstatat(AT_FDCWD, spec, &sb, 0)) != 0) {
+831             src_line = __LINE__ \- 1;
+832             src_name = __FILE__;
+833             strnz__cpy(fn, "fstatat", MAXLEN \- 1);
+834         } else {
+835             if ((sb\&.st_mode & S_IFMT) != S_IFREG) {
+836                 src_line = __LINE__ \- 1;
+837                 src_name = __FILE__;
+838                 strnz__cpy(fn, "verify_file", MAXLEN \- 1);
+839                 strnz__cpy(em2, "Not a regular file\&.", MAXLEN \- 1);
+840             }
+841         }
+842     }
+843     if (src_line != 0) {
+844         if (imode & S_QUIET)
+845             return false;
+846         ssnprintf(em0, MAXLEN \- 1, "%s failed in %s at line %d", fn, src_name,
+847                   src_line);
+848         strnz__cpy(em1, spec, MAXLEN \- 1);
+849         strnz__cpy(em3, "Check the file", MAXLEN \- 1);
+850         display_error(em0, em1, em2, em3);
+851         return false;
+852     }
+853     return true;
+.PP
+.fi
+
+.PP
+References \fBcanonicalize_file_spec()\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBem3\fP, \fBexpand_tilde()\fP, \fBfn\fP, \fBMAXLEN\fP, \fBsrc_line\fP, \fBsrc_name\fP, \fBssnprintf()\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBverify_spec_arg()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "char errmsg[\fBMAXLEN\fP]"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/usr/local/src/cmenu/src/enterchr\&.c\fP, and \fB/usr/local/src/cmenu/src/enterstr\&.c\fP\&.
+.PP
+Definition at line \fB63\fP of file \fBfutil\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

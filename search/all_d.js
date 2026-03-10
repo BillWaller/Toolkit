@@ -11,12 +11,12 @@ var searchData=
   ['hex_5fclr_5fstr_5fto_5frgb_8',['hex_clr_str_to_rgb',['../dc/d40/dwin_8c.html#a9916a18055fdcf1f0aac0f61b946eaf9',1,'dwin.c']]],
   ['high_20precision_20math_20with_20c_20menu_20and_20gawk_9',['High Precision Math With C-Menu and Gawk',['../d5/d77/md_FAQ.html#high-precision-math-with-c-menu-and-gawk',1,'']]],
   ['highlighting_10',['Highlighting',['../dc/db0/md_extras.html#highlighting',1,'']]],
-  ['highlights_20pun_20intended_11',['Highlights (Pun Intended)',['../d0/d30/md_README.html#highlights-pun-intended',1,'']]],
+  ['highlights_20pun_20intended_11',['Highlights Pun Intended',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#highlights-pun-intended',1,'Highlights (Pun Intended)'],['../index.html#highlights-pun-intended-1',1,'Highlights (Pun Intended)']]],
   ['horizontal_20scrolling_12',['Horizontal Scrolling',['../de/d82/md_C-Menu-UG.html#horizontal-scrolling',1,'']]],
   ['how_20to_20colorize_20html_20color_20codes_13',['View - How to Colorize HTML Color Codes',['../d5/d77/md_FAQ.html#view---how-to-colorize-html-color-codes',1,'']]],
   ['how_20to_20colorize_20manual_20pages_14',['View - How to Colorize Manual Pages',['../d5/d77/md_FAQ.html#view---how-to-colorize-manual-pages',1,'']]],
   ['how_20to_20customize_20colors_15',['View - How to Customize Colors',['../d5/d77/md_FAQ.html#view---how-to-customize-colors',1,'']]],
   ['how_20to_20use_20tree_20sitter_20with_20view_16',['View - How to Use Tree-Sitter with View',['../d5/d77/md_FAQ.html#view---how-to-use-tree-sitter-with-view',1,'']]],
   ['html_20color_20codes_17',['View - How to Colorize HTML Color Codes',['../d5/d77/md_FAQ.html#view---how-to-colorize-html-color-codes',1,'']]],
-  ['html_20documentation_18',['&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation',['../d0/d30/md_README.html#_new_---complete-c-menu-html-documentation',1,'']]]
+  ['html_20documentation_18',['HTML Documentation',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#_new_---complete-c-menu-html-documentation',1,'&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation'],['../index.html#_new_---complete-c-menu-html-documentation-1',1,'&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation']]]
 ];

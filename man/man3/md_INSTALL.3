@@ -1,0 +1,293 @@
+.TH "md_INSTALL" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_INSTALL \- Installation Guide 
+.PP
+
+
+.PP
+.IP "\(bu" 2
+\fBTo Install C-Menu\fP
+.IP "  \(bu" 4
+\fBBuild C-Menu\fP
+.IP "    \(bu" 6
+\fBRSH Static Linking\fP
+.IP "    \(bu" 6
+\fBPrerequisites\fP
+.IP "    \(bu" 6
+\fBOption 1 - Build C-Menu Using CMake Directly\fP
+.IP "    \(bu" 6
+\fBOption 2 - Build C-Menu with Provided Scripts\fP
+.IP "    \(bu" 6
+\fBOption 3 - Build C-Menu Using Makefile\fP
+.PP
+
+.IP "  \(bu" 4
+\fBFinish the installation\fP
+.PP
+
+.PP
+.SH "To Install C-Menu"
+.PP
+1️⃣ Clone the C-Menu repository:
+
+.PP
+.PP
+.nf
+gh repo clone BillWaller/C\-Menu
+.fi
+.PP
+
+.PP
+2️⃣ Copy the menuapp directory to your desired location:
+
+.PP
+.PP
+.nf
+cp \-r C\-Menu/src/menuapp /home/yourusername/
+.fi
+.PP
+
+.PP
+.PP
+.SS "Build C-Menu"
+.SS "RSH Static Linking"
+C-Menu uses dynamic linking by default, but if you plan to use rsh in a rescue environment where dynamic linking may not be available, you can statically link rsh during the build\&. To do this, set the \fRRSH_LD\fP environment variable to \fR-static\fP before building C-Menu:
+
+.PP
+.PP
+.nf
+export RSH_LD="\-static"
+.fi
+.PP
+
+.PP
+CMake or Makefile will strip symbols from the executable once it has been copied to its destination directory\&. This is done to reduce the size of the executable and improve performance\&.
+
+.PP
+\fI\fBNOTE\fP\fP If you choose to statically link rsh, make sure that your C compiler and linker support static linking and that you have the necessary static libraries, specifically, libc\&.a, installed on your system\&. Static linking can increase the size of the executable and may have implications for compatibility and security, so be sure to test the statically linked version of C-Menu in your target environment\&.
+
+.PP
+Most distributions provide static libraries for the GNU C Library (glibc) as part of their development packages\&. You may need to install additional packages to obtain these static libraries, such as \fRglibc-static\fP or \fRlibc6-dev\fP for glibc\&.
+
+.PP
+.PP
+.SS "Prerequisites"
+.IP "\(bu" 2
+One of:
+.IP "  \(bu" 4
+CMake 3\&.20 or higher, or
+.IP "  \(bu" 4
+GNU Make 4\&.3 or higher
+.PP
+
+.IP "\(bu" 2
+A C compiler that supports C23 or later (e\&.g\&., GCC 13 or later, Clang 15 or later)
+.IP "\(bu" 2
+NCursesw development libraries 6\&.5 or later
+.IP "\(bu" 2
+GNU GLIBC development files
+.IP "\(bu" 2
+GNU Math Library (libm) development files
+.PP
+
+.PP
+.PP
+.SS "Option 1 - Build C-Menu Using CMake Directly"
+1️⃣ Navigate to the C-Menu/src directory, create a build directory, and cd into it:
+
+.PP
+.PP
+.nf
+cd C\-Menu/src
+mkdir build
+cd build
+.fi
+.PP
+
+.PP
+2️⃣ Configure the project using CMake, specifying the installation prefix and build type:
+
+.PP
+.PP
+.nf
+cmake \-DCMAKE_INSTALL_PREFIX="$HOME"/menuapp \-DCMAKE_BUILD_TYPE=Release \&.\&.
+.fi
+.PP
+
+.PP
+3️⃣ Build the project using:
+
+.PP
+.PP
+.nf
+make
+.fi
+.PP
+
+.PP
+4️⃣ \&. If you want to use rsh in setuid mode, you must install C-Menu with root privileges\&.
+
+.PP
+.PP
+.nf
+sudo make install
+.fi
+.PP
+
+.PP
+go to \fBFinish the installation\fP below to complete the installation process\&.
+
+.PP
+.PP
+.SS "Option 2 - Build C-Menu with Provided Scripts"
+1️⃣ Navigate to the C-Menu/build directory and run the provided build script:
+
+.PP
+.PP
+.nf
+cd C\-Menu/build
+\&./build\&.sh
+.fi
+.PP
+
+.PP
+2️⃣ Assume root privileges to install C-Menu:
+
+.PP
+.PP
+.nf
+sudo \&./install\&.sh
+.fi
+.PP
+
+.PP
+go to \fBFinish the installation\fP below to complete the installation process\&.
+
+.PP
+.PP
+.SS "Option 3 - Build C-Menu Using Makefile"
+1️⃣ \&. Navigate to the C-Menu/src directory and edit the provided Makefile to set the installation PREFIX to your desired location (e\&.g\&., /home/yourusername/menuapp):
+
+.PP
+.PP
+.nf
+cd C\-Menu/src
+.fi
+.PP
+
+.PP
+.PP
+.nf
+USER=yourusername
+GROUP=yourgroup
+HOME=/home/$(USER)
+PREFIX=/home/$(USER)/menuapp
+.fi
+.PP
+
+.PP
+2️⃣ Build the project using:
+
+.PP
+.PP
+.nf
+make
+.fi
+.PP
+
+.PP
+3️⃣ Assume root privileges to install C-Menu:
+
+.PP
+.PP
+.nf
+sudo make install
+.fi
+.PP
+
+.PP
+Continue with \fBFinish the installation\fP below to complete the installation process\&.
+
+.PP
+.PP
+.SS "Finish the installation"
+1️⃣ Vrify that the C-Menu libraries and binaries have been installed to the correct directories (e\&.g\&., /home/yourusername/menuapp/lib64 and /home/yourusername/menuapp/bin) and that the permissions are set correctly\&.
+
+.PP
+.PP
+.nf
+ls \-l "$HOME"/menuapp/lib64 "$HOME"/menuapp/bin
+.fi
+.PP
+
+.PP
+
+.PP
+2️⃣ Register the C-Menu libraries with the dynamic linker by running the following command:
+
+.PP
+.PP
+.nf
+sudo ldconfig \-v "$HOME"/menuapp/lib64
+.fi
+.PP
+
+.PP
+3️⃣ Add the C-Menu bin directory to your PATH environment variable by adding the following line to your shell profile (e\&.g\&., ~/\&.bashrc or ~/\&.zshrc):
+
+.PP
+.PP
+.nf
+export PATH="/home/yourusername/menuapp/bin:"$PATH"
+.fi
+.PP
+
+.PP
+(replace /home/yourusername with the actual path to your menuapp directory) and save the file\&. 😆
+
+.PP
+4️⃣ Copy the sample minitrc from the C-Menu/menuapp directory to your home directory:
+
+.PP
+.PP
+.nf
+cp "$HOME"/menuapp/minitrc "$HOME"/\&.minitrc
+.fi
+.PP
+
+.PP
+5️⃣ Edit the ~/\&.minitrc file to customize your C-Menu configuration as needed\&.
+
+.PP
+.PP
+.nf
+vi ~/\&.minitrc
+.fi
+.PP
+
+.PP
+6️⃣ Source your shell profile to apply the changes to your PATH:
+
+.PP
+.PP
+.nf
+source ~/\&.bashrc
+.fi
+.PP
+
+.PP
+7️⃣ Start C-Menu by running the following command in your terminal:
+
+.PP
+.PP
+.nf
+menu
+.fi
+.PP
+.SH ""
+.PP
+.SH "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository\&."
+.PP
+

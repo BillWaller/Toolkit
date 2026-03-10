@@ -1,0 +1,234 @@
+.TH "src/rsh.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/rsh.c \- restricted shell to run bash as root  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <limits\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stddef\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <sys/resource\&.h>\fP
+.br
+\fR#include <sys/types\&.h>\fP
+.br
+\fR#include <sys/wait\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAXLEN\fP   256"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBABEND\fP (int e, char const *)"
+.br
+.RI "Abnormal termination - print an error message and exit\&. "
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.RI "Main function for rsh\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "bool \fBf_verbose\fP = false"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+restricted shell to run bash as root 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBrsh\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MAXLEN   256"
+
+.PP
+Definition at line \fB23\fP of file \fBrsh\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void ABEND (int e, char const * s)"
+
+.PP
+Abnormal termination - print an error message and exit\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIe\fP Error code 
+.br
+\fIs\fP Error message 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function prints the provided error message along with the error code and its corresponding string representation, then exits the program with a failure status\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB121\fP of file \fBrsh\&.c\fP\&.
+.nf
+121                                  {
+122     fprintf(stderr, "%s: %d %s\\n", s, e, strerror(e));
+123     exit(EXIT_FAILURE);
+124 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int main (int argc, char ** argv)"
+
+.PP
+Main function for rsh\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc\fP Argument count 
+.br
+\fIargv\fP Argument vector 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If executed as 'rsh', this program sets the user ID and group ID to 0 (root) and then executes the user's default shell (or /usr/bin/bash if SHELL is not set) with the provided arguments\&. If no arguments are given, it runs the shell in interactive mode\&. 
+
+.PP
+To work properly, this program must be compiled and set with the setuid bit: 
+.PP
+.nf
+$ sudo \-s
+cc rsh\&.c \-o rsh
+sudo chown root:root rsh
+sudo chmod 4755 rsh
+exit
+
+.fi
+.PP
+ 
+
+.PP
+to verify proper operation: 
+.PP
+.nf
+$ rsh
+$ whoami
+root
+
+.fi
+.PP
+ 
+.RE
+.PP
+
+.PP
+Definition at line \fB64\fP of file \fBrsh\&.c\fP\&.
+.nf
+64                                 {
+65     char *cargv[30];
+66     char exec_cmd[MAXLEN] = "/usr/bin/bash";
+67     char *p;
+68     int c, a;
+69     int rc;
+70     int status;
+71     pid_t pid;
+72 
+73     if ((p = getenv("SHELL")))
+74         strncpy(exec_cmd, p, MAXLEN \- 1);
+75     cargv[0] = strdup(exec_cmd);
+76     c = 1;
+77     a = 1;
+78     if (argc == 1)
+79         cargv[c++] = "\-i";
+80     while (a < argc)
+81         cargv[c++] = strdup(argv[a++]);
+82     cargv[c] = nullptr;
+83     pid = fork();
+84     switch (pid) {
+85     case \-1:
+86         ABEND(EXIT_FAILURE, "fork() fatal error");
+87         break;
+88     case 0: // Child
+89         if (argv[0] && strstr(argv[0], "rsh")) {
+90             if (setuid(0) || setgid(0))
+91                 ABEND(EXIT_FAILURE, "setuid(0) fatal error");
+92             struct rlimit rl;
+93             getrlimit(RLIMIT_FSIZE, &rl);
+94             rl\&.rlim_cur = RLIM_INFINITY;
+95             rl\&.rlim_max = RLIM_INFINITY;
+96             setrlimit(RLIMIT_FSIZE, &rl);
+97         }
+98         execvp(exec_cmd, cargv);
+99         ABEND(EXIT_FAILURE, "execvp() fatal error");
+100         break;
+101     default: // Parent
+102         waitpid(pid, &status, 0);
+103         if (f_verbose) {
+104             if (WIFEXITED(status)) {
+105                 rc = WEXITSTATUS(status);
+106                 if (rc != 0)
+107                     ABEND(rc, "Child process exited");
+108             } else {
+109                 if (WIFSIGNALED(status)) {
+110                     rc = WTERMSIG(status);
+111                     ABEND(rc, "Child process terminated by signal");
+112                 } else
+113                     ABEND(EXIT_FAILURE, "Child process terminated abnormally");
+114             }
+115         }
+116         break;
+117     }
+118     exit(EXIT_SUCCESS);
+119 }
+.PP
+.fi
+
+.PP
+References \fBABEND()\fP, \fBf_verbose\fP, and \fBMAXLEN\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "bool f_verbose = false"
+
+.PP
+Definition at line \fB29\fP of file \fBrsh\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBwhence()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

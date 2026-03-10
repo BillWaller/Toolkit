@@ -1,0 +1,102 @@
+.TH "src/test/unicode_decode.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/test/unicode_decode.c \- decode UTF-8 encoded string to Unicode code points  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <stdint\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "uint32_t \fButf8_decode\fP (const unsigned char **s)"
+.br
+.ti -1c
+.RI "int \fBmain\fP ()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+decode UTF-8 encoded string to Unicode code points 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBunicode_decode\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int main ()"
+
+.PP
+Definition at line \fB39\fP of file \fBunicode_decode\&.c\fP\&.
+.nf
+39            {
+40     const unsigned char *str = (const unsigned char *)"█";
+41 
+42     while (*str) {
+43         uint32_t cp = utf8_decode(&str);
+44         printf("U+%06X\\n", cp);
+45     }
+46     return 0;
+47 }
+.PP
+.fi
+
+.PP
+References \fButf8_decode()\fP\&.
+.SS "uint32_t utf8_decode (const unsigned char ** s)"
+
+.PP
+Definition at line \fB13\fP of file \fBunicode_decode\&.c\fP\&.
+.nf
+13                                               {
+14     uint32_t cp = 0;
+15     const unsigned char *p = *s;
+16 
+17     if (p[0] < 0x80) { // 1\-byte ascii
+18         cp = p[0];
+19         p += 1;
+20     } else if ((p[0] & 0xe0) == 0xc0) { // 2\-byte
+21         cp = ((p[0] & 0x1f) << 6) | (p[1] & 0x3f);
+22         p += 2;
+23     } else if ((p[0] & 0xf0) == 0xe0) { // 3\-byte
+24         cp = ((p[0] & 0x0f) << 12) | ((p[1] & 0x3f) << 6) | (p[2] & 0x3f);
+25         p += 3;
+26     } else if ((p[0] & 0xf8) == 0xf0) { // 4\-byte
+27         cp = ((p[0] & 0x07) << 18) | ((p[1] & 0x3f) << 12) |
+28              ((p[2] & 0x3f) << 6) | (p[3] & 0x3f);
+29         p += 4;
+30     } else {
+31         cp = 0xfffd; // invalid sequence
+32         p += 1;
+33     }
+34 
+35     *s = p;
+36     return cp;
+37 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

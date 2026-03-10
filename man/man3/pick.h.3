@@ -1,0 +1,328 @@
+.TH "src/include/pick.h" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/include/pick.h \- \fBPick\fP data structures, enums, types, end external declarations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <cm\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBPick\fP"
+.br
+.RI "\fBPick\fP data structure\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBOBJ_MAXLEN\fP   80"
+.br
+.ti -1c
+.RI "#define \fBOBJ_MAXCNT\fP   1024"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBsave_object\fP (\fBPick\fP *, char *)"
+.br
+.RI "Saves a string as an object in the pick structure\&. "
+.ti -1c
+.RI "void \fBdisplay_page\fP (\fBPick\fP *)"
+.br
+.RI "Displays current page of objects in pick window\&. "
+.ti -1c
+.RI "void \fBreverse_object\fP (\fBPick\fP *)"
+.br
+.RI "Reverses the display of the currently selected object in pick window\&. "
+.ti -1c
+.RI "void \fBtoggle_object\fP (\fBPick\fP *)"
+.br
+.RI "Toggles the selection state of the currently selected object in pick window\&. "
+.ti -1c
+.RI "int \fBoutput_objects\fP (\fBPick\fP *)"
+.br
+.RI "Outputs selected objects to specified output file\&. "
+.ti -1c
+.RI "int \fBmpick\fP (int, char **, int, int, int, int, char *, int)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBPick\fP * \fBpick\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+\fBPick\fP data structures, enums, types, end external declarations\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBpick\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define OBJ_MAXCNT   1024"
+
+.PP
+Definition at line \fB17\fP of file \fBpick\&.h\fP\&.
+.PP
+Referenced by \fBnew_pick()\fP, and \fBsave_object()\fP\&.
+.SS "#define OBJ_MAXLEN   80"
+\fBPick\fP structures, enums, and data types 
+.PP
+Definition at line \fB16\fP of file \fBpick\&.h\fP\&.
+.PP
+Referenced by \fBsave_object()\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void display_page (\fBPick\fP * pick)\fR [extern]\fP"
+
+.PP
+Displays current page of objects in pick window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBpick\fP\fP Pointer to \fBPick\fP structure containing objects and display information 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Clears the pick window and displays the current page of objects based on the current table page, line, and column\&. Marks selected objects with an asterisk\&. Updates the chyron with page information at the bottom of the pick window\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB503\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+503                               {
+504     int y, col, pidx;
+505     for (y = 0; y < pick\->pg_lines; y++) {
+506         wmove(pick\->win, y, 0);
+507         wclrtoeol(pick\->win);
+508     }
+509     pidx = pick\->tbl_page * pick\->pg_lines * pick\->tbl_cols;
+510     for (col = 0; col < pick\->tbl_cols; col++) {
+511         pick\->x = col * (pick\->tbl_col_width + 1) + 1;
+512         for (y = 0; y < pick\->pg_lines; y++, pidx++) {
+513             if (pidx < pick\->obj_cnt) {
+514                 if (pick\->f_selected[pidx])
+515                     mvwaddstr(pick\->win, y, pick\->x \- 1, "*");
+516                 mvwaddstr_fill(pick\->win, y, pick\->x, pick\->object[pidx],
+517                                pick\->tbl_col_width);
+518             }
+519         }
+520     }
+521     pick_display_chyron(pick);
+522 }
+.PP
+.fi
+
+.PP
+References \fBmvwaddstr_fill()\fP, \fBpick\fP, and \fBpick_display_chyron()\fP\&.
+.PP
+Referenced by \fBpick_engine()\fP, and \fBpicker()\fP\&.
+.SS "int mpick (int , char ** , int , int , int , int , char * , int )\fR [extern]\fP"
+
+.SS "int output_objects (\fBPick\fP * pick)\fR [extern]\fP"
+
+.PP
+Outputs selected objects to specified output file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBpick\fP\fP Pointer to \fBPick\fP structure containing selected objects and output file information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, 1 on failure 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If output file cannot be opened, an error message is printed and the function returns 1\&. Otherwise, selected objects are written to the output file, one per line, and the file is closed before returning 0\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB612\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+612                                {
+613     char tmp_str[MAXLEN];
+614     int m;
+615     if ((pick\->out_fp = fopen(pick\->out_spec, "w")) == nullptr) {
+616         m = MAXLEN \- 30;
+617         strnz__cpy(tmp_str, "Can't open pick output file: ", m);
+618         m \-= strlen(pick\->in_spec);
+619         strnz__cat(tmp_str, pick\->out_spec, m);
+620     }
+621     for (pick\->obj_idx = 0; pick\->obj_idx < pick\->obj_cnt; pick\->obj_idx++) {
+622         if (pick\->f_selected[pick\->obj_idx])
+623             fprintf(stdout, "%s\\n", pick\->object[pick\->obj_idx]);
+624     }
+625     fflush(stdout);
+626     if (pick\->out_fp != nullptr)
+627         fclose(pick\->out_fp);
+628     return (0);
+629 }
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, \fBpick\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBpick_engine()\fP\&.
+.SS "void reverse_object (\fBPick\fP * pick)\fR [extern]\fP"
+
+.PP
+Reverses the display of the currently selected object in pick window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBpick\fP\fP Pointer to \fBPick\fP structure containing object and display information 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Calculates the x coordinate for the currently selected object based on the current table column and column width\&. Moves the cursor to the object's position in the pick window, turns on reverse video attribute, and displays the object's text\&. Turns off reverse video attribute and refreshes the pick window to show the updated display\&. Moves the cursor back to the position before the object text for potential further interactions\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB550\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+550                                 {
+551     pick\->x = pick\->tbl_col * (pick\->tbl_col_width + 1) + 1;
+552     pick\->tbl_line = (pick\->obj_idx / pick\->tbl_cols) % pick\->pg_lines;
+553     pick\->y = pick\->tbl_line;
+554     wmove(pick\->win, pick\->y, pick\->x);
+555     wattron(pick\->win, WA_REVERSE);
+556     mvwaddstr_fill(pick\->win, pick\->y, pick\->x, pick\->object[pick\->obj_idx],
+557                    pick\->tbl_col_width);
+558     wattroff(pick\->win, WA_REVERSE);
+559     wrefresh(pick\->win);
+560     wmove(pick\->win, pick\->y, pick\->x \- 1);
+561 }
+.PP
+.fi
+
+.PP
+References \fBmvwaddstr_fill()\fP, and \fBpick\fP\&.
+.PP
+Referenced by \fBpick_engine()\fP, and \fBpicker()\fP\&.
+.SS "void save_object (\fBPick\fP * pick, char * s)\fR [extern]\fP"
+
+.PP
+Saves a string as an object in the pick structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBpick\fP\fP Pointer to \fBPick\fP structure 
+.br
+\fIs\fP \fBString\fP to save as an object 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If the current object index is less than the maximum allowed, saves the string as an object in the pick structure\&. Updates the column width if necessary and marks the object as not selected\&. Increments the object index for the next object to be saved\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB287\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+287                                       {
+288     int l;
+289 
+290     if (pick\->obj_idx < OBJ_MAXCNT \- 1) {
+291         l = strlen(s);
+292         if (l > OBJ_MAXLEN \- 1)
+293             s[OBJ_MAXLEN \- 1] = '\\0';
+294         if (l > pick\->tbl_col_width)
+295             pick\->tbl_col_width = l;
+296         if (l < 1)
+297             l = 1;
+298         pick\->object[pick\->obj_idx] = (char *)calloc(l + 1, sizeof(char));
+299         strnz__cpy(pick\->object[pick\->obj_idx], s, l);
+300         pick\->f_selected[pick\->obj_idx] = FALSE;
+301         pick\->obj_idx++;
+302     }
+303 }
+.PP
+.fi
+
+.PP
+References \fBFALSE\fP, \fBOBJ_MAXCNT\fP, \fBOBJ_MAXLEN\fP, \fBpick\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBread_pick_input()\fP\&.
+.SS "void toggle_object (\fBPick\fP * pick)\fR [extern]\fP"
+
+.PP
+Toggles the selection state of the currently selected object in pick window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBpick\fP\fP Pointer to \fBPick\fP structure containing object and selection information 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Calculates the x coordinate for the currently selected object based on the current table column and column width\&. If the object is currently selected, it is deselected by updating the selection count, marking it as not selected, and displaying a space before the object text\&. If the object is not currently selected, it is selected by updating the selection count, marking it as selected, and displaying an asterisk before the object text\&. Refreshes the pick window to show the updated display\&. Moves the cursor back to the position before the object text for potential further interactions\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB592\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+592                                {
+593     pick\->x = pick\->tbl_col * (pick\->tbl_col_width + 1) + 1;
+594     if (pick\->f_selected[pick\->obj_idx]) {
+595         pick\->select_cnt\-\-;
+596         pick\->f_selected[pick\->obj_idx] = FALSE;
+597         mvwaddstr(pick\->win, pick\->y, pick\->x \- 1, " ");
+598     } else {
+599         pick\->select_cnt++;
+600         pick\->f_selected[pick\->obj_idx] = true;
+601         mvwaddstr(pick\->win, pick\->y, pick\->x \- 1, "*");
+602     }
+603 }
+.PP
+.fi
+
+.PP
+References \fBFALSE\fP, and \fBpick\fP\&.
+.PP
+Referenced by \fBpicker()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBPick\fP* pick\fR [extern]\fP"
+pointer to \fBPick\fP data structure 
+.PP
+Definition at line \fB34\fP of file \fBmem\&.c\fP\&.
+.PP
+Referenced by \fBdestroy_pick()\fP, \fBdisplay_page()\fP, \fBdisplay_pick_help()\fP, \fBexec_objects()\fP, \fBinit_pick()\fP, \fBinit_pick_files()\fP, \fBnew_pick()\fP, \fBopen_pick_win()\fP, \fBoutput_objects()\fP, \fBpick_display_chyron()\fP, \fBpick_engine()\fP, \fBpicker()\fP, \fBread_pick_input()\fP, \fBreverse_object()\fP, \fBsave_object()\fP, \fBtoggle_object()\fP, and \fBunreverse_object()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

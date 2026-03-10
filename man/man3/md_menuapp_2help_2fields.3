@@ -1,0 +1,53 @@
+.TH "md_menuapp_2help_2fields" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md_menuapp_2help_2fields \- Form Field Definition File Format 
+.PP
+
+.SH "Line Type Speecifiers (H, T, F, and ?)"
+.PP
+.IP "\(bu" 2
+# - Comment line (ignored)
+.IP "\(bu" 2
+H - The header to be displayed at the top of the form
+.IP "\(bu" 2
+T - \fBText\fP field (line:column:length:text)
+.IP "\(bu" 2
+F - Input field (line:column:length:type)
+.IP "\(bu" 2
+? - A user supplied help file for the form\&. If no path is given, \fBForm\fP will look for a file with the same name as the form but with a \&.hlp extension\&. It will search in the current directory and then in the menu help directory, ~/menuapp/help\&.
+.PP
+.SH "Field Delimiters"
+.PP
+The ":" character is used as a delimiter in the fields above, but any character that is placed immediately after the line designator (H, T, F, ?) can be used as a delimiter\&. For example, the following two lines are equivalent:
+
+.PP
+.PP
+.nf
+T:2:4:Enter any three of the four values to calculate the fourth\&.
+T|2|4|Enter any three of the four values to calculate the fourth\&.
+.fi
+.PP
+.SH "Data Types"
+.PP
+.IP "\(bu" 2
+\fBString\fP: Any text
+.IP "\(bu" 2
+Decimal_Int: Integer number
+.IP "\(bu" 2
+Hex_Int: Hexadecimal integer
+.IP "\(bu" 2
+Float: Floating point number
+.IP "\(bu" 2
+Double: Double precision floating point number
+.IP "\(bu" 2
+Currency: Currency amount
+.IP "\(bu" 2
+APR: Annual Percentage Rate
+.IP "\(bu" 2
+Note that the data types affect only input validation\&. All data is stored internally as strings\&.
+.PP
+
+.PP
+The \fBField\fP Format Specifiers can be any combination of upper and lower case, and new types can be easily added by modifying the source code\&. 

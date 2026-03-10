@@ -2,10 +2,10 @@ var searchData=
 [
   ['obj_5fidx_0',['obj_idx',['../db/ddc/pick__engine_8c.html#a4a50bfe3f8460978b34566ec3dff7adb',1,'pick_engine.c']]],
   ['obscurity_1',['Security Through Obscurity',['../d7/da4/md_snippets.html#security-through-obscurity',1,'']]],
-  ['of_20c_20menu_2',['Elements of C-Menu',['../d0/d30/md_README.html#elements-of-c-menu',1,'']]],
-  ['of_20contents_3',['of Contents',['../de/d82/md_C-Menu-UG.html#table-of-contents',1,'Table of Contents'],['../dc/db0/md_extras.html#table-of-contents-1',1,'Table of Contents'],['../d5/d77/md_FAQ.html#table-of-contents-2',1,'Table of Contents'],['../d0/d30/md_README.html#table-of-contents-3',1,'Table of Contents'],['../d7/da4/md_snippets.html#table-of-contents-4',1,'Table of Contents']]],
+  ['of_20c_20menu_2',['of C Menu',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#elements-of-c-menu',1,'Elements of C-Menu'],['../index.html#elements-of-c-menu-1',1,'Elements of C-Menu']]],
+  ['of_20contents_3',['of Contents',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#table-of-contents',1,'Table of Contents'],['../de/d82/md_C-Menu-UG.html#table-of-contents-1',1,'Table of Contents'],['../dc/db0/md_extras.html#table-of-contents-2',1,'Table of Contents'],['../d5/d77/md_FAQ.html#table-of-contents-3',1,'Table of Contents'],['../index.html#table-of-contents-4',1,'Table of Contents'],['../d7/da4/md_snippets.html#table-of-contents-5',1,'Table of Contents']]],
   ['of_20ls_4',['Use lsd instead of ls',['../d7/da4/md_snippets.html#use-lsd-instead-of-ls',1,'']]],
-  ['of_20the_20same_20file_20with_20view_5',['Screenshot of the Same File With View',['../d0/d30/md_README.html#screenshot-of-the-same-file-with-view',1,'']]],
+  ['of_20the_20same_20file_20with_20view_5',['of the Same File With View',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#screenshot-of-the-same-file-with-view',1,'Screenshot of the Same File With View'],['../index.html#screenshot-of-the-same-file-with-view-1',1,'Screenshot of the Same File With View']]],
   ['on_20linux_6',['On Linux',['../dc/db0/md_extras.html#bat-on-linux',1,'Bat On Linux'],['../dc/db0/md_extras.html#ghostty-on-linux',1,'Ghostty On Linux'],['../dc/db0/md_extras.html#lsd-on-linux',1,'lsd On Linux'],['../dc/db0/md_extras.html#ripgrep-on-linux',1,'Ripgrep On Linux'],['../dc/db0/md_extras.html#tree-sitter-on-linux',1,'Tree-Sitter On Linux'],['../dc/db0/md_extras.html#tree-sitter-parsers-on-linux',1,'Tree-Sitter Parsers On Linux'],['../dc/db0/md_extras.html#tree-sitter-cli-on-linux',1,'Tree-Sitter-CLI On Linux']]],
   ['on_20linux_20and_20macos_7',['Installing Rust On Linux and macOS',['../dc/db0/md_extras.html#installing-rust-on-linux-and-macos',1,'']]],
   ['on_20macos_8',['On macOS',['../dc/db0/md_extras.html#bat-on-macos',1,'Bat On macOS'],['../dc/db0/md_extras.html#ghostty-on-macos',1,'Ghostty On macOS'],['../dc/db0/md_extras.html#lsd-on-macos',1,'lsd On macOS'],['../dc/db0/md_extras.html#ripgrep-on-macos',1,'Ripgrep On macOS'],['../dc/db0/md_extras.html#tree-sitter-on-macos',1,'Tree-Sitter On macOS'],['../dc/db0/md_extras.html#tree-sitter-parsers-on-macos',1,'Tree-Sitter Parsers On macOS'],['../dc/db0/md_extras.html#tree-sitter-cli-on-macos',1,'Tree-Sitter-CLI On macOS']]],
@@ -27,7 +27,7 @@ var searchData=
   ['opts_2ec_24',['opts.c',['../df/dcd/opts_8c.html',1,'']]],
   ['optsp_2ec_25',['optsp.c',['../dd/dac/optsp_8c.html',1,'']]],
   ['or_20have_20questions_20feel_20free_20to_20open_20an_20issue_20on_20the_20c_20menu_20github_20repository_26',['🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.',['../d4/def/md_INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'']]],
-  ['other_20features_27',['View - Other Features',['../d0/d30/md_README.html#view---other-features',1,'']]],
+  ['other_20features_27',['Other Features',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#view---other-features',1,'View - Other Features'],['../index.html#view---other-features-1',1,'View - Other Features']]],
   ['out_5fspec_28',['OUT_SPEC',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00a96d229d3aab3fa830c22f014691550e4',1,'init.c']]],
   ['output_29',['Sorted lf Output',['../d5/d77/md_FAQ.html#sorted-lf-output',1,'']]],
   ['output_5fobjects_30',['output_objects',['../db/ddc/pick__engine_8c.html#a8feb6cd586d503a676b831ec722576fb',1,'pick_engine.c']]]

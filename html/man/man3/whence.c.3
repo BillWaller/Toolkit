@@ -1,0 +1,514 @@
+.TH "src/whence.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/whence.c \- Find the full path of a file in the directories specified by the\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <cm\&.h>\fP
+.br
+\fR#include <fcntl\&.h>\fP
+.br
+\fR#include <getopt\&.h>\fP
+.br
+\fR#include <limits\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stddef\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <sys/stat\&.h>\fP
+.br
+\fR#include <sys/types\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTRUE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBFALSE\fP   0"
+.br
+.ti -1c
+.RI "#define \fBFAIL\fP   \-1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBwhence_usage\fP ()"
+.br
+.RI "Display usage information for the whence utility\&. "
+.ti -1c
+.RI "void \fBwhence\fP (char *file_spec_p)"
+.br
+.RI "Find the full path of a file in the directories specified by the PATH environment variable\&. "
+.ti -1c
+.RI "int \fBnext_path\fP (char *dp, char **sp)"
+.br
+.RI "Extract the next directory path from the PATH string\&. "
+.ti -1c
+.RI "int \fBfile_spec_parts\fP (char *file_spec, char *file_path, char *\fBfile_name\fP)"
+.br
+.RI "Split a file specification into directory and file name components\&. "
+.ti -1c
+.RI "void \fBABEND\fP (char *pgmid, int rc, char *\fBerr_msg\fP)"
+.br
+.RI "Exit the program with an error message\&. "
+.ti -1c
+.RI "void \fBnormalend\fP ()"
+.br
+.RI "Exit the program successfully\&. "
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.RI "Main function for whence utility\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "bool \fBf_all\fP"
+.br
+.ti -1c
+.RI "bool \fBf_display_help\fP"
+.br
+.ti -1c
+.RI "bool \fBf_verbose\fP"
+.br
+.ti -1c
+.RI "char * \fBpath_p\fP"
+.br
+.ti -1c
+.RI "char \fBpath_s\fP [\fBMAXLEN\fP]"
+.br
+.ti -1c
+.RI "char * \fBfile_name\fP [\fBMAXLEN\fP+1]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Find the full path of a file in the directories specified by the\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBwhence\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define FAIL   \-1"
+
+.PP
+Definition at line \fB25\fP of file \fBwhence\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "#define FALSE   0"
+
+.PP
+Definition at line \fB24\fP of file \fBwhence\&.c\fP\&.
+.SS "#define TRUE   1"
+
+.PP
+Definition at line \fB23\fP of file \fBwhence\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void ABEND (char * pgmid, int rc, char * err_msg)"
+
+.PP
+Exit the program with an error message\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpgmid\fP The name of the program 
+.br
+\fIrc\fP The return code to exit with 
+.br
+\fI\fBerr_msg\fP\fP The error message to display 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function is called to exit the program with an error status\&. It prints the program name, return code, and error message to the standard error stream, and then exits with the specified return code\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB233\fP of file \fBwhence\&.c\fP\&.
+.nf
+233                                                {
+234     fprintf(stderr, "%s; error %d; %s\\n", pgmid, rc, err_msg);
+235     exit(EXIT_FAILURE);
+236 }
+.PP
+.fi
+
+.PP
+References \fBerr_msg\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int file_spec_parts (char * file_spec, char * file_path, char * file_name)"
+
+.PP
+Split a file specification into directory and file name components\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_spec\fP The full file specification to split 
+.br
+\fIfile_path\fP A buffer to store the extracted directory path 
+.br
+\fI\fBfile_name\fP\fP A buffer to store the extracted file name 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes a file specification, checks if it is a directory, and if so, it sets the file path accordingly\&. If the file specification is empty, it defaults to the current directory\&. Otherwise, it splits the file specification into the directory and file name components based on the last occurrence of a slash ('/')\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB172\fP of file \fBwhence\&.c\fP\&.
+.nf
+172                                                                        {
+173     int i, last_slash;
+174     char tmp_file_spec[PATH_MAX];
+175     int file_spec_l;
+176     struct stat stat_struct;
+177 
+178     if (stat(file_spec, &stat_struct) != \-1)
+179         if ((stat_struct\&.st_mode & S_IFMT) == S_IFDIR) {
+180             if (file_spec[strlen(file_path)] != '/')
+181                 strnz__cat(file_spec, "/", MAXLEN \- 1);
+182             strnz__cpy(file_path, file_spec, MAXLEN \- 1);
+183             file_name[0] = '\\0';
+184             return (0);
+185         }
+186     if (strlen(file_spec) == 0) {
+187         strnz__cpy(file_spec, "\&./", MAXLEN \- 1);
+188         file_name[0] = '\\0';
+189         return (0);
+190     }
+191     strnz__cpy(tmp_file_spec, file_spec, MAXLEN \- 1);
+192     last_slash = \-1;
+193     file_spec_l = strlen(tmp_file_spec);
+194     if (file_spec_l > 0) {
+195         i = 0;
+196         while (i < file_spec_l && tmp_file_spec[i] != '\\0') {
+197             if (tmp_file_spec[i] == '/') {
+198                 last_slash = i;
+199                 break;
+200             }
+201             i++;
+202         }
+203     }
+204     if (last_slash < 0) {
+205         strnz__cpy(file_path, "\&./", MAXLEN \- 1);
+206         if (strcmp(file_spec, "\&.") == 0)
+207             file_name[0] = '\\0';
+208         else
+209             strnz__cpy(file_name, tmp_file_spec, MAXLEN \- 1);
+210         strnz__cpy(file_spec, file_path, MAXLEN \- 1);
+211         strnz__cat(file_spec, file_name, MAXLEN \- 1);
+212     } else {
+213         tmp_file_spec[last_slash] = '\\0';
+214         strnz__cpy(file_path, tmp_file_spec, MAXLEN \- 1);
+215         strnz__cat(file_path, "/", MAXLEN \- 1);
+216         if (last_slash < file_spec_l)
+217             last_slash++;
+218         strnz__cpy(file_name, tmp_file_spec + last_slash, MAXLEN \- 1);
+219     }
+220     return (0);
+221 }
+.PP
+.fi
+
+.PP
+References \fBfile_name\fP, \fBMAXLEN\fP, \fBstrnz__cat()\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBwhence()\fP\&.
+.SS "int main (int argc, char ** argv)"
+
+.PP
+Main function for whence utility\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc\fP Argument count 
+.br
+\fIargv\fP Argument vector 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Exit status options include: -a: Show all matches (default is to show only the first match) -h: Display help message -v: Verbose mode (implies -a) 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function processes command-line arguments, retrieves the PATH environment variable, and calls the whence function for each specified file\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB49\fP of file \fBwhence\&.c\fP\&.
+.nf
+49                                 {
+50 
+51     int opt;
+52     if (argc < 2)
+53         whence_usage();
+54     while ((opt = getopt(argc, argv, "ahv")) != \-1) {
+55         switch (opt) {
+56         case 'a':
+57             f_all = TRUE;
+58             break;
+59         case 'h':
+60             f_display_help = TRUE;
+61             break;
+62         case 'v':
+63             f_verbose = TRUE;
+64             break;
+65         default:
+66             ABEND(argv[0], FAIL, "unrecognized option");
+67         }
+68     }
+69     if (f_display_help) {
+70         whence_usage();
+71         normalend();
+72     }
+73     path_p = getenv("PATH");
+74     if (path_p == nullptr)
+75         ABEND(argv[0], FAIL, "PATH environment variable not set");
+76     if (f_verbose)
+77         printf("%s\\n", path_p);
+78     while (optind < argc) {
+79         whence(argv[optind++]);
+80     }
+81     normalend();
+82 }
+.PP
+.fi
+
+.PP
+References \fBABEND()\fP, \fBf_all\fP, \fBf_display_help\fP, \fBf_verbose\fP, \fBFAIL\fP, \fBnormalend()\fP, \fBpath_p\fP, \fBTRUE\fP, \fBwhence()\fP, and \fBwhence_usage()\fP\&.
+.SS "int next_path (char * dp, char ** sp)"
+
+.PP
+Extract the next directory path from the PATH string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdp\fP A buffer to store the extracted directory path 
+.br
+\fIsp\fP A pointer to the current position in the PATH string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The length of the extracted directory path 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes a buffer and a pointer to the current position in the PATH string, and extracts the next directory path\&. If the next character in the PATH string is a colon, it treats it as an empty path and uses the current working directory\&. Otherwise, it copies characters until it reaches a colon or the end of the string, and returns the length of the extracted path\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB143\fP of file \fBwhence\&.c\fP\&.
+.nf
+143                                    {
+144     int dl;
+145 
+146     if (**sp == ':') {
+147         (*sp)++;
+148         getcwd(dp, PATH_MAX);
+149         return (strlen(dp));
+150     } else {
+151         dl = 0;
+152         while (**sp != '\\0' && **sp != '\\n' && **sp != '\\r' && **sp != ':') {
+153             *dp++ = *(*sp)++;
+154             dl++;
+155         }
+156         *dp = '\\0';
+157         if (**sp == ':' && *++(*sp) == '\\0')
+158             (*sp)\-\-;
+159         return (dl);
+160     }
+161 }
+.PP
+.fi
+
+.PP
+Referenced by \fBwhence()\fP\&.
+.SS "void normalend ()"
+
+.PP
+Exit the program successfully\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function is called to exit the program with a success status\&. It simply calls the exit function with EXIT_SUCCESS\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB225\fP of file \fBwhence\&.c\fP\&.
+.nf
+225 { exit(EXIT_SUCCESS); }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void whence (char * file_spec_p)"
+
+.PP
+Find the full path of a file in the directories specified by the PATH environment variable\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_spec_p\fP The file specification to search for 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes a file specification, extracts the directory and file name components, and searches through the directories specified in the PATH environment variable to find matches\&. It prints the full path of each match found, and if verbose mode is enabled, it also indicates whether each attempted path was found or not\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB101\fP of file \fBwhence\&.c\fP\&.
+.nf
+101                                {
+102     char file_spec[PATH_MAX];
+103     char file_dir[PATH_MAX];
+104     char file_name[PATH_MAX];
+105     char try_spec[PATH_MAX];
+106     char try_dir[PATH_MAX];
+107     int path_l;
+108     struct stat stat_struct;
+109 
+110     strnz__cpy(file_spec, file_spec_p, MAXLEN \- 1);
+111     strnz__cpy(path_s, path_p, MAXLEN \- 1);
+112     file_spec_parts(file_spec, file_dir, file_name);
+113     path_p = path_s;
+114     path_l = next_path(try_dir, &path_p);
+115     while (path_l != 0) {
+116         strnz__cpy(try_spec, try_dir, MAXLEN \- 1);
+117         if (try_spec[path_l] != '/')
+118             strnz__cat(try_spec, "/", MAXLEN \- 1);
+119         strnz__cat(try_spec, file_name, MAXLEN \- 1);
+120         if (f_verbose) {
+121             if (stat(try_spec, &stat_struct) == \-1)
+122                 printf("\-      %s\\n", try_spec);
+123             else
+124                 printf("found  %s\\n", try_spec);
+125         } else if (stat(try_spec, &stat_struct) == 0) {
+126             printf("%s\\n", try_spec);
+127             if (!f_all)
+128                 return;
+129         }
+130         path_l = next_path(try_dir, &path_p);
+131     }
+132 }
+.PP
+.fi
+
+.PP
+References \fBf_all\fP, \fBf_verbose\fP, \fBfile_name\fP, \fBfile_spec_parts()\fP, \fBMAXLEN\fP, \fBnext_path()\fP, \fBpath_p\fP, \fBpath_s\fP, \fBstrnz__cat()\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void whence_usage ()"
+
+.PP
+Display usage information for the whence utility\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function prints the usage instructions and available options for the whence utility to the standard error stream\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB87\fP of file \fBwhence\&.c\fP\&.
+.nf
+87                     {
+88     fprintf(stderr, "whence_usage: whence [options] file_name\\n");
+89     fprintf(stderr, "       \-a show all matches\\n");
+90     fprintf(stderr, "       \-h help\\n");
+91     fprintf(stderr, "       \-v verbose (implies \-a)\\n");
+92 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "bool f_all"
+
+.PP
+Definition at line \fB27\fP of file \fBwhence\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBwhence()\fP\&.
+.SS "bool f_display_help"
+
+.PP
+Definition at line \fB27\fP of file \fBwhence\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "bool f_verbose"
+
+.PP
+Definition at line \fB27\fP of file \fBwhence\&.c\fP\&.
+.SS "char* file_name[\fBMAXLEN\fP+1]"
+
+.PP
+Definition at line \fB30\fP of file \fBwhence\&.c\fP\&.
+.PP
+Referenced by \fBderive_file_spec()\fP, \fBfile_spec_parts()\fP, \fBlocate_file_in_path()\fP, \fBverify_spec_arg()\fP, \fBview_init_input()\fP, and \fBwhence()\fP\&.
+.SS "char* path_p"
+
+.PP
+Definition at line \fB28\fP of file \fBwhence\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBwhence()\fP\&.
+.SS "char path_s[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB29\fP of file \fBwhence\&.c\fP\&.
+.PP
+Referenced by \fBwhence()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

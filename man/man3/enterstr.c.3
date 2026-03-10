@@ -1,0 +1,110 @@
+.TH "src/enterstr.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/enterstr.c \- Enter a string from keyboard\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <cm\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <sys/ioctl\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.RI "allows the user to enter a string in cooked mode "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Enter a string from keyboard\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBenterstr\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.PP
+allows the user to enter a string in cooked mode 
+.PP
+\fBNote\fP
+.RS 4
+allows line editing and other features 
+
+.PP
+writes the prompt to stderr and the user's input to stdout 
+
+.PP
+handles signals to ensure that the terminal settings are restored if the program is interrupted\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB32\fP of file \fBenterstr\&.c\fP\&.
+.nf
+32                                 {
+33     struct termios new_tioctl;
+34     char in_str[BUFSIZ];
+35     char *in_ptr = in_str;
+36     char *msg;
+37     char errmsg[128];
+38 
+39     if (argc < 2)
+40         strcpy(errmsg, "input:");
+41     else
+42         strcpy(errmsg, argv[1]);
+43     capture_shell_tioctl();
+44     sig_prog_mode();
+45     new_tioctl = shell_tioctl;
+46     new_tioctl\&.c_lflag |= ICANON;
+47     tcsetattr(2, TCSAFLUSH, &new_tioctl);
+48     while (1) {
+49         msg = errmsg;
+50         while (*msg)
+51             write(2, msg++, 1);
+52         if (read(2, in_str, BUFSIZ) > \-1)
+53             break;
+54     }
+55     while (*in_ptr)
+56         write(1, in_ptr++, 1);
+57     sig_dfl_mode();
+58     restore_shell_tioctl();
+59     _exit(0);
+60 }
+.PP
+.fi
+
+.PP
+References \fBcapture_shell_tioctl()\fP, \fBerrmsg\fP, \fBin_str\fP, \fBrestore_shell_tioctl()\fP, \fBshell_tioctl\fP, \fBsig_dfl_mode()\fP, and \fBsig_prog_mode()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

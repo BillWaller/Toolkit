@@ -1,0 +1,1520 @@
+.TH "src/init.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/init.c \- Initialization for Menu Application Programs\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <common\&.h>\fP
+.br
+\fR#include <getopt\&.h>\fP
+.br
+\fR#include <locale\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBMAPP_MSRC\fP = 257, \fBMAPP_HELP\fP, \fBMAPP_HELP_DIR\fP, \fBMAPP_DATA_DIR\fP, \fBMAPP_SPEC\fP, \fBHELP_SPEC\fP, \fBIN_SPEC\fP, \fBOUT_SPEC\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBwrite_config\fP (Init *\fBinit\fP)"
+.br
+.RI "Write the current configuration to a file specified in init->minitrc\&. "
+.ti -1c
+.RI "void \fBdisplay_version\fP ()"
+.br
+.RI "Display the version information of the application\&. "
+.ti -1c
+.RI "void \fBmapp_initialization\fP (Init *\fBinit\fP, int argc, char **argv)"
+.br
+.RI "Main initialization function for MAPP - Menu Application\&. "
+.ti -1c
+.RI "int \fBparse_opt_args\fP (Init *\fBinit\fP, int argc, char **argv)"
+.br
+.RI "Parse command-line options and set Init struct values accordingly\&. "
+.ti -1c
+.RI "void \fBzero_opt_args\fP (Init *\fBinit\fP)"
+.br
+.RI "Initialize optional arguments in the Init struct to default values\&. "
+.ti -1c
+.RI "int \fBparse_config\fP (Init *\fBinit\fP)"
+.br
+.RI "parse the configuration file specified in init->minitrc and set Init struct values accordingly "
+.ti -1c
+.RI "void \fBdump_config\fP (Init *\fBinit\fP, char *msg)"
+.br
+.RI "Dump the current configuration to stderr for debugging purposes\&. "
+.ti -1c
+.RI "void \fBusage\fP ()"
+.br
+.RI "Display the usage information of the application\&. "
+.ti -1c
+.RI "void \fBprompt_int_to_str\fP (char *s, int prompt_type)"
+.br
+.RI "Convert prompt type integer constant to string\&. "
+.ti -1c
+.RI "int \fBprompt_str_to_int\fP (char *s)"
+.br
+.RI "Convert prompt type string to integer constant\&. "
+.ti -1c
+.RI "bool \fBderive_file_spec\fP (char *file_spec, char *dir, char *\fBfile_name\fP)"
+.br
+.RI "Derive full file specification from directory and file name\&. "
+.ti -1c
+.RI "void \fBopt_prt_char\fP (const char *o, const char *name, const char *value)"
+.br
+.RI "Print an option and its value in a formatted manner\&. "
+.ti -1c
+.RI "void \fBopt_prt_str\fP (const char *o, const char *name, const char *value)"
+.br
+.RI "Print an option and its value in a formatted manner for integer values\&. "
+.ti -1c
+.RI "void \fBopt_prt_int\fP (const char *o, const char *name, int value)"
+.br
+.RI "Print an option and its value in a formatted manner for integer values\&. "
+.ti -1c
+.RI "void \fBopt_prt_double\fP (const char *o, const char *name, double value)"
+.br
+.RI "Print an option and its value in a formatted manner for double values\&. "
+.ti -1c
+.RI "void \fBopt_prt_bool\fP (const char *o, const char *name, bool value)"
+.br
+.RI "Print an option and its value in a formatted manner for boolean values\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "bool \fBf_write_config\fP = false"
+.br
+.ti -1c
+.RI "bool \fBf_dump_config\fP = false"
+.br
+.ti -1c
+.RI "bool \fBf_help\fP = false"
+.br
+.ti -1c
+.RI "bool \fBf_version\fP = false"
+.br
+.ti -1c
+.RI "bool \fBf_debug\fP = false"
+.br
+.ti -1c
+.RI "bool \fBf_stop_on_error\fP = true"
+.br
+.ti -1c
+.RI "Init * \fBinit\fP = nullptr"
+.br
+.ti -1c
+.RI "int \fBexecutor\fP = 0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Initialization for Menu Application Programs\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBinit\&.c\fP\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIMAPP_MSRC \fP(257)
+.TP
+\f(BIMAPP_HELP \fP
+.TP
+\f(BIMAPP_HELP_DIR \fP
+.TP
+\f(BIMAPP_DATA_DIR \fP
+.TP
+\f(BIMAPP_SPEC \fP
+.TP
+\f(BIHELP_SPEC \fP
+.TP
+\f(BIIN_SPEC \fP
+.TP
+\f(BIOUT_SPEC \fP
+.PP
+Definition at line \fB17\fP of file \fBinit\&.c\fP\&.
+.nf
+17      {
+18     MAPP_MSRC = 257,
+19     MAPP_HELP,
+20     MAPP_HELP_DIR,
+21     MAPP_DATA_DIR,
+22     MAPP_SPEC,
+23     HELP_SPEC,
+24     IN_SPEC,
+25     OUT_SPEC
+26 };
+.PP
+.fi
+
+.SH "Function Documentation"
+.PP 
+.SS "bool derive_file_spec (char * file_spec, char * dir, char * file_name)"
+
+.PP
+Derive full file specification from directory and file name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_spec\fP - output full file specification 
+.br
+\fIdir\fP - directory path 
+.br
+\fI\fBfile_name\fP\fP - file name 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if file_spec is derived, false otherwise 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If dir is nullptr, use MAPP_DIR environment variable or default directory ~/menuapp 
+
+.PP
+file_spec should be a pre-allocated char array of size MAXLEN to hold the resulting file specification 
+.RE
+.PP
+
+.PP
+Definition at line \fB796\fP of file \fBinit\&.c\fP\&.
+.nf
+796                                                                    {
+797     char ts[MAXLEN];
+798     char ts2[MAXLEN];
+799     char *e;
+800 
+801     if (!file_name || !*file_name) {
+802         *file_spec = '\\0';
+803         return false;
+804     }
+805     if (dir) {
+806         strnz__cpy(ts, dir, MAXLEN \- 1);
+807     } else {
+808         e = getenv("MAPP_DIR");
+809         if (e) {
+810             strnz__cpy(ts, e, MAXLEN \- 1);
+811         } else {
+812             strnz__cpy(ts, "~/menuapp", MAXLEN \- 1);
+813         }
+814     }
+815     trim_path(ts);
+816     strnz__cpy(ts2, ts, MAXLEN \- 1);
+817     // construct the full file specification
+818     // check that the file exists and is readable
+819     strnz__cpy(file_spec, ts2, MAXLEN \- 1);
+820     strnz__cat(file_spec, "/", MAXLEN \- 1);
+821     strnz__cat(file_spec, file_name, MAXLEN \- 1);
+822     return true;
+823 }
+.PP
+.fi
+
+.PP
+References \fBfile_name\fP, \fBMAXLEN\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtrim_path()\fP\&.
+.SS "void display_version ()"
+
+.PP
+Display the version information of the application\&. 
+.PP
+\fBNote\fP
+.RS 4
+The version information is defined in the mapp_version variable and is printed to stderr when this function is called\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB827\fP of file \fBinit\&.c\fP\&.
+.nf
+827                        {
+828     fprintf(stderr, "\\nC\-Menu version: %s\\n", CM_VERSION);
+829     exit(EXIT_SUCCESS);
+830 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmapp_initialization()\fP\&.
+.SS "void dump_config (Init * init, char * msg)"
+
+.PP
+Dump the current configuration to stderr for debugging purposes\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to Init struct containing the current configuration 
+.br
+\fImsg\fP - string to print before dumping the configuration to stderr in a readable format, prefixed by the provided title string\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB892\fP of file \fBinit\&.c\fP\&.
+.nf
+892                                         {
+893     char tmp_str[MAXLEN];
+894     SIO *sio = init\->sio;
+895     opt_prt_str("\-a:", "\-\-minitrc", init\->minitrc);
+896     opt_prt_int("\-L:", "  lines", init\->lines);
+897     opt_prt_int("\-C:", "  cols", init\->cols);
+898     opt_prt_int("\-X:", "  begx", init\->begx);
+899     opt_prt_int("\-Y:", "  begy", init\->begy);
+900     opt_prt_int("\-F:", "  fg_color", sio\->fg_color);
+901     opt_prt_int("\-B:", "  bg_color", sio\->bg_color);
+902     opt_prt_int("\-O:", "  bo_color", sio\->bo_color);
+903     opt_prt_str("\-T:", "  title", init\->title);
+904     opt_prt_double("\-r:", "  red_gamma", sio\->red_gamma);
+905     opt_prt_double("\-g:", "  green_gamma", sio\->green_gamma);
+906     opt_prt_double("\-b:", "  blue_gamma", sio\->blue_gamma);
+907     opt_prt_double("\-G:", "  gray_gamma", sio\->gray_gamma);
+908     opt_prt_str("\-f:", "  fill_char", init\->fill_char);
+909     opt_prt_str("\-u", "  brackets", init\->brackets);
+910     opt_prt_int("\-t:", "  tab_stop", init\->tab_stop);
+911     opt_prt_int("\-n:", "  select_max", init\->select_max);
+912     opt_prt_str("\-i:", "  in_spec", init\->in_spec);
+913     opt_prt_str("\-o:", "  out_spec", init\->out_spec);
+914     opt_prt_str("\-R:", "  receiver_cmd", init\->receiver_cmd);
+915     opt_prt_str("\-S:", "  provider_cmd", init\->provider_cmd);
+916     opt_prt_str("\-c:", "  cmd", init\->cmd);
+917     opt_prt_str("\-A:", "  cmd_all", init\->cmd_all);
+918     opt_prt_str("\-k:", "  parent_cmd", init\->parent_cmd);
+919     opt_prt_bool("\-e:", "  f_erase_remainder", init\->f_erase_remainder);
+920     opt_prt_bool("\-j:", "  f_strip_ansi", init\->f_strip_ansi);
+921     opt_prt_bool("\-s ", "  f_squeeze", init\->f_squeeze);
+922     opt_prt_bool("\-x:", "  f_ignore_case", init\->f_ignore_case);
+923     opt_prt_bool("\-y:", "  f_at_end_remove", init\->f_at_end_remove);
+924     opt_prt_bool("\-z ", "  f_at_end_clear", init\->f_at_end_clear);
+925     opt_prt_bool("\-Z ", "  f_stop_on_error", init\->f_stop_on_error);
+926     opt_prt_str("\-P:", "  promp_type", tmp_str);
+927     prompt_int_to_str(tmp_str, init\->prompt_type);
+928     opt_prt_str("   ", "  black", sio\->black);
+929     opt_prt_str("   ", "  red", sio\->red);
+930     opt_prt_str("   ", "  green", sio\->green);
+931     opt_prt_str("   ", "  yellow", sio\->yellow);
+932     opt_prt_str("   ", "  blue", sio\->blue);
+933     opt_prt_str("   ", "  magenta", sio\->magenta);
+934     opt_prt_str("   ", "  cyan", sio\->cyan);
+935     opt_prt_str("   ", "  white", sio\->white);
+936     opt_prt_str("   ", "  orange", sio\->orange);
+937     opt_prt_str("   ", "  bblack", sio\->bblack);
+938     opt_prt_str("   ", "  bred", sio\->bred);
+939     opt_prt_str("   ", "  bgreen", sio\->bgreen);
+940     opt_prt_str("   ", "  byellow", sio\->byellow);
+941     opt_prt_str("   ", "  bblue", sio\->bblue);
+942     opt_prt_str("   ", "  bmagenta", sio\->bmagenta);
+943     opt_prt_str("   ", "  bcyan", sio\->bcyan);
+944     opt_prt_str("   ", "  bwhite", sio\->bwhite);
+945     opt_prt_str("   ", "  borange", sio\->borange);
+946     opt_prt_str("   ", "  bg", sio\->bg);
+947     opt_prt_str("   ", "  abg", sio\->abg);
+948     opt_prt_str("   ", "  editor", init\->editor);
+949     opt_prt_str("\-H:", "  help_spec", init\->help_spec);
+950     opt_prt_str("\-d:", "\-\-mapp_spec", init\->mapp_spec);
+951     opt_prt_str("\-m:", "\-\-mapp_home", init\->mapp_home);
+952     opt_prt_str("   ", "\-\-mapp_data", init\->mapp_data);
+953     opt_prt_str("   ", "\-\-mapp_help", init\->mapp_help);
+954     opt_prt_str("\-U:", "\-\-mapp_user", init\->mapp_user);
+955     opt_prt_str("   ", "\-\-mapp_msrc", init\->mapp_msrc);
+956 
+957     (void)fprintf(stderr, "\\n%s\\n\\n", msg);
+958 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP, \fBMAXLEN\fP, \fBopt_prt_bool()\fP, \fBopt_prt_double()\fP, \fBopt_prt_int()\fP, \fBopt_prt_str()\fP, \fBprompt_int_to_str()\fP, \fBsio\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP\&.
+.SS "void mapp_initialization (Init * init, int argc, char ** argv)"
+
+.PP
+Main initialization function for MAPP - Menu Application\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to Init struct to be initialized 
+.br
+\fIargc\fP - argument count from \fBmain()\fP 
+.br
+\fIargv\fP - argument vector from \fBmain()\fP 
+.PP
+.nf
+1\&. Read environment variables and set defaults
+2\&. Parse configuration file
+3\&. Parse command\-line options
+4\&. Set up SIO struct with colors and other settings
+5\&. Handle special options like help and version
+
+.fi
+.PP
+ 
+.RE
+.PP
+< background color
+
+.PP
+< foreground color
+
+.PP
+< border color
+
+.PP
+< clear screen on exit (obsolete)
+
+.PP
+< erase remainder on enter
+
+.PP
+< field enclosure brackets
+
+.PP
+< field fill character
+
+.PP
+< view prompt type
+
+.PP
+< menu specification file
+
+.PP
+< generally /home/user/\&.minitrc
+
+.PP
+< command-line options override config file
+.PP
+Definition at line \fB64\fP of file \fBinit\&.c\fP\&.
+.nf
+64                                                             {
+65     char term[MAXLEN];
+66     char tmp_str[MAXLEN];
+67     char *t;
+68     setlocale(LC_ALL, "en_US\&.UTF\-8");
+69     SIO *sio = init\->sio;
+70     if (!init) {
+71         ssnprintf(tmp_str, sizeof(tmp_str), "%s",
+72                   "init struct not allocated on entry");
+73         abend(\-1, tmp_str);
+74         exit(\-1);
+75     }
+76     if (init\->minitrc[0] == '\\0')
+77         strnz__cpy(init\->minitrc, "~/\&.minitrc", MAXLEN \- 1);
+78     sio\->bg_color = BG_COLOR;       
+79     sio\->fg_color = FG_COLOR;       
+80     sio\->bo_color = BO_COLOR;       
+81     init\->f_at_end_clear = true;    
+82     init\->f_erase_remainder = true; 
+83     init\->brackets[0] = '\\0';       
+84     strnz__cpy(init\->fill_char, "_", MAXLEN \- 1); 
+85     init\->prompt_type = PT_LONG;                  
+86     init\->mapp_spec[0] = '\\0'; 
+87     strnz__cpy(init\->mapp_home, "~/menuapp", MAXLEN \- 1);
+88     strnz__cpy(init\->mapp_user, "~/menuapp/user", MAXLEN \- 1);
+89     strnz__cpy(init\->mapp_msrc, "~/menuapp/msrc", MAXLEN \- 1);
+90     strnz__cpy(init\->mapp_data, "~/menuapp/data", MAXLEN \- 1);
+91     strnz__cpy(init\->mapp_help, "~/menuapp/help", MAXLEN \- 1);
+92     // Priority\-4 \- cfg_args
+93 
+94     t = getenv("TERM");
+95     if (!t || *t == '\\0')
+96         strnz__cpy(term, "xterm\-256color", MAXLEN);
+97     t = getenv("EDITOR");
+98     if (t && *t != '\\0')
+99         strnz__cpy(init\->editor, "vi", MAXLEN \- 1);
+100 
+101     parse_config(init); 
+102     if (f_debug)
+103         dump_config(init, "Configuration after parse_config");
+104     parse_opt_args(init, argc,
+105                    argv); 
+106     if (f_dump_config) {
+107         dump_config(init, "Configuration after parse_config and "
+108                           "parse_opt_args");
+109     } else if (f_debug)
+110         dump_config(init, "Configuration after parse_opt_args");
+111     if (f_write_config) {
+112         write_config(init);
+113     }
+114     if (f_help) {
+115         dump_config(init, "Current Configuration");
+116     }
+117     if (f_version) {
+118         display_version();
+119     }
+120     if (init\->mapp_home[0] != '\\0') {
+121         expand_tilde(init\->mapp_home, MAXLEN \- 1);
+122         if (!verify_dir(init\->mapp_home, R_OK))
+123             abend(\-1, "MAPP_HOME directory invalid");
+124     }
+125 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBdisplay_version()\fP, \fBdump_config()\fP, \fBexpand_tilde()\fP, \fBf_debug\fP, \fBf_dump_config\fP, \fBf_help\fP, \fBf_version\fP, \fBf_write_config\fP, \fBinit\fP, \fBMAXLEN\fP, \fBparse_config()\fP, \fBparse_opt_args()\fP, \fBsio\fP, \fBssnprintf()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, \fBverify_dir()\fP, and \fBwrite_config()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void opt_prt_bool (const char * o, const char * name, bool value)"
+
+.PP
+Print an option and its value in a formatted manner for boolean values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP - option flag (e\&.g\&., "-z") 
+.br
+\fIname\fP - option name (e\&.g\&., "f_at_end_clear") 
+.br
+\fIvalue\fP - boolean option value to print 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function is used to display the current configuration options and their boolean values in a readable format, printing "true" or "false" based on the value\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB885\fP of file \fBinit\&.c\fP\&.
+.nf
+885                                                                {
+886     fprintf(stdout, "%3s %\-15s: %s\\n", o, name, value ? "true" : "false");
+887 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdump_config()\fP\&.
+.SS "void opt_prt_char (const char * o, const char * name, const char * value)"
+
+.PP
+Print an option and its value in a formatted manner\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP - option flag (e\&.g\&., "-a:") 
+.br
+\fIname\fP - option name (e\&.g\&., "--minitrc") 
+.br
+\fIvalue\fP - option value to print 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function is used to display the current configuration options and their values in a readable format\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB845\fP of file \fBinit\&.c\fP\&.
+.nf
+845                                                                       {
+846     fprintf(stdout, "%3s %\-15s: %s\\n", o, name, value);
+847 }
+.PP
+.fi
+
+.SS "void opt_prt_double (const char * o, const char * name, double value)"
+
+.PP
+Print an option and its value in a formatted manner for double values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP - option flag (e\&.g\&., "-r:") 
+.br
+\fIname\fP - option name (e\&.g\&., "red_gamma") 
+.br
+\fIvalue\fP - double option value to print 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function is used to display the current configuration options and their double values in a readable format\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB874\fP of file \fBinit\&.c\fP\&.
+.nf
+874                                                                    {
+875     fprintf(stdout, "%3s %\-15s: %0\&.2f\\n", o, name, value);
+876 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdump_config()\fP\&.
+.SS "void opt_prt_int (const char * o, const char * name, int value)"
+
+.PP
+Print an option and its value in a formatted manner for integer values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP - option flag (e\&.g\&., "-C:") 
+.br
+\fIname\fP - option name (e\&.g\&., "--cols") 
+.br
+\fIvalue\fP - integer option value to print 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function is used to display the current configuration options and their integer values in a readable format\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB865\fP of file \fBinit\&.c\fP\&.
+.nf
+865                                                              {
+866     fprintf(stdout, "%3s %\-15s: %d\\n", o, name, value);
+867 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdump_config()\fP\&.
+.SS "void opt_prt_str (const char * o, const char * name, const char * value)"
+
+.PP
+Print an option and its value in a formatted manner for integer values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo\fP - option flag (e\&.g\&., "-C:") 
+.br
+\fIname\fP - option name (e\&.g\&., "--cols") 
+.br
+\fIvalue\fP - integer option value to print 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function is used to display the current configuration options and their integer values in a readable format\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB855\fP of file \fBinit\&.c\fP\&.
+.nf
+855                                                                      {
+856     fprintf(stdout, "%3s %\-15s: %s\\n", o, name, value);
+857 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdump_config()\fP\&.
+.SS "int parse_config (Init * init)"
+
+.PP
+parse the configuration file specified in init->minitrc and set Init struct values accordingly 
+.PP
+\fBReturns\fP
+.RS 4
+on success, -1 on failure 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+lines beginning with '#" are comments, discard @note copy line to tmp_str removing quotes, spaces, semicolons, and newlines @note record structure is "parse key=value pairs" 
+
+.PP
+skip lines without '=' 
+
+.PP
+set init struct values based on key 
+
+.PP
+skips unknown keys 
+.RE
+.PP
+
+.PP
+Definition at line \fB363\fP of file \fBinit\&.c\fP\&.
+.nf
+363                              {
+364     char ts[MAXLEN];
+365     char *sp, *dp;
+366     char tmp_str[MAXLEN];
+367     SIO *sio = init\->sio;
+368     if (!init\->minitrc[0]) {
+369         char *e = getenv("MINITRC");
+370         if (e)
+371             strnz__cpy(init\->minitrc, e, MAXLEN \- 1);
+372         else
+373             strnz__cpy(init\->minitrc, "~/\&.minitrc", MAXLEN \- 1);
+374     }
+375     expand_tilde(init\->minitrc, MAXLEN \- 1);
+376     FILE *config_fp = fopen(init\->minitrc, "r");
+377     if (!config_fp) {
+378         fprintf(stderr, "failed to read file: %s\\n", init\->minitrc);
+379         return (\-1);
+380     }
+381     while (fgets(ts, sizeof(ts), config_fp)) {
+382         if (ts[0] != '#') {
+383             sp = ts;
+384             dp = tmp_str;
+385             while (*sp != '\\0') {
+386                 if (*sp == '\\n') {
+387                     *dp = *sp = '\\0';
+388                 } else {
+389                     if (*sp != '"' && *sp != ' ' && *sp != ';') {
+390                         *dp++ = *sp;
+391                     }
+392                     sp++;
+393                 }
+394             }
+395             *dp = '\\0';
+396             char *key = strtok(tmp_str, "=");
+397             char *value = strtok(nullptr, "=");
+398             if (value == nullptr)
+399                 continue;
+400             if (!strcmp(key, "minitrc")) {
+401                 strnz__cpy(init\->minitrc, value, MAXLEN \- 1);
+402                 continue;
+403             }
+404             if (!strcmp(key, "lines")) {
+405                 init\->lines = atoi(value);
+406                 continue;
+407             }
+408             if (!strcmp(key, "cols")) {
+409                 init\->cols = atoi(value);
+410                 continue;
+411             }
+412             if (!strcmp(key, "begy")) {
+413                 init\->begy = atoi(value);
+414                 continue;
+415             }
+416             if (!strcmp(key, "begx")) {
+417                 init\->begx = atoi(value);
+418                 continue;
+419             }
+420             if (!strcmp(key, "fg_color")) {
+421                 sio\->fg_color = clr_name_to_idx(value);
+422                 continue;
+423             }
+424             if (!strcmp(key, "bg_color")) {
+425                 sio\->bg_color = clr_name_to_idx(value);
+426                 continue;
+427             }
+428             if (!strcmp(key, "bo_color")) {
+429                 sio\->bo_color = clr_name_to_idx(value);
+430                 continue;
+431             }
+432             if (!strcmp(key, "red_gamma")) {
+433                 sio\->red_gamma = str_to_double(value);
+434                 continue;
+435             }
+436             if (!strcmp(key, "green_gamma")) {
+437                 sio\->green_gamma = str_to_double(value);
+438                 continue;
+439             }
+440             if (!strcmp(key, "blue_gamma")) {
+441                 sio\->blue_gamma = str_to_double(value);
+442                 continue;
+443             }
+444             if (!strcmp(key, "gray_gamma")) {
+445                 sio\->gray_gamma = str_to_double(value);
+446                 continue;
+447             }
+448             if (!strcmp(key, "f_at_end_clear")) {
+449                 init\->f_at_end_clear = str_to_bool(value);
+450                 continue;
+451             }
+452             if (!strcmp(key, "f_at_end_remove")) {
+453                 init\->f_at_end_remove = str_to_bool(value);
+454                 continue;
+455             }
+456             if (!strcmp(key, "f_erase_remainder")) {
+457                 init\->f_erase_remainder = str_to_bool(value);
+458                 continue;
+459             }
+460             if (!strcmp(key, "brackets")) {
+461                 strnz__cpy(init\->brackets, value, 2);
+462                 continue;
+463             }
+464             if (!strcmp(key, "fill_char")) {
+465                 strnz__cpy(init\->fill_char, value, 2);
+466                 continue;
+467             }
+468             if (!strcmp(key, "f_ignore_case")) {
+469                 init\->f_ignore_case = str_to_bool(value);
+470                 continue;
+471             }
+472             if (!strcmp(key, "f_squeeze")) {
+473                 init\->f_squeeze = str_to_bool(value);
+474                 continue;
+475             }
+476             if (!strcmp(key, "f_strip_ansi")) {
+477                 init\->f_strip_ansi = str_to_bool(value);
+478                 continue;
+479             }
+480             if (!strcmp(key, "f_stop_on_error")) {
+481                 init\->f_stop_on_error = str_to_bool(value);
+482                 continue;
+483             }
+484             if (!strcmp(key, "select_max")) {
+485                 init\->select_max = atoi(value);
+486                 continue;
+487             }
+488             if (!strcmp(key, "tab_stop")) {
+489                 init\->tab_stop = atoi(value);
+490                 continue;
+491             }
+492             if (!strcmp(key, "prompt_type")) {
+493                 strnz__cpy(tmp_str, value, MAXLEN \- 1);
+494                 init\->prompt_type = prompt_str_to_int(tmp_str);
+495                 continue;
+496             }
+497             if (!strcmp(key, "prompt_str")) {
+498                 strnz__cpy(init\->prompt_str, value, MAXLEN \- 1);
+499                 continue;
+500             }
+501             if (!strcmp(key, "title")) {
+502                 strnz__cpy(init\->title, value, MAXLEN \- 1);
+503                 continue;
+504             }
+505             if (!strcmp(key, "cmd")) {
+506                 strnz__cpy(init\->cmd, value, MAXLEN \- 1);
+507                 continue;
+508             }
+509             if (!strcmp(key, "cmd_all")) {
+510                 strnz__cpy(init\->cmd_all, value, MAXLEN \- 1);
+511                 continue;
+512             }
+513             if (!strcmp(key, "parent_cmd")) {
+514                 strnz__cpy(init\->parent_cmd, value, MAXLEN \- 1);
+515                 continue;
+516             }
+517             if (!strcmp(key, "provider_cmd")) {
+518                 strnz__cpy(init\->provider_cmd, value, MAXLEN \- 1);
+519                 continue;
+520             }
+521             if (!strcmp(key, "receiver_cmd")) {
+522                 strnz__cpy(init\->receiver_cmd, value, MAXLEN \- 1);
+523                 continue;
+524             }
+525             if (!strcmp(key, "bg")) {
+526                 strnz__cpy(sio\->bg, value, COLOR_LEN \- 1);
+527                 continue;
+528             }
+529             if (!strcmp(key, "black")) {
+530                 strnz__cpy(sio\->black, value, COLOR_LEN \- 1);
+531                 continue;
+532             }
+533             if (!strcmp(key, "red")) {
+534                 strnz__cpy(sio\->red, value, COLOR_LEN \- 1);
+535                 continue;
+536             }
+537             if (!strcmp(key, "green")) {
+538                 strnz__cpy(sio\->green, value, COLOR_LEN \- 1);
+539                 continue;
+540             }
+541             if (!strcmp(key, "yellow")) {
+542                 strnz__cpy(sio\->yellow, value, COLOR_LEN \- 1);
+543                 continue;
+544             }
+545             if (!strcmp(key, "blue")) {
+546                 strnz__cpy(sio\->blue, value, COLOR_LEN \- 1);
+547                 continue;
+548             }
+549             if (!strcmp(key, "magenta")) {
+550                 strnz__cpy(sio\->magenta, value, COLOR_LEN \- 1);
+551                 continue;
+552             }
+553             if (!strcmp(key, "cyan")) {
+554                 strnz__cpy(sio\->cyan, value, COLOR_LEN \- 1);
+555                 continue;
+556             }
+557             if (!strcmp(key, "white")) {
+558                 strnz__cpy(sio\->white, value, COLOR_LEN \- 1);
+559                 continue;
+560             }
+561             if (!strcmp(key, "orange")) {
+562                 strnz__cpy(sio\->orange, value, COLOR_LEN \- 1);
+563                 continue;
+564             }
+565             if (!strcmp(key, "bblack")) {
+566                 strnz__cpy(sio\->bblack, value, COLOR_LEN \- 1);
+567                 continue;
+568             }
+569             if (!strcmp(key, "bred")) {
+570                 strnz__cpy(sio\->bred, value, COLOR_LEN \- 1);
+571                 continue;
+572             }
+573             if (!strcmp(key, "bgreen")) {
+574                 strnz__cpy(sio\->bgreen, value, COLOR_LEN \- 1);
+575                 continue;
+576             }
+577             if (!strcmp(key, "byellow")) {
+578                 strnz__cpy(sio\->byellow, value, COLOR_LEN \- 1);
+579                 continue;
+580             }
+581             if (!strcmp(key, "bblue")) {
+582                 strnz__cpy(sio\->bblue, value, COLOR_LEN \- 1);
+583                 continue;
+584             }
+585             if (!strcmp(key, "bmagenta")) {
+586                 strnz__cpy(sio\->bmagenta, value, COLOR_LEN \- 1);
+587                 continue;
+588             }
+589             if (!strcmp(key, "bcyan")) {
+590                 strnz__cpy(sio\->bcyan, value, COLOR_LEN \- 1);
+591                 continue;
+592             }
+593             if (!strcmp(key, "bwhite")) {
+594                 strnz__cpy(sio\->bwhite, value, COLOR_LEN \- 1);
+595                 continue;
+596             }
+597             if (!strcmp(key, "borange")) {
+598                 strnz__cpy(sio\->borange, value, COLOR_LEN \- 1);
+599                 continue;
+600             }
+601             if (!strcmp(key, "bg")) {
+602                 strnz__cpy(sio\->bg, value, COLOR_LEN \- 1);
+603                 continue;
+604             }
+605             if (!strcmp(key, "editor")) {
+606                 strnz__cpy(init\->editor, value, MAXLEN \- 1);
+607                 continue;
+608             }
+609             if (!strcmp(key, "mapp_spec")) {
+610                 strnz__cpy(init\->mapp_spec, value, MAXLEN \- 1);
+611                 continue;
+612             }
+613             if (!strcmp(key, "mapp_data")) {
+614                 strnz__cpy(init\->mapp_data, value, MAXLEN \- 1);
+615                 continue;
+616             }
+617             if (!strcmp(key, "mapp_help")) {
+618                 strnz__cpy(init\->mapp_help, value, MAXLEN \- 1);
+619                 continue;
+620             }
+621             if (!strcmp(key, "mapp_home")) {
+622                 strnz__cpy(init\->mapp_home, value, MAXLEN \- 1);
+623                 continue;
+624             }
+625             if (!strcmp(key, "mapp_msrc")) {
+626                 strnz__cpy(init\->mapp_msrc, value, MAXLEN \- 1);
+627                 continue;
+628             }
+629             if (!strcmp(key, "mapp_user")) {
+630                 strnz__cpy(init\->mapp_user, value, MAXLEN \- 1);
+631                 continue;
+632             }
+633         }
+634     }
+635     (void)fclose(config_fp);
+636     return 0;
+637 }
+.PP
+.fi
+
+.PP
+References \fBclr_name_to_idx()\fP, \fBexpand_tilde()\fP, \fBinit\fP, \fBMAXLEN\fP, \fBprompt_str_to_int()\fP, \fBsio\fP, \fBstr_to_bool()\fP, \fBstr_to_double()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP\&.
+.SS "int parse_opt_args (Init * init, int argc, char ** argv)"
+
+.PP
+Parse command-line options and set Init struct values accordingly\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to Init struct 
+.br
+\fIargc\fP - argument count 
+.br
+\fIargv\fP - argument vector Return index of first non-option argument 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Accepts both short and long options 
+.RE
+.PP
+
+.PP
+Definition at line \fB158\fP of file \fBinit\&.c\fP\&.
+.nf
+158                                                       {
+159     int i;
+160     int opt;
+161     int longindex = 0;
+162     int flag = 0;
+163     char tmp_str[MAXLEN];
+164     char *optstring = "a:b:c:d:ef:g:hi:j:k:m:n:o:p:r:st:u:vw:xzA:B:C:DF:G:H:L:"
+165                       "MO:P:R:S:T:VWX:Y:Z";
+166     struct option long_options[] = {{"help", 0, &flag, MAPP_HELP},
+167                                     {"mapp_spec", 1, &flag, MAPP_SPEC},
+168                                     {"mapp_data", 1, &flag, MAPP_DATA_DIR},
+169                                     {"mapp_help", 1, &flag, MAPP_HELP_DIR},
+170                                     {"help_spec", 1, &flag, HELP_SPEC},
+171                                     {"mapp_spec", 1, &flag, MAPP_SPEC},
+172                                     {"in_spec", 1, &flag, IN_SPEC},
+173                                     {"out_spec", 1, &flag, OUT_SPEC},
+174                                     {"mapp_msrc", 1, &flag, MAPP_MSRC},
+175                                     {0, 0, 0, 0}};
+176     char mapp[MAXLEN];
+177     SIO *sio = init\->sio;
+178     base_name(mapp, argv[0]);
+179     optind = 1;
+180     while ((opt = getopt_long(argc, argv, optstring, long_options,
+181                               &longindex)) != \-1) {
+182         switch (opt) {
+183         case 0:
+184             switch (flag) {
+185             case MAPP_DATA_DIR:
+186                 strnz__cpy(init\->mapp_data, optarg, MAXLEN \- 1);
+187                 break;
+188             case MAPP_HELP_DIR:
+189                 strnz__cpy(init\->mapp_help, optarg, MAXLEN \- 1);
+190                 break;
+191             case MAPP_SPEC:
+192                 strnz__cpy(init\->mapp_spec, optarg, MAXLEN \- 1);
+193                 break;
+194             case HELP_SPEC:
+195                 strnz__cpy(init\->help_spec, optarg, MAXLEN \- 1);
+196                 break;
+197             case IN_SPEC:
+198                 strnz__cpy(init\->in_spec, optarg, MAXLEN \- 1);
+199                 break;
+200             case OUT_SPEC:
+201                 strnz__cpy(init\->out_spec, optarg, MAXLEN \- 1);
+202                 break;
+203             case MAPP_MSRC:
+204                 strnz__cpy(init\->mapp_msrc, optarg, MAXLEN \- 1);
+205                 break;
+206             default:
+207                 break;
+208             }
+209             break;
+210         case 'a':
+211             strnz__cpy(init\->minitrc, optarg, MAXLEN \- 1);
+212             break;
+213         case 'b':
+214             sio\->blue_gamma = str_to_double(optarg);
+215             break;
+216         case 'c':
+217             strnz__cpy(init\->cmd, optarg, MAXLEN \- 1);
+218             break;
+219         case 'd':
+220             strnz__cpy(init\->mapp_spec, optarg, MAXLEN \- 1);
+221             break;
+222         case 'e':
+223             init\->f_erase_remainder = true;
+224             break;
+225         case 'f': // fill char
+226             strnz__cpy(init\->fill_char, optarg, 1);
+227             break;
+228         case 'g':
+229             sio\->green_gamma = str_to_double(optarg);
+230             break;
+231         case 'h':
+232             f_help = true;
+233             break;
+234         case 'i':
+235             strnz__cpy(init\->in_spec, optarg, MAXLEN \- 1);
+236             break;
+237         case 'j':
+238             init\->f_strip_ansi = true;
+239             break;
+240         case 'k':
+241             strnz__cpy(init\->parent_cmd, optarg, MAXLEN \- 1);
+242             break;
+243         case 'm':
+244             strnz__cpy(init\->mapp_home, optarg, MAXLEN \- 1);
+245             break;
+246         case 'n':
+247             init\->select_max = atoi(optarg);
+248             break;
+249         case 'o':
+250             strnz__cpy(init\->out_spec, optarg, MAXLEN \- 1);
+251             break;
+252         case 'p':
+253             strnz__cpy(init\->prompt_str, optarg, MAXLEN \- 1);
+254             break;
+255         case 'r':
+256             sio\->red_gamma = str_to_double(optarg);
+257             break;
+258         case 's':
+259             init\->f_squeeze = true;
+260             break;
+261         case 't':
+262             init\->tab_stop = atoi(optarg);
+263             if (init\->tab_stop < 1)
+264                 init\->tab_stop = 1;
+265             break;
+266         case 'u': // brackets
+267             strnz__cpy(init\->brackets, optarg, 2);
+268             break;
+269         case 'v':
+270         case 'V':
+271             f_version = true;
+272             break;
+273         case 'x':
+274             init\->f_ignore_case = true;
+275             break;
+276         case 'y':
+277             init\->f_at_end_remove = true;
+278             break;
+279         case 'z':
+280             init\->f_at_end_clear = true;
+281             break;
+282         case 'A':
+283             strnz__cpy(init\->cmd_all, optarg, MAXLEN \- 1);
+284             break;
+285         case 'B':
+286             sio\->bg_color = clr_name_to_idx(optarg);
+287             break;
+288         case 'C':
+289             init\->cols = atoi(optarg);
+290             break;
+291         case 'D':
+292             f_dump_config = true;
+293             break;
+294         case 'F':
+295             sio\->fg_color = clr_name_to_idx(optarg);
+296             break;
+297         case 'G':
+298             sio\->gray_gamma = str_to_double(optarg);
+299             break;
+300         case 'H':
+301             strnz__cpy(init\->help_spec, optarg, MAXLEN \- 1);
+302             break;
+303         case 'L':
+304             init\->lines = atoi(optarg);
+305             break;
+306         case 'M':
+307             init\->f_multiple_cmd_args = true;
+308             break;
+309         case 'O':
+310             sio\->bo_color = clr_name_to_idx(optarg);
+311             break;
+312         case 'P':
+313             strnz__cpy(tmp_str, optarg, MAXLEN \- 1);
+314             init\->prompt_type = prompt_str_to_int(tmp_str);
+315             break;
+316         case 'R':
+317             strnz__cpy(init\->receiver_cmd, optarg, MAXLEN \- 1);
+318             break;
+319         case 'S':
+320             strnz__cpy(init\->provider_cmd, optarg, MAXLEN \- 1);
+321             break;
+322         case 'T':
+323             strnz__cpy(init\->title, optarg, MAXLEN \- 1);
+324             break;
+325         case 'U':
+326             strnz__cpy(init\->mapp_user, optarg, MAXLEN \- 1);
+327             break;
+328         case 'W':
+329             f_write_config = true;
+330             break;
+331         case 'X':
+332             init\->begx = atoi(optarg);
+333             break;
+334         case 'Y':
+335             init\->begy = atoi(optarg);
+336             break;
+337         case 'Z':
+338             init\->f_stop_on_error = true;
+339             break;
+340         default:
+341             break;
+342         }
+343     }
+344     init\->argv[0] = strdup(argv[0]);
+345     i = 0;
+346     while (i < argc) {
+347         init\->argv[i] = strdup(argv[i]);
+348         i++;
+349     }
+350     init\->argv[i] = nullptr;
+351     init\->argc = argc;
+352     return optind;
+353 }
+.PP
+.fi
+
+.PP
+References \fBbase_name()\fP, \fBclr_name_to_idx()\fP, \fBf_dump_config\fP, \fBf_help\fP, \fBf_version\fP, \fBf_write_config\fP, \fBHELP_SPEC\fP, \fBIN_SPEC\fP, \fBinit\fP, \fBMAPP_DATA_DIR\fP, \fBMAPP_HELP\fP, \fBMAPP_HELP_DIR\fP, \fBMAPP_MSRC\fP, \fBMAPP_SPEC\fP, \fBMAXLEN\fP, \fBOUT_SPEC\fP, \fBprompt_str_to_int()\fP, \fBsio\fP, \fBstr_to_double()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_engine()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SS "void prompt_int_to_str (char * s, int prompt_type)"
+
+.PP
+Convert prompt type integer constant to string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - output prompt type string 
+.br
+\fIprompt_type\fP - prompt type integer constant 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Valid prompt type integer constants are PT_SHORT, PT_LONG, and PT_STRING 
+
+.PP
+Returns "none" for unrecognized prompt type integer constants 
+.RE
+.PP
+
+.PP
+Definition at line \fB664\fP of file \fBinit\&.c\fP\&.
+.nf
+664                                                  {
+665     switch (prompt_type) {
+666     case PT_SHORT:
+667         strnz__cpy(s, "short", 7);
+668         break;
+669     case PT_LONG:
+670         strnz__cpy(s, "long", 7);
+671         break;
+672     case PT_STRING:
+673         strnz__cpy(s, "string", 7);
+674         break;
+675     default:
+676         strnz__cpy(s, "none", 7);
+677         break;
+678     }
+679 }
+.PP
+.fi
+
+.PP
+References \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBdump_config()\fP, and \fBwrite_config()\fP\&.
+.SS "int prompt_str_to_int (char * s)"
+
+.PP
+Convert prompt type string to integer constant\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP - prompt type string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+prompt type integer constant 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Valid prompt type strings are "short", "long", and "string" 
+
+.PP
+Returns PT_NONE for unrecognized prompt type strings 
+.RE
+.PP
+
+.PP
+Definition at line \fB644\fP of file \fBinit\&.c\fP\&.
+.nf
+644                                {
+645     int prompt_type;
+646     str_to_lower(s);
+647     if (strcmp(s, "short") == 0)
+648         prompt_type = PT_SHORT;
+649     else if (strcmp(s, "long") == 0)
+650         prompt_type = PT_LONG;
+651     else if (strcmp(s, "string") == 0)
+652         prompt_type = PT_STRING;
+653     else
+654         prompt_type = PT_NONE;
+655     return prompt_type;
+656 }
+.PP
+.fi
+
+.PP
+References \fBstr_to_lower()\fP\&.
+.PP
+Referenced by \fBparse_config()\fP, and \fBparse_opt_args()\fP\&.
+.SS "void usage ()"
+
+.PP
+Display the usage information of the application\&. 
+.PP
+\fBNote\fP
+.RS 4
+The usage information is printed to stderr when this function is called\&. After displaying the usage information, the function waits for the user to press any key before returning\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB835\fP of file \fBinit\&.c\fP\&.
+.nf
+835              {
+836     (void)fprintf(stderr, "\\n\\nPress any key to continue\&.\&.\&.");
+837     di_getch();
+838 }
+.PP
+.fi
+
+.PP
+References \fBdi_getch()\fP\&.
+.PP
+Referenced by \fBdump_opts_by_use()\fP\&.
+.SS "int write_config (Init * init)"
+
+.PP
+Write the current configuration to a file specified in init->minitrc\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to Init struct containing current configuration 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, -1 on failure 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The configuration is written in key=value format, one per line 
+
+.PP
+Lines beginning with '#' are comments and are ignored when reading the config file 
+
+.PP
+The file is created if it does not exist, and overwritten if it does exist 
+.RE
+.PP
+
+.PP
+Definition at line \fB689\fP of file \fBinit\&.c\fP\&.
+.nf
+689                              {
+690     char *e;
+691     char minitrc_dmp[MAXLEN];
+692     char tmp_str[MAXLEN];
+693     SIO *sio = init\->sio;
+694     e = getenv("HOME");
+695     if (e) {
+696         strnz__cpy(minitrc_dmp, e, MAXLEN \- 1);
+697         strnz__cat(minitrc_dmp, "/", MAXLEN \- 1);
+698         strnz__cat(minitrc_dmp, "menuapp/minitrc\&.dmp", MAXLEN \- 1);
+699         ;
+700     } else {
+701         strnz__cpy(minitrc_dmp, "\&./minitrc\&.dmp", MAXLEN \- 1);
+702     }
+703     FILE *minitrc_fp = fopen(minitrc_dmp, "w");
+704     if (minitrc_fp == (FILE *)0) {
+705         fprintf(stderr, "failed to open file: %s\\n", minitrc_dmp);
+706         return (\-1);
+707     }
+708     (void)fprintf(minitrc_fp, "# %s\\n", "~/\&.minitrc");
+709     (void)fprintf(minitrc_fp, "%s=%d\\n", "cols", init\->cols);
+710     (void)fprintf(minitrc_fp, "%s=%d\\n", "lines", init\->lines);
+711     (void)fprintf(minitrc_fp, "%s=%d\\n", "begx", init\->begx);
+712     (void)fprintf(minitrc_fp, "%s=%d\\n", "begy", init\->begy);
+713     (void)fprintf(minitrc_fp, "%s=%s\\n", "bg_color",
+714                   colors_text[sio\->bg_color]);
+715     (void)fprintf(minitrc_fp, "%s=%s\\n", "fg_color",
+716                   colors_text[sio\->fg_color]);
+717     (void)fprintf(minitrc_fp, "%s=%s\\n", "bo_color",
+718                   colors_text[sio\->bo_color]);
+719     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "red_gamma", sio\->red_gamma);
+720     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "green_gamma", sio\->green_gamma);
+721     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "blue_gamma", sio\->blue_gamma);
+722     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "gray_gamma", sio\->gray_gamma);
+723     (void)fprintf(minitrc_fp, "%s=%s\\n", "in_spec", init\->in_spec);
+724     (void)fprintf(minitrc_fp, "%s=%s\\n", "out_spec", init\->out_spec);
+725     (void)fprintf(minitrc_fp, "%s=%s\\n", "provider_cmd", init\->provider_cmd);
+726     (void)fprintf(minitrc_fp, "%s=%s\\n", "receiver_cmd", init\->receiver_cmd);
+727     (void)fprintf(minitrc_fp, "%s=%s\\n", "cmd_all", init\->cmd_all);
+728     (void)fprintf(minitrc_fp, "%s=%s\\n", "parent_cmd", init\->parent_cmd);
+729     (void)fprintf(minitrc_fp, "%s=%s\\n", "title", init\->title);
+730     (void)fprintf(minitrc_fp, "%s=%d\\n", "select_max", init\->select_max);
+731     (void)fprintf(minitrc_fp, "%s=%s\\n", "brackets", init\->brackets);
+732     (void)fprintf(minitrc_fp, "%s=%d\\n", "tab_stop", init\->tab_stop);
+733     prompt_int_to_str(tmp_str, init\->prompt_type);
+734     (void)fprintf(minitrc_fp, "%s=%s\\n", "prompt_type", tmp_str);
+735     (void)fprintf(minitrc_fp, "%s=%s\\n", "prompt_str", init\->prompt_str);
+736     (void)fprintf(minitrc_fp, "%s=%s\\n", "cmd", init\->cmd);
+737     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_at_end_clear",
+738                   init\->f_at_end_clear ? "true" : "false");
+739     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_at_end_remove",
+740                   init\->f_at_end_remove ? "true" : "false");
+741     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_erase_remainder",
+742                   init\->f_erase_remainder ? "true" : "false");
+743     (void)fprintf(minitrc_fp, "%s=%s\\n", "fill_char", init\->fill_char);
+744     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_strip_ansi",
+745                   init\->f_strip_ansi ? "true" : "false");
+746     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_ignore_case",
+747                   init\->f_ignore_case ? "true" : "false");
+748     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_squeeze",
+749                   init\->f_squeeze ? "true" : "false");
+750     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_stop_on_error",
+751                   init\->f_stop_on_error ? "true" : "false");
+752     (void)fprintf(minitrc_fp, "%s=%s\\n", "black", sio\->black);
+753     (void)fprintf(minitrc_fp, "%s=%s\\n", "bg", sio\->bg);
+754     (void)fprintf(minitrc_fp, "%s=%s\\n", "abg", sio\->abg);
+755     (void)fprintf(minitrc_fp, "%s=%s\\n", "black", sio\->black);
+756     (void)fprintf(minitrc_fp, "%s=%s\\n", "red", sio\->red);
+757     (void)fprintf(minitrc_fp, "%s=%s\\n", "green", sio\->green);
+758     (void)fprintf(minitrc_fp, "%s=%s\\n", "yellow", sio\->yellow);
+759     (void)fprintf(minitrc_fp, "%s=%s\\n", "blue", sio\->blue);
+760     (void)fprintf(minitrc_fp, "%s=%s\\n", "magenta", sio\->magenta);
+761     (void)fprintf(minitrc_fp, "%s=%s\\n", "cyan", sio\->cyan);
+762     (void)fprintf(minitrc_fp, "%s=%s\\n", "white", sio\->white);
+763     (void)fprintf(minitrc_fp, "%s=%s\\n", "bblack", sio\->bblack);
+764     (void)fprintf(minitrc_fp, "%s=%s\\n", "bred", sio\->bred);
+765     (void)fprintf(minitrc_fp, "%s=%s\\n", "bgreen", sio\->bgreen);
+766     (void)fprintf(minitrc_fp, "%s=%s\\n", "byellow", sio\->byellow);
+767     (void)fprintf(minitrc_fp, "%s=%s\\n", "bblue", sio\->bblue);
+768     (void)fprintf(minitrc_fp, "%s=%s\\n", "bmagenta", sio\->bmagenta);
+769     (void)fprintf(minitrc_fp, "%s=%s\\n", "bcyan", sio\->bcyan);
+770     (void)fprintf(minitrc_fp, "%s=%s\\n", "bwhite", sio\->bwhite);
+771     (void)fprintf(minitrc_fp, "%s=%s\\n", "editor", init\->editor);
+772     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_spec", init\->mapp_spec);
+773     (void)fprintf(minitrc_fp, "%s=%s\\n", "help_spec", init\->help_spec);
+774     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_data", init\->mapp_data);
+775     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_help", init\->mapp_help);
+776     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_home", init\->mapp_home);
+777     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_msrc", init\->mapp_msrc);
+778     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_user", init\->mapp_user);
+779     (void)fclose(minitrc_fp);
+780     strnz__cpy(tmp_str, "Configuration written to file: ", MAXLEN \- 1);
+781     strnz__cat(tmp_str, minitrc_dmp, MAXLEN \- 1);
+782     Perror(tmp_str);
+783     return 0;
+784 }
+.PP
+.fi
+
+.PP
+References \fBcolors_text\fP, \fBinit\fP, \fBMAXLEN\fP, \fBPerror()\fP, \fBprompt_int_to_str()\fP, \fBsio\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "void zero_opt_args (Init * init)"
+
+.PP
+Initialize optional arguments in the Init struct to default values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to Init struct to be initialized This function sets all optional argument fields in the Init struct to their default values before parsing command-line options or configuration file\&. This ensures that any fields not specified by the user will have known default values\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB132\fP of file \fBinit\&.c\fP\&.
+.nf
+132                                {
+133     init\->f_mapp_desc = false;
+134     init\->f_provider_cmd = false;
+135     init\->f_receiver_cmd = false;
+136     init\->f_title = false;
+137     init\->f_mapp_spec = false;
+138     init\->f_help_spec = false;
+139     init\->f_in_spec = false;
+140     init\->f_out_spec = false;
+141     init\->mapp_spec[0] = init\->help_spec[0] = '\\0';
+142     init\->provider_cmd[0] = init\->receiver_cmd[0] = '\\0';
+143     init\->title[0] = '\\0';
+144     init\->cmd[0] = init\->cmd_all[0] = '\\0';
+145     init\->parent_cmd[0] = '\\0';
+146     init\->in_spec[0] = init\->out_spec[0] = '\\0';
+147     init\->help_spec[0] = '\\0';
+148     init\->in_spec[0] = '\\0';
+149     init\->out_spec[0] = '\\0';
+150 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_engine()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "int executor = 0"
+
+.PP
+Definition at line \fB50\fP of file \fBinit\&.c\fP\&.
+.SS "bool f_debug = false"
+
+.PP
+Definition at line \fB32\fP of file \fBinit\&.c\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP\&.
+.SS "bool f_dump_config = false"
+
+.PP
+Definition at line \fB29\fP of file \fBinit\&.c\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP, and \fBparse_opt_args()\fP\&.
+.SS "bool f_help = false"
+
+.PP
+Definition at line \fB30\fP of file \fBinit\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP, \fBmapp_initialization()\fP, and \fBparse_opt_args()\fP\&.
+.SS "bool f_stop_on_error = true"
+
+.PP
+Definition at line \fB33\fP of file \fBinit\&.c\fP\&.
+.SS "bool f_version = false"
+
+.PP
+Definition at line \fB31\fP of file \fBinit\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP, \fBmapp_initialization()\fP, and \fBparse_opt_args()\fP\&.
+.SS "bool f_write_config = false"
+
+.PP
+Definition at line \fB28\fP of file \fBinit\&.c\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP, and \fBparse_opt_args()\fP\&.
+.SS "Init* init = nullptr"
+
+.PP
+Definition at line \fB38\fP of file \fBinit\&.c\fP\&.
+.PP
+Referenced by \fBdestroy_form()\fP, \fBdestroy_init()\fP, \fBdestroy_menu()\fP, \fBdestroy_pick()\fP, \fBdestroy_view()\fP, \fBdisplay_pick_help()\fP, \fBdump_config()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_calculate()\fP, \fBform_display_screen()\fP, \fBform_end_fields()\fP, \fBform_engine()\fP, \fBinit_form()\fP, \fBinit_form_files()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBinit_pick_files()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_files()\fP, \fBinit_view_full_screen()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBmenu_engine()\fP, \fBmview()\fP, \fBnew_form()\fP, \fBnew_init()\fP, \fBnew_menu()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBopen_pick_win()\fP, \fBparse_config()\fP, \fBparse_menu_description()\fP, \fBparse_opt_args()\fP, \fBpick_engine()\fP, \fBpicker()\fP, \fBread_pick_input()\fP, \fBresize_page()\fP, \fBview_cmd_processor()\fP, \fBview_display_help()\fP, \fBview_file()\fP, \fBwrite_config()\fP, \fBwrite_view_buffer()\fP, and \fBzero_opt_args()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

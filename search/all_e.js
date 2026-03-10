@@ -23,7 +23,7 @@ var searchData=
   ['init_5fview_5ffiles_20',['init_view_files',['../d3/d8f/mem_8c.html#ac5213483d722f8f1bd5c28fbbb55369e',1,'mem.c']]],
   ['init_5fview_5ffull_5fscreen_21',['init_view_full_screen',['../dc/d90/init__view_8c.html#a5d69ccbd704b60891cdc788693d436d4',1,'init_view.c']]],
   ['inode_22',['Menu - What Happened to Delete by Inode',['../d5/d77/md_FAQ.html#menu---what-happened-to-delete-by-inode',1,'']]],
-  ['input_23',['C-Keys - Diagnose Keyboard/Mouse Input',['../d0/d30/md_README.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['input_23',['Input',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#c-keys---diagnose-keyboardmouse-input',1,'C-Keys - Diagnose Keyboard/Mouse Input'],['../index.html#c-keys---diagnose-keyboardmouse-input-1',1,'C-Keys - Diagnose Keyboard/Mouse Input']]],
   ['install_20c_20menu_24',['To Install C-Menu',['../d4/def/md_INSTALL.html#to-install-c-menu',1,'']]],
   ['install_20tree_20sitter_20cli_25',['Install Tree-Sitter-CLI',['../d5/d77/md_FAQ.html#install-tree-sitter-cli',1,'']]],
   ['install_2emd_26',['INSTALL.md',['../da/dbd/INSTALL_8md.html',1,'']]],
@@ -36,8 +36,8 @@ var searchData=
   ['installment_20loan_20calculator_33',['Menu - Using the Installment Loan Calculator',['../d5/d77/md_FAQ.html#menu---using-the-installment-loan-calculator',1,'']]],
   ['instead_20of_20ls_34',['Use lsd instead of ls',['../d7/da4/md_snippets.html#use-lsd-instead-of-ls',1,'']]],
   ['integrating_20external_20executables_35',['Menu Form - Integrating External Executables',['../d5/d77/md_FAQ.html#menu-form---integrating-external-executables',1,'']]],
-  ['intended_36',['Highlights (Pun Intended)',['../d0/d30/md_README.html#highlights-pun-intended',1,'']]],
-  ['interface_20toolkit_37',['A User Interface Toolkit',['../d0/d30/md_README.html',1,'']]],
+  ['intended_36',['Intended',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#highlights-pun-intended',1,'Highlights (Pun Intended)'],['../index.html#highlights-pun-intended-1',1,'Highlights (Pun Intended)']]],
+  ['interface_20toolkit_37',['Interface Toolkit',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html',1,'A User Interface Toolkit'],['../index.html',1,'A User Interface Toolkit']]],
   ['interprocess_20communications_38',['Menu - Interprocess Communications',['../d5/d77/md_FAQ.html#menu---interprocess-communications',1,'']]],
   ['introduction_39',['Introduction',['../d7/d7a/md_API.html#introduction',1,'Introduction'],['../de/d82/md_C-Menu-UG.html#introduction-1',1,'Introduction'],['../dc/db0/md_extras.html#introduction-2',1,'Introduction']]],
   ['is_5fnumeric_40',['is_numeric',['../d3/d42/iloan_8c.html#ac2aed50ae3ec0cf7176c57f7d96f6df0',1,'iloan.c']]],
@@ -46,6 +46,6 @@ var searchData=
   ['is_5fvalid_5ftime_43',['is_valid_time',['../dd/d42/fields_8c.html#a56bbb25c4d0944e1b96b9a723cde2ae9',1,'fields.c']]],
   ['issue_20on_20the_20c_20menu_20github_20repository_44',['🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.',['../d4/def/md_INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'']]],
   ['issues_20or_20have_20questions_20feel_20free_20to_20open_20an_20issue_20on_20the_20c_20menu_20github_20repository_45',['🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.',['../d4/def/md_INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'']]],
-  ['it_46',['Just Do It!',['../d0/d30/md_README.html#just-do-it',1,'']]],
+  ['it_46',['It',['../d6/db9/md__2srv_2www_2htdocs_2C-Menu_2README.html#just-do-it',1,'Just Do It!'],['../index.html#just-do-it-1',1,'Just Do It!']]],
   ['items_47',['Selecting Items',['../de/d82/md_C-Menu-UG.html#selecting-items',1,'']]]
 ];

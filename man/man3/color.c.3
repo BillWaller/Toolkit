@@ -1,0 +1,195 @@
+.TH "src/test/color.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/test/color.c \- Test program for xterm 256-color to \fBRGB\fP conversion and vice versa\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <stdio\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBRGB\fP"
+.br
+.RI "Represents an \fBRGB\fP color with 8-bit components\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBRGB\fP \fBxterm256_to_rgb\fP (int code)"
+.br
+.RI "Converts an xterm 256-color code to its corresponding \fBRGB\fP color\&. "
+.ti -1c
+.RI "int \fBrgb_to_xterm256\fP (unsigned char r, unsigned char g, unsigned char b)"
+.br
+.RI "Converts an \fBRGB\fP color to the nearest xterm 256-color code\&. "
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Test program for xterm 256-color to \fBRGB\fP conversion and vice versa\&. 
+
+This program defines two functions: \fR\fBxterm256_to_rgb\fP\fP to convert an xterm 256-color code to its corresponding \fBRGB\fP color, and \fR\fBrgb_to_xterm256\fP\fP to convert an \fBRGB\fP color to the nearest xterm 256-color code\&. The main function tests these conversions by iterating through all 256 xterm color codes, converting them to \fBRGB\fP, and then converting back to xterm codes, printing the results\&. 
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2025-12 
+.RE
+.PP
+
+.PP
+Definition in file \fBcolor\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[])"
+
+.PP
+Definition at line \fB92\fP of file \fBcolor\&.c\fP\&.
+.nf
+92                                  {
+93     RGB rgb;
+94     RGB rgb2;
+95     int i, idx;
+96     for (i = 0; i < 256; i++) {
+97         rgb = xterm256_to_rgb(i);
+98         idx = rgb_to_xterm256(rgb\&.r, rgb\&.g, rgb\&.b);
+99         rgb2 = xterm256_to_rgb(idx);
+100         printf("idx %\-3d (%3d, %3d, %3d) #%02x%02x%02x %\-3d (%3d, %3d, %3d) "
+101                "#%02x%02x%02x\\n",
+102                i, rgb\&.r, rgb\&.g, rgb\&.b, rgb\&.r, rgb\&.g, rgb\&.b, idx, rgb2\&.r, rgb2\&.g,
+103                rgb2\&.b, rgb2\&.r, rgb2\&.g, rgb2\&.b);
+104     }
+105     return 0;
+106 }
+.PP
+.fi
+
+.PP
+References \fBRGB::b\fP, \fBRGB::g\fP, \fBRGB::r\fP, \fBrgb_to_xterm256()\fP, and \fBxterm256_to_rgb()\fP\&.
+.SS "int rgb_to_xterm256 (unsigned char r, unsigned char g, unsigned char b)"
+
+.PP
+Converts an \fBRGB\fP color to the nearest xterm 256-color code\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIr\fP The red component (0-255)\&. 
+.br
+\fIg\fP The green component (0-255)\&. 
+.br
+\fIb\fP The blue component (0-255)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The nearest xterm 256-color code (0-255)\&. 
+.RE
+.PP
+xterm Color cube
+.PP
+Definition at line \fB77\fP of file \fBcolor\&.c\fP\&.
+.nf
+77                                                                        {
+78     if (r == g && g == b) {
+79         if (r < 8)
+80             return 16;
+81         if (r > 248)
+82             return 231;
+83         return ((r \- 8) / 10) + 232;
+84     } else {
+86         int r_index = (r < 45) ? 0 : (r \- 60) / 40 + 1;
+87         int g_index = (g < 45) ? 0 : (g \- 60) / 40 + 1;
+88         int b_index = (b < 45) ? 0 : (b \- 60) / 40 + 1;
+89         return 16 + (36 * r_index) + (6 * g_index) + b_index;
+90     }
+91 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "\fBRGB\fP xterm256_to_rgb (int code)"
+
+.PP
+Converts an xterm 256-color code to its corresponding \fBRGB\fP color\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcode\fP The xterm 256-color code (0-255)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+An \fBRGB\fP struct representing the corresponding color\&. 16 color standard palette 216 color xterm cube 24 color grayscale 
+.RE
+.PP
+16 color standard palette
+
+.PP
+216 (6x6x6) color xterm cube
+
+.PP
+24 color grayscale
+.PP
+Definition at line \fB31\fP of file \fBcolor\&.c\fP\&.
+.nf
+31                               {
+32     RGB color;
+33     if (code < 16) {
+35         static const RGB standard_colors[16] = {
+36             {0, 0, 0},       {128, 0, 0},   {0, 128, 0},   {128, 128, 0},
+37             {0, 0, 128},     {128, 0, 128}, {0, 128, 128}, {192, 192, 192},
+38             {128, 128, 128}, {255, 0, 0},   {0, 255, 0},   {255, 255, 0},
+39             {0, 0, 255},     {255, 0, 255}, {0, 255, 255}, {255, 255, 255}};
+40         color = standard_colors[code];
+41     } else if (code >= 16 && code <= 231) {
+43         int index = code \- 16;
+44         int r = (index / 36) % 6;
+45         int g = (index / 6) % 6;
+46         int b = index % 6;
+47         if (r > 0)
+48             color\&.r = r * 40 + 55;
+49         else
+50             color\&.r = 0;
+51         if (g > 0)
+52             color\&.g = g * 40 + 55;
+53         else
+54             color\&.g = 0;
+55         if (b > 0)
+56             color\&.b = b * 40 + 55;
+57         else
+58             color\&.b = 0;
+59     } else if (code >= 232 && code <= 255) {
+61         int gray = (code \- 232) * 10 + 8;
+62         color\&.r = gray;
+63         color\&.g = gray;
+64         color\&.b = gray;
+65     } else {
+66         // Invalid code
+67         color\&.r = color\&.g = color\&.b = 0;
+68     }
+69     return color;
+70 }
+.PP
+.fi
+
+.PP
+References \fBRGB::b\fP, \fBRGB::g\fP, and \fBRGB::r\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

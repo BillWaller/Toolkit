@@ -1,0 +1,492 @@
+.TH "src/menu_engine.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/menu_engine.c \- The working part of C-Menu Menu\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <common\&.h>\fP
+.br
+\fR#include <ctype\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "unsigned int \fBmenu_engine\fP (Init *\fBinit\fP)"
+.br
+.RI "The main loop of the menu system\&. "
+.ti -1c
+.RI "unsigned int \fBmenu_cmd_processor\fP (Init *\fBinit\fP)"
+.br
+.RI "Processes user input for the menu system\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+The working part of C-Menu Menu\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBmenu_engine\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "unsigned int menu_cmd_processor (Init * init)"
+
+.PP
+Processes user input for the menu system\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP A pointer to an Init structure containing initialization data for the menu system\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an integer indicating the action taken by the user, such as returning to the main menu, displaying a submenu, or executing a command associated with a menu choice\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+handles navigation through the menu options, executing commands associated with menu choices, and responding to special keys such as function keys and mouse clicks\&. 
+.RE
+.PP
+Move up to the previous menu choice
+
+.PP
+Move down to the next menu choice
+
+.PP
+Select the current menu choice and execute its associated command
+
+.PP
+Display help information for the menu system
+
+.PP
+Exit the menu and return to the previous menu or exit if at top
+
+.PP
+send default printer output file to printer
+
+.PP
+open the default editor
+
+.PP
+process mouse event
+
+.PP
+If the user presses a key that corresponds to a menu choice's letter, select that menu choice
+
+.PP
+Return to the main menu
+
+.PP
+Execute the command associated with the selected menu choice
+
+.PP
+Display help information for the menu system
+
+.PP
+Display a submenu or perform an action associated with the selected menu choice
+
+.PP
+Display a pick list or form associated with the selected menu choice
+
+.PP
+Display a form associated with the selected menu choice
+
+.PP
+Display a view associated with the selected menu choice
+
+.PP
+open ckeys (test curses keys)
+
+.PP
+return to calling program
+
+.PP
+write the current menu configuration to a file
+.PP
+Definition at line \fB96\fP of file \fBmenu_engine\&.c\fP\&.
+.nf
+96                                             {
+97     int i, c, j;
+98     char *d;
+99     int in_key;
+100     char tmp_str[MAXLEN];
+101 
+102     keypad(menu\->win, TRUE);
+103     Menu *menu = init\->menu;
+104     mousemask(BUTTON1_CLICKED | BUTTON1_DOUBLE_CLICKED, nullptr);
+105     MEVENT event;
+106     wattron(menu\->win, A_REVERSE);
+107     mvwaddstr_fill(menu\->win, menu\->line_idx, 0,
+108                    menu\->line[menu\->line_idx]\->choice_text, menu\->cols);
+109     wattroff(menu\->win, A_REVERSE);
+110     event\&.y = event\&.x = \-1;
+111     // tcflush(2, TCIFLUSH);
+112     wmove(menu\->win, menu\->line_idx, 1);
+113     in_key = xwgetch(menu\->win, nullptr);
+114     mvwaddstr_fill(menu\->win, menu\->line_idx, 0,
+115                    menu\->line[menu\->line_idx]\->choice_text, menu\->cols);
+116     switch (in_key) {
+118     case 'k':
+119     case KEY_UP:
+120         i = menu\->line_idx;
+121         while (i > 0) {
+122             i\-\-;
+123             if (menu\->line[i]\->type == MT_CHOICE) {
+124                 menu\->line_idx = i;
+125                 break;
+126             }
+127         }
+128         return (MA_ENTER_OPTION);
+130     case 'j':
+131     case KEY_DOWN:
+132         i = menu\->line_idx;
+133         while (i < menu\->item_count \- 1) {
+134             i++;
+135             if (menu\->line[i]\->type == MT_CHOICE) {
+136                 menu\->line_idx = i;
+137                 break;
+138             }
+139         }
+140         return (MA_ENTER_OPTION);
+142     case '\\n':
+143     case KEY_ENTER:
+144         break;
+146     case 'H':
+147     case KEY_F(1):
+148         eargv[0] = strdup("mview");
+149         strnz__cpy(tmp_str, "~/menuapp/help/menu\&.help", MAXLEN \- 1);
+150         expand_tilde(tmp_str, MAXLEN \- 1);
+151         eargv[1] = strdup(tmp_str);
+152         eargv[2] = nullptr;
+153         eargc = 2;
+154         zero_opt_args(init);
+155         parse_opt_args(init, eargc, eargv);
+156         init\->lines = 30;
+157         init\->cols = 60;
+158         init\->begy = menu\->begy + 1;
+159         init\->begx = menu\->begx + 4;
+160         strnz__cpy(init\->title, "Menu Help", MAXLEN \- 1);
+161         mview(init, eargc, eargv);
+162         return (MA_DISPLAY_MENU);
+163     case KEY_F(2):
+164         eargv[0] = strdup("mview");
+165         strnz__cpy(tmp_str, "~/menuapp/\&.about", MAXLEN \- 1);
+166         expand_tilde(tmp_str, MAXLEN \- 1);
+167         eargv[1] = strdup(tmp_str);
+168         eargv[2] = nullptr;
+169         eargc = 2;
+170         zero_opt_args(init);
+171         parse_opt_args(init, eargc, eargv);
+172         init\->lines = 10;
+173         init\->cols = 40;
+174         init\->begy = menu\->begy + 1;
+175         init\->begx = menu\->begx + 4;
+176         strnz__cpy(init\->title, "About CMenu", MAXLEN \- 1);
+177         mview(init, eargc, eargv);
+178         return (MA_DISPLAY_MENU);
+180     case 'q':
+181     case KEY_F(9):
+182     case KEY_BREAK:
+183     case KEY_DL:
+184         return (MA_RETURN);
+186     case KEY_ALTF(9):
+187         d = getenv("PRTCMD");
+188         if (d == nullptr || *d == '\\0')
+189             strnz__cpy(earg_str, PRINTCMD, MAXLEN \- 1);
+190         else
+191             strnz__cpy(earg_str, d, MAXLEN \- 1);
+192         strnz__cat(earg_str, " ", MAXLEN \- 1);
+193         d = getenv("PRTFILE");
+194         if (d == nullptr || *d == '\\0') {
+195             d = getenv("HOME");
+196             if (d == nullptr || *d == '\\0')
+197                 strnz__cat(earg_str, VIEW_PRT_FILE, MAXLEN \- 1);
+198             else {
+199                 strnz__cat(earg_str, d, MAXLEN \- 1);
+200                 strnz__cat(earg_str, "/", MAXLEN \- 1);
+201                 strnz__cat(earg_str, VIEW_PRT_FILE, MAXLEN \- 1);
+202             }
+203         } else
+204             strnz__cat(earg_str, d, MAXLEN \- 1);
+205         full_screen_shell(earg_str);
+206         return (MA_DISPLAY_MENU);
+208     case KEY_ALTF(10):
+209         restore_wins();
+210         return (MA_DISPLAY_MENU);
+211         d = getenv("DEFAULTEDITOR");
+212         if (d == nullptr || *d == '\\0')
+213             strnz__cpy(earg_str, DEFAULTEDITOR, MAXLEN \- 1);
+214         else
+215             strnz__cpy(earg_str, d, MAXLEN \- 1);
+216         str_to_args(eargv, earg_str, MAX_ARGS);
+217         full_screen_fork_exec(eargv);
+218         return (MA_INIT);
+220     case KEY_MOUSE:
+221         if (click_y == \-1 || click_x == \-1)
+222             return (MA_ENTER_OPTION);
+223         if (click_y < 0 || click_y >= menu\->item_count)
+224             return (MA_ENTER_OPTION);
+225         menu\->line_idx = click_y;
+226         break;
+227     default:
+230         for (i = 0; i < menu\->item_count; i++) {
+231             if (menu\->line[i]\->raw_text[0] == '_') {
+232                 if (menu\->line[i]\->choice_letter == (char)in_key) {
+233                     menu\->line_idx = i;
+234                     break;
+235                 }
+236             } else {
+237                 if (menu\->line[i]\->choice_letter == toupper((char)in_key)) {
+238                     menu\->line_idx = i;
+239                     break;
+240                 }
+241             }
+242         }
+243         if (i >= menu\->item_count)
+244             return (MA_ENTER_OPTION);
+245         break;
+246     }
+247     c = (int)menu\->line[menu\->line_idx]\->command_type;
+248     switch (c) {
+250     case CT_RETURNMAIN:
+251         return (MA_RETURN_MAIN);
+255     case CT_EXEC:
+256         strnz__cpy(earg_str, menu\->line[menu\->line_idx]\->command_str,
+257                    MAXLEN \- 1);
+258         eargc = str_to_args(eargv, earg_str, MAX_ARGS);
+259         j = 0;
+260         free(eargv[0]);
+261         for (i = 1; i < eargc && eargv[i] != nullptr; i++) {
+262             if (eargv[i][0] == '~') {
+263                 strnz__cpy(tmp_str, eargv[i], MAXLEN \- 1);
+264                 expand_tilde(tmp_str, MAXLEN \- 1);
+265                 eargv[j++] = strdup(tmp_str);
+266             } else
+267                 eargv[j++] = strdup(eargv[i]);
+268             free(eargv[i]);
+269         }
+270         eargv[j] = nullptr;
+271         full_screen_fork_exec(eargv);
+272         return (MA_DISPLAY_MENU);
+274     case CT_ABOUT:
+275         eargv[0] = strdup("mview");
+276         strnz__cpy(tmp_str, "~/menuapp/\&.about", MAXLEN \- 1);
+277         expand_tilde(tmp_str, MAXLEN \- 1);
+278         eargv[1] = strdup(tmp_str);
+279         eargv[2] = nullptr;
+280         eargc = 2;
+281         zero_opt_args(init);
+282         parse_opt_args(init, eargc, eargv);
+283         init\->lines = 30;
+284         init\->cols = 60;
+285         init\->begy = menu\->begy + 1;
+286         init\->begx = menu\->begx + 4;
+287         strnz__cpy(init\->title, "About C\-Menu", MAXLEN \- 1);
+288         mview(init, eargc, eargv);
+289         return (MA_DISPLAY_MENU);
+290     case CT_HELP:
+291         eargv[0] = strdup("mview");
+292         strnz__cpy(tmp_str, "~/menuapp/help/menu\&.help", MAXLEN \- 1);
+293         expand_tilde(tmp_str, MAXLEN \- 1);
+294         eargv[1] = strdup(tmp_str);
+295         eargv[2] = nullptr;
+296         eargc = 2;
+297         zero_opt_args(init);
+298         parse_opt_args(init, eargc, eargv);
+299         init\->lines = 30;
+300         init\->cols = 60;
+301         init\->begy = menu\->begy + 1;
+302         init\->begx = menu\->begx + 4;
+303         strnz__cpy(init\->title, "Menu Help", MAXLEN \- 1);
+304         mview(init, eargc, eargv);
+305         return (MA_DISPLAY_MENU);
+308     case CT_MENU:
+309         strnz__cpy(earg_str, menu\->line[menu\->line_idx]\->command_str,
+310                    MAXLEN \- 1);
+311         eargc = str_to_args(eargv, earg_str, MAX_ARGS);
+312         if (eargc == 0)
+313             return (MA_DISPLAY_MENU);
+314         zero_opt_args(init);
+315         parse_opt_args(init, eargc, eargv);
+316         if (init\->begy == 0)
+317             init\->begy = menu\->begy + 1;
+318         if (init\->begx == 0)
+319             init\->begx = menu\->begx + 2;
+320         Menu *save_menu = init\->menu;
+321         init\->menu = nullptr;
+322         init\->menu = new_menu(init, eargc, eargv, init\->begy, init\->begx);
+323         if (!init\->menu)
+324             abend(\-1, "menu_cmd_processor: new_menu() failed");
+325         menu = init\->menu;
+326         parse_menu_description(init);
+327         menu_engine(init);
+328         init\->menu = destroy_menu(init);
+329         init\->menu = save_menu;
+330         menu = init\->menu;
+331         return (MA_INIT);
+334     case CT_PICK:
+335         strnz__cpy(earg_str, menu\->line[menu\->line_idx]\->command_str,
+336                    MAXLEN \- 1);
+337         eargc = str_to_args(eargv, earg_str, MAX_ARGS);
+338         zero_opt_args(init);
+339         parse_opt_args(init, eargc, eargv);
+340         init_pick(init, eargc, eargv, menu\->begy + 1, menu\->begx + 2);
+341         return (MA_DISPLAY_MENU);
+344     case CT_FORM:
+345         strnz__cpy(earg_str, menu\->line[menu\->line_idx]\->command_str,
+346                    MAXLEN \- 1);
+347         eargc = str_to_args(eargv, earg_str, MAX_ARGS);
+348         zero_opt_args(init);
+349         parse_opt_args(init, eargc, eargv);
+350         init_form(init, eargc, eargv, menu\->begy + 1, menu\->begx + 4);
+351         return (MA_DISPLAY_MENU);
+354     case CT_VIEW:
+355         strnz__cpy(earg_str, menu\->line[menu\->line_idx]\->command_str,
+356                    MAXLEN \- 1);
+357         eargc = str_to_args(eargv, earg_str, MAX_ARGS);
+358         zero_opt_args(init);
+359         parse_opt_args(init, eargc, eargv);
+360         init\->begy = menu\->begy + 1;
+361         init\->begx = menu\->begx + 4;
+362         strnz__cpy(init\->title, menu\->line[menu\->line_idx]\->raw_text,
+363                    MAXLEN \- 1);
+364         mview(init, eargc, eargv);
+365         return (MA_DISPLAY_MENU);
+367     case CT_CKEYS:
+368         display_curses_keys();
+369         return (MA_DISPLAY_MENU);
+371     case CT_RETURN:
+372         return (MA_RETURN);
+374     case CT_WRITE_CONFIG:
+375         write_config(init);
+376         return (MA_ENTER_OPTION);
+377     default:
+378         return (MA_ENTER_OPTION);
+379     }
+380     return 0;
+381 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBclick_x\fP, \fBclick_y\fP, \fBdestroy_menu()\fP, \fBdisplay_curses_keys()\fP, \fBearg_str\fP, \fBeargc\fP, \fBeargv\fP, \fBexpand_tilde()\fP, \fBfull_screen_fork_exec()\fP, \fBfull_screen_shell()\fP, \fBinit\fP, \fBinit_form()\fP, \fBinit_pick()\fP, \fBMAXLEN\fP, \fBmenu\fP, \fBmenu_engine()\fP, \fBmview()\fP, \fBmvwaddstr_fill()\fP, \fBnew_menu()\fP, \fBparse_menu_description()\fP, \fBparse_opt_args()\fP, \fBrestore_wins()\fP, \fBstr_to_args()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, \fBTRUE\fP, \fBwrite_config()\fP, \fBxwgetch()\fP, and \fBzero_opt_args()\fP\&.
+.PP
+Referenced by \fBmenu_engine()\fP\&.
+.SS "unsigned int menu_engine (Init * init)"
+
+.PP
+The main loop of the menu system\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP A pointer to an Init structure containing initialization data for the menu system\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an integer indicating the action taken by the user, such as returning to the main menu or exiting the menu system\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+displays the menu and processes user input until the user exits the menu or returns to the main menu\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB28\fP of file \fBmenu_engine\&.c\fP\&.
+.nf
+28                                      {
+29     int action;
+30     int i;
+31     char tmp_str[MAXLEN];
+32 
+33     Menu *menu = init\->menu;
+34     if (menu == nullptr) {
+35         Perror("menu_engine: menu is nullptr");
+36         return (1);
+37     }
+38     action = MA_INIT;
+39     while (action == MA_INIT) {
+40         action = MA_DISPLAY_MENU;
+41         if (win_new(menu\->lines, menu\->cols, menu\->begy, menu\->begx,
+42                     menu\->title, 0)) {
+43             ssnprintf(tmp_str, MAXLEN \- 1,
+44                       "win_new(%d, %d, %d, %d, %s, %b) failed", menu\->lines,
+45                       menu\->cols, menu\->begy, menu\->begx, menu\->title, 0);
+46             Perror(tmp_str);
+47             return (1);
+48         }
+49         menu\->win = win_win[win_ptr];
+50         menu\->box = win_box[win_ptr];
+51         while (action == MA_DISPLAY_MENU) {
+52             for (menu\->line_idx = 0; menu\->line_idx < menu\->item_count;
+53                  menu\->line_idx++) {
+54                 mvwaddstr(menu\->win, menu\->line_idx, 0,
+55                           menu\->line[menu\->line_idx]\->choice_text);
+56             }
+57             menu\->line_idx = 0;
+58             for (i = 0; i < menu\->item_count; i++)
+59                 if (menu\->line[i]\->type == MT_CHOICE) {
+60                     menu\->line_idx = i;
+61                     break;
+62                 }
+63             while ((action = menu_cmd_processor(init)) == MA_ENTER_OPTION)
+64                 ;
+65         }
+66         if (action == MA_RETURN) {
+67             win_del();
+68             menu\->win = win_win[win_ptr];
+69             menu\->box = win_box[win_ptr];
+70             return (MA_RETURN);
+71         }
+72         if (action == MA_INIT) {
+73             menu\->lines = 0;
+74             menu\->cols = 0;
+75             menu\->line_idx = 0;
+76             menu\->item_count = 0;
+77             menu\->title[0] = '\\0';
+78             menu\->choice_max_len = 0;
+79             menu\->text_max_len = 0;
+80             if (parse_menu_description(init))
+81                 return (MA_RETURN);
+82         }
+83     }
+84     return (action);
+85 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP, \fBMAXLEN\fP, \fBmenu\fP, \fBmenu_cmd_processor()\fP, \fBparse_menu_description()\fP, \fBPerror()\fP, \fBssnprintf()\fP, \fBtmp_str\fP, \fBwin_box\fP, \fBwin_del()\fP, \fBwin_new()\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

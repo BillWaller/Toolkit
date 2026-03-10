@@ -1,0 +1,1075 @@
+.TH "src/fields.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/fields.c \- Field Edit and Entry for C-Menu Form\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <common\&.h>\fP
+.br
+\fR#include <monetary\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stddef\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBis_valid_date\fP (int yyyy, int mm, int dd)"
+.br
+.RI "Check if a given date is valid, including leap years\&. "
+.ti -1c
+.RI "bool \fBis_valid_time\fP (int hh, int mm, int ss)"
+.br
+.RI "Check if a given time is valid\&. "
+.ti -1c
+.RI "int \fBform_fmt_field\fP (Form *\fBform\fP, char *s)"
+.br
+.RI "Format field according to its format type\&. "
+.ti -1c
+.RI "void \fBnumeric\fP (char *d, char *s)"
+.br
+.RI "Extract numeric characters from source string to destination string\&. "
+.ti -1c
+.RI "void \fBright_justify\fP (char *s, int fl)"
+.br
+.RI "Right justify string by removing trailing spaces and adding leading spaces\&. "
+.ti -1c
+.RI "void \fBleft_justify\fP (char *s)"
+.br
+.RI "Left justify string by removing leading spaces\&. "
+.ti -1c
+.RI "int \fBform_accept_field\fP (Form *\fBform\fP)"
+.br
+.RI "Accept input for a field\&. "
+.ti -1c
+.RI "int \fBform_display_field\fP (Form *\fBform\fP)"
+.br
+.RI "Display current field\&. "
+.ti -1c
+.RI "int \fBform_display_field_n\fP (Form *\fBform\fP, int n)"
+.br
+.RI "Display field n\&. "
+.ti -1c
+.RI "int \fBform_display_field_brackets\fP (Form *\fBform\fP)"
+.br
+.RI "Display brackets around current field if set\&. "
+.ti -1c
+.RI "int \fBform_validate_field\fP (Form *\fBform\fP)"
+.br
+.RI "Validate current field based on flags\&. "
+.ti -1c
+.RI "void \fBmk_filler\fP (char *s, int fl)"
+.br
+.RI "Create filler string for field\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBff_tbl\fP [][26]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Field Edit and Entry for C-Menu Form\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBfields\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int form_accept_field (Form * form)"
+
+.PP
+Accept input for a field\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int Key code of action taken 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Handles character input, navigation keys, and mouse events for field editing\&. Validates input based on field format and updates display\&. Returns key code of action taken (e\&.g\&., accept field, tab to next field, break out of input loop)\&. 
+.RE
+.PP
+KEY_F(10) is the default key for accepting the field and moving to the next field
+
+.PP
+KEY_F(9) Cancels the current operation
+
+.PP
+KEY_UP, KEY_BTAB moves to the previous field
+
+.PP
+KEY_DOWN, TAB moves to the next field
+
+.PP
+KEY_END moves cursor to end of field
+
+.PP
+< Enter accepts the field and moves to the next field if form->f_erase_remainder is set, it will clear the remaining characters above and after the current cursor location
+
+.PP
+KEY_IC toggles insert mode
+
+.PP
+KEY_DC deletes character at cursor
+
+.PP
+KEY_HOME moves cursor to start of field
+
+.PP
+KEY_BACKSPACE deletes character before cursor
+
+.PP
+KEY_LEFT moves cursor left one character
+
+.PP
+KEY_RIGHT moves cursor right one character
+
+.PP
+Handles mouse events for field editing
+
+.PP
+Validates fields based on format
+
+.PP
+FF_STRING accepts all printable characters and spaces
+
+.PP
+FF_DECIMAL_INT accepts digits 0 through 9 and decimal point ('\&.')
+
+.PP
+FF_HEX_INT accepts digits 0 through 9 and letters A through F (case-insensitive)
+
+.PP
+FF_FLOAT accepts digits 0 through 9 and decimal point ('\&.') and negative operator ('-') at the start of the field
+
+.PP
+FF_DOUBLE accepts digits 0 through 9 and decimal point ('\&.') and negative operator ('-') at the start of the field
+
+.PP
+FF_CURRENCY accepts digits 0 through 9 and decimal point ('\&.') and negative operator ('-') at the start of the field
+
+.PP
+FF_YYYYMMDD accepts digits 0 through 9
+
+.PP
+FF_HHMMSS accepts digits 0 through 9
+
+.PP
+FF_APR accepts digits 0 through 9 and decimal point ('\&.')
+.PP
+Definition at line \fB44\fP of file \fBfields\&.c\fP\&.
+.nf
+44                                   {
+45     bool f_insert = FALSE;
+46     int in_key;
+47     char *s, *d;
+48     WINDOW *win = form\->win;
+49 
+50     int flin = form\->field[form\->fidx]\->line;
+51     int fcol = form\->field[form\->fidx]\->col;
+52     int flen = form\->field[form\->fidx]\->len;
+53     int ff = form\->field[form\->fidx]\->ff;
+54     char *accept_s = form\->field[form\->fidx]\->accept_s;
+55     char *filler_s = form\->field[form\->fidx]\->filler_s;
+56     form_fmt_field(form, accept_s);
+57     click_x = click_y = \-1;
+58     char *fstart = accept_s;
+59     char *fend = fstart + flen;
+60     int x = fcol;
+61     char *p = fstart = accept_s;
+62     char *str_end = p + strlen(p);
+63     in_key = 0;
+64     if (f_insert)
+65         set_chyron_key(form\->chyron, 18, "OVR", KEY_IC);
+66     else
+67         set_chyron_key(form\->chyron, 18, "INS", KEY_IC);
+68     compile_chyron(form\->chyron);
+69     form_display_chyron(form);
+70 
+71     while (1) {
+72         if (in_key == 0) {
+73             mvwaddstr(win, flin, fcol, filler_s);
+74             mvwaddstr(win, flin, fcol, accept_s);
+75             wmove(win, flin, x);
+76             tcflush(0, TCIFLUSH);
+77             wmove(win, flin, x);
+78             in_key = xwgetch(win, form\->chyron);
+79         }
+80         switch (in_key) {
+83         case KEY_F(10):
+84             form_fmt_field(form, accept_s);
+85             form_display_field(form);
+86             if (form_validate_field(form) != 0)
+87                 continue;
+88             return (in_key);
+90         case KEY_BREAK:
+91         case KEY_F(9):
+92             form_display_field(form);
+93             in_key = KEY_F(9);
+94             return (in_key);
+96         case 'H':
+97         case KEY_F(1):
+98             return (in_key);
+99         case KEY_BTAB:
+100         case KEY_UP:
+101             form_fmt_field(form, accept_s);
+102             form_display_field(form);
+103             in_key = KEY_UP;
+104             return (in_key);
+106         case '\\t':
+107         case KEY_DOWN:
+108             form_fmt_field(form, accept_s);
+109             form_display_field(form);
+110             in_key = KEY_DOWN;
+111             return (in_key);
+113         case KEY_END:
+114             while (*p != '\\0')
+115                 p++;
+116             x = fcol + (p \- fstart);
+117             in_key = 0;
+118             continue;
+122         case '\\n':
+123         case KEY_ENTER:
+124             if (form\->f_erase_remainder)
+125                 *p = '\\0';
+126             form_fmt_field(form, accept_s);
+127             form_display_field(form);
+128             in_key = KEY_ENTER;
+129             return (in_key);
+131         case KEY_IC:
+132             if (f_insert) {
+133                 f_insert = FALSE;
+134                 set_chyron_key(form\->chyron, 18, "INS", KEY_IC);
+135             } else {
+136                 f_insert = TRUE;
+137                 set_chyron_key(form\->chyron, 18, "OVR", KEY_IC);
+138             }
+139             compile_chyron(form\->chyron);
+140             form_display_chyron(form);
+141             in_key = 0;
+142             continue;
+144         case KEY_DC:
+145             s = p + 1;
+146             d = p;
+147             while (*s != '\\0')
+148                 *d++ = *s++;
+149             *d = '\\0';
+150             str_end = d;
+151             f_insert = FALSE;
+152             in_key = 0;
+153             continue;
+155         case KEY_HOME:
+156             p = fstart;
+157             x = fcol;
+158             in_key = 0;
+159             continue;
+161         case KEY_BACKSPACE:
+162             if (p > fstart) {
+163                 p\-\-;
+164                 x\-\-;
+165             }
+166             s = p + 1;
+167             d = p;
+168             while (*s != '\\0')
+169                 *d++ = *s++;
+170             *d = '\\0';
+171             str_end = d;
+172             in_key = 0;
+173             continue;
+175         case KEY_LEFT:
+176             if (p > fstart) {
+177                 p\-\-;
+178                 x\-\-;
+179             }
+180             in_key = 0;
+181             continue;
+183         case KEY_RIGHT:
+184             if (p < fend && p < str_end) {
+185                 p++;
+186                 x++;
+187             }
+188             in_key = 0;
+189             continue;
+191         case KEY_MOUSE:
+192             form\->fidx = form_yx_to_fidx(form, click_y, click_x);
+193             x = click_x;
+194             flin = click_y;
+195             flen = form\->field[form\->fidx]\->len;
+196             ff = form\->field[form\->fidx]\->ff;
+197             accept_s = form\->field[form\->fidx]\->accept_s;
+198             filler_s = form\->field[form\->fidx]\->filler_s;
+199             form_fmt_field(form, accept_s);
+200             fstart = accept_s;
+201             fend = fstart + flen;
+202             p = fstart + (x \- form\->field[form\->fidx]\->col);
+203             str_end = fstart + strlen(fstart);
+204             in_key = 0;
+205             continue;
+206 
+207         default:
+208             if (p >= fend) {
+209                 in_key = 0;
+210                 continue;
+211             }
+213             switch (ff) {
+215             case FF_STRING:
+216                 break;
+219             case FF_DECIMAL_INT:
+220                 if ((in_key >= '0' && in_key <= '9') || in_key == '\&.')
+221                     break;
+222                 beep();
+223                 in_key = 0;
+224                 continue;
+227             case FF_HEX_INT:
+228                 if ((in_key >= '0' && in_key <= '9') ||
+229                     (in_key >= 'A' && in_key <= 'F') ||
+230                     (in_key >= 'a' && in_key <= 'f'))
+231                     break;
+232                 beep();
+233                 in_key = 0;
+234                 continue;
+237             case FF_FLOAT:
+238                 if ((in_key >= '0' && in_key <= '9') || in_key == '\&.' ||
+239                     (in_key == '\-' && p == fstart))
+240                     break;
+241                 beep();
+242                 in_key = 0;
+243                 continue;
+246             case FF_DOUBLE:
+247                 if ((in_key >= '0' && in_key <= '9') || in_key == '\&.' ||
+248                     (in_key == '\-' && p == fstart))
+249                     break;
+250                 beep();
+251                 in_key = 0;
+252                 continue;
+256             case FF_CURRENCY:
+257                 if ((in_key >= '0' && in_key <= '9') || in_key == '\&.' ||
+258                     (in_key == '\-' && p == fstart))
+259                     break;
+260                 beep();
+261                 in_key = 0;
+262                 continue;
+264             case FF_YYYYMMDD:
+265                 if (in_key >= '0' && in_key <= '9')
+266                     break;
+267                 beep();
+268                 in_key = 0;
+269                 continue;
+271             case FF_HHMMSS:
+272                 if (in_key >= '0' && in_key <= '9')
+273                     break;
+274                 beep();
+275                 in_key = 0;
+276                 continue;
+278             case FF_APR:
+279                 if ((in_key >= '0' && in_key <= '9') || in_key == '\&.')
+280                     break;
+281                 beep();
+282                 in_key = 0;
+283                 continue;
+284             default:
+285                 Perror("form_accept_field() invalid format");
+286                 break;
+287             }
+288             if (in_key >= ' ') {
+289                 if (f_insert) {
+290                     if (str_end < fend) {
+291                         s = str_end \- 1;
+292                         d = str_end;
+293                         while (s >= p)
+294                             *d\-\- = *s\-\-;
+295                         *p++ = in_key;
+296                         str_end++;
+297                         x++;
+298                     }
+299                 } else {
+300                     if (p < fend) {
+301                         if (p < str_end) {
+302                             *p++ = in_key;
+303                             x++;
+304                         } else if (p == str_end) {
+305                             *p++ = in_key;
+306                             *p = '\\0';
+307                             str_end = p;
+308                             x++;
+309                         }
+310                     }
+311                 }
+312                 in_key = 0;
+313                 continue;
+314             }
+315         }
+316     }
+317 }
+.PP
+.fi
+
+.PP
+References \fBclick_x\fP, \fBclick_y\fP, \fBcompile_chyron()\fP, \fBFALSE\fP, \fBform\fP, \fBform_display_chyron()\fP, \fBform_display_field()\fP, \fBform_fmt_field()\fP, \fBform_validate_field()\fP, \fBform_yx_to_fidx()\fP, \fBPerror()\fP, \fBset_chyron_key()\fP, \fBTRUE\fP, \fBwin\fP, and \fBxwgetch()\fP\&.
+.PP
+Referenced by \fBform_enter_fields()\fP\&.
+.SS "int form_display_field (Form * form)"
+
+.PP
+Display current field\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function displays the current field based on the form's current field index (fidx)\&. It retrieves the line and column information for the current field, displays any brackets if set, and then displays the field's content using the display_s string\&. The function ensures that the field is displayed correctly within the form's window and refreshes the display to show the updated field content\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB345\fP of file \fBfields\&.c\fP\&.
+.nf
+345                                    {
+346     WINDOW *win = form\->win;
+347     int flin = form\->field[form\->fidx]\->line;
+348     int fcol = form\->field[form\->fidx]\->col;
+349     form_display_field_brackets(form);
+350     mvwaddstr(win, flin, fcol, form\->field[form\->fidx]\->filler_s);
+351     mvwaddstr(win, flin, fcol, form\->field[form\->fidx]\->display_s);
+352     wrefresh(win);
+353     return 0;
+354 }
+.PP
+.fi
+
+.PP
+References \fBform\fP, \fBform_display_field_brackets()\fP, and \fBwin\fP\&.
+.PP
+Referenced by \fBform_accept_field()\fP, and \fBform_display_field_n()\fP\&.
+.SS "int form_display_field_brackets (Form * form)"
+
+.PP
+Display brackets around current field if set\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function checks if the form's brackets array has non-empty values for both the left and right brackets\&. If so, it retrieves the line and column information for the current field and uses the form's box window to display the left bracket at the start of the field and the right bracket at the end of the field\&. The display is refreshed to show the brackets around the field\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB364\fP of file \fBfields\&.c\fP\&.
+.nf
+364                                             {
+365     int flin, fcol;
+366     if (form\->brackets[0] != '\\0' && form\->brackets[1] != '\\0') {
+367         WINDOW *box = form\->box;
+368         flin = form\->field[form\->fidx]\->line + 1;
+369         fcol = form\->field[form\->fidx]\->col;
+370         wmove(box, flin, fcol);
+371         waddch(box, form\->brackets[0]);
+372         wmove(box, flin, fcol + form\->field[form\->fidx]\->len + 1);
+373         waddch(box, form\->brackets[1]);
+374         wrefresh(box);
+375     }
+376     return 0;
+377 }
+.PP
+.fi
+
+.PP
+References \fBform\fP\&.
+.PP
+Referenced by \fBform_display_field()\fP\&.
+.SS "int form_display_field_n (Form * form, int n)"
+
+.PP
+Display field n\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.br
+\fIn\fP Field index to display 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function temporarily sets the form's current field index (fidx) to n, calls \fBform_display_field()\fP to display that field, and then restores the original fidx value\&. This allows for displaying a specific field without permanently changing the form's current field index\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB328\fP of file \fBfields\&.c\fP\&.
+.nf
+328                                             {
+329     int fidx = form\->fidx;
+330     form\->fidx = n;
+331     form_display_field(form);
+332     form\->fidx = fidx;
+333     return 0;
+334 }
+.PP
+.fi
+
+.PP
+References \fBform\fP, and \fBform_display_field()\fP\&.
+.PP
+Referenced by \fBform_display_fields()\fP\&.
+.SS "int form_fmt_field (Form * form, char * s)"
+
+.PP
+Format field according to its format type\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.br
+\fIs\fP Input string to format 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes the input string for the current field and formats it according to the field's specified format type (ff)\&. It updates the accept_s and display_s strings for the field based on the formatted value\&. The function handles various format types, including strings, decimal integers, hexadecimal integers, floating-point numbers, currency, dates, and times\&. It uses helper functions for validation and formatting, such as \fBis_valid_date()\fP, \fBis_valid_time()\fP, \fBnumeric()\fP, \fBright_justify()\fP, \fBleft_justify()\fP, and strnzcpy()\&. The function ensures that the formatted output fits within the field's length and creates a filler string for the field as needed\&. The function also handles error cases, such as invalid formats, and provides feedback through error messages\&. It is designed to be extensible, allowing for additional format types to be added in the future as needed\&. 
+.RE
+.PP
+Format field according to its format type 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.br
+\fIs\fP Input string to format 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+takes the input string for the current field and formats it according to the field's specified format type (ff)\&. It updates the accept_s and display_s strings for the field based on the formatted value\&. 
+
+.PP
+handles various format types, including strings, decimal integers, hexadecimal integers, floating-point numbers, currency, dates, and times\&. 
+
+.PP
+uses helper functions for validation and formatting, such as \fBis_valid_date()\fP, \fBis_valid_time()\fP, \fBnumeric()\fP, \fBright_justify()\fP, \fBleft_justify()\fP, and strnzcpy()\&. The function ensures that the formatted output fits within the field's length and creates a filler string for the field as needed\&. The function also handles error cases, such as invalid formats, and provides feedback through error messages\&. It is designed to be extensible, allowing for additional format types to be added in the future as needed\&. 
+
+.PP
+assumes that the input string is well-formed and does not contain malicious content\&. Input validation and sanitization should be performed at a higher level in the application to ensure security and robustness\&. 
+
+.PP
+The function currently does not handle localization or internationalization of number formats, such as different decimal separators or currency symbols\&. Future enhancements may include support for locale-specific formatting\&. 
+
+.PP
+Error handling is basic; future versions may include more detailed error reporting and logging mechanisms\&. 
+
+.PP
+Performance optimizations may be considered for handling large volumes of data or high-frequency updates in real-time applications\&. 
+
+.PP
+The following variables and structures are used in this function: 
+.PP
+.nf
+char field_s[MAXLEN];
+int decimal_int_n = 0;
+int hex_int_n = 0;
+float float_n = 0\&.0;
+double double_n = 0\&.0;
+double currency_n = 0\&.0;
+struct Date { int yyyy; int mm; int dd; };
+struct Time { int hh; int mm; int ss; };
+
+.fi
+.PP
+ 
+
+.PP
+supports format types: FF_STRING, FF_DECIMAL_INT, FF_HEX_INT, FF_FLOAT, FF_DOUBLE, FF_CURRENCY, FF_YYYYMMDD, FF_HHMMSS, FF_APR with appropriate formatting and validation for each type\&. 
+
+.PP
+Handles field length and filler string creation\&. 
+
+.PP
+As the roadmap indicates, these data types are just a start and more complex types and formats may be added in the future\&. 
+
+.PP
+These data types are not suitable for financial, scientific, or high-precision applications\&. They are intended for basic data entry and display in a text-based user interface\&. 
+
+.PP
+In the future, we will aqdd support for additional data types and formats such as: dates with time zones, timestamps, percentages, scientific notation, and custom user-defined formats\&. 
+
+.PP
+For high precision applications, we will be integrating support for 128-bit binary coded decimal (BCD) types and arbitrary precision decimal types using libraries such as the GNU MPFR library, IBM's decNumber, Rust Decimal, or the Intel Decimal Floating-Point Math Library\&. 
+
+.PP
+C-Menu Form converts each field's input string into internal numeric binary based on the field's specified format\&. The internal numberic binary is then formated and displayed, verifying the user's input and Form's interpretation of the user's input\&.
+.RE
+.PP
+
+.PP
+Definition at line \fB395\fP of file \fBfields\&.c\fP\&.
+.nf
+395                                         {
+457     strnz__cpy(form\->field[form\->fidx]\->input_s, s, MAXLEN \- 1);
+458     char *input_s = form\->field[form\->fidx]\->input_s;
+459     char *accept_s = form\->field[form\->fidx]\->accept_s;
+460     char *display_s = form\->field[form\->fidx]\->display_s;
+461     char *filler_s = form\->field[form\->fidx]\->filler_s;
+462     int ff = form\->field[form\->fidx]\->ff;
+463     int fl = form\->field[form\->fidx]\->len;
+464 
+465     char field_s[MAXLEN];
+466     int decimal_int_n = 0;
+467     int hex_int_n = 0;
+468     float float_n = 0\&.0;
+469     double double_n = 0\&.0;
+470     double currency_n = 0\&.0;
+471 
+472     struct {
+473         int yyyy;
+474         int mm;
+475         int dd;
+476     } Date;
+477     Date\&.yyyy = Date\&.mm = Date\&.dd = 0;
+478     struct {
+479         int hh;
+480         int mm;
+481         int ss;
+482     } Time;
+483     Time\&.hh = Time\&.mm = Time\&.ss = 0;
+484     strnz(accept_s, fl);
+485     switch (ff) {
+486     case FF_STRING:
+487         left_justify(s);
+488         trim(s);
+489         strnz__cpy(input_s, s, MAXLEN \- 1);
+490         strnz__cpy(accept_s, s, MAXLEN \- 1);
+491         strnz__cpy(display_s, s, MAXLEN \- 1);
+492         break;
+493     case FF_DECIMAL_INT:
+494         sscanf(input_s, "%d", &decimal_int_n);
+495         sprintf(accept_s, "%d", decimal_int_n);
+496         sprintf(display_s, "%d", decimal_int_n);
+497         right_justify(display_s, fl);
+498         break;
+499     case FF_HEX_INT:
+500         sscanf(input_s, "%x", &hex_int_n);
+501         sprintf(accept_s, "%d", hex_int_n);
+502         sprintf(display_s, "%x", hex_int_n);
+503         right_justify(display_s, fl);
+504         break;
+505     case FF_FLOAT:
+506         sscanf(input_s, "%f", &float_n);
+507         sprintf(accept_s, "%f", float_n);
+508         sprintf(display_s, "%f", float_n);
+509         right_justify(display_s, fl);
+510         break;
+511     case FF_DOUBLE:
+512         sscanf(input_s, "%lf", &double_n);
+513         sprintf(accept_s, "%lf", double_n);
+514         sprintf(display_s, "%lf", double_n);
+515         right_justify(display_s, fl);
+516         break;
+517     case FF_CURRENCY:
+518         numeric(field_s, input_s);
+519         sscanf(field_s, "%lf", &currency_n);
+520         sprintf(accept_s, "%\&.2lf", currency_n);
+521         sprintf(display_s, "%'\&.2lf", currency_n);
+522         right_justify(display_s, fl);
+523         break;
+524     case FF_YYYYMMDD:
+525         Date\&.yyyy = Date\&.mm = Date\&.dd = 0;
+526         strnz__cpy(field_s, input_s, MAXLEN \- 1);
+527         sscanf(field_s, "%4d%2d%2d", &Date\&.yyyy, &Date\&.mm, &Date\&.dd);
+528         sprintf(accept_s, "%04d%02d%02d", Date\&.yyyy, Date\&.mm, Date\&.dd);
+529         if (is_valid_date(Date\&.yyyy, Date\&.mm, Date\&.dd))
+530             sprintf(display_s, "%04d\-%02d\-%02d", Date\&.yyyy, Date\&.mm, Date\&.dd);
+531         break;
+532     case FF_HHMMSS:
+533         Time\&.hh = Time\&.mm = Time\&.ss = 0;
+534         strnz__cpy(field_s, input_s, MAXLEN \- 1);
+535         sscanf(field_s, "%2d%2d%2d", &Time\&.hh, &Time\&.mm, &Time\&.ss);
+536         sprintf(accept_s, "%02d%02d%02d", Time\&.hh, Time\&.mm, Time\&.ss);
+537         if (is_valid_time(Time\&.hh, Time\&.mm, Time\&.ss))
+538             sprintf(display_s, "%02d:%02d:%02d", Time\&.hh, Time\&.mm, Time\&.ss);
+539         break;
+540     case FF_APR:
+541         sscanf(input_s, "%lf", &double_n);
+542         sprintf(accept_s, "%lf", double_n);
+543         sprintf(display_s, "%0\&.3lf", double_n);
+544         right_justify(display_s, fl);
+545         break;
+546     default:
+547         Perror("form_fmt_field() invalid format");
+548         break;
+549     }
+550     strnz(accept_s, fl);
+551     left_justify(accept_s);
+552     mk_filler(filler_s, fl);
+553     return 0;
+554 }
+.PP
+.fi
+
+.PP
+References \fBform\fP, \fBis_valid_date()\fP, \fBis_valid_time()\fP, \fBleft_justify()\fP, \fBMAXLEN\fP, \fBmk_filler()\fP, \fBnumeric()\fP, \fBPerror()\fP, \fBright_justify()\fP, \fBstrnz()\fP, \fBstrnz__cpy()\fP, and \fBtrim()\fP\&.
+.PP
+Referenced by \fBform_accept_field()\fP, and \fBform_read_data()\fP\&.
+.SS "int form_validate_field (Form * form)"
+
+.PP
+Validate current field based on flags\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBform\fP\fP Pointer to Form structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if valid, 1 if invalid 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Very underdeveloped - only checks F_NOTBLANK and F_NOMETAS 
+.RE
+.PP
+
+.PP
+Definition at line \fB560\fP of file \fBfields\&.c\fP\&.
+.nf
+560                                     {
+561     int n = form\->fidx;
+562     char *p = form\->field[n]\->accept_s;
+563     if (form\->field[n]\->ff & F_NOTBLANK) {
+564         char *s = form\->field[n]\->accept_s;
+565         while (*s++ == ' ')
+566             ;
+567         if (*s == '\\0') {
+568             Perror("blank field not allowed");
+569             return (1);
+570         }
+571     }
+572     if (form\->field[n]\->ff & F_NOMETAS) {
+573         if (strpbrk(p, "*?[]") != 0) {
+574             Perror("metacharacters not allowed");
+575             return (1);
+576         }
+577     }
+578     return (0);
+579 }
+.PP
+.fi
+
+.PP
+References \fBform\fP, and \fBPerror()\fP\&.
+.PP
+Referenced by \fBform_accept_field()\fP\&.
+.SS "bool is_valid_date (int yyyy, int mm, int dd)"
+
+.PP
+Check if a given date is valid, including leap years\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIyyyy\fP Year 
+.br
+\fImm\fP Month 
+.br
+\fIdd\fP Day 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the date is valid, false otherwise 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function checks if the provided year, month, and day constitute a valid date\&. It accounts for leap years when determining the number of days in February\&. The function returns true if the date is valid and false if it is not\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB640\fP of file \fBfields\&.c\fP\&.
+.nf
+640                                              {
+641     if (yyyy < 1 || mm < 1 || mm > 12 || dd < 1)
+642         return false;
+643     int days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+644     if ((yyyy % 4 == 0 && yyyy % 100 != 0) || (yyyy % 400 == 0))
+645         days_in_month[2] = 29;
+646     if (dd > days_in_month[mm])
+647         return false;
+648     return true;
+649 }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_fmt_field()\fP\&.
+.SS "bool is_valid_time (int hh, int mm, int ss)"
+
+.PP
+Check if a given time is valid\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhh\fP Hour 
+.br
+\fImm\fP Minute 
+.br
+\fIss\fP Second 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the time is valid, false otherwise 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function checks if the provided hour, minute, and second constitute a valid time\&. It ensures that hours are between 0 and 23, minutes and seconds are between 0 and 59\&. The function returns true if the time is valid and false if it is not\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB660\fP of file \fBfields\&.c\fP\&.
+.nf
+660                                            {
+661     if (hh < 0 || hh > 23 || mm < 0 || mm > 59 || ss < 0 || ss > 59)
+662         return false;
+663     return true;
+664 }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_fmt_field()\fP\&.
+.SS "void left_justify (char * s)"
+
+.PP
+Left justify string by removing leading spaces\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP String to left justify 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes a string s and removes any leading spaces, effectively left-justifying the text\&. It does this by finding the first non-space character and shifting the string to the left, overwriting the leading spaces\&. The resulting string is null-terminated\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB604\fP of file \fBfields\&.c\fP\&.
+.nf
+604 { trim(s); }
+.PP
+.fi
+
+.PP
+References \fBtrim()\fP\&.
+.PP
+Referenced by \fBform_fmt_field()\fP\&.
+.SS "void mk_filler (char * s, int fl)"
+
+.PP
+Create filler string for field\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP Filler string to create 
+.br
+\fIfl\fP Field length 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Fills the string s with the fill character specified in the form's fill_char array, repeated for the length of the field (fl)\&. The resulting string is null-terminated\&. This filler string can be used to display empty fields or to clear the field area before displaying new content\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB588\fP of file \fBfields\&.c\fP\&.
+.nf
+588                                 {
+589     char *e = s + fl;
+590     unsigned char c;
+591 
+592     c = form\->fill_char[0];
+593     while (s != e)
+594         *s++ = c;
+595     *s = '\\0';
+596 }
+.PP
+.fi
+
+.PP
+References \fBform\fP\&.
+.PP
+Referenced by \fBform_fmt_field()\fP\&.
+.SS "void numeric (char * d, char * s)"
+
+.PP
+Extract numeric characters from source string to destination string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP Destination string 
+.br
+\fIs\fP Source string 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes a source string s and extracts only the numeric characters (digits 0-9), as well as dashes ('-') and periods ('\&.'), copying them into the destination string d\&. The resulting string in d is null-terminated\&. This is useful for processing input that may contain non-numeric characters, allowing the application to focus on the numeric content for further processing or validation\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB675\fP of file \fBfields\&.c\fP\&.
+.nf
+675                                {
+676     while (*s != '\\0') {
+677         if (*s == '\-' || *s == '\&.' || (*s >= '0' && *s <= '9'))
+678             *d++ = *s++;
+679         else
+680             s++;
+681     }
+682     *d = '\\0';
+683 }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_fmt_field()\fP\&.
+.SS "void right_justify (char * s, int fl)"
+
+.PP
+Right justify string by removing trailing spaces and adding leading spaces\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP String to right justify 
+.br
+\fIfl\fP Field length 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function takes a string s and right-justifies it within a field of length fl\&. It first removes any trailing spaces from the string, then shifts the characters to the right end of the field, filling the left side with spaces\&. The resulting string is null-terminated and fits within the specified field length\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB615\fP of file \fBfields\&.c\fP\&.
+.nf
+615                                     {
+616     char *p = s;
+617     char *d = s + fl;
+618     trim(s);
+619     *d = '\\0';
+620     while (*s != '\\0') {
+621         s++;
+622     }
+623     while (s != p) {
+624         *(\-\-d) = *(\-\-s);
+625     }
+626     while (d != p) {
+627         *(\-\-d) = ' ';
+628     }
+629 }
+.PP
+.fi
+
+.PP
+References \fBtrim()\fP\&.
+.PP
+Referenced by \fBform_fmt_field()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "char ff_tbl[][26]"
+\fBInitial value:\fP
+.nf
+= {"string",   "decimal_int", "hex_int", "float", "double",
+         "currency", "yyyymmdd",    "hhmmss",  "apr",   ""}
+.PP
+.fi
+
+.PP
+Definition at line \fB26\fP of file \fBfields\&.c\fP\&.
+.nf
+26                   {"string",   "decimal_int", "hex_int", "float", "double",
+27                      "currency", "yyyymmdd",    "hhmmss",  "apr",   ""};
+.PP
+.fi
+
+.PP
+Referenced by \fBform_parse_desc()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

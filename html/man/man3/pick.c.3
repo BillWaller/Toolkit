@@ -1,0 +1,101 @@
+.TH "src/pick.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/pick.c \- Command Line Entry Point for C-Menu Pick\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <common\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fB__end_pgm\fP"
+.br
+.RI "Main entry point for C-Menu Pick\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Command Line Entry Point for C-Menu Pick\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBpick\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.PP
+Definition at line \fB18\fP of file \fBpick\&.c\fP\&.
+.nf
+18                                 {
+19     __atexit;
+20     capture_shell_tioctl();
+21     Init *init = new_init(argc, argv);
+22     SIO *sio = init\->sio;
+23     mapp_initialization(init, argc, argv);
+24     open_curses(sio);
+25     sig_prog_mode();
+26     capture_curses_tioctl();
+27     win_init_attrs(sio\->fg_color, sio\->bg_color, sio\->bo_color);
+28 
+29     init_pick(init, init\->argc, init\->argv, 0, 0);
+30 
+31     destroy_init(init);
+32     win_del();
+33     destroy_curses();
+34     return 0;
+35 }
+.PP
+.fi
+
+.PP
+References \fBcapture_curses_tioctl()\fP, \fBcapture_shell_tioctl()\fP, \fBdestroy_curses()\fP, \fBdestroy_init()\fP, \fBinit\fP, \fBinit_pick()\fP, \fBmapp_initialization()\fP, \fBnew_init()\fP, \fBopen_curses()\fP, \fBsig_prog_mode()\fP, \fBsio\fP, \fBwin_del()\fP, and \fBwin_init_attrs()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "__end_pgm"
+
+.PP
+Main entry point for C-Menu Pick\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc\fP Argument count 
+.br
+\fIargv\fP Argument vector 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Exit status 
+.RE
+.PP
+
+.PP
+Definition at line \fB17\fP of file \fBpick\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

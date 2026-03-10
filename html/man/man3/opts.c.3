@@ -1,0 +1,735 @@
+.TH "src/opts.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/opts.c \- Sort and print options\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <common\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBARRAY_SIZE\fP(arr)"
+.br
+.ti -1c
+.RI "#define \fBred\fP   '\\033[0;31m'"
+.br
+.ti -1c
+.RI "#define \fBgreen\fP   '\\033[0;32m'"
+.br
+.ti -1c
+.RI "#define \fByellow\fP   '\\033[0;33m'"
+.br
+.ti -1c
+.RI "#define \fBblue\fP   '\\033[0;34m'"
+.br
+.ti -1c
+.RI "#define \fBmagenta\fP   '\\033[0;35m'"
+.br
+.ti -1c
+.RI "#define \fBcyan\fP   '\\033[0;36m'"
+.br
+.ti -1c
+.RI "#define \fBwhite\fP   '\\033[0;37m'"
+.br
+.ti -1c
+.RI "#define \fBbblue\fP   '\\033[34;1m'"
+.br
+.ti -1c
+.RI "#define \fBreset\fP   '\\033[0m'"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBdump_opts_by_name\fP ()"
+.br
+.RI "dump options sorted by name "
+.ti -1c
+.RI "void \fBdump_opts_by_group\fP ()"
+.br
+.RI "dump options sorted by group "
+.ti -1c
+.RI "void \fBdump_opts_by_desc\fP ()"
+.br
+.RI "dump options sorted by description "
+.ti -1c
+.RI "void \fBdump_opts_by_use\fP (char *\fBusage\fP, char *mask)"
+.br
+.RI "dump options by use mask "
+.ti -1c
+.RI "void \fBdump_opts_by_short_opt\fP ()"
+.br
+.RI "dump options sorted by short option "
+.ti -1c
+.RI "void \fBsort_opts_by_name\fP ()"
+.br
+.RI "dump options name "
+.ti -1c
+.RI "void \fBsort_opts_by_group\fP ()"
+.br
+.RI "sort options by group "
+.ti -1c
+.RI "void \fBsort_opts_by_desc\fP ()"
+.br
+.RI "sort options by description "
+.ti -1c
+.RI "void \fBsort_opts_by_short_opt\fP ()"
+.br
+.RI "sort options by short option "
+.ti -1c
+.RI "void \fBprint_opt_header\fP ()"
+.br
+.RI "print option header "
+.ti -1c
+.RI "void \fBprint_opt\fP (int i)"
+.br
+.RI "print option "
+.ti -1c
+.RI "int \fBcomp_opt_desc\fP (const void *o1, const void *o2)"
+.br
+.RI "compare option descriptions "
+.ti -1c
+.RI "int \fBcomp_opt_group\fP (const void *o1, const void *o2)"
+.br
+.RI "compare option groups "
+.ti -1c
+.RI "void \fBdump_opts\fP ()"
+.br
+.RI "dump all options "
+.ti -1c
+.RI "Opts * \fBselect_opt\fP (char *name)"
+.br
+.RI "select option by name "
+.ti -1c
+.RI "int \fBcomp_opt_name\fP (const void *o1, const void *o2)"
+.br
+.RI "compare option names "
+.ti -1c
+.RI "int \fBcomp_opt_short_opt\fP (const void *o1, const void *o2)"
+.br
+.RI "compare option short options "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "Opts \fBopts\fP []"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Sort and print options\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBopts\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ARRAY_SIZE( arr)"
+\fBValue:\fP
+.nf
+(sizeof((arr)) / sizeof((arr)[0]))
+.PP
+.fi
+
+.PP
+Definition at line \fB15\fP of file \fBopts\&.c\fP\&.
+.PP
+Referenced by \fBselect_opt()\fP, \fBsort_opts_by_desc()\fP, \fBsort_opts_by_group()\fP, \fBsort_opts_by_name()\fP, and \fBsort_opts_by_short_opt()\fP\&.
+.SS "#define bblue   '\\033[34;1m'"
+
+.PP
+Definition at line \fB39\fP of file \fBopts\&.c\fP\&.
+.SS "#define blue   '\\033[0;34m'"
+
+.PP
+Definition at line \fB35\fP of file \fBopts\&.c\fP\&.
+.PP
+Referenced by \fBprint_opt()\fP\&.
+.SS "#define cyan   '\\033[0;36m'"
+
+.PP
+Definition at line \fB37\fP of file \fBopts\&.c\fP\&.
+.SS "#define green   '\\033[0;32m'"
+
+.PP
+Definition at line \fB33\fP of file \fBopts\&.c\fP\&.
+.PP
+Referenced by \fBprint_opt()\fP\&.
+.SS "#define magenta   '\\033[0;35m'"
+
+.PP
+Definition at line \fB36\fP of file \fBopts\&.c\fP\&.
+.SS "#define red   '\\033[0;31m'"
+
+.PP
+Definition at line \fB32\fP of file \fBopts\&.c\fP\&.
+.SS "#define reset   '\\033[0m'"
+
+.PP
+Definition at line \fB40\fP of file \fBopts\&.c\fP\&.
+.PP
+Referenced by \fBprint_opt()\fP\&.
+.SS "#define white   '\\033[0;37m'"
+
+.PP
+Definition at line \fB38\fP of file \fBopts\&.c\fP\&.
+.SS "#define yellow   '\\033[0;33m'"
+
+.PP
+Definition at line \fB34\fP of file \fBopts\&.c\fP\&.
+.PP
+Referenced by \fBprint_opt()\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int comp_opt_desc (const void * o1, const void * o2)"
+
+.PP
+compare option descriptions 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo1\fP - pointer to first option 
+.br
+\fIo2\fP - pointer to second option 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+negative if o1 < o2, zero if o1 == o2, positive if o1 > o2 
+.RE
+.PP
+
+.PP
+Definition at line \fB142\fP of file \fBopts\&.c\fP\&.
+.nf
+142                                                   {
+143     return strcmp(((Opts *)o1)\->desc, ((Opts *)o2)\->desc);
+144 }
+.PP
+.fi
+
+.PP
+Referenced by \fBsort_opts_by_desc()\fP\&.
+.SS "int comp_opt_group (const void * o1, const void * o2)"
+
+.PP
+compare option groups 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo1\fP - pointer to first option 
+.br
+\fIo2\fP - pointer to second option 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+negative if o1 < o2, zero if o1 == o2, positive if o1 > o2 
+.RE
+.PP
+
+.PP
+Definition at line \fB134\fP of file \fBopts\&.c\fP\&.
+.nf
+134                                                    {
+135     return ((Opts *)o1)\->group \- ((Opts *)o2)\->group;
+136 }
+.PP
+.fi
+
+.PP
+Referenced by \fBsort_opts_by_group()\fP\&.
+.SS "int comp_opt_name (const void * o1, const void * o2)"
+
+.PP
+compare option names 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo1\fP - pointer to first option 
+.br
+\fIo2\fP - pointer to second option 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+negative if o1 < o2, zero if o1 == o2, positive if o1 > o2 
+.RE
+.PP
+
+.PP
+Definition at line \fB126\fP of file \fBopts\&.c\fP\&.
+.nf
+126                                                   {
+127     return strcmp(((Opts *)o1)\->name, ((Opts *)o2)\->name);
+128 }
+.PP
+.fi
+
+.PP
+Referenced by \fBselect_opt()\fP, and \fBsort_opts_by_name()\fP\&.
+.SS "int comp_opt_short_opt (const void * o1, const void * o2)"
+
+.PP
+compare option short options 
+.PP
+\fBParameters\fP
+.RS 4
+\fIo1\fP - pointer to first option 
+.br
+\fIo2\fP - pointer to second option 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+negative if o1 < o2, zero if o1 == o2, positive if o1 > o2 
+.RE
+.PP
+
+.PP
+Definition at line \fB150\fP of file \fBopts\&.c\fP\&.
+.nf
+150                                                        {
+151     return strcmp(((Opts *)o1)\->short_opt, ((Opts *)o2)\->short_opt);
+152 }
+.PP
+.fi
+
+.PP
+Referenced by \fBsort_opts_by_short_opt()\fP\&.
+.SS "void dump_opts ()"
+
+.PP
+dump all options 
+.PP
+Definition at line \fB211\fP of file \fBopts\&.c\fP\&.
+.nf
+211                  {
+212     print_opt_header();
+213     int i = 0;
+214     while (opts[i]\&.name != nullptr) {
+215         if (opts[i]\&.name[0] != '\\0')
+216             print_opt(i);
+217         i++;
+218     }
+219 }
+.PP
+.fi
+
+.PP
+References \fBopts\fP, \fBprint_opt()\fP, and \fBprint_opt_header()\fP\&.
+.PP
+Referenced by \fBdump_opts_by_desc()\fP, \fBdump_opts_by_group()\fP, \fBdump_opts_by_name()\fP, \fBdump_opts_by_short_opt()\fP, and \fBmain()\fP\&.
+.SS "void dump_opts_by_desc ()"
+
+.PP
+dump options sorted by description 
+.PP
+Definition at line \fB155\fP of file \fBopts\&.c\fP\&.
+.nf
+155                          {
+156     sort_opts_by_desc();
+157     dump_opts();
+158 }
+.PP
+.fi
+
+.PP
+References \fBdump_opts()\fP, and \fBsort_opts_by_desc()\fP\&.
+.SS "void dump_opts_by_group ()"
+
+.PP
+dump options sorted by group 
+.PP
+Definition at line \fB167\fP of file \fBopts\&.c\fP\&.
+.nf
+167                           {
+168     sort_opts_by_group();
+169     dump_opts();
+170 }
+.PP
+.fi
+
+.PP
+References \fBdump_opts()\fP, and \fBsort_opts_by_group()\fP\&.
+.SS "void dump_opts_by_name ()"
+
+.PP
+dump options sorted by name 
+.PP
+Definition at line \fB161\fP of file \fBopts\&.c\fP\&.
+.nf
+161                          {
+162     sort_opts_by_name();
+163     dump_opts();
+164 }
+.PP
+.fi
+
+.PP
+References \fBdump_opts()\fP, and \fBsort_opts_by_name()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void dump_opts_by_short_opt ()"
+
+.PP
+dump options sorted by short option 
+.PP
+Definition at line \fB173\fP of file \fBopts\&.c\fP\&.
+.nf
+173                               {
+174     sort_opts_by_short_opt();
+175     dump_opts();
+176 }
+.PP
+.fi
+
+.PP
+References \fBdump_opts()\fP, and \fBsort_opts_by_short_opt()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void dump_opts_by_use (char * usage, char * mask)"
+
+.PP
+dump options by use mask 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBusage\fP\fP - usage string 
+.br
+\fImask\fP - use mask string 
+.RE
+.PP
+
+.PP
+Definition at line \fB224\fP of file \fBopts\&.c\fP\&.
+.nf
+224                                                {
+225     int i = 0;
+226     int j = 0;
+227     printf("\\nusage: %s\\n\\n", usage);
+228     print_opt_header();
+229     while (opts[i]\&.name != nullptr && opts[i]\&.name[0] != '\\0') {
+230         for (j = 0; j < 4; j++) {
+231             if (mask[j] != '\&.' && mask[j] == opts[i]\&.use[j])
+232                 break;
+233             else
+234                 continue;
+235         }
+236         if (j == 4) {
+237             i++;
+238             continue;
+239         }
+240         if (opts[i]\&.name[0] != '\\0')
+241             print_opt(i);
+242         i++;
+243     }
+244 }
+.PP
+.fi
+
+.PP
+References \fBopts\fP, \fBprint_opt()\fP, \fBprint_opt_header()\fP, and \fBusage()\fP\&.
+.PP
+Referenced by \fBform_usage()\fP, and \fBmain()\fP\&.
+.SS "void print_opt (int i)"
+
+.PP
+print option 
+.PP
+\fBParameters\fP
+.RS 4
+\fIi\fP - option index 
+.RE
+.PP
+
+.PP
+Definition at line \fB256\fP of file \fBopts\&.c\fP\&.
+.nf
+256                       {
+257     char *type;
+258     char *group;
+259     char c;
+260     switch (opts[i]\&.type) {
+261     case OT_STRING:
+262         type = "str";
+263         break;
+264     case OT_INT:
+265         type = "int";
+266         break;
+267     case OT_BOOL:
+268         type = "bool";
+269         break;
+270     case OT_HEX:
+271         type = "hex";
+272         break;
+273     default:
+274         type = "   ";
+275     }
+276     switch (opts[i]\&.group) {
+277     case OG_FILES:
+278         group = "file";
+279         break;
+280     case OG_DIRS:
+281         group = "dir";
+282         break;
+283     case OG_SPECS:
+284         group = "spec";
+285         break;
+286     case OG_MISC:
+287         group = "misc";
+288         break;
+289     case OG_PARMS:
+290         group = "prm";
+291         break;
+292     case OG_FLAGS:
+293         group = "flag";
+294         break;
+295     case OG_COL:
+296         group = "col";
+297         break;
+298     default:
+299         group = "   ";
+300     }
+301     if (opts[i]\&.short_opt[0] == '\\0')
+302         c = ' ';
+303     else
+304         c = '\-';
+305     printf("%02d %s%\-18s%s %\-4s %\-4s %4s %2s%1c%\-3s%s%s%s%s\\n", i, blue,
+306            opts[i]\&.name, reset, type, group, opts[i]\&.use, yellow, c,
+307            opts[i]\&.short_opt, reset, green, opts[i]\&.desc, reset);
+308     i++;
+309 }
+.PP
+.fi
+
+.PP
+References \fBblue\fP, \fBgreen\fP, \fBopts\fP, \fBreset\fP, and \fByellow\fP\&.
+.PP
+Referenced by \fBdump_opts()\fP, and \fBdump_opts_by_use()\fP\&.
+.SS "void print_opt_header ()"
+
+.PP
+print option header 
+.PP
+Definition at line \fB247\fP of file \fBopts\&.c\fP\&.
+.nf
+247                         {
+248     printf("   field name         type grp  mask opt description\\n");
+249     printf(
+250         "   \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\- \-\-\-\- \-\-\-\- \-\-\-\- \-\-\- \-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\\n");
+251 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdump_opts()\fP, and \fBdump_opts_by_use()\fP\&.
+.SS "Opts * select_opt (char * name)"
+
+.PP
+select option by name 
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP - option name 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+pointer to option, or nullptr if not found 
+.RE
+.PP
+
+.PP
+Definition at line \fB201\fP of file \fBopts\&.c\fP\&.
+.nf
+201                              {
+202     Opts *opt;
+203     Opts key;
+204     key\&.name = name;
+205     sort_opts_by_name();
+206     opt = bsearch(&key, opts, ARRAY_SIZE(opts), sizeof(opts[0]), comp_opt_name);
+207     return opt;
+208 }
+.PP
+.fi
+
+.PP
+References \fBARRAY_SIZE\fP, \fBcomp_opt_name()\fP, \fBopts\fP, and \fBsort_opts_by_name()\fP\&.
+.SS "void sort_opts_by_desc ()"
+
+.PP
+sort options by description 
+.PP
+Definition at line \fB189\fP of file \fBopts\&.c\fP\&.
+.nf
+189                          {
+190     qsort(opts, ARRAY_SIZE(opts), sizeof(opts[0]), comp_opt_desc);
+191 }
+.PP
+.fi
+
+.PP
+References \fBARRAY_SIZE\fP, \fBcomp_opt_desc()\fP, and \fBopts\fP\&.
+.PP
+Referenced by \fBdump_opts_by_desc()\fP\&.
+.SS "void sort_opts_by_group ()"
+
+.PP
+sort options by group 
+.PP
+Definition at line \fB184\fP of file \fBopts\&.c\fP\&.
+.nf
+184                           {
+185     qsort(opts, ARRAY_SIZE(opts), sizeof(opts[0]), comp_opt_group);
+186 }
+.PP
+.fi
+
+.PP
+References \fBARRAY_SIZE\fP, \fBcomp_opt_group()\fP, and \fBopts\fP\&.
+.PP
+Referenced by \fBdump_opts_by_group()\fP\&.
+.SS "void sort_opts_by_name ()"
+
+.PP
+dump options name 
+.PP
+Definition at line \fB179\fP of file \fBopts\&.c\fP\&.
+.nf
+179                          {
+180     qsort(opts, ARRAY_SIZE(opts), sizeof(opts[0]), comp_opt_name);
+181 }
+.PP
+.fi
+
+.PP
+References \fBARRAY_SIZE\fP, \fBcomp_opt_name()\fP, and \fBopts\fP\&.
+.PP
+Referenced by \fBdump_opts_by_name()\fP, and \fBselect_opt()\fP\&.
+.SS "void sort_opts_by_short_opt ()"
+
+.PP
+sort options by short option 
+.PP
+Definition at line \fB194\fP of file \fBopts\&.c\fP\&.
+.nf
+194                               {
+195     qsort(opts, ARRAY_SIZE(opts), sizeof(opts[0]), comp_opt_short_opt);
+196 }
+.PP
+.fi
+
+.PP
+References \fBARRAY_SIZE\fP, \fBcomp_opt_short_opt()\fP, and \fBopts\fP\&.
+.PP
+Referenced by \fBdump_opts_by_short_opt()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "Opts opts[]"
+
+.PP
+Definition at line \fB52\fP of file \fBopts\&.c\fP\&.
+.nf
+52             {
+53     {"minitrc", 0, 2, "mfpv", "a:", "configuration file spec"},
+54     {"blue_gamma", 1, 4, "\&.\&.\&.v", "b:", "blue_gamma (View)"},
+55     {"cmd", 0, 3, "\&.\&.\&.v", "c:", "view cmd, first file"},
+56     {"mapp_spec", 0, 0, "mfpv", "d:", "description spec"},
+57     {"f_erase_remainder", 2, 5, "\&.f\&.\&.", "e",
+58      "erase remainder of line on enter"},
+59     {"fill_char", 0, 4, "\&.\&.p\&.", "f:", "field fill_char"},
+60     {"green_gamma", 1, 4, "\&.\&.\&.v", "g:", "green_gamma (View)"},
+61     {"help", 2, 5, "mfpv", "h", "help"},
+62     {"in_spec", 0, 0, "\&.\&.p\&.", "i:", "input spec"},
+63     {"mapp_home", 0, 1, "mfpv", "m:", "home directory"},
+64     {"select_max", 1, 4, "\&.f\&.\&.", "n:", "number of selections"},
+65     {"out_spec", 0, 0, "\&.\&.p\&.", "o:", "output spec"},
+66     {"prompt\-str", 0, 3, "\&.\&.\&.v", "p:", "User supplied string"},
+67     {"red_gamma", 1, 4, "\&.\&.\&.v", "r:", "red_gamma (View)"},
+68     {"f_strip_ansi", 2, 5, "\&.\&.\&.v", "j", "always strip ansi when writing"},
+69     {"f_squeeze", 2, 5, "\&.\&.\&.v", "s", "squeeze multiple blank lines"},
+70     {"tab_stop", 1, 4, "\&.\&.\&.v", "t:", "number of spaces per tab"},
+71     {"brackets", 0, 4, "\&.\&.p\&.", "u:", "brackets around fields"},
+72     {"f_ignore_case", 2, 5, "\&.\&.\&.v", "x", "ignore case in search"},
+73     {"f_at_end_remove", 2, 5, "\&.\&.\&.v", "y", "remove file at end of program"},
+74     {"f_at_end_clear", 2, 5, "mfpv", "z", "clear screen at end of program"},
+75     {"cmd_all", 0, 3, "\&.\&.\&.v", "A:", "view cmd, all files"},
+76     {"bg_color", 1, 4, "mfpv", "B:", "background_color"},
+77     {"lines", 1, 4, "mfpv", "C:", "width in columns"},
+78     {"f_dump_config", 0, 1, "mfpv", "D", "f_dump_config"},
+79     {"fg_color", 1, 4, "mfpv", "F:", "foreground_color"},
+80     {"help_spec", 0, 0, "mfpv", "H:", "help spec"},
+81     {"cols", 1, 4, "mfpv", "L:", "height in lines"},
+82     {"f_mutiple_cmd_args", 2, 5, "\&.\&.p\&.", "M", "multiple command arguments"},
+83     {"bo_color", 1, 4, "mfpv", "O:", "border_color"},
+84     {"prompt\-type", 0, 3, "\&.\&.\&.v",
+85      "P:", "prompt (S\-Short, L\-Long, N\-None)[string]"},
+86     {"receiver_cmd", 0, 3, "\&.\&.\&.v", "R:", "execute receiver of piped output"},
+87     {"provider_cmd", 0, 3, "\&.\&.\&.v", "S:", "execute provider of piped input"},
+88     {"title", 0, 3, "mfpv", "T:", "title"},
+89     {"mapp_user", 0, 1, "mfpv", "U:", "user directory"},
+90     {"f_write_config", 0, 1, "mfpv", "W", "f_write_config"},
+91     {"begx", 1, 4, "mfpv", "X:", "begin on column"},
+92     {"begy", 1, 4, "mfpv", "Y:", "begin on line"},
+93     {"f_stop_on_error", 2, 5, "mfpv", "Z", "stop on error"},
+94 
+95     {"black", 0, 4, "mfpv", "", "black (#000000)"},
+96     {"red", 0, 4, "mfpv", "", "red (#bf0000)"},
+97     {"green", 0, 4, "mfpv", "", "green (#00cf00)"},
+98     {"yellow", 0, 4, "mfpv", "", "yellow (#efbf00)"},
+99     {"blue", 0, 4, "mfpv", "", "blue (#0000FF)"},
+100     {"magenta", 0, 4, "mfpv", "", "magenta (#9f009f)"},
+101     {"cyan", 0, 4, "mfpv", "", "cyan (#00dfdf)"},
+102     {"white", 0, 4, "mfpv", "", "white (#d0d0d0)"},
+103     {"orange", 0, 4, "mfpv", "", "orange (#FF5f00)"},
+104     {"bblack", 0, 4, "mfpv", "", "bright black (#7f7f7f)"},
+105     {"bred", 0, 4, "mfpv", "", "bright red (#FF3737)"},
+106     {"bgreen", 0, 4, "mfpv", "", "bright green (#00FF7f)"},
+107     {"byellow", 0, 4, "mfpv", "", "bright yellow (#FFeF00)"},
+108     {"bblue", 0, 4, "mfpv", "", "bright blue (#00cfFF)"},
+109     {"bmagenta", 0, 4, "mfpv", "", "bright magenta (#FF00FF)"},
+110     {"bcyan", 0, 4, "mfpv", "", "bright cyan (#00FFFF)"},
+111     {"bwhite", 0, 4, "mfpv", "", "bright white (#FFFFFF)"},
+112     {"borange", 0, 4, "mfpv", "", "bright orange (#FF7500)"},
+113     {"bg", 3, 6, "mfpv", "", "background (#000720)"},
+114     {"abg", 3, 6, "mfpv", "", "alternate background (#000f50)"},
+115     {"editor", 0, 1, "mfpv", "", "default editor"},
+116     {"mapp_data", 0, 1, "mfpv", "", "data directory"},
+117     {"mapp_help", 0, 1, "mfpv", "", "help directory"},
+118     {"mapp_msrc", 0, 1, "mfpv", "", "source directory"},
+119     {"", 0, 0, "", "", ""}}; // End marker
+.PP
+.fi
+
+.PP
+Referenced by \fBdump_opts()\fP, \fBdump_opts_by_use()\fP, \fBprint_opt()\fP, \fBselect_opt()\fP, \fBsort_opts_by_desc()\fP, \fBsort_opts_by_group()\fP, \fBsort_opts_by_name()\fP, and \fBsort_opts_by_short_opt()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

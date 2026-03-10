@@ -1,0 +1,2464 @@
+.TH "src/dwin.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/dwin.c \- Window support for C-Menu Menu, Form, Pick, and View\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <cm\&.h>\fP
+.br
+\fR#include <errno\&.h>\fP
+.br
+\fR#include <math\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+\fR#include <wchar\&.h>\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBcolors_enum\fP { \fBCLR_BLACK\fP, \fBCLR_RED\fP, \fBCLR_GREEN\fP, \fBCLR_YELLOW\fP, \fBCLR_BLUE\fP, \fBCLR_MAGENTA\fP, \fBCLR_CYAN\fP, \fBCLR_WHITE\fP, \fBCLR_BBLACK\fP, \fBCLR_BRED\fP, \fBCLR_BGREEN\fP, \fBCLR_BYELLOW\fP, \fBCLR_BBLUE\fP, \fBCLR_BMAGENTA\fP, \fBCLR_BCYAN\fP, \fBCLR_BWHITE\fP, \fBCLR_BORANGE\fP, \fBCLR_NCOLORS\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "bool \fBopen_curses\fP (SIO *\fBsio\fP)"
+.br
+.RI "Initialize NCurses and color settings\&. "
+.ti -1c
+.RI "void \fBdestroy_curses\fP ()"
+.br
+.RI "Gracefully shut down NCurses and restore terminal settings\&. "
+.ti -1c
+.RI "int \fBwin_new\fP (int wlines, int wcols, int wbegy, int wbegx, char *wtitle, int flag)"
+.br
+.RI "Create a new window with optional box and title\&. "
+.ti -1c
+.RI "void \fBwin_redraw\fP (WINDOW *\fBwin\fP)"
+.br
+.RI "Redraw the specified window\&. "
+.ti -1c
+.RI "void \fBwin_resize\fP (int wlines, int wcols, char *title)"
+.br
+.RI "Resize the current window and its box, and update the title\&. "
+.ti -1c
+.RI "WINDOW * \fBwin_del\fP ()"
+.br
+.RI "Delete the current window and its associated box window\&. "
+.ti -1c
+.RI "void \fBrestore_wins\fP ()"
+.br
+.RI "Restore all windows after a screen resize\&. "
+.ti -1c
+.RI "void \fBcbox\fP (WINDOW *box)"
+.br
+.RI "Draw a box around the specified window\&. "
+.ti -1c
+.RI "void \fBwin_init_attrs\fP (int fg_color, int bg_color, int bo_color)"
+.br
+.RI "Initialize window attributes\&. "
+.ti -1c
+.RI "int \fBPerror\fP (char *emsg_str)"
+.br
+.RI "Display a simple error message window or print to stderr\&. "
+.ti -1c
+.RI "void \fBmvwaddstr_fill\fP (WINDOW *w, int y, int x, char *s, int l)"
+.br
+.RI "For lines shorter than their display area, fill the rest with spaces\&. "
+.ti -1c
+.RI "void \fBabend\fP (int ec, char *s)"
+.br
+.RI "Abnormal program termination\&. "
+.ti -1c
+.RI "void \fBuser_end\fP ()"
+.br
+.RI "Program terminated by user\&. "
+.ti -1c
+.RI "int \fBnf_error\fP (int ec, char *s)"
+.br
+.RI "Display error message and wait for key press\&. "
+.ti -1c
+.RI "void \fBset_chyron_key\fP (Chyron *chyron, int k, char *s, int kc)"
+.br
+.RI "Set chyron key\&. "
+.ti -1c
+.RI "bool \fBis_set_chyron_key\fP (Chyron *chyron, int k)"
+.br
+.RI "Check if function key label is set\&. "
+.ti -1c
+.RI "void \fBunset_chyron_key\fP (Chyron *chyron, int k)"
+.br
+.RI "Unset chyron key\&. "
+.ti -1c
+.RI "void \fBcompile_chyron\fP (Chyron *chyron)"
+.br
+.RI "construct the chyron string from the chyron structure "
+.ti -1c
+.RI "int \fBget_chyron_key\fP (Chyron *chyron, int x)"
+.br
+.RI "Get keycode from chyron\&. "
+.ti -1c
+.RI "Chyron * \fBnew_chyron\fP ()"
+.br
+.RI "Create and initialize Chyron structure\&. "
+.ti -1c
+.RI "Chyron * \fBdestroy_chyron\fP (Chyron *chyron)"
+.br
+.RI "Destroy Chyron structure\&. "
+.ti -1c
+.RI "void \fBlist_colors\fP ()"
+.br
+.RI "list colors to stderr "
+.ti -1c
+.RI "int \fBclr_name_to_idx\fP (char *s)"
+.br
+.RI "Get color index from color name\&. "
+.ti -1c
+.RI "void \fBinit_hex_clr\fP (int idx, char *s)"
+.br
+.RI "Initialize extended ncurses color from HTML style hex string\&. "
+.ti -1c
+.RI "int \fBrgb_clr_to_cube\fP (int)"
+.br
+.ti -1c
+.RI "RGB \fBhex_clr_str_to_rgb\fP (char *s)"
+.br
+.RI "Convert six-digit HTML style hex color code to RGB struct\&. "
+.ti -1c
+.RI "RGB \fBxterm256_idx_to_rgb\fP (int idx)"
+.br
+.RI "Convert XTerm 256 color index to RGB color\&. "
+.ti -1c
+.RI "int \fBrgb_to_curses_clr\fP (RGB *rgb)"
+.br
+.RI "Get color index for RGB color\&. "
+.ti -1c
+.RI "int \fBrgb_to_xterm256_idx\fP (RGB *rgb)"
+.br
+.RI "Convert RGB color to XTerm 256 color index\&. "
+.ti -1c
+.RI "void \fBapply_gamma\fP (RGB *rgb)"
+.br
+.RI "Apply gamma correction to RGB color\&. "
+.ti -1c
+.RI "bool \fBinit_clr_palette\fP (SIO *\fBsio\fP)"
+.br
+.RI "Initialize color palette based on SIO settings\&. "
+.ti -1c
+.RI "cchar_t \fBmkccc\fP (int cp)"
+.br
+.RI "Create a cchar_t with the specified color pair index\&. "
+.ti -1c
+.RI "int \fBget_clr_pair\fP (int fg, int bg)"
+.br
+.RI "Get color pair index for foreground and background colors\&. "
+.ti -1c
+.RI "int \fBdisplay_error\fP (char *\fBem0\fP, char *\fBem1\fP, char *\fBem2\fP, char *\fBem3\fP)"
+.br
+.RI "Display an error message window or print to stderr\&. "
+.ti -1c
+.RI "int \fBxwgetch\fP (WINDOW *\fBwin\fP, Chyron *chyron)"
+.br
+.RI "Wrapper for wgetch that handles signals and mouse events\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "int \fBclick_y\fP"
+.br
+.ti -1c
+.RI "int \fBclick_x\fP"
+.br
+.ti -1c
+.RI "SIO * \fBsio\fP"
+.br
+.ti -1c
+.RI "RGB \fBStdColors\fP [16]"
+.br
+.ti -1c
+.RI "char const \fBcolors_text\fP [][10]"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_ho\fP = BW_HO"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_ve\fP = BW_VE"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_tl\fP = BW_RTL"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_tr\fP = BW_RTR"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_bl\fP = BW_RBL"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_br\fP = BW_RBR"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_lt\fP = BW_LT"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_rt\fP = BW_RT"
+.br
+.ti -1c
+.RI "const wchar_t \fBbw_sp\fP = BW_SP"
+.br
+.ti -1c
+.RI "double \fBGRAY_GAMMA\fP"
+.br
+.ti -1c
+.RI "double \fBRED_GAMMA\fP"
+.br
+.ti -1c
+.RI "double \fBGREEN_GAMMA\fP"
+.br
+.ti -1c
+.RI "double \fBBLUE_GAMMA\fP"
+.br
+.ti -1c
+.RI "WINDOW * \fBwin\fP"
+.br
+.ti -1c
+.RI "WINDOW * \fBwin_win\fP [MAXWIN]"
+.br
+.ti -1c
+.RI "WINDOW * \fBwin_box\fP [MAXWIN]"
+.br
+.ti -1c
+.RI "int \fBexit_code\fP"
+.br
+.ti -1c
+.RI "unsigned int \fBcmd_key\fP"
+.br
+.ti -1c
+.RI "bool \fBf_sigwench\fP = false"
+.br
+.ti -1c
+.RI "int \fBwin_attr\fP"
+.br
+.ti -1c
+.RI "int \fBbox_attr\fP"
+.br
+.ti -1c
+.RI "int \fBwin_ptr\fP"
+.br
+.ti -1c
+.RI "int \fBm_lines\fP"
+.br
+.ti -1c
+.RI "int \fBm_cols\fP"
+.br
+.ti -1c
+.RI "int \fBm_begy\fP = \-1"
+.br
+.ti -1c
+.RI "int \fBm_begx\fP = \-1"
+.br
+.ti -1c
+.RI "int \fBmouse_support\fP"
+.br
+.ti -1c
+.RI "int \fBstdin_fd\fP"
+.br
+.ti -1c
+.RI "int \fBstdout_fd\fP"
+.br
+.ti -1c
+.RI "int \fBsrc_line\fP"
+.br
+.ti -1c
+.RI "char * \fBsrc_name\fP"
+.br
+.ti -1c
+.RI "char \fBfn\fP [\fBMAXLEN\fP]"
+.br
+.ti -1c
+.RI "char \fBem0\fP [\fBMAXLEN\fP]"
+.br
+.ti -1c
+.RI "char \fBem1\fP [\fBMAXLEN\fP]"
+.br
+.ti -1c
+.RI "char \fBem2\fP [\fBMAXLEN\fP]"
+.br
+.ti -1c
+.RI "char \fBem3\fP [\fBMAXLEN\fP]"
+.br
+.ti -1c
+.RI "int \fBcp_norm\fP"
+.br
+.ti -1c
+.RI "int \fBcp_box\fP"
+.br
+.ti -1c
+.RI "int \fBcp_reverse\fP"
+.br
+.ti -1c
+.RI "int \fBclr_cnt\fP = 0"
+.br
+.ti -1c
+.RI "int \fBclr_idx\fP = 0"
+.br
+.ti -1c
+.RI "int \fBclr_pair_idx\fP = 1"
+.br
+.ti -1c
+.RI "int \fBclr_pair_cnt\fP = 1"
+.br
+.ti -1c
+.RI "cchar_t \fBCCC_NORM\fP"
+.br
+.ti -1c
+.RI "cchar_t \fBCCC_BOX\fP"
+.br
+.ti -1c
+.RI "cchar_t \fBCCC_REVERSE\fP"
+.br
+.ti -1c
+.RI "int \fBtty_fd\fP"
+.br
+.ti -1c
+.RI "int \fBpipe_in\fP"
+.br
+.ti -1c
+.RI "int \fBpipe_out\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Window support for C-Menu Menu, Form, Pick, and View\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBdwin\&.c\fP\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBcolors_enum\fP"
+
+.PP
+\fBNote\fP
+.RS 4
+Used for xterm256 color conversions 
+
+.PP
+These colors can be overridden in "\&.minitrc" 
+.RE
+.PP
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BICLR_BLACK \fP
+.TP
+\f(BICLR_RED \fP
+.TP
+\f(BICLR_GREEN \fP
+.TP
+\f(BICLR_YELLOW \fP
+.TP
+\f(BICLR_BLUE \fP
+.TP
+\f(BICLR_MAGENTA \fP
+.TP
+\f(BICLR_CYAN \fP
+.TP
+\f(BICLR_WHITE \fP
+.TP
+\f(BICLR_BBLACK \fP
+.TP
+\f(BICLR_BRED \fP
+.TP
+\f(BICLR_BGREEN \fP
+.TP
+\f(BICLR_BYELLOW \fP
+.TP
+\f(BICLR_BBLUE \fP
+.TP
+\f(BICLR_BMAGENTA \fP
+.TP
+\f(BICLR_BCYAN \fP
+.TP
+\f(BICLR_BWHITE \fP
+.TP
+\f(BICLR_BORANGE \fP
+.TP
+\f(BICLR_NCOLORS \fP
+.PP
+Definition at line \fB62\fP of file \fBdwin\&.c\fP\&.
+.nf
+62                  {
+63     CLR_BLACK,
+64     CLR_RED,
+65     CLR_GREEN,
+66     CLR_YELLOW,
+67     CLR_BLUE,
+68     CLR_MAGENTA,
+69     CLR_CYAN,
+70     CLR_WHITE,
+71     CLR_BBLACK,
+72     CLR_BRED,
+73     CLR_BGREEN,
+74     CLR_BYELLOW,
+75     CLR_BBLUE,
+76     CLR_BMAGENTA,
+77     CLR_BCYAN,
+78     CLR_BWHITE,
+79     CLR_BORANGE,
+80     CLR_NCOLORS
+81 };
+.PP
+.fi
+
+.SH "Function Documentation"
+.PP 
+.SS "void abend (int ec, char * s)"
+
+.PP
+Abnormal program termination\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIec\fP Exit code 
+.br
+\fIs\fP Error message 
+.RE
+.PP
+
+.PP
+Definition at line \fB1058\fP of file \fBdwin\&.c\fP\&.
+.nf
+1058                             {
+1059     destroy_curses();
+1060     restore_shell_tioctl();
+1061     sig_dfl_mode();
+1062     fprintf(stderr, "\\n\\nABEND: %s (code: %d)\\n", s, ec);
+1063     exit(EXIT_FAILURE);
+1064 }
+.PP
+.fi
+
+.PP
+References \fBdestroy_curses()\fP, \fBrestore_shell_tioctl()\fP, and \fBsig_dfl_mode()\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBform_parse_desc()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBinit_view_full_screen()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBnew_chyron()\fP, \fBnew_form()\fP, \fBnew_init()\fP, \fBnew_menu()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBopen_curses()\fP, \fBparse_menu_description()\fP, \fBPerror()\fP, \fBsig_prog_mode()\fP, and \fBview_init_input()\fP\&.
+.SS "void apply_gamma (RGB * rgb)"
+
+.PP
+Apply gamma correction to RGB color\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrgb\fP Pointer to RGB color 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function modifies the RGB color in place\&. It applies gamma correction to the RGB color based on the gamma values set in the SIO struct\&. If the color is a shade of gray, it applies the gray gamma correction\&. Otherwise, it applies the individual red, green, and blue gamma corrections\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB507\fP of file \fBdwin\&.c\fP\&.
+.nf
+507                            {
+508     if (rgb\->r == rgb\->g && rgb\->r == rgb\->b) {
+509         if (GRAY_GAMMA > 0\&.0f && GRAY_GAMMA != 1\&.0f) {
+510             rgb\->r = (int)(pow((rgb\->r / 255\&.0f), 1\&.0f / GRAY_GAMMA) * 255\&.0f);
+511             rgb\->g = rgb\->r;
+512             rgb\->b = rgb\->r;
+513         }
+514         return;
+515     }
+516     if (rgb\->r != 0 && RED_GAMMA > 0\&.0f && RED_GAMMA != 1\&.0f)
+517         rgb\->r = (int)(pow((rgb\->r / 255\&.0f), 1\&.0f / RED_GAMMA) * 255\&.0f);
+518     if (rgb\->g != 0 && GREEN_GAMMA > 0\&.0f && GREEN_GAMMA != 1\&.0f)
+519         rgb\->g = (int)(pow((rgb\->g / 255\&.0f), 1\&.0f / GREEN_GAMMA) * 255\&.0f);
+520     if (rgb\->b != 0 && BLUE_GAMMA > 0\&.0f && BLUE_GAMMA != 1\&.0f)
+521         rgb\->b = (int)(pow((rgb\->b / 255\&.0f), 1\&.0f / BLUE_GAMMA) * 255\&.0f);
+522 }
+.PP
+.fi
+
+.PP
+References \fBBLUE_GAMMA\fP, \fBGRAY_GAMMA\fP, \fBGREEN_GAMMA\fP, and \fBRED_GAMMA\fP\&.
+.PP
+Referenced by \fBinit_hex_clr()\fP, and \fBrgb_to_curses_clr()\fP\&.
+.SS "void cbox (WINDOW * box)"
+
+.PP
+Draw a box around the specified window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbox\fP Pointer to the window to draw the box around 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function uses NCurses functions to draw a box around the specified window\&. It adds the appropriate characters for the corners and edges of the box based on the current character set\&. Use this function when you want to visually separate a window from the rest of the screen with a border\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB818\fP of file \fBdwin\&.c\fP\&.
+.nf
+818                        {
+819     int x, y;
+820     int maxx;
+821     int maxy;
+822 
+823     maxx = getmaxx(box);
+824     maxx\-\-;
+825     mvwaddnwstr(box, 0, 0, &bw_tl, 1);
+826     for (x = 1; x < maxx; x++)
+827         waddnwstr(box, &bw_ho, 1);
+828     waddnwstr(box, &bw_tr, 1);
+829     maxy = getmaxy(box);
+830     maxy\-\-;
+831     for (y = 1; y < maxy; y++) {
+832         mvwaddnwstr(box, y, 0, &bw_ve, 1);
+833         mvwaddnwstr(box, y, maxx, &bw_ve, 1);
+834     }
+835     mvwaddnwstr(box, maxy, 0, &bw_bl, 1);
+836     for (x = 1; x < maxx; x++)
+837         waddnwstr(box, &bw_ho, 1);
+838     waddnwstr(box, &bw_br, 1);
+839 }
+.PP
+.fi
+
+.PP
+References \fBbw_bl\fP, \fBbw_br\fP, \fBbw_ho\fP, \fBbw_tl\fP, \fBbw_tr\fP, and \fBbw_ve\fP\&.
+.PP
+Referenced by \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "int clr_name_to_idx (char * s)"
+
+.PP
+Get color index from color name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP Color name 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Color index or -1 if not found 
+.RE
+.PP
+
+.PP
+Definition at line \fB999\fP of file \fBdwin\&.c\fP\&.
+.nf
+999                              {
+1000     int i = 0;
+1001     int n = 16;
+1002 
+1003     str_to_lower(s);
+1004     while (i < n) {
+1005         if (!strcmp(colors_text[i], s))
+1006             break;
+1007         i++;
+1008     }
+1009     if (i >= n)
+1010         return (\-1);
+1011     return (i);
+1012 }
+.PP
+.fi
+
+.PP
+References \fBcolors_text\fP, and \fBstr_to_lower()\fP\&.
+.PP
+Referenced by \fBparse_config()\fP, and \fBparse_opt_args()\fP\&.
+.SS "void compile_chyron (Chyron * chyron)"
+
+.PP
+construct the chyron string from the chyron structure 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchyron\fP 
+.RE
+.PP
+The chyron string is constructed by concatenating the labels of the set keys, separated by " | "\&. The end_pos values for each key are set to determine the zones for mouse clicks\&. When a mouse click occurs, the get_chyron_key function uses the end_pos values to determine which key was clicked based on the X position of the click\&. 
+.PP
+Definition at line \fB252\fP of file \fBdwin\&.c\fP\&.
+.nf
+252                                     {
+253     int end_pos = 0;
+254     int i = 0;
+255     chyron\->s[0] = '\\0';
+256     chyron\->l = 0;
+257     while (i < CHYRON_KEYS) {
+258         if (chyron\->key[i]\->text[0] == '\\0') {
+259             i++;
+260             continue;
+261         }
+262         if (end_pos == 0)
+263             strnz__cat(chyron\->s, " ", MAXLEN \- 1);
+264         else
+265             strnz__cat(chyron\->s, " | ", MAXLEN \- 1);
+266         strnz__cat(chyron\->s, chyron\->key[i]\->text, MAXLEN \- 1);
+267         end_pos = strlen(chyron\->s) + 1;
+268         chyron\->key[i]\->end_pos = end_pos;
+269         i++;
+270     }
+271     if (end_pos > 0)
+272         chyron\->l = strnz__cat(chyron\->s, " ", MAXLEN \- 1);
+273 }
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, and \fBstrnz__cat()\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBform_accept_field()\fP, \fBform_display_chyron()\fP, \fBform_display_fields()\fP, \fBPerror()\fP, and \fBpick_engine()\fP\&.
+.SS "Chyron * destroy_chyron (Chyron * chyron)"
+
+.PP
+Destroy Chyron structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchyron\fP pointer to Chyron structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+
+.PP
+Definition at line \fB192\fP of file \fBdwin\&.c\fP\&.
+.nf
+192                                        {
+193     int i;
+194 
+195     if (!chyron)
+196         return nullptr;
+197     for (i = 0; i < CHYRON_KEYS; i++) {
+198         if (chyron\->key[i])
+199             free(chyron\->key[i]);
+200         chyron\->key[i] = nullptr;
+201     }
+202     free(chyron);
+203     chyron = nullptr;
+204     return chyron;
+205 }
+.PP
+.fi
+
+.PP
+Referenced by \fBdisplay_error()\fP, and \fBPerror()\fP\&.
+.SS "void destroy_curses ()"
+
+.PP
+Gracefully shut down NCurses and restore terminal settings\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function should be called before exiting the program to ensure that the terminal is left in a usable state\&. It checks if NCurses was initialized and, if so, it clears the screen, refreshes it, and ends the NCurses session\&. It also restores the original terminal settings using restore_shell_tioctl and resets signal handlers to their default state with sig_dfl_mode\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB609\fP of file \fBdwin\&.c\fP\&.
+.nf
+609                       {
+610     if (f_curses_open) {
+611         wclear(stdscr);
+612         wrefresh(stdscr);
+613         endwin();
+614         f_curses_open = false;
+615     }
+616     restore_shell_tioctl();
+617     sig_dfl_mode();
+618     return;
+619 }
+.PP
+.fi
+
+.PP
+References \fBf_curses_open\fP, \fBrestore_shell_tioctl()\fP, and \fBsig_dfl_mode()\fP\&.
+.PP
+Referenced by \fBabend()\fP, \fBmain()\fP, \fBopen_curses()\fP, and \fBuser_end()\fP\&.
+.SS "int display_error (char * em0, char * em1, char * em2, char * em3)"
+
+.PP
+Display an error message window or print to stderr\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBem0\fP\fP First error message line 
+.br
+\fI\fBem1\fP\fP Second error message line 
+.br
+\fI\fBem2\fP\fP Third error message line 
+.br
+\fI\fBem3\fP\fP Fourth error message line 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Key code of user command 
+.RE
+.PP
+
+.PP
+Definition at line \fB847\fP of file \fBdwin\&.c\fP\&.
+.nf
+847                                                               {
+848     char title[MAXLEN];
+849     int line, pos, em_l, em0_l, em1_l, em2_l, em3_l;
+850     WINDOW *error_win;
+851 
+852     if (!f_curses_open) {
+853         fprintf(stderr, "\\n\\n%s\\n%s\\n%s\\n%s\\n\\n", em0, em1, em2, em3);
+854         return (1);
+855     }
+856 
+857     Chyron *chyron = new_chyron();
+858     set_chyron_key(chyron, 1, "F1 Help", KEY_F(1));
+859     set_chyron_key(chyron, 9, "F9 Cancel", KEY_F(9));
+860     set_chyron_key(chyron, 10, "F10 Continue", KEY_F(10));
+861     compile_chyron(chyron);
+862 
+863     em_l = 0;
+864     em0_l = strnz(em0, COLS \- 4);
+865     em1_l = strnz(em1, COLS \- 4);
+866     em2_l = strnz(em2, COLS \- 4);
+867     em3_l = strnz(em1, COLS \- 4);
+868     if (em0_l > em_l)
+869         em_l = em0_l;
+870     if (em1_l > em_l)
+871         em_l = em1_l;
+872     if (em2_l > em_l)
+873         em_l = em2_l;
+874     if (em3_l > em_l)
+875         em_l = em3_l;
+876     if (em_l < chyron\->l)
+877         em_l = chyron\->l;
+878     if (em_l > (COLS \- 4))
+879         em_l = COLS \- 4;
+880 
+881     pos = ((COLS \- em_l) \- 4) / 2;
+882     line = (LINES \- 6) / 2;
+883     strnz__cpy(title, "Notification", MAXLEN \- 1);
+884     if (win_new(5, em_l + 2, line, pos, title, 0)) {
+885         ssnprintf(title, MAXLEN \- 1, "win_new(%d, %d, %d, %d, %s, %b) failed",
+886                   5, em_l + 2, line, pos, title, 0);
+887         destroy_chyron(chyron);
+888         abend(\-1, title);
+889     }
+890     error_win = win_win[win_ptr];
+891     mvwaddstr(error_win, 0, 1, em0);
+892     mvwaddstr(error_win, 1, 1, em1);
+893     mvwaddstr(error_win, 2, 1, em2);
+894     mvwaddstr(error_win, 3, 1, em3);
+895     wattron(error_win, WA_REVERSE);
+896     mvwaddstr(error_win, 4, 1, chyron\->s);
+897     wattroff(error_win, WA_REVERSE);
+898     wmove(error_win, 4, chyron\->l + 1);
+899     wrefresh(error_win);
+900     while (1) {
+901         cmd_key = xwgetch(error_win, chyron);
+902         switch (cmd_key) {
+903         case 'n':
+904         case 'N':
+905         case 'q':
+906         case 'Q':
+907         case 'x':
+908         case 'X':
+909         case 'y':
+910         case 'Y':
+911         case KEY_F(1):
+912         case KEY_F(9):
+913         case KEY_F(10):
+914             win_del();
+915             return (cmd_key);
+916         default:
+917             continue;
+918         }
+919     }
+920     win_del();
+921     destroy_chyron(chyron);
+922     return (cmd_key);
+923 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBcmd_key\fP, \fBcompile_chyron()\fP, \fBdestroy_chyron()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBem3\fP, \fBf_curses_open\fP, \fBMAXLEN\fP, \fBnew_chyron()\fP, \fBset_chyron_key()\fP, \fBssnprintf()\fP, \fBstrnz()\fP, \fBstrnz__cpy()\fP, \fBwin_del()\fP, \fBwin_new()\fP, \fBwin_ptr\fP, \fBwin_win\fP, and \fBxwgetch()\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBget_clr_pair()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_full_screen()\fP, \fBlf_find()\fP, \fBmk_dir()\fP, \fBnew_init()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBparse_menu_description()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, \fBwrite_view_buffer()\fP, and \fBxwgetch()\fP\&.
+.SS "int get_chyron_key (Chyron * chyron, int x)"
+
+.PP
+Get keycode from chyron\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchyron\fP structure 
+.br
+\fIx\fP Mouse X position 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Keycode 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function uses the end_pos values set in compile_chyron to determine which key was clicked 
+
+.PP
+The chyron functions provide \fBxwgetch()\fP with a mechanism to translate mouse click positions into key codes based on the labels set in the chyron structure\&. When a mouse click occurs, \fBxwgetch()\fP can call \fBget_chyron_key()\fP with the X position of the click to determine which function key was clicked, allowing for dynamic and customizable function key behavior in the chyron area of the interface\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB287\fP of file \fBdwin\&.c\fP\&.
+.nf
+287                                           {
+288     int i;
+289     for (i = 0; chyron\->key[i]\->end_pos != \-1; i++)
+290         if (x < chyron\->key[i]\->end_pos)
+291             break;
+292     return chyron\->key[i]\->keycode;
+293 }
+.PP
+.fi
+
+.PP
+Referenced by \fBxwgetch()\fP\&.
+.SS "int get_clr_pair (int fg, int bg)"
+
+.PP
+Get color pair index for foreground and background colors\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfg\fP Foreground color index 
+.br
+\fIbg\fP Background color index 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Color pair index 
+.RE
+.PP
+
+.PP
+Definition at line \fB394\fP of file \fBdwin\&.c\fP\&.
+.nf
+394                                  {
+395     int rc, i, pfg, pbg;
+396     for (i = 0; i < clr_pair_cnt; i++) {
+397         extended_pair_content(i, &pfg, &pbg);
+398         if (pfg == fg && pbg == bg)
+399             return i;
+400     }
+401     if (i >= COLOR_PAIRS) {
+402         ssnprintf(em0, MAXLEN \- 1, "%s, line: %d", __FILE__, __LINE__ \- 1);
+403         ssnprintf(em1, MAXLEN \- 1, "NCurses COLOR_PAIRS (%d) exceeded (%d)",
+404                   COLOR_PAIRS, i);
+405         strerror_r(errno, em2, MAXLEN);
+406         display_error(em0, em1, em2, nullptr);
+407         return (EXIT_FAILURE);
+408     }
+409     if (i < COLOR_PAIRS) {
+410         rc = init_extended_pair(i, fg, bg);
+411         if (rc == ERR)
+412             return ERR;
+413     }
+414     if (i < COLOR_PAIRS)
+415         clr_pair_cnt++;
+416     return i;
+417 }
+.PP
+.fi
+
+.PP
+References \fBclr_pair_cnt\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBMAXLEN\fP, and \fBssnprintf()\fP\&.
+.PP
+Referenced by \fBopen_curses()\fP, and \fBparse_ansi_str()\fP\&.
+.SS "RGB hex_clr_str_to_rgb (char * s)"
+
+.PP
+Convert six-digit HTML style hex color code to RGB struct\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP six-digit HTML style hex color code 
+.RE
+.PP
+
+.PP
+Definition at line \fB596\fP of file \fBdwin\&.c\fP\&.
+.nf
+596                                 {
+597     RGB rgb;
+598     sscanf(s, "#%02x%02x%02x", &rgb\&.r, &rgb\&.g, &rgb\&.b);
+599     return rgb;
+600 }
+.PP
+.fi
+
+.PP
+Referenced by \fBinit_hex_clr()\fP\&.
+.SS "bool init_clr_palette (SIO * sio)"
+
+.PP
+Initialize color palette based on SIO settings\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBsio\fP\fP Pointer to SIO struct with color settings 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function initializes the xterm256 color cube and applies any color overrides specified in the SIO struct\&. The color strings in the SIO struct are expected to be six-digit HTML style hex color codes (e\&.g\&., "#RRGGBB")\&. If a color override is specified for any of the standard colors, it is applied using the init_hex_clr function\&. After processing all colors, the clr_cnt variable is set to 16 to indicate that the standard colors have been initialized\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB534\fP of file \fBdwin\&.c\fP\&.
+.nf
+534                                 {
+535     if (sio\->black[0])
+536         init_hex_clr(CLR_BLACK, sio\->black);
+537     if (sio\->red[0])
+538         init_hex_clr(CLR_RED, sio\->red);
+539     if (sio\->green[0])
+540         init_hex_clr(CLR_GREEN, sio\->green);
+541     if (sio\->yellow[0])
+542         init_hex_clr(CLR_YELLOW, sio\->yellow);
+543     if (sio\->blue[0])
+544         init_hex_clr(CLR_BLUE, sio\->blue);
+545     if (sio\->magenta[0])
+546         init_hex_clr(CLR_MAGENTA, sio\->magenta);
+547     if (sio\->cyan[0])
+548         init_hex_clr(CLR_CYAN, sio\->cyan);
+549     if (sio\->white[0])
+550         init_hex_clr(CLR_WHITE, sio\->white);
+551     if (sio\->bblack[0])
+552         init_hex_clr(CLR_BBLACK, sio\->bblack);
+553     if (sio\->bred[0])
+554         init_hex_clr(CLR_BRED, sio\->bred);
+555     if (sio\->bgreen[0])
+556         init_hex_clr(CLR_BGREEN, sio\->bgreen);
+557     if (sio\->byellow[0])
+558         init_hex_clr(CLR_BYELLOW, sio\->byellow);
+559     if (sio\->bblue[0])
+560         init_hex_clr(CLR_BBLUE, sio\->bblue);
+561     if (sio\->bmagenta[0])
+562         init_hex_clr(CLR_BMAGENTA, sio\->bmagenta);
+563     if (sio\->bcyan[0])
+564         init_hex_clr(CLR_BCYAN, sio\->bcyan);
+565     if (sio\->bwhite[0])
+566         init_hex_clr(CLR_BWHITE, sio\->bwhite);
+567     clr_cnt = 16;
+568     return true;
+569 }
+.PP
+.fi
+
+.PP
+References \fBCLR_BBLACK\fP, \fBCLR_BBLUE\fP, \fBCLR_BCYAN\fP, \fBCLR_BGREEN\fP, \fBCLR_BLACK\fP, \fBCLR_BLUE\fP, \fBCLR_BMAGENTA\fP, \fBCLR_BRED\fP, \fBCLR_BWHITE\fP, \fBCLR_BYELLOW\fP, \fBclr_cnt\fP, \fBCLR_CYAN\fP, \fBCLR_GREEN\fP, \fBCLR_MAGENTA\fP, \fBCLR_RED\fP, \fBCLR_WHITE\fP, \fBCLR_YELLOW\fP, \fBinit_hex_clr()\fP, and \fBsio\fP\&.
+.PP
+Referenced by \fBopen_curses()\fP\&.
+.SS "void init_hex_clr (int idx, char * s)"
+
+.PP
+Initialize extended ncurses color from HTML style hex string\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIidx\fP Color index 
+.br
+\fIs\fP Hex color string 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+NCurses uses 0-1000 for RGB values, so the RGB values from the hex string are converted to this range before initializing the color\&. If the color index is less than 16, the RGB values are also stored in the StdColors array for reference\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB579\fP of file \fBdwin\&.c\fP\&.
+.nf
+579                                     {
+580     RGB rgb;
+581     rgb = hex_clr_str_to_rgb(s);
+582     apply_gamma(&rgb);
+583     if (idx < 16) {
+584         StdColors[idx]\&.r = rgb\&.r;
+585         StdColors[idx]\&.g = rgb\&.g;
+586         StdColors[idx]\&.g = rgb\&.g;
+587     }
+588     rgb\&.r = (rgb\&.r * 1000) / 255;
+589     rgb\&.g = (rgb\&.g * 1000) / 255;
+590     rgb\&.b = (rgb\&.b * 1000) / 255;
+591     init_extended_color(idx, rgb\&.r, rgb\&.g, rgb\&.b);
+592 }
+.PP
+.fi
+
+.PP
+References \fBapply_gamma()\fP, \fBhex_clr_str_to_rgb()\fP, and \fBStdColors\fP\&.
+.PP
+Referenced by \fBinit_clr_palette()\fP\&.
+.SS "bool is_set_chyron_key (Chyron * chyron, int k)"
+
+.PP
+Check if function key label is set\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchyron\fP structure 
+.br
+\fIk\fP Function key index (0-19) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if set, false if not set 
+.RE
+.PP
+
+.PP
+Definition at line \fB210\fP of file \fBdwin\&.c\fP\&.
+.nf
+210                                               {
+211     if (chyron\->key[k]\->text[0] != '\\0')
+212         return true;
+213     else
+214         return false;
+215 }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_calculate()\fP, and \fBform_end_fields()\fP\&.
+.SS "void list_colors ()"
+
+.PP
+list colors to stderr 
+.PP
+\fBNote\fP
+.RS 4
+only lists the first 16, since that's how many we let the user redefine 
+.RE
+.PP
+
+.PP
+Definition at line \fB1017\fP of file \fBdwin\&.c\fP\&.
+.nf
+1017                    {
+1018     int i, col;
+1019 
+1020     for (i = 0, col = 0; i < 16; i++, col++) {
+1021         if (i < 8) {
+1022             fprintf(stderr, " ");
+1023         }
+1024         if (i == 8) {
+1025             col = 0;
+1026             fprintf(stderr, "\\n");
+1027         } else if (col > 0)
+1028             fprintf(stderr, " ");
+1029         fprintf(stderr, "%s", colors_text[i]);
+1030     }
+1031     fprintf(stderr, "\\n");
+1032 }
+.PP
+.fi
+
+.PP
+References \fBcolors_text\fP\&.
+.SS "cchar_t mkccc (int cp)"
+
+.PP
+Create a cchar_t with the specified color pair index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcp\fP Color pair index 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+cchar_t with the specified color pair index and a space character as the wide character 
+.RE
+.PP
+
+.PP
+Definition at line \fB625\fP of file \fBdwin\&.c\fP\&.
+.nf
+625                       {
+626     cchar_t cc;
+627     wchar_t wc = L' ';
+628     setcchar(&cc, &wc, WA_NORMAL, cp, nullptr);
+629     return cc;
+630 }
+.PP
+.fi
+
+.PP
+Referenced by \fBopen_curses()\fP\&.
+.SS "void mvwaddstr_fill (WINDOW * w, int y, int x, char * s, int l)"
+
+.PP
+For lines shorter than their display area, fill the rest with spaces\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIw\fP Pointer to window 
+.br
+\fIy\fP Y coordinate 
+.br
+\fIx\fP X coordinate 
+.br
+\fIs\fP String to display 
+.br
+\fIl\fP Length of display area 
+.RE
+.PP
+
+.PP
+Definition at line \fB979\fP of file \fBdwin\&.c\fP\&.
+.nf
+979                                                              {
+980     char *d, *e;
+981     char tmp_str[MAXLEN];
+982 
+983     d = tmp_str;
+984     if (l > MAXLEN \- 1)
+985         l = MAXLEN \- 1;
+986     e = tmp_str + l;
+987     while (d < e)
+988         if (*s == '\\0' || *s == '\\n')
+989             *d++ = ' ';
+990         else
+991             *d++ = *s++;
+992     *d++ = '\\0';
+993     mvwaddstr(w, y, x, tmp_str);
+994 }
+.PP
+.fi
+
+.PP
+References \fBMAXLEN\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBdisplay_page()\fP, \fBmenu_cmd_processor()\fP, \fBpicker()\fP, \fBreverse_object()\fP, and \fBunreverse_object()\fP\&.
+.SS "Chyron * new_chyron ()"
+
+.PP
+Create and initialize Chyron structure\&. 
+.PP
+\fBReturns\fP
+.RS 4
+pointer to new Chyron structure
+.RE
+.PP
+This function allocates memory for a new Chyron structure and initializes the key pointers\&. Each key pointer is allocated memory for a ChyronKey structure\&. The Chyron structure is used to manage function key labels and their associated keycodes for mouse click handling in the chyron area of the interface\&. 
+.PP
+\fBNote\fP
+.RS 4
+The use of calloc ensures that the allocated memory is initialized to zero, which means that the text for each key will be initialized to an empty string and the keycodes will be initialized to zero\&. This allows the is_set_chyron_key function to check if a key is set by checking if the first character of the text is not '\\0'\&. If any memory allocation fails, the function will call abend to handle the error and return nullptr\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB178\fP of file \fBdwin\&.c\fP\&.
+.nf
+178                      {
+179     Chyron *chyron = (Chyron *)calloc(1, sizeof(Chyron));
+180     if (!chyron) {
+181         abend(\-1, "calloc chyron failed");
+182         return nullptr;
+183     }
+184     for (int i = 0; i < CHYRON_KEYS; i++)
+185         chyron\->key[i] = (ChyronKey *)calloc(1, sizeof(ChyronKey));
+186     return chyron;
+187 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBform_display_fields()\fP, \fBPerror()\fP, and \fBpick_engine()\fP\&.
+.SS "int nf_error (int ec, char * s)"
+
+.PP
+Display error message and wait for key press\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIec\fP Error code 
+.br
+\fIs\fP Error message 
+.RE
+.PP
+
+.PP
+Definition at line \fB1037\fP of file \fBdwin\&.c\fP\&.
+.nf
+1037                               {
+1038     fprintf(stderr, "ERROR: %s code: %d\\n", s, ec);
+1039     fprintf(stderr, "Press a key to continue");
+1040     di_getch();
+1041     fprintf(stderr, "\\n");
+1042     return ec;
+1043 }
+.PP
+.fi
+
+.PP
+References \fBdi_getch()\fP\&.
+.SS "bool open_curses (SIO * sio)"
+
+.PP
+Initialize NCurses and color settings\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBsio\fP\fP Pointer to SIO struct with terminal and color settings 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if successful, false if error note This function initializes NCurses and sets up color pairs based on the settings in the SIO struct\&. It also applies gamma correction to colors\&. Use this function to initialize NCurses if you don't want NCurses to receive data from the stdin pipe 
+.PP
+.nf
+1\&. saves stdin and stdout file descriptors in SIO
+2\&. opens a terminal device for NCurses screen IO
+3\&. replaces STDERR_FILENO with terminal file descriptor
+
+.fi
+.PP
+ 
+.RE
+.PP
+save stdin and stdout file descriptors
+
+.PP
+open the terminal device for reading and writing
+
+.PP
+Attach the terminal descriptor to the STDERR_FILENO
+
+.PP
+We use SCREEN and newterm because this allows us to
+
+.PP
+specify the terminal FILE
+
+.PP
+Set gamma correction values
+
+.PP
+These are read from ~/\&.minitrc
+
+.PP
+We need these values when initializing colors
+.PP
+Definition at line \fB306\fP of file \fBdwin\&.c\fP\&.
+.nf
+306                            {
+307     char tmp_str[MAXLEN];
+308     char emsg0[MAXLEN];
+309     int rc;
+310     RGB frgb, brgb;
+311 
+312     if (ttyname_r(STDERR_FILENO, sio\->tty_name, sizeof(sio\->tty_name)) != 0) {
+313         strerror_r(errno, tmp_str, MAXLEN \- 1);
+314         strnz__cpy(emsg0, "ttyname_r failed ", MAXLEN \- 1);
+315         strnz__cat(emsg0, tmp_str, MAXLEN \- 1);
+316         fprintf(stderr, "%s\\n", tmp_str);
+317         exit(0);
+318     }
+320     sio\->stdin_fd = dup(STDIN_FILENO);
+321     sio\->stdout_fd = dup(STDOUT_FILENO);
+323     sio\->tty_fp = fopen(sio\->tty_name, "r+");
+324     if (sio\->tty_fp == nullptr) {
+325         strerror_r(errno, tmp_str, MAXLEN \- 1);
+326         strnz__cpy(emsg0, "fopen(sio\->tty_name) failed ", MAXLEN \- 1);
+327         strnz__cat(emsg0, tmp_str, MAXLEN \- 1);
+328         fprintf(stderr, "%s\\n", tmp_str);
+329         exit(0);
+330     }
+332     dup2(fileno(sio\->tty_fp), STDERR_FILENO);
+335     SCREEN *screen = newterm(nullptr, sio\->tty_fp, sio\->tty_fp);
+336     if (screen == nullptr) {
+337         strerror_r(errno, tmp_str, MAXLEN \- 1);
+338         strnz__cpy(emsg0, "newterm failed ", MAXLEN \- 1);
+339         strnz__cat(emsg0, tmp_str, MAXLEN \- 1);
+340         fprintf(stderr, "%s\\n", tmp_str);
+341         exit(0);
+342     }
+343     set_term(screen);
+344     f_curses_open = true;
+345     if (!has_colors()) {
+346         destroy_curses();
+347         abend(\-1, "Terminal color support required");
+348     }
+349     start_color();
+350     if (!can_change_color()) {
+351         destroy_curses();
+352         fprintf(stderr, "Terminal cannot change colors\\n");
+353         fprintf(stderr, "Check TERM environment variable\\n");
+354         fprintf(stderr, "Check terminfo for missing \\"ccc\\"\\n");
+355         abend(\-1, "fatal error");
+356     }
+357     init_clr_palette(sio);
+361     RED_GAMMA = sio\->red_gamma;
+362     GREEN_GAMMA = sio\->green_gamma;
+363     BLUE_GAMMA = sio\->blue_gamma;
+364     GRAY_GAMMA = sio\->gray_gamma;
+365     cp_norm = get_clr_pair(sio\->fg_color, sio\->bg_color);
+366     cp_reverse = get_clr_pair(sio\->bg_color, sio\->fg_color);
+367     cp_box = get_clr_pair(sio\->bo_color, sio\->bg_color);
+368     CCC_NORM = mkccc(cp_norm);
+369     CCC_BOX = mkccc(cp_box);
+370     CCC_REVERSE = mkccc(cp_reverse);
+371     noecho();
+372     cbreak();
+373     keypad(stdscr, true);
+374     idlok(stdscr, false);
+375     idcok(stdscr, false);
+376 #ifdef DEBUG
+377     immedok(stdscr, true);
+378 #endif
+379     wbkgrndset(stdscr, &CCC_NORM);
+380     extended_pair_content(cp_norm, &sio\->fg_color, &sio\->bg_color);
+381     extended_color_content(sio\->fg_color, &frgb\&.r, &frgb\&.g, &frgb\&.b);
+382     rc = extended_color_content(sio\->bg_color, &brgb\&.r, &brgb\&.g, &brgb\&.b);
+383     if (rc == ERR) {
+384         destroy_curses();
+385         abend(\-1, "extended_color_content failed");
+386     }
+387     return sio;
+388 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBBLUE_GAMMA\fP, \fBCCC_BOX\fP, \fBCCC_NORM\fP, \fBCCC_REVERSE\fP, \fBcp_box\fP, \fBcp_norm\fP, \fBcp_reverse\fP, \fBdestroy_curses()\fP, \fBf_curses_open\fP, \fBget_clr_pair()\fP, \fBGRAY_GAMMA\fP, \fBGREEN_GAMMA\fP, \fBinit_clr_palette()\fP, \fBMAXLEN\fP, \fBmkccc()\fP, \fBRED_GAMMA\fP, \fBsio\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int Perror (char * emsg_str)"
+
+.PP
+Display a simple error message window or print to stderr\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIemsg_str\fP Error message string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Key code of user command 
+.RE
+.PP
+
+.PP
+Definition at line \fB928\fP of file \fBdwin\&.c\fP\&.
+.nf
+928                            {
+929     char emsg[80];
+930     int emsg_max_len = 80;
+931     unsigned cmd_key;
+932     WINDOW *error_win;
+933     int len, line, pos;
+934     char title[MAXLEN];
+935 
+936     len = strnz__cpy(emsg, emsg_str, emsg_max_len \- 1);
+937     if (!f_curses_open) {
+938         fprintf(stderr, "\\n%s\\n", emsg);
+939         return (1);
+940     }
+941 
+942     Chyron *chyron = new_chyron();
+943     set_chyron_key(chyron, 1, "F1 Help", KEY_F(1));
+944     set_chyron_key(chyron, 9, "F9 Cancel", KEY_F(9));
+945     set_chyron_key(chyron, 10, "F10 Continue", KEY_F(10));
+946     compile_chyron(chyron);
+947     pos = (COLS \- len \- 4) / 2;
+948     line = (LINES \- 4) / 2;
+949     if (chyron\->l > len)
+950         len = chyron\->l;
+951     if (len < 39)
+952         len = 39;
+953     strnz__cpy(title, "Notification", MAXLEN \- 1);
+954     if (win_new(2, len + 2, line, pos, title, 0)) {
+955         ssnprintf(title, MAXLEN \- 1, "win_new(%d, %d, %d, %d, %s, %b) failed",
+956                   4, line, line, pos, title, 0);
+957         destroy_chyron(chyron);
+958         abend(\-1, title);
+959     }
+960     error_win = win_win[win_ptr];
+961     mvwaddstr(error_win, 0, 1, emsg);
+962     wattron(error_win, WA_REVERSE);
+963     mvwaddstr(error_win, 1, 0, chyron\->s);
+964     wattroff(error_win, WA_REVERSE);
+965     wmove(error_win, 1, chyron\->l);
+966     wrefresh(error_win);
+967     cmd_key = xwgetch(error_win, chyron);
+968     win_del();
+969     destroy_chyron(chyron);
+970     return (cmd_key);
+971 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBcmd_key\fP, \fBcompile_chyron()\fP, \fBdestroy_chyron()\fP, \fBf_curses_open\fP, \fBMAXLEN\fP, \fBnew_chyron()\fP, \fBset_chyron_key()\fP, \fBssnprintf()\fP, \fBstrnz__cpy()\fP, \fBwin_del()\fP, \fBwin_new()\fP, \fBwin_ptr\fP, \fBwin_win\fP, and \fBxwgetch()\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBdisplay_line()\fP, \fBexec_objects()\fP, \fBfork_exec()\fP, \fBform_accept_field()\fP, \fBform_calculate()\fP, \fBform_display_screen()\fP, \fBform_engine()\fP, \fBform_fmt_field()\fP, \fBform_usage()\fP, \fBform_validate_field()\fP, \fBget_cmd_arg()\fP, \fBgo_to_line()\fP, \fBgo_to_mark()\fP, \fBgo_to_percent()\fP, \fBinit_form()\fP, \fBinit_pick()\fP, \fBlf_process()\fP, \fBmenu_engine()\fP, \fBnew_pick()\fP, \fBopen_pick_win()\fP, \fBparse_menu_description()\fP, \fBsearch()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, and \fBwrite_config()\fP\&.
+.SS "void restore_wins ()"
+
+.PP
+Restore all windows after a screen resize\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function is used to restore the display of all windows after a screen resize event\&. It clears the standard screen and then iterates through all existing windows, touching and refreshing them to ensure they are redrawn correctly on the resized screen\&. Use this function in response to a SIGWINCH signal to handle terminal resizing gracefully\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB797\fP of file \fBdwin\&.c\fP\&.
+.nf
+797                     {
+798     int i;
+799 
+800     wclear(stdscr);
+801     touchwin(stdscr);
+802     wnoutrefresh(stdscr);
+803     for (i = 0; i <= win_ptr; i++) {
+804         touchwin(win_box[i]);
+805         wnoutrefresh(win_box[i]);
+806         touchwin(win_win[i]);
+807         wnoutrefresh(win_win[i]);
+808     }
+809 }
+.PP
+.fi
+
+.PP
+References \fBwin_box\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBexec_objects()\fP, \fBfork_exec()\fP, \fBform_engine()\fP, \fBfull_screen_fork_exec()\fP, \fBfull_screen_shell()\fP, \fBmenu_cmd_processor()\fP, \fBresize_page()\fP, and \fBview_cmd_processor()\fP\&.
+.SS "int rgb_clr_to_cube (int )"
+
+.SS "int rgb_to_curses_clr (RGB * rgb)"
+
+.PP
+Get color index for RGB color\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrgb\fP RGB color 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+NCurses color index 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Curses uses 0-1000 for RGB values 
+
+.PP
+If the color does not exist, it is created along with a new color index 
+.RE
+.PP
+
+.PP
+Definition at line \fB425\fP of file \fBdwin\&.c\fP\&.
+.nf
+425                                 {
+426     int i;
+427     int r, g, b;
+428     apply_gamma(rgb);
+429     rgb\->r = (rgb\->r * 1000) / 255;
+430     rgb\->g = (rgb\->g * 1000) / 255;
+431     rgb\->b = (rgb\->b * 1000) / 255;
+432     for (i = 0; i < clr_cnt; i++) {
+433         extended_color_content(i, &r, &g, &b);
+434         if (rgb\->r == r && rgb\->g == g && rgb\->b == b) {
+435             return i;
+436         }
+437     }
+438     if (i < COLORS) {
+439         init_extended_color(i, rgb\->r, rgb\->g, rgb\->b);
+440         clr_cnt++;
+441         return clr_cnt \- 1;
+442     }
+443     return ERR;
+444 }
+.PP
+.fi
+
+.PP
+References \fBapply_gamma()\fP, and \fBclr_cnt\fP\&.
+.PP
+Referenced by \fBparse_ansi_str()\fP\&.
+.SS "int rgb_to_xterm256_idx (RGB * rgb)"
+
+.PP
+Convert RGB color to XTerm 256 color index\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrgb\fP RGB color 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+XTerm 256 color index note This function converts an RGB color to the nearest XTerm 256 color index\&. It first checks if the color is a shade of gray, and if so, it uses the gray ramp\&. Otherwise, it calculates the nearest color in the 6x6x6 color cube\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB453\fP of file \fBdwin\&.c\fP\&.
+.nf
+453                                   {
+454     if (rgb\->r == rgb\->g && rgb\->g == rgb\->b) {
+455         if (rgb\->r < 8)
+456             return 16;
+457         if (rgb\->r > 248)
+458             return 231;
+459         return ((rgb\->r \- 8) / 10) + 231;
+460     } else {
+461         int r_index = (rgb\->r < 45) ? 0 : (rgb\->r \- 60) / 40 + 1;
+462         int g_index = (rgb\->g < 45) ? 0 : (rgb\->g \- 60) / 40 + 1;
+463         int b_index = (rgb\->b < 45) ? 0 : (rgb\->b \- 60) / 40 + 1;
+464         return 16 + (36 * r_index) + (6 * g_index) + b_index;
+465     }
+466 }
+.PP
+.fi
+
+.SS "void set_chyron_key (Chyron * chyron, int k, char * s, int kc)"
+
+.PP
+Set chyron key\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchyron\fP structure 
+.br
+\fIk\fP chyron key index (0-19) 
+.br
+\fIs\fP chyron key label 
+.br
+\fIkc\fP chyron key code
+.RE
+.PP
+This function sets the label and keycode for a chyron key\&. The label is copied into the chyron structure, and the keycode is stored for later retrieval when theire is a mouse click\&. The compile_chyron function uses the keycode values to determine which key was clicked based on the mouse X position\&. If the label string is empty, the key is unset by setting the first character of the text to '\\0'\&. 
+.PP
+Definition at line \fB228\fP of file \fBdwin\&.c\fP\&.
+.nf
+228                                                             {
+229     size_t y;
+230     size_t x = sizeof(chyron\->key[k]\->text);
+231     y = x;
+232     x = y;
+233     if (*s != '\\0')
+234         ssnprintf(chyron\->key[k]\->text, CHYRON_KEY_MAXLEN \- 1, "%s", s);
+235     else
+236         chyron\->key[k]\->text[0] = '\\0';
+237     chyron\->key[k]\->keycode = kc;
+238 }
+.PP
+.fi
+
+.PP
+References \fBssnprintf()\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBform_accept_field()\fP, \fBform_calculate()\fP, \fBform_display_fields()\fP, \fBform_end_fields()\fP, \fBPerror()\fP, and \fBpick_engine()\fP\&.
+.SS "void unset_chyron_key (Chyron * chyron, int k)"
+
+.PP
+Unset chyron key\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIchyron\fP structure 
+.br
+\fIk\fP chyron_key index 
+.RE
+.PP
+
+.PP
+Definition at line \fB243\fP of file \fBdwin\&.c\fP\&.
+.nf
+243 { chyron\->key[k]\->text[0] = '\\0'; }
+.PP
+.fi
+
+.PP
+Referenced by \fBform_calculate()\fP, and \fBform_end_fields()\fP\&.
+.SS "void user_end ()"
+
+.PP
+Program terminated by user\&. 
+.PP
+Definition at line \fB1046\fP of file \fBdwin\&.c\fP\&.
+.nf
+1046                 {
+1047     destroy_curses();
+1048     restore_shell_tioctl();
+1049     sig_dfl_mode();
+1050     fprintf(stderr, "Normal program exit");
+1051     fprintf(stderr, "\\n");
+1052     exit(EXIT_SUCCESS);
+1053 }
+.PP
+.fi
+
+.PP
+References \fBdestroy_curses()\fP, \fBrestore_shell_tioctl()\fP, and \fBsig_dfl_mode()\fP\&.
+.SS "WINDOW * win_del ()"
+
+.PP
+Delete the current window and its associated box window\&. 
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function deletes the current window and its associated box window, if they exist\&. It also refreshes the remaining windows to ensure the display is updated correctly\&. After calling this function, the global win_ptr variable is decremented to point to the previous window in the stack\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB764\fP of file \fBdwin\&.c\fP\&.
+.nf
+764                   {
+765     int i;
+766 
+767     if (win_ptr > 0) {
+768         wclear(win_win[win_ptr]);
+769         touchwin(win_win[win_ptr]);
+770         wnoutrefresh(win_win[win_ptr]);
+771         delwin(win_win[win_ptr]);
+772 
+773         wclear(win_box[win_ptr]);
+774         touchwin(win_box[win_ptr]);
+775         wnoutrefresh(win_box[win_ptr]);
+776         delwin(win_box[win_ptr]);
+777 
+778         touchwin(stdscr);
+779         wnoutrefresh(stdscr);
+780         for (i = 0; i < win_ptr; i++) {
+781             touchwin(win_box[i]);
+782             wnoutrefresh(win_box[i]);
+783             touchwin(win_win[i]);
+784             wnoutrefresh(win_win[i]);
+785         }
+786         win_ptr\-\-;
+787     }
+788     return (0);
+789 }
+.PP
+.fi
+
+.PP
+References \fBwin_box\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBinit_form()\fP, \fBinit_pick()\fP, \fBmain()\fP, \fBmenu_engine()\fP, \fBmview()\fP, and \fBPerror()\fP\&.
+.SS "void win_init_attrs (int fg_color, int bg_color, int bo_color)"
+
+.PP
+Initialize window attributes\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfg_color\fP Foreground color index 
+.br
+\fIbg_color\fP Background color index 
+.br
+\fIbo_color\fP Box color index note This function initializes color pairs for the window note cp_norm and cp_box are global variables see get_clr_pair 
+.RE
+.PP
+
+.PP
+Definition at line \fB159\fP of file \fBdwin\&.c\fP\&.
+.nf
+159                                                               {
+160     init_extended_pair(cp_norm, fg_color, bg_color);
+161     init_extended_pair(cp_box, bo_color, bg_color);
+162     return;
+163 }
+.PP
+.fi
+
+.PP
+References \fBcp_box\fP, and \fBcp_norm\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int win_new (int wlines, int wcols, int wbegy, int wbegx, char * wtitle, int flag)"
+
+.PP
+Create a new window with optional box and title\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwlines\fP Number of lines 
+.br
+\fIwcols\fP Number of columns 
+.br
+\fIwbegy\fP Beginning Y position 
+.br
+\fIwbegx\fP Beginning X position 
+.br
+\fIwtitle\fP Window title 
+.br
+\fIflag\fP Window flags 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+if flag set to W_BOX, Only create win_box\&. This is for View which uses the box window for display and doesn't need a separate win_win 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 if successful, 1 if error 
+.RE
+.PP
+
+.PP
+Definition at line \fB642\fP of file \fBdwin\&.c\fP\&.
+.nf
+643                       {
+644     char box_title[MAXLEN] = "Pick Selections";
+645     int maxx;
+646     if (win_ptr < MAXWIN) {
+647         if (win_ptr > 0)
+648             wrefresh(win_win[win_ptr]);
+649         else
+650             wrefresh(stdscr);
+651         win_ptr++;
+652         if (wbegy != 0 || wbegx != 0 || wlines < LINES \- 2 ||
+653             wcols < COLS \- 2) {
+654             win_box[win_ptr] = newwin(wlines + 2, wcols + 2, wbegy, wbegx);
+655             if (win_box[win_ptr] == nullptr) {
+656                 win_ptr\-\-;
+657                 return (1);
+658             }
+659             wbkgrnd(win_box[win_ptr], &CCC_BOX);
+660             wbkgrndset(win_box[win_ptr], &CCC_BOX);
+661             if (wtitle != nullptr && *wtitle != '\\0')
+662                 strnz__cpy(box_title, wtitle, MAXLEN \- 1);
+663             cbox(win_box[win_ptr]);
+664             mvwaddnwstr(win_box[win_ptr], 0, 1, &bw_rt, 1);
+665             mvwaddnwstr(win_box[win_ptr], 0, 2, &bw_sp, 1);
+666             mvwaddstr(win_box[win_ptr], 0, 3, box_title);
+667             maxx = getmaxx(win_box[win_ptr]);
+668             int s = strlen(box_title);
+669             if ((s + 3) < maxx)
+670                 mvwaddch(win_box[win_ptr], 0, (s + 3), ' ');
+671             if ((s + 4) < maxx)
+672                 mvwaddnwstr(win_box[win_ptr], 0, (s + 4), &bw_lt, 1);
+673             wnoutrefresh(win_box[win_ptr]);
+674             wbegy += 1;
+675             wbegx += 1;
+676         } else {
+677             win_box[win_ptr] = newwin(wlines, wcols, wbegy, wbegx);
+678             if (win_box[win_ptr] == nullptr) {
+679                 win_ptr\-\-;
+680                 return (1);
+681             }
+682             wbkgrnd(win_box[win_ptr], &CCC_BOX);
+683             wbkgrndset(win_box[win_ptr], &CCC_BOX);
+684         }
+685         if (!(flag & W_BOX)) {
+686             win_win[win_ptr] = newwin(wlines, wcols, wbegy, wbegx);
+687             if (win_win[win_ptr] == nullptr) {
+688                 delwin(win_box[win_ptr]);
+689                 win_ptr\-\-;
+690                 return (1);
+691             }
+692             wbkgrnd(win_win[win_ptr], &CCC_NORM);
+693             wbkgrndset(win_win[win_ptr], &CCC_NORM);
+694             keypad(win_win[win_ptr], true);
+695             idlok(win_win[win_ptr], false);
+696             idcok(win_win[win_ptr], false);
+697 #ifdef DEBUG
+698             immedok(win_win[win_ptr], true);
+699 #endif
+700         }
+701     }
+702     return (0);
+703 }
+.PP
+.fi
+
+.PP
+References \fBbw_lt\fP, \fBbw_rt\fP, \fBbw_sp\fP, \fBcbox()\fP, \fBCCC_BOX\fP, \fBCCC_NORM\fP, \fBMAXLEN\fP, \fBstrnz__cpy()\fP, \fBwin_box\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBform_display_screen()\fP, \fBinit_view_boxwin()\fP, \fBmenu_engine()\fP, \fBopen_pick_win()\fP, and \fBPerror()\fP\&.
+.SS "void win_redraw (WINDOW * win)"
+
+.PP
+Redraw the specified window\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBwin\fP\fP Pointer to the window to redraw 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function erases the contents of the specified window and then refreshes it to update the display\&. Use this function when you need to clear and redraw a window, such as after resizing or when updating its contents\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB753\fP of file \fBdwin\&.c\fP\&.
+.nf
+753                              {
+754     werase(win);
+755     wnoutrefresh(win);
+756 }
+.PP
+.fi
+
+.PP
+References \fBwin\fP\&.
+.SS "void win_resize (int wlines, int wcols, char * title)"
+
+.PP
+Resize the current window and its box, and update the title\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwlines\fP Number of lines 
+.br
+\fIwcols\fP Number of columns 
+.br
+\fItitle\fP Window title 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This function resizes the current window and its associated box window to the specified number of lines and columns\&. It also updates the title of the box window if a title is provided\&. After resizing, it refreshes the windows to apply the changes\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB713\fP of file \fBdwin\&.c\fP\&.
+.nf
+713                                                     {
+714     int maxx;
+715     wrefresh(stdscr);
+716     wresize(win_box[win_ptr], wlines + 2, wcols + 2);
+717     wbkgrnd(win_box[win_ptr], &CCC_BOX);
+718     wbkgrndset(win_box[win_ptr], &CCC_BOX);
+719     cbox(win_box[win_ptr]);
+720     if (title != nullptr && *title != '\\0') {
+721         wmove(win_box[win_ptr], 0, 1);
+722         waddnstr(win_box[win_ptr], (const char *)&bw_rt, 1);
+723         wmove(win_box[win_ptr], 0, 2);
+724         waddnstr(win_box[win_ptr], (const char *)&bw_sp, 1);
+725         mvwaddnwstr(win_box[win_ptr], 0, 1, &bw_rt, 1);
+726         mvwaddnwstr(win_box[win_ptr], 0, 2, &bw_sp, 1);
+727         mvwaddstr(win_box[win_ptr], 0, 3, title);
+728         maxx = getmaxx(win_box[win_ptr]);
+729         int s = strlen(title);
+730         if ((s + 3) < maxx)
+731             mvwaddch(win_box[win_ptr], 0, (s + 3), ' ');
+732         if ((s + 4) < maxx)
+733             mvwaddnwstr(win_box[win_ptr], 0, (s + 4), &bw_lt, 1);
+734     }
+735     wnoutrefresh(win_box[win_ptr]);
+736     wresize(win_win[win_ptr], wlines, wcols);
+737     init_extended_pair(cp_norm, sio\->fg_color, sio\->bg_color);
+738     wbkgrnd(win_win[win_ptr], &CCC_NORM);
+739     wbkgrndset(win_win[win_ptr], &CCC_NORM);
+740     wsetscrreg(win_win[win_ptr], 0, wlines \- 1);
+741     keypad(win_win[win_ptr], TRUE);
+742     idlok(win_win[win_ptr], false);
+743     idcok(win_win[win_ptr], false);
+744 #ifdef DEBUG
+745     immedok(win_win[win_ptr], true);
+746 #endif
+747 }
+.PP
+.fi
+
+.PP
+References \fBbw_lt\fP, \fBbw_rt\fP, \fBbw_sp\fP, \fBcbox()\fP, \fBCCC_BOX\fP, \fBCCC_NORM\fP, \fBcp_norm\fP, \fBsio\fP, \fBTRUE\fP, \fBwin_box\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBresize_page()\fP\&.
+.SS "RGB xterm256_idx_to_rgb (int idx)"
+
+.PP
+Convert XTerm 256 color index to RGB color\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIidx\fP XTerm 256 color index 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+RGB color note This function converts an XTerm 256 color index to an RGB color\&. It first checks if the index is in the standard 16 colors, then checks if it's in the 6x6x6 color cube, and finally checks if it's in the gray ramp\&. 
+.RE
+.PP
+Convert XTerm 256 color index to RGB 
+.PP
+\fBParameters\fP
+.RS 4
+\fIidx\fP - XTerm 256 color index 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+RGB struct
+.RE
+.PP
+
+.PP
+Definition at line \fB474\fP of file \fBdwin\&.c\fP\&.
+.nf
+474                                  {
+478     RGB rgb;
+479     if (idx > 255)
+480         idx = 255;
+481     if (idx < 0)
+482         idx = 0;
+483     rgb\&.r = rgb\&.g = rgb\&.b = 0;
+484     if (idx < 16) {
+485         rgb\&.r = StdColors[idx]\&.r;
+486         rgb\&.g = StdColors[idx]\&.g;
+487         rgb\&.b = StdColors[idx]\&.b;
+488     } else if (idx >= 16 && idx <= 231) {
+489         idx \-= 16;
+490         rgb\&.r = (idx / 36) % 6 * 51;
+491         rgb\&.g = (idx / 6) % 6 * 51;
+492         rgb\&.b = (idx % 6) * 51;
+493     } else if (idx >= 232 && idx <= 255) {
+494         int gray = (idx \- 232) * 11;
+495         rgb\&.r = rgb\&.g = rgb\&.b = gray;
+496     }
+497     return rgb;
+498 }
+.PP
+.fi
+
+.PP
+References \fBStdColors\fP\&.
+.PP
+Referenced by \fBparse_ansi_str()\fP\&.
+.SS "int xwgetch (WINDOW * win, Chyron * chyron)"
+
+.PP
+Wrapper for wgetch that handles signals and mouse events\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBwin\fP\fP Pointer to window 
+.br
+\fIchyron\fP Pointer to chyron for handling chyron line clicks 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Key code or ERR if interrupted by signal 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+This, of course, will be expanded into an event loop for message queuing
+.RE
+.PP
+Get mouse event and check if it's a left click or double click\&. If the click is outside the window, ignore it\&. If it's on the chyron line, get the corresponding key command\&. Otherwise, store the click coordinates as click_y and click_x for later use\&. 
+.PP
+Definition at line \fB1075\fP of file \fBdwin\&.c\fP\&.
+.nf
+1075                                          {
+1076     int c;
+1077     MEVENT event;
+1078     event\&.y = event\&.x = \-1;
+1079     click_y = click_x = \-1;
+1080     halfdelay(1);
+1081     do {
+1082         c = wgetch(win);
+1083         if (sig_received != 0) {
+1084             if (handle_signal(sig_received))
+1085                 c = display_error(em0, em1, em2, nullptr);
+1086             if (c == 'q' || c == KEY_F(9))
+1087                 exit(EXIT_FAILURE);
+1088             continue;
+1089         }
+1090         if (c == ERR)
+1091             continue;
+1092         if (c == KEY_MOUSE) {
+1093             if (getmouse(&event) != OK) {
+1094                 c = 0;
+1095                 continue;
+1096             }
+1097             if (event\&.bstate & BUTTON1_CLICKED ||
+1098                 event\&.bstate & BUTTON1_DOUBLE_CLICKED) {
+1099                 if (!wenclose(win, event\&.y, event\&.x)) {
+1100                     c = 0;
+1101                     continue;
+1102                 }
+1103                 wmouse_trafo(win, &event\&.y, &event\&.x, false);
+1104                 if (event\&.y < 0 || event\&.x < 0 || event\&.x >= getmaxx(win) ||
+1105                     event\&.y >= getmaxy(win)) {
+1106                     c = 0;
+1107                     continue;
+1108                 }
+1109                 click_y = event\&.y;
+1110                 click_x = event\&.x;
+1111                 if (chyron && event\&.y == getmaxy(win) \- 1)
+1112                     return get_chyron_key(chyron, event\&.x);
+1113                 else
+1114                     return KEY_MOUSE;
+1115             }
+1116         }
+1117     } while (c == ERR);
+1118     return c;
+1119 }
+.PP
+.fi
+
+.PP
+References \fBclick_x\fP, \fBclick_y\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBget_chyron_key()\fP, \fBhandle_signal()\fP, \fBsig_received\fP, and \fBwin\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBform_accept_field()\fP, \fBform_calculate()\fP, \fBform_end_fields()\fP, \fBget_cmd_arg()\fP, \fBget_cmd_char()\fP, \fBmenu_cmd_processor()\fP, \fBPerror()\fP, \fBpicker()\fP, and \fBremove_file()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "double BLUE_GAMMA"
+\fBInitial value:\fP
+.nf
+              =
+1\&.2
+.PP
+.fi
+Gamma correction value for blue colors\&. Set in \&.minitrc 
+.PP
+Definition at line \fB113\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBapply_gamma()\fP, and \fBopen_curses()\fP\&.
+.SS "int box_attr"
+
+.PP
+Definition at line \fB123\fP of file \fBdwin\&.c\fP\&.
+.SS "const wchar_t bw_bl = BW_RBL"
+bottom left corner 
+.PP
+Definition at line \fB102\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBcbox()\fP\&.
+.SS "const wchar_t bw_br = BW_RBR"
+bottom right corner 
+.PP
+Definition at line \fB103\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBcbox()\fP\&.
+.SS "const wchar_t bw_ho = BW_HO"
+horizontal line 
+.PP
+Definition at line \fB98\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBcbox()\fP\&.
+.SS "const wchar_t bw_lt = BW_LT"
+left tee 
+.PP
+Definition at line \fB104\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "const wchar_t bw_rt = BW_RT"
+right tee 
+.PP
+Definition at line \fB105\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "const wchar_t bw_sp = BW_SP"
+tee space 
+.PP
+Definition at line \fB106\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "const wchar_t bw_tl = BW_RTL"
+top left corner 
+.PP
+Definition at line \fB100\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBcbox()\fP\&.
+.SS "const wchar_t bw_tr = BW_RTR"
+top right corner 
+.PP
+Definition at line \fB101\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBcbox()\fP\&.
+.SS "const wchar_t bw_ve = BW_VE"
+vertical line 
+.PP
+Definition at line \fB99\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBcbox()\fP\&.
+.SS "cchar_t CCC_BOX"
+
+.PP
+Definition at line \fB147\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBinit_view_full_screen()\fP, \fBopen_curses()\fP, \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "cchar_t CCC_NORM"
+
+.PP
+Definition at line \fB146\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBinit_view_boxwin()\fP, \fBopen_curses()\fP, \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "cchar_t CCC_REVERSE"
+
+.PP
+Definition at line \fB148\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBopen_curses()\fP\&.
+.SS "int click_x"
+
+.PP
+Definition at line \fB43\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBform_accept_field()\fP, \fBform_calculate()\fP, \fBform_end_fields()\fP, \fBmenu_cmd_processor()\fP, \fBpicker()\fP, and \fBxwgetch()\fP\&.
+.SS "int click_y"
+
+.PP
+Definition at line \fB42\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBform_accept_field()\fP, \fBform_calculate()\fP, \fBform_end_fields()\fP, \fBmenu_cmd_processor()\fP, \fBpicker()\fP, and \fBxwgetch()\fP\&.
+.SS "int clr_cnt = 0"
+
+.PP
+Definition at line \fB142\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBinit_clr_palette()\fP, and \fBrgb_to_curses_clr()\fP\&.
+.SS "int clr_idx = 0"
+
+.PP
+Definition at line \fB143\fP of file \fBdwin\&.c\fP\&.
+.SS "int clr_pair_cnt = 1"
+
+.PP
+Definition at line \fB145\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBget_clr_pair()\fP\&.
+.SS "int clr_pair_idx = 1"
+
+.PP
+Definition at line \fB144\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBparse_ansi_str()\fP\&.
+.SS "unsigned int cmd_key"
+
+.PP
+Definition at line \fB120\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBform_desc_error()\fP, \fBform_enter_fields()\fP, \fBform_read_data()\fP, \fBPerror()\fP, and \fBpicker()\fP\&.
+.SS "char const colors_text[][10]"
+\fBInitial value:\fP
+.nf
+                   = {
+"black",   "red",    "green", "yellow",   "blue",   "magenta", "cyan",
+"white",   "orange", "bg",    "abg",      "bblack", "bred",    "bgreen",
+"byellow", "bblue",  "bcyan", "bmagenta", "bwhite", "borange", ""}
+.PP
+.fi
+colors_text 
+.PP
+\fBNote\fP
+.RS 4
+Color names for \&.minitrc overrides 
+
+.PP
+These names are used in \&.minitrc to specify color overrides 
+
+.PP
+The order of these names corresponds to the \fBcolors_enum\fP values 
+.RE
+.PP
+
+.PP
+Definition at line \fB94\fP of file \fBdwin\&.c\fP\&.
+.nf
+94                              {
+95     "black",   "red",    "green", "yellow",   "blue",   "magenta", "cyan",
+96     "white",   "orange", "bg",    "abg",      "bblack", "bred",    "bgreen",
+97     "byellow", "bblue",  "bcyan", "bmagenta", "bwhite", "borange", ""};
+.PP
+.fi
+
+.PP
+Referenced by \fBclr_name_to_idx()\fP, \fBlist_colors()\fP, and \fBwrite_config()\fP\&.
+.SS "int cp_box"
+
+.PP
+Definition at line \fB140\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBopen_curses()\fP, and \fBwin_init_attrs()\fP\&.
+.SS "int cp_norm"
+
+.PP
+Definition at line \fB139\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBfmt_line()\fP, \fBopen_curses()\fP, \fBsearch()\fP, \fBwin_init_attrs()\fP, and \fBwin_resize()\fP\&.
+.SS "int cp_reverse"
+
+.PP
+Definition at line \fB141\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBopen_curses()\fP\&.
+.SS "char em0[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB135\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBenter_file_spec()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBget_clr_pair()\fP, \fBhandle_signal()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_full_screen()\fP, \fBlf_find()\fP, \fBmk_dir()\fP, \fBnew_init()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBparse_menu_description()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, \fBwrite_view_buffer()\fP, and \fBxwgetch()\fP\&.
+.SS "char em1[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB136\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBenter_file_spec()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBget_clr_pair()\fP, \fBhandle_signal()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_full_screen()\fP, \fBlf_find()\fP, \fBmk_dir()\fP, \fBnew_init()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBparse_menu_description()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, \fBwrite_view_buffer()\fP, and \fBxwgetch()\fP\&.
+.SS "char em2[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB137\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBenter_file_spec()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBget_clr_pair()\fP, \fBhandle_signal()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_full_screen()\fP, \fBlf_find()\fP, \fBmk_dir()\fP, \fBnew_init()\fP, \fBnew_view()\fP, \fBparse_menu_description()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBview_cmd_processor()\fP, \fBview_init_input()\fP, \fBwrite_view_buffer()\fP, and \fBxwgetch()\fP\&.
+.SS "char em3[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB138\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBverify_dir()\fP, and \fBverify_file()\fP\&.
+.SS "int exit_code"
+
+.PP
+Definition at line \fB119\fP of file \fBdwin\&.c\fP\&.
+.SS "bool f_sigwench = false"
+
+.PP
+Definition at line \fB121\fP of file \fBdwin\&.c\fP\&.
+.SS "char fn[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB134\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBfile_spec_name()\fP, \fBlocate_file_in_path()\fP, \fBverify_dir()\fP, and \fBverify_file()\fP\&.
+.SS "double GRAY_GAMMA"
+\fBInitial value:\fP
+.nf
+              =
+1\&.2
+.PP
+.fi
+Gamma correction value for gray colors\&. Set in \&.minitrc 
+.PP
+Definition at line \fB107\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBapply_gamma()\fP, and \fBopen_curses()\fP\&.
+.SS "double GREEN_GAMMA"
+\fBInitial value:\fP
+.nf
+               =
+1\&.2
+.PP
+.fi
+Gamma correction value for green colors\&. Set in \&.minitrc 
+.PP
+Definition at line \fB111\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBapply_gamma()\fP, and \fBopen_curses()\fP\&.
+.SS "int m_begx = \-1"
+
+.PP
+Definition at line \fB128\fP of file \fBdwin\&.c\fP\&.
+.SS "int m_begy = \-1"
+
+.PP
+Definition at line \fB127\fP of file \fBdwin\&.c\fP\&.
+.SS "int m_cols"
+
+.PP
+Definition at line \fB126\fP of file \fBdwin\&.c\fP\&.
+.SS "int m_lines"
+
+.PP
+Definition at line \fB125\fP of file \fBdwin\&.c\fP\&.
+.SS "int mouse_support"
+
+.PP
+Definition at line \fB129\fP of file \fBdwin\&.c\fP\&.
+.SS "int pipe_in"
+
+.PP
+Definition at line \fB150\fP of file \fBdwin\&.c\fP\&.
+.SS "int pipe_out"
+
+.PP
+Definition at line \fB150\fP of file \fBdwin\&.c\fP\&.
+.SS "double RED_GAMMA"
+\fBInitial value:\fP
+.nf
+             =
+1\&.2
+.PP
+.fi
+Gamma correction value for red colors\&. Set in \&.minitrc 
+.PP
+Definition at line \fB109\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBapply_gamma()\fP, and \fBopen_curses()\fP\&.
+.SS "SIO* sio"
+Global pointer to SIO struct for terminal and color settings 
+.PP
+Definition at line \fB57\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdump_config()\fP, \fBinit_clr_palette()\fP, \fBinit_pick()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBopen_curses()\fP, \fBparse_config()\fP, \fBparse_opt_args()\fP, \fBwin_resize()\fP, and \fBwrite_config()\fP\&.
+.SS "int src_line"
+
+.PP
+Definition at line \fB132\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBverify_dir()\fP, and \fBverify_file()\fP\&.
+.SS "char* src_name"
+
+.PP
+Definition at line \fB133\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBverify_dir()\fP, and \fBverify_file()\fP\&.
+.SS "RGB StdColors[16]"
+\fBInitial value:\fP
+.nf
+          = {
+{0, 0, 0},       {128, 0, 0},   {0, 128, 0},   {128, 128, 0},
+{0, 0, 128},     {128, 0, 128}, {0, 128, 128}, {192, 192, 192},
+{128, 128, 128}, {255, 0, 0},   {0, 255, 0},   {255, 255, 0},
+{0, 0, 255},     {255, 0, 255}, {0, 255, 255}, {255, 255, 255}}
+.PP
+.fi
+StdColors 
+.PP
+\fBNote\fP
+.RS 4
+Standard 16 colors for xterm256 color conversions 
+
+.PP
+These colors can be overridden in "\&.minitrc" 
+.RE
+.PP
+
+.PP
+Definition at line \fB85\fP of file \fBdwin\&.c\fP\&.
+.nf
+85                   {
+86     {0, 0, 0},       {128, 0, 0},   {0, 128, 0},   {128, 128, 0},
+87     {0, 0, 128},     {128, 0, 128}, {0, 128, 128}, {192, 192, 192},
+88     {128, 128, 128}, {255, 0, 0},   {0, 255, 0},   {255, 255, 0},
+89     {0, 0, 255},     {255, 0, 255}, {0, 255, 255}, {255, 255, 255}};
+.PP
+.fi
+
+.PP
+Referenced by \fBinit_hex_clr()\fP, and \fBxterm256_idx_to_rgb()\fP\&.
+.SS "int stdin_fd"
+
+.PP
+Definition at line \fB130\fP of file \fBdwin\&.c\fP\&.
+.SS "int stdout_fd"
+
+.PP
+Definition at line \fB131\fP of file \fBdwin\&.c\fP\&.
+.SS "int tty_fd"
+Global file/pipe numbers 
+.PP
+Definition at line \fB150\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBpicker()\fP\&.
+.SS "WINDOW* win"
+
+.PP
+Definition at line \fB116\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBform_accept_field()\fP, \fBform_display_field()\fP, \fBwin_redraw()\fP, and \fBxwgetch()\fP\&.
+.SS "int win_attr"
+
+.PP
+Definition at line \fB122\fP of file \fBdwin\&.c\fP\&.
+.SS "WINDOW* win_box[MAXWIN]"
+
+.PP
+Definition at line \fB118\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBform_display_screen()\fP, \fBmenu_engine()\fP, \fBopen_pick_win()\fP, \fBrestore_wins()\fP, \fBwin_del()\fP, \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "int win_ptr"
+
+.PP
+Definition at line \fB124\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBform_display_screen()\fP, \fBinit_view_boxwin()\fP, \fBmenu_engine()\fP, \fBopen_pick_win()\fP, \fBPerror()\fP, \fBrestore_wins()\fP, \fBwin_del()\fP, \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SS "WINDOW* win_win[MAXWIN]"
+
+.PP
+Definition at line \fB117\fP of file \fBdwin\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBform_display_screen()\fP, \fBinit_view_boxwin()\fP, \fBmenu_engine()\fP, \fBopen_pick_win()\fP, \fBPerror()\fP, \fBrestore_wins()\fP, \fBwin_del()\fP, \fBwin_new()\fP, and \fBwin_resize()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

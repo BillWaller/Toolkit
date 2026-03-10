@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['page_0',['Page',['../d0/d30/md_README.html#example-manual-page',1,'Example Manual Page'],['../index.html#example-manual-page-1',1,'Example Manual Page']]],
+  ['page_20using_20editor_1',['Page Using Editor',['../d0/d30/md_README.html#example-manual-page-using-editor',1,'Example Manual Page Using Editor'],['../index.html#example-manual-page-using-editor-1',1,'Example Manual Page Using Editor']]],
+  ['paged_20virtual_20address_20space_2',['Paged Virtual Address Space',['../d0/d30/md_README.html#demand-paged-virtual-address-space',1,'Demand Paged Virtual Address Space'],['../index.html#demand-paged-virtual-address-space-1',1,'Demand Paged Virtual Address Space']]],
+  ['pages_3',['Pages',['../d5/d77/md_FAQ.html#view---how-to-colorize-manual-pages',1,'View - How to Colorize Manual Pages'],['../d0/d30/md_README.html#view-and-color-manual-pages',1,'View and Color Manual Pages'],['../index.html#view-and-color-manual-pages-1',1,'View and Color Manual Pages']]],
+  ['parsers_4',['Tree-Sitter Parsers',['../dc/db0/md_extras.html#tree-sitter-parsers',1,'']]],
+  ['parsers_20on_20linux_5',['Tree-Sitter Parsers On Linux',['../dc/db0/md_extras.html#tree-sitter-parsers-on-linux',1,'']]],
+  ['parsers_20on_20macos_6',['Tree-Sitter Parsers On macOS',['../dc/db0/md_extras.html#tree-sitter-parsers-on-macos',1,'']]],
+  ['parsers_20on_20windows_7',['Tree-Sitter Parsers On Windows',['../dc/db0/md_extras.html#tree-sitter-parsers-on-windows',1,'']]],
+  ['path_8',['Prepend Path',['../d7/da4/md_snippets.html#prepend-path',1,'']]],
+  ['pick_9',['C-Menu Pick',['../de/d82/md_C-Menu-UG.html#c-menu-pick',1,'']]],
+  ['pick_20a_20picker_10',['Pick A Picker',['../d0/d30/md_README.html#pick---a-picker',1,'Pick - A Picker'],['../index.html#pick---a-picker-1',1,'Pick - A Picker']]],
+  ['pick_20and_20view_20api_11',['Menu, Form, Pick, and View API',['../d5/d77/md_FAQ.html#menu-form-pick-and-view-api',1,'']]],
+  ['pick_20options_12',['Pick Options',['../de/d82/md_C-Menu-UG.html#pick-options',1,'']]],
+  ['pick_20selecting_20multiple_20files_13',['Pick - Selecting Multiple Files',['../d5/d77/md_FAQ.html#pick---selecting-multiple-files',1,'']]],
+  ['pick_20usage_14',['Pick Usage',['../de/d82/md_C-Menu-UG.html#pick-usage',1,'']]],
+  ['pick_20view_20c_20keys_20rsh_20and_20lf_15',['Pick View C Keys RSH and lf',['../d0/d30/md_README.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf'],['../index.html#menu-form-pick-view-c-keys-rsh-and-lf-1',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf']]],
+  ['picker_16',['Picker',['../d0/d30/md_README.html#pick---a-picker',1,'Pick - A Picker'],['../index.html#pick---a-picker-1',1,'Pick - A Picker']]],
+  ['precision_20math_20with_20c_20menu_20and_20gawk_17',['High Precision Math With C-Menu and Gawk',['../d5/d77/md_FAQ.html#high-precision-math-with-c-menu-and-gawk',1,'']]],
+  ['prepend_20path_18',['Prepend Path',['../d7/da4/md_snippets.html#prepend-path',1,'']]],
+  ['prerequisites_19',['Prerequisites',['../de/d82/md_C-Menu-UG.html#prerequisites',1,'Prerequisites'],['../d4/def/md_INSTALL.html#prerequisites-1',1,'Prerequisites']]],
+  ['privilege_20indicator_20shell_20prompts_20',['Privilege Indicator Shell Prompts',['../d7/da4/md_snippets.html#privilege-indicator-shell-prompts',1,'']]],
+  ['prompts_21',['Privilege Indicator Shell Prompts',['../d7/da4/md_snippets.html#privilege-indicator-shell-prompts',1,'']]],
+  ['provided_20scripts_22',['Option 2 - Build C-Menu with Provided Scripts',['../d4/def/md_INSTALL.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
+  ['pun_20intended_23',['Pun Intended',['../d0/d30/md_README.html#highlights-pun-intended',1,'Highlights (Pun Intended)'],['../index.html#highlights-pun-intended-1',1,'Highlights (Pun Intended)']]]
+];

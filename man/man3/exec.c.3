@@ -1,0 +1,512 @@
+.TH "src/exec.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/exec.c \- Functions to execute external commands\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <cm\&.h>\fP
+.br
+\fR#include <errno\&.h>\fP
+.br
+\fR#include <fcntl\&.h>\fP
+.br
+\fR#include <stddef\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <sys/types\&.h>\fP
+.br
+\fR#include <sys/wait\&.h>\fP
+.br
+\fR#include <termios\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBfull_screen_fork_exec\fP (char **argv)"
+.br
+.RI "Execute a command in full screen mode\&. "
+.ti -1c
+.RI "int \fBfull_screen_shell\fP (char *shellCmdPtr)"
+.br
+.RI "Execute a shell command in full screen mode\&. "
+.ti -1c
+.RI "int \fBshell\fP (char *shellCmdPtr)"
+.br
+.RI "Execute a shell command\&. "
+.ti -1c
+.RI "int \fBfork_exec\fP (char **argv)"
+.br
+.RI "Fork and exec a command\&. "
+.ti -1c
+.RI "void \fBabend\fP (int ec, char *s)"
+.br
+.RI "Abnormal program termination\&. "
+.ti -1c
+.RI "void \fBuser_end\fP ()"
+.br
+.RI "Program terminated by user\&. "
+.ti -1c
+.RI "int \fBnf_error\fP (int ec, char *s)"
+.br
+.RI "Display error message and wait for key press\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "int \fBeargc\fP"
+.br
+.ti -1c
+.RI "char * \fBeargv\fP [MAXARGS]"
+.br
+.ti -1c
+.RI "char \fBearg_str\fP [\fBMAXLEN\fP]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Functions to execute external commands\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBexec\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void abend (int ec, char * s)"
+
+.PP
+Abnormal program termination\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIec\fP Exit code 
+.br
+\fIs\fP Error message 
+.RE
+.PP
+
+.PP
+Definition at line \fB1058\fP of file \fBdwin\&.c\fP\&.
+.nf
+1058                             {
+1059     destroy_curses();
+1060     restore_shell_tioctl();
+1061     sig_dfl_mode();
+1062     fprintf(stderr, "\\n\\nABEND: %s (code: %d)\\n", s, ec);
+1063     exit(EXIT_FAILURE);
+1064 }
+.PP
+.fi
+
+.PP
+References \fBdestroy_curses()\fP, \fBrestore_shell_tioctl()\fP, and \fBsig_dfl_mode()\fP\&.
+.PP
+Referenced by \fBdisplay_error()\fP, \fBform_parse_desc()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBinit_view_full_screen()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBnew_chyron()\fP, \fBnew_form()\fP, \fBnew_init()\fP, \fBnew_menu()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBopen_curses()\fP, \fBparse_menu_description()\fP, \fBPerror()\fP, \fBsig_prog_mode()\fP, and \fBview_init_input()\fP\&.
+.SS "int fork_exec (char ** argv)"
+
+.PP
+Fork and exec a command\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargv\fP - array of arguments for the command to execute 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the return code from the executed command, or -1 on error 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Captures and restores terminal settings around the fork and exec\&. 
+
+.PP
+Sets signal handlers to default in the child process\&. 
+
+.PP
+Waits for the child process to complete in the parent process\&. 
+
+.PP
+Handles errors from fork and execvp, and reports child exit status\&. 
+
+.PP
+Restores curses mode and keypad settings after execution\&. 
+
+.PP
+Restores window states after execution\&. 
+
+.PP
+Uses a temporary string buffer tmp_str for error messages\&. 
+
+.PP
+Uses Perror for error reporting\&. 
+
+.PP
+Uses sig_dfl_mode and sig_prog_mode for signal handling\&. 
+
+.PP
+Uses capture_curses_tioctl and restore_curses_tioctl for terminal settings\&. 
+
+.PP
+Uses restore_shell_tioctl for shell terminal settings\&. 
+
+.PP
+Uses waitpid to wait for the child process\&. 
+
+.PP
+Uses WIFEXITED, WEXITSTATUS, WIFSIGNALED, and WTERMSIG to interpret child status\&. 
+
+.PP
+Uses keypad to manage keypad mode in curses\&. 
+
+.PP
+Uses restore_wins to restore window states\&. 
+
+.PP
+Uses errno for error codes\&. 
+
+.PP
+Uses pid_t for process IDs\&. 
+
+.PP
+Uses standard file descriptors STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO\&. 
+
+.PP
+Uses execvp for executing the command\&. 
+
+.PP
+Uses fork for creating a new process\&. 
+
+.PP
+Uses ssnprintf for formatting error messages\&. 
+
+.PP
+Uses switch-case for handling fork results\&. 
+
+.PP
+Uses default shell if SHELL environment variable is not set\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB124\fP of file \fBexec\&.c\fP\&.
+.nf
+124                            {
+125     char tmp_str[MAXLEN];
+126     pid_t pid;
+127     int status;
+128     int rc;
+129 
+130     if (argv[0] == 0) {
+131         Perror("fork_exec: missing argument for execvp");
+132         return (\-1);
+133     }
+134     capture_curses_tioctl();
+135     sig_dfl_mode();
+136     restore_shell_tioctl();
+137 
+138     tmp_str[0] = '\\0';
+139     pid = fork();
+140     switch (pid) {
+141     case \-1: // parent fork failed
+142         restore_curses_tioctl();
+143         sig_prog_mode();
+144         keypad(stdscr, true);
+145         ssnprintf(tmp_str, sizeof(tmp_str), "fork failed: %s, errno: %d",
+146                   argv[0], errno);
+147         Perror(tmp_str);
+148         return (\-1);
+149     case 0: // child
+150         restore_shell_tioctl();
+151         execvp(argv[0], argv);
+152         restore_curses_tioctl();
+153         sig_prog_mode();
+154         keypad(stdscr, true);
+155         ssnprintf(tmp_str, sizeof(tmp_str), "execvp failed: %s, errno: %d",
+156                   argv[0], errno);
+157         Perror(tmp_str);
+158         exit(\-1);
+159     default: // parent
+160         rc = 0;
+161         restore_curses_tioctl();
+162         sig_prog_mode();
+163         waitpid(pid, &status, 0);
+164         if (WIFEXITED(status)) {
+165             rc = WEXITSTATUS(status);
+166             if (rc != 0) {
+167                 keypad(stdscr, true);
+168                 ssnprintf(tmp_str, sizeof(tmp_str),
+169                           "Child %s exited  with status %d", argv[0], rc);
+170             }
+171         } else {
+172             if (WIFSIGNALED(status)) {
+173                 rc = WTERMSIG(status);
+174                 keypad(stdscr, true);
+175                 ssnprintf(tmp_str, sizeof(tmp_str),
+176                           "Child %s terminated by signal %d", argv[0], rc);
+177             } else {
+178                 keypad(stdscr, true);
+179                 ssnprintf(tmp_str, sizeof(tmp_str),
+180                           "Child %s terminated abnormally", argv[0]);
+181             }
+182         }
+183         break;
+184     }
+185     restore_curses_tioctl();
+186     sig_prog_mode();
+187     keypad(stdscr, true);
+188     restore_wins();
+189     if (tmp_str[0] != '\\0') {
+190         Perror(tmp_str);
+191     }
+192     return (rc);
+193 }
+.PP
+.fi
+
+.PP
+References \fBcapture_curses_tioctl()\fP, \fBMAXLEN\fP, \fBPerror()\fP, \fBrestore_curses_tioctl()\fP, \fBrestore_shell_tioctl()\fP, \fBrestore_wins()\fP, \fBsig_dfl_mode()\fP, \fBsig_prog_mode()\fP, \fBssnprintf()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBfull_screen_fork_exec()\fP, and \fBshell()\fP\&.
+.SS "int full_screen_fork_exec (char ** argv)"
+
+.PP
+Execute a command in full screen mode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargv\fP - array of arguments for the command to execute 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the return code from the executed command 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Clear the screen, 
+
+.PP
+move the cursor to the bottom, and refresh the screen before executing the command\&. 
+
+.PP
+After the command completes, clear the screen, move the cursor to the top, refresh the screen, and restore the windows\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB40\fP of file \fBexec\&.c\fP\&.
+.nf
+40                                        {
+41     int rc;
+42 
+43     fflush(stderr);
+44     wclear(stdscr);
+45     wmove(stdscr, LINES \- 1, 0);
+46     wrefresh(stdscr);
+47     rc = fork_exec(argv);
+48     wclear(stdscr);
+49     wmove(stdscr, 0, 0);
+50     wrefresh(stdscr);
+51     restore_wins();
+52     return (rc);
+53 }
+.PP
+.fi
+
+.PP
+References \fBfork_exec()\fP, and \fBrestore_wins()\fP\&.
+.PP
+Referenced by \fBmenu_cmd_processor()\fP\&.
+.SS "int full_screen_shell (char * shellCmdPtr)"
+
+.PP
+Execute a shell command in full screen mode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIshellCmdPtr\fP - pointer to the shell command string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the return code from the executed shell command 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Clear the screen, move the cursor to the top, and refresh the screen before executing the shell command\&. 
+
+.PP
+After the command completes, restore the windows\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB61\fP of file \fBexec\&.c\fP\&.
+.nf
+61                                          {
+62     int rc;
+63 
+64     fflush(stderr);
+65     wclear(stdscr);
+66     wmove(stdscr, 0, 0);
+67     wrefresh(stdscr);
+68     rc = shell(shellCmdPtr);
+69     restore_wins();
+70     return (rc);
+71 }
+.PP
+.fi
+
+.PP
+References \fBrestore_wins()\fP, and \fBshell()\fP\&.
+.PP
+Referenced by \fBmenu_cmd_processor()\fP, and \fBview_cmd_processor()\fP\&.
+.SS "int nf_error (int ec, char * s)"
+
+.PP
+Display error message and wait for key press\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIec\fP Error code 
+.br
+\fIs\fP Error message 
+.RE
+.PP
+
+.PP
+Definition at line \fB1037\fP of file \fBdwin\&.c\fP\&.
+.nf
+1037                               {
+1038     fprintf(stderr, "ERROR: %s code: %d\\n", s, ec);
+1039     fprintf(stderr, "Press a key to continue");
+1040     di_getch();
+1041     fprintf(stderr, "\\n");
+1042     return ec;
+1043 }
+.PP
+.fi
+
+.PP
+References \fBdi_getch()\fP\&.
+.SS "int shell (char * shellCmdPtr)"
+
+.PP
+Execute a shell command\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIshellCmdPtr\fP - pointer to the shell command string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the return code from the executed shell command 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Executes the command string using the user's shell\&. 
+
+.PP
+If the SHELL environment variable is not set, use /bin/sh\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB77\fP of file \fBexec\&.c\fP\&.
+.nf
+77                              {
+78     int Eargc;
+79     char *Eargv[MAXARGS];
+80     char *shellPtr;
+81     int rc;
+82 
+83     Eargc = 0;
+84     shellPtr = getenv("SHELL");
+85     if (shellPtr == nullptr || *shellPtr == '\\0')
+86         shellPtr = DEFAULTSHELL;
+87     Eargv[Eargc++] = strdup(shellPtr);
+88     Eargv[Eargc++] = "\-c";
+89     Eargv[Eargc++] = shellCmdPtr;
+90     Eargv[Eargc++] = nullptr;
+91     rc = fork_exec(Eargv);
+92     free(Eargv[0]);
+93     return (rc);
+94 }
+.PP
+.fi
+
+.PP
+References \fBfork_exec()\fP\&.
+.PP
+Referenced by \fBform_exec_cmd()\fP, \fBfull_screen_shell()\fP, \fBlp()\fP, and \fBview_cmd_processor()\fP\&.
+.SS "void user_end ()"
+
+.PP
+Program terminated by user\&. 
+.PP
+Definition at line \fB1046\fP of file \fBdwin\&.c\fP\&.
+.nf
+1046                 {
+1047     destroy_curses();
+1048     restore_shell_tioctl();
+1049     sig_dfl_mode();
+1050     fprintf(stderr, "Normal program exit");
+1051     fprintf(stderr, "\\n");
+1052     exit(EXIT_SUCCESS);
+1053 }
+.PP
+.fi
+
+.PP
+References \fBdestroy_curses()\fP, \fBrestore_shell_tioctl()\fP, and \fBsig_dfl_mode()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "char earg_str[\fBMAXLEN\fP]"
+
+.PP
+Definition at line \fB23\fP of file \fBexec\&.c\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP, \fBform_calculate()\fP, \fBform_exec_cmd()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "int eargc"
+
+.PP
+Definition at line \fB21\fP of file \fBexec\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBform_engine()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SS "char* eargv[MAXARGS]"
+
+.PP
+Definition at line \fB22\fP of file \fBexec\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBform_calculate()\fP, \fBform_engine()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

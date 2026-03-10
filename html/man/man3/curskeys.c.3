@@ -1,0 +1,650 @@
+.TH "src/curskeys.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/curskeys.c \- Test Curses Keys\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <common\&.h>\fP
+.br
+\fR#include <ncursesw/ncurses\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBKSTRLEN\fP   100"
+.br
+.ti -1c
+.RI "#define \fBMAXLEN\fP   256"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBdisplay_curses_keys\fP ()"
+.br
+.RI "Display Curses Keys Responds to curses keys and mouse events, displaying the key code and description\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Test Curses Keys\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBcurskeys\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define KSTRLEN   100"
+
+.PP
+Definition at line \fB14\fP of file \fBcurskeys\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP\&.
+.SS "#define MAXLEN   256"
+
+.PP
+Definition at line \fB15\fP of file \fBcurskeys\&.c\fP\&.
+.PP
+Referenced by \fBbuild_prompt()\fP, \fBcanonicalize_file_spec()\fP, \fBcompile_chyron()\fP, \fBderive_file_spec()\fP, \fBdir_name()\fP, \fBdisplay_curses_keys()\fP, \fBdisplay_error()\fP, \fBdisplay_pick_help()\fP, \fBdump_config()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBexpand_tilde()\fP, \fBfile_spec_parts()\fP, \fBfmt_line()\fP, \fBfork_exec()\fP, \fBform_calculate()\fP, \fBform_desc_error()\fP, \fBform_display_screen()\fP, \fBform_engine()\fP, \fBform_exec_cmd()\fP, \fBform_fmt_field()\fP, \fBform_parse_desc()\fP, \fBform_read_data()\fP, \fBform_write()\fP, \fBget_clr_pair()\fP, \fBget_cmd_arg()\fP, \fBgo_to_line()\fP, \fBhandle_signal()\fP, \fBinit_form()\fP, \fBinit_form_files()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBinit_pick_files()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_files()\fP, \fBinit_view_full_screen()\fP, \fBlf_find()\fP, \fBlf_process()\fP, \fBlocate_file_in_path()\fP, \fBlp()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBmenu_engine()\fP, \fBmk_dir()\fP, \fBmvwaddstr_fill()\fP, \fBnew_form()\fP, \fBnew_init()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBopen_curses()\fP, \fBopen_pick_win()\fP, \fBoutput_objects()\fP, \fBparse_config()\fP, \fBparse_menu_description()\fP, \fBparse_opt_args()\fP, \fBPerror()\fP, \fBpick_display_chyron()\fP, \fBrep_substring()\fP, \fBsearch()\fP, \fBstr_to_args()\fP, \fBverify_dir()\fP, \fBverify_file()\fP, \fBverify_spec_arg()\fP, \fBview_cmd_processor()\fP, \fBview_display_help()\fP, \fBview_init_input()\fP, \fBwhence()\fP, \fBwin_new()\fP, \fBwrite_config()\fP, and \fBwrite_view_buffer()\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int display_curses_keys ()"
+
+.PP
+Display Curses Keys Responds to curses keys and mouse events, displaying the key code and description\&. 
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on failure 
+.RE
+.PP
+
+.PP
+Definition at line \fB23\fP of file \fBcurskeys\&.c\fP\&.
+.nf
+23                           {
+24     WINDOW *win;
+25     WINDOW *box;
+26     char Title[] = "TEST CURSES KEYS";
+27     int lines = 10;
+28     int cols = 55;
+29     char kstr[KSTRLEN];
+30     unsigned int c;
+31     char action[MAXLEN];
+32     char tmp[MAXLEN];
+33     MEVENT event;
+34     char *s;
+35     int maxy, maxx;
+36 
+37     getmaxyx(stdscr, maxy, maxx);
+38     int begy = (maxy \- lines) / 3;
+39     int begx = (maxx \- cols) / 2;
+40 
+41     mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION | BUTTON_SHIFT |
+42                   BUTTON_CTRL | BUTTON_ALT,
+43               nullptr);
+44     if (win_new(lines, cols, begy, begx, Title, 0)) {
+45         strnz__cpy(tmp, "win_new failed: ", MAXLEN \- 1);
+46         strnz__cat(tmp, Title, MAXLEN \- 1);
+47         Perror(tmp);
+48         return 0;
+49     }
+50     win = win_win[win_ptr];
+51     box = win_box[win_ptr];
+52     keypad(win, TRUE);
+53     wattron(win, WA_REVERSE);
+54     mvwaddstr(win, lines \- 1, 0, " <ALT>END to exit ");
+55     wattroff(win, WA_REVERSE);
+56     wnoutrefresh(box);
+57     mvwaddstr(win, 1, 4, "Press a key or activate the mouse:");
+58     // timeout(1000);
+59     c = '\\0';
+60     while (!c) {
+61         kstr[0] = '\\0';
+62         wmove(win, 1, 39);
+63         c = xwgetch(win, nullptr);
+64         s = keybound(c, 0);
+65         switch (c) {
+66         case '\\0':
+67             break;
+68         case KEY_CODE_YES:
+69             strnz__cpy(kstr, "KEY_CODE_YES A wchar_t contains a key code",
+70                        KSTRLEN \- 1);
+71             break;
+72         case KEY_BREAK:
+73             strnz__cpy(kstr, "KEY_BREAK Break key(unreliable)", KSTRLEN \- 1);
+74             break;
+75         case KEY_DOWN:
+76             strnz__cpy(kstr, "KEY_DOWN down \- arrow key", KSTRLEN \- 1);
+77             break;
+78         case KEY_UP:
+79             strnz__cpy(kstr, "KEY_UP up \- arrow key", KSTRLEN \- 1);
+80             break;
+81         case KEY_LEFT:
+82             strnz__cpy(kstr, "KEY_LEFT left \- arrow key", KSTRLEN \- 1);
+83             break;
+84         case KEY_RIGHT:
+85             strnz__cpy(kstr, "KEY_RIGHT right \- arrow key", KSTRLEN \- 1);
+86             break;
+87         case KEY_HOME:
+88             strnz__cpy(kstr, "KEY_HOME home key", KSTRLEN \- 1);
+89             break;
+90         case KEY_BACKSPACE:
+91             strnz__cpy(kstr, "KEY_BACKSPACE backspace key", KSTRLEN \- 1);
+92             break;
+93         case KEY_F(1):
+94             strnz__cpy(kstr, "KEY_F(1) KEY_F(1)", KSTRLEN \- 1);
+95             break;
+96         case KEY_F(2):
+97             strnz__cpy(kstr, "KEY_F2 KEY_F2", KSTRLEN \- 1);
+98             break;
+99         case KEY_F(3):
+100             strnz__cpy(kstr, "KEY_F3 KEY_F3", KSTRLEN \- 1);
+101             break;
+102         case KEY_F(4):
+103             strnz__cpy(kstr, "KEY_F4 KEY_F4", KSTRLEN \- 1);
+104             break;
+105         case KEY_F(5):
+106             strnz__cpy(kstr, "KEY_F5 KEY_F5", KSTRLEN \- 1);
+107             break;
+108         case KEY_F(6):
+109             strnz__cpy(kstr, "KEY_F6 KEY_F6", KSTRLEN \- 1);
+110             break;
+111         case KEY_F(7):
+112             strnz__cpy(kstr, "KEY_F7 KEY_F7", KSTRLEN \- 1);
+113             break;
+114         case KEY_F(8):
+115             strnz__cpy(kstr, "KEY_F8 KEY_F8", KSTRLEN \- 1);
+116             break;
+117         case KEY_F(9):
+118             strnz__cpy(kstr, "KEY_F9 KEY_F9", KSTRLEN \- 1);
+119             break;
+120         case KEY_F(10):
+121             strnz__cpy(kstr, "KEY_F10 KEY_F10", KSTRLEN \- 1);
+122             break;
+123         case KEY_F(11):
+124             strnz__cpy(kstr, "KEY_F11 KEY_F11", KSTRLEN \- 1);
+125             break;
+126         case KEY_F(12):
+127             strnz__cpy(kstr, "KEY_F12 KEY_F12", KSTRLEN \- 1);
+128             break;
+129         case KEY_DL:
+130             strnz__cpy(kstr, "KEY_DL delete \- line key", KSTRLEN \- 1);
+131             break;
+132         case KEY_IL:
+133             strnz__cpy(kstr, "KEY_IL insert \- line key", KSTRLEN \- 1);
+134             break;
+135         case KEY_DC:
+136             strnz__cpy(kstr, "KEY_DC delete \- character key", KSTRLEN \- 1);
+137             break;
+138         case KEY_IC:
+139             strnz__cpy(kstr, "KEY_IC insert \- character key", KSTRLEN \- 1);
+140             break;
+141         case KEY_EIC:
+142             strnz__cpy(kstr, "KEY_EIC sent by rmir or smir in insert mode",
+143                        KSTRLEN \- 1);
+144             break;
+145         case KEY_CLEAR:
+146             strnz__cpy(kstr, "KEY_CLEAR clear \- screen or erase key",
+147                        KSTRLEN \- 1);
+148             break;
+149         case KEY_EOS:
+150             strnz__cpy(kstr, "KEY_EOS clear \- to \- end \- of \- screen key",
+151                        KSTRLEN \- 1);
+152             break;
+153         case KEY_EOL:
+154             strnz__cpy(kstr, "KEY_EOL clear \- to \- end \- of \- line key",
+155                        KSTRLEN \- 1);
+156             break;
+157         case KEY_SF:
+158             strnz__cpy(kstr, "KEY_SF scroll \- forward key", KSTRLEN \- 1);
+159             break;
+160         case KEY_SR:
+161             strnz__cpy(kstr, "KEY_SR scroll \- backward key", KSTRLEN \- 1);
+162             break;
+163         case KEY_NPAGE:
+164             strnz__cpy(kstr, "KEY_NPAGE next \- page key", KSTRLEN \- 1);
+165             break;
+166         case KEY_PPAGE:
+167             strnz__cpy(kstr, "KEY_PPAGE previous \- page key", KSTRLEN \- 1);
+168             break;
+169         case KEY_STAB:
+170             strnz__cpy(kstr, "KEY_STAB set \- tab key", KSTRLEN \- 1);
+171             break;
+172         case KEY_CTAB:
+173             strnz__cpy(kstr, "KEY_CTAB clear \- tab key", KSTRLEN \- 1);
+174             break;
+175         case KEY_CATAB:
+176             strnz__cpy(kstr, "KEY_CATAB clear \- all \- tabs key", KSTRLEN \- 1);
+177             break;
+178         case '\\n':
+179             strnz__cpy(kstr, "KEY_ENTER newline key", KSTRLEN \- 1);
+180             break;
+181         case KEY_ENTER:
+182             strnz__cpy(kstr, "KEY_ENTER enter / send key", KSTRLEN \- 1);
+183             break;
+184         case KEY_SRESET:
+185             strnz__cpy(kstr, "KEY_SRESET Soft(partial) reset(unreliable)",
+186                        KSTRLEN \- 1);
+187             break;
+188         case KEY_RESET:
+189             strnz__cpy(kstr, "KEY_RESET Reset or hard reset(unreliable)",
+190                        KSTRLEN \- 1);
+191             break;
+192         case KEY_PRINT:
+193             strnz__cpy(kstr, "KEY_PRINT print key", KSTRLEN \- 1);
+194             break;
+195         case KEY_LL:
+196             strnz__cpy(kstr, "KEY_LL lower \- left key(home down)", KSTRLEN \- 1);
+197             break;
+198         case KEY_A1:
+199             strnz__cpy(kstr, "KEY_A1 upper left of keypad", KSTRLEN \- 1);
+200             break;
+201         case KEY_A3:
+202             strnz__cpy(kstr, "KEY_A3 upper right of keypad", KSTRLEN \- 1);
+203             break;
+204         case KEY_B2:
+205             strnz__cpy(kstr, "KEY_B2 center of keypad", KSTRLEN \- 1);
+206             break;
+207         case KEY_C1:
+208             strnz__cpy(kstr, "KEY_C1 lower left of keypad", KSTRLEN \- 1);
+209             break;
+210         case KEY_C3:
+211             strnz__cpy(kstr, "KEY_C3 lower right of keypad", KSTRLEN \- 1);
+212             break;
+213         case KEY_BTAB:
+214             strnz__cpy(kstr, "KEY_BTAB back \- tab key", KSTRLEN \- 1);
+215             break;
+216         case KEY_BEG:
+217             strnz__cpy(kstr, "KEY_BEG begin key", KSTRLEN \- 1);
+218             break;
+219         case KEY_CANCEL:
+220             strnz__cpy(kstr, "KEY_CANCEL cancel key", KSTRLEN \- 1);
+221             break;
+222         case KEY_CLOSE:
+223             strnz__cpy(kstr, "KEY_CLOSE close key", KSTRLEN \- 1);
+224             break;
+225         case KEY_COMMAND:
+226             strnz__cpy(kstr, "KEY_COMMAND command key", KSTRLEN \- 1);
+227             break;
+228         case KEY_COPY:
+229             strnz__cpy(kstr, "KEY_COPY copy key", KSTRLEN \- 1);
+230             break;
+231         case KEY_CREATE:
+232             strnz__cpy(kstr, "KEY_CREATE create key", KSTRLEN \- 1);
+233             break;
+234         case KEY_END:
+235             strnz__cpy(kstr, "KEY_END end key", KSTRLEN \- 1);
+236             break;
+237         case KEY_EXIT:
+238             strnz__cpy(kstr, "KEY_EXIT exit key", KSTRLEN \- 1);
+239             break;
+240         case KEY_FIND:
+241             strnz__cpy(kstr, "KEY_FIND find key", KSTRLEN \- 1);
+242             break;
+243         case KEY_HELP:
+244             strnz__cpy(kstr, "KEY_HELP help key", KSTRLEN \- 1);
+245             break;
+246         case KEY_MARK:
+247             strnz__cpy(kstr, "KEY_MARK mark key", KSTRLEN \- 1);
+248             break;
+249         case KEY_MESSAGE:
+250             strnz__cpy(kstr, "KEY_MESSAGE message key", KSTRLEN \- 1);
+251             break;
+252         case KEY_MOVE:
+253             strnz__cpy(kstr, "KEY_MOVE move key", KSTRLEN \- 1);
+254             break;
+255         case KEY_NEXT:
+256             strnz__cpy(kstr, "KEY_NEXT next key", KSTRLEN \- 1);
+257             break;
+258         case KEY_OPEN:
+259             strnz__cpy(kstr, "KEY_OPEN open key", KSTRLEN \- 1);
+260             break;
+261         case KEY_OPTIONS:
+262             strnz__cpy(kstr, "KEY_OPTIONS options key", KSTRLEN \- 1);
+263             break;
+264         case KEY_PREVIOUS:
+265             strnz__cpy(kstr, "KEY_PREVIOUS previous key", KSTRLEN \- 1);
+266             break;
+267         case KEY_REDO:
+268             strnz__cpy(kstr, "KEY_REDO redo key", KSTRLEN \- 1);
+269             break;
+270         case KEY_REFERENCE:
+271             strnz__cpy(kstr, "KEY_REFERENCE reference key", KSTRLEN \- 1);
+272             break;
+273         case KEY_REFRESH:
+274             strnz__cpy(kstr, "KEY_REFRESH refresh key", KSTRLEN \- 1);
+275             break;
+276         case KEY_REPLACE:
+277             strnz__cpy(kstr, "KEY_REPLACE replace key", KSTRLEN \- 1);
+278             break;
+279         case KEY_RESTART:
+280             strnz__cpy(kstr, "KEY_RESTART restart key", KSTRLEN \- 1);
+281             break;
+282         case KEY_RESUME:
+283             strnz__cpy(kstr, "KEY_RESUME resume key", KSTRLEN \- 1);
+284             break;
+285         case KEY_SAVE:
+286             strnz__cpy(kstr, "KEY_SAVE save key", KSTRLEN \- 1);
+287             break;
+288         case KEY_SBEG:
+289             strnz__cpy(kstr, "KEY_SBEG shifted begin key", KSTRLEN \- 1);
+290             break;
+291         case KEY_SCANCEL:
+292             strnz__cpy(kstr, "KEY_SCANCEL shifted cancel key", KSTRLEN \- 1);
+293             break;
+294         case KEY_SCOMMAND:
+295             strnz__cpy(kstr, "KEY_SCOMMAND shifted command key", KSTRLEN \- 1);
+296             break;
+297         case KEY_SCOPY:
+298             strnz__cpy(kstr, "KEY_SCOPY shifted copy key", KSTRLEN \- 1);
+299             break;
+300         case KEY_SCREATE:
+301             strnz__cpy(kstr, "KEY_SCREATE shifted create key", KSTRLEN \- 1);
+302             break;
+303         case KEY_SDC:
+304             strnz__cpy(kstr, "KEY_SDC shifted delete \- character key",
+305                        KSTRLEN \- 1);
+306             break;
+307         case KEY_SDL:
+308             strnz__cpy(kstr, "KEY_SDL shifted delete \- line key", KSTRLEN \- 1);
+309             break;
+310         case KEY_SELECT:
+311             strnz__cpy(kstr, "KEY_SELECT select key", KSTRLEN \- 1);
+312             break;
+313         case KEY_SEND:
+314             strnz__cpy(kstr, "KEY_SEND shifted end key", KSTRLEN \- 1);
+315             break;
+316         case KEY_SEOL:
+317             strnz__cpy(kstr,
+318                        "KEY_SEOL shifted clear \- to \- end \- of \- line key",
+319                        KSTRLEN \- 1);
+320             break;
+321         case KEY_SEXIT:
+322             strnz__cpy(kstr, "KEY_SEXIT shifted exit key", KSTRLEN \- 1);
+323             break;
+324         case KEY_SFIND:
+325             strnz__cpy(kstr, "KEY_SFIND shifted find key", KSTRLEN \- 1);
+326             break;
+327         case KEY_SHELP:
+328             strnz__cpy(kstr, "KEY_SHELP shifted help key", KSTRLEN \- 1);
+329             break;
+330         case KEY_SHOME:
+331             strnz__cpy(kstr, "KEY_SHOME shifted home key", KSTRLEN \- 1);
+332             break;
+333         case KEY_SIC:
+334             strnz__cpy(kstr, "KEY_SIC shifted insert \- character key",
+335                        KSTRLEN \- 1);
+336             break;
+337         case KEY_SLEFT:
+338             strnz__cpy(kstr, "KEY_SLEFT shifted left \- arrow key", KSTRLEN \- 1);
+339             break;
+340         case KEY_SMESSAGE:
+341             strnz__cpy(kstr, "KEY_SMESSAGE shifted message key", KSTRLEN \- 1);
+342             break;
+343         case KEY_SMOVE:
+344             strnz__cpy(kstr, "KEY_SMOVE shifted move key", KSTRLEN \- 1);
+345             break;
+346         case KEY_SNEXT:
+347             strnz__cpy(kstr, "KEY_SNEXT shifted next key", KSTRLEN \- 1);
+348             break;
+349         case KEY_SOPTIONS:
+350             strnz__cpy(kstr, "KEY_SOPTIONS shifted options key", KSTRLEN \- 1);
+351             break;
+352         case KEY_SPREVIOUS:
+353             strnz__cpy(kstr, "KEY_SPREVIOUS shifted previous key", KSTRLEN \- 1);
+354             break;
+355         case KEY_SPRINT:
+356             strnz__cpy(kstr, "KEY_SPRINT shifted print key", KSTRLEN \- 1);
+357             break;
+358         case KEY_SREDO:
+359             strnz__cpy(kstr, "KEY_SREDO shifted redo key", KSTRLEN \- 1);
+360             break;
+361         case KEY_SREPLACE:
+362             strnz__cpy(kstr, "KEY_SREPLACE shifted replace key", KSTRLEN \- 1);
+363             break;
+364         case KEY_SRIGHT:
+365             strnz__cpy(kstr, "KEY_SRIGHT shifted right \- arrow key",
+366                        KSTRLEN \- 1);
+367             break;
+368         case KEY_SRSUME:
+369             strnz__cpy(kstr, "KEY_SRSUME shifted resume key", KSTRLEN \- 1);
+370             break;
+371         case KEY_SSAVE:
+372             strnz__cpy(kstr, "KEY_SSAVE shifted save key", KSTRLEN \- 1);
+373             break;
+374         case KEY_SSUSPEND:
+375             strnz__cpy(kstr, "KEY_SSUSPEND shifted suspend key", KSTRLEN \- 1);
+376             break;
+377         case KEY_SUNDO:
+378             strnz__cpy(kstr, "KEY_SUNDO shifted undo key", KSTRLEN \- 1);
+379             break;
+380         case KEY_SUSPEND:
+381             strnz__cpy(kstr, "KEY_SUSPEND suspend key", KSTRLEN \- 1);
+382             break;
+383         case KEY_UNDO:
+384             strnz__cpy(kstr, "KEY_UNDO undo key", KSTRLEN \- 1);
+385             break;
+386         case KEY_ALTDEL:
+387             strnz__cpy(kstr, "KEY_ALTDEL alt+delete", KSTRLEN \- 1);
+388             break;
+389         case KEY_ALTDOWN:
+390             strnz__cpy(kstr, "KEY_ALTDOWN alt+down", KSTRLEN \- 1);
+391             break;
+392         case KEY_ALTEND:
+393             strnz__cpy(kstr, "KEY_ALTEND alt+end", KSTRLEN \- 1);
+394             break;
+395         case KEY_ALTHOME:
+396             strnz__cpy(kstr, "KEY_ALTHOME alt+home", KSTRLEN \- 1);
+397             break;
+398         case KEY_ALTINS:
+399             strnz__cpy(kstr, "KEY_ALTINS alt+ins", KSTRLEN \- 1);
+400             break;
+401         case KEY_ALTLEFT:
+402             strnz__cpy(kstr, "KEY_ALTLEFT alt+left", KSTRLEN \- 1);
+403             break;
+404         case KEY_ALTPGDN:
+405             strnz__cpy(kstr, "KEY_ALTPGDN alt+pgdn", KSTRLEN \- 1);
+406             break;
+407         case KEY_ALTPGUP:
+408             strnz__cpy(kstr, "KEY_ALTPGUP alt+pgup", KSTRLEN \- 1);
+409             break;
+410         case KEY_ALTRIGHT:
+411             strnz__cpy(kstr, "KEY_ALTRIGHT alt+right", KSTRLEN \- 1);
+412             break;
+413         case KEY_ALTUP:
+414             strnz__cpy(kstr, "KEY_ALTUP alt+up", KSTRLEN \- 1);
+415             break;
+416         case KEY_ALTF(1):
+417             strnz__cpy(kstr, "KEY_ALTF1 alt+F1", KSTRLEN \- 1);
+418             break;
+419         case KEY_ALTF(2):
+420             strnz__cpy(kstr, "KEY_ALTF1 alt+F2", KSTRLEN \- 1);
+421             break;
+422         case KEY_ALTF(3):
+423             strnz__cpy(kstr, "KEY_ALTF3 alt+F3", KSTRLEN \- 1);
+424             break;
+425         case KEY_ALTF(4):
+426             strnz__cpy(kstr, "KEY_ALTF4 alt+F4", KSTRLEN \- 1);
+427             break;
+428         case KEY_ALTF(5):
+429             strnz__cpy(kstr, "KEY_ALTF5 alt+F5", KSTRLEN \- 1);
+430             break;
+431         case KEY_ALTF(6):
+432             strnz__cpy(kstr, "KEY_ALTF6 alt+F6", KSTRLEN \- 1);
+433             break;
+434         case KEY_ALTF(7):
+435             strnz__cpy(kstr, "KEY_ALTF7 alt+F7", KSTRLEN \- 1);
+436             break;
+437         case KEY_ALTF(8):
+438             strnz__cpy(kstr, "KEY_ALTF8 alt+F8", KSTRLEN \- 1);
+439             break;
+440         case KEY_ALTF(9):
+441             strnz__cpy(kstr, "KEY_ALTF9 alt+F9", KSTRLEN \- 1);
+442             break;
+443         case KEY_ALTF(10):
+444             strnz__cpy(kstr, "KEY_ALTF10 alt+F10", KSTRLEN \- 1);
+445             break;
+446         case KEY_ALTF(11):
+447             strnz__cpy(kstr, "KEY_ALTF11 alt+F11", KSTRLEN \- 1);
+448             break;
+449         case KEY_ALTF(12):
+450             strnz__cpy(kstr, "KEY_ALTF12 alt+F12", KSTRLEN \- 1);
+451             break;
+452         case KEY_MOUSE:
+453             action[0] = '\\0';
+454             if (getmouse(&event) == OK) {
+455                 switch (event\&.bstate) {
+456                 case BUTTON1_PRESSED:
+457                     strnz__cpy(action, "Button 1 pressed", KSTRLEN \- 1);
+458                     break;
+459                 case BUTTON1_RELEASED:
+460                     strnz__cpy(action, "Button 1 released", KSTRLEN \- 1);
+461                     break;
+462                 case BUTTON1_CLICKED:
+463                     strnz__cpy(action, "Button 1 clicked", KSTRLEN \- 1);
+464                     break;
+465                 case BUTTON1_DOUBLE_CLICKED:
+466                     strnz__cpy(action, "Button 1 double\-clicked", KSTRLEN \- 1);
+467                     break;
+468                 case BUTTON2_PRESSED:
+469                     strnz__cpy(action, "Button 2 pressed", KSTRLEN \- 1);
+470                     break;
+471                 case BUTTON2_RELEASED:
+472                     strnz__cpy(action, "Button 2 released", KSTRLEN \- 1);
+473                     break;
+474                 case BUTTON2_CLICKED:
+475                     strnz__cpy(action, "Button 2 clicked", KSTRLEN \- 1);
+476                     break;
+477                 case BUTTON2_DOUBLE_CLICKED:
+478                     strnz__cpy(action, "Button 2 double\-clicked", KSTRLEN \- 1);
+479                     break;
+480                 case BUTTON3_PRESSED:
+481                     strnz__cpy(action, "Button 3 pressed", KSTRLEN \- 1);
+482                     break;
+483                 case BUTTON3_RELEASED:
+484                     strnz__cpy(action, "Button 3 released", KSTRLEN \- 1);
+485                     break;
+486                 case BUTTON3_CLICKED:
+487                     strnz__cpy(action, "Button 3 clicked", KSTRLEN \- 1);
+488                     break;
+489                 case BUTTON3_DOUBLE_CLICKED:
+490                     strnz__cpy(action, "Button 3 double\-clicked", KSTRLEN \- 1);
+491                     break;
+492                 case BUTTON4_PRESSED:
+493                     strnz__cpy(action, "Button 4 pressed", KSTRLEN \- 1);
+494                     break;
+495                 case BUTTON4_RELEASED:
+496                     strnz__cpy(action, "Button 4 released", KSTRLEN \- 1);
+497                     break;
+498                 case BUTTON4_CLICKED:
+499                     strnz__cpy(action, "Button 4 clicked", KSTRLEN \- 1);
+500                     break;
+501                 case BUTTON4_DOUBLE_CLICKED:
+502                     strnz__cpy(action, "Button 4 double\-clicked", KSTRLEN \- 1);
+503                     break;
+504                 case BUTTON5_PRESSED:
+505                     strnz__cpy(action, "Scroll Up", KSTRLEN \- 1);
+506                     break;
+507                 default:
+508                     break;
+509                 }
+510                 mvwaddstr(win, 6, 3, "     Action:");
+511                 mvwaddstr(win, 6, 16, action);
+512                 wclrtoeol(win);
+513 
+514                 strnz__cpy(tmp, "  With Key:", MAXLEN \- 1);
+515                 if (event\&.bstate & BUTTON_SHIFT)
+516                     strnz__cat(tmp, " Shift", MAXLEN \- 1);
+517                 if (event\&.bstate & BUTTON_CTRL)
+518                     strnz__cat(tmp, " Ctrl", MAXLEN \- 1);
+519                 if (event\&.bstate & BUTTON_ALT)
+520                     strnz__cat(tmp, " Alt", MAXLEN \- 1);
+521                 mvwaddstr(win, 3, 4, tmp);
+522                 wclrtoeol(win);
+523                 if (wenclose(win, event\&.y, event\&.x)) {
+524                     sprintf(tmp, "   Inside Win:  y: %3d, x: %3d",
+525                             event\&.y \- begy, event\&.x \- begx);
+526                 } else {
+527                     sprintf(tmp, "  Outside Win:  y: %3d, x: %3d",
+528                             event\&.y \- begy, event\&.x \- begx);
+529                 }
+530                 mvwaddstr(win, 4, 4, tmp);
+531                 wclrtoeol(win);
+532                 wmove(win, 5, 0);
+533                 wclrtoeol(win);
+534                 wmove(win, 7, 0);
+535                 wclrtoeol(win);
+536             }
+537             break;
+538         default:
+539             break;
+540         }
+541         if (c != KEY_MOUSE) {
+542 
+543             sprintf(tmp, "     Octal: %3o", c);
+544             mvwaddstr(win, 3, 4, tmp);
+545             wclrtoeol(win);
+546 
+547             sprintf(tmp, "   Decimal: %3d", c);
+548             mvwaddstr(win, 4, 4, tmp);
+549             wclrtoeol(win);
+550 
+551             sprintf(tmp, "       Hex: %3x", c);
+552             mvwaddstr(win, 5, 4, tmp);
+553             wclrtoeol(win);
+554 
+555             if (kstr[0]) {
+556                 sprintf(tmp, "Description: %s", kstr);
+557             } else {
+558                 sprintf(tmp, "      ASCII: %c", c);
+559             }
+560             mvwaddstr(win, 6, 3, tmp);
+561             wclrtoeol(win);
+562             mvwaddstr(win, 7, 2, "Key bound To: ");
+563             wclrtoeol(win);
+564             mvwaddstr(win, 7, 16, s ? s : "Not Bound");
+565             wrefresh(win);
+566         }
+567         if (c == KEY_ALTEND) {
+568             usleep(100000);
+569             break;
+570         }
+571         c = '\\0';
+572     }
+573     wclear(win);
+574     wrefresh(win);
+575     clear();
+576     refresh();
+577     win_del();
+578     return 0;
+579 }
+.PP
+.fi
+
+.PP
+References \fBKSTRLEN\fP, \fBMAXLEN\fP, \fBPerror()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBTRUE\fP, \fBwin\fP, \fBwin_box\fP, \fBwin_del()\fP, \fBwin_new()\fP, \fBwin_ptr\fP, \fBwin_win\fP, and \fBxwgetch()\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

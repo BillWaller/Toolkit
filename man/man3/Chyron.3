@@ -1,0 +1,78 @@
+.TH "Chyron" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Chyron
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <src/include/cm\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBChyronKey\fP * \fBkey\fP [20]"
+.br
+.ti -1c
+.RI "char \fBs\fP [256]"
+.br
+.ti -1c
+.RI "int \fBl\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBNote\fP
+.RS 4
+The \fBChyron\fP structure represents a key binding for a command in the chyron, which is a status line or message area in the terminal interface\&.
+.RE
+.PP
+The \fBChyronKey\fP structure includes fields for displayable text, the key code, and the end position of the command text in the chyron\&. 
+.PP
+\fBNote\fP
+.RS 4
+This structure allows xwgetch to map mouse clicks to key codes as defined by NCursesw and the C-Menu program\&. 
+
+.PP
+The text field holds the displayable text associated with the command\&. \fBxwgetch()\fP translates a mouse click on the chyron with a particular key code stored in this table\&. 
+
+.PP
+The use case is when the developer wants a dynamic chyron that can be easily changed depending on the context of the program without having to worry about translating mouse click positions to key codes\&. 
+
+.PP
+While many key codes are defined by NCursesw, the developer is free to define their own key codes for custom commands in the chyron\&. However, \fBxwgetch()\fP will translate mouse clicks to the key codes defined in this table, even if they interfere with standard NCurses key codes, Unicode code points, or ASCII characters\&. Just use common sense\&. 
+
+.PP
+In addition to returning the key code associated with mouse clicks on the chyron, \fBxwgetch()\fP also returns the key codes for standard keyboard input, and sets the global variables cliek_y and click_x to the coordinates of the mouse click\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB123\fP of file \fBcm\&.h\fP\&.
+.SH "Field Documentation"
+.PP 
+.SS "\fBChyronKey\fP* Chyron::key[20]"
+array of key bindings for the chyron 
+.PP
+Definition at line \fB124\fP of file \fBcm\&.h\fP\&.
+.PP
+Referenced by \fBcompile_chyron()\fP, \fBdestroy_chyron()\fP, \fBget_chyron_key()\fP, \fBis_set_chyron_key()\fP, \fBnew_chyron()\fP, \fBset_chyron_key()\fP, and \fBunset_chyron_key()\fP\&.
+.SS "int Chyron::l"
+length of the chyron string, for display purposes 
+.PP
+Definition at line \fB126\fP of file \fBcm\&.h\fP\&.
+.PP
+Referenced by \fBcompile_chyron()\fP, \fBdisplay_error()\fP, and \fBPerror()\fP\&.
+.SS "char Chyron::s[256]"
+the chyron string, for displaying messages in 
+.PP
+Definition at line \fB125\fP of file \fBcm\&.h\fP\&.
+.PP
+Referenced by \fBcompile_chyron()\fP, \fBdisplay_error()\fP, and \fBPerror()\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

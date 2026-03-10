@@ -1,0 +1,3057 @@
+.TH "src/include/common.h" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/include/common.h \- Headder for C-Menu \fBMenu\fP, \fBForm\fP, \fBPick\fP, and \fBView\fP components\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <ncursesw/ncurses\&.h>\fP
+.br
+\fR#include <cm\&.h>\fP
+.br
+\fR#include <form\&.h>\fP
+.br
+\fR#include <menu\&.h>\fP
+.br
+\fR#include <pick\&.h>\fP
+.br
+\fR#include <view\&.h>\fP
+.br
+\fR#include <stddef\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBInit\fP"
+.br
+.RI "Gathers runtime information for C-Menu \fBMenu\fP, \fBForm\fP, \fBPick\fP, and \fBView\fP components, used for passing common data and state during initialization and processing of these componentsi\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_XOPEN_SOURCE_EXTENDED\fP   1"
+.br
+.ti -1c
+.RI "#define \fBNCURSES_WIDECHAR\fP   1"
+.br
+.ti -1c
+.RI "#define \fBUSE_PAD\fP   \fBTRUE\fP"
+.br
+.ti -1c
+.RI "#define \fBMIN_COLS\fP   40"
+.br
+.ti -1c
+.RI "#define \fBMAX_WIDE_LEN\fP   1024"
+.br
+.ti -1c
+.RI "#define \fBCOLOR_LEN\fP   8"
+.br
+.ti -1c
+.RI "#define \fBPICK_MAX_ARG_LEN\fP   256"
+.br
+.ti -1c
+.RI "#define \fBMAX_ARGS\fP   64"
+.br
+.ti -1c
+.RI "#define \fBMAX_PICK_OBJS\fP   1024"
+.br
+.ti -1c
+.RI "#define \fBACCEPT_PROMPT_CHAR\fP   '_'"
+.br
+.ti -1c
+.RI "#define \fBMENU_HELP_FILE\fP   'help/menu\&.help'"
+.br
+.ti -1c
+.RI "#define \fBPICK_HELP_FILE\fP   'help/pick\&.help'"
+.br
+.ti -1c
+.RI "#define \fBVIEW_HELP_FILE\fP   'help/view\&.help'"
+.br
+.ti -1c
+.RI "#define \fBVIEW_PRT_FILE\fP   'data/prtout'"
+.br
+.ti -1c
+.RI "#define \fBDEFAULTEDITOR\fP   'vi'"
+.br
+.ti -1c
+.RI "#define \fBMINITRC\fP   '\&.minitrc'"
+.br
+.ti -1c
+.RI "#define \fBABOUT\fP   '\&.about'"
+.br
+.ti -1c
+.RI "#define \fBMAPP_DIR\fP   '~/menuapp'"
+.br
+.ti -1c
+.RI "#define \fBPRINTCMD\fP   'lp \-c \-s'"
+.br
+.ti -1c
+.RI "#define \fBMAXOPTS\fP   50"
+.br
+.ti -1c
+.RI "#define \fBEIGHT\fP   8"
+.br
+.ti -1c
+.RI "#define \fBF_VIEW\fP   0x01"
+.br
+.ti -1c
+.RI "#define \fBP_READ\fP   0"
+.br
+.ti -1c
+.RI "#define \fBP_WRITE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBTRUE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBnew_cmenu\fP()"
+.br
+.ti -1c
+.RI "#define \fBdestroy_cmenu\fP()"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef Menu \fBMenu\fP"
+.br
+.ti -1c
+.RI "typedef Form \fBForm\fP"
+.br
+.ti -1c
+.RI "typedef Pick \fBPick\fP"
+.br
+.ti -1c
+.RI "typedef View \fBView\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCaller\fP { \fBVIEW\fP, \fBFORM\fP, \fBPICK\fP, \fBMENU\fP }"
+.br
+.ti -1c
+.RI "enum \fBOptType\fP { \fBOT_STRING\fP, \fBOT_INT\fP, \fBOT_BOOL\fP, \fBOT_HEX\fP }"
+.br
+.RI "option types "
+.ti -1c
+.RI "enum \fBOptGroup\fP { \fBOG_FILES\fP, \fBOG_DIRS\fP, \fBOG_SPECS\fP, \fBOG_MISC\fP, \fBOG_PARMS\fP, \fBOG_FLAGS\fP, \fBOG_COL\fP }"
+.br
+.RI "option groups "
+.ti -1c
+.RI "enum { \fBIC_MENU\fP, \fBIC_PICK\fP, \fBIC_FORM\fP, \fBIC_VIEW\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBmapp_initialization\fP (\fBInit\fP *\fBinit\fP, int, char **)"
+.br
+.RI "Main initialization function for MAPP - \fBMenu\fP Application\&. "
+.ti -1c
+.RI "\fBInit\fP * \fBnew_init\fP (int, char **)"
+.br
+.RI "Create and initialize \fBInit\fP structure\&. "
+.ti -1c
+.RI "\fBView\fP * \fBnew_view\fP (\fBInit\fP *\fBinit\fP, int, char **)"
+.br
+.RI "Create and initialize \fBView\fP structure\&. "
+.ti -1c
+.RI "\fBForm\fP * \fBnew_form\fP (\fBInit\fP *\fBinit\fP, int, char **, int, int)"
+.br
+.RI "Create and initialize \fBForm\fP structure\&. "
+.ti -1c
+.RI "\fBPick\fP * \fBnew_pick\fP (\fBInit\fP *\fBinit\fP, int, char **, int, int)"
+.br
+.RI "Create and initialize \fBPick\fP structure\&. "
+.ti -1c
+.RI "\fBMenu\fP * \fBnew_menu\fP (\fBInit\fP *\fBinit\fP, int, char **, int, int)"
+.br
+.RI "Create and initialize \fBMenu\fP structure\&. "
+.ti -1c
+.RI "\fBMenu\fP * \fBdestroy_menu\fP (\fBInit\fP *\fBinit\fP)"
+.br
+.RI "Destroy \fBMenu\fP structure\&. "
+.ti -1c
+.RI "\fBPick\fP * \fBdestroy_pick\fP (\fBInit\fP *\fBinit\fP)"
+.br
+.RI "Destroy \fBPick\fP structure\&. "
+.ti -1c
+.RI "\fBForm\fP * \fBdestroy_form\fP (\fBInit\fP *\fBinit\fP)"
+.br
+.RI "Destroy \fBForm\fP structure\&. "
+.ti -1c
+.RI "\fBView\fP * \fBdestroy_view\fP (\fBInit\fP *\fBinit\fP)"
+.br
+.RI "Destroy \fBView\fP structure\&. "
+.ti -1c
+.RI "\fBInit\fP * \fBdestroy_init\fP (\fBInit\fP *\fBinit\fP)"
+.br
+.RI "Destroy \fBInit\fP structure\&. "
+.ti -1c
+.RI "int \fBparse_opt_args\fP (\fBInit\fP *, int, char **)"
+.br
+.RI "Parse command-line options and set \fBInit\fP struct values accordingly\&. "
+.ti -1c
+.RI "void \fBzero_opt_args\fP (\fBInit\fP *)"
+.br
+.RI "Initialize optional arguments in the \fBInit\fP struct to default values\&. "
+.ti -1c
+.RI "int \fBwrite_config\fP (\fBInit\fP *)"
+.br
+.RI "Write the current configuration to a file specified in init->minitrc\&. "
+.ti -1c
+.RI "bool \fBderive_file_spec\fP (char *, char *, char *)"
+.br
+.RI "Derive full file specification from directory and file name\&. "
+.ti -1c
+.RI "bool \fBinit_menu_files\fP (\fBInit\fP *, int, char **)"
+.br
+.RI "Initialize \fBMenu\fP file specifications\&. "
+.ti -1c
+.RI "unsigned int \fBmenu_engine\fP (\fBInit\fP *)"
+.br
+.RI "The main loop of the menu system\&. "
+.ti -1c
+.RI "unsigned int \fBparse_menu_description\fP (\fBInit\fP *)"
+.br
+.RI "Parse menu description file and create \fBMenu\fP\&. "
+.ti -1c
+.RI "int \fBinit_form\fP (\fBInit\fP *, int, char **, int, int)"
+.br
+.RI "Initialize form data structure and parse description file\&. "
+.ti -1c
+.RI "int \fBinit_pick\fP (\fBInit\fP *, int, char **, int, int)"
+.br
+.RI "Initializes pick structure and opens pick input file or pipe\&. "
+.ti -1c
+.RI "int \fBopen_pick_win\fP (\fBInit\fP *)"
+.br
+.RI "Initializes the pick window based on the parameters specified in the \fBPick\fP structure\&. "
+.ti -1c
+.RI "int \fBpick_engine\fP (\fBInit\fP *)"
+.br
+.RI "Initializes pick interface, calculates window size and position, and enters picker loop\&. "
+.ti -1c
+.RI "int \fBview_file\fP (\fBInit\fP *)"
+.br
+.RI "Start view\&. "
+.ti -1c
+.RI "int \fBmview\fP (\fBInit\fP *, int, char **)"
+.br
+.RI "subprogram entry point for C-Menu \fBView\fP "
+.ti -1c
+.RI "int \fBinit_view_full_screen\fP (\fBInit\fP *)"
+.br
+.RI "Initialize C-Menu \fBView\fP in full screen mode\&. "
+.ti -1c
+.RI "int \fBinit_view_boxwin\fP (\fBInit\fP *, char *)"
+.br
+.RI "Initialize the C-Menu \fBView\fP in box window mode\&. "
+.ti -1c
+.RI "bool \fBview_init_input\fP (\fBView\fP *, char *)"
+.br
+.RI "Initialize the input for a C-Menu \fBView\fP\&. "
+.ti -1c
+.RI "int \fBcmd_processor\fP (\fBInit\fP *)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBInit\fP * \fBinit\fP"
+.br
+.ti -1c
+.RI "int \fBinit_cnt\fP"
+.br
+.ti -1c
+.RI "char \fBminitrc\fP [256]"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Headder for C-Menu \fBMenu\fP, \fBForm\fP, \fBPick\fP, and \fBView\fP components\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBcommon\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _XOPEN_SOURCE_EXTENDED   1"
+
+.PP
+Definition at line \fB13\fP of file \fBcommon\&.h\fP\&.
+.SS "#define ABOUT   '\&.about'"
+
+.PP
+Definition at line \fB43\fP of file \fBcommon\&.h\fP\&.
+.SS "#define ACCEPT_PROMPT_CHAR   '_'"
+
+.PP
+Definition at line \fB34\fP of file \fBcommon\&.h\fP\&.
+.SS "#define COLOR_LEN   8"
+
+.PP
+Definition at line \fB30\fP of file \fBcommon\&.h\fP\&.
+.SS "#define DEFAULTEDITOR   'vi'"
+
+.PP
+Definition at line \fB40\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBmenu_cmd_processor()\fP, and \fBview_cmd_processor()\fP\&.
+.SS "#define destroy_cmenu()"
+\fBValue:\fP
+.nf
+destroy_init(init);                                                        \\
+win_del();                                                                 \\
+destroy_curses();                                                          \\
+return 0;                                                                  \\
+}
+.PP
+.fi
+
+.PP
+Definition at line \fB66\fP of file \fBcommon\&.h\fP\&.
+.nf
+66 #define destroy_cmenu()                                                        \\
+67     destroy_init(init);                                                        \\
+68     win_del();                                                                 \\
+69     destroy_curses();                                                          \\
+70     return 0;                                                                  \\
+71     }
+.PP
+.fi
+
+.SS "#define EIGHT   8"
+
+.PP
+Definition at line \fB47\fP of file \fBcommon\&.h\fP\&.
+.SS "#define F_VIEW   0x01"
+
+.PP
+Definition at line \fB48\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBinit_view_boxwin()\fP\&.
+.SS "#define MAPP_DIR   '~/menuapp'"
+
+.PP
+Definition at line \fB44\fP of file \fBcommon\&.h\fP\&.
+.SS "#define MAX_ARGS   64"
+
+.PP
+Definition at line \fB32\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "#define MAX_PICK_OBJS   1024"
+
+.PP
+Definition at line \fB33\fP of file \fBcommon\&.h\fP\&.
+.SS "#define MAX_WIDE_LEN   1024"
+
+.PP
+Definition at line \fB29\fP of file \fBcommon\&.h\fP\&.
+.SS "#define MAXOPTS   50"
+
+.PP
+Definition at line \fB46\fP of file \fBcommon\&.h\fP\&.
+.SS "#define MENU_HELP_FILE   'help/menu\&.help'"
+
+.PP
+Definition at line \fB36\fP of file \fBcommon\&.h\fP\&.
+.SS "#define MIN_COLS   40"
+
+.PP
+Definition at line \fB27\fP of file \fBcommon\&.h\fP\&.
+.SS "#define MINITRC   '\&.minitrc'"
+
+.PP
+Definition at line \fB42\fP of file \fBcommon\&.h\fP\&.
+.SS "#define NCURSES_WIDECHAR   1"
+
+.PP
+Definition at line \fB14\fP of file \fBcommon\&.h\fP\&.
+.SS "#define new_cmenu()"
+\fBValue:\fP
+.nf
+__end_pgm;                                                                 \\
+int main(int argc, char **argv) {                                          \\
+    __atexit;                                                              \\
+    capture_shell_tioctl();                                                \\
+    Init *init = new_init(argc, argv);                                     \\
+    SIO *sio = init\->sio;                                                  \\
+    mapp_initialization(init, argc, argv);                                 \\
+    open_curses(sio);                                                      \\
+    sig_prog_mode();                                                       \\
+    capture_curses_tioctl();                                               \\
+    win_init_attrs(sio\->fg_color, sio\->bg_color, sio\->bo_color);
+.PP
+.fi
+
+.PP
+Definition at line \fB53\fP of file \fBcommon\&.h\fP\&.
+.nf
+53 #define new_cmenu()                                                            \\
+54     __end_pgm;                                                                 \\
+55     int main(int argc, char **argv) {                                          \\
+56         __atexit;                                                              \\
+57         capture_shell_tioctl();                                                \\
+58         Init *init = new_init(argc, argv);                                     \\
+59         SIO *sio = init\->sio;                                                  \\
+60         mapp_initialization(init, argc, argv);                                 \\
+61         open_curses(sio);                                                      \\
+62         sig_prog_mode();                                                       \\
+63         capture_curses_tioctl();                                               \\
+64         win_init_attrs(sio\->fg_color, sio\->bg_color, sio\->bo_color);
+.PP
+.fi
+
+.SS "#define P_READ   0"
+
+.PP
+Definition at line \fB49\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBform_calculate()\fP, \fBinit_pick()\fP, and \fBview_init_input()\fP\&.
+.SS "#define P_WRITE   1"
+
+.PP
+Definition at line \fB50\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBform_calculate()\fP, \fBinit_pick()\fP, and \fBview_init_input()\fP\&.
+.SS "#define PICK_HELP_FILE   'help/pick\&.help'"
+
+.PP
+Definition at line \fB37\fP of file \fBcommon\&.h\fP\&.
+.SS "#define PICK_MAX_ARG_LEN   256"
+
+.PP
+Definition at line \fB31\fP of file \fBcommon\&.h\fP\&.
+.SS "#define PRINTCMD   'lp \-c \-s'"
+
+.PP
+Definition at line \fB45\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBlp()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "#define TRUE   1"
+
+.PP
+Definition at line \fB51\fP of file \fBcommon\&.h\fP\&.
+.SS "#define USE_PAD   \fBTRUE\fP"
+
+.PP
+Definition at line \fB26\fP of file \fBcommon\&.h\fP\&.
+.SS "#define VIEW_HELP_FILE   'help/view\&.help'"
+
+.PP
+Definition at line \fB38\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBview_display_help()\fP\&.
+.SS "#define VIEW_PRT_FILE   'data/prtout'"
+
+.PP
+Definition at line \fB39\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBmenu_cmd_processor()\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef Form Form"
+
+.PP
+Definition at line \fB95\fP of file \fBcommon\&.h\fP\&.
+.SS "typedef Menu Menu"
+
+.PP
+Definition at line \fB94\fP of file \fBcommon\&.h\fP\&.
+.SS "typedef Pick Pick"
+
+.PP
+Definition at line \fB96\fP of file \fBcommon\&.h\fP\&.
+.SS "typedef View View"
+
+.PP
+Definition at line \fB97\fP of file \fBcommon\&.h\fP\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIIC_MENU \fP
+.TP
+\f(BIIC_PICK \fP
+.TP
+\f(BIIC_FORM \fP
+.TP
+\f(BIIC_VIEW \fP
+.PP
+Definition at line \fB182\fP of file \fBcommon\&.h\fP\&.
+.nf
+182 { IC_MENU, IC_PICK, IC_FORM, IC_VIEW };
+.PP
+.fi
+
+.SS "enum \fBCaller\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIVIEW \fP
+.TP
+\f(BIFORM \fP
+.TP
+\f(BIPICK \fP
+.TP
+\f(BIMENU \fP
+.PP
+Definition at line \fB73\fP of file \fBcommon\&.h\fP\&.
+.nf
+73 { VIEW, FORM, PICK, MENU };
+.PP
+.fi
+
+.SS "enum \fBOptGroup\fP"
+
+.PP
+option groups 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIOG_FILES \fP
+.TP
+\f(BIOG_DIRS \fP
+.TP
+\f(BIOG_SPECS \fP
+.TP
+\f(BIOG_MISC \fP
+.TP
+\f(BIOG_PARMS \fP
+.TP
+\f(BIOG_FLAGS \fP
+.TP
+\f(BIOG_COL \fP
+.PP
+Definition at line \fB84\fP of file \fBcommon\&.h\fP\&.
+.nf
+84               {
+85     OG_FILES,
+86     OG_DIRS,
+87     OG_SPECS,
+88     OG_MISC,
+89     OG_PARMS,
+90     OG_FLAGS,
+91     OG_COL
+92 };
+.PP
+.fi
+
+.SS "enum \fBOptType\fP"
+
+.PP
+option types 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\f(BIOT_STRING \fP
+.TP
+\f(BIOT_INT \fP
+.TP
+\f(BIOT_BOOL \fP
+.TP
+\f(BIOT_HEX \fP
+.PP
+Definition at line \fB76\fP of file \fBcommon\&.h\fP\&.
+.nf
+76              {
+77     OT_STRING,
+78     OT_INT,
+79     OT_BOOL,
+80     OT_HEX,
+81 };
+.PP
+.fi
+
+.SH "Function Documentation"
+.PP 
+.SS "int cmd_processor (\fBInit\fP * )\fR [extern]\fP"
+
+.SS "bool derive_file_spec (char * file_spec, char * dir, char * file_name)\fR [extern]\fP"
+
+.PP
+Derive full file specification from directory and file name\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_spec\fP - output full file specification 
+.br
+\fIdir\fP - directory path 
+.br
+\fI\fBfile_name\fP\fP - file name 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if file_spec is derived, false otherwise 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If dir is nullptr, use MAPP_DIR environment variable or default directory ~/menuapp 
+
+.PP
+file_spec should be a pre-allocated char array of size MAXLEN to hold the resulting file specification 
+.RE
+.PP
+
+.PP
+Definition at line \fB796\fP of file \fBinit\&.c\fP\&.
+.nf
+796                                                                    {
+797     char ts[MAXLEN];
+798     char ts2[MAXLEN];
+799     char *e;
+800 
+801     if (!file_name || !*file_name) {
+802         *file_spec = '\\0';
+803         return false;
+804     }
+805     if (dir) {
+806         strnz__cpy(ts, dir, MAXLEN \- 1);
+807     } else {
+808         e = getenv("MAPP_DIR");
+809         if (e) {
+810             strnz__cpy(ts, e, MAXLEN \- 1);
+811         } else {
+812             strnz__cpy(ts, "~/menuapp", MAXLEN \- 1);
+813         }
+814     }
+815     trim_path(ts);
+816     strnz__cpy(ts2, ts, MAXLEN \- 1);
+817     // construct the full file specification
+818     // check that the file exists and is readable
+819     strnz__cpy(file_spec, ts2, MAXLEN \- 1);
+820     strnz__cat(file_spec, "/", MAXLEN \- 1);
+821     strnz__cat(file_spec, file_name, MAXLEN \- 1);
+822     return true;
+823 }
+.PP
+.fi
+
+.PP
+References \fBfile_name\fP, \fBMAXLEN\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtrim_path()\fP\&.
+.SS "\fBForm\fP * destroy_form (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Destroy \fBForm\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+
+.PP
+Definition at line \fB255\fP of file \fBmem\&.c\fP\&.
+.nf
+255                                {
+256     int i;
+257 
+258     if (!init\->form)
+259         return nullptr;
+260     for (i = 0; i < init\->form\->fidx; i++) {
+261         if (init\->form\->field[i])
+262             free(init\->form\->field[i]);
+263         init\->form\->field[i] = nullptr;
+264     }
+265     for (i = 0; i < init\->form\->didx; i++) {
+266         if (init\->form\->text[i])
+267             free(init\->form\->text[i]);
+268         init\->form\->text[i] = nullptr;
+269     }
+270     free(init\->form);
+271     init\->form = nullptr;
+272     init\->form_cnt\-\-;
+273     return init\->form;
+274 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP\&.
+.PP
+Referenced by \fBdestroy_init()\fP, \fBenter_file_spec()\fP, \fBform_engine()\fP, and \fBinit_form()\fP\&.
+.SS "\fBInit\fP * destroy_init (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Destroy \fBInit\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+
+.PP
+Definition at line \fB93\fP of file \fBmem\&.c\fP\&.
+.nf
+93                                {
+94     int i;
+95     if (!init)
+96         return nullptr;
+97     if (init\->sio) {
+98         free(init\->sio);
+99         init\->sio = nullptr;
+100     }
+101     if (init\->menu) {
+102         init\->menu = destroy_menu(init);
+103         init\->menu = nullptr;
+104     }
+105     if (init\->view) {
+106         init\->view = destroy_view(init);
+107         init\->view = nullptr;
+108     }
+109     if (init\->form) {
+110         init\->form = destroy_form(init);
+111         init\->form = nullptr;
+112     }
+113     if (init\->pick) {
+114         init\->pick = destroy_pick(init);
+115         init\->pick = nullptr;
+116     }
+117     for (i = 0; i <= init\->argc; i++) {
+118         if (init\->argv[i]) {
+119             if (init\->argv[i] != nullptr)
+120                 free(init\->argv[i]);
+121             init\->argv[i] = nullptr;
+122         }
+123     }
+124     if (init\->argv) {
+125         if (init\->argv != nullptr)
+126             free(init\->argv);
+127         init\->argv = nullptr;
+128     }
+129     if (init != nullptr) {
+130         free(init);
+131         init = nullptr;
+132     }
+133     init_cnt\-\-;
+134     return init;
+135 }
+.PP
+.fi
+
+.PP
+References \fBdestroy_form()\fP, \fBdestroy_menu()\fP, \fBdestroy_pick()\fP, \fBdestroy_view()\fP, \fBinit\fP, and \fBinit_cnt\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "\fBMenu\fP * destroy_menu (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Destroy \fBMenu\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+
+.PP
+Definition at line \fB165\fP of file \fBmem\&.c\fP\&.
+.nf
+165                                {
+166     if (!init\->menu)
+167         return (nullptr);
+168     free(init\->menu);
+169     init\->menu = nullptr;
+170     init\->menu_cnt\-\-;
+171     return init\->menu;
+172 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP\&.
+.PP
+Referenced by \fBdestroy_init()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "\fBPick\fP * destroy_pick (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Destroy \fBPick\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+
+.PP
+Definition at line \fB211\fP of file \fBmem\&.c\fP\&.
+.nf
+211                                {
+212     if (!init\->pick)
+213         return nullptr;
+214 
+215     for (pick\->obj_idx = 0; pick\->obj_idx < pick\->obj_cnt; pick\->obj_idx++)
+216         if (pick\->object[pick\->obj_idx] != nullptr)
+217             free(pick\->object[pick\->obj_idx]);
+218     free(pick\->object);
+219     free(pick);
+220     init\->pick = nullptr;
+221     init\->pick_cnt\-\-;
+222     return init\->pick;
+223 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP, and \fBpick\fP\&.
+.PP
+Referenced by \fBdestroy_init()\fP, and \fBinit_pick()\fP\&.
+.SS "\fBView\fP * destroy_view (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Destroy \fBView\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nullptr 
+.RE
+.PP
+
+.PP
+Definition at line \fB326\fP of file \fBmem\&.c\fP\&.
+.nf
+326                                {
+327     int i;
+328     view = init\->view;
+329     for (i = 0; i <= view\->argc; i++)
+330         free(view\->argv[i]);
+331     free(view\->argv);
+332     free(view);
+333     init\->view = nullptr;
+334     view = nullptr;
+335     init\->view_cnt\-\-;
+336     return init\->view;
+337 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP, and \fBview\fP\&.
+.PP
+Referenced by \fBdestroy_init()\fP, and \fBmview()\fP\&.
+.SS "int init_form (\fBInit\fP * init, int argc, char ** argv, int begy, int begx)\fR [extern]\fP"
+
+.PP
+Initialize form data structure and parse description file\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP A pointer to the \fBInit\fP structure containing form data and state\&. 
+.br
+\fIargc\fP The number of command line arguments passed to the form\&. 
+.br
+\fIargv\fP The array of command line arguments passed to the form\&. 
+.br
+\fI\fBbegy\fP\fP The y-coordinate for the top-left corner of the form window\&. 
+.br
+\fI\fBbegx\fP\fP The x-coordinate for the top-left corner of the form window\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, or a non-zero value if an error occurs during 
+.RE
+.PP
+
+.PP
+Definition at line \fB53\fP of file \fBform_engine\&.c\fP\&.
+.nf
+53                                                                      {
+54     int rc;
+55     char tmp_str[MAXLEN];
+56     if (init\->form != nullptr)
+57         destroy_form(init);
+58     init\->form = new_form(init, argc, argv, begy, begx);
+59     form = init\->form;
+60     if (!form\->f_mapp_spec) {
+61         if (form\->mapp_spec[0] == '\\0') {
+62             rc = Perror("Error: No form specification file given");
+63         } else {
+64             strnz__cpy(tmp_str, "form\->mapp_spec: ", MAXLEN \- 1);
+65             strnz__cat(tmp_str, form\->mapp_spec, MAXLEN \- 1);
+66             strnz__cat(tmp_str, " not found", MAXLEN \- 1);
+67             rc = Perror(tmp_str);
+68         }
+69         return rc;
+70     }
+71     if (begy != 0)
+72         form\->begy = begy;
+73     if (begx != 0)
+74         form\->begx = begx;
+75     if ((form\->f_in_spec && (form\->in_spec[0] == '\\0')) ||
+76         (strcmp(form\->in_spec, "\-") == 0) ||
+77         strcmp(form\->in_spec, "/dev/stdin") == 0) {
+78         strnz__cpy(form\->in_spec, "/dev/stdin", MAXLEN \- 1);
+79         form\->f_in_pipe = true;
+80     }
+81     if (form\->title[0] == '\\0')
+82         strnz__cpy(form\->title, form\->in_spec, MAXLEN \- 1);
+83     rc = form_engine(init);
+84     if (form\->win)
+85         win_del();
+86     destroy_form(init);
+87     return rc;
+88 }
+.PP
+.fi
+
+.PP
+References \fBbegx\fP, \fBbegy\fP, \fBdestroy_form()\fP, \fBform\fP, \fBform_engine()\fP, \fBinit\fP, \fBMAXLEN\fP, \fBnew_form()\fP, \fBPerror()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, and \fBwin_del()\fP\&.
+.PP
+Referenced by \fBenter_file_spec()\fP, \fBmain()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "bool init_menu_files (\fBInit\fP * init, int argc, char ** argv)\fR [extern]\fP"
+
+.PP
+Initialize \fBMenu\fP file specifications\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.br
+\fIargc\fP - number of arguments in argv 
+.br
+\fIargv\fP - Arguments may have been provided by command line, ~/\&.minitrc, environment variables, or calling program interal to C-Menu 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Positional args: [menu desc], [help file] 
+.RE
+.PP
+
+.PP
+Definition at line \fB461\fP of file \fBmem\&.c\fP\&.
+.nf
+461                                                         {
+462     char tmp_str[MAXLEN];
+463     // menu\->f_mapp_spec =
+464     //     verify_spec_arg(menu\->mapp_spec, init\->mapp_spec, init\->mapp_msrc,
+465     //                     "~/menuapp/msrc", R_OK);
+466     // menu\->f_help_spec =
+467     //     verify_spec_arg(menu\->help_spec, init\->help_spec, init\->mapp_help,
+468     //                     "~/menuapp/help", R_OK);
+469     if (optind < argc && !init\->f_mapp_spec) {
+470         menu\->f_mapp_spec =
+471             verify_spec_arg(menu\->mapp_spec, argv[optind], init\->mapp_msrc,
+472                             "~/menuapp/msrc", R_OK);
+473         if (menu\->f_mapp_spec)
+474             optind++;
+475     }
+476     if (optind < argc && !menu\->f_help_spec) {
+477         menu\->f_help_spec =
+478             verify_spec_arg(menu\->help_spec, argv[optind], init\->mapp_help,
+479                             "~/menuapp/help", R_OK);
+480         if (menu\->f_help_spec)
+481             optind++;
+482     }
+483     if (!menu\->f_mapp_spec) {
+484         menu\->f_mapp_spec = verify_spec_arg(
+485             menu\->mapp_spec, "~/menuapp/msrc/main\&.m", nullptr, nullptr, R_OK);
+486         if (!menu\->f_mapp_spec) {
+487             strnz__cpy(tmp_str, "menu cannot read description file ",
+488                        MAXLEN \- 1);
+489             strnz__cat(tmp_str, menu\->mapp_spec, MAXLEN \- 1);
+490             abend(\-1, tmp_str);
+491         }
+492     }
+493     if (!menu\->f_help_spec) {
+494         menu\->f_help_spec =
+495             verify_spec_arg(menu\->help_spec, "~/menuapp/help/main\&.help",
+496                             nullptr, nullptr, R_OK);
+497         if (!menu\->f_help_spec) {
+498             strnz__cpy(tmp_str, "menu cannot read help file ", MAXLEN \- 1);
+499             strnz__cat(tmp_str, menu\->help_spec, MAXLEN \- 1);
+500             abend(\-1, tmp_str);
+501         }
+502     }
+503     menu\->f_stop_on_error = init\->f_stop_on_error;
+504     return true;
+505 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBinit\fP, \fBMAXLEN\fP, \fBmenu\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, and \fBverify_spec_arg()\fP\&.
+.PP
+Referenced by \fBnew_menu()\fP\&.
+.SS "int init_pick (\fBInit\fP * init, int argc, char ** argv, int begy, int begx)\fR [extern]\fP"
+
+.PP
+Initializes pick structure and opens pick input file or pipe\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to \fBInit\fP structure 
+.br
+\fIargc\fP Argument count 
+.br
+\fIargv\fP Argument vector 
+.br
+\fI\fBbegy\fP\fP Beginning y coordinate for pick window 
+.br
+\fI\fBbegx\fP\fP Beginning x coordinate for pick window 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+If provider_cmd is specified, it takes precedence over in_spec and input file arguments 
+
+.PP
+provider_cmd is executed and its output is read as pick input 
+
+.PP
+If provider_cmd is not specified, in_spec is used to read pick input from a file or stdin 
+
+.PP
+If provider_cmd is specified, it is executed and its output is read as pick input 
+.RE
+.PP
+Spawn Child to execute provider_cmd Close read end of pipe as Child only needs to write to pipe
+
+.PP
+Connect CHILD STDOUT to write end of pipe
+
+.PP
+STDOUT attached to write end of pipe, so close pipe fd
+
+.PP
+Return to Parent Close write end of pipe as Parent only needs to read from pipe
+
+.PP
+Open a file pointer on read end of pipe
+
+.PP
+No provider_cmd specified, so read pick input from file or stdin
+
+.PP
+Wait for provider_cmd child process to finish before proceeding
+
+.PP
+Enter pick_engine
+.PP
+Definition at line \fB54\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+54                                                                      {
+55     struct stat sb;
+56     char *s_argv[MAXARGS];
+57     char tmp_str[MAXLEN];
+58     int m;
+59     pid_t pid = 0;
+60 
+61     if (init\->pick != nullptr)
+62         destroy_pick(init);
+63     Pick *pick = new_pick(init, argc, argv, begy, begx);
+64     if (init\->pick != pick)
+65         abend(\-1, "init\->pick != pick\\n");
+66     SIO *sio = init\->sio;
+67     if (pick\->provider_cmd[0] != '\\0') {
+68         str_to_args(s_argv, pick\->provider_cmd, MAXARGS \- 1);
+69         if (pipe(pipe_fd) == \-1) {
+70             Perror("pipe(pipe_fd) failed in init_pick");
+71             return (1);
+72         }
+73         if ((pid = fork()) == \-1) {
+74             Perror("fork() failed in init_pick");
+75             return (1);
+76         }
+77         if (pid == 0) {
+80             close(pipe_fd[P_READ]);
+82             dup2(pipe_fd[P_WRITE], STDOUT_FILENO);
+83             dup2(pipe_fd[P_WRITE], STDERR_FILENO);
+85             close(pipe_fd[P_WRITE]);
+86             execvp(s_argv[0], s_argv);
+87             m = MAXLEN \- 24;
+88             strnz__cpy(tmp_str, "Can't exec pick start cmd: ", m);
+89             m \-= strlen(s_argv[0]);
+90             strnz__cat(tmp_str, s_argv[0], m);
+91             Perror(tmp_str);
+92             exit(EXIT_FAILURE);
+93         }
+96         close(pipe_fd[P_WRITE]);
+98         pick\->in_fp = fdopen(pipe_fd[P_READ], "rb");
+99         pick\->f_in_pipe = true;
+100     } else {
+101         if ((pick\->in_spec[0] == '\\0') || strcmp(pick\->in_spec, "\-") == 0 ||
+102             strcmp(pick\->in_spec, "/dev/stdin") == 0) {
+103             strnz__cpy(pick\->in_spec, "/dev/stdin", MAXLEN \- 1);
+104             pick\->in_fp = fdopen(STDIN_FILENO, "rb");
+105             pick\->f_in_pipe = true;
+106         }
+107     }
+108     if (!pick\->f_in_pipe) {
+110         if (lstat(pick\->in_spec, &sb) == \-1) {
+111             m = MAXLEN \- 29;
+112             strnz__cpy(tmp_str, "Can\\'t stat pick input file: ", m);
+113             m \-= strlen(pick\->in_spec);
+114             strnz__cat(tmp_str, pick\->in_spec, m);
+115             Perror(tmp_str);
+116             return (1);
+117         }
+118         if (sb\&.st_size == 0) {
+119             m = MAXLEN \- 24;
+120             strnz__cpy(tmp_str, "Pick input file empty: ", m);
+121             m \-= strlen(pick\->in_spec);
+122             strnz__cat(tmp_str, pick\->in_spec, m);
+123             Perror(tmp_str);
+124             return (1);
+125         }
+126         if ((pick\->in_fp = fopen(pick\->in_spec, "rb")) == nullptr) {
+127             m = MAXLEN \- 29;
+128             strnz__cpy(tmp_str, "Can't open pick input file: ", m);
+129             m \-= strlen(pick\->in_spec);
+130             strnz__cat(tmp_str, pick\->in_spec, m);
+131             Perror(tmp_str);
+132             return (1);
+133         }
+134     }
+135     read_pick_input(init);
+136     if (pick\->f_in_pipe && pid > 0) {
+138         waitpid(pid, nullptr, 0);
+139         close(pipe_fd[P_READ]);
+140         dup2(sio\->stdin_fd, STDIN_FILENO);
+141         dup2(sio\->stdout_fd, STDOUT_FILENO);
+142         restore_curses_tioctl();
+143         sig_prog_mode();
+144         keypad(pick\->win, true);
+145     }
+146     if (pick\->obj_cnt == 0) {
+147         Perror("No pick objects available");
+148         destroy_pick(init);
+149         return (1);
+150     }
+152     pick_engine(init);
+153     win_del();
+154     destroy_pick(init);
+155     return 0;
+156 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBbegx\fP, \fBbegy\fP, \fBdestroy_pick()\fP, \fBinit\fP, \fBMAXARGS\fP, \fBMAXLEN\fP, \fBnew_pick()\fP, \fBP_READ\fP, \fBP_WRITE\fP, \fBPerror()\fP, \fBpick\fP, \fBpick_engine()\fP, \fBpipe_fd\fP, \fBread_pick_input()\fP, \fBrestore_curses_tioctl()\fP, \fBsig_prog_mode()\fP, \fBsio\fP, \fBstr_to_args()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, and \fBwin_del()\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "int init_view_boxwin (\fBInit\fP * init, char * title)\fR [extern]\fP"
+
+.PP
+Initialize the C-Menu \fBView\fP in box window mode\&. 
+.PP
+\fBNote\fP
+.RS 4
+sets up the view structure for box window mode, adjusts dimensions based on screen size, and creates a new pad for the view\&. It also configures various parameters such as scroll lines, command line position, and tab size\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to the \fBInit\fP structure containing view settings\&. 
+.br
+\fItitle\fP Title for the box window\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, -1 on failure\&. 
+.RE
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+.PP
+Definition at line \fB56\fP of file \fBinit_view\&.c\fP\&.
+.nf
+56                                               {
+57     int scr_lines, scr_cols;
+58     view = init\->view;
+59     view\->f_full_screen = false;
+60     // scr_lines = LINES;
+61     // scr_cols = COLS;
+62     getmaxyx(stdscr, scr_lines, scr_cols);
+63     if (view\->lines > scr_lines)
+64         view\->lines = scr_lines;
+65     if (view\->cols > scr_cols)
+66         view\->cols = scr_cols;
+67     if (view\->begy + view\->lines > scr_lines)
+68         view\->begy = scr_lines \- view\->lines \- 2;
+69     if (view\->begx + view\->cols > scr_cols) {
+70         view\->begx = scr_cols \- view\->cols \- 2;
+71     }
+72     if (title != NULL && title[0] != '\\0')
+73         strnz__cpy(view\->title, title, MAXLEN \- 1);
+74     else if (view\->argv[0] != NULL && view\->argv[0][0] != '\\0')
+75         strnz__cpy(view\->title, "C\-Menu View", MAXLEN \- 1);
+76     if (win_new(view\->lines, view\->cols, view\->begy, view\->begx, view\->title)) {
+77         snprintf(em0, MAXLEN \- 65, "%s, line: %d", __FILE__, __LINE__ \- 1);
+78         snprintf(em1, MAXLEN \- 65, "win_new(%d, %d, %d, %d, %s) failed",
+79                  view\->lines, view\->cols, view\->begy, view\->begx, "NULL");
+80         em2[0] = '\\0';
+81         display_error(em0, em1, em2, NULL);
+82         return (\-1);
+83     }
+84     view\->scroll_lines = view\->lines \- 1;
+85     view\->cmd_line = view\->lines \- 1;
+86     view\->pminrow = 0;
+87     view\->pmincol = 0;
+88     view\->sminrow = view\->begy + 1;
+89     view\->smincol = view\->begx + 1;
+90     view\->smaxrow = view\->begy + view\->lines;
+91     view\->smaxcol = view\->begx + view\->cols;
+92     view\->win = newpad(view\->lines, MAX_COLS);
+93     if (view\->win == NULL) {
+94         snprintf(em0, MAXLEN \- 65, "%s, line: %d", __FILE__, __LINE__ \- 2);
+95         snprintf(em1, MAXLEN \- 65, "newpad(%d, %d) failed", view\->lines,
+96                  MAX_COLS);
+97         em2[0] = '\\0';
+98         display_error(em0, em1, em2, NULL);
+99         return \-1;
+100     }
+101     wbkgd(view\->win, COLOR_PAIR(cp_norm) | ' ');
+102     set_tabsize(view\->tab_stop);
+103     wsetscrreg(view\->win, 0, view\->scroll_lines \- 1);
+104     scrollok(view\->win, true);
+105     // immedok(view\->win, true);
+106     keypad(view\->win, true);
+107     idlok(view\->win, false);
+108     idcok(view\->win, false);
+109     return (0);
+110 }
+.PP
+.fi
+
+.PP
+References \fBCCC_NORM\fP, \fBcp_norm\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBF_VIEW\fP, \fBinit\fP, \fBMAXLEN\fP, \fBPAD_COLS\fP, \fBssnprintf()\fP, \fBstrnz__cpy()\fP, \fBview\fP, \fBwin_new()\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBmview()\fP\&.
+.SS "int init_view_full_screen (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Initialize C-Menu \fBView\fP in full screen mode\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function sets up the view structure for full screen mode and creates a new pad for the view\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to the \fBInit\fP structure containing view settings\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, -1 on failure\&. 
+.RE
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+.PP
+Definition at line \fB19\fP of file \fBinit_view\&.c\fP\&.
+.nf
+19                                       {
+20     view = init\->view;
+21     view\->f_full_screen = true;
+22     getmaxyx(stdscr, view\->lines, view\->cols);
+23     view\->pminrow = 0;
+24     view\->pmincol = 0;
+25     view\->sminrow = 0;
+26     view\->smincol = 0;
+27     view\->scroll_lines = view\->lines \- 1;
+28     view\->cmd_line = view\->lines \- 1;
+29     view\->smaxrow = view\->lines \- 1;
+30     view\->smaxcol = view\->cols \- 1;
+31     view\->win = newpad(view\->lines, MAX_COLS);
+32     if (view\->win == NULL) {
+33         snprintf(em0, MAXLEN \- 65, "%s, line: %d", __FILE__, __LINE__ \- 2);
+34         snprintf(em1, MAXLEN \- 65, "newpad(%d, %d) failed", view\->lines,
+35                  MAX_COLS);
+36         em2[0] = '\\0';
+37         display_error(em0, em1, em2, NULL);
+38         abend(\-1, "init_view_full_screen: newpad() failed");
+39     }
+40     view\->box = NULL;
+41     wbkgd(view\->win, COLOR_PAIR(cp_norm) | ' ');
+42     if (view\->tab_stop <= 0)
+43         view\->tab_stop = TABSIZE;
+44     set_tabsize(view\->tab_stop);
+45     wsetscrreg(view\->win, 0, view\->scroll_lines \- 1);
+46     scrollok(view\->win, true);
+47     // immedok(view\->win, true);
+48     keypad(view\->win, true);
+49     idlok(view\->win, false);
+50     idcok(view\->win, false);
+51     return 0;
+52 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBCCC_BOX\fP, \fBcp_norm\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBinit\fP, \fBMAXLEN\fP, \fBPAD_COLS\fP, \fBssnprintf()\fP, and \fBview\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void mapp_initialization (\fBInit\fP * init, int argc, char ** argv)\fR [extern]\fP"
+
+.PP
+Main initialization function for MAPP - \fBMenu\fP Application\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to \fBInit\fP struct to be initialized 
+.br
+\fIargc\fP - argument count from \fBmain()\fP 
+.br
+\fIargv\fP - argument vector from \fBmain()\fP 
+.PP
+.nf
+1\&. Read environment variables and set defaults
+2\&. Parse configuration file
+3\&. Parse command\-line options
+4\&. Set up SIO struct with colors and other settings
+5\&. Handle special options like help and version
+
+.fi
+.PP
+ 
+.RE
+.PP
+< background color
+
+.PP
+< foreground color
+
+.PP
+< border color
+
+.PP
+< clear screen on exit (obsolete)
+
+.PP
+< erase remainder on enter
+
+.PP
+< field enclosure brackets
+
+.PP
+< field fill character
+
+.PP
+< view prompt type
+
+.PP
+< menu specification file
+
+.PP
+< generally /home/user/\&.minitrc
+
+.PP
+< command-line options override config file
+.PP
+Definition at line \fB64\fP of file \fBinit\&.c\fP\&.
+.nf
+64                                                             {
+65     char term[MAXLEN];
+66     char tmp_str[MAXLEN];
+67     char *t;
+68     setlocale(LC_ALL, "en_US\&.UTF\-8");
+69     SIO *sio = init\->sio;
+70     if (!init) {
+71         ssnprintf(tmp_str, sizeof(tmp_str), "%s",
+72                   "init struct not allocated on entry");
+73         abend(\-1, tmp_str);
+74         exit(\-1);
+75     }
+76     if (init\->minitrc[0] == '\\0')
+77         strnz__cpy(init\->minitrc, "~/\&.minitrc", MAXLEN \- 1);
+78     sio\->bg_color = BG_COLOR;       
+79     sio\->fg_color = FG_COLOR;       
+80     sio\->bo_color = BO_COLOR;       
+81     init\->f_at_end_clear = true;    
+82     init\->f_erase_remainder = true; 
+83     init\->brackets[0] = '\\0';       
+84     strnz__cpy(init\->fill_char, "_", MAXLEN \- 1); 
+85     init\->prompt_type = PT_LONG;                  
+86     init\->mapp_spec[0] = '\\0'; 
+87     strnz__cpy(init\->mapp_home, "~/menuapp", MAXLEN \- 1);
+88     strnz__cpy(init\->mapp_user, "~/menuapp/user", MAXLEN \- 1);
+89     strnz__cpy(init\->mapp_msrc, "~/menuapp/msrc", MAXLEN \- 1);
+90     strnz__cpy(init\->mapp_data, "~/menuapp/data", MAXLEN \- 1);
+91     strnz__cpy(init\->mapp_help, "~/menuapp/help", MAXLEN \- 1);
+92     // Priority\-4 \- cfg_args
+93 
+94     t = getenv("TERM");
+95     if (!t || *t == '\\0')
+96         strnz__cpy(term, "xterm\-256color", MAXLEN);
+97     t = getenv("EDITOR");
+98     if (t && *t != '\\0')
+99         strnz__cpy(init\->editor, "vi", MAXLEN \- 1);
+100 
+101     parse_config(init); 
+102     if (f_debug)
+103         dump_config(init, "Configuration after parse_config");
+104     parse_opt_args(init, argc,
+105                    argv); 
+106     if (f_dump_config) {
+107         dump_config(init, "Configuration after parse_config and "
+108                           "parse_opt_args");
+109     } else if (f_debug)
+110         dump_config(init, "Configuration after parse_opt_args");
+111     if (f_write_config) {
+112         write_config(init);
+113     }
+114     if (f_help) {
+115         dump_config(init, "Current Configuration");
+116     }
+117     if (f_version) {
+118         display_version();
+119     }
+120     if (init\->mapp_home[0] != '\\0') {
+121         expand_tilde(init\->mapp_home, MAXLEN \- 1);
+122         if (!verify_dir(init\->mapp_home, R_OK))
+123             abend(\-1, "MAPP_HOME directory invalid");
+124     }
+125 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBBG_COLOR\fP, \fBBO_COLOR\fP, \fBdisplay_version()\fP, \fBdump_config()\fP, \fBexpand_tilde()\fP, \fBf_debug\fP, \fBf_dump_config\fP, \fBf_help\fP, \fBf_version\fP, \fBf_write_config\fP, \fBFG_COLOR\fP, \fBinit\fP, \fBMAXLEN\fP, \fBparse_config()\fP, \fBparse_opt_args()\fP, \fBPT_LONG\fP, \fBsio\fP, \fBssnprintf()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, \fBverify_dir()\fP, and \fBwrite_config()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "unsigned int menu_engine (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+The main loop of the menu system\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP A pointer to an \fBInit\fP structure containing initialization data for the menu system\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an integer indicating the action taken by the user, such as returning to the main menu or exiting the menu system\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+displays the menu and processes user input until the user exits the menu or returns to the main menu\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB28\fP of file \fBmenu_engine\&.c\fP\&.
+.nf
+28                                      {
+29     int action;
+30     int i;
+31     char tmp_str[MAXLEN];
+32 
+33     Menu *menu = init\->menu;
+34     if (menu == nullptr) {
+35         Perror("menu_engine: menu is nullptr");
+36         return (1);
+37     }
+38     action = MA_INIT;
+39     while (action == MA_INIT) {
+40         action = MA_DISPLAY_MENU;
+41         if (win_new(menu\->lines, menu\->cols, menu\->begy, menu\->begx,
+42                     menu\->title, 0)) {
+43             ssnprintf(tmp_str, MAXLEN \- 1,
+44                       "win_new(%d, %d, %d, %d, %s, %b) failed", menu\->lines,
+45                       menu\->cols, menu\->begy, menu\->begx, menu\->title, 0);
+46             Perror(tmp_str);
+47             return (1);
+48         }
+49         menu\->win = win_win[win_ptr];
+50         menu\->box = win_box[win_ptr];
+51         while (action == MA_DISPLAY_MENU) {
+52             for (menu\->line_idx = 0; menu\->line_idx < menu\->item_count;
+53                  menu\->line_idx++) {
+54                 mvwaddstr(menu\->win, menu\->line_idx, 0,
+55                           menu\->line[menu\->line_idx]\->choice_text);
+56             }
+57             menu\->line_idx = 0;
+58             for (i = 0; i < menu\->item_count; i++)
+59                 if (menu\->line[i]\->type == MT_CHOICE) {
+60                     menu\->line_idx = i;
+61                     break;
+62                 }
+63             while ((action = menu_cmd_processor(init)) == MA_ENTER_OPTION)
+64                 ;
+65         }
+66         if (action == MA_RETURN) {
+67             win_del();
+68             menu\->win = win_win[win_ptr];
+69             menu\->box = win_box[win_ptr];
+70             return (MA_RETURN);
+71         }
+72         if (action == MA_INIT) {
+73             menu\->lines = 0;
+74             menu\->cols = 0;
+75             menu\->line_idx = 0;
+76             menu\->item_count = 0;
+77             menu\->title[0] = '\\0';
+78             menu\->choice_max_len = 0;
+79             menu\->text_max_len = 0;
+80             if (parse_menu_description(init))
+81                 return (MA_RETURN);
+82         }
+83     }
+84     return (action);
+85 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP, \fBMA_DISPLAY_MENU\fP, \fBMA_ENTER_OPTION\fP, \fBMA_INIT\fP, \fBMA_RETURN\fP, \fBMAXLEN\fP, \fBmenu\fP, \fBmenu_cmd_processor()\fP, \fBMT_CHOICE\fP, \fBparse_menu_description()\fP, \fBPerror()\fP, \fBssnprintf()\fP, \fBtmp_str\fP, \fBwin_box\fP, \fBwin_del()\fP, \fBwin_new()\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "int mview (\fBInit\fP * init, int argc, char ** argv)\fR [extern]\fP"
+
+.PP
+subprogram entry point for C-Menu \fBView\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to \fBInit\fP structure containing initialization parameters 
+.br
+\fIargc\fP Argument count from command line 
+.br
+\fIargv\fP Argument vector from command line 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on failure 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+use this function to start the C-Menu \fBView\fP from another program, passing in the necessary initialization parameters through the \fBInit\fP structure\&. The function will handle setting up the view based on the provided parameters and will return 0 on success or a non-zero value if an error occurs during initialization\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB23\fP of file \fBmview\&.c\fP\&.
+.nf
+23                                              {
+24     view = init\->view;
+25     if (!view)
+26         view = new_view(init, argc, argv);
+27     else
+28         view = init\->view;
+29     if (init\->lines != 0 && view\->lines == 0)
+30         view\->lines = init\->lines;
+31     if (view\->lines == 0)
+32         view\->lines = LINES * 3 / 4;
+33     if (view\->lines > LINES \- 3)
+34         view\->lines = LINES \- 3;
+35     if (init\->cols != 0 && view\->lines == 0)
+36         view\->cols = init\->cols;
+37     if (view\->cols == 0)
+38         view\->cols = COLS * 3 / 4;
+39     if (view\->cols > COLS \- 3)
+40         view\->cols = COLS \- 3;
+41     if (init\->begy != 0 && view\->begy == 0)
+42         view\->begy = init\->begy;
+43     if (view\->begy == 0)
+44         view\->begy = (LINES \- view\->lines) / 5;
+45     if (view\->begy + view\->lines > LINES \- 2)
+46         view\->begy = LINES \- view\->lines \- 2;
+47     if (init\->begx != 0 && view\->begx == 0)
+48         view\->begx = init\->begx;
+49     if (view\->begx == 0)
+50         view\->begx = (COLS \- view\->cols) / 5;
+51     if (view\->begx + view\->cols > COLS \- 2)
+52         view\->begx = COLS \- view\->cols \- 2;
+53     view\->f_full_screen = false;
+54     if (!init_view_boxwin(init, init\->title)) {
+55         view_file(init);
+56         win_del();
+57     }
+58     destroy_view(init);
+59     return 0;
+60 }
+.PP
+.fi
+
+.PP
+References \fBdestroy_view()\fP, \fBinit\fP, \fBinit_view_boxwin()\fP, \fBnew_view()\fP, \fBview\fP, \fBview_file()\fP, and \fBwin_del()\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBexec_objects()\fP, \fBform_engine()\fP, \fBmain()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SS "\fBForm\fP * new_form (\fBInit\fP * init, int argc, char ** argv, int begy, int begx)\fR [extern]\fP"
+
+.PP
+Create and initialize \fBForm\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.br
+\fIargc\fP - number of arguments in argv 
+.br
+\fIargv\fP - Arguments may have been provided by command line, ~/\&.minitrc, environment variables, or calling program interal to C-Menu 
+.br
+\fI\fBbegy\fP,\fBbegx\fP\fP - initial position of form window 
+.RE
+.PP
+
+.PP
+Definition at line \fB233\fP of file \fBmem\&.c\fP\&.
+.nf
+233                                                                       {
+234     init\->form = (Form *)calloc(1, sizeof(Form));
+235     if (!init\->form) {
+236         abend(\-1, "calloc form failed");
+237         return nullptr;
+238     }
+239     init\->form_cnt++;
+240     form = init\->form;
+241     if (!init_form_files(init, argc, argv)) {
+242         abend(\-1, "init_form_files failed");
+243         return nullptr;
+244     }
+245     strnz__cpy(form\->brackets, init\->brackets, 3);
+246     strnz__cpy(form\->fill_char, init\->fill_char, MAXLEN \- 1);
+247     form\->begy = begy;
+248     form\->begx = begx;
+249     return init\->form;
+250 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBbegx\fP, \fBbegy\fP, \fBform\fP, \fBinit\fP, \fBinit_form_files()\fP, \fBMAXLEN\fP, and \fBstrnz__cpy()\fP\&.
+.PP
+Referenced by \fBinit_form()\fP\&.
+.SS "\fBInit\fP * new_init (int argc, char ** argv)\fR [extern]\fP"
+
+.PP
+Create and initialize \fBInit\fP structure\&. 
+.PP
+\fBNote\fP
+.RS 4
+calloc initializes all fields to zero/nullptr 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc,argv\fP - arguments idiomatic directory usage: 
+.PP
+.nf
+init\->mapp_msrc  description files
+init\->mapp_help  help files
+init\->mapp_data  in, out, data files
+init\->mapp_user  executable scripts
+init\->mapp_bin   binary executables
+
+.fi
+.PP
+ 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Initialize file specifications in priority order: 
+.PP
+.nf
+1 \- Default values
+2 \- Configuration file
+3 \- Environment variables
+4 \- Command line positional arguments
+5 \- Command line option arguments
+
+.fi
+.PP
+ 
+.RE
+.PP
+
+.PP
+Definition at line \fB57\fP of file \fBmem\&.c\fP\&.
+.nf
+57                                       {
+58     int i = 0;
+59     Init *init = calloc(1, sizeof(Init));
+60     if (init == nullptr) {
+61         abend(\-1, "calloc init failed");
+62         return nullptr;
+63     }
+64     init\->argv = calloc(MAXARGS + 1, sizeof(char *));
+65     if (init\->argv == nullptr) {
+66         free(init);
+67         ssnprintf(em0, MAXLEN \- 1, "%s, line: %d, errno: %d", __FILE__,
+68                   __LINE__ \- 4, errno);
+69         ssnprintf(em1, MAXLEN \- 1, "%s", strerror(errno));
+70         ssnprintf(em2, MAXLEN \- 1, "view\->argv = calloc(%d, %d) failed\\n",
+71                   (MAXARGS + 1), sizeof(char *));
+72         display_error(em0, em1, em2, nullptr);
+73         abend(\-1, "calloc init\->argv failed");
+74         return nullptr;
+75     }
+76     init\->argc = argc;
+77     for (i = 0; i < init\->argc; i++) {
+78         init\->argv[i] = strdup(argv[i]);
+79     }
+80     init\->argv[i] = nullptr;
+81     init\->sio = (SIO *)calloc(1, sizeof(SIO));
+82     if (!init\->sio) {
+83         abend(\-1, "calloc sio failed");
+84         return nullptr;
+85     }
+86     init_cnt++;
+87     return init;
+88 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBinit\fP, \fBinit_cnt\fP, \fBMAXARGS\fP, \fBMAXLEN\fP, and \fBssnprintf()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "\fBMenu\fP * new_menu (\fBInit\fP * init, int argc, char ** argv, int begy, int begx)\fR [extern]\fP"
+
+.PP
+Create and initialize \fBMenu\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.br
+\fIargc\fP - number of arguments in argv 
+.br
+\fIargv\fP - Arguments may have been provided by command line, ~/\&.minitrc, environment variables, or calling program interal to C-Menu 
+.br
+\fI\fBbegy\fP,\fBbegx\fP\fP - initial position of menu window 
+.RE
+.PP
+
+.PP
+Definition at line \fB145\fP of file \fBmem\&.c\fP\&.
+.nf
+145                                                                       {
+146     init\->menu = (Menu *)calloc(1, sizeof(Menu));
+147     if (!init\->menu) {
+148         abend(\-1, "calloc menu failed");
+149         return nullptr;
+150     }
+151     init\->menu_cnt++;
+152     menu = init\->menu;
+153     if (!init_menu_files(init, argc, argv)) {
+154         abend(\-1, "init_menu_files failed");
+155         return nullptr;
+156     }
+157     menu\->begy = begy;
+158     menu\->begx = begx;
+159     return init\->menu;
+160 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBbegx\fP, \fBbegy\fP, \fBinit\fP, \fBinit_menu_files()\fP, and \fBmenu\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "\fBPick\fP * new_pick (\fBInit\fP * init, int argc, char ** argv, int begy, int begx)\fR [extern]\fP"
+
+.PP
+Create and initialize \fBPick\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.br
+\fIargc\fP - number of arguments in argv 
+.br
+\fIargv\fP - Arguments may have been provided by command line, ~/\&.minitrc, environment variables, or calling program interal to C-Menu 
+.br
+\fI\fBbegy\fP,\fBbegx\fP\fP - initial position of pick window 
+.RE
+.PP
+
+.PP
+Definition at line \fB182\fP of file \fBmem\&.c\fP\&.
+.nf
+182                                                                       {
+183     init\->pick = (Pick *)calloc(1, sizeof(Pick));
+184     if (!init\->pick) {
+185         Perror("calloc pick failed");
+186         return nullptr;
+187     }
+188     init\->pick_cnt++;
+189     pick = init\->pick;
+190     if (!init_pick_files(init, argc, argv)) {
+191         abend(\-1, "init_pick_files failed");
+192         return nullptr;
+193     }
+194     pick\->object = calloc(OBJ_MAXCNT + 1, sizeof(char *));
+195     if (pick\->object == nullptr) {
+196         ssnprintf(em0, MAXLEN \- 1, "%s, line: %d", __FILE__, __LINE__ \- 1);
+197         ssnprintf(em1, MAXLEN \- 1,
+198                   "calloc pick\->object = calloc(%d, %d) failed\\n",
+199                   OBJ_MAXCNT + 1, sizeof(char *));
+200         display_error(em0, em1, nullptr, nullptr);
+201         abend(\-1, "User terminated program");
+202     }
+203     pick\->begy = begy;
+204     pick\->begx = begx;
+205     return init\->pick;
+206 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBbegx\fP, \fBbegy\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBinit\fP, \fBinit_pick_files()\fP, \fBMAXLEN\fP, \fBOBJ_MAXCNT\fP, \fBPerror()\fP, \fBpick\fP, and \fBssnprintf()\fP\&.
+.PP
+Referenced by \fBinit_pick()\fP\&.
+.SS "\fBView\fP * new_view (\fBInit\fP * init, int argc, char ** argv)\fR [extern]\fP"
+
+.PP
+Create and initialize \fBView\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP structure 
+.br
+\fIargc\fP - number of arguments in argv 
+.br
+\fIargv\fP - Arguments may have been provided by command line, ~/\&.minitrc, environment variables, or calling program interal to C-Menu 
+.RE
+.PP
+
+.PP
+Definition at line \fB283\fP of file \fBmem\&.c\fP\&.
+.nf
+283                                                   {
+284     init\->view_cnt++;
+285     init\->view = (View *)calloc(1, sizeof(View));
+286     if (!init\->view) {
+287         free(init\->view);
+288         ssnprintf(em0, MAXLEN \- 1, "%s, line: %d, errno: %d", __FILE__,
+289                   __LINE__ \- 1, errno);
+290         ssnprintf(em1, MAXLEN \- 1, "%s", strerror(errno));
+291         ssnprintf(em2, MAXLEN \- 1, "init\->view = calloc(%d, %d) failed\\n",
+292                   (argc \- optind + 1), sizeof(char *));
+293         display_error(em0, em1, em2, nullptr);
+294         abend(\-1, "calloc init\->view failed");
+295         return false;
+296     }
+297     view = init\->view;
+298     view\->argv = calloc((argc \- optind + 1), sizeof(char *));
+299     if (view\->argv == nullptr) {
+300         free(view\->argv);
+301         ssnprintf(em0, MAXLEN \- 1, "%s, line: %d, errno: %d", __FILE__,
+302                   __LINE__ \- 1, errno);
+303         ssnprintf(em1, MAXLEN \- 1, "%s", strerror(errno));
+304         ssnprintf(em2, MAXLEN \- 1, "view\->argv = calloc(%d, %d) failed\\n",
+305                   (argc \- optind + 1), sizeof(char *));
+306         display_error(em0, em1, em2, nullptr);
+307         abend(\-1, "User terminated program");
+308         return false;
+309     }
+310     int s = optind;
+311     int d = 0;
+312     while (s < argc)
+313         view\->argv[d++] = strdup(argv[s++]);
+314     view\->argv[d] = nullptr;
+315     view\->argc = d;
+316     if (!init_view_files(init)) {
+317         abend(\-1, "init_view_files failed");
+318         return nullptr;
+319     }
+320     return view;
+321 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBinit\fP, \fBinit_view_files()\fP, \fBMAXLEN\fP, \fBssnprintf()\fP, and \fBview\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmview()\fP\&.
+.SS "int open_pick_win (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Initializes the pick window based on the parameters specified in the \fBPick\fP structure\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to \fBInit\fP structure containing pick information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, 1 on failure 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Creates a new window for the pick interface using win_new function with the specified parameters from the \fBPick\fP structure\&. If window creation fails, an error message is printed and the function returns 1\&. Otherwise, initializes the window and box pointers in the \fBPick\fP structure, sets scrollok and keypad options for the window, and returns 0 on success\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB821\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+821                               {
+822     char tmp_str[MAXLEN];
+823     pick = init\->pick;
+824     if (win_new(pick\->win_lines, pick\->win_width, pick\->begy, pick\->begx,
+825                 pick\->title, 0)) {
+826         ssnprintf(tmp_str, MAXLEN \- 1, "win_new(%d, %d, %d, %d, %s, %b) failed",
+827                   pick\->win_lines, pick\->win_width, pick\->begy, pick\->begx,
+828                   pick\->title, 0);
+829         Perror(tmp_str);
+830 
+831         return (1);
+832     }
+833     pick\->win = win_win[win_ptr];
+834     pick\->box = win_box[win_ptr];
+835     scrollok(pick\->win, FALSE);
+836     keypad(pick\->win, true);
+837     return 0;
+838 }
+.PP
+.fi
+
+.PP
+References \fBFALSE\fP, \fBinit\fP, \fBMAXLEN\fP, \fBPerror()\fP, \fBpick\fP, \fBssnprintf()\fP, \fBtmp_str\fP, \fBwin_box\fP, \fBwin_new()\fP, \fBwin_ptr\fP, and \fBwin_win\fP\&.
+.PP
+Referenced by \fBpick_engine()\fP\&.
+.SS "unsigned int parse_menu_description (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Parse menu description file and create \fBMenu\fP\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to \fBInit\fP structure containing menu information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, non-zero on failure 
+.RE
+.PP
+'#' Comment line, ignore
+
+.PP
+'!' Choice line, parse and add to menu
+
+.PP
+':' \fBText\fP line, parse and add to menu
+
+.PP
+< in_buf -> Title
+
+.PP
+'?' Help line, ignore for now
+
+.PP
+' ' Empty line, ignore
+.PP
+Definition at line \fB24\fP of file \fBparse_menu_desc\&.c\fP\&.
+.nf
+24                                                 {
+25     FILE *fp;
+26     char tmp_str[MAXLEN];
+27     char tmp_buf[MAXLEN];
+28     char in_buf[MAXLEN];
+29     char *in_buf_p;
+30     int Pos;
+31     unsigned char ltr;
+32     unsigned char fltr[127];
+33     int directive;
+34     int l;
+35     char *s, *d, *e;
+36     int actions = 0;
+37     int choices = 0;
+38     int in_fp_line = 0;
+39     menu = init\->menu;
+40     fp = fopen(menu\->mapp_spec, "r");
+41     if (fp == nullptr) {
+42         strnz__cat(tmp_buf, "file not found", MAXLEN);
+43         abend(\-1, tmp_buf);
+44         exit(\-1);
+45     }
+46     while ((fgets(in_buf, MAXLEN, fp)) != nullptr) {
+47         if (in_buf[0] == '\\0')
+48             continue;
+49         in_fp_line++;
+50         chrep(in_buf, '\\r', '\\0');
+51         chrep(in_buf, '\\n', '\\0');
+52         chrep(in_buf, '\\t', ' ');
+53         in_buf_p = in_buf;
+54         directive = *in_buf_p;
+55         in_buf_p++;
+56         strnz__cpy(tmp_buf, in_buf_p, MAXLEN);
+57         trim(tmp_buf);
+58         l = strlen(tmp_buf);
+59         if (!l)
+60             continue;
+61         switch (directive) {
+63         case '#':
+64             break;
+66         case '!':
+67             if (!menu\->line_idx)
+68                 break;
+69             if (menu\->line[menu\->line_idx \- 1]\->type != MT_TEXT)
+70                 break;
+71             menu\->line_idx\-\-;
+72             l = strlen(tmp_buf);
+73             if (l + 1 > MAXLEN)
+74                 break;
+75             menu\->line[menu\->line_idx]\->command_str =
+76                 (char *)malloc(MAXLEN + 1);
+77             if (!menu\->line[menu\->line_idx]\->command_str) {
+78                 sprintf(tmp_str,
+79                         "0\-malloc(%d bytes) failed M\-L[%d]\->command_str",
+80                         MAXLEN + 1, menu\->line_idx);
+81                 abend(\-1, tmp_str);
+82             }
+83             menu\->line[menu\->line_idx]\->command_str = strdup(tmp_buf);
+84             menu\->line[menu\->line_idx]\->command_type =
+85                 get_command_type(tmp_buf);
+86             s = menu\->line[menu\->line_idx]\->raw_text;
+87             if (*s == '\-' || *s == '_') {
+88                 s++;
+89                 ltr = *s++;
+90             } else
+91                 ltr = *s;
+92             l = 0;
+93             while (*s++ != '\\0')
+94                 l++;
+95             if (l + 1 > MAXLEN)
+96                 l = MAXLEN \- 1;
+97             menu\->line[menu\->line_idx]\->choice_text =
+98                 (char *)malloc(MAXLEN + 1);
+99             if (!menu\->line[menu\->line_idx]\->choice_text) {
+100                 sprintf(tmp_str,
+101                         "1\-malloc(%d bytes) failed M\-L[%d]\->choice_text",
+102                         MAXLEN + 1, menu\->line_idx);
+103                 abend(\-1, tmp_str);
+104             }
+105             d = menu\->line[menu\->line_idx]\->choice_text;
+106             e = d + l;
+107             s = menu\->line[menu\->line_idx]\->raw_text;
+108             if (*s == '\-' || *s == '_')
+109                 s += 2;
+110             while (*s != '\\0' && d < e)
+111                 *d++ = *s++;
+112             *d = (char)'\\0';
+113             if (l > menu\->choice_max_len)
+114                 menu\->choice_max_len = l;
+115             if (menu\->line[menu\->line_idx]\->command_type == CT_RETURN)
+116                 menu\->line[menu\->line_idx]\->choice_letter = 'Q';
+117             else
+118                 menu\->line[menu\->line_idx]\->choice_letter = ltr;
+119             menu\->line[menu\->line_idx]\->type = MT_CHOICE;
+120             menu\->line_idx++;
+121             actions++;
+122             break;
+124         case ':':
+125             if (choices > actions) {
+126                 ssnprintf(em0, MAXLEN \- 1,
+127                           "More choices than actions at line %d of",
+128                           in_fp_line);
+129                 strnz__cpy(em1, menu\->mapp_spec, MAXLEN \- 1);
+130                 strnz__cat(em2, in_buf, MAXLEN \- 1);
+131                 display_error(em0, em1, em2, nullptr);
+132                 abend(\-1, "unrecoverable error");
+133             }
+134             chrep(tmp_buf, '\\t', ' ');
+135             l = strlen(tmp_buf);
+136             if (l > menu\->text_max_len)
+137                 menu\->text_max_len = l;
+138             if (!menu\->title[0]) { 
+139                 if (l + 5 > MAXLEN)
+140                     l = MAXLEN \- 5;
+141                 strnz__cpy(menu\->title, tmp_buf, l);
+142                 l += 4;
+143                 if (l > menu\->text_max_len)
+144                     menu\->text_max_len = l;
+145             } else {
+146                 menu\->line[menu\->line_idx] = (Line *)malloc(sizeof(Line));
+147                 if (menu\->line[menu\->line_idx] == (Line *)0) {
+148                     sprintf(tmp_str,
+149                             "2\-malloc(%ld bytes) failed menu\->line[%d]",
+150                             sizeof(Line), menu\->line_idx);
+151                     abend(\-1, tmp_str);
+152                 }
+153                 menu\->line[menu\->line_idx]\->type = MT_TEXT;
+154                 menu\->line[menu\->line_idx]\->raw_text = strdup(tmp_buf);
+155                 menu\->line[menu\->line_idx]\->choice_text = nullptr;
+156                 menu\->line[menu\->line_idx]\->choice_letter = '\\0';
+157                 menu\->line[menu\->line_idx]\->letter_pos = 0;
+158                 menu\->line[menu\->line_idx]\->command_type = '\\0';
+159                 menu\->line[menu\->line_idx]\->command_str = nullptr;
+160                 menu\->line_idx++;
+161                 choices++;
+162             }
+163             break; 
+164         case '?':
+165             break; 
+166         case ' ':
+167         case '\\0':
+168         case '\\n':
+169             break;
+170         default:
+171 
+172             // strnz__cpy(tmp_buf, "unrecognized operator in ", MAXLEN);
+173             // abend(\-1, tmp_buf);
+174         }
+175     }
+176     fclose(fp);
+177     menu\->item_count = menu\->line_idx;
+178     for (ltr = '0'; ltr < 'z'; ltr++)
+179         fltr[ltr] = FALSE;
+180     fltr['Q'] = TRUE;
+181     for (menu\->line_idx = 0; menu\->line_idx < menu\->item_count;
+182          menu\->line_idx++) {
+183         ltr = menu\->line[menu\->line_idx]\->choice_letter;
+184         if (ltr < '0' || ltr > 'z')
+185             ltr = '0';
+186         if (!fltr[ltr] ||
+187             (menu\->line[menu\->line_idx]\->command_type == CT_RETURN &&
+188              ltr == 'Q')) {
+189             fltr[ltr] = TRUE;
+190             s = menu\->line[menu\->line_idx]\->choice_text;
+191             Pos = 0;
+192             while (*s != '\\0') {
+193                 if (*s == ltr)
+194                     break;
+195                 s++;
+196                 Pos++;
+197             }
+198         } else {
+199             Pos = 0;
+200             while (ltr != '\\0') {
+201                 Pos++;
+202                 ltr = toupper(menu\->line[menu\->line_idx]\->choice_text[Pos]);
+203                 if (ltr >= '0' && ltr <= 'Z')
+204                     if (!fltr[ltr])
+205                         break;
+206             }
+207             if (ltr == '\\0') {
+208                 for (ltr = '0'; ltr < 'Z'; ltr++)
+209                     if (!fltr[ltr])
+210                         break;
+211                 if (ltr > 'z') {
+212                     Perror("Ran out of letters");
+213                     return 0;
+214                 }
+215             }
+216             fltr[ltr] = TRUE;
+217             menu\->line[menu\->line_idx]\->choice_letter = ltr;
+218         }
+219         menu\->line[menu\->line_idx]\->letter_pos = Pos;
+220     }
+221     menu\->lines = menu\->item_count;
+222     if (menu\->text_max_len > (menu\->choice_max_len + 6))
+223         menu\->cols = menu\->text_max_len;
+224     else
+225         menu\->cols = menu\->choice_max_len + 6;
+226     if (menu\->cols >= MAXLEN)
+227         Perror("line too long");
+228     for (menu\->line_idx = 0; menu\->line_idx < menu\->item_count;
+229          menu\->line_idx++) {
+230         strnz__cpy(tmp_buf, " x \- ", MAXLEN \- 1);
+231         tmp_buf[1] = menu\->line[menu\->line_idx]\->choice_letter;
+232         strnz__cat(tmp_buf, menu\->line[menu\->line_idx]\->choice_text,
+233                    MAXLEN \- 1);
+234         strnz__cpy(menu\->line[menu\->line_idx]\->choice_text, tmp_buf,
+235                    MAXLEN \- 1);
+236     }
+237 
+238     return 0;
+239 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBchrep()\fP, \fBCT_RETURN\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBFALSE\fP, \fBget_command_type()\fP, \fBinit\fP, \fBMAXLEN\fP, \fBmenu\fP, \fBMT_CHOICE\fP, \fBMT_TEXT\fP, \fBPerror()\fP, \fBssnprintf()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, \fBtrim()\fP, and \fBTRUE\fP\&.
+.PP
+Referenced by \fBmain()\fP, \fBmenu_cmd_processor()\fP, and \fBmenu_engine()\fP\&.
+.SS "int parse_opt_args (\fBInit\fP * init, int argc, char ** argv)\fR [extern]\fP"
+
+.PP
+Parse command-line options and set \fBInit\fP struct values accordingly\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to \fBInit\fP struct 
+.br
+\fIargc\fP - argument count 
+.br
+\fIargv\fP - argument vector Return index of first non-option argument 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Accepts both short and long options 
+.RE
+.PP
+
+.PP
+Definition at line \fB158\fP of file \fBinit\&.c\fP\&.
+.nf
+158                                                       {
+159     int i;
+160     int opt;
+161     int longindex = 0;
+162     int flag = 0;
+163     char tmp_str[MAXLEN];
+164     char *optstring = "a:b:c:d:ef:g:hi:j:k:m:n:o:p:r:st:u:vw:xzA:B:C:DF:G:H:L:"
+165                       "MO:P:R:S:T:VWX:Y:Z";
+166     struct option long_options[] = {{"help", 0, &flag, MAPP_HELP},
+167                                     {"mapp_spec", 1, &flag, MAPP_SPEC},
+168                                     {"mapp_data", 1, &flag, MAPP_DATA_DIR},
+169                                     {"mapp_help", 1, &flag, MAPP_HELP_DIR},
+170                                     {"help_spec", 1, &flag, HELP_SPEC},
+171                                     {"mapp_spec", 1, &flag, MAPP_SPEC},
+172                                     {"in_spec", 1, &flag, IN_SPEC},
+173                                     {"out_spec", 1, &flag, OUT_SPEC},
+174                                     {"mapp_msrc", 1, &flag, MAPP_MSRC},
+175                                     {0, 0, 0, 0}};
+176     char mapp[MAXLEN];
+177     SIO *sio = init\->sio;
+178     base_name(mapp, argv[0]);
+179     optind = 1;
+180     while ((opt = getopt_long(argc, argv, optstring, long_options,
+181                               &longindex)) != \-1) {
+182         switch (opt) {
+183         case 0:
+184             switch (flag) {
+185             case MAPP_DATA_DIR:
+186                 strnz__cpy(init\->mapp_data, optarg, MAXLEN \- 1);
+187                 break;
+188             case MAPP_HELP_DIR:
+189                 strnz__cpy(init\->mapp_help, optarg, MAXLEN \- 1);
+190                 break;
+191             case MAPP_SPEC:
+192                 strnz__cpy(init\->mapp_spec, optarg, MAXLEN \- 1);
+193                 break;
+194             case HELP_SPEC:
+195                 strnz__cpy(init\->help_spec, optarg, MAXLEN \- 1);
+196                 break;
+197             case IN_SPEC:
+198                 strnz__cpy(init\->in_spec, optarg, MAXLEN \- 1);
+199                 break;
+200             case OUT_SPEC:
+201                 strnz__cpy(init\->out_spec, optarg, MAXLEN \- 1);
+202                 break;
+203             case MAPP_MSRC:
+204                 strnz__cpy(init\->mapp_msrc, optarg, MAXLEN \- 1);
+205                 break;
+206             default:
+207                 break;
+208             }
+209             break;
+210         case 'a':
+211             strnz__cpy(init\->minitrc, optarg, MAXLEN \- 1);
+212             break;
+213         case 'b':
+214             sio\->blue_gamma = str_to_double(optarg);
+215             break;
+216         case 'c':
+217             strnz__cpy(init\->cmd, optarg, MAXLEN \- 1);
+218             break;
+219         case 'd':
+220             strnz__cpy(init\->mapp_spec, optarg, MAXLEN \- 1);
+221             break;
+222         case 'e':
+223             init\->f_erase_remainder = true;
+224             break;
+225         case 'f': // fill char
+226             strnz__cpy(init\->fill_char, optarg, 1);
+227             break;
+228         case 'g':
+229             sio\->green_gamma = str_to_double(optarg);
+230             break;
+231         case 'h':
+232             f_help = true;
+233             break;
+234         case 'i':
+235             strnz__cpy(init\->in_spec, optarg, MAXLEN \- 1);
+236             break;
+237         case 'j':
+238             init\->f_strip_ansi = true;
+239             break;
+240         case 'k':
+241             strnz__cpy(init\->parent_cmd, optarg, MAXLEN \- 1);
+242             break;
+243         case 'm':
+244             strnz__cpy(init\->mapp_home, optarg, MAXLEN \- 1);
+245             break;
+246         case 'n':
+247             init\->select_max = atoi(optarg);
+248             break;
+249         case 'o':
+250             strnz__cpy(init\->out_spec, optarg, MAXLEN \- 1);
+251             break;
+252         case 'p':
+253             strnz__cpy(init\->prompt_str, optarg, MAXLEN \- 1);
+254             break;
+255         case 'r':
+256             sio\->red_gamma = str_to_double(optarg);
+257             break;
+258         case 's':
+259             init\->f_squeeze = true;
+260             break;
+261         case 't':
+262             init\->tab_stop = atoi(optarg);
+263             if (init\->tab_stop < 1)
+264                 init\->tab_stop = 1;
+265             break;
+266         case 'u': // brackets
+267             strnz__cpy(init\->brackets, optarg, 2);
+268             break;
+269         case 'v':
+270         case 'V':
+271             f_version = true;
+272             break;
+273         case 'x':
+274             init\->f_ignore_case = true;
+275             break;
+276         case 'y':
+277             init\->f_at_end_remove = true;
+278             break;
+279         case 'z':
+280             init\->f_at_end_clear = true;
+281             break;
+282         case 'A':
+283             strnz__cpy(init\->cmd_all, optarg, MAXLEN \- 1);
+284             break;
+285         case 'B':
+286             sio\->bg_color = clr_name_to_idx(optarg);
+287             break;
+288         case 'C':
+289             init\->cols = atoi(optarg);
+290             break;
+291         case 'D':
+292             f_dump_config = true;
+293             break;
+294         case 'F':
+295             sio\->fg_color = clr_name_to_idx(optarg);
+296             break;
+297         case 'G':
+298             sio\->gray_gamma = str_to_double(optarg);
+299             break;
+300         case 'H':
+301             strnz__cpy(init\->help_spec, optarg, MAXLEN \- 1);
+302             break;
+303         case 'L':
+304             init\->lines = atoi(optarg);
+305             break;
+306         case 'M':
+307             init\->f_multiple_cmd_args = true;
+308             break;
+309         case 'O':
+310             sio\->bo_color = clr_name_to_idx(optarg);
+311             break;
+312         case 'P':
+313             strnz__cpy(tmp_str, optarg, MAXLEN \- 1);
+314             init\->prompt_type = prompt_str_to_int(tmp_str);
+315             break;
+316         case 'R':
+317             strnz__cpy(init\->receiver_cmd, optarg, MAXLEN \- 1);
+318             break;
+319         case 'S':
+320             strnz__cpy(init\->provider_cmd, optarg, MAXLEN \- 1);
+321             break;
+322         case 'T':
+323             strnz__cpy(init\->title, optarg, MAXLEN \- 1);
+324             break;
+325         case 'U':
+326             strnz__cpy(init\->mapp_user, optarg, MAXLEN \- 1);
+327             break;
+328         case 'W':
+329             f_write_config = true;
+330             break;
+331         case 'X':
+332             init\->begx = atoi(optarg);
+333             break;
+334         case 'Y':
+335             init\->begy = atoi(optarg);
+336             break;
+337         case 'Z':
+338             init\->f_stop_on_error = true;
+339             break;
+340         default:
+341             break;
+342         }
+343     }
+344     init\->argv[0] = strdup(argv[0]);
+345     i = 0;
+346     while (i < argc) {
+347         init\->argv[i] = strdup(argv[i]);
+348         i++;
+349     }
+350     init\->argv[i] = nullptr;
+351     init\->argc = argc;
+352     return optind;
+353 }
+.PP
+.fi
+
+.PP
+References \fBbase_name()\fP, \fBclr_name_to_idx()\fP, \fBf_dump_config\fP, \fBf_help\fP, \fBf_version\fP, \fBf_write_config\fP, \fBHELP_SPEC\fP, \fBIN_SPEC\fP, \fBinit\fP, \fBMAPP_DATA_DIR\fP, \fBMAPP_HELP\fP, \fBMAPP_HELP_DIR\fP, \fBMAPP_MSRC\fP, \fBMAPP_SPEC\fP, \fBMAXLEN\fP, \fBOUT_SPEC\fP, \fBprompt_str_to_int()\fP, \fBsio\fP, \fBstr_to_double()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_engine()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SS "int pick_engine (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Initializes pick interface, calculates window size and position, and enters picker loop\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP Pointer to \fBInit\fP structure containing pick information 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Count of selected objects on success, -1 if user cancels 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+Initializes key command strings for chyron display and calculates pick window size and position based on terminal size and pick parameters\&. 
+
+.PP
+Opens pick window and displays first page of objects\&. Enters picker loop to handle user input and interactions\&. If user cancels selection, returns -1\&. 
+
+.PP
+If user accepts selection, returns count of selected objects\&. 
+.RE
+.PP
+Initialize window and data structures
+
+.PP
+Initialize key command strings for chyron display
+
+.PP
+Calculate pick window size and position based on terminal size and pick parameters
+
+.PP
+Enter picker loop to handle user input and interactions
+.PP
+Definition at line \fB199\fP of file \fBpick_engine\&.c\fP\&.
+.nf
+199                             {
+201     int rc;
+202     int maxy, maxx, win_maxy, win_maxx;
+203     int tbl_max_cols, pg_max_objs;
+205 
+206     getmaxyx(stdscr, maxy, maxx);
+209     win_maxy = (maxy * 8) / 10;
+210     if (win_maxy > (maxy \- pick\->begy) \- 2)
+211         win_maxy = (maxy \- pick\->begy) \- 2;
+212     win_maxx = (maxx * 9) / 10;
+213     if (win_maxx > (maxx \- pick\->begx) \- 2)
+214         win_maxx = (maxx \- pick\->begx) \- 2;
+215     if (pick\->tbl_col_width < 4)
+216         pick\->tbl_col_width = 4;
+217     if (pick\->tbl_col_width > win_maxx \- 2)
+218         pick\->tbl_col_width = win_maxx \- 2;
+219     // populate the columns in sequence
+220     if (pick\->obj_cnt <= win_maxy) {
+221         pick\->tbl_lines = pick\->obj_cnt;
+222         pick\->tbl_cols = 1;
+223     } else {
+224         tbl_max_cols = (win_maxx / (pick\->tbl_col_width + 1));
+225         pg_max_objs = win_maxy * tbl_max_cols;
+226         if (pick\->obj_cnt > pg_max_objs)
+227             pick\->tbl_cols = tbl_max_cols;
+228         else
+229             pick\->tbl_cols = pick\->obj_cnt / win_maxy;
+230         pick\->tbl_lines = pick\->obj_cnt / tbl_max_cols;
+231     }
+232     pick\->tbl_pages = (pick\->tbl_lines / (win_maxy \- 1)) + 1;
+233     pick\->pg_lines = (pick\->tbl_lines / pick\->tbl_pages);
+234     pick\->win_lines = pick\->pg_lines + 1;
+235     pick\->tbl_page = 0;
+236     if (pick\->begy == 0)
+237         pick\->begy = (LINES \- pick\->win_lines) / 5;
+238     else if (pick\->begy + pick\->win_lines > LINES \- 4)
+239         pick\->begy = LINES \- pick\->win_lines \- 2;
+240     pick\->win_width = (pick\->tbl_col_width + 1) * pick\->tbl_cols;
+241 
+242     pick\->chyron = new_chyron();
+243     set_chyron_key(pick\->chyron, 1, "F1 Help", KEY_F(1));
+244     set_chyron_key(pick\->chyron, 9, "F9 Cancel", KEY_F(9));
+245     set_chyron_key(pick\->chyron, 10, "F10 Continue", KEY_F(10));
+246     if (pick\->tbl_pages > 1) {
+247         set_chyron_key(pick\->chyron, 11, "PgUp", KEY_PPAGE);
+248         set_chyron_key(pick\->chyron, 12, "PgDn", KEY_NPAGE);
+249     }
+250     set_chyron_key(pick\->chyron, 13, "Toggle", 32);
+251     compile_chyron(pick\->chyron);
+252     if (pick\->chyron\->l > win_maxx)
+253         pick\->chyron\->l = strnz(pick\->chyron\->s, win_maxx);
+254     if (pick\->win_width < pick\->chyron\->l)
+255         pick\->win_width = pick\->chyron\->l;
+256 
+257     if (pick\->begx + pick\->win_width > COLS \- 4)
+258         pick\->begx = COLS \- pick\->win_width \- 2;
+259     else if (pick\->begx == 0)
+260         pick\->begx = (COLS \- pick\->win_width) / 2;
+261 
+262     rc = open_pick_win(init);
+263     if (rc)
+264         return (rc);
+265     display_page(pick);
+266     reverse_object(pick);
+267     pick\->obj_idx = 0;
+268     pick\->x = 1;
+269     mousemask(BUTTON1_CLICKED | BUTTON1_DOUBLE_CLICKED, nullptr);
+271     picker(init);
+272     if (pick\->select_cnt > 0) {
+273         if (pick\->f_out_spec && pick\->out_spec[0])
+274             rc = output_objects(pick);
+275         if (pick\->f_cmd && pick\->cmd[0])
+276             rc = exec_objects(init);
+277     }
+278     return (rc);
+279 }
+.PP
+.fi
+
+.PP
+References \fBcompile_chyron()\fP, \fBdisplay_page()\fP, \fBexec_objects()\fP, \fBinit\fP, \fBnew_chyron()\fP, \fBopen_pick_win()\fP, \fBoutput_objects()\fP, \fBpick\fP, \fBpicker()\fP, \fBreverse_object()\fP, \fBset_chyron_key()\fP, and \fBstrnz()\fP\&.
+.PP
+Referenced by \fBinit_pick()\fP\&.
+.SS "int view_file (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Start view\&. 
+.PP
+Definition at line \fB84\fP of file \fBview_engine\&.c\fP\&.
+.nf
+84                           {
+85     view = init\->view;
+86     if (view\->argc < 1) {
+87         view\->curr_argc = \-1;
+88         view\->argc = 0;
+89         view\->next_file_spec_ptr = "\-";
+90     } else
+91         view\->next_file_spec_ptr = view\->argv[0];
+92     while (view\->curr_argc < view\->argc) {
+93         if (view\->next_file_spec_ptr == nullptr ||
+94             *view\->next_file_spec_ptr == '\\0') {
+95             break;
+96         }
+97         view\->file_spec_ptr = view\->next_file_spec_ptr;
+98         view\->next_file_spec_ptr = nullptr;
+99         if (view_init_input(view, view\->file_spec_ptr)) {
+100             if (view\->buf) {
+101                 view\->f_eod = 0;
+102                 view\->f_bod = 0;
+103                 view\->maxcol = 0;
+104                 view\->page_top_pos = 0;
+105                 view\->page_bot_pos = 0;
+106                 view\->file_pos = 0;
+107                 next_page(view);
+108                 view_cmd_processor(init);
+109                 munmap(view\->buf, view\->file_size);
+110             }
+111         } else {
+112             view\->curr_argc++;
+113             if (view\->curr_argc < view\->argc) {
+114                 view\->next_file_spec_ptr = view\->argv[view\->curr_argc];
+115             }
+116         }
+117     }
+118     return 0;
+119 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP, \fBnext_page()\fP, \fBview\fP, \fBview_cmd_processor()\fP, and \fBview_init_input()\fP\&.
+.PP
+Referenced by \fBmain()\fP, and \fBmview()\fP\&.
+.SS "bool view_init_input (\fBView\fP * view, char * file_name)\fR [extern]\fP"
+
+.PP
+Initialize the input for a C-Menu \fBView\fP\&. This function initializes the input for view, which can be a file, standard input, or a provider command to be initiated by view\&. It handles different input sources and sets up the necessary file descriptors and memory mapping for efficient access\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBview\fP\fP Pointer to the \fBView\fP structure to be initialized\&. 
+.br
+\fI\fBfile_name\fP\fP Name of the input file or "-" for standard input\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true on success, false on failure\&. 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+if a provider command is specified, set up a pipe to read its output\&. A child process is spawned, and view, the parent process, reads from the pipe\&. 
+
+.PP
+If input is from a pipe or standard input, clone it to a temporary file\&. This allows for memory-mapping the input later\&. It does not support real-time updates to the input, but it allows for efficient access to the data\&. 
+.RE
+.PP
+< maximum number of arguments
+
+.PP
+< maximum number of arguments
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+< maximum length for strings and buffers
+
+.PP
+Open the input file for reading and get its size\&.
+.PP
+Definition at line \fB114\fP of file \fBinit_view\&.c\fP\&.
+.nf
+114                                                   {
+115     struct stat sb;
+116     int idx = 0;
+117     pid_t pid;
+118     int pipe_fd[2];
+119     char *s_argv[MAXARGS];
+120 
+121     if (strcmp(file_name, "\-") == 0) {
+122         file_name = "/dev/stdin";
+123         view\->f_in_pipe = true;
+124     }
+125     //  ╭───────────────────────────────────────────────────────────────╮
+126     //  │ INPUT IS FROM START_CMD                                       │
+127     //  │ SETUP PIPES                                                   │
+128     //  │ CHILD  P_WRITE                                                │
+129     //  │ PARENT P_READ                                                 │
+130     //  ╰───────────────────────────────────────────────────────────────╯
+131     if (view\->provider_cmd[0] != '\\0') {
+132         str_to_args(s_argv, view\->provider_cmd, MAXARGS \- 1);
+133         if (pipe(pipe_fd) == \-1) {
+134             Perror("pipe(pipe_fd) failed in init_view");
+135             return (1);
+136         }
+137         if ((pid = fork()) == \-1) {
+138             Perror("fork() failed in init_view");
+139             return (1);
+140         }
+141         if (pid == 0) { // Child
+142             close(pipe_fd[P_READ]);
+143             dup2(pipe_fd[P_WRITE], STDOUT_FILENO);
+144             close(pipe_fd[P_WRITE]);
+145             execvp(s_argv[0], s_argv);
+146             strnz__cpy(tmp_str, "Can't exec view start cmd: ", MAXLEN \- 1);
+147             strnz__cat(tmp_str, s_argv[0], MAXLEN \- 1);
+148             Perror(tmp_str);
+149             exit(EXIT_FAILURE);
+150         }
+151         // Back to parent
+152         close(pipe_fd[P_WRITE]);
+153         dup2(pipe_fd[P_READ], STDIN_FILENO);
+154         view\->in_fd = dup(STDIN_FILENO);
+155         view\->f_in_pipe = true;
+156     } else {
+157         //  ╭───────────────────────────────────────────────────────────────╮
+158         //  │ ATTEMPT to OPEN FILENAME                                      │
+159         //  ╰───────────────────────────────────────────────────────────────╯
+160         if (view\->f_in_pipe)
+161             view\->in_fd = dup(STDIN_FILENO);
+162         else {
+163             view\->in_fd = open(file_name, O_RDONLY);
+164             if (view\->in_fd == \-1) {
+165                 snprintf(em0, MAXLEN \- 65, "%s, line: %d", __FILE__,
+166                          __LINE__ \- 2);
+167                 snprintf(em1, MAXLEN \- 65, "open %s", file_name);
+168                 strerror_r(errno, em2, MAXLEN);
+169                 display_error(em0, em1, em2, NULL);
+170                 return false;
+171             }
+172             if (fstat(view\->in_fd, &sb) == \-1) {
+173                 snprintf(em0, MAXLEN \- 65, "%s, line: %d", __FILE__,
+174                          __LINE__ \- 1);
+175                 snprintf(em1, MAXLEN \- 65, "fstat %s", file_name);
+176                 strerror_r(errno, em2, MAXLEN);
+177                 display_error(em0, em1, em2, NULL);
+178                 close(view\->in_fd);
+179                 return (EXIT_FAILURE);
+180             }
+181             view\->file_size = sb\&.st_size;
+182             if (!S_ISREG(sb\&.st_mode))
+183                 view\->f_in_pipe = true;
+184         }
+185     }
+186     if (view\->f_in_pipe) {
+187         char tmp_filename[] = "/tmp/view_XXXXXX";
+188         char buf[VBUFSIZ];
+189         ssize_t bytes_read;
+190         //  ╭───────────────────────────────────────────────────────╮
+191         //  │ CLONE STDIN to TMP_FILENAME                           │
+192         //  ╰───────────────────────────────────────────────────────╯
+193         close(view\->in_fd);
+194         view\->in_fd = mkstemp(tmp_filename);
+195         if (view\->in_fd == \-1) {
+196             abend(\-1, "failed to mkstemp");
+197             exit(EXIT_FAILURE);
+198         }
+199         unlink(tmp_filename);
+200         while ((bytes_read = read(STDIN_FILENO, buf, sizeof(buf))) > 0)
+201             if (write(view\->in_fd, buf, bytes_read) != bytes_read) {
+202                 abend(\-1, "unable to write tmp");
+203                 exit(EXIT_FAILURE);
+204             }
+205         if (bytes_read == \-1) {
+206             abend(\-1, "unable to read stdin");
+207             exit(EXIT_FAILURE);
+208         }
+209         if (fstat(view\->in_fd, &sb) == \-1) {
+210             abend(\-1, "fstat failed");
+211             exit(EXIT_FAILURE);
+212         }
+213         view\->file_size = sb\&.st_size;
+214         if (view\->file_size == 0) {
+215             close(view\->in_fd);
+216             strnz__cpy(tmp_str, "no standard input", MAXLEN \- 1);
+217             abend(\-1, tmp_str);
+218             exit(EXIT_FAILURE);
+219         }
+220         waitpid(\-1, NULL, 0);
+221     }
+222     //  ╭───────────────────────────────────────────────────────────────╮
+223     //  │ MMAP                                                          │
+224     //  ╰───────────────────────────────────────────────────────────────╯
+225     view\->buf =
+226         mmap(NULL, view\->file_size, PROT_READ, MAP_PRIVATE, view\->in_fd, 0);
+227     if (view\->buf == MAP_FAILED) {
+228         snprintf(em0, MAXLEN \- 65, "%s, line: %d", __FILE__, __LINE__ \- 2);
+229         snprintf(em1, MAXLEN \- 65, "mmap %s", file_name);
+230         strerror_r(errno, em2, MAXLEN);
+231         display_error(em0, em1, em2, NULL);
+232         close(view\->in_fd);
+233         return (EXIT_FAILURE);
+234     }
+235     close(view\->in_fd);
+236     view\->file_size = sb\&.st_size;
+237     view\->f_new_file = true;
+238     view\->prev_file_pos = NULL_POSITION;
+239     view\->buf_curr_ptr = view\->buf;
+240     if (view\->cmd_all[0] != '\\0')
+241         strnz__cpy(view\->cmd, view\->cmd_all, MAXLEN \- 1);
+242     for (idx = 0; idx < NMARKS; idx++)
+243         view\->mark_tbl[idx] = NULL_POSITION;
+244     strnz__cpy(view\->cur_file_str, file_name, MAXLEN \- 1);
+245     if (view\->f_stdout_is_tty) {
+246         view\->page_top_pos = 0;
+247         view\->page_bot_pos = 0;
+248     }
+249     return true;
+250 }
+.PP
+.fi
+
+.PP
+References \fBabend()\fP, \fBbase_name()\fP, \fBdisplay_error()\fP, \fBem0\fP, \fBem1\fP, \fBem2\fP, \fBexpand_tilde()\fP, \fBfile_name\fP, \fBMAXARGS\fP, \fBMAXLEN\fP, \fBNMARKS\fP, \fBNULL_POSITION\fP, \fBP_READ\fP, \fBP_WRITE\fP, \fBPerror()\fP, \fBpipe_fd\fP, \fBssnprintf()\fP, \fBstr_to_args()\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, \fBtmp_str\fP, \fBVBUFSIZ\fP, and \fBview\fP\&.
+.PP
+Referenced by \fBview_file()\fP\&.
+.SS "int write_config (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Write the current configuration to a file specified in init->minitrc\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to \fBInit\fP struct containing current configuration 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, -1 on failure 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+The configuration is written in key=value format, one per line 
+
+.PP
+Lines beginning with '#' are comments and are ignored when reading the config file 
+
+.PP
+The file is created if it does not exist, and overwritten if it does exist 
+.RE
+.PP
+
+.PP
+Definition at line \fB689\fP of file \fBinit\&.c\fP\&.
+.nf
+689                              {
+690     char *e;
+691     char minitrc_dmp[MAXLEN];
+692     char tmp_str[MAXLEN];
+693     SIO *sio = init\->sio;
+694     e = getenv("HOME");
+695     if (e) {
+696         strnz__cpy(minitrc_dmp, e, MAXLEN \- 1);
+697         strnz__cat(minitrc_dmp, "/", MAXLEN \- 1);
+698         strnz__cat(minitrc_dmp, "menuapp/minitrc\&.dmp", MAXLEN \- 1);
+699         ;
+700     } else {
+701         strnz__cpy(minitrc_dmp, "\&./minitrc\&.dmp", MAXLEN \- 1);
+702     }
+703     FILE *minitrc_fp = fopen(minitrc_dmp, "w");
+704     if (minitrc_fp == (FILE *)0) {
+705         fprintf(stderr, "failed to open file: %s\\n", minitrc_dmp);
+706         return (\-1);
+707     }
+708     (void)fprintf(minitrc_fp, "# %s\\n", "~/\&.minitrc");
+709     (void)fprintf(minitrc_fp, "%s=%d\\n", "cols", init\->cols);
+710     (void)fprintf(minitrc_fp, "%s=%d\\n", "lines", init\->lines);
+711     (void)fprintf(minitrc_fp, "%s=%d\\n", "begx", init\->begx);
+712     (void)fprintf(minitrc_fp, "%s=%d\\n", "begy", init\->begy);
+713     (void)fprintf(minitrc_fp, "%s=%s\\n", "bg_color",
+714                   colors_text[sio\->bg_color]);
+715     (void)fprintf(minitrc_fp, "%s=%s\\n", "fg_color",
+716                   colors_text[sio\->fg_color]);
+717     (void)fprintf(minitrc_fp, "%s=%s\\n", "bo_color",
+718                   colors_text[sio\->bo_color]);
+719     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "red_gamma", sio\->red_gamma);
+720     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "green_gamma", sio\->green_gamma);
+721     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "blue_gamma", sio\->blue_gamma);
+722     (void)fprintf(minitrc_fp, "%s=%0\&.2f\\n", "gray_gamma", sio\->gray_gamma);
+723     (void)fprintf(minitrc_fp, "%s=%s\\n", "in_spec", init\->in_spec);
+724     (void)fprintf(minitrc_fp, "%s=%s\\n", "out_spec", init\->out_spec);
+725     (void)fprintf(minitrc_fp, "%s=%s\\n", "provider_cmd", init\->provider_cmd);
+726     (void)fprintf(minitrc_fp, "%s=%s\\n", "receiver_cmd", init\->receiver_cmd);
+727     (void)fprintf(minitrc_fp, "%s=%s\\n", "cmd_all", init\->cmd_all);
+728     (void)fprintf(minitrc_fp, "%s=%s\\n", "parent_cmd", init\->parent_cmd);
+729     (void)fprintf(minitrc_fp, "%s=%s\\n", "title", init\->title);
+730     (void)fprintf(minitrc_fp, "%s=%d\\n", "select_max", init\->select_max);
+731     (void)fprintf(minitrc_fp, "%s=%s\\n", "brackets", init\->brackets);
+732     (void)fprintf(minitrc_fp, "%s=%d\\n", "tab_stop", init\->tab_stop);
+733     prompt_int_to_str(tmp_str, init\->prompt_type);
+734     (void)fprintf(minitrc_fp, "%s=%s\\n", "prompt_type", tmp_str);
+735     (void)fprintf(minitrc_fp, "%s=%s\\n", "prompt_str", init\->prompt_str);
+736     (void)fprintf(minitrc_fp, "%s=%s\\n", "cmd", init\->cmd);
+737     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_at_end_clear",
+738                   init\->f_at_end_clear ? "true" : "false");
+739     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_at_end_remove",
+740                   init\->f_at_end_remove ? "true" : "false");
+741     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_erase_remainder",
+742                   init\->f_erase_remainder ? "true" : "false");
+743     (void)fprintf(minitrc_fp, "%s=%s\\n", "fill_char", init\->fill_char);
+744     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_strip_ansi",
+745                   init\->f_strip_ansi ? "true" : "false");
+746     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_ignore_case",
+747                   init\->f_ignore_case ? "true" : "false");
+748     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_squeeze",
+749                   init\->f_squeeze ? "true" : "false");
+750     (void)fprintf(minitrc_fp, "%s=%s\\n", "f_stop_on_error",
+751                   init\->f_stop_on_error ? "true" : "false");
+752     (void)fprintf(minitrc_fp, "%s=%s\\n", "black", sio\->black);
+753     (void)fprintf(minitrc_fp, "%s=%s\\n", "bg", sio\->bg);
+754     (void)fprintf(minitrc_fp, "%s=%s\\n", "abg", sio\->abg);
+755     (void)fprintf(minitrc_fp, "%s=%s\\n", "black", sio\->black);
+756     (void)fprintf(minitrc_fp, "%s=%s\\n", "red", sio\->red);
+757     (void)fprintf(minitrc_fp, "%s=%s\\n", "green", sio\->green);
+758     (void)fprintf(minitrc_fp, "%s=%s\\n", "yellow", sio\->yellow);
+759     (void)fprintf(minitrc_fp, "%s=%s\\n", "blue", sio\->blue);
+760     (void)fprintf(minitrc_fp, "%s=%s\\n", "magenta", sio\->magenta);
+761     (void)fprintf(minitrc_fp, "%s=%s\\n", "cyan", sio\->cyan);
+762     (void)fprintf(minitrc_fp, "%s=%s\\n", "white", sio\->white);
+763     (void)fprintf(minitrc_fp, "%s=%s\\n", "bblack", sio\->bblack);
+764     (void)fprintf(minitrc_fp, "%s=%s\\n", "bred", sio\->bred);
+765     (void)fprintf(minitrc_fp, "%s=%s\\n", "bgreen", sio\->bgreen);
+766     (void)fprintf(minitrc_fp, "%s=%s\\n", "byellow", sio\->byellow);
+767     (void)fprintf(minitrc_fp, "%s=%s\\n", "bblue", sio\->bblue);
+768     (void)fprintf(minitrc_fp, "%s=%s\\n", "bmagenta", sio\->bmagenta);
+769     (void)fprintf(minitrc_fp, "%s=%s\\n", "bcyan", sio\->bcyan);
+770     (void)fprintf(minitrc_fp, "%s=%s\\n", "bwhite", sio\->bwhite);
+771     (void)fprintf(minitrc_fp, "%s=%s\\n", "editor", init\->editor);
+772     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_spec", init\->mapp_spec);
+773     (void)fprintf(minitrc_fp, "%s=%s\\n", "help_spec", init\->help_spec);
+774     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_data", init\->mapp_data);
+775     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_help", init\->mapp_help);
+776     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_home", init\->mapp_home);
+777     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_msrc", init\->mapp_msrc);
+778     (void)fprintf(minitrc_fp, "%s=%s\\n", "mapp_user", init\->mapp_user);
+779     (void)fclose(minitrc_fp);
+780     strnz__cpy(tmp_str, "Configuration written to file: ", MAXLEN \- 1);
+781     strnz__cat(tmp_str, minitrc_dmp, MAXLEN \- 1);
+782     Perror(tmp_str);
+783     return 0;
+784 }
+.PP
+.fi
+
+.PP
+References \fBcolors_text\fP, \fBinit\fP, \fBMAXLEN\fP, \fBPerror()\fP, \fBprompt_int_to_str()\fP, \fBsio\fP, \fBstrnz__cat()\fP, \fBstrnz__cpy()\fP, and \fBtmp_str\fP\&.
+.PP
+Referenced by \fBmapp_initialization()\fP, and \fBmenu_cmd_processor()\fP\&.
+.SS "void zero_opt_args (\fBInit\fP * init)\fR [extern]\fP"
+
+.PP
+Initialize optional arguments in the \fBInit\fP struct to default values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBinit\fP\fP - pointer to \fBInit\fP struct to be initialized This function sets all optional argument fields in the \fBInit\fP struct to their default values before parsing command-line options or configuration file\&. This ensures that any fields not specified by the user will have known default values\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB132\fP of file \fBinit\&.c\fP\&.
+.nf
+132                                {
+133     init\->f_mapp_desc = false;
+134     init\->f_provider_cmd = false;
+135     init\->f_receiver_cmd = false;
+136     init\->f_title = false;
+137     init\->f_mapp_spec = false;
+138     init\->f_help_spec = false;
+139     init\->f_in_spec = false;
+140     init\->f_out_spec = false;
+141     init\->mapp_spec[0] = init\->help_spec[0] = '\\0';
+142     init\->provider_cmd[0] = init\->receiver_cmd[0] = '\\0';
+143     init\->title[0] = '\\0';
+144     init\->cmd[0] = init\->cmd_all[0] = '\\0';
+145     init\->parent_cmd[0] = '\\0';
+146     init\->in_spec[0] = init\->out_spec[0] = '\\0';
+147     init\->help_spec[0] = '\\0';
+148     init\->in_spec[0] = '\\0';
+149     init\->out_spec[0] = '\\0';
+150 }
+.PP
+.fi
+
+.PP
+References \fBinit\fP\&.
+.PP
+Referenced by \fBdisplay_pick_help()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_engine()\fP, \fBmenu_cmd_processor()\fP, and \fBview_display_help()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "\fBInit\fP * init\fR [extern]\fP"
+
+.PP
+Definition at line \fB184\fP of file \fBcommon\&.h\fP\&.
+.PP
+Referenced by \fBdestroy_form()\fP, \fBdestroy_init()\fP, \fBdestroy_menu()\fP, \fBdestroy_pick()\fP, \fBdestroy_view()\fP, \fBdisplay_pick_help()\fP, \fBdump_config()\fP, \fBenter_file_spec()\fP, \fBexec_objects()\fP, \fBform_calculate()\fP, \fBform_display_screen()\fP, \fBform_end_fields()\fP, \fBform_engine()\fP, \fBinit_form()\fP, \fBinit_form_files()\fP, \fBinit_menu_files()\fP, \fBinit_pick()\fP, \fBinit_pick_files()\fP, \fBinit_view_boxwin()\fP, \fBinit_view_files()\fP, \fBinit_view_full_screen()\fP, \fBmain()\fP, \fBmapp_initialization()\fP, \fBmenu_cmd_processor()\fP, \fBmenu_engine()\fP, \fBmview()\fP, \fBnew_form()\fP, \fBnew_init()\fP, \fBnew_menu()\fP, \fBnew_pick()\fP, \fBnew_view()\fP, \fBopen_pick_win()\fP, \fBparse_config()\fP, \fBparse_menu_description()\fP, \fBparse_opt_args()\fP, \fBpick_engine()\fP, \fBpicker()\fP, \fBread_pick_input()\fP, \fBresize_page()\fP, \fBview_cmd_processor()\fP, \fBview_display_help()\fP, \fBview_file()\fP, \fBwrite_config()\fP, \fBwrite_view_buffer()\fP, and \fBzero_opt_args()\fP\&.
+.SS "int init_cnt\fR [extern]\fP"
+
+.PP
+Definition at line \fB31\fP of file \fBmem\&.c\fP\&.
+.PP
+Referenced by \fBdestroy_init()\fP, and \fBnew_init()\fP\&.
+.SS "char minitrc[256]\fR [extern]\fP"
+number of \fBInit\fP data structures allocated 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.

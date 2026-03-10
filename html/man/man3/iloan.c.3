@@ -1,0 +1,729 @@
+.TH "src/iloan.c" 3 "Version v0.2.9" "C-Menu" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/iloan.c \- Installment Loan Calculator\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include <math\&.h>\fP
+.br
+\fR#include <signal\&.h>\fP
+.br
+\fR#include <stdbool\&.h>\fP
+.br
+\fR#include <stdio\&.h>\fP
+.br
+\fR#include <stdlib\&.h>\fP
+.br
+\fR#include <string\&.h>\fP
+.br
+\fR#include <unistd\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBFALSE\fP   0"
+.br
+.ti -1c
+.RI "#define \fBTRUE\fP   1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBnumbers\fP (char *d, char *s)"
+.br
+.ti -1c
+.RI "double \fBcalculate_i\fP (double, double, double)"
+.br
+.ti -1c
+.RI "double \fBcalculate_n\fP (double, double, double)"
+.br
+.ti -1c
+.RI "double \fBcalculate_pmt\fP (double, double, double)"
+.br
+.ti -1c
+.RI "double \fBcalculate_pv\fP (double, double, double)"
+.br
+.ti -1c
+.RI "int \fBis_numeric\fP (char *)"
+.br
+.ti -1c
+.RI "void \fBaccept_str\fP (char *s)"
+.br
+.ti -1c
+.RI "char * \fBformat_currency\fP (float)"
+.br
+.ti -1c
+.RI "char * \fBformat_interest\fP (float)"
+.br
+.ti -1c
+.RI "double \fBaccept_pv\fP ()"
+.br
+.ti -1c
+.RI "double \fBaccept_n\fP ()"
+.br
+.ti -1c
+.RI "double \fBaccept_i\fP ()"
+.br
+.ti -1c
+.RI "double \fBaccept_pmt\fP ()"
+.br
+.ti -1c
+.RI "void \fBerror_press_any_key\fP (char *)"
+.br
+.ti -1c
+.RI "void \fBABEND\fP (int)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.RI "iloan is a trivial application to demonstrate how a command-line program can be integrated into C-Menu Form with simple file, argument, or pipe i-o\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBin_str\fP [BUFSIZ+1]"
+.br
+.ti -1c
+.RI "int \fBf_pv\fP = 0"
+.br
+.ti -1c
+.RI "int \fBf_n\fP = 0"
+.br
+.ti -1c
+.RI "int \fBf_i\fP = 0"
+.br
+.ti -1c
+.RI "int \fBf_pmt\fP = 0"
+.br
+.ti -1c
+.RI "bool \fBf_quiet\fP = false"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Installment Loan Calculator\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bill Waller Copyright (c) 2025 MIT License billxwaller@gmail.com 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2026-02-09 
+.RE
+.PP
+
+.PP
+Definition in file \fBiloan\&.c\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define FALSE   0"
+
+.PP
+Definition at line \fB18\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBform_accept_field()\fP, \fBformat_currency()\fP, \fBis_numeric()\fP, \fBopen_pick_win()\fP, \fBparse_menu_description()\fP, \fBsave_object()\fP, and \fBtoggle_object()\fP\&.
+.SS "#define TRUE   1"
+
+.PP
+Definition at line \fB19\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBdisplay_curses_keys()\fP, \fBform_accept_field()\fP, \fBformat_currency()\fP, \fBis_numeric()\fP, \fBmain()\fP, \fBmenu_cmd_processor()\fP, \fBparse_menu_description()\fP, and \fBwin_resize()\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void ABEND (int e)"
+
+.PP
+Definition at line \fB402\fP of file \fBiloan\&.c\fP\&.
+.nf
+402                   {
+403     printf("ABEND: Error %d:\\n", e);
+404     exit(EXIT_FAILURE);
+405 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double accept_i ()"
+
+.PP
+Definition at line \fB221\fP of file \fBiloan\&.c\fP\&.
+.nf
+221                   {
+222     double i;
+223     while (1) {
+224         accept_str("Rate (annual) \- \- \-> ");
+225         if (in_str[0] == '\\0') {
+226             i = 0;
+227             break;
+228         } else {
+229             if (is_numeric(in_str)) {
+230                 i = atof(in_str);
+231                 if (i < 0)
+232                     error_press_any_key("interest Rate can't be less than 0");
+233                 else
+234                     break;
+235             } else
+236                 error_press_any_key("Interest Rate must be numeric");
+237         }
+238     }
+239     return (i);
+240 }
+.PP
+.fi
+
+.PP
+References \fBaccept_str()\fP, \fBerror_press_any_key()\fP, \fBin_str\fP, and \fBis_numeric()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double accept_n ()"
+
+.PP
+Definition at line \fB205\fP of file \fBiloan\&.c\fP\&.
+.nf
+205                   {
+206     double n;
+207     while (1) {
+208         accept_str("Number of Payments > ");
+209         if (is_numeric(in_str)) {
+210             n = atof(in_str);
+211             if (n < 0)
+212                 error_press_any_key("Number of Payments can't be less than 0");
+213             else
+214                 break;
+215         } else
+216             error_press_any_key("Number of Payments must be numeric");
+217     }
+218     return (n);
+219 }
+.PP
+.fi
+
+.PP
+References \fBaccept_str()\fP, \fBerror_press_any_key()\fP, \fBin_str\fP, and \fBis_numeric()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double accept_pmt ()"
+
+.PP
+Definition at line \fB242\fP of file \fBiloan\&.c\fP\&.
+.nf
+242                     {
+243     double pmt;
+244     while (1) {
+245         accept_str("Payment Amount  \- \-> ");
+246         if (in_str[0] == '\\0') {
+247             pmt = 0;
+248             break;
+249         } else {
+250             if (is_numeric(in_str)) {
+251                 pmt = atof(in_str);
+252                 break;
+253             } else
+254                 error_press_any_key("Payment Amount must be numeric");
+255         }
+256     }
+257     return (pmt);
+258 }
+.PP
+.fi
+
+.PP
+References \fBaccept_str()\fP, \fBerror_press_any_key()\fP, \fBin_str\fP, and \fBis_numeric()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double accept_pv ()"
+
+.PP
+Definition at line \fB184\fP of file \fBiloan\&.c\fP\&.
+.nf
+184                    {
+185     double pv;
+186     while (1) {
+187         accept_str("Present Value \- \- \-> ");
+188         if (in_str[0] == '\\0') {
+189             pv = 0;
+190             break;
+191         } else {
+192             if (is_numeric(in_str)) {
+193                 pv = atof(in_str);
+194                 if (pv < 0)
+195                     error_press_any_key("Present Value can't be less than 0");
+196                 else
+197                     break;
+198             } else
+199                 error_press_any_key("Present Value must be numeric");
+200         }
+201     }
+202     return (pv);
+203 }
+.PP
+.fi
+
+.PP
+References \fBaccept_str()\fP, \fBerror_press_any_key()\fP, \fBin_str\fP, and \fBis_numeric()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void accept_str (char * s)"
+
+.PP
+Definition at line \fB349\fP of file \fBiloan\&.c\fP\&.
+.nf
+349                          {
+350     fprintf(stderr, "%s", s);
+351     read(0, in_str, BUFSIZ);
+352 }
+.PP
+.fi
+
+.PP
+References \fBin_str\fP\&.
+.PP
+Referenced by \fBaccept_i()\fP, \fBaccept_n()\fP, \fBaccept_pmt()\fP, and \fBaccept_pv()\fP\&.
+.SS "double calculate_i (double pv, double n, double pmt)"
+
+.PP
+Definition at line \fB291\fP of file \fBiloan\&.c\fP\&.
+.nf
+291                                                     {
+292     double i1 = 0, i;
+293     double delta = 0\&.0000001;
+294     double xdelta;
+295     double fdelta;
+296     double fprimi;
+297     double ffact;
+298     double fi;
+299     double fman;
+300     double fmann;
+301     if (pv == 0 || n == 0 || pmt == 0)
+302         error_press_any_key(
+303             "3 non\-zero values required to calculate Interest Rate");
+304     ffact = pv / pmt;
+305     xdelta = 0;
+306     if (ffact < n) {
+307         i1 = 0\&.0125;
+308         xdelta = 0\&.9;
+309     }
+310     while (xdelta > delta) {
+311         fman = 1 / (1 + i1);
+312         fmann = pow(fman, n);
+313         fi = ffact * i1 + fmann \- 1;
+314         fprimi = ffact \- n * fmann * fman;
+315         fdelta = fi / fprimi;
+316         i1 = i1 \- fdelta;
+317         if (fdelta < 0)
+318             xdelta = \-fdelta;
+319         else
+320             xdelta = fdelta;
+321     }
+322     i = i1 * 1200;
+323     if (!f_quiet)
+324         printf("interest Rate \- \- \- \- \- \-> %s\\n", format_interest(i));
+325     return (i);
+326 }
+.PP
+.fi
+
+.PP
+References \fBerror_press_any_key()\fP, \fBf_quiet\fP, and \fBformat_interest()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double calculate_n (double pv, double i, double pmt)"
+
+.PP
+Definition at line \fB279\fP of file \fBiloan\&.c\fP\&.
+.nf
+279                                                     {
+280     double i1, n;
+281     if (pv == 0 || i == 0 || pmt == 0)
+282         error_press_any_key("3 non\-zero values required to calculate "
+283                             "Number of Payments");
+284     i1 = i / 1200;
+285     n = \-log(1 \- pv * i1 / pmt) / log(1 + i1);
+286     if (!f_quiet)
+287         printf("Number of Payments  \- \- \-> %s\\n", format_currency(n));
+288     return (n);
+289 }
+.PP
+.fi
+
+.PP
+References \fBerror_press_any_key()\fP, \fBf_quiet\fP, and \fBformat_currency()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double calculate_pmt (double pv, double n, double i)"
+
+.PP
+Definition at line \fB328\fP of file \fBiloan\&.c\fP\&.
+.nf
+328                                                     {
+329     double i1, pmt;
+330     if (pv == 0 || n == 0 || i == 0)
+331         error_press_any_key(
+332             "3 non\-zero values required to calculate Payment Amount");
+333     i1 = i / 1200;
+334     pmt = pv * i1 / (1 \- pow(1 + i1, \-n));
+335     if (!f_quiet)
+336         printf("Payment Amount  \- \- \- \- \-> %s\\n", format_currency(pmt));
+337     return (pmt);
+338 }
+.PP
+.fi
+
+.PP
+References \fBerror_press_any_key()\fP, \fBf_quiet\fP, and \fBformat_currency()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "double calculate_pv (double n, double i, double pmt)"
+
+.PP
+Definition at line \fB266\fP of file \fBiloan\&.c\fP\&.
+.nf
+266                                                     {
+267     double i1, pv;
+268 
+269     if (n == 0 || i == 0 || pmt == 0)
+270         error_press_any_key(
+271             "3 non\-zero values required to calculate Present Value");
+272     i1 = i / 1200;
+273     pv = pmt * (1 \- pow(1 + i1, \-n)) / i1;
+274     if (!f_quiet)
+275         printf("Present Value \- \- \- \- \- \-> %s\\n", format_currency(pv));
+276     return (pv);
+277 }
+.PP
+.fi
+
+.PP
+References \fBerror_press_any_key()\fP, \fBf_quiet\fP, and \fBformat_currency()\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "void error_press_any_key (char * s)"
+
+.PP
+Definition at line \fB260\fP of file \fBiloan\&.c\fP\&.
+.nf
+260                                   {
+261     printf("%s", s);
+262     getc(stdin);
+263     printf("\\n\\n");
+264 }
+.PP
+.fi
+
+.PP
+Referenced by \fBaccept_i()\fP, \fBaccept_n()\fP, \fBaccept_pmt()\fP, \fBaccept_pv()\fP, \fBcalculate_i()\fP, \fBcalculate_n()\fP, \fBcalculate_pmt()\fP, \fBcalculate_pv()\fP, and \fBmain()\fP\&.
+.SS "char * format_currency (float a)"
+
+.PP
+Definition at line \fB354\fP of file \fBiloan\&.c\fP\&.
+.nf
+354                                {
+355     int digit_count, left_of_point;
+356     static char sstr[80];
+357     static char fstr[80];
+358     char *src_ptr, *dst_ptr, *sptr, *FPtr;
+359 
+360     sprintf(sstr, "%\-18\&.2f", a);
+361     sptr = sstr;
+362     src_ptr = sstr;
+363     FPtr = fstr;
+364     dst_ptr = fstr;
+365     while (*src_ptr++ != '\\0')
+366         ;
+367     src_ptr \-= 2;
+368     left_of_point = FALSE;
+369     digit_count = 0;
+370     while (src_ptr >= sptr) {
+371         if (left_of_point) {
+372             if (*src_ptr >= '0' && *src_ptr <= '9') {
+373                 if (digit_count == 3) {
+374                     *dst_ptr++ = ',';
+375                     digit_count = 1;
+376                 } else
+377                     digit_count++;
+378             }
+379         } else if (*src_ptr == '\&.')
+380             left_of_point = TRUE;
+381         *dst_ptr++ = *src_ptr\-\-;
+382     }
+383     src_ptr = dst_ptr \- 1;
+384     dst_ptr = sptr;
+385     while (src_ptr >= FPtr)
+386         *dst_ptr++ = *src_ptr\-\-;
+387     while (*\-\-dst_ptr == ' ')
+388         ;
+389     *++dst_ptr = '\\0';
+390     return (sptr);
+391 }
+.PP
+.fi
+
+.PP
+References \fBFALSE\fP, and \fBTRUE\fP\&.
+.PP
+Referenced by \fBcalculate_n()\fP, \fBcalculate_pmt()\fP, \fBcalculate_pv()\fP, and \fBmain()\fP\&.
+.SS "char * format_interest (float a)"
+
+.PP
+Definition at line \fB393\fP of file \fBiloan\&.c\fP\&.
+.nf
+393                                {
+394     static char sstr[80];
+395     char *s;
+396 
+397     sprintf(sstr, "%\-3\&.5f", a);
+398     s = sstr;
+399     return (s);
+400 }
+.PP
+.fi
+
+.PP
+Referenced by \fBcalculate_i()\fP, and \fBmain()\fP\&.
+.SS "int is_numeric (char * s)"
+
+.PP
+Definition at line \fB340\fP of file \fBiloan\&.c\fP\&.
+.nf
+340                         {
+341     char c;
+342 
+343     while ((c = *s++) != '\\0' && c != '\\n')
+344         if ((c < '0' || c > '9') && c != '\&.' && c != ',')
+345             return (FALSE);
+346     return (TRUE);
+347 }
+.PP
+.fi
+
+.PP
+References \fBFALSE\fP, and \fBTRUE\fP\&.
+.PP
+Referenced by \fBaccept_i()\fP, \fBaccept_n()\fP, \fBaccept_pmt()\fP, and \fBaccept_pv()\fP\&.
+.SS "int main (int argc, char ** argv)"
+
+.PP
+iloan is a trivial application to demonstrate how a command-line program can be integrated into C-Menu Form with simple file, argument, or pipe i-o\&. 
+.PP
+\fBNote\fP
+.RS 4
+Positional arguments present_value The present value of the loan (the amount borrowed)\&. number_of_payments The total number of payments to be made\&. interest_rate The annual interest rate (as a percentage)\&. payment_amount The amount of each payment\&. 
+
+.PP
+The program calculates the missing value based on the three provided values\&. For example, if the present value, number of payments, and interest rate are provided, it will calculate the payment amount\&. If the present value, interest rate, and payment amount are provided, it will calculate the number of payments, and so on\&. 
+
+.PP
+The program can be used in a non-interactive way by passing the four values as arguments, with the value to be calculated set to 0\&. For example, to calculate the payment amount for a $10,000 loan with a 5% annual interest rate and 60 monthly payments, you could run: 
+.PP
+.nf
+iloan 10000 60 5 0
+
+.fi
+.PP
+ 
+
+.PP
+This is proof-of-concept code, and is not intended for production use\&. It is not designed to be robust, and does not handle all edge cases or input errors\&. It is intended solely to demonstrate how a simple command-line program can be integrated into C-Menu Form\&. 
+
+.PP
+In the future, more sophisticated abstractions, such as async event handlers, serialization, rpc, database, and a standardized plugin interface will be integrated into C-Menu\&. 
+
+.PP
+Feel free to modify and enhance this code as needed, but please do not use it in production without proper testing and validation\&. It is provided as-is without any warranty or support\&. Use at your own risk\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB74\fP of file \fBiloan\&.c\fP\&.
+.nf
+74                                 {
+75     double pv = 0, pmt = 0, i = 0, n = 0;
+76     char tmp_str[BUFSIZ];
+77 
+78     signal(SIGINT, ABEND);
+79     signal(SIGQUIT, ABEND);
+80     signal(SIGHUP, ABEND);
+81 
+82     if (argc > 1 &&
+83         ((strcmp(argv[1], "\-\-help") == 0 || strcmp(argv[1], "\-h") == 0) ||
+84          argc < 4)) {
+85         printf("Usage: iloan [present_value number_of_payments "
+86                "interest_rate payment_amount]\\n\\n");
+87         exit(EXIT_SUCCESS);
+88     }
+89     if (argc > 4) {
+90         numbers(tmp_str, argv[1]);
+91         sscanf(tmp_str, "%lf", &pv);
+92         sscanf(argv[2], "%lf", &n);
+93         sscanf(argv[3], "%lf", &i);
+94         numbers(tmp_str, argv[4]);
+95         sscanf(tmp_str, "%lf", &pmt);
+96         if (pv != 0)
+97             f_pv = 1;
+98         if (n != 0)
+99             f_n = 1;
+100         if (i != 0)
+101             f_i = 1;
+102         if (pmt != 0)
+103             f_pmt = 1;
+104         if (f_pv + f_n + f_i + f_pmt < 3) {
+105             error_press_any_key(
+106                 "Error: At least three values must be greater than zero\&.");
+107             exit(EXIT_FAILURE);
+108         }
+109         f_quiet = true;
+110     } else {
+111         if (argc != 1) {
+112             printf("Usage: iloan [present_value number_of_payments "
+113                    "interest_rate payment_amount]\\n\\n");
+114             exit(EXIT_FAILURE);
+115         } else {
+116             if (argc == 1) {
+117                 printf("\\nInstallment Loan Calculator\\n\\n");
+118                 printf("Three of these values must be greater than 0\&.  The "
+119                        "field\\n");
+120                 printf("with a value of 0 will be calculated\&.\\n\\n");
+121                 while (f_pv + f_n + f_i + f_pmt < 3) {
+122                     if (pv == 0) {
+123                         pv = accept_pv();
+124                         if (pv != 0)
+125                             f_pv = 1;
+126                     }
+127                     if (n == 0) {
+128                         n = accept_n();
+129                         if (n != 0)
+130                             f_n = 1;
+131                     }
+132                     if (i == 0) {
+133                         i = accept_i();
+134                         if (i != 0)
+135                             f_i = 1;
+136                     }
+137                     if (pmt == 0) {
+138                         pmt = accept_pmt();
+139                         if (pmt != 0)
+140                             f_pmt = 1;
+141                     }
+142                     if (f_pv + f_n + f_i + f_pmt < 3) {
+143                         error_press_any_key("Error: At least three values must "
+144                                             "be greater than zero\&.");
+145                     }
+146                 }
+147                 printf("\\nYou entered:\\n\\n");
+148                 if (pv != 0)
+149                     printf("Present Value \- \- \- \- \- \-> %s\\n",
+150                            format_currency(pv));
+151                 if (n != 0)
+152                     printf("Number of Payments  \- \- \-> %s\\n",
+153                            format_currency(n));
+154                 if (i != 0)
+155                     printf("Interest Rate \- \- \- \- \- \-> %s\\n",
+156                            format_interest(i));
+157                 if (pmt != 0)
+158                     printf("Payment Amount  \- \- \- \- \-> %s\\n",
+159                            format_currency(pmt));
+160                 printf("\\n\\nCalculation result:\\n\\n");
+161             }
+162         }
+163     }
+164     if (pv == 0)
+165         pv = calculate_pv(n, i, pmt);
+166     else if (n == 0)
+167         n = calculate_n(pv, i, pmt);
+168     else if (i == 0)
+169         i = calculate_i(pv, n, pmt);
+170     else if (pmt == 0)
+171         pmt = calculate_pmt(pv, n, i);
+172 
+173     if (f_quiet) {
+174         printf("%s\\n", format_currency(pv));
+175         printf("%s\\n", format_currency(n));
+176         printf("%s\\n", format_interest(i));
+177         printf("%s\\n", format_currency(pmt));
+178     }
+179     signal(SIGINT, SIG_DFL);
+180     signal(SIGQUIT, SIG_DFL);
+181     signal(SIGHUP, SIG_DFL);
+182 }
+.PP
+.fi
+
+.PP
+References \fBABEND()\fP, \fBaccept_i()\fP, \fBaccept_n()\fP, \fBaccept_pmt()\fP, \fBaccept_pv()\fP, \fBcalculate_i()\fP, \fBcalculate_n()\fP, \fBcalculate_pmt()\fP, \fBcalculate_pv()\fP, \fBerror_press_any_key()\fP, \fBf_i\fP, \fBf_n\fP, \fBf_pmt\fP, \fBf_pv\fP, \fBf_quiet\fP, \fBformat_currency()\fP, \fBformat_interest()\fP, \fBnumbers()\fP, and \fBtmp_str\fP\&.
+.SS "void numbers (char * d, char * s)"
+
+.PP
+Definition at line \fB407\fP of file \fBiloan\&.c\fP\&.
+.nf
+407                                {
+408     while (*s != '\\0') {
+409         if (*s == '\-' || *s == '\&.' || (*s >= '0' && *s <= '9'))
+410             *d++ = *s++;
+411         else
+412             s++;
+413     }
+414     *d = '\\0';
+415 }
+.PP
+.fi
+
+.PP
+Referenced by \fBmain()\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "int f_i = 0"
+
+.PP
+Definition at line \fB39\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int f_n = 0"
+
+.PP
+Definition at line \fB38\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int f_pmt = 0"
+
+.PP
+Definition at line \fB40\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "int f_pv = 0"
+
+.PP
+Definition at line \fB37\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBmain()\fP\&.
+.SS "bool f_quiet = false"
+
+.PP
+Definition at line \fB41\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBcalculate_i()\fP, \fBcalculate_n()\fP, \fBcalculate_pmt()\fP, \fBcalculate_pv()\fP, and \fBmain()\fP\&.
+.SS "char in_str[BUFSIZ+1]"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/usr/local/src/cmenu/src/enterstr\&.c\fP\&.
+.PP
+Definition at line \fB20\fP of file \fBiloan\&.c\fP\&.
+.PP
+Referenced by \fBaccept_i()\fP, \fBaccept_n()\fP, \fBaccept_pmt()\fP, \fBaccept_pv()\fP, \fBaccept_str()\fP, \fBfmt_line()\fP, and \fBmain()\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for C-Menu from the source code\&.
