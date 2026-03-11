@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['d_5fcalc_0',['D_CALC',['../d3/dee/form__engine_8c.html#a4bee8ff1d56707e8d62039c449eb5112',1,'form_engine.c']]],
-  ['d_5fcmd_1',['D_CMD',['../d3/dee/form__engine_8c.html#a2d8c742d9f48c28a95f7a8a143db9b22',1,'form_engine.c']]],
-  ['d_5fcomment_2',['D_COMMENT',['../d3/dee/form__engine_8c.html#a9bde875ceaf7176146f8c1a05a5724e8',1,'form_engine.c']]],
-  ['d_5ffield_3',['D_FIELD',['../d3/dee/form__engine_8c.html#a43348dafdbc52ee02edb0652d644130e',1,'form_engine.c']]],
-  ['d_5fheader_4',['D_HEADER',['../d3/dee/form__engine_8c.html#afb32f9ec171fac7ce0a9c7b68236e21a',1,'form_engine.c']]],
-  ['d_5fhelp_5',['D_HELP',['../d3/dee/form__engine_8c.html#a89b314cf8c48acb2b0f084023efe43cd',1,'form_engine.c']]],
-  ['d_5fquery_6',['D_QUERY',['../d3/dee/form__engine_8c.html#a8dde2b17da1845d674f44135895994a5',1,'form_engine.c']]],
-  ['d_5ftext_7',['D_TEXT',['../d3/dee/form__engine_8c.html#a582a134ae58dbe280e34e0a1d6a1e26d',1,'form_engine.c']]]
+  ['chyron_5fkey_5fmaxlen_0',['CHYRON_KEY_MAXLEN',['../d8/d23/a00326.html#a8da05f3fdf70360f7c152b7d8a272117',1,'cm.h']]],
+  ['chyron_5fkeys_1',['CHYRON_KEYS',['../d8/d23/a00326.html#a5069d4241bf871aa21c9d0808c97f2e4',1,'cm.h']]],
+  ['cm_5fversion_2',['CM_VERSION',['../d1/d5d/a00311.html#ac9eb2084c3924fce14851a3c9d00e49e',1,'version.h']]],
+  ['cm_5fversion_5fmajor_3',['CM_VERSION_MAJOR',['../d1/d5d/a00311.html#a9221f7c04c58c841c83097b214577c84',1,'version.h']]],
+  ['cm_5fversion_5fminor_4',['CM_VERSION_MINOR',['../d1/d5d/a00311.html#a2e9d471d43efb8c60c06d7da6cd2db01',1,'version.h']]],
+  ['cm_5fversion_5fpatch_5',['CM_VERSION_PATCH',['../d1/d5d/a00311.html#a856a7dfd8aa120cc86b55a421d35021c',1,'version.h']]],
+  ['color_5flen_6',['COLOR_LEN',['../d8/d23/a00326.html#ab5557ed18d83facb69dd68b30629c37e',1,'COLOR_LEN:&#160;cm.h'],['../de/d55/a00323.html#ab5557ed18d83facb69dd68b30629c37e',1,'COLOR_LEN:&#160;common.h']]],
+  ['ctrl_7',['Ctrl',['../dd/d52/a00221.html#af475c4649f5ac3f8f9901d7a7b9c1b93',1,'view_engine.c']]],
+  ['cyan_8',['cyan',['../d3/d1a/a00251.html#aee63ed202c647f085cfc57577055a531',1,'opts.c']]]
 ];

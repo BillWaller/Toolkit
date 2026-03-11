@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['mapp_5fdata_5fdir_0',['MAPP_DATA_DIR',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00aa23eebd292aeb6a2095f9977d28f33c3',1,'init.c']]],
-  ['mapp_5fhelp_1',['MAPP_HELP',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00afcd9e9db3f541b8b1cd36332e2ae4154',1,'init.c']]],
-  ['mapp_5fhelp_5fdir_2',['MAPP_HELP_DIR',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00ab6239545e8e293a9685f5f99b40b6ba2',1,'init.c']]],
-  ['mapp_5fmsrc_3',['MAPP_MSRC',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00abe512cb25e936e19605f30ea962473de',1,'init.c']]],
-  ['mapp_5fspec_4',['MAPP_SPEC',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00a398973374baa4d523fe470c5550f74b6',1,'init.c']]]
+  ['ic_5fform_0',['IC_FORM',['../de/d55/a00323.html#aeab79c4bf306c0844eb09a7f0cdacd38a530be1be388f89ec94c487a21ba7b362',1,'common.h']]],
+  ['ic_5fmenu_1',['IC_MENU',['../de/d55/a00323.html#aeab79c4bf306c0844eb09a7f0cdacd38a02837ddadd096a7d209c3fe5a33acaa6',1,'common.h']]],
+  ['ic_5fpick_2',['IC_PICK',['../de/d55/a00323.html#aeab79c4bf306c0844eb09a7f0cdacd38a850a7ff287a433f5b915f327a020bc24',1,'common.h']]],
+  ['ic_5fview_3',['IC_VIEW',['../de/d55/a00323.html#aeab79c4bf306c0844eb09a7f0cdacd38a2e7a13afc8ce47492aceabcebb84de76',1,'common.h']]],
+  ['in_5fspec_4',['IN_SPEC',['../d9/dd6/a00272.html#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268',1,'init.c']]]
 ];

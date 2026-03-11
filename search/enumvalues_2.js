@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['in_5fspec_0',['IN_SPEC',['../d8/d60/init_8c.html#a883978a89980bed0e363bdb963404e00ae535181da055c6d522612508f6932268',1,'init.c']]]
+  ['help_5fspec_0',['HELP_SPEC',['../d9/dd6/a00272.html#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80',1,'init.c']]]
 ];
