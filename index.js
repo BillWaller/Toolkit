@@ -1,7 +1,7 @@
 var index =
 [
     [ "Table of Contents", "index.html#table-of-contents-3", null ],
-    [ "<b><em>NEW</em></b> - Complete C-Menu HTML Documentation", "index.html#_new_---complete-c-menu-html-documentation", null ],
+    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [
       [ "Elements of C-Menu", "index.html#elements-of-c-menu", null ],

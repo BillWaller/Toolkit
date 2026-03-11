@@ -193,7 +193,7 @@ var NAVTREE =
         ] ],
         [ "Finish the installation", "d4/def/md_INSTALL.html#finish-the-installation", null ]
       ] ],
-      [ "<img src=\"screenshots/mainmenu.png\" alt=\"C-Menu Running\" class=\"inline\"/>", "d4/def/md_INSTALL.html#c-menu-runningscreenshotsmainmenupng", null ],
+      [ "c-menu-runningscreenshotsmainmenupng", "d4/def/md_INSTALL.html#c-menu-runningscreenshotsmainmenupng", null ],
       [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d4/def/md_INSTALL.html#autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository", null ]
     ] ],
     [ "Configuration snippets", "d7/da4/md_snippets.html", [
@@ -225,7 +225,6 @@ var NAVTREE =
         [ "Tree-Sitter config.json", "d7/da4/md_snippets.html#tree-sitter-configjson", null ]
       ] ]
     ] ],
-    [ "Deprecated List", "da/d58/deprecated.html", null ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
@@ -245,7 +244,7 @@ var NAVTREEINDEX =
 [
 "d0/d59/futil_8c.html",
 "d7/d72/scriou_8c.html#ab69b11814964ea732c1e8e0ca6d22c1c",
-"dc/db0/md_extras.html#ghostty-on-macos"
+"dc/db0/md_extras.html#ghostty-on-windows"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

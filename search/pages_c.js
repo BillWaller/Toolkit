@@ -14,6 +14,5 @@ var searchData=
   ['how_20to_20colorize_20manual_20pages_11',['View - How to Colorize Manual Pages',['../d5/d77/md_FAQ.html#view---how-to-colorize-manual-pages',1,'']]],
   ['how_20to_20customize_20colors_12',['View - How to Customize Colors',['../d5/d77/md_FAQ.html#view---how-to-customize-colors',1,'']]],
   ['how_20to_20use_20tree_20sitter_20with_20view_13',['View - How to Use Tree-Sitter with View',['../d5/d77/md_FAQ.html#view---how-to-use-tree-sitter-with-view',1,'']]],
-  ['html_20color_20codes_14',['View - How to Colorize HTML Color Codes',['../d5/d77/md_FAQ.html#view---how-to-colorize-html-color-codes',1,'']]],
-  ['html_20documentation_15',['&lt;b&gt;&lt;em&gt;NEW&lt;/em&gt;&lt;/b&gt; - Complete C-Menu HTML Documentation',['../index.html#_new_---complete-c-menu-html-documentation',1,'']]]
+  ['html_20color_20codes_14',['View - How to Colorize HTML Color Codes',['../d5/d77/md_FAQ.html#view---how-to-colorize-html-color-codes',1,'']]]
 ];

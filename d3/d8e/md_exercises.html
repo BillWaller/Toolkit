@@ -137,13 +137,9 @@ Requisites</h3>
 <li>A collection of background images available in the SDDM theme directory. For this exercise, we will assume the SDDM theme is located at /usr/share/sddm/themes/sddm-corporate-theme/Backgrounds, and that they are of type Portable Network Graphics (*.png). This exercise assumes that the Backgrounds directory contains a default.png image that is currently being used as the SDDM background. For the sddm-corporate-theme, the background image is specified in Themes/corporate.conf as Background=Backgrounds/default.png. You may want to install the sddm-corporate-theme as it is set up perfectly for this exercise.</li>
 </ul>
 <p><a href="https://github.com/BillWaller/sddm-corporate-theme.git">sddm-corporate-theme</a></p>
-<ol type="1">
-<li>In your editor, open a new file:</li>
-</ol>
+<p>1️⃣ In your editor, open a new file:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><ol type="1">
-<li>Add the following content to the file and save it:</li>
-</ol>
+</div><!-- fragment --><p>2️⃣ Add the following content to the file and save it:</p>
 <div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
 <div class="line">:</div>
 <div class="line">:   Select SDDM Background</div>
@@ -151,13 +147,9 @@ Requisites</h3>
 <div class="line">!help</div>
 <div class="line">:   Exit Workstation Configuration</div>
 <div class="line">!return</div>
-</div><!-- fragment --><ol type="1">
-<li>Open another file to create a bash script:</li>
-</ol>
+</div><!-- fragment --><p>3️⃣ Open another file to create a bash script:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><ol type="1">
-<li>Add the following content to the file, save it, and make it executable:</li>
-</ol>
+</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
 <div class="fragment"><div class="line">#!/bin/bash</div>
 <div class="line"> </div>
 <div class="line">U=$(id -un)</div>
@@ -170,13 +162,9 @@ Requisites</h3>
 <div class="line">done</div>
 </div><!-- fragment --><p>This script will change the ownership of the SDDM background directory to the current user, allowing them to select a new background image. It will then list the available background images which will provide input for C-Menu Pick. Don't forget to make the script executable.</p>
 <div class="fragment"><div class="line">chmod +x ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><ol type="1">
-<li>Now, create another bash script:</li>
-</ol>
+</div><!-- fragment --><p>5️⃣ Now, create another bash script:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><ol type="1">
-<li>Add the following content to the file, save it, and make it executable:</li>
-</ol>
+</div><!-- fragment --><p>6️⃣ Add the following content to the file, save it, and make it executable:</p>
 <div class="fragment"><div class="line">#!/bin/bash</div>
 <div class="line"> </div>
 <div class="line">U=$(id -un)</div>
@@ -187,43 +175,36 @@ Requisites</h3>
 <div class="line">cd &quot;$bkgd_dir&quot;</div>
 <div class="line">ln -sf &quot;$1&quot; default.png</div>
 </div><!-- fragment --><p>Pick will execute this script, passing the selected background image as an argument. The script will create a symbolic link named default.png that points to the selected background image, effectively changing the SDDM background.</p>
-<ol type="1">
-<li>Finally, test your menu by running it from the command line:</li>
-</ol>
+<p>7️⃣ Finally, test your menu by running it from the command line:</p>
 <div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><ol type="1">
-<li>You may want to add the Workstation Configuration option to your main menu. To do this, open your main menu file:</li>
-</ol>
+</div><!-- fragment --><p>8️⃣ You may want to add the Workstation Configuration option to your main menu. To do this, open your main menu file:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/msrc/main.m</div>
-</div><!-- fragment --><ol type="1">
-<li>Add the following lines to include the Workstation Configuration menu:</li>
-</ol>
+</div><!-- fragment --><p>9️⃣ Add the following lines to include the Workstation Configuration menu:</p>
 <div class="fragment"><div class="line">:   Workstation Configuration</div>
 <div class="line">!menu workstation_config.m</div>
 </div><!-- fragment --><p>From the C-Menu main menu, you should now see an option for Workstation Configuration. Selecting it will take you to the menu where you can choose a new SDDM background image.</p>
-<p><img src="../../screenshots/workstation_config.png" alt="Select SDDM Background" class="inline"/> To verify that the background has been changed, you can log out of your session and return to the SDDM login screen. You should see the new background image you selected. Or, you can check the symbolic link in the SDDM background directory to confirm it points to the correct image.</p>
-<p><img src="../../screenshots/sddm_backgrounds.png" alt="SDDM Backgrounds" class="inline"/></p>
-<p>The above image shows the SDDM background directory before and after selecting the space_force.png background image.</p>
+<div class="image">
+<img src="../../workstation_config.png" alt=""/>
+<div class="caption">
+Select SDDM Background</div></div>
+    <p>To verify that the background has been changed, you can log out of your session and return to the SDDM login screen. You should see the new background image you selected. Or, you can check the symbolic link in the SDDM background directory to confirm it points to the correct image.</p>
+<div class="image">
+<img src="../../sddm_backgrounds.png" alt=""/>
+<div class="caption">
+SDDM Backgrounds</div></div>
+    <p>The above image shows the SDDM background directory before and after selecting the space_force.png background image.</p>
 <h2 class="doxsection"><a class="anchor" id="ghostty-configuration"></a>
 Ghostty Configuration</h2>
-<ol type="1">
-<li>In this exercise, we will add Ghostty configurations for color themes and fonts to the Workstation Configuration. First, open the workstation_config.m file:</li>
-</ol>
+<p>1️⃣ In this exercise, we will add Ghostty configurations for color themes and fonts to the Workstation Configuration. First, open the workstation_config.m file:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><ol type="1">
-<li>Add the following lines to the workstation_config.m to include options for Ghostty themes and fonts:</li>
-</ol>
+</div><!-- fragment --><p>2️⃣ Add the following lines to the workstation_config.m to include options for Ghostty themes and fonts:</p>
 <div class="fragment"><div class="line">:   Select Ghostty Theme</div>
 <div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
 <div class="line">:   Select Ghostty Font</div>
 <div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-</div><!-- fragment --><ol type="1">
-<li>Next, create the ghostty_themes.sh and ghostty_chtheme.sh scripts:</li>
-</ol>
+</div><!-- fragment --><p>3️⃣ Next, create the ghostty_themes.sh and ghostty_chtheme.sh scripts:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_themes.sh</div>
-</div><!-- fragment --><ol type="1">
-<li>Add the following content to the file, save it, and make it executable:</li>
-</ol>
+</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
 <div class="fragment"><div class="line">#!/bin/bash</div>
 <div class="line">U=$(id -un)</div>
 <div class="line">G=$(id -gn)</div>
@@ -233,9 +214,7 @@ Ghostty Configuration</h2>
 <div class="line">for theme in $(lf -d 1 -t f -e &#39;.*default_theme$&#39; . &#39;.*&#39;); do</div>
 <div class="line">    echo $(basename &quot;$theme&quot;)</div>
 <div class="line">done</div>
-</div><!-- fragment --><ol type="1">
-<li>Now, create the ~/menuapp/bin/ghostty_chtheme.sh script, add the following content, save it, and make it executable.</li>
-</ol>
+</div><!-- fragment --><p>5️⃣ Now, create the ~/menuapp/bin/ghostty_chtheme.sh script, add the following content, save it, and make it executable.</p>
 <div class="fragment"><div class="line">#!/bin/bash</div>
 <div class="line"> </div>
 <div class="line">U=$(id -un)</div>
@@ -244,9 +223,7 @@ Ghostty Configuration</h2>
 <div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
 <div class="line">cd &quot;$themes_dir&quot;</div>
 <div class="line">ln -sf &quot;$1&quot; default_theme</div>
-</div><!-- fragment --><ol type="1">
-<li>Finally, create the ghostty_fonts.sh and ghostty_chfont.sh scripts:</li>
-</ol>
+</div><!-- fragment --><p>6️⃣ Finally, create the ghostty_fonts.sh and ghostty_chfont.sh scripts:</p>
 <div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_fonts.sh</div>
 </div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
 <div class="line">U=$(id -un)</div>
@@ -266,9 +243,7 @@ Ghostty Configuration</h2>
 <div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
 <div class="line">cd &quot;$fonts_dir&quot;</div>
 <div class="line">ln -sf &quot;$1&quot; default_font</div>
-</div><!-- fragment --><ol type="1">
-<li>Test your menu again by running it from the command line:</li>
-</ol>
+</div><!-- fragment --><p>7️⃣ Test your menu again by running it from the command line:</p>
 <div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
 </div><!-- fragment --><p>Or, if you have installed the ~/.bashrc configurations described in <a class="el" href="../../dc/db0/md_extras.html" title="Augmenting C-Menu">Augmenting C-Menu</a>, you can just type mm to start C-Menu and navigate to the Workstation Configuration menu.</p>
 <h2 class="doxsection"><a class="anchor" id="alacritty-and-kitty"></a>
@@ -310,8 +285,11 @@ Alacritty and Kitty</h2>
 <div class="line">!help</div>
 <div class="line">:     Exit Workstation Configuration</div>
 <div class="line">!return</div>
-</div><!-- fragment --><p><img src="../../screenshots/workstation_config2.png" alt="Workstation Configuration" class="inline"/> </p>
-</div></div><!-- contents -->
+</div><!-- fragment --><div class="image">
+<img src="../../workstation_config2.png" alt=""/>
+<div class="caption">
+Workstation Configuration</div></div>
+     </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
