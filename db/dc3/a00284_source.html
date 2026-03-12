@@ -17,7 +17,7 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -1162,434 +1162,441 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/dc3/a00284_
 <div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span>    bool is_dir;</div>
 <div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>    bool suppress;</div>
 <div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span>    <span class="keywordtype">int</span> j, i;</div>
-<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span> </div>
-<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>    <span class="keywordflow">if</span> ((dir = opendir(base_path)) == 0)</div>
-<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>        <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="keywordflow">while</span> ((dir_st = readdir(dir)) != nullptr) {</div>
-<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>        <span class="keywordflow">if</span> (dir_st-&gt;d_name[0] == <span class="stringliteral">&#39;.&#39;</span>)</div>
-<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>        <a class="code hl_function" href="../../db/dc3/a00284.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(file_spec, <span class="keyword">sizeof</span>(file_spec), <span class="stringliteral">&quot;%s/%s&quot;</span>, base_path,</div>
-<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>                  dir_st-&gt;d_name);</div>
-<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>        <span class="keywordflow">if</span> (lstat(file_spec, &amp;sb) == -1)</div>
-<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span>            <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>        suppress = false;</div>
-<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span>        <span class="keywordflow">if</span> (S_ISLNK(sb.st_mode)) {</div>
-<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>            <span class="keywordflow">if</span> (flags &amp; LF_DIRS)</div>
-<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>                suppress = true;</div>
-<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>            is_dir = false;</div>
-<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (S_ISDIR(sb.st_mode)) {</div>
-<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>            <span class="keywordflow">if</span> (flags &amp; LF_FILES)</div>
-<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>                suppress = true;</div>
-<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>            is_dir = true;</div>
-<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (S_ISREG(sb.st_mode)) {</div>
-<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>            <span class="keywordflow">if</span> (flags &amp; LF_DIRS)</div>
-<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>                suppress = true;</div>
-<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>            is_dir = false;</div>
-<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>            <span class="keywordflow">if</span> (flags &amp; LF_DIRS)</div>
-<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>                suppress = true;</div>
-<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>            <span class="keywordflow">if</span> (flags &amp; LF_FILES)</div>
-<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>                suppress = true;</div>
-<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>            is_dir = false;</div>
-<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>        }</div>
-<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>        <span class="keywordflow">if</span> (file_spec[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; file_spec[1] == <span class="stringliteral">&#39;/&#39;</span>) {</div>
-<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span>            i = 2;</div>
-<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>            j = 0;</div>
-<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>            <span class="keywordflow">while</span> (file_spec[i])</div>
-<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>                file_spec[j++] = file_spec[i++];</div>
-<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>            file_spec[j] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span>    bool suppress_hidden = flags &amp; LF_ALL ? false : true;</div>
+<div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>    <span class="keywordtype">char</span> bname[<a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span> </div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="keywordflow">if</span> ((dir = opendir(base_path)) == 0)</div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>        <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>    <span class="keywordflow">while</span> ((dir_st = readdir(dir)) != nullptr) {</div>
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>        base_name(bname, dir_st-&gt;d_name);</div>
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>        <span class="keywordflow">if</span> (bname[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; bname[1] == <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00989" name="l00989"></a><span class="lineno">  989</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bname[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; bname[1] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; bname[2] == <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bname[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; suppress_hidden)</div>
+<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>        <a class="code hl_function" href="../../db/dc3/a00284.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(file_spec, <span class="keyword">sizeof</span>(file_spec), <span class="stringliteral">&quot;%s/%s&quot;</span>, base_path,</div>
+<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>                  dir_st-&gt;d_name);</div>
+<div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>        <span class="keywordflow">if</span> (lstat(file_spec, &amp;sb) == -1)</div>
+<div class="line"><a id="l00996" name="l00996"></a><span class="lineno">  996</span>            <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span>        suppress = false;</div>
+<div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>        <span class="keywordflow">if</span> (S_ISLNK(sb.st_mode)) {</div>
+<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span>            <span class="keywordflow">if</span> (flags &amp; LF_DIRS)</div>
+<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span>                suppress = true;</div>
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span>            is_dir = false;</div>
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (S_ISDIR(sb.st_mode)) {</div>
+<div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>            <span class="keywordflow">if</span> (flags &amp; LF_FILES)</div>
+<div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>                suppress = true;</div>
+<div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>            is_dir = true;</div>
+<div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (S_ISREG(sb.st_mode)) {</div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>            <span class="keywordflow">if</span> (flags &amp; LF_DIRS)</div>
+<div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>                suppress = true;</div>
+<div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>            is_dir = false;</div>
+<div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l01011" name="l01011"></a><span class="lineno"> 1011</span>            <span class="keywordflow">if</span> (flags &amp; LF_DIRS)</div>
+<div class="line"><a id="l01012" name="l01012"></a><span class="lineno"> 1012</span>                suppress = true;</div>
+<div class="line"><a id="l01013" name="l01013"></a><span class="lineno"> 1013</span>            <span class="keywordflow">if</span> (flags &amp; LF_FILES)</div>
+<div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>                suppress = true;</div>
+<div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>            is_dir = false;</div>
 <div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>        }</div>
-<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>        <span class="keywordflow">if</span> (file_spec[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; !(flags &amp; LF_ALL))</div>
-<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>            suppress = true;</div>
-<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>        <span class="keywordflow">if</span> (!suppress) {</div>
-<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>            reti = regexec(compiled_re, file_spec, compiled_re-&gt;re_nsub + 1,</div>
-<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>                           pmatch, REG_FLAGS);</div>
-<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>            <span class="keywordflow">if</span> (reti == REG_NOMATCH) {</div>
-<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>                suppress = true;</div>
-<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>                <span class="keywordtype">char</span> msgbuf[100];</div>
-<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>                regerror(reti, compiled_re, msgbuf, <span class="keyword">sizeof</span>(msgbuf));</div>
-<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, msgbuf, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span>                <a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
-<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span>                <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span>            }</div>
-<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span>        }</div>
-<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span>        <span class="keywordflow">if</span> (!suppress &amp;&amp; (flags &amp; LF_EXCLUDE)) {</div>
-<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span>            reti = regexec(compiled_ere, file_spec, compiled_re-&gt;re_nsub + 1,</div>
-<div class="line"><a id="l01035" name="l01035"></a><span class="lineno"> 1035</span>                           pmatch, REG_FLAGS);</div>
-<div class="line"><a id="l01036" name="l01036"></a><span class="lineno"> 1036</span>            <span class="keywordflow">if</span> (reti == 0)</div>
-<div class="line"><a id="l01037" name="l01037"></a><span class="lineno"> 1037</span>                suppress = true;</div>
-<div class="line"><a id="l01038" name="l01038"></a><span class="lineno"> 1038</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti == REG_NOMATCH)</div>
-<div class="line"><a id="l01039" name="l01039"></a><span class="lineno"> 1039</span>                suppress = false;</div>
-<div class="line"><a id="l01040" name="l01040"></a><span class="lineno"> 1040</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><a id="l01041" name="l01041"></a><span class="lineno"> 1041</span>                <span class="keywordtype">char</span> msgbuf[100];</div>
-<div class="line"><a id="l01042" name="l01042"></a><span class="lineno"> 1042</span>                regerror(reti, compiled_re, msgbuf, <span class="keyword">sizeof</span>(msgbuf));</div>
-<div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01044" name="l01044"></a><span class="lineno"> 1044</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, msgbuf, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01045" name="l01045"></a><span class="lineno"> 1045</span>                <a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
-<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>                <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span>            }</div>
-<div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span>        }</div>
-<div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span>        <span class="keywordflow">if</span> (!suppress)</div>
-<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, file_spec);</div>
-<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span>        <span class="keywordflow">if</span> (is_dir &amp;&amp; (depth + 1 &lt; max_depth)) {</div>
-<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>            depth++;</div>
-<div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#a07c8d6297f2d3fd2651a507391fd6d2e">lf_process</a>(file_spec, compiled_re, compiled_ere, depth, max_depth,</div>
-<div class="line"><a id="l01054" name="l01054"></a><span class="lineno"> 1054</span>                       flags);</div>
-<div class="line"><a id="l01055" name="l01055"></a><span class="lineno"> 1055</span>            depth--;</div>
-<div class="line"><a id="l01056" name="l01056"></a><span class="lineno"> 1056</span>        }</div>
-<div class="line"><a id="l01057" name="l01057"></a><span class="lineno"> 1057</span>    }</div>
-<div class="line"><a id="l01058" name="l01058"></a><span class="lineno"> 1058</span>    closedir(dir);</div>
-<div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span>    <span class="keywordflow">return</span> true;</div>
+<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span>        <span class="keywordflow">if</span> (file_spec[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; file_spec[1] == <span class="stringliteral">&#39;/&#39;</span>) {</div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span>            i = 2;</div>
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span>            j = 0;</div>
+<div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>            <span class="keywordflow">while</span> (file_spec[i])</div>
+<div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>                file_spec[j++] = file_spec[i++];</div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>            file_spec[j] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>        }</div>
+<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>        <span class="keywordflow">if</span> (file_spec[0] == <span class="stringliteral">&#39;.&#39;</span> &amp;&amp; suppress_hidden)</div>
+<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span>            suppress = true;</div>
+<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>        <span class="keywordflow">if</span> (!suppress) {</div>
+<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>            reti = regexec(compiled_re, file_spec, compiled_re-&gt;re_nsub + 1,</div>
+<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>                           pmatch, REG_FLAGS);</div>
+<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span>            <span class="keywordflow">if</span> (reti == REG_NOMATCH) {</div>
+<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span>                suppress = true;</div>
+<div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
+<div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span>                <span class="keywordtype">char</span> msgbuf[100];</div>
+<div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span>                regerror(reti, compiled_re, msgbuf, <span class="keyword">sizeof</span>(msgbuf));</div>
+<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01035" name="l01035"></a><span class="lineno"> 1035</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, msgbuf, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01036" name="l01036"></a><span class="lineno"> 1036</span>                <a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
+<div class="line"><a id="l01037" name="l01037"></a><span class="lineno"> 1037</span>                <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l01038" name="l01038"></a><span class="lineno"> 1038</span>            }</div>
+<div class="line"><a id="l01039" name="l01039"></a><span class="lineno"> 1039</span>        }</div>
+<div class="line"><a id="l01040" name="l01040"></a><span class="lineno"> 1040</span>        <span class="keywordflow">if</span> (!suppress &amp;&amp; (flags &amp; LF_EXCLUDE)) {</div>
+<div class="line"><a id="l01041" name="l01041"></a><span class="lineno"> 1041</span>            reti = regexec(compiled_ere, file_spec, compiled_re-&gt;re_nsub + 1,</div>
+<div class="line"><a id="l01042" name="l01042"></a><span class="lineno"> 1042</span>                           pmatch, REG_FLAGS);</div>
+<div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span>            <span class="keywordflow">if</span> (reti == 0)</div>
+<div class="line"><a id="l01044" name="l01044"></a><span class="lineno"> 1044</span>                suppress = true;</div>
+<div class="line"><a id="l01045" name="l01045"></a><span class="lineno"> 1045</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti == REG_NOMATCH)</div>
+<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span>                suppress = false;</div>
+<div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
+<div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span>                <span class="keywordtype">char</span> msgbuf[100];</div>
+<div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span>                regerror(reti, compiled_re, msgbuf, <span class="keyword">sizeof</span>(msgbuf));</div>
+<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span>                <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, msgbuf, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span>                <a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../de/d25/a00290.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
+<div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span>                <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l01054" name="l01054"></a><span class="lineno"> 1054</span>            }</div>
+<div class="line"><a id="l01055" name="l01055"></a><span class="lineno"> 1055</span>        }</div>
+<div class="line"><a id="l01056" name="l01056"></a><span class="lineno"> 1056</span>        <span class="keywordflow">if</span> (!suppress)</div>
+<div class="line"><a id="l01057" name="l01057"></a><span class="lineno"> 1057</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, file_spec);</div>
+<div class="line"><a id="l01058" name="l01058"></a><span class="lineno"> 1058</span>        <span class="keywordflow">if</span> (is_dir &amp;&amp; (depth + 1 &lt; max_depth)) {</div>
+<div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span>            depth++;</div>
+<div class="line"><a id="l01060" name="l01060"></a><span class="lineno"> 1060</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#a07c8d6297f2d3fd2651a507391fd6d2e">lf_process</a>(file_spec, compiled_re, compiled_ere, depth, max_depth,</div>
+<div class="line"><a id="l01061" name="l01061"></a><span class="lineno"> 1061</span>                       flags);</div>
+<div class="line"><a id="l01062" name="l01062"></a><span class="lineno"> 1062</span>            depth--;</div>
+<div class="line"><a id="l01063" name="l01063"></a><span class="lineno"> 1063</span>        }</div>
+<div class="line"><a id="l01064" name="l01064"></a><span class="lineno"> 1064</span>    }</div>
+<div class="line"><a id="l01065" name="l01065"></a><span class="lineno"> 1065</span>    closedir(dir);</div>
+<div class="line"><a id="l01066" name="l01066"></a><span class="lineno"> 1066</span>    <span class="keywordflow">return</span> true;</div>
 </div>
-<div class="line"><a id="l01060" name="l01060"></a><span class="lineno"> 1060</span>}</div>
-<div class="line"><a id="l01061" name="l01061"></a><span class="lineno"> 1061</span><span class="comment">/** @brief If directory doesn&#39;t exist, make it</span></div>
-<div class="line"><span class="lineno"> 1062</span><span class="comment">    @param dir directory name</span></div>
-<div class="foldopen" id="foldopen01063" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a8d34fd1e4f0b6caab029f02814092794"> 1063</a></span><span class="comment">    @return true if directory now exists or false otherwise */</span></div>
-<div class="line"><a id="l01064" name="l01064"></a><span class="lineno"> 1064</span>bool mk_dir(<span class="keywordtype">char</span> *dir) {</div>
-<div class="line"><a id="l01065" name="l01065"></a><span class="lineno"> 1065</span>    expand_tilde(dir, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01066" name="l01066"></a><span class="lineno"> 1066</span>    <span class="keywordflow">if</span> (!verify_dir(dir, S_WCOK | S_QUIET)) {</div>
-<div class="line"><a id="l01067" name="l01067"></a><span class="lineno"> 1067</span>        <span class="keywordflow">if</span> (!mkdir(dir, 0755)) {</div>
-<div class="line"><a id="l01068" name="l01068"></a><span class="lineno"> 1068</span>            <span class="comment">/** Directory does not exist and unable to create */</span></div>
-<div class="line"><a id="l01069" name="l01069"></a><span class="lineno"> 1069</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;%s, line: %d&quot;</span>, __FILE__, __LINE__ - 2);</div>
-<div class="line"><a id="l01070" name="l01070"></a><span class="lineno"> 1070</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;mkdir &quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01071" name="l01071"></a><span class="lineno"> 1071</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, dir, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01072" name="l01072"></a><span class="lineno"> 1072</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot; failed&quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01073" name="l01073"></a><span class="lineno"> 1073</span>            strerror_r(errno, <a class="code hl_variable" href="../../de/d25/a00290.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01074" name="l01074"></a><span class="lineno"> 1074</span>            <a class="code hl_function" href="../../de/d25/a00290.html#a67659f8a701b74f4dec0d36227a10d1c">display_error</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_variable" href="../../de/d25/a00290.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, nullptr);</div>
-<div class="line"><a id="l01075" name="l01075"></a><span class="lineno"> 1075</span>            <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l01076" name="l01076"></a><span class="lineno"> 1076</span>        }</div>
-<div class="line"><a id="l01077" name="l01077"></a><span class="lineno"> 1077</span>        <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l01078" name="l01078"></a><span class="lineno"> 1078</span>    }</div>
-<div class="line"><a id="l01079" name="l01079"></a><span class="lineno"> 1079</span>    <span class="keywordflow">return</span> true;</div>
+<div class="line"><a id="l01067" name="l01067"></a><span class="lineno"> 1067</span>}</div>
+<div class="line"><a id="l01068" name="l01068"></a><span class="lineno"> 1068</span><span class="comment">/** @brief If directory doesn&#39;t exist, make it</span></div>
+<div class="line"><span class="lineno"> 1069</span><span class="comment">    @param dir directory name</span></div>
+<div class="foldopen" id="foldopen01070" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a8d34fd1e4f0b6caab029f02814092794"> 1070</a></span><span class="comment">    @return true if directory now exists or false otherwise */</span></div>
+<div class="line"><a id="l01071" name="l01071"></a><span class="lineno"> 1071</span>bool mk_dir(<span class="keywordtype">char</span> *dir) {</div>
+<div class="line"><a id="l01072" name="l01072"></a><span class="lineno"> 1072</span>    expand_tilde(dir, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01073" name="l01073"></a><span class="lineno"> 1073</span>    <span class="keywordflow">if</span> (!verify_dir(dir, S_WCOK | S_QUIET)) {</div>
+<div class="line"><a id="l01074" name="l01074"></a><span class="lineno"> 1074</span>        <span class="keywordflow">if</span> (!mkdir(dir, 0755)) {</div>
+<div class="line"><a id="l01075" name="l01075"></a><span class="lineno"> 1075</span>            <span class="comment">/** Directory does not exist and unable to create */</span></div>
+<div class="line"><a id="l01076" name="l01076"></a><span class="lineno"> 1076</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;%s, line: %d&quot;</span>, __FILE__, __LINE__ - 2);</div>
+<div class="line"><a id="l01077" name="l01077"></a><span class="lineno"> 1077</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;mkdir &quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01078" name="l01078"></a><span class="lineno"> 1078</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, dir, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01079" name="l01079"></a><span class="lineno"> 1079</span>            <a class="code hl_function" href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot; failed&quot;</span>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01080" name="l01080"></a><span class="lineno"> 1080</span>            strerror_r(errno, <a class="code hl_variable" href="../../de/d25/a00290.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01081" name="l01081"></a><span class="lineno"> 1081</span>            <a class="code hl_function" href="../../de/d25/a00290.html#a67659f8a701b74f4dec0d36227a10d1c">display_error</a>(<a class="code hl_variable" href="../../de/d25/a00290.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_variable" href="../../de/d25/a00290.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_variable" href="../../de/d25/a00290.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, nullptr);</div>
+<div class="line"><a id="l01082" name="l01082"></a><span class="lineno"> 1082</span>            <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l01083" name="l01083"></a><span class="lineno"> 1083</span>        }</div>
+<div class="line"><a id="l01084" name="l01084"></a><span class="lineno"> 1084</span>        <span class="keywordflow">return</span> true;</div>
+<div class="line"><a id="l01085" name="l01085"></a><span class="lineno"> 1085</span>    }</div>
+<div class="line"><a id="l01086" name="l01086"></a><span class="lineno"> 1086</span>    <span class="keywordflow">return</span> true;</div>
 </div>
-<div class="line"><a id="l01080" name="l01080"></a><span class="lineno"> 1080</span>}</div>
-<div class="line"><a id="l01081" name="l01081"></a><span class="lineno"> 1081</span><span class="comment">/**  @brief Removes quotes and trims at first space</span></div>
-<div class="line"><span class="lineno"> 1082</span><span class="comment">     @param spec - file specification to canonicalize</span></div>
-<div class="foldopen" id="foldopen01083" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8"> 1083</a></span><span class="comment">     @returns length of resulting string */</span></div>
-<div class="line"><a id="l01084" name="l01084"></a><span class="lineno"> 1084</span><a class="code hl_function" href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8">canonicalize_file_spec</a>(<span class="keywordtype">char</span> *spec) {</div>
-<div class="line"><a id="l01085" name="l01085"></a><span class="lineno"> 1085</span>    <span class="keywordflow">if</span> (spec == nullptr || *spec == <span class="stringliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><a id="l01086" name="l01086"></a><span class="lineno"> 1086</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l01087" name="l01087"></a><span class="lineno"> 1087</span>    <span class="keywordtype">char</span> tmp_s[<a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><a id="l01088" name="l01088"></a><span class="lineno"> 1088</span>    <span class="keywordtype">char</span> *s;</div>
-<div class="line"><a id="l01089" name="l01089"></a><span class="lineno"> 1089</span>    s = spec;</div>
-<div class="line"><a id="l01090" name="l01090"></a><span class="lineno"> 1090</span>    <span class="keywordtype">char</span> *d;</div>
-<div class="line"><a id="l01091" name="l01091"></a><span class="lineno"> 1091</span>    d = tmp_s;</div>
-<div class="line"><a id="l01092" name="l01092"></a><span class="lineno"> 1092</span>    <span class="keywordtype">int</span> l = 0;</div>
-<div class="line"><a id="l01093" name="l01093"></a><span class="lineno"> 1093</span>    <span class="keywordflow">while</span> (*s != <span class="stringliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><a id="l01094" name="l01094"></a><span class="lineno"> 1094</span>        <span class="keywordflow">if</span> (*s == <span class="stringliteral">&#39; &#39;</span>)</div>
-<div class="line"><a id="l01095" name="l01095"></a><span class="lineno"> 1095</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l01096" name="l01096"></a><span class="lineno"> 1096</span>        <span class="keywordflow">if</span> (*s == <span class="stringliteral">&#39;\&quot;&#39;</span> || *s == <span class="stringliteral">&#39;\&#39;&#39;</span>) {</div>
-<div class="line"><a id="l01097" name="l01097"></a><span class="lineno"> 1097</span>            s++;</div>
-<div class="line"><a id="l01098" name="l01098"></a><span class="lineno"> 1098</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l01099" name="l01099"></a><span class="lineno"> 1099</span>            ;</div>
-<div class="line"><a id="l01100" name="l01100"></a><span class="lineno"> 1100</span>        }</div>
-<div class="line"><a id="l01101" name="l01101"></a><span class="lineno"> 1101</span>        *d++ = *s++;</div>
-<div class="line"><a id="l01102" name="l01102"></a><span class="lineno"> 1102</span>        l++;</div>
-<div class="line"><a id="l01103" name="l01103"></a><span class="lineno"> 1103</span>    }</div>
-<div class="line"><a id="l01104" name="l01104"></a><span class="lineno"> 1104</span>    *d = <span class="stringliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l01105" name="l01105"></a><span class="lineno"> 1105</span>    <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(spec, tmp_s, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01106" name="l01106"></a><span class="lineno"> 1106</span>    l = strlen(spec);</div>
-<div class="line"><a id="l01107" name="l01107"></a><span class="lineno"> 1107</span>    <span class="keywordflow">return</span> l;</div>
+<div class="line"><a id="l01087" name="l01087"></a><span class="lineno"> 1087</span>}</div>
+<div class="line"><a id="l01088" name="l01088"></a><span class="lineno"> 1088</span><span class="comment">/**  @brief Removes quotes and trims at first space</span></div>
+<div class="line"><span class="lineno"> 1089</span><span class="comment">     @param spec - file specification to canonicalize</span></div>
+<div class="foldopen" id="foldopen01090" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8"> 1090</a></span><span class="comment">     @returns length of resulting string */</span></div>
+<div class="line"><a id="l01091" name="l01091"></a><span class="lineno"> 1091</span><a class="code hl_function" href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8">canonicalize_file_spec</a>(<span class="keywordtype">char</span> *spec) {</div>
+<div class="line"><a id="l01092" name="l01092"></a><span class="lineno"> 1092</span>    <span class="keywordflow">if</span> (spec == nullptr || *spec == <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l01093" name="l01093"></a><span class="lineno"> 1093</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01094" name="l01094"></a><span class="lineno"> 1094</span>    <span class="keywordtype">char</span> tmp_s[<a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><a id="l01095" name="l01095"></a><span class="lineno"> 1095</span>    <span class="keywordtype">char</span> *s;</div>
+<div class="line"><a id="l01096" name="l01096"></a><span class="lineno"> 1096</span>    s = spec;</div>
+<div class="line"><a id="l01097" name="l01097"></a><span class="lineno"> 1097</span>    <span class="keywordtype">char</span> *d;</div>
+<div class="line"><a id="l01098" name="l01098"></a><span class="lineno"> 1098</span>    d = tmp_s;</div>
+<div class="line"><a id="l01099" name="l01099"></a><span class="lineno"> 1099</span>    <span class="keywordtype">int</span> l = 0;</div>
+<div class="line"><a id="l01100" name="l01100"></a><span class="lineno"> 1100</span>    <span class="keywordflow">while</span> (*s != <span class="stringliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l01101" name="l01101"></a><span class="lineno"> 1101</span>        <span class="keywordflow">if</span> (*s == <span class="stringliteral">&#39; &#39;</span>)</div>
+<div class="line"><a id="l01102" name="l01102"></a><span class="lineno"> 1102</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l01103" name="l01103"></a><span class="lineno"> 1103</span>        <span class="keywordflow">if</span> (*s == <span class="stringliteral">&#39;\&quot;&#39;</span> || *s == <span class="stringliteral">&#39;\&#39;&#39;</span>) {</div>
+<div class="line"><a id="l01104" name="l01104"></a><span class="lineno"> 1104</span>            s++;</div>
+<div class="line"><a id="l01105" name="l01105"></a><span class="lineno"> 1105</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l01106" name="l01106"></a><span class="lineno"> 1106</span>            ;</div>
+<div class="line"><a id="l01107" name="l01107"></a><span class="lineno"> 1107</span>        }</div>
+<div class="line"><a id="l01108" name="l01108"></a><span class="lineno"> 1108</span>        *d++ = *s++;</div>
+<div class="line"><a id="l01109" name="l01109"></a><span class="lineno"> 1109</span>        l++;</div>
+<div class="line"><a id="l01110" name="l01110"></a><span class="lineno"> 1110</span>    }</div>
+<div class="line"><a id="l01111" name="l01111"></a><span class="lineno"> 1111</span>    *d = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l01112" name="l01112"></a><span class="lineno"> 1112</span>    <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(spec, tmp_s, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01113" name="l01113"></a><span class="lineno"> 1113</span>    l = strlen(spec);</div>
+<div class="line"><a id="l01114" name="l01114"></a><span class="lineno"> 1114</span>    <span class="keywordflow">return</span> l;</div>
 </div>
-<div class="line"><a id="l01108" name="l01108"></a><span class="lineno"> 1108</span>}</div>
-<div class="line"><a id="l01109" name="l01109"></a><span class="lineno"> 1109</span><span class="comment">/** @brief Replace all occurrences of &quot;tgt_s&quot; in &quot;org_s&quot; with &quot;rep_s&quot;</span></div>
-<div class="line"><span class="lineno"> 1110</span><span class="comment">    @param org_s - original string</span></div>
-<div class="line"><span class="lineno"> 1111</span><span class="comment">    @param tgt_s - target substring to replace</span></div>
-<div class="line"><span class="lineno"> 1112</span><span class="comment">    @param rep_s - replacement substring</span></div>
-<div class="line"><span class="lineno"> 1113</span><span class="comment">    @returns A pointer to the newly allocated string with replacements or a copy</span></div>
-<div class="line"><span class="lineno"> 1114</span><span class="comment">   of the replacement string if original string is the same as target string</span></div>
-<div class="line"><span class="lineno"> 1115</span><span class="comment">   This is a special case that allows for replacing the entire original string.</span></div>
-<div class="line"><span class="lineno"> 1116</span><span class="comment">   If any parameter is nullptr, the function returns nullptr. If &quot;tgt_s&quot; is not</span></div>
-<div class="line"><span class="lineno"> 1117</span><span class="comment">   found in &quot;org_s&quot;, the function returns a copy of &quot;org_s&quot;. If target substring</span></div>
-<div class="line"><span class="lineno"> 1118</span><span class="comment">   is not found the function returns a copy of the original string.</span></div>
-<div class="line"><span class="lineno"> 1119</span><span class="comment">    @note allocates memory for the return value, so the caller is responsible</span></div>
-<div class="line"><span class="lineno"> 1120</span><span class="comment">   for freeing this memory when it is no longer needed to avoid memory leaks.</span></div>
-<div class="line"><span class="lineno"> 1121</span><span class="comment">    @note Does not modify the original string &quot;org_s&quot;.</span></div>
-<div class="line"><span class="lineno"> 1122</span><span class="comment">    @note Assumes that &quot;tgt_s&quot; and &quot;rep_s&quot; are null-terminated strings. If they</span></div>
-<div class="line"><span class="lineno"> 1123</span><span class="comment">   are not, the behavior is undefined.</span></div>
-<div class="line"><span class="lineno"> 1124</span><span class="comment">    @note Does not perform any bounds checking on the input strings, so it is</span></div>
-<div class="line"><span class="lineno"> 1125</span><span class="comment">   the caller&#39;s responsibility to ensure that they are valid and that the</span></div>
-<div class="line"><span class="lineno"> 1126</span><span class="comment">   resulting string does not exceed available memory.</span></div>
-<div class="line"><span class="lineno"> 1127</span><span class="comment">    @note Uses the standard library functions strlen, strstr, malloc, and</span></div>
-<div class="line"><span class="lineno"> 1128</span><span class="comment">   strcpy, which may have their own limitations and behaviors that the caller</span></div>
-<div class="line"><span class="lineno"> 1129</span><span class="comment">   should be aware of.</span></div>
-<div class="line"><span class="lineno"> 1130</span><span class="comment">    @note Does not handle overlapping occurrences of &quot;tgt_s&quot; in &quot;org_s&quot;. If</span></div>
-<div class="line"><span class="lineno"> 1131</span><span class="comment">   &quot;tgt_s&quot; can overlap with itself in &quot;org_s&quot;, the behavior may be unexpected.</span></div>
-<div class="line"><span class="lineno"> 1132</span><span class="comment">   The caller should ensure that &quot;tgt_s&quot; does not contain overlapping patterns</span></div>
-<div class="line"><span class="lineno"> 1133</span><span class="comment">   to avoid this issue.</span></div>
-<div class="line"><span class="lineno"> 1134</span><span class="comment">    @note Does not handle cases where &quot;tgt_s&quot; is a substring of &quot;rep_s&quot;, which</span></div>
-<div class="line"><span class="lineno"> 1135</span><span class="comment">   could lead to unintended consequences if &quot;tgt_s&quot; appears in &quot;rep_s&quot;. The</span></div>
-<div class="line"><span class="lineno"> 1136</span><span class="comment">   caller should ensure that &quot;tgt_s&quot; and &quot;rep_s&quot; are distinct to avoid this</span></div>
-<div class="foldopen" id="foldopen01137" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#ab19b53c3f569332292039c471719eb6b"> 1137</a></span><span class="comment">   issue. */</span></div>
-<div class="line"><a id="l01138" name="l01138"></a><span class="lineno"> 1138</span><span class="keywordtype">char</span> *<a class="code hl_function" href="../../db/dc3/a00284.html#ab19b53c3f569332292039c471719eb6b">rep_substring</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *org_s, <span class="keyword">const</span> <span class="keywordtype">char</span> *tgt_s, <span class="keyword">const</span> <span class="keywordtype">char</span> *rep_s) {</div>
-<div class="line"><a id="l01139" name="l01139"></a><span class="lineno"> 1139</span>    <span class="keywordflow">if</span> (org_s == nullptr || tgt_s == nullptr || rep_s == nullptr)</div>
-<div class="line"><a id="l01140" name="l01140"></a><span class="lineno"> 1140</span>        <span class="keywordflow">return</span> nullptr;</div>
-<div class="line"><a id="l01141" name="l01141"></a><span class="lineno"> 1141</span>    <span class="keywordflow">if</span> (*org_s == <span class="stringliteral">&#39;\0&#39;</span> || *tgt_s == <span class="stringliteral">&#39;\0&#39;</span> || *rep_s == <span class="stringliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><a id="l01142" name="l01142"></a><span class="lineno"> 1142</span>        <span class="keywordflow">return</span> nullptr;</div>
-<div class="line"><a id="l01143" name="l01143"></a><span class="lineno"> 1143</span>    <span class="keywordflow">if</span> (strstr(org_s, tgt_s) == nullptr)</div>
-<div class="line"><a id="l01144" name="l01144"></a><span class="lineno"> 1144</span>        <span class="keywordflow">return</span> strdup(org_s);</div>
-<div class="line"><a id="l01145" name="l01145"></a><span class="lineno"> 1145</span>    <span class="keywordflow">if</span> (strstr(rep_s, tgt_s) != nullptr)</div>
-<div class="line"><a id="l01146" name="l01146"></a><span class="lineno"> 1146</span>        <span class="keywordflow">return</span> nullptr;</div>
-<div class="line"><a id="l01147" name="l01147"></a><span class="lineno"> 1147</span>    <span class="keywordflow">if</span> (tgt_s == rep_s || tgt_s == org_s || rep_s == org_s)</div>
-<div class="line"><a id="l01148" name="l01148"></a><span class="lineno"> 1148</span>        <span class="keywordflow">return</span> strdup(org_s);</div>
-<div class="line"><a id="l01149" name="l01149"></a><span class="lineno"> 1149</span>    <span class="keywordflow">if</span> (strcmp(org_s, tgt_s) == 0)</div>
-<div class="line"><a id="l01150" name="l01150"></a><span class="lineno"> 1150</span>        <span class="keywordflow">return</span> strdup(rep_s);</div>
-<div class="line"><a id="l01151" name="l01151"></a><span class="lineno"> 1151</span>    <span class="keywordtype">char</span> *out_s, *ip, *tmp;</div>
-<div class="line"><a id="l01152" name="l01152"></a><span class="lineno"> 1152</span>    <span class="keywordtype">int</span> tgt_l = strlen(tgt_s);</div>
-<div class="line"><a id="l01153" name="l01153"></a><span class="lineno"> 1153</span>    <span class="keywordtype">int</span> rep_l = strlen(rep_s);</div>
-<div class="line"><a id="l01154" name="l01154"></a><span class="lineno"> 1154</span>    <span class="keywordtype">int</span> head_l;</div>
-<div class="line"><a id="l01155" name="l01155"></a><span class="lineno"> 1155</span>    <span class="keywordtype">int</span> n = 0;</div>
-<div class="line"><a id="l01156" name="l01156"></a><span class="lineno"> 1156</span>    ip = (<span class="keywordtype">char</span> *)org_s;</div>
-<div class="line"><a id="l01157" name="l01157"></a><span class="lineno"> 1157</span>    <span class="keywordflow">while</span> ((tmp = strstr(ip, tgt_s)) != nullptr) {</div>
-<div class="line"><a id="l01158" name="l01158"></a><span class="lineno"> 1158</span>        n++;</div>
-<div class="line"><a id="l01159" name="l01159"></a><span class="lineno"> 1159</span>        ip = tmp + tgt_l;</div>
-<div class="line"><a id="l01160" name="l01160"></a><span class="lineno"> 1160</span>    }</div>
-<div class="line"><a id="l01161" name="l01161"></a><span class="lineno"> 1161</span>    out_s = malloc(strlen(org_s) + (rep_l - tgt_l) * n + 1);</div>
-<div class="line"><a id="l01162" name="l01162"></a><span class="lineno"> 1162</span>    <span class="keywordflow">if</span> (!out_s) {</div>
-<div class="line"><a id="l01163" name="l01163"></a><span class="lineno"> 1163</span>        <span class="keywordflow">return</span> nullptr;</div>
-<div class="line"><a id="l01164" name="l01164"></a><span class="lineno"> 1164</span>    }</div>
-<div class="line"><a id="l01165" name="l01165"></a><span class="lineno"> 1165</span>    tmp = out_s;</div>
-<div class="line"><a id="l01166" name="l01166"></a><span class="lineno"> 1166</span>    ip = (<span class="keywordtype">char</span> *)org_s;</div>
-<div class="line"><a id="l01167" name="l01167"></a><span class="lineno"> 1167</span>    <span class="keywordflow">while</span> (n--) {</div>
-<div class="line"><a id="l01168" name="l01168"></a><span class="lineno"> 1168</span>        <span class="keywordtype">char</span> *p = strstr(ip, tgt_s);</div>
-<div class="line"><a id="l01169" name="l01169"></a><span class="lineno"> 1169</span>        head_l = p - ip;</div>
-<div class="line"><a id="l01170" name="l01170"></a><span class="lineno"> 1170</span>        <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp, ip, head_l);</div>
-<div class="line"><a id="l01171" name="l01171"></a><span class="lineno"> 1171</span>        tmp += head_l;</div>
-<div class="line"><a id="l01172" name="l01172"></a><span class="lineno"> 1172</span>        <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp, rep_s, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01173" name="l01173"></a><span class="lineno"> 1173</span>        tmp += rep_l;</div>
-<div class="line"><a id="l01174" name="l01174"></a><span class="lineno"> 1174</span>        ip += head_l + tgt_l;</div>
-<div class="line"><a id="l01175" name="l01175"></a><span class="lineno"> 1175</span>    }</div>
-<div class="line"><a id="l01176" name="l01176"></a><span class="lineno"> 1176</span>    <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp, ip, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><a id="l01177" name="l01177"></a><span class="lineno"> 1177</span>    <span class="keywordflow">return</span> out_s;</div>
+<div class="line"><a id="l01115" name="l01115"></a><span class="lineno"> 1115</span>}</div>
+<div class="line"><a id="l01116" name="l01116"></a><span class="lineno"> 1116</span><span class="comment">/** @brief Replace all occurrences of &quot;tgt_s&quot; in &quot;org_s&quot; with &quot;rep_s&quot;</span></div>
+<div class="line"><span class="lineno"> 1117</span><span class="comment">    @param org_s - original string</span></div>
+<div class="line"><span class="lineno"> 1118</span><span class="comment">    @param tgt_s - target substring to replace</span></div>
+<div class="line"><span class="lineno"> 1119</span><span class="comment">    @param rep_s - replacement substring</span></div>
+<div class="line"><span class="lineno"> 1120</span><span class="comment">    @returns A pointer to the newly allocated string with replacements or a copy</span></div>
+<div class="line"><span class="lineno"> 1121</span><span class="comment">   of the replacement string if original string is the same as target string</span></div>
+<div class="line"><span class="lineno"> 1122</span><span class="comment">   This is a special case that allows for replacing the entire original string.</span></div>
+<div class="line"><span class="lineno"> 1123</span><span class="comment">   If any parameter is nullptr, the function returns nullptr. If &quot;tgt_s&quot; is not</span></div>
+<div class="line"><span class="lineno"> 1124</span><span class="comment">   found in &quot;org_s&quot;, the function returns a copy of &quot;org_s&quot;. If target substring</span></div>
+<div class="line"><span class="lineno"> 1125</span><span class="comment">   is not found the function returns a copy of the original string.</span></div>
+<div class="line"><span class="lineno"> 1126</span><span class="comment">    @note allocates memory for the return value, so the caller is responsible</span></div>
+<div class="line"><span class="lineno"> 1127</span><span class="comment">   for freeing this memory when it is no longer needed to avoid memory leaks.</span></div>
+<div class="line"><span class="lineno"> 1128</span><span class="comment">    @note Does not modify the original string &quot;org_s&quot;.</span></div>
+<div class="line"><span class="lineno"> 1129</span><span class="comment">    @note Assumes that &quot;tgt_s&quot; and &quot;rep_s&quot; are null-terminated strings. If they</span></div>
+<div class="line"><span class="lineno"> 1130</span><span class="comment">   are not, the behavior is undefined.</span></div>
+<div class="line"><span class="lineno"> 1131</span><span class="comment">    @note Does not perform any bounds checking on the input strings, so it is</span></div>
+<div class="line"><span class="lineno"> 1132</span><span class="comment">   the caller&#39;s responsibility to ensure that they are valid and that the</span></div>
+<div class="line"><span class="lineno"> 1133</span><span class="comment">   resulting string does not exceed available memory.</span></div>
+<div class="line"><span class="lineno"> 1134</span><span class="comment">    @note Uses the standard library functions strlen, strstr, malloc, and</span></div>
+<div class="line"><span class="lineno"> 1135</span><span class="comment">   strcpy, which may have their own limitations and behaviors that the caller</span></div>
+<div class="line"><span class="lineno"> 1136</span><span class="comment">   should be aware of.</span></div>
+<div class="line"><span class="lineno"> 1137</span><span class="comment">    @note Does not handle overlapping occurrences of &quot;tgt_s&quot; in &quot;org_s&quot;. If</span></div>
+<div class="line"><span class="lineno"> 1138</span><span class="comment">   &quot;tgt_s&quot; can overlap with itself in &quot;org_s&quot;, the behavior may be unexpected.</span></div>
+<div class="line"><span class="lineno"> 1139</span><span class="comment">   The caller should ensure that &quot;tgt_s&quot; does not contain overlapping patterns</span></div>
+<div class="line"><span class="lineno"> 1140</span><span class="comment">   to avoid this issue.</span></div>
+<div class="line"><span class="lineno"> 1141</span><span class="comment">    @note Does not handle cases where &quot;tgt_s&quot; is a substring of &quot;rep_s&quot;, which</span></div>
+<div class="line"><span class="lineno"> 1142</span><span class="comment">   could lead to unintended consequences if &quot;tgt_s&quot; appears in &quot;rep_s&quot;. The</span></div>
+<div class="line"><span class="lineno"> 1143</span><span class="comment">   caller should ensure that &quot;tgt_s&quot; and &quot;rep_s&quot; are distinct to avoid this</span></div>
+<div class="foldopen" id="foldopen01144" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#ab19b53c3f569332292039c471719eb6b"> 1144</a></span><span class="comment">   issue. */</span></div>
+<div class="line"><a id="l01145" name="l01145"></a><span class="lineno"> 1145</span><span class="keywordtype">char</span> *<a class="code hl_function" href="../../db/dc3/a00284.html#ab19b53c3f569332292039c471719eb6b">rep_substring</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *org_s, <span class="keyword">const</span> <span class="keywordtype">char</span> *tgt_s, <span class="keyword">const</span> <span class="keywordtype">char</span> *rep_s) {</div>
+<div class="line"><a id="l01146" name="l01146"></a><span class="lineno"> 1146</span>    <span class="keywordflow">if</span> (org_s == nullptr || tgt_s == nullptr || rep_s == nullptr)</div>
+<div class="line"><a id="l01147" name="l01147"></a><span class="lineno"> 1147</span>        <span class="keywordflow">return</span> nullptr;</div>
+<div class="line"><a id="l01148" name="l01148"></a><span class="lineno"> 1148</span>    <span class="keywordflow">if</span> (*org_s == <span class="stringliteral">&#39;\0&#39;</span> || *tgt_s == <span class="stringliteral">&#39;\0&#39;</span> || *rep_s == <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l01149" name="l01149"></a><span class="lineno"> 1149</span>        <span class="keywordflow">return</span> nullptr;</div>
+<div class="line"><a id="l01150" name="l01150"></a><span class="lineno"> 1150</span>    <span class="keywordflow">if</span> (strstr(org_s, tgt_s) == nullptr)</div>
+<div class="line"><a id="l01151" name="l01151"></a><span class="lineno"> 1151</span>        <span class="keywordflow">return</span> strdup(org_s);</div>
+<div class="line"><a id="l01152" name="l01152"></a><span class="lineno"> 1152</span>    <span class="keywordflow">if</span> (strstr(rep_s, tgt_s) != nullptr)</div>
+<div class="line"><a id="l01153" name="l01153"></a><span class="lineno"> 1153</span>        <span class="keywordflow">return</span> nullptr;</div>
+<div class="line"><a id="l01154" name="l01154"></a><span class="lineno"> 1154</span>    <span class="keywordflow">if</span> (tgt_s == rep_s || tgt_s == org_s || rep_s == org_s)</div>
+<div class="line"><a id="l01155" name="l01155"></a><span class="lineno"> 1155</span>        <span class="keywordflow">return</span> strdup(org_s);</div>
+<div class="line"><a id="l01156" name="l01156"></a><span class="lineno"> 1156</span>    <span class="keywordflow">if</span> (strcmp(org_s, tgt_s) == 0)</div>
+<div class="line"><a id="l01157" name="l01157"></a><span class="lineno"> 1157</span>        <span class="keywordflow">return</span> strdup(rep_s);</div>
+<div class="line"><a id="l01158" name="l01158"></a><span class="lineno"> 1158</span>    <span class="keywordtype">char</span> *out_s, *ip, *tmp;</div>
+<div class="line"><a id="l01159" name="l01159"></a><span class="lineno"> 1159</span>    <span class="keywordtype">int</span> tgt_l = strlen(tgt_s);</div>
+<div class="line"><a id="l01160" name="l01160"></a><span class="lineno"> 1160</span>    <span class="keywordtype">int</span> rep_l = strlen(rep_s);</div>
+<div class="line"><a id="l01161" name="l01161"></a><span class="lineno"> 1161</span>    <span class="keywordtype">int</span> head_l;</div>
+<div class="line"><a id="l01162" name="l01162"></a><span class="lineno"> 1162</span>    <span class="keywordtype">int</span> n = 0;</div>
+<div class="line"><a id="l01163" name="l01163"></a><span class="lineno"> 1163</span>    ip = (<span class="keywordtype">char</span> *)org_s;</div>
+<div class="line"><a id="l01164" name="l01164"></a><span class="lineno"> 1164</span>    <span class="keywordflow">while</span> ((tmp = strstr(ip, tgt_s)) != nullptr) {</div>
+<div class="line"><a id="l01165" name="l01165"></a><span class="lineno"> 1165</span>        n++;</div>
+<div class="line"><a id="l01166" name="l01166"></a><span class="lineno"> 1166</span>        ip = tmp + tgt_l;</div>
+<div class="line"><a id="l01167" name="l01167"></a><span class="lineno"> 1167</span>    }</div>
+<div class="line"><a id="l01168" name="l01168"></a><span class="lineno"> 1168</span>    out_s = malloc(strlen(org_s) + (rep_l - tgt_l) * n + 1);</div>
+<div class="line"><a id="l01169" name="l01169"></a><span class="lineno"> 1169</span>    <span class="keywordflow">if</span> (!out_s) {</div>
+<div class="line"><a id="l01170" name="l01170"></a><span class="lineno"> 1170</span>        <span class="keywordflow">return</span> nullptr;</div>
+<div class="line"><a id="l01171" name="l01171"></a><span class="lineno"> 1171</span>    }</div>
+<div class="line"><a id="l01172" name="l01172"></a><span class="lineno"> 1172</span>    tmp = out_s;</div>
+<div class="line"><a id="l01173" name="l01173"></a><span class="lineno"> 1173</span>    ip = (<span class="keywordtype">char</span> *)org_s;</div>
+<div class="line"><a id="l01174" name="l01174"></a><span class="lineno"> 1174</span>    <span class="keywordflow">while</span> (n--) {</div>
+<div class="line"><a id="l01175" name="l01175"></a><span class="lineno"> 1175</span>        <span class="keywordtype">char</span> *p = strstr(ip, tgt_s);</div>
+<div class="line"><a id="l01176" name="l01176"></a><span class="lineno"> 1176</span>        head_l = p - ip;</div>
+<div class="line"><a id="l01177" name="l01177"></a><span class="lineno"> 1177</span>        <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp, ip, head_l);</div>
+<div class="line"><a id="l01178" name="l01178"></a><span class="lineno"> 1178</span>        tmp += head_l;</div>
+<div class="line"><a id="l01179" name="l01179"></a><span class="lineno"> 1179</span>        <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp, rep_s, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01180" name="l01180"></a><span class="lineno"> 1180</span>        tmp += rep_l;</div>
+<div class="line"><a id="l01181" name="l01181"></a><span class="lineno"> 1181</span>        ip += head_l + tgt_l;</div>
+<div class="line"><a id="l01182" name="l01182"></a><span class="lineno"> 1182</span>    }</div>
+<div class="line"><a id="l01183" name="l01183"></a><span class="lineno"> 1183</span>    <a class="code hl_function" href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp, ip, <a class="code hl_define" href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l01184" name="l01184"></a><span class="lineno"> 1184</span>    <span class="keywordflow">return</span> out_s;</div>
 </div>
-<div class="line"><a id="l01178" name="l01178"></a><span class="lineno"> 1178</span>}</div>
-<div class="line"><a id="l01179" name="l01179"></a><span class="lineno"> 1179</span><span class="comment">/** @brief String functions provide a simple string library to facilitate string</span></div>
-<div class="line"><span class="lineno"> 1180</span><span class="comment">   manipulation in C, allowing developers to easily create, copy, concatenate,</span></div>
-<div class="line"><span class="lineno"> 1181</span><span class="comment">   and free strings without having to manage memory manually.</span></div>
-<div class="line"><span class="lineno"> 1182</span><span class="comment">   @note The library includes functions to convert C strings to String structs,</span></div>
-<div class="line"><span class="lineno"> 1183</span><span class="comment">   create new String structs with specified lengths, copy and concatenate String</span></div>
-<div class="line"><span class="lineno"> 1184</span><span class="comment">   structs, and free the memory used by String structs. By using this library,</span></div>
-<div class="line"><span class="lineno"> 1185</span><span class="comment">   developers can avoid common pitfalls of C string handling, such as buffer</span></div>
-<div class="line"><span class="lineno"> 1186</span><span class="comment">   overflows and memory leaks, while still benefiting from the performance</span></div>
-<div class="line"><span class="lineno"> 1187</span><span class="comment">   advantages of C.</span></div>
-<div class="line"><span class="lineno"> 1188</span><span class="comment">   @note Designed to be simple and easy to use, making it a great choice for</span></div>
-<div class="line"><span class="lineno"> 1189</span><span class="comment">   developers who want to work with strings in C without having to worry about</span></div>
-<div class="line"><span class="lineno"> 1190</span><span class="comment">   the complexities of manual memory management.</span></div>
-<div class="line"><span class="lineno"> 1191</span><span class="comment">   @note The String struct is defined as follows:</span></div>
-<div class="line"><span class="lineno"> 1192</span><span class="comment">   @code</span></div>
-<div class="line"><span class="lineno"> 1193</span><span class="comment">     typedef struct {</span></div>
-<div class="line"><span class="lineno"> 1194</span><span class="comment">         size_t l; // length of the string (including null terminator)</span></div>
-<div class="line"><span class="lineno"> 1195</span><span class="comment">         char *s;  // pointer to the dynamically allocated string</span></div>
-<div class="line"><span class="lineno"> 1196</span><span class="comment">     } String;</span></div>
-<div class="line"><span class="lineno"> 1197</span><span class="comment">    @endcode</span></div>
-<div class="line"><span class="lineno"> 1198</span><span class="comment">   @note All functions in this library that return a String struct allocate</span></div>
-<div class="line"><span class="lineno"> 1199</span><span class="comment">   memory for the string using malloc or realloc. It is the caller&#39;s</span></div>
-<div class="line"><span class="lineno"> 1200</span><span class="comment">   responsibility to free this memory using the free_string function when it is</span></div>
-<div class="line"><span class="lineno"> 1201</span><span class="comment">   no longer needed to avoid memory leaks.</span></div>
-<div class="line"><span class="lineno"> 1202</span><span class="comment">   @note The String functions in this library do not perform bounds checking on</span></div>
-<div class="line"><span class="lineno"> 1203</span><span class="comment">   the input strings or the resulting strings. It is the caller&#39;s responsibility</span></div>
-<div class="line"><span class="lineno"> 1204</span><span class="comment">   to ensure that all input strings are valid and that the resulting strings do</span></div>
-<div class="line"><span class="lineno"> 1205</span><span class="comment">   not exceed available memory.</span></div>
-<div class="line"><span class="lineno"> 1206</span><span class="comment">   @note The String functions in this library assume that all input strings are</span></div>
-<div class="line"><span class="lineno"> 1207</span><span class="comment">   null-terminated. If any input string is not null-terminated, the behavior is</span></div>
-<div class="line"><span class="lineno"> 1208</span><span class="comment">   undefined.</span></div>
-<div class="line"><span class="lineno"> 1209</span><span class="comment">   @see snippets/strings_test1.c</span></div>
-<div class="line"><span class="lineno"> 1210</span><span class="comment"> */</span></div>
-<div class="line"><a id="l01211" name="l01211"></a><span class="lineno"> 1211</span><span class="comment">/** @brief Convert C string to String struct</span></div>
-<div class="line"><span class="lineno"> 1212</span><span class="comment">    @param s C string</span></div>
-<div class="line"><span class="lineno"> 1213</span><span class="comment">    @return String struct containing dynamically allocated copy of input string</span></div>
-<div class="line"><span class="lineno"> 1214</span><span class="comment">    @note the caller is responsible for freeing the allocated memory.</span></div>
-<div class="foldopen" id="foldopen01215" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a3e61ddee7c9ff9a346d3656d0054615f"> 1215</a></span><span class="comment">    */</span></div>
-<div class="line"><a id="l01216" name="l01216"></a><span class="lineno"> 1216</span>String <a class="code hl_function" href="../../db/dc3/a00284.html#a3e61ddee7c9ff9a346d3656d0054615f">to_string</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s) {</div>
-<div class="line"><a id="l01217" name="l01217"></a><span class="lineno"> 1217</span>    <span class="keywordflow">if</span> (s == nullptr) {</div>
-<div class="line"><a id="l01218" name="l01218"></a><span class="lineno"> 1218</span>        String str;</div>
-<div class="line"><a id="l01219" name="l01219"></a><span class="lineno"> 1219</span>        str.l = 0;</div>
-<div class="line"><a id="l01220" name="l01220"></a><span class="lineno"> 1220</span>        str.s = nullptr;</div>
-<div class="line"><a id="l01221" name="l01221"></a><span class="lineno"> 1221</span>        <span class="keywordflow">return</span> str;</div>
-<div class="line"><a id="l01222" name="l01222"></a><span class="lineno"> 1222</span>    }</div>
-<div class="line"><a id="l01223" name="l01223"></a><span class="lineno"> 1223</span>    String str;</div>
-<div class="line"><a id="l01224" name="l01224"></a><span class="lineno"> 1224</span>    str.l = strlen(s) + 1;</div>
-<div class="line"><a id="l01225" name="l01225"></a><span class="lineno"> 1225</span>    str.s = (<span class="keywordtype">char</span> *)malloc(str.l);</div>
-<div class="line"><a id="l01226" name="l01226"></a><span class="lineno"> 1226</span>    strcpy(str.s, s);</div>
-<div class="line"><a id="l01227" name="l01227"></a><span class="lineno"> 1227</span>    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a id="l01185" name="l01185"></a><span class="lineno"> 1185</span>}</div>
+<div class="line"><a id="l01186" name="l01186"></a><span class="lineno"> 1186</span><span class="comment">/** @brief String functions provide a simple string library to facilitate string</span></div>
+<div class="line"><span class="lineno"> 1187</span><span class="comment">   manipulation in C, allowing developers to easily create, copy, concatenate,</span></div>
+<div class="line"><span class="lineno"> 1188</span><span class="comment">   and free strings without having to manage memory manually.</span></div>
+<div class="line"><span class="lineno"> 1189</span><span class="comment">   @note The library includes functions to convert C strings to String structs,</span></div>
+<div class="line"><span class="lineno"> 1190</span><span class="comment">   create new String structs with specified lengths, copy and concatenate String</span></div>
+<div class="line"><span class="lineno"> 1191</span><span class="comment">   structs, and free the memory used by String structs. By using this library,</span></div>
+<div class="line"><span class="lineno"> 1192</span><span class="comment">   developers can avoid common pitfalls of C string handling, such as buffer</span></div>
+<div class="line"><span class="lineno"> 1193</span><span class="comment">   overflows and memory leaks, while still benefiting from the performance</span></div>
+<div class="line"><span class="lineno"> 1194</span><span class="comment">   advantages of C.</span></div>
+<div class="line"><span class="lineno"> 1195</span><span class="comment">   @note Designed to be simple and easy to use, making it a great choice for</span></div>
+<div class="line"><span class="lineno"> 1196</span><span class="comment">   developers who want to work with strings in C without having to worry about</span></div>
+<div class="line"><span class="lineno"> 1197</span><span class="comment">   the complexities of manual memory management.</span></div>
+<div class="line"><span class="lineno"> 1198</span><span class="comment">   @note The String struct is defined as follows:</span></div>
+<div class="line"><span class="lineno"> 1199</span><span class="comment">   @code</span></div>
+<div class="line"><span class="lineno"> 1200</span><span class="comment">     typedef struct {</span></div>
+<div class="line"><span class="lineno"> 1201</span><span class="comment">         size_t l; // length of the string (including null terminator)</span></div>
+<div class="line"><span class="lineno"> 1202</span><span class="comment">         char *s;  // pointer to the dynamically allocated string</span></div>
+<div class="line"><span class="lineno"> 1203</span><span class="comment">     } String;</span></div>
+<div class="line"><span class="lineno"> 1204</span><span class="comment">    @endcode</span></div>
+<div class="line"><span class="lineno"> 1205</span><span class="comment">   @note All functions in this library that return a String struct allocate</span></div>
+<div class="line"><span class="lineno"> 1206</span><span class="comment">   memory for the string using malloc or realloc. It is the caller&#39;s</span></div>
+<div class="line"><span class="lineno"> 1207</span><span class="comment">   responsibility to free this memory using the free_string function when it is</span></div>
+<div class="line"><span class="lineno"> 1208</span><span class="comment">   no longer needed to avoid memory leaks.</span></div>
+<div class="line"><span class="lineno"> 1209</span><span class="comment">   @note The String functions in this library do not perform bounds checking on</span></div>
+<div class="line"><span class="lineno"> 1210</span><span class="comment">   the input strings or the resulting strings. It is the caller&#39;s responsibility</span></div>
+<div class="line"><span class="lineno"> 1211</span><span class="comment">   to ensure that all input strings are valid and that the resulting strings do</span></div>
+<div class="line"><span class="lineno"> 1212</span><span class="comment">   not exceed available memory.</span></div>
+<div class="line"><span class="lineno"> 1213</span><span class="comment">   @note The String functions in this library assume that all input strings are</span></div>
+<div class="line"><span class="lineno"> 1214</span><span class="comment">   null-terminated. If any input string is not null-terminated, the behavior is</span></div>
+<div class="line"><span class="lineno"> 1215</span><span class="comment">   undefined.</span></div>
+<div class="line"><span class="lineno"> 1216</span><span class="comment">   @see snippets/strings_test1.c</span></div>
+<div class="line"><span class="lineno"> 1217</span><span class="comment"> */</span></div>
+<div class="line"><a id="l01218" name="l01218"></a><span class="lineno"> 1218</span><span class="comment">/** @brief Convert C string to String struct</span></div>
+<div class="line"><span class="lineno"> 1219</span><span class="comment">    @param s C string</span></div>
+<div class="line"><span class="lineno"> 1220</span><span class="comment">    @return String struct containing dynamically allocated copy of input string</span></div>
+<div class="line"><span class="lineno"> 1221</span><span class="comment">    @note the caller is responsible for freeing the allocated memory.</span></div>
+<div class="foldopen" id="foldopen01222" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a3e61ddee7c9ff9a346d3656d0054615f"> 1222</a></span><span class="comment">    */</span></div>
+<div class="line"><a id="l01223" name="l01223"></a><span class="lineno"> 1223</span>String <a class="code hl_function" href="../../db/dc3/a00284.html#a3e61ddee7c9ff9a346d3656d0054615f">to_string</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s) {</div>
+<div class="line"><a id="l01224" name="l01224"></a><span class="lineno"> 1224</span>    <span class="keywordflow">if</span> (s == nullptr) {</div>
+<div class="line"><a id="l01225" name="l01225"></a><span class="lineno"> 1225</span>        String str;</div>
+<div class="line"><a id="l01226" name="l01226"></a><span class="lineno"> 1226</span>        str.l = 0;</div>
+<div class="line"><a id="l01227" name="l01227"></a><span class="lineno"> 1227</span>        str.s = nullptr;</div>
+<div class="line"><a id="l01228" name="l01228"></a><span class="lineno"> 1228</span>        <span class="keywordflow">return</span> str;</div>
+<div class="line"><a id="l01229" name="l01229"></a><span class="lineno"> 1229</span>    }</div>
+<div class="line"><a id="l01230" name="l01230"></a><span class="lineno"> 1230</span>    String str;</div>
+<div class="line"><a id="l01231" name="l01231"></a><span class="lineno"> 1231</span>    str.l = strlen(s) + 1;</div>
+<div class="line"><a id="l01232" name="l01232"></a><span class="lineno"> 1232</span>    str.s = (<span class="keywordtype">char</span> *)malloc(str.l);</div>
+<div class="line"><a id="l01233" name="l01233"></a><span class="lineno"> 1233</span>    strcpy(str.s, s);</div>
+<div class="line"><a id="l01234" name="l01234"></a><span class="lineno"> 1234</span>    <span class="keywordflow">return</span> str;</div>
 </div>
-<div class="line"><a id="l01228" name="l01228"></a><span class="lineno"> 1228</span>}</div>
-<div class="line"><a id="l01229" name="l01229"></a><span class="lineno"> 1229</span><span class="comment">/** @brief Create a String struct with a dynamically allocated string @param l</span></div>
-<div class="line"><span class="lineno"> 1230</span><span class="comment">   length of string to create including null terminator</span></div>
-<div class="line"><span class="lineno"> 1231</span><span class="comment">   @returns String struct</span></div>
-<div class="line"><span class="lineno"> 1232</span><span class="comment">   @note The returned String struct contains a dynamically allocated string of</span></div>
-<div class="line"><span class="lineno"> 1233</span><span class="comment">   he specified length</span></div>
-<div class="line"><span class="lineno"> 1234</span><span class="comment">   @sa free_string</span></div>
-<div class="line"><span class="lineno"> 1235</span><span class="comment">   @note the caller is responsible for calling free_string to free the allocated</span></div>
-<div class="foldopen" id="foldopen01236" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a54d1c02afad60732c1d2ce92e50cb970"> 1236</a></span><span class="comment">   memory. */</span></div>
-<div class="line"><a id="l01237" name="l01237"></a><span class="lineno"> 1237</span>String <a class="code hl_function" href="../../db/dc3/a00284.html#a54d1c02afad60732c1d2ce92e50cb970">mk_string</a>(size_t l) {</div>
-<div class="line"><a id="l01238" name="l01238"></a><span class="lineno"> 1238</span>    <span class="keywordflow">if</span> (l == 0) {</div>
-<div class="line"><a id="l01239" name="l01239"></a><span class="lineno"> 1239</span>        String str;</div>
-<div class="line"><a id="l01240" name="l01240"></a><span class="lineno"> 1240</span>        str.l = 0;</div>
-<div class="line"><a id="l01241" name="l01241"></a><span class="lineno"> 1241</span>        str.s = nullptr;</div>
-<div class="line"><a id="l01242" name="l01242"></a><span class="lineno"> 1242</span>        <span class="keywordflow">return</span> str;</div>
-<div class="line"><a id="l01243" name="l01243"></a><span class="lineno"> 1243</span>    }</div>
-<div class="line"><a id="l01244" name="l01244"></a><span class="lineno"> 1244</span>    String str;</div>
-<div class="line"><a id="l01245" name="l01245"></a><span class="lineno"> 1245</span>    str.l = l + 1;</div>
-<div class="line"><a id="l01246" name="l01246"></a><span class="lineno"> 1246</span>    str.s = (<span class="keywordtype">char</span> *)malloc(str.l);</div>
-<div class="line"><a id="l01247" name="l01247"></a><span class="lineno"> 1247</span>    str.s[0] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l01248" name="l01248"></a><span class="lineno"> 1248</span>    <span class="keywordflow">return</span> str;</div>
+<div class="line"><a id="l01235" name="l01235"></a><span class="lineno"> 1235</span>}</div>
+<div class="line"><a id="l01236" name="l01236"></a><span class="lineno"> 1236</span><span class="comment">/** @brief Create a String struct with a dynamically allocated string @param l</span></div>
+<div class="line"><span class="lineno"> 1237</span><span class="comment">   length of string to create including null terminator</span></div>
+<div class="line"><span class="lineno"> 1238</span><span class="comment">   @returns String struct</span></div>
+<div class="line"><span class="lineno"> 1239</span><span class="comment">   @note The returned String struct contains a dynamically allocated string of</span></div>
+<div class="line"><span class="lineno"> 1240</span><span class="comment">   he specified length</span></div>
+<div class="line"><span class="lineno"> 1241</span><span class="comment">   @sa free_string</span></div>
+<div class="line"><span class="lineno"> 1242</span><span class="comment">   @note the caller is responsible for calling free_string to free the allocated</span></div>
+<div class="foldopen" id="foldopen01243" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a54d1c02afad60732c1d2ce92e50cb970"> 1243</a></span><span class="comment">   memory. */</span></div>
+<div class="line"><a id="l01244" name="l01244"></a><span class="lineno"> 1244</span>String <a class="code hl_function" href="../../db/dc3/a00284.html#a54d1c02afad60732c1d2ce92e50cb970">mk_string</a>(size_t l) {</div>
+<div class="line"><a id="l01245" name="l01245"></a><span class="lineno"> 1245</span>    <span class="keywordflow">if</span> (l == 0) {</div>
+<div class="line"><a id="l01246" name="l01246"></a><span class="lineno"> 1246</span>        String str;</div>
+<div class="line"><a id="l01247" name="l01247"></a><span class="lineno"> 1247</span>        str.l = 0;</div>
+<div class="line"><a id="l01248" name="l01248"></a><span class="lineno"> 1248</span>        str.s = nullptr;</div>
+<div class="line"><a id="l01249" name="l01249"></a><span class="lineno"> 1249</span>        <span class="keywordflow">return</span> str;</div>
+<div class="line"><a id="l01250" name="l01250"></a><span class="lineno"> 1250</span>    }</div>
+<div class="line"><a id="l01251" name="l01251"></a><span class="lineno"> 1251</span>    String str;</div>
+<div class="line"><a id="l01252" name="l01252"></a><span class="lineno"> 1252</span>    str.l = l + 1;</div>
+<div class="line"><a id="l01253" name="l01253"></a><span class="lineno"> 1253</span>    str.s = (<span class="keywordtype">char</span> *)malloc(str.l);</div>
+<div class="line"><a id="l01254" name="l01254"></a><span class="lineno"> 1254</span>    str.s[0] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l01255" name="l01255"></a><span class="lineno"> 1255</span>    <span class="keywordflow">return</span> str;</div>
 </div>
-<div class="line"><a id="l01249" name="l01249"></a><span class="lineno"> 1249</span>}</div>
-<div class="line"><a id="l01250" name="l01250"></a><span class="lineno"> 1250</span><span class="comment">/** @brief Free the dynamically allocated String</span></div>
-<div class="line"><span class="lineno"> 1251</span><span class="comment">    @param string to free</span></div>
-<div class="line"><span class="lineno"> 1252</span><span class="comment">    @return string with nullptr pointer and length 0</span></div>
-<div class="line"><span class="lineno"> 1253</span><span class="comment">    @note Frees the dynamically allocated string and sets length to 0.</span></div>
-<div class="foldopen" id="foldopen01254" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a9733005966bd730252e081c3ef9bb2c2"> 1254</a></span><span class="comment"> */</span></div>
-<div class="line"><a id="l01255" name="l01255"></a><span class="lineno"> 1255</span>String <a class="code hl_function" href="../../db/dc3/a00284.html#a9733005966bd730252e081c3ef9bb2c2">free_string</a>(String string) {</div>
-<div class="line"><a id="l01256" name="l01256"></a><span class="lineno"> 1256</span>    <span class="keywordflow">if</span> (string.s == nullptr)</div>
-<div class="line"><a id="l01257" name="l01257"></a><span class="lineno"> 1257</span>        <span class="keywordflow">return</span> string;</div>
-<div class="line"><a id="l01258" name="l01258"></a><span class="lineno"> 1258</span>    free(string.s);</div>
-<div class="line"><a id="l01259" name="l01259"></a><span class="lineno"> 1259</span>    string.l = 0;</div>
-<div class="line"><a id="l01260" name="l01260"></a><span class="lineno"> 1260</span>    string.s = nullptr;</div>
-<div class="line"><a id="l01261" name="l01261"></a><span class="lineno"> 1261</span>    <span class="keywordflow">return</span> string;</div>
+<div class="line"><a id="l01256" name="l01256"></a><span class="lineno"> 1256</span>}</div>
+<div class="line"><a id="l01257" name="l01257"></a><span class="lineno"> 1257</span><span class="comment">/** @brief Free the dynamically allocated String</span></div>
+<div class="line"><span class="lineno"> 1258</span><span class="comment">    @param string to free</span></div>
+<div class="line"><span class="lineno"> 1259</span><span class="comment">    @return string with nullptr pointer and length 0</span></div>
+<div class="line"><span class="lineno"> 1260</span><span class="comment">    @note Frees the dynamically allocated string and sets length to 0.</span></div>
+<div class="foldopen" id="foldopen01261" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a9733005966bd730252e081c3ef9bb2c2"> 1261</a></span><span class="comment"> */</span></div>
+<div class="line"><a id="l01262" name="l01262"></a><span class="lineno"> 1262</span>String <a class="code hl_function" href="../../db/dc3/a00284.html#a9733005966bd730252e081c3ef9bb2c2">free_string</a>(String string) {</div>
+<div class="line"><a id="l01263" name="l01263"></a><span class="lineno"> 1263</span>    <span class="keywordflow">if</span> (string.s == nullptr)</div>
+<div class="line"><a id="l01264" name="l01264"></a><span class="lineno"> 1264</span>        <span class="keywordflow">return</span> string;</div>
+<div class="line"><a id="l01265" name="l01265"></a><span class="lineno"> 1265</span>    free(string.s);</div>
+<div class="line"><a id="l01266" name="l01266"></a><span class="lineno"> 1266</span>    string.l = 0;</div>
+<div class="line"><a id="l01267" name="l01267"></a><span class="lineno"> 1267</span>    string.s = nullptr;</div>
+<div class="line"><a id="l01268" name="l01268"></a><span class="lineno"> 1268</span>    <span class="keywordflow">return</span> string;</div>
 </div>
-<div class="line"><a id="l01262" name="l01262"></a><span class="lineno"> 1262</span>}</div>
-<div class="line"><a id="l01263" name="l01263"></a><span class="lineno"> 1263</span><span class="comment">/** @brief Copy src String to dest String, allocating additional memory for dest</span></div>
-<div class="line"><span class="lineno"> 1264</span><span class="comment">   String if necessary</span></div>
-<div class="line"><span class="lineno"> 1265</span><span class="comment">    @param dest - destination String struct</span></div>
-<div class="line"><span class="lineno"> 1266</span><span class="comment">    @param src - source String struct</span></div>
-<div class="line"><span class="lineno"> 1267</span><span class="comment">    @returns length of dest String</span></div>
-<div class="foldopen" id="foldopen01268" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d"> 1268</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
-<div class="line"><a id="l01269" name="l01269"></a><span class="lineno"> 1269</span><a class="code hl_function" href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d">string_cpy</a>(String *dest, <span class="keyword">const</span> String *src) {</div>
-<div class="line"><a id="l01270" name="l01270"></a><span class="lineno"> 1270</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
-<div class="line"><a id="l01271" name="l01271"></a><span class="lineno"> 1271</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l01272" name="l01272"></a><span class="lineno"> 1272</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; src-&gt;l) {</div>
-<div class="line"><a id="l01273" name="l01273"></a><span class="lineno"> 1273</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, src-&gt;l);</div>
-<div class="line"><a id="l01274" name="l01274"></a><span class="lineno"> 1274</span>        dest-&gt;l = src-&gt;l;</div>
-<div class="line"><a id="l01275" name="l01275"></a><span class="lineno"> 1275</span>    }</div>
-<div class="line"><a id="l01276" name="l01276"></a><span class="lineno"> 1276</span>    strcpy(dest-&gt;s, src-&gt;s);</div>
-<div class="line"><a id="l01277" name="l01277"></a><span class="lineno"> 1277</span>    <span class="keywordflow">return</span> src-&gt;l;</div>
+<div class="line"><a id="l01269" name="l01269"></a><span class="lineno"> 1269</span>}</div>
+<div class="line"><a id="l01270" name="l01270"></a><span class="lineno"> 1270</span><span class="comment">/** @brief Copy src String to dest String, allocating additional memory for dest</span></div>
+<div class="line"><span class="lineno"> 1271</span><span class="comment">   String if necessary</span></div>
+<div class="line"><span class="lineno"> 1272</span><span class="comment">    @param dest - destination String struct</span></div>
+<div class="line"><span class="lineno"> 1273</span><span class="comment">    @param src - source String struct</span></div>
+<div class="line"><span class="lineno"> 1274</span><span class="comment">    @returns length of dest String</span></div>
+<div class="foldopen" id="foldopen01275" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d"> 1275</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
+<div class="line"><a id="l01276" name="l01276"></a><span class="lineno"> 1276</span><a class="code hl_function" href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d">string_cpy</a>(String *dest, <span class="keyword">const</span> String *src) {</div>
+<div class="line"><a id="l01277" name="l01277"></a><span class="lineno"> 1277</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
+<div class="line"><a id="l01278" name="l01278"></a><span class="lineno"> 1278</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01279" name="l01279"></a><span class="lineno"> 1279</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; src-&gt;l) {</div>
+<div class="line"><a id="l01280" name="l01280"></a><span class="lineno"> 1280</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, src-&gt;l);</div>
+<div class="line"><a id="l01281" name="l01281"></a><span class="lineno"> 1281</span>        dest-&gt;l = src-&gt;l;</div>
+<div class="line"><a id="l01282" name="l01282"></a><span class="lineno"> 1282</span>    }</div>
+<div class="line"><a id="l01283" name="l01283"></a><span class="lineno"> 1283</span>    strcpy(dest-&gt;s, src-&gt;s);</div>
+<div class="line"><a id="l01284" name="l01284"></a><span class="lineno"> 1284</span>    <span class="keywordflow">return</span> src-&gt;l;</div>
 </div>
-<div class="line"><a id="l01278" name="l01278"></a><span class="lineno"> 1278</span>}</div>
-<div class="line"><a id="l01279" name="l01279"></a><span class="lineno"> 1279</span><span class="comment">/** @brief Concatenates src String to dest String, allocating additional memory</span></div>
-<div class="line"><span class="lineno"> 1280</span><span class="comment">   for dest String if necessary</span></div>
-<div class="line"><span class="lineno"> 1281</span><span class="comment">    @param dest - destination String struct</span></div>
-<div class="line"><span class="lineno"> 1282</span><span class="comment">    @param src - source String struct</span></div>
-<div class="line"><span class="lineno"> 1283</span><span class="comment">    @returns new length of dest String after concatenation</span></div>
-<div class="foldopen" id="foldopen01284" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0"> 1284</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
-<div class="line"><a id="l01285" name="l01285"></a><span class="lineno"> 1285</span><a class="code hl_function" href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0">string_cat</a>(String *dest, <span class="keyword">const</span> String *src) {</div>
-<div class="line"><a id="l01286" name="l01286"></a><span class="lineno"> 1286</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
-<div class="line"><a id="l01287" name="l01287"></a><span class="lineno"> 1287</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l01288" name="l01288"></a><span class="lineno"> 1288</span>    size_t new_len = strlen(dest-&gt;s) + strlen(src-&gt;s) + 1;</div>
-<div class="line"><a id="l01289" name="l01289"></a><span class="lineno"> 1289</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
-<div class="line"><a id="l01290" name="l01290"></a><span class="lineno"> 1290</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
-<div class="line"><a id="l01291" name="l01291"></a><span class="lineno"> 1291</span>        dest-&gt;l = new_len;</div>
-<div class="line"><a id="l01292" name="l01292"></a><span class="lineno"> 1292</span>    }</div>
-<div class="line"><a id="l01293" name="l01293"></a><span class="lineno"> 1293</span>    strcat(dest-&gt;s, src-&gt;s);</div>
-<div class="line"><a id="l01294" name="l01294"></a><span class="lineno"> 1294</span>    <span class="keywordflow">return</span> new_len;</div>
+<div class="line"><a id="l01285" name="l01285"></a><span class="lineno"> 1285</span>}</div>
+<div class="line"><a id="l01286" name="l01286"></a><span class="lineno"> 1286</span><span class="comment">/** @brief Concatenates src String to dest String, allocating additional memory</span></div>
+<div class="line"><span class="lineno"> 1287</span><span class="comment">   for dest String if necessary</span></div>
+<div class="line"><span class="lineno"> 1288</span><span class="comment">    @param dest - destination String struct</span></div>
+<div class="line"><span class="lineno"> 1289</span><span class="comment">    @param src - source String struct</span></div>
+<div class="line"><span class="lineno"> 1290</span><span class="comment">    @returns new length of dest String after concatenation</span></div>
+<div class="foldopen" id="foldopen01291" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0"> 1291</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
+<div class="line"><a id="l01292" name="l01292"></a><span class="lineno"> 1292</span><a class="code hl_function" href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0">string_cat</a>(String *dest, <span class="keyword">const</span> String *src) {</div>
+<div class="line"><a id="l01293" name="l01293"></a><span class="lineno"> 1293</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
+<div class="line"><a id="l01294" name="l01294"></a><span class="lineno"> 1294</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01295" name="l01295"></a><span class="lineno"> 1295</span>    size_t new_len = strlen(dest-&gt;s) + strlen(src-&gt;s) + 1;</div>
+<div class="line"><a id="l01296" name="l01296"></a><span class="lineno"> 1296</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
+<div class="line"><a id="l01297" name="l01297"></a><span class="lineno"> 1297</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
+<div class="line"><a id="l01298" name="l01298"></a><span class="lineno"> 1298</span>        dest-&gt;l = new_len;</div>
+<div class="line"><a id="l01299" name="l01299"></a><span class="lineno"> 1299</span>    }</div>
+<div class="line"><a id="l01300" name="l01300"></a><span class="lineno"> 1300</span>    strcat(dest-&gt;s, src-&gt;s);</div>
+<div class="line"><a id="l01301" name="l01301"></a><span class="lineno"> 1301</span>    <span class="keywordflow">return</span> new_len;</div>
 </div>
-<div class="line"><a id="l01295" name="l01295"></a><span class="lineno"> 1295</span>}</div>
-<div class="line"><a id="l01296" name="l01296"></a><span class="lineno"> 1296</span><span class="comment">/** @brief Concatenates up to n characters from src String to dest String,</span></div>
-<div class="line"><span class="lineno"> 1297</span><span class="comment">   allocating additional memory for dest String if necessary</span></div>
-<div class="line"><span class="lineno"> 1298</span><span class="comment">    @param dest - destination String struct</span></div>
-<div class="line"><span class="lineno"> 1299</span><span class="comment">    @param src - source String struct</span></div>
-<div class="line"><span class="lineno"> 1300</span><span class="comment">    @param n - maximum number of characters to concatenate</span></div>
-<div class="line"><span class="lineno"> 1301</span><span class="comment">    @returns new length of dest String after concatenation</span></div>
-<div class="foldopen" id="foldopen01302" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc"> 1302</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
-<div class="line"><a id="l01303" name="l01303"></a><span class="lineno"> 1303</span><a class="code hl_function" href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc">string_ncat</a>(String *dest, <span class="keyword">const</span> String *src, size_t n) {</div>
-<div class="line"><a id="l01304" name="l01304"></a><span class="lineno"> 1304</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
-<div class="line"><a id="l01305" name="l01305"></a><span class="lineno"> 1305</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l01306" name="l01306"></a><span class="lineno"> 1306</span>    size_t dest_len = strlen(dest-&gt;s);</div>
-<div class="line"><a id="l01307" name="l01307"></a><span class="lineno"> 1307</span>    size_t src_len = strlen(src-&gt;s);</div>
-<div class="line"><a id="l01308" name="l01308"></a><span class="lineno"> 1308</span>    size_t cat_len = (n &lt; src_len) ? n : src_len;</div>
-<div class="line"><a id="l01309" name="l01309"></a><span class="lineno"> 1309</span>    size_t new_len = dest_len + cat_len + 1;</div>
-<div class="line"><a id="l01310" name="l01310"></a><span class="lineno"> 1310</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
-<div class="line"><a id="l01311" name="l01311"></a><span class="lineno"> 1311</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
-<div class="line"><a id="l01312" name="l01312"></a><span class="lineno"> 1312</span>        dest-&gt;l = new_len;</div>
-<div class="line"><a id="l01313" name="l01313"></a><span class="lineno"> 1313</span>    }</div>
-<div class="line"><a id="l01314" name="l01314"></a><span class="lineno"> 1314</span>    strncat(dest-&gt;s, src-&gt;s, cat_len);</div>
-<div class="line"><a id="l01315" name="l01315"></a><span class="lineno"> 1315</span>    <span class="keywordflow">return</span> new_len;</div>
+<div class="line"><a id="l01302" name="l01302"></a><span class="lineno"> 1302</span>}</div>
+<div class="line"><a id="l01303" name="l01303"></a><span class="lineno"> 1303</span><span class="comment">/** @brief Concatenates up to n characters from src String to dest String,</span></div>
+<div class="line"><span class="lineno"> 1304</span><span class="comment">   allocating additional memory for dest String if necessary</span></div>
+<div class="line"><span class="lineno"> 1305</span><span class="comment">    @param dest - destination String struct</span></div>
+<div class="line"><span class="lineno"> 1306</span><span class="comment">    @param src - source String struct</span></div>
+<div class="line"><span class="lineno"> 1307</span><span class="comment">    @param n - maximum number of characters to concatenate</span></div>
+<div class="line"><span class="lineno"> 1308</span><span class="comment">    @returns new length of dest String after concatenation</span></div>
+<div class="foldopen" id="foldopen01309" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc"> 1309</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
+<div class="line"><a id="l01310" name="l01310"></a><span class="lineno"> 1310</span><a class="code hl_function" href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc">string_ncat</a>(String *dest, <span class="keyword">const</span> String *src, size_t n) {</div>
+<div class="line"><a id="l01311" name="l01311"></a><span class="lineno"> 1311</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
+<div class="line"><a id="l01312" name="l01312"></a><span class="lineno"> 1312</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01313" name="l01313"></a><span class="lineno"> 1313</span>    size_t dest_len = strlen(dest-&gt;s);</div>
+<div class="line"><a id="l01314" name="l01314"></a><span class="lineno"> 1314</span>    size_t src_len = strlen(src-&gt;s);</div>
+<div class="line"><a id="l01315" name="l01315"></a><span class="lineno"> 1315</span>    size_t cat_len = (n &lt; src_len) ? n : src_len;</div>
+<div class="line"><a id="l01316" name="l01316"></a><span class="lineno"> 1316</span>    size_t new_len = dest_len + cat_len + 1;</div>
+<div class="line"><a id="l01317" name="l01317"></a><span class="lineno"> 1317</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
+<div class="line"><a id="l01318" name="l01318"></a><span class="lineno"> 1318</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
+<div class="line"><a id="l01319" name="l01319"></a><span class="lineno"> 1319</span>        dest-&gt;l = new_len;</div>
+<div class="line"><a id="l01320" name="l01320"></a><span class="lineno"> 1320</span>    }</div>
+<div class="line"><a id="l01321" name="l01321"></a><span class="lineno"> 1321</span>    strncat(dest-&gt;s, src-&gt;s, cat_len);</div>
+<div class="line"><a id="l01322" name="l01322"></a><span class="lineno"> 1322</span>    <span class="keywordflow">return</span> new_len;</div>
 </div>
-<div class="line"><a id="l01316" name="l01316"></a><span class="lineno"> 1316</span>}</div>
-<div class="line"><a id="l01317" name="l01317"></a><span class="lineno"> 1317</span><span class="comment">/** @brief copies up to n characters from src String to dest String, allocating</span></div>
-<div class="line"><span class="lineno"> 1318</span><span class="comment">   additional memory for dest String if necessary</span></div>
-<div class="line"><span class="lineno"> 1319</span><span class="comment">    @param dest - destination String struct</span></div>
-<div class="line"><span class="lineno"> 1320</span><span class="comment">    @param src - source String struct</span></div>
-<div class="line"><span class="lineno"> 1321</span><span class="comment">    @param n - maximum number of characters to copy</span></div>
-<div class="foldopen" id="foldopen01322" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105"> 1322</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
-<div class="line"><a id="l01323" name="l01323"></a><span class="lineno"> 1323</span><a class="code hl_function" href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105">string_ncpy</a>(String *dest, <span class="keyword">const</span> String *src, size_t n) {</div>
-<div class="line"><a id="l01324" name="l01324"></a><span class="lineno"> 1324</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
-<div class="line"><a id="l01325" name="l01325"></a><span class="lineno"> 1325</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l01326" name="l01326"></a><span class="lineno"> 1326</span>    size_t src_len = strlen(src-&gt;s);</div>
-<div class="line"><a id="l01327" name="l01327"></a><span class="lineno"> 1327</span>    size_t cpy_len = (n &lt; src_len) ? n : src_len;</div>
-<div class="line"><a id="l01328" name="l01328"></a><span class="lineno"> 1328</span>    size_t new_len = cpy_len + 1;</div>
-<div class="line"><a id="l01329" name="l01329"></a><span class="lineno"> 1329</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
-<div class="line"><a id="l01330" name="l01330"></a><span class="lineno"> 1330</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
-<div class="line"><a id="l01331" name="l01331"></a><span class="lineno"> 1331</span>        dest-&gt;l = new_len;</div>
-<div class="line"><a id="l01332" name="l01332"></a><span class="lineno"> 1332</span>    }</div>
-<div class="line"><a id="l01333" name="l01333"></a><span class="lineno"> 1333</span>    strncpy(dest-&gt;s, src-&gt;s, cpy_len);</div>
-<div class="line"><a id="l01334" name="l01334"></a><span class="lineno"> 1334</span>    dest-&gt;s[cpy_len] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l01335" name="l01335"></a><span class="lineno"> 1335</span>    <span class="keywordflow">return</span> new_len;</div>
+<div class="line"><a id="l01323" name="l01323"></a><span class="lineno"> 1323</span>}</div>
+<div class="line"><a id="l01324" name="l01324"></a><span class="lineno"> 1324</span><span class="comment">/** @brief copies up to n characters from src String to dest String, allocating</span></div>
+<div class="line"><span class="lineno"> 1325</span><span class="comment">   additional memory for dest String if necessary</span></div>
+<div class="line"><span class="lineno"> 1326</span><span class="comment">    @param dest - destination String struct</span></div>
+<div class="line"><span class="lineno"> 1327</span><span class="comment">    @param src - source String struct</span></div>
+<div class="line"><span class="lineno"> 1328</span><span class="comment">    @param n - maximum number of characters to copy</span></div>
+<div class="foldopen" id="foldopen01329" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105"> 1329</a></span><span class="comment">    @note the caller is responsible for freeing the allocated memory. */</span></div>
+<div class="line"><a id="l01330" name="l01330"></a><span class="lineno"> 1330</span><a class="code hl_function" href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105">size_t</a> <a class="code hl_function" href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105">string_ncpy</a>(String *dest, <span class="keyword">const</span> String *src, size_t n) {</div>
+<div class="line"><a id="l01331" name="l01331"></a><span class="lineno"> 1331</span>    <span class="keywordflow">if</span> (dest == nullptr || src == nullptr || src-&gt;s == nullptr)</div>
+<div class="line"><a id="l01332" name="l01332"></a><span class="lineno"> 1332</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01333" name="l01333"></a><span class="lineno"> 1333</span>    size_t src_len = strlen(src-&gt;s);</div>
+<div class="line"><a id="l01334" name="l01334"></a><span class="lineno"> 1334</span>    size_t cpy_len = (n &lt; src_len) ? n : src_len;</div>
+<div class="line"><a id="l01335" name="l01335"></a><span class="lineno"> 1335</span>    size_t new_len = cpy_len + 1;</div>
+<div class="line"><a id="l01336" name="l01336"></a><span class="lineno"> 1336</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
+<div class="line"><a id="l01337" name="l01337"></a><span class="lineno"> 1337</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
+<div class="line"><a id="l01338" name="l01338"></a><span class="lineno"> 1338</span>        dest-&gt;l = new_len;</div>
+<div class="line"><a id="l01339" name="l01339"></a><span class="lineno"> 1339</span>    }</div>
+<div class="line"><a id="l01340" name="l01340"></a><span class="lineno"> 1340</span>    strncpy(dest-&gt;s, src-&gt;s, cpy_len);</div>
+<div class="line"><a id="l01341" name="l01341"></a><span class="lineno"> 1341</span>    dest-&gt;s[cpy_len] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l01342" name="l01342"></a><span class="lineno"> 1342</span>    <span class="keywordflow">return</span> new_len;</div>
 </div>
-<div class="line"><a id="l01336" name="l01336"></a><span class="lineno"> 1336</span>}</div>
-<div class="line"><a id="l01337" name="l01337"></a><span class="lineno"> 1337</span><span class="comment">/** @brief Function to intentionally cause a segmentation fault for testing</span></div>
-<div class="line"><span class="lineno"> 1338</span><span class="comment">   purposes</span></div>
-<div class="line"><span class="lineno"> 1339</span><span class="comment">    @note This function is designed to intentionally cause a segmentation fault</span></div>
-<div class="line"><span class="lineno"> 1340</span><span class="comment">   by dereferencing a null pointer. It is intended for testing purposes only and</span></div>
-<div class="line"><span class="lineno"> 1341</span><span class="comment">   should not be used in production code. The caller should be aware that</span></div>
-<div class="foldopen" id="foldopen01342" data-start="{" data-end="}">
-<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#ab0df3034e2ed84e1d878fba903da46ba"> 1342</a></span><span class="comment">   executing this function will crash the program. */</span></div>
-<div class="line"><a id="l01343" name="l01343"></a><span class="lineno"> 1343</span><span class="keywordtype">int</span> segmentation_fault() {</div>
-<div class="line"><a id="l01344" name="l01344"></a><span class="lineno"> 1344</span>    <span class="keywordtype">int</span> *p = NULL;</div>
-<div class="line"><a id="l01345" name="l01345"></a><span class="lineno"> 1345</span>    *p = 100;</div>
-<div class="line"><a id="l01346" name="l01346"></a><span class="lineno"> 1346</span> </div>
-<div class="line"><a id="l01347" name="l01347"></a><span class="lineno"> 1347</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l01343" name="l01343"></a><span class="lineno"> 1343</span>}</div>
+<div class="line"><a id="l01344" name="l01344"></a><span class="lineno"> 1344</span><span class="comment">/** @brief Function to intentionally cause a segmentation fault for testing</span></div>
+<div class="line"><span class="lineno"> 1345</span><span class="comment">   purposes</span></div>
+<div class="line"><span class="lineno"> 1346</span><span class="comment">    @note This function is designed to intentionally cause a segmentation fault</span></div>
+<div class="line"><span class="lineno"> 1347</span><span class="comment">   by dereferencing a null pointer. It is intended for testing purposes only and</span></div>
+<div class="line"><span class="lineno"> 1348</span><span class="comment">   should not be used in production code. The caller should be aware that</span></div>
+<div class="foldopen" id="foldopen01349" data-start="{" data-end="}">
+<div class="line"><span class="lineno"><a class="line" href="../../db/dc3/a00284.html#ab0df3034e2ed84e1d878fba903da46ba"> 1349</a></span><span class="comment">   executing this function will crash the program. */</span></div>
+<div class="line"><a id="l01350" name="l01350"></a><span class="lineno"> 1350</span><span class="keywordtype">int</span> segmentation_fault() {</div>
+<div class="line"><a id="l01351" name="l01351"></a><span class="lineno"> 1351</span>    <span class="keywordtype">int</span> *p = NULL;</div>
+<div class="line"><a id="l01352" name="l01352"></a><span class="lineno"> 1352</span>    *p = 100;</div>
+<div class="line"><a id="l01353" name="l01353"></a><span class="lineno"> 1353</span> </div>
+<div class="line"><a id="l01354" name="l01354"></a><span class="lineno"> 1354</span>    <span class="keywordflow">return</span> 0;</div>
 </div>
-<div class="line"><a id="l01348" name="l01348"></a><span class="lineno"> 1348</span>}</div>
+<div class="line"><a id="l01355" name="l01355"></a><span class="lineno"> 1355</span>}</div>
 <div class="ttc" id="aa00221_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../dd/d52/a00221.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d52/a00221_source.html#l00015">curskeys.c:15</a></div></div>
 <div class="ttc" id="aa00284_html_a02792428710078b7a2ca59ef70ae83fa"><div class="ttname"><a href="../../db/dc3/a00284.html#a02792428710078b7a2ca59ef70ae83fa">locate_file_in_path</a></div><div class="ttdeci">bool locate_file_in_path(char *, char *)</div><div class="ttdoc">Locates a file in the system PATH.</div><div class="ttdef"><b>Definition</b> <a href="#l00859">futil.c:859</a></div></div>
 <div class="ttc" id="aa00284_html_a07c8d6297f2d3fd2651a507391fd6d2e"><div class="ttname"><a href="../../db/dc3/a00284.html#a07c8d6297f2d3fd2651a507391fd6d2e">lf_process</a></div><div class="ttdeci">bool lf_process(const char *, regex_t *, regex_t *, int, int, int)</div><div class="ttdoc">logic for lf_find()</div><div class="ttdef"><b>Definition</b> <a href="#l00966">futil.c:966</a></div></div>
-<div class="ttc" id="aa00284_html_a0d44c51feb7f300fecb49dbf223a62f8"><div class="ttname"><a href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8">canonicalize_file_spec</a></div><div class="ttdeci">size_t canonicalize_file_spec(char *)</div><div class="ttdoc">Removes quotes and trims at first space.</div><div class="ttdef"><b>Definition</b> <a href="#l01083">futil.c:1083</a></div></div>
+<div class="ttc" id="aa00284_html_a0d44c51feb7f300fecb49dbf223a62f8"><div class="ttname"><a href="../../db/dc3/a00284.html#a0d44c51feb7f300fecb49dbf223a62f8">canonicalize_file_spec</a></div><div class="ttdeci">size_t canonicalize_file_spec(char *)</div><div class="ttdoc">Removes quotes and trims at first space.</div><div class="ttdef"><b>Definition</b> <a href="#l01090">futil.c:1090</a></div></div>
 <div class="ttc" id="aa00284_html_a0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../db/dc3/a00284.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="#l00213">futil.c:213</a></div></div>
-<div class="ttc" id="aa00284_html_a1d8368ef59a9e415c859d20794d6b26d"><div class="ttname"><a href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d">string_cpy</a></div><div class="ttdeci">size_t string_cpy(String *, const String *)</div><div class="ttdoc">Copy src String to dest String, allocating additional memory for dest String if necessary.</div><div class="ttdef"><b>Definition</b> <a href="#l01268">futil.c:1268</a></div></div>
+<div class="ttc" id="aa00284_html_a1d8368ef59a9e415c859d20794d6b26d"><div class="ttname"><a href="../../db/dc3/a00284.html#a1d8368ef59a9e415c859d20794d6b26d">string_cpy</a></div><div class="ttdeci">size_t string_cpy(String *, const String *)</div><div class="ttdoc">Copy src String to dest String, allocating additional memory for dest String if necessary.</div><div class="ttdef"><b>Definition</b> <a href="#l01275">futil.c:1275</a></div></div>
 <div class="ttc" id="aa00284_html_a32204f694cf5e28c888a1045a1b383a4"><div class="ttname"><a href="../../db/dc3/a00284.html#a32204f694cf5e28c888a1045a1b383a4">stripz_quotes</a></div><div class="ttdeci">bool stripz_quotes(char *)</div><div class="ttdoc">removes leading and trailing double quotes if present</div><div class="ttdef"><b>Definition</b> <a href="#l00404">futil.c:404</a></div></div>
 <div class="ttc" id="aa00284_html_a34703756fd5be0fde758400f320db047"><div class="ttname"><a href="../../db/dc3/a00284.html#a34703756fd5be0fde758400f320db047">trim</a></div><div class="ttdeci">size_t trim(char *)</div><div class="ttdoc">Trims leading and trailing spaces from string s in place.</div><div class="ttdef"><b>Definition</b> <a href="#l00083">futil.c:83</a></div></div>
 <div class="ttc" id="aa00284_html_a3daf5e92dfdb5cb48ee14a2ecb3ff7c8"><div class="ttname"><a href="../../db/dc3/a00284.html#a3daf5e92dfdb5cb48ee14a2ecb3ff7c8">file_spec_path</a></div><div class="ttdeci">bool file_spec_path(char *, char *)</div><div class="ttdoc">extracts the path component of a file specification</div><div class="ttdef"><b>Definition</b> <a href="#l00508">futil.c:508</a></div></div>
-<div class="ttc" id="aa00284_html_a3e61ddee7c9ff9a346d3656d0054615f"><div class="ttname"><a href="../../db/dc3/a00284.html#a3e61ddee7c9ff9a346d3656d0054615f">to_string</a></div><div class="ttdeci">String to_string(const char *)</div><div class="ttdoc">String functions provide a simple string library to facilitate string manipulation in C,...</div><div class="ttdef"><b>Definition</b> <a href="#l01215">futil.c:1215</a></div></div>
+<div class="ttc" id="aa00284_html_a3e61ddee7c9ff9a346d3656d0054615f"><div class="ttname"><a href="../../db/dc3/a00284.html#a3e61ddee7c9ff9a346d3656d0054615f">to_string</a></div><div class="ttdeci">String to_string(const char *)</div><div class="ttdoc">String functions provide a simple string library to facilitate string manipulation in C,...</div><div class="ttdef"><b>Definition</b> <a href="#l01222">futil.c:1222</a></div></div>
 <div class="ttc" id="aa00284_html_a4221f925d0d107e59e77faf4e8a40810"><div class="ttname"><a href="../../db/dc3/a00284.html#a4221f925d0d107e59e77faf4e8a40810">str_to_upper</a></div><div class="ttdeci">bool str_to_upper(char *)</div><div class="ttdoc">Converts a string to uppercase.</div><div class="ttdef"><b>Definition</b> <a href="#l00192">futil.c:192</a></div></div>
 <div class="ttc" id="aa00284_html_a4db64c5f94e5859f353740840d85beb5"><div class="ttname"><a href="../../db/dc3/a00284.html#a4db64c5f94e5859f353740840d85beb5">str_to_double</a></div><div class="ttdeci">double str_to_double(char *)</div><div class="ttdoc">converts string to double</div><div class="ttdef"><b>Definition</b> <a href="#l00565">futil.c:565</a></div></div>
 <div class="ttc" id="aa00284_html_a4f42956462e811d96c9fb881a85dada4"><div class="ttname"><a href="../../db/dc3/a00284.html#a4f42956462e811d96c9fb881a85dada4">rtrim</a></div><div class="ttdeci">size_t rtrim(char *)</div><div class="ttdoc">Trims trailing spaces from string s in place.</div><div class="ttdef"><b>Definition</b> <a href="#l00068">futil.c:68</a></div></div>
 <div class="ttc" id="aa00284_html_a4fb9a5e513fb39d3dd8eadef0f2cd44b"><div class="ttname"><a href="../../db/dc3/a00284.html#a4fb9a5e513fb39d3dd8eadef0f2cd44b">str_to_lower</a></div><div class="ttdeci">bool str_to_lower(char *)</div><div class="ttdoc">Converts a string to lowercase.</div><div class="ttdef"><b>Definition</b> <a href="#l00179">futil.c:179</a></div></div>
-<div class="ttc" id="aa00284_html_a54d1c02afad60732c1d2ce92e50cb970"><div class="ttname"><a href="../../db/dc3/a00284.html#a54d1c02afad60732c1d2ce92e50cb970">mk_string</a></div><div class="ttdeci">String mk_string(size_t)</div><div class="ttdoc">Create a String struct with a dynamically allocated string.</div><div class="ttdef"><b>Definition</b> <a href="#l01236">futil.c:1236</a></div></div>
+<div class="ttc" id="aa00284_html_a54d1c02afad60732c1d2ce92e50cb970"><div class="ttname"><a href="../../db/dc3/a00284.html#a54d1c02afad60732c1d2ce92e50cb970">mk_string</a></div><div class="ttdeci">String mk_string(size_t)</div><div class="ttdoc">Create a String struct with a dynamically allocated string.</div><div class="ttdef"><b>Definition</b> <a href="#l01243">futil.c:1243</a></div></div>
 <div class="ttc" id="aa00284_html_a5bd2fb968d70ed5285cfce1ed9e33ca1"><div class="ttname"><a href="../../db/dc3/a00284.html#a5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a></div><div class="ttdeci">bool lf_find(const char *, const char *, const char *, int, int)</div><div class="ttdoc">Find files in a directory matching a regular expression.</div><div class="ttdef"><b>Definition</b> <a href="#l00905">futil.c:905</a></div></div>
 <div class="ttc" id="aa00284_html_a5c2214ee3dfaca5bf1cd5bbd6e6cf40d"><div class="ttname"><a href="../../db/dc3/a00284.html#a5c2214ee3dfaca5bf1cd5bbd6e6cf40d">strnfill</a></div><div class="ttdeci">bool strnfill(char *s, char c, int n)</div><div class="ttdoc">Fills string s with character c n.</div><div class="ttdef"><b>Definition</b> <a href="#l00377">futil.c:377</a></div></div>
-<div class="ttc" id="aa00284_html_a5ea62e2fba431b9cecaac045daff6105"><div class="ttname"><a href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105">string_ncpy</a></div><div class="ttdeci">size_t string_ncpy(String *, const String *, size_t)</div><div class="ttdoc">copies up to n characters from src String to dest String, allocating additional memory for dest Strin...</div><div class="ttdef"><b>Definition</b> <a href="#l01322">futil.c:1322</a></div></div>
+<div class="ttc" id="aa00284_html_a5ea62e2fba431b9cecaac045daff6105"><div class="ttname"><a href="../../db/dc3/a00284.html#a5ea62e2fba431b9cecaac045daff6105">string_ncpy</a></div><div class="ttdeci">size_t string_ncpy(String *, const String *, size_t)</div><div class="ttdoc">copies up to n characters from src String to dest String, allocating additional memory for dest Strin...</div><div class="ttdef"><b>Definition</b> <a href="#l01329">futil.c:1329</a></div></div>
 <div class="ttc" id="aa00284_html_a636608f26d1193b5d860f2312cd8ee49"><div class="ttname"><a href="../../db/dc3/a00284.html#a636608f26d1193b5d860f2312cd8ee49">strnz</a></div><div class="ttdeci">size_t strnz(char *, size_t)</div><div class="ttdoc">terminates string at New Line, Carriage Return, or max_len</div><div class="ttdef"><b>Definition</b> <a href="#l00281">futil.c:281</a></div></div>
 <div class="ttc" id="aa00284_html_a63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../db/dc3/a00284.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="#l00111">futil.c:111</a></div></div>
 <div class="ttc" id="aa00284_html_a671225aa841321cad803a383ba99db11"><div class="ttname"><a href="../../db/dc3/a00284.html#a671225aa841321cad803a383ba99db11">strip_quotes</a></div><div class="ttdeci">bool strip_quotes(char *)</div><div class="ttdoc">removes leading and trailing double quotes if present</div><div class="ttdef"><b>Definition</b> <a href="#l00390">futil.c:390</a></div></div>
 <div class="ttc" id="aa00284_html_a807bfe01a82eb1728ab8ae01426d02e1"><div class="ttname"><a href="../../db/dc3/a00284.html#a807bfe01a82eb1728ab8ae01426d02e1">strnz_dup</a></div><div class="ttdeci">char * strnz_dup(char *s, size_t l)</div><div class="ttdoc">Allocates memory for and duplicates string s up to length l or until line feed or carriage return.</div><div class="ttdef"><b>Definition</b> <a href="#l00318">futil.c:318</a></div></div>
 <div class="ttc" id="aa00284_html_a82896df8e50776b7e7b0cede4e45b523"><div class="ttname"><a href="../../db/dc3/a00284.html#a82896df8e50776b7e7b0cede4e45b523">strip_ansi</a></div><div class="ttdeci">size_t strip_ansi(char *, char *)</div><div class="ttdoc">Strips ANSI SGR escape sequences (ending in &#39;m&#39;) from string s to d.</div><div class="ttdef"><b>Definition</b> <a href="#l00469">futil.c:469</a></div></div>
-<div class="ttc" id="aa00284_html_a8e2af68338c74351899a7a35adc6cda0"><div class="ttname"><a href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0">string_cat</a></div><div class="ttdeci">size_t string_cat(String *, const String *)</div><div class="ttdoc">Concatenates src String to dest String, allocating additional memory for dest String if necessary.</div><div class="ttdef"><b>Definition</b> <a href="#l01284">futil.c:1284</a></div></div>
-<div class="ttc" id="aa00284_html_a9733005966bd730252e081c3ef9bb2c2"><div class="ttname"><a href="../../db/dc3/a00284.html#a9733005966bd730252e081c3ef9bb2c2">free_string</a></div><div class="ttdeci">String free_string(String)</div><div class="ttdoc">Free the dynamically allocated String.</div><div class="ttdef"><b>Definition</b> <a href="#l01254">futil.c:1254</a></div></div>
+<div class="ttc" id="aa00284_html_a8e2af68338c74351899a7a35adc6cda0"><div class="ttname"><a href="../../db/dc3/a00284.html#a8e2af68338c74351899a7a35adc6cda0">string_cat</a></div><div class="ttdeci">size_t string_cat(String *, const String *)</div><div class="ttdoc">Concatenates src String to dest String, allocating additional memory for dest String if necessary.</div><div class="ttdef"><b>Definition</b> <a href="#l01291">futil.c:1291</a></div></div>
+<div class="ttc" id="aa00284_html_a9733005966bd730252e081c3ef9bb2c2"><div class="ttname"><a href="../../db/dc3/a00284.html#a9733005966bd730252e081c3ef9bb2c2">free_string</a></div><div class="ttdeci">String free_string(String)</div><div class="ttdoc">Free the dynamically allocated String.</div><div class="ttdef"><b>Definition</b> <a href="#l01261">futil.c:1261</a></div></div>
 <div class="ttc" id="aa00284_html_aa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../db/dc3/a00284.html#aa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="#l00241">futil.c:241</a></div></div>
 <div class="ttc" id="aa00284_html_aa3967ab49e69c2f867cd7058ccf26eb1"><div class="ttname"><a href="../../db/dc3/a00284.html#aa3967ab49e69c2f867cd7058ccf26eb1">str_subc</a></div><div class="ttdeci">bool str_subc(char *, char *, char, char *, int)</div><div class="ttdoc">Replaces &quot;ReplaceChr&quot; in &quot;s&quot; with &quot;Withstr&quot; in &quot;d&quot; won&#39;t copy more than &quot;l&quot; bytes to &quot;d&quot; Replaces all...</div><div class="ttdef"><b>Definition</b> <a href="#l00353">futil.c:353</a></div></div>
 <div class="ttc" id="aa00284_html_ab190e75e095b7d3da114fce21ab8c8ea"><div class="ttname"><a href="../../db/dc3/a00284.html#ab190e75e095b7d3da114fce21ab8c8ea">verify_file</a></div><div class="ttdeci">bool verify_file(char *, int)</div><div class="ttdoc">Verifies that the file specified by &quot;in_spec&quot; exists and is accessible with the permissions specified...</div><div class="ttdef"><b>Definition</b> <a href="#l00813">futil.c:813</a></div></div>
-<div class="ttc" id="aa00284_html_ab19b53c3f569332292039c471719eb6b"><div class="ttname"><a href="../../db/dc3/a00284.html#ab19b53c3f569332292039c471719eb6b">rep_substring</a></div><div class="ttdeci">char * rep_substring(const char *, const char *, const char *)</div><div class="ttdoc">Replace all occurrences of &quot;tgt_s&quot; in &quot;org_s&quot; with &quot;rep_s&quot;.</div><div class="ttdef"><b>Definition</b> <a href="#l01137">futil.c:1137</a></div></div>
+<div class="ttc" id="aa00284_html_ab19b53c3f569332292039c471719eb6b"><div class="ttname"><a href="../../db/dc3/a00284.html#ab19b53c3f569332292039c471719eb6b">rep_substring</a></div><div class="ttdeci">char * rep_substring(const char *, const char *, const char *)</div><div class="ttdoc">Replace all occurrences of &quot;tgt_s&quot; in &quot;org_s&quot; with &quot;rep_s&quot;.</div><div class="ttdef"><b>Definition</b> <a href="#l01144">futil.c:1144</a></div></div>
 <div class="ttc" id="aa00284_html_ab6ae8b51eae6da91d345cd4018a20bfa"><div class="ttname"><a href="../../db/dc3/a00284.html#ab6ae8b51eae6da91d345cd4018a20bfa">strnlf</a></div><div class="ttdeci">size_t strnlf(char *, size_t)</div><div class="ttdoc">terminates string with line feed</div><div class="ttdef"><b>Definition</b> <a href="#l00298">futil.c:298</a></div></div>
 <div class="ttc" id="aa00284_html_ab96e4c73a7b3ba1310044b479733cdd9"><div class="ttname"><a href="../../db/dc3/a00284.html#ab96e4c73a7b3ba1310044b479733cdd9">a_toi</a></div><div class="ttdeci">int a_toi(char *, bool *)</div><div class="ttdoc">a safer alternative to atoi() for converting ASCII strings to integers.</div><div class="ttdef"><b>Definition</b> <a href="#l00438">futil.c:438</a></div></div>
 <div class="ttc" id="aa00284_html_ac22d2bbc3de5560fd33f66c17f2918f2"><div class="ttname"><a href="../../db/dc3/a00284.html#ac22d2bbc3de5560fd33f66c17f2918f2">file_spec_name</a></div><div class="ttdeci">bool file_spec_name(char *, char *)</div><div class="ttdoc">extracts the file name component of a file specification</div><div class="ttdef"><b>Definition</b> <a href="#l00534">futil.c:534</a></div></div>
 <div class="ttc" id="aa00284_html_ae14a4e790b69c8c2e50d1eb5cdf1fd19"><div class="ttname"><a href="../../db/dc3/a00284.html#ae14a4e790b69c8c2e50d1eb5cdf1fd19">verify_dir</a></div><div class="ttdeci">bool verify_dir(char *, int)</div><div class="ttdoc">Verifies that the directory specified by &quot;spec&quot; exists and is accessible with the permissions specifi...</div><div class="ttdef"><b>Definition</b> <a href="#l00763">futil.c:763</a></div></div>
 <div class="ttc" id="aa00284_html_ae2be7c771d0ee7a8c81ebf10331bd449"><div class="ttname"><a href="../../db/dc3/a00284.html#ae2be7c771d0ee7a8c81ebf10331bd449">chrep</a></div><div class="ttdeci">bool chrep(char *, char, char)</div><div class="ttdoc">Replaces all occurrences of old_chr in s with new_chr in place.</div><div class="ttdef"><b>Definition</b> <a href="#l00420">futil.c:420</a></div></div>
 <div class="ttc" id="aa00284_html_ae66f0b659923d81fd95da97e0d5ca496"><div class="ttname"><a href="../../db/dc3/a00284.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a></div><div class="ttdeci">char errmsg[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="#l00063">futil.c:63</a></div></div>
-<div class="ttc" id="aa00284_html_ae86995f3322d0448e2890ecb7d3624dc"><div class="ttname"><a href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc">string_ncat</a></div><div class="ttdeci">size_t string_ncat(String *, const String *, size_t)</div><div class="ttdoc">Concatenates up to n characters from src String to dest String, allocating additional memory for dest...</div><div class="ttdef"><b>Definition</b> <a href="#l01302">futil.c:1302</a></div></div>
+<div class="ttc" id="aa00284_html_ae86995f3322d0448e2890ecb7d3624dc"><div class="ttname"><a href="../../db/dc3/a00284.html#ae86995f3322d0448e2890ecb7d3624dc">string_ncat</a></div><div class="ttdeci">size_t string_ncat(String *, const String *, size_t)</div><div class="ttdoc">Concatenates up to n characters from src String to dest String, allocating additional memory for dest...</div><div class="ttdef"><b>Definition</b> <a href="#l01309">futil.c:1309</a></div></div>
 <div class="ttc" id="aa00284_html_aeb688a44147992813f7e456cb6360b1f"><div class="ttname"><a href="../../db/dc3/a00284.html#aeb688a44147992813f7e456cb6360b1f">normalize_file_spec</a></div><div class="ttdeci">bool normalize_file_spec(char *)</div><div class="ttdoc">replace backslashes with forward lashes</div><div class="ttdef"><b>Definition</b> <a href="#l00492">futil.c:492</a></div></div>
 <div class="ttc" id="aa00284_html_af717756d0ca49bc436d1fb69ae0d6c05"><div class="ttname"><a href="../../db/dc3/a00284.html#af717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a></div><div class="ttdeci">int str_to_args(char **, char *, int)</div><div class="ttdoc">Converts a string into an array of argument strings.</div><div class="ttdef"><b>Definition</b> <a href="#l00130">futil.c:130</a></div></div>
 <div class="ttc" id="aa00284_html_afba98c475b8ccba7fffaebf81eda9adf"><div class="ttname"><a href="../../db/dc3/a00284.html#afba98c475b8ccba7fffaebf81eda9adf">str_to_bool</a></div><div class="ttdeci">bool str_to_bool(const char *)</div><div class="ttdoc">Converts String to boolean true or false.</div><div class="ttdef"><b>Definition</b> <a href="#l00577">futil.c:577</a></div></div>
