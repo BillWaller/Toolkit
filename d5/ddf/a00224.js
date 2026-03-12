@@ -1,5 +1,27 @@
 var a00224 =
 [
-    [ "main", "d5/ddf/a00224.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "__end_pgm", "d5/ddf/a00224.html#ab5fceb24373673e919c49ede0f9b12e5", null ]
+    [ "display_page", "d5/ddf/a00224.html#acd6b9991f2aa305f622f5d2515815bba", null ],
+    [ "display_pick_help", "d5/ddf/a00224.html#aeebc4c0b94ca97d753e10a0cd1798730", null ],
+    [ "exec_objects", "d5/ddf/a00224.html#af7fcbb1c8b67a4d11c86ba7209f397c2", null ],
+    [ "init_pick", "d5/ddf/a00224.html#a1b2ee87543245e612c1710ea58930a17", null ],
+    [ "open_pick_win", "d5/ddf/a00224.html#af20c847dc030116f9999adbba681000c", null ],
+    [ "output_objects", "d5/ddf/a00224.html#a8feb6cd586d503a676b831ec722576fb", null ],
+    [ "pick_display_chyron", "d5/ddf/a00224.html#aed5ddd88212281d12281a15bf8fc7b8b", null ],
+    [ "pick_engine", "d5/ddf/a00224.html#ab97dcab41017c5132f52b682437a151e", null ],
+    [ "picker", "d5/ddf/a00224.html#abb0969a6d1c7e78be46c3b325754c802", null ],
+    [ "read_pick_input", "d5/ddf/a00224.html#aabda879000cf8135245ef451de08f780", null ],
+    [ "reverse_object", "d5/ddf/a00224.html#ab2173ff8fb800d126c180487744672d5", null ],
+    [ "save_object", "d5/ddf/a00224.html#a02f90007f2422dd2094ab64569e157f0", null ],
+    [ "toggle_object", "d5/ddf/a00224.html#a036c2f9cdf302cced4d9b703022664c0", null ],
+    [ "unreverse_object", "d5/ddf/a00224.html#a650262f8279502ebc73607394dd7af13", null ],
+    [ "calculated_idx", "d5/ddf/a00224.html#acdb9de82d81b176784185dea9063b57c", null ],
+    [ "obj_idx", "d5/ddf/a00224.html#a4a50bfe3f8460978b34566ec3dff7adb", null ],
+    [ "pagers_editors", "d5/ddf/a00224.html#a8f93294009502446912fa64f33731029", null ],
+    [ "pg_lines", "d5/ddf/a00224.html#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d", null ],
+    [ "pipe_fd", "d5/ddf/a00224.html#ac7ac4adf3c3409d847a57c140700f334", null ],
+    [ "tbl_col", "d5/ddf/a00224.html#ab57f05e19e1e81af17fbbd3a766c405a", null ],
+    [ "tbl_cols", "d5/ddf/a00224.html#a7df4e526a3af8e113bbc05ca011c2341", null ],
+    [ "tbl_line", "d5/ddf/a00224.html#a25fe2a76cfd155c51a46c99d6a1cf4d9", null ],
+    [ "tbl_page", "d5/ddf/a00224.html#ae7c3abf692920540a78bc3322d02828a", null ],
+    [ "tbl_pages", "d5/ddf/a00224.html#acbe29ef30ea713ef47f3cd892310ca50", null ]
 ];

@@ -1,24 +1,5 @@
 var searchData=
 [
-  ['bblue_0',['bblue',['../d3/d1a/a00251.html#a0777ed9763c78435bf1943054f6456e9',1,'opts.c']]],
-  ['bg_5fcolor_1',['BG_COLOR',['../d8/d23/a00326.html#ae7ed5ea1d43fb2b71b3eaea2397fb5ca',1,'cm.h']]],
-  ['blue_2',['blue',['../d3/d1a/a00251.html#a679c8f05bd397c3b2ad08274a1e5e752',1,'opts.c']]],
-  ['bo_5fcolor_3',['BO_COLOR',['../d8/d23/a00326.html#ad1ec42c0323104fe2e8902c7fee7a8b6',1,'cm.h']]],
-  ['bufsiz_4',['BUFSIZ',['../d5/d0f/a00308.html#a72a591cf0a96cf23c63df5c78712dabe',1,'view.h']]],
-  ['bw_5fbl_5',['BW_BL',['../d8/d23/a00326.html#a68dc64ce5bc9d36979e5e5aeeae6aa9c',1,'cm.h']]],
-  ['bw_5fbr_6',['BW_BR',['../d8/d23/a00326.html#a2248c706b02306ffb7e9c56502d86a48',1,'cm.h']]],
-  ['bw_5fbt_7',['BW_BT',['../d8/d23/a00326.html#afb8209fd9e32a5f41a2ec3a5b24f86cd',1,'cm.h']]],
-  ['bw_5fcr_8',['BW_CR',['../d8/d23/a00326.html#ab6968ae511fd803080d692082136e272',1,'cm.h']]],
-  ['bw_5fho_9',['BW_HO',['../d8/d23/a00326.html#a3a332793e77a1e68726a2d13d7f55ca3',1,'cm.h']]],
-  ['bw_5flt_10',['BW_LT',['../d8/d23/a00326.html#a48329df47a7a805ae1f87dbd753ab44d',1,'cm.h']]],
-  ['bw_5frbl_11',['BW_RBL',['../d8/d23/a00326.html#a07f5c2093934704866f8f2a929b02708',1,'cm.h']]],
-  ['bw_5frbr_12',['BW_RBR',['../d8/d23/a00326.html#aa649e42529097b99aad72566d2b1b5cd',1,'cm.h']]],
-  ['bw_5frt_13',['BW_RT',['../d8/d23/a00326.html#a5f8b121e5808c67638fcc9bfe9fd4206',1,'cm.h']]],
-  ['bw_5frtl_14',['BW_RTL',['../d8/d23/a00326.html#ae312cc3a020b35cae0e7ca83a3e687d3',1,'cm.h']]],
-  ['bw_5frtr_15',['BW_RTR',['../d8/d23/a00326.html#a4af3e3b0ca438491b52cc69d34b21e3c',1,'cm.h']]],
-  ['bw_5fsp_16',['BW_SP',['../d8/d23/a00326.html#a9a46104bf6b08340bde5564e97d726cf',1,'cm.h']]],
-  ['bw_5ftl_17',['BW_TL',['../d8/d23/a00326.html#a59b444fc2a1494b95421502327df8806',1,'cm.h']]],
-  ['bw_5ftr_18',['BW_TR',['../d8/d23/a00326.html#a946116f93309c2f6255bbfee3f1bdbca',1,'cm.h']]],
-  ['bw_5ftt_19',['BW_TT',['../d8/d23/a00326.html#a42442655917c2e30a647d0f1e4fc5068',1,'cm.h']]],
-  ['bw_5fve_20',['BW_VE',['../d8/d23/a00326.html#a41790a98c9c20313f5fde7d741e5ea79',1,'cm.h']]]
+  ['ctrl_0',['Ctrl',['../d2/dc8/a00242.html#af475c4649f5ac3f8f9901d7a7b9c1b93',1,'view_engine.c']]],
+  ['cyan_1',['cyan',['../d5/d42/a00269.html#aee63ed202c647f085cfc57577055a531',1,'opts.c']]]
 ];
