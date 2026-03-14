@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Installation Guide</title>
+<title>C-Menu: EXERCISES</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
@@ -113,119 +113,189 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d0/d39/a00314.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Installation Guide </div></div>
+  <div class="headertitle"><div class="title">EXERCISES </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="installation-guide"></a></p>
+<div class="textblock"><p><a class="anchor" id="exercises"></a></p>
 <ul>
-<li><a class="el" href="#to-install-c-menu" title="To Install C-Menu">To Install C-Menu</a><ul>
-<li><a class="el" href="#build-c-menu" title="Build C-Menu">Build C-Menu</a><ul>
-<li><a class="el" href="#rsh-static-linking" title="RSH Static Linking">RSH Static Linking</a></li>
-<li><a class="el" href="../../d2/d71/a00309.html#prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li><a class="el" href="#option-1---build-c-menu-using-cmake-directly" title="Option 1 - Build C-Menu Using CMake Directly">Option 1 - Build C-Menu Using CMake Directly</a></li>
-<li><a class="el" href="#option-2---build-c-menu-with-provided-scripts" title="Option 2 - Build C-Menu with Provided Scripts">Option 2 - Build C-Menu with Provided Scripts</a></li>
-<li><a class="el" href="#option-3---build-c-menu-using-makefile" title="Option 3 - Build C-Menu Using Makefile">Option 3 - Build C-Menu Using Makefile</a></li>
+<li><a class="el" href="#exercise-1-system-configurations" title="Exercise 1: System Configurations">Exercise 1: System Configurations</a><ul>
+<li><a class="el" href="#sddm-background-configuration" title="SDDM Background Configuration">SDDM Background Configuration</a><ul>
+<li><a class="el" href="#requisites" title="Requisites">Requisites</a></li>
 </ul>
 </li>
-<li><a class="el" href="#finish-the-installation" title="Finish the installation">Finish the installation</a></li>
+<li><a class="el" href="#ghostty-configuration" title="Ghostty Configuration">Ghostty Configuration</a></li>
+<li><a class="el" href="#alacritty-and-kitty" title="Alacritty and Kitty">Alacritty and Kitty</a></li>
 </ul>
 </li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="to-install-c-menu"></a>
-To Install C-Menu</h1>
-<p>1️⃣ Clone the C-Menu repository:</p>
-<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
-</div><!-- fragment --><p>2️⃣ Copy the menuapp directory to your desired location:</p>
-<div class="fragment"><div class="line">cp -r C-Menu/src/menuapp /home/yourusername/</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="build-c-menu"></a>
-Build C-Menu</h2>
-<h3 class="doxsection"><a class="anchor" id="rsh-static-linking"></a>
-RSH Static Linking</h3>
-<p>C-Menu uses dynamic linking by default, but if you plan to use rsh in a rescue environment where dynamic linking may not be available, you can statically link rsh during the build. To do this, set the <span class="tt">RSH_LD</span> environment variable to <span class="tt">-static</span> before building C-Menu:</p>
-<div class="fragment"><div class="line">export RSH_LD=&quot;-static&quot;</div>
-</div><!-- fragment --><p>CMake or Makefile will strip symbols from the executable once it has been copied to its destination directory. This is done to reduce the size of the executable and improve performance.</p>
-<p><em><b>NOTE</b></em> If you choose to statically link rsh, make sure that your C compiler and linker support static linking and that you have the necessary static libraries, specifically, libc.a, installed on your system. Static linking can increase the size of the executable and may have implications for compatibility and security, so be sure to test the statically linked version of C-Menu in your target environment.</p>
-<p>Most distributions provide static libraries for the GNU C Library (glibc) as part of their development packages. You may need to install additional packages to obtain these static libraries, such as <span class="tt">glibc-static</span> or <span class="tt">libc6-dev</span> for glibc.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="prerequisites-1"></a>
-Prerequisites</h3>
+<p>The purpose of the EXERCISES section is to provide you with practice problems similar to those you might encounter as a developer or system administrator. We are just barely getting started, so please be patient. The exercises will become more complex as we progress through the course.</p>
+<p>As an added benefit, the exercises will provide a great test bed for debugging the C-Menu code. As always, your comments and suggestions (even complaints) are welcome.</p>
+<h1 class="doxsection"><a class="anchor" id="exercise-1-system-configurations"></a>
+Exercise 1: System Configurations</h1>
+<h2 class="doxsection"><a class="anchor" id="sddm-background-configuration"></a>
+SDDM Background Configuration</h2>
+<p>The objective of this exercise is to Create a C-Menu Menu that allows users to safely and easily configure their system settings. We will start with a simple menu that allows users to select a new SDDM background image. This exercise assumes you have sddm installed and that the sddm theme is located in /usr/share/sddm/themes.</p>
+<h3 class="doxsection"><a class="anchor" id="requisites"></a>
+Requisites</h3>
 <ul>
-<li>One of:<ul>
-<li>CMake 3.20 or higher, or</li>
-<li>GNU Make 4.3 or higher</li>
+<li>A working C-Menu installation.</li>
+<li>SDDM installed and configured on your system.</li>
+<li>A collection of background images available in the SDDM theme directory. For this exercise, we will assume the SDDM theme is located at /usr/share/sddm/themes/sddm-corporate-theme/Backgrounds, and that they are of type Portable Network Graphics (*.png). This exercise assumes that the Backgrounds directory contains a default.png image that is currently being used as the SDDM background. For the sddm-corporate-theme, the background image is specified in Themes/corporate.conf as Background=Backgrounds/default.png. You may want to install the sddm-corporate-theme as it is set up perfectly for this exercise.</li>
 </ul>
-</li>
-<li>A C compiler that supports C23 or later (e.g., GCC 13 or later, Clang 15 or later)</li>
-<li>NCursesw development libraries 6.5 or later</li>
-<li>GNU GLIBC development files</li>
-<li>GNU Math Library (libm) development files</li>
-</ul>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="option-1---build-c-menu-using-cmake-directly"></a>
-Option 1 - Build C-Menu Using CMake Directly</h3>
-<p>1️⃣ Navigate to the C-Menu/src directory, create a build directory, and cd into it:</p>
-<div class="fragment"><div class="line">cd C-Menu/src</div>
-<div class="line">mkdir build</div>
-<div class="line">cd build</div>
-</div><!-- fragment --><p>2️⃣ Configure the project using CMake, specifying the installation prefix and build type:</p>
-<div class="fragment"><div class="line">cmake -DCMAKE_INSTALL_PREFIX=&quot;$HOME&quot;/menuapp -DCMAKE_BUILD_TYPE=Release ..</div>
-</div><!-- fragment --><p>3️⃣ Build the project using:</p>
-<div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><p>4️⃣ . If you want to use rsh in setuid mode, you must install C-Menu with root privileges.</p>
-<div class="fragment"><div class="line">sudo make install</div>
-</div><!-- fragment --><p>go to <a class="el" href="#finish-the-installation" title="Finish the installation">Finish the installation</a> below to complete the installation process.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="option-2---build-c-menu-with-provided-scripts"></a>
-Option 2 - Build C-Menu with Provided Scripts</h3>
-<p>1️⃣ Navigate to the C-Menu/build directory and run the provided build script:</p>
-<div class="fragment"><div class="line">cd C-Menu/build</div>
-<div class="line">./build.sh</div>
-</div><!-- fragment --><p>2️⃣ Assume root privileges to install C-Menu:</p>
-<div class="fragment"><div class="line">sudo ./install.sh</div>
-</div><!-- fragment --><p>go to <a class="el" href="#finish-the-installation" title="Finish the installation">Finish the installation</a> below to complete the installation process.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="option-3---build-c-menu-using-makefile"></a>
-Option 3 - Build C-Menu Using Makefile</h3>
-<p>1️⃣ . Navigate to the C-Menu/src directory and edit the provided Makefile to set the installation PREFIX to your desired location (e.g., /home/yourusername/menuapp):</p>
-<div class="fragment"><div class="line">cd C-Menu/src</div>
-</div><!-- fragment --><div class="fragment"><div class="line">USER=yourusername</div>
-<div class="line">GROUP=yourgroup</div>
-<div class="line">HOME=/home/$(USER)</div>
-<div class="line">PREFIX=/home/$(USER)/menuapp</div>
-</div><!-- fragment --><p>2️⃣ Build the project using:</p>
-<div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><p>3️⃣ Assume root privileges to install C-Menu:</p>
-<div class="fragment"><div class="line">sudo make install</div>
-</div><!-- fragment --><p>Continue with <a class="el" href="#finish-the-installation" title="Finish the installation">Finish the installation</a> below to complete the installation process.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="finish-the-installation"></a>
-Finish the installation</h2>
-<p>1️⃣ Vrify that the C-Menu libraries and binaries have been installed to the correct directories (e.g., /home/yourusername/menuapp/lib64 and /home/yourusername/menuapp/bin) and that the permissions are set correctly.</p>
-<div class="fragment"><div class="line">ls -l &quot;$HOME&quot;/menuapp/lib64 &quot;$HOME&quot;/menuapp/bin</div>
-</div><!-- fragment --><div class="image">
-<img src="../../postmakels.png" alt=""/>
+<p><a href="https://github.com/BillWaller/sddm-corporate-theme.git">sddm-corporate-theme</a></p>
+<p>1️⃣ In your editor, open a new file:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
+</div><!-- fragment --><p>2️⃣ Add the following content to the file and save it:</p>
+<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
+<div class="line">:</div>
+<div class="line">:   Select SDDM Background</div>
+<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
+<div class="line">!help</div>
+<div class="line">:   Exit Workstation Configuration</div>
+<div class="line">!return</div>
+</div><!-- fragment --><p>3️⃣ Open another file to create a bash script:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
+</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
+<div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line"> </div>
+<div class="line">U=$(id -un)</div>
+<div class="line">G=$(id -gn)</div>
+<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
+<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
+<div class="line">cd &quot;$bkgd_dir&quot;</div>
+<div class="line">for bg in $(lf -e &#39;.*default\.png$&#39; . &#39;.*\.png$&#39;); do</div>
+<div class="line">    echo $(basename &quot;$bg&quot;)</div>
+<div class="line">done</div>
+</div><!-- fragment --><p>This script will change the ownership of the SDDM background directory to the current user, allowing them to select a new background image. It will then list the available background images which will provide input for C-Menu Pick. Don't forget to make the script executable.</p>
+<div class="fragment"><div class="line">chmod +x ~/menuapp/bin/sddm_chbg.sh</div>
+</div><!-- fragment --><p>5️⃣ Now, create another bash script:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
+</div><!-- fragment --><p>6️⃣ Add the following content to the file, save it, and make it executable:</p>
+<div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line"> </div>
+<div class="line">U=$(id -un)</div>
+<div class="line">G=$(id -gn)</div>
+<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
+<div class="line"> </div>
+<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
+<div class="line">cd &quot;$bkgd_dir&quot;</div>
+<div class="line">ln -sf &quot;$1&quot; default.png</div>
+</div><!-- fragment --><p>Pick will execute this script, passing the selected background image as an argument. The script will create a symbolic link named default.png that points to the selected background image, effectively changing the SDDM background.</p>
+<p>7️⃣ Finally, test your menu by running it from the command line:</p>
+<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
+</div><!-- fragment --><p>8️⃣ You may want to add the Workstation Configuration option to your main menu. To do this, open your main menu file:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/msrc/main.m</div>
+</div><!-- fragment --><p>9️⃣ Add the following lines to include the Workstation Configuration menu:</p>
+<div class="fragment"><div class="line">:   Workstation Configuration</div>
+<div class="line">!menu workstation_config.m</div>
+</div><!-- fragment --><p>From the C-Menu main menu, you should now see an option for Workstation Configuration. Selecting it will take you to the menu where you can choose a new SDDM background image.</p>
+<div class="image">
+<img src="../../workstation_config.png" alt=""/>
 <div class="caption">
-Directory Listing</div></div>
-    <p>2️⃣ Register the C-Menu libraries with the dynamic linker by running the following command:</p>
-<div class="fragment"><div class="line">sudo ldconfig -v &quot;$HOME&quot;/menuapp/lib64</div>
-</div><!-- fragment --><p>3️⃣ Add the C-Menu bin directory to your PATH environment variable by adding the following line to your shell profile (e.g., ~/.bashrc or ~/.zshrc):</p>
-<div class="fragment"><div class="line">export PATH=&quot;/home/yourusername/menuapp/bin:&quot;$PATH&quot;</div>
-</div><!-- fragment --><p>(replace /home/yourusername with the actual path to your menuapp directory) and save the file. 😆</p>
-<p>4️⃣ Copy the sample minitrc from the C-Menu/menuapp directory to your home directory:</p>
-<div class="fragment"><div class="line">cp &quot;$HOME&quot;/menuapp/minitrc &quot;$HOME&quot;/.minitrc</div>
-</div><!-- fragment --><p>5️⃣ Edit the ~/.minitrc file to customize your C-Menu configuration as needed.</p>
-<div class="fragment"><div class="line">vi ~/.minitrc</div>
-</div><!-- fragment --><p>6️⃣ Source your shell profile to apply the changes to your PATH:</p>
-<div class="fragment"><div class="line">source ~/.bashrc</div>
-</div><!-- fragment --><p>7️⃣ Start C-Menu by running the following command in your terminal:</p>
-<div class="fragment"><div class="line">menu</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="c-menu-runningscreenshotsmainmenupng"></a>
-c-menu-runningscreenshotsmainmenupng</h1>
-<p><img src="../../mainmenu.png" alt="" class="inline" title="C-Menu Running"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md--enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository"></a>
-🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h1>
-</div></div><!-- contents -->
+Select SDDM Background</div></div>
+    <p>To verify that the background has been changed, you can log out of your session and return to the SDDM login screen. You should see the new background image you selected. Or, you can check the symbolic link in the SDDM background directory to confirm it points to the correct image.</p>
+<div class="image">
+<img src="../../sddm_backgrounds.png" alt=""/>
+<div class="caption">
+SDDM Backgrounds</div></div>
+    <p>The above image shows the SDDM background directory before and after selecting the space_force.png background image.</p>
+<h2 class="doxsection"><a class="anchor" id="ghostty-configuration"></a>
+Ghostty Configuration</h2>
+<p>1️⃣ In this exercise, we will add Ghostty configurations for color themes and fonts to the Workstation Configuration. First, open the workstation_config.m file:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
+</div><!-- fragment --><p>2️⃣ Add the following lines to the workstation_config.m to include options for Ghostty themes and fonts:</p>
+<div class="fragment"><div class="line">:   Select Ghostty Theme</div>
+<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
+<div class="line">:   Select Ghostty Font</div>
+<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
+</div><!-- fragment --><p>3️⃣ Next, create the ghostty_themes.sh and ghostty_chtheme.sh scripts:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_themes.sh</div>
+</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
+<div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line">U=$(id -un)</div>
+<div class="line">G=$(id -gn)</div>
+<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
+<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
+<div class="line">cd &quot;$themes_dir&quot;</div>
+<div class="line">for theme in $(lf -d 1 -t f -e &#39;.*default_theme$&#39; . &#39;.*&#39;); do</div>
+<div class="line">    echo $(basename &quot;$theme&quot;)</div>
+<div class="line">done</div>
+</div><!-- fragment --><p>5️⃣ Now, create the ~/menuapp/bin/ghostty_chtheme.sh script, add the following content, save it, and make it executable.</p>
+<div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line"> </div>
+<div class="line">U=$(id -un)</div>
+<div class="line">G=$(id -gn)</div>
+<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
+<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
+<div class="line">cd &quot;$themes_dir&quot;</div>
+<div class="line">ln -sf &quot;$1&quot; default_theme</div>
+</div><!-- fragment --><p>6️⃣ Finally, create the ghostty_fonts.sh and ghostty_chfont.sh scripts:</p>
+<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_fonts.sh</div>
+</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line">U=$(id -un)</div>
+<div class="line">G=$(id -gn)</div>
+<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
+<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
+<div class="line">cd &quot;$fonts_dir&quot;</div>
+<div class="line">for font in $(lf -d 1 -t f -e &#39;.*default_font$&#39; . &#39;.*&#39;); do</div>
+<div class="line">    echo $(basename &quot;$font&quot;)</div>
+<div class="line">done</div>
+</div><!-- fragment --><div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_chfont.sh</div>
+</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line"> </div>
+<div class="line">U=$(id -un)</div>
+<div class="line">G=$(id -gn)</div>
+<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
+<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
+<div class="line">cd &quot;$fonts_dir&quot;</div>
+<div class="line">ln -sf &quot;$1&quot; default_font</div>
+</div><!-- fragment --><p>7️⃣ Test your menu again by running it from the command line:</p>
+<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
+</div><!-- fragment --><p>Or, if you have installed the ~/.bashrc configurations described in <a class="el" href="../../d4/d6f/a00315.html" title="Augmenting C-Menu">Augmenting C-Menu</a>, you can just type mm to start C-Menu and navigate to the Workstation Configuration menu.</p>
+<h2 class="doxsection"><a class="anchor" id="alacritty-and-kitty"></a>
+Alacritty and Kitty</h2>
+<p>The process for adding Alacritty and Kitty configurations is similar to the Ghostty configuration. You will need to create scripts to list available themes and fonts for Alacritty and Kitty, as well as scripts to change the default theme and font by creating symbolic links.</p>
+<p>You may want to automate the creation of these scripts by using sed to replace "ghostty" with "alacritty" and "kitty" in the existing Ghostty scripts. Here's an example of how you can do this:</p>
+<div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line"> </div>
+<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_fonts.sh &gt;kitty_fonts.sh</div>
+<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chfont.sh &gt;kitty_chfont.sh</div>
+<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_themes.sh &gt;kitty_themes.sh</div>
+<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chtheme.sh &gt;kitty_chtheme.sh</div>
+<div class="line">chmod a+x kitty_*.sh</div>
+<div class="line">cp kitty_*.sh ~/menuapp/bin/</div>
+<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_fonts.sh &gt;alacritty_fonts.sh</div>
+<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chfont.sh &gt;alacritty_chfont.sh</div>
+<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_themes.sh &gt;alacritty_themes.sh</div>
+<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chtheme.sh &gt;alacritty_chtheme.sh</div>
+<div class="line">chmod a+x alacritty_*.sh</div>
+<div class="line">cp alacritty_*.sh ~/menuapp/bin/</div>
+</div><!-- fragment --><p>Here is the final content of the workstation_config.m file after adding the Alacritty and Kitty configuration options:</p>
+<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
+<div class="line">:</div>
+<div class="line">:   Select SDDM Background</div>
+<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
+<div class="line">:   Select Ghostty Font</div>
+<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
+<div class="line">:   Select Ghostty Theme</div>
+<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
+<div class="line">:   Select Kitty Font</div>
+<div class="line">!pick -n 1 -T &quot;Select Kitty Font&quot; -S kitty_font.sh -c &quot;kitty_chfont.sh %%&quot;</div>
+<div class="line">:   Select Kitty Theme</div>
+<div class="line">!pick -n 1 -T &quot;Select Kitty Theme&quot; -S kitty_themes.sh -c &quot;kitty_chtheme.sh %%&quot;</div>
+<div class="line">:   Select Alacritty Font</div>
+<div class="line">!pick -n 1 -T &quot;Select Alacritty Font&quot; -S alacritty_fonts.sh -c &quot;alacritty_chfont.sh %%&quot;</div>
+<div class="line">:   Select Alacritty Theme</div>
+<div class="line">!pick -n 1 -T &quot;Select Alacritty Theme&quot; -S alacritty_themes.sh -c &quot;alacritty_chtheme.sh %%&quot;</div>
+<div class="line">:     Help</div>
+<div class="line">!help</div>
+<div class="line">:     Exit Workstation Configuration</div>
+<div class="line">!return</div>
+</div><!-- fragment --><div class="image">
+<img src="../../workstation_config2.png" alt=""/>
+<div class="caption">
+Workstation Configuration</div></div>
+     </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

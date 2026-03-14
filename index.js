@@ -1,9 +1,11 @@
 var index =
 [
     [ "Table of Contents", "index.html#table-of-contents-3", null ],
-    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github", null ],
+    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github-3", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [
+      [ "C-Menu API", "index.html#c-menu-api", null ],
+      [ "C-Menu Introduction", "index.html#c-menu-introduction", null ],
       [ "Elements of C-Menu", "index.html#elements-of-c-menu", null ],
       [ "Key Features", "index.html#key-features", null ],
       [ "Highlights (Pun Intended)", "index.html#highlights-pun-intended", null ],

@@ -1,17 +1,16 @@
 var a00296 =
 [
-    [ "capture_curses_tioctl", "db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "db/d7b/a00296.html#a11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c", null ],
-    [ "curses_err_tioctl", "db/d7b/a00296.html#afe4863a6b75c5a20c2008f36f86cfeed", null ],
-    [ "curses_in_tioctl", "db/d7b/a00296.html#afcd0e5aee1f3f7445581428cb02b2115", null ],
-    [ "curses_out_tioctl", "db/d7b/a00296.html#ad9964c09cd96ce9748052b5494f30fc6", null ],
-    [ "curses_tioctl", "db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6", null ],
-    [ "f_have_curses_tioctl", "db/d7b/a00296.html#ac46bd98f4cec1758c1d600920caa7f39", null ],
-    [ "f_have_shell_tioctl", "db/d7b/a00296.html#a1e8b2f4dea5e88e7af17541140207df0", null ],
-    [ "shell_tioctl", "db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3", null ]
+    [ "form_accept_field", "db/d7b/a00296.html#aa3062b9adcfe4160df15f1763963f9f8", null ],
+    [ "form_display_field", "db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e", null ],
+    [ "form_display_field_brackets", "db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66", null ],
+    [ "form_display_field_n", "db/d7b/a00296.html#a95c3fea1ca130a8386408cdb450c2069", null ],
+    [ "form_fmt_field", "db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41", null ],
+    [ "form_validate_field", "db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185", null ],
+    [ "is_valid_date", "db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de", null ],
+    [ "is_valid_time", "db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9", null ],
+    [ "left_justify", "db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65", null ],
+    [ "mk_filler", "db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa", null ],
+    [ "numeric", "db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c", null ],
+    [ "right_justify", "db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55", null ],
+    [ "ff_tbl", "db/d7b/a00296.html#ab2b1f7bf9cce5974d1459eba268c0211", null ]
 ];

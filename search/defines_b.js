@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellow_0',['yellow',['../d5/d42/a00269.html#aaa509be08a5019c968f558d628a2a540',1,'opts.c']]]
+  ['white_0',['white',['../d9/dd6/a00272.html#a85bd03e30e523319b5e069e7a8a0f81d',1,'opts.c']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['white_0',['white',['../d5/d42/a00269.html#a85bd03e30e523319b5e069e7a8a0f81d',1,'opts.c']]]
+  ['true_0',['TRUE',['../dc/d9a/a00218.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'TRUE:&#160;iloan.c'],['../d0/d27/a00239.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'TRUE:&#160;whence.c']]]
 ];

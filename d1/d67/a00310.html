@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Changelog</title>
+<title>C-Menu: /usr/local/src/cmenu/src/enterstr.c</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
@@ -112,96 +112,64 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d1/d67/a00310.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Changelog </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">/usr/local/src/cmenu/src/enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="changelog"></a></p>
-<h1 class="doxsection"><a class="anchor" id="released---2026-02-04"></a>
-[Released] - 2026-02-04</h1>
-<p>0.2.9 - 2026-03-10</p>
-<p>Moved documentation to a separate repository and website, which is now available at:</p>
-<p><a href="https://decision-inc.com/">C-Menu Comprehensive Reference</a></p>
-<p>This was necessary because the documentation had become too large and unwieldy to be easily navigable within the C-Menu repository, so only the main page was available. With the new website on Github Pages, I was able to include all the Doxygen pages including function cross references and diagrams.</p>
-<p>The new website is much more user-friendly and easier to navigate, and it will allow me to keep the documentation up-to-date more easily.</p>
-<p>0.2.9 - 2026-03-09</p>
-<p>Much more work on chyron integration. Appears to be working as intended. In the process, I found and fixed a number of bugs in form and one in lf. The debugging process is somewhat tedious following disruptive feature additions, but we are making progress.</p>
-<p>Still more work on inte</p>
-<p>0.2.9 - 2026-03-08</p>
-<p>Continuing to work on chyron integration into Form and Pick. When using the Installment Loan example, the chyron has been adjusted to only include relevant options, and the key handling has been reworked to accommodate the new structure. For example, when the user finishes entering all the fields in the form, the chyron provides only F1 Help, F5 Calculate, and F9 Cancel, which makes sense because the form is still in edit mode and the user can continue to edit fields by using movement keys or by clicking on the fields. Once the user clicks calculate, the chyron changes to include F1 Help, F4 Edit, F9 Cancel, and F10 Commit. Upon clicking F9 Commit (or pressing the F9 key), Form will execute the appropriate action specified by the user.</p>
-<p>0.2.9 - 2026-03-07</p>
-<p>Corrected Pick Page Down and Page Up key handling, which had been broken by the integration of the chyron facility into xwgetch. This was a major problem, and it caused the Pick module to be completely unusable. I have reimplemented the key handling, and it is now working as intended.</p>
-<p>Modified Pick so that the chyron only includes Page Up and Page Down options when there is more than 1 page of Pick ojbects. This is part of a larger effort to integrate the chyron facility into all C-Menu programs. The chyron facility allows C-Menu to generate dynamic chyrons based on the current state of the program, while automatically keeping track of click zones so that xwgetch can interpret mouse clicks as key codes. The idea is that the chyron should only include relevant options.</p>
-<p>0.2.9 - 2026-03-06</p>
-<p>Added -e exclude regular expression to lf, which allows users to exclude files from the listing based on a regular expression. This is a powerful feature that can be used to filter out unwanted files from the listing.</p>
-<p>Replaced mouse handling in Pick, Form, and Menu with xwgetch, which reads chyron mouse selections as key codes. Now all mouse events are handled through a single function. xwgetch also handles asynchronous signal events.</p>
-<p>Some code in <a class="el" href="../../df/da9/a00263.html" title="The working part of C-Menu Menu.">menu_engine.c</a>, which handled hierarchical menu navigation, had somehow been deleted. This was a major problem, and it caused the menu system to be completely broken. I have reimplemented it, and it is now working as intended.</p>
-<p>The addition of an Exercises section will provide a test bed for debugging as well as a proof-of-concept for C-Menu. The first project is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database.</p>
-<p>0.2.9 - 2026-02-27</p>
-<p>Added a number of improvements to CMake build to accommodate C-Menu's revised file structure. Both CMake and straight Makefile builds produce similar results, but CMake is more flexible, easier to work with, and less prone to difficult-to-solve problems.</p>
-<p>View's search function has been reworked to fix a number of issues with buffer and page management, such as off-by-one page top and bottom positioning.</p>
-<p>lf (list files) - recursive option has been replaced by a depth option and lf's core logic has been reworked to enhance reliability. Also removed mangled lf syntax which had been used in some scripts to compensate for deficiencies in lf's option handler.</p>
-<p>Many documentation updates - API/ABI documentation is substantially complete. Function Call Graphs, Called Graphs, and forward and backward references added.</p>
-<p>Every function is documented, and most variables. All documentation has been consolidated into a single html file available at:</p>
-<p><a href="https://billwaller.github.io/C-Menu/">C-Menu Comprehensive Reference</a></p>
-<p>In View, replaced calls to mbtowc() with mbrtowc() because of spurious accent marks populating the complex characters structures (cchar_t). Apparently, mbtowc() is broken. mbrtowc() is the new and improved replacement.</p>
-<p>The ANSI SGR parser and gamma correction in View is working perfectly. Try a setting of 2.2 in ~/.minitrc to brighten up dull documents.</p>
-<p>0.2.9 - 2026-02-09</p>
-<p>Split the large menu.h into Separate .h files for each module, which should make it easier for developers who want to work on a particular feature.</p>
-<p>Modified Makefile and CMakeLists.txt to reflect the new file structure, and to add the new shared library libcm.so</p>
-<p>Many unimplemented functions have been implemented, and the project is now in a much more complete state. I am still working on the documentation, but I have made significant progress on it, and I will be uploading it to the repository as I go.</p>
-<p>I will look into adding a website for the project, and I will be uploading the documentation to the repository as I go. I am also working on a website for the project, which will be up soon.</p>
-<hr  />
-<p>[0.2.8] - 2026-02-04</p>
-<p>Makefile</p>
-<p>menu - <a class="el" href="../../d9/d01/a00227.html" title="Command line start-up for C-Menu.">menu.c</a> <a class="el" href="../../df/da9/a00263.html" title="The working part of C-Menu Menu.">menu_engine.c</a> <a class="el" href="../../d3/d1a/a00251.html" title="Parse menu description file and create Menu.">parse_menu_desc.c</a></p>
-<p>form - <a class="el" href="../../d3/d5e/a00275.html" title="Command Line Start-up for C-Menu Form.">form.c</a></p>
-<p>pick - <a class="el" href="../../d9/d39/a00257.html" title="Command Line Entry Point for C-Menu Pick.">pick.c</a></p>
-<p>view - <a class="el" href="../../d6/d22/a00245.html" title="Command Line Start-up for C-Menu View.">view.c</a></p>
-<p>ckeys - <a class="el" href="../../dc/d5d/a00278.html" title="Test Curses Keys.">ckeys.c</a></p>
-<p>enterchr - <a class="el" href="../../d6/d7f/a00287.html" title="Enter a single character from keyboard.">enterchr.c</a></p>
-<p>enterstr - <a class="el" href="../../dd/dd7/a00260.html" title="Enter a string from keyboard.">enterstr.c</a></p>
-<p>optsp - <a class="el" href="../../d0/d27/a00239.html" title="print option list for C-Menu">optsp.c</a></p>
-<p>whence - <a class="el" href="../../d7/d40/a00236.html" title="Find the full path of a file in the directories specified by the.">whence.c</a></p>
-<p>stripansi - <a class="el" href="../../d5/d35/a00266.html" title="removes ansi escape sequences beginning with &quot;\033[&quot;&quot; and ending in&quot;m&quot; or &quot;K&quot;">stripansi.c</a></p>
-<p>iloan - <a class="el" href="../../d3/dd5/a00215.html" title="Installment Loan Calculator.">iloan.c</a></p>
-<p>lf - <a class="el" href="../../d7/d03/a00254.html" title="list files matching a regular expression">lf.c</a></p>
-<p>add_executable(form <a class="el" href="../../d3/d5e/a00275.html" title="Command Line Start-up for C-Menu Form.">form.c</a>) target_sources(form PRIVATE $&lt;TARGET_OBJECTS:cmenu&gt;) target_link_libraries(form cm ${LIBS})</p>
-<p>add_executable(enterchr <a class="el" href="../../d6/d7f/a00287.html" title="Enter a single character from keyboard.">enterchr.c</a>) target_link_libraries(enterchr cm ${LIBS})</p>
-<p>add_executable(enterstr <a class="el" href="../../dd/dd7/a00260.html" title="Enter a string from keyboard.">enterstr.c</a>) target_link_libraries(enterstr cm ${LIBS})</p>
-<p>add_executable(iloan <a class="el" href="../../d3/dd5/a00215.html" title="Installment Loan Calculator.">iloan.c</a>) target_link_libraries(iloan cm ${LIBS})</p>
-<p>add_executable(lf <a class="el" href="../../d7/d03/a00254.html" title="list files matching a regular expression">lf.c</a>) target_link_libraries(lf cm ${LIBS})</p>
-<p>add_executable(pick <a class="el" href="../../d9/d39/a00257.html" title="Command Line Entry Point for C-Menu Pick.">pick.c</a>) target_sources(pick PRIVATE $&lt;TARGET_OBJECTS:cmenu&gt;) target_link_libraries(pick cm ${LIBS})</p>
-<p>TARGETS menu form pick view ckeys enterchr enterstr lf optsp stripansi whence cm</p>
-<p><a class="el" href="../../de/d25/a00290.html" title="Window support for C-Menu Menu, Form, Pick, and View.">dwin.c</a> <a class="el" href="../../db/dc3/a00284.html" title="General utility functions.">futil.c</a> <a class="el" href="../../db/d7b/a00296.html" title="Screen IO Support for MENU.">scriou.c</a> <a class="el" href="../../d1/da8/a00230.html" title="Functions to execute external commands.">exec.c</a> <a class="el" href="../../dd/dd7/a00248.html" title="signal handling for interrupt signals">sig.c</a></p>
-<p>COMMON_SRCS <a class="el" href="../../dd/d52/a00221.html" title="Test Curses Keys.">curskeys.c</a> <a class="el" href="../../d6/d82/a00293.html" title="Field Edit and Entry for C-Menu Form.">fields.c</a> <a class="el" href="../../d6/de1/a00233.html" title="The working part of C-Menu Form.">form_engine.c</a> <a class="el" href="../../dd/dc1/a00212.html" title="Initialize C-Menu View Screen IO and Input.">init_view.c</a> <a class="el" href="../../d5/ddf/a00224.html" title="pick from a list of choices">pick_engine.c</a> <a class="el" href="../../d2/dc8/a00242.html" title="The working part of View.">view_engine.c</a> <a class="el" href="../../d2/d04/a00281.html" title="Initialization for Menu Application Programs.">init.c</a> <a class="el" href="../../d3/de5/a00209.html" title="Create and destroy main data structures for C-Menu.">mem.c</a> <a class="el" href="../../d9/dd6/a00272.html" title="Callable Startup for C-Menu View.">mview.c</a> <a class="el" href="../../d5/d42/a00269.html" title="Sort and print options.">opts.c</a>)</p>
-<ul>
-<li>0.2.8 - 2026-02-03</li>
-<li>0.2.9 - 2026-02-04</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="fixed"></a>
-Fixed</h2>
-<ul>
-<li>Prevent segmentation fault upon <span class="tt">close()</span> ([#28](link-to-pr))</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md028--2026-02-04"></a>
-[0.2.8]- 2026-02-04</h1>
-<h2 class="doxsection"><a class="anchor" id="added"></a>
-Added</h2>
-<ul>
-<li>Initial release of the project ([<span class="tt">a1b2c3d</span>](link-to-commit))</li>
-</ul>
-<p>: <a href="https://github.com/BillWAller/C-Menu/releases/tag/C-Menu-0.2.8">https://github.com/BillWAller/C-Menu/releases/tag/C-Menu-0.2.8</a> : <a href="https://github.com/BillWaller/C-Menu/releases/tag/C-Menu-0.2.8">https://github.com/BillWaller/C-Menu/releases/tag/C-Menu-0.2.8</a> </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
+<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
+<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
+<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
+</div><!-- fragment --><div class="fragment"><div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;cm.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d2/d04/a00281.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../dc/d9a/a00218.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[BUFSIZ];</div>
+<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../dc/d9a/a00218.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line">    <span class="keywordtype">char</span> *msg;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a2" name="_a2"></a><a class="code hl_variable" href="../../d6/d7f/a00287.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>[128];</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d6/d7f/a00287.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d6/d7f/a00287.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>, argv[1]);</div>
+<div class="line">    <a id="a3" name="a3"></a><a class="code hl_function" href="../../df/d95/a00299.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d3/d1a/a00251.html#aca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line">    new_tioctl = <a id="_a5" name="_a5"></a><a class="code hl_variable" href="../../df/d95/a00299.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        msg = <a class="code hl_variable" href="../../d6/d7f/a00287.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>;</div>
+<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line">            write(2, msg++, 1);</div>
+<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../dc/d9a/a00218.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, BUFSIZ) &gt; -1)</div>
+<div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line">        write(1, in_ptr++, 1);</div>
+<div class="line">    <a id="a6" name="a6"></a><a class="code hl_function" href="../../d3/d1a/a00251.html#a06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
+<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../df/d95/a00299.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line">    _exit(0);</div>
+<div class="line">}</div>
+<div class="ttc" id="aa00218_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../dc/d9a/a00218.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d9a/a00218_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa00251_html_a06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d3/d1a/a00251.html#a06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d1a/a00251_source.html#l00023">sig.c:23</a></div></div>
+<div class="ttc" id="aa00251_html_aca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d3/d1a/a00251.html#aca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d1a/a00251_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa00281_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d2/d04/a00281.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d04/a00281_source.html#l00016">ckeys.c:16</a></div></div>
+<div class="ttc" id="aa00287_html_ae66f0b659923d81fd95da97e0d5ca496"><div class="ttname"><a href="../../d6/d7f/a00287.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a></div><div class="ttdeci">char errmsg[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00067">futil.c:67</a></div></div>
+<div class="ttc" id="aa00299_html_a0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../df/d95/a00299.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../df/d95/a00299_source.html#l00040">scriou.c:40</a></div></div>
+<div class="ttc" id="aa00299_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../df/d95/a00299.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../df/d95/a00299_source.html#l00020">scriou.c:20</a></div></div>
+<div class="ttc" id="aa00299_html_ac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../df/d95/a00299.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../df/d95/a00299_source.html#l00051">scriou.c:51</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: scriou.c Source File</title>
+<title>C-Menu: fields.c Source File</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
@@ -113,11 +113,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/d7b/a00296_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">scriou.c</div></div>
+  <div class="headertitle"><div class="title">fields.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../db/d7b/a00296.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file scriou.c</span></div>
-<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Screen IO Support for MENU</span></div>
+<a href="../../db/d7b/a00296.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file fields.c</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Field Edit and Entry for C-Menu Form</span></div>
 <div class="line"><span class="lineno">    3</span><span class="comment">    @author Bill Waller</span></div>
 <div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2025</span></div>
 <div class="line"><span class="lineno">    5</span><span class="comment">    MIT License</span></div>
@@ -125,170 +125,739 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/d7b/a00296_
 <div class="line"><span class="lineno">    7</span><span class="comment">    @date 2026-02-09</span></div>
 <div class="line"><span class="lineno">    8</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/**  This file contains terminal ioctl handling functions for C-MENU. It</span></div>
-<div class="line"><span class="lineno">   11</span><span class="comment">     provide sane terminal settings for C-MENU applications, and restores</span></div>
-<div class="line"><span class="lineno">   12</span><span class="comment">     the terminal to its original state when the C-MENU application exits. */</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3">   20</a></span><span class="keyword">struct</span> termios <a class="code hl_variable" href="../../db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6">   21</a></span><span class="keyword">struct</span> termios <a class="code hl_variable" href="../../db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a1e8b2f4dea5e88e7af17541140207df0">   22</a></span><a class="code hl_variable" href="../../db/d7b/a00296.html#a1e8b2f4dea5e88e7af17541140207df0">bool</a> <a class="code hl_variable" href="../../db/d7b/a00296.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a> = false;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ac46bd98f4cec1758c1d600920caa7f39">   23</a></span><a class="code hl_variable" href="../../db/d7b/a00296.html#ac46bd98f4cec1758c1d600920caa7f39">bool</a> <a class="code hl_variable" href="../../db/d7b/a00296.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a> = false;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><a class="code hl_function" href="../../db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_function" href="../../db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><a class="code hl_function" href="../../db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a>();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><a class="code hl_function" href="../../db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><a class="code hl_function" href="../../db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a>(<span class="keyword">struct</span> termios *);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><a class="code hl_function" href="../../db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(<span class="keyword">struct</span> termios *);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">char</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a11948dfa6be15e54c80072e4b3df0e12">di_getch</a>();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">struct</span> termios <a class="code hl_variable" href="../../db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>, <a class="code hl_variable" href="../../db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#afcd0e5aee1f3f7445581428cb02b2115">   33</a></span><span class="keyword">struct</span> termios shell_in_tioctl, <a class="code hl_variable" href="../../db/d7b/a00296.html#afcd0e5aee1f3f7445581428cb02b2115">curses_in_tioctl</a>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ad9964c09cd96ce9748052b5494f30fc6">   34</a></span><span class="keyword">struct</span> termios shell_out_tioctl, <a class="code hl_variable" href="../../db/d7b/a00296.html#ad9964c09cd96ce9748052b5494f30fc6">curses_out_tioctl</a>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#afe4863a6b75c5a20c2008f36f86cfeed">   35</a></span><span class="keyword">struct</span> termios shell_err_tioctl, <a class="code hl_variable" href="../../db/d7b/a00296.html#afe4863a6b75c5a20c2008f36f86cfeed">curses_err_tioctl</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">/** @brief capture_shell_tioctl() - capture shell terminal settings</span></div>
-<div class="line"><span class="lineno">   38</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   39</span><span class="comment">    @note - captures terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">   40</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>() {</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (f_have_shell_tioctl)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    tcgetattr(0, &amp;<a class="code hl_variable" href="../../db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    tcgetattr(2, &amp;shell_err_tioctl);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    f_have_shell_tioctl = true;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">common</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">monetary</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stddef</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><a class="code hl_function" href="../../db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de">is_valid_date</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><a class="code hl_function" href="../../db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9">is_valid_time</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(Form *, <span class="keywordtype">char</span> *);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">numeric</a>(<span class="keywordtype">char</span> *, <span class="keywordtype">char</span> *);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a>(<span class="keywordtype">char</span> *, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">left_justify</a>(<span class="keywordtype">char</span> *);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ab2b1f7bf9cce5974d1459eba268c0211">   26</a></span><span class="keywordtype">char</span> <a class="code hl_variable" href="../../db/d7b/a00296.html#ab2b1f7bf9cce5974d1459eba268c0211">ff_tbl</a>[][26] = {<span class="stringliteral">&quot;string&quot;</span>,   <span class="stringliteral">&quot;decimal_int&quot;</span>, <span class="stringliteral">&quot;hex_int&quot;</span>, <span class="stringliteral">&quot;float&quot;</span>, <span class="stringliteral">&quot;double&quot;</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                     <span class="stringliteral">&quot;currency&quot;</span>, <span class="stringliteral">&quot;yyyymmdd&quot;</span>,    <span class="stringliteral">&quot;hhmmss&quot;</span>,  <span class="stringliteral">&quot;apr&quot;</span>,   <span class="stringliteral">&quot;&quot;</span>};</div>
 </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">/** @brief restore_shell_tioctl() - restore shell terminal settings</span></div>
-<div class="line"><span class="lineno">   49</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   50</span><span class="comment">    @note - restores terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0">   51</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>() {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">if</span> (!f_have_shell_tioctl)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    tcsetattr(0, TCSANOW, &amp;<a class="code hl_variable" href="../../db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#aa3062b9adcfe4160df15f1763963f9f8">form_accept_field</a>(Form *);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a>(Form *);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a95c3fea1ca130a8386408cdb450c2069">form_display_field_n</a>(Form *, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">form_display_field_brackets</a>(Form *);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a>(Form *);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">mk_filler</a>(<span class="keywordtype">char</span> *, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">/** @brief Accept input for a field</span></div>
+<div class="line"><span class="lineno">   37</span><span class="comment">     @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">   38</span><span class="comment">     @return int Key code of action taken</span></div>
+<div class="line"><span class="lineno">   39</span><span class="comment">     @note Handles character input, navigation keys, and mouse events for field</span></div>
+<div class="line"><span class="lineno">   40</span><span class="comment">     editing. Validates input based on field format and updates display.</span></div>
+<div class="line"><span class="lineno">   41</span><span class="comment">     Returns key code of action taken (e.g., accept field, tab to next field,</span></div>
+<div class="line"><span class="lineno">   42</span><span class="comment">     break out of input loop).</span></div>
+<div class="line"><span class="lineno">   43</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#aa3062b9adcfe4160df15f1763963f9f8">   44</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#aa3062b9adcfe4160df15f1763963f9f8">form_accept_field</a>(Form *form) {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    bool f_insert = <a class="code hl_define" href="../../dc/d9a/a00218.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> in_key;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">char</span> *s, *d;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    WINDOW *win = form-&gt;win;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">int</span> flin = form-&gt;field[form-&gt;fidx]-&gt;line;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">int</span> fcol = form-&gt;field[form-&gt;fidx]-&gt;col;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">int</span> flen = form-&gt;field[form-&gt;fidx]-&gt;len;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span> ff = form-&gt;field[form-&gt;fidx]-&gt;ff;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">char</span> *accept_s = form-&gt;field[form-&gt;fidx]-&gt;accept_s;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">char</span> *filler_s = form-&gt;field[form-&gt;fidx]-&gt;filler_s;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">,</a> accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">)</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_variable" href="../../d6/d82/a00293.html#a89aa1c1525f82269298a01d552e60037">click_x</a> = <a class="code hl_variable" href="../../d6/d82/a00293.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> = -1;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">char</span> *fstart = accept_s;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">char</span> *fend = fstart + flen;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">int</span> x = fcol;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">char</span> *p = fstart = accept_s;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">char</span> *str_end = p + strlen(p);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    in_key = 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keywordflow">if</span> (f_insert)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">(</a>form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> 18<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> <span class="stringliteral">&quot;OVR&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> KEY_IC<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">)</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">(</a>form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> 18<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> <span class="stringliteral">&quot;INS&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> KEY_IC<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">)</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_function" href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">compile_chyron</a><a class="code hl_function" href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">(</a>form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">)</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_function" href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">form_display_chyron</a><a class="code hl_function" href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">(</a>form<a class="code hl_function" href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">)</a>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">if</span> (in_key == 0) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            mvwaddstr(win, flin, fcol, filler_s);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            mvwaddstr(win, flin, fcol, accept_s);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            wmove(win, flin, x);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            tcflush(0, TCIFLUSH);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            wmove(win, flin, x);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            in_key = <a class="code hl_function" href="../../d6/d82/a00293.html#acf4c709bccc4c965a5d61db978db31a3">xwgetch</a><a class="code hl_function" href="../../d6/d82/a00293.html#acf4c709bccc4c965a5d61db978db31a3">(</a>win<a class="code hl_function" href="../../d6/d82/a00293.html#acf4c709bccc4c965a5d61db978db31a3">,</a> form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#acf4c709bccc4c965a5d61db978db31a3">)</a>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <span class="keywordflow">switch</span> (in_key) {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="comment">/** KEY_F(10) is the default key for accepting the field and moving</span></div>
+<div class="line"><span class="lineno">   82</span><span class="comment">                to the next field */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">case</span> KEY_F(10):</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">,</a> accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">)</a>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">)</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">)</a> != 0)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="comment">/** KEY_F(9) Cancels the current operation */</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">case</span> KEY_BREAK:</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">case</span> KEY_F(9):</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">)</a>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            in_key = KEY_F(9);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            <span class="comment">/** KEY_UP, KEY_BTAB moves to the previous field */</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;H&#39;</span>:</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">case</span> KEY_F(1):</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordflow">case</span> KEY_BTAB:</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">case</span> KEY_UP:</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">,</a> accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">)</a>;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">)</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            in_key = KEY_UP;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="comment">/** KEY_DOWN, TAB moves to the next field */</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;\t&#39;</span>:</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">case</span> KEY_DOWN:</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">,</a> accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">)</a>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">)</a>;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            in_key = KEY_DOWN;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="comment">/** KEY_END moves cursor to end of field */</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">case</span> KEY_END:</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="keywordflow">while</span> (*p != <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                p++;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            x = fcol + (p - fstart);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            in_key = 0;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="comment">/**&lt; Enter accepts the field and moves to the next field if</span></div>
+<div class="line"><span class="lineno">  120</span><span class="comment">             * form-&gt;f_erase_remainder is set, it will clear the remaining</span></div>
+<div class="line"><span class="lineno">  121</span><span class="comment">             * characters above and after the current cursor location */</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;\n&#39;</span>:</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">case</span> KEY_ENTER:</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="keywordflow">if</span> (form-&gt;f_erase_remainder)</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                *p = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">,</a> accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">)</a>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">)</a>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            in_key = KEY_ENTER;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="comment">/** KEY_IC toggles insert mode */</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">case</span> KEY_IC:</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">if</span> (f_insert) {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                f_insert = <a class="code hl_define" href="../../dc/d9a/a00218.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">(</a>form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> 18<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> <span class="stringliteral">&quot;INS&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> KEY_IC<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">)</a>;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                f_insert = <a class="code hl_define" href="../../dc/d9a/a00218.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                <a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">(</a>form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> 18<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> <span class="stringliteral">&quot;OVR&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">,</a> KEY_IC<a class="code hl_function" href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">)</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            <a class="code hl_function" href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">compile_chyron</a><a class="code hl_function" href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">(</a>form-&gt;chyron<a class="code hl_function" href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">)</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <a class="code hl_function" href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">form_display_chyron</a><a class="code hl_function" href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">(</a>form<a class="code hl_function" href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">)</a>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            in_key = 0;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="comment">/** KEY_DC deletes character at cursor */</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">case</span> KEY_DC:</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            s = p + 1;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            d = p;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">while</span> (*s != <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                *d++ = *s++;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            *d = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            str_end = d;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            f_insert = <a class="code hl_define" href="../../dc/d9a/a00218.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            in_key = 0;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="comment">/** KEY_HOME moves cursor to start of field */</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">case</span> KEY_HOME:</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            p = fstart;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            x = fcol;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            in_key = 0;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            <span class="comment">/** KEY_BACKSPACE deletes character before cursor */</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">case</span> KEY_BACKSPACE:</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordflow">if</span> (p &gt; fstart) {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                p--;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                x--;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>            s = p + 1;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            d = p;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            <span class="keywordflow">while</span> (*s != <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                *d++ = *s++;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            *d = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>            str_end = d;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            in_key = 0;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="comment">/** KEY_LEFT moves cursor left one character */</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">case</span> KEY_LEFT:</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            <span class="keywordflow">if</span> (p &gt; fstart) {</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                p--;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                x--;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            }</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>            in_key = 0;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>            <span class="comment">/** KEY_RIGHT moves cursor right one character */</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        <span class="keywordflow">case</span> KEY_RIGHT:</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            <span class="keywordflow">if</span> (p &lt; fend &amp;&amp; p &lt; str_end) {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                p++;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                x++;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            in_key = 0;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="comment">/** Handles mouse events for field editing */</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">case</span> KEY_MOUSE:</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            form-&gt;fidx = <a class="code hl_function" href="../../d7/d40/a00236.html#a3c66bd6b1987c79ef5a31bb28227c65b">form_yx_to_fidx</a><a class="code hl_function" href="../../d7/d40/a00236.html#a3c66bd6b1987c79ef5a31bb28227c65b">(</a>form<a class="code hl_function" href="../../d7/d40/a00236.html#a3c66bd6b1987c79ef5a31bb28227c65b">,</a> <a class="code hl_variable" href="../../d6/d82/a00293.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a><a class="code hl_function" href="../../d7/d40/a00236.html#a3c66bd6b1987c79ef5a31bb28227c65b">,</a> <a class="code hl_variable" href="../../d6/d82/a00293.html#a89aa1c1525f82269298a01d552e60037">click_x</a><a class="code hl_function" href="../../d7/d40/a00236.html#a3c66bd6b1987c79ef5a31bb28227c65b">)</a>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            x = <a class="code hl_variable" href="../../d6/d82/a00293.html#a89aa1c1525f82269298a01d552e60037">click_x</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            flin = <a class="code hl_variable" href="../../d6/d82/a00293.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a>;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            flen = form-&gt;field[form-&gt;fidx]-&gt;len;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            ff = form-&gt;field[form-&gt;fidx]-&gt;ff;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            accept_s = form-&gt;field[form-&gt;fidx]-&gt;accept_s;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            filler_s = form-&gt;field[form-&gt;fidx]-&gt;filler_s;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">,</a> accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">)</a>;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>            fstart = accept_s;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            fend = fstart + flen;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            p = fstart + (x - form-&gt;field[form-&gt;fidx]-&gt;col);</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            str_end = fstart + strlen(fstart);</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            in_key = 0;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            <span class="keywordflow">if</span> (p &gt;= fend) {</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>                in_key = 0;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>            <span class="comment">/** Validates fields based on format */</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            <span class="keywordflow">switch</span> (ff) {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>                <span class="comment">/** FF_STRING accepts all printable characters and spaces */</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <span class="keywordflow">case</span> FF_STRING:</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                <span class="comment">/** FF_DECIMAL_INT accepts digits 0 through 9 and decimal point</span></div>
+<div class="line"><span class="lineno">  218</span><span class="comment">                 * (&#39;.&#39;) */</span></div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="keywordflow">case</span> FF_DECIMAL_INT:</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>) || in_key == <span class="stringliteral">&#39;.&#39;</span>)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>                beep();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                in_key = 0;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>                <span class="comment">/** FF_HEX_INT accepts digits 0 through 9 and letters A through</span></div>
+<div class="line"><span class="lineno">  226</span><span class="comment">                 * F (case-insensitive) */</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            <span class="keywordflow">case</span> FF_HEX_INT:</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>) ||</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                    (in_key &gt;= <span class="stringliteral">&#39;A&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;F&#39;</span>) ||</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>                    (in_key &gt;= <span class="stringliteral">&#39;a&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;f&#39;</span>))</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>                beep();</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>                in_key = 0;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>                <span class="comment">/** FF_FLOAT accepts digits 0 through 9 and decimal point (&#39;.&#39;)</span></div>
+<div class="line"><span class="lineno">  236</span><span class="comment">                 * and negative operator (&#39;-&#39;) at the start of the field */</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            <span class="keywordflow">case</span> FF_FLOAT:</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>) || in_key == <span class="stringliteral">&#39;.&#39;</span> ||</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                    (in_key == <span class="stringliteral">&#39;-&#39;</span> &amp;&amp; p == fstart))</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>                beep();</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                in_key = 0;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>                <span class="comment">/** FF_DOUBLE accepts digits 0 through 9 and decimal point (&#39;.&#39;)</span></div>
+<div class="line"><span class="lineno">  245</span><span class="comment">                 * and negative operator (&#39;-&#39;) at the start of the field */</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            <span class="keywordflow">case</span> FF_DOUBLE:</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>) || in_key == <span class="stringliteral">&#39;.&#39;</span> ||</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                    (in_key == <span class="stringliteral">&#39;-&#39;</span> &amp;&amp; p == fstart))</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>                beep();</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>                in_key = 0;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>                <span class="comment">/** FF_CURRENCY accepts digits 0 through 9 and decimal point</span></div>
+<div class="line"><span class="lineno">  254</span><span class="comment">                 * (&#39;.&#39;) and negative operator (&#39;-&#39;) at the start of the field</span></div>
+<div class="line"><span class="lineno">  255</span><span class="comment">                 */</span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">case</span> FF_CURRENCY:</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>) || in_key == <span class="stringliteral">&#39;.&#39;</span> ||</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                    (in_key == <span class="stringliteral">&#39;-&#39;</span> &amp;&amp; p == fstart))</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                beep();</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                in_key = 0;</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                <span class="comment">/** FF_YYYYMMDD accepts digits 0 through 9 */</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            <span class="keywordflow">case</span> FF_YYYYMMDD:</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>                <span class="keywordflow">if</span> (in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>)</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>                beep();</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                in_key = 0;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                <span class="comment">/** FF_HHMMSS accepts digits 0 through 9 */</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <span class="keywordflow">case</span> FF_HHMMSS:</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>                <span class="keywordflow">if</span> (in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>)</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                beep();</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>                in_key = 0;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>                <span class="comment">/** FF_APR accepts digits 0 through 9 and decimal point (&#39;.&#39;) */</span></div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            <span class="keywordflow">case</span> FF_APR:</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="stringliteral">&#39;9&#39;</span>) || in_key == <span class="stringliteral">&#39;.&#39;</span>)</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                beep();</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>                in_key = 0;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>            <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>                <a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">(</a><span class="stringliteral">&quot;form_accept_field() invalid format&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            }</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <span class="keywordflow">if</span> (in_key &gt;= <span class="stringliteral">&#39; &#39;</span>) {</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>                <span class="keywordflow">if</span> (f_insert) {</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>                    <span class="keywordflow">if</span> (str_end &lt; fend) {</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>                        s = str_end - 1;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>                        d = str_end;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>                        <span class="keywordflow">while</span> (s &gt;= p)</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                            *d-- = *s--;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>                        *p++ = in_key;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                        str_end++;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>                        x++;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>                    }</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>                    <span class="keywordflow">if</span> (p &lt; fend) {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>                        <span class="keywordflow">if</span> (p &lt; str_end) {</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>                            *p++ = in_key;</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>                            x++;</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p == str_end) {</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>                            *p++ = in_key;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>                            *p = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>                            str_end = p;</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>                            x++;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>                        }</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                    }</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                in_key = 0;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            }</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        }</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>}</div>
 </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">/** @brief capture_curses_tioctl() - capture curses terminal settings</span></div>
-<div class="line"><span class="lineno">   58</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   59</span><span class="comment">    @note - captures terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24">   60</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a>() {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (f_have_curses_tioctl)</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    tcgetattr(0, &amp;<a class="code hl_variable" href="../../db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    f_have_curses_tioctl = true;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span> </div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="comment">/** @brief Display field n</span></div>
+<div class="line"><span class="lineno">  320</span><span class="comment">    @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">  321</span><span class="comment">    @param n Field index to display</span></div>
+<div class="line"><span class="lineno">  322</span><span class="comment">    @return 0 on success, non-zero on error</span></div>
+<div class="line"><span class="lineno">  323</span><span class="comment">    @note This function temporarily sets the form&#39;s current field index (fidx)</span></div>
+<div class="line"><span class="lineno">  324</span><span class="comment">   to n, calls form_display_field() to display that field, and then restores the</span></div>
+<div class="line"><span class="lineno">  325</span><span class="comment">   original fidx value. This allows for displaying a specific field without</span></div>
+<div class="line"><span class="lineno">  326</span><span class="comment">   permanently changing the form&#39;s current field index.</span></div>
+<div class="line"><span class="lineno">  327</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00328" data-start="{" data-end="}">
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a95c3fea1ca130a8386408cdb450c2069">  328</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a95c3fea1ca130a8386408cdb450c2069">form_display_field_n</a>(Form *form, <span class="keywordtype">int</span> n) {</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="keywordtype">int</span> fidx = form-&gt;fidx;</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    form-&gt;fidx = n;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a><a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">)</a>;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    form-&gt;fidx = fidx;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>}</div>
 </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/** @brief restore_curses_tioctl() - restore curses terminal settings</span></div>
-<div class="line"><span class="lineno">   68</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   69</span><span class="comment">    @note - restores terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410">   70</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>() {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">if</span> (!f_have_curses_tioctl)</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    tcsetattr(0, TCSANOW, &amp;<a class="code hl_variable" href="../../db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment">/** @brief Display current field</span></div>
+<div class="line"><span class="lineno">  336</span><span class="comment">    @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">  337</span><span class="comment">    @return 0 on success, non-zero on error</span></div>
+<div class="line"><span class="lineno">  338</span><span class="comment">    @note This function displays the current field based on the form&#39;s current</span></div>
+<div class="line"><span class="lineno">  339</span><span class="comment">   field index (fidx). It retrieves the line and column information for the</span></div>
+<div class="line"><span class="lineno">  340</span><span class="comment">   current field, displays any brackets if set, and then displays the field&#39;s</span></div>
+<div class="line"><span class="lineno">  341</span><span class="comment">   content using the display_s string. The function ensures that the field is</span></div>
+<div class="line"><span class="lineno">  342</span><span class="comment">   displayed correctly within the form&#39;s window and refreshes the display to</span></div>
+<div class="line"><span class="lineno">  343</span><span class="comment">   show the updated field content.</span></div>
+<div class="line"><span class="lineno">  344</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00345" data-start="{" data-end="}">
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">  345</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a>(Form *form) {</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    WINDOW *win = form-&gt;win;</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <span class="keywordtype">int</span> flin = form-&gt;field[form-&gt;fidx]-&gt;line;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keywordtype">int</span> fcol = form-&gt;field[form-&gt;fidx]-&gt;col;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">form_display_field_brackets</a><a class="code hl_function" href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">(</a>form<a class="code hl_function" href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">)</a>;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>    mvwaddstr(win, flin, fcol, form-&gt;field[form-&gt;fidx]-&gt;filler_s);</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    mvwaddstr(win, flin, fcol, form-&gt;field[form-&gt;fidx]-&gt;display_s);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    wrefresh(win);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>}</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">/** @brief set_sane_tioctl() - set terminal to sane settings for C-MENU</span></div>
-<div class="line"><span class="lineno">   77</span><span class="comment">    @param t_p - pointer to termios structure to modify</span></div>
-<div class="line"><span class="lineno">   78</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   79</span><span class="comment">     @note - sets terminal to sane settings for C-MENU applications */</span></div>
-<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c">   80</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a>(<span class="keyword">struct</span> termios *t_p) {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    tcgetattr(0, t_p);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    t_p-&gt;c_iflag &amp;= ~(IGNBRK | BRKINT | PARMRK | INPCK | ISTRIP | INLCR |</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                      IGNCR | ICRNL | IXON | IXOFF);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    t_p-&gt;c_iflag |= IUTF8;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    t_p-&gt;c_oflag |= OPOST | OCRNL;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    t_p-&gt;c_lflag &amp;= ~(ECHO | ECHONL | ICANON | IEXTEN);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    t_p-&gt;c_lflag |= (ISIG | ICANON | IEXTEN | ECHO | ECHOE | ECHOK);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    t_p-&gt;c_cflag &amp;= ~(CSIZE | PARENB);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    t_p-&gt;c_cflag |= CS8 | CLOCAL | CREAD;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    tcsetattr(0, TCSANOW, t_p);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="comment">/** @brief Display brackets around current field if set</span></div>
+<div class="line"><span class="lineno">  356</span><span class="comment">    @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">  357</span><span class="comment">    @return 0 on success, non-zero on error</span></div>
+<div class="line"><span class="lineno">  358</span><span class="comment">    @note This function checks if the form&#39;s brackets array has non-empty values</span></div>
+<div class="line"><span class="lineno">  359</span><span class="comment">   for both the left and right brackets. If so, it retrieves the line and column</span></div>
+<div class="line"><span class="lineno">  360</span><span class="comment">   information for the current field and uses the form&#39;s box window to display</span></div>
+<div class="line"><span class="lineno">  361</span><span class="comment">   the left bracket at the start of the field and the right bracket at the end</span></div>
+<div class="line"><span class="lineno">  362</span><span class="comment">   of the field. The display is refreshed to show the brackets around the field.</span></div>
+<div class="line"><span class="lineno">  363</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00364" data-start="{" data-end="}">
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">  364</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">form_display_field_brackets</a>(Form *form) {</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordtype">int</span> flin, fcol;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keywordflow">if</span> (form-&gt;brackets[0] != <span class="stringliteral">&#39;\0&#39;</span> &amp;&amp; form-&gt;brackets[1] != <span class="stringliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        WINDOW *box = form-&gt;box;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        flin = form-&gt;field[form-&gt;fidx]-&gt;line + 1;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>        fcol = form-&gt;field[form-&gt;fidx]-&gt;col;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        wmove(box, flin, fcol);</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        waddch(box, form-&gt;brackets[0]);</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        wmove(box, flin, fcol + form-&gt;field[form-&gt;fidx]-&gt;len + 1);</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        waddch(box, form-&gt;brackets[1]);</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        wrefresh(box);</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>    }</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>}</div>
 </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">/** @brief mk_raw_tioctl() - set terminal to raw mode</span></div>
-<div class="line"><span class="lineno">   94</span><span class="comment">    @param t_p - pointer to termios structure to modify</span></div>
-<div class="line"><span class="lineno">   95</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   96</span><span class="comment">    @note - unlike cfmakeraw(), this leaves ISIG enabled.</span></div>
-<div class="line"><span class="lineno">   97</span><span class="comment">    @note - cfmakeraw() disables ISIG, which prevents C-MENU from handling</span></div>
-<div class="line"><span class="lineno">   98</span><span class="comment">   signals like Ctrl-C. Instead of using cfmakeraw(), we manually set the</span></div>
-<div class="line"><span class="lineno">   99</span><span class="comment">   terminal to raw mode while leaving ISIG enabled.</span></div>
-<div class="line"><span class="lineno">  100</span><span class="comment">    @note - the following code is equivalent to cfmakeraw() but with ISIG left</span></div>
-<div class="line"><span class="lineno">  101</span><span class="comment">   enabled:</span></div>
-<div class="line"><span class="lineno">  102</span><span class="comment">    @code</span></div>
-<div class="line"><span class="lineno">  103</span><span class="comment">    t_p-&gt;c_iflag &amp;= ~(IGNBRK | BRKINT | PARMRK | INPCK | ISTRIP | INLCR |</span></div>
-<div class="line"><span class="lineno">  104</span><span class="comment">                   IGNCR | ICRNL | IXON | IXOFF);</span></div>
-<div class="line"><span class="lineno">  105</span><span class="comment">    t_p-&gt;c_lflag &amp;= ~(ECHO | ECHONL | ICANON | IEXTEN);</span></div>
-<div class="line"><span class="lineno">  106</span><span class="comment">    t_p-&gt;c_cflag &amp;= ~(CSIZE | PARENB);</span></div>
-<div class="line"><span class="lineno">  107</span><span class="comment">    t_p-&gt;c_cflag |= CS8 | CLOCAL;</span></div>
-<div class="line"><span class="lineno">  108</span><span class="comment">    @endcode</span></div>
-<div class="line"><span class="lineno">  109</span><span class="comment">   */</span></div>
-<div class="foldopen" id="foldopen00110" data-start="{" data-end="}">
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae">  110</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(<span class="keyword">struct</span> termios *t_p) {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    tcgetattr(0, t_p);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    t_p-&gt;c_lflag |= ISIG;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    t_p-&gt;c_lflag &amp;= ~(ECHO | ICANON);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    t_p-&gt;c_cc[VMIN] = 1;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    t_p-&gt;c_cc[VTIME] = 0;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    tcsetattr(0, TCSAFLUSH, t_p);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="comment">/** @brief Format field according to its format type</span></div>
+<div class="line"><span class="lineno">  379</span><span class="comment">    @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">  380</span><span class="comment">    @param s Input string to format</span></div>
+<div class="line"><span class="lineno">  381</span><span class="comment">    @return 0 on success, non-zero on error</span></div>
+<div class="line"><span class="lineno">  382</span><span class="comment">    @note This function takes the input string for the current field and formats</span></div>
+<div class="line"><span class="lineno">  383</span><span class="comment">   it according to the field&#39;s specified format type (ff). It updates the</span></div>
+<div class="line"><span class="lineno">  384</span><span class="comment">   accept_s and display_s strings for the field based on the formatted value.</span></div>
+<div class="line"><span class="lineno">  385</span><span class="comment">   The function handles various format types, including strings, decimal</span></div>
+<div class="line"><span class="lineno">  386</span><span class="comment">   integers, hexadecimal integers, floating-point numbers, currency, dates, and</span></div>
+<div class="line"><span class="lineno">  387</span><span class="comment">   times. It uses helper functions for validation and formatting, such as</span></div>
+<div class="line"><span class="lineno">  388</span><span class="comment">   is_valid_date(), is_valid_time(), numeric(), right_justify(), left_justify(),</span></div>
+<div class="line"><span class="lineno">  389</span><span class="comment">   and strnzcpy(). The function ensures that the formatted output fits within</span></div>
+<div class="line"><span class="lineno">  390</span><span class="comment">   the field&#39;s length and creates a filler string for the field as needed. The</span></div>
+<div class="line"><span class="lineno">  391</span><span class="comment">   function also handles error cases, such as invalid formats, and provides</span></div>
+<div class="line"><span class="lineno">  392</span><span class="comment">   feedback through error messages. It is designed to be extensible, allowing</span></div>
+<div class="line"><span class="lineno">  393</span><span class="comment">   for additional format types to be added in the future as needed.</span></div>
+<div class="line"><span class="lineno">  394</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00395" data-start="{" data-end="}">
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">  395</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(Form *form, <span class="keywordtype">char</span> *s) {</div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>    <span class="comment">/** @brief Format field according to its format type</span></div>
+<div class="line"><span class="lineno">  397</span><span class="comment">        @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">  398</span><span class="comment">        @param s Input string to format</span></div>
+<div class="line"><span class="lineno">  399</span><span class="comment">        @return 0 on success, non-zero on error</span></div>
+<div class="line"><span class="lineno">  400</span><span class="comment">        @note takes the input string for the current field and formats it</span></div>
+<div class="line"><span class="lineno">  401</span><span class="comment">       according to the field&#39;s specified format type (ff). It updates the</span></div>
+<div class="line"><span class="lineno">  402</span><span class="comment">       accept_s and display_s strings for the field based on the formatted</span></div>
+<div class="line"><span class="lineno">  403</span><span class="comment">       value.</span></div>
+<div class="line"><span class="lineno">  404</span><span class="comment">        @note handles various format types, including strings, decimal integers,</span></div>
+<div class="line"><span class="lineno">  405</span><span class="comment">       hexadecimal integers, floating-point numbers, currency, dates, and times.</span></div>
+<div class="line"><span class="lineno">  406</span><span class="comment">        @note uses helper functions for validation and formatting, such as</span></div>
+<div class="line"><span class="lineno">  407</span><span class="comment">       is_valid_date(), is_valid_time(), numeric(), right_justify(),</span></div>
+<div class="line"><span class="lineno">  408</span><span class="comment">       left_justify(), and strnzcpy(). The function ensures that the formatted</span></div>
+<div class="line"><span class="lineno">  409</span><span class="comment">       output fits within the field&#39;s length and creates a filler string for the</span></div>
+<div class="line"><span class="lineno">  410</span><span class="comment">       field as needed. The function also handles error cases, such as invalid</span></div>
+<div class="line"><span class="lineno">  411</span><span class="comment">       formats, and provides feedback through error messages. It is designed to</span></div>
+<div class="line"><span class="lineno">  412</span><span class="comment">       be extensible, allowing for additional format types to be added in the</span></div>
+<div class="line"><span class="lineno">  413</span><span class="comment">       future as needed.</span></div>
+<div class="line"><span class="lineno">  414</span><span class="comment">        @note assumes that the input string is well-formed and does not contain</span></div>
+<div class="line"><span class="lineno">  415</span><span class="comment">       malicious content. Input validation and sanitization should be performed</span></div>
+<div class="line"><span class="lineno">  416</span><span class="comment">       at a higher level in the application to ensure security and robustness.</span></div>
+<div class="line"><span class="lineno">  417</span><span class="comment">       @note The function currently does not handle localization or</span></div>
+<div class="line"><span class="lineno">  418</span><span class="comment">       internationalization of number formats, such as different decimal</span></div>
+<div class="line"><span class="lineno">  419</span><span class="comment">       separators or currency symbols. Future enhancements may include support</span></div>
+<div class="line"><span class="lineno">  420</span><span class="comment">       for locale-specific formatting. @note Error handling is basic; future</span></div>
+<div class="line"><span class="lineno">  421</span><span class="comment">       versions may include more detailed error reporting and logging</span></div>
+<div class="line"><span class="lineno">  422</span><span class="comment">       mechanisms. @note Performance optimizations may be considered for</span></div>
+<div class="line"><span class="lineno">  423</span><span class="comment">       handling large volumes of data or high-frequency updates in real-time</span></div>
+<div class="line"><span class="lineno">  424</span><span class="comment">       applications. @note The following variables and structures are used in</span></div>
+<div class="line"><span class="lineno">  425</span><span class="comment">       this function:</span></div>
+<div class="line"><span class="lineno">  426</span><span class="comment">        @code</span></div>
+<div class="line"><span class="lineno">  427</span><span class="comment">            char field_s[MAXLEN];</span></div>
+<div class="line"><span class="lineno">  428</span><span class="comment">            int decimal_int_n = 0;</span></div>
+<div class="line"><span class="lineno">  429</span><span class="comment">            int hex_int_n = 0;</span></div>
+<div class="line"><span class="lineno">  430</span><span class="comment">            float float_n = 0.0;</span></div>
+<div class="line"><span class="lineno">  431</span><span class="comment">            double double_n = 0.0;</span></div>
+<div class="line"><span class="lineno">  432</span><span class="comment">            double currency_n = 0.0;</span></div>
+<div class="line"><span class="lineno">  433</span><span class="comment">            struct Date { int yyyy; int mm; int dd; };</span></div>
+<div class="line"><span class="lineno">  434</span><span class="comment">            struct Time { int hh; int mm; int ss; };</span></div>
+<div class="line"><span class="lineno">  435</span><span class="comment">        @endcode</span></div>
+<div class="line"><span class="lineno">  436</span><span class="comment">        @note supports format types: FF_STRING, FF_DECIMAL_INT, FF_HEX_INT,</span></div>
+<div class="line"><span class="lineno">  437</span><span class="comment">       FF_FLOAT, FF_DOUBLE, FF_CURRENCY, FF_YYYYMMDD, FF_HHMMSS, FF_APR with</span></div>
+<div class="line"><span class="lineno">  438</span><span class="comment">       appropriate formatting and validation for each type. @note Handles field</span></div>
+<div class="line"><span class="lineno">  439</span><span class="comment">       length and filler string creation. @note As the roadmap indicates, these</span></div>
+<div class="line"><span class="lineno">  440</span><span class="comment">       data types are just a start and more complex types and formats may be</span></div>
+<div class="line"><span class="lineno">  441</span><span class="comment">       added in the future. @note These data types are not suitable for</span></div>
+<div class="line"><span class="lineno">  442</span><span class="comment">       financial, scientific, or high-precision applications. They are intended</span></div>
+<div class="line"><span class="lineno">  443</span><span class="comment">       for basic data entry and display in a text-based user interface.</span></div>
+<div class="line"><span class="lineno">  444</span><span class="comment">        @note In the future, we will aqdd support for additional data types and</span></div>
+<div class="line"><span class="lineno">  445</span><span class="comment">       formats such as: dates with time zones, timestamps, percentages,</span></div>
+<div class="line"><span class="lineno">  446</span><span class="comment">       scientific notation, and custom user-defined formats.</span></div>
+<div class="line"><span class="lineno">  447</span><span class="comment">        @note For high precision applications, we will be integrating support</span></div>
+<div class="line"><span class="lineno">  448</span><span class="comment">       for 128-bit binary coded decimal (BCD) types and arbitrary precision</span></div>
+<div class="line"><span class="lineno">  449</span><span class="comment">       decimal types using libraries such as the GNU MPFR library, IBM&#39;s</span></div>
+<div class="line"><span class="lineno">  450</span><span class="comment">       decNumber, Rust Decimal, or the Intel Decimal Floating-Point Math</span></div>
+<div class="line"><span class="lineno">  451</span><span class="comment">       Library.</span></div>
+<div class="line"><span class="lineno">  452</span><span class="comment">        @note C-Menu Form converts each field&#39;s input string into internal</span></div>
+<div class="line"><span class="lineno">  453</span><span class="comment">       numeric binary based on the field&#39;s specified format. The internal</span></div>
+<div class="line"><span class="lineno">  454</span><span class="comment">       numberic binary is then formated and displayed, verifying the user&#39;s</span></div>
+<div class="line"><span class="lineno">  455</span><span class="comment">       input and Form&#39;s interpretation of the user&#39;s input.</span></div>
+<div class="line"><span class="lineno">  456</span><span class="comment">      */</span></div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(form-&gt;field[form-&gt;fidx]-&gt;input_s, s, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>    <span class="keywordtype">char</span> *input_s = form-&gt;field[form-&gt;fidx]-&gt;input_s;</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    <span class="keywordtype">char</span> *accept_s = form-&gt;field[form-&gt;fidx]-&gt;accept_s;</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>    <span class="keywordtype">char</span> *display_s = form-&gt;field[form-&gt;fidx]-&gt;display_s;</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    <span class="keywordtype">char</span> *filler_s = form-&gt;field[form-&gt;fidx]-&gt;filler_s;</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>    <span class="keywordtype">int</span> ff = form-&gt;field[form-&gt;fidx]-&gt;ff;</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>    <span class="keywordtype">int</span> fl = form-&gt;field[form-&gt;fidx]-&gt;len;</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span> </div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>    <span class="keywordtype">char</span> field_s[<a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>    <span class="keywordtype">int</span> decimal_int_n = 0;</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>    <span class="keywordtype">int</span> hex_int_n = 0;</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>    <span class="keywordtype">float</span> float_n = 0.0;</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    <span class="keywordtype">double</span> double_n = 0.0;</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    <span class="keywordtype">double</span> currency_n = 0.0;</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span> </div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>    <span class="keyword">struct</span> {</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>        <span class="keywordtype">int</span> yyyy;</div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>        <span class="keywordtype">int</span> mm;</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>        <span class="keywordtype">int</span> dd;</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>    } Date;</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>    Date.yyyy = Date.mm = Date.dd = 0;</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>    <span class="keyword">struct</span> {</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>        <span class="keywordtype">int</span> hh;</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>        <span class="keywordtype">int</span> mm;</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>        <span class="keywordtype">int</span> ss;</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>    } Time;</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>    Time.hh = Time.mm = Time.ss = 0;</div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    <a class="code hl_function" href="../../d6/d7f/a00287.html#a636608f26d1193b5d860f2312cd8ee49">strnz</a>(accept_s, fl);</div>
+<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>    <span class="keywordflow">switch</span> (ff) {</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>    <span class="keywordflow">case</span> FF_STRING:</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">left_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">(</a>s<a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">)</a>;</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a34703756fd5be0fde758400f320db047">trim</a>(s);</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(input_s, s, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(accept_s, s, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(display_s, s, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>    <span class="keywordflow">case</span> FF_DECIMAL_INT:</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>        sscanf(input_s, <span class="stringliteral">&quot;%d&quot;</span>, &amp;decimal_int_n);</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>        sprintf(accept_s, <span class="stringliteral">&quot;%d&quot;</span>, decimal_int_n);</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>        sprintf(display_s, <span class="stringliteral">&quot;%d&quot;</span>, decimal_int_n);</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">(</a>display_s<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">)</a>;</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    <span class="keywordflow">case</span> FF_HEX_INT:</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>        sscanf(input_s, <span class="stringliteral">&quot;%x&quot;</span>, &amp;hex_int_n);</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>        sprintf(accept_s, <span class="stringliteral">&quot;%d&quot;</span>, hex_int_n);</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>        sprintf(display_s, <span class="stringliteral">&quot;%x&quot;</span>, hex_int_n);</div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">(</a>display_s<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">)</a>;</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>    <span class="keywordflow">case</span> FF_FLOAT:</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>        sscanf(input_s, <span class="stringliteral">&quot;%f&quot;</span>, &amp;float_n);</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>        sprintf(accept_s, <span class="stringliteral">&quot;%f&quot;</span>, float_n);</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        sprintf(display_s, <span class="stringliteral">&quot;%f&quot;</span>, float_n);</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">(</a>display_s<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">)</a>;</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>    <span class="keywordflow">case</span> FF_DOUBLE:</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>        sscanf(input_s, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;double_n);</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>        sprintf(accept_s, <span class="stringliteral">&quot;%lf&quot;</span>, double_n);</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>        sprintf(display_s, <span class="stringliteral">&quot;%lf&quot;</span>, double_n);</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">(</a>display_s<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">)</a>;</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>    <span class="keywordflow">case</span> FF_CURRENCY:</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">numeric</a><a class="code hl_function" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">(</a>field_s<a class="code hl_function" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">,</a> input_s<a class="code hl_function" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">)</a>;</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        sscanf(field_s, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;currency_n);</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>        sprintf(accept_s, <span class="stringliteral">&quot;%.2lf&quot;</span>, currency_n);</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>        sprintf(display_s, <span class="stringliteral">&quot;%&#39;.2lf&quot;</span>, currency_n);</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">(</a>display_s<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">)</a>;</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>    <span class="keywordflow">case</span> FF_YYYYMMDD:</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>        Date.yyyy = Date.mm = Date.dd = 0;</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(field_s, input_s, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>        sscanf(field_s, <span class="stringliteral">&quot;%4d%2d%2d&quot;</span>, &amp;Date.yyyy, &amp;Date.mm, &amp;Date.dd);</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>        sprintf(accept_s, <span class="stringliteral">&quot;%04d%02d%02d&quot;</span>, Date.yyyy, Date.mm, Date.dd);</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>        <span class="keywordflow">if</span> (is_valid_date(Date.yyyy, Date.mm, Date.dd))</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>            sprintf(display_s, <span class="stringliteral">&quot;%04d-%02d-%02d&quot;</span>, Date.yyyy, Date.mm, Date.dd);</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>    <span class="keywordflow">case</span> FF_HHMMSS:</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>        Time.hh = Time.mm = Time.ss = 0;</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(field_s, input_s, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>        sscanf(field_s, <span class="stringliteral">&quot;%2d%2d%2d&quot;</span>, &amp;Time.hh, &amp;Time.mm, &amp;Time.ss);</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>        sprintf(accept_s, <span class="stringliteral">&quot;%02d%02d%02d&quot;</span>, Time.hh, Time.mm, Time.ss);</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>        <span class="keywordflow">if</span> (is_valid_time(Time.hh, Time.mm, Time.ss))</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span>            sprintf(display_s, <span class="stringliteral">&quot;%02d:%02d:%02d&quot;</span>, Time.hh, Time.mm, Time.ss);</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="keywordflow">case</span> FF_APR:</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        sscanf(input_s, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;double_n);</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>        sprintf(accept_s, <span class="stringliteral">&quot;%lf&quot;</span>, double_n);</div>
+<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>        sprintf(display_s, <span class="stringliteral">&quot;%0.3lf&quot;</span>, double_n);</div>
+<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">(</a>display_s<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">)</a>;</div>
+<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span>        <a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">(</a><span class="stringliteral">&quot;form_fmt_field() invalid format&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>    }</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>    <a class="code hl_function" href="../../d6/d7f/a00287.html#a636608f26d1193b5d860f2312cd8ee49">strnz</a>(accept_s, fl);</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">left_justify</a><a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">(</a>accept_s<a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">)</a>;</div>
+<div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">mk_filler</a><a class="code hl_function" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">(</a>filler_s<a class="code hl_function" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">,</a> fl<a class="code hl_function" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">)</a>;</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>}</div>
 </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">/** @brief  sget single character from terminal in raw mode</span></div>
-<div class="line"><span class="lineno">  120</span><span class="comment">    @return - the character read from terminal</span></div>
-<div class="line"><span class="lineno">  121</span><span class="comment">    @note restores terminal settings */</span></div>
-<div class="foldopen" id="foldopen00122" data-start="{" data-end="}">
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a11948dfa6be15e54c80072e4b3df0e12">  122</a></span><span class="keywordtype">char</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a11948dfa6be15e54c80072e4b3df0e12">di_getch</a>() {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">struct</span> termios org_tioctl, new_tioctl;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordtype">char</span> buf;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordflow">if</span> (tcgetattr(2, &amp;org_tioctl) == -1) {</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        fprintf(stderr, <span class="stringliteral">&quot;\ndi_getch: tcgetattr failed\n&quot;</span>);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">return</span> (0);</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    }</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    new_tioctl = org_tioctl;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    new_tioctl.c_lflag &amp;= ~(ECHO | ICANON);</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    new_tioctl.c_cc[VMIN] = 1;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    new_tioctl.c_cc[VTIME] = 0;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    read(2, &amp;buf, 1);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    tcsetattr(2, TCSAFLUSH, &amp;org_tioctl);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    <span class="keywordflow">return</span> (buf);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span><span class="comment">/** @brief Validate current field based on flags</span></div>
+<div class="line"><span class="lineno">  556</span><span class="comment">    @param form Pointer to Form structure</span></div>
+<div class="line"><span class="lineno">  557</span><span class="comment">    @return 0 if valid, 1 if invalid</span></div>
+<div class="line"><span class="lineno">  558</span><span class="comment">    @note Very underdeveloped - only checks F_NOTBLANK and F_NOMETAS</span></div>
+<div class="line"><span class="lineno">  559</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00560" data-start="{" data-end="}">
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">  560</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a>(Form *form) {</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    <span class="keywordtype">int</span> n = form-&gt;fidx;</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>    <span class="keywordtype">char</span> *p = form-&gt;field[n]-&gt;accept_s;</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>    <span class="keywordflow">if</span> (form-&gt;field[n]-&gt;ff &amp; F_NOTBLANK) {</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>        <span class="keywordtype">char</span> *s = form-&gt;field[n]-&gt;accept_s;</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>        <span class="keywordflow">while</span> (*s++ == <span class="stringliteral">&#39; &#39;</span>)</div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>            ;</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>        <span class="keywordflow">if</span> (*s == <span class="stringliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>            <a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">(</a><span class="stringliteral">&quot;blank field not allowed&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>            <span class="keywordflow">return</span> (1);</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>        }</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    }</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    <span class="keywordflow">if</span> (form-&gt;field[n]-&gt;ff &amp; F_NOMETAS) {</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>        <span class="keywordflow">if</span> (strpbrk(p, <span class="stringliteral">&quot;*?[]&quot;</span>) != 0) {</div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>            <a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">(</a><span class="stringliteral">&quot;metacharacters not allowed&quot;</span><a class="code hl_function" href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">)</a>;</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>            <span class="keywordflow">return</span> (1);</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>        }</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>    }</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="keywordflow">return</span> (0);</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>}</div>
 </div>
-<div class="ttc" id="aa00296_html_a0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../db/d7b/a00296.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00040">scriou.c:40</a></div></div>
-<div class="ttc" id="aa00296_html_a11948dfa6be15e54c80072e4b3df0e12"><div class="ttname"><a href="../../db/d7b/a00296.html#a11948dfa6be15e54c80072e4b3df0e12">di_getch</a></div><div class="ttdeci">char di_getch()</div><div class="ttdoc">sget single character from terminal in raw mode</div><div class="ttdef"><b>Definition</b> <a href="#l00122">scriou.c:122</a></div></div>
-<div class="ttc" id="aa00296_html_a1c8e0f0a02e08c783231a20093fb8410"><div class="ttname"><a href="../../db/d7b/a00296.html#a1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a></div><div class="ttdeci">bool restore_curses_tioctl()</div><div class="ttdoc">restore_curses_tioctl() - restore curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00070">scriou.c:70</a></div></div>
-<div class="ttc" id="aa00296_html_a1e8b2f4dea5e88e7af17541140207df0"><div class="ttname"><a href="../../db/d7b/a00296.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a></div><div class="ttdeci">bool f_have_shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa00296_html_a4d0a6767e791cf93a268ebe9ba02aa24"><div class="ttname"><a href="../../db/d7b/a00296.html#a4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a></div><div class="ttdeci">bool capture_curses_tioctl()</div><div class="ttdoc">capture_curses_tioctl() - capture curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00060">scriou.c:60</a></div></div>
-<div class="ttc" id="aa00296_html_a5080741aab7f17e1d5b24e5ad63cf5e6"><div class="ttname"><a href="../../db/d7b/a00296.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a></div><div class="ttdeci">struct termios curses_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00021">scriou.c:21</a></div></div>
-<div class="ttc" id="aa00296_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../db/d7b/a00296.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00020">scriou.c:20</a></div></div>
-<div class="ttc" id="aa00296_html_a9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../db/d7b/a00296.html#a9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="#l00110">scriou.c:110</a></div></div>
-<div class="ttc" id="aa00296_html_ab69b11814964ea732c1e8e0ca6d22c1c"><div class="ttname"><a href="../../db/d7b/a00296.html#ab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a></div><div class="ttdeci">bool set_sane_tioctl(struct termios *)</div><div class="ttdoc">set_sane_tioctl() - set terminal to sane settings for C-MENU</div><div class="ttdef"><b>Definition</b> <a href="#l00080">scriou.c:80</a></div></div>
-<div class="ttc" id="aa00296_html_ac46bd98f4cec1758c1d600920caa7f39"><div class="ttname"><a href="../../db/d7b/a00296.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a></div><div class="ttdeci">bool f_have_curses_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00023">scriou.c:23</a></div></div>
-<div class="ttc" id="aa00296_html_ac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../db/d7b/a00296.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00051">scriou.c:51</a></div></div>
-<div class="ttc" id="aa00296_html_ad9964c09cd96ce9748052b5494f30fc6"><div class="ttname"><a href="../../db/d7b/a00296.html#ad9964c09cd96ce9748052b5494f30fc6">curses_out_tioctl</a></div><div class="ttdeci">struct termios shell_out_tioctl curses_out_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00034">scriou.c:34</a></div></div>
-<div class="ttc" id="aa00296_html_afcd0e5aee1f3f7445581428cb02b2115"><div class="ttname"><a href="../../db/d7b/a00296.html#afcd0e5aee1f3f7445581428cb02b2115">curses_in_tioctl</a></div><div class="ttdeci">struct termios shell_in_tioctl curses_in_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00033">scriou.c:33</a></div></div>
-<div class="ttc" id="aa00296_html_afe4863a6b75c5a20c2008f36f86cfeed"><div class="ttname"><a href="../../db/d7b/a00296.html#afe4863a6b75c5a20c2008f36f86cfeed">curses_err_tioctl</a></div><div class="ttdeci">struct termios shell_err_tioctl curses_err_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00035">scriou.c:35</a></div></div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span><span class="comment">/** @brief Create filler string for field</span></div>
+<div class="line"><span class="lineno">  581</span><span class="comment">    @param s Filler string to create</span></div>
+<div class="line"><span class="lineno">  582</span><span class="comment">    @param fl Field length</span></div>
+<div class="line"><span class="lineno">  583</span><span class="comment">    @note Fills the string s with the fill character specified in the form&#39;s</span></div>
+<div class="line"><span class="lineno">  584</span><span class="comment">   fill_char array, repeated for the length of the field (fl). The resulting</span></div>
+<div class="line"><span class="lineno">  585</span><span class="comment">   string is null-terminated. This filler string can be used to display empty</span></div>
+<div class="line"><span class="lineno">  586</span><span class="comment">   fields or to clear the field area before displaying new content.</span></div>
+<div class="line"><span class="lineno">  587</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00588" data-start="{" data-end="}">
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">  588</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">mk_filler</a>(<span class="keywordtype">char</span> *s, <span class="keywordtype">int</span> fl) {</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>    <span class="keywordtype">char</span> *e = s + fl;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> c;</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span> </div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>    c = <a class="code hl_variable" href="../../dd/dc1/a00212.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;fill_char[0];</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>    <span class="keywordflow">while</span> (s != e)</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span>        *s++ = c;</div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>    *s = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>}</div>
+</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span><span class="comment">/** @brief Left justify string by removing leading spaces</span></div>
+<div class="line"><span class="lineno">  598</span><span class="comment">    @param s String to left justify</span></div>
+<div class="line"><span class="lineno">  599</span><span class="comment">    @note This function takes a string s and removes any leading spaces,</span></div>
+<div class="line"><span class="lineno">  600</span><span class="comment">   effectively left-justifying the text. It does this by finding the first</span></div>
+<div class="line"><span class="lineno">  601</span><span class="comment">   non-space character and shifting the string to the left, overwriting the</span></div>
+<div class="line"><span class="lineno">  602</span><span class="comment">   leading spaces. The resulting string is null-terminated.</span></div>
+<div class="line"><span class="lineno">  603</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">  604</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">left_justify</a>(<span class="keywordtype">char</span> *s) { <a class="code hl_function" href="../../d6/d7f/a00287.html#a34703756fd5be0fde758400f320db047">trim</a>(s); }</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span><span class="comment">/** @brief Right justify string by removing trailing spaces and adding leading</span></div>
+<div class="line"><span class="lineno">  606</span><span class="comment">   spaces</span></div>
+<div class="line"><span class="lineno">  607</span><span class="comment">    @param s String to right justify</span></div>
+<div class="line"><span class="lineno">  608</span><span class="comment">    @param fl Field length</span></div>
+<div class="line"><span class="lineno">  609</span><span class="comment">    @note This function takes a string s and right-justifies it within a field</span></div>
+<div class="line"><span class="lineno">  610</span><span class="comment">   of length fl. It first removes any trailing spaces from the string, then</span></div>
+<div class="line"><span class="lineno">  611</span><span class="comment">   shifts the characters to the right end of the field, filling the left side</span></div>
+<div class="line"><span class="lineno">  612</span><span class="comment">   with spaces. The resulting string is null-terminated and fits within the</span></div>
+<div class="line"><span class="lineno">  613</span><span class="comment">   specified field length.</span></div>
+<div class="line"><span class="lineno">  614</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00615" data-start="{" data-end="}">
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">  615</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a>(<span class="keywordtype">char</span> *s, <span class="keywordtype">int</span> fl) {</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>    <span class="keywordtype">char</span> *p = s;</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>    <span class="keywordtype">char</span> *d = s + fl;</div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>    <a class="code hl_function" href="../../d6/d7f/a00287.html#a34703756fd5be0fde758400f320db047">trim</a>(s);</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>    *d = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    <span class="keywordflow">while</span> (*s != <span class="stringliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>        s++;</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    }</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    <span class="keywordflow">while</span> (s != p) {</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>        *(--d) = *(--s);</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>    }</div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>    <span class="keywordflow">while</span> (d != p) {</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>        *(--d) = <span class="stringliteral">&#39; &#39;</span>;</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>    }</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>}</div>
+</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span><span class="comment">/** @brief Check if a given date is valid, including leap years</span></div>
+<div class="line"><span class="lineno">  631</span><span class="comment">    @param yyyy Year</span></div>
+<div class="line"><span class="lineno">  632</span><span class="comment">    @param mm Month</span></div>
+<div class="line"><span class="lineno">  633</span><span class="comment">    @param dd Day</span></div>
+<div class="line"><span class="lineno">  634</span><span class="comment">    @return true if the date is valid, false otherwise</span></div>
+<div class="line"><span class="lineno">  635</span><span class="comment">    @note This function checks if the provided year, month, and day constitute a</span></div>
+<div class="line"><span class="lineno">  636</span><span class="comment">   valid date. It accounts for leap years when determining the number of days in</span></div>
+<div class="line"><span class="lineno">  637</span><span class="comment">   February. The function returns true if the date is valid and false if it is</span></div>
+<div class="line"><span class="lineno">  638</span><span class="comment">   not.</span></div>
+<div class="line"><span class="lineno">  639</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00640" data-start="{" data-end="}">
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de">  640</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de">is_valid_date</a>(<span class="keywordtype">int</span> yyyy, <span class="keywordtype">int</span> mm, <span class="keywordtype">int</span> dd) {</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    <span class="keywordflow">if</span> (yyyy &lt; 1 || mm &lt; 1 || mm &gt; 12 || dd &lt; 1)</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>        <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    <span class="keywordtype">int</span> days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>    <span class="keywordflow">if</span> ((yyyy % 4 == 0 &amp;&amp; yyyy % 100 != 0) || (yyyy % 400 == 0))</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>        days_in_month[2] = 29;</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>    <span class="keywordflow">if</span> (dd &gt; days_in_month[mm])</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>        <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>    <span class="keywordflow">return</span> true;</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>}</div>
+</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span><span class="comment">/** @brief Check if a given time is valid</span></div>
+<div class="line"><span class="lineno">  651</span><span class="comment">    @param hh Hour</span></div>
+<div class="line"><span class="lineno">  652</span><span class="comment">    @param mm Minute</span></div>
+<div class="line"><span class="lineno">  653</span><span class="comment">    @param ss Second</span></div>
+<div class="line"><span class="lineno">  654</span><span class="comment">    @return true if the time is valid, false otherwise</span></div>
+<div class="line"><span class="lineno">  655</span><span class="comment">    @note This function checks if the provided hour, minute, and second</span></div>
+<div class="line"><span class="lineno">  656</span><span class="comment">   constitute a valid time. It ensures that hours are between 0 and 23, minutes</span></div>
+<div class="line"><span class="lineno">  657</span><span class="comment">   and seconds are between 0 and 59. The function returns true if the time is</span></div>
+<div class="line"><span class="lineno">  658</span><span class="comment">   valid and false if it is not.</span></div>
+<div class="line"><span class="lineno">  659</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00660" data-start="{" data-end="}">
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9">  660</a></span><a class="code hl_function" href="../../db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9">bool</a> <a class="code hl_function" href="../../db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9">is_valid_time</a>(<span class="keywordtype">int</span> hh, <span class="keywordtype">int</span> mm, <span class="keywordtype">int</span> ss) {</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>    <span class="keywordflow">if</span> (hh &lt; 0 || hh &gt; 23 || mm &lt; 0 || mm &gt; 59 || ss &lt; 0 || ss &gt; 59)</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>        <span class="keywordflow">return</span> false;</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>    <span class="keywordflow">return</span> true;</div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span>}</div>
+</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="comment">/** @brief Extract numeric characters from source string to destination string</span></div>
+<div class="line"><span class="lineno">  666</span><span class="comment">    @param d Destination string</span></div>
+<div class="line"><span class="lineno">  667</span><span class="comment">    @param s Source string</span></div>
+<div class="line"><span class="lineno">  668</span><span class="comment">    @note This function takes a source string s and extracts only the numeric</span></div>
+<div class="line"><span class="lineno">  669</span><span class="comment">   characters (digits 0-9), as well as dashes (&#39;-&#39;) and periods (&#39;.&#39;), copying</span></div>
+<div class="line"><span class="lineno">  670</span><span class="comment">   them into the destination string d. The resulting string in d is</span></div>
+<div class="line"><span class="lineno">  671</span><span class="comment">   null-terminated. This is useful for processing input that may contain</span></div>
+<div class="line"><span class="lineno">  672</span><span class="comment">   non-numeric characters, allowing the application to focus on the numeric</span></div>
+<div class="line"><span class="lineno">  673</span><span class="comment">   content for further processing or validation.</span></div>
+<div class="line"><span class="lineno">  674</span><span class="comment"> */</span></div>
+<div class="foldopen" id="foldopen00675" data-start="{" data-end="}">
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno"><a class="line" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">  675</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">numeric</a>(<span class="keywordtype">char</span> *d, <span class="keywordtype">char</span> *s) {</div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>    <span class="keywordflow">while</span> (*s != <span class="stringliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span>        <span class="keywordflow">if</span> (*s == <span class="stringliteral">&#39;-&#39;</span> || *s == <span class="stringliteral">&#39;.&#39;</span> || (*s &gt;= <span class="stringliteral">&#39;0&#39;</span> &amp;&amp; *s &lt;= <span class="stringliteral">&#39;9&#39;</span>))</div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span>            *d++ = *s++;</div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>            s++;</div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>    }</div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span>    *d = <span class="stringliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>}</div>
+</div>
+<div class="ttc" id="aa00212_html_adb98384f3771d341017b7b3add874515"><div class="ttname"><a href="../../dd/dc1/a00212.html#adb98384f3771d341017b7b3add874515">form</a></div><div class="ttdeci">Form * form</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dc1/a00212_source.html#l00035">mem.c:35</a></div></div>
+<div class="ttc" id="aa00218_html_aa8cecfc5c5c054d2875c03e77b7be15d"><div class="ttname"><a href="../../dc/d9a/a00218.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a></div><div class="ttdeci">#define TRUE</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d9a/a00218_source.html#l00019">iloan.c:19</a></div></div>
+<div class="ttc" id="aa00218_html_aa93f0eb578d23995850d61f7d61c55c1"><div class="ttname"><a href="../../dc/d9a/a00218.html#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a></div><div class="ttdeci">#define FALSE</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d9a/a00218_source.html#l00018">iloan.c:18</a></div></div>
+<div class="ttc" id="aa00224_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d5/ddf/a00224_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa00236_html_a3c66bd6b1987c79ef5a31bb28227c65b"><div class="ttname"><a href="../../d7/d40/a00236.html#a3c66bd6b1987c79ef5a31bb28227c65b">form_yx_to_fidx</a></div><div class="ttdeci">int form_yx_to_fidx(Form *, int, int)</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d40/a00236_source.html#l00419">form_engine.c:419</a></div></div>
+<div class="ttc" id="aa00236_html_a639a9c28161fb26549fb07378ae82f55"><div class="ttname"><a href="../../d7/d40/a00236.html#a639a9c28161fb26549fb07378ae82f55">form_display_chyron</a></div><div class="ttdeci">void form_display_chyron(Form *)</div><div class="ttdoc">Display the chyron (status line) at the bottom of the form window, showing available commands and the...</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d40/a00236_source.html#l00509">form_engine.c:509</a></div></div>
+<div class="ttc" id="aa00287_html_a0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00217">futil.c:217</a></div></div>
+<div class="ttc" id="aa00287_html_a34703756fd5be0fde758400f320db047"><div class="ttname"><a href="../../d6/d7f/a00287.html#a34703756fd5be0fde758400f320db047">trim</a></div><div class="ttdeci">size_t trim(char *)</div><div class="ttdoc">Trims leading and trailing spaces from string s in place.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00087">futil.c:87</a></div></div>
+<div class="ttc" id="aa00287_html_a636608f26d1193b5d860f2312cd8ee49"><div class="ttname"><a href="../../d6/d7f/a00287.html#a636608f26d1193b5d860f2312cd8ee49">strnz</a></div><div class="ttdeci">size_t strnz(char *, size_t)</div><div class="ttdoc">terminates string at New Line, Carriage Return, or max_len</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00285">futil.c:285</a></div></div>
+<div class="ttc" id="aa00293_html_a208ce92c197fdd6d2b007987e534aa3b"><div class="ttname"><a href="../../d6/d82/a00293.html#a208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a></div><div class="ttdeci">void set_chyron_key(Chyron *, int, char *, int)</div><div class="ttdoc">Set chyron key.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d82/a00293_source.html#l00228">dwin.c:228</a></div></div>
+<div class="ttc" id="aa00293_html_a61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d6/d82/a00293.html#a61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d82/a00293_source.html#l00928">dwin.c:928</a></div></div>
+<div class="ttc" id="aa00293_html_a645871e46277e31736bc36d0f3dce4bd"><div class="ttname"><a href="../../d6/d82/a00293.html#a645871e46277e31736bc36d0f3dce4bd">compile_chyron</a></div><div class="ttdeci">void compile_chyron(Chyron *)</div><div class="ttdoc">construct the chyron string from the chyron structure</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d82/a00293_source.html#l00252">dwin.c:252</a></div></div>
+<div class="ttc" id="aa00293_html_a89aa1c1525f82269298a01d552e60037"><div class="ttname"><a href="../../d6/d82/a00293.html#a89aa1c1525f82269298a01d552e60037">click_x</a></div><div class="ttdeci">int click_x</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d82/a00293_source.html#l00043">dwin.c:43</a></div></div>
+<div class="ttc" id="aa00293_html_aba43294be5cc34c20fa3d3a58af45f0d"><div class="ttname"><a href="../../d6/d82/a00293.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a></div><div class="ttdeci">int click_y</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d82/a00293_source.html#l00042">dwin.c:42</a></div></div>
+<div class="ttc" id="aa00293_html_acf4c709bccc4c965a5d61db978db31a3"><div class="ttname"><a href="../../d6/d82/a00293.html#acf4c709bccc4c965a5d61db978db31a3">xwgetch</a></div><div class="ttdeci">int xwgetch(WINDOW *win, Chyron *chyron)</div><div class="ttdoc">Wrapper for wgetch that handles signals and mouse events.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d82/a00293_source.html#l01083">dwin.c:1083</a></div></div>
+<div class="ttc" id="aa00296_html_a07a8d9311c88786e7310fef638d34a41"><div class="ttname"><a href="../../db/d7b/a00296.html#a07a8d9311c88786e7310fef638d34a41">form_fmt_field</a></div><div class="ttdeci">int form_fmt_field(Form *, char *)</div><div class="ttdoc">Format field according to its format type.</div><div class="ttdef"><b>Definition</b> <a href="#l00395">fields.c:395</a></div></div>
+<div class="ttc" id="aa00296_html_a18db59e4c79e823f79310378183ac25c"><div class="ttname"><a href="../../db/d7b/a00296.html#a18db59e4c79e823f79310378183ac25c">numeric</a></div><div class="ttdeci">void numeric(char *, char *)</div><div class="ttdoc">Extract numeric characters from source string to destination string.</div><div class="ttdef"><b>Definition</b> <a href="#l00675">fields.c:675</a></div></div>
+<div class="ttc" id="aa00296_html_a21ebe9713e3b003715a7a2c3b64cbf55"><div class="ttname"><a href="../../db/d7b/a00296.html#a21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a></div><div class="ttdeci">void right_justify(char *, int)</div><div class="ttdoc">Right justify string by removing trailing spaces and adding leading spaces.</div><div class="ttdef"><b>Definition</b> <a href="#l00615">fields.c:615</a></div></div>
+<div class="ttc" id="aa00296_html_a353546f4d99ef7ec908d371187f033de"><div class="ttname"><a href="../../db/d7b/a00296.html#a353546f4d99ef7ec908d371187f033de">is_valid_date</a></div><div class="ttdeci">bool is_valid_date(int, int, int)</div><div class="ttdoc">Check if a given date is valid, including leap years.</div><div class="ttdef"><b>Definition</b> <a href="#l00640">fields.c:640</a></div></div>
+<div class="ttc" id="aa00296_html_a425021d4c87474159a36d395e4dcdf65"><div class="ttname"><a href="../../db/d7b/a00296.html#a425021d4c87474159a36d395e4dcdf65">left_justify</a></div><div class="ttdeci">void left_justify(char *)</div><div class="ttdoc">Left justify string by removing leading spaces.</div><div class="ttdef"><b>Definition</b> <a href="#l00604">fields.c:604</a></div></div>
+<div class="ttc" id="aa00296_html_a56bbb25c4d0944e1b96b9a723cde2ae9"><div class="ttname"><a href="../../db/d7b/a00296.html#a56bbb25c4d0944e1b96b9a723cde2ae9">is_valid_time</a></div><div class="ttdeci">bool is_valid_time(int, int, int)</div><div class="ttdoc">Check if a given time is valid.</div><div class="ttdef"><b>Definition</b> <a href="#l00660">fields.c:660</a></div></div>
+<div class="ttc" id="aa00296_html_a95c3fea1ca130a8386408cdb450c2069"><div class="ttname"><a href="../../db/d7b/a00296.html#a95c3fea1ca130a8386408cdb450c2069">form_display_field_n</a></div><div class="ttdeci">int form_display_field_n(Form *, int)</div><div class="ttdoc">Display field n.</div><div class="ttdef"><b>Definition</b> <a href="#l00328">fields.c:328</a></div></div>
+<div class="ttc" id="aa00296_html_aa3062b9adcfe4160df15f1763963f9f8"><div class="ttname"><a href="../../db/d7b/a00296.html#aa3062b9adcfe4160df15f1763963f9f8">form_accept_field</a></div><div class="ttdeci">int form_accept_field(Form *)</div><div class="ttdoc">Accept input for a field.</div><div class="ttdef"><b>Definition</b> <a href="#l00044">fields.c:44</a></div></div>
+<div class="ttc" id="aa00296_html_aac069c6892f64ea6307044a92b179faa"><div class="ttname"><a href="../../db/d7b/a00296.html#aac069c6892f64ea6307044a92b179faa">mk_filler</a></div><div class="ttdeci">void mk_filler(char *, int)</div><div class="ttdoc">Create filler string for field.</div><div class="ttdef"><b>Definition</b> <a href="#l00588">fields.c:588</a></div></div>
+<div class="ttc" id="aa00296_html_ab2b1f7bf9cce5974d1459eba268c0211"><div class="ttname"><a href="../../db/d7b/a00296.html#ab2b1f7bf9cce5974d1459eba268c0211">ff_tbl</a></div><div class="ttdeci">char ff_tbl[][26]</div><div class="ttdef"><b>Definition</b> <a href="#l00026">fields.c:26</a></div></div>
+<div class="ttc" id="aa00296_html_abd1710f59277202b0a58f840d4da322e"><div class="ttname"><a href="../../db/d7b/a00296.html#abd1710f59277202b0a58f840d4da322e">form_display_field</a></div><div class="ttdeci">int form_display_field(Form *)</div><div class="ttdoc">Display current field.</div><div class="ttdef"><b>Definition</b> <a href="#l00345">fields.c:345</a></div></div>
+<div class="ttc" id="aa00296_html_ad2a5cf5a784d70bcd15fcd82ecc13185"><div class="ttname"><a href="../../db/d7b/a00296.html#ad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a></div><div class="ttdeci">int form_validate_field(Form *)</div><div class="ttdoc">Validate current field based on flags.</div><div class="ttdef"><b>Definition</b> <a href="#l00560">fields.c:560</a></div></div>
+<div class="ttc" id="aa00296_html_ad306f4b1bdcba7aefece7e4b73367b66"><div class="ttname"><a href="../../db/d7b/a00296.html#ad306f4b1bdcba7aefece7e4b73367b66">form_display_field_brackets</a></div><div class="ttdeci">int form_display_field_brackets(Form *)</div><div class="ttdoc">Display brackets around current field if set.</div><div class="ttdef"><b>Definition</b> <a href="#l00364">fields.c:364</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../db/d7b/a00296.html">scriou.c</a></li>
+    <li class="navelem"><a href="../../db/d7b/a00296.html">fields.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

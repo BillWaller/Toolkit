@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: EXERCISES</title>
+<title>C-Menu: API</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
@@ -113,189 +113,91 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d1/d5d/a00311.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">EXERCISES </div></div>
+  <div class="headertitle"><div class="title">API </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="exercises"></a></p>
-<ul>
-<li><a class="el" href="#exercise-1-system-configurations" title="Exercise 1: System Configurations">Exercise 1: System Configurations</a><ul>
-<li><a class="el" href="#sddm-background-configuration" title="SDDM Background Configuration">SDDM Background Configuration</a><ul>
-<li><a class="el" href="#requisites" title="Requisites">Requisites</a></li>
-</ul>
-</li>
-<li><a class="el" href="#ghostty-configuration" title="Ghostty Configuration">Ghostty Configuration</a></li>
-<li><a class="el" href="#alacritty-and-kitty" title="Alacritty and Kitty">Alacritty and Kitty</a></li>
-</ul>
-</li>
-</ul>
-<p>The purpose of the EXERCISES section is to provide you with practice problems similar to those you might encounter as a developer or system administrator. We are just barely getting started, so please be patient. The exercises will become more complex as we progress through the course.</p>
-<p>As an added benefit, the exercises will provide a great test bed for debugging the C-Menu code. As always, your comments and suggestions (even complaints) are welcome.</p>
-<h1 class="doxsection"><a class="anchor" id="exercise-1-system-configurations"></a>
-Exercise 1: System Configurations</h1>
-<h2 class="doxsection"><a class="anchor" id="sddm-background-configuration"></a>
-SDDM Background Configuration</h2>
-<p>The objective of this exercise is to Create a C-Menu Menu that allows users to safely and easily configure their system settings. We will start with a simple menu that allows users to select a new SDDM background image. This exercise assumes you have sddm installed and that the sddm theme is located in /usr/share/sddm/themes.</p>
-<h3 class="doxsection"><a class="anchor" id="requisites"></a>
-Requisites</h3>
-<ul>
-<li>A working C-Menu installation.</li>
-<li>SDDM installed and configured on your system.</li>
-<li>A collection of background images available in the SDDM theme directory. For this exercise, we will assume the SDDM theme is located at /usr/share/sddm/themes/sddm-corporate-theme/Backgrounds, and that they are of type Portable Network Graphics (*.png). This exercise assumes that the Backgrounds directory contains a default.png image that is currently being used as the SDDM background. For the sddm-corporate-theme, the background image is specified in Themes/corporate.conf as Background=Backgrounds/default.png. You may want to install the sddm-corporate-theme as it is set up perfectly for this exercise.</li>
-</ul>
-<p><a href="https://github.com/BillWaller/sddm-corporate-theme.git">sddm-corporate-theme</a></p>
-<p>1️⃣ In your editor, open a new file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>2️⃣ Add the following content to the file and save it:</p>
-<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
-<div class="line">:</div>
-<div class="line">:   Select SDDM Background</div>
-<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
-<div class="line">!help</div>
-<div class="line">:   Exit Workstation Configuration</div>
-<div class="line">!return</div>
-</div><!-- fragment --><p>3️⃣ Open another file to create a bash script:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
-<div class="line">cd &quot;$bkgd_dir&quot;</div>
-<div class="line">for bg in $(lf -e &#39;.*default\.png$&#39; . &#39;.*\.png$&#39;); do</div>
-<div class="line">    echo $(basename &quot;$bg&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>This script will change the ownership of the SDDM background directory to the current user, allowing them to select a new background image. It will then list the available background images which will provide input for C-Menu Pick. Don't forget to make the script executable.</p>
-<div class="fragment"><div class="line">chmod +x ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>5️⃣ Now, create another bash script:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>6️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
-<div class="line"> </div>
-<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
-<div class="line">cd &quot;$bkgd_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default.png</div>
-</div><!-- fragment --><p>Pick will execute this script, passing the selected background image as an argument. The script will create a symbolic link named default.png that points to the selected background image, effectively changing the SDDM background.</p>
-<p>7️⃣ Finally, test your menu by running it from the command line:</p>
-<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>8️⃣ You may want to add the Workstation Configuration option to your main menu. To do this, open your main menu file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/main.m</div>
-</div><!-- fragment --><p>9️⃣ Add the following lines to include the Workstation Configuration menu:</p>
-<div class="fragment"><div class="line">:   Workstation Configuration</div>
-<div class="line">!menu workstation_config.m</div>
-</div><!-- fragment --><p>From the C-Menu main menu, you should now see an option for Workstation Configuration. Selecting it will take you to the menu where you can choose a new SDDM background image.</p>
+<div class="textblock"><p><a class="anchor" id="api"></a></p>
+<h1 class="doxsection"><a class="anchor" id="get-c-menu-on-github"></a>
+Get C-Menu on Github</h1>
+<p>Click the link below to access the C-Menu Documentation:</p>
+<p><a href="https://decision-inc.com">C-Menu on Github</a></p>
+<p><a href="https://github.com/BillWaller/C-Menu.git">Download C-Menu from Github</a></p>
+<p>or</p>
+<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="introduction"></a>
+Introduction</h1>
+<p>The C-Menu API is a set of functions and tools that allow developers to extend the capabilities of C-Menu and develop custom applications that integrate with C-Menu.</p>
 <div class="image">
-<img src="../../workstation_config.png" alt=""/>
+<img src="../../api-help1.png" alt=""/>
 <div class="caption">
-Select SDDM Background</div></div>
-    <p>To verify that the background has been changed, you can log out of your session and return to the SDDM login screen. You should see the new background image you selected. Or, you can check the symbolic link in the SDDM background directory to confirm it points to the correct image.</p>
+C-Menu API Help in Neovim</div></div>
+    <p>The C-Menu API documentation is available in Neovim. As you are typing the function name, a list of matching signatures appears along with a brief description of each function and its parameters. This makes it easier to to use the API without having to leave your coding environment. You can select the one you want with the arrow keys and press Enter to insert it into your code. You can also hover over a function and press Shift-K to view the full documentation in a pop-up window.</p>
+<p><b><em>NOTE:</em></b> Requires Neovim properly configured with support for LSP and a plugin that provides LSP functionality, such as nvim-lspconfig.</p>
+<h1 class="doxsection"><a class="anchor" id="api-organization"></a>
+API Organization</h1>
+<p>The C-Menu API is organized into modules, each containing functions related to a specific aspect of C-Menu's functionality. The most important directories in the C-Menu source are src and menuapp. The src directory contains the source code for C-Menu, including the implementation of the API functions. The menuapp directory contains the application code that uses the API to create the C-Menu user interface and handle user interactions. To familiarize yourself with the API, you can explore the src and src/include directories while you explore the C-Menu documentation at:</p>
+<p><a href="https://decision-inc.com">C-Menu Documentation</a></p>
+<p>Start by opening the C-Menu top-level directory explore the various subdirectories.</p>
 <div class="image">
-<img src="../../sddm_backgrounds.png" alt=""/>
+<img src="../../cmenu-tree.png" alt=""/>
 <div class="caption">
-SDDM Backgrounds</div></div>
-    <p>The above image shows the SDDM background directory before and after selecting the space_force.png background image.</p>
-<h2 class="doxsection"><a class="anchor" id="ghostty-configuration"></a>
-Ghostty Configuration</h2>
-<p>1️⃣ In this exercise, we will add Ghostty configurations for color themes and fonts to the Workstation Configuration. First, open the workstation_config.m file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>2️⃣ Add the following lines to the workstation_config.m to include options for Ghostty themes and fonts:</p>
-<div class="fragment"><div class="line">:   Select Ghostty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-</div><!-- fragment --><p>3️⃣ Next, create the ghostty_themes.sh and ghostty_chtheme.sh scripts:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_themes.sh</div>
-</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
-<div class="line">cd &quot;$themes_dir&quot;</div>
-<div class="line">for theme in $(lf -d 1 -t f -e &#39;.*default_theme$&#39; . &#39;.*&#39;); do</div>
-<div class="line">    echo $(basename &quot;$theme&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>5️⃣ Now, create the ~/menuapp/bin/ghostty_chtheme.sh script, add the following content, save it, and make it executable.</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
-<div class="line">cd &quot;$themes_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default_theme</div>
-</div><!-- fragment --><p>6️⃣ Finally, create the ghostty_fonts.sh and ghostty_chfont.sh scripts:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_fonts.sh</div>
-</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
-<div class="line">cd &quot;$fonts_dir&quot;</div>
-<div class="line">for font in $(lf -d 1 -t f -e &#39;.*default_font$&#39; . &#39;.*&#39;); do</div>
-<div class="line">    echo $(basename &quot;$font&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_chfont.sh</div>
-</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
-<div class="line">cd &quot;$fonts_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default_font</div>
-</div><!-- fragment --><p>7️⃣ Test your menu again by running it from the command line:</p>
-<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>Or, if you have installed the ~/.bashrc configurations described in <a class="el" href="../../d7/df2/a00312.html" title="Augmenting C-Menu">Augmenting C-Menu</a>, you can just type mm to start C-Menu and navigate to the Workstation Configuration menu.</p>
-<h2 class="doxsection"><a class="anchor" id="alacritty-and-kitty"></a>
-Alacritty and Kitty</h2>
-<p>The process for adding Alacritty and Kitty configurations is similar to the Ghostty configuration. You will need to create scripts to list available themes and fonts for Alacritty and Kitty, as well as scripts to change the default theme and font by creating symbolic links.</p>
-<p>You may want to automate the creation of these scripts by using sed to replace "ghostty" with "alacritty" and "kitty" in the existing Ghostty scripts. Here's an example of how you can do this:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_fonts.sh &gt;kitty_fonts.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chfont.sh &gt;kitty_chfont.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_themes.sh &gt;kitty_themes.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chtheme.sh &gt;kitty_chtheme.sh</div>
-<div class="line">chmod a+x kitty_*.sh</div>
-<div class="line">cp kitty_*.sh ~/menuapp/bin/</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_fonts.sh &gt;alacritty_fonts.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chfont.sh &gt;alacritty_chfont.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_themes.sh &gt;alacritty_themes.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chtheme.sh &gt;alacritty_chtheme.sh</div>
-<div class="line">chmod a+x alacritty_*.sh</div>
-<div class="line">cp alacritty_*.sh ~/menuapp/bin/</div>
-</div><!-- fragment --><p>Here is the final content of the workstation_config.m file after adding the Alacritty and Kitty configuration options:</p>
-<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
-<div class="line">:</div>
-<div class="line">:   Select SDDM Background</div>
-<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Kitty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Kitty Font&quot; -S kitty_font.sh -c &quot;kitty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Kitty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Kitty Theme&quot; -S kitty_themes.sh -c &quot;kitty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Alacritty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Alacritty Font&quot; -S alacritty_fonts.sh -c &quot;alacritty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Alacritty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Alacritty Theme&quot; -S alacritty_themes.sh -c &quot;alacritty_chtheme.sh %%&quot;</div>
-<div class="line">:     Help</div>
-<div class="line">!help</div>
-<div class="line">:     Exit Workstation Configuration</div>
-<div class="line">!return</div>
+C-Menu Top-Level Directory</div></div>
+    <h2 class="doxsection"><a class="anchor" id="c-menu-header-files"></a>
+C-Menu Header Files</h2>
+<p>The src/include directory contains header files that define the API functions and data structures. These header files are located in src/include. They are:</p>
+<h3 class="doxsection"><a class="anchor" id="includecmh"></a>
+include/cm.h</h3>
+<p>cm.h: This header file includes generic functions and data that are used throughout C-Menu, but aren't specific to the application layer. It contains general-purpose functions and data structures that can be used in various contexts, not just within C-Menu. cm.h contains:</p>
+<ul>
+<li>struct SIO for managing screen input/output operations</li>
+<li>Chyron manager for handling on-screen text and messages</li>
+<li>File management capabilities for handling files and directories</li>
+<li>String manipulation functions for working with strings in C</li>
+<li>Color and color pair management functions, color initialization, and conversion to and from CGA, XTerm256 (EGA), True-Color (16.7M), and NCurses (1B) color types in decimal, hexadecimal, and ANSI formats.</li>
+<li>3 Channel color and grayscale gamma correction</li>
+<li>Error reporting</li>
+<li>Signal handling including SIGSEGV graceful termination</li>
+<li>Logging functions for debugging and error reporting</li>
+<li>Ncurses support including WACS characters, mouse support, and terminal capabilities</li>
+</ul>
+<h3 class="doxsection"><a class="anchor" id="includecommonh"></a>
+include/common.h</h3>
+<p>common.h: This header file contains the common data structure, "Init", which is used in Menu, Form, Pick, and View. The "Init" structure is a fundamental part of the C-Menu API and is used to initialize and configure various components of the C-Menu application. It contains fields that specify the properties and behavior of menu items, forms, picks, and views. The functions that utilize the "Init" structure are essential for setting up and managing the user interface elements in C-Menu.</p>
+<p>The data in the Init structure is substantially stored in ~/.minitrc. This file is read on startup, and along with certain environment variables, and command-line arguments, is used to initialize the C-Menu application and configure its behavior. A default ~/.minitrc file is provided with C-Menu. Any of the C-Menu main programs will create a new configuration file when invoked with the -D option. (dump-config).</p>
+<p>Each user can have any number of configuration files by specifying the -a option with the name of the configuration file. For example, if you have a configuration file named "myconfig.minitrc", you can start C-Menu with that configuration by running:</p>
+<div class="fragment"><div class="line">menu -a myconfig.minitrc</div>
+</div><!-- fragment --><div class="fragment"><div class="line">export MINITRC=myconfig.minitrc</div>
+</div><!-- fragment --><p>You can also view the contents of the default configuration by running:</p>
+<div class="fragment"><div class="line">options</div>
 </div><!-- fragment --><div class="image">
-<img src="../../workstation_config2.png" alt=""/>
+<img src="../../options.png" alt=""/>
 <div class="caption">
-Workstation Configuration</div></div>
-     </div></div><!-- contents -->
+C-Menu Configuration</div></div>
+    <p>This is very useful because field name is also the name of the C variable used by the C-Menu API. For example, the "title" field in the Init structure corresponds to the "title" variable in the C-Menu API. In instances where a long option is needed, the field name is also the long option name. For example, the "mapp_help" field corresponds to the "--mapp_help" long option in the command-line interface. This allows developers to easily understand how to use the API functions and how to configure their applications using the configuration file.</p>
+<h3 class="doxsection"><a class="anchor" id="includemenuh-formh-pickh-and-viewh"></a>
+include/menu.h, form.h, pick.h, and view.h</h3>
+<p>These are the application layer header files that define the API functions and data structures specific to Menu, Form, Pick, and View components of C-Menu. Each of these header files contains functions and data structures specific to their respective components, allowing developers to create and manage menus, forms, picks, and views in their C-Menu applications.</p>
+<h3 class="doxsection"><a class="anchor" id="includeversionh-and-versionh"></a>
+include/version.h and version.h</h3>
+<p>version.h: This header file contains version information for C-Menu, including the major, minor, and patch version numbers. version.h is generated from version.h.in during the build process and contains the actual version numbers for the C-Menu application. This information is useful for developers to ensure compatibility with specific versions of C-Menu when developing their applications. The version information can be accessed through the API functions, allowing developers to check the version of C-Menu they are working with and ensure that their applications are compatible with that version.</p>
+<h3 class="doxsection"><a class="anchor" id="version-compatibility"></a>
+Version Compatibility</h3>
+<ul>
+<li>Why it matters: All libcm.so.0.x.x versions of libcm are compatible with all C-Menu 0.x.x version, but libcm.so.1.x.x is only compatible with libcm.so.1.x.x. However, it is perfectly reasonable to have multiple versions of libcm installed on the same system, as long as they are properly managed and linked to the correct C-Menu application. This allows developers to work with different versions of C-Menu and ensure that their applications are compatible with the specific version they are targeting. The dynamic linker handles the loading of the correct version of libcm based on the version information specified in the C-Menu application and the available versions of libcm on the system. This allows for flexibility and compatibility when developing applications that use the C-Menu API.</li>
+</ul>
+<p>To be continued in the next version of the documentation. The C-Menu API is extensive and covers a wide range of functionality, so this documentation will be expanded to include more detailed information about each module, function, and data structure in the API. Future updates will also include examples and best practices for using the C-Menu API effectively in your applications. Stay tuned for more updates!</p>
+<p>In the meantime, you can explore the extensive C-Menu documentation available at:</p>
+<p><a href="https://decision-inc.com">C-Menu Documentation</a></p>
+<h3 class="doxsection"><a class="anchor" id="roadmap-for-api-documentation-and-user-guide"></a>
+Roadmap for API Documentation and User Guide</h3>
+<p><b><em>Note:</em></b> The C-Menu Documentation is developing along two tracks. The API documentation is geared for developers who want to use the C-Menu API to create custom applications, or perhaps contribute to the C-Menu codebase. The User Guide is geared for administrators, developers, and end-users who want to use C-Menu as an adjunct to their workflow, or perhaps customize C-Menu for their specific needs. Both tracks are important and will be developed in parallel, but the API documentation is currently the focus of development. The User Guide will be expanded in future updates to include more detailed information about using C-Menu effectively, including tips and best practices for customizing C-Menu to fit your specific needs. I will also try to add more to the Exercises section, which is intended to demonstrate how to use C-Menu to solve real-world problems and to provide hands-on experience with the C-Menu API. The exercises will cover a range of topics, from basic usage of C-Menu to more advanced features and customization options. Stay tuned for more updates on the User Guide and Exercises sections of the documentation!</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository"></a>
+🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h1>
+<hr  />
+<p>=== <b>_ INCOMPLETE CONTENT _</b> === </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
