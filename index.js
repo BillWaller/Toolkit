@@ -5,7 +5,7 @@ var index =
     [ "NEW Features", "index.html#new-features", [
       [ "View Line Numbering", "index.html#view-line-numbering", null ]
     ] ],
-    [ "view-c-sourcescreenshotsviewpng", "index.html#view-c-sourcescreenshotsviewpng", [
+    [ "view-c-sourcescreenshotsnew_view1png", "index.html#view-c-sourcescreenshotsnew_view1png", [
       [ "Large Log File in View", "index.html#large-log-file-in-view", null ]
     ] ],
     [ "view-large-log-filescreenshotsnew_view2png", "index.html#view-large-log-filescreenshotsnew_view2png", [

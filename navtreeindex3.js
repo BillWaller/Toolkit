@@ -21,7 +21,7 @@ var NAVTREEINDEX3 =
 "index.html#view":[0,7,13],
 "index.html#view---other-features":[0,7,18],
 "index.html#view-and-color-manual-pages":[0,7,14],
-"index.html#view-c-sourcescreenshotsviewpng":[0,3],
+"index.html#view-c-sourcescreenshotsnew_view1png":[0,3],
 "index.html#view-large-log-filescreenshotsnew_view2png":[0,4],
 "index.html#view-line-numbering":[0,2,0],
 "pages.html":[]
