@@ -1,19 +1,13 @@
 var a00239 =
 [
-    [ "FAIL", "d0/d27/a00239.html#abb508ea8227673f419e9fe3a86c30d8e", null ],
-    [ "FALSE", "d0/d27/a00239.html#aa93f0eb578d23995850d61f7d61c55c1", null ],
-    [ "TRUE", "d0/d27/a00239.html#aa8cecfc5c5c054d2875c03e77b7be15d", null ],
-    [ "ABEND", "d0/d27/a00239.html#a4f226af0b5469cf62b0f04d52813c800", null ],
-    [ "file_spec_parts", "d0/d27/a00239.html#ab7a6465a15ab53a9885da8d4db187066", null ],
-    [ "main", "d0/d27/a00239.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "next_path", "d0/d27/a00239.html#acac1da221398735ede713c45973ee35d", null ],
-    [ "normalend", "d0/d27/a00239.html#a3883d2f8375f9cee1e12ee075aec671f", null ],
-    [ "whence", "d0/d27/a00239.html#a5b496563e1004d5cf3aac814088ff99c", null ],
-    [ "whence_usage", "d0/d27/a00239.html#a29ecb778b765c0b091abfcc46146a0ac", null ],
-    [ "f_all", "d0/d27/a00239.html#a2844f8f6a2086d94dbc790472d9c84a9", null ],
-    [ "f_display_help", "d0/d27/a00239.html#a3b847a748c3556faef86ad136ef58e33", null ],
-    [ "f_verbose", "d0/d27/a00239.html#aaada0e40d7855fd811f41c576cd785fe", null ],
-    [ "file_name", "d0/d27/a00239.html#a0ee25cc73460ea2c06199de0e492359c", null ],
-    [ "path_p", "d0/d27/a00239.html#aa3dd61c11bd2de62a22ac2f817803679", null ],
-    [ "path_s", "d0/d27/a00239.html#aa86025b878c52fb0c028088167115f89", null ]
+    [ "abend", "d0/d27/a00239.html#a8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "fork_exec", "d0/d27/a00239.html#a386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d0/d27/a00239.html#a907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d0/d27/a00239.html#aeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d0/d27/a00239.html#a2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "d0/d27/a00239.html#a5c3ffccf49f08359334198f7fce3f9df", null ],
+    [ "user_end", "d0/d27/a00239.html#ae646ecf8918437a8a1f2ea4304db008a", null ],
+    [ "earg_str", "d0/d27/a00239.html#a67227506d7050fd4fd59e06e2628a364", null ],
+    [ "eargc", "d0/d27/a00239.html#a075d6920297448f7d044417b9f8594b0", null ],
+    [ "eargv", "d0/d27/a00239.html#aba17a3c518eb2ffd68f0219cc8c1792b", null ]
 ];

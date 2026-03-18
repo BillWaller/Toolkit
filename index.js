@@ -2,6 +2,16 @@ var index =
 [
     [ "Table of Contents", "index.html#table-of-contents-3", null ],
     [ "Get C-Menu on Github", "index.html#get-c-menu-on-github-3", null ],
+    [ "NEW Features", "index.html#new-features", [
+      [ "View Line Numbering", "index.html#view-line-numbering", null ]
+    ] ],
+    [ "view-c-sourcescreenshotsviewpng", "index.html#view-c-sourcescreenshotsviewpng", [
+      [ "Large Log File in View", "index.html#large-log-file-in-view", null ]
+    ] ],
+    [ "view-large-log-filescreenshotsnew_view2png", "index.html#view-large-log-filescreenshotsnew_view2png", [
+      [ "New Options for lf", "index.html#new-options-for-lf", null ]
+    ] ],
+    [ "lf-optionsscreenshotslf-helppng", "index.html#lf-optionsscreenshotslf-helppng", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [
       [ "C-Menu API", "index.html#c-menu-api", null ],

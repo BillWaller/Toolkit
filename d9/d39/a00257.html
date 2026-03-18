@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: lf.c File Reference</title>
+<title>C-Menu: sig.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
@@ -113,244 +113,324 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d39/a00257.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">lf.c File Reference</div></div>
+  <div class="headertitle"><div class="title">sig.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>list files matching a regular expression  
+<p>signal handling for interrupt signals  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;cm.h&gt;</code><br />
-<code>#include &lt;dirent.h&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;grp.h&gt;</code><br />
-<code>#include &lt;pwd.h&gt;</code><br />
-<code>#include &lt;regex.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for lf.c:</div>
+Include dependency graph for sig.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d7/d2f/a00258.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d7/d2f/a00258.svg" width="660" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../d9/d39/a00257_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">List files in a directory matching a regular expression.  <br /></td></tr>
+<tr class="memitem:a06c1eb6cf3649dc187115565409f91af" id="r_a06c1eb6cf3649dc187115565409f91af"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a> ()</td></tr>
+<tr class="memdesc:a06c1eb6cf3649dc187115565409f91af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set signal handlers to default behavior.  <br /></td></tr>
+<tr class="memitem:aca2de03f6d52d4b11237990e4e605177" id="r_aca2de03f6d52d4b11237990e4e605177"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a> ()</td></tr>
+<tr class="memdesc:aca2de03f6d52d4b11237990e4e605177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up signal handlers for interrupt signals.  <br /></td></tr>
+<tr class="memitem:aa08a9a8dede37c66c81c3f51a0f338a9" id="r_aa08a9a8dede37c66c81c3f51a0f338a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a> (int sig_num)</td></tr>
+<tr class="memdesc:aa08a9a8dede37c66c81c3f51a0f338a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal handler for interrupt signals.  <br /></td></tr>
+<tr class="memitem:a79c3e22498eb2346543aa9c86fd22e58" id="r_a79c3e22498eb2346543aa9c86fd22e58"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a79c3e22498eb2346543aa9c86fd22e58">handle_signal</a> (int sig_num)</td></tr>
+<tr class="memdesc:a79c3e22498eb2346543aa9c86fd22e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle received signals and prompt user for action.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a01a99fc32bd5b471123f6223503c9616" id="r_a01a99fc32bd5b471123f6223503c9616"><td class="memItemLeft">volatile sig_atomic_t&#160;</td><td class="memItemRight"><a class="el" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0</td></tr>
+<tr class="memitem:a44f81ebcc5b6c685cbdfe388eb420313" id="r_a44f81ebcc5b6c685cbdfe388eb420313"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a> = false</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>list files matching a regular expression </p>
+<div class="textblock"><p>signal handling for interrupt signals </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d9/d39/a00257_source.html">lf.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+<a id="a79c3e22498eb2346543aa9c86fd22e58" name="a79c3e22498eb2346543aa9c86fd22e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79c3e22498eb2346543aa9c86fd22e58">&#9670;&#160;</a></span>handle_signal()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">bool handle_signal </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sig_num</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>List files in a directory matching a regular expression. </p>
-<div class="fragment"><div class="line">lf [options ad:e:hit:v] [dir] [re]</div>
-<div class="line">     -a        List hidden files</div>
-<div class="line">     -d        maximum max_depth of subdirectories to examine</div>
-<div class="line">     -e        exclude files matching the regular expression</div>
-<div class="line">     -h        show <span class="keyword">this</span> help message</div>
-<div class="line">     -i        ignore <span class="keywordflow">case</span> in <a class="code hl_function" href="../../d6/d22/a00245.html#a5f639aa1a1f03fa05888c724bc17d99c">search</a></div>
-<div class="line">     -t [bcdplfsu]</div>
-<div class="line">         b        block devices</div>
-<div class="line">          c       character devices</div>
-<div class="line">           d      directories</div>
-<div class="line">            p     named pipes</div>
-<div class="line">             l    symbolic links</div>
-<div class="line">              f   regular files</div>
-<div class="line">               s  sockets</div>
-<div class="line">                u unknown</div>
-<div class="line">     -v        show version information</div>
-<div class="line">    dir Directory to <a class="code hl_function" href="../../d6/d22/a00245.html#a5f639aa1a1f03fa05888c724bc17d99c">search</a></div>
-<div class="line">    re  Regular expression to match</div>
-<div class="ttc" id="aa00245_html_a5f639aa1a1f03fa05888c724bc17d99c"><div class="ttname"><a href="../../d6/d22/a00245.html#a5f639aa1a1f03fa05888c724bc17d99c">search</a></div><div class="ttdeci">bool search(View *, int *, char *)</div><div class="ttdoc">Search for Regular Expression Pattern.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d22/a00245_source.html#l01006">view_engine.c:1006</a></div></div>
-</div><!-- fragment --> <pre class="fragment">    Capabilities:
-         specify whether to list hidden files
-         list files in a directory structure matching a regular expression
-         exclude files matching a regular expression
-         ignore case in search
-         list files of specific types by specifying
-           -t [b][c][d][p][l][f][s][u] (in any order or combination)
-               b block devices
-               c character devices
-               d directories
-               p named pipes
-               l symbolic links
-               s sockets
-               u unknown file types
-         specify maximum depth of subdirectory descent
-</pre> 
-<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00062">62</a> of file <a class="el" href="../../d9/d39/a00257_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>                                {</div>
-<div class="line"><span class="lineno">   63</span>    <span class="keywordtype">char</span> dir[<a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno">   64</span>    <span class="keywordtype">char</span> re[<a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno">   65</span>    <span class="keywordtype">char</span> ere[<a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno">   66</span>    dir[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">   67</span>    re[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">   68</span>    ere[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">   69</span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="../../db/dc3/a00284.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="../../db/dc3/a00284.html#ab5ca79336823d1b09da46701f6244686">f_version</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   71</span>    <span class="keywordtype">int</span> flags = 0;</div>
-<div class="line"><span class="lineno">   72</span>    <span class="keywordtype">int</span> opt;</div>
-<div class="line"><span class="lineno">   73</span>    <span class="keywordtype">int</span> max_depth = 3;</div>
-<div class="line"><span class="lineno">   74</span>    <span class="keywordtype">int</span> i;</div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">while</span> ((opt = getopt(argc, argv, <span class="stringliteral">&quot;ad:e:hit:v&quot;</span>)) != -1) {</div>
-<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">switch</span> (opt) {</div>
-<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;a&#39;</span>:</div>
-<div class="line"><span class="lineno">   79</span>            flags |= LF_ALL;</div>
-<div class="line"><span class="lineno">   80</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
-<div class="line"><span class="lineno">   82</span>            max_depth = atoi(optarg);</div>
-<div class="line"><span class="lineno">   83</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   84</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;e&#39;</span>:</div>
-<div class="line"><span class="lineno">   85</span>            <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(ere, optarg, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">   86</span>            flags |= LF_EXC_REGEX;</div>
-<div class="line"><span class="lineno">   87</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;h&#39;</span>:</div>
-<div class="line"><span class="lineno">   89</span>            <a class="code hl_variable" href="../../db/dc3/a00284.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   90</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;i&#39;</span>:</div>
-<div class="line"><span class="lineno">   92</span>            flags |= LF_ICASE;</div>
-<div class="line"><span class="lineno">   93</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;t&#39;</span>:</div>
-<div class="line"><span class="lineno">   95</span>            i = 0;</div>
-<div class="line"><span class="lineno">   96</span>            <span class="keywordflow">while</span> (optarg[i]) {</div>
-<div class="line"><span class="lineno">   97</span>                <span class="keywordflow">switch</span> (optarg[i++]) {</div>
-<div class="line"><span class="lineno">   98</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;b&#39;</span>:</div>
-<div class="line"><span class="lineno">   99</span>                    flags |= FT_BLK &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  100</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  101</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;c&#39;</span>:</div>
-<div class="line"><span class="lineno">  102</span>                    flags |= FT_CHR &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  103</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  104</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
-<div class="line"><span class="lineno">  105</span>                    flags |= FT_DIR &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  106</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  107</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;p&#39;</span>:</div>
-<div class="line"><span class="lineno">  108</span>                    flags |= FT_FIFO &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  109</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  110</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;l&#39;</span>:</div>
-<div class="line"><span class="lineno">  111</span>                    flags |= FT_LNK &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  112</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  113</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;f&#39;</span>:</div>
-<div class="line"><span class="lineno">  114</span>                    flags |= FT_REG &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  115</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  116</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;s&#39;</span>:</div>
-<div class="line"><span class="lineno">  117</span>                    flags |= FT_SOCK &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  118</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  119</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;u&#39;</span>:</div>
-<div class="line"><span class="lineno">  120</span>                    flags |= FT_UNKNOWN &lt;&lt; 8;</div>
-<div class="line"><span class="lineno">  121</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  122</span>                <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  123</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  124</span>                }</div>
-<div class="line"><span class="lineno">  125</span>            }</div>
-<div class="line"><span class="lineno">  126</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;v&#39;</span>:</div>
-<div class="line"><span class="lineno">  128</span>            <a class="code hl_variable" href="../../db/dc3/a00284.html#ab5ca79336823d1b09da46701f6244686">f_version</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  129</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  131</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  132</span>        }</div>
-<div class="line"><span class="lineno">  133</span>    }</div>
-<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/dc3/a00284.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a>) {</div>
-<div class="line"><span class="lineno">  135</span>        printf(<span class="stringliteral">&quot;Usage: lf [options] [directory] [regexp]\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  136</span>        printf(<span class="stringliteral">&quot;Options:\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  137</span>        printf(<span class="stringliteral">&quot;  -a        List hidden files\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  138</span>        printf(<span class="stringliteral">&quot;  -d        maximum depth of subdirectories to examine\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  139</span>        printf(<span class="stringliteral">&quot;  -e        exclude files matching the regular expression\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  140</span>        printf(<span class="stringliteral">&quot;  -h        show this help message\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  141</span>        printf(<span class="stringliteral">&quot;  -i        ignore case in search\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  142</span>        printf(<span class="stringliteral">&quot;  -t f      list files (exclude directories)\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  143</span>        printf(<span class="stringliteral">&quot;  -t d      list directories (exclude files)\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  144</span>        printf(<span class="stringliteral">&quot;  -v        show version information\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  145</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><span class="lineno">  146</span>    }</div>
-<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/dc3/a00284.html#ab5ca79336823d1b09da46701f6244686">f_version</a>) {</div>
-<div class="line"><span class="lineno">  148</span>        printf(<span class="stringliteral">&quot;lf version 1.0\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  149</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><span class="lineno">  150</span>    }</div>
-<div class="line"><span class="lineno">  151</span>    <span class="keyword">struct </span>stat sb;</div>
-<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">if</span> (optind &lt; argc) {</div>
-<div class="line"><span class="lineno">  153</span>        <span class="keywordflow">if</span> (stat(argv[optind], &amp;sb) == -1 || (sb.st_mode &amp; S_IFMT) != S_IFDIR) {</div>
-<div class="line"><span class="lineno">  154</span>            <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  155</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  156</span>            <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, argv[optind], <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  157</span>            optind++;</div>
-<div class="line"><span class="lineno">  158</span>        }</div>
-<div class="line"><span class="lineno">  159</span>    }</div>
-<div class="line"><span class="lineno">  160</span>    <span class="keywordflow">if</span> (optind &lt; argc) {</div>
-<div class="line"><span class="lineno">  161</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(re, argv[optind], <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  162</span>        optind++;</div>
-<div class="line"><span class="lineno">  163</span>    }</div>
-<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">if</span> (re[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  165</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(re, <span class="stringliteral">&quot;.*&quot;</span>, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  166</span>    <span class="keywordflow">if</span> (dir[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  167</span>        <a class="code hl_function" href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  168</span>    flags |= LF_REGEX;</div>
-<div class="line"><span class="lineno">  169</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">  170</span><span class="comment">        printf(&quot;\n\nFT_BLK: %08b\n&quot;, FT_BLK);</span></div>
-<div class="line"><span class="lineno">  171</span><span class="comment">        printf(&quot;FT_CHR: %08b\n&quot;, FT_CHR);</span></div>
-<div class="line"><span class="lineno">  172</span><span class="comment">        printf(&quot;FT_DIR: %08b\n&quot;, FT_DIR);</span></div>
-<div class="line"><span class="lineno">  173</span><span class="comment">        printf(&quot;FT_FIFO: %08b\n&quot;, FT_FIFO);</span></div>
-<div class="line"><span class="lineno">  174</span><span class="comment">        printf(&quot;FT_LNK: %08b\n&quot;, FT_LNK);</span></div>
-<div class="line"><span class="lineno">  175</span><span class="comment">        printf(&quot;FT_REG: %08b\n&quot;, FT_REG);</span></div>
-<div class="line"><span class="lineno">  176</span><span class="comment">        printf(&quot;FT_SOCK: %08b\n&quot;, FT_SOCK);</span></div>
-<div class="line"><span class="lineno">  177</span><span class="comment">        printf(&quot;FT_UNKNOWN: %08b\n&quot;, FT_UNKNOWN);</span></div>
-<div class="line"><span class="lineno">  178</span><span class="comment">        printf(&quot;flags: %016b %08b %08b\n&quot;, flags, flags &gt;&gt; 8, flags &amp; 0xff);</span></div>
-<div class="line"><span class="lineno">  179</span><span class="comment">    */</span></div>
-<div class="line"><span class="lineno">  180</span>    <a class="code hl_function" href="../../d6/d7f/a00287.html#a5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a>(dir, re, ere, max_depth, flags);</div>
-<div class="line"><span class="lineno">  181</span>    <span class="comment">/*</span></div>
-<div class="line"><span class="lineno">  182</span><span class="comment">        printf(&quot;\n\nFT_BLK: %08b\n&quot;, FT_BLK);</span></div>
-<div class="line"><span class="lineno">  183</span><span class="comment">        printf(&quot;FT_CHR: %08b\n&quot;, FT_CHR);</span></div>
-<div class="line"><span class="lineno">  184</span><span class="comment">        printf(&quot;FT_DIR: %08b\n&quot;, FT_DIR);</span></div>
-<div class="line"><span class="lineno">  185</span><span class="comment">        printf(&quot;FT_FIFO: %08b\n&quot;, FT_FIFO);</span></div>
-<div class="line"><span class="lineno">  186</span><span class="comment">        printf(&quot;FT_LNK: %08b\n&quot;, FT_LNK);</span></div>
-<div class="line"><span class="lineno">  187</span><span class="comment">        printf(&quot;FT_REG: %08b\n&quot;, FT_REG);</span></div>
-<div class="line"><span class="lineno">  188</span><span class="comment">        printf(&quot;FT_SOCK: %08b\n&quot;, FT_SOCK);</span></div>
-<div class="line"><span class="lineno">  189</span><span class="comment">        printf(&quot;FT_UNKNOWN: %08b\n&quot;, FT_UNKNOWN);</span></div>
-<div class="line"><span class="lineno">  190</span><span class="comment">        printf(&quot;flags: %016b %08b %08b\n&quot;, flags, flags &gt;&gt; 8, flags &amp; 0xff);</span></div>
-<div class="line"><span class="lineno">  191</span><span class="comment">    */</span></div>
-<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  193</span>}</div>
-<div class="ttc" id="aa00224_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d5/ddf/a00224.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d5/ddf/a00224_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa00284_html_a3659ff312a50e7aebf45b9035df6b13c"><div class="ttname"><a href="../../db/dc3/a00284.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a></div><div class="ttdeci">bool f_help</div><div class="ttdef"><b>Definition</b> <a href="../../db/dc3/a00284_source.html#l00030">init.c:30</a></div></div>
-<div class="ttc" id="aa00284_html_ab5ca79336823d1b09da46701f6244686"><div class="ttname"><a href="../../db/dc3/a00284.html#ab5ca79336823d1b09da46701f6244686">f_version</a></div><div class="ttdeci">bool f_version</div><div class="ttdef"><b>Definition</b> <a href="../../db/dc3/a00284_source.html#l00031">init.c:31</a></div></div>
-<div class="ttc" id="aa00287_html_a0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d6/d7f/a00287.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00217">futil.c:217</a></div></div>
-<div class="ttc" id="aa00287_html_a5bd2fb968d70ed5285cfce1ed9e33ca1"><div class="ttname"><a href="../../d6/d7f/a00287.html#a5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a></div><div class="ttdeci">bool lf_find(const char *, const char *, const char *, int, int)</div><div class="ttdoc">Find files in a directory matching a regular expression.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00900">futil.c:900</a></div></div>
+<p>Handle received signals and prompt user for action. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00105">105</a> of file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  105</span>                                {</div>
+<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">switch</span> (sig_num) {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">case</span> SIGINT:</div>
+<div class="line"><span class="lineno">  108</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;SIGINT - Interrupt from keyboard&quot;</span>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">case</span> SIGTERM:</div>
+<div class="line"><span class="lineno">  111</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;SIGTERM - Termination signal&quot;</span>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">case</span> SIGQUIT:</div>
+<div class="line"><span class="lineno">  114</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;SIGQUIT - Quit from keyboard&quot;</span>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  116</span>    <span class="keywordflow">case</span> SIGSEGV:</div>
+<div class="line"><span class="lineno">  117</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;SIGSEGV - Segmentation fault&quot;</span>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">case</span> SIGUSR1:</div>
+<div class="line"><span class="lineno">  120</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;SIGUSR1 - User Signal 1&quot;</span>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  123</span>        <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <span class="stringliteral">&quot;unknown signal&quot;</span>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  125</span>    }</div>
+<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>)</div>
+<div class="line"><span class="lineno">  127</span>        <a class="code hl_function" href="../../d5/d0f/a00308.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line"><span class="lineno">  128</span>    <a class="code hl_variable" href="../../d0/d61/a00302.html#abef31515478e58cca8e39168552fca30">em0</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  129</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;Caught signal %d\n&quot;</span>, sig_num);</div>
+<div class="line"><span class="lineno">  130</span>    <a class="code hl_function" href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d0/d61/a00302.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, <span class="stringliteral">&quot;Press &#39;q&#39; or F9 to exit, any other key to continue&quot;</span>,</div>
+<div class="line"><span class="lineno">  131</span>               <a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  132</span>    <a class="code hl_variable" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0;</div>
+<div class="line"><span class="lineno">  133</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  134</span>}</div>
+<div class="ttc" id="aa00230_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d1/da8/a00230_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa00257_html_a01a99fc32bd5b471123f6223503c9616"><div class="ttname"><a href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a></div><div class="ttdeci">volatile sig_atomic_t sig_received</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d39/a00257_source.html#l00018">sig.c:18</a></div></div>
+<div class="ttc" id="aa00257_html_a44f81ebcc5b6c685cbdfe388eb420313"><div class="ttname"><a href="#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a></div><div class="ttdeci">bool f_curses_open</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d39/a00257_source.html#l00020">sig.c:20</a></div></div>
+<div class="ttc" id="aa00296_html_a0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../db/d7b/a00296.html#a0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../db/d7b/a00296_source.html#l00220">futil.c:220</a></div></div>
+<div class="ttc" id="aa00296_html_a63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../db/d7b/a00296.html#a63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d7b/a00296_source.html#l00118">futil.c:118</a></div></div>
+<div class="ttc" id="aa00302_html_a2c05e3c261f7b64f0d2c4f1e0d20f788"><div class="ttname"><a href="../../d0/d61/a00302.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a00302_source.html#l00142">dwin.c:142</a></div></div>
+<div class="ttc" id="aa00302_html_abef31515478e58cca8e39168552fca30"><div class="ttname"><a href="../../d0/d61/a00302.html#abef31515478e58cca8e39168552fca30">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a00302_source.html#l00141">dwin.c:141</a></div></div>
+<div class="ttc" id="aa00302_html_af8ae7d202360c017575b322f4d1d890f"><div class="ttname"><a href="../../d0/d61/a00302.html#af8ae7d202360c017575b322f4d1d890f">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a00302_source.html#l00143">dwin.c:143</a></div></div>
+<div class="ttc" id="aa00308_html_ac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d5/d0f/a00308.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d0f/a00308_source.html#l00051">scriou.c:51</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d7f/a00287_source.html#l00900">lf_find()</a>, and <a class="el" href="../../d6/d7f/a00287_source.html#l00217">strnz__cpy()</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d61/a00302_source.html#l00141">em0</a>, <a class="el" href="../../d0/d61/a00302_source.html#l00142">em1</a>, <a class="el" href="../../d0/d61/a00302_source.html#l00143">em2</a>, <a class="el" href="../../d5/d0f/a00308_source.html#l00051">restore_shell_tioctl()</a>, <a class="el" href="../../d9/d39/a00257_source.html#l00018">sig_received</a>, <a class="el" href="../../db/d7b/a00296_source.html#l00118">ssnprintf()</a>, and <a class="el" href="../../db/d7b/a00296_source.html#l00220">strnz__cpy()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d39/a00257_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d39/a00257_a79c3e22498eb2346543aa9c86fd22e58_cgraph.svg" width="316" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+
+</div>
+</div>
+<a id="a06c1eb6cf3649dc187115565409f91af" name="a06c1eb6cf3649dc187115565409f91af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06c1eb6cf3649dc187115565409f91af">&#9670;&#160;</a></span>sig_dfl_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sig_dfl_mode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set signal handlers to default behavior. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../de/dab/a00319.html#a6">/usr/local/src/cmenu/src/enterstr.c</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00023">23</a> of file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                    {</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keyword">struct </span>sigaction sa;</div>
+<div class="line"><span class="lineno">   25</span> </div>
+<div class="line"><span class="lineno">   26</span>    sa.sa_handler = SIG_DFL;</div>
+<div class="line"><span class="lineno">   27</span>    sigemptyset(&amp;sa.sa_mask);</div>
+<div class="line"><span class="lineno">   28</span>    sa.sa_flags = SA_RESTART;</div>
+<div class="line"><span class="lineno">   29</span>    sigaction(SIGINT, &amp;sa, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">   30</span>    sigaction(SIGTERM, &amp;sa, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">   31</span>    sigaction(SIGQUIT, &amp;sa, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">   32</span>    sigaction(SIGUSR1, &amp;sa, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">   33</span>    sa.sa_flags = SA_SIGINFO;</div>
+<div class="line"><span class="lineno">   34</span>    sigaction(SIGSEGV, &amp;sa, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">   35</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a00302_source.html#l01086">abend()</a>, <a class="el" href="../../d0/d61/a00302_source.html#l00628">destroy_curses()</a>, <a class="el" href="../../d0/d27/a00239_source.html#l00124">fork_exec()</a>, <a class="el" href="../../d9/dd6/a00272_source.html#l00032">main()</a>, and <a class="el" href="../../d0/d61/a00302_source.html#l01074">user_end()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d39/a00257_a06c1eb6cf3649dc187115565409f91af_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="aca2de03f6d52d4b11237990e4e605177" name="aca2de03f6d52d4b11237990e4e605177"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca2de03f6d52d4b11237990e4e605177">&#9670;&#160;</a></span>sig_prog_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sig_prog_mode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set up signal handlers for interrupt signals. </p>
+<p>Upon receiving an interrupt signal (SIGINT, SIGTERM, SIGQUIT), the program will prompt the user to either exit the program or continue execution. If the user chooses to exit, a confirmation prompt will be displayed. If the user opts to continue, the program will resume normal operation. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../de/dab/a00319.html#a4">/usr/local/src/cmenu/src/enterstr.c</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00042">42</a> of file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>                     {</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keyword">struct </span>sigaction sa;</div>
+<div class="line"><span class="lineno">   44</span> </div>
+<div class="line"><span class="lineno">   45</span>    memset(&amp;sa, 0, <span class="keyword">sizeof</span>(sa));</div>
+<div class="line"><span class="lineno">   46</span>    sa.sa_handler = <a class="code hl_function" href="#aa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a>;</div>
+<div class="line"><span class="lineno">   47</span>    sigemptyset(&amp;sa.sa_mask);</div>
+<div class="line"><span class="lineno">   48</span>    sa.sa_flags = SA_RESTART;</div>
+<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">if</span> (sigaction(SIGINT, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
+<div class="line"><span class="lineno">   50</span>        <a class="code hl_function" href="../../d0/d61/a00302.html#a8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGINT failed&quot;</span>);</div>
+<div class="line"><span class="lineno">   51</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">   52</span>    }</div>
+<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">if</span> (sigaction(SIGTERM, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
+<div class="line"><span class="lineno">   54</span>        <a class="code hl_function" href="../../d0/d61/a00302.html#a8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGTERM failed&quot;</span>);</div>
+<div class="line"><span class="lineno">   55</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">   56</span>    };</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">if</span> (sigaction(SIGQUIT, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
+<div class="line"><span class="lineno">   58</span>        <a class="code hl_function" href="../../d0/d61/a00302.html#a8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGQUIT failed&quot;</span>);</div>
+<div class="line"><span class="lineno">   59</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">   60</span>    }</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">if</span> (sigaction(SIGUSR1, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
+<div class="line"><span class="lineno">   62</span>        <a class="code hl_function" href="../../d0/d61/a00302.html#a8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGUSR1 failed&quot;</span>);</div>
+<div class="line"><span class="lineno">   63</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">   64</span>    }</div>
+<div class="line"><span class="lineno">   65</span>    sa.sa_flags = SA_SIGINFO; <span class="comment">// Set the flag to receive siginfo_t</span></div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">if</span> (sigaction(SIGSEGV, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
+<div class="line"><span class="lineno">   67</span>        <a class="code hl_function" href="../../d0/d61/a00302.html#a8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGSEGV failed&quot;</span>);</div>
+<div class="line"><span class="lineno">   68</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">   69</span>    }</div>
+<div class="line"><span class="lineno">   70</span>}</div>
+<div class="ttc" id="aa00257_html_aa08a9a8dede37c66c81c3f51a0f338a9"><div class="ttname"><a href="#aa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a></div><div class="ttdeci">void signal_handler(int sig_num)</div><div class="ttdoc">Signal handler for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d39/a00257_source.html#l00072">sig.c:72</a></div></div>
+<div class="ttc" id="aa00302_html_a8f6c45ca4a7f6a41c4c88314e697565a"><div class="ttname"><a href="../../d0/d61/a00302.html#a8f6c45ca4a7f6a41c4c88314e697565a">abend</a></div><div class="ttdeci">void abend(int, char *)</div><div class="ttdoc">Abnormal program termination.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a00302_source.html#l01086">dwin.c:1086</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d0/d61/a00302_source.html#l01086">abend()</a>, and <a class="el" href="../../d9/d39/a00257_source.html#l00072">signal_handler()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/de1/a00233_source.html#l00683">exec_objects()</a>, <a class="el" href="../../d0/d27/a00239_source.html#l00124">fork_exec()</a>, <a class="el" href="../../d6/de1/a00233_source.html#l00055">init_pick()</a>, and <a class="el" href="../../de/d25/a00290_source.html#l00016">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d39/a00257_aca2de03f6d52d4b11237990e4e605177_cgraph.svg" width="656" height="128"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d39/a00257_aca2de03f6d52d4b11237990e4e605177_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="aa08a9a8dede37c66c81c3f51a0f338a9" name="aa08a9a8dede37c66c81c3f51a0f338a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa08a9a8dede37c66c81c3f51a0f338a9">&#9670;&#160;</a></span>signal_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void signal_handler </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sig_num</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Signal handler for interrupt signals. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00072">72</a> of file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   72</span>                                 {</div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">switch</span> (sig_num) {</div>
+<div class="line"><span class="lineno">   74</span>    <span class="keywordflow">case</span> SIGINT:</div>
+<div class="line"><span class="lineno">   75</span>        <a class="code hl_variable" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGINT;</div>
+<div class="line"><span class="lineno">   76</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">case</span> SIGTERM:</div>
+<div class="line"><span class="lineno">   78</span>        <a class="code hl_variable" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGTERM;</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">case</span> SIGQUIT:</div>
+<div class="line"><span class="lineno">   81</span>        <a class="code hl_variable" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGQUIT;</div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">case</span> SIGSEGV:</div>
+<div class="line"><span class="lineno">   84</span>        tcsetattr(0, TCSANOW, &amp;<a class="code hl_variable" href="../../d5/d0f/a00308.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>);</div>
+<div class="line"><span class="lineno">   85</span>        <span class="keywordtype">char</span> *msg1 = <span class="stringliteral">&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   86</span>        write(STDERR_FILENO, msg1, strlen(msg1));</div>
+<div class="line"><span class="lineno">   87</span>        <span class="keywordtype">char</span> *msg2 = <span class="stringliteral">&quot;________ SIGSEGV - Segmentation fault - Generating core &quot;</span></div>
+<div class="line"><span class="lineno">   88</span>                     <span class="stringliteral">&quot;dump ________\n\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   89</span>        write(STDERR_FILENO, msg2, strlen(msg2));</div>
+<div class="line"><span class="lineno">   90</span>        <span class="keyword">struct </span>sigaction sa;</div>
+<div class="line"><span class="lineno">   91</span>        sa.sa_handler = SIG_DFL;</div>
+<div class="line"><span class="lineno">   92</span>        sigemptyset(&amp;sa.sa_mask);</div>
+<div class="line"><span class="lineno">   93</span>        sa.sa_flags = 0;</div>
+<div class="line"><span class="lineno">   94</span>        sigaction(SIGSEGV, &amp;sa, NULL);</div>
+<div class="line"><span class="lineno">   95</span>        kill(getpid(), SIGSEGV); <span class="comment">// Re-raise the signal</span></div>
+<div class="line"><span class="lineno">   96</span>        _exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">   97</span>    <span class="keywordflow">case</span> SIGUSR1:</div>
+<div class="line"><span class="lineno">   98</span>        <a class="code hl_variable" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGUSR1;</div>
+<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  101</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  102</span>    }</div>
+<div class="line"><span class="lineno">  103</span>}</div>
+<div class="ttc" id="aa00308_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d5/d0f/a00308.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d0f/a00308_source.html#l00020">scriou.c:20</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d5/d0f/a00308_source.html#l00020">shell_tioctl</a>, and <a class="el" href="../../d9/d39/a00257_source.html#l00018">sig_received</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d9/d39/a00257_source.html#l00042">sig_prog_mode()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d39/a00257_aa08a9a8dede37c66c81c3f51a0f338a9_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a44f81ebcc5b6c685cbdfe388eb420313" name="a44f81ebcc5b6c685cbdfe388eb420313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f81ebcc5b6c685cbdfe388eb420313">&#9670;&#160;</a></span>f_curses_open</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool f_curses_open = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00020">20</a> of file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
+
+</div>
+</div>
+<a id="a01a99fc32bd5b471123f6223503c9616" name="a01a99fc32bd5b471123f6223503c9616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01a99fc32bd5b471123f6223503c9616">&#9670;&#160;</a></span>sig_received</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile sig_atomic_t sig_received = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d39/a00257_source.html#l00018">18</a> of file <a class="el" href="../../d9/d39/a00257_source.html">sig.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d9/d39/a00257_source.html#l00105">handle_signal()</a>, <a class="el" href="../../d9/d39/a00257_source.html#l00072">signal_handler()</a>, and <a class="el" href="../../d0/d61/a00302_source.html#l01103">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -367,7 +447,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d9/d39/a00257.html">lf.c</a></li>
+    <li class="navelem"><a href="../../d9/d39/a00257.html">sig.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
