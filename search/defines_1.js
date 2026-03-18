@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['bblue_0',['bblue',['../d2/d04/a00281.html#a0777ed9763c78435bf1943054f6456e9',1,'opts.c']]],
-  ['blue_1',['blue',['../d2/d04/a00281.html#a679c8f05bd397c3b2ad08274a1e5e752',1,'opts.c']]]
+  ['bblue_0',['bblue',['../dc/d5d/a00278.html#a0777ed9763c78435bf1943054f6456e9',1,'opts.c']]],
+  ['blue_1',['blue',['../dc/d5d/a00278.html#a679c8f05bd397c3b2ad08274a1e5e752',1,'opts.c']]]
 ];

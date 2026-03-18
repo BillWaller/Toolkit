@@ -1,10 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"index.html#highlights-pun-intended":[0,7,4],
-"index.html#just-do-it":[0,7,5],
-"index.html#key-features":[0,7,3],
-"index.html#large-log-file-in-view":[0,3,0],
-"index.html#lf---list-files-using-regular-expressions":[0,7,23],
 "index.html#lf-optionsscreenshotslf-helppng":[0,5],
 "index.html#log-file-with-editor":[0,7,13,0],
 "index.html#maintaining-security-with-rsh":[0,7,22],

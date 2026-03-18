@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['get_5fchyron_5fkey_0',['get_chyron_key',['../d0/d61/a00302.html#a4298f891699300bfc4e6e56fd2a8d574',1,'dwin.c']]],
-  ['get_5fclr_5fpair_1',['get_clr_pair',['../d0/d61/a00302.html#af0ba4efbc81c259a2519ca41dd9d1599',1,'dwin.c']]],
+  ['get_5fchyron_5fkey_0',['get_chyron_key',['../df/d95/a00299.html#a4298f891699300bfc4e6e56fd2a8d574',1,'dwin.c']]],
+  ['get_5fclr_5fpair_1',['get_clr_pair',['../df/d95/a00299.html#af0ba4efbc81c259a2519ca41dd9d1599',1,'dwin.c']]],
   ['get_5fcmd_5farg_2',['get_cmd_arg',['../d3/d1a/a00251.html#a8e98d9f33c5f6aa78ea2fbc13c75b3a9',1,'view_engine.c']]],
   ['get_5fcmd_5fchar_3',['get_cmd_char',['../d3/d1a/a00251.html#ab3d3c80c5b7bb6dc461a8e5746be7690',1,'view_engine.c']]],
   ['get_5fcommand_5ftype_4',['get_command_type',['../dd/dd7/a00260.html#a1989771e09ef0e00c4cec786094d1d26',1,'parse_menu_desc.c']]],

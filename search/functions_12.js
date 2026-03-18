@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['verify_5fdir_0',['verify_dir',['../db/d7b/a00296.html#ae14a4e790b69c8c2e50d1eb5cdf1fd19',1,'futil.c']]],
-  ['verify_5ffile_1',['verify_file',['../db/d7b/a00296.html#ab190e75e095b7d3da114fce21ab8c8ea',1,'futil.c']]],
+  ['verify_5fdir_0',['verify_dir',['../d6/d82/a00293.html#ae14a4e790b69c8c2e50d1eb5cdf1fd19',1,'futil.c']]],
+  ['verify_5ffile_1',['verify_file',['../d6/d82/a00293.html#ab190e75e095b7d3da114fce21ab8c8ea',1,'futil.c']]],
   ['verify_5fspec_5farg_2',['verify_spec_arg',['../dc/d9a/a00218.html#a75ce293fe4e007a3337a190647408000',1,'mem.c']]],
   ['view_5fcmd_5fprocessor_3',['view_cmd_processor',['../d3/d1a/a00251.html#a9c4b3ba5f73c18b486646c62b933972a',1,'view_engine.c']]],
   ['view_5fdisplay_5fhelp_4',['view_display_help',['../d3/d1a/a00251.html#ad997ba9f8591568c77291fb1b44601b2',1,'view_engine.c']]],

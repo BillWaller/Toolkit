@@ -7,7 +7,6 @@ var a00251 =
     [ "build_prompt", "d3/d1a/a00251.html#aa0d1c85e4fcd40cb34420308dae381cf", null ],
     [ "cat_file", "d3/d1a/a00251.html#a6543444a87ef174a7b63fa3adcb16c58", null ],
     [ "cmd_line_prompt", "d3/d1a/a00251.html#a5a1709eaa7dd8a6dec494455146f1be1", null ],
-    [ "decrement_ln", "d3/d1a/a00251.html#a9e7c0041f44d3da6fb795f3191ca34ff", null ],
     [ "display_line", "d3/d1a/a00251.html#a16a4b855ead8402d4744e77a5504082a", null ],
     [ "enter_file_spec", "d3/d1a/a00251.html#a2ffea5674e85f124a70e19f745a66583", null ],
     [ "fmt_line", "d3/d1a/a00251.html#a747411d59b020ad11d4567ab0b3db8c2", null ],

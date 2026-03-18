@@ -8,5 +8,5 @@ var searchData=
   ['d_5fhelp_5',['D_HELP',['../d2/dc8/a00242.html#a89b314cf8c48acb2b0f084023efe43cd',1,'form_engine.c']]],
   ['d_5fquery_6',['D_QUERY',['../d2/dc8/a00242.html#a8dde2b17da1845d674f44135895994a5',1,'form_engine.c']]],
   ['d_5ftext_7',['D_TEXT',['../d2/dc8/a00242.html#a582a134ae58dbe280e34e0a1d6a1e26d',1,'form_engine.c']]],
-  ['debug_8',['DEBUG',['../d0/d61/a00302.html#ad72dbcf6d0153db1b8d8a58001feed83',1,'dwin.c']]]
+  ['debug_8',['DEBUG',['../df/d95/a00299.html#ad72dbcf6d0153db1b8d8a58001feed83',1,'dwin.c']]]
 ];

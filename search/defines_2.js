@@ -1,5 +1,5 @@
 var searchData=
 [
   ['ctrl_0',['Ctrl',['../d3/d1a/a00251.html#af475c4649f5ac3f8f9901d7a7b9c1b93',1,'view_engine.c']]],
-  ['cyan_1',['cyan',['../d2/d04/a00281.html#aee63ed202c647f085cfc57577055a531',1,'opts.c']]]
+  ['cyan_1',['cyan',['../dc/d5d/a00278.html#aee63ed202c647f085cfc57577055a531',1,'opts.c']]]
 ];
