@@ -5,7 +5,11 @@ var index =
       [ "Large Log File in View", "index.html#large-log-file-in-view", null ],
       [ "<b><em>New Options for lf</em></b>", "index.html#_new-options-for-lf_", null ]
     ] ],
-    [ "Table of Contents", "index.html#table-of-contents", null ],
+    [ "Table of Contents", "index.html#table-of-contents", [
+      [ "Other Markdown files in this repository:", "index.html#other-markdown-files-in-this-repository", null ],
+      [ "HTML Documentation:", "index.html#html-documentation", null ]
+    ] ],
+    [ "Table of Contents", "index.html#table-of-contents-1", null ],
     [ "Get C-Menu on Github", "index.html#get-c-menu-on-github", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [
