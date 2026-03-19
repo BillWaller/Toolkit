@@ -3,7 +3,7 @@ var searchData=
   ['save_5fobject_0',['save_object',['../d9/d8e/a01050.html#ga02f90007f2422dd2094ab64569e157f0',1,'pick_engine.c']]],
   ['scroll_5fdown_5fn_5flines_1',['scroll_down_n_lines',['../dd/d57/a01054.html#gaa79b8294ebf98c84d4a844fd7d9e4862',1,'view_engine.c']]],
   ['scroll_5fup_5fn_5flines_2',['scroll_up_n_lines',['../dd/d57/a01054.html#gab08fc8983cc3bdb21b438c82ece16346',1,'view_engine.c']]],
-  ['search_3',['search',['../dc/d99/a01053.html#ga5f639aa1a1f03fa05888c724bc17d99c',1,'view_engine.c']]],
+  ['search_3',['search',['../dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c',1,'view_engine.c']]],
   ['segmentation_5ffault_4',['segmentation_fault',['../d0/ddd/a01044.html#gab0df3034e2ed84e1d878fba903da46ba',1,'futil.c']]],
   ['select_5fopt_5',['select_opt',['../db/d20/a00980.html#a2978674465c80376b792c0305d3b5d8b',1,'opts.c']]],
   ['set_5fchyron_5fkey_6',['set_chyron_key',['../d8/d79/a01036.html#ga208ce92c197fdd6d2b007987e534aa3b',1,'dwin.c']]],

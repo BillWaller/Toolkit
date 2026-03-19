@@ -9,7 +9,6 @@ var a01053 =
     [ "get_cmd_char", "dc/d99/a01053.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
     [ "lp", "dc/d99/a01053.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
     [ "remove_file", "dc/d99/a01053.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "search", "dc/d99/a01053.html#ga5f639aa1a1f03fa05888c724bc17d99c", null ],
     [ "view_cmd_processor", "dc/d99/a01053.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
     [ "view_file", "dc/d99/a01053.html#ga0bd4dc056ab5010547129bb87819789b", null ],
     [ "write_view_buffer", "dc/d99/a01053.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]

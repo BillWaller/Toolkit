@@ -138,8 +138,6 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga6543444a87ef174a7b63fa3adcb16c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate File to Standard Output.  <br /></td></tr>
 <tr class="memitem:ga219efbc4d9d70ebc47fafa540b370247" id="r_ga219efbc4d9d70ebc47fafa540b370247"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga219efbc4d9d70ebc47fafa540b370247">lp</a> (char *PrintFile)</td></tr>
 <tr class="memdesc:ga219efbc4d9d70ebc47fafa540b370247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send File to Print Queue.  <br /></td></tr>
-<tr class="memitem:ga5f639aa1a1f03fa05888c724bc17d99c" id="r_ga5f639aa1a1f03fa05888c724bc17d99c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga5f639aa1a1f03fa05888c724bc17d99c">search</a> (View *view, int *search_cmd, char *regex_pattern)</td></tr>
-<tr class="memdesc:ga5f639aa1a1f03fa05888c724bc17d99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for Regular Expression Pattern.  <br /></td></tr>
 <tr class="memitem:ga677ea54b0c727a5475d0b3efe71f5a7c" id="r_ga677ea54b0c727a5475d0b3efe71f5a7c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga677ea54b0c727a5475d0b3efe71f5a7c">remove_file</a> (View *view)</td></tr>
 <tr class="memdesc:ga677ea54b0c727a5475d0b3efe71f5a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove File.  <br /></td></tr>
 <tr class="memitem:ga2ffea5674e85f124a70e19f745a66583" id="r_ga2ffea5674e85f124a70e19f745a66583"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga2ffea5674e85f124a70e19f745a66583">enter_file_spec</a> (Init *init, char *file_spec)</td></tr>
@@ -860,236 +858,6 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="ga5f639aa1a1f03fa05888c724bc17d99c" name="ga5f639aa1a1f03fa05888c724bc17d99c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5f639aa1a1f03fa05888c724bc17d99c">&#9670;&#160;</a></span>search()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool search </td>
-          <td>(</td>
-          <td class="paramtype">View *</td>          <td class="paramname"><span class="paramname"><em>view</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>search_cmd</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>regex_pattern</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Search for Regular Expression Pattern. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">view</td><td>Pointer to View Structure </td></tr>
-    <tr><td class="paramname">search_cmd</td><td>Search Command Character ('/' or '?') </td></tr>
-    <tr><td class="paramname">regex_pattern</td><td>Regular Expression Pattern to Search For </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if a match is found and displayed, false if the search completes without finding a match or if an error occurs </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>The search performs extended regular expression matching, ignoring ANSI sequences and Unicode characters. Matches are highlighted on the screen, and the search continues until the page is full or the end of the file is reached. If the search wraps around the file, a message is displayed indicating that the search is complete. </dd>
-<dd>
-The search state is maintained in the view structure, allowing for repeat searches and tracking of the current search position. </dd>
-<dd>
-this function highlights all matches in the current ncurses pad, including those not displayed on the screen, and tracks the first and last match columns for prompt display. </dd>
-<dd>
-ANSI sequences and Unicode characters are stripped before matching, so matching corresponds to the visual display </dd></dl>
-<p>initialize iteration</p>
-<p>get line to scan</p>
-<p>non-matching page filler</p>
-<p>Display matching lines</p>
-<p>All matches on the current line are highlighted, including those not displayed on the screen. Track first and last match columns for prompt display.</p>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da3/a00953_source.html#l01050">1050</a> of file <a class="el" href="../../d5/da3/a00953_source.html">view_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1050</span>                                                              {</div>
-<div class="line"><span class="lineno"> 1051</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../df/d39/a00950.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>[<a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno"> 1052</span>    <span class="keywordtype">int</span> REG_FLAGS = 0;</div>
-<div class="line"><span class="lineno"> 1053</span>    regmatch_t pmatch[1];</div>
-<div class="line"><span class="lineno"> 1054</span>    regex_t compiled_regex;</div>
-<div class="line"><span class="lineno"> 1055</span>    <span class="keywordtype">int</span> reti;</div>
-<div class="line"><span class="lineno"> 1056</span>    <span class="keywordtype">int</span> line_offset;</div>
-<div class="line"><span class="lineno"> 1057</span>    <span class="keywordtype">int</span> line_len;</div>
-<div class="line"><span class="lineno"> 1058</span>    <span class="keywordtype">int</span> match_len;</div>
-<div class="line"><span class="lineno"> 1059</span>    off_t prev_ln;</div>
-<div class="line"><span class="lineno"> 1060</span>    <span class="keywordtype">bool</span> f_page = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1061</span>    <span class="keywordflow">if</span> (*regex_pattern == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1062</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1063</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_ignore_case)</div>
-<div class="line"><span class="lineno"> 1064</span>        REG_FLAGS = REG_ICASE | REG_EXTENDED;</div>
-<div class="line"><span class="lineno"> 1065</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1066</span>        REG_FLAGS = REG_EXTENDED;</div>
-<div class="line"><span class="lineno"> 1067</span>    reti = regcomp(&amp;compiled_regex, regex_pattern, REG_FLAGS);</div>
-<div class="line"><span class="lineno"> 1068</span>    <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno"> 1069</span>        <a class="code hl_function" href="../../d4/dbc/a01038.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<span class="stringliteral">&quot;Invalid pattern&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1070</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1071</span>    }</div>
-<div class="line"><span class="lineno"> 1073</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno"> 1075</span>        <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;/&#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1076</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos == <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size)</div>
-<div class="line"><span class="lineno"> 1077</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = 0;</div>
-<div class="line"><span class="lineno"> 1078</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1079</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos == 0)</div>
-<div class="line"><span class="lineno"> 1080</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size;</div>
-<div class="line"><span class="lineno"> 1081</span>        }</div>
-<div class="line"><span class="lineno"> 1082</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos == <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_beg_pos) {</div>
-<div class="line"><span class="lineno"> 1083</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_first_iter == <span class="keyword">true</span>) {</div>
-<div class="line"><span class="lineno"> 1084</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_first_iter = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1085</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_search_complete = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1086</span>                <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;/&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1087</span>                    <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury = 0;</div>
-<div class="line"><span class="lineno"> 1088</span>                <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1089</span>                    <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;scroll_lines + 1;</div>
-<div class="line"><span class="lineno"> 1090</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1091</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_search_complete = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1092</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1093</span>            }</div>
-<div class="line"><span class="lineno"> 1094</span>        }</div>
-<div class="line"><span class="lineno"> 1095</span>        <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos;</div>
-<div class="line"><span class="lineno"> 1096</span>        <a class="code hl_function" href="../../dd/d57/a01054.html#ga03bfb3d8d09d33f4f59930485f283ead">sync_ln</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1098</span>        <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;/&#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1099</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury == <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;scroll_lines)</div>
-<div class="line"><span class="lineno"> 1100</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1101</span>            prev_ln = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln;</div>
-<div class="line"><span class="lineno"> 1102</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = <a class="code hl_function" href="../../dd/d57/a01054.html#ga395b27e6a9716bf49e3fc04d53987b33">get_next_line</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos);</div>
-<div class="line"><span class="lineno"> 1103</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos;</div>
-<div class="line"><span class="lineno"> 1104</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1105</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury == 0)</div>
-<div class="line"><span class="lineno"> 1106</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1107</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = <a class="code hl_function" href="../../dd/d57/a01054.html#gab49fb9f9417c7cf790cea1679e4e5edc">get_prev_line</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos);</div>
-<div class="line"><span class="lineno"> 1108</span>            prev_ln = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln;</div>
-<div class="line"><span class="lineno"> 1109</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos;</div>
-<div class="line"><span class="lineno"> 1110</span>        }</div>
-<div class="line"><span class="lineno"> 1111</span>        <a class="code hl_function" href="../../d2/d71/a01055.html#ga747411d59b020ad11d4567ab0b3db8c2">fmt_line</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1112</span>        reti = regexec(&amp;compiled_regex, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;stripped_line_out,</div>
-<div class="line"><span class="lineno"> 1113</span>                       compiled_regex.re_nsub + 1, pmatch, REG_FLAGS);</div>
-<div class="line"><span class="lineno"> 1114</span>        <span class="keywordflow">if</span> (reti == REG_NOMATCH) {</div>
-<div class="line"><span class="lineno"> 1115</span>            <span class="keywordflow">if</span> (f_page) {</div>
-<div class="line"><span class="lineno"> 1117</span>                <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;?&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1118</span>                    <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury -= 2;</div>
-<div class="line"><span class="lineno"> 1119</span>                <a class="code hl_function" href="../../d2/d71/a01055.html#ga16a4b855ead8402d4744e77a5504082a">display_line</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1120</span>                <span class="keywordflow">if</span> ((*search_cmd == <span class="charliteral">&#39;/&#39;</span> &amp;&amp; <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury == <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;scroll_lines) ||</div>
-<div class="line"><span class="lineno"> 1121</span>                    (*search_cmd == <span class="charliteral">&#39;?&#39;</span> &amp;&amp; <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury == 1)) {</div>
-<div class="line"><span class="lineno"> 1122</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1123</span>                }</div>
-<div class="line"><span class="lineno"> 1124</span>            }</div>
-<div class="line"><span class="lineno"> 1125</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1126</span>        }</div>
-<div class="line"><span class="lineno"> 1127</span>        <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno"> 1128</span>            <span class="keywordtype">char</span> err_str[<a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno"> 1129</span>            regerror(reti, &amp;compiled_regex, err_str, <span class="keyword">sizeof</span>(err_str));</div>
-<div class="line"><span class="lineno"> 1130</span>            <a class="code hl_function" href="../../d4/d56/a01042.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../df/d39/a00950.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1131</span>            <a class="code hl_function" href="../../d4/d56/a01042.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../df/d39/a00950.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, err_str, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1132</span>            <a class="code hl_function" href="../../d4/dbc/a01038.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<a class="code hl_variable" href="../../df/d39/a00950.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
-<div class="line"><span class="lineno"> 1133</span>            regfree(&amp;compiled_regex);</div>
-<div class="line"><span class="lineno"> 1134</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1135</span>        }</div>
-<div class="line"><span class="lineno"> 1137</span>        <span class="keywordflow">if</span> (!f_page) {</div>
-<div class="line"><span class="lineno"> 1138</span>            <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;/&#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1139</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_ln = prev_ln;</div>
-<div class="line"><span class="lineno"> 1140</span>                wmove(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;pad, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury, 0);</div>
-<div class="line"><span class="lineno"> 1141</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1142</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_ln = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln;</div>
-<div class="line"><span class="lineno"> 1143</span>                wmove(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;pad, 0, 0);</div>
-<div class="line"><span class="lineno"> 1144</span>            }</div>
-<div class="line"><span class="lineno"> 1145</span>            wclrtobot(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;pad);</div>
-<div class="line"><span class="lineno"> 1146</span>            f_page = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1147</span>        }</div>
-<div class="line"><span class="lineno"> 1148</span>        <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;?&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1149</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury -= 2;</div>
-<div class="line"><span class="lineno"> 1150</span>        <a class="code hl_function" href="../../d2/d71/a01055.html#ga16a4b855ead8402d4744e77a5504082a">display_line</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1154</span>        <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;first_match_x = -1;</div>
-<div class="line"><span class="lineno"> 1155</span>        <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;last_match_x = 0;</div>
-<div class="line"><span class="lineno"> 1156</span>        line_len = strlen(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;stripped_line_out);</div>
-<div class="line"><span class="lineno"> 1157</span> </div>
-<div class="line"><span class="lineno"> 1158</span>        line_offset = 0;</div>
-<div class="line"><span class="lineno"> 1159</span>        <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno"> 1160</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;curx = line_offset + pmatch[0].rm_so;</div>
-<div class="line"><span class="lineno"> 1161</span>            match_len = pmatch[0].rm_eo - pmatch[0].rm_so;</div>
-<div class="line"><span class="lineno"> 1162</span>            mvwchgat(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;pad, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury - 1, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;curx, match_len,</div>
-<div class="line"><span class="lineno"> 1163</span>                     WA_REVERSE, <a class="code hl_variable" href="../../df/d59/a01001.html#af907ff1bb99a37ff55577d5f1064349a">cp_norm</a>, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno"> 1164</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;first_match_x == -1)</div>
-<div class="line"><span class="lineno"> 1165</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;first_match_x = pmatch[0].rm_so;</div>
-<div class="line"><span class="lineno"> 1166</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;last_match_x = line_offset + pmatch[0].rm_eo;</div>
-<div class="line"><span class="lineno"> 1167</span>            line_offset += pmatch[0].rm_eo;</div>
-<div class="line"><span class="lineno"> 1168</span>            <span class="keywordflow">if</span> (line_offset &gt;= line_len)</div>
-<div class="line"><span class="lineno"> 1169</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1170</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;line_out_p = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;stripped_line_out + line_offset;</div>
-<div class="line"><span class="lineno"> 1171</span>            reti = regexec(&amp;compiled_regex, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;line_out_p,</div>
-<div class="line"><span class="lineno"> 1172</span>                           compiled_regex.re_nsub + 1, pmatch, REG_FLAGS);</div>
-<div class="line"><span class="lineno"> 1173</span>            <span class="keywordflow">if</span> (reti == REG_NOMATCH)</div>
-<div class="line"><span class="lineno"> 1174</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1175</span>            <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno"> 1176</span>                <span class="keywordtype">char</span> msgbuf[100];</div>
-<div class="line"><span class="lineno"> 1177</span>                regerror(reti, &amp;compiled_regex, msgbuf, <span class="keyword">sizeof</span>(msgbuf));</div>
-<div class="line"><span class="lineno"> 1178</span>                sprintf(<a class="code hl_variable" href="../../df/d39/a00950.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <span class="stringliteral">&quot;Regex match failed: %s&quot;</span>, msgbuf);</div>
-<div class="line"><span class="lineno"> 1179</span>                <a class="code hl_function" href="../../d4/dbc/a01038.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<a class="code hl_variable" href="../../df/d39/a00950.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
-<div class="line"><span class="lineno"> 1180</span>                regfree(&amp;compiled_regex);</div>
-<div class="line"><span class="lineno"> 1181</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1182</span>            }</div>
-<div class="line"><span class="lineno"> 1183</span>            <span class="keywordflow">if</span> (*search_cmd == <span class="charliteral">&#39;/&#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1184</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury == <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;scroll_lines) {</div>
-<div class="line"><span class="lineno"> 1185</span>                    regfree(&amp;compiled_regex);</div>
-<div class="line"><span class="lineno"> 1186</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1187</span>                }</div>
-<div class="line"><span class="lineno"> 1188</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury == 1) {</div>
-<div class="line"><span class="lineno"> 1189</span>                regfree(&amp;compiled_regex);</div>
-<div class="line"><span class="lineno"> 1190</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1191</span>            }</div>
-<div class="line"><span class="lineno"> 1192</span>        }</div>
-<div class="line"><span class="lineno"> 1193</span>    }</div>
-<div class="line"><span class="lineno"> 1194</span>    <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos;</div>
-<div class="line"><span class="lineno"> 1195</span><span class="preprocessor">#ifdef DEBUG</span><span class="preprocessor"></span></div>
-<div class="line"><span class="lineno"> 1197</span>    <a class="code hl_function" href="../../d4/d56/a01042.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;tmp_prompt_str, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1,</div>
-<div class="line"><span class="lineno"> 1198</span>              <span class="stringliteral">&quot;%s|%c%s|Pos %zu-%zu|(%zd) %zu %zu&quot;</span>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_name, *search_cmd,</div>
-<div class="line"><span class="lineno"> 1199</span>              regex_pattern, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos,</div>
-<div class="line"><span class="lineno"> 1200</span>              <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_beg_pos, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos);</div>
-<div class="line"><span class="lineno"> 1201</span><span class="preprocessor">#else</span></div>
-<div class="line"><span class="lineno"> 1202</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;last_match_x &gt; <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;maxcol)</div>
-<div class="line"><span class="lineno"> 1203</span>        <a class="code hl_function" href="../../d4/d56/a01042.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;tmp_prompt_str, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1,</div>
-<div class="line"><span class="lineno"> 1204</span>                  <span class="stringliteral">&quot;%s|%c%s|Match Cols %d-%d of %d-%d|(%zd%%)&quot;</span>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_name,</div>
-<div class="line"><span class="lineno"> 1205</span>                  *search_cmd, regex_pattern, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;first_match_x,</div>
-<div class="line"><span class="lineno"> 1206</span>                  <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;last_match_x, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;pmincol, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;smaxcol - <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx,</div>
-<div class="line"><span class="lineno"> 1207</span>                  (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos * 100 / <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size));</div>
-<div class="line"><span class="lineno"> 1208</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1209</span>        <a class="code hl_function" href="../../d4/d56/a01042.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;tmp_prompt_str, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1,</div>
-<div class="line"><span class="lineno"> 1210</span>                  <span class="stringliteral">&quot;%s|%c%s|Pos %zu-%zu|(%zd%%)&quot;</span>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_name, *search_cmd,</div>
-<div class="line"><span class="lineno"> 1211</span>                  regex_pattern, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos,</div>
-<div class="line"><span class="lineno"> 1212</span>                  (<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos * 100 / <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size));</div>
-<div class="line"><span class="lineno"> 1213</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno"> 1214</span>    regfree(&amp;compiled_regex);</div>
-<div class="line"><span class="lineno"> 1215</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1216</span>}</div>
-<div class="ttc" id="aa01001_html_af907ff1bb99a37ff55577d5f1064349a"><div class="ttname"><a href="../../df/d59/a01001.html#af907ff1bb99a37ff55577d5f1064349a">cp_norm</a></div><div class="ttdeci">int cp_norm</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00149">dwin.c:149</a></div></div>
-<div class="ttc" id="aa01038_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d4/dbc/a01038.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00992">dwin.c:992</a></div></div>
-<div class="ttc" id="aa01054_html_ga03bfb3d8d09d33f4f59930485f283ead"><div class="ttname"><a href="../../dd/d57/a01054.html#ga03bfb3d8d09d33f4f59930485f283ead">sync_ln</a></div><div class="ttdeci">void sync_ln(View *)</div><div class="ttdoc">Synchronize Line Table with Current File Position.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01656">view_engine.c:1656</a></div></div>
-<div class="ttc" id="aa01054_html_ga395b27e6a9716bf49e3fc04d53987b33"><div class="ttname"><a href="../../dd/d57/a01054.html#ga395b27e6a9716bf49e3fc04d53987b33">get_next_line</a></div><div class="ttdeci">off_t get_next_line(View *, off_t)</div><div class="ttdoc">Get Next Line from View-&gt;buf.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01423">view_engine.c:1423</a></div></div>
-<div class="ttc" id="aa01054_html_gab49fb9f9417c7cf790cea1679e4e5edc"><div class="ttname"><a href="../../dd/d57/a01054.html#gab49fb9f9417c7cf790cea1679e4e5edc">get_prev_line</a></div><div class="ttdeci">off_t get_prev_line(View *, off_t)</div><div class="ttdoc">Get Previous Line from View-&gt;buf.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01466">view_engine.c:1466</a></div></div>
-<div class="ttc" id="aa01055_html_ga16a4b855ead8402d4744e77a5504082a"><div class="ttname"><a href="../../d2/d71/a01055.html#ga16a4b855ead8402d4744e77a5504082a">display_line</a></div><div class="ttdeci">void display_line(View *)</div><div class="ttdoc">Display Line on Padparam View *view data structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01691">view_engine.c:1691</a></div></div>
-<div class="ttc" id="aa01055_html_ga747411d59b020ad11d4567ab0b3db8c2"><div class="ttname"><a href="../../d2/d71/a01055.html#ga747411d59b020ad11d4567ab0b3db8c2">fmt_line</a></div><div class="ttdeci">int fmt_line(View *)</div><div class="ttdoc">Format Line for Display.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01723">view_engine.c:1723</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/d59/a01001_source.html#l00149">cp_norm</a>, <a class="el" href="../../d5/da3/a00953_source.html#l01691">display_line()</a>, <a class="el" href="../../d5/da3/a00953_source.html#l01723">fmt_line()</a>, <a class="el" href="../../d5/da3/a00953_source.html#l01423">get_next_line()</a>, <a class="el" href="../../d5/da3/a00953_source.html#l01466">get_prev_line()</a>, <a class="el" href="../../df/d59/a01001_source.html#l00992">Perror()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00129">ssnprintf()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00264">strnz__cat()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00235">strnz__cpy()</a>, and <a class="el" href="../../d5/da3/a00953_source.html#l01656">sync_ln()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d5/da3/a00953_source.html#l00177">view_cmd_processor()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d99/a01053_ga5f639aa1a1f03fa05888c724bc17d99c_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d99/a01053_ga5f639aa1a1f03fa05888c724bc17d99c_icgraph.svg" width="100%" height="558"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
 <a id="ga9c4b3ba5f73c18b486646c62b933972a" name="ga9c4b3ba5f73c18b486646c62b933972a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga9c4b3ba5f73c18b486646c62b933972a">&#9670;&#160;</a></span>view_cmd_processor()</h2>
 
@@ -1119,8 +887,8 @@ Here is the caller graph for this function:</div>
 <p>&lt; 'l', 'L', KEY_RIGHT - Horizontal scroll right by two thirds of the page width</p>
 <p>'k', 'K', KEY_UP, Ctrl('K') - Scroll up one line</p>
 <p>'j', 'J', KEY_DOWN, KEY_ENTER, SPACE - scroll down one line</p>
-<p>'b', 'B', Ctrl('B'), KEY_PPAGE - Scroll up one page</p>
-<p>'f', 'F', Ctrl('F'), KEY_NPAGE - scroll down one page</p>
+<p>'b', 'B', Ctrl('B'), KEY_PPAGE - Previous Page</p>
+<p>'f', 'F', Ctrl('F'), KEY_NPAGE Next Page</p>
 <p>'g', KEY_HOME - Go to the beginning of the document</p>
 <p>KEY_LL - Go to the end of the document</p>
 <p>'!', Execute Shell Command from within C-Menu View</p>
@@ -1407,7 +1175,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  451</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cury = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;scroll_lines + 1;</div>
 <div class="line"><span class="lineno">  452</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos;</div>
 <div class="line"><span class="lineno">  453</span>            }</div>
-<div class="line"><span class="lineno">  454</span>            <a class="code hl_function" href="#ga5f639aa1a1f03fa05888c724bc17d99c">search</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, &amp;prev_search_cmd, <a class="code hl_variable" href="../../d5/da3/a00953.html#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a>);</div>
+<div class="line"><span class="lineno">  454</span>            <a class="code hl_function" href="../../dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c">search</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, &amp;prev_search_cmd, <a class="code hl_variable" href="../../d5/da3/a00953.html#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a>);</div>
 <div class="line"><span class="lineno">  455</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno">  457</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;/&#39;</span>:</div>
 <div class="line"><span class="lineno">  458</span>            <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_search_complete = <span class="keyword">false</span>;</div>
@@ -1419,7 +1187,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  464</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_first_iter = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  465</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_beg_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos;</div>
 <div class="line"><span class="lineno">  466</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos;</div>
-<div class="line"><span class="lineno">  467</span>                <a class="code hl_function" href="#ga5f639aa1a1f03fa05888c724bc17d99c">search</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, &amp;search_cmd, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cmd_arg);</div>
+<div class="line"><span class="lineno">  467</span>                <a class="code hl_function" href="../../dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c">search</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, &amp;search_cmd, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cmd_arg);</div>
 <div class="line"><span class="lineno">  468</span>                prev_search_cmd = search_cmd;</div>
 <div class="line"><span class="lineno">  469</span>                <a class="code hl_function" href="../../d4/d56/a01042.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/da3/a00953.html#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cmd_arg, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
 <div class="line"><span class="lineno">  470</span>            }</div>
@@ -1434,7 +1202,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  480</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_first_iter = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  481</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_beg_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos;</div>
 <div class="line"><span class="lineno">  482</span>                <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;srch_curr_pos = <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos;</div>
-<div class="line"><span class="lineno">  483</span>                <a class="code hl_function" href="#ga5f639aa1a1f03fa05888c724bc17d99c">search</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, &amp;search_cmd, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cmd_arg);</div>
+<div class="line"><span class="lineno">  483</span>                <a class="code hl_function" href="../../dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c">search</a>(<a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, &amp;search_cmd, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cmd_arg);</div>
 <div class="line"><span class="lineno">  484</span>                prev_search_cmd = search_cmd;</div>
 <div class="line"><span class="lineno">  485</span>                <a class="code hl_function" href="../../d4/d56/a01042.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/da3/a00953.html#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a>, <a class="code hl_variable" href="../../d6/d82/a00920.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cmd_arg, <a class="code hl_define" href="../../d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
 <div class="line"><span class="lineno">  486</span>            }</div>
@@ -1634,17 +1402,18 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="aa00953_html_a963dfb3ff1f86d65cf46829388b1b3bc"><div class="ttname"><a href="../../d5/da3/a00953.html#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a></div><div class="ttdeci">char prev_regex_pattern[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00080">view_engine.c:80</a></div></div>
 <div class="ttc" id="aa00953_html_af475c4649f5ac3f8f9901d7a7b9c1b93"><div class="ttname"><a href="../../d5/da3/a00953.html#af475c4649f5ac3f8f9901d7a7b9c1b93">Ctrl</a></div><div class="ttdeci">#define Ctrl(c)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00029">view_engine.c:29</a></div></div>
 <div class="ttc" id="aa01035_html_ga40858af5b0d68549fb483f77c97eb82c"><div class="ttname"><a href="../../de/d26/a01035.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a></div><div class="ttdeci">void restore_wins()</div><div class="ttdoc">Restore all windows after a screen resize.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00854">dwin.c:854</a></div></div>
+<div class="ttc" id="aa01038_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d4/dbc/a01038.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00992">dwin.c:992</a></div></div>
 <div class="ttc" id="aa01039_html_gaeb3e7eb282467134ce50fde7d9ebd19d"><div class="ttname"><a href="../../df/d21/a01039.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a></div><div class="ttdeci">int full_screen_shell(char *)</div><div class="ttdoc">Execute a shell command in full screen mode.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dad/a00941_source.html#l00072">exec.c:72</a></div></div>
 <div class="ttc" id="aa01042_html_gaa3967ab49e69c2f867cd7058ccf26eb1"><div class="ttname"><a href="../../d4/d56/a01042.html#gaa3967ab49e69c2f867cd7058ccf26eb1">str_subc</a></div><div class="ttdeci">bool str_subc(char *, char *, char, char *, int)</div><div class="ttdoc">Replaces &quot;ReplaceChr&quot; in &quot;s&quot; with &quot;Withstr&quot; in &quot;d&quot; won&#39;t copy more than &quot;l&quot; bytes to &quot;d&quot; Replaces all...</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d48/a00995_source.html#l00381">futil.c:381</a></div></div>
 <div class="ttc" id="aa01053_html_ga219efbc4d9d70ebc47fafa540b370247"><div class="ttname"><a href="#ga219efbc4d9d70ebc47fafa540b370247">lp</a></div><div class="ttdeci">void lp(char *)</div><div class="ttdoc">Send File to Print Queue.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00995">view_engine.c:995</a></div></div>
 <div class="ttc" id="aa01053_html_ga2ffea5674e85f124a70e19f745a66583"><div class="ttname"><a href="#ga2ffea5674e85f124a70e19f745a66583">enter_file_spec</a></div><div class="ttdeci">bool enter_file_spec(Init *, char *)</div><div class="ttdoc">use form to enter a file specification</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l02051">view_engine.c:2051</a></div></div>
 <div class="ttc" id="aa01053_html_ga30ab3b4282eabd18619c5b053ff8b0b1"><div class="ttname"><a href="#ga30ab3b4282eabd18619c5b053ff8b0b1">write_view_buffer</a></div><div class="ttdeci">int write_view_buffer(Init *, bool)</div><div class="ttdoc">Write buffer contents to files.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00936">view_engine.c:936</a></div></div>
-<div class="ttc" id="aa01053_html_ga5f639aa1a1f03fa05888c724bc17d99c"><div class="ttname"><a href="#ga5f639aa1a1f03fa05888c724bc17d99c">search</a></div><div class="ttdeci">bool search(View *, int *, char *)</div><div class="ttdoc">Search for Regular Expression Pattern.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01050">view_engine.c:1050</a></div></div>
 <div class="ttc" id="aa01053_html_ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><div class="ttname"><a href="#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9">get_cmd_arg</a></div><div class="ttdeci">int get_cmd_arg(View *, char *)</div><div class="ttdoc">Get Command Argument from User Input.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00753">view_engine.c:753</a></div></div>
 <div class="ttc" id="aa01053_html_gaa0d1c85e4fcd40cb34420308dae381cf"><div class="ttname"><a href="#gaa0d1c85e4fcd40cb34420308dae381cf">build_prompt</a></div><div class="ttdeci">void build_prompt(View *, int, char *, double elapsed)</div><div class="ttdoc">Build Prompt String.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00867">view_engine.c:867</a></div></div>
 <div class="ttc" id="aa01053_html_gab3d3c80c5b7bb6dc461a8e5746be7690"><div class="ttname"><a href="#gab3d3c80c5b7bb6dc461a8e5746be7690">get_cmd_char</a></div><div class="ttdeci">int get_cmd_char(View *, off_t *)</div><div class="ttdoc">Get Command Character and Numeric Argument.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00709">view_engine.c:709</a></div></div>
 <div class="ttc" id="aa01054_html_ga46145f1d3680a48cb9391a8ae95db9ad"><div class="ttname"><a href="../../dd/d57/a01054.html#ga46145f1d3680a48cb9391a8ae95db9ad">go_to_eof</a></div><div class="ttdeci">void go_to_eof(View *)</div><div class="ttdoc">Go to End of File.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01545">view_engine.c:1545</a></div></div>
 <div class="ttc" id="aa01054_html_ga5dbc34981815690a92812e34d1cf478f"><div class="ttname"><a href="../../dd/d57/a01054.html#ga5dbc34981815690a92812e34d1cf478f">prev_page</a></div><div class="ttdeci">void prev_page(View *)</div><div class="ttdoc">display previous page</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01277">view_engine.c:1277</a></div></div>
+<div class="ttc" id="aa01054_html_ga5f639aa1a1f03fa05888c724bc17d99c"><div class="ttname"><a href="../../dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c">search</a></div><div class="ttdeci">bool search(View *, int *, char *)</div><div class="ttdoc">Search for Regular Expression Pattern.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01050">view_engine.c:1050</a></div></div>
 <div class="ttc" id="aa01054_html_gaa79b8294ebf98c84d4a844fd7d9e4862"><div class="ttname"><a href="../../dd/d57/a01054.html#gaa79b8294ebf98c84d4a844fd7d9e4862">scroll_down_n_lines</a></div><div class="ttdeci">void scroll_down_n_lines(View *, int)</div><div class="ttdoc">Scroll N Lines.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01340">view_engine.c:1340</a></div></div>
 <div class="ttc" id="aa01054_html_gab08fc8983cc3bdb21b438c82ece16346"><div class="ttname"><a href="../../dd/d57/a01054.html#gab08fc8983cc3bdb21b438c82ece16346">scroll_up_n_lines</a></div><div class="ttdeci">void scroll_up_n_lines(View *, int)</div><div class="ttdoc">Scroll Up N Lines.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01384">view_engine.c:1384</a></div></div>
 <div class="ttc" id="aa01054_html_gac81796e830049e74987a6b526cfc296f"><div class="ttname"><a href="../../dd/d57/a01054.html#gac81796e830049e74987a6b526cfc296f">go_to_line</a></div><div class="ttdeci">int go_to_line(View *, off_t)</div><div class="ttdoc">Go to Specific Line.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01587">view_engine.c:1587</a></div></div>
@@ -1832,6 +1601,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  979</span>}</div>
 <div class="ttc" id="aa01042_html_ga82896df8e50776b7e7b0cede4e45b523"><div class="ttname"><a href="../../d4/d56/a01042.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a></div><div class="ttdeci">size_t strip_ansi(char *, char *)</div><div class="ttdoc">Strips ANSI SGR escape sequences (ending in &#39;m&#39;) from string s to d.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d48/a00995_source.html#l00503">futil.c:503</a></div></div>
 <div class="ttc" id="aa01042_html_gab6ae8b51eae6da91d345cd4018a20bfa"><div class="ttname"><a href="../../d4/d56/a01042.html#gab6ae8b51eae6da91d345cd4018a20bfa">strnlf</a></div><div class="ttdeci">size_t strnlf(char *, size_t)</div><div class="ttdoc">terminates string with line feed</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d48/a00995_source.html#l00324">futil.c:324</a></div></div>
+<div class="ttc" id="aa01054_html_ga395b27e6a9716bf49e3fc04d53987b33"><div class="ttname"><a href="../../dd/d57/a01054.html#ga395b27e6a9716bf49e3fc04d53987b33">get_next_line</a></div><div class="ttdeci">off_t get_next_line(View *, off_t)</div><div class="ttdoc">Get Next Line from View-&gt;buf.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l01423">view_engine.c:1423</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../df/d59/a01001_source.html#l00910">display_error()</a>, <a class="el" href="../../df/d59/a01001_source.html#l00145">em0</a>, <a class="el" href="../../df/d59/a01001_source.html#l00146">em1</a>, <a class="el" href="../../df/d59/a01001_source.html#l00147">em2</a>, <a class="el" href="../../d5/da3/a00953_source.html#l01423">get_next_line()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00129">ssnprintf()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00503">strip_ansi()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00324">strnlf()</a>, <a class="el" href="../../dd/d48/a00995_source.html#l00264">strnz__cat()</a>, and <a class="el" href="../../dd/d48/a00995_source.html#l00235">strnz__cpy()</a>.</p>
 

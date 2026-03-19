@@ -15,5 +15,6 @@ var a01054 =
     [ "prev_page", "dd/d57/a01054.html#ga5dbc34981815690a92812e34d1cf478f", null ],
     [ "scroll_down_n_lines", "dd/d57/a01054.html#gaa79b8294ebf98c84d4a844fd7d9e4862", null ],
     [ "scroll_up_n_lines", "dd/d57/a01054.html#gab08fc8983cc3bdb21b438c82ece16346", null ],
+    [ "search", "dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c", null ],
     [ "sync_ln", "dd/d57/a01054.html#ga03bfb3d8d09d33f4f59930485f283ead", null ]
 ];

@@ -18,7 +18,7 @@ var searchData=
   ['scroll_5fup_5fn_5flines_15',['scroll_up_n_lines',['../dd/d57/a01054.html#gab08fc8983cc3bdb21b438c82ece16346',1,'view_engine.c']]],
   ['scrolling_16',['Horizontal Scrolling',['../d0/dc9/a01065.html#horizontal-scrolling',1,'']]],
   ['sddm_20background_20configuration_17',['SDDM Background Configuration',['../d2/d49/a01067.html#sddm-background-configuration',1,'']]],
-  ['search_18',['search',['../dc/d99/a01053.html#ga5f639aa1a1f03fa05888c724bc17d99c',1,'view_engine.c']]],
+  ['search_18',['search',['../dd/d57/a01054.html#ga5f639aa1a1f03fa05888c724bc17d99c',1,'view_engine.c']]],
   ['searching_20backward_19',['Searching Backward',['../d0/dc9/a01065.html#searching-backward',1,'']]],
   ['searching_20forward_20',['Searching Forward',['../d0/dc9/a01065.html#searching-forward',1,'']]],
   ['security_20through_20obscurity_21',['Security Through Obscurity',['../df/d18/a01071.html#security-through-obscurity',1,'']]],
