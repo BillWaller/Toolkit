@@ -1,23 +1,13 @@
 var a00218 =
 [
-    [ "destroy_form", "dc/d9a/a00218.html#a8e0f566e6ae953068fec9e896ecb0123", null ],
-    [ "destroy_init", "dc/d9a/a00218.html#aac196563b2f701fba2d1580ac8813de7", null ],
-    [ "destroy_menu", "dc/d9a/a00218.html#a8708b20d5d31a2bd82d91d281236ce64", null ],
-    [ "destroy_pick", "dc/d9a/a00218.html#aea01afdf2f6aa68b25d51a4b714ffec2", null ],
-    [ "destroy_view", "dc/d9a/a00218.html#a519762bc6148577dc96caf851c3ebfe9", null ],
-    [ "init_form_files", "dc/d9a/a00218.html#a4da25f98e58860d93b737cdc1997e9e9", null ],
-    [ "init_menu_files", "dc/d9a/a00218.html#a6a3ca11276b38608f15cef7c3962143e", null ],
-    [ "init_pick_files", "dc/d9a/a00218.html#ab40bb77758b149f33cbde8063f341b00", null ],
-    [ "init_view_files", "dc/d9a/a00218.html#ac5213483d722f8f1bd5c28fbbb55369e", null ],
-    [ "new_form", "dc/d9a/a00218.html#a625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
-    [ "new_init", "dc/d9a/a00218.html#a75cffbfad8930c347fa9ae68b69f3bdf", null ],
-    [ "new_menu", "dc/d9a/a00218.html#a861e6162a19e089468fdc2a1479b547f", null ],
-    [ "new_pick", "dc/d9a/a00218.html#aa7928f3771536aa0e27d88479be2cbc8", null ],
-    [ "new_view", "dc/d9a/a00218.html#a2e67404cd52bddd379a57c50434ac445", null ],
-    [ "verify_spec_arg", "dc/d9a/a00218.html#a75ce293fe4e007a3337a190647408000", null ],
-    [ "form", "dc/d9a/a00218.html#adb98384f3771d341017b7b3add874515", null ],
-    [ "init_cnt", "dc/d9a/a00218.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32", null ],
-    [ "menu", "dc/d9a/a00218.html#a529b480d3d81a86e882c4d6ab8afa8bb", null ],
-    [ "pick", "dc/d9a/a00218.html#aa0984c16af72bfdf57c5d88de1d314f9", null ],
-    [ "view", "dc/d9a/a00218.html#af2dd70d8b95c32fb670ac6f9cc8df201", null ]
+    [ "abend", "dc/d9a/a00218.html#a8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "fork_exec", "dc/d9a/a00218.html#a386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "dc/d9a/a00218.html#a907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "dc/d9a/a00218.html#aeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "dc/d9a/a00218.html#a2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "dc/d9a/a00218.html#a5c3ffccf49f08359334198f7fce3f9df", null ],
+    [ "user_end", "dc/d9a/a00218.html#ae646ecf8918437a8a1f2ea4304db008a", null ],
+    [ "earg_str", "dc/d9a/a00218.html#a67227506d7050fd4fd59e06e2628a364", null ],
+    [ "eargc", "dc/d9a/a00218.html#a075d6920297448f7d044417b9f8594b0", null ],
+    [ "eargv", "dc/d9a/a00218.html#aba17a3c518eb2ffd68f0219cc8c1792b", null ]
 ];

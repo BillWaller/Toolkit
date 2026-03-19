@@ -1,17 +1,12 @@
 var index =
 [
-    [ "Table of Contents", "index.html#table-of-contents-3", null ],
-    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github-3", null ],
-    [ "NEW Features", "index.html#new-features", [
-      [ "View Line Numbering", "index.html#view-line-numbering", null ]
+    [ "<b><em>NEW Features</em></b>", "index.html#_new-features_", [
+      [ "<b><em>NEW View Line Numbering</em></b>", "index.html#_new-view-line-numbering_", null ],
+      [ "Large Log File in View", "index.html#large-log-file-in-view", null ],
+      [ "<b><em>New Options for lf</em></b>", "index.html#_new-options-for-lf_", null ]
     ] ],
-    [ "view-c-sourcescreenshotsnew_view1png", "index.html#view-c-sourcescreenshotsnew_view1png", [
-      [ "Large Log File in View", "index.html#large-log-file-in-view", null ]
-    ] ],
-    [ "view-large-log-filescreenshotsnew_view2png", "index.html#view-large-log-filescreenshotsnew_view2png", [
-      [ "New Options for lf", "index.html#new-options-for-lf", null ]
-    ] ],
-    [ "lf-optionsscreenshotslf-helppng", "index.html#lf-optionsscreenshotslf-helppng", null ],
+    [ "Table of Contents", "index.html#table-of-contents", null ],
+    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [
       [ "C-Menu API", "index.html#c-menu-api", null ],
@@ -20,12 +15,12 @@ var index =
       [ "Key Features", "index.html#key-features", null ],
       [ "Highlights (Pun Intended)", "index.html#highlights-pun-intended", null ],
       [ "Just Do It!", "index.html#just-do-it", null ],
-      [ "Menu", "index.html#menu-1", null ],
+      [ "Menu", "index.html#menu", null ],
       [ "C-Keys - Diagnose Keyboard/Mouse Input", "index.html#c-keys---diagnose-keyboardmouse-input", null ],
       [ "Pick - A Picker", "index.html#pick---a-picker", null ],
       [ "Form for Data Entry and Editing", "index.html#form-for-data-entry-and-editing", null ],
       [ "Form Key Features", "index.html#form-key-features", null ],
-      [ "Form Data Types", "index.html#form-data-types-1", null ],
+      [ "Form Data Types", "index.html#form-data-types", null ],
       [ "Sample Menu Description File", "index.html#sample-menu-description-file", null ],
       [ "View", "index.html#view", [
         [ "Log File With Editor", "index.html#log-file-with-editor", null ],

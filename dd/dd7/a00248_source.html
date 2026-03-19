@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: optsp.c Source File</title>
+<title>C-Menu: enterstr.c Source File</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../codefolding.js"></script>
@@ -113,11 +113,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/dd7/a00248_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">optsp.c</div></div>
+  <div class="headertitle"><div class="title">enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../dd/dd7/a00248.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file optsp.c</span></div>
-<div class="line"><span class="lineno">    2</span><span class="comment">    @brief print option list for C-Menu</span></div>
+<a href="../../dd/dd7/a00248.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file enterstr.c</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Enter a string from keyboard</span></div>
 <div class="line"><span class="lineno">    3</span><span class="comment">    @author Bill Waller</span></div>
 <div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2025</span></div>
 <div class="line"><span class="lineno">    5</span><span class="comment">    MIT License</span></div>
@@ -126,121 +126,71 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/dd7/a00248_
 <div class="line"><span class="lineno">    8</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">getopt</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdlib</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../dc/d5d/a00278.html#a67f46739ac01f51f30214abf2a6435c8">dump_opts_by_short_opt</a>();</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../dc/d5d/a00278.html#ad2bd729273018084d32c9a1481b566a6">dump_opts_by_name</a>();</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="../../dd/dd7/a00248.html#ae6648cd71a8bd49d58ae8ed33ba910d1">   18</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">MAXLEN</span> 256</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="../../dd/dd7/a00248.html#a76008d71974d1c5ac02497fe6a49fb59">   20</a></span><span class="keywordtype">char</span> <a class="code hl_variable" href="../../dd/dd7/a00248.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>[<a class="code hl_define" href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/** @brief check if a string contains a specified character</span></div>
-<div class="line"><span class="lineno">   23</span><span class="comment">    @param str the string to check</span></div>
-<div class="line"><span class="lineno">   24</span><span class="comment">    @param c the character to look for</span></div>
-<div class="line"><span class="lineno">   25</span><span class="comment">    @return true if the character is found, false otherwise */</span></div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="}">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="../../dd/dd7/a00248.html#a58c7c22e79895abf30c1bb4d2714ad34">   26</a></span><a class="code hl_function" href="../../dd/dd7/a00248.html#a58c7c22e79895abf30c1bb4d2714ad34">bool</a> <a class="code hl_function" href="../../dd/dd7/a00248.html#a58c7c22e79895abf30c1bb4d2714ad34">contains</a>(<span class="keywordtype">char</span> *str, <span class="keywordtype">char</span> c) {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">while</span> (*str) {</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">if</span> (*str == c)</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>            <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        str++;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>}</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">ioctl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/** @example</span></div>
+<div class="line"><span class="lineno">   19</span><span class="comment">    @code</span></div>
+<div class="line"><span class="lineno">   20</span><span class="comment">    USERNAME=$(enterstr &quot;Enter your username: &quot;)</span></div>
+<div class="line"><span class="lineno">   21</span><span class="comment">    PASSWORD=$(enterstr &quot;Enter your password: &quot;)</span></div>
+<div class="line"><span class="lineno">   22</span><span class="comment">    echo &quot;Username: $USERNAME&quot;</span></div>
+<div class="line"><span class="lineno">   23</span><span class="comment">    echo &quot;Password: $PASSWORD&quot;</span></div>
+<div class="line"><span class="lineno">   24</span><span class="comment">    @endcode</span></div>
+<div class="line"><span class="lineno">   25</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/** @brief allows the user to enter a string in cooked mode</span></div>
+<div class="line"><span class="lineno">   28</span><span class="comment">    @note allows line editing and other features</span></div>
+<div class="line"><span class="lineno">   29</span><span class="comment">    @note writes the prompt to stderr and the user&#39;s input to stdout</span></div>
+<div class="line"><span class="lineno">   30</span><span class="comment">    @note handles signals to ensure that the terminal settings are restored if</span></div>
+<div class="line"><span class="lineno">   31</span><span class="comment">   the program is interrupted. */</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="../../dd/dd7/a00248.html#a3c04138a5bfe5d72780bb7e82a18e627">   32</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d5/d35/a00266.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">struct</span> termios new_tioctl;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">char</span> in_str[BUFSIZ];</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">char</span> *in_ptr = in_str;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">char</span> *msg;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">char</span> errmsg[128];</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        strcpy(errmsg, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        strcpy(errmsg, argv[1]);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_function" href="../../db/dc3/a00284.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a><a class="code hl_function" href="../../db/dc3/a00284.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">(</a><a class="code hl_function" href="../../db/dc3/a00284.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">)</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_function" href="../../d7/d40/a00236.html#aca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../d7/d40/a00236.html#aca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../d7/d40/a00236.html#aca2de03f6d52d4b11237990e4e605177">)</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    new_tioctl = <a class="code hl_variable" href="../../db/dc3/a00284.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        msg = errmsg;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            write(2, msg++, 1);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">if</span> (read(2, in_str, BUFSIZ) &gt; -1)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        write(1, in_ptr++, 1);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_function" href="../../d7/d40/a00236.html#a06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a><a class="code hl_function" href="../../d7/d40/a00236.html#a06c1eb6cf3649dc187115565409f91af">(</a><a class="code hl_function" href="../../d7/d40/a00236.html#a06c1eb6cf3649dc187115565409f91af">)</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="../../db/dc3/a00284.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a><a class="code hl_function" href="../../db/dc3/a00284.html#ac5e3adb304b78910fc77761ef6a743f0">(</a><a class="code hl_function" href="../../db/dc3/a00284.html#ac5e3adb304b78910fc77761ef6a743f0">)</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    _exit(0);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
 </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/** @brief main function for optsp</span></div>
-<div class="line"><span class="lineno">   36</span><span class="comment">    @param argc argument count</span></div>
-<div class="line"><span class="lineno">   37</span><span class="comment">    @param argv argument vector</span></div>
-<div class="line"><span class="lineno">   38</span><span class="comment">    @return exit status</span></div>
-<div class="line"><span class="lineno">   39</span><span class="comment">    options:</span></div>
-<div class="line"><span class="lineno">   40</span><span class="comment">     -n sort by name</span></div>
-<div class="line"><span class="lineno">   41</span><span class="comment">     -s sort by short option</span></div>
-<div class="line"><span class="lineno">   42</span><span class="comment">     -u select only options in mask</span></div>
-<div class="line"><span class="lineno">   43</span><span class="comment">     -h show help message</span></div>
-<div class="line"><span class="lineno">   44</span><span class="comment">     -v show version</span></div>
-<div class="line"><span class="lineno">   45</span><span class="comment">    mask: any combination in any order of m, f, p, and v, where</span></div>
-<div class="line"><span class="lineno">   46</span><span class="comment">        m is menu,</span></div>
-<div class="line"><span class="lineno">   47</span><span class="comment">        f is form,</span></div>
-<div class="line"><span class="lineno">   48</span><span class="comment">        p is pick, and</span></div>
-<div class="line"><span class="lineno">   49</span><span class="comment">        v is view</span></div>
-<div class="line"><span class="lineno">   50</span><span class="comment"> */</span></div>
-<div class="foldopen" id="foldopen00051" data-start="{" data-end="}">
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="../../dd/dd7/a00248.html#a3c04138a5bfe5d72780bb7e82a18e627">   51</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d6/d7f/a00287.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    bool f_help = false;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    bool f_version = false;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">int</span> opt;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">int</span> i;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">char</span> tab[] = <span class="stringliteral">&quot;mfpv&quot;</span>;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">char</span> mask[] = <span class="stringliteral">&quot;....&quot;</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    bool f_mask = false;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">while</span> ((opt = getopt(argc, argv, <span class="stringliteral">&quot;hm:nsv&quot;</span>)) != -1) {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">switch</span> (opt) {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;h&#39;</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            f_help = true;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;m&#39;</span>:</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            <span class="keywordflow">for</span> (i = 0; i &lt; 4; i++) {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keywordflow">if</span> (contains(optarg, tab[i]))</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    mask[i] = tab[i];</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            printf(<span class="stringliteral">&quot;mask: %s\n&quot;</span>, mask);</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            f_mask = true;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;n&#39;</span>:</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <a class="code hl_function" href="../../dc/d5d/a00278.html#ad2bd729273018084d32c9a1481b566a6">dump_opts_by_name</a><a class="code hl_function" href="../../dc/d5d/a00278.html#ad2bd729273018084d32c9a1481b566a6">(</a><a class="code hl_function" href="../../dc/d5d/a00278.html#ad2bd729273018084d32c9a1481b566a6">)</a>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;s&#39;</span>:</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            <a class="code hl_function" href="../../dc/d5d/a00278.html#a67f46739ac01f51f30214abf2a6435c8">dump_opts_by_short_opt</a><a class="code hl_function" href="../../dc/d5d/a00278.html#a67f46739ac01f51f30214abf2a6435c8">(</a><a class="code hl_function" href="../../dc/d5d/a00278.html#a67f46739ac01f51f30214abf2a6435c8">)</a>;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">case</span> <span class="stringliteral">&#39;v&#39;</span>:</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            f_version = true;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (f_help) {</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        printf(<span class="stringliteral">&quot;\nUsage: optsp [options]\n\n&quot;</span>);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        printf(<span class="stringliteral">&quot;Options:\n&quot;</span>);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        printf(<span class="stringliteral">&quot; -n  sort by name\n&quot;</span>);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        printf(<span class="stringliteral">&quot; -s  sort by short option\n&quot;</span>);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        printf(<span class="stringliteral">&quot; -h  show this help message\n&quot;</span>);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        printf(<span class="stringliteral">&quot; -m  mask: any combination in any order of m, f, p, and v\n&quot;</span>);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        printf(<span class="stringliteral">&quot;\nwhere m is menu,\n&quot;</span>);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        printf(<span class="stringliteral">&quot;      f is form,\n&quot;</span>);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        printf(<span class="stringliteral">&quot;      p is pick, and\n&quot;</span>);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        printf(<span class="stringliteral">&quot;      v is view.\n&quot;</span>);</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">if</span> (f_version) {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        printf(<span class="stringliteral">&quot;CMenu %s\n&quot;</span>, CM_VERSION);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span> (!f_mask)</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <a class="code hl_function" href="../../dc/d5d/a00278.html#a518c63d1d53a636e68ed360015d81207">dump_opts</a><a class="code hl_function" href="../../dc/d5d/a00278.html#a518c63d1d53a636e68ed360015d81207">(</a><a class="code hl_function" href="../../dc/d5d/a00278.html#a518c63d1d53a636e68ed360015d81207">)</a>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_function" href="../../dc/d5d/a00278.html#ab2958e2921a81b3f26fe0a9b7da34763">dump_opts_by_use</a><a class="code hl_function" href="../../dc/d5d/a00278.html#ab2958e2921a81b3f26fe0a9b7da34763">(</a><span class="stringliteral">&quot;Usage: &quot;</span><a class="code hl_function" href="../../dc/d5d/a00278.html#ab2958e2921a81b3f26fe0a9b7da34763">,</a> mask<a class="code hl_function" href="../../dc/d5d/a00278.html#ab2958e2921a81b3f26fe0a9b7da34763">)</a>;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}</div>
-</div>
-<div class="ttc" id="aa00230_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d1/da8/a00230.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d1/da8/a00230_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa00248_html_a58c7c22e79895abf30c1bb4d2714ad34"><div class="ttname"><a href="../../dd/dd7/a00248.html#a58c7c22e79895abf30c1bb4d2714ad34">contains</a></div><div class="ttdeci">bool contains(char *str, char c)</div><div class="ttdoc">check if a string contains a specified character</div><div class="ttdef"><b>Definition</b> <a href="#l00026">optsp.c:26</a></div></div>
-<div class="ttc" id="aa00248_html_a76008d71974d1c5ac02497fe6a49fb59"><div class="ttname"><a href="../../dd/dd7/a00248.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a></div><div class="ttdeci">char tmp_str[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="#l00020">optsp.c:20</a></div></div>
-<div class="ttc" id="aa00278_html_a518c63d1d53a636e68ed360015d81207"><div class="ttname"><a href="../../dc/d5d/a00278.html#a518c63d1d53a636e68ed360015d81207">dump_opts</a></div><div class="ttdeci">void dump_opts()</div><div class="ttdoc">dump all options</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d5d/a00278_source.html#l00214">opts.c:214</a></div></div>
-<div class="ttc" id="aa00278_html_a67f46739ac01f51f30214abf2a6435c8"><div class="ttname"><a href="../../dc/d5d/a00278.html#a67f46739ac01f51f30214abf2a6435c8">dump_opts_by_short_opt</a></div><div class="ttdeci">void dump_opts_by_short_opt()</div><div class="ttdoc">dump options sorted by short option</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d5d/a00278_source.html#l00176">opts.c:176</a></div></div>
-<div class="ttc" id="aa00278_html_ab2958e2921a81b3f26fe0a9b7da34763"><div class="ttname"><a href="../../dc/d5d/a00278.html#ab2958e2921a81b3f26fe0a9b7da34763">dump_opts_by_use</a></div><div class="ttdeci">void dump_opts_by_use(char *, char *)</div><div class="ttdoc">dump options by use mask</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d5d/a00278_source.html#l00227">opts.c:227</a></div></div>
-<div class="ttc" id="aa00278_html_ad2bd729273018084d32c9a1481b566a6"><div class="ttname"><a href="../../dc/d5d/a00278.html#ad2bd729273018084d32c9a1481b566a6">dump_opts_by_name</a></div><div class="ttdeci">void dump_opts_by_name()</div><div class="ttdoc">dump options sorted by name</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d5d/a00278_source.html#l00164">opts.c:164</a></div></div>
-<div class="ttc" id="aa00287_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d6/d7f/a00287.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d7f/a00287_source.html#l00016">ckeys.c:16</a></div></div>
+<div class="ttc" id="aa00236_html_a06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d7/d40/a00236.html#a06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d40/a00236_source.html#l00023">sig.c:23</a></div></div>
+<div class="ttc" id="aa00236_html_aca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d7/d40/a00236.html#aca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d40/a00236_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa00266_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d5/d35/a00266.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d35/a00266_source.html#l00016">ckeys.c:16</a></div></div>
+<div class="ttc" id="aa00284_html_a0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../db/dc3/a00284.html#a0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/dc3/a00284_source.html#l00040">scriou.c:40</a></div></div>
+<div class="ttc" id="aa00284_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../db/dc3/a00284.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../db/dc3/a00284_source.html#l00020">scriou.c:20</a></div></div>
+<div class="ttc" id="aa00284_html_ac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../db/dc3/a00284.html#ac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/dc3/a00284_source.html#l00051">scriou.c:51</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dd/dd7/a00248.html">optsp.c</a></li>
+    <li class="navelem"><a href="../../dd/dd7/a00248.html">enterstr.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
