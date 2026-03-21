@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: init_view.c File Reference</title>
+<title>C-Menu: mem.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,47 +109,164 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('df/de9/a00923.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">init_view.c File Reference<div class="ingroups"><a class="el" href="../../da/d17/a01046.html">Initializing View I/O</a></div></div></div>
+  <div class="headertitle"><div class="title">mem.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Initialize C-Menu View Screen IO and Input.  
+<p>Create and destroy main data structures for C-Menu.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;common.h&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/mman.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;sys/sysmacros.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
-<code>#include &lt;wait.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for init_view.c:</div>
+Include dependency graph for mem.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d62/a00924.svg" width="100%" height="386"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d62/a00924.svg" width="476" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../df/de9/a00923_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga5d69ccbd704b60891cdc788693d436d4" id="r_ga5d69ccbd704b60891cdc788693d436d4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../da/d17/a01046.html#ga5d69ccbd704b60891cdc788693d436d4">init_view_full_screen</a> (Init *init)</td></tr>
-<tr class="memdesc:ga5d69ccbd704b60891cdc788693d436d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize C-Menu View in full screen mode.  <br /></td></tr>
-<tr class="memitem:ga8dd32c1a4c961ec715f63625a6f87b61" id="r_ga8dd32c1a4c961ec715f63625a6f87b61"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../da/d17/a01046.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a> (Init *init, char *title)</td></tr>
-<tr class="memdesc:ga8dd32c1a4c961ec715f63625a6f87b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the C-Menu View in box window mode.  <br /></td></tr>
-<tr class="memitem:ga0d392793038e6c32c6f3fa978fc42ced" id="r_ga0d392793038e6c32c6f3fa978fc42ced"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../da/d17/a01046.html#ga0d392793038e6c32c6f3fa978fc42ced">view_init_input</a> (View *view, char *file_name)</td></tr>
-<tr class="memdesc:ga0d392793038e6c32c6f3fa978fc42ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the input for a C-Menu View.  <br /></td></tr>
+<tr class="memitem:ga75cffbfad8930c347fa9ae68b69f3bdf" id="r_ga75cffbfad8930c347fa9ae68b69f3bdf"><td class="memItemLeft">Init *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga75cffbfad8930c347fa9ae68b69f3bdf">new_init</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:ga75cffbfad8930c347fa9ae68b69f3bdf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize Init structure.  <br /></td></tr>
+<tr class="memitem:ga861e6162a19e089468fdc2a1479b547f" id="r_ga861e6162a19e089468fdc2a1479b547f"><td class="memItemLeft">Menu *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga861e6162a19e089468fdc2a1479b547f">new_menu</a> (Init *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:ga861e6162a19e089468fdc2a1479b547f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize Menu structure.  <br /></td></tr>
+<tr class="memitem:gaa7928f3771536aa0e27d88479be2cbc8" id="r_gaa7928f3771536aa0e27d88479be2cbc8"><td class="memItemLeft">Pick *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#gaa7928f3771536aa0e27d88479be2cbc8">new_pick</a> (Init *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:gaa7928f3771536aa0e27d88479be2cbc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize Pick structure.  <br /></td></tr>
+<tr class="memitem:ga625c89a0ff0ede7fbac1b40c7ac9dbda" id="r_ga625c89a0ff0ede7fbac1b40c7ac9dbda"><td class="memItemLeft">Form *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda">new_form</a> (Init *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:ga625c89a0ff0ede7fbac1b40c7ac9dbda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize Form structure.  <br /></td></tr>
+<tr class="memitem:ga2e67404cd52bddd379a57c50434ac445" id="r_ga2e67404cd52bddd379a57c50434ac445"><td class="memItemLeft">View *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga2e67404cd52bddd379a57c50434ac445">new_view</a> (Init *init, int argc, char **argv)</td></tr>
+<tr class="memdesc:ga2e67404cd52bddd379a57c50434ac445"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and initialize View structure.  <br /></td></tr>
+<tr class="memitem:ga519762bc6148577dc96caf851c3ebfe9" id="r_ga519762bc6148577dc96caf851c3ebfe9"><td class="memItemLeft">View *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a> (Init *init)</td></tr>
+<tr class="memdesc:ga519762bc6148577dc96caf851c3ebfe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy View structure.  <br /></td></tr>
+<tr class="memitem:ga8e0f566e6ae953068fec9e896ecb0123" id="r_ga8e0f566e6ae953068fec9e896ecb0123"><td class="memItemLeft">Form *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga8e0f566e6ae953068fec9e896ecb0123">destroy_form</a> (Init *init)</td></tr>
+<tr class="memdesc:ga8e0f566e6ae953068fec9e896ecb0123"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy Form structure.  <br /></td></tr>
+<tr class="memitem:gaea01afdf2f6aa68b25d51a4b714ffec2" id="r_gaea01afdf2f6aa68b25d51a4b714ffec2"><td class="memItemLeft">Pick *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#gaea01afdf2f6aa68b25d51a4b714ffec2">destroy_pick</a> (Init *init)</td></tr>
+<tr class="memdesc:gaea01afdf2f6aa68b25d51a4b714ffec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy Pick structure.  <br /></td></tr>
+<tr class="memitem:ga8708b20d5d31a2bd82d91d281236ce64" id="r_ga8708b20d5d31a2bd82d91d281236ce64"><td class="memItemLeft">Menu *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga8708b20d5d31a2bd82d91d281236ce64">destroy_menu</a> (Init *init)</td></tr>
+<tr class="memdesc:ga8708b20d5d31a2bd82d91d281236ce64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy Menu structure.  <br /></td></tr>
+<tr class="memitem:gaac196563b2f701fba2d1580ac8813de7" id="r_gaac196563b2f701fba2d1580ac8813de7"><td class="memItemLeft">Init *&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#gaac196563b2f701fba2d1580ac8813de7">destroy_init</a> (Init *init)</td></tr>
+<tr class="memdesc:gaac196563b2f701fba2d1580ac8813de7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy Init structure.  <br /></td></tr>
+<tr class="memitem:ga6a3ca11276b38608f15cef7c3962143e" id="r_ga6a3ca11276b38608f15cef7c3962143e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga6a3ca11276b38608f15cef7c3962143e">init_menu_files</a> (Init *init, int argc, char **argv)</td></tr>
+<tr class="memdesc:ga6a3ca11276b38608f15cef7c3962143e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Menu file specifications.  <br /></td></tr>
+<tr class="memitem:gab40bb77758b149f33cbde8063f341b00" id="r_gab40bb77758b149f33cbde8063f341b00"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#gab40bb77758b149f33cbde8063f341b00">init_pick_files</a> (Init *init, int argc, char **argv)</td></tr>
+<tr class="memdesc:gab40bb77758b149f33cbde8063f341b00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Pick file specifications.  <br /></td></tr>
+<tr class="memitem:ga4da25f98e58860d93b737cdc1997e9e9" id="r_ga4da25f98e58860d93b737cdc1997e9e9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga4da25f98e58860d93b737cdc1997e9e9">init_form_files</a> (Init *init, int argc, char **argv)</td></tr>
+<tr class="memdesc:ga4da25f98e58860d93b737cdc1997e9e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Form file specifications.  <br /></td></tr>
+<tr class="memitem:gac5213483d722f8f1bd5c28fbbb55369e" id="r_gac5213483d722f8f1bd5c28fbbb55369e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#gac5213483d722f8f1bd5c28fbbb55369e">init_view_files</a> (Init *init)</td></tr>
+<tr class="memdesc:gac5213483d722f8f1bd5c28fbbb55369e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize View file specifications.  <br /></td></tr>
+<tr class="memitem:ga75ce293fe4e007a3337a190647408000" id="r_ga75ce293fe4e007a3337a190647408000"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d99/a01053.html#ga75ce293fe4e007a3337a190647408000">verify_spec_arg</a> (char *spec, char *org_spec, char *dir, char *alt_dir, int mode)</td></tr>
+<tr class="memdesc:ga75ce293fe4e007a3337a190647408000"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verify file specification argument.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aebf4d07ed1f6b95d160f8a2f5a4d2e32" id="r_aebf4d07ed1f6b95d160f8a2f5a4d2e32"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aebf4d07ed1f6b95d160f8a2f5a4d2e32">init_cnt</a> = 0</td></tr>
+<tr class="memitem:a529b480d3d81a86e882c4d6ab8afa8bb" id="r_a529b480d3d81a86e882c4d6ab8afa8bb"><td class="memItemLeft">Menu *&#160;</td><td class="memItemRight"><a class="el" href="#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></td></tr>
+<tr class="memitem:aa0984c16af72bfdf57c5d88de1d314f9" id="r_aa0984c16af72bfdf57c5d88de1d314f9"><td class="memItemLeft">Pick *&#160;</td><td class="memItemRight"><a class="el" href="#aa0984c16af72bfdf57c5d88de1d314f9">pick</a></td></tr>
+<tr class="memitem:adb98384f3771d341017b7b3add874515" id="r_adb98384f3771d341017b7b3add874515"><td class="memItemLeft">Form *&#160;</td><td class="memItemRight"><a class="el" href="#adb98384f3771d341017b7b3add874515">form</a></td></tr>
+<tr class="memitem:af2dd70d8b95c32fb670ac6f9cc8df201" id="r_af2dd70d8b95c32fb670ac6f9cc8df201"><td class="memItemLeft">View *&#160;</td><td class="memItemRight"><a class="el" href="#af2dd70d8b95c32fb670ac6f9cc8df201">view</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Initialize C-Menu View Screen IO and Input. </p>
+<div class="textblock"><p>Create and destroy main data structures for C-Menu. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../df/de9/a00923_source.html">init_view.c</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../df/de9/a00923_source.html">mem.c</a>.</p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="adb98384f3771d341017b7b3add874515" name="adb98384f3771d341017b7b3add874515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb98384f3771d341017b7b3add874515">&#9670;&#160;</a></span>form</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Form* form</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/de9/a00923_source.html#l00047">47</a> of file <a class="el" href="../../df/de9/a00923_source.html">mem.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d29/a00947_source.html#l00271">form_calculate()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00893">form_desc_error()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00445">form_display_screen()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00188">form_end_fields()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00113">form_engine()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00059">init_form()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00638">init_form_files()</a>, <a class="el" href="../../d6/d8d/a01007_source.html#l00610">mk_filler()</a>, and <a class="el" href="../../df/de9/a00923_source.html#l00252">new_form()</a>.</p>
+
+</div>
+</div>
+<a id="aebf4d07ed1f6b95d160f8a2f5a4d2e32" name="aebf4d07ed1f6b95d160f8a2f5a4d2e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf4d07ed1f6b95d160f8a2f5a4d2e32">&#9670;&#160;</a></span>init_cnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init_cnt = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/de9/a00923_source.html#l00043">43</a> of file <a class="el" href="../../df/de9/a00923_source.html">mem.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../df/de9/a00923_source.html#l00107">destroy_init()</a>, and <a class="el" href="../../df/de9/a00923_source.html#l00070">new_init()</a>.</p>
+
+</div>
+</div>
+<a id="a529b480d3d81a86e882c4d6ab8afa8bb" name="a529b480d3d81a86e882c4d6ab8afa8bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a529b480d3d81a86e882c4d6ab8afa8bb">&#9670;&#160;</a></span>menu</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Menu* menu</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/de9/a00923_source.html#l00045">45</a> of file <a class="el" href="../../df/de9/a00923_source.html">mem.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d29/a00947_source.html#l00113">form_engine()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00489">init_menu_files()</a>, <a class="el" href="../../d6/dad/a00941_source.html#l00021">main()</a>, <a class="el" href="../../d5/d6c/a00977_source.html#l00106">menu_cmd_processor()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00160">new_menu()</a>, and <a class="el" href="../../d3/dcd/a00965_source.html#l00030">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="aa0984c16af72bfdf57c5d88de1d314f9" name="aa0984c16af72bfdf57c5d88de1d314f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0984c16af72bfdf57c5d88de1d314f9">&#9670;&#160;</a></span>pick</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Pick* pick</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/de9/a00923_source.html#l00046">46</a> of file <a class="el" href="../../df/de9/a00923_source.html">mem.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../df/de9/a00923_source.html#l00229">destroy_pick()</a>, <a class="el" href="../../d5/d54/a00938_source.html#l00888">display_pick_help()</a>, <a class="el" href="../../d5/d54/a00938_source.html#l00700">exec_objects()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00542">init_pick_files()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00199">new_pick()</a>, <a class="el" href="../../d5/d54/a00938_source.html#l00863">open_pick_win()</a>, <a class="el" href="../../d5/d54/a00938_source.html#l00207">pick_engine()</a>, and <a class="el" href="../../d5/d54/a00938_source.html#l00333">picker()</a>.</p>
+
+</div>
+</div>
+<a id="af2dd70d8b95c32fb670ac6f9cc8df201" name="af2dd70d8b95c32fb670ac6f9cc8df201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2dd70d8b95c32fb670ac6f9cc8df201">&#9670;&#160;</a></span>view</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">View* view</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/de9/a00923_source.html#l00048">48</a> of file <a class="el" href="../../df/de9/a00923_source.html">mem.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../df/de9/a00923_source.html#l00348">destroy_view()</a>, <a class="el" href="../../d3/de5/a00956_source.html#l01968">enter_file_spec()</a>, <a class="el" href="../../d8/d38/a00926_source.html#l00106">init_view_boxwin()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00742">init_view_files()</a>, <a class="el" href="../../d8/d38/a00926_source.html#l00034">init_view_full_screen()</a>, <a class="el" href="../../d3/de5/a00956_source.html#l00912">lp()</a>, <a class="el" href="../../db/d40/a00959_source.html#l00013">main()</a>, <a class="el" href="../../d3/d7b/a00986_source.html#l00023">mview()</a>, <a class="el" href="../../df/de9/a00923_source.html#l00304">new_view()</a>, <a class="el" href="../../d3/de5/a00956_source.html#l01141">resize_page()</a>, <a class="el" href="../../d3/de5/a00956_source.html#l00177">view_cmd_processor()</a>, and <a class="el" href="../../d3/de5/a00956_source.html#l00129">view_file()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -162,7 +279,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../df/de9/a00923.html">init_view.c</a></li>
+    <li class="navelem"><a href="../../df/de9/a00923.html">mem.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

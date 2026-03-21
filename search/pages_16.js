@@ -1,26 +1,6 @@
 var searchData=
 [
-  ['r_20menu_0',['About C-Menu and R-Menu',['../d1/de6/a01068.html#about-c-menu-and-r-menu',1,'']]],
-  ['recommended_1',['Not Required, But Recommended',['../d0/dc9/a01065.html#not-required-but-recommended',1,'']]],
-  ['regular_20expressions_2',['lf - List Files Using Regular Expressions',['../index.html#lf---list-files-using-regular-expressions',1,'']]],
-  ['released_202026_2002_2004_3',['[Released] - 2026-02-04',['../d0/dfb/a01066.html#released---2026-02-04',1,'']]],
-  ['repository_4',['repository',['../d9/db3/a01064.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.'],['../d5/d67/a01070.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.']]],
-  ['repository_3a_5',['Other Markdown files in this repository:',['../index.html#other-markdown-files-in-this-repository',1,'']]],
-  ['required_20but_20recommended_6',['Not Required, But Recommended',['../d0/dc9/a01065.html#not-required-but-recommended',1,'']]],
-  ['requisites_7',['Requisites',['../d2/d49/a01067.html#requisites',1,'']]],
-  ['resources_8',['Resources',['../d1/de6/a01068.html#additional-resources',1,'Additional Resources'],['../d1/de6/a01068.html#other-resources',1,'Other Resources']]],
-  ['ripgrep_9',['Installing Ripgrep',['../d1/de6/a01068.html#installing-ripgrep',1,'']]],
-  ['ripgrep_20on_20linux_10',['Ripgrep On Linux',['../d1/de6/a01068.html#ripgrep-on-linux',1,'']]],
-  ['ripgrep_20on_20macos_11',['Ripgrep On macOS',['../d1/de6/a01068.html#ripgrep-on-macos',1,'']]],
-  ['ripgrep_20on_20windows_12',['Ripgrep On Windows',['../d1/de6/a01068.html#ripgrep-on-windows',1,'']]],
-  ['roadmap_20for_20api_20documentation_20and_20user_20guide_13',['Roadmap for API Documentation and User Guide',['../d9/db3/a01064.html#roadmap-for-api-documentation-and-user-guide',1,'']]],
-  ['rsh_14',['RSH',['../index.html#maintaining-security-with-rsh',1,'Maintaining Security with RSH'],['../index.html#rsh',1,'RSH']]],
-  ['rsh_20and_20lf_15',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../index.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
-  ['rsh_20helpers_16',['RSH Helpers',['../df/d18/a01071.html#rsh-helpers',1,'']]],
-  ['rsh_20safety_20features_17',['RSH Safety Features',['../d0/dc9/a01065.html#rsh-safety-features',1,'']]],
-  ['rsh_20static_20linking_18',['RSH Static Linking',['../d5/d67/a01070.html#rsh-static-linking',1,'']]],
-  ['rust_19',['Installing Rust',['../d1/de6/a01068.html#installing-rust',1,'']]],
-  ['rust_20on_20linux_20and_20macos_20',['Installing Rust On Linux and macOS',['../d1/de6/a01068.html#installing-rust-on-linux-and-macos',1,'']]],
-  ['rustlings_21',['Rustlings',['../d1/de6/a01068.html#rustlings',1,'']]],
-  ['rusty_22',['Let&apos;s Get Rusty',['../d1/de6/a01068.html#lets-get-rusty',1,'']]]
+  ['question_20marks_0',['Why View Displays Question Marks',['../dd/d80/a01075.html#why-view-displays-question-marks',1,'']]],
+  ['questions_1',['Frequently Asked Questions',['../dd/d80/a01075.html',1,'']]],
+  ['questions_20feel_20free_20to_20open_20an_20issue_20on_20the_20c_20menu_20github_20repository_2',['questions feel free to open an issue on the C Menu GitHub repository',['../d5/d67/a01070.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.'],['../d6/d80/a01076.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.']]]
 ];

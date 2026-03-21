@@ -1,17 +1,14 @@
 var a01041 =
 [
-    [ "form_calculate", "d1/d83/a01041.html#ga0329d3892bf2c4fe8e77a3c303ebe5f6", null ],
-    [ "form_desc_error", "d1/d83/a01041.html#ga02cf855a99051ac21f4966aa92b9544f", null ],
-    [ "form_display_chyron", "d1/d83/a01041.html#ga639a9c28161fb26549fb07378ae82f55", null ],
-    [ "form_display_fields", "d1/d83/a01041.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
-    [ "form_display_screen", "d1/d83/a01041.html#gaf488c427355a0bfca2caa63ba51d5a30", null ],
-    [ "form_end_fields", "d1/d83/a01041.html#ga67032038765fcb55ea51e0bdd6686efc", null ],
-    [ "form_engine", "d1/d83/a01041.html#gada302551bf41bf8ed6132fd34328a47e", null ],
-    [ "form_enter_fields", "d1/d83/a01041.html#ga85f521b3faafff8ce5584317cebe5d3c", null ],
-    [ "form_exec_cmd", "d1/d83/a01041.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
-    [ "form_parse_desc", "d1/d83/a01041.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
-    [ "form_read_data", "d1/d83/a01041.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
-    [ "form_usage", "d1/d83/a01041.html#ga55ea39040ce4618476ee3fada6a0c417", null ],
-    [ "form_write", "d1/d83/a01041.html#ga2839acac3143be9233fbf99458b77e64", null ],
-    [ "init_form", "d1/d83/a01041.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
+    [ "cbox", "d1/d83/a01041.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
+    [ "destroy_curses", "d1/d83/a01041.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "d1/d83/a01041.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "d1/d83/a01041.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "d1/d83/a01041.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "win_del", "d1/d83/a01041.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
+    [ "win_init_attrs", "d1/d83/a01041.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "d1/d83/a01041.html#ga435c7bff7ffedb8f51c6de9259e36f6c", null ],
+    [ "win_redraw", "d1/d83/a01041.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "d1/d83/a01041.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "d1/d83/a01041.html#gacf4c709bccc4c965a5d61db978db31a3", null ]
 ];

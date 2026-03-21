@@ -1,10 +1,5 @@
 var searchData=
 [
-  ['key_20features_0',['Key Features',['../index.html#form-key-features',1,'Form Key Features'],['../index.html#key-features',1,'Key Features']]],
-  ['keyboard_20mouse_20input_1',['C-Keys - Diagnose Keyboard/Mouse Input',['../index.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keys_2',['Motion Keys',['../d0/dc9/a01065.html#motion-keys',1,'']]],
-  ['keys_20diagnose_20keyboard_20mouse_20input_3',['C-Keys - Diagnose Keyboard/Mouse Input',['../index.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keys_20rsh_20and_20lf_4',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../index.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
-  ['kitty_5',['Kitty',['../d2/d49/a01067.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../df/d18/a01071.html#kitty',1,'Kitty']]],
-  ['kitty_20configuration_6',['Kitty Configuration',['../d1/de6/a01068.html#kitty-configuration',1,'']]]
+  ['json_0',['Tree-Sitter config.json',['../db/dba/a01078.html#tree-sitter-configjson',1,'']]],
+  ['just_20do_20it_1',['Just Do It!',['../index.html#just-do-it',1,'']]]
 ];

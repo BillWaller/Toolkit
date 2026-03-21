@@ -1,18 +1,17 @@
 var a01047 =
 [
-    [ "destroy_form", "db/dbb/a01047.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
-    [ "destroy_init", "db/dbb/a01047.html#gaac196563b2f701fba2d1580ac8813de7", null ],
-    [ "destroy_menu", "db/dbb/a01047.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
-    [ "destroy_pick", "db/dbb/a01047.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
-    [ "destroy_view", "db/dbb/a01047.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
-    [ "init_form_files", "db/dbb/a01047.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
-    [ "init_menu_files", "db/dbb/a01047.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
-    [ "init_pick_files", "db/dbb/a01047.html#gab40bb77758b149f33cbde8063f341b00", null ],
-    [ "init_view_files", "db/dbb/a01047.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
-    [ "new_form", "db/dbb/a01047.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
-    [ "new_init", "db/dbb/a01047.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
-    [ "new_menu", "db/dbb/a01047.html#ga861e6162a19e089468fdc2a1479b547f", null ],
-    [ "new_pick", "db/dbb/a01047.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
-    [ "new_view", "db/dbb/a01047.html#ga2e67404cd52bddd379a57c50434ac445", null ],
-    [ "verify_spec_arg", "db/dbb/a01047.html#ga75ce293fe4e007a3337a190647408000", null ]
+    [ "form_calculate", "db/dbb/a01047.html#ga0329d3892bf2c4fe8e77a3c303ebe5f6", null ],
+    [ "form_desc_error", "db/dbb/a01047.html#ga02cf855a99051ac21f4966aa92b9544f", null ],
+    [ "form_display_chyron", "db/dbb/a01047.html#ga639a9c28161fb26549fb07378ae82f55", null ],
+    [ "form_display_fields", "db/dbb/a01047.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
+    [ "form_display_screen", "db/dbb/a01047.html#gaf488c427355a0bfca2caa63ba51d5a30", null ],
+    [ "form_end_fields", "db/dbb/a01047.html#ga67032038765fcb55ea51e0bdd6686efc", null ],
+    [ "form_engine", "db/dbb/a01047.html#gada302551bf41bf8ed6132fd34328a47e", null ],
+    [ "form_enter_fields", "db/dbb/a01047.html#ga85f521b3faafff8ce5584317cebe5d3c", null ],
+    [ "form_exec_cmd", "db/dbb/a01047.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
+    [ "form_parse_desc", "db/dbb/a01047.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
+    [ "form_read_data", "db/dbb/a01047.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
+    [ "form_usage", "db/dbb/a01047.html#ga55ea39040ce4618476ee3fada6a0c417", null ],
+    [ "form_write", "db/dbb/a01047.html#ga2839acac3143be9233fbf99458b77e64", null ],
+    [ "init_form", "db/dbb/a01047.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['opts_2ec_0',['opts.c',['../db/d20/a00980.html',1,'']]],
-  ['optsp_2ec_1',['optsp.c',['../df/d39/a00950.html',1,'']]]
+  ['opts_2ec_0',['opts.c',['../d7/d98/a00983.html',1,'']]],
+  ['optsp_2ec_1',['optsp.c',['../d5/da3/a00953.html',1,'']]]
 ];

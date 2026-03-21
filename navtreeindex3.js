@@ -1,13 +1,25 @@
 var NAVTREEINDEX3 =
 {
-"globals_w.html":[10,1,0,21],
-"globals_x.html":[10,1,0,22],
-"globals_y.html":[10,1,0,23],
-"globals_z.html":[10,1,0,24],
+"globals_l.html":[11,1,0,11],
+"globals_m.html":[11,1,0,12],
+"globals_n.html":[11,1,0,13],
+"globals_o.html":[11,1,0,14],
+"globals_p.html":[11,1,0,15],
+"globals_r.html":[11,1,0,16],
+"globals_s.html":[11,1,0,17],
+"globals_t.html":[11,1,0,18],
+"globals_u.html":[11,1,0,19],
+"globals_v.html":[11,1,0,20],
+"globals_vars.html":[11,1,2],
+"globals_w.html":[11,1,0,21],
+"globals_x.html":[11,1,0,22],
+"globals_y.html":[11,1,0,23],
+"globals_z.html":[11,1,0,24],
 "index.html":[],
 "index.html":[0],
+"index.html#_new-api-integration-with-neovim_":[0,0,2],
 "index.html#_new-features_":[0,0],
-"index.html#_new-options-for-lf_":[0,0,2],
+"index.html#_new-options-for-lf_":[0,0,3],
 "index.html#_new-view-line-numbering_":[0,0,0],
 "index.html#autotoc_md3-channel-gamma-correction":[0,5,19],
 "index.html#c-keys---diagnose-keyboardmouse-input":[0,5,7],
@@ -47,5 +59,5 @@ var NAVTREEINDEX3 =
 "index.html#view---other-features":[0,5,18],
 "index.html#view-and-color-manual-pages":[0,5,14],
 "pages.html":[],
-"topics.html":[9]
+"topics.html":[10]
 };

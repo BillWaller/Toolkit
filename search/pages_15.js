@@ -1,6 +1,29 @@
 var searchData=
 [
-  ['question_20marks_0',['Why View Displays Question Marks',['../d8/d18/a01069.html#why-view-displays-question-marks',1,'']]],
-  ['questions_1',['Frequently Asked Questions',['../d8/d18/a01069.html',1,'']]],
-  ['questions_20feel_20free_20to_20open_20an_20issue_20on_20the_20c_20menu_20github_20repository_2',['questions feel free to open an issue on the C Menu GitHub repository',['../d9/db3/a01064.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.'],['../d5/d67/a01070.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.']]]
+  ['page_0',['Example Manual Page',['../index.html#example-manual-page',1,'']]],
+  ['page_20using_20editor_1',['Example Manual Page Using Editor',['../index.html#example-manual-page-using-editor',1,'']]],
+  ['paged_20virtual_20address_20space_2',['Demand Paged Virtual Address Space',['../index.html#demand-paged-virtual-address-space',1,'']]],
+  ['pages_3',['Pages',['../dd/d80/a01075.html#view---how-to-colorize-manual-pages',1,'View - How to Colorize Manual Pages'],['../index.html#view-and-color-manual-pages',1,'View and Color Manual Pages']]],
+  ['parsers_4',['Tree-Sitter Parsers',['../d7/df7/a01074.html#tree-sitter-parsers',1,'']]],
+  ['parsers_20on_20linux_5',['Tree-Sitter Parsers On Linux',['../d7/df7/a01074.html#tree-sitter-parsers-on-linux',1,'']]],
+  ['parsers_20on_20macos_6',['Tree-Sitter Parsers On macOS',['../d7/df7/a01074.html#tree-sitter-parsers-on-macos',1,'']]],
+  ['parsers_20on_20windows_7',['Tree-Sitter Parsers On Windows',['../d7/df7/a01074.html#tree-sitter-parsers-on-windows',1,'']]],
+  ['path_8',['Prepend Path',['../db/dba/a01078.html#prepend-path',1,'']]],
+  ['pick_9',['Pick',['../df/d18/a01071.html#c-menu-pick',1,'C-Menu Pick'],['../d0/dd3/a01077.html#pick',1,'Pick']]],
+  ['pick_20a_20picker_10',['Pick - A Picker',['../index.html#pick---a-picker',1,'']]],
+  ['pick_20and_20view_20api_11',['Menu, Form, Pick, and View API',['../dd/d80/a01075.html#menu-form-pick-and-view-api',1,'']]],
+  ['pick_20h_20and_20view_20h_12',['include/menu.h, form.h, pick.h, and view.h',['../d5/d67/a01070.html#includemenuh-formh-pickh-and-viewh',1,'']]],
+  ['pick_20options_13',['Pick Options',['../df/d18/a01071.html#pick-options',1,'']]],
+  ['pick_20selecting_20multiple_20files_14',['Pick - Selecting Multiple Files',['../dd/d80/a01075.html#pick---selecting-multiple-files',1,'']]],
+  ['pick_20usage_15',['Pick Usage',['../df/d18/a01071.html#pick-usage',1,'']]],
+  ['pick_20view_20c_20keys_20rsh_20and_20lf_16',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../index.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
+  ['picker_17',['Pick - A Picker',['../index.html#pick---a-picker',1,'']]],
+  ['pre_20release_18',['0.2.9 - Pre-Release',['../d0/dd3/a01077.html#autotoc_md029---pre-release',1,'']]],
+  ['precision_20math_20with_20c_20menu_20and_20gawk_19',['High Precision Math With C-Menu and Gawk',['../dd/d80/a01075.html#high-precision-math-with-c-menu-and-gawk',1,'']]],
+  ['prepend_20path_20',['Prepend Path',['../db/dba/a01078.html#prepend-path',1,'']]],
+  ['prerequisites_21',['Prerequisites',['../df/d18/a01071.html#prerequisites',1,'Prerequisites'],['../d6/d80/a01076.html#prerequisites-1',1,'Prerequisites']]],
+  ['privilege_20indicator_20shell_20prompts_22',['Privilege Indicator Shell Prompts',['../db/dba/a01078.html#privilege-indicator-shell-prompts',1,'']]],
+  ['prompts_23',['Privilege Indicator Shell Prompts',['../db/dba/a01078.html#privilege-indicator-shell-prompts',1,'']]],
+  ['provided_20scripts_24',['Option 2 - Build C-Menu with Provided Scripts',['../d6/d80/a01076.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
+  ['pun_20intended_25',['Highlights (Pun Intended)',['../index.html#highlights-pun-intended',1,'']]]
 ];

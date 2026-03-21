@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['red_5fgamma_0',['RED_GAMMA',['../df/d59/a01001.html#ac61da501335760ab73621c26c6632f29',1,'dwin.c']]]
+  ['red_5fgamma_0',['RED_GAMMA',['../df/dbc/a01004.html#ac61da501335760ab73621c26c6632f29',1,'dwin.c']]]
 ];

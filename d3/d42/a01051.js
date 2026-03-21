@@ -1,10 +1,17 @@
 var a01051 =
 [
-    [ "capture_curses_tioctl", "d3/d42/a01051.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "d3/d42/a01051.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "d3/d42/a01051.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "d3/d42/a01051.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "d3/d42/a01051.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "d3/d42/a01051.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "d3/d42/a01051.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "derive_file_spec", "d3/d42/a01051.html#ga20c40545a1e05954b496c6d674d31458", null ],
+    [ "display_version", "d3/d42/a01051.html#ga33abf350aae0212c85a5903e41764025", null ],
+    [ "dump_config", "d3/d42/a01051.html#ga1af490b85f0487c201f369333b84e540", null ],
+    [ "mapp_initialization", "d3/d42/a01051.html#gaccd65939c0ce6f0d940c5cf795a1e8fa", null ],
+    [ "opt_prt_bool", "d3/d42/a01051.html#ga4cea5ec97a8076e2a944e2c441ebb091", null ],
+    [ "opt_prt_char", "d3/d42/a01051.html#ga3d0b179ebc74f8a911a4152f54e7a8a7", null ],
+    [ "opt_prt_double", "d3/d42/a01051.html#ga365153038835675ce050503313cea890", null ],
+    [ "opt_prt_int", "d3/d42/a01051.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e", null ],
+    [ "opt_prt_str", "d3/d42/a01051.html#ga086c2240ffa5e497b67d630ea0d206b5", null ],
+    [ "parse_config", "d3/d42/a01051.html#ga5836f1ea8f972e3ca12e2772dc76fb32", null ],
+    [ "parse_opt_args", "d3/d42/a01051.html#ga11b56c5001e3ca95f4d0a28903b29609", null ],
+    [ "usage", "d3/d42/a01051.html#ga2ef30c42cbc289d899a8be5d2d8f77d0", null ],
+    [ "write_config", "d3/d42/a01051.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
+    [ "zero_opt_args", "d3/d42/a01051.html#gae9b71868d00a28cdcf5f4514e662edfe", null ]
 ];

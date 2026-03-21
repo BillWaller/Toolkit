@@ -1,6 +1,7 @@
 var a00932 =
 [
-    [ "KSTRLEN", "d8/dbb/a00932.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
     [ "MAXLEN", "d8/dbb/a00932.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
-    [ "display_curses_keys", "d8/dbb/a00932.html#ae916cef9ebf00ff41380ce9f38a362e0", null ]
+    [ "ABEND", "d8/dbb/a00932.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "d8/dbb/a00932.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "f_verbose", "d8/dbb/a00932.html#aaada0e40d7855fd811f41c576cd785fe", null ]
 ];
