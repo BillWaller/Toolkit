@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['red_0',['red',['../d7/d98/a00983.html#ab435487e41a1d42d4379464e35f873b4',1,'opts.c']]],
-  ['reset_1',['reset',['../d7/d98/a00983.html#a01de9e6a115c86e1c2b8747df2b28925',1,'opts.c']]]
+  ['red_0',['red',['../d6/d8d/a01007.html#ab435487e41a1d42d4379464e35f873b4',1,'opts.c']]],
+  ['reset_1',['reset',['../d6/d8d/a01007.html#a01de9e6a115c86e1c2b8747df2b28925',1,'opts.c']]]
 ];

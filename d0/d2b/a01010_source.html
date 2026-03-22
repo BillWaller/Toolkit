@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: scriou.c Source File</title>
+<title>C-Menu: mview.c Source File</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,11 +109,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d0/d2b/a01010_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">scriou.c</div></div>
+  <div class="headertitle"><div class="title">mview.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d0/d2b/a01010.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file scriou.c</span></div>
-<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Screen IO Support for MENU</span></div>
+<a href="../../d0/d2b/a01010.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file mview.c</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Callable Startup for C-Menu View</span></div>
 <div class="line"><span class="lineno">    3</span><span class="comment">    @author Bill Waller</span></div>
 <div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2025</span></div>
 <div class="line"><span class="lineno">    5</span><span class="comment">    MIT License</span></div>
@@ -121,164 +121,71 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d0/d2b/a01010_
 <div class="line"><span class="lineno">    7</span><span class="comment">    @date 2026-02-09</span></div>
 <div class="line"><span class="lineno">    8</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/** @defgroup screen_io Terminal Handling</span></div>
-<div class="line"><span class="lineno">   11</span><span class="comment">   @brief Provides Terminal Settings for C-MENU Applications and Restores</span></div>
-<div class="line"><span class="lineno">   12</span><span class="comment">   Terminal State on Exit</span></div>
-<div class="line"><span class="lineno">   13</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">   21</a></span><span class="keyword">struct</span> termios <a class="code hl_variable" href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#a5080741aab7f17e1d5b24e5ad63cf5e6">   22</a></span><span class="keyword">struct</span> termios <a class="code hl_variable" href="../../d0/d2b/a01010.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#a1e8b2f4dea5e88e7af17541140207df0">   23</a></span>bool <a class="code hl_variable" href="../../d0/d2b/a01010.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a> = false;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#ac46bd98f4cec1758c1d600920caa7f39">   24</a></span>bool <a class="code hl_variable" href="../../d0/d2b/a01010.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a> = false;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#gab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a>(<span class="keyword">struct</span> termios *);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(<span class="keyword">struct</span> termios *);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">char</span> <a class="code hl_function" href="../../d2/db8/a01057.html#ga11948dfa6be15e54c80072e4b3df0e12">di_getch</a>();</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">struct</span> termios <a class="code hl_variable" href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>, <a class="code hl_variable" href="../../d0/d2b/a01010.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#afcd0e5aee1f3f7445581428cb02b2115">   34</a></span><span class="keyword">struct</span> termios shell_in_tioctl, <a class="code hl_variable" href="../../d0/d2b/a01010.html#afcd0e5aee1f3f7445581428cb02b2115">curses_in_tioctl</a>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#ad9964c09cd96ce9748052b5494f30fc6">   35</a></span><span class="keyword">struct</span> termios shell_out_tioctl, <a class="code hl_variable" href="../../d0/d2b/a01010.html#ad9964c09cd96ce9748052b5494f30fc6">curses_out_tioctl</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#afe4863a6b75c5a20c2008f36f86cfeed">   36</a></span><span class="keyword">struct</span> termios shell_err_tioctl, <a class="code hl_variable" href="../../d0/d2b/a01010.html#afe4863a6b75c5a20c2008f36f86cfeed">curses_err_tioctl</a>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">/** @brief capture_shell_tioctl() - capture shell terminal settings</span></div>
-<div class="line"><span class="lineno">   39</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">   40</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   41</span><span class="comment">    @note - captures terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">   42</a></span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>() {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d0/d2b/a01010.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a>)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    tcgetattr(0, &amp;<a class="code hl_variable" href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    tcgetattr(2, &amp;shell_err_tioctl);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_variable" href="../../d0/d2b/a01010.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a> = true;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">/** @brief restore_shell_tioctl() - restore shell terminal settings</span></div>
-<div class="line"><span class="lineno">   51</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">   52</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   53</span><span class="comment">    @note - restores terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#gac5e3adb304b78910fc77761ef6a743f0">   54</a></span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>() {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d0/d2b/a01010.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a>)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    tcsetattr(0, TCSANOW, &amp;<a class="code hl_variable" href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">/** @brief capture_curses_tioctl() - capture curses terminal settings</span></div>
-<div class="line"><span class="lineno">   61</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">   62</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   63</span><span class="comment">    @note - captures terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#ga4d0a6767e791cf93a268ebe9ba02aa24">   64</a></span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a>() {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d0/d2b/a01010.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a>)</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    tcgetattr(0, &amp;<a class="code hl_variable" href="../../d0/d2b/a01010.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_variable" href="../../d0/d2b/a01010.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a> = true;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">/** @brief restore_curses_tioctl() - restore curses terminal settings</span></div>
-<div class="line"><span class="lineno">   72</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">   73</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   74</span><span class="comment">    @note - restores terminal settings for stdin, stdout, and stderr */</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#ga1c8e0f0a02e08c783231a20093fb8410">   75</a></span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>() {</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d0/d2b/a01010.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a>)</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">return</span> false;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    tcsetattr(0, TCSANOW, &amp;<a class="code hl_variable" href="../../d0/d2b/a01010.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">/** @brief set_sane_tioctl() - set terminal to sane settings for C-MENU</span></div>
-<div class="line"><span class="lineno">   82</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">   83</span><span class="comment">    @param t_p - pointer to termios structure to modify</span></div>
-<div class="line"><span class="lineno">   84</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">   85</span><span class="comment">     @note - sets terminal to sane settings for C-MENU applications */</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#gab69b11814964ea732c1e8e0ca6d22c1c">   86</a></span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#gab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a>(<span class="keyword">struct</span> termios *t_p) {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    tcgetattr(0, t_p);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    t_p-&gt;c_iflag &amp;= ~(IGNBRK | BRKINT | PARMRK | INPCK | ISTRIP | INLCR |</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                      IGNCR | ICRNL | IXON | IXOFF);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    t_p-&gt;c_iflag |= IUTF8;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    t_p-&gt;c_oflag |= OPOST | OCRNL;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    t_p-&gt;c_lflag &amp;= ~(ECHO | ECHONL | ICANON | IEXTEN);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    t_p-&gt;c_lflag |= (ISIG | ICANON | IEXTEN | ECHO | ECHOE | ECHOK);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    t_p-&gt;c_cflag &amp;= ~(CSIZE | PARENB);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    t_p-&gt;c_cflag |= CS8 | CLOCAL | CREAD;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    tcsetattr(0, TCSANOW, t_p);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>}</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">/** @brief mk_raw_tioctl() - set terminal to raw mode</span></div>
-<div class="line"><span class="lineno">  100</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">  101</span><span class="comment">    @param t_p - pointer to termios structure to modify</span></div>
-<div class="line"><span class="lineno">  102</span><span class="comment">    @return - true on success</span></div>
-<div class="line"><span class="lineno">  103</span><span class="comment">    @note - unlike cfmakeraw(), this leaves ISIG enabled.</span></div>
-<div class="line"><span class="lineno">  104</span><span class="comment">    @note - cfmakeraw() disables ISIG, which prevents C-MENU from handling</span></div>
-<div class="line"><span class="lineno">  105</span><span class="comment">   signals like Ctrl-C. Instead of using cfmakeraw(), we manually set the</span></div>
-<div class="line"><span class="lineno">  106</span><span class="comment">   terminal to raw mode while leaving ISIG enabled.</span></div>
-<div class="line"><span class="lineno">  107</span><span class="comment">    @note - the following code is equivalent to cfmakeraw() but with ISIG left</span></div>
-<div class="line"><span class="lineno">  108</span><span class="comment">   enabled:</span></div>
-<div class="line"><span class="lineno">  109</span><span class="comment">    @code</span></div>
-<div class="line"><span class="lineno">  110</span><span class="comment">    t_p-&gt;c_iflag &amp;= ~(IGNBRK | BRKINT | PARMRK | INPCK | ISTRIP | INLCR |</span></div>
-<div class="line"><span class="lineno">  111</span><span class="comment">                   IGNCR | ICRNL | IXON | IXOFF);</span></div>
-<div class="line"><span class="lineno">  112</span><span class="comment">    t_p-&gt;c_lflag &amp;= ~(ECHO | ECHONL | ICANON | IEXTEN);</span></div>
-<div class="line"><span class="lineno">  113</span><span class="comment">    t_p-&gt;c_cflag &amp;= ~(CSIZE | PARENB);</span></div>
-<div class="line"><span class="lineno">  114</span><span class="comment">    t_p-&gt;c_cflag |= CS8 | CLOCAL;</span></div>
-<div class="line"><span class="lineno">  115</span><span class="comment">    @endcode</span></div>
-<div class="line"><span class="lineno">  116</span><span class="comment">   */</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#ga9595fce25a583a656ca51a8b8f7494ae">  117</a></span>bool <a class="code hl_function" href="../../d2/db8/a01057.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(<span class="keyword">struct</span> termios *t_p) {</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    tcgetattr(0, t_p);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    t_p-&gt;c_lflag |= ISIG;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    t_p-&gt;c_lflag &amp;= ~(ECHO | ICANON);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    t_p-&gt;c_cc[VMIN] = 1;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    t_p-&gt;c_cc[VTIME] = 0;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    tcsetattr(0, TCSAFLUSH, t_p);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="keywordflow">return</span> true;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">/** @brief  sget single character from terminal in raw mode</span></div>
-<div class="line"><span class="lineno">  127</span><span class="comment"> *  @ingroup screen_io</span></div>
-<div class="line"><span class="lineno">  128</span><span class="comment">    @return - the character read from terminal</span></div>
-<div class="line"><span class="lineno">  129</span><span class="comment">    @note restores terminal settings */</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="../../d2/db8/a01057.html#ga11948dfa6be15e54c80072e4b3df0e12">  130</a></span><span class="keywordtype">char</span> <a class="code hl_function" href="../../d2/db8/a01057.html#ga11948dfa6be15e54c80072e4b3df0e12">di_getch</a>() {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">struct</span> termios org_tioctl, new_tioctl;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordtype">char</span> buf;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">if</span> (tcgetattr(2, &amp;org_tioctl) == -1) {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        fprintf(stderr, <span class="stringliteral">&quot;\ndi_getch: tcgetattr failed\n&quot;</span>);</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">return</span> (0);</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    new_tioctl = org_tioctl;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    new_tioctl.c_lflag &amp;= ~(ECHO | ICANON);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    new_tioctl.c_cc[VMIN] = 1;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    new_tioctl.c_cc[VTIME] = 0;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    read(2, &amp;buf, 1);</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    tcsetattr(2, TCSAFLUSH, &amp;org_tioctl);</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <span class="keywordflow">return</span> (buf);</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
-<div class="ttc" id="aa01010_html_a1e8b2f4dea5e88e7af17541140207df0"><div class="ttname"><a href="../../d0/d2b/a01010.html#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a></div><div class="ttdeci">bool f_have_shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00023">scriou.c:23</a></div></div>
-<div class="ttc" id="aa01010_html_a5080741aab7f17e1d5b24e5ad63cf5e6"><div class="ttname"><a href="../../d0/d2b/a01010.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a></div><div class="ttdeci">struct termios curses_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01010_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00021">scriou.c:21</a></div></div>
-<div class="ttc" id="aa01010_html_ac46bd98f4cec1758c1d600920caa7f39"><div class="ttname"><a href="../../d0/d2b/a01010.html#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a></div><div class="ttdeci">bool f_have_curses_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00024">scriou.c:24</a></div></div>
-<div class="ttc" id="aa01010_html_ad9964c09cd96ce9748052b5494f30fc6"><div class="ttname"><a href="../../d0/d2b/a01010.html#ad9964c09cd96ce9748052b5494f30fc6">curses_out_tioctl</a></div><div class="ttdeci">struct termios shell_out_tioctl curses_out_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00035">scriou.c:35</a></div></div>
-<div class="ttc" id="aa01010_html_afcd0e5aee1f3f7445581428cb02b2115"><div class="ttname"><a href="../../d0/d2b/a01010.html#afcd0e5aee1f3f7445581428cb02b2115">curses_in_tioctl</a></div><div class="ttdeci">struct termios shell_in_tioctl curses_in_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00034">scriou.c:34</a></div></div>
-<div class="ttc" id="aa01010_html_afe4863a6b75c5a20c2008f36f86cfeed"><div class="ttname"><a href="../../d0/d2b/a01010.html#afe4863a6b75c5a20c2008f36f86cfeed">curses_err_tioctl</a></div><div class="ttdeci">struct termios shell_err_tioctl curses_err_tioctl</div><div class="ttdef"><b>Definition</b> <a href="#l00036">scriou.c:36</a></div></div>
-<div class="ttc" id="aa01057_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d2/db8/a01057.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00042">scriou.c:42</a></div></div>
-<div class="ttc" id="aa01057_html_ga11948dfa6be15e54c80072e4b3df0e12"><div class="ttname"><a href="../../d2/db8/a01057.html#ga11948dfa6be15e54c80072e4b3df0e12">di_getch</a></div><div class="ttdeci">char di_getch()</div><div class="ttdoc">sget single character from terminal in raw mode</div><div class="ttdef"><b>Definition</b> <a href="#l00130">scriou.c:130</a></div></div>
-<div class="ttc" id="aa01057_html_ga1c8e0f0a02e08c783231a20093fb8410"><div class="ttname"><a href="../../d2/db8/a01057.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a></div><div class="ttdeci">bool restore_curses_tioctl()</div><div class="ttdoc">restore_curses_tioctl() - restore curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00075">scriou.c:75</a></div></div>
-<div class="ttc" id="aa01057_html_ga4d0a6767e791cf93a268ebe9ba02aa24"><div class="ttname"><a href="../../d2/db8/a01057.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a></div><div class="ttdeci">bool capture_curses_tioctl()</div><div class="ttdoc">capture_curses_tioctl() - capture curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00064">scriou.c:64</a></div></div>
-<div class="ttc" id="aa01057_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../d2/db8/a01057.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="#l00117">scriou.c:117</a></div></div>
-<div class="ttc" id="aa01057_html_gab69b11814964ea732c1e8e0ca6d22c1c"><div class="ttname"><a href="../../d2/db8/a01057.html#gab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a></div><div class="ttdeci">bool set_sane_tioctl(struct termios *)</div><div class="ttdoc">set_sane_tioctl() - set terminal to sane settings for C-MENU</div><div class="ttdef"><b>Definition</b> <a href="#l00086">scriou.c:86</a></div></div>
-<div class="ttc" id="aa01057_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d2/db8/a01057.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="#l00054">scriou.c:54</a></div></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">common</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/** @brief subprogram entry point for C-Menu View</span></div>
+<div class="line"><span class="lineno">   14</span><span class="comment">    @param init Pointer to Init structure containing initialization parameters</span></div>
+<div class="line"><span class="lineno">   15</span><span class="comment">    @param argc Argument count from command line</span></div>
+<div class="line"><span class="lineno">   16</span><span class="comment">    @param argv Argument vector from command line</span></div>
+<div class="line"><span class="lineno">   17</span><span class="comment">    @return 0 on success, non-zero on failure</span></div>
+<div class="line"><span class="lineno">   18</span><span class="comment">    @note use this function to start the C-Menu View from another program,</span></div>
+<div class="line"><span class="lineno">   19</span><span class="comment">   passing in the necessary initialization parameters through the Init</span></div>
+<div class="line"><span class="lineno">   20</span><span class="comment">   structure. The function will handle setting up the view based on the provided</span></div>
+<div class="line"><span class="lineno">   21</span><span class="comment">   parameters and will return 0 on success or a non-zero value if an error</span></div>
+<div class="line"><span class="lineno">   22</span><span class="comment">   occurs during initialization. */</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">   23</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a>(Init *init, <span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = init-&gt;view;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = <a class="code hl_function" href="../../d0/dd3/a01077.html#ga2e67404cd52bddd379a57c50434ac445">new_view</a><a class="code hl_function" href="../../d0/dd3/a01077.html#ga2e67404cd52bddd379a57c50434ac445">(</a>init<a class="code hl_function" href="../../d0/dd3/a01077.html#ga2e67404cd52bddd379a57c50434ac445">,</a> argc<a class="code hl_function" href="../../d0/dd3/a01077.html#ga2e67404cd52bddd379a57c50434ac445">,</a> argv<a class="code hl_function" href="../../d0/dd3/a01077.html#ga2e67404cd52bddd379a57c50434ac445">)</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = init-&gt;view;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordflow">if</span> (init-&gt;lines != 0 &amp;&amp; <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines == 0)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines = init-&gt;lines;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines == 0)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines = LINES * 3 / 4;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines &gt; LINES - 3)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines = LINES - 3;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">if</span> (init-&gt;cols != 0 &amp;&amp; <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines == 0)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols = init-&gt;cols;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols == 0)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols = COLS * 3 / 4;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols &gt; COLS - 3)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols = COLS - 3;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">if</span> (init-&gt;begy != 0 &amp;&amp; <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy == 0)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy = init-&gt;begy;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy == 0)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy = (LINES - <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines) / 5;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy + <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines &gt; LINES - 2)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy = LINES - <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines - 2;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> (init-&gt;begx != 0 &amp;&amp; <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx == 0)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx = init-&gt;begx;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx == 0)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx = (COLS - <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols) / 5;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx + <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols &gt; COLS - 1)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx = COLS - <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols - 1;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_variable" href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_full_screen = false;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="../../d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a><a class="code hl_function" href="../../d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61">(</a>init<a class="code hl_function" href="../../d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61">,</a> init-&gt;title<a class="code hl_function" href="../../d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61">)</a>) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <a class="code hl_function" href="../../da/d93/a01084.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a><a class="code hl_function" href="../../da/d93/a01084.html#ga0bd4dc056ab5010547129bb87819789b">(</a>init<a class="code hl_function" href="../../da/d93/a01084.html#ga0bd4dc056ab5010547129bb87819789b">)</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <a class="code hl_function" href="../../d0/dc9/a01065.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a><a class="code hl_function" href="../../d0/dc9/a01065.html#ga9dd598e1d49c8764af1eec42c682623e">(</a><a class="code hl_function" href="../../d0/dc9/a01065.html#ga9dd598e1d49c8764af1eec42c682623e">)</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="../../d0/dd3/a01077.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a><a class="code hl_function" href="../../d0/dd3/a01077.html#ga519762bc6148577dc96caf851c3ebfe9">(</a>init<a class="code hl_function" href="../../d0/dd3/a01077.html#ga519762bc6148577dc96caf851c3ebfe9">)</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="ttc" id="aa00947_html_af2dd70d8b95c32fb670ac6f9cc8df201"><div class="ttname"><a href="../../d3/d29/a00947.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a></div><div class="ttdeci">View * view</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d29/a00947_source.html#l00048">mem.c:48</a></div></div>
+<div class="ttc" id="aa01010_html_a75a4e7afc9c9aafd3d35ab706f5fdc71"><div class="ttname"><a href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a></div><div class="ttdeci">int mview(Init *init, int argc, char **argv)</div><div class="ttdoc">subprogram entry point for C-Menu View</div><div class="ttdef"><b>Definition</b> <a href="#l00023">mview.c:23</a></div></div>
+<div class="ttc" id="aa01065_html_ga9dd598e1d49c8764af1eec42c682623e"><div class="ttname"><a href="../../d0/dc9/a01065.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a></div><div class="ttdeci">WINDOW * win_del()</div><div class="ttdoc">Delete the current window and its associated box window.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00821">dwin.c:821</a></div></div>
+<div class="ttc" id="aa01076_html_ga8dd32c1a4c961ec715f63625a6f87b61"><div class="ttname"><a href="../../d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a></div><div class="ttdeci">int init_view_boxwin(Init *init, char *title)</div><div class="ttdoc">Initialize the C-Menu View in box window mode.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d39/a00950_source.html#l00106">init_view.c:106</a></div></div>
+<div class="ttc" id="aa01077_html_ga2e67404cd52bddd379a57c50434ac445"><div class="ttname"><a href="../../d0/dd3/a01077.html#ga2e67404cd52bddd379a57c50434ac445">new_view</a></div><div class="ttdeci">View * new_view(Init *init, int, char **)</div><div class="ttdoc">Create and initialize View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d29/a00947_source.html#l00304">mem.c:304</a></div></div>
+<div class="ttc" id="aa01077_html_ga519762bc6148577dc96caf851c3ebfe9"><div class="ttname"><a href="../../d0/dd3/a01077.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a></div><div class="ttdeci">View * destroy_view(Init *init)</div><div class="ttdoc">Destroy View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d29/a00947_source.html#l00348">mem.c:348</a></div></div>
+<div class="ttc" id="aa01084_html_ga0bd4dc056ab5010547129bb87819789b"><div class="ttname"><a href="../../da/d93/a01084.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a></div><div class="ttdeci">int view_file(Init *)</div><div class="ttdoc">Start view.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d20/a00980_source.html#l00129">view_engine.c:129</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d0/d2b/a01010.html">scriou.c</a></li>
+    <li class="navelem"><a href="../../d0/d2b/a01010.html">mview.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

@@ -1,6 +1,7 @@
 var index =
 [
     [ "<b><em>NEW Features</em></b>", "index.html#_new-features_", [
+      [ "C-Menu Introduction", "index.html#c-menu-introduction", null ],
       [ "<b><em>NEW View Line Numbering</em></b>", "index.html#_new-view-line-numbering_", null ],
       [ "Large Log File in View", "index.html#large-log-file-in-view", null ],
       [ "<b><em>New API Integration With Neovim</em></b>", "index.html#_new-api-integration-with-neovim_", null ],
@@ -15,7 +16,6 @@ var index =
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [
       [ "C-Menu API", "index.html#c-menu-api", null ],
-      [ "C-Menu Introduction", "index.html#c-menu-introduction", null ],
       [ "Elements of C-Menu", "index.html#elements-of-c-menu", null ],
       [ "Key Features", "index.html#key-features", null ],
       [ "Highlights (Pun Intended)", "index.html#highlights-pun-intended", null ],

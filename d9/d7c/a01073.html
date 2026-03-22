@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: EXERCISES</title>
+<title>C-Menu: String Objects</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -108,191 +108,319 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d7c/a01073.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">EXERCISES </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">String Objects </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="exercises"></a></p>
-<ul>
-<li><a class="el" href="#exercise-1-system-configurations" title="Exercise 1: System Configurations">Exercise 1: System Configurations</a><ul>
-<li><a class="el" href="#sddm-background-configuration" title="SDDM Background Configuration">SDDM Background Configuration</a><ul>
-<li><a class="el" href="#requisites" title="Requisites">Requisites</a></li>
-</ul>
-</li>
-<li><a class="el" href="#ghostty-configuration" title="Ghostty Configuration">Ghostty Configuration</a></li>
-<li><a class="el" href="#alacritty-and-kitty" title="Alacritty and Kitty">Alacritty and Kitty</a></li>
-</ul>
-</li>
-</ul>
-<p>The purpose of the EXERCISES section is to provide you with practice problems similar to those you might encounter as a developer or system administrator. We are just barely getting started, so please be patient. The exercises will become more complex as we progress through the course.</p>
-<p>As an added benefit, the exercises will provide a great test bed for debugging the C-Menu code. As always, your comments and suggestions (even complaints) are welcome.</p>
-<h1 class="doxsection"><a class="anchor" id="exercise-1-system-configurations"></a>
-Exercise 1: System Configurations</h1>
-<h2 class="doxsection"><a class="anchor" id="sddm-background-configuration"></a>
-SDDM Background Configuration</h2>
-<p>The objective of this exercise is to Create a C-Menu Menu that allows users to safely and easily configure their system settings. We will start with a simple menu that allows users to select a new SDDM background image. This exercise assumes you have sddm installed and that the sddm theme is located in /usr/share/sddm/themes.</p>
-<h3 class="doxsection"><a class="anchor" id="requisites"></a>
-Requisites</h3>
-<ul>
-<li>A working C-Menu installation.</li>
-<li>SDDM installed and configured on your system.</li>
-<li>A collection of background images available in the SDDM theme directory. For this exercise, we will assume the SDDM theme is located at /usr/share/sddm/themes/sddm-corporate-theme/Backgrounds, and that they are of type Portable Network Graphics (*.png). This exercise assumes that the Backgrounds directory contains a default.png image that is currently being used as the SDDM background. For the sddm-corporate-theme, the background image is specified in Themes/corporate.conf as Background=Backgrounds/default.png. You may want to install the sddm-corporate-theme as it is set up perfectly for this exercise.</li>
-</ul>
-<p><a href="https://github.com/BillWaller/sddm-corporate-theme.git">sddm-corporate-theme</a></p>
-<p>1️⃣ In your editor, open a new file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>2️⃣ Add the following content to the file and save it:</p>
-<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
-<div class="line">:</div>
-<div class="line">:   Select SDDM Background</div>
-<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
-<div class="line">!help</div>
-<div class="line">:   Exit Workstation Configuration</div>
-<div class="line">!return</div>
-</div><!-- fragment --><p>3️⃣ Open another file to create a bash script:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
-<div class="line">cd &quot;$bkgd_dir&quot;</div>
-<div class="line">for bg in $(lf -e &#39;.*default\.png$&#39; . &#39;.*\.png$&#39;); do</div>
-<div class="line">    echo $(basename &quot;$bg&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>This script will change the ownership of the SDDM background directory to the current user, allowing them to select a new background image. It will then list the available background images which will provide input for C-Menu Pick. Don't forget to make the script executable.</p>
-<div class="fragment"><div class="line">chmod +x ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>5️⃣ Now, create another bash script:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>6️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
-<div class="line"> </div>
-<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
-<div class="line">cd &quot;$bkgd_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default.png</div>
-</div><!-- fragment --><p>Pick will execute this script, passing the selected background image as an argument. The script will create a symbolic link named default.png that points to the selected background image, effectively changing the SDDM background.</p>
-<p>7️⃣ Finally, test your menu by running it from the command line:</p>
-<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>8️⃣ You may want to add the Workstation Configuration option to your main menu. To do this, open your main menu file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/main.m</div>
-</div><!-- fragment --><p>9️⃣ Add the following lines to include the Workstation Configuration menu:</p>
-<div class="fragment"><div class="line">:   Workstation Configuration</div>
-<div class="line">!menu workstation_config.m</div>
-</div><!-- fragment --><p>From the C-Menu main menu, you should now see an option for Workstation Configuration. Selecting it will take you to the menu where you can choose a new SDDM background image.</p>
-<div class="image">
-<img src="../../workstation_config.png" alt=""/>
-<div class="caption">
-Select SDDM Background</div></div>
-    <p>To verify that the background has been changed, you can log out of your session and return to the SDDM login screen. You should see the new background image you selected. Or, you can check the symbolic link in the SDDM background directory to confirm it points to the correct image.</p>
-<div class="image">
-<img src="../../sddm_backgrounds.png" alt=""/>
-<div class="caption">
-SDDM Backgrounds</div></div>
-    <p>The above image shows the SDDM background directory before and after selecting the space_force.png background image.</p>
-<h2 class="doxsection"><a class="anchor" id="ghostty-configuration"></a>
-Ghostty Configuration</h2>
-<p>1️⃣ In this exercise, we will add Ghostty configurations for color themes and fonts to the Workstation Configuration. First, open the workstation_config.m file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>2️⃣ Add the following lines to the workstation_config.m to include options for Ghostty themes and fonts:</p>
-<div class="fragment"><div class="line">:   Select Ghostty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-</div><!-- fragment --><p>3️⃣ Next, create the ghostty_themes.sh and ghostty_chtheme.sh scripts:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_themes.sh</div>
-</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
-<div class="line">cd &quot;$themes_dir&quot;</div>
-<div class="line">for theme in $(lf -d 1 -t f -e &#39;.*default_theme$&#39; . &#39;.*&#39;); do</div>
-<div class="line">    echo $(basename &quot;$theme&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>5️⃣ Now, create the ~/menuapp/bin/ghostty_chtheme.sh script, add the following content, save it, and make it executable.</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
-<div class="line">cd &quot;$themes_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default_theme</div>
-</div><!-- fragment --><p>6️⃣ Finally, create the ghostty_fonts.sh and ghostty_chfont.sh scripts:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_fonts.sh</div>
-</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
-<div class="line">cd &quot;$fonts_dir&quot;</div>
-<div class="line">for font in $(lf -d 1 -t f -e &#39;.*default_font$&#39; . &#39;.*&#39;); do</div>
-<div class="line">    echo $(basename &quot;$font&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_chfont.sh</div>
-</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
-<div class="line">cd &quot;$fonts_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default_font</div>
-</div><!-- fragment --><p>7️⃣ Test your menu again by running it from the command line:</p>
-<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>Or, if you have installed the ~/.bashrc configurations described in <a class="el" href="../../d7/df7/a01074.html" title="Augmenting C-Menu">Augmenting C-Menu</a>, you can just type mm to start C-Menu and navigate to the Workstation Configuration menu.</p>
-<h2 class="doxsection"><a class="anchor" id="alacritty-and-kitty"></a>
-Alacritty and Kitty</h2>
-<p>The process for adding Alacritty and Kitty configurations is similar to the Ghostty configuration. You will need to create scripts to list available themes and fonts for Alacritty and Kitty, as well as scripts to change the default theme and font by creating symbolic links.</p>
-<p>You may want to automate the creation of these scripts by using sed to replace "ghostty" with "alacritty" and "kitty" in the existing Ghostty scripts. Here's an example of how you can do this:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_fonts.sh &gt;kitty_fonts.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chfont.sh &gt;kitty_chfont.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_themes.sh &gt;kitty_themes.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chtheme.sh &gt;kitty_chtheme.sh</div>
-<div class="line">chmod a+x kitty_*.sh</div>
-<div class="line">cp kitty_*.sh ~/menuapp/bin/</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_fonts.sh &gt;alacritty_fonts.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chfont.sh &gt;alacritty_chfont.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_themes.sh &gt;alacritty_themes.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chtheme.sh &gt;alacritty_chtheme.sh</div>
-<div class="line">chmod a+x alacritty_*.sh</div>
-<div class="line">cp alacritty_*.sh ~/menuapp/bin/</div>
-</div><!-- fragment --><p>Here is the final content of the workstation_config.m file after adding the Alacritty and Kitty configuration options:</p>
-<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
-<div class="line">:</div>
-<div class="line">:   Select SDDM Background</div>
-<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Kitty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Kitty Font&quot; -S kitty_font.sh -c &quot;kitty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Kitty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Kitty Theme&quot; -S kitty_themes.sh -c &quot;kitty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Alacritty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Alacritty Font&quot; -S alacritty_fonts.sh -c &quot;alacritty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Alacritty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Alacritty Theme&quot; -S alacritty_themes.sh -c &quot;alacritty_chtheme.sh %%&quot;</div>
-<div class="line">:     Help</div>
-<div class="line">!help</div>
-<div class="line">:     Exit Workstation Configuration</div>
-<div class="line">!return</div>
-</div><!-- fragment --><div class="image">
-<img src="../../workstation_config2.png" alt=""/>
-<div class="caption">
-Workstation Configuration</div></div>
-     </div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>Simple String Object Library.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga3e61ddee7c9ff9a346d3656d0054615f" id="r_ga3e61ddee7c9ff9a346d3656d0054615f"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#ga3e61ddee7c9ff9a346d3656d0054615f">to_string</a> (const char *s)</td></tr>
+<tr class="memdesc:ga3e61ddee7c9ff9a346d3656d0054615f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String functions provide a simple string library to facilitate string manipulation in C, allowing developers to easily create, copy, concatenate, and free strings without having to manage memory manually.  <br /></td></tr>
+<tr class="memitem:ga9733005966bd730252e081c3ef9bb2c2" id="r_ga9733005966bd730252e081c3ef9bb2c2"><td class="memItemLeft">String&#160;</td><td class="memItemRight"><a class="el" href="#ga9733005966bd730252e081c3ef9bb2c2">free_string</a> (String string)</td></tr>
+<tr class="memdesc:ga9733005966bd730252e081c3ef9bb2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the dynamically allocated String.  <br /></td></tr>
+<tr class="memitem:ga1d8368ef59a9e415c859d20794d6b26d" id="r_ga1d8368ef59a9e415c859d20794d6b26d"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1d8368ef59a9e415c859d20794d6b26d">string_cpy</a> (String *dest, const String *src)</td></tr>
+<tr class="memdesc:ga1d8368ef59a9e415c859d20794d6b26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy src String to dest String, allocating additional memory for dest String if necessary.  <br /></td></tr>
+<tr class="memitem:ga8e2af68338c74351899a7a35adc6cda0" id="r_ga8e2af68338c74351899a7a35adc6cda0"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ga8e2af68338c74351899a7a35adc6cda0">string_cat</a> (String *dest, const String *src)</td></tr>
+<tr class="memdesc:ga8e2af68338c74351899a7a35adc6cda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates src String to dest String, allocating additional memory for dest String if necessary.  <br /></td></tr>
+<tr class="memitem:gae86995f3322d0448e2890ecb7d3624dc" id="r_gae86995f3322d0448e2890ecb7d3624dc"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#gae86995f3322d0448e2890ecb7d3624dc">string_ncat</a> (String *dest, const String *src, size_t n)</td></tr>
+<tr class="memdesc:gae86995f3322d0448e2890ecb7d3624dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates up to n characters from src String to dest String, allocating additional memory for dest String if necessary.  <br /></td></tr>
+<tr class="memitem:ga5ea62e2fba431b9cecaac045daff6105" id="r_ga5ea62e2fba431b9cecaac045daff6105"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#ga5ea62e2fba431b9cecaac045daff6105">string_ncpy</a> (String *dest, const String *src, size_t n)</td></tr>
+<tr class="memdesc:ga5ea62e2fba431b9cecaac045daff6105"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies up to n characters from src String to dest String, allocating additional memory for dest String if necessary  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple String Object Library. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ga9733005966bd730252e081c3ef9bb2c2" name="ga9733005966bd730252e081c3ef9bb2c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9733005966bd730252e081c3ef9bb2c2">&#9670;&#160;</a></span>free_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String free_string </td>
+          <td>(</td>
+          <td class="paramtype">String</td>          <td class="paramname"><span class="paramname"><em>string</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Free the dynamically allocated String. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>to free </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>string with nullptr pointer and length 0 </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Frees the dynamically allocated string and sets length to 0. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l01371">1371</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1372</span>                                  {</div>
+<div class="line"><span class="lineno"> 1373</span>    <span class="keywordflow">if</span> (<span class="keywordtype">string</span>.s == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno"> 1374</span>        <span class="keywordflow">return</span> string;</div>
+<div class="line"><span class="lineno"> 1375</span>    free(<span class="keywordtype">string</span>.s);</div>
+<div class="line"><span class="lineno"> 1376</span>    <span class="keywordtype">string</span>.l = 0;</div>
+<div class="line"><span class="lineno"> 1377</span>    <span class="keywordtype">string</span>.s = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1378</span>    <span class="keywordflow">return</span> string;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga8e2af68338c74351899a7a35adc6cda0" name="ga8e2af68338c74351899a7a35adc6cda0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8e2af68338c74351899a7a35adc6cda0">&#9670;&#160;</a></span>string_cat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t string_cat </td>
+          <td>(</td>
+          <td class="paramtype">String *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concatenates src String to dest String, allocating additional memory for dest String if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>- destination String struct </td></tr>
+    <tr><td class="paramname">src</td><td>- source String struct </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>new length of dest String after concatenation </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the caller is responsible for freeing the allocated memory. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l01403">1403</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1404</span>                                                   {</div>
+<div class="line"><span class="lineno"> 1405</span>    <span class="keywordflow">if</span> (dest == <span class="keyword">nullptr</span> || src == <span class="keyword">nullptr</span> || src-&gt;s == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno"> 1406</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno"> 1407</span>    <span class="keywordtype">size_t</span> new_len = strlen(dest-&gt;s) + strlen(src-&gt;s) + 1;</div>
+<div class="line"><span class="lineno"> 1408</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
+<div class="line"><span class="lineno"> 1409</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
+<div class="line"><span class="lineno"> 1410</span>        dest-&gt;l = new_len;</div>
+<div class="line"><span class="lineno"> 1411</span>    }</div>
+<div class="line"><span class="lineno"> 1412</span>    strcat(dest-&gt;s, src-&gt;s);</div>
+<div class="line"><span class="lineno"> 1413</span>    <span class="keywordflow">return</span> new_len;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga1d8368ef59a9e415c859d20794d6b26d" name="ga1d8368ef59a9e415c859d20794d6b26d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1d8368ef59a9e415c859d20794d6b26d">&#9670;&#160;</a></span>string_cpy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t string_cpy </td>
+          <td>(</td>
+          <td class="paramtype">String *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy src String to dest String, allocating additional memory for dest String if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>- destination String struct </td></tr>
+    <tr><td class="paramname">src</td><td>- source String struct </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>length of dest String </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the caller is responsible for freeing the allocated memory. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l01386">1386</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1387</span>                                                   {</div>
+<div class="line"><span class="lineno"> 1388</span>    <span class="keywordflow">if</span> (dest == <span class="keyword">nullptr</span> || src == <span class="keyword">nullptr</span> || src-&gt;s == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno"> 1389</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno"> 1390</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; src-&gt;l) {</div>
+<div class="line"><span class="lineno"> 1391</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, src-&gt;l);</div>
+<div class="line"><span class="lineno"> 1392</span>        dest-&gt;l = src-&gt;l;</div>
+<div class="line"><span class="lineno"> 1393</span>    }</div>
+<div class="line"><span class="lineno"> 1394</span>    strcpy(dest-&gt;s, src-&gt;s);</div>
+<div class="line"><span class="lineno"> 1395</span>    <span class="keywordflow">return</span> src-&gt;l;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="gae86995f3322d0448e2890ecb7d3624dc" name="gae86995f3322d0448e2890ecb7d3624dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae86995f3322d0448e2890ecb7d3624dc">&#9670;&#160;</a></span>string_ncat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t string_ncat </td>
+          <td>(</td>
+          <td class="paramtype">String *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Concatenates up to n characters from src String to dest String, allocating additional memory for dest String if necessary. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>- destination String struct </td></tr>
+    <tr><td class="paramname">src</td><td>- source String struct </td></tr>
+    <tr><td class="paramname">n</td><td>- maximum number of characters to concatenate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>new length of dest String after concatenation </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the caller is responsible for freeing the allocated memory. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l01422">1422</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1423</span>                                                              {</div>
+<div class="line"><span class="lineno"> 1424</span>    <span class="keywordflow">if</span> (dest == <span class="keyword">nullptr</span> || src == <span class="keyword">nullptr</span> || src-&gt;s == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno"> 1425</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno"> 1426</span>    <span class="keywordtype">size_t</span> dest_len = strlen(dest-&gt;s);</div>
+<div class="line"><span class="lineno"> 1427</span>    <span class="keywordtype">size_t</span> src_len = strlen(src-&gt;s);</div>
+<div class="line"><span class="lineno"> 1428</span>    <span class="keywordtype">size_t</span> cat_len = (n &lt; src_len) ? n : src_len;</div>
+<div class="line"><span class="lineno"> 1429</span>    <span class="keywordtype">size_t</span> new_len = dest_len + cat_len + 1;</div>
+<div class="line"><span class="lineno"> 1430</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
+<div class="line"><span class="lineno"> 1431</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
+<div class="line"><span class="lineno"> 1432</span>        dest-&gt;l = new_len;</div>
+<div class="line"><span class="lineno"> 1433</span>    }</div>
+<div class="line"><span class="lineno"> 1434</span>    strncat(dest-&gt;s, src-&gt;s, cat_len);</div>
+<div class="line"><span class="lineno"> 1435</span>    <span class="keywordflow">return</span> new_len;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga5ea62e2fba431b9cecaac045daff6105" name="ga5ea62e2fba431b9cecaac045daff6105"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5ea62e2fba431b9cecaac045daff6105">&#9670;&#160;</a></span>string_ncpy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t string_ncpy </td>
+          <td>(</td>
+          <td class="paramtype">String *</td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>copies up to n characters from src String to dest String, allocating additional memory for dest String if necessary </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td>- destination String struct </td></tr>
+    <tr><td class="paramname">src</td><td>- source String struct </td></tr>
+    <tr><td class="paramname">n</td><td>- maximum number of characters to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>the caller is responsible for freeing the allocated memory. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l01443">1443</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1444</span>                                                              {</div>
+<div class="line"><span class="lineno"> 1445</span>    <span class="keywordflow">if</span> (dest == <span class="keyword">nullptr</span> || src == <span class="keyword">nullptr</span> || src-&gt;s == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno"> 1446</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno"> 1447</span>    <span class="keywordtype">size_t</span> src_len = strlen(src-&gt;s);</div>
+<div class="line"><span class="lineno"> 1448</span>    <span class="keywordtype">size_t</span> cpy_len = (n &lt; src_len) ? n : src_len;</div>
+<div class="line"><span class="lineno"> 1449</span>    <span class="keywordtype">size_t</span> new_len = cpy_len + 1;</div>
+<div class="line"><span class="lineno"> 1450</span>    <span class="keywordflow">if</span> (dest-&gt;l &lt; new_len) {</div>
+<div class="line"><span class="lineno"> 1451</span>        dest-&gt;s = (<span class="keywordtype">char</span> *)realloc(dest-&gt;s, new_len);</div>
+<div class="line"><span class="lineno"> 1452</span>        dest-&gt;l = new_len;</div>
+<div class="line"><span class="lineno"> 1453</span>    }</div>
+<div class="line"><span class="lineno"> 1454</span>    strncpy(dest-&gt;s, src-&gt;s, cpy_len);</div>
+<div class="line"><span class="lineno"> 1455</span>    dest-&gt;s[cpy_len] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1456</span>    <span class="keywordflow">return</span> new_len;</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga3e61ddee7c9ff9a346d3656d0054615f" name="ga3e61ddee7c9ff9a346d3656d0054615f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3e61ddee7c9ff9a346d3656d0054615f">&#9670;&#160;</a></span>to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String to_string </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>String functions provide a simple string library to facilitate string manipulation in C, allowing developers to easily create, copy, concatenate, and free strings without having to manage memory manually. </p>
+<dl class="section note"><dt>Note</dt><dd>The library includes functions to convert C strings to String structs, create new String structs with specified lengths, copy and concatenate String structs, and free the memory used by String structs. By using this library, developers can avoid common pitfalls of C string handling, such as buffer overflows and memory leaks, while still benefiting from the performance advantages of C. </dd>
+<dd>
+Designed to be simple and easy to use, making it a great choice for developers who want to work with strings in C without having to worry about the complexities of manual memory management. </dd>
+<dd>
+The String struct is defined as follows: <div class="fragment"><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line">    <span class="keywordtype">size_t</span> l; <span class="comment">// length of the string (including null terminator)</span></div>
+<div class="line">    <span class="keywordtype">char</span> *s;  <span class="comment">// pointer to the dynamically allocated string</span></div>
+<div class="line">} String;</div>
+</div><!-- fragment --> </dd>
+<dd>
+All functions in this library that return a String struct allocate memory for the string using malloc or realloc. It is the caller's responsibility to free this memory using the free_string function when it is no longer needed to avoid memory leaks. </dd>
+<dd>
+The String functions in this library do not perform bounds checking on the input strings or the resulting strings. It is the caller's responsibility to ensure that all input strings are valid and that the resulting strings do not exceed available memory. </dd>
+<dd>
+The String functions in this library assume that all input strings are null-terminated. If any input string is not null-terminated, the behavior is undefined. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>snippets/strings_test1.c</dd></dl>
+<p>Convert C string to String struct</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>C string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>String struct containing dynamically allocated copy of input string </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the caller is responsible for freeing the allocated memory. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l01331">1331</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1332</span>                                {</div>
+<div class="line"><span class="lineno"> 1333</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno"> 1334</span>        String str;</div>
+<div class="line"><span class="lineno"> 1335</span>        str.l = 0;</div>
+<div class="line"><span class="lineno"> 1336</span>        str.s = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1337</span>        <span class="keywordflow">return</span> str;</div>
+<div class="line"><span class="lineno"> 1338</span>    }</div>
+<div class="line"><span class="lineno"> 1339</span>    String str;</div>
+<div class="line"><span class="lineno"> 1340</span>    str.l = strlen(s) + 1;</div>
+<div class="line"><span class="lineno"> 1341</span>    str.s = (<span class="keywordtype">char</span> *)malloc(str.l);</div>
+<div class="line"><span class="lineno"> 1342</span>    strcpy(str.s, s);</div>
+<div class="line"><span class="lineno"> 1343</span>    <span class="keywordflow">return</span> str;</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

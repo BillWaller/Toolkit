@@ -1,19 +1,6 @@
 var a00950 =
 [
-    [ "FAIL", "df/d39/a00950.html#abb508ea8227673f419e9fe3a86c30d8e", null ],
-    [ "FALSE", "df/d39/a00950.html#aa93f0eb578d23995850d61f7d61c55c1", null ],
-    [ "TRUE", "df/d39/a00950.html#aa8cecfc5c5c054d2875c03e77b7be15d", null ],
-    [ "ABEND", "df/d39/a00950.html#a4f226af0b5469cf62b0f04d52813c800", null ],
-    [ "file_spec_parts", "df/d39/a00950.html#ab7a6465a15ab53a9885da8d4db187066", null ],
-    [ "main", "df/d39/a00950.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "next_path", "df/d39/a00950.html#acac1da221398735ede713c45973ee35d", null ],
-    [ "normalend", "df/d39/a00950.html#a3883d2f8375f9cee1e12ee075aec671f", null ],
-    [ "whence", "df/d39/a00950.html#a5b496563e1004d5cf3aac814088ff99c", null ],
-    [ "whence_usage", "df/d39/a00950.html#a29ecb778b765c0b091abfcc46146a0ac", null ],
-    [ "f_all", "df/d39/a00950.html#a2844f8f6a2086d94dbc790472d9c84a9", null ],
-    [ "f_display_help", "df/d39/a00950.html#a3b847a748c3556faef86ad136ef58e33", null ],
-    [ "f_verbose", "df/d39/a00950.html#aaada0e40d7855fd811f41c576cd785fe", null ],
-    [ "file_name", "df/d39/a00950.html#a0ee25cc73460ea2c06199de0e492359c", null ],
-    [ "path_p", "df/d39/a00950.html#aa3dd61c11bd2de62a22ac2f817803679", null ],
-    [ "path_s", "df/d39/a00950.html#aa86025b878c52fb0c028088167115f89", null ]
+    [ "init_view_boxwin", "d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d6/d80/a01076.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_init_input", "d6/d80/a01076.html#ga0d392793038e6c32c6f3fa978fc42ced", null ]
 ];

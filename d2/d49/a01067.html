@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /usr/local/src/cmenu/src/enterchr.c</title>
+<title>C-Menu: Color Management</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,63 +109,710 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d2/d49/a01067.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">/usr/local/src/cmenu/src/enterchr.c</div></div>
+  <div class="headertitle"><div class="title">Color Management </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line">key=$(enterchr <span class="stringliteral">&quot;Are you sure?: &quot;</span>)</div>
-<div class="line"><span class="keywordflow">if</span> [ <span class="stringliteral">&quot;$key&quot;</span> = <span class="stringliteral">&quot;Y&quot;</span> ]; then</div>
-<div class="line">    echo <span class="stringliteral">&quot;You entered Y&quot;</span></div>
-<div class="line"><span class="keywordflow">else</span></div>
-<div class="line">    echo <span class="stringliteral">&quot;You entered N&quot;</span></div>
-<div class="line">fi</div>
-</div><!-- fragment --><div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;cm.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;fcntl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d7/d76/a00992.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line">    <span class="keywordtype">char</span> c = <span class="charliteral">&#39;Y&#39;</span>;</div>
-<div class="line">    <span class="keywordtype">char</span> *msg;</div>
-<div class="line">    <span class="keyword">struct </span>termios raw_tioctl;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d9/d9a/a00998.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>[128];</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d9/d9a/a00998.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>, <span class="stringliteral">&quot;Press any key&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d9/d9a/a00998.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>, argv[1]);</div>
-<div class="line">    <a id="a2" name="a2"></a><a class="code hl_function" href="../../d2/db8/a01057.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line">    raw_tioctl = <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d2/db8/a01057.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(&amp;raw_tioctl);</div>
-<div class="line">    tcflush(0, TCOFLUSH);</div>
-<div class="line">    <span class="keywordflow">while</span> (1) {</div>
-<div class="line">        msg = <a class="code hl_variable" href="../../d9/d9a/a00998.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a>;</div>
-<div class="line">        <span class="keywordflow">while</span> (*msg) {</div>
-<div class="line">            write(2, msg++, 1);</div>
-<div class="line">        }</div>
-<div class="line">        <span class="keywordflow">if</span> (read(0, &amp;c, 1) &gt; 0) {</div>
-<div class="line">            write(1, &amp;c, 1);</div>
-<div class="line">            <span class="keywordflow">break</span>;</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../d2/db8/a01057.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line">    <span class="keywordflow">if</span> (c == (<span class="keywordtype">char</span>)0x1b)</div>
-<div class="line">        <span class="keywordflow">return</span> (1);</div>
-<div class="line">    <span class="keywordflow">return</span> (0);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa00992_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d7/d76/a00992.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d76/a00992_source.html#l00016">ckeys.c:16</a></div></div>
-<div class="ttc" id="aa00998_html_ae66f0b659923d81fd95da97e0d5ca496"><div class="ttname"><a href="../../d9/d9a/a00998.html#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a></div><div class="ttdeci">char errmsg[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9a/a00998_source.html#l00078">futil.c:78</a></div></div>
-<div class="ttc" id="aa01010_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d0/d2b/a01010.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d2b/a01010_source.html#l00021">scriou.c:21</a></div></div>
-<div class="ttc" id="aa01057_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d2/db8/a01057.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d2b/a01010_source.html#l00042">scriou.c:42</a></div></div>
-<div class="ttc" id="aa01057_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../d2/db8/a01057.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d2b/a01010_source.html#l00117">scriou.c:117</a></div></div>
-<div class="ttc" id="aa01057_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d2/db8/a01057.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d2b/a01010_source.html#l00054">scriou.c:54</a></div></div>
-</div><!-- fragment --> </div><!-- contents -->
+
+<p>Conversion of Color Data Types and Management of Colors and Color Pairs.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gaf0ba4efbc81c259a2519ca41dd9d1599" id="r_gaf0ba4efbc81c259a2519ca41dd9d1599"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#gaf0ba4efbc81c259a2519ca41dd9d1599">get_clr_pair</a> (int fg, int bg)</td></tr>
+<tr class="memdesc:gaf0ba4efbc81c259a2519ca41dd9d1599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color pair index for foreground and background colors.  <br /></td></tr>
+<tr class="memitem:ga4900dd34e828972e58b0ca549cf7d4d8" id="r_ga4900dd34e828972e58b0ca549cf7d4d8"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga4900dd34e828972e58b0ca549cf7d4d8">rgb_to_curses_clr</a> (RGB *rgb)</td></tr>
+<tr class="memdesc:ga4900dd34e828972e58b0ca549cf7d4d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color index for RGB color.  <br /></td></tr>
+<tr class="memitem:gab54dcac30b133be7e79e4de58ffa421e" id="r_gab54dcac30b133be7e79e4de58ffa421e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#gab54dcac30b133be7e79e4de58ffa421e">rgb_to_xterm256_idx</a> (RGB *rgb)</td></tr>
+<tr class="memdesc:gab54dcac30b133be7e79e4de58ffa421e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert RGB color to XTerm 256 color index.  <br /></td></tr>
+<tr class="memitem:ga31ee0d93c7b527f92559fc410152f768" id="r_ga31ee0d93c7b527f92559fc410152f768"><td class="memItemLeft">RGB&#160;</td><td class="memItemRight"><a class="el" href="#ga31ee0d93c7b527f92559fc410152f768">xterm256_idx_to_rgb</a> (int idx)</td></tr>
+<tr class="memdesc:ga31ee0d93c7b527f92559fc410152f768"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert XTerm 256 color index to RGB color.  <br /></td></tr>
+<tr class="memitem:gaa3a6b291c0820d9da545325a2dba5274" id="r_gaa3a6b291c0820d9da545325a2dba5274"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaa3a6b291c0820d9da545325a2dba5274">apply_gamma</a> (RGB *rgb)</td></tr>
+<tr class="memdesc:gaa3a6b291c0820d9da545325a2dba5274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply gamma correction to RGB color.  <br /></td></tr>
+<tr class="memitem:ga81bb6f1f6fcbd25e272e2ba301bec52f" id="r_ga81bb6f1f6fcbd25e272e2ba301bec52f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga81bb6f1f6fcbd25e272e2ba301bec52f">init_clr_palette</a> (SIO *sio)</td></tr>
+<tr class="memdesc:ga81bb6f1f6fcbd25e272e2ba301bec52f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize color palette based on SIO settings.  <br /></td></tr>
+<tr class="memitem:ga61af7829a5d63d766e76930a0893d574" id="r_ga61af7829a5d63d766e76930a0893d574"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a> (int idx, char *s)</td></tr>
+<tr class="memdesc:ga61af7829a5d63d766e76930a0893d574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize extended ncurses color from HTML style hex string.  <br /></td></tr>
+<tr class="memitem:ga9916a18055fdcf1f0aac0f61b946eaf9" id="r_ga9916a18055fdcf1f0aac0f61b946eaf9"><td class="memItemLeft">RGB&#160;</td><td class="memItemRight"><a class="el" href="#ga9916a18055fdcf1f0aac0f61b946eaf9">hex_clr_str_to_rgb</a> (char *s)</td></tr>
+<tr class="memdesc:ga9916a18055fdcf1f0aac0f61b946eaf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert six-digit HTML style hex color code to RGB struct.  <br /></td></tr>
+<tr class="memitem:ga08537e2322c1207f7e6ae571bac1c9fd" id="r_ga08537e2322c1207f7e6ae571bac1c9fd"><td class="memItemLeft">cchar_t&#160;</td><td class="memItemRight"><a class="el" href="#ga08537e2322c1207f7e6ae571bac1c9fd">mkccc</a> (int cp)</td></tr>
+<tr class="memdesc:ga08537e2322c1207f7e6ae571bac1c9fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a cchar_t with the specified color pair index.  <br /></td></tr>
+<tr class="memitem:ga3d16b5f29cd6e5d2b5b9a6e577dba0e7" id="r_ga3d16b5f29cd6e5d2b5b9a6e577dba0e7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7">clr_name_to_idx</a> (char *s)</td></tr>
+<tr class="memdesc:ga3d16b5f29cd6e5d2b5b9a6e577dba0e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color index from color name.  <br /></td></tr>
+<tr class="memitem:ga482af92e265df3405f0620b4d6158b4e" id="r_ga482af92e265df3405f0620b4d6158b4e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga482af92e265df3405f0620b4d6158b4e">list_colors</a> ()</td></tr>
+<tr class="memdesc:ga482af92e265df3405f0620b4d6158b4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">list colors to stderr  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Conversion of Color Data Types and Management of Colors and Color Pairs. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="gaa3a6b291c0820d9da545325a2dba5274" name="gaa3a6b291c0820d9da545325a2dba5274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa3a6b291c0820d9da545325a2dba5274">&#9670;&#160;</a></span>apply_gamma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apply_gamma </td>
+          <td>(</td>
+          <td class="paramtype">RGB *</td>          <td class="paramname"><span class="paramname"><em>rgb</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Apply gamma correction to RGB color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rgb</td><td>Pointer to RGB color </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function modifies the RGB color in place. It applies gamma correction to the RGB color based on the gamma values set in the SIO struct. If the color is a shade of gray, it applies the gray gamma correction. Otherwise, it applies the individual red, green, and blue gamma corrections. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00541">541</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  541</span>                           {</div>
+<div class="line"><span class="lineno">  542</span>    <span class="keywordflow">if</span> (rgb-&gt;r == rgb-&gt;g &amp;&amp; rgb-&gt;r == rgb-&gt;b) {</div>
+<div class="line"><span class="lineno">  543</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#ac50ec3418398b22cb857da67d17b4a9d">GRAY_GAMMA</a> &gt; 0.0f &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#ac50ec3418398b22cb857da67d17b4a9d">GRAY_GAMMA</a> != 1.0f) {</div>
+<div class="line"><span class="lineno">  544</span>            rgb-&gt;r = (int)(pow((rgb-&gt;r / 255.0f), 1.0f / <a class="code hl_variable" href="../../db/d08/a01028.html#ac50ec3418398b22cb857da67d17b4a9d">GRAY_GAMMA</a>) * 255.0f);</div>
+<div class="line"><span class="lineno">  545</span>            rgb-&gt;g = rgb-&gt;r;</div>
+<div class="line"><span class="lineno">  546</span>            rgb-&gt;b = rgb-&gt;r;</div>
+<div class="line"><span class="lineno">  547</span>        }</div>
+<div class="line"><span class="lineno">  548</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  549</span>    }</div>
+<div class="line"><span class="lineno">  550</span>    <span class="keywordflow">if</span> (rgb-&gt;r != 0 &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#ac61da501335760ab73621c26c6632f29">RED_GAMMA</a> &gt; 0.0f &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#ac61da501335760ab73621c26c6632f29">RED_GAMMA</a> != 1.0f)</div>
+<div class="line"><span class="lineno">  551</span>        rgb-&gt;r = (int)(pow((rgb-&gt;r / 255.0f), 1.0f / <a class="code hl_variable" href="../../db/d08/a01028.html#ac61da501335760ab73621c26c6632f29">RED_GAMMA</a>) * 255.0f);</div>
+<div class="line"><span class="lineno">  552</span>    <span class="keywordflow">if</span> (rgb-&gt;g != 0 &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#ae73f509d37ed68f90fda73b039a914b8">GREEN_GAMMA</a> &gt; 0.0f &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#ae73f509d37ed68f90fda73b039a914b8">GREEN_GAMMA</a> != 1.0f)</div>
+<div class="line"><span class="lineno">  553</span>        rgb-&gt;g = (int)(pow((rgb-&gt;g / 255.0f), 1.0f / <a class="code hl_variable" href="../../db/d08/a01028.html#ae73f509d37ed68f90fda73b039a914b8">GREEN_GAMMA</a>) * 255.0f);</div>
+<div class="line"><span class="lineno">  554</span>    <span class="keywordflow">if</span> (rgb-&gt;b != 0 &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#a5a610420788722ce758e00cc38030617">BLUE_GAMMA</a> &gt; 0.0f &amp;&amp; <a class="code hl_variable" href="../../db/d08/a01028.html#a5a610420788722ce758e00cc38030617">BLUE_GAMMA</a> != 1.0f)</div>
+<div class="line"><span class="lineno">  555</span>        rgb-&gt;b = (int)(pow((rgb-&gt;b / 255.0f), 1.0f / <a class="code hl_variable" href="../../db/d08/a01028.html#a5a610420788722ce758e00cc38030617">BLUE_GAMMA</a>) * 255.0f);</div>
+<div class="line"><span class="lineno">  556</span>}</div>
+<div class="ttc" id="aa01028_html_a5a610420788722ce758e00cc38030617"><div class="ttname"><a href="../../db/d08/a01028.html#a5a610420788722ce758e00cc38030617">BLUE_GAMMA</a></div><div class="ttdeci">double BLUE_GAMMA</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00123">dwin.c:123</a></div></div>
+<div class="ttc" id="aa01028_html_ac50ec3418398b22cb857da67d17b4a9d"><div class="ttname"><a href="../../db/d08/a01028.html#ac50ec3418398b22cb857da67d17b4a9d">GRAY_GAMMA</a></div><div class="ttdeci">double GRAY_GAMMA</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00117">dwin.c:117</a></div></div>
+<div class="ttc" id="aa01028_html_ac61da501335760ab73621c26c6632f29"><div class="ttname"><a href="../../db/d08/a01028.html#ac61da501335760ab73621c26c6632f29">RED_GAMMA</a></div><div class="ttdeci">double RED_GAMMA</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00119">dwin.c:119</a></div></div>
+<div class="ttc" id="aa01028_html_ae73f509d37ed68f90fda73b039a914b8"><div class="ttname"><a href="../../db/d08/a01028.html#ae73f509d37ed68f90fda73b039a914b8">GREEN_GAMMA</a></div><div class="ttdeci">double GREEN_GAMMA</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00121">dwin.c:121</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00123">BLUE_GAMMA</a>, <a class="el" href="../../db/d08/a01028_source.html#l00117">GRAY_GAMMA</a>, <a class="el" href="../../db/d08/a01028_source.html#l00121">GREEN_GAMMA</a>, and <a class="el" href="../../db/d08/a01028_source.html#l00119">RED_GAMMA</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d08/a01028_source.html#l00627">init_hex_clr()</a>, and <a class="el" href="../../db/d08/a01028_source.html#l00456">rgb_to_curses_clr()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_gaa3a6b291c0820d9da545325a2dba5274_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ga3d16b5f29cd6e5d2b5b9a6e577dba0e7" name="ga3d16b5f29cd6e5d2b5b9a6e577dba0e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7">&#9670;&#160;</a></span>clr_name_to_idx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int clr_name_to_idx </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get color index from color name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Color name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Color index or -1 if not found </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l01074">1074</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1074</span>                             {</div>
+<div class="line"><span class="lineno"> 1075</span>    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><span class="lineno"> 1076</span>    <span class="keywordtype">int</span> n = 16;</div>
+<div class="line"><span class="lineno"> 1077</span> </div>
+<div class="line"><span class="lineno"> 1078</span>    <a class="code hl_function" href="../../d6/d6a/a01072.html#ga4fb9a5e513fb39d3dd8eadef0f2cd44b">str_to_lower</a>(s);</div>
+<div class="line"><span class="lineno"> 1079</span>    <span class="keywordflow">while</span> (i &lt; n) {</div>
+<div class="line"><span class="lineno"> 1080</span>        <span class="keywordflow">if</span> (!strcmp(<a class="code hl_variable" href="../../db/d08/a01028.html#acbdce6357eb2671e308bbb88e6e87d80">colors_text</a>[i], s))</div>
+<div class="line"><span class="lineno"> 1081</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno"> 1082</span>        i++;</div>
+<div class="line"><span class="lineno"> 1083</span>    }</div>
+<div class="line"><span class="lineno"> 1084</span>    <span class="keywordflow">if</span> (i &gt;= n)</div>
+<div class="line"><span class="lineno"> 1085</span>        <span class="keywordflow">return</span> (-1);</div>
+<div class="line"><span class="lineno"> 1086</span>    <span class="keywordflow">return</span> (i);</div>
+<div class="line"><span class="lineno"> 1087</span>}</div>
+<div class="ttc" id="aa01028_html_acbdce6357eb2671e308bbb88e6e87d80"><div class="ttname"><a href="../../db/d08/a01028.html#acbdce6357eb2671e308bbb88e6e87d80">colors_text</a></div><div class="ttdeci">char const colors_text[][10]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00104">dwin.c:104</a></div></div>
+<div class="ttc" id="aa01072_html_ga4fb9a5e513fb39d3dd8eadef0f2cd44b"><div class="ttname"><a href="../../d6/d6a/a01072.html#ga4fb9a5e513fb39d3dd8eadef0f2cd44b">str_to_lower</a></div><div class="ttdeci">bool str_to_lower(char *)</div><div class="ttdoc">Converts a string to lowercase.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00199">futil.c:199</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00104">colors_text</a>, and <a class="el" href="../../d1/dd8/a01022_source.html#l00199">str_to_lower()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga3d16b5f29cd6e5d2b5b9a6e577dba0e7_cgraph.svg" width="288" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="gaf0ba4efbc81c259a2519ca41dd9d1599" name="gaf0ba4efbc81c259a2519ca41dd9d1599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf0ba4efbc81c259a2519ca41dd9d1599">&#9670;&#160;</a></span>get_clr_pair()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_clr_pair </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>bg</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get color pair index for foreground and background colors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fg</td><td>Foreground color index </td></tr>
+    <tr><td class="paramname">bg</td><td>Background color index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Color pair index </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00424">424</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  424</span>                                 {</div>
+<div class="line"><span class="lineno">  425</span>    <span class="keywordtype">int</span> rc, i, pfg, pbg;</div>
+<div class="line"><span class="lineno">  426</span>    <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code hl_variable" href="../../db/d08/a01028.html#a18a4af3a4dc1db7b852de4a05e407509">clr_pair_cnt</a>; i++) {</div>
+<div class="line"><span class="lineno">  427</span>        extended_pair_content(i, &amp;pfg, &amp;pbg);</div>
+<div class="line"><span class="lineno">  428</span>        <span class="keywordflow">if</span> (pfg == fg &amp;&amp; pbg == bg)</div>
+<div class="line"><span class="lineno">  429</span>            <span class="keywordflow">return</span> i;</div>
+<div class="line"><span class="lineno">  430</span>    }</div>
+<div class="line"><span class="lineno">  431</span>    <span class="keywordflow">if</span> (i &gt;= COLOR_PAIRS) {</div>
+<div class="line"><span class="lineno">  432</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../db/d08/a01028.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;%s, line: %d&quot;</span>, __FILE__, __LINE__ - 1);</div>
+<div class="line"><span class="lineno">  433</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../db/d08/a01028.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;NCurses COLOR_PAIRS (%d) exceeded (%d)&quot;</span>,</div>
+<div class="line"><span class="lineno">  434</span>                  COLOR_PAIRS, i);</div>
+<div class="line"><span class="lineno">  435</span>        strerror_r(errno, <a class="code hl_variable" href="../../db/d08/a01028.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>);</div>
+<div class="line"><span class="lineno">  436</span>        <a class="code hl_function" href="../../d1/de6/a01068.html#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a>(<a class="code hl_variable" href="../../db/d08/a01028.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  437</span>        <span class="keywordflow">return</span> (EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  438</span>    }</div>
+<div class="line"><span class="lineno">  439</span>    <span class="keywordflow">if</span> (i &lt; COLOR_PAIRS) {</div>
+<div class="line"><span class="lineno">  440</span>        rc = init_extended_pair(i, fg, bg);</div>
+<div class="line"><span class="lineno">  441</span>        <span class="keywordflow">if</span> (rc == ERR)</div>
+<div class="line"><span class="lineno">  442</span>            <span class="keywordflow">return</span> ERR;</div>
+<div class="line"><span class="lineno">  443</span>    }</div>
+<div class="line"><span class="lineno">  444</span>    <span class="keywordflow">if</span> (i &lt; COLOR_PAIRS)</div>
+<div class="line"><span class="lineno">  445</span>        <a class="code hl_variable" href="../../db/d08/a01028.html#a18a4af3a4dc1db7b852de4a05e407509">clr_pair_cnt</a>++;</div>
+<div class="line"><span class="lineno">  446</span>    <span class="keywordflow">return</span> i;</div>
+<div class="line"><span class="lineno">  447</span>}</div>
+<div class="ttc" id="aa00959_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d40/a00959_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa01028_html_a18a4af3a4dc1db7b852de4a05e407509"><div class="ttname"><a href="../../db/d08/a01028.html#a18a4af3a4dc1db7b852de4a05e407509">clr_pair_cnt</a></div><div class="ttdeci">int clr_pair_cnt</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00155">dwin.c:155</a></div></div>
+<div class="ttc" id="aa01028_html_a2c05e3c261f7b64f0d2c4f1e0d20f788"><div class="ttname"><a href="../../db/d08/a01028.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00146">dwin.c:146</a></div></div>
+<div class="ttc" id="aa01028_html_abef31515478e58cca8e39168552fca30"><div class="ttname"><a href="../../db/d08/a01028.html#abef31515478e58cca8e39168552fca30">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00145">dwin.c:145</a></div></div>
+<div class="ttc" id="aa01028_html_af8ae7d202360c017575b322f4d1d890f"><div class="ttname"><a href="../../db/d08/a01028.html#af8ae7d202360c017575b322f4d1d890f">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00147">dwin.c:147</a></div></div>
+<div class="ttc" id="aa01068_html_ga67659f8a701b74f4dec0d36227a10d1c"><div class="ttname"><a href="../../d1/de6/a01068.html#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a></div><div class="ttdeci">int display_error(char *em0, char *em1, char *em2, char *em3)</div><div class="ttdoc">Display an error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00911">dwin.c:911</a></div></div>
+<div class="ttc" id="aa01072_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../d6/d6a/a01072.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00129">futil.c:129</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00155">clr_pair_cnt</a>, <a class="el" href="../../db/d08/a01028_source.html#l00911">display_error()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00145">em0</a>, <a class="el" href="../../db/d08/a01028_source.html#l00146">em1</a>, <a class="el" href="../../db/d08/a01028_source.html#l00147">em2</a>, and <a class="el" href="../../d1/dd8/a01022_source.html#l00129">ssnprintf()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d08/a01028_source.html#l00326">open_curses()</a>, and <a class="el" href="../../db/d20/a00980_source.html#l01785">parse_ansi_str()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_gaf0ba4efbc81c259a2519ca41dd9d1599_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_gaf0ba4efbc81c259a2519ca41dd9d1599_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ga9916a18055fdcf1f0aac0f61b946eaf9" name="ga9916a18055fdcf1f0aac0f61b946eaf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9916a18055fdcf1f0aac0f61b946eaf9">&#9670;&#160;</a></span>hex_clr_str_to_rgb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RGB hex_clr_str_to_rgb </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert six-digit HTML style hex color code to RGB struct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>six-digit HTML style hex color code </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00645">645</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  645</span>                                {</div>
+<div class="line"><span class="lineno">  646</span>    RGB rgb;</div>
+<div class="line"><span class="lineno">  647</span>    sscanf(s, <span class="stringliteral">&quot;#%02x%02x%02x&quot;</span>, &amp;rgb.r, &amp;rgb.g, &amp;rgb.b);</div>
+<div class="line"><span class="lineno">  648</span>    <span class="keywordflow">return</span> rgb;</div>
+<div class="line"><span class="lineno">  649</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../db/d08/a01028_source.html#l00627">init_hex_clr()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga9916a18055fdcf1f0aac0f61b946eaf9_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ga81bb6f1f6fcbd25e272e2ba301bec52f" name="ga81bb6f1f6fcbd25e272e2ba301bec52f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81bb6f1f6fcbd25e272e2ba301bec52f">&#9670;&#160;</a></span>init_clr_palette()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool init_clr_palette </td>
+          <td>(</td>
+          <td class="paramtype">SIO *</td>          <td class="paramname"><span class="paramname"><em>sio</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize color palette based on SIO settings. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sio</td><td>Pointer to SIO struct with color settings </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false if error </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function initializes the xterm256 color cube and applies any color overrides specified in the SIO struct. The color strings in the SIO struct are expected to be six-digit HTML style hex color codes (e.g., "#RRGGBB"). If a color override is specified for any of the standard colors, it is applied using the init_hex_clr function. After processing all colors, the clr_cnt variable is set to 16 to indicate that the standard colors have been initialized. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00569">569</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  569</span>                                {</div>
+<div class="line"><span class="lineno">  570</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;black[0])</div>
+<div class="line"><span class="lineno">  571</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a52bc232f095c5c805a0ed6426912c539">CLR_BLACK</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;black);</div>
+<div class="line"><span class="lineno">  572</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;red[0])</div>
+<div class="line"><span class="lineno">  573</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a1e3838b717650deda02035c37847fe1b">CLR_RED</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;red);</div>
+<div class="line"><span class="lineno">  574</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;green[0])</div>
+<div class="line"><span class="lineno">  575</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068ad87acb0aec3ebb94c4558be21d4819fd">CLR_GREEN</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;green);</div>
+<div class="line"><span class="lineno">  576</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;yellow[0])</div>
+<div class="line"><span class="lineno">  577</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a2615c368722739679fe667fcff2530d3">CLR_YELLOW</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;yellow);</div>
+<div class="line"><span class="lineno">  578</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;blue[0])</div>
+<div class="line"><span class="lineno">  579</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068ac5a6a351b83977cd296019b8322b296e">CLR_BLUE</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;blue);</div>
+<div class="line"><span class="lineno">  580</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;magenta[0])</div>
+<div class="line"><span class="lineno">  581</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a43ac28abf335a9d0314d07d534771050">CLR_MAGENTA</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;magenta);</div>
+<div class="line"><span class="lineno">  582</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;cyan[0])</div>
+<div class="line"><span class="lineno">  583</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068afc921a84634eb6f88a5a4faaa6a1930a">CLR_CYAN</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;cyan);</div>
+<div class="line"><span class="lineno">  584</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;white[0])</div>
+<div class="line"><span class="lineno">  585</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a3d6f64208464cff60b7691ecfdf185f6">CLR_WHITE</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;white);</div>
+<div class="line"><span class="lineno">  586</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bblack[0])</div>
+<div class="line"><span class="lineno">  587</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a755b2c2ecfd3c37facde81fe6ed93bf3">CLR_BBLACK</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bblack);</div>
+<div class="line"><span class="lineno">  588</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bred[0])</div>
+<div class="line"><span class="lineno">  589</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068abdae45ac34862991c8c6b12d4dbeb4a8">CLR_BRED</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bred);</div>
+<div class="line"><span class="lineno">  590</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bgreen[0])</div>
+<div class="line"><span class="lineno">  591</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a819cafc4dbd627a2b87d9b2a47c7bc3d">CLR_BGREEN</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bgreen);</div>
+<div class="line"><span class="lineno">  592</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;byellow[0])</div>
+<div class="line"><span class="lineno">  593</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a84fbb1bfd7bb8ff725414e0edddfabda">CLR_BYELLOW</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;byellow);</div>
+<div class="line"><span class="lineno">  594</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bblue[0])</div>
+<div class="line"><span class="lineno">  595</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a7bcbaaecf76020ea11912d3f0df38d94">CLR_BBLUE</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bblue);</div>
+<div class="line"><span class="lineno">  596</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bmagenta[0])</div>
+<div class="line"><span class="lineno">  597</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a8cc31d0844fa7c99b043a915d923381f">CLR_BMAGENTA</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bmagenta);</div>
+<div class="line"><span class="lineno">  598</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bcyan[0])</div>
+<div class="line"><span class="lineno">  599</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a2d41964c021b5ab794278dddf0e92b57">CLR_BCYAN</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bcyan);</div>
+<div class="line"><span class="lineno">  600</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bwhite[0])</div>
+<div class="line"><span class="lineno">  601</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a5ed45661d16082e896fc645d4bbb83e8">CLR_BWHITE</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bwhite);</div>
+<div class="line"><span class="lineno">  602</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;borange[0])</div>
+<div class="line"><span class="lineno">  603</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a98ee550545d2b48919abcac7c47497ad">CLR_BORANGE</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;borange);</div>
+<div class="line"><span class="lineno">  604</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;fg_clr_x[0])</div>
+<div class="line"><span class="lineno">  605</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a1e080a207d86e882175bf1474917b96e">CLR_FG</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;fg_clr_x);</div>
+<div class="line"><span class="lineno">  606</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bg_clr_x[0])</div>
+<div class="line"><span class="lineno">  607</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068aad322839dc9913439f64386356cc1936">CLR_BG</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bg_clr_x);</div>
+<div class="line"><span class="lineno">  608</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bo_clr_x[0])</div>
+<div class="line"><span class="lineno">  609</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a753d45cf19b63d182aaa360e11c7a277">CLR_BO</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;bo_clr_x);</div>
+<div class="line"><span class="lineno">  610</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;ln_clr_x[0])</div>
+<div class="line"><span class="lineno">  611</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a7d3ab0c1f7f7887d28bfaf193a33d9d7">CLR_LN</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;ln_clr_x);</div>
+<div class="line"><span class="lineno">  612</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;ln_bg_clr_x[0])</div>
+<div class="line"><span class="lineno">  613</span>        <a class="code hl_function" href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a>(<a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a63595779f5976f8807fc694d05fee0af">CLR_LN_BG</a>, <a class="code hl_variable" href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a>-&gt;ln_bg_clr_x);</div>
+<div class="line"><span class="lineno">  614</span>    <a class="code hl_variable" href="../../db/d08/a01028.html#a4368e17b6beaf8d5be879e213f071cf4">clr_cnt</a> = <a class="code hl_enumvalue" href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068ac077f6e53ba1e74c3587fdc7564e8cfd">CLR_NCOLORS</a>;</div>
+<div class="line"><span class="lineno">  615</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  616</span>}</div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a1e080a207d86e882175bf1474917b96e"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a1e080a207d86e882175bf1474917b96e">CLR_FG</a></div><div class="ttdeci">@ CLR_FG</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00085">dwin.c:85</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a1e3838b717650deda02035c37847fe1b"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a1e3838b717650deda02035c37847fe1b">CLR_RED</a></div><div class="ttdeci">@ CLR_RED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00069">dwin.c:69</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a2615c368722739679fe667fcff2530d3"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a2615c368722739679fe667fcff2530d3">CLR_YELLOW</a></div><div class="ttdeci">@ CLR_YELLOW</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00071">dwin.c:71</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a2d41964c021b5ab794278dddf0e92b57"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a2d41964c021b5ab794278dddf0e92b57">CLR_BCYAN</a></div><div class="ttdeci">@ CLR_BCYAN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00082">dwin.c:82</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a3d6f64208464cff60b7691ecfdf185f6"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a3d6f64208464cff60b7691ecfdf185f6">CLR_WHITE</a></div><div class="ttdeci">@ CLR_WHITE</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00075">dwin.c:75</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a43ac28abf335a9d0314d07d534771050"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a43ac28abf335a9d0314d07d534771050">CLR_MAGENTA</a></div><div class="ttdeci">@ CLR_MAGENTA</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00073">dwin.c:73</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a52bc232f095c5c805a0ed6426912c539"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a52bc232f095c5c805a0ed6426912c539">CLR_BLACK</a></div><div class="ttdeci">@ CLR_BLACK</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00068">dwin.c:68</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a5ed45661d16082e896fc645d4bbb83e8"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a5ed45661d16082e896fc645d4bbb83e8">CLR_BWHITE</a></div><div class="ttdeci">@ CLR_BWHITE</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00083">dwin.c:83</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a63595779f5976f8807fc694d05fee0af"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a63595779f5976f8807fc694d05fee0af">CLR_LN_BG</a></div><div class="ttdeci">@ CLR_LN_BG</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00089">dwin.c:89</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a753d45cf19b63d182aaa360e11c7a277"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a753d45cf19b63d182aaa360e11c7a277">CLR_BO</a></div><div class="ttdeci">@ CLR_BO</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00087">dwin.c:87</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a755b2c2ecfd3c37facde81fe6ed93bf3"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a755b2c2ecfd3c37facde81fe6ed93bf3">CLR_BBLACK</a></div><div class="ttdeci">@ CLR_BBLACK</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00076">dwin.c:76</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a7bcbaaecf76020ea11912d3f0df38d94"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a7bcbaaecf76020ea11912d3f0df38d94">CLR_BBLUE</a></div><div class="ttdeci">@ CLR_BBLUE</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00080">dwin.c:80</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a7d3ab0c1f7f7887d28bfaf193a33d9d7"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a7d3ab0c1f7f7887d28bfaf193a33d9d7">CLR_LN</a></div><div class="ttdeci">@ CLR_LN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00088">dwin.c:88</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a819cafc4dbd627a2b87d9b2a47c7bc3d"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a819cafc4dbd627a2b87d9b2a47c7bc3d">CLR_BGREEN</a></div><div class="ttdeci">@ CLR_BGREEN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00078">dwin.c:78</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a84fbb1bfd7bb8ff725414e0edddfabda"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a84fbb1bfd7bb8ff725414e0edddfabda">CLR_BYELLOW</a></div><div class="ttdeci">@ CLR_BYELLOW</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00079">dwin.c:79</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a8cc31d0844fa7c99b043a915d923381f"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a8cc31d0844fa7c99b043a915d923381f">CLR_BMAGENTA</a></div><div class="ttdeci">@ CLR_BMAGENTA</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00081">dwin.c:81</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068a98ee550545d2b48919abcac7c47497ad"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a98ee550545d2b48919abcac7c47497ad">CLR_BORANGE</a></div><div class="ttdeci">@ CLR_BORANGE</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00084">dwin.c:84</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068aad322839dc9913439f64386356cc1936"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068aad322839dc9913439f64386356cc1936">CLR_BG</a></div><div class="ttdeci">@ CLR_BG</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00086">dwin.c:86</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068abdae45ac34862991c8c6b12d4dbeb4a8"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068abdae45ac34862991c8c6b12d4dbeb4a8">CLR_BRED</a></div><div class="ttdeci">@ CLR_BRED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00077">dwin.c:77</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068ac077f6e53ba1e74c3587fdc7564e8cfd"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068ac077f6e53ba1e74c3587fdc7564e8cfd">CLR_NCOLORS</a></div><div class="ttdeci">@ CLR_NCOLORS</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00090">dwin.c:90</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068ac5a6a351b83977cd296019b8322b296e"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068ac5a6a351b83977cd296019b8322b296e">CLR_BLUE</a></div><div class="ttdeci">@ CLR_BLUE</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00072">dwin.c:72</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068ad87acb0aec3ebb94c4558be21d4819fd"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068ad87acb0aec3ebb94c4558be21d4819fd">CLR_GREEN</a></div><div class="ttdeci">@ CLR_GREEN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00070">dwin.c:70</a></div></div>
+<div class="ttc" id="aa01028_html_a3105ef09a0641c32b76be16f85a10068afc921a84634eb6f88a5a4faaa6a1930a"><div class="ttname"><a href="../../db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068afc921a84634eb6f88a5a4faaa6a1930a">CLR_CYAN</a></div><div class="ttdeci">@ CLR_CYAN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00074">dwin.c:74</a></div></div>
+<div class="ttc" id="aa01028_html_a4368e17b6beaf8d5be879e213f071cf4"><div class="ttname"><a href="../../db/d08/a01028.html#a4368e17b6beaf8d5be879e213f071cf4">clr_cnt</a></div><div class="ttdeci">int clr_cnt</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00153">dwin.c:153</a></div></div>
+<div class="ttc" id="aa01028_html_aa0282924076d87477074665400a5f76e"><div class="ttname"><a href="../../db/d08/a01028.html#aa0282924076d87477074665400a5f76e">sio</a></div><div class="ttdeci">SIO * sio</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00062">dwin.c:62</a></div></div>
+<div class="ttc" id="aa01067_html_ga61af7829a5d63d766e76930a0893d574"><div class="ttname"><a href="#ga61af7829a5d63d766e76930a0893d574">init_hex_clr</a></div><div class="ttdeci">void init_hex_clr(int, char *)</div><div class="ttdoc">Initialize extended ncurses color from HTML style hex string.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00627">dwin.c:627</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00076">CLR_BBLACK</a>, <a class="el" href="../../db/d08/a01028_source.html#l00080">CLR_BBLUE</a>, <a class="el" href="../../db/d08/a01028_source.html#l00082">CLR_BCYAN</a>, <a class="el" href="../../db/d08/a01028_source.html#l00086">CLR_BG</a>, <a class="el" href="../../db/d08/a01028_source.html#l00078">CLR_BGREEN</a>, <a class="el" href="../../db/d08/a01028_source.html#l00068">CLR_BLACK</a>, <a class="el" href="../../db/d08/a01028_source.html#l00072">CLR_BLUE</a>, <a class="el" href="../../db/d08/a01028_source.html#l00081">CLR_BMAGENTA</a>, <a class="el" href="../../db/d08/a01028_source.html#l00087">CLR_BO</a>, <a class="el" href="../../db/d08/a01028_source.html#l00084">CLR_BORANGE</a>, <a class="el" href="../../db/d08/a01028_source.html#l00077">CLR_BRED</a>, <a class="el" href="../../db/d08/a01028_source.html#l00083">CLR_BWHITE</a>, <a class="el" href="../../db/d08/a01028_source.html#l00079">CLR_BYELLOW</a>, <a class="el" href="../../db/d08/a01028_source.html#l00153">clr_cnt</a>, <a class="el" href="../../db/d08/a01028_source.html#l00074">CLR_CYAN</a>, <a class="el" href="../../db/d08/a01028_source.html#l00085">CLR_FG</a>, <a class="el" href="../../db/d08/a01028_source.html#l00070">CLR_GREEN</a>, <a class="el" href="../../db/d08/a01028_source.html#l00088">CLR_LN</a>, <a class="el" href="../../db/d08/a01028_source.html#l00089">CLR_LN_BG</a>, <a class="el" href="../../db/d08/a01028_source.html#l00073">CLR_MAGENTA</a>, <a class="el" href="../../db/d08/a01028_source.html#l00090">CLR_NCOLORS</a>, <a class="el" href="../../db/d08/a01028_source.html#l00069">CLR_RED</a>, <a class="el" href="../../db/d08/a01028_source.html#l00075">CLR_WHITE</a>, <a class="el" href="../../db/d08/a01028_source.html#l00071">CLR_YELLOW</a>, and <a class="el" href="../../db/d08/a01028_source.html#l00627">init_hex_clr()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d08/a01028_source.html#l00326">open_curses()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga81bb6f1f6fcbd25e272e2ba301bec52f_cgraph.svg" width="462" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga81bb6f1f6fcbd25e272e2ba301bec52f_icgraph.svg" width="382" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga61af7829a5d63d766e76930a0893d574" name="ga61af7829a5d63d766e76930a0893d574"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61af7829a5d63d766e76930a0893d574">&#9670;&#160;</a></span>init_hex_clr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_hex_clr </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize extended ncurses color from HTML style hex string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>Color index </td></tr>
+    <tr><td class="paramname">s</td><td>Hex color string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>NCurses uses 0-1000 for RGB values, so the RGB values from the hex string are converted to this range before initializing the color. If the color index is less than 16, the RGB values are also stored in the StdColors array for reference. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00627">627</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  627</span>                                    {</div>
+<div class="line"><span class="lineno">  628</span>    RGB rgb;</div>
+<div class="line"><span class="lineno">  629</span>    rgb = <a class="code hl_function" href="#ga9916a18055fdcf1f0aac0f61b946eaf9">hex_clr_str_to_rgb</a>(s);</div>
+<div class="line"><span class="lineno">  630</span>    <a class="code hl_function" href="#gaa3a6b291c0820d9da545325a2dba5274">apply_gamma</a>(&amp;rgb);</div>
+<div class="line"><span class="lineno">  631</span>    <span class="keywordflow">if</span> (idx &lt; 16) {</div>
+<div class="line"><span class="lineno">  632</span>        <a class="code hl_variable" href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a>[idx].r = rgb.r;</div>
+<div class="line"><span class="lineno">  633</span>        <a class="code hl_variable" href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a>[idx].g = rgb.g;</div>
+<div class="line"><span class="lineno">  634</span>        <a class="code hl_variable" href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a>[idx].g = rgb.g;</div>
+<div class="line"><span class="lineno">  635</span>    }</div>
+<div class="line"><span class="lineno">  636</span>    rgb.r = (rgb.r * 1000) / 255;</div>
+<div class="line"><span class="lineno">  637</span>    rgb.g = (rgb.g * 1000) / 255;</div>
+<div class="line"><span class="lineno">  638</span>    rgb.b = (rgb.b * 1000) / 255;</div>
+<div class="line"><span class="lineno">  639</span>    init_extended_color(idx, rgb.r, rgb.g, rgb.b);</div>
+<div class="line"><span class="lineno">  640</span>}</div>
+<div class="ttc" id="aa01028_html_a3c1c6dc744276f4d9dc326a7deacb09a"><div class="ttname"><a href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a></div><div class="ttdeci">RGB StdColors[16]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00095">dwin.c:95</a></div></div>
+<div class="ttc" id="aa01067_html_ga9916a18055fdcf1f0aac0f61b946eaf9"><div class="ttname"><a href="#ga9916a18055fdcf1f0aac0f61b946eaf9">hex_clr_str_to_rgb</a></div><div class="ttdeci">RGB hex_clr_str_to_rgb(char *)</div><div class="ttdoc">Convert six-digit HTML style hex color code to RGB struct.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00645">dwin.c:645</a></div></div>
+<div class="ttc" id="aa01067_html_gaa3a6b291c0820d9da545325a2dba5274"><div class="ttname"><a href="#gaa3a6b291c0820d9da545325a2dba5274">apply_gamma</a></div><div class="ttdeci">void apply_gamma(RGB *)</div><div class="ttdoc">Apply gamma correction to RGB color.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00541">dwin.c:541</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00541">apply_gamma()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00645">hex_clr_str_to_rgb()</a>, and <a class="el" href="../../db/d08/a01028_source.html#l00095">StdColors</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d08/a01028_source.html#l00569">init_clr_palette()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga61af7829a5d63d766e76930a0893d574_cgraph.svg" width="296" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga61af7829a5d63d766e76930a0893d574_icgraph.svg" width="527" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga482af92e265df3405f0620b4d6158b4e" name="ga482af92e265df3405f0620b4d6158b4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga482af92e265df3405f0620b4d6158b4e">&#9670;&#160;</a></span>list_colors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void list_colors </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>list colors to stderr </p>
+<dl class="section note"><dt>Note</dt><dd>only lists the first 16, since that's how many we let the user redefine </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l01093">1093</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1093</span>                   {</div>
+<div class="line"><span class="lineno"> 1094</span>    <span class="keywordtype">int</span> i, col;</div>
+<div class="line"><span class="lineno"> 1095</span> </div>
+<div class="line"><span class="lineno"> 1096</span>    <span class="keywordflow">for</span> (i = 0, col = 0; i &lt; 16; i++, col++) {</div>
+<div class="line"><span class="lineno"> 1097</span>        <span class="keywordflow">if</span> (i &lt; 8) {</div>
+<div class="line"><span class="lineno"> 1098</span>            fprintf(stderr, <span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><span class="lineno"> 1099</span>        }</div>
+<div class="line"><span class="lineno"> 1100</span>        <span class="keywordflow">if</span> (i == 8) {</div>
+<div class="line"><span class="lineno"> 1101</span>            col = 0;</div>
+<div class="line"><span class="lineno"> 1102</span>            fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1103</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (col &gt; 0)</div>
+<div class="line"><span class="lineno"> 1104</span>            fprintf(stderr, <span class="stringliteral">&quot; &quot;</span>);</div>
+<div class="line"><span class="lineno"> 1105</span>        fprintf(stderr, <span class="stringliteral">&quot;%s&quot;</span>, <a class="code hl_variable" href="../../db/d08/a01028.html#acbdce6357eb2671e308bbb88e6e87d80">colors_text</a>[i]);</div>
+<div class="line"><span class="lineno"> 1106</span>    }</div>
+<div class="line"><span class="lineno"> 1107</span>    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1108</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00104">colors_text</a>.</p>
+
+</div>
+</div>
+<a id="ga08537e2322c1207f7e6ae571bac1c9fd" name="ga08537e2322c1207f7e6ae571bac1c9fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga08537e2322c1207f7e6ae571bac1c9fd">&#9670;&#160;</a></span>mkccc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cchar_t mkccc </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a cchar_t with the specified color pair index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cp</td><td>Color pair index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>cchar_t with the specified color pair index and a space character as the wide character </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00676">676</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  676</span>                      {</div>
+<div class="line"><span class="lineno">  677</span>    cchar_t cc = {0};</div>
+<div class="line"><span class="lineno">  678</span>    <span class="keywordtype">wchar_t</span> wc = L<span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  679</span>    setcchar(&amp;cc, &amp;wc, WA_NORMAL, cp, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  680</span>    <span class="keywordflow">return</span> cc;</div>
+<div class="line"><span class="lineno">  681</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../db/d08/a01028_source.html#l00326">open_curses()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga08537e2322c1207f7e6ae571bac1c9fd_icgraph.svg" width="327" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga4900dd34e828972e58b0ca549cf7d4d8" name="ga4900dd34e828972e58b0ca549cf7d4d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4900dd34e828972e58b0ca549cf7d4d8">&#9670;&#160;</a></span>rgb_to_curses_clr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rgb_to_curses_clr </td>
+          <td>(</td>
+          <td class="paramtype">RGB *</td>          <td class="paramname"><span class="paramname"><em>rgb</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get color index for RGB color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rgb</td><td>RGB color </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>NCurses color index </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Curses uses 0-1000 for RGB values </dd>
+<dd>
+If the color does not exist, it is created along with a new color index </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00456">456</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  456</span>                                {</div>
+<div class="line"><span class="lineno">  457</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">  458</span>    <span class="keywordtype">int</span> r, g, b;</div>
+<div class="line"><span class="lineno">  459</span>    <a class="code hl_function" href="#gaa3a6b291c0820d9da545325a2dba5274">apply_gamma</a>(rgb);</div>
+<div class="line"><span class="lineno">  460</span>    rgb-&gt;r = (rgb-&gt;r * 1000) / 255;</div>
+<div class="line"><span class="lineno">  461</span>    rgb-&gt;g = (rgb-&gt;g * 1000) / 255;</div>
+<div class="line"><span class="lineno">  462</span>    rgb-&gt;b = (rgb-&gt;b * 1000) / 255;</div>
+<div class="line"><span class="lineno">  463</span>    <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code hl_variable" href="../../db/d08/a01028.html#a4368e17b6beaf8d5be879e213f071cf4">clr_cnt</a>; i++) {</div>
+<div class="line"><span class="lineno">  464</span>        extended_color_content(i, &amp;r, &amp;g, &amp;b);</div>
+<div class="line"><span class="lineno">  465</span>        <span class="keywordflow">if</span> (rgb-&gt;r == r &amp;&amp; rgb-&gt;g == g &amp;&amp; rgb-&gt;b == b) {</div>
+<div class="line"><span class="lineno">  466</span>            <span class="keywordflow">return</span> i;</div>
+<div class="line"><span class="lineno">  467</span>        }</div>
+<div class="line"><span class="lineno">  468</span>    }</div>
+<div class="line"><span class="lineno">  469</span>    <span class="keywordflow">if</span> (i &lt; COLORS) {</div>
+<div class="line"><span class="lineno">  470</span>        init_extended_color(i, rgb-&gt;r, rgb-&gt;g, rgb-&gt;b);</div>
+<div class="line"><span class="lineno">  471</span>        <a class="code hl_variable" href="../../db/d08/a01028.html#a4368e17b6beaf8d5be879e213f071cf4">clr_cnt</a>++;</div>
+<div class="line"><span class="lineno">  472</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="../../db/d08/a01028.html#a4368e17b6beaf8d5be879e213f071cf4">clr_cnt</a> - 1;</div>
+<div class="line"><span class="lineno">  473</span>    }</div>
+<div class="line"><span class="lineno">  474</span>    <span class="keywordflow">return</span> ERR;</div>
+<div class="line"><span class="lineno">  475</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00541">apply_gamma()</a>, and <a class="el" href="../../db/d08/a01028_source.html#l00153">clr_cnt</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d20/a00980_source.html#l01785">parse_ansi_str()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga4900dd34e828972e58b0ca549cf7d4d8_cgraph.svg" width="308" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga4900dd34e828972e58b0ca549cf7d4d8_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="gab54dcac30b133be7e79e4de58ffa421e" name="gab54dcac30b133be7e79e4de58ffa421e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab54dcac30b133be7e79e4de58ffa421e">&#9670;&#160;</a></span>rgb_to_xterm256_idx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rgb_to_xterm256_idx </td>
+          <td>(</td>
+          <td class="paramtype">RGB *</td>          <td class="paramname"><span class="paramname"><em>rgb</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert RGB color to XTerm 256 color index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rgb</td><td>RGB color </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>XTerm 256 color index note This function converts an RGB color to the nearest XTerm 256 color index. It first checks if the color is a shade of gray, and if so, it uses the gray ramp. Otherwise, it calculates the nearest color in the 6x6x6 color cube. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00485">485</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  485</span>                                  {</div>
+<div class="line"><span class="lineno">  486</span>    <span class="keywordflow">if</span> (rgb-&gt;r == rgb-&gt;g &amp;&amp; rgb-&gt;g == rgb-&gt;b) {</div>
+<div class="line"><span class="lineno">  487</span>        <span class="keywordflow">if</span> (rgb-&gt;r &lt; 8)</div>
+<div class="line"><span class="lineno">  488</span>            <span class="keywordflow">return</span> 16;</div>
+<div class="line"><span class="lineno">  489</span>        <span class="keywordflow">if</span> (rgb-&gt;r &gt; 248)</div>
+<div class="line"><span class="lineno">  490</span>            <span class="keywordflow">return</span> 231;</div>
+<div class="line"><span class="lineno">  491</span>        <span class="keywordflow">return</span> ((rgb-&gt;r - 8) / 10) + 231;</div>
+<div class="line"><span class="lineno">  492</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  493</span>        <span class="keywordtype">int</span> r_index = (rgb-&gt;r &lt; 45) ? 0 : (rgb-&gt;r - 60) / 40 + 1;</div>
+<div class="line"><span class="lineno">  494</span>        <span class="keywordtype">int</span> g_index = (rgb-&gt;g &lt; 45) ? 0 : (rgb-&gt;g - 60) / 40 + 1;</div>
+<div class="line"><span class="lineno">  495</span>        <span class="keywordtype">int</span> b_index = (rgb-&gt;b &lt; 45) ? 0 : (rgb-&gt;b - 60) / 40 + 1;</div>
+<div class="line"><span class="lineno">  496</span>        <span class="keywordflow">return</span> 16 + (36 * r_index) + (6 * g_index) + b_index;</div>
+<div class="line"><span class="lineno">  497</span>    }</div>
+<div class="line"><span class="lineno">  498</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga31ee0d93c7b527f92559fc410152f768" name="ga31ee0d93c7b527f92559fc410152f768"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga31ee0d93c7b527f92559fc410152f768">&#9670;&#160;</a></span>xterm256_idx_to_rgb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">RGB xterm256_idx_to_rgb </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert XTerm 256 color index to RGB color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>XTerm 256 color index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>RGB color note This function converts an XTerm 256 color index to an RGB color. It first checks if the index is in the standard 16 colors, then checks if it's in the 6x6x6 color cube, and finally checks if it's in the gray ramp. </dd></dl>
+<p>Convert XTerm 256 color index to RGB </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idx</td><td>- XTerm 256 color index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>RGB struct</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d08/a01028_source.html#l00507">507</a> of file <a class="el" href="../../db/d08/a01028_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  507</span>                                 {</div>
+<div class="line"><span class="lineno">  511</span>    RGB rgb;</div>
+<div class="line"><span class="lineno">  512</span>    <span class="keywordflow">if</span> (idx &gt; 255)</div>
+<div class="line"><span class="lineno">  513</span>        idx = 255;</div>
+<div class="line"><span class="lineno">  514</span>    <span class="keywordflow">if</span> (idx &lt; 0)</div>
+<div class="line"><span class="lineno">  515</span>        idx = 0;</div>
+<div class="line"><span class="lineno">  516</span>    rgb.r = rgb.g = rgb.b = 0;</div>
+<div class="line"><span class="lineno">  517</span>    <span class="keywordflow">if</span> (idx &lt; 16) {</div>
+<div class="line"><span class="lineno">  518</span>        rgb.r = <a class="code hl_variable" href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a>[idx].r;</div>
+<div class="line"><span class="lineno">  519</span>        rgb.g = <a class="code hl_variable" href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a>[idx].g;</div>
+<div class="line"><span class="lineno">  520</span>        rgb.b = <a class="code hl_variable" href="../../db/d08/a01028.html#a3c1c6dc744276f4d9dc326a7deacb09a">StdColors</a>[idx].b;</div>
+<div class="line"><span class="lineno">  521</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idx &gt;= 16 &amp;&amp; idx &lt;= 231) {</div>
+<div class="line"><span class="lineno">  522</span>        idx -= 16;</div>
+<div class="line"><span class="lineno">  523</span>        rgb.r = (idx / 36) % 6 * 51;</div>
+<div class="line"><span class="lineno">  524</span>        rgb.g = (idx / 6) % 6 * 51;</div>
+<div class="line"><span class="lineno">  525</span>        rgb.b = (idx % 6) * 51;</div>
+<div class="line"><span class="lineno">  526</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (idx &gt;= 232 &amp;&amp; idx &lt;= 255) {</div>
+<div class="line"><span class="lineno">  527</span>        <span class="keywordtype">int</span> gray = (idx - 232) * 11;</div>
+<div class="line"><span class="lineno">  528</span>        rgb.r = rgb.g = rgb.b = gray;</div>
+<div class="line"><span class="lineno">  529</span>    }</div>
+<div class="line"><span class="lineno">  530</span>    <span class="keywordflow">return</span> rgb;</div>
+<div class="line"><span class="lineno">  531</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l00095">StdColors</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d20/a00980_source.html#l01785">parse_ansi_str()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/d49/a01067_ga31ee0d93c7b527f92559fc410152f768_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

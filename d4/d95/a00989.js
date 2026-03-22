@@ -1,5 +1,6 @@
 var a00989 =
 [
-    [ "main", "d4/d95/a00989.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "__end_pgm", "d4/d95/a00989.html#ab5fceb24373673e919c49ede0f9b12e5", null ]
+    [ "free_menu_line", "d9/d67/a01080.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
+    [ "get_command_type", "d9/d67/a01080.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d9/d67/a01080.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

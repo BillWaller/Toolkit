@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Configuration snippets</title>
+<title>C-Menu: Menu Engine</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -108,538 +108,488 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/dba/a01078.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Configuration snippets </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">Menu Engine </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="configuration-snippets"></a></p>
-<h1 class="doxsection"><a class="anchor" id="table-of-contents-5"></a>
-Table of Contents</h1>
-<ul>
-<li><a class="el" href="#c-menu-desktop-files" title="C-Menu Desktop Files">C-Menu Desktop Files</a></li>
-<li><a class="el" href="#c-menu-bashrc-configuration" title="C-Menu bashrc Configuration">C-Menu bashrc Configuration</a><ul>
-<li><a class="el" href="#shell-logging" title="Shell Logging">Shell Logging</a></li>
-<li><a class="el" href="#prepend-path" title="Prepend Path">Prepend Path</a></li>
-<li><a class="el" href="#helpful-c-menu-environment-variables" title="Helpful C-Menu Environment Variables">Helpful C-Menu Environment Variables</a></li>
-<li><a class="el" href="#security-through-obscurity" title="Security Through Obscurity">Security Through Obscurity</a></li>
-<li><a class="el" href="#rsh-helpers" title="RSH Helpers">RSH Helpers</a></li>
-<li><a class="el" href="#privilege-indicator-shell-prompts" title="Privilege Indicator Shell Prompts">Privilege Indicator Shell Prompts</a></li>
-<li><a class="el" href="#terminal-and-editor-settings" title="Terminal and Editor Settings">Terminal and Editor Settings</a></li>
-<li><a class="el" href="#gdb-debugging-setup" title="GDB Debugging Setup">GDB Debugging Setup</a></li>
-<li><a class="el" href="#if-you-cant-stop-typing-vi" title="If You Can&#39;t Stop Typing &quot;vi&quot;">If You Can't Stop Typing &quot;vi&quot;</a></li>
-<li><a class="el" href="#c-menu-startup-with-mm" title="C-Menu Startup with &quot;mm&quot;">C-Menu Startup with &quot;mm&quot;</a></li>
-<li><a class="el" href="#curses-escape-delay" title="Curses Escape Delay">Curses Escape Delay</a></li>
-<li><a class="el" href="#use-lsd-instead-of-ls" title="Use lsd instead of ls">Use lsd instead of ls</a></li>
-<li><a class="el" href="#locale-settings" title="Locale Settings">Locale Settings</a></li>
-<li><a class="el" href="#system-specific-environment-variables" title="System Specific Environment Variables">System Specific Environment Variables</a></li>
-</ul>
-</li>
-<li><a class="el" href="#c-menu-configuration" title="C-Menu Configuration">C-Menu Configuration</a></li>
-<li><a class="el" href="#terminal-configurations" title="Terminal Configurations">Terminal Configurations</a><ul>
-<li><a class="el" href="../../d7/df7/a01074.html#ghostty" title="Ghostty">Ghostty</a></li>
-<li><a class="el" href="#kitty" title="Kitty">Kitty</a></li>
-<li><a class="el" href="#alacritty" title="Alacritty">Alacritty</a></li>
-</ul>
-</li>
-<li><a class="el" href="../../d7/df7/a01074.html#tree-sitter" title="Tree-Sitter">Tree-Sitter</a><ul>
-<li><a class="el" href="#tree-sitter-configjson" title="Tree-Sitter config.json">Tree-Sitter config.json</a></li>
-</ul>
-</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="c-menu-desktop-files"></a>
-C-Menu Desktop Files</h1>
-<p>You may find it useful to create desktop files to start C-Menu by clicking a desktop icon. You will find desktop files to start C-Menu in Ghostty, Kitty, and Alacritty in the C-Menu/example_configs/Desktop directory.</p>
-<p>Each of these desktop files have two modified lines, Exec and Icon. The Exec line is the command that is executed when you click the desktop icon. You can substitute your choice of icons for Decision.svg.</p>
-<p>Icon=/usr/share/pixmaps/Decision.svg Exec=alacritty -e menu</p>
-<p>The script, install_desktop.sh, in the C-Menu/example_configs/Desktop directory, will copy these desktop files to your local applications directory, or you can modify it to copy them to a different location. You can also create your own desktop files using the examples as a templates.</p>
-<h1 class="doxsection"><a class="anchor" id="c-menu-bashrc-configuration"></a>
-C-Menu bashrc Configuration</h1>
-<p>This sample bashrc almost certainly contains settings that are not appropriate for your system. It is provided as a reference only. You should carefully review and modify this file to suit your specific needs and environment.</p>
-<p>Do NOT blindly copy this file to your $HOME/.bashrc</p>
-<p>It is recommended to back up your existing .bashrc before replacing it with any of the contents in the following snippets.</p>
-<p>Use at your own risk.</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">.bashrc</div>
-<div class="line">shellcheck disable=SC2155</div>
-<div class="line">shellcheck source=/dev/null</div>
-</div><!-- fragment --><p>The lines beginning with shellcheck are to prevent false positives from the shellcheck linter.</p>
-<div class="fragment"><div class="line">IFS=&quot;</div>
-<div class="line">&quot;</div>
-</div><!-- fragment --><p>The line above sets the Internal Field Separator (IFS) to only a newline character. This prevents word splitting on spaces and tabs, which can lead to unexpected behavior in scripts and commands.</p>
-<h2 class="doxsection"><a class="anchor" id="shell-logging"></a>
-Shell Logging</h2>
-<p>To activate shell startup logging, create a file named .shelllog in your home directory. Each time a shell starts, it will append a log entry to /var/log/shell.log</p>
-<div class="fragment"><div class="line">export BASHRC=1</div>
-<div class="line">unset BASHLOG</div>
-<div class="line">if [ -f &quot;$HOME&quot;/.shelllog ]; then</div>
-<div class="line">    export BASHLOG=&quot;1&quot;</div>
-<div class="line">fi</div>
-<div class="line">this_file=&quot;$HOME&quot;/.bashrc</div>
-<div class="line">ShellLog() {</div>
-<div class="line">    if [ &quot;$BASHLOG = &quot;1&quot; ] &amp;&amp; [ -w /var/log/shell.log ]; then</div>
-<div class="line">        echo &quot;$(rfc3339)&quot; &quot;$this_file&quot; &quot;$1&quot; else &gt;&gt;/var/log/shell.log;</div>
-<div class="line">    else</div>
-<div class="line">        return 1;</div>
-<div class="line">    fi</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="prepend-path"></a>
-Prepend Path</h2>
-<p>This technique for managing the PATH environment variable is from bashfaq #24. It's elegant and efficient. Usage: prepend_path /some/directory It checks if the directory is already in PATH. If not, it prepends it to PATH.</p>
-<div class="fragment"><div class="line">pp() {</div>
-<div class="line">case &quot;:${PATH}:&quot; in</div>
-<div class="line">    *:&quot;$1&quot;:*) ;;</div>
-<div class="line">    *)</div>
-<div class="line">        PATH=&quot;$1:$PATH&quot;</div>
-<div class="line">        ;;</div>
-<div class="line">esac</div>
-<div class="line">}</div>
-<div class="line">PATH=/usr/bin:/bin:/usr/sbin:/sbin</div>
-<div class="line">for P in /usr/local/sbin \</div>
-<div class="line">/usr/local/bin \</div>
-<div class="line">/usr/lib64/qt6/bin \</div>
-<div class="line">/usr/lib/qt6/bin \</div>
-<div class="line">&quot;$HOME&quot;/.local/bin \</div>
-<div class="line">&quot;$HOME&quot;/.cargo/bin \</div>
-<div class="line">/usr/local/bin/zig-0.15.2 \</div>
-<div class="line">&quot;$HOME&quot;/menuapp/bin; do</div>
-<div class="line">    [ -d &quot;$P&quot; ] &amp;&amp; pp &quot;$P&quot;</div>
-<div class="line">done</div>
-<div class="line">export PATH</div>
-</div><!-- fragment --><p><b><em>WARNING:</em></b> /usr/bin/view is generally a link to vim, which will obscure C-Menu View if /usr/bin preceedes $HOME/menuapp/bin in your PATH environment variable.</p>
-<p>If you use the prepend path function above and have $HOME/menuapp/bin early in your PATH, you should be fine. In the abovew example, it is first in the PATH because it was prepended last.</p>
-<p>If you have issues starting C-Menu View by typing "view" at the shell prompt, examine your PATH environment variable.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="helpful-c-menu-environment-variables"></a>
-Helpful C-Menu Environment Variables</h2>
-<div class="fragment"><div class="line">export CMENU_SRC=/usr/local/src/cmenu/src</div>
-<div class="line">export CMENU_HOME=&quot;$HOME&quot;/menuapp</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="security-through-obscurity"></a>
-Security Through Obscurity</h2>
-<p>Having a shell with an obscure name can be beneficial. Using xsh, or some other alias reduces visibility and vulnerability to some automated attacks and even well-meaning, but misguided distributors who, in an unknown set of circumstancs, might turn on shell restrictions for common shells like bash.</p>
-<div class="fragment"><div class="line">export SHELL=bash</div>
-<div class="line">which xsh &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export SHELL=xsh</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="rsh-helpers"></a>
-RSH Helpers</h2>
-<p>xx and x are convenience functions for starting and exiting a root shell using rsh.</p>
-<div class="fragment"><div class="line">xx() {</div>
-<div class="line">    if file &quot;$HOME&quot;/menuapp/bin/rsh | grep setuid &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">        &quot;$HOME&quot;/menuapp/bin/rsh</div>
-<div class="line">    else</div>
-<div class="line">        if file /usr/local/bin/rsh | grep setuid &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">            /usr/local/bin/rsh</div>
-<div class="line">        fi</div>
-<div class="line">    fi</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>Exit functions that suppress output.</p>
-<div class="fragment"><div class="line">x() { exit &gt;/dev/null 2&gt;&amp;1; }</div>
-<div class="line">q() { exit &gt;/dev/null 2&gt;&amp;1; }</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="privilege-indicator-shell-prompts"></a>
-Privilege Indicator Shell Prompts</h2>
-<p>A green prompt for normal users, red for root. You can customize this prompt or use whatever prompt you like, but an obvious indicator of privilege level is highly recommended.</p>
-<p>This is a very minimal prompt, but serves the purpose of indicating privilege level. You can customize it to include more information if you like, but be careful not to make it too cluttered or slow to render. The key is to have a clear visual indicator of whether you are running as root or a normal user, to help prevent accidentally running commands with elevated privileges.</p>
-<p>The inclusion of \W in the prompt is a common practice to show the current working directory, which can be helpful for context. If you want the full directory, use \w (lower case). The color coding (green for normal users and red for root) provides an immediate visual cue about the privilege level of the shell session. You can even make it hot-pink if you want it to be really annoying. The key is to have a clear and distinct visual indicator of privilege level, to help prevent accidental misuse of root privileges.</p>
-<div class="fragment"><div class="line">export PS1=&quot;\&zwj;[\e[1;32m\&zwj;]\u@\h(\l)\W-&gt;\&zwj;[\e[0m\&zwj;] &quot;</div>
-<div class="line">export XUSER=&quot;$(id -un)&quot;</div>
-<div class="line">[ &quot;$XUSER&quot; = &quot;root&quot; ] &amp;&amp; export PS1=&quot;\&zwj;[\e[1;31m\&zwj;]\u@\h(\l)\W-&gt;\&zwj;[\e[0m\&zwj;] &quot;</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="terminal-and-editor-settings"></a>
-Terminal and Editor Settings</h2>
-<div class="fragment"><div class="line">export TERM=xterm-256color</div>
-<div class="line">export TTYPATH=&quot;$(dirname &quot;$(tty)&quot;)&quot;</div>
-<div class="line">export EDITOR=nvim</div>
-<div class="line">clear() {</div>
-<div class="line">    tput clear</div>
-<div class="line">}</div>
-<div class="line">stty ixany</div>
-<div class="line">set -o vi</div>
-<div class="line">export MANPAGER=&quot;nvim +Man!&quot;</div>
-<div class="line">export MANWIDTH=80</div>
-<div class="line">which less &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export PAGER=less</div>
-<div class="line">## -----------</div>
-<div class="line">VIEW_FAKE=false</div>
-<div class="line">FILE=$(which view)</div>
-<div class="line">if [ -L &quot;$FILE&quot; ] &amp;&amp; [ -e &quot;$FILE&quot; ]; then</div>
-<div class="line">    LINKTO=$(readlink &quot;$FILE&quot;)</div>
-<div class="line">    if [ &quot;$LINKTO&quot; = &quot;vi&quot; ] || [ &quot;$LINKTO&quot; = &quot;vim&quot; ]; then</div>
-<div class="line">        ShellLog &quot;$FILE is a symbolic link to vim&quot;</div>
-<div class="line">        VIEW_FAKE=true</div>
-<div class="line">    fi</div>
-<div class="line">fi</div>
-<div class="line">if [ &quot;$VIEW_FAKE&quot; = &quot;false&quot; ]; then</div>
-<div class="line">    which view &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export PAGER=view</div>
-<div class="line">    export PAGER=$(which view 2&gt;/dev/null)</div>
-<div class="line">fi</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="gdb-debugging-setup"></a>
-GDB Debugging Setup</h2>
-<p>This is useful when debugging programs that require user input</p>
-<div class="fragment"><div class="line">which sleep &gt;/dev/null 2&gt;&amp;1 &amp;&amp; s() {</div>
-<div class="line">    TTY=$(tty)</div>
-<div class="line">    /bin/grep -v &quot;inferior-tty&quot; &quot;$HOME&quot;/.gdbinit &gt;/tmp/.gdbinit.$$ 2&gt;&amp;1</div>
-<div class="line">    echo &quot;set inferior-tty $TTY&quot; &gt;&gt;/tmp/.gdbinit.$$</div>
-<div class="line">    mv /tmp/.gdbinit.$$ &quot;$HOME&quot;/.gdbinit</div>
-<div class="line">    echo &quot;sleeping&quot;</div>
-<div class="line">    sleep 50000</div>
-<div class="line">}</div>
-<div class="line">which gdb &gt;/dev/null 2&gt;&amp;1 &amp;&amp; gdb() { /usr/bin/gdb --silent &quot;$@&quot;; }</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="if-you-cant-stop-typing-vi"></a>
-If You Can't Stop Typing "vi"</h2>
-<div class="fragment"><div class="line">which nvim &gt;/dev/null 2&gt;&amp;1 &amp;&amp; vi() { nvim &quot;$@&quot;; }</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="c-menu-startup-with-mm"></a>
-C-Menu Startup with "mm"</h2>
-<p>You must prepend $HOME/menuapp/bin to your PATH before (meaning earlier in the .bashrc script) defining the following function.</p>
-<div class="fragment"><div class="line">. &quot;$HOME&quot;/menuapp/bin/cmenu_path</div>
-<div class="line">which menu &gt;/dev/null 2&gt;&amp;1 &amp;&amp; mm() {</div>
-<div class="line">    menu &quot;$@&quot;</div>
-<div class="line">}</div>
-<div class="line">. &quot;$HOME&quot;/.nvim_appname</div>
-<div class="line">kk() { cd /usr/local/src/cmenu/src || return; }</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="curses-escape-delay"></a>
-Curses Escape Delay</h2>
-<p>I use a local computer, so 50ms works fine for me. If you have a slow connection you may need to set this to 300 or 500. The default is 1000.</p>
-<div class="fragment"><div class="line">export ESCDELAY=200</div>
-<div class="line">export ESCDELAY=50</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="use-lsd-instead-of-ls"></a>
-Use lsd instead of ls</h2>
-<div class="fragment"><div class="line">PREFER_LSD=1</div>
-<div class="line">if [ &quot;$PREFER_LSD&quot; = &quot;1&quot; ]; then</div>
-<div class="line">    which lsd &gt;/dev/null 2&gt;&amp;1 &amp;&amp; ls() { /usr/bin/lsd &quot;$@&quot;; }</div>
-<div class="line">else</div>
-<div class="line">    which ls &gt;/dev/null 2&gt;&amp;1 &amp;&amp; ls() { /bin/ls --color=auto &quot;$@&quot;; }</div>
-<div class="line">fi</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="locale-settings"></a>
-Locale Settings</h2>
-<p>If you are in the US, you probably want to set this locale.</p>
-<div class="fragment"><div class="line">export LC_ALL=&quot;en_US.UTF-8&quot;</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="system-specific-environment-variables"></a>
-System Specific Environment Variables</h2>
-<p>Customize these settings for your system.</p>
-<div class="fragment"><div class="line">export JAVA_HOME=/usr/lib64/jvm/java-21-openjdk-21</div>
-<div class="line">export NODE_PATH=&quot;$HOME&quot;/node_modules</div>
-<div class="line">export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig</div>
-<div class="line">export python3_host_prog=/usr/bin/python3</div>
-<div class="line">export XDG_CONFIG_HOME=&quot;$HOME&quot;/.config</div>
-<div class="line">export XDG_DATA_HOME=&quot;$HOME&quot;/.local/share</div>
-<div class="line">export CARGO_HOME=&quot;$HOME&quot;/.cargo</div>
-<div class="line">export RUSTUP_HOME=&quot;$HOME&quot;/.rustup</div>
-<div class="line">export LLVM_LIB_DIR=/usr/lib64</div>
-<div class="line">export MASON=&quot;$HOME/.local/share/lazyvim/mason&quot;</div>
-</div><!-- fragment --><hr  />
-<h1 class="doxsection"><a class="anchor" id="c-menu-configuration"></a>
-C-Menu Configuration</h1>
-<div class="fragment"><div class="line"># ~/.minitrc</div>
-<div class="line">cols=0</div>
-<div class="line">lines=0</div>
-<div class="line">begx=0</div>
-<div class="line">begy=0</div>
-<div class="line">begy=0</div>
-<div class="line">help=false</div>
-<div class="line">black=#00020f</div>
-<div class="line">red=#ff0000</div>
-<div class="line">green=#00d07f</div>
-<div class="line">yellow=#ffba00</div>
-<div class="line">blue=#0080ff</div>
-<div class="line">magenta=#f000f0</div>
-<div class="line">cyan=#00dfff</div>
-<div class="line">white=#c0c0c0</div>
-<div class="line">bblack=#000930</div>
-<div class="line">bred=#ff7f00</div>
-<div class="line">bgreen=#00ff87</div>
-<div class="line">byellow=#ffff00</div>
-<div class="line">bblue=#00afff</div>
-<div class="line">bmagenta=#ff00ff</div>
-<div class="line">bcyan=#00ffff</div>
-<div class="line">bwhite=#ffffff</div>
-<div class="line">bg_color=black</div>
-<div class="line">fg_color=white</div>
-<div class="line">bo_color=red</div>
-<div class="line">red_gamma=2.20</div>
-<div class="line">green_gamma=2.20</div>
-<div class="line">blue_gamma=2.20</div>
-<div class="line">gray_gamma=2.20</div>
-<div class="line">brackets=</div>
-<div class="line">cd_mapp_home=false</div>
-<div class="line">f_at_end_clear=true</div>
-<div class="line">f_at_end_remove=false</div>
-<div class="line">f_erase_remainder=true</div>
-<div class="line">fill_char=_</div>
-<div class="line">f_ignore_case=false</div>
-<div class="line">f_squeeze=false</div>
-<div class="line">f_stop_on_error=true</div>
-<div class="line">tab_stop=4</div>
-<div class="line">prompt_type=long</div>
-<div class="line">prompt_str=</div>
-<div class="line">cmd=</div>
-<div class="line">cmd_all=</div>
-<div class="line">provider_cmd=</div>
-<div class="line">receiver_cmd=</div>
-<div class="line">title=</div>
-<div class="line">select_max=0</div>
-<div class="line">black=#00020f</div>
-<div class="line">bg=#000000</div>
-<div class="line">abg=</div>
-<div class="line">mapp_spec=main.m</div>
-<div class="line">help_spec=</div>
-<div class="line">in_spec=</div>
-<div class="line">out_spec=</div>
-<div class="line">mapp_data=~/menuapp/data</div>
-<div class="line">mapp_help=~/menuapp/help</div>
-<div class="line">mapp_home=~/menuapp</div>
-<div class="line">mapp_msrc=~/menuapp/msrc</div>
-<div class="line">mapp_user=~/menuapp/user</div>
-</div><!-- fragment --><hr  />
-<h1 class="doxsection"><a class="anchor" id="terminal-configurations"></a>
-Terminal Configurations</h1>
-<p>Please adjust these terminal configurations for your system. In particular, you should pay attention to the screen dimensions, which I have set to 95 columns and up to 80 lines. Make sure you have the specified fonts installed on your system, or change the font settings to match fonts you do have.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="ghostty-1"></a>
-Ghostty</h2>
-<div class="fragment"><div class="line"># ~/.config/ghostty/config</div>
-<div class="line">#</div>
-<div class="line">command = xsh</div>
-<div class="line">#  -c menu</div>
-<div class="line">title = xsh</div>
-<div class="line"># config-file = fonts/default_font</div>
-<div class="line"># BEGIN_GHOSTTY_FONT</div>
-<div class="line">font-family = &quot;Cascadia Code Medium&quot;</div>
-<div class="line">font-family-bold = &quot;Cascadia Code Bold&quot;</div>
-<div class="line">font-family-italic = &quot;Cascadia Code Italic&quot;</div>
-<div class="line">font-family-bold-italic = &quot;Cascadia Code Bold Italic&quot;</div>
-<div class="line"># END_GHOSTTY_FONT</div>
-<div class="line">font-size = 13</div>
-<div class="line">window-width = 95</div>
-<div class="line">window-height = 80</div>
-<div class="line">background-opacity = 0.99</div>
-<div class="line">window-decoration = server</div>
-<div class="line">keybind = ctrl+r=reload_config</div>
-<div class="line"># config-file = themes/default_theme</div>
-<div class="line"># high_contrast3</div>
-<div class="line"> </div>
-<div class="line">palette=0=#000000</div>
-<div class="line">palette=1=#FF3f3f</div>
-<div class="line">palette=2=#4ff07f</div>
-<div class="line">palette=3=#FFef4f</div>
-<div class="line">palette=4=#5faFff</div>
-<div class="line">palette=5=#f077f0</div>
-<div class="line">palette=6=#8fdFfF</div>
-<div class="line">palette=7=#FF8f5f</div>
-<div class="line">palette=8=#bfbfbf</div>
-<div class="line">palette=9=#FF7f00</div>
-<div class="line">palette=10=#00FFa0</div>
-<div class="line">palette=11=#FFcf00</div>
-<div class="line">palette=12=#005fFF</div>
-<div class="line">palette=13=#FF00FF</div>
-<div class="line">palette=14=#00ffff</div>
-<div class="line">palette=15=#e0d0d0</div>
-<div class="line"> </div>
-<div class="line"># extended colors</div>
-<div class="line">background = #000720</div>
-<div class="line">foreground = #e0d0d0</div>
-<div class="line">cursor-color = #f0f0f0</div>
-<div class="line">selection-background = #e0d0d0</div>
-<div class="line">selection-foreground = #000000</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="kitty"></a>
-Kitty</h2>
-<div class="fragment"><div class="line"># ~/.config/kitty/kitty.conf</div>
-<div class="line">#</div>
-<div class="line">shell xsh</div>
-<div class="line"># include ~/.config/kitty/fonts/default_font</div>
-<div class="line"># BEGIN_KITTY_FONTS</div>
-<div class="line">font_family      JetBrainsMono NFM Medium</div>
-<div class="line">bold_font        JetBrainsMono NFM ExtraBold</div>
-<div class="line">italic_font      JetBrainsMono NFM Italic</div>
-<div class="line">bold_italic_font JetBrainsMono NFM Bold Italic</div>
-<div class="line"># END_KITTY_FONTS</div>
-<div class="line">remember_window_size no</div>
-<div class="line">font_size 15.0</div>
-<div class="line">initial_window_width    95c</div>
-<div class="line">initial_window_height   50c</div>
-<div class="line"># include ~/.config/kitty/themes/default_theme</div>
-<div class="line"># high_contrast3</div>
-<div class="line">#</div>
-<div class="line">url_color               #a0e0ff</div>
-<div class="line">cursor                  #ffffff</div>
-<div class="line">cursor_text_color       #000000</div>
-<div class="line"> </div>
-<div class="line"># Tabs</div>
-<div class="line">active_tab_background   #001e1e</div>
-<div class="line">active_tab_foreground   #afd0ff</div>
-<div class="line">inactive_tab_background #2030a0</div>
-<div class="line">inactive_tab_foreground #c0c0c0</div>
-<div class="line">#tab_bar_background     #313131</div>
-<div class="line"> </div>
-<div class="line"># Windows</div>
-<div class="line">active_border_color     #79a8ff</div>
-<div class="line">inactive_border_color   #646464</div>
-<div class="line"> </div>
-<div class="line">color0    #000000</div>
-<div class="line">color1    #FF3f3f</div>
-<div class="line">color2    #4ff07f</div>
-<div class="line">color3    #FFef4f</div>
-<div class="line">color4    #5faFff</div>
-<div class="line">color5    #f077f0</div>
-<div class="line">color6    #8fdFfF</div>
-<div class="line">color7    #FF8f5f</div>
-<div class="line">color8    #bfbfbf</div>
-<div class="line">color9    #FF7f00</div>
-<div class="line">color10    #00FFa0</div>
-<div class="line">color11    #FFcf00</div>
-<div class="line">color12    #005fFF</div>
-<div class="line">color13    #FF00FF</div>
-<div class="line">color14    #00ffff</div>
-<div class="line">color15    #e0d0d0</div>
-<div class="line"> </div>
-<div class="line"># extended colors</div>
-<div class="line">background              #000720</div>
-<div class="line">foreground              #e0d0d0</div>
-<div class="line">cursor                  #f0f0f0</div>
-<div class="line">selection_background    #e0d0d0</div>
-<div class="line">selection_foreground    #000000</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="alacritty"></a>
-Alacritty</h2>
-<div class="fragment"><div class="line"># /home/bill/.config/alacritty/alacritty.toml</div>
-<div class="line"># Bill Waller</div>
-<div class="line"> </div>
-<div class="line">[terminal.shell]</div>
-<div class="line">program = &quot;/usr/local/bin/xsh&quot;</div>
-<div class="line"> </div>
-<div class="line">[general]</div>
-<div class="line"> </div>
-<div class="line"># import = [</div>
-<div class="line">#     &quot;~/.config/alacritty/fonts/default_font.toml&quot;,</div>
-<div class="line">#     &quot;~/.config/alacritty/themes/default_theme.toml&quot;,</div>
-<div class="line"># ]</div>
-<div class="line"> </div>
-<div class="line">[font]</div>
-<div class="line"># BEGIN_ALACRITTY_FONT</div>
-<div class="line">normal = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;Regular&quot; }</div>
-<div class="line">bold = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;ExtraBold&quot; }</div>
-<div class="line">italic = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;Italic&quot; }</div>
-<div class="line">bold_italic = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;Bold Italic&quot; }</div>
-<div class="line"># END_ALACRITTY_FONT</div>
-<div class="line">size = 15</div>
-<div class="line"> </div>
-<div class="line"># dynamic_title = true</div>
-<div class="line"># decorations = &quot;Full&quot;</div>
-<div class="line"># decorations_theme_variant = &quot;Dark&quot;</div>
-<div class="line"> </div>
-<div class="line">[window]</div>
-<div class="line">dimensions = { columns = 95, lines = 50 }</div>
-<div class="line"> </div>
-<div class="line">[scrolling]</div>
-<div class="line">history = 10000</div>
-<div class="line"> </div>
-<div class="line">[colors.primary]</div>
-<div class="line">background  = &#39;#000000&#39;</div>
-<div class="line">foreground  = &#39;#c0c0c0&#39;</div>
-<div class="line"> </div>
-<div class="line">[colors.normal]</div>
-<div class="line">black       = &#39;#000000&#39;</div>
-<div class="line">red         = &#39;#FF0000&#39;</div>
-<div class="line">green       = &#39;#00FF8f&#39;</div>
-<div class="line">yellow      = &#39;#FFc700&#39;</div>
-<div class="line">blue        = &#39;#009FFF&#39;</div>
-<div class="line">magenta     = &#39;#e070e0&#39;</div>
-<div class="line">cyan        = &#39;#00CFDF&#39;</div>
-<div class="line">white       = &#39;#FF7f00&#39;</div>
-<div class="line">[colors.bright]</div>
-<div class="line">black       = &#39;#7f7f7f&#39;</div>
-<div class="line">red         = &#39;#FF7F00&#39;</div>
-<div class="line">green       = &#39;#00FFa0&#39;</div>
-<div class="line">yellow      = &#39;#FFEf00&#39;</div>
-<div class="line">blue        = &#39;#0000FF&#39;</div>
-<div class="line">magenta     = &#39;#FF00FF&#39;</div>
-<div class="line">cyan        = &#39;#00ffff&#39;</div>
-<div class="line">white       = &#39;#FFFFFF&#39;</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="tree-sitter-1"></a>
-Tree-Sitter</h1>
-<p>Before you can use Tree-Sitter-CLI, you will need to install the parsers for your file types. Below an example layout for parser installation.</p>
-<div class="image">
-<img src="../../tree-sitter-parsers.png" alt=""/>
-<div class="caption">
-Tree-Sitter Configuration</div></div>
-    <hr  />
-<h2 class="doxsection"><a class="anchor" id="tree-sitter-configjson"></a>
-Tree-Sitter config.json</h2>
-<div class="fragment"><div class="line">{</div>
-<div class="line">  &quot;parser-directories&quot;: [</div>
-<div class="line">    &quot;/home/bill/src&quot;,</div>
-<div class="line">    &quot;/home/bill/.config/tree-sitter/parsers&quot;</div>
-<div class="line">  ],</div>
-<div class="line">  &quot;theme&quot;: {</div>
-<div class="line">    &quot;attribute&quot;: {</div>
-<div class="line">      &quot;color&quot;: &quot;#f9a080&quot;,</div>
-<div class="line">      &quot;italic&quot;: true</div>
-<div class="line">    },</div>
-<div class="line">    &quot;comment&quot;: {</div>
-<div class="line">      &quot;color&quot;: &quot;#a0a0a0&quot;,</div>
-<div class="line">      &quot;italic&quot;: true</div>
-<div class="line">    },</div>
-<div class="line">    &quot;constant&quot;: &quot;#00b0ff&quot;,</div>
-<div class="line">    &quot;constant.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#f000f0&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;constructor&quot;: &quot;#00ffbf&quot;,</div>
-<div class="line">    &quot;embedded&quot;: null,</div>
-<div class="line">    &quot;function&quot;: &quot;#ff4f00&quot;,</div>
-<div class="line">    &quot;function_definition&quot;: &quot;#f07070&quot;,</div>
-<div class="line">    &quot;function_declaration&quot;: &quot;#70b0f0&quot;,</div>
-<div class="line">    &quot;function.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#d070ff&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;keyword&quot;: &quot;#00b07f&quot;,</div>
-<div class="line">    &quot;module&quot;: &quot;#0000f0&quot;,</div>
-<div class="line">    &quot;number&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ffaf90&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;operator&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ff00ff&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;property&quot;: &quot;#00b0ff&quot;,</div>
-<div class="line">    &quot;property.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ff4f00&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;punctuation&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;punctuation.bracket&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;punctuation.delimiter&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;punctuation.special&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;string&quot;: &quot;#90c0ff&quot;,</div>
-<div class="line">    &quot;string.special&quot;: &quot;#f07fff&quot;,</div>
-<div class="line">    &quot;tag&quot;: &quot;#ff0000&quot;,</div>
-<div class="line">    &quot;type&quot;: &quot;#3fefff&quot;,</div>
-<div class="line">    &quot;type.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ff5070&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;variable&quot;: &quot;#f09040&quot;,</div>
-<div class="line">    &quot;variable.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#00d050&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;variable.parameter&quot;: {</div>
-<div class="line">      &quot;color&quot;: &quot;#00d050&quot;,</div>
-<div class="line">      &quot;underline&quot;: true</div>
-<div class="line">    }</div>
-<div class="line">  }</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
- </div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p>Main loop and command processor for the C-Menu menu system.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga7d7973d7aac92759dcc86ec52bb038f4" id="r_ga7d7973d7aac92759dcc86ec52bb038f4"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="#ga7d7973d7aac92759dcc86ec52bb038f4">menu_engine</a> (Init *init)</td></tr>
+<tr class="memdesc:ga7d7973d7aac92759dcc86ec52bb038f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main loop of the menu system.  <br /></td></tr>
+<tr class="memitem:gaa5d0e30e7036b72b51c843d0a7e486a1" id="r_gaa5d0e30e7036b72b51c843d0a7e486a1"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="#gaa5d0e30e7036b72b51c843d0a7e486a1">menu_cmd_processor</a> (Init *init)</td></tr>
+<tr class="memdesc:gaa5d0e30e7036b72b51c843d0a7e486a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes user input for the menu system.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Main loop and command processor for the C-Menu menu system. </p>
+<p>This module contains the core functionality for displaying menus, processing user input, and executing commands associated with menu choices. It handles navigation through menu options, responding to special keys, and managing the display of submenus, pick lists, forms, and views. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="gaa5d0e30e7036b72b51c843d0a7e486a1" name="gaa5d0e30e7036b72b51c843d0a7e486a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa5d0e30e7036b72b51c843d0a7e486a1">&#9670;&#160;</a></span>menu_cmd_processor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int menu_cmd_processor </td>
+          <td>(</td>
+          <td class="paramtype">Init *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Processes user input for the menu system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">init</td><td>A pointer to an Init structure containing initialization data for the menu system. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an integer indicating the action taken by the user, such as returning to the main menu, displaying a submenu, or executing a command associated with a menu choice. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>handles navigation through the menu options, executing commands associated with menu choices, and responding to special keys such as function keys and mouse clicks. </dd></dl>
+<p>Move up to the previous menu choice</p>
+<p>Move down to the next menu choice</p>
+<p>Select the current menu choice and execute its associated command</p>
+<p>Display help information for the menu system</p>
+<p>Exit the menu and return to the previous menu or exit if at top</p>
+<p>send default printer output file to printer</p>
+<p>open the default editor</p>
+<p>process mouse event</p>
+<p>If the user presses a key that corresponds to a menu choice's letter, select that menu choice</p>
+<p>Return to the main menu</p>
+<p>Execute the command associated with the selected menu choice</p>
+<p>Display help information for the menu system</p>
+<p>Display a submenu or perform an action associated with the selected menu choice</p>
+<p>Display a pick list or form associated with the selected menu choice</p>
+<p>Display a form associated with the selected menu choice</p>
+<p>Display a view associated with the selected menu choice</p>
+<p>open ckeys (test curses keys)</p>
+<p>return to calling program</p>
+<p>write the current menu configuration to a file</p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/d59/a01001_source.html#l00106">106</a> of file <a class="el" href="../../df/d59/a01001_source.html">menu_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span>                                            {</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordtype">int</span> i, c, j;</div>
+<div class="line"><span class="lineno">  108</span>    <span class="keywordtype">char</span> *d;</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keywordtype">int</span> in_key;</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>[<a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  111</span> </div>
+<div class="line"><span class="lineno">  112</span>    keypad(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, <a class="code hl_define" href="../../d5/da3/a00953.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);</div>
+<div class="line"><span class="lineno">  113</span>    Menu *<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a> = <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu;</div>
+<div class="line"><span class="lineno">  114</span>    mousemask(BUTTON1_CLICKED | BUTTON1_DOUBLE_CLICKED, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  115</span>    MEVENT event;</div>
+<div class="line"><span class="lineno">  116</span>    wattron(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, A_REVERSE);</div>
+<div class="line"><span class="lineno">  117</span>    <a class="code hl_function" href="../../d0/dc9/a01065.html#gaaf79b6e287507d6c4ae505f1cd174760">mvwaddstr_fill</a>(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx, 0,</div>
+<div class="line"><span class="lineno">  118</span>                   <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;choice_text, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;cols);</div>
+<div class="line"><span class="lineno">  119</span>    wattroff(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, A_REVERSE);</div>
+<div class="line"><span class="lineno">  120</span>    <span class="keyword">event</span>.y = <span class="keyword">event</span>.x = -1;</div>
+<div class="line"><span class="lineno">  121</span>    <span class="comment">// tcflush(2, TCIFLUSH);</span></div>
+<div class="line"><span class="lineno">  122</span>    wmove(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx, 1);</div>
+<div class="line"><span class="lineno">  123</span>    in_key = <a class="code hl_function" href="../../d0/dc9/a01065.html#gacf4c709bccc4c965a5d61db978db31a3">xwgetch</a>(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  124</span>    <a class="code hl_function" href="../../d0/dc9/a01065.html#gaaf79b6e287507d6c4ae505f1cd174760">mvwaddstr_fill</a>(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx, 0,</div>
+<div class="line"><span class="lineno">  125</span>                   <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;choice_text, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;cols);</div>
+<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">switch</span> (in_key) {</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;k&#39;</span>:</div>
+<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">case</span> KEY_UP:</div>
+<div class="line"><span class="lineno">  130</span>        i = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx;</div>
+<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">while</span> (i &gt; 0) {</div>
+<div class="line"><span class="lineno">  132</span>            i--;</div>
+<div class="line"><span class="lineno">  133</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[i]-&gt;type == MT_CHOICE) {</div>
+<div class="line"><span class="lineno">  134</span>                <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = i;</div>
+<div class="line"><span class="lineno">  135</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  136</span>            }</div>
+<div class="line"><span class="lineno">  137</span>        }</div>
+<div class="line"><span class="lineno">  138</span>        <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;j&#39;</span>:</div>
+<div class="line"><span class="lineno">  141</span>    <span class="keywordflow">case</span> KEY_DOWN:</div>
+<div class="line"><span class="lineno">  142</span>        i = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx;</div>
+<div class="line"><span class="lineno">  143</span>        <span class="keywordflow">while</span> (i &lt; menu-&gt;item_count - 1) {</div>
+<div class="line"><span class="lineno">  144</span>            i++;</div>
+<div class="line"><span class="lineno">  145</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[i]-&gt;type == MT_CHOICE) {</div>
+<div class="line"><span class="lineno">  146</span>                <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = i;</div>
+<div class="line"><span class="lineno">  147</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  148</span>            }</div>
+<div class="line"><span class="lineno">  149</span>        }</div>
+<div class="line"><span class="lineno">  150</span>        <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;\n&#39;</span>:</div>
+<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">case</span> KEY_ENTER:</div>
+<div class="line"><span class="lineno">  154</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  156</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;H&#39;</span>:</div>
+<div class="line"><span class="lineno">  157</span>    <span class="keywordflow">case</span> KEY_F(1):</div>
+<div class="line"><span class="lineno">  158</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0] = strdup(<span class="stringliteral">&quot;mview&quot;</span>);</div>
+<div class="line"><span class="lineno">  159</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <span class="stringliteral">&quot;~/menuapp/help/menu.help&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  160</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  161</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[1] = strdup(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
+<div class="line"><span class="lineno">  162</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[2] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  163</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = 2;</div>
+<div class="line"><span class="lineno">  164</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  165</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  166</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;lines = 30;</div>
+<div class="line"><span class="lineno">  167</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;cols = 60;</div>
+<div class="line"><span class="lineno">  168</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1;</div>
+<div class="line"><span class="lineno">  169</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1;</div>
+<div class="line"><span class="lineno">  170</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;title, <span class="stringliteral">&quot;Menu Help&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  171</span>        <a class="code hl_function" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  172</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">case</span> KEY_F(2):</div>
+<div class="line"><span class="lineno">  174</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0] = strdup(<span class="stringliteral">&quot;mview&quot;</span>);</div>
+<div class="line"><span class="lineno">  175</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <span class="stringliteral">&quot;~/menuapp/.about&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  176</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  177</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[1] = strdup(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
+<div class="line"><span class="lineno">  178</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[2] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  179</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = 2;</div>
+<div class="line"><span class="lineno">  180</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  181</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  182</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;lines = 10;</div>
+<div class="line"><span class="lineno">  183</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;cols = 40;</div>
+<div class="line"><span class="lineno">  184</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1;</div>
+<div class="line"><span class="lineno">  185</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1;</div>
+<div class="line"><span class="lineno">  186</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;title, <span class="stringliteral">&quot;About CMenu&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  187</span>        <a class="code hl_function" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  188</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  190</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;q&#39;</span>:</div>
+<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">case</span> KEY_F(9):</div>
+<div class="line"><span class="lineno">  192</span>    case KEY_BREAK:</div>
+<div class="line"><span class="lineno">  193</span>    case KEY_DL:</div>
+<div class="line"><span class="lineno">  194</span>        return (MA_RETURN);</div>
+<div class="line"><span class="lineno">  196</span>    <span class="keywordflow">case</span> KEY_ALTF(9):</div>
+<div class="line"><span class="lineno">  197</span>        d = getenv(<span class="stringliteral">&quot;PRTCMD&quot;</span>);</div>
+<div class="line"><span class="lineno">  198</span>        <span class="keywordflow">if</span> (d == <span class="keyword">nullptr</span> || *d == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  199</span>            <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, PRINTCMD, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  200</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  201</span>            <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, d, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  202</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <span class="stringliteral">&quot; &quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  203</span>        d = getenv(<span class="stringliteral">&quot;PRTFILE&quot;</span>);</div>
+<div class="line"><span class="lineno">  204</span>        <span class="keywordflow">if</span> (d == <span class="keyword">nullptr</span> || *d == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  205</span>            d = getenv(<span class="stringliteral">&quot;HOME&quot;</span>);</div>
+<div class="line"><span class="lineno">  206</span>            <span class="keywordflow">if</span> (d == <span class="keyword">nullptr</span> || *d == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  207</span>                <a class="code hl_function" href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, VIEW_PRT_FILE, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  208</span>            <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  209</span>                <a class="code hl_function" href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, d, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  210</span>                <a class="code hl_function" href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  211</span>                <a class="code hl_function" href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, VIEW_PRT_FILE, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  212</span>            }</div>
+<div class="line"><span class="lineno">  213</span>        } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  214</span>            <a class="code hl_function" href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, d, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  215</span>        <a class="code hl_function" href="../../d8/d18/a01069.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>);</div>
+<div class="line"><span class="lineno">  216</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  218</span>    <span class="keywordflow">case</span> KEY_ALTF(10):</div>
+<div class="line"><span class="lineno">  219</span>        <a class="code hl_function" href="../../d0/dc9/a01065.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a>();</div>
+<div class="line"><span class="lineno">  220</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  221</span>        d = getenv(<span class="stringliteral">&quot;DEFAULTEDITOR&quot;</span>);</div>
+<div class="line"><span class="lineno">  222</span>        <span class="keywordflow">if</span> (d == <span class="keyword">nullptr</span> || *d == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  223</span>            <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, DEFAULTEDITOR, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  224</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  225</span>            <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, d, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  226</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, MAX_ARGS);</div>
+<div class="line"><span class="lineno">  227</span>        <a class="code hl_function" href="../../d8/d18/a01069.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  228</span>        <span class="keywordflow">return</span> (MA_INIT);</div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">case</span> KEY_MOUSE:</div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> == -1 || <a class="code hl_variable" href="../../db/d08/a01028.html#a89aa1c1525f82269298a01d552e60037">click_x</a> == -1)</div>
+<div class="line"><span class="lineno">  232</span>            <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  233</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y &lt; 0 || click_y &gt;</a>= <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;item_count)</div>
+<div class="line"><span class="lineno">  234</span>            <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  235</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = <a class="code hl_variable" href="../../db/d08/a01028.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a>;</div>
+<div class="line"><span class="lineno">  236</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  237</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  240</span>        <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;item_count; i++) {</div>
+<div class="line"><span class="lineno">  241</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[i]-&gt;raw_text[0] == <span class="charliteral">&#39;_&#39;</span>) {</div>
+<div class="line"><span class="lineno">  242</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[i]-&gt;choice_letter == (<span class="keywordtype">char</span>)in_key) {</div>
+<div class="line"><span class="lineno">  243</span>                    <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = i;</div>
+<div class="line"><span class="lineno">  244</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  245</span>                }</div>
+<div class="line"><span class="lineno">  246</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  247</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[i]-&gt;choice_letter == toupper((<span class="keywordtype">char</span>)in_key)) {</div>
+<div class="line"><span class="lineno">  248</span>                    <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = i;</div>
+<div class="line"><span class="lineno">  249</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  250</span>                }</div>
+<div class="line"><span class="lineno">  251</span>            }</div>
+<div class="line"><span class="lineno">  252</span>        }</div>
+<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">if</span> (i &gt;= <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;item_count)</div>
+<div class="line"><span class="lineno">  254</span>            <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  255</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  256</span>    }</div>
+<div class="line"><span class="lineno">  257</span>    c = (int)<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;command_type;</div>
+<div class="line"><span class="lineno">  258</span>    <span class="keywordflow">switch</span> (c) {</div>
+<div class="line"><span class="lineno">  260</span>    <span class="keywordflow">case</span> CT_RETURNMAIN:</div>
+<div class="line"><span class="lineno">  261</span>        <span class="keywordflow">return</span> (MA_RETURN_MAIN);</div>
+<div class="line"><span class="lineno">  265</span>    <span class="keywordflow">case</span> CT_EXEC:</div>
+<div class="line"><span class="lineno">  266</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;command_str,</div>
+<div class="line"><span class="lineno">  267</span>                   <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  268</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = <a class="code hl_function" href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, MAX_ARGS);</div>
+<div class="line"><span class="lineno">  269</span>        j = 0;</div>
+<div class="line"><span class="lineno">  270</span>        free(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0]);</div>
+<div class="line"><span class="lineno">  271</span>        <span class="keywordflow">for</span> (i = 1; i &lt; <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> &amp;&amp; <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[i] != <span class="keyword">nullptr</span>; i++) {</div>
+<div class="line"><span class="lineno">  272</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[i][0] == <span class="charliteral">&#39;~&#39;</span>) {</div>
+<div class="line"><span class="lineno">  273</span>                <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[i], <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  274</span>                <a class="code hl_function" href="../../d6/d6a/a01072.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  275</span>                <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[j++] = strdup(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
+<div class="line"><span class="lineno">  276</span>            } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  277</span>                <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[j++] = strdup(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[i]);</div>
+<div class="line"><span class="lineno">  278</span>            free(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[i]);</div>
+<div class="line"><span class="lineno">  279</span>        }</div>
+<div class="line"><span class="lineno">  280</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[j] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  281</span>        <a class="code hl_function" href="../../d8/d18/a01069.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  282</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  284</span>    <span class="keywordflow">case</span> CT_ABOUT:</div>
+<div class="line"><span class="lineno">  285</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0] = strdup(<span class="stringliteral">&quot;mview&quot;</span>);</div>
+<div class="line"><span class="lineno">  286</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <span class="stringliteral">&quot;~/menuapp/.about&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  287</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  288</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[1] = strdup(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
+<div class="line"><span class="lineno">  289</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[2] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  290</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = 2;</div>
+<div class="line"><span class="lineno">  291</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  292</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  293</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;lines = 30;</div>
+<div class="line"><span class="lineno">  294</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;cols = 60;</div>
+<div class="line"><span class="lineno">  295</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1;</div>
+<div class="line"><span class="lineno">  296</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1;</div>
+<div class="line"><span class="lineno">  297</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;title, <span class="stringliteral">&quot;About C-Menu&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  298</span>        <a class="code hl_function" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  299</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  300</span>    <span class="keywordflow">case</span> CT_HELP:</div>
+<div class="line"><span class="lineno">  301</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0] = strdup(<span class="stringliteral">&quot;mview&quot;</span>);</div>
+<div class="line"><span class="lineno">  302</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <span class="stringliteral">&quot;~/menuapp/help/menu.help&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  303</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  304</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[1] = strdup(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
+<div class="line"><span class="lineno">  305</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[2] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  306</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = 2;</div>
+<div class="line"><span class="lineno">  307</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  308</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  309</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;lines = 30;</div>
+<div class="line"><span class="lineno">  310</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;cols = 60;</div>
+<div class="line"><span class="lineno">  311</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1;</div>
+<div class="line"><span class="lineno">  312</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1;</div>
+<div class="line"><span class="lineno">  313</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;title, <span class="stringliteral">&quot;Menu Help&quot;</span>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  314</span>        <a class="code hl_function" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  315</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">case</span> CT_MENU:</div>
+<div class="line"><span class="lineno">  319</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;command_str,</div>
+<div class="line"><span class="lineno">  320</span>                   <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  321</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = <a class="code hl_function" href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, MAX_ARGS);</div>
+<div class="line"><span class="lineno">  322</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> == 0)</div>
+<div class="line"><span class="lineno">  323</span>            <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  324</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  325</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  326</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy == 0)</div>
+<div class="line"><span class="lineno">  327</span>            <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1;</div>
+<div class="line"><span class="lineno">  328</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx == 0)</div>
+<div class="line"><span class="lineno">  329</span>            <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1;</div>
+<div class="line"><span class="lineno">  330</span>        Menu *save_menu = <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu;</div>
+<div class="line"><span class="lineno">  331</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  332</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu = <a class="code hl_function" href="../../d0/dd3/a01077.html#ga861e6162a19e089468fdc2a1479b547f">new_menu</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy, <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx);</div>
+<div class="line"><span class="lineno">  333</span>        <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu)</div>
+<div class="line"><span class="lineno">  334</span>            <a class="code hl_function" href="../../d1/de6/a01068.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;menu_cmd_processor: new_menu() failed&quot;</span>);</div>
+<div class="line"><span class="lineno">  335</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a> = <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu;</div>
+<div class="line"><span class="lineno">  336</span>        <a class="code hl_function" href="../../d9/d67/a01080.html#gadd4bd5f0e9c89c717e460b2eb9952e6a">parse_menu_description</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  337</span>        <a class="code hl_function" href="#ga7d7973d7aac92759dcc86ec52bb038f4">menu_engine</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  338</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu = <a class="code hl_function" href="../../d0/dd3/a01077.html#ga8708b20d5d31a2bd82d91d281236ce64">destroy_menu</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  339</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu = save_menu;</div>
+<div class="line"><span class="lineno">  340</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a> = <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu;</div>
+<div class="line"><span class="lineno">  341</span>        <span class="keywordflow">return</span> (MA_INIT);</div>
+<div class="line"><span class="lineno">  344</span>    <span class="keywordflow">case</span> CT_PICK:</div>
+<div class="line"><span class="lineno">  345</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;command_str,</div>
+<div class="line"><span class="lineno">  346</span>                   <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  347</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = <a class="code hl_function" href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, MAX_ARGS);</div>
+<div class="line"><span class="lineno">  348</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  349</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  350</span>        <a class="code hl_function" href="../../dd/dee/a01081.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1);</div>
+<div class="line"><span class="lineno">  351</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  354</span>    <span class="keywordflow">case</span> CT_FORM:</div>
+<div class="line"><span class="lineno">  355</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;command_str,</div>
+<div class="line"><span class="lineno">  356</span>                   <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  357</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = <a class="code hl_function" href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, MAX_ARGS);</div>
+<div class="line"><span class="lineno">  358</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  359</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  360</span>        <a class="code hl_function" href="../../df/d18/a01071.html#gabf1be20a8aad5f7ba09172ac1434a110">init_form</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1);</div>
+<div class="line"><span class="lineno">  361</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  364</span>    <span class="keywordflow">case</span> CT_VIEW:</div>
+<div class="line"><span class="lineno">  365</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;command_str,</div>
+<div class="line"><span class="lineno">  366</span>                   <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  367</span>        <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = <a class="code hl_function" href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a>(<a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a>, MAX_ARGS);</div>
+<div class="line"><span class="lineno">  368</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  369</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  370</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy + 1;</div>
+<div class="line"><span class="lineno">  371</span>        <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx = <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx + 1;</div>
+<div class="line"><span class="lineno">  372</span>        <a class="code hl_function" href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;title, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;raw_text,</div>
+<div class="line"><span class="lineno">  373</span>                   <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  374</span>        <a class="code hl_function" href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a>, <a class="code hl_variable" href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  375</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  377</span>    <span class="keywordflow">case</span> CT_CKEYS:</div>
+<div class="line"><span class="lineno">  378</span>        <a class="code hl_function" href="../../db/d40/a00959.html#ae916cef9ebf00ff41380ce9f38a362e0">display_curses_keys</a>();</div>
+<div class="line"><span class="lineno">  379</span>        <span class="keywordflow">return</span> (MA_DISPLAY_MENU);</div>
+<div class="line"><span class="lineno">  381</span>    <span class="keywordflow">case</span> CT_RETURN:</div>
+<div class="line"><span class="lineno">  382</span>        <span class="keywordflow">return</span> (MA_RETURN);</div>
+<div class="line"><span class="lineno">  384</span>    <span class="keywordflow">case</span> CT_WRITE_CONFIG:</div>
+<div class="line"><span class="lineno">  385</span>        <a class="code hl_function" href="../../dd/d80/a01075.html#ga4b671c384affcc6dc1ed59a04d666cc7">write_config</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  386</span>        <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  387</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  388</span>        <span class="keywordflow">return</span> (MA_ENTER_OPTION);</div>
+<div class="line"><span class="lineno">  389</span>    }</div>
+<div class="line"><span class="lineno">  390</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  391</span>}</div>
+<div class="ttc" id="aa00947_html_a529b480d3d81a86e882c4d6ab8afa8bb"><div class="ttname"><a href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></div><div class="ttdeci">Menu * menu</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d29/a00947_source.html#l00045">mem.c:45</a></div></div>
+<div class="ttc" id="aa00953_html_aa8cecfc5c5c054d2875c03e77b7be15d"><div class="ttname"><a href="../../d5/da3/a00953.html#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a></div><div class="ttdeci">#define TRUE</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00019">iloan.c:19</a></div></div>
+<div class="ttc" id="aa00959_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d40/a00959_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa00959_html_ae916cef9ebf00ff41380ce9f38a362e0"><div class="ttname"><a href="../../db/d40/a00959.html#ae916cef9ebf00ff41380ce9f38a362e0">display_curses_keys</a></div><div class="ttdeci">int display_curses_keys()</div><div class="ttdoc">Display Curses Keys Responds to curses keys and mouse events, displaying the key code and description...</div><div class="ttdef"><b>Definition</b> <a href="../../db/d40/a00959_source.html#l00023">curskeys.c:23</a></div></div>
+<div class="ttc" id="aa00968_html_a075d6920297448f7d044417b9f8594b0"><div class="ttname"><a href="../../d7/dd4/a00968.html#a075d6920297448f7d044417b9f8594b0">eargc</a></div><div class="ttdeci">int eargc</div><div class="ttdef"><b>Definition</b> <a href="../../d7/dd4/a00968_source.html#l00030">exec.c:30</a></div></div>
+<div class="ttc" id="aa00968_html_a67227506d7050fd4fd59e06e2628a364"><div class="ttname"><a href="../../d7/dd4/a00968.html#a67227506d7050fd4fd59e06e2628a364">earg_str</a></div><div class="ttdeci">char earg_str[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d7/dd4/a00968_source.html#l00032">exec.c:32</a></div></div>
+<div class="ttc" id="aa00968_html_aba17a3c518eb2ffd68f0219cc8c1792b"><div class="ttname"><a href="../../d7/dd4/a00968.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a></div><div class="ttdeci">char * eargv[MAXARGS]</div><div class="ttdef"><b>Definition</b> <a href="../../d7/dd4/a00968_source.html#l00031">exec.c:31</a></div></div>
+<div class="ttc" id="aa00977_html_a76008d71974d1c5ac02497fe6a49fb59"><div class="ttname"><a href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a></div><div class="ttdeci">char tmp_str[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d6c/a00977_source.html#l00020">optsp.c:20</a></div></div>
+<div class="ttc" id="aa01010_html_a75a4e7afc9c9aafd3d35ab706f5fdc71"><div class="ttname"><a href="../../d0/d2b/a01010.html#a75a4e7afc9c9aafd3d35ab706f5fdc71">mview</a></div><div class="ttdeci">int mview(Init *init, int argc, char **argv)</div><div class="ttdoc">subprogram entry point for C-Menu View</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d2b/a01010_source.html#l00023">mview.c:23</a></div></div>
+<div class="ttc" id="aa01019_html_a3d163d0928a8410a38d85fddf9b0d0d8"><div class="ttname"><a href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a></div><div class="ttdeci">Init * init</div><div class="ttdef"><b>Definition</b> <a href="../../db/daf/a01019_source.html#l00046">init.c:46</a></div></div>
+<div class="ttc" id="aa01028_html_a89aa1c1525f82269298a01d552e60037"><div class="ttname"><a href="../../db/d08/a01028.html#a89aa1c1525f82269298a01d552e60037">click_x</a></div><div class="ttdeci">int click_x</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00048">dwin.c:48</a></div></div>
+<div class="ttc" id="aa01028_html_aba43294be5cc34c20fa3d3a58af45f0d"><div class="ttname"><a href="../../db/d08/a01028.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a></div><div class="ttdeci">int click_y</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00047">dwin.c:47</a></div></div>
+<div class="ttc" id="aa01065_html_ga40858af5b0d68549fb483f77c97eb82c"><div class="ttname"><a href="../../d0/dc9/a01065.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a></div><div class="ttdeci">void restore_wins()</div><div class="ttdoc">Restore all windows after a screen resize.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00855">dwin.c:855</a></div></div>
+<div class="ttc" id="aa01065_html_gaaf79b6e287507d6c4ae505f1cd174760"><div class="ttname"><a href="../../d0/dc9/a01065.html#gaaf79b6e287507d6c4ae505f1cd174760">mvwaddstr_fill</a></div><div class="ttdeci">void mvwaddstr_fill(WINDOW *, int, int, char *, int)</div><div class="ttdoc">For lines shorter than their display area, fill the rest with spaces.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l01053">dwin.c:1053</a></div></div>
+<div class="ttc" id="aa01065_html_gacf4c709bccc4c965a5d61db978db31a3"><div class="ttname"><a href="../../d0/dc9/a01065.html#gacf4c709bccc4c965a5d61db978db31a3">xwgetch</a></div><div class="ttdeci">int xwgetch(WINDOW *win, Chyron *chyron)</div><div class="ttdoc">Wrapper for wgetch that handles signals and mouse events.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l01156">dwin.c:1156</a></div></div>
+<div class="ttc" id="aa01068_html_ga8f6c45ca4a7f6a41c4c88314e697565a"><div class="ttname"><a href="../../d1/de6/a01068.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a></div><div class="ttdeci">void abend(int, char *)</div><div class="ttdoc">Abnormal program termination.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l01138">dwin.c:1138</a></div></div>
+<div class="ttc" id="aa01069_html_ga907dc4a5b8c29a03d23bdc87f41b5f1b"><div class="ttname"><a href="../../d8/d18/a01069.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a></div><div class="ttdeci">int full_screen_fork_exec(char **)</div><div class="ttdoc">Execute a command in full screen mode.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/dd4/a00968_source.html#l00050">exec.c:50</a></div></div>
+<div class="ttc" id="aa01069_html_gaeb3e7eb282467134ce50fde7d9ebd19d"><div class="ttname"><a href="../../d8/d18/a01069.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a></div><div class="ttdeci">int full_screen_shell(char *)</div><div class="ttdoc">Execute a shell command in full screen mode.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/dd4/a00968_source.html#l00072">exec.c:72</a></div></div>
+<div class="ttc" id="aa01071_html_gabf1be20a8aad5f7ba09172ac1434a110"><div class="ttname"><a href="../../df/d18/a01071.html#gabf1be20a8aad5f7ba09172ac1434a110">init_form</a></div><div class="ttdeci">int init_form(Init *, int, char **, int, int)</div><div class="ttdoc">Initialize form data structure and parse description file.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d3c/a00971_source.html#l00059">form_engine.c:59</a></div></div>
+<div class="ttc" id="aa01072_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d6/d6a/a01072.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00235">futil.c:235</a></div></div>
+<div class="ttc" id="aa01072_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../d6/d6a/a01072.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00264">futil.c:264</a></div></div>
+<div class="ttc" id="aa01072_html_gad7f9941ba28a6cca3ccce953c4d77e32"><div class="ttname"><a href="../../d6/d6a/a01072.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a></div><div class="ttdeci">bool expand_tilde(char *path, int path_maxlen)</div><div class="ttdoc">Replace Leading Tilde With Home Directory.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00650">futil.c:650</a></div></div>
+<div class="ttc" id="aa01072_html_gaf717756d0ca49bc436d1fb69ae0d6c05"><div class="ttname"><a href="../../d6/d6a/a01072.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a></div><div class="ttdeci">int str_to_args(char **, char *, int)</div><div class="ttdoc">Converts a string into an array of argument strings.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00149">futil.c:149</a></div></div>
+<div class="ttc" id="aa01075_html_ga11b56c5001e3ca95f4d0a28903b29609"><div class="ttname"><a href="../../dd/d80/a01075.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a></div><div class="ttdeci">int parse_opt_args(Init *, int, char **)</div><div class="ttdoc">Parse command-line options and set Init struct values accordingly.</div><div class="ttdef"><b>Definition</b> <a href="../../db/daf/a01019_source.html#l00170">init.c:170</a></div></div>
+<div class="ttc" id="aa01075_html_ga4b671c384affcc6dc1ed59a04d666cc7"><div class="ttname"><a href="../../dd/d80/a01075.html#ga4b671c384affcc6dc1ed59a04d666cc7">write_config</a></div><div class="ttdeci">int write_config(Init *init)</div><div class="ttdoc">Write the current configuration to a file specified in init-&gt;minitrc.</div><div class="ttdef"><b>Definition</b> <a href="../../db/daf/a01019_source.html#l00645">init.c:645</a></div></div>
+<div class="ttc" id="aa01075_html_gae9b71868d00a28cdcf5f4514e662edfe"><div class="ttname"><a href="../../dd/d80/a01075.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a></div><div class="ttdeci">void zero_opt_args(Init *)</div><div class="ttdoc">Initialize optional arguments in the Init struct to default values.</div><div class="ttdef"><b>Definition</b> <a href="../../db/daf/a01019_source.html#l00143">init.c:143</a></div></div>
+<div class="ttc" id="aa01077_html_ga861e6162a19e089468fdc2a1479b547f"><div class="ttname"><a href="../../d0/dd3/a01077.html#ga861e6162a19e089468fdc2a1479b547f">new_menu</a></div><div class="ttdeci">Menu * new_menu(Init *init, int, char **, int, int)</div><div class="ttdoc">Create and initialize Menu structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d29/a00947_source.html#l00160">mem.c:160</a></div></div>
+<div class="ttc" id="aa01077_html_ga8708b20d5d31a2bd82d91d281236ce64"><div class="ttname"><a href="../../d0/dd3/a01077.html#ga8708b20d5d31a2bd82d91d281236ce64">destroy_menu</a></div><div class="ttdeci">Menu * destroy_menu(Init *init)</div><div class="ttdoc">Destroy Menu structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d29/a00947_source.html#l00181">mem.c:181</a></div></div>
+<div class="ttc" id="aa01078_html_ga7d7973d7aac92759dcc86ec52bb038f4"><div class="ttname"><a href="#ga7d7973d7aac92759dcc86ec52bb038f4">menu_engine</a></div><div class="ttdeci">unsigned int menu_engine(Init *)</div><div class="ttdoc">The main loop of the menu system.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00037">menu_engine.c:37</a></div></div>
+<div class="ttc" id="aa01080_html_gadd4bd5f0e9c89c717e460b2eb9952e6a"><div class="ttname"><a href="../../d9/d67/a01080.html#gadd4bd5f0e9c89c717e460b2eb9952e6a">parse_menu_description</a></div><div class="ttdeci">unsigned int parse_menu_description(Init *)</div><div class="ttdoc">Parse menu description file and create Menu.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d95/a00989_source.html#l00030">parse_menu_desc.c:30</a></div></div>
+<div class="ttc" id="aa01081_html_ga1b2ee87543245e612c1710ea58930a17"><div class="ttname"><a href="../../dd/dee/a01081.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a></div><div class="ttdeci">int init_pick(Init *init, int argc, char **argv, int begy, int begx)</div><div class="ttdoc">Initializes pick structure and opens pick input file or pipe.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d88/a00962_source.html#l00060">pick_engine.c:60</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d08/a01028_source.html#l01138">abend()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00048">click_x</a>, <a class="el" href="../../db/d08/a01028_source.html#l00047">click_y</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00181">destroy_menu()</a>, <a class="el" href="../../db/d40/a00959_source.html#l00023">display_curses_keys()</a>, <a class="el" href="../../d7/dd4/a00968_source.html#l00032">earg_str</a>, <a class="el" href="../../d7/dd4/a00968_source.html#l00030">eargc</a>, <a class="el" href="../../d7/dd4/a00968_source.html#l00031">eargv</a>, <a class="el" href="../../d7/dd4/a00968_source.html#l00050">full_screen_fork_exec()</a>, <a class="el" href="../../d7/dd4/a00968_source.html#l00072">full_screen_shell()</a>, <a class="el" href="../../d0/d3c/a00971_source.html#l00059">init_form()</a>, <a class="el" href="../../df/d88/a00962_source.html#l00060">init_pick()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00045">menu</a>, <a class="el" href="../../df/d59/a01001_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d0/d2b/a01010_source.html#l00023">mview()</a>, <a class="el" href="../../db/d08/a01028_source.html#l01053">mvwaddstr_fill()</a>, <a class="el" href="../../d3/d29/a00947_source.html#l00160">new_menu()</a>, <a class="el" href="../../d4/d95/a00989_source.html#l00030">parse_menu_description()</a>, <a class="el" href="../../db/daf/a01019_source.html#l00170">parse_opt_args()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00855">restore_wins()</a>, <a class="el" href="../../d1/dd8/a01022_source.html#l00149">str_to_args()</a>, <a class="el" href="../../d1/dd8/a01022_source.html#l00264">strnz__cat()</a>, <a class="el" href="../../d1/dd8/a01022_source.html#l00235">strnz__cpy()</a>, <a class="el" href="../../db/daf/a01019_source.html#l00645">write_config()</a>, <a class="el" href="../../db/d08/a01028_source.html#l01156">xwgetch()</a>, and <a class="el" href="../../db/daf/a01019_source.html#l00143">zero_opt_args()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../df/d59/a01001_source.html#l00037">menu_engine()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/dba/a01078_gaa5d0e30e7036b72b51c843d0a7e486a1_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/dba/a01078_gaa5d0e30e7036b72b51c843d0a7e486a1_icgraph.svg" width="434" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga7d7973d7aac92759dcc86ec52bb038f4" name="ga7d7973d7aac92759dcc86ec52bb038f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7d7973d7aac92759dcc86ec52bb038f4">&#9670;&#160;</a></span>menu_engine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int menu_engine </td>
+          <td>(</td>
+          <td class="paramtype">Init *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The main loop of the menu system. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">init</td><td>A pointer to an Init structure containing initialization data for the menu system. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an integer indicating the action taken by the user, such as returning to the main menu or exiting the menu system. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>displays the menu and processes user input until the user exits the menu or returns to the main menu. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../df/d59/a01001_source.html#l00037">37</a> of file <a class="el" href="../../df/d59/a01001_source.html">menu_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                                     {</div>
+<div class="line"><span class="lineno">   38</span>    <span class="keywordtype">int</span> action;</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">   40</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>[<a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">   41</span> </div>
+<div class="line"><span class="lineno">   42</span>    Menu *<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a> = <a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu;</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a> == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">   44</span>        <a class="code hl_function" href="../../d1/de6/a01068.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<span class="stringliteral">&quot;menu_engine: menu is nullptr&quot;</span>);</div>
+<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">return</span> (1);</div>
+<div class="line"><span class="lineno">   46</span>    }</div>
+<div class="line"><span class="lineno">   47</span>    action = MA_INIT;</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">while</span> (action == MA_INIT) {</div>
+<div class="line"><span class="lineno">   49</span>        action = MA_DISPLAY_MENU;</div>
+<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d0/dc9/a01065.html#ga435c7bff7ffedb8f51c6de9259e36f6c">win_new</a>(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;lines, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;cols, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx,</div>
+<div class="line"><span class="lineno">   51</span>                    <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;title, 0)) {</div>
+<div class="line"><span class="lineno">   52</span>            <a class="code hl_function" href="../../d6/d6a/a01072.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>, <a class="code hl_define" href="../../db/d40/a00959.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1,</div>
+<div class="line"><span class="lineno">   53</span>                      <span class="stringliteral">&quot;win_new(%d, %d, %d, %d, %s, %b) failed&quot;</span>, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;lines,</div>
+<div class="line"><span class="lineno">   54</span>                      <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;cols, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begy, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;begx, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;title, 0);</div>
+<div class="line"><span class="lineno">   55</span>            <a class="code hl_function" href="../../d1/de6/a01068.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<a class="code hl_variable" href="../../d5/d6c/a00977.html#a76008d71974d1c5ac02497fe6a49fb59">tmp_str</a>);</div>
+<div class="line"><span class="lineno">   56</span>            <span class="keywordflow">return</span> (1);</div>
+<div class="line"><span class="lineno">   57</span>        }</div>
+<div class="line"><span class="lineno">   58</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win = <a class="code hl_variable" href="../../db/d08/a01028.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../db/d08/a01028.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
+<div class="line"><span class="lineno">   59</span>        <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;box = <a class="code hl_variable" href="../../db/d08/a01028.html#af08da1273fa752a418c2fd78b64a8914">win_box</a>[<a class="code hl_variable" href="../../db/d08/a01028.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
+<div class="line"><span class="lineno">   60</span>        <span class="keywordflow">while</span> (action == MA_DISPLAY_MENU) {</div>
+<div class="line"><span class="lineno">   61</span>            <span class="keywordflow">for</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = 0; <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx &lt; <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;item_count;</div>
+<div class="line"><span class="lineno">   62</span>                 <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx++) {</div>
+<div class="line"><span class="lineno">   63</span>                mvwaddstr(<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win, <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx, 0,</div>
+<div class="line"><span class="lineno">   64</span>                          <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx]-&gt;choice_text);</div>
+<div class="line"><span class="lineno">   65</span>            }</div>
+<div class="line"><span class="lineno">   66</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = 0;</div>
+<div class="line"><span class="lineno">   67</span>            <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;item_count; i++)</div>
+<div class="line"><span class="lineno">   68</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line[i]-&gt;type == MT_CHOICE) {</div>
+<div class="line"><span class="lineno">   69</span>                    <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = i;</div>
+<div class="line"><span class="lineno">   70</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   71</span>                }</div>
+<div class="line"><span class="lineno">   72</span>            <span class="keywordflow">while</span> ((action = <a class="code hl_function" href="#gaa5d0e30e7036b72b51c843d0a7e486a1">menu_cmd_processor</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>)) == MA_ENTER_OPTION)</div>
+<div class="line"><span class="lineno">   73</span>                ;</div>
+<div class="line"><span class="lineno">   74</span>        }</div>
+<div class="line"><span class="lineno">   75</span>        <span class="keywordflow">if</span> (action == MA_RETURN) {</div>
+<div class="line"><span class="lineno">   76</span>            <a class="code hl_function" href="../../d0/dc9/a01065.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
+<div class="line"><span class="lineno">   77</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;win = <a class="code hl_variable" href="../../db/d08/a01028.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../db/d08/a01028.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
+<div class="line"><span class="lineno">   78</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;box = <a class="code hl_variable" href="../../db/d08/a01028.html#af08da1273fa752a418c2fd78b64a8914">win_box</a>[<a class="code hl_variable" href="../../db/d08/a01028.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
+<div class="line"><span class="lineno">   79</span>            <span class="keywordflow">return</span> (MA_RETURN);</div>
+<div class="line"><span class="lineno">   80</span>        }</div>
+<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">if</span> (action == MA_INIT) {</div>
+<div class="line"><span class="lineno">   82</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;lines = 0;</div>
+<div class="line"><span class="lineno">   83</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;cols = 0;</div>
+<div class="line"><span class="lineno">   84</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;line_idx = 0;</div>
+<div class="line"><span class="lineno">   85</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;item_count = 0;</div>
+<div class="line"><span class="lineno">   86</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;title[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   87</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;choice_max_len = 0;</div>
+<div class="line"><span class="lineno">   88</span>            <a class="code hl_variable" href="../../d3/d29/a00947.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a>-&gt;text_max_len = 0;</div>
+<div class="line"><span class="lineno">   89</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d9/d67/a01080.html#gadd4bd5f0e9c89c717e460b2eb9952e6a">parse_menu_description</a>(<a class="code hl_variable" href="../../db/daf/a01019.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>))</div>
+<div class="line"><span class="lineno">   90</span>                <span class="keywordflow">return</span> (MA_RETURN);</div>
+<div class="line"><span class="lineno">   91</span>        }</div>
+<div class="line"><span class="lineno">   92</span>    }</div>
+<div class="line"><span class="lineno">   93</span>    <span class="keywordflow">return</span> (action);</div>
+<div class="line"><span class="lineno">   94</span>}</div>
+<div class="ttc" id="aa01028_html_a1bd8f5499dde00a4810e8cc7dd44f414"><div class="ttname"><a href="../../db/d08/a01028.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a></div><div class="ttdeci">WINDOW * win_win[MAXWIN]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00127">dwin.c:127</a></div></div>
+<div class="ttc" id="aa01028_html_aa7c8c79b6f580386dedaacce81b2e2b5"><div class="ttname"><a href="../../db/d08/a01028.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a></div><div class="ttdeci">int win_ptr</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00134">dwin.c:134</a></div></div>
+<div class="ttc" id="aa01028_html_af08da1273fa752a418c2fd78b64a8914"><div class="ttname"><a href="../../db/d08/a01028.html#af08da1273fa752a418c2fd78b64a8914">win_box</a></div><div class="ttdeci">WINDOW * win_box[MAXWIN]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00128">dwin.c:128</a></div></div>
+<div class="ttc" id="aa01065_html_ga435c7bff7ffedb8f51c6de9259e36f6c"><div class="ttname"><a href="../../d0/dc9/a01065.html#ga435c7bff7ffedb8f51c6de9259e36f6c">win_new</a></div><div class="ttdeci">int win_new(int, int, int, int, char *, int)</div><div class="ttdoc">Create a new window with optional box and title.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00694">dwin.c:694</a></div></div>
+<div class="ttc" id="aa01065_html_ga9dd598e1d49c8764af1eec42c682623e"><div class="ttname"><a href="../../d0/dc9/a01065.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a></div><div class="ttdeci">WINDOW * win_del()</div><div class="ttdoc">Delete the current window and its associated box window.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00821">dwin.c:821</a></div></div>
+<div class="ttc" id="aa01068_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d1/de6/a01068.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00993">dwin.c:993</a></div></div>
+<div class="ttc" id="aa01072_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../d6/d6a/a01072.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00129">futil.c:129</a></div></div>
+<div class="ttc" id="aa01078_html_gaa5d0e30e7036b72b51c843d0a7e486a1"><div class="ttname"><a href="#gaa5d0e30e7036b72b51c843d0a7e486a1">menu_cmd_processor</a></div><div class="ttdeci">unsigned int menu_cmd_processor(Init *)</div><div class="ttdoc">Processes user input for the menu system.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00106">menu_engine.c:106</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../df/d59/a01001_source.html#l00106">menu_cmd_processor()</a>, <a class="el" href="../../d4/d95/a00989_source.html#l00030">parse_menu_description()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00993">Perror()</a>, <a class="el" href="../../d1/dd8/a01022_source.html#l00129">ssnprintf()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00128">win_box</a>, <a class="el" href="../../db/d08/a01028_source.html#l00821">win_del()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00694">win_new()</a>, <a class="el" href="../../db/d08/a01028_source.html#l00134">win_ptr</a>, and <a class="el" href="../../db/d08/a01028_source.html#l00127">win_win</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/dcd/a00965_source.html#l00021">main()</a>, and <a class="el" href="../../df/d59/a01001_source.html#l00106">menu_cmd_processor()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/dba/a01078_ga7d7973d7aac92759dcc86ec52bb038f4_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/dba/a01078_ga7d7973d7aac92759dcc86ec52bb038f4_icgraph.svg" width="332" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

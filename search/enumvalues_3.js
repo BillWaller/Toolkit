@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['mapp_5fdata_5fdir_0',['MAPP_DATA_DIR',['../dd/d48/a00995.html#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3',1,'init.c']]],
-  ['mapp_5fhelp_1',['MAPP_HELP',['../dd/d48/a00995.html#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154',1,'init.c']]],
-  ['mapp_5fhelp_5fdir_2',['MAPP_HELP_DIR',['../dd/d48/a00995.html#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2',1,'init.c']]],
-  ['mapp_5fmsrc_3',['MAPP_MSRC',['../dd/d48/a00995.html#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de',1,'init.c']]],
-  ['mapp_5fspec_4',['MAPP_SPEC',['../dd/d48/a00995.html#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6',1,'init.c']]]
+  ['mapp_5fdata_5fdir_0',['MAPP_DATA_DIR',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3',1,'init.c']]],
+  ['mapp_5fhelp_1',['MAPP_HELP',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154',1,'init.c']]],
+  ['mapp_5fhelp_5fdir_2',['MAPP_HELP_DIR',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2',1,'init.c']]],
+  ['mapp_5fmsrc_3',['MAPP_MSRC',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de',1,'init.c']]],
+  ['mapp_5fspec_4',['MAPP_SPEC',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6',1,'init.c']]]
 ];
