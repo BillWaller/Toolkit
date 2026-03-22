@@ -44,7 +44,7 @@ var NAVTREE =
     ] ],
     [ "User guide", "d2/d20/a01096.html", [
       [ "Get C-Menu on Github", "d2/d20/a01096.html#get-c-menu-on-github-2", null ],
-      [ "Table of Contents", "d2/d20/a01096.html#table-of-contents-2", null ],
+      [ "Table of Contents", "d2/d20/a01096.html#table-of-contents-1", null ],
       [ "Introduction", "d2/d20/a01096.html#introduction-1", null ],
       [ "Prerequisites", "d2/d20/a01096.html#prerequisites", [
         [ "Not Required, But Recommended", "d2/d20/a01096.html#not-required-but-recommended", null ]
@@ -62,7 +62,11 @@ var NAVTREE =
           [ "Form Field Delimiters", "d2/d20/a01096.html#form-field-delimiters", null ],
           [ "Form Data Types", "d2/d20/a01096.html#form-data-types-1", null ],
           [ "Form Line Syntax", "d2/d20/a01096.html#form-line-syntax", null ],
-          [ "Form Options", "d2/d20/a01096.html#form-options", null ],
+          [ "Form Options", "d2/d20/a01096.html#form-options", null ]
+        ] ]
+      ] ],
+      [ "C-Menu Pick", "d2/d20/a01096.html#c-menu-pick", [
+        [ "Pick Usage", "d2/d20/a01096.html#pick-usage", [
           [ "Selecting Items", "d2/d20/a01096.html#selecting-items", null ]
         ] ],
         [ "Pick Options", "d2/d20/a01096.html#pick-options", null ]
@@ -79,7 +83,8 @@ var NAVTREE =
         [ "lf", "d2/d20/a01096.html#lf", null ],
         [ "whence", "d2/d20/a01096.html#whence", null ]
       ] ],
-      [ "Troubleshooting", "d2/d20/a01096.html#troubleshooting", null ]
+      [ "Troubleshooting", "d2/d20/a01096.html#troubleshooting", null ],
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d20/a01096.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1", null ]
     ] ],
     [ "Changelog", "d1/dfa/a01097.html", [
       [ "[Released] - 2026-02-04", "d1/dfa/a01097.html#released---2026-02-04", [
@@ -96,11 +101,12 @@ var NAVTREE =
         ] ],
         [ "Ghostty Configuration", "d5/d17/a01098.html#ghostty-configuration", null ],
         [ "Alacritty and Kitty", "d5/d17/a01098.html#alacritty-and-kitty", null ]
-      ] ]
+      ] ],
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d5/d17/a01098.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2", null ]
     ] ],
     [ "Augmenting C-Menu", "d6/dbc/a01099.html", [
       [ "Get C-Menu on Github", "d6/dbc/a01099.html#get-c-menu-on-github-3", null ],
-      [ "Table of Contents", "d6/dbc/a01099.html#table-of-contents-3", null ],
+      [ "Table of Contents", "d6/dbc/a01099.html#table-of-contents-2", null ],
       [ "Introduction", "d6/dbc/a01099.html#introduction-2", null ],
       [ "Installing Rust", "d6/dbc/a01099.html#installing-rust", [
         [ "Installing Rust On Linux and macOS", "d6/dbc/a01099.html#installing-rust-on-linux-and-macos", null ]
@@ -171,10 +177,11 @@ var NAVTREE =
         [ "Folke", "d6/dbc/a01099.html#folke", null ],
         [ "Other Resources", "d6/dbc/a01099.html#other-resources", null ]
       ] ],
-      [ "Conclusion", "d6/dbc/a01099.html#conclusion", null ]
+      [ "Conclusion", "d6/dbc/a01099.html#conclusion", null ],
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d6/dbc/a01099.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-3", null ]
     ] ],
     [ "Frequently Asked Questions", "d3/dbd/a01100.html", [
-      [ "Table of Contents", "d3/dbd/a01100.html#table-of-contents-4", null ],
+      [ "Table of Contents", "d3/dbd/a01100.html#table-of-contents-3", null ],
       [ "Sorted lf Output", "d3/dbd/a01100.html#sorted-lf-output", null ],
       [ "Multiple Executables", "d3/dbd/a01100.html#multiple-executables", null ],
       [ "Static Executables", "d3/dbd/a01100.html#static-executables", null ],
@@ -203,10 +210,11 @@ var NAVTREE =
       [ "Menu - What Happened to Delete by Inode", "d3/dbd/a01100.html#menu---what-happened-to-delete-by-inode", null ],
       [ "Pick - Selecting Multiple Files", "d3/dbd/a01100.html#pick---selecting-multiple-files", null ],
       [ "Menu lf - Where Are My Header Files?", "d3/dbd/a01100.html#menu-lf---where-are-my-header-files", null ],
-      [ "View In a Box Window", "d3/dbd/a01100.html#view-in-a-box-window", null ]
+      [ "View In a Box Window", "d3/dbd/a01100.html#view-in-a-box-window", null ],
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d3/dbd/a01100.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4", null ]
     ] ],
     [ "Installation Guide", "de/d99/a01101.html", [
-      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "de/d99/a01101.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1", null ]
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "de/d99/a01101.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5", null ]
     ] ],
     [ "C-Menu ROADMAP", "d4/da7/a01102.html", [
       [ "0.2.9 - Pre-Release", "d4/da7/a01102.html#autotoc_md029---pre-release", [
@@ -223,7 +231,7 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Configuration snippets", "d9/d10/a01103.html", [
-      [ "Table of Contents", "d9/d10/a01103.html#table-of-contents-5", null ],
+      [ "Table of Contents", "d9/d10/a01103.html#table-of-contents-4", null ],
       [ "C-Menu Desktop Files", "d9/d10/a01103.html#c-menu-desktop-files", null ],
       [ "C-Menu bashrc Configuration", "d9/d10/a01103.html#c-menu-bashrc-configuration", [
         [ "Shell Logging", "d9/d10/a01103.html#shell-logging", null ],
@@ -270,9 +278,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "d0/d2b/a01010.html",
-"d5/da3/a00953.html#a7800e5ade94fe5dce9d4092ddb9a10da",
-"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a98ee550545d2b48919abcac7c47497ad",
-"globals_p.html"
+"d5/da3/a00953.html#a3c04138a5bfe5d72780bb7e82a18e627",
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a755b2c2ecfd3c37facde81fe6ed93bf3",
+"globals_i.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

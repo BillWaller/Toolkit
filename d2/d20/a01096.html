@@ -120,7 +120,7 @@ Get C-Menu on Github</h1>
 <p><a href="https://github.com/BillWaller/C-Menu.git">Download C-Menu from Github</a></p>
 <div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
 </div><!-- fragment --><hr  />
-<h1 class="doxsection"><a class="anchor" id="table-of-contents-2"></a>
+<h1 class="doxsection"><a class="anchor" id="table-of-contents-1"></a>
 Table of Contents</h1>
 <ul>
 <li><a class="el" href="../../de/d6d/a01095.html#introduction" title="Introduction">Introduction</a></li>
@@ -148,6 +148,30 @@ Table of Contents</h1>
 </li>
 </ul>
 </li>
+<li><a class="el" href="#c-menu-pick" title="C-Menu Pick">C-Menu Pick</a><ul>
+<li><a class="el" href="#pick-usage" title="Pick Usage">Pick Usage</a><ul>
+<li><a class="el" href="#selecting-items" title="Selecting Items">Selecting Items</a></li>
+</ul>
+</li>
+<li><a class="el" href="#pick-options" title="Pick Options">Pick Options</a></li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-view" title="C-Menu View">C-Menu View</a><ul>
+<li><a class="el" href="#view-options" title="View Options">View Options</a><ul>
+<li><a class="el" href="#view-navigation" title="View Navigation">View Navigation</a></li>
+<li><a class="el" href="#searching-forward" title="Searching Forward">Searching Forward</a></li>
+<li><a class="el" href="#searching-backward" title="Searching Backward">Searching Backward</a></li>
+<li><a class="el" href="#horizontal-scrolling" title="Horizontal Scrolling">Horizontal Scrolling</a></li>
+<li><a class="el" href="#motion-keys" title="Motion Keys">Motion Keys</a></li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-options" title="C-Menu Options">C-Menu Options</a></li>
+<li><a class="el" href="#lf" title="lf">lf</a></li>
+<li><a class="el" href="#whence" title="whence">whence</a></li>
+</ul>
+</li>
+<li><a class="el" href="#troubleshooting" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="el" href="../../de/d6d/a01095.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository" title="🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.">🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</a></li>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="introduction-1"></a>
 Introduction</h1>
@@ -289,36 +313,18 @@ Form Options</h3>
 <div class="line">-R &lt;string&gt; Command to receive output via a STDOUT pipe</div>
 <div class="line">-c &lt;string&gt; Command to be executed with arguments provided by form</div>
 </div><!-- fragment --><p>The number of fields in the Form structure is currently set to a maximum of 100, and the maximum field length is set to 1024, but this can be easily modified in the source code if needed.</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;form.h&gt;</span></div>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="c-menu-pick"></a>
+C-Menu Pick</h1>
+<p>C-Menu Pick is a utility that allows users to create and to manage pick lists for selection within the C-Menu system, or stand-alone. It can be used to present a list of options for the user to choose from.</p>
+<h2 class="doxsection"><a class="anchor" id="pick-usage"></a>
+Pick Usage</h2>
+<p>Pick does not have a description file, but instead takes its input from standard input (stdin) or a file. Each line of input represents a separate pick item. The user can select an item by clicking on it or moving the cursor to highlight it and pressing the space bar to toggle it on or off. The number of items that can be selected is configurable by a command-line option (-n).</p>
+<p>The table of pick objects is currently set to a maximum of 1024 items of 80 bytes each, but this can be easily modified in the source code if needed.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;pick.h&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#define FIELD_MAXLEN 1024</span></div>
-<div class="line"><span class="preprocessor">#define FIELD_MAXCNT 100</span></div>
-</div><!-- fragment --><div class="fragment"><div class="line">---</div>
-<div class="line"> </div>
-<div class="line">## C-Menu Pick</div>
-<div class="line"> </div>
-<div class="line">C-Menu Pick is a utility that allows users to create and to manage</div>
-<div class="line">pick lists for selection within the C-Menu system, or stand-alone.</div>
-<div class="line">It can be used to present a list of options for the user to choose</div>
-<div class="line">from.</div>
-<div class="line"> </div>
-<div class="line">### Pick Usage</div>
-<div class="line"> </div>
-<div class="line">Pick does not have a description file, but instead takes its input from</div>
-<div class="line">standard input (stdin) or a file. Each line of input represents a</div>
-<div class="line">separate pick item. The user can select an item by clicking on it or</div>
-<div class="line">moving the cursor to highlight it and pressing the space bar to toggle</div>
-<div class="line">it on or off. The number of items that can be selected is configurable</div>
-<div class="line">by a command-line option (-n).</div>
-<div class="line"> </div>
-<div class="line">The table of pick objects is currently set to a maximum of 1024 items of 80</div>
-<div class="line">bytes each, but this can be easily modified in the source code if needed.</div>
-<div class="line"> </div>
-<div class="line">```c</div>
-<div class="line">#include &lt;pick.h&gt;</div>
-<div class="line"> </div>
-<div class="line">#define OBJ_MAXLEN 80</div>
-<div class="line">#define OBJ_MAXCNT 1024</div>
+<div class="line"><span class="preprocessor">#define OBJ_MAXLEN 80</span></div>
+<div class="line"><span class="preprocessor">#define OBJ_MAXCNT 1024</span></div>
 </div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="selecting-items"></a>
 Selecting Items</h3>
 <p>To select an item, the user can either click on it with the mouse or move the cursor to highlight it and press the space bar to toggle it on or off. Once the desired items are selected, the user can press the Enter key to confirm the selection and exit Pick.</p>
@@ -459,8 +465,11 @@ Troubleshooting</h1>
 <p>On some systems, "/usr/bin/view" may be a link to "/usr/bin/vim" or "/usr/bin/alts". Make sure ~/menuapp/bin is at the front of your PATH. You can check the location of a command using:</p>
 <div class="fragment"><div class="line">which &lt;command_name&gt;</div>
 </div><!-- fragment --><ul>
-<li>If you experience issues with root access features, ensure that RSH is installed with the correct permissions and that you understand the security implications. </li>
+<li>If you experience issues with root access features, ensure that RSH is installed with the correct permissions and that you understand the security implications.</li>
 </ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1"></a>
+🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h1>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -7,11 +7,8 @@ var index =
       [ "<b><em>New API Integration With Neovim</em></b>", "index.html#_new-api-integration-with-neovim_", null ],
       [ "<b><em>New Options for lf</em></b>", "index.html#_new-options-for-lf_", null ]
     ] ],
-    [ "Table of Contents", "index.html#table-of-contents", [
-      [ "Other Markdown files in this repository:", "index.html#other-markdown-files-in-this-repository", null ],
-      [ "HTML Documentation:", "index.html#html-documentation", null ]
-    ] ],
-    [ "Table of Contents", "index.html#table-of-contents-1", null ],
+    [ "Other C-Menu Documents", "index.html#other-c-menu-documents", null ],
+    [ "Table of Contents:", "index.html#table-of-contents", null ],
     [ "Get C-Menu on Github", "index.html#get-c-menu-on-github", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf", [

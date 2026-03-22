@@ -1,5 +1,11 @@
 var NAVTREEINDEX2 =
 {
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a755b2c2ecfd3c37facde81fe6ed93bf3":[11,0,3,1,8],
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a7bcbaaecf76020ea11912d3f0df38d94":[11,0,3,1,12],
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a7d3ab0c1f7f7887d28bfaf193a33d9d7":[11,0,3,1,20],
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a819cafc4dbd627a2b87d9b2a47c7bc3d":[11,0,3,1,10],
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a84fbb1bfd7bb8ff725414e0edddfabda":[11,0,3,1,11],
+"db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a8cc31d0844fa7c99b043a915d923381f":[11,0,3,1,13],
 "db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068a98ee550545d2b48919abcac7c47497ad":[11,0,3,1,16],
 "db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068aad322839dc9913439f64386356cc1936":[11,0,3,1,18],
 "db/d08/a01028.html#a3105ef09a0641c32b76be16f85a10068abdae45ac34862991c8c6b12d4dbeb4a8":[11,0,3,1,9],
@@ -142,7 +148,7 @@ var NAVTREEINDEX2 =
 "de/d91/a01034.html#afe4863a6b75c5a20c2008f36f86cfeed":[11,0,25,7],
 "de/d91/a01034_source.html":[11,0,25],
 "de/d99/a01101.html":[7],
-"de/d99/a01101.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1":[7,0],
+"de/d99/a01101.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5":[7,0],
 "de/d9c/a01092.html":[12,0],
 "de/def/a01016.html":[11,0,1],
 "de/def/a01016.html#a3c04138a5bfe5d72780bb7e82a18e627":[11,0,1,0],
@@ -243,11 +249,5 @@ var NAVTREEINDEX2 =
 "globals_func_x.html":[11,1,1,20],
 "globals_func_z.html":[11,1,1,21],
 "globals_g.html":[11,1,0,7],
-"globals_h.html":[11,1,0,8],
-"globals_i.html":[11,1,0,9],
-"globals_k.html":[11,1,0,10],
-"globals_l.html":[11,1,0,11],
-"globals_m.html":[11,1,0,12],
-"globals_n.html":[11,1,0,13],
-"globals_o.html":[11,1,0,14]
+"globals_h.html":[11,1,0,8]
 };

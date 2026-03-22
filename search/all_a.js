@@ -47,7 +47,7 @@ var searchData=
   ['do_20it_44',['Just Do It!',['../index.html#just-do-it',1,'']]],
   ['documentation_45',['Documentation',['../de/d6d/a01095.html#documentation',1,'']]],
   ['documentation_20and_20user_20guide_46',['Roadmap for API Documentation and User Guide',['../de/d6d/a01095.html#roadmap-for-api-documentation-and-user-guide',1,'']]],
-  ['documentation_3a_47',['HTML Documentation:',['../index.html#html-documentation',1,'']]],
+  ['documents_47',['Other C-Menu Documents',['../index.html#other-c-menu-documents',1,'']]],
   ['don_20t_20work_48',['Some Menu Selections Don&apos;t work',['../d3/dbd/a01100.html#some-menu-selections-dont-work',1,'']]],
   ['download_20from_20github_49',['Download From Github',['../d3/dbd/a01100.html#download-from-github',1,'']]],
   ['dump_5fconfig_50',['dump_config',['../dd/d80/a01075.html#ga1af490b85f0487c201f369333b84e540',1,'init.c']]],
