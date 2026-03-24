@@ -1,14 +1,8 @@
 var searchData=
 [
-  ['blue_5fgamma_0',['BLUE_GAMMA',['../db/d08/a01028.html#a5a610420788722ce758e00cc38030617',1,'dwin.c']]],
-  ['box_5fattr_1',['box_attr',['../db/d08/a01028.html#a016e8893ca4a8c072b92cee09f16c537',1,'dwin.c']]],
-  ['bw_5fbl_2',['bw_bl',['../db/d08/a01028.html#aa6f50dac9169ce11bcb06617d58c8086',1,'dwin.c']]],
-  ['bw_5fbr_3',['bw_br',['../db/d08/a01028.html#afbacc56e9dbf0e3bb81ce86866abee32',1,'dwin.c']]],
-  ['bw_5fho_4',['bw_ho',['../db/d08/a01028.html#a0b66386fcca36a42f23788aaa4a7ac60',1,'dwin.c']]],
-  ['bw_5flt_5',['bw_lt',['../db/d08/a01028.html#a7bef9ff53fbc9a7b38220fd5ac150f15',1,'dwin.c']]],
-  ['bw_5frt_6',['bw_rt',['../db/d08/a01028.html#a0aa9bf26801498404f8bea286da44500',1,'dwin.c']]],
-  ['bw_5fsp_7',['bw_sp',['../db/d08/a01028.html#a6b79a612cf4396d8fc3144a17381f6b3',1,'dwin.c']]],
-  ['bw_5ftl_8',['bw_tl',['../db/d08/a01028.html#a26a8de94bb9f636074d149970b64e58c',1,'dwin.c']]],
-  ['bw_5ftr_9',['bw_tr',['../db/d08/a01028.html#a598486fa325c11b5d4c9f097ea37c68d',1,'dwin.c']]],
-  ['bw_5fve_10',['bw_ve',['../db/d08/a01028.html#ad2cc2b8cc2c9eef9f20ed9650da0b3f9',1,'dwin.c']]]
+  ['abg_0',['abg',['../dd/de2/a01134.html#a32b793bd49e601ad65f4dee0a38a6056',1,'SIO']]],
+  ['about_5ffn_1',['about_fn',['../da/d73/a01090.html#a42dc8eac40418f0aca36c766d7a5a2da',1,'Init']]],
+  ['accept_5fs_2',['accept_s',['../d3/ddc/a01142.html#a259801946ce7b016e71fee1b90139fcf',1,'Field']]],
+  ['argc_3',['argc',['../da/d73/a01090.html#a394616f810da879963bdffa6d57b0d90',1,'Init::argc'],['../d5/d16/a01154.html#a1a9cb8c933f8daee80d275fcae7bbb82',1,'Menu::argc'],['../df/db5/a01158.html#a6d33bae69cf980edc98f577028bdba84',1,'Pick::argc'],['../d4/d13/a01162.html#a11b649a7bd5e1ac51943e2e57691b0a8',1,'View::argc']]],
+  ['argv_4',['argv',['../da/d73/a01090.html#ab6900a934df57e5b9971da7f6484eb41',1,'Init::argv'],['../d5/d16/a01154.html#aefb3580ad8effc5bc4d18272dda1d8c1',1,'Menu::argv'],['../df/db5/a01158.html#abf9dfbe77ff1ec9cef9baf5c4a0cba10',1,'Pick::argv'],['../d4/d13/a01162.html#a1927285829c2fa879bf8cfd9dd06c595',1,'View::argv']]]
 ];

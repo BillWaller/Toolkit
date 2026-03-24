@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['lf_5fdir_0',['LF_DIR',['../d1/dd8/a01022.html#a0ac18add284994be76aca1ea5c500c2d',1,'futil.c']]],
-  ['lf_5flnk_1',['LF_LNK',['../d1/dd8/a01022.html#ae14db1df03a3127c0e4ff5a1307e89cc',1,'futil.c']]],
-  ['lf_5freg_2',['LF_REG',['../d1/dd8/a01022.html#a7089bd4cb667475a891d92b36239cc66',1,'futil.c']]]
+  ['green_0',['green',['../d6/d8d/a01007.html#a7027592d032f7d20b38a1304ae3da2a2',1,'opts.c']]]
 ];

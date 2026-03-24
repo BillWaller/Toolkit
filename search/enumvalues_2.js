@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['in_5fspec_0',['IN_SPEC',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268',1,'init.c']]]
+  ['help_5fspec_0',['HELP_SPEC',['../db/daf/a01019.html#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80',1,'init.c']]]
 ];

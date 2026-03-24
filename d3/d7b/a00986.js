@@ -1,5 +1,6 @@
 var a00986 =
 [
+    [ "MAX_FRAMES", "d3/d7b/a00986.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
     [ "handle_signal", "d6/d9a/a01083.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
     [ "sig_dfl_mode", "d6/d9a/a01083.html#ga06c1eb6cf3649dc187115565409f91af", null ],
     [ "sig_prog_mode", "d6/d9a/a01083.html#gaca2de03f6d52d4b11237990e4e605177", null ],

@@ -1,5 +1,13 @@
 var a01079 =
 [
+    [ "Opts", "d1/d3d/a01110.html", [
+      [ "desc", "d1/d3d/a01110.html#a4afa9c2be94515f2b4a7ea325e68e125", null ],
+      [ "group", "d1/d3d/a01110.html#ad199424ffc057114820a24664b279de3", null ],
+      [ "name", "d1/d3d/a01110.html#a67f0875f795b9860cb7766f44ac1b469", null ],
+      [ "short_opt", "d1/d3d/a01110.html#ae738d2ff51bfad332e7010ce6f620ec7", null ],
+      [ "type", "d1/d3d/a01110.html#a4cc04fda36ca48d9391ca6f3feb9894a", null ],
+      [ "use", "d1/d3d/a01110.html#a111879bc0b5f92966cb9d85a2716debf", null ]
+    ] ],
     [ "comp_opt_desc", "d2/d4d/a01079.html#ga7dab6cfce87206aebbd43f5d7511f9b8", null ],
     [ "comp_opt_group", "d2/d4d/a01079.html#ga4f6cb8b1a6d59258311444e8a3c6d00c", null ],
     [ "comp_opt_name", "d2/d4d/a01079.html#ga368ef550932bfb5c79cff9e43f9b5bfb", null ],

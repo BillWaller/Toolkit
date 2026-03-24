@@ -48,6 +48,5 @@ var a01022 =
     [ "trim_path", "d6/d6a/a01072.html#gafb4a0bc0d88592caff5cd1436dd426a0", null ],
     [ "verify_dir", "d6/d6a/a01072.html#gae14a4e790b69c8c2e50d1eb5cdf1fd19", null ],
     [ "verify_file", "d6/d6a/a01072.html#gab190e75e095b7d3da114fce21ab8c8ea", null ],
-    [ "errmsg", "d1/dd8/a01022.html#ae66f0b659923d81fd95da97e0d5ca496", null ],
-    [ "f_debug", "d1/dd8/a01022.html#a9181fa1b07a03c974e46d0af39baff66", null ]
+    [ "errmsg", "d1/dd8/a01022.html#ae66f0b659923d81fd95da97e0d5ca496", null ]
 ];

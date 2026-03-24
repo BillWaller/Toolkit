@@ -10,5 +10,6 @@ var a01065 =
     [ "win_new", "d0/dc9/a01065.html#ga435c7bff7ffedb8f51c6de9259e36f6c", null ],
     [ "win_redraw", "d0/dc9/a01065.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
     [ "win_resize", "d0/dc9/a01065.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
-    [ "xwgetch", "d0/dc9/a01065.html#gacf4c709bccc4c965a5d61db978db31a3", null ]
+    [ "xwgetch", "d0/dc9/a01065.html#gacf4c709bccc4c965a5d61db978db31a3", null ],
+    [ "xwgetch_t", "d0/dc9/a01065.html#ga08c98321c95f4a39f4fa441bcc3d62fd", null ]
 ];
