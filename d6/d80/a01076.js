@@ -1,7 +1,14 @@
 var a01076 =
 [
-    [ "init_view.c", "df/d39/a00950.html", null ],
-    [ "init_view_boxwin", "d6/d80/a01076.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d6/d80/a01076.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_init_input", "d6/d80/a01076.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "apply_gamma", "d6/d80/a01076.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
+    [ "clr_name_to_idx", "d6/d80/a01076.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
+    [ "get_clr_pair", "d6/d80/a01076.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
+    [ "hex_clr_str_to_rgb", "d6/d80/a01076.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "init_clr_palette", "d6/d80/a01076.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
+    [ "init_hex_clr", "d6/d80/a01076.html#ga61af7829a5d63d766e76930a0893d574", null ],
+    [ "list_colors", "d6/d80/a01076.html#ga482af92e265df3405f0620b4d6158b4e", null ],
+    [ "mkccc", "d6/d80/a01076.html#ga08537e2322c1207f7e6ae571bac1c9fd", null ],
+    [ "rgb_to_curses_clr", "d6/d80/a01076.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
+    [ "rgb_to_xterm256_idx", "d6/d80/a01076.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
+    [ "xterm256_idx_to_rgb", "d6/d80/a01076.html#ga31ee0d93c7b527f92559fc410152f768", null ]
 ];

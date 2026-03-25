@@ -1,28 +1,7 @@
 var a00962 =
 [
-    [ "deselect_object", "dd/dee/a01081.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "dd/dee/a01081.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "dd/dee/a01081.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "dd/dee/a01081.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "dd/dee/a01081.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "open_pick_win", "dd/dee/a01081.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "dd/dee/a01081.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_display_chyron", "dd/dee/a01081.html#gaed5ddd88212281d12281a15bf8fc7b8b", null ],
-    [ "pick_engine", "dd/dee/a01081.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "dd/dee/a01081.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
-    [ "read_pick_input", "dd/dee/a01081.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "dd/dee/a01081.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "dd/dee/a01081.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "dd/dee/a01081.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "dd/dee/a01081.html#ga650262f8279502ebc73607394dd7af13", null ],
-    [ "calculated_idx", "df/d88/a00962.html#acdb9de82d81b176784185dea9063b57c", null ],
-    [ "obj_idx", "df/d88/a00962.html#a4a50bfe3f8460978b34566ec3dff7adb", null ],
-    [ "pagers_editors", "df/d88/a00962.html#a8f93294009502446912fa64f33731029", null ],
-    [ "pg_lines", "df/d88/a00962.html#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d", null ],
-    [ "pipe_fd", "df/d88/a00962.html#ac7ac4adf3c3409d847a57c140700f334", null ],
-    [ "tbl_col", "df/d88/a00962.html#ab57f05e19e1e81af17fbbd3a766c405a", null ],
-    [ "tbl_cols", "df/d88/a00962.html#a7df4e526a3af8e113bbc05ca011c2341", null ],
-    [ "tbl_line", "df/d88/a00962.html#a25fe2a76cfd155c51a46c99d6a1cf4d9", null ],
-    [ "tbl_page", "df/d88/a00962.html#ae7c3abf692920540a78bc3322d02828a", null ],
-    [ "tbl_pages", "df/d88/a00962.html#acbe29ef30ea713ef47f3cd892310ca50", null ]
+    [ "RSH_SSH", "df/d88/a00962.html#a52fd11c5b04a7ea03aaa9433964c8cbd", null ],
+    [ "ABEND", "df/d88/a00962.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "df/d88/a00962.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "f_verbose", "df/d88/a00962.html#aaada0e40d7855fd811f41c576cd785fe", null ]
 ];

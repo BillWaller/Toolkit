@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['key_0',['key',['../d5/d17/a01098.html#afae4703fe8eb6cfce07372508666dea6',1,'Chyron']]],
+  ['key_0',['key',['../de/d4a/a01107.html#afae4703fe8eb6cfce07372508666dea6',1,'Chyron']]],
   ['key_20features_1',['Key Features',['../index.html#form-key-features',1,'Form Key Features'],['../index.html#key-features',1,'Key Features']]],
   ['key_5faltdel_2',['KEY_ALTDEL',['../d8/db9/a00725.html#a994bc87be1eb918768f1ab7f9f325f1c',1,'cm.h']]],
   ['key_5faltdown_3',['KEY_ALTDOWN',['../d8/db9/a00725.html#a199a6d2613c848c2d31b6b63997afdf2',1,'cm.h']]],
@@ -15,11 +15,11 @@ var searchData=
   ['key_5faltright_12',['KEY_ALTRIGHT',['../d8/db9/a00725.html#a8bfe766d44a69587427b117680587450',1,'cm.h']]],
   ['key_5faltup_13',['KEY_ALTUP',['../d8/db9/a00725.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b',1,'cm.h']]],
   ['keyboard_20mouse_20input_14',['C-Keys - Diagnose Keyboard/Mouse Input',['../index.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keycode_15',['keycode',['../d6/dea/a01094.html#a86b6864ce0ecfeef4be8a88c24b98082',1,'ChyronKey']]],
-  ['keys_16',['Motion Keys',['../d8/df3/a01216.html#motion-keys',1,'']]],
+  ['keycode_15',['keycode',['../d9/d10/a01103.html#a86b6864ce0ecfeef4be8a88c24b98082',1,'ChyronKey']]],
+  ['keys_16',['Motion Keys',['../d8/d53/a01225.html#motion-keys',1,'']]],
   ['keys_20diagnose_20keyboard_20mouse_20input_17',['C-Keys - Diagnose Keyboard/Mouse Input',['../index.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
   ['keys_20rsh_20and_20lf_18',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../index.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
-  ['kitty_19',['Kitty',['../d8/d15/a01218.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../d7/ddd/a01223.html#kitty',1,'Kitty']]],
-  ['kitty_20configuration_20',['Kitty Configuration',['../d5/d39/a01219.html#kitty-configuration',1,'']]],
-  ['kstrlen_21',['KSTRLEN',['../db/d40/a00959.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
+  ['kitty_19',['Kitty',['../d9/da8/a01227.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../d0/d67/a01232.html#kitty',1,'Kitty']]],
+  ['kitty_20configuration_20',['Kitty Configuration',['../de/d16/a01228.html#kitty-configuration',1,'']]],
+  ['kstrlen_21',['KSTRLEN',['../d3/dcd/a00965.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
 ];

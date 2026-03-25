@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['bblue_0',['bblue',['../d6/d8d/a01007.html#a0777ed9763c78435bf1943054f6456e9',1,'opts.c']]],
+  ['bblue_0',['bblue',['../de/def/a01016.html#a0777ed9763c78435bf1943054f6456e9',1,'opts.c']]],
   ['bg_5fcolor_1',['BG_COLOR',['../d8/db9/a00725.html#ae7ed5ea1d43fb2b71b3eaea2397fb5ca',1,'cm.h']]],
-  ['blue_2',['blue',['../d6/d8d/a01007.html#a679c8f05bd397c3b2ad08274a1e5e752',1,'opts.c']]],
+  ['blue_2',['blue',['../de/def/a01016.html#a679c8f05bd397c3b2ad08274a1e5e752',1,'opts.c']]],
   ['bo_5fcolor_3',['BO_COLOR',['../d8/db9/a00725.html#ad1ec42c0323104fe2e8902c7fee7a8b6',1,'cm.h']]],
   ['bufsiz_4',['BUFSIZ',['../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe',1,'view.h']]],
   ['bw_5fbl_5',['BW_BL',['../d8/db9/a00725.html#a68dc64ce5bc9d36979e5e5aeeae6aa9c',1,'cm.h']]],

@@ -1,6 +1,6 @@
 var a00956 =
 [
-    [ "ABEND", "d3/de5/a00956.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
-    [ "main", "d3/de5/a00956.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "f_verbose", "d3/de5/a00956.html#aaada0e40d7855fd811f41c576cd785fe", null ]
+    [ "init_view_boxwin", "d2/df3/a01085.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d2/df3/a01085.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_init_input", "d2/df3/a01085.html#gab050f5482419339e9207dbdc65a7b49e", null ]
 ];

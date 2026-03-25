@@ -1,11 +1,18 @@
 var a01086 =
 [
-    [ "cmd_line_prompt", "d9/df5/a01086.html#ga5a1709eaa7dd8a6dec494455146f1be1", null ],
-    [ "display_line", "d9/df5/a01086.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "fmt_line", "d9/df5/a01086.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "d9/df5/a01086.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "d9/df5/a01086.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "resize_page", "d9/df5/a01086.html#gacf603aea7d287c5d94548bf6ac2d2adb", null ],
-    [ "view_display_help", "d9/df5/a01086.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "d9/df5/a01086.html#gae6f141401cf9f104dbe14f09603d5178", null ]
+    [ "destroy_form", "d9/df5/a01086.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "d9/df5/a01086.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "d9/df5/a01086.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "d9/df5/a01086.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "d9/df5/a01086.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "d9/df5/a01086.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "d9/df5/a01086.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "d9/df5/a01086.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "d9/df5/a01086.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "d9/df5/a01086.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
+    [ "new_init", "d9/df5/a01086.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "d9/df5/a01086.html#ga861e6162a19e089468fdc2a1479b547f", null ],
+    [ "new_pick", "d9/df5/a01086.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
+    [ "new_view", "d9/df5/a01086.html#ga2e67404cd52bddd379a57c50434ac445", null ],
+    [ "verify_spec_arg", "d9/df5/a01086.html#ga75ce293fe4e007a3337a190647408000", null ]
 ];

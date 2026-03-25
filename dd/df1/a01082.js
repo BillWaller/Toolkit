@@ -1,10 +1,9 @@
 var a01082 =
 [
-    [ "capture_curses_tioctl", "dd/df1/a01082.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "dd/df1/a01082.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "dd/df1/a01082.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "dd/df1/a01082.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "dd/df1/a01082.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "dd/df1/a01082.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "dd/df1/a01082.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "free_string", "dd/df1/a01082.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "dd/df1/a01082.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "dd/df1/a01082.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "dd/df1/a01082.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "dd/df1/a01082.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "dd/df1/a01082.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];

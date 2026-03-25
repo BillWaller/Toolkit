@@ -1,28 +1,15 @@
 var a01079 =
 [
-    [ "Opts", "d1/d3d/a01110.html", [
-      [ "desc", "d1/d3d/a01110.html#a4afa9c2be94515f2b4a7ea325e68e125", null ],
-      [ "group", "d1/d3d/a01110.html#ad199424ffc057114820a24664b279de3", null ],
-      [ "name", "d1/d3d/a01110.html#a67f0875f795b9860cb7766f44ac1b469", null ],
-      [ "short_opt", "d1/d3d/a01110.html#ae738d2ff51bfad332e7010ce6f620ec7", null ],
-      [ "type", "d1/d3d/a01110.html#a4cc04fda36ca48d9391ca6f3feb9894a", null ],
-      [ "use", "d1/d3d/a01110.html#a111879bc0b5f92966cb9d85a2716debf", null ]
-    ] ],
-    [ "comp_opt_desc", "d2/d4d/a01079.html#ga7dab6cfce87206aebbd43f5d7511f9b8", null ],
-    [ "comp_opt_group", "d2/d4d/a01079.html#ga4f6cb8b1a6d59258311444e8a3c6d00c", null ],
-    [ "comp_opt_name", "d2/d4d/a01079.html#ga368ef550932bfb5c79cff9e43f9b5bfb", null ],
-    [ "comp_opt_short_opt", "d2/d4d/a01079.html#ga0f808d9ff32065a09e463ce5f29a912f", null ],
-    [ "contains", "d2/d4d/a01079.html#ga58c7c22e79895abf30c1bb4d2714ad34", null ],
-    [ "dump_opts", "d2/d4d/a01079.html#ga518c63d1d53a636e68ed360015d81207", null ],
-    [ "dump_opts_by_desc", "d2/d4d/a01079.html#ga09057d0d0fe6d631679535a616b7472b", null ],
-    [ "dump_opts_by_group", "d2/d4d/a01079.html#ga6bf06dd5190d18bfd69c519a3e5fb7e4", null ],
-    [ "dump_opts_by_name", "d2/d4d/a01079.html#gad2bd729273018084d32c9a1481b566a6", null ],
-    [ "dump_opts_by_short_opt", "d2/d4d/a01079.html#ga67f46739ac01f51f30214abf2a6435c8", null ],
-    [ "dump_opts_by_use", "d2/d4d/a01079.html#gab2958e2921a81b3f26fe0a9b7da34763", null ],
-    [ "print_opt", "d2/d4d/a01079.html#gaab5b69801076b208d7428b7aac76000b", null ],
-    [ "print_opt_header", "d2/d4d/a01079.html#gaf621ff60685ba18f3720cf24c758fdf4", null ],
-    [ "select_opt", "d2/d4d/a01079.html#ga2978674465c80376b792c0305d3b5d8b", null ],
-    [ "sort_opts_by_desc", "d2/d4d/a01079.html#gacf55f6ae1f20090335cbab3928d788f7", null ],
-    [ "sort_opts_by_group", "d2/d4d/a01079.html#gab99486f96fe0db3c90a7255fdbdf29e8", null ],
-    [ "sort_opts_by_name", "d2/d4d/a01079.html#gad4e476077d97143f00e00e60877a1f61", null ]
+    [ "form_accept_field", "d2/d4d/a01079.html#gaa3062b9adcfe4160df15f1763963f9f8", null ],
+    [ "form_display_field", "d2/d4d/a01079.html#gabd1710f59277202b0a58f840d4da322e", null ],
+    [ "form_display_field_brackets", "d2/d4d/a01079.html#gad306f4b1bdcba7aefece7e4b73367b66", null ],
+    [ "form_display_field_n", "d2/d4d/a01079.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
+    [ "form_fmt_field", "d2/d4d/a01079.html#ga07a8d9311c88786e7310fef638d34a41", null ],
+    [ "form_validate_field", "d2/d4d/a01079.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
+    [ "is_valid_date", "d2/d4d/a01079.html#ga353546f4d99ef7ec908d371187f033de", null ],
+    [ "is_valid_time", "d2/d4d/a01079.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
+    [ "left_justify", "d2/d4d/a01079.html#ga425021d4c87474159a36d395e4dcdf65", null ],
+    [ "mk_filler", "d2/d4d/a01079.html#gaac069c6892f64ea6307044a92b179faa", null ],
+    [ "numeric", "d2/d4d/a01079.html#ga18db59e4c79e823f79310378183ac25c", null ],
+    [ "right_justify", "d2/d4d/a01079.html#ga21ebe9713e3b003715a7a2c3b64cbf55", null ]
 ];

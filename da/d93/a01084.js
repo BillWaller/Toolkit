@@ -1,15 +1,17 @@
 var a01084 =
 [
-    [ "get_next_char", "da/d93/a01084.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "da/d93/a01084.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "da/d93/a01084.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "da/d93/a01084.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "da/d93/a01084.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "da/d93/a01084.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "da/d93/a01084.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "da/d93/a01084.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "da/d93/a01084.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "da/d93/a01084.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "da/d93/a01084.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "da/d93/a01084.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "derive_file_spec", "da/d93/a01084.html#ga20c40545a1e05954b496c6d674d31458", null ],
+    [ "display_version", "da/d93/a01084.html#ga33abf350aae0212c85a5903e41764025", null ],
+    [ "dump_config", "da/d93/a01084.html#ga1af490b85f0487c201f369333b84e540", null ],
+    [ "mapp_initialization", "da/d93/a01084.html#gaccd65939c0ce6f0d940c5cf795a1e8fa", null ],
+    [ "opt_prt_bool", "da/d93/a01084.html#ga4cea5ec97a8076e2a944e2c441ebb091", null ],
+    [ "opt_prt_char", "da/d93/a01084.html#ga3d0b179ebc74f8a911a4152f54e7a8a7", null ],
+    [ "opt_prt_double", "da/d93/a01084.html#ga365153038835675ce050503313cea890", null ],
+    [ "opt_prt_int", "da/d93/a01084.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e", null ],
+    [ "opt_prt_str", "da/d93/a01084.html#ga086c2240ffa5e497b67d630ea0d206b5", null ],
+    [ "parse_config", "da/d93/a01084.html#ga5836f1ea8f972e3ca12e2772dc76fb32", null ],
+    [ "parse_opt_args", "da/d93/a01084.html#ga11b56c5001e3ca95f4d0a28903b29609", null ],
+    [ "usage", "da/d93/a01084.html#ga2ef30c42cbc289d899a8be5d2d8f77d0", null ],
+    [ "write_config", "da/d93/a01084.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
+    [ "zero_opt_args", "da/d93/a01084.html#gae9b71868d00a28cdcf5f4514e662edfe", null ]
 ];

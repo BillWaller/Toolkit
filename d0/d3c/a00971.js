@@ -1,26 +1,5 @@
 var a00971 =
 [
-    [ "D_CALC", "d0/d3c/a00971.html#a4bee8ff1d56707e8d62039c449eb5112", null ],
-    [ "D_CMD", "d0/d3c/a00971.html#a2d8c742d9f48c28a95f7a8a143db9b22", null ],
-    [ "D_COMMENT", "d0/d3c/a00971.html#a9bde875ceaf7176146f8c1a05a5724e8", null ],
-    [ "D_FIELD", "d0/d3c/a00971.html#a43348dafdbc52ee02edb0652d644130e", null ],
-    [ "D_HEADER", "d0/d3c/a00971.html#afb32f9ec171fac7ce0a9c7b68236e21a", null ],
-    [ "D_HELP", "d0/d3c/a00971.html#a89b314cf8c48acb2b0f084023efe43cd", null ],
-    [ "D_QUERY", "d0/d3c/a00971.html#a8dde2b17da1845d674f44135895994a5", null ],
-    [ "D_TEXT", "d0/d3c/a00971.html#a582a134ae58dbe280e34e0a1d6a1e26d", null ],
-    [ "form_calculate", "df/d18/a01071.html#ga0329d3892bf2c4fe8e77a3c303ebe5f6", null ],
-    [ "form_desc_error", "df/d18/a01071.html#ga02cf855a99051ac21f4966aa92b9544f", null ],
-    [ "form_display_chyron", "df/d18/a01071.html#ga639a9c28161fb26549fb07378ae82f55", null ],
-    [ "form_display_fields", "df/d18/a01071.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
-    [ "form_display_screen", "df/d18/a01071.html#gaf488c427355a0bfca2caa63ba51d5a30", null ],
-    [ "form_end_fields", "df/d18/a01071.html#ga67032038765fcb55ea51e0bdd6686efc", null ],
-    [ "form_engine", "df/d18/a01071.html#gada302551bf41bf8ed6132fd34328a47e", null ],
-    [ "form_enter_fields", "df/d18/a01071.html#ga85f521b3faafff8ce5584317cebe5d3c", null ],
-    [ "form_exec_cmd", "df/d18/a01071.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
-    [ "form_parse_desc", "df/d18/a01071.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
-    [ "form_read_data", "df/d18/a01071.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
-    [ "form_usage", "df/d18/a01071.html#ga55ea39040ce4618476ee3fada6a0c417", null ],
-    [ "form_write", "df/d18/a01071.html#ga2839acac3143be9233fbf99458b77e64", null ],
-    [ "form_yx_to_fidx", "d0/d3c/a00971.html#a3c66bd6b1987c79ef5a31bb28227c65b", null ],
-    [ "init_form", "df/d18/a01071.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
+    [ "main", "d0/d3c/a00971.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "__end_pgm", "d0/d3c/a00971.html#ab5fceb24373673e919c49ede0f9b12e5", null ]
 ];

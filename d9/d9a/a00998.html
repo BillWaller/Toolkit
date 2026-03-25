@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: enterstr.c File Reference</title>
+<title>C-Menu: lf.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,21 +109,26 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d9a/a00998.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">enterstr.c File Reference</div></div>
+  <div class="headertitle"><div class="title">lf.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Enter a string from keyboard.  
+<p>list files matching a regular expression  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;grp.h&gt;</code><br />
+<code>#include &lt;pwd.h&gt;</code><br />
+<code>#include &lt;regex.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/ioctl.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for enterstr.c:</div>
+Include dependency graph for lf.c:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/de2/a00999.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
@@ -133,14 +138,14 @@ Include dependency graph for enterstr.c:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">allows the user to enter a string in cooked mode  <br /></td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">List files in a directory matching a regular expression.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Enter a string from keyboard. </p>
+<div class="textblock"><p>list files matching a regular expression </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d9/d9a/a00998_source.html">enterstr.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../d9/d9a/a00998_source.html">lf.c</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
@@ -161,57 +166,170 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>allows the user to enter a string in cooked mode </p>
-<dl class="section note"><dt>Note</dt><dd>allows line editing and other features </dd>
-<dd>
-writes the prompt to stderr and the user's input to stdout </dd>
-<dd>
-handles signals to ensure that the terminal settings are restored if the program is interrupted. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d9/d9a/a00998_source.html#l00032">32</a> of file <a class="el" href="../../d9/d9a/a00998_source.html">enterstr.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span>                                {</div>
-<div class="line"><span class="lineno">   33</span>    <span class="keyword">struct </span>termios new_tioctl;</div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d5/da3/a00953.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../d5/da3/a00953.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
-<div class="line"><span class="lineno">   36</span>    <span class="keywordtype">char</span> *msg;</div>
-<div class="line"><span class="lineno">   37</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
-<div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line"><span class="lineno">   40</span>        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   42</span>        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
-<div class="line"><span class="lineno">   43</span>    <a class="code hl_function" href="../../dd/df1/a01082.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">   44</span>    <a class="code hl_function" href="../../d6/d9a/a01083.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">   45</span>    new_tioctl = <a class="code hl_variable" href="../../de/d91/a01034.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line"><span class="lineno">   46</span>    new_tioctl.c_lflag |= ICANON;</div>
-<div class="line"><span class="lineno">   47</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno">   49</span>        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
-<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">while</span> (*msg)</div>
-<div class="line"><span class="lineno">   51</span>            write(2, msg++, 1);</div>
-<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../d5/da3/a00953.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
-<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">while</span> (*in_ptr)</div>
-<div class="line"><span class="lineno">   56</span>        write(1, in_ptr++, 1);</div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_function" href="../../d6/d9a/a01083.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
-<div class="line"><span class="lineno">   58</span>    <a class="code hl_function" href="../../dd/df1/a01082.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">   59</span>    _exit(0);</div>
-<div class="line"><span class="lineno">   60</span>}</div>
-<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dd8/a01022_source.html#l00078">futil.c:78</a></div></div>
-<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
-<div class="ttc" id="aa00953_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../d5/da3/a00953.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da3/a00953_source.html#l00020">iloan.c:20</a></div></div>
-<div class="ttc" id="aa01034_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../de/d91/a01034.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../de/d91/a01034_source.html#l00021">scriou.c:21</a></div></div>
-<div class="ttc" id="aa01082_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../dd/df1/a01082.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/d91/a01034_source.html#l00042">scriou.c:42</a></div></div>
-<div class="ttc" id="aa01082_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../dd/df1/a01082.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/d91/a01034_source.html#l00054">scriou.c:54</a></div></div>
-<div class="ttc" id="aa01083_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d6/d9a/a01083.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d7b/a00986_source.html#l00042">sig.c:42</a></div></div>
-<div class="ttc" id="aa01083_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d6/d9a/a01083.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d7b/a00986_source.html#l00062">sig.c:62</a></div></div>
+<p>List files in a directory matching a regular expression. </p>
+<pre class="fragment">    lf [options ad:e:hit:v] [dir] [re]
+       -a  List hidden files
+       -d  maximum max_depth of subdirectories to examine
+       -e  exclude files matching the regular expression
+       -h  show this help message
+       -i  ignore case in search
+       -t  [bcdplfsu]
+           b          block devices
+            c         character devices
+             d        directories
+              p       named pipes
+               l      symbolic links
+                f     regular files
+                 s    sockets
+                  u   unknown
+                      (in any order or combination)
+       -v  show version information
+       dir Directory to search
+       re  Regular expression to match
+</pre> 
+<p class="definition">Definition at line <a class="el" href="../../d9/d9a/a00998_source.html#l00047">47</a> of file <a class="el" href="../../d9/d9a/a00998_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>                                {</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordtype">char</span> dir[<a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">   49</span>    <span class="keywordtype">char</span> re[<a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordtype">char</span> ere[<a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">   51</span>    dir[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   52</span>    re[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   53</span>    ere[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="../../db/d08/a01028.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="../../db/d08/a01028.html#ab5ca79336823d1b09da46701f6244686">f_version</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   56</span>    <span class="keywordtype">int</span> flags = 0;</div>
+<div class="line"><span class="lineno">   57</span>    <span class="keywordtype">int</span> opt;</div>
+<div class="line"><span class="lineno">   58</span>    <span class="keywordtype">int</span> max_depth = 3;</div>
+<div class="line"><span class="lineno">   59</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">   60</span> </div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordflow">while</span> ((opt = getopt(argc, argv, <span class="stringliteral">&quot;ad:e:hit:v&quot;</span>)) != -1) {</div>
+<div class="line"><span class="lineno">   62</span>        <span class="keywordflow">switch</span> (opt) {</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;a&#39;</span>:</div>
+<div class="line"><span class="lineno">   64</span>            flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa1cd0ce06c451faa378667670f2046418">LF_ALL</a>;</div>
+<div class="line"><span class="lineno">   65</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
+<div class="line"><span class="lineno">   67</span>            max_depth = atoi(optarg);</div>
+<div class="line"><span class="lineno">   68</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   69</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;e&#39;</span>:</div>
+<div class="line"><span class="lineno">   70</span>            <a class="code hl_function" href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(ere, optarg, <a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">   71</span>            flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>;</div>
+<div class="line"><span class="lineno">   72</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   73</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;h&#39;</span>:</div>
+<div class="line"><span class="lineno">   74</span>            <a class="code hl_variable" href="../../db/d08/a01028.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">   75</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   76</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;i&#39;</span>:</div>
+<div class="line"><span class="lineno">   77</span>            flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a">LF_ICASE</a>;</div>
+<div class="line"><span class="lineno">   78</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   79</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;t&#39;</span>:</div>
+<div class="line"><span class="lineno">   80</span>            i = 0;</div>
+<div class="line"><span class="lineno">   81</span>            <span class="keywordflow">while</span> (optarg[i]) {</div>
+<div class="line"><span class="lineno">   82</span>                <span class="keywordflow">switch</span> (optarg[i++]) {</div>
+<div class="line"><span class="lineno">   83</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;b&#39;</span>:</div>
+<div class="line"><span class="lineno">   84</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">   85</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   86</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;c&#39;</span>:</div>
+<div class="line"><span class="lineno">   87</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">   88</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   89</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;d&#39;</span>:</div>
+<div class="line"><span class="lineno">   90</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">   91</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   92</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;p&#39;</span>:</div>
+<div class="line"><span class="lineno">   93</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">   94</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   95</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;l&#39;</span>:</div>
+<div class="line"><span class="lineno">   96</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">   97</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   98</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;f&#39;</span>:</div>
+<div class="line"><span class="lineno">   99</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">  100</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  101</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;s&#39;</span>:</div>
+<div class="line"><span class="lineno">  102</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">  103</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  104</span>                <span class="keywordflow">case</span> <span class="charliteral">&#39;u&#39;</span>:</div>
+<div class="line"><span class="lineno">  105</span>                    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a> &lt;&lt; 8;</div>
+<div class="line"><span class="lineno">  106</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  107</span>                <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  108</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  109</span>                }</div>
+<div class="line"><span class="lineno">  110</span>            }</div>
+<div class="line"><span class="lineno">  111</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;v&#39;</span>:</div>
+<div class="line"><span class="lineno">  113</span>            <a class="code hl_variable" href="../../db/d08/a01028.html#ab5ca79336823d1b09da46701f6244686">f_version</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  114</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  116</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  117</span>        }</div>
+<div class="line"><span class="lineno">  118</span>    }</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a>) {</div>
+<div class="line"><span class="lineno">  120</span>        printf(<span class="stringliteral">&quot;Usage: lf [options] [directory] [regexp]\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  121</span>        printf(<span class="stringliteral">&quot;Options:\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  122</span>        printf(<span class="stringliteral">&quot;  -a        List hidden files\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  123</span>        printf(<span class="stringliteral">&quot;  -d        maximum depth of subdirectories to examine\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  124</span>        printf(<span class="stringliteral">&quot;  -e        exclude files matching the regular expression\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  125</span>        printf(<span class="stringliteral">&quot;  -h        show this help message\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  126</span>        printf(<span class="stringliteral">&quot;  -i        ignore case in search\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  127</span>        printf(<span class="stringliteral">&quot;  -t   [bcdplfsu]\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  128</span>        printf(<span class="stringliteral">&quot;       b          block devices\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  129</span>        printf(<span class="stringliteral">&quot;        c         character devices\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  130</span>        printf(<span class="stringliteral">&quot;         d        directories\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  131</span>        printf(<span class="stringliteral">&quot;          p       named pipes\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  132</span>        printf(<span class="stringliteral">&quot;           l      symbolic links\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  133</span>        printf(<span class="stringliteral">&quot;            f     regular files\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  134</span>        printf(<span class="stringliteral">&quot;             s    sockets\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  135</span>        printf(<span class="stringliteral">&quot;              u   unknown\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  136</span>        printf(<span class="stringliteral">&quot;                  (in any order or combination)\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  137</span>        printf(<span class="stringliteral">&quot;  -v        show version information\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  138</span>        exit(EXIT_SUCCESS);</div>
+<div class="line"><span class="lineno">  139</span>    }</div>
+<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d08/a01028.html#ab5ca79336823d1b09da46701f6244686">f_version</a>) {</div>
+<div class="line"><span class="lineno">  141</span>        printf(<span class="stringliteral">&quot;lf version: %s\n&quot;</span>, <a class="code hl_define" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a>);</div>
+<div class="line"><span class="lineno">  142</span>        exit(EXIT_SUCCESS);</div>
+<div class="line"><span class="lineno">  143</span>    }</div>
+<div class="line"><span class="lineno">  144</span>    <span class="keyword">struct </span>stat sb;</div>
+<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">if</span> (optind &lt; argc) {</div>
+<div class="line"><span class="lineno">  146</span>        <span class="keywordflow">if</span> (stat(argv[optind], &amp;sb) == -1 || (sb.st_mode &amp; S_IFMT) != S_IFDIR) {</div>
+<div class="line"><span class="lineno">  147</span>            <a class="code hl_function" href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  148</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  149</span>            <a class="code hl_function" href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, argv[optind], <a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  150</span>            optind++;</div>
+<div class="line"><span class="lineno">  151</span>        }</div>
+<div class="line"><span class="lineno">  152</span>    }</div>
+<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">if</span> (optind &lt; argc) {</div>
+<div class="line"><span class="lineno">  154</span>        <a class="code hl_function" href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(re, argv[optind], <a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  155</span>        optind++;</div>
+<div class="line"><span class="lineno">  156</span>    }</div>
+<div class="line"><span class="lineno">  157</span>    <span class="keywordflow">if</span> (re[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  158</span>        <a class="code hl_function" href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(re, <span class="stringliteral">&quot;.*&quot;</span>, <a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  159</span>    <span class="keywordflow">if</span> (dir[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  160</span>        <a class="code hl_function" href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  161</span>    flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
+<div class="line"><span class="lineno">  162</span>    <a class="code hl_function" href="../../dd/dee/a01081.html#ga5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a>(dir, re, ere, max_depth, flags);</div>
+<div class="line"><span class="lineno">  163</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  164</span>}</div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a></div><div class="ttdeci">@ FT_UNKNOWN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00106">cm.h:106</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a></div><div class="ttdeci">@ FT_SOCK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00105">cm.h:105</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a></div><div class="ttdeci">@ FT_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00101">cm.h:101</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a></div><div class="ttdeci">@ FT_FIFO</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00102">cm.h:102</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a></div><div class="ttdeci">@ FT_REG</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00104">cm.h:104</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a></div><div class="ttdeci">@ FT_CHR</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00100">cm.h:100</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a></div><div class="ttdeci">@ FT_BLK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00099">cm.h:99</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a></div><div class="ttdeci">@ FT_LNK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00103">cm.h:103</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a></div><div class="ttdeci">@ LF_EXC_REGEX</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00094">cm.h:94</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa1cd0ce06c451faa378667670f2046418"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa1cd0ce06c451faa378667670f2046418">LF_ALL</a></div><div class="ttdeci">@ LF_ALL</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00092">cm.h:92</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a">LF_ICASE</a></div><div class="ttdeci">@ LF_ICASE</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00093">cm.h:93</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a></div><div class="ttdeci">@ LF_REGEX</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00095">cm.h:95</a></div></div>
+<div class="ttc" id="aa00728_html_ac9eb2084c3924fce14851a3c9d00e49e"><div class="ttname"><a href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></div><div class="ttdeci">#define CM_VERSION</div><div class="ttdef"><b>Definition</b> <a href="../../df/d3b/a00728_source.html#l00007">version.h:7</a></div></div>
+<div class="ttc" id="aa00965_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d3/dcd/a00965.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dcd/a00965_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa01028_html_a3659ff312a50e7aebf45b9035df6b13c"><div class="ttname"><a href="../../db/d08/a01028.html#a3659ff312a50e7aebf45b9035df6b13c">f_help</a></div><div class="ttdeci">bool f_help</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00040">init.c:40</a></div></div>
+<div class="ttc" id="aa01028_html_ab5ca79336823d1b09da46701f6244686"><div class="ttname"><a href="../../db/d08/a01028.html#ab5ca79336823d1b09da46701f6244686">f_version</a></div><div class="ttdeci">bool f_version</div><div class="ttdef"><b>Definition</b> <a href="../../db/d08/a01028_source.html#l00041">init.c:41</a></div></div>
+<div class="ttc" id="aa01081_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../dd/dee/a01081.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dcf/a01031_source.html#l00234">futil.c:234</a></div></div>
+<div class="ttc" id="aa01081_html_ga5bd2fb968d70ed5285cfce1ed9e33ca1"><div class="ttname"><a href="../../dd/dee/a01081.html#ga5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a></div><div class="ttdeci">bool lf_find(const char *, const char *, const char *, int, int)</div><div class="ttdoc">Find files in a directory matching a regular expression.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dcf/a01031_source.html#l00942">futil.c:942</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../de/d91/a01034_source.html#l00042">capture_shell_tioctl()</a>, <a class="el" href="../../de/d91/a01034_source.html#l00054">restore_shell_tioctl()</a>, <a class="el" href="../../de/d91/a01034_source.html#l00021">shell_tioctl</a>, <a class="el" href="../../d3/d7b/a00986_source.html#l00042">sig_dfl_mode()</a>, and <a class="el" href="../../d3/d7b/a00986_source.html#l00062">sig_prog_mode()</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00099">FT_BLK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00100">FT_CHR</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00101">FT_DIR</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00102">FT_FIFO</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00103">FT_LNK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00104">FT_REG</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00105">FT_SOCK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00106">FT_UNKNOWN</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00092">LF_ALL</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00094">LF_EXC_REGEX</a>, <a class="el" href="../../d6/dcf/a01031_source.html#l00942">lf_find()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00093">LF_ICASE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00095">LF_REGEX</a>, and <a class="el" href="../../d6/dcf/a01031_source.html#l00234">strnz__cpy()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d9a/a00998_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="508"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d9a/a00998_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -229,7 +347,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d9/d9a/a00998.html">enterstr.c</a></li>
+    <li class="navelem"><a href="../../d9/d9a/a00998.html">lf.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
