@@ -7,6 +7,6 @@ var searchData=
   ['cm_5fversion_5fminor_4',['CM_VERSION_MINOR',['../df/d3b/a00728.html#a2e9d471d43efb8c60c06d7da6cd2db01',1,'version.h']]],
   ['cm_5fversion_5fpatch_5',['CM_VERSION_PATCH',['../df/d3b/a00728.html#a856a7dfd8aa120cc86b55a421d35021c',1,'version.h']]],
   ['color_5flen_6',['COLOR_LEN',['../d8/db9/a00725.html#ab5557ed18d83facb69dd68b30629c37e',1,'COLOR_LEN:&#160;cm.h'],['../dd/dd8/a00719.html#ab5557ed18d83facb69dd68b30629c37e',1,'COLOR_LEN:&#160;common.h'],['../d6/dc0/a00734.html#ab5557ed18d83facb69dd68b30629c37e',1,'COLOR_LEN:&#160;view.h']]],
-  ['ctrl_7',['Ctrl',['../d3/d7b/a00986.html#af475c4649f5ac3f8f9901d7a7b9c1b93',1,'view_engine.c']]],
-  ['cyan_8',['cyan',['../de/def/a01016.html#aee63ed202c647f085cfc57577055a531',1,'opts.c']]]
+  ['ctrl_7',['Ctrl',['../d7/d98/a00983.html#af475c4649f5ac3f8f9901d7a7b9c1b93',1,'view_engine.c']]],
+  ['cyan_8',['cyan',['../d6/d8d/a01007.html#aee63ed202c647f085cfc57577055a531',1,'opts.c']]]
 ];

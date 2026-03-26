@@ -1,7 +1,6 @@
 var a01085 =
 [
-    [ "init_view.c", "d3/de5/a00956.html", null ],
-    [ "init_view_boxwin", "d2/df3/a01085.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d2/df3/a01085.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_init_input", "d2/df3/a01085.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "end_pos", "d2/df3/a01085.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
+    [ "keycode", "d2/df3/a01085.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
+    [ "text", "d2/df3/a01085.html#a26a5a1b51ba82579294838ee52a18af3", null ]
 ];
