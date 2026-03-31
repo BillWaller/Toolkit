@@ -1,5 +1,6 @@
 var a01001 =
 [
-    [ "main", "df/d59/a01001.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "__end_pgm", "df/d59/a01001.html#ab5fceb24373673e919c49ede0f9b12e5", null ]
+    [ "KSTRLEN", "df/d59/a01001.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "df/d59/a01001.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "df/d59/a01001.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

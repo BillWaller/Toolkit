@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: fields.c File Reference</title>
+<title>C-Menu: sig.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,86 +109,106 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d1/dd8/a01022.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">fields.c File Reference</div></div>
+  <div class="headertitle"><div class="title">sig.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="../../db/d28/a01133.html" title="structure for form fields">Field</a> Edit and Entry for C-Menu <a class="el" href="../../d6/d6e/a01137.html">Form</a>.  
+<p>signal handling for interrupt signals  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;monetary.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;execinfo.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for fields.c:</div>
+Include dependency graph for sig.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/dcd/a01023.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/dcd/a01023.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d1/dd8/a01022_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a5b4055201d2d8170e179b1ceaa438b9c" id="r_a5b4055201d2d8170e179b1ceaa438b9c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b4055201d2d8170e179b1ceaa438b9c">MAX_FRAMES</a>&#160;&#160;&#160;64</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga353546f4d99ef7ec908d371187f033de" id="r_ga353546f4d99ef7ec908d371187f033de"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga353546f4d99ef7ec908d371187f033de">is_valid_date</a> (int yyyy, int mm, int dd)</td></tr>
-<tr class="memdesc:ga353546f4d99ef7ec908d371187f033de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given date is valid, including leap years.  <br /></td></tr>
-<tr class="memitem:ga56bbb25c4d0944e1b96b9a723cde2ae9" id="r_ga56bbb25c4d0944e1b96b9a723cde2ae9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga56bbb25c4d0944e1b96b9a723cde2ae9">is_valid_time</a> (int hh, int mm, int ss)</td></tr>
-<tr class="memdesc:ga56bbb25c4d0944e1b96b9a723cde2ae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given time is valid.  <br /></td></tr>
-<tr class="memitem:ga07a8d9311c88786e7310fef638d34a41" id="r_ga07a8d9311c88786e7310fef638d34a41"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a> (<a class="el" href="../../d6/d6e/a01137.html">Form</a> *form, char *s)</td></tr>
-<tr class="memdesc:ga07a8d9311c88786e7310fef638d34a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format field according to its format type.  <br /></td></tr>
-<tr class="memitem:ga18db59e4c79e823f79310378183ac25c" id="r_ga18db59e4c79e823f79310378183ac25c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga18db59e4c79e823f79310378183ac25c">numeric</a> (char *d, char *s)</td></tr>
-<tr class="memdesc:ga18db59e4c79e823f79310378183ac25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract numeric characters from source string to destination string.  <br /></td></tr>
-<tr class="memitem:ga21ebe9713e3b003715a7a2c3b64cbf55" id="r_ga21ebe9713e3b003715a7a2c3b64cbf55"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga21ebe9713e3b003715a7a2c3b64cbf55">right_justify</a> (char *s, int fl)</td></tr>
-<tr class="memdesc:ga21ebe9713e3b003715a7a2c3b64cbf55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Right justify string by removing trailing spaces and adding leadingspaces.  <br /></td></tr>
-<tr class="memitem:ga425021d4c87474159a36d395e4dcdf65" id="r_ga425021d4c87474159a36d395e4dcdf65"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga425021d4c87474159a36d395e4dcdf65">left_justify</a> (char *s)</td></tr>
-<tr class="memdesc:ga425021d4c87474159a36d395e4dcdf65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Left justify string by removing leading spaces.  <br /></td></tr>
-<tr class="memitem:gaa3062b9adcfe4160df15f1763963f9f8" id="r_gaa3062b9adcfe4160df15f1763963f9f8"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#gaa3062b9adcfe4160df15f1763963f9f8">form_accept_field</a> (<a class="el" href="../../d6/d6e/a01137.html">Form</a> *form)</td></tr>
-<tr class="memdesc:gaa3062b9adcfe4160df15f1763963f9f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accept input for a field.  <br /></td></tr>
-<tr class="memitem:gabd1710f59277202b0a58f840d4da322e" id="r_gabd1710f59277202b0a58f840d4da322e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#gabd1710f59277202b0a58f840d4da322e">form_display_field</a> (<a class="el" href="../../d6/d6e/a01137.html">Form</a> *form)</td></tr>
-<tr class="memdesc:gabd1710f59277202b0a58f840d4da322e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display current field.  <br /></td></tr>
-<tr class="memitem:ga95c3fea1ca130a8386408cdb450c2069" id="r_ga95c3fea1ca130a8386408cdb450c2069"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#ga95c3fea1ca130a8386408cdb450c2069">form_display_field_n</a> (<a class="el" href="../../d6/d6e/a01137.html">Form</a> *form, int n)</td></tr>
-<tr class="memdesc:ga95c3fea1ca130a8386408cdb450c2069"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display field n.  <br /></td></tr>
-<tr class="memitem:gad306f4b1bdcba7aefece7e4b73367b66" id="r_gad306f4b1bdcba7aefece7e4b73367b66"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#gad306f4b1bdcba7aefece7e4b73367b66">form_display_field_brackets</a> (<a class="el" href="../../d6/d6e/a01137.html">Form</a> *form)</td></tr>
-<tr class="memdesc:gad306f4b1bdcba7aefece7e4b73367b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display brackets around current field if set.  <br /></td></tr>
-<tr class="memitem:gad2a5cf5a784d70bcd15fcd82ecc13185" id="r_gad2a5cf5a784d70bcd15fcd82ecc13185"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#gad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a> (<a class="el" href="../../d6/d6e/a01137.html">Form</a> *form)</td></tr>
-<tr class="memdesc:gad2a5cf5a784d70bcd15fcd82ecc13185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate current field based on flags.  <br /></td></tr>
-<tr class="memitem:gaac069c6892f64ea6307044a92b179faa" id="r_gaac069c6892f64ea6307044a92b179faa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/d9e/a01061.html#gaac069c6892f64ea6307044a92b179faa">mk_filler</a> (char *s, int fl)</td></tr>
-<tr class="memdesc:gaac069c6892f64ea6307044a92b179faa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create filler string for field.  <br /></td></tr>
+<tr class="memitem:ga06c1eb6cf3649dc187115565409f91af" id="r_ga06c1eb6cf3649dc187115565409f91af"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d6/d80/a01076.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a> ()</td></tr>
+<tr class="memdesc:ga06c1eb6cf3649dc187115565409f91af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set signal handlers to default behavior.  <br /></td></tr>
+<tr class="memitem:gaca2de03f6d52d4b11237990e4e605177" id="r_gaca2de03f6d52d4b11237990e4e605177"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d6/d80/a01076.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a> ()</td></tr>
+<tr class="memdesc:gaca2de03f6d52d4b11237990e4e605177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up signal handlers for interrupt signals.  <br /></td></tr>
+<tr class="memitem:gaa08a9a8dede37c66c81c3f51a0f338a9" id="r_gaa08a9a8dede37c66c81c3f51a0f338a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d6/d80/a01076.html#gaa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a> (int sig_num)</td></tr>
+<tr class="memdesc:gaa08a9a8dede37c66c81c3f51a0f338a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal handler for interrupt signals.  <br /></td></tr>
+<tr class="memitem:ga79c3e22498eb2346543aa9c86fd22e58" id="r_ga79c3e22498eb2346543aa9c86fd22e58"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d6/d80/a01076.html#ga79c3e22498eb2346543aa9c86fd22e58">handle_signal</a> (int sig_num)</td></tr>
+<tr class="memdesc:ga79c3e22498eb2346543aa9c86fd22e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle received signals and prompt user for action.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ab2b1f7bf9cce5974d1459eba268c0211" id="r_ab2b1f7bf9cce5974d1459eba268c0211"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ab2b1f7bf9cce5974d1459eba268c0211">ff_tbl</a> [][26]</td></tr>
+<tr class="memitem:a01a99fc32bd5b471123f6223503c9616" id="r_a01a99fc32bd5b471123f6223503c9616"><td class="memItemLeft">volatile sig_atomic_t&#160;</td><td class="memItemRight"><a class="el" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0</td></tr>
+<tr class="memitem:a44f81ebcc5b6c685cbdfe388eb420313" id="r_a44f81ebcc5b6c685cbdfe388eb420313"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a> = false</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="../../db/d28/a01133.html" title="structure for form fields">Field</a> Edit and Entry for C-Menu <a class="el" href="../../d6/d6e/a01137.html">Form</a>. </p>
+<div class="textblock"><p>signal handling for interrupt signals </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d1/dd8/a01022_source.html">fields.c</a>.</p>
-</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="ab2b1f7bf9cce5974d1459eba268c0211" name="ab2b1f7bf9cce5974d1459eba268c0211"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2b1f7bf9cce5974d1459eba268c0211">&#9670;&#160;</a></span>ff_tbl</h2>
+<p class="definition">Definition in file <a class="el" href="../../d1/dd8/a01022_source.html">sig.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a5b4055201d2d8170e179b1ceaa438b9c" name="a5b4055201d2d8170e179b1ceaa438b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b4055201d2d8170e179b1ceaa438b9c">&#9670;&#160;</a></span>MAX_FRAMES</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char ff_tbl[][26]</td>
+          <td class="memname">#define MAX_FRAMES&#160;&#160;&#160;64</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;string&quot;</span>,   <span class="stringliteral">&quot;decimal_int&quot;</span>, <span class="stringliteral">&quot;hex_int&quot;</span>, <span class="stringliteral">&quot;float&quot;</span>, <span class="stringliteral">&quot;double&quot;</span>,</div>
-<div class="line">         <span class="stringliteral">&quot;currency&quot;</span>, <span class="stringliteral">&quot;yyyymmdd&quot;</span>,    <span class="stringliteral">&quot;hhmmss&quot;</span>,  <span class="stringliteral">&quot;apr&quot;</span>,   <span class="stringliteral">&quot;&quot;</span>}</div>
-</div><!-- fragment --><p>ff_tbl - a table of field format strings used in the <a class="el" href="../../d6/d6e/a01137.html">Form</a> description file to identify field data types the index of the field format in this table corresponds to the <a class="el" href="../../d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55">FieldFormat</a> enum values, e.g. ff_tbl[FF_STRING] = "string", ff_tbl[F_DECIMAL_INT] = "decimal_int", etc. a table of field format strings used in the <a class="el" href="../../d6/d6e/a01137.html">Form</a> description file to identify field data types, e.g. "string", "decimal_int", "hex_int", etc. The index of the field format in this table corresponds to the <a class="el" href="../../d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55">FieldFormat</a> enum values, e.g. ff_tbl[FF_STRING] = "string", ff_tbl[FF_DECIMAL_INT] = "decimal_int", etc. This table is used for parsing the form description file and determining the field formats for each field in the form. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l00040">40</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">fields.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   40</span>                  {<span class="stringliteral">&quot;string&quot;</span>,   <span class="stringliteral">&quot;decimal_int&quot;</span>, <span class="stringliteral">&quot;hex_int&quot;</span>, <span class="stringliteral">&quot;float&quot;</span>, <span class="stringliteral">&quot;double&quot;</span>,</div>
-<div class="line"><span class="lineno">   41</span>                     <span class="stringliteral">&quot;currency&quot;</span>, <span class="stringliteral">&quot;yyyymmdd&quot;</span>,    <span class="stringliteral">&quot;hhmmss&quot;</span>,  <span class="stringliteral">&quot;apr&quot;</span>,   <span class="stringliteral">&quot;&quot;</span>};</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../df/dce/a00974_source.html#l00543">form_parse_desc()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l00029">29</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">sig.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a44f81ebcc5b6c685cbdfe388eb420313" name="a44f81ebcc5b6c685cbdfe388eb420313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f81ebcc5b6c685cbdfe388eb420313">&#9670;&#160;</a></span>f_curses_open</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool f_curses_open = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>curses mode is active </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l00033">33</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">sig.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d22/a01049_source.html#l00909">answer_yn()</a>, <a class="el" href="../../d0/d22/a01049_source.html#l00654">destroy_curses()</a>, <a class="el" href="../../d0/d22/a01049_source.html#l00972">display_error()</a>, <a class="el" href="../../d1/dd8/a01022_source.html#l00146">handle_signal()</a>, <a class="el" href="../../d0/d22/a01049_source.html#l00331">open_curses()</a>, <a class="el" href="../../d0/d22/a01049_source.html#l01033">Perror()</a>, and <a class="el" href="../../d0/d22/a01049_source.html#l01097">wait_mk_win()</a>.</p>
+
+</div>
+</div>
+<a id="a01a99fc32bd5b471123f6223503c9616" name="a01a99fc32bd5b471123f6223503c9616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01a99fc32bd5b471123f6223503c9616">&#9670;&#160;</a></span>sig_received</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile sig_atomic_t sig_received = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/dd8/a01022_source.html#l00031">31</a> of file <a class="el" href="../../d1/dd8/a01022_source.html">sig.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d1/dd8/a01022_source.html#l00146">handle_signal()</a>, <a class="el" href="../../df/d59/a01001_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d1/dd8/a01022_source.html#l00095">signal_handler()</a>, and <a class="el" href="../../d0/d22/a01049_source.html#l01257">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -205,7 +225,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d1/dd8/a01022.html">fields.c</a></li>
+    <li class="navelem"><a href="../../d1/dd8/a01022.html">sig.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

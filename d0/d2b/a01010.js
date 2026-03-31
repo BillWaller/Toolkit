@@ -1,23 +1,11 @@
 var a01010 =
 [
-    [ "derive_file_spec", "d0/dfb/a01066.html#ga20c40545a1e05954b496c6d674d31458", null ],
-    [ "display_version", "d0/dfb/a01066.html#ga33abf350aae0212c85a5903e41764025", null ],
-    [ "dump_config", "d0/dfb/a01066.html#ga1af490b85f0487c201f369333b84e540", null ],
-    [ "mapp_initialization", "d0/dfb/a01066.html#gaccd65939c0ce6f0d940c5cf795a1e8fa", null ],
-    [ "opt_prt_bool", "d0/dfb/a01066.html#ga4cea5ec97a8076e2a944e2c441ebb091", null ],
-    [ "opt_prt_char", "d0/dfb/a01066.html#ga3d0b179ebc74f8a911a4152f54e7a8a7", null ],
-    [ "opt_prt_double", "d0/dfb/a01066.html#ga365153038835675ce050503313cea890", null ],
-    [ "opt_prt_int", "d0/dfb/a01066.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e", null ],
-    [ "opt_prt_str", "d0/dfb/a01066.html#ga086c2240ffa5e497b67d630ea0d206b5", null ],
-    [ "parse_config", "d0/dfb/a01066.html#ga5836f1ea8f972e3ca12e2772dc76fb32", null ],
-    [ "parse_opt_args", "d0/dfb/a01066.html#ga11b56c5001e3ca95f4d0a28903b29609", null ],
-    [ "usage", "d0/dfb/a01066.html#ga2ef30c42cbc289d899a8be5d2d8f77d0", null ],
-    [ "write_config", "d0/dfb/a01066.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
-    [ "zero_opt_args", "d0/dfb/a01066.html#gae9b71868d00a28cdcf5f4514e662edfe", null ],
-    [ "executor", "d0/d2b/a01010.html#a96c3f93bf7b1b8ff028d4cf6404e3b5f", null ],
-    [ "f_dump_config", "d0/d2b/a01010.html#a34792d55b383aa7122cd2c3a889605bf", null ],
-    [ "f_help", "d0/d2b/a01010.html#a3659ff312a50e7aebf45b9035df6b13c", null ],
-    [ "f_version", "d0/d2b/a01010.html#ab5ca79336823d1b09da46701f6244686", null ],
-    [ "f_write_config", "d0/d2b/a01010.html#ae148746fdd7938021e7d7d4d31118517", null ],
-    [ "init", "d0/d2b/a01010.html#a3d163d0928a8410a38d85fddf9b0d0d8", null ]
+    [ "fork_exec", "de/de6/a01063.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "de/de6/a01063.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "de/de6/a01063.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d4/d8a/a01062.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "de/de6/a01063.html#ga5c3ffccf49f08359334198f7fce3f9df", null ],
+    [ "earg_str", "d0/d2b/a01010.html#a67227506d7050fd4fd59e06e2628a364", null ],
+    [ "eargc", "d0/d2b/a01010.html#a075d6920297448f7d044417b9f8594b0", null ],
+    [ "eargv", "d0/d2b/a01010.html#aba17a3c518eb2ffd68f0219cc8c1792b", null ]
 ];

@@ -1,15 +1,10 @@
 var a01075 =
 [
-    [ "get_next_char", "dd/d80/a01075.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "dd/d80/a01075.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "dd/d80/a01075.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "dd/d80/a01075.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "dd/d80/a01075.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "dd/d80/a01075.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "dd/d80/a01075.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "dd/d80/a01075.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "dd/d80/a01075.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "dd/d80/a01075.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "dd/d80/a01075.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "dd/d80/a01075.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "capture_curses_tioctl", "dd/d80/a01075.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "dd/d80/a01075.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "dd/d80/a01075.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "dd/d80/a01075.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "dd/d80/a01075.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "dd/d80/a01075.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "dd/d80/a01075.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
 ];

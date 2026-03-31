@@ -1,10 +1,7 @@
 var a00986 =
 [
-    [ "MAX_FRAMES", "d3/d7b/a00986.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "d7/df7/a01074.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "d7/df7/a01074.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "d7/df7/a01074.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "d7/df7/a01074.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "d3/d7b/a00986.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "d3/d7b/a00986.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "popup_form", "d3/d7b/a00986.html#a60c229fa5ec76fec4c9398713f5d94b0", null ],
+    [ "popup_menu", "d3/d7b/a00986.html#ab23bd360d05e43d199cc7eebd837256e", null ],
+    [ "popup_pick", "d3/d7b/a00986.html#ae9bfdce1fecee7783df822358ca938b0", null ],
+    [ "popup_view", "d3/d7b/a00986.html#acf10729052fcc22eed486aeac3066e63", null ]
 ];

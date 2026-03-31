@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['view_0',['View',['../dc/d06/a01153.html',1,'']]]
+  ['wcstr_0',['WCStr',['../df/dd5/a01115.html',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var examples =
 [
-    [ "/usr/local/src/cmenu/src/enterchr.c", "db/d07/a01155.html", null ],
-    [ "/usr/local/src/cmenu/src/enterstr.c", "d9/d25/a01157.html", null ]
+    [ "/usr/local/src/C-Menu/src/enterchr.c", "dc/d81/a01161.html", null ],
+    [ "/usr/local/src/C-Menu/src/enterstr.c", "d6/d27/a01163.html", null ]
 ];

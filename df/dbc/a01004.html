@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: stripansi.c File Reference</title>
+<title>C-Menu: pick_engine.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,94 +109,246 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('df/dbc/a01004.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">stripansi.c File Reference</div></div>
+  <div class="headertitle"><div class="title">pick_engine.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>removes ansi escape sequences beginning with "\033["" and ending in
-"m" or "K"  
+<p>pick from a list of choices  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for stripansi.c:</div>
+Include dependency graph for pick_engine.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d7/d06/a01005.svg" width="554" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d7/d06/a01005.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../df/dbc/a01004_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memitem:gab97dcab41017c5132f52b682437a151e" id="r_gab97dcab41017c5132f52b682437a151e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gab97dcab41017c5132f52b682437a151e">pick_engine</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gab97dcab41017c5132f52b682437a151e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick interface, calculates window size and position, and enters picker loop.  <br /></td></tr>
+<tr class="memitem:ga02f90007f2422dd2094ab64569e157f0" id="r_ga02f90007f2422dd2094ab64569e157f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#ga02f90007f2422dd2094ab64569e157f0">save_object</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick, char *s)</td></tr>
+<tr class="memdesc:ga02f90007f2422dd2094ab64569e157f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a string as an object in the pick structure.  <br /></td></tr>
+<tr class="memitem:gabb0969a6d1c7e78be46c3b325754c802" id="r_gabb0969a6d1c7e78be46c3b325754c802"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gabb0969a6d1c7e78be46c3b325754c802">picker</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gabb0969a6d1c7e78be46c3b325754c802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop to handle user input and interactions for pick interface.  <br /></td></tr>
+<tr class="memitem:gacd6b9991f2aa305f622f5d2515815bba" id="r_gacd6b9991f2aa305f622f5d2515815bba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gacd6b9991f2aa305f622f5d2515815bba">display_page</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gacd6b9991f2aa305f622f5d2515815bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
+<tr class="memitem:gab2173ff8fb800d126c180487744672d5" id="r_gab2173ff8fb800d126c180487744672d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gab2173ff8fb800d126c180487744672d5">reverse_object</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gab2173ff8fb800d126c180487744672d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the display of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga650262f8279502ebc73607394dd7af13" id="r_ga650262f8279502ebc73607394dd7af13"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#ga650262f8279502ebc73607394dd7af13">unreverse_object</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga650262f8279502ebc73607394dd7af13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unreverses the display of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga036c2f9cdf302cced4d9b703022664c0" id="r_ga036c2f9cdf302cced4d9b703022664c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#ga036c2f9cdf302cced4d9b703022664c0">toggle_object</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga036c2f9cdf302cced4d9b703022664c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the selection state of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga8feb6cd586d503a676b831ec722576fb" id="r_ga8feb6cd586d503a676b831ec722576fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga8feb6cd586d503a676b831ec722576fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs selected objects to specified output file.  <br /></td></tr>
+<tr class="memitem:gaf7fcbb1c8b67a4d11c86ba7209f397c2" id="r_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes specified command with selected objects as arguments.  <br /></td></tr>
+<tr class="memitem:gaf20c847dc030116f9999adbba681000c" id="r_gaf20c847dc030116f9999adbba681000c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gaf20c847dc030116f9999adbba681000c">open_pick_win</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaf20c847dc030116f9999adbba681000c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the pick window based on the parameters specified in the <a class="el" href="../../d8/ddb/a01147.html" title="Pick data structure.">Pick</a> structure.  <br /></td></tr>
+<tr class="memitem:gaeebc4c0b94ca97d753e10a0cd1798730" id="r_gaeebc4c0b94ca97d753e10a0cd1798730"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gaeebc4c0b94ca97d753e10a0cd1798730">display_pick_help</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaeebc4c0b94ca97d753e10a0cd1798730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the help screen for the pick interface using view.  <br /></td></tr>
+<tr class="memitem:gaed5ddd88212281d12281a15bf8fc7b8b" id="r_gaed5ddd88212281d12281a15bf8fc7b8b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gaed5ddd88212281d12281a15bf8fc7b8b">pick_display_chyron</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gaed5ddd88212281d12281a15bf8fc7b8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays chyron with page information at bottom of pick window.  <br /></td></tr>
+<tr class="memitem:gaabda879000cf8135245ef451de08f780" id="r_gaabda879000cf8135245ef451de08f780"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#gaabda879000cf8135245ef451de08f780">read_pick_input</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaabda879000cf8135245ef451de08f780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads pick input from file pointer and saves objects into pick structure.  <br /></td></tr>
+<tr class="memitem:ga98b36615c0627c4195c40b6c23d6062a" id="r_ga98b36615c0627c4195c40b6c23d6062a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a> (<a class="el" href="../../d8/ddb/a01147.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga98b36615c0627c4195c40b6c23d6062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deselects the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga1b2ee87543245e612c1710ea58930a17" id="r_ga1b2ee87543245e612c1710ea58930a17"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/df7/a01074.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a> (<a class="el" href="../../d6/d9a/a01083.html">Init</a> *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:ga1b2ee87543245e612c1710ea58930a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick structure and opens pick input file or pipe.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab57f05e19e1e81af17fbbd3a766c405a" id="r_ab57f05e19e1e81af17fbbd3a766c405a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab57f05e19e1e81af17fbbd3a766c405a">tbl_col</a></td></tr>
+<tr class="memitem:a25fe2a76cfd155c51a46c99d6a1cf4d9" id="r_a25fe2a76cfd155c51a46c99d6a1cf4d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">tbl_line</a></td></tr>
+<tr class="memitem:ae7c3abf692920540a78bc3322d02828a" id="r_ae7c3abf692920540a78bc3322d02828a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae7c3abf692920540a78bc3322d02828a">tbl_page</a></td></tr>
+<tr class="memitem:a7df4e526a3af8e113bbc05ca011c2341" id="r_a7df4e526a3af8e113bbc05ca011c2341"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7df4e526a3af8e113bbc05ca011c2341">tbl_cols</a></td></tr>
+<tr class="memitem:ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" id="r_ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">pg_lines</a></td></tr>
+<tr class="memitem:acbe29ef30ea713ef47f3cd892310ca50" id="r_acbe29ef30ea713ef47f3cd892310ca50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acbe29ef30ea713ef47f3cd892310ca50">tbl_pages</a></td></tr>
+<tr class="memitem:a4a50bfe3f8460978b34566ec3dff7adb" id="r_a4a50bfe3f8460978b34566ec3dff7adb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4a50bfe3f8460978b34566ec3dff7adb">obj_idx</a></td></tr>
+<tr class="memitem:acdb9de82d81b176784185dea9063b57c" id="r_acdb9de82d81b176784185dea9063b57c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdb9de82d81b176784185dea9063b57c">calculated_idx</a></td></tr>
+<tr class="memitem:ac7ac4adf3c3409d847a57c140700f334" id="r_ac7ac4adf3c3409d847a57c140700f334"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac7ac4adf3c3409d847a57c140700f334">pipe_fd</a> [2]</td></tr>
+<tr class="memitem:a8f93294009502446912fa64f33731029" id="r_a8f93294009502446912fa64f33731029"><td class="memItemLeft">char const&#160;</td><td class="memItemRight"><a class="el" href="#a8f93294009502446912fa64f33731029">pagers_editors</a> [12][10]</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>removes ansi escape sequences beginning with "\033["" and ending in
-"m" or "K" </p>
+<div class="textblock"><p>pick from a list of choices </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../df/dbc/a01004_source.html">stripansi.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+<p class="definition">Definition in file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="acdb9de82d81b176784185dea9063b57c" name="acdb9de82d81b176784185dea9063b57c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb9de82d81b176784185dea9063b57c">&#9670;&#160;</a></span>calculated_idx</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
+          <td class="memname">int calculated_idx</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>C function - strip_ansi(out_str, in_str)</p>
-<p>This function iterates through the input string, copying characters to the output buffer while skipping over any ANSI escape sequences. It looks for sequences that start with "\033[" and end with "m" or "K", and removes them from the output. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>Argument count (should be 2 for the program name and input file) </td></tr>
-    <tr><td class="paramname">argv</td><td>Argument vector (argv[1] should be the input file name)</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>ANSI escape sequences start with "\033[" and end with "m" or "K". This function removes those sequences from the input string and writes the cleaned string to stdout </p>
-<p>&lt; Buffer to hold the input string read from the file</p>
-<p>&lt; Buffer to hold the cleaned output string</p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00024">24</a> of file <a class="el" href="../../df/dbc/a01004_source.html">stripansi.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   24</span>                                 {</div>
-<div class="line"><span class="lineno">   25</span>    <span class="keywordtype">char</span></div>
-<div class="line"><span class="lineno">   26</span>        in_buf[2048]; </div>
-<div class="line"><span class="lineno">   27</span>    <span class="keywordtype">char</span> out_buf[2048]; </div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordflow">if</span> (argc != 2) {</div>
-<div class="line"><span class="lineno">   29</span>        fprintf(stderr, <span class="stringliteral">&quot;Usage: %s [file_with_ansi_codes]\n&quot;</span>, argv[0]);</div>
-<div class="line"><span class="lineno">   30</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><span class="lineno">   31</span>    }</div>
-<div class="line"><span class="lineno">   32</span>    FILE *in_fp = fopen(argv[1], <span class="stringliteral">&quot;r&quot;</span>);</div>
-<div class="line"><span class="lineno">   33</span>    <span class="keywordflow">if</span> (!in_fp) {</div>
-<div class="line"><span class="lineno">   34</span>        perror(<span class="stringliteral">&quot;Error opening file&quot;</span>);</div>
-<div class="line"><span class="lineno">   35</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><span class="lineno">   36</span>    }</div>
-<div class="line"><span class="lineno">   37</span>    <span class="keywordflow">while</span> (fgets(in_buf, <span class="keyword">sizeof</span>(in_buf), in_fp)) {</div>
-<div class="line"><span class="lineno">   38</span>        <a class="code hl_function" href="../../de/de6/a01063.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a>(out_buf, in_buf);</div>
-<div class="line"><span class="lineno">   39</span>        fputs(out_buf, stdout);</div>
-<div class="line"><span class="lineno">   40</span>    }</div>
-<div class="line"><span class="lineno">   41</span>    fclose(in_fp);</div>
-<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   43</span>}</div>
-<div class="ttc" id="aa01063_html_ga82896df8e50776b7e7b0cede4e45b523"><div class="ttname"><a href="../../de/de6/a01063.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a></div><div class="ttdeci">size_t strip_ansi(char *, char *)</div><div class="ttdoc">Strips ANSI SGR escape sequences (ending in &#39;m&#39;) from string s to d.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d59/a01013_source.html#l00502">futil.c:502</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d7/d59/a01013_source.html#l00502">strip_ansi()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../df/dbc/a01004_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="198" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00024">24</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
 </div>
+</div>
+<a id="a4a50bfe3f8460978b34566ec3dff7adb" name="a4a50bfe3f8460978b34566ec3dff7adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a50bfe3f8460978b34566ec3dff7adb">&#9670;&#160;</a></span>obj_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int obj_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00024">24</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a8f93294009502446912fa64f33731029" name="a8f93294009502446912fa64f33731029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f93294009502446912fa64f33731029">&#9670;&#160;</a></span>pagers_editors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char const pagers_editors[12][10]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>,  <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;vi&quot;</span>,   <span class="stringliteral">&quot;vim&quot;</span>,   <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00042">42</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>                                  {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>,  <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
+<div class="line"><span class="lineno">   43</span>                                     <span class="stringliteral">&quot;vi&quot;</span>,   <span class="stringliteral">&quot;vim&quot;</span>,   <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
+<div class="line"><span class="lineno">   44</span>                                     <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" name="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">&#9670;&#160;</a></span>pg_lines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pg_lines</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00023">23</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="ac7ac4adf3c3409d847a57c140700f334" name="ac7ac4adf3c3409d847a57c140700f334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ac4adf3c3409d847a57c140700f334">&#9670;&#160;</a></span>pipe_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pipe_fd[2]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00040">40</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../df/dbc/a01004_source.html#l00060">init_pick()</a>.</p>
+
+</div>
+</div>
+<a id="ab57f05e19e1e81af17fbbd3a766c405a" name="ab57f05e19e1e81af17fbbd3a766c405a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab57f05e19e1e81af17fbbd3a766c405a">&#9670;&#160;</a></span>tbl_col</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_col</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00023">23</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a7df4e526a3af8e113bbc05ca011c2341" name="a7df4e526a3af8e113bbc05ca011c2341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df4e526a3af8e113bbc05ca011c2341">&#9670;&#160;</a></span>tbl_cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00023">23</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a25fe2a76cfd155c51a46c99d6a1cf4d9" name="a25fe2a76cfd155c51a46c99d6a1cf4d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">&#9670;&#160;</a></span>tbl_line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00023">23</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="ae7c3abf692920540a78bc3322d02828a" name="ae7c3abf692920540a78bc3322d02828a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c3abf692920540a78bc3322d02828a">&#9670;&#160;</a></span>tbl_page</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_page</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00023">23</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="acbe29ef30ea713ef47f3cd892310ca50" name="acbe29ef30ea713ef47f3cd892310ca50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbe29ef30ea713ef47f3cd892310ca50">&#9670;&#160;</a></span>tbl_pages</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_pages</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/dbc/a01004_source.html#l00023">23</a> of file <a class="el" href="../../df/dbc/a01004_source.html">pick_engine.c</a>.</p>
 
 </div>
 </div>
@@ -213,7 +365,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../df/dbc/a01004.html">stripansi.c</a></li>
+    <li class="navelem"><a href="../../df/dbc/a01004.html">pick_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

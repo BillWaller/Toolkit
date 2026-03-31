@@ -1,17 +1,12 @@
 var a01062 =
 [
-    [ "form_calculate", "d4/d8a/a01062.html#ga0329d3892bf2c4fe8e77a3c303ebe5f6", null ],
-    [ "form_desc_error", "d4/d8a/a01062.html#ga02cf855a99051ac21f4966aa92b9544f", null ],
-    [ "form_display_chyron", "d4/d8a/a01062.html#ga639a9c28161fb26549fb07378ae82f55", null ],
-    [ "form_display_fields", "d4/d8a/a01062.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
-    [ "form_display_screen", "d4/d8a/a01062.html#gaf488c427355a0bfca2caa63ba51d5a30", null ],
-    [ "form_end_fields", "d4/d8a/a01062.html#ga67032038765fcb55ea51e0bdd6686efc", null ],
-    [ "form_engine", "d4/d8a/a01062.html#gada302551bf41bf8ed6132fd34328a47e", null ],
-    [ "form_enter_fields", "d4/d8a/a01062.html#ga85f521b3faafff8ce5584317cebe5d3c", null ],
-    [ "form_exec_cmd", "d4/d8a/a01062.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
-    [ "form_parse_desc", "d4/d8a/a01062.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
-    [ "form_read_data", "d4/d8a/a01062.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
-    [ "form_usage", "d4/d8a/a01062.html#ga55ea39040ce4618476ee3fada6a0c417", null ],
-    [ "form_write", "d4/d8a/a01062.html#ga2839acac3143be9233fbf99458b77e64", null ],
-    [ "init_form", "d4/d8a/a01062.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
+    [ "abend", "d4/d8a/a01062.html#ga8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "answer_yn", "d4/d8a/a01062.html#ga483e2ea4802aa6360588c11adb871464", null ],
+    [ "display_error", "d4/d8a/a01062.html#ga67659f8a701b74f4dec0d36227a10d1c", null ],
+    [ "nf_error", "d4/d8a/a01062.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "Perror", "d4/d8a/a01062.html#ga61b4f28456257f68ed042bed7f187efd", null ],
+    [ "wait_continue", "d4/d8a/a01062.html#ga45c5bf79120644a22ffef896119fb672", null ],
+    [ "wait_destroy", "d4/d8a/a01062.html#ga1659db421e92afe23911f5ae0a469bc5", null ],
+    [ "wait_mk_chyron", "d4/d8a/a01062.html#gaab76ab3464d34674d9d4cd80c87999e7", null ],
+    [ "wait_mk_win", "d4/d8a/a01062.html#ga5f404e9a570fd5981638c80af3d6e54d", null ]
 ];

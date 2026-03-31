@@ -1,7 +1,9 @@
 var a01067 =
 [
-    [ "init_view.c", "d3/de5/a00956.html", null ],
-    [ "init_view_boxwin", "d2/d49/a01067.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d2/d49/a01067.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_init_input", "d2/d49/a01067.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "free_string", "d2/d49/a01067.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "d2/d49/a01067.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "d2/d49/a01067.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "d2/d49/a01067.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "d2/d49/a01067.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "d2/d49/a01067.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];

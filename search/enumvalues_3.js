@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['ic_5fform_0',['IC_FORM',['../dd/dd8/a00719.html#aeab79c4bf306c0844eb09a7f0cdacd38a530be1be388f89ec94c487a21ba7b362',1,'common.h']]],
-  ['ic_5fmenu_1',['IC_MENU',['../dd/dd8/a00719.html#aeab79c4bf306c0844eb09a7f0cdacd38a02837ddadd096a7d209c3fe5a33acaa6',1,'common.h']]],
-  ['ic_5fpick_2',['IC_PICK',['../dd/dd8/a00719.html#aeab79c4bf306c0844eb09a7f0cdacd38a850a7ff287a433f5b915f327a020bc24',1,'common.h']]],
-  ['ic_5fview_3',['IC_VIEW',['../dd/dd8/a00719.html#aeab79c4bf306c0844eb09a7f0cdacd38a2e7a13afc8ce47492aceabcebb84de76',1,'common.h']]],
-  ['in_5fspec_4',['IN_SPEC',['../d0/d2b/a01010.html#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268',1,'init.c']]]
+  ['gm_5fblue_0',['GM_BLUE',['../db/d14/a01040.html#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148',1,'init.c']]],
+  ['gm_5fgray_1',['GM_GRAY',['../db/d14/a01040.html#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d',1,'init.c']]],
+  ['gm_5fgreen_2',['GM_GREEN',['../db/d14/a01040.html#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27',1,'init.c']]],
+  ['gm_5fred_3',['GM_RED',['../db/d14/a01040.html#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167',1,'init.c']]]
 ];

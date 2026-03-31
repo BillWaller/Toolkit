@@ -1,18 +1,5 @@
 var a01072 =
 [
-    [ "deselect_object", "d6/d6a/a01072.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "d6/d6a/a01072.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "d6/d6a/a01072.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "d6/d6a/a01072.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d6/d6a/a01072.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "open_pick_win", "d6/d6a/a01072.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "d6/d6a/a01072.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_display_chyron", "d6/d6a/a01072.html#gaed5ddd88212281d12281a15bf8fc7b8b", null ],
-    [ "pick_engine", "d6/d6a/a01072.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d6/d6a/a01072.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
-    [ "read_pick_input", "d6/d6a/a01072.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d6/d6a/a01072.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d6/d6a/a01072.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d6/d6a/a01072.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d6/d6a/a01072.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "menu_cmd_processor", "d6/d6a/a01072.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
+    [ "menu_engine", "d6/d6a/a01072.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
 ];
