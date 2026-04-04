@@ -1,7 +1,7 @@
 var searchData=
 [
   ['v_0',['v',['../db/d32/a01122.html#aa044ab06de65e1e9ecc89b07f3d71f71',1,'Argv']]],
-  ['variables_1',['Variables',['../d1/d31/a01245.html#helpful-c-menu-environment-variables',1,'Helpful C-Menu Environment Variables'],['../d1/d31/a01245.html#system-specific-environment-variables',1,'System Specific Environment Variables']]],
+  ['variables_1',['Variables',['../d4/dd5/a01244.html#helpful-c-menu-environment-variables',1,'Helpful C-Menu Environment Variables'],['../d4/dd5/a01244.html#system-specific-environment-variables',1,'System Specific Environment Variables']]],
   ['vbufsiz_2',['VBUFSIZ',['../d6/dc0/a00734.html#a5259eafdce2c5489c29df7b44a782b88',1,'view.h']]],
   ['verify_5fdir_3',['verify_dir',['../dd/dee/a01081.html#gae14a4e790b69c8c2e50d1eb5cdf1fd19',1,'verify_dir(char *, int):&#160;futil.c'],['../dd/dee/a01081.html#gae14a4e790b69c8c2e50d1eb5cdf1fd19',1,'verify_dir(char *spec, int imode):&#160;futil.c']]],
   ['verify_5fdir_5fq_4',['verify_dir_q',['../d8/db9/a00725.html#a687241db9c91740d0d397669331dcc9f',1,'cm.h']]],
@@ -12,13 +12,13 @@ var searchData=
   ['version_20h_9',['include/version.h and version.h',['../dd/dad/a01235.html#includeversionh-and-versionh',1,'']]],
   ['version_20h_20and_20version_20h_10',['include/version.h and version.h',['../dd/dad/a01235.html#includeversionh-and-versionh',1,'']]],
   ['version_2eh_11',['version.h',['../df/d3b/a00728.html',1,'']]],
-  ['vi_12',['If You Can&apos;t Stop Typing &quot;vi&quot;',['../d1/d31/a01245.html#if-you-cant-stop-typing-vi',1,'']]],
+  ['vi_12',['If You Can&apos;t Stop Typing &quot;vi&quot;',['../d4/dd5/a01244.html#if-you-cant-stop-typing-vi',1,'']]],
   ['view_13',['VIEW',['../dd/dd8/a00719.html#a5abe1ba66f71bb3a1bc22393854d33dfa577616539ca6eda467d3b4b6e6a551d5',1,'common.h']]],
-  ['view_14',['View',['../d8/d2b/a01236.html#c-menu-view',1,'C-Menu View'],['../d7/dc5/a01242.html#large-log-file-in-view',1,'Large Log File in View'],['../index.html#large-log-file-in-view-1',1,'Large Log File in View'],['../d7/dc5/a01242.html#screenshot-of-the-same-file-with-view',1,'Screenshot of the Same File With View'],['../d8/db0/a01243.html#screenshot-of-the-same-file-with-view-1',1,'Screenshot of the Same File With View'],['../index.html#screenshot-of-the-same-file-with-view-2',1,'Screenshot of the Same File With View'],['../dc/dee/a01166.html',1,'View'],['../dd/dd8/a00719.html#a2149b021b5351d5b42a6045cb75e7045',1,'View:&#160;common.h'],['../d7/dc5/a01242.html#view',1,'View'],['../d8/db0/a01243.html#view-1',1,'View'],['../d4/dd5/a01244.html#view-2',1,'View'],['../index.html#view-3',1,'View'],['../d5/d6e/a01240.html#view---how-to-use-tree-sitter-with-view',1,'View - How to Use Tree-Sitter with View']]],
+  ['view_14',['View',['../d8/d2b/a01236.html#c-menu-view',1,'C-Menu View'],['../d7/dc5/a01242.html#large-log-file-in-view',1,'Large Log File in View'],['../index.html#large-log-file-in-view-1',1,'Large Log File in View'],['../d7/dc5/a01242.html#screenshot-of-the-same-file-with-view',1,'Screenshot of the Same File With View'],['../index.html#screenshot-of-the-same-file-with-view-1',1,'Screenshot of the Same File With View'],['../dc/dee/a01166.html',1,'View'],['../dd/dd8/a00719.html#a2149b021b5351d5b42a6045cb75e7045',1,'View:&#160;common.h'],['../d7/dc5/a01242.html#view',1,'View'],['../d8/db0/a01243.html#view-1',1,'View'],['../index.html#view-2',1,'View'],['../d5/d6e/a01240.html#view---how-to-use-tree-sitter-with-view',1,'View - How to Use Tree-Sitter with View']]],
   ['view_15',['view',['../d5/d17/a01098.html#aacef1d241555eb2516a58cd6b496746b',1,'Init::view'],['../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201',1,'view:&#160;mem.c'],['../df/dbc/a01004.html#af2dd70d8b95c32fb670ac6f9cc8df201',1,'view:&#160;mem.c']]],
-  ['view_20and_20color_20manual_20pages_16',['View and Color Manual Pages',['../d7/dc5/a01242.html#view-and-color-manual-pages',1,'View and Color Manual Pages'],['../d8/db0/a01243.html#view-and-color-manual-pages-1',1,'View and Color Manual Pages'],['../index.html#view-and-color-manual-pages-2',1,'View and Color Manual Pages']]],
+  ['view_20and_20color_20manual_20pages_16',['View and Color Manual Pages',['../d7/dc5/a01242.html#view-and-color-manual-pages',1,'View and Color Manual Pages'],['../index.html#view-and-color-manual-pages-1',1,'View and Color Manual Pages']]],
   ['view_20api_17',['Menu, Form, Pick, and View API',['../d5/d6e/a01240.html#menu-form-pick-and-view-api',1,'']]],
-  ['view_20c_20keys_20rsh_20and_20lf_18',['View C Keys RSH and lf',['../d7/dc5/a01242.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf'],['../d8/db0/a01243.html#menu-form-pick-view-c-keys-rsh-and-lf-1',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf'],['../index.html#menu-form-pick-view-c-keys-rsh-and-lf-2',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf']]],
+  ['view_20c_20keys_20rsh_20and_20lf_18',['View C Keys RSH and lf',['../d7/dc5/a01242.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf'],['../index.html#menu-form-pick-view-c-keys-rsh-and-lf-1',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf']]],
   ['view_20display_19',['Manage View Display',['../d6/dea/a01094.html',1,'']]],
   ['view_20displays_20question_20marks_20',['Why View Displays Question Marks',['../d5/d6e/a01240.html#why-view-displays-question-marks',1,'']]],
   ['view_20engine_21',['View Engine',['../de/d9c/a01092.html',1,'']]],
@@ -32,7 +32,7 @@ var searchData=
   ['view_20line_20numbering_29',['View Line Numbering',['../d7/dc5/a01242.html#_new-view-line-numbering_',1,'&lt;b&gt;&lt;em&gt;NEW View Line Numbering&lt;/em&gt;&lt;/b&gt;'],['../index.html#_new-view-line-numbering_-1',1,'&lt;b&gt;&lt;em&gt;NEW View Line Numbering&lt;/em&gt;&lt;/b&gt;']]],
   ['view_20navigation_30',['View Navigation',['../de/d1c/a01093.html',1,'View Navigation'],['../d8/d2b/a01236.html#view-navigation',1,'View Navigation']]],
   ['view_20options_31',['View Options',['../d8/d2b/a01236.html#view-options',1,'']]],
-  ['view_20other_20features_32',['View Other Features',['../d7/dc5/a01242.html#view---other-features',1,'View - Other Features'],['../d8/db0/a01243.html#view---other-features-1',1,'View - Other Features'],['../index.html#view---other-features-2',1,'View - Other Features']]],
+  ['view_20other_20features_32',['View Other Features',['../d7/dc5/a01242.html#view---other-features',1,'View - Other Features'],['../index.html#view---other-features-1',1,'View - Other Features']]],
   ['view_2eh_33',['view.h',['../d6/dc0/a00734.html',1,'']]],
   ['view_5fcmd_5fprocessor_34',['view_cmd_processor',['../de/d9c/a01092.html#ga9c4b3ba5f73c18b486646c62b933972a',1,'view_engine.c']]],
   ['view_5fcnt_35',['view_cnt',['../d5/d17/a01098.html#aaf90110dd120ff67d0502a659cd3385c',1,'Init']]],
@@ -45,6 +45,6 @@ var searchData=
   ['view_5fprt_5ffile_42',['VIEW_PRT_FILE',['../dd/dd8/a00719.html#a262b9132ae6d68fe411d5b72f0e499ab',1,'common.h']]],
   ['view_5frestore_5fwins_43',['view_restore_wins',['../de/d91/a01034.html#a322b7dfe2d426fe7cfb2b4f59bf6fc78',1,'view_engine.c']]],
   ['views_20ckeys_20etc_44',['Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.',['../d5/d6e/a01240.html#drop-down-and-pop-up-menus-forms-pickers-views-ckeys-etc',1,'']]],
-  ['virtual_20address_20space_45',['Virtual Address Space',['../d7/dc5/a01242.html#demand-paged-virtual-address-space',1,'Demand Paged Virtual Address Space'],['../d8/db0/a01243.html#demand-paged-virtual-address-space-1',1,'Demand Paged Virtual Address Space'],['../index.html#demand-paged-virtual-address-space-2',1,'Demand Paged Virtual Address Space']]],
+  ['virtual_20address_20space_45',['Virtual Address Space',['../d7/dc5/a01242.html#demand-paged-virtual-address-space',1,'Demand Paged Virtual Address Space'],['../index.html#demand-paged-virtual-address-space-1',1,'Demand Paged Virtual Address Space']]],
   ['visual_20aids_20soap_20box_46',['Visual Aids Soap-box',['../d5/d6e/a01240.html#visual-aids-soap-box',1,'']]]
 ];

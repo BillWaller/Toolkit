@@ -273,89 +273,51 @@ var NAVTREE =
       [ "Configuration", "d7/dc5/a01242.html#configuration", null ],
       [ "MIT License", "d7/dc5/a01242.html#mit-license", null ]
     ] ],
-    [ "A User Interface Toolkit", "d8/db0/a01243.html", [
-      [ "Table of Contents", "d8/db0/a01243.html#table-of-contents-4", null ],
-      [ "Get C-Menu on Github", "d8/db0/a01243.html#get-c-menu-on-github-4", null ],
-      [ "NEW Features", "d8/db0/a01243.html#new-features", null ],
-      [ "C-Menu Exercises", "d8/db0/a01243.html#c-menu-exercises-1", null ],
-      [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "d8/db0/a01243.html#menu-form-pick-view-c-keys-rsh-and-lf-1", [
-        [ "C-Menu API", "d8/db0/a01243.html#c-menu-api-1", null ],
-        [ "C-Menu Introduction", "d8/db0/a01243.html#c-menu-introduction-1", null ],
-        [ "Elements of C-Menu", "d8/db0/a01243.html#elements-of-c-menu-1", null ],
-        [ "Key Features", "d8/db0/a01243.html#key-features-1", null ],
-        [ "Highlights (Pun Intended)", "d8/db0/a01243.html#highlights-pun-intended-1", null ],
-        [ "Just Do It!", "d8/db0/a01243.html#just-do-it-1", null ],
-        [ "Menu", "d8/db0/a01243.html#menu-1", null ],
-        [ "C-Keys - Diagnose Keyboard/Mouse Input", "d8/db0/a01243.html#c-keys---diagnose-keyboardmouse-input-1", null ],
-        [ "Pick - A Picker", "d8/db0/a01243.html#pick---a-picker-1", null ],
-        [ "Form for Data Entry and Editing", "d8/db0/a01243.html#form-for-data-entry-and-editing-1", null ],
-        [ "Form Key Features", "d8/db0/a01243.html#form-key-features-1", null ],
-        [ "Form Data Types", "d8/db0/a01243.html#form-data-types-2", null ],
-        [ "Sample Menu Description File", "d8/db0/a01243.html#sample-menu-description-file-1", null ],
-        [ "View", "d8/db0/a01243.html#view-1", [
-          [ "Log File With Editor", "d8/db0/a01243.html#log-file-with-editor-1", null ],
-          [ "Screenshot of the Same File With View", "d8/db0/a01243.html#screenshot-of-the-same-file-with-view-1", null ]
-        ] ],
-        [ "View and Color Manual Pages", "d8/db0/a01243.html#view-and-color-manual-pages-1", null ],
-        [ "Example Manual Page Using Editor", "d8/db0/a01243.html#example-manual-page-using-editor-1", null ],
-        [ "Example Manual Page", "d8/db0/a01243.html#example-manual-page-1", null ],
-        [ "Demand Paged Virtual Address Space", "d8/db0/a01243.html#demand-paged-virtual-address-space-1", null ],
-        [ "View - Other Features", "d8/db0/a01243.html#view---other-features-1", null ],
-        [ "3-Channel Gamma Correction", "d8/db0/a01243.html#autotoc_md3-channel-gamma-correction-1", null ],
-        [ "Gray Gamma", "d8/db0/a01243.html#gray-gamma-1", null ],
-        [ "RSH", "d8/db0/a01243.html#rsh-1", null ],
-        [ "Maintaining Security with RSH", "d8/db0/a01243.html#maintaining-security-with-rsh-1", null ],
-        [ "lf - List Files Using Regular Expressions", "d8/db0/a01243.html#lf---list-files-using-regular-expressions-1", null ]
+    [ "C-Menu ROADMAP", "d8/db0/a01243.html", [
+      [ "0.3.0 On the Horizon", "d8/db0/a01243.html#autotoc_md030-on-the-horizon", [
+        [ "Asynchronous Communication and Serialization", "d8/db0/a01243.html#asynchronous-communication-and-serialization", null ]
       ] ],
-      [ "Features", "d8/db0/a01243.html#features-1", null ],
-      [ "Configuration", "d8/db0/a01243.html#configuration-1", null ],
-      [ "MIT License", "d8/db0/a01243.html#mit-license-1", null ]
-    ] ],
-    [ "C-Menu ROADMAP", "d4/dd5/a01244.html", [
-      [ "0.3.0 On the Horizon", "d4/dd5/a01244.html#autotoc_md030-on-the-horizon", [
-        [ "Asynchronous Communication and Serialization", "d4/dd5/a01244.html#asynchronous-communication-and-serialization", null ]
+      [ "0.2.9 Wrap-Up", "d8/db0/a01243.html#autotoc_md029-wrap-up", null ],
+      [ "0.2.9 - Pre-Release", "d8/db0/a01243.html#autotoc_md029---pre-release", [
+        [ "Form", "d8/db0/a01243.html#form", null ],
+        [ "Pick", "d8/db0/a01243.html#pick", null ],
+        [ "Exercises - Example Use Cases", "d8/db0/a01243.html#exercises---example-use-cases", null ],
+        [ "View", "d8/db0/a01243.html#view-1", null ]
       ] ],
-      [ "0.2.9 Wrap-Up", "d4/dd5/a01244.html#autotoc_md029-wrap-up", null ],
-      [ "0.2.9 - Pre-Release", "d4/dd5/a01244.html#autotoc_md029---pre-release", [
-        [ "Form", "d4/dd5/a01244.html#form", null ],
-        [ "Pick", "d4/dd5/a01244.html#pick", null ],
-        [ "Exercises - Example Use Cases", "d4/dd5/a01244.html#exercises---example-use-cases", null ],
-        [ "View", "d4/dd5/a01244.html#view-2", null ]
+      [ "1.0.0 - Initial Release", "d8/db0/a01243.html#autotoc_md100---initial-release", [
+        [ "General", "d8/db0/a01243.html#general", null ]
       ] ],
-      [ "1.0.0 - Initial Release", "d4/dd5/a01244.html#autotoc_md100---initial-release", [
-        [ "General", "d4/dd5/a01244.html#general", null ]
-      ] ],
-      [ "1.1.0 - Feature Enhancements", "d4/dd5/a01244.html#autotoc_md110---feature-enhancements", [
-        [ "General", "d4/dd5/a01244.html#general-1", null ]
+      [ "1.1.0 - Feature Enhancements", "d8/db0/a01243.html#autotoc_md110---feature-enhancements", [
+        [ "General", "d8/db0/a01243.html#general-1", null ]
       ] ]
     ] ],
-    [ "Configuration snippets", "d1/d31/a01245.html", [
-      [ "Table of Contents", "d1/d31/a01245.html#table-of-contents-5", null ],
-      [ "C-Menu Desktop Files", "d1/d31/a01245.html#c-menu-desktop-files", null ],
-      [ "C-Menu bashrc Configuration", "d1/d31/a01245.html#c-menu-bashrc-configuration", [
-        [ "Shell Logging", "d1/d31/a01245.html#shell-logging", null ],
-        [ "Prepend Path", "d1/d31/a01245.html#prepend-path", null ],
-        [ "Helpful C-Menu Environment Variables", "d1/d31/a01245.html#helpful-c-menu-environment-variables", null ],
-        [ "Security Through Obscurity", "d1/d31/a01245.html#security-through-obscurity", null ],
-        [ "RSH Helpers", "d1/d31/a01245.html#rsh-helpers", null ],
-        [ "Privilege Indicator Shell Prompts", "d1/d31/a01245.html#privilege-indicator-shell-prompts", null ],
-        [ "Terminal and Editor Settings", "d1/d31/a01245.html#terminal-and-editor-settings", null ],
-        [ "GDB Debugging Setup", "d1/d31/a01245.html#gdb-debugging-setup", null ],
-        [ "If You Can't Stop Typing \"vi\"", "d1/d31/a01245.html#if-you-cant-stop-typing-vi", null ],
-        [ "C-Menu Startup with \"mm\"", "d1/d31/a01245.html#c-menu-startup-with-mm", null ],
-        [ "Curses Escape Delay", "d1/d31/a01245.html#curses-escape-delay", null ],
-        [ "Use lsd instead of ls", "d1/d31/a01245.html#use-lsd-instead-of-ls", null ],
-        [ "Locale Settings", "d1/d31/a01245.html#locale-settings", null ],
-        [ "System Specific Environment Variables", "d1/d31/a01245.html#system-specific-environment-variables", null ]
+    [ "Configuration snippets", "d4/dd5/a01244.html", [
+      [ "Table of Contents", "d4/dd5/a01244.html#table-of-contents-4", null ],
+      [ "C-Menu Desktop Files", "d4/dd5/a01244.html#c-menu-desktop-files", null ],
+      [ "C-Menu bashrc Configuration", "d4/dd5/a01244.html#c-menu-bashrc-configuration", [
+        [ "Shell Logging", "d4/dd5/a01244.html#shell-logging", null ],
+        [ "Prepend Path", "d4/dd5/a01244.html#prepend-path", null ],
+        [ "Helpful C-Menu Environment Variables", "d4/dd5/a01244.html#helpful-c-menu-environment-variables", null ],
+        [ "Security Through Obscurity", "d4/dd5/a01244.html#security-through-obscurity", null ],
+        [ "RSH Helpers", "d4/dd5/a01244.html#rsh-helpers", null ],
+        [ "Privilege Indicator Shell Prompts", "d4/dd5/a01244.html#privilege-indicator-shell-prompts", null ],
+        [ "Terminal and Editor Settings", "d4/dd5/a01244.html#terminal-and-editor-settings", null ],
+        [ "GDB Debugging Setup", "d4/dd5/a01244.html#gdb-debugging-setup", null ],
+        [ "If You Can't Stop Typing \"vi\"", "d4/dd5/a01244.html#if-you-cant-stop-typing-vi", null ],
+        [ "C-Menu Startup with \"mm\"", "d4/dd5/a01244.html#c-menu-startup-with-mm", null ],
+        [ "Curses Escape Delay", "d4/dd5/a01244.html#curses-escape-delay", null ],
+        [ "Use lsd instead of ls", "d4/dd5/a01244.html#use-lsd-instead-of-ls", null ],
+        [ "Locale Settings", "d4/dd5/a01244.html#locale-settings", null ],
+        [ "System Specific Environment Variables", "d4/dd5/a01244.html#system-specific-environment-variables", null ]
       ] ],
-      [ "C-Menu Configuration", "d1/d31/a01245.html#c-menu-configuration-1", null ],
-      [ "Terminal Configurations", "d1/d31/a01245.html#terminal-configurations", [
-        [ "Ghostty", "d1/d31/a01245.html#ghostty-1", null ],
-        [ "Kitty", "d1/d31/a01245.html#kitty", null ],
-        [ "Alacritty", "d1/d31/a01245.html#alacritty", null ]
+      [ "C-Menu Configuration", "d4/dd5/a01244.html#c-menu-configuration-1", null ],
+      [ "Terminal Configurations", "d4/dd5/a01244.html#terminal-configurations", [
+        [ "Ghostty", "d4/dd5/a01244.html#ghostty-1", null ],
+        [ "Kitty", "d4/dd5/a01244.html#kitty", null ],
+        [ "Alacritty", "d4/dd5/a01244.html#alacritty", null ]
       ] ],
-      [ "Tree-Sitter", "d1/d31/a01245.html#tree-sitter-1", [
-        [ "Tree-Sitter config.json", "d1/d31/a01245.html#tree-sitter-configjson", null ]
+      [ "Tree-Sitter", "d4/dd5/a01244.html#tree-sitter-1", [
+        [ "Tree-Sitter config.json", "d4/dd5/a01244.html#tree-sitter-configjson", null ]
       ] ]
     ] ],
     [ "Topics", "topics.html", "topics" ],
@@ -386,12 +348,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d3/dc4/a01089.html#ga98b36615c0627c4195c40b6c23d6062a",
-"d6/dc0/a00734.html#a3f15836bdfb0ecbf8ed781532654a435",
-"d8/db9/a00725.html#a07f5c2093934704866f8f2a929b02708",
-"d9/db3/a01064.html#a6b79a612cf4396d8fc3144a17381f6b3",
-"dc/dee/a01166.html#af63a7ddea6169afb47794f6a3ed80896",
-"dir_7db48fb218083d232d52f70dedcc49c8.html"
+"d4/d13/a01162.html#a4c4fdbe94c13a7d32d83e38a4afe2537",
+"d6/dc0/a00734.html#adb849ef0de5c311417c91c292799a846aaa481826e984e7266a1f7c20896b2490",
+"d8/db9/a00725.html#a41790a98c9c20313f5fde7d741e5ea79",
+"d9/db3/a01064.html#af8ae7d202360c017575b322f4d1d890f",
+"dd/dd8/a00719.html#a0367fef29909c4748fe8ea0ffb16f3de",
+"functions_vars_i.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

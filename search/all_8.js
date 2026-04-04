@@ -5,7 +5,7 @@ var searchData=
   ['backward_2',['Searching Backward',['../d8/d2b/a01236.html#searching-backward',1,'']]],
   ['base_5fname_3',['base_name',['../dd/dee/a01081.html#gae3d67c8c0b5b559664942e539256605b',1,'base_name(char *, char *):&#160;futil.c'],['../dd/dee/a01081.html#gae3d67c8c0b5b559664942e539256605b',1,'base_name(char *buf, char *path):&#160;futil.c']]],
   ['bash_20executable_4',['Alternate Bash Executable',['../d7/dbf/a01239.html#alternate-bash-executable',1,'']]],
-  ['bashrc_20configuration_5',['C-Menu bashrc Configuration',['../d1/d31/a01245.html#c-menu-bashrc-configuration',1,'']]],
+  ['bashrc_20configuration_5',['C-Menu bashrc Configuration',['../d4/dd5/a01244.html#c-menu-bashrc-configuration',1,'']]],
   ['bat_6',['Installing Bat',['../d7/dbf/a01239.html#installing-bat',1,'']]],
   ['bat_20on_20linux_7',['Bat On Linux',['../d7/dbf/a01239.html#bat-on-linux',1,'']]],
   ['bat_20on_20macos_8',['Bat On macOS',['../d7/dbf/a01239.html#bat-on-macos',1,'']]],

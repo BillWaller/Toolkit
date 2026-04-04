@@ -3,7 +3,7 @@ var searchData=
   ['background_20configuration_0',['SDDM Background Configuration',['../d8/ddf/a01238.html#sddm-background-configuration',1,'']]],
   ['backward_1',['Searching Backward',['../d8/d2b/a01236.html#searching-backward',1,'']]],
   ['bash_20executable_2',['Alternate Bash Executable',['../d7/dbf/a01239.html#alternate-bash-executable',1,'']]],
-  ['bashrc_20configuration_3',['C-Menu bashrc Configuration',['../d1/d31/a01245.html#c-menu-bashrc-configuration',1,'']]],
+  ['bashrc_20configuration_3',['C-Menu bashrc Configuration',['../d4/dd5/a01244.html#c-menu-bashrc-configuration',1,'']]],
   ['bat_4',['Installing Bat',['../d7/dbf/a01239.html#installing-bat',1,'']]],
   ['bat_20on_20linux_5',['Bat On Linux',['../d7/dbf/a01239.html#bat-on-linux',1,'']]],
   ['bat_20on_20macos_6',['Bat On macOS',['../d7/dbf/a01239.html#bat-on-macos',1,'']]],
