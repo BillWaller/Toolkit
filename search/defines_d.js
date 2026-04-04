@@ -1,6 +1,8 @@
 var searchData=
 [
   ['s_5fquiet_0',['S_QUIET',['../d8/db9/a00725.html#ac0d28426799e4da770644952ec858461',1,'cm.h']]],
-  ['s_5fwcok_1',['S_WCOK',['../d8/db9/a00725.html#ad34d5090eb39a3e2f33d4af2a44653a2',1,'cm.h']]],
-  ['scr_5fcols_2',['SCR_COLS',['../d8/db9/a00725.html#a9bef510e4a49836ed133025bcdba8a5c',1,'cm.h']]]
+  ['s_5ftolower_1',['S_TOLOWER',['../d8/db9/a00725.html#a6f55fbf6943d17be0f72c169fa757419',1,'cm.h']]],
+  ['s_5ftoupper_2',['S_TOUPPER',['../d8/db9/a00725.html#ad7551b5d8dfe11045160026bd97f8c1d',1,'cm.h']]],
+  ['s_5fwcok_3',['S_WCOK',['../d8/db9/a00725.html#ad34d5090eb39a3e2f33d4af2a44653a2',1,'cm.h']]],
+  ['scr_5fcols_4',['SCR_COLS',['../d8/db9/a00725.html#a9bef510e4a49836ed133025bcdba8a5c',1,'cm.h']]]
 ];

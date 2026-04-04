@@ -1,10 +1,12 @@
 var a01075 =
 [
-    [ "capture_curses_tioctl", "dd/d80/a01075.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "dd/d80/a01075.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "dd/d80/a01075.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "dd/d80/a01075.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "dd/d80/a01075.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "dd/d80/a01075.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "dd/d80/a01075.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "compile_chyron", "dd/d80/a01075.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "dd/d80/a01075.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "get_chyron_key", "dd/d80/a01075.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "dd/d80/a01075.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "dd/d80/a01075.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "mk_cmplx_buf", "dd/d80/a01075.html#gae36640465370bd716799eabb7dc058c5", null ],
+    [ "new_chyron", "dd/d80/a01075.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key_cp", "dd/d80/a01075.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "dd/d80/a01075.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

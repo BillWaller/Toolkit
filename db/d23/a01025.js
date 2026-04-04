@@ -1,6 +1,8 @@
 var a01025 =
 [
-    [ "free_menu_line", "d9/d7c/a01073.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
-    [ "get_command_type", "d9/d7c/a01073.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "d9/d7c/a01073.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "fork_exec", "db/dba/a01078.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "db/dba/a01078.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "db/dba/a01078.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d0/dd3/a01077.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "db/dba/a01078.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

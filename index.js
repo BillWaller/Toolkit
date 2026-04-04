@@ -1,15 +1,15 @@
 var index =
 [
+    [ "Other C-Menu Documents", "index.html#other-c-menu-documents-1", null ],
+    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github-5", [
+      [ "C-Menu Introduction", "index.html#c-menu-introduction-2", null ]
+    ] ],
     [ "<b><em>NEW Features</em></b>", "index.html#_new-features_-1", [
-      [ "C-Menu Introduction", "index.html#c-menu-introduction-2", null ],
       [ "<b><em>NEW View Line Numbering</em></b>", "index.html#_new-view-line-numbering_-1", null ],
       [ "Large Log File in View", "index.html#large-log-file-in-view-1", null ],
       [ "<b><em>New API Integration With Neovim</em></b>", "index.html#_new-api-integration-with-neovim_-1", null ],
       [ "<b><em>New Options for lf</em></b>", "index.html#_new-options-for-lf_-1", null ]
     ] ],
-    [ "Other C-Menu Documents", "index.html#other-c-menu-documents-1", null ],
-    [ "Table of Contents:", "index.html#table-of-contents-6", null ],
-    [ "Get C-Menu on Github", "index.html#get-c-menu-on-github-5", null ],
     [ "C-Menu Exercises", "index.html#c-menu-exercises-2", null ],
     [ "Menu, Form, Pick, View, C-Keys, RSH, and lf", "index.html#menu-form-pick-view-c-keys-rsh-and-lf-2", [
       [ "C-Menu API", "index.html#c-menu-api-2", null ],

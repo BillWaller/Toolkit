@@ -1,18 +1,14 @@
 var a01074 =
 [
-    [ "deselect_object", "d7/df7/a01074.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "d7/df7/a01074.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "d7/df7/a01074.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "d7/df7/a01074.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d7/df7/a01074.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "open_pick_win", "d7/df7/a01074.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "d7/df7/a01074.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_display_chyron", "d7/df7/a01074.html#gaed5ddd88212281d12281a15bf8fc7b8b", null ],
-    [ "pick_engine", "d7/df7/a01074.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d7/df7/a01074.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
-    [ "read_pick_input", "d7/df7/a01074.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d7/df7/a01074.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d7/df7/a01074.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d7/df7/a01074.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d7/df7/a01074.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "cbox", "d7/df7/a01074.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
+    [ "destroy_curses", "d7/df7/a01074.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "d7/df7/a01074.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "d7/df7/a01074.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "d7/df7/a01074.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "win_del", "d7/df7/a01074.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
+    [ "win_init_attrs", "d7/df7/a01074.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "d7/df7/a01074.html#ga435c7bff7ffedb8f51c6de9259e36f6c", null ],
+    [ "win_redraw", "d7/df7/a01074.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "d7/df7/a01074.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "d7/df7/a01074.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
 ];

@@ -1,6 +1,7 @@
 var a01091 =
 [
-    [ "key", "d6/d0d/a01091.html#afae4703fe8eb6cfce07372508666dea6", null ],
-    [ "l", "d6/d0d/a01091.html#a0664a24c199473e38c5475d9e3a31447", null ],
-    [ "s", "d6/d0d/a01091.html#ad9e5bdc4bce57a1bbf514562bbb35988", null ]
+    [ "handle_signal", "d6/d0d/a01091.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d6/d0d/a01091.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d6/d0d/a01091.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d6/d0d/a01091.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];
