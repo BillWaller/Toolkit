@@ -45,5 +45,5 @@ var searchData=
   ['green_42',['green',['../da/dfb/a01174.html#ac4a372aca71313c77bbd7f2a1b986ea5',1,'SIO']]],
   ['green_5fgamma_43',['GREEN_GAMMA',['../d3/dbd/a01100.html#ae73f509d37ed68f90fda73b039a914b8',1,'dwin.c']]],
   ['green_5fgamma_44',['green_gamma',['../da/dfb/a01174.html#a017a9ba957f600018439b6f278313eaa',1,'SIO']]],
-  ['guide_45',['Guide',['../d2/d1d/a01277.html',1,'Installation Guide'],['../dd/d39/a01271.html#roadmap-for-api-documentation-and-user-guide',1,'Roadmap for API Documentation and User Guide']]]
+  ['guide_45',['Roadmap for API Documentation and User Guide',['../dd/d39/a01271.html#roadmap-for-api-documentation-and-user-guide',1,'']]]
 ];

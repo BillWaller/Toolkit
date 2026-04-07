@@ -26,6 +26,7 @@ var NAVTREE =
 [
   [ "C-Menu", "index.html", [
     [ "Introduction", "index.html#introduction-5", [
+      [ "Other C-Menu documentation", "index.html#other-c-menu-documentation", null ],
       [ "C-Menu Binaries for Linux x86_64", "index.html#c-menu-binaries-for-linux-x86_64-1", null ],
       [ "Build C-Menu from Source", "index.html#build-c-menu-from-source-1", [
         [ "Finish the installation", "index.html#finish-the-installation-1", null ]
@@ -239,13 +240,14 @@ var NAVTREE =
         [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d5/d37/a01276.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4", null ]
       ] ]
     ] ],
-    [ "Installation Guide", "d2/d1d/a01277.html", [
-      [ "Introduction", "d2/d1d/a01277.html#introduction-4", null ],
-      [ "C-Menu Binaries for Linux x86_64", "d2/d1d/a01277.html#c-menu-binaries-for-linux-x86_64", null ],
-      [ "Build C-Menu from Source", "d2/d1d/a01277.html#build-c-menu-from-source", [
-        [ "Finish the installation", "d2/d1d/a01277.html#finish-the-installation", null ]
-      ] ],
-      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d1d/a01277.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5", null ]
+    [ "INSTALL", "d2/d1d/a01277.html", [
+      [ "Introduction", "d2/d1d/a01277.html#introduction-4", [
+        [ "C-Menu Binaries for Linux x86_64", "d2/d1d/a01277.html#c-menu-binaries-for-linux-x86_64", null ],
+        [ "Build C-Menu from Source", "d2/d1d/a01277.html#build-c-menu-from-source", [
+          [ "Finish the installation", "d2/d1d/a01277.html#finish-the-installation", null ]
+        ] ],
+        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d1d/a01277.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5", null ]
+      ] ]
     ] ],
     [ "OVERVIEW", "d4/d10/a01278.html", [
       [ "Table of Contents", "d4/d10/a01278.html#table-of-contents-5", [
