@@ -26,7 +26,6 @@ var NAVTREE =
 [
   [ "C-Menu", "index.html", [
     [ "Introduction", "index.html#introduction-5", [
-      [ "Other C-Menu documentation", "index.html#other-c-menu-documentation", null ],
       [ "C-Menu Binaries for Linux x86_64", "index.html#c-menu-binaries-for-linux-x86_64-1", null ],
       [ "Build C-Menu from Source", "index.html#build-c-menu-from-source-1", [
         [ "Finish the installation", "index.html#finish-the-installation-1", null ]
