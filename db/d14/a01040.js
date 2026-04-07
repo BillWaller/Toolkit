@@ -1,6 +1,10 @@
 var a01040 =
 [
-    [ "free_menu_line", "da/db7/a01088.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
-    [ "get_command_type", "da/db7/a01088.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "da/db7/a01088.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "MAX_FRAMES", "db/d14/a01040.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
+    [ "handle_signal", "d6/dea/a01094.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d6/dea/a01094.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d6/dea/a01094.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d6/dea/a01094.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
+    [ "f_curses_open", "db/d14/a01040.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
+    [ "sig_received", "db/d14/a01040.html#a01a99fc32bd5b471123f6223503c9616", null ]
 ];
