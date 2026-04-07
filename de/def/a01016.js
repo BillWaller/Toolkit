@@ -1,27 +1,6 @@
 var a01016 =
 [
-    [ "deselect_object", "d9/df5/a01086.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "d9/df5/a01086.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "d9/df5/a01086.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "d9/df5/a01086.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d9/df5/a01086.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "open_pick_win", "d9/df5/a01086.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "d9/df5/a01086.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_engine", "d9/df5/a01086.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d9/df5/a01086.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
-    [ "read_pick_input", "d9/df5/a01086.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d9/df5/a01086.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d9/df5/a01086.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d9/df5/a01086.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d9/df5/a01086.html#ga650262f8279502ebc73607394dd7af13", null ],
-    [ "calculated_idx", "de/def/a01016.html#acdb9de82d81b176784185dea9063b57c", null ],
-    [ "obj_idx", "de/def/a01016.html#a4a50bfe3f8460978b34566ec3dff7adb", null ],
-    [ "pagers_editors", "de/def/a01016.html#a8f93294009502446912fa64f33731029", null ],
-    [ "pg_lines", "de/def/a01016.html#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d", null ],
-    [ "pipe_fd", "de/def/a01016.html#ac7ac4adf3c3409d847a57c140700f334", null ],
-    [ "tbl_col", "de/def/a01016.html#ab57f05e19e1e81af17fbbd3a766c405a", null ],
-    [ "tbl_cols", "de/def/a01016.html#a7df4e526a3af8e113bbc05ca011c2341", null ],
-    [ "tbl_line", "de/def/a01016.html#a25fe2a76cfd155c51a46c99d6a1cf4d9", null ],
-    [ "tbl_page", "de/def/a01016.html#ae7c3abf692920540a78bc3322d02828a", null ],
-    [ "tbl_pages", "de/def/a01016.html#acbe29ef30ea713ef47f3cd892310ca50", null ]
+    [ "KSTRLEN", "de/def/a01016.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "de/def/a01016.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "de/def/a01016.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

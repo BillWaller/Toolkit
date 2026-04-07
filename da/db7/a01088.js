@@ -1,7 +1,6 @@
 var a01088 =
 [
-    [ "handle_signal", "da/db7/a01088.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "da/db7/a01088.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "da/db7/a01088.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "da/db7/a01088.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
+    [ "free_menu_line", "da/db7/a01088.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
+    [ "get_command_type", "da/db7/a01088.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "da/db7/a01088.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];
