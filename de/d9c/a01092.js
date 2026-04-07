@@ -1,18 +1,12 @@
 var a01092 =
 [
-    [ "destroy_form", "de/d9c/a01092.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
-    [ "destroy_init", "de/d9c/a01092.html#gaac196563b2f701fba2d1580ac8813de7", null ],
-    [ "destroy_menu", "de/d9c/a01092.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
-    [ "destroy_pick", "de/d9c/a01092.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
-    [ "destroy_view", "de/d9c/a01092.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
-    [ "init_form_files", "de/d9c/a01092.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
-    [ "init_menu_files", "de/d9c/a01092.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
-    [ "init_pick_files", "de/d9c/a01092.html#gab40bb77758b149f33cbde8063f341b00", null ],
-    [ "init_view_files", "de/d9c/a01092.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
-    [ "new_form", "de/d9c/a01092.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
-    [ "new_init", "de/d9c/a01092.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
-    [ "new_menu", "de/d9c/a01092.html#ga861e6162a19e089468fdc2a1479b547f", null ],
-    [ "new_pick", "de/d9c/a01092.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
-    [ "new_view", "de/d9c/a01092.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
-    [ "verify_spec_arg", "de/d9c/a01092.html#ga75ce293fe4e007a3337a190647408000", null ]
+    [ "abend", "de/d9c/a01092.html#ga8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "answer_yn", "de/d9c/a01092.html#ga483e2ea4802aa6360588c11adb871464", null ],
+    [ "display_error", "de/d9c/a01092.html#ga67659f8a701b74f4dec0d36227a10d1c", null ],
+    [ "nf_error", "de/d9c/a01092.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "Perror", "de/d9c/a01092.html#ga61b4f28456257f68ed042bed7f187efd", null ],
+    [ "wait_continue", "de/d9c/a01092.html#ga45c5bf79120644a22ffef896119fb672", null ],
+    [ "wait_destroy", "de/d9c/a01092.html#ga1659db421e92afe23911f5ae0a469bc5", null ],
+    [ "wait_mk_chyron", "de/d9c/a01092.html#gaab76ab3464d34674d9d4cd80c87999e7", null ],
+    [ "wait_mk_win", "de/d9c/a01092.html#ga5f404e9a570fd5981638c80af3d6e54d", null ]
 ];

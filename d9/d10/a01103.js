@@ -1,7 +1,6 @@
 var a01103 =
 [
-    [ "cmplx_buf", "d9/d10/a01103.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2", null ],
-    [ "key", "d9/d10/a01103.html#afae4703fe8eb6cfce07372508666dea6", null ],
-    [ "l", "d9/d10/a01103.html#a0664a24c199473e38c5475d9e3a31447", null ],
-    [ "s", "d9/d10/a01103.html#ad9e5bdc4bce57a1bbf514562bbb35988", null ]
+    [ "free_menu_line", "d9/d10/a01103.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
+    [ "get_command_type", "d9/d10/a01103.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d9/d10/a01103.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

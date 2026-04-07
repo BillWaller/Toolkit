@@ -1,6 +1,6 @@
 var a01022 =
 [
-    [ "KSTRLEN", "d1/dd8/a01022.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
-    [ "MAXLEN", "d1/dd8/a01022.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
-    [ "popup_ckeys", "d1/dd8/a01022.html#a483e450445eab0cfdef426ba3f027c6f", null ]
+    [ "init_view_boxwin", "d3/dbd/a01100.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d3/dbd/a01100.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_init_input", "d3/dbd/a01100.html#gab050f5482419339e9207dbdc65a7b49e", null ]
 ];

@@ -1,5 +1,6 @@
 var a01055 =
 [
-    [ "menu_cmd_processor", "de/d1c/a01093.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
-    [ "menu_engine", "de/d1c/a01093.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
+    [ "free_menu_line", "d9/d10/a01103.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
+    [ "get_command_type", "d9/d10/a01103.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d9/d10/a01103.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

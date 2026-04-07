@@ -1,11 +1,7 @@
 var a01100 =
 [
-    [ "display_line", "d3/dbd/a01100.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_prompt", "d3/dbd/a01100.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "fmt_line", "d3/dbd/a01100.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "d3/dbd/a01100.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "d3/dbd/a01100.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "resize_page", "d3/dbd/a01100.html#gacf603aea7d287c5d94548bf6ac2d2adb", null ],
-    [ "view_display_help", "d3/dbd/a01100.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "d3/dbd/a01100.html#gae6f141401cf9f104dbe14f09603d5178", null ]
+    [ "init_view.c", "d1/dd8/a01022.html", null ],
+    [ "init_view_boxwin", "d3/dbd/a01100.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d3/dbd/a01100.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_init_input", "d3/dbd/a01100.html#gab050f5482419339e9207dbdc65a7b49e", null ]
 ];

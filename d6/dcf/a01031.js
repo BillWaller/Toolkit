@@ -1,8 +1,6 @@
 var a01031 =
 [
-    [ "fork_exec", "da/d93/a01084.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "da/d93/a01084.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "da/d93/a01084.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "d6/d9a/a01083.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "da/d93/a01084.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "KSTRLEN", "d6/dcf/a01031.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "d6/dcf/a01031.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "d6/dcf/a01031.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];
