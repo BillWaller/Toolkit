@@ -1,6 +1,7 @@
 var a01114 =
 [
-    [ "bg", "d6/d40/a01114.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
-    [ "fg", "d6/d40/a01114.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
-    [ "pair_id", "d6/d40/a01114.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
+    [ "fork_exec", "d6/d40/a01114.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d6/d40/a01114.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d6/d40/a01114.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "d6/d40/a01114.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

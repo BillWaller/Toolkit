@@ -1,7 +1,17 @@
 var a01106 =
 [
-    [ "handle_signal", "da/d4e/a01106.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "da/d4e/a01106.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "da/d4e/a01106.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "da/d4e/a01106.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
+    [ "capture_curses_tioctl", "db/d1e/a01126.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "db/d1e/a01126.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "db/d1e/a01126.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "db/d1e/a01126.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "db/d1e/a01126.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "db/d1e/a01126.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "db/d1e/a01126.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ],
+    [ "curses_err_tioctl", "da/d4e/a01106.html#afe4863a6b75c5a20c2008f36f86cfeed", null ],
+    [ "curses_in_tioctl", "da/d4e/a01106.html#afcd0e5aee1f3f7445581428cb02b2115", null ],
+    [ "curses_out_tioctl", "da/d4e/a01106.html#ad9964c09cd96ce9748052b5494f30fc6", null ],
+    [ "curses_tioctl", "da/d4e/a01106.html#a5080741aab7f17e1d5b24e5ad63cf5e6", null ],
+    [ "f_have_curses_tioctl", "da/d4e/a01106.html#ac46bd98f4cec1758c1d600920caa7f39", null ],
+    [ "f_have_shell_tioctl", "da/d4e/a01106.html#a1e8b2f4dea5e88e7af17541140207df0", null ],
+    [ "shell_tioctl", "da/d4e/a01106.html#a6683c571cfe7d874546506ebf41fc3d3", null ]
 ];

@@ -1,6 +1,12 @@
 var a01111 =
 [
-    [ "bg", "d3/de1/a01111.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
-    [ "fg", "d3/de1/a01111.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
-    [ "pair_id", "d3/de1/a01111.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
+    [ "compile_chyron", "d3/de1/a01111.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "d3/de1/a01111.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "get_chyron_key", "d3/de1/a01111.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "d3/de1/a01111.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "d3/de1/a01111.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "mk_cmplx_buf", "d3/de1/a01111.html#gae36640465370bd716799eabb7dc058c5", null ],
+    [ "new_chyron", "d3/de1/a01111.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key_cp", "d3/de1/a01111.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "d3/de1/a01111.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

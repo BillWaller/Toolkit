@@ -1,8 +1,23 @@
 var a01040 =
 [
-    [ "fork_exec", "de/d1c/a01093.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "de/d1c/a01093.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "de/d1c/a01093.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "de/d9c/a01092.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "de/d1c/a01093.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "destroy_form", "db/d32/a01122.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "db/d32/a01122.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "db/d32/a01122.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "db/d32/a01122.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "db/d32/a01122.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "db/d32/a01122.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "db/d32/a01122.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "db/d32/a01122.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "db/d32/a01122.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "db/d32/a01122.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
+    [ "new_init", "db/d32/a01122.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "db/d32/a01122.html#ga861e6162a19e089468fdc2a1479b547f", null ],
+    [ "new_pick", "db/d32/a01122.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
+    [ "new_view", "db/d32/a01122.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "db/d32/a01122.html#ga75ce293fe4e007a3337a190647408000", null ],
+    [ "form", "db/d14/a01040.html#adb98384f3771d341017b7b3add874515", null ],
+    [ "init_cnt", "db/d14/a01040.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32", null ],
+    [ "menu", "db/d14/a01040.html#a529b480d3d81a86e882c4d6ab8afa8bb", null ],
+    [ "pick", "db/d14/a01040.html#aa0984c16af72bfdf57c5d88de1d314f9", null ],
+    [ "view", "db/d14/a01040.html#af2dd70d8b95c32fb670ac6f9cc8df201", null ]
 ];

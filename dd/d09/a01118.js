@@ -1,5 +1,9 @@
 var a01118 =
 [
-    [ "l", "dd/d09/a01118.html#a8cffb4a348d6d6f90ce1c9efd99ad557", null ],
-    [ "s", "dd/d09/a01118.html#a1270cae1cd57356ffc567eed342b5d97", null ]
+    [ "free_string", "dd/d09/a01118.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "dd/d09/a01118.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "dd/d09/a01118.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "dd/d09/a01118.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "dd/d09/a01118.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "dd/d09/a01118.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];
