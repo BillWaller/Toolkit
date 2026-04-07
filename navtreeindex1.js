@@ -186,7 +186,7 @@ var NAVTREEINDEX1 =
 "d4/d10/a01278.html#rsh":[8,0,4,20],
 "d4/d10/a01278.html#sample-menu-description-file":[8,0,4,11],
 "d4/d10/a01278.html#screenshot-of-the-same-file-with-view":[8,0,4,12,1],
-"d4/d10/a01278.html#table-of-contents-5":[8,0],
+"d4/d10/a01278.html#table-of-contents-4":[8,0],
 "d4/d10/a01278.html#view":[8,0,4,12],
 "d4/d10/a01278.html#view---other-features":[8,0,4,17],
 "d4/d10/a01278.html#view-and-color-manual-pages":[8,0,4,13],

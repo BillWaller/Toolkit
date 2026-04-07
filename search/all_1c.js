@@ -44,7 +44,6 @@ var searchData=
   ['view_5finit_5finput_41',['view_init_input',['../dd/de4/a01121.html#gab050f5482419339e9207dbdc65a7b49e',1,'view_init_input(View *, char *):&#160;init_view.c'],['../dd/de4/a01121.html#gab050f5482419339e9207dbdc65a7b49e',1,'view_init_input(View *view, char *file_name):&#160;init_view.c']]],
   ['view_5fprt_5ffile_42',['VIEW_PRT_FILE',['../dd/dd8/a00719.html#a262b9132ae6d68fe411d5b72f0e499ab',1,'common.h']]],
   ['view_5frestore_5fwins_43',['view_restore_wins',['../d5/d67/a01070.html#a322b7dfe2d426fe7cfb2b4f59bf6fc78',1,'view_engine.c']]],
-  ['views_20ckeys_20etc_44',['Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.',['../d5/d37/a01276.html#drop-down-and-pop-up-menus-forms-pickers-views-ckeys-etc',1,'']]],
-  ['virtual_20address_20space_45',['Demand Paged Virtual Address Space',['../d4/d10/a01278.html#demand-paged-virtual-address-space',1,'']]],
-  ['visual_20aids_20soap_20box_46',['Visual Aids Soap-box',['../d5/d37/a01276.html#visual-aids-soap-box',1,'']]]
+  ['virtual_20address_20space_44',['Demand Paged Virtual Address Space',['../d4/d10/a01278.html#demand-paged-virtual-address-space',1,'']]],
+  ['visual_20aids_20soap_20box_45',['Visual Aids Soap-box',['../d5/d37/a01276.html#visual-aids-soap-box',1,'']]]
 ];

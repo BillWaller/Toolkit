@@ -115,15 +115,13 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/d37/a01276.
 <div class="textblock"><p><a class="anchor" id="autotoc_md44"></a> <img src="../../FAQ.png" alt="" class="inline" title="Frequently Asked Questions"/>    </p>
 <h1 class="doxsection"><a class="anchor" id="table-of-contents-3"></a>
 Table of Contents</h1>
-<h2 class="doxsection"><a class="anchor" id="table-of-contents-4"></a>
-Table of Contents</h2>
 <ul>
 <li><a class="el" href="#lf-is-fast-but-i-rely-on-finds-features" title="lf is fast, but I rely on find&#39;s features">lf is fast, but I rely on find's features</a></li>
-<li><a class="el" href="#can-lf-match-files-with-multiple-suffixes" title="Can lf match files with multiple suffixes">Can lf match files with multiple suffixes</a></li>
-<li><a class="el" href="#drop-down-and-pop-up-menus-forms-pickers-views-ckeys-etc" title="Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.">Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.</a></li>
-<li><a class="el" href="#sorted-lf-output" title="Sorted lf Output">Sorted lf Output</a></li>
-<li><a class="el" href="#multiple-executables" title="Multiple Executables">Multiple Executables</a></li>
-<li><a class="el" href="#static-executables" title="Static Executables">Static Executables</a></li>
+<li>Can lf match files with multiple suffixes</li>
+<li>Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.</li>
+<li>Sorted lf Output</li>
+<li>Multiple Executables</li>
+<li>Static Executables</li>
 <li><a class="el" href="#whats-the-icon" title="What&#39;s the Icon?">What's the Icon?</a></li>
 <li><a class="el" href="#c-menus-file-structure" title="C-Menu&#39;s File Structure">C-Menu's File Structure</a></li>
 <li><a class="el" href="#some-menu-selections-dont-work" title="Some Menu Selections Don&#39;t work">Some Menu Selections Don't work</a><ul>
@@ -152,106 +150,27 @@ Table of Contents</h2>
 <li><a class="el" href="#pick---selecting-multiple-files" title="Pick - Selecting Multiple Files">Pick - Selecting Multiple Files</a></li>
 <li><a class="el" href="#menu-lf---where-are-my-header-files" title="Menu lf - Where Are My Header Files?">Menu lf - Where Are My Header Files?</a></li>
 <li><a class="el" href="#view-in-a-box-window" title="View In a Box Window">View In a Box Window</a></li>
-<li><a class="el" href="../../dd/d39/a01271.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository" title="🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.">🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</a></li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="lf-is-fast-but-i-rely-on-finds-features"></a>
 lf is fast, but I rely on find's features</h2>
-<p>Q: I use find all the time to delete, move, and process files. find's -exec argument can apply any executable to found files. Does lf have something like that?</p>
-<p>A: Of course. "find"" uses the xargs utility to execute commands on its output,
-and xargs is available in the public domain. For example, you can use the following command to remove all files found with find:
-
-@icode{bash} 
-find . -type f -exec rm -f {} \;
-@endicode 
-
-You can do the same thing with lf. Use the following command to delete all files found by lf:
-
-@icode{bash} 
-lf -t f | xargs rm -f
-@endicode 
-
-You can also use xargs to apply any executable to the files found by lf. For example, you can use the following command to list all files found by lf in long format:
-
-@icode{bash} 
-lf -t f | xargs ls -l
-@endicode 
-
-As always, the lf command is a little shorter than the equivalent find command because we don't like to punish you for using our software, and it is much faster. You can use xargs with lf to apply any executable to the files found by lf, just like you can with find.
-
-@subsection can-lf-match-files-with-multiple-suffixes Can lf match files with multiple suffixes
-
-Q: With find, you can search for files with multiple extensions. Is there a way
-to do that with lf?
-
-A: Yes. You can use a regular expression to match multiple suffixes with lf. For example, you can use the following command:
-
-@icode{bash} 
-lf -a -d 5 . '.*\.([ch]|cpp|rs|sh)$' | sort &gt;lf.out
-@endicode 
-
-This is equivalent to the following find command:
-
-@icode{bash} 
-find . -maxdepth 5 \&zwj;( -name "*.[ch]" -o -name "*.cpp" -o -name "*.rs" -o -name "*.sh" \&zwj;) | sed 's/^\.\//' | sort &gt;find.out
-@endicode 
-
-Once you get the hang of using regular expressions, you will find that they are more powerful and flexible than the options provided by find. Regular expressions allow you to match complex patterns in file names, and lf allows you to include or exclude (with the -e option) specific patterns as needed. Arguably, regular expressions are more intuitive and easier to read than the complex syntax of find when it comes to matching multiple patterns.
-
-@subsection drop-down-and-pop-up-menus-forms-pickers-views-ckeys-etc Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.
-
-Q: Are you going to add drop-down and pop-up features to C-Menu?
-
-A: Yes. Drop-down and pop-up menus are on the roadmap for future releases of C-Menu, and we are already making some progress in that direction. Stand by!
-
-@subsection sorted-lf-output Sorted lf Output
-
-Q: Why is the output of "lf" not sorted?
-
-A: It should be sorted. The easiest way to do that is to pipe lf output through
-"sort". The preferred method would be to use the -S option to execute a shell
-script such as ~/menuapp/bin/project_src. I have added "| sort" to that script
-based on your suggestion. Here is the new script:
-
-A2: Please forgive the previous answer that seems a bit terse as I re-read it. Here is a more detailed answer that I believe you will appreciate.
-
-The compelling design objective for "lf" was to create an ultra-lightweight stand-in for find with a minimal memory footprint, a simple interface that is easy to learn and use, and high performance on any platform, including IOT, and embedded applications. Any features that impede rapid development or deployment to constrained resource environments would detract from "lf"'s design objectives. What we want from "lf" is more-bang-for-the-buck.
-
-"lf" isn't find, and it isn't meant to be. It is a simple utility that provides basic file listing capabilities with a focus on speed and simplicity. As you know, the manual page for find is 35 pages, while the manual page for "lf" is only 2 pages. "lf" must be simple, easy-to-use, and fast.
-
-Adding a sorting option to lf would require storing the sortable fields in a table,which would increase the memory footprint and add many instruction cycles to the process.
-
-@icode{bash} 
-#!/bin/bash
-# project_src
-# This script lists C source files in the current directory and sorts them.
-lf . .*\.[ch]$ | sort
-@endicode 
-
-I should have done that in all the C-Menu examples, and I will in the future.
-Thanks for pointing it out.
-
-@subsection multiple-executables Multiple Executables
-
-Q: Why do you have multiple executables for Menu, Form, Pick, and View?
-
-A: That's a very good question. Done! 2026-03-25 There is one executable now that
-replaces menu, form, pick, view, and ckeys. The usage of those executables has
-not changed from the user's perspective as they are symbolic links to main.
-
-@subsection static-executables Static Executables
-
-Q: Why don't you provide static executables for C-Menu?
-
-A: I can understand why you might prefer static executables, especially in a rescue or embedded environment, and that's why the build system has a provision to make rsh as a static executable. However, the executables that use NCurses present a much more difficult challenge. While NCurses itself can be built as a static library, it has many dependencies, and some of those attempt to open dynamic libraries, even when the executable is linked with the static NCurses and GLibc libraries. The resulting executables would probably work fine, everywhere except where you needed them.
-
-It's not an unsolvable problem. Developers of embedded systems deal with such issues routinely. However, embedded systems development is a specialized and highly technical field, and I don't have the expertise to create static executables that could be trusted to work reliably across a wide range of environments. If you happen to be an embedded systems developer are interested in contributing to the project, please let me know. I would be happy to collaborate with you on this.
-
-@subsection whats-the-icon What's the Icon?
-
-Q: What is the icon for C-Menu?
-
-@image html screenshots/decision256.png "C-Menu Icon"    </p>
-<p>A: I tried using the stylized C-Menu logo, but it is illegible at small sizes. At least temporarily, I am using the above image.</p>
+<p>Q: I use find all the time to delete, move, and process files. find's -exec argument can apply any executable to found files. How can I do that with lf?</p>
+<p>A: The xargs utility, which is distributed with find, is available in the public domain. You can use it with lf. For example:</p>
+<div class="fragment"><div class="line">lf -a -t f | xargs rm -f</div>
+<div class="line"> </div>
+<div class="line">lf -a -t f | xargs ls -l</div>
+</div><!-- fragment --><p>And, you will find the performance of lf is spectacular compared to find.</p>
+<div class="image">
+<img src="../../lf-vs-find5.png" alt=""/>
+<div class="caption">
+lf vs find performance</div></div>
+    <h2 class="doxsection"><a class="anchor" id="whats-the-icon"></a>
+What's the Icon?</h2>
+<p>Q: What is the icon for C-Menu?</p>
+<div class="image">
+<img src="../../decision256.png" alt=""/>
+<div class="caption">
+C-Menu Icon</div></div>
+    <p>A: I tried using the stylized C-Menu logo, but it is illegible at small sizes. At least temporarily, I am using the above image.</p>
 <p>My main objectives in designing the icon were to make it simple, distinctive, and visually appealing. I wanted to create an icon that would be easily recognizable and memorable, while also conveying a sense of functionality and modernity. The overlapping tilted squares in the design represent the idea of multiple layers of functionality and customization that C-Menu offers. The use of transparency and cascading effects adds depth and visual interest to the icon, while also symbolizing the flexibility and adaptability of C-Menu as a tool for developers. Overall, I aimed to create an icon that would capture the essence of C-Menu's capabilities while also being visually striking and unique.</p>
 <p>However, after querying several people as to their impression, there was no consensus. My wife said it looks like a diamond. My brother-in-law, Larry, a former US Marine and Vietnam Veteran said it looks like rank chevrons. My Son, Brian, said it's just overlapping tilted squares. Cousin Mike, an IBM Systems Analyst, said it looks like a ligature made from the less and more symbols "&lt;&gt;". What do you think? If you have a suggestion for a better icon, please let me know.</p>
 <h2 class="doxsection"><a class="anchor" id="c-menus-file-structure"></a>
@@ -557,8 +476,7 @@ View In a Box Window</h2>
 <div class="fragment"><div class="line">tree-sitter highlight view_engine.c | view -L 40 -C 80 -T &quot;Highlighted view_engine.c&quot;</div>
 </div><!-- fragment --><p>The "-S" option will tell view to execute the command and display the output. As an added bonus, if you don't provide a title with "-T", view will use the "-S" command as the title:</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4"></a>
-🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h2>
+<p>Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.](#-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository) </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

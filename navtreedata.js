@@ -26,11 +26,12 @@ var NAVTREE =
 [
   [ "C-Menu", "index.html", [
     [ "Introduction", "index.html#introduction-5", [
+      [ "Other documentation", "index.html#other-documentation", null ],
       [ "C-Menu Binaries for Linux x86_64", "index.html#c-menu-binaries-for-linux-x86_64-1", null ],
       [ "Build C-Menu from Source", "index.html#build-c-menu-from-source-1", [
         [ "Finish the installation", "index.html#finish-the-installation-1", null ]
       ] ],
-      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-6", null ]
+      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5", null ]
     ] ],
     [ "API", "dd/d39/a01271.html", [
       [ "How to get C-Menu", "dd/d39/a01271.html#how-to-get-c-menu", [
@@ -203,13 +204,7 @@ var NAVTREE =
     ] ],
     [ "FAQ", "d5/d37/a01276.html", [
       [ "Table of Contents", "d5/d37/a01276.html#table-of-contents-3", [
-        [ "Table of Contents", "d5/d37/a01276.html#table-of-contents-4", null ],
         [ "lf is fast, but I rely on find's features", "d5/d37/a01276.html#lf-is-fast-but-i-rely-on-finds-features", null ],
-        [ "Can lf match files with multiple suffixes", "d5/d37/a01276.html#can-lf-match-files-with-multiple-suffixes", null ],
-        [ "Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.", "d5/d37/a01276.html#drop-down-and-pop-up-menus-forms-pickers-views-ckeys-etc", null ],
-        [ "Sorted lf Output", "d5/d37/a01276.html#sorted-lf-output", null ],
-        [ "Multiple Executables", "d5/d37/a01276.html#multiple-executables", null ],
-        [ "Static Executables", "d5/d37/a01276.html#static-executables", null ],
         [ "What's the Icon?", "d5/d37/a01276.html#whats-the-icon", null ],
         [ "C-Menu's File Structure", "d5/d37/a01276.html#c-menus-file-structure", null ],
         [ "Some Menu Selections Don't work", "d5/d37/a01276.html#some-menu-selections-dont-work", [
@@ -235,8 +230,7 @@ var NAVTREE =
         [ "Menu - What Happened to Delete by Inode", "d5/d37/a01276.html#menu---what-happened-to-delete-by-inode", null ],
         [ "Pick - Selecting Multiple Files", "d5/d37/a01276.html#pick---selecting-multiple-files", null ],
         [ "Menu lf - Where Are My Header Files?", "d5/d37/a01276.html#menu-lf---where-are-my-header-files", null ],
-        [ "View In a Box Window", "d5/d37/a01276.html#view-in-a-box-window", null ],
-        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d5/d37/a01276.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4", null ]
+        [ "View In a Box Window", "d5/d37/a01276.html#view-in-a-box-window", null ]
       ] ]
     ] ],
     [ "INSTALL", "d2/d1d/a01277.html", [
@@ -245,11 +239,11 @@ var NAVTREE =
         [ "Build C-Menu from Source", "d2/d1d/a01277.html#build-c-menu-from-source", [
           [ "Finish the installation", "d2/d1d/a01277.html#finish-the-installation", null ]
         ] ],
-        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d1d/a01277.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5", null ]
+        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d1d/a01277.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4", null ]
       ] ]
     ] ],
     [ "OVERVIEW", "d4/d10/a01278.html", [
-      [ "Table of Contents", "d4/d10/a01278.html#table-of-contents-5", [
+      [ "Table of Contents", "d4/d10/a01278.html#table-of-contents-4", [
         [ "Other C-Menu Documents", "d4/d10/a01278.html#other-c-menu-documents", null ],
         [ "Get C-Menu on Github", "d4/d10/a01278.html#get-c-menu-on-github-3", [
           [ "C-Menu Introduction", "d4/d10/a01278.html#c-menu-introduction", null ]
@@ -312,33 +306,35 @@ var NAVTREE =
         [ "General", "d9/de7/a01279.html#general-1", null ]
       ] ]
     ] ],
-    [ "Configuration snippets", "d8/d0d/a01280.html", [
-      [ "Table of Contents", "d8/d0d/a01280.html#table-of-contents-6", null ],
-      [ "C-Menu Desktop Files", "d8/d0d/a01280.html#c-menu-desktop-files", null ],
-      [ "C-Menu bashrc Configuration", "d8/d0d/a01280.html#c-menu-bashrc-configuration", [
-        [ "Shell Logging", "d8/d0d/a01280.html#shell-logging", null ],
-        [ "Prepend Path", "d8/d0d/a01280.html#prepend-path", null ],
-        [ "Helpful C-Menu Environment Variables", "d8/d0d/a01280.html#helpful-c-menu-environment-variables", null ],
-        [ "Security Through Obscurity", "d8/d0d/a01280.html#security-through-obscurity", null ],
-        [ "RSH Helpers", "d8/d0d/a01280.html#rsh-helpers", null ],
-        [ "Privilege Indicator Shell Prompts", "d8/d0d/a01280.html#privilege-indicator-shell-prompts", null ],
-        [ "Terminal and Editor Settings", "d8/d0d/a01280.html#terminal-and-editor-settings", null ],
-        [ "GDB Debugging Setup", "d8/d0d/a01280.html#gdb-debugging-setup", null ],
-        [ "If You Can't Stop Typing \"vi\"", "d8/d0d/a01280.html#if-you-cant-stop-typing-vi", null ],
-        [ "C-Menu Startup with \"mm\"", "d8/d0d/a01280.html#c-menu-startup-with-mm", null ],
-        [ "Curses Escape Delay", "d8/d0d/a01280.html#curses-escape-delay", null ],
-        [ "Use lsd instead of ls", "d8/d0d/a01280.html#use-lsd-instead-of-ls", null ],
-        [ "Locale Settings", "d8/d0d/a01280.html#locale-settings", null ],
-        [ "System Specific Environment Variables", "d8/d0d/a01280.html#system-specific-environment-variables", null ]
-      ] ],
-      [ "C-Menu Configuration", "d8/d0d/a01280.html#c-menu-configuration-1", null ],
-      [ "Terminal Configurations", "d8/d0d/a01280.html#terminal-configurations", [
-        [ "Ghostty", "d8/d0d/a01280.html#ghostty-1", null ],
-        [ "Kitty", "d8/d0d/a01280.html#kitty", null ],
-        [ "Alacritty", "d8/d0d/a01280.html#alacritty", null ]
-      ] ],
-      [ "Tree-Sitter", "d8/d0d/a01280.html#tree-sitter-1", [
-        [ "Tree-Sitter config.json", "d8/d0d/a01280.html#tree-sitter-configjson", null ]
+    [ "snippets", "d8/d0d/a01280.html", [
+      [ "Configuration snippets", "d8/d0d/a01280.html#configuration-snippets", [
+        [ "Table of Contents", "d8/d0d/a01280.html#table-of-contents-5", null ],
+        [ "C-Menu Desktop Files", "d8/d0d/a01280.html#c-menu-desktop-files", null ],
+        [ "C-Menu bashrc Configuration", "d8/d0d/a01280.html#c-menu-bashrc-configuration", [
+          [ "Shell Logging", "d8/d0d/a01280.html#shell-logging", null ],
+          [ "Prepend Path", "d8/d0d/a01280.html#prepend-path", null ],
+          [ "Helpful C-Menu Environment Variables", "d8/d0d/a01280.html#helpful-c-menu-environment-variables", null ],
+          [ "Security Through Obscurity", "d8/d0d/a01280.html#security-through-obscurity", null ],
+          [ "RSH Helpers", "d8/d0d/a01280.html#rsh-helpers", null ],
+          [ "Privilege Indicator Shell Prompts", "d8/d0d/a01280.html#privilege-indicator-shell-prompts", null ],
+          [ "Terminal and Editor Settings", "d8/d0d/a01280.html#terminal-and-editor-settings", null ],
+          [ "GDB Debugging Setup", "d8/d0d/a01280.html#gdb-debugging-setup", null ],
+          [ "If You Can't Stop Typing \"vi\"", "d8/d0d/a01280.html#if-you-cant-stop-typing-vi", null ],
+          [ "C-Menu Startup with \"mm\"", "d8/d0d/a01280.html#c-menu-startup-with-mm", null ],
+          [ "Curses Escape Delay", "d8/d0d/a01280.html#curses-escape-delay", null ],
+          [ "Use lsd instead of ls", "d8/d0d/a01280.html#use-lsd-instead-of-ls", null ],
+          [ "Locale Settings", "d8/d0d/a01280.html#locale-settings", null ],
+          [ "System Specific Environment Variables", "d8/d0d/a01280.html#system-specific-environment-variables", null ]
+        ] ],
+        [ "C-Menu Configuration", "d8/d0d/a01280.html#c-menu-configuration-1", null ],
+        [ "Terminal Configurations", "d8/d0d/a01280.html#terminal-configurations", [
+          [ "Ghostty", "d8/d0d/a01280.html#ghostty-1", null ],
+          [ "Kitty", "d8/d0d/a01280.html#kitty", null ],
+          [ "Alacritty", "d8/d0d/a01280.html#alacritty", null ]
+        ] ],
+        [ "Tree-Sitter", "d8/d0d/a01280.html#tree-sitter-1", [
+          [ "Tree-Sitter config.json", "d8/d0d/a01280.html#tree-sitter-configjson", null ]
+        ] ]
       ] ]
     ] ],
     [ "Topics", "topics.html", "topics" ],
@@ -371,10 +367,10 @@ var NAVTREEINDEX =
 "annotated.html",
 "d3/dbd/a01100.html",
 "d4/d5d/a01202.html#a802435fc6d94e12b6cc3df841815f041",
-"d8/d0d/a01280.html#tree-sitter-configjson",
-"d9/d2e/a01194.html#a274319cb0d5ccabbd48105a5db38298d",
-"dc/d51/a01120.html#ga365153038835675ce050503313cea890",
-"functions_t.html"
+"d8/d11/a01178.html#a8fe1ec2a1ec422e83737ccb864bce0da",
+"d9/d2e/a01194.html#a7668a643c4d6f85dd86323b4ea6fbee3",
+"dc/d51/a01120.html#gaccd65939c0ce6f0d940c5cf795a1e8fa",
+"functions_vars_d.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

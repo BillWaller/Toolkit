@@ -114,7 +114,7 @@ var NAVTREEINDEX0 =
 "d1/dfa/a01097.html#a3c04138a5bfe5d72780bb7e82a18e627":[13,0,4,0],
 "d1/dfa/a01097_source.html":[13,0,4],
 "d2/d1d/a01277.html":[7],
-"d2/d1d/a01277.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5":[7,0,2],
+"d2/d1d/a01277.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4":[7,0,2],
 "d2/d1d/a01277.html#build-c-menu-from-source":[7,0,1],
 "d2/d1d/a01277.html#c-menu-binaries-for-linux-x86_64":[7,0,0],
 "d2/d1d/a01277.html#finish-the-installation":[7,0,1,0],

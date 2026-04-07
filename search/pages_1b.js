@@ -20,7 +20,6 @@ var searchData=
   ['view_20navigation_17',['View Navigation',['../d4/d0e/a01272.html#view-navigation',1,'']]],
   ['view_20options_18',['View Options',['../d4/d0e/a01272.html#view-options',1,'']]],
   ['view_20other_20features_19',['View - Other Features',['../d4/d10/a01278.html#view---other-features',1,'']]],
-  ['views_20ckeys_20etc_20',['Drop-down and Pop-up Menus, Forms, Pickers, Views, Ckeys, etc.',['../d5/d37/a01276.html#drop-down-and-pop-up-menus-forms-pickers-views-ckeys-etc',1,'']]],
-  ['virtual_20address_20space_21',['Demand Paged Virtual Address Space',['../d4/d10/a01278.html#demand-paged-virtual-address-space',1,'']]],
-  ['visual_20aids_20soap_20box_22',['Visual Aids Soap-box',['../d5/d37/a01276.html#visual-aids-soap-box',1,'']]]
+  ['virtual_20address_20space_20',['Demand Paged Virtual Address Space',['../d4/d10/a01278.html#demand-paged-virtual-address-space',1,'']]],
+  ['visual_20aids_20soap_20box_21',['Visual Aids Soap-box',['../d5/d37/a01276.html#visual-aids-soap-box',1,'']]]
 ];
