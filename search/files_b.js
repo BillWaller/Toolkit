@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['scriou_2ec_0',['scriou.c',['../d9/d7c/a01073.html',1,'']]],
-  ['sig_2ec_1',['sig.c',['../db/d14/a01040.html',1,'']]],
-  ['snippets_2emd_2',['snippets.md',['../d7/d98/a00983.html',1,'']]],
-  ['stripansi_2ec_3',['stripansi.c',['../d2/d71/a01055.html',1,'']]]
+  ['scriou_2ec_0',['scriou.c',['../d6/d80/a01076.html',1,'']]],
+  ['sig_2ec_1',['sig.c',['../d8/d27/a01043.html',1,'']]],
+  ['snippets_2emd_2',['snippets.md',['../d3/d7b/a00986.html',1,'']]],
+  ['stripansi_2ec_3',['stripansi.c',['../d5/d4c/a01058.html',1,'']]]
 ];

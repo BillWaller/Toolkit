@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x86_5f64_0',['x86_64',['../d4/dd5/a01244.html#c-menu-binaries-for-linux-x86_64',1,'C-Menu Binaries for Linux x86_64'],['../index.html#c-menu-binaries-for-linux-x86_64-1',1,'C-Menu Binaries for Linux x86_64']]]
+  ['x86_5f64_0',['x86_64',['../dd/d95/a01247.html#c-menu-binaries-for-linux-x86_64',1,'C-Menu Binaries for Linux x86_64'],['../index.html#c-menu-binaries-for-linux-x86_64-1',1,'C-Menu Binaries for Linux x86_64']]]
 ];
