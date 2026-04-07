@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: parse_menu_desc.c File Reference</title>
+<title>C-Menu: lf.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,41 +109,186 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/d14/a01040.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">parse_menu_desc.c File Reference</div></div>
+  <div class="headertitle"><div class="title">lf.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Parse menu description file and create <a class="el" href="../../df/db5/a01158.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.  
+<p>list files matching a regular expression  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;argp.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;grp.h&gt;</code><br />
+<code>#include &lt;pwd.h&gt;</code><br />
+<code>#include &lt;regex.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for parse_menu_desc.c:</div>
+Include dependency graph for lf.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/d83/a01041.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/d83/a01041.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../db/d14/a01040_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gadd4bd5f0e9c89c717e460b2eb9952e6a" id="r_gadd4bd5f0e9c89c717e460b2eb9952e6a"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../da/db7/a01088.html#gadd4bd5f0e9c89c717e460b2eb9952e6a">parse_menu_description</a> (<a class="el" href="../../d5/d17/a01098.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gadd4bd5f0e9c89c717e460b2eb9952e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse menu description file and create <a class="el" href="../../df/db5/a01158.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.  <br /></td></tr>
-<tr class="memitem:ga1989771e09ef0e00c4cec786094d1d26" id="r_ga1989771e09ef0e00c4cec786094d1d26"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../da/db7/a01088.html#ga1989771e09ef0e00c4cec786094d1d26">get_command_type</a> (char *t)</td></tr>
-<tr class="memdesc:ga1989771e09ef0e00c4cec786094d1d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get command type from command string.  <br /></td></tr>
-<tr class="memitem:ga91c1b232235d7f7111b4779e6cd47a29" id="r_ga91c1b232235d7f7111b4779e6cd47a29"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../da/db7/a01088.html#ga91c1b232235d7f7111b4779e6cd47a29">free_menu_line</a> (<a class="el" href="../../d5/d16/a01154.html">Line</a> *line)</td></tr>
-<tr class="memdesc:ga91c1b232235d7f7111b4779e6cd47a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free memory allocated for a menu line.  <br /></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a62f73ea01c816f1996aed4c66f57c4fb" id="r_a62f73ea01c816f1996aed4c66f57c4fb"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a62f73ea01c816f1996aed4c66f57c4fb">argp_program_version</a> = <a class="el" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td></tr>
+<tr class="memitem:aaa037e59f26a80a8a2e35e6f2364004d" id="r_aaa037e59f26a80a8a2e35e6f2364004d"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#aaa037e59f26a80a8a2e35e6f2364004d">argp_program_bug_address</a> = &quot;billxwaller@gmail.com&quot;</td></tr>
+<tr class="memitem:a9c5c8462bbe0ea90777f94557d6d5ac9" id="r_a9c5c8462bbe0ea90777f94557d6d5ac9"><td class="memItemLeft">const char&#160;</td><td class="memItemRight"><a class="el" href="#a9c5c8462bbe0ea90777f94557d6d5ac9">doc</a> []</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Parse menu description file and create <a class="el" href="../../df/db5/a01158.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>. </p>
+<div class="textblock"><p>list files matching a regular expression </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../db/d14/a01040_source.html">parse_menu_desc.c</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../db/d14/a01040_source.html">lf.c</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d14/a01040_source.html#l00123">123</a> of file <a class="el" href="../../db/d14/a01040_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  123</span>                                {</div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordtype">char</span> dir[<a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  125</span>    <span class="keywordtype">char</span> re[<a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  126</span>    dir[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  127</span>    re[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  128</span> </div>
+<div class="line"><span class="lineno">  129</span>    <span class="keyword">struct </span>lf lf = {0};</div>
+<div class="line"><span class="lineno">  130</span>    lf.f_all = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  131</span>    lf.max_depth = 4;</div>
+<div class="line"><span class="lineno">  132</span>    lf.exclude = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  133</span>    lf.f_ignore_case = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  134</span>    lf.file_types_p = 0;</div>
+<div class="line"><span class="lineno">  135</span>    lf.args[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  136</span>    lf.args[1] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  137</span>    argp_parse(&amp;argp, argc, argv, 0, 0, &amp;lf);</div>
+<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">if</span> (lf.argc &gt; 0) {</div>
+<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="../../db/dba/a01078.html#ga36904413ff36a25decee4eafa2c5c108">is_directory</a>(lf.args[0])) {</div>
+<div class="line"><span class="lineno">  140</span>            <a class="code hl_function" href="../../db/dba/a01078.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, lf.args[0], <a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  141</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  142</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../db/dba/a01078.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a>(lf.args[0])) {</div>
+<div class="line"><span class="lineno">  143</span>                <a class="code hl_function" href="../../db/dba/a01078.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(re, lf.args[0], <a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  144</span>                lf.flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
+<div class="line"><span class="lineno">  145</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  146</span>                printf(<span class="stringliteral">&quot;arg1: &#39;%s&#39; is neither a directory nor a valid regex.\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  147</span>                       lf.args[0]);</div>
+<div class="line"><span class="lineno">  148</span>            }</div>
+<div class="line"><span class="lineno">  149</span>        }</div>
+<div class="line"><span class="lineno">  150</span>    }</div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">if</span> (lf.argc &gt; 1) {</div>
+<div class="line"><span class="lineno">  152</span>        <span class="keywordflow">if</span> (dir[0] == <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; <a class="code hl_function" href="../../db/dba/a01078.html#ga36904413ff36a25decee4eafa2c5c108">is_directory</a>(lf.args[1])) {</div>
+<div class="line"><span class="lineno">  153</span>            <a class="code hl_function" href="../../db/dba/a01078.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(dir, lf.args[1], <a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  154</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  155</span>            <span class="keywordflow">if</span> (re[0] == <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; <a class="code hl_function" href="../../db/dba/a01078.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a>(lf.args[1])) {</div>
+<div class="line"><span class="lineno">  156</span>                <a class="code hl_function" href="../../db/dba/a01078.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(re, lf.args[1], <a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  157</span>                lf.flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
+<div class="line"><span class="lineno">  158</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  159</span>                printf(<span class="stringliteral">&quot;arg2: &#39;%s&#39; is neither a directory nor a valid regex.\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  160</span>                       lf.args[1]);</div>
+<div class="line"><span class="lineno">  161</span>            }</div>
+<div class="line"><span class="lineno">  162</span>        }</div>
+<div class="line"><span class="lineno">  163</span>    }</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">if</span> (dir[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  165</span>        strncpy(dir, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  166</span>    <a class="code hl_function" href="../../db/dba/a01078.html#ga5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a>(dir, re, lf.exclude, lf.max_depth, lf.flags);</div>
+<div class="line"><span class="lineno">  167</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  168</span>}</div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a></div><div class="ttdeci">@ LF_REGEX</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00122">cm.h:122</a></div></div>
+<div class="ttc" id="aa01013_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d7/d59/a01013.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d7/d59/a01013_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa01078_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../db/dba/a01078.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d71/a01055_source.html#l00269">futil.c:269</a></div></div>
+<div class="ttc" id="aa01078_html_ga36904413ff36a25decee4eafa2c5c108"><div class="ttname"><a href="../../db/dba/a01078.html#ga36904413ff36a25decee4eafa2c5c108">is_directory</a></div><div class="ttdeci">bool is_directory(const char *)</div><div class="ttdoc">Checks if the given path is a directory.</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d71/a01055_source.html#l01243">futil.c:1243</a></div></div>
+<div class="ttc" id="aa01078_html_ga5bd2fb968d70ed5285cfce1ed9e33ca1"><div class="ttname"><a href="../../db/dba/a01078.html#ga5bd2fb968d70ed5285cfce1ed9e33ca1">lf_find</a></div><div class="ttdeci">bool lf_find(const char *, const char *, const char *, int, int)</div><div class="ttdoc">Find files in a directory matching a regular expression.</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d71/a01055_source.html#l00977">futil.c:977</a></div></div>
+<div class="ttc" id="aa01078_html_ga76cb87971fb4e63944ec6627c56c0ffb"><div class="ttname"><a href="../../db/dba/a01078.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a></div><div class="ttdeci">bool is_valid_regex(const char *)</div><div class="ttdoc">Checks if the given regular expression pattern is valid.</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d71/a01055_source.html#l01254">futil.c:1254</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d2/d71/a01055_source.html#l01243">is_directory()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l01254">is_valid_regex()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00977">lf_find()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00122">LF_REGEX</a>, and <a class="el" href="../../d2/d71/a01055_source.html#l00269">strnz__cpy()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d14/a01040_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="aaa037e59f26a80a8a2e35e6f2364004d" name="aaa037e59f26a80a8a2e35e6f2364004d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa037e59f26a80a8a2e35e6f2364004d">&#9670;&#160;</a></span>argp_program_bug_address</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* argp_program_bug_address = &quot;billxwaller@gmail.com&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d14/a01040_source.html#l00025">25</a> of file <a class="el" href="../../db/d14/a01040_source.html">lf.c</a>.</p>
+
+</div>
+</div>
+<a id="a62f73ea01c816f1996aed4c66f57c4fb" name="a62f73ea01c816f1996aed4c66f57c4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f73ea01c816f1996aed4c66f57c4fb">&#9670;&#160;</a></span>argp_program_version</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* argp_program_version = <a class="el" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d14/a01040_source.html#l00024">24</a> of file <a class="el" href="../../db/d14/a01040_source.html">lf.c</a>.</p>
+
+</div>
+</div>
+<a id="a9c5c8462bbe0ea90777f94557d6d5ac9" name="a9c5c8462bbe0ea90777f94557d6d5ac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c5c8462bbe0ea90777f94557d6d5ac9">&#9670;&#160;</a></span>doc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char doc[]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="stringliteral">&quot;lf list files\vIf specified, DIRECTORY is the top-level &quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;directory to search. REGULAR_EXPRESSION is a properly &quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;formatted regular expression for which matching files &quot;</span></div>
+<div class="line">    <span class="stringliteral">&quot;will be listed.&quot;</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="../../db/d14/a01040_source.html#l00026">26</a> of file <a class="el" href="../../db/d14/a01040_source.html">lf.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -156,7 +301,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../db/d14/a01040.html">parse_menu_desc.c</a></li>
+    <li class="navelem"><a href="../../db/d14/a01040.html">lf.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

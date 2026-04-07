@@ -1,6 +1,8 @@
 var a01022 =
 [
-    [ "main", "d1/dd8/a01022.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "mview", "d1/dd8/a01022.html#a7e0e84dc9f397280af3c85afd24dddb5", null ],
-    [ "__end_pgm", "d1/dd8/a01022.html#ab5fceb24373673e919c49ede0f9b12e5", null ]
+    [ "fork_exec", "dd/d80/a01075.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "dd/d80/a01075.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "dd/d80/a01075.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d7/df7/a01074.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "dd/d80/a01075.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

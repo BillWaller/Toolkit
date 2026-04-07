@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: exec.c File Reference</title>
+<title>C-Menu: form_engine.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,50 +109,287 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/d23/a01025.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">exec.c File Reference</div></div>
+  <div class="headertitle"><div class="title">form_engine.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Functions to execute external commands.  
+<p>The working part of C-Menu <a class="el" href="../../d8/ddb/a01147.html">Form</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
-<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wait.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for exec.c:</div>
+Include dependency graph for form_engine.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d02/a01026.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d02/a01026.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../db/d23/a01025_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a9bde875ceaf7176146f8c1a05a5724e8" id="r_a9bde875ceaf7176146f8c1a05a5724e8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9bde875ceaf7176146f8c1a05a5724e8">D_COMMENT</a>&#160;&#160;&#160;'#'</td></tr>
+<tr class="memitem:a2d8c742d9f48c28a95f7a8a143db9b22" id="r_a2d8c742d9f48c28a95f7a8a143db9b22"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2d8c742d9f48c28a95f7a8a143db9b22">D_CMD</a>&#160;&#160;&#160;'!'</td></tr>
+<tr class="memitem:a43348dafdbc52ee02edb0652d644130e" id="r_a43348dafdbc52ee02edb0652d644130e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a43348dafdbc52ee02edb0652d644130e">D_FIELD</a>&#160;&#160;&#160;'F'</td></tr>
+<tr class="memitem:a582a134ae58dbe280e34e0a1d6a1e26d" id="r_a582a134ae58dbe280e34e0a1d6a1e26d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a582a134ae58dbe280e34e0a1d6a1e26d">D_TEXT</a>&#160;&#160;&#160;'T'</td></tr>
+<tr class="memitem:a89b314cf8c48acb2b0f084023efe43cd" id="r_a89b314cf8c48acb2b0f084023efe43cd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a89b314cf8c48acb2b0f084023efe43cd">D_HELP</a>&#160;&#160;&#160;'?'</td></tr>
+<tr class="memitem:afb32f9ec171fac7ce0a9c7b68236e21a" id="r_afb32f9ec171fac7ce0a9c7b68236e21a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#afb32f9ec171fac7ce0a9c7b68236e21a">D_HEADER</a>&#160;&#160;&#160;'H'</td></tr>
+<tr class="memitem:a4bee8ff1d56707e8d62039c449eb5112" id="r_a4bee8ff1d56707e8d62039c449eb5112"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4bee8ff1d56707e8d62039c449eb5112">D_CALC</a>&#160;&#160;&#160;'C'</td></tr>
+<tr class="memitem:a8dde2b17da1845d674f44135895994a5" id="r_a8dde2b17da1845d674f44135895994a5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8dde2b17da1845d674f44135895994a5">D_QUERY</a>&#160;&#160;&#160;'Q'</td></tr>
+<tr class="memitem:aff901b214de5a981faa612ea3e7ebbc1" id="r_aff901b214de5a981faa612ea3e7ebbc1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aff901b214de5a981faa612ea3e7ebbc1">D_GETTER</a>&#160;&#160;&#160;'G'</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga907dc4a5b8c29a03d23bdc87f41b5f1b" id="r_ga907dc4a5b8c29a03d23bdc87f41b5f1b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/dba/a01078.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a> (char **argv)</td></tr>
-<tr class="memdesc:ga907dc4a5b8c29a03d23bdc87f41b5f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command in full screen mode.  <br /></td></tr>
-<tr class="memitem:gaeb3e7eb282467134ce50fde7d9ebd19d" id="r_gaeb3e7eb282467134ce50fde7d9ebd19d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/dba/a01078.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a> (char *shellCmdPtr)</td></tr>
-<tr class="memdesc:gaeb3e7eb282467134ce50fde7d9ebd19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a shell command in full screen mode.  <br /></td></tr>
-<tr class="memitem:ga5c3ffccf49f08359334198f7fce3f9df" id="r_ga5c3ffccf49f08359334198f7fce3f9df"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/dba/a01078.html#ga5c3ffccf49f08359334198f7fce3f9df">shell</a> (char *shellCmdPtr)</td></tr>
-<tr class="memdesc:ga5c3ffccf49f08359334198f7fce3f9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a shell command.  <br /></td></tr>
-<tr class="memitem:ga386fad82c5208c7d3b2a5060882974f3" id="r_ga386fad82c5208c7d3b2a5060882974f3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/dba/a01078.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a> (char **argv)</td></tr>
-<tr class="memdesc:ga386fad82c5208c7d3b2a5060882974f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fork and exec a command.  <br /></td></tr>
-<tr class="memitem:ga2f2e1496a7c253b2d58446154c98a0bf" id="r_ga2f2e1496a7c253b2d58446154c98a0bf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#ga2f2e1496a7c253b2d58446154c98a0bf">nf_error</a> (int ec, char *s)</td></tr>
-<tr class="memdesc:ga2f2e1496a7c253b2d58446154c98a0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display error message and wait for key press.  <br /></td></tr>
+<tr class="memitem:gaf488c427355a0bfca2caa63ba51d5a30" id="r_gaf488c427355a0bfca2caa63ba51d5a30"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gaf488c427355a0bfca2caa63ba51d5a30">form_display_screen</a> (<a class="el" href="../../de/d6d/a01095.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaf488c427355a0bfca2caa63ba51d5a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the form on the screen, including text elements and fields, and set up the form window based on the form configuration.  <br /></td></tr>
+<tr class="memitem:gadd0fa69826228ae8e3c50c9b5eed57f8" id="r_gadd0fa69826228ae8e3c50c9b5eed57f8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gadd0fa69826228ae8e3c50c9b5eed57f8">form_display_fields</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gadd0fa69826228ae8e3c50c9b5eed57f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display form fields on the screen, populating field values and formatting them according to the form configuration.  <br /></td></tr>
+<tr class="memitem:gae570c2569ffef8c9d38184b6d9446812" id="r_gae570c2569ffef8c9d38184b6d9446812"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gae570c2569ffef8c9d38184b6d9446812">field_navigator</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gae570c2569ffef8c9d38184b6d9446812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle user input for field entry, allowing navigation between fields and looping until an exit action is selected.  <br /></td></tr>
+<tr class="memitem:ga23739f53779b30a5d3da63b0a97be85b" id="r_ga23739f53779b30a5d3da63b0a97be85b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#ga23739f53779b30a5d3da63b0a97be85b">form_parse_desc</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga23739f53779b30a5d3da63b0a97be85b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the form description file to populate the <a class="el" href="../../d8/ddb/a01147.html">Form</a> data structure with field definitions, text elements, and other configuration specified in the description file.  <br /></td></tr>
+<tr class="memitem:ga15e4844b5dff35fd08e47d8379328d55" id="r_ga15e4844b5dff35fd08e47d8379328d55"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#ga15e4844b5dff35fd08e47d8379328d55">form_read_data</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga15e4844b5dff35fd08e47d8379328d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read initial data for form fields from a specified input source, such as a file or standard input, and populate the form fields with the data.  <br /></td></tr>
+<tr class="memitem:ga2839acac3143be9233fbf99458b77e64" id="r_ga2839acac3143be9233fbf99458b77e64"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#ga2839acac3143be9233fbf99458b77e64">form_write</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga2839acac3143be9233fbf99458b77e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write form field values to a specified output destination, such as a file or standard output, based on the form configuration and user input.  <br /></td></tr>
+<tr class="memitem:a55ea39040ce4618476ee3fada6a0c417" id="r_a55ea39040ce4618476ee3fada6a0c417"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a55ea39040ce4618476ee3fada6a0c417">form_usage</a> ()</td></tr>
+<tr class="memitem:ga02cf855a99051ac21f4966aa92b9544f" id="r_ga02cf855a99051ac21f4966aa92b9544f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#ga02cf855a99051ac21f4966aa92b9544f">form_desc_error</a> (int in_line_num, char *in_buf, char *em)</td></tr>
+<tr class="memdesc:ga02cf855a99051ac21f4966aa92b9544f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle errors encountered while parsing the form description file, providing detailed error messages that include the file name, line number, and the specific error encountered.  <br /></td></tr>
+<tr class="memitem:gab2e6e35d9dba586838b91f54a6dd41a2" id="r_gab2e6e35d9dba586838b91f54a6dd41a2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gab2e6e35d9dba586838b91f54a6dd41a2">form_exec_cmd</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gab2e6e35d9dba586838b91f54a6dd41a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a provider command specified in the form description file, passing form field values as arguments, and optionally redirecting output to a file.  <br /></td></tr>
+<tr class="memitem:ga7b01ef5c3435083eeec419451b61aa85" id="r_ga7b01ef5c3435083eeec419451b61aa85"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#ga7b01ef5c3435083eeec419451b61aa85">form_process</a> (<a class="el" href="../../de/d6d/a01095.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga7b01ef5c3435083eeec419451b61aa85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle integration with a getter program which will provide field data.  <br /></td></tr>
+<tr class="memitem:gac63d5f05787a038d4ae5f4741eafbe50" id="r_gac63d5f05787a038d4ae5f4741eafbe50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gac63d5f05787a038d4ae5f4741eafbe50">form_post</a> (<a class="el" href="../../de/d6d/a01095.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gac63d5f05787a038d4ae5f4741eafbe50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle post-processing after field entry, allowing user to edit data, execute a provider command, or write data to an output file.  <br /></td></tr>
+<tr class="memitem:gabf1be20a8aad5f7ba09172ac1434a110" id="r_gabf1be20a8aad5f7ba09172ac1434a110"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gabf1be20a8aad5f7ba09172ac1434a110">init_form</a> (<a class="el" href="../../de/d6d/a01095.html">Init</a> *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:gabf1be20a8aad5f7ba09172ac1434a110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize form data structure and parse description file.  <br /></td></tr>
+<tr class="memitem:gada302551bf41bf8ed6132fd34328a47e" id="r_gada302551bf41bf8ed6132fd34328a47e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dd3/a01077.html#gada302551bf41bf8ed6132fd34328a47e">form_engine</a> (<a class="el" href="../../de/d6d/a01095.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gada302551bf41bf8ed6132fd34328a47e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d8/ddb/a01147.html">Form</a> main processing loop.  <br /></td></tr>
+<tr class="memitem:a3c66bd6b1987c79ef5a31bb28227c65b" id="r_a3c66bd6b1987c79ef5a31bb28227c65b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c66bd6b1987c79ef5a31bb28227c65b">form_yx_to_fidx</a> (<a class="el" href="../../d8/ddb/a01147.html">Form</a> *, int, int)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Functions to execute external commands. </p>
+<div class="textblock"><p>The working part of C-Menu <a class="el" href="../../d8/ddb/a01147.html">Form</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../db/d23/a01025_source.html">exec.c</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a4bee8ff1d56707e8d62039c449eb5112" name="a4bee8ff1d56707e8d62039c449eb5112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bee8ff1d56707e8d62039c449eb5112">&#9670;&#160;</a></span>D_CALC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_CALC&#160;&#160;&#160;'C'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00031">31</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a2d8c742d9f48c28a95f7a8a143db9b22" name="a2d8c742d9f48c28a95f7a8a143db9b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d8c742d9f48c28a95f7a8a143db9b22">&#9670;&#160;</a></span>D_CMD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_CMD&#160;&#160;&#160;'!'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00026">26</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a9bde875ceaf7176146f8c1a05a5724e8" name="a9bde875ceaf7176146f8c1a05a5724e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bde875ceaf7176146f8c1a05a5724e8">&#9670;&#160;</a></span>D_COMMENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_COMMENT&#160;&#160;&#160;'#'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00025">25</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a43348dafdbc52ee02edb0652d644130e" name="a43348dafdbc52ee02edb0652d644130e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43348dafdbc52ee02edb0652d644130e">&#9670;&#160;</a></span>D_FIELD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_FIELD&#160;&#160;&#160;'F'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00027">27</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="aff901b214de5a981faa612ea3e7ebbc1" name="aff901b214de5a981faa612ea3e7ebbc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff901b214de5a981faa612ea3e7ebbc1">&#9670;&#160;</a></span>D_GETTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_GETTER&#160;&#160;&#160;'G'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00033">33</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="afb32f9ec171fac7ce0a9c7b68236e21a" name="afb32f9ec171fac7ce0a9c7b68236e21a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb32f9ec171fac7ce0a9c7b68236e21a">&#9670;&#160;</a></span>D_HEADER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_HEADER&#160;&#160;&#160;'H'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00030">30</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a89b314cf8c48acb2b0f084023efe43cd" name="a89b314cf8c48acb2b0f084023efe43cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89b314cf8c48acb2b0f084023efe43cd">&#9670;&#160;</a></span>D_HELP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_HELP&#160;&#160;&#160;'?'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00029">29</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a8dde2b17da1845d674f44135895994a5" name="a8dde2b17da1845d674f44135895994a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dde2b17da1845d674f44135895994a5">&#9670;&#160;</a></span>D_QUERY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_QUERY&#160;&#160;&#160;'Q'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00032">32</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a582a134ae58dbe280e34e0a1d6a1e26d" name="a582a134ae58dbe280e34e0a1d6a1e26d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a582a134ae58dbe280e34e0a1d6a1e26d">&#9670;&#160;</a></span>D_TEXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_TEXT&#160;&#160;&#160;'T'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00028">28</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a55ea39040ce4618476ee3fada6a0c417" name="a55ea39040ce4618476ee3fada6a0c417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55ea39040ce4618476ee3fada6a0c417">&#9670;&#160;</a></span>form_usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void form_usage </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c66bd6b1987c79ef5a31bb28227c65b" name="a3c66bd6b1987c79ef5a31bb28227c65b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c66bd6b1987c79ef5a31bb28227c65b">&#9670;&#160;</a></span>form_yx_to_fidx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int form_yx_to_fidx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/ddb/a01147.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d23/a01025_source.html#l00445">445</a> of file <a class="el" href="../../db/d23/a01025_source.html">form_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  445</span>                                              {</div>
+<div class="line"><span class="lineno">  446</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="../../d2/d94/a00716.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;fcnt; i++) {</div>
+<div class="line"><span class="lineno">  447</span>        <span class="keywordflow">if</span> (y == <a class="code hl_variable" href="../../d2/d94/a00716.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;field[i]-&gt;line &amp;&amp; x &gt;= <a class="code hl_variable" href="../../d2/d94/a00716.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;field[i]-&gt;col &amp;&amp;</div>
+<div class="line"><span class="lineno">  448</span>            x &lt; form-&gt;field[i]-&gt;col + <a class="code hl_variable" href="../../d2/d94/a00716.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;field[i]-&gt;len) {</div>
+<div class="line"><span class="lineno">  449</span>            <span class="keywordflow">return</span> i;</div>
+<div class="line"><span class="lineno">  450</span>        }</div>
+<div class="line"><span class="lineno">  451</span>    }</div>
+<div class="line"><span class="lineno">  452</span>    <span class="keywordflow">return</span> -1; <span class="comment">// No field found at the given coordinates</span></div>
+<div class="line"><span class="lineno">  453</span>}</div>
+<div class="ttc" id="aa00716_html_adb98384f3771d341017b7b3add874515"><div class="ttname"><a href="../../d2/d94/a00716.html#adb98384f3771d341017b7b3add874515">form</a></div><div class="ttdeci">Form * form</div><div class="ttdef"><b>Definition</b> <a href="../../df/d59/a01001_source.html#l00047">mem.c:47</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d2/d94/a00716_source.html#l00117">Field::col</a>, <a class="el" href="../../d2/d94/a00716_source.html#l00309">Form::fcnt</a>, <a class="el" href="../../d2/d94/a00716_source.html#l00344">Form::field</a>, <a class="el" href="../../d2/d94/a00716_source.html#l00119">Field::len</a>, and <a class="el" href="../../d2/d94/a00716_source.html#l00115">Field::line</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d9/db3/a01064_source.html#l00059">field_editor()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d23/a01025_a3c66bd6b1987c79ef5a31bb28227c65b_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -165,7 +402,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../db/d23/a01025.html">exec.c</a></li>
+    <li class="navelem"><a href="../../db/d23/a01025.html">form_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

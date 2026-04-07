@@ -1,7 +1,6 @@
 var a01085 =
 [
-    [ "init_view.c", "d6/d8d/a01007.html", null ],
-    [ "init_view_boxwin", "d2/df3/a01085.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d2/df3/a01085.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_init_input", "d2/df3/a01085.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "free_menu_line", "d2/df3/a01085.html#ga91c1b232235d7f7111b4779e6cd47a29", null ],
+    [ "get_command_type", "d2/df3/a01085.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d2/df3/a01085.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];
