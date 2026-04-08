@@ -25,14 +25,7 @@
 var NAVTREE =
 [
   [ "C-Menu", "index.html", [
-    [ "Introduction", "index.html#introduction-5", [
-      [ "Other documentation", "index.html#other-documentation", null ],
-      [ "C-Menu Binaries for Linux x86_64", "index.html#c-menu-binaries-for-linux-x86_64-1", null ],
-      [ "Build C-Menu from Source", "index.html#build-c-menu-from-source-1", [
-        [ "Finish the installation", "index.html#finish-the-installation-1", null ]
-      ] ],
-      [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5", null ]
-    ] ],
+    [ "C-Menu - A User Interface Toolkit", "index.html", "index" ],
     [ "API", "dd/d39/a01271.html", [
       [ "How to get C-Menu", "dd/d39/a01271.html#how-to-get-c-menu", [
         [ "Get C-Menu on Github", "dd/d39/a01271.html#get-c-menu-on-github", null ],
@@ -235,6 +228,7 @@ var NAVTREE =
     ] ],
     [ "INSTALL", "d2/d1d/a01277.html", [
       [ "Introduction", "d2/d1d/a01277.html#introduction-4", [
+        [ "Other documentation", "d2/d1d/a01277.html#other-documentation", null ],
         [ "C-Menu Binaries for Linux x86_64", "d2/d1d/a01277.html#c-menu-binaries-for-linux-x86_64", null ],
         [ "Build C-Menu from Source", "d2/d1d/a01277.html#build-c-menu-from-source", [
           [ "Finish the installation", "d2/d1d/a01277.html#finish-the-installation", null ]
@@ -307,8 +301,7 @@ var NAVTREE =
       ] ]
     ] ],
     [ "snippets", "d8/d0d/a01280.html", [
-      [ "Configuration snippets", "d8/d0d/a01280.html#configuration-snippets", [
-        [ "Table of Contents", "d8/d0d/a01280.html#table-of-contents-5", null ],
+      [ "Table of Contents", "d8/d0d/a01280.html#table-of-contents-5", [
         [ "C-Menu Desktop Files", "d8/d0d/a01280.html#c-menu-desktop-files", null ],
         [ "C-Menu bashrc Configuration", "d8/d0d/a01280.html#c-menu-bashrc-configuration", [
           [ "Shell Logging", "d8/d0d/a01280.html#shell-logging", null ],
@@ -365,12 +358,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d3/dbd/a01100.html",
-"d4/d5d/a01202.html#a802435fc6d94e12b6cc3df841815f041",
+"d3/d42/a01275.html#useful-configurations",
+"d4/d5d/a01202.html#a7e347c1e99fbbc6066116404aab95e57",
 "d8/d11/a01178.html#a8fe1ec2a1ec422e83737ccb864bce0da",
-"d9/d2e/a01194.html#a7668a643c4d6f85dd86323b4ea6fbee3",
-"dc/d51/a01120.html#gaccd65939c0ce6f0d940c5cf795a1e8fa",
-"functions_vars_d.html"
+"d9/d2e/a01194.html#a664f3c9c44cf2ecfbbd913c723d5f1d0",
+"dc/d51/a01120.html#ga5836f1ea8f972e3ca12e2772dc76fb32",
+"functions_vars_c.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

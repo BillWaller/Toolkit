@@ -12,6 +12,7 @@ var a00725 =
     [ "SIO", "da/dfb/a01174.html", "da/dfb/a01174" ],
     [ "__atexit", "d8/db9/a00725.html#ad14a50de7b832f6b30f7b0d7828fa03f", null ],
     [ "__end_pgm", "d8/db9/a00725.html#a05741fd1aa6381f5ce864e2d8e268bc4", null ],
+    [ "_GNU_SOURCE", "d8/db9/a00725.html#a369266c24eacffb87046522897a570d5", null ],
     [ "_XOPEN_SOURCE_EXTENDED", "d8/db9/a00725.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
     [ "ABS", "d8/db9/a00725.html#a996f7be338ccb40d1a2a5abc1ad61759", null ],
     [ "BG_COLOR", "d8/db9/a00725.html#ae7ed5ea1d43fb2b71b3eaea2397fb5ca", null ],

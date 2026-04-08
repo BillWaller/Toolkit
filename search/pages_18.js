@@ -44,7 +44,7 @@ var searchData=
   ['sitter_20with_20view_41',['View - How to Use Tree-Sitter with View',['../d5/d37/a01276.html#view---how-to-use-tree-sitter-with-view',1,'']]],
   ['snacks_20nvim_42',['Snacks nvim',['../d3/d42/a01275.html#folkes-snacksnvim',1,'Folke&apos;s Snacks.nvim'],['../d3/d42/a01275.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'To Use the Neovim Unicode Art in Snacks.nvim']]],
   ['snacks_20nvim_20colorizer_43',['To Install Folke&apos;s Snacks.nvim-colorizer',['../d3/d42/a01275.html#to-install-folkes-snacksnvim-colorizer',1,'']]],
-  ['snippets_44',['snippets',['../d8/d0d/a01280.html#configuration-snippets',1,'Configuration snippets'],['../d8/d0d/a01280.html',1,'snippets']]],
+  ['snippets_44',['snippets',['../d8/d0d/a01280.html',1,'']]],
   ['soap_20box_45',['Visual Aids Soap-box',['../d5/d37/a01276.html#visual-aids-soap-box',1,'']]],
   ['some_20menu_20selections_20don_20t_20work_46',['Some Menu Selections Don&apos;t work',['../d5/d37/a01276.html#some-menu-selections-dont-work',1,'']]],
   ['source_47',['Source',['../d2/d1d/a01277.html#build-c-menu-from-source',1,'Build C-Menu from Source'],['../index.html#build-c-menu-from-source-1',1,'Build C-Menu from Source']]],

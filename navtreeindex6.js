@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"functions_vars_c.html":[12,2,1,2],
 "functions_vars_d.html":[12,2,1,3],
 "functions_vars_e.html":[12,2,1,4],
 "functions_vars_f.html":[12,2,1,5],
@@ -95,12 +96,13 @@ var NAVTREEINDEX6 =
 "globals_x.html":[13,1,0,22],
 "globals_z.html":[13,1,0,23],
 "index.html":[],
-"index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5":[0,3],
-"index.html#build-c-menu-from-source-1":[0,2],
-"index.html#c-menu-binaries-for-linux-x86_64-1":[0,1],
-"index.html#finish-the-installation-1":[0,2,0],
-"index.html#introduction-5":[0],
-"index.html#other-documentation":[0,0],
+"index.html":[0],
+"index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5":[0,0,3],
+"index.html#build-c-menu-from-source-1":[0,0,2],
+"index.html#c-menu-binaries-for-linux-x86_64-1":[0,0,1],
+"index.html#finish-the-installation-1":[0,0,2,0],
+"index.html#introduction-5":[0,0],
+"index.html#other-documentation-1":[0,0,0],
 "pages.html":[],
 "topics.html":[11]
 };

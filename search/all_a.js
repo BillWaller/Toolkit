@@ -62,7 +62,7 @@ var searchData=
   ['do_20it_59',['Just Do It!',['../d4/d10/a01278.html#just-do-it',1,'']]],
   ['doc_60',['doc',['../d2/d4d/a01079.html#a9c5c8462bbe0ea90777f94557d6d5ac9',1,'lf.c']]],
   ['documentation_61',['Documentation',['../dd/d39/a01271.html#documentation',1,'']]],
-  ['documentation_62',['Other documentation',['../index.html#other-documentation',1,'']]],
+  ['documentation_62',['documentation',['../d2/d1d/a01277.html#other-documentation',1,'Other documentation'],['../index.html#other-documentation-1',1,'Other documentation']]],
   ['documentation_20and_20user_20guide_63',['Roadmap for API Documentation and User Guide',['../dd/d39/a01271.html#roadmap-for-api-documentation-and-user-guide',1,'']]],
   ['documents_64',['Other C-Menu Documents',['../d4/d10/a01278.html#other-c-menu-documents',1,'']]],
   ['don_20t_20work_65',['Some Menu Selections Don&apos;t work',['../d5/d37/a01276.html#some-menu-selections-dont-work',1,'']]],

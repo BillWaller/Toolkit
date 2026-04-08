@@ -18,7 +18,7 @@ var searchData=
   ['displays_20question_20marks_15',['Why View Displays Question Marks',['../d5/d37/a01276.html#why-view-displays-question-marks',1,'']]],
   ['do_20it_16',['Just Do It!',['../d4/d10/a01278.html#just-do-it',1,'']]],
   ['documentation_17',['Documentation',['../dd/d39/a01271.html#documentation',1,'']]],
-  ['documentation_18',['Other documentation',['../index.html#other-documentation',1,'']]],
+  ['documentation_18',['documentation',['../d2/d1d/a01277.html#other-documentation',1,'Other documentation'],['../index.html#other-documentation-1',1,'Other documentation']]],
   ['documentation_20and_20user_20guide_19',['Roadmap for API Documentation and User Guide',['../dd/d39/a01271.html#roadmap-for-api-documentation-and-user-guide',1,'']]],
   ['documents_20',['Other C-Menu Documents',['../d4/d10/a01278.html#other-c-menu-documents',1,'']]],
   ['don_20t_20work_21',['Some Menu Selections Don&apos;t work',['../d5/d37/a01276.html#some-menu-selections-dont-work',1,'']]],

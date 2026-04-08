@@ -143,8 +143,31 @@ RSH SSH Authentication</div></div>
     <ul>
 <li>The Green prompt indicates user privilege, and Red indicates root privilege.</li>
 </ul>
-<p><b><em>lf</em></b> - A "regular expression" file finder that's a smaller, easier-to-use, and much faster alternative to the Unix find command. The following is an actual benchmark of lf vs find for searching directories. Admittedly, the benchmarks appear hyperbolic, but they are real and reproducible. You may have to run the benchmarks a few times to believe the performance of lf.</p>
-<div class="image">
+<p><b><em>lf</em></b> - A "regular expression" file finder that's a smaller, easier-to-use, and much faster alternative to the Unix find command. The following is an actual benchmark of execution times for lf and find. The find and lf commands, approximate common usage, and produce identical results.</p>
+<div class="fragment"><div class="line">time find . -maxdepth 9 -type f -regex &#39;.*\.[ch]$&#39; &gt; find.out</div>
+<div class="line"> </div>
+<div class="line">real    0m0.975s</div>
+<div class="line">user    0m0.728s</div>
+<div class="line">sys     0m0.243s</div>
+<div class="line"> </div>
+<div class="line">time lf -a -d 9 -t f &#39;.*\.[ch]$&#39; &gt; lf.out</div>
+<div class="line"> </div>
+<div class="line">real    0m0.632s</div>
+<div class="line">user    0m0.425s</div>
+<div class="line">sys     0m0.207s</div>
+</div><!-- fragment --><p>Verify that the output files are identical:</p>
+<div class="fragment"><div class="line">wc -l find.out lf.out</div>
+<div class="line"> </div>
+<div class="line">  2489 find.out</div>
+<div class="line">  2489 lf.out</div>
+<div class="line">  4978 total</div>
+</div><!-- fragment --><p>The results show that lf is about 35% faster than find in this benchmark, and the output files are identical.</p>
+<p>Next, we will add "-exec ls -l {} \;", a common use of find, and see how that affects performance. The resulting benchmarks are so extreme, they may strain credulity at first, but they are real and easily reproducible. Just run lf and find commands on your system in a variety of directories.</p>
+<div class="fragment"><div class="line">time find . -maxdepth 5 -type f -exec -l {} \; &gt;find.out</div>
+<div class="line">time lf -a -d 5 -t f | xargs ls -l &gt;lf.out</div>
+</div><!-- fragment --><p>CAUTION: A simple mistake such as forgetting to include the -a option for lf may give lf an unfair advantage because lf omits hidden files and directories by default. Therefore, you must examine the number of files found to verify the accuracy of the benchmark.</p>
+<div class="fragment"><div class="line">wc -l find.out lf.out</div>
+</div><!-- fragment --><div class="image">
 <img src="../../lf-vs-find2.png" alt=""/>
 <div class="caption">
 lf File Finder</div></div>
@@ -157,6 +180,20 @@ C-Menu Completions in Neovim</div></div>
 <p>Oh, and C-Menu is free, distributed under the MIT License.</p>
 <p>Are you ready to get started? Below, you will find several options for installing C-Menu on your Linux system. I haven't yet provided a packaged binary distribution, but that will be coming soon in version 0.3.0.</p>
 <p>Choose the option that best suits your needs and follow the instructions to get C-Menu up and running on your system.</p>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="other-documentation"></a>
+Other documentation</h2>
+<ul>
+<li><a href="https://decision-inc.com">Comprehensive HTML Documentation</a></li>
+<li><a class="el" href="../../dd/d39/a01271.html" title="API">API Reference</a></li>
+<li><a class="el" href="../../d3/d42/a01275.html" title="extras">Augmentation</a></li>
+<li><a class="el" href="../../de/d85/a01273.html" title="Changelog">CHANGELOG</a></li>
+<li><a class="el" href="../../de/d33/a01274.html" title="exercises">Exercises</a></li>
+<li><a class="el" href="../../d5/d37/a01276.html" title="FAQ">Frequently Asked Questions</a></li>
+<li><a class="el" href="../../d4/d10/a01278.html" title="OVERVIEW">Overview</a></li>
+<li><a class="el" href="../../d9/de7/a01279.html" title="C-Menu ROADMAP">ROADMAP</a></li>
+<li><a class="el" href="../../d4/d0e/a01272.html" title="C-Menu-UG">User Guide</a></li>
+</ul>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="c-menu-binaries-for-linux-x86_64"></a>
 C-Menu Binaries for Linux x86_64</h2>
