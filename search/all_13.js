@@ -144,7 +144,7 @@ var searchData=
   ['mt_5fnull_141',['MT_NULL',['../df/df7/a00731.html#a2fed2fc3ab388520d49eb23a61ac210fae3c66e194f40f54236bc3525966ef18f',1,'menu.h']]],
   ['mt_5ftext_142',['MT_TEXT',['../df/df7/a00731.html#a2fed2fc3ab388520d49eb23a61ac210fa796ca2ffa9f8624c116934255064874d',1,'menu.h']]],
   ['multiple_20files_143',['Pick - Selecting Multiple Files',['../d5/d37/a01276.html#pick---selecting-multiple-files',1,'']]],
-  ['mview_144',['mview',['../d5/d4c/a01058.html#a7e0e84dc9f397280af3c85afd24dddb5',1,'menu.c']]],
+  ['mview_144',['mview',['../d5/d4c/a01058.html#a38fc30c220409a9dcf3b32d1231cbdc4',1,'menu.c']]],
   ['mvwaddstr_5ffill_145',['mvwaddstr_fill',['../d1/d3d/a01110.html#gaaf79b6e287507d6c4ae505f1cd174760',1,'mvwaddstr_fill(WINDOW *w, int y, int x, char *s, int l):&#160;dwin.c'],['../d1/d3d/a01110.html#gaaf79b6e287507d6c4ae505f1cd174760',1,'mvwaddstr_fill(WINDOW *, int, int, char *, int):&#160;dwin.c']]],
   ['my_20header_20files_146',['Menu lf - Where Are My Header Files?',['../d5/d37/a01276.html#menu-lf---where-are-my-header-files',1,'']]]
 ];

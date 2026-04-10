@@ -13,6 +13,6 @@ var searchData=
   ['mkccc_10',['mkccc',['../d0/d39/a01112.html#ga08537e2322c1207f7e6ae571bac1c9fd',1,'dwin.c']]],
   ['mouse_5fgetch_11',['mouse_getch',['../d8/db9/a00725.html#a3107afaf63f9591048607038bacbcd6e',1,'cm.h']]],
   ['mpick_12',['mpick',['../db/d7c/a00722.html#a5feee834d60352ad0a50a2ef64e5bbc9',1,'pick.h']]],
-  ['mview_13',['mview',['../d5/d4c/a01058.html#a7e0e84dc9f397280af3c85afd24dddb5',1,'menu.c']]],
+  ['mview_13',['mview',['../d5/d4c/a01058.html#a38fc30c220409a9dcf3b32d1231cbdc4',1,'menu.c']]],
   ['mvwaddstr_5ffill_14',['mvwaddstr_fill',['../d1/d3d/a01110.html#gaaf79b6e287507d6c4ae505f1cd174760',1,'mvwaddstr_fill(WINDOW *w, int y, int x, char *s, int l):&#160;dwin.c'],['../d1/d3d/a01110.html#gaaf79b6e287507d6c4ae505f1cd174760',1,'mvwaddstr_fill(WINDOW *, int, int, char *, int):&#160;dwin.c']]]
 ];

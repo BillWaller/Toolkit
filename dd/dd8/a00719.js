@@ -1,6 +1,7 @@
 var a00719 =
 [
     [ "Init", "dd/de2/a01134.html", "dd/de2/a01134" ],
+    [ "_GNU_SOURCE", "dd/dd8/a00719.html#a369266c24eacffb87046522897a570d5", null ],
     [ "_XOPEN_SOURCE_EXTENDED", "dd/dd8/a00719.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
     [ "ABOUT", "dd/dd8/a00719.html#afb212d6c7153207eaa622fb59e8b0898", null ],
     [ "ACCEPT_PROMPT_CHAR", "dd/dd8/a00719.html#a39891a0ab1cdd38db427edfcf5c9335b", null ],

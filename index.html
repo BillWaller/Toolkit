@@ -118,7 +118,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 </div>
     <h1 class="doxsection"><a class="anchor" id="introduction-5"></a>
 Introduction</h1>
-<p>The following is a very brief introduction to the C-Menu Toolkit and only covers a very tiny fraction of its features and capabilities. For more detailed information, please refer to the html documentation at:</p>
+<p>The following is a brief introduction to the C-Menu Toolkit covering a fraction of its features and capabilities. Who is C-Menu for? Anyone who demands performance with a professional look and feel for their applications, without the overhead of a graphical user interface. C-Menu is especially well suited for rescue, embedded, server, development, and other resource-constrained environments, but it also also appeals to the purist programmer who wants to create powerful, efficient, and user-friendly applications without the bloat of a GUI.</p>
+<p>For more detailed information, please refer to the html documentation at:</p>
 <p><a href="https://decision-inc.com">decision-inc.com</a></p>
 <p>With the C-Menu Toolkit, you can quickly and easily develop menu-driven user interfaces to give your applications a professional look and feel. The main components are:</p>
 <p><b><em><a class="el" href="d9/d2e/a01194.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a></em></b> - Hierarchical menus</p>
@@ -132,12 +133,13 @@ Hierarchical Menus</div></div>
 <div class="caption">
 On-Screen Forms</div></div>
     <p><b><em><a class="el" href="d0/d32/a01198.html" title="Pick data structure.">Pick</a></em></b> - Lists objects for user selection</p>
-<p><b><em><a class="el" href="d4/d5d/a01202.html">View</a></em></b> - A pager for viewing large files with highlighting, Unicode support, line numbering, regular expression searching and a large virtual pad for horizontal scrolling. <a class="el" href="d4/d5d/a01202.html">View</a> works great with tree-sitter, source-highlight, pygments, bat, manual pages, and other syntax highlighters. It can strip the ansi codes from files for convenient editing.</p>
+<p><b><em><a class="el" href="d4/d5d/a01202.html">View</a></em></b> - A pager for viewing files with highlighting, Unicode support, line numbering, regular expression searching and a large virtual pad for horizontal scrolling. <a class="el" href="d4/d5d/a01202.html">View</a> works great with tree-sitter, source-highlight, pygments, bat, manual pages, and other syntax highlighters. <a class="el" href="d4/d5d/a01202.html">View</a> doesn't alter the file you are viewing. It uses the highlighter in a pipe, and reads the output, so the original file is never changed. If you happen to have a file that has been highlighted by another application, view can strip the ANSI codes for convenient editing. And view is lightning fast, especially with huge log files.</p>
+<p>Why is <a class="el" href="d4/d5d/a01202.html">View</a> so fast? Even if an application has a super-fast buffering scheme, it still has to wait on the kernel to provide data, and then copy data into it's own buffers, duplicating work the Kernel has already done. Why waste the time and memory? To be fair, it may be that many applications were written before direct accesses to the Kernel's demand paged virtual address space was available. Whatever the reason, <a class="el" href="d4/d5d/a01202.html">View</a> takes advantage of direct-to-Kernel memory mapped files to achieve maximum performance, reliability, and resource economy. If you work with large datasets, you will love view. No fluff, no bloat, no nonsense, just blazing fast performance.</p>
 <div class="image">
 <img src="tree-sitter5.png" alt=""/>
 <div class="caption">
 C-Menu View with Syntax Highlighting</div></div>
-    <p><b><em>RSH</em></b> - RSH provides an alternative to su and sudo for executing commands with elevated privileges. It allows developers and system administrators to get in and out of root shells and execute commands with root privileges without the need for a password, for example, by authenticating with an ssh key as you do on gethub.</p>
+    <p><b><em>RSH</em></b> - RSH provides an alternative to su and sudo for executing commands with elevated privileges. It allows developers and system administrators to get in and out of root shells and execute commands with root privileges without the need for a password, for example, by authenticating with an ssh key as you would on gethub.</p>
 <p>In the following example, make install requires root privilege, so the user types xx, is authenticated with an ssh key, and then types make install. When the make install is finished, the user types x to exit the root shell and relinquish root privilege.</p>
 <div class="image">
 <img src="Makefile-out.png" alt=""/>
@@ -166,20 +168,21 @@ RSH SSH Authentication</div></div>
 <div class="line">  4978 total</div>
 </div><!-- fragment --><p>The results show that lf is about 35% faster than find in this benchmark, and the output files are identical.</p>
 <p>Next, we will add "-exec ls -l {} \;", a common use of find, and see how that affects performance. The resulting benchmarks are so extreme, they may strain credulity at first, but they are real and easily reproducible. Just run lf and find commands on your system in a variety of directories.</p>
+<p>Note 1: The -a (List hidden files) has been replaced with -n (Don't list hidden files), so that the default behavior is more like find, thus mitigating the probability of confusion.</p>
+<p>Note 2: The default maximum depth for lf was 3 as that was convenient for development, but otherwise it didn't make sense. The default maximum depth for lf is now 0, which means no limit, and thus more consistent with find.</p>
 <div class="fragment"><div class="line">time find . -maxdepth 5 -type f -exec -l {} \; &gt;find.out</div>
 <div class="line">time lf -a -d 5 -t f | xargs ls -l &gt;lf.out</div>
-</div><!-- fragment --><p>CAUTION: A simple mistake such as forgetting to include the -a option for lf may give lf an unfair advantage because lf omits hidden files and directories by default. Therefore, you must examine the number of files found to verify the accuracy of the benchmark.</p>
-<div class="fragment"><div class="line">wc -l find.out lf.out</div>
+</div><!-- fragment --><div class="fragment"><div class="line">wc -l find.out lf.out</div>
 </div><!-- fragment --><div class="image">
 <img src="lf-vs-find2.png" alt=""/>
 <div class="caption">
 lf File Finder</div></div>
-    <p><b><em>API</em></b> - A C library that provides a simple and consistent interface for creating menu-driven user interfaces in C. The API includes tools specific to C-Menu, but also many general purpose tools that can be used in a wide range of applications. The API documentation is available in html and integrated into Neovim's completion engine, making it easy for developers to learn and use the API effectively.</p>
+    <p><b><em>API</em></b> - C-Menu provides a simple and consistent API for creating menu-driven user interfaces in C. The API includes tools specific to C-Menu, but also many general purpose tools that can be used in a wide range of applications. The API documentation is available in html and integrated into Neovim's completion engine, making it easy for developers to learn and use the API effectively.</p>
 <div class="image">
 <img src="api-help1.png" alt=""/>
 <div class="caption">
 C-Menu Completions in Neovim</div></div>
-    <p>All of the C-Menu binaries, including executables and libcm.so are less than 350k, a tiny footprint for such powerful tools, and no GUI is required. The only dependencies are the GNU C Library, GNU Math Library, NCursesw, and a terminal emulator. That makes C-Menu especially well suited for rescue, embedded, server, development, and other resource-constrained environments, where the overhead of a graphical user interface would be counter-productive.</p>
+    <p>All of the C-Menu binaries, including executables and libcm.so are less than 350k, a tiny footprint for such powerful tools, and no GUI is required. The only dependencies are the GNU C Library, GNU Math Library, NCursesw, and a terminal emulator.</p>
 <p>Oh, and C-Menu is free, distributed under the MIT License.</p>
 <p>Are you ready to get started? Below, you will find several options for installing C-Menu on your Linux system. I haven't yet provided a packaged binary distribution, but that will be coming soon in version 0.3.0.</p>
 <p>Choose the option that best suits your needs and follow the instructions to get C-Menu up and running on your system.</p>

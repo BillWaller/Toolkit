@@ -30,6 +30,7 @@ var a01174 =
     [ "cp_reverse", "da/dfb/a01174.html#a714ecd8c646ef708c12b8c77aaafa6e2", null ],
     [ "cp_reverse_highlight", "da/dfb/a01174.html#a1949bc05800033f4f6805c537ee5ea5e", null ],
     [ "cp_title", "da/dfb/a01174.html#aa0cc8227ad23e309d2c2851818f17951", null ],
+    [ "cp_win", "da/dfb/a01174.html#add99e85e551d7f387be9f66d1aa4ac06", null ],
     [ "cyan", "da/dfb/a01174.html#a788cf39794df5f73c8e04be770168f1c", null ],
     [ "fg_clr_x", "da/dfb/a01174.html#a17eaa92ba6bb0fa2cc12691f4377ebfe", null ],
     [ "gray_gamma", "da/dfb/a01174.html#aede049c103cb7fb2b31d85a9724937e6", null ],

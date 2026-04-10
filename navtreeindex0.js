@@ -95,9 +95,8 @@ var NAVTREEINDEX0 =
 "d0/d61/a01130.html#gad997ba9f8591568c77291fb1b44601b2":[11,20,6],
 "d0/d61/a01130.html#gae6f141401cf9f104dbe14f09603d5178":[11,20,7],
 "d0/dc8/a01124.html":[11,14],
-"d0/dc8/a01124.html#ga1989771e09ef0e00c4cec786094d1d26":[11,14,1],
-"d0/dc8/a01124.html#ga91c1b232235d7f7111b4779e6cd47a29":[11,14,0],
-"d0/dc8/a01124.html#gadd4bd5f0e9c89c717e460b2eb9952e6a":[11,14,2],
+"d0/dc8/a01124.html#ga1989771e09ef0e00c4cec786094d1d26":[11,14,0],
+"d0/dc8/a01124.html#gadd4bd5f0e9c89c717e460b2eb9952e6a":[11,14,1],
 "d1/d3d/a01110.html":[11,0],
 "d1/d3d/a01110.html#ga02c9f554eaa3f1d6599e75838da3cee6":[11,0,3],
 "d1/d3d/a01110.html#ga2feaacf50ca2c7d00b73e21faca59702":[11,0,10],
@@ -249,5 +248,6 @@ var NAVTREEINDEX0 =
 "d3/d42/a01275.html#tree-sitter-parsers":[5,0,11],
 "d3/d42/a01275.html#tree-sitter-parsers-on-linux":[5,0,11,0],
 "d3/d42/a01275.html#tree-sitter-parsers-on-macos":[5,0,11,1],
-"d3/d42/a01275.html#tree-sitter-parsers-on-windows":[5,0,11,2]
+"d3/d42/a01275.html#tree-sitter-parsers-on-windows":[5,0,11,2],
+"d3/d42/a01275.html#useful-configurations":[5,0,18]
 };
