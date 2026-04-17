@@ -181,6 +181,5 @@ var menudata={children:[
 {text:"t",url:"globals_defs.html#index_t"},
 {text:"u",url:"globals_defs.html#index_u"},
 {text:"v",url:"globals_defs.html#index_v"},
-{text:"w",url:"globals_defs.html#index_w"},
 {text:"x",url:"globals_defs.html#index_x"}]}]}]},
 {text:"Examples",url:"examples.html"}]}

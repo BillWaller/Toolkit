@@ -1,9 +1,14 @@
 var a01118 =
 [
-    [ "free_string", "dd/d09/a01118.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
-    [ "string_cat", "dd/d09/a01118.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
-    [ "string_cpy", "dd/d09/a01118.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
-    [ "string_ncat", "dd/d09/a01118.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
-    [ "string_ncpy", "dd/d09/a01118.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
-    [ "to_string", "dd/d09/a01118.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
+    [ "apply_gamma", "dd/d09/a01118.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
+    [ "clr_name_to_idx", "dd/d09/a01118.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
+    [ "get_clr_pair", "dd/d09/a01118.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
+    [ "hex_clr_str_to_rgb", "dd/d09/a01118.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "init_clr_palette", "dd/d09/a01118.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
+    [ "init_hex_clr", "dd/d09/a01118.html#ga61af7829a5d63d766e76930a0893d574", null ],
+    [ "list_colors", "dd/d09/a01118.html#ga482af92e265df3405f0620b4d6158b4e", null ],
+    [ "mkccc", "dd/d09/a01118.html#ga08537e2322c1207f7e6ae571bac1c9fd", null ],
+    [ "rgb_to_curses_clr", "dd/d09/a01118.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
+    [ "rgb_to_xterm256_idx", "dd/d09/a01118.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
+    [ "xterm256_idx_to_rgb", "dd/d09/a01118.html#ga31ee0d93c7b527f92559fc410152f768", null ]
 ];

@@ -1,5 +1,6 @@
 var a01058 =
 [
-    [ "main", "d5/d4c/a01058.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "mview", "d5/d4c/a01058.html#a38fc30c220409a9dcf3b32d1231cbdc4", null ]
+    [ "KSTRLEN", "d5/d4c/a01058.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "d5/d4c/a01058.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: stripansi.c Source File</title>
+<title>C-Menu: enterstr.c Source File</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,61 +109,83 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('da/db7/a01088_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">stripansi.c</div></div>
+  <div class="headertitle"><div class="title">enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../da/db7/a01088.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file stripansi.c</span></div>
-<div class="line"><span class="lineno">    2</span><span class="comment">    @brief removes ansi escape sequences beginning with &quot;\033[&quot;&quot; and ending in</span></div>
-<div class="line"><span class="lineno">    3</span><span class="comment">   &quot;m&quot; or &quot;K&quot;</span></div>
-<div class="line"><span class="lineno">    4</span><span class="comment">    @author Bill Waller</span></div>
-<div class="line"><span class="lineno">    5</span><span class="comment">    Copyright (c) 2025</span></div>
-<div class="line"><span class="lineno">    6</span><span class="comment">    MIT License</span></div>
-<div class="line"><span class="lineno">    7</span><span class="comment">    billxwaller@gmail.com</span></div>
-<div class="line"><span class="lineno">    8</span><span class="comment">    @date 2026-02-09</span></div>
-<div class="line"><span class="lineno">    9</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<a href="../../da/db7/a01088.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file enterstr.c</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Enter a string from keyboard</span></div>
+<div class="line"><span class="lineno">    3</span><span class="comment">    @author Bill Waller</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2025</span></div>
+<div class="line"><span class="lineno">    5</span><span class="comment">    MIT License</span></div>
+<div class="line"><span class="lineno">    6</span><span class="comment">    billxwaller@gmail.com</span></div>
+<div class="line"><span class="lineno">    7</span><span class="comment">    @date 2026-02-09</span></div>
+<div class="line"><span class="lineno">    8</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">/** C function - strip_ansi(out_str, in_str)</span></div>
-<div class="line"><span class="lineno">   15</span><span class="comment">   @details This function iterates through the input string, copying characters</span></div>
-<div class="line"><span class="lineno">   16</span><span class="comment">   to the output buffer while skipping over any ANSI escape sequences. It looks</span></div>
-<div class="line"><span class="lineno">   17</span><span class="comment">   for sequences that start with &quot;\033[&quot; and end with &quot;m&quot; or &quot;K&quot;, and removes</span></div>
-<div class="line"><span class="lineno">   18</span><span class="comment">   them from the output.</span></div>
-<div class="line"><span class="lineno">   19</span><span class="comment">   @param argc Argument count (should be 2 for the program name and input file)</span></div>
-<div class="line"><span class="lineno">   20</span><span class="comment">   @param argv Argument vector (argv[1] should be the input file name)</span></div>
-<div class="line"><span class="lineno">   21</span><span class="comment">   @details ANSI escape sequences start with &quot;\033[&quot; and end with &quot;m&quot; or &quot;K&quot;.</span></div>
-<div class="line"><span class="lineno">   22</span><span class="comment">   This function removes those sequences from the input string and writes the</span></div>
-<div class="line"><span class="lineno">   23</span><span class="comment">   cleaned string to stdout */</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="../../da/db7/a01088.html#a0ddf1224851353fc92bfbff6f499fa97">   24</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d1/dfa/a01097.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) {</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">char</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        in_buf[2048]; <span class="comment">/**&lt; Buffer to hold the input string read from the file */</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">char</span> out_buf[2048]; <span class="comment">/**&lt; Buffer to hold the cleaned output string */</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">if</span> (argc != 2) {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        fprintf(stderr, <span class="stringliteral">&quot;Usage: %s [file_with_ansi_codes]\n&quot;</span>, argv[0]);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    }</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    FILE *in_fp = fopen(argv[1], <span class="stringliteral">&quot;r&quot;</span>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">if</span> (!in_fp) {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        perror(<span class="stringliteral">&quot;Error opening file&quot;</span>);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">while</span> (fgets(in_buf, <span class="keyword">sizeof</span>(in_buf), in_fp)) {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_function" href="../../d6/d8b/a01117.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a><a class="code hl_function" href="../../d6/d8b/a01117.html#ga82896df8e50776b7e7b0cede4e45b523">(</a>out_buf<a class="code hl_function" href="../../d6/d8b/a01117.html#ga82896df8e50776b7e7b0cede4e45b523">,</a> in_buf<a class="code hl_function" href="../../d6/d8b/a01117.html#ga82896df8e50776b7e7b0cede4e45b523">)</a>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        fputs(out_buf, stdout);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    fclose(in_fp);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
-<div class="ttc" id="aa01097_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d1/dfa/a01097.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Capture the current terminal settings for later restoration.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dfa/a01097_source.html#l00038">enterchr.c:38</a></div></div>
-<div class="ttc" id="aa01117_html_ga82896df8e50776b7e7b0cede4e45b523"><div class="ttname"><a href="../../d6/d8b/a01117.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a></div><div class="ttdeci">size_t strip_ansi(char *, char *)</div><div class="ttdoc">Strips ANSI SGR escape sequences (ending in &#39;m&#39;) from string s to d.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dea/a01094_source.html#l00537">futil.c:537</a></div></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">ioctl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/** @example</span></div>
+<div class="line"><span class="lineno">   19</span><span class="comment">    @code</span></div>
+<div class="line"><span class="lineno">   20</span><span class="comment">    USERNAME=$(enterstr &quot;Enter your username: &quot;)</span></div>
+<div class="line"><span class="lineno">   21</span><span class="comment">    PASSWORD=$(enterstr &quot;Enter your password: &quot;)</span></div>
+<div class="line"><span class="lineno">   22</span><span class="comment">    echo &quot;Username: $USERNAME&quot;</span></div>
+<div class="line"><span class="lineno">   23</span><span class="comment">    echo &quot;Password: $PASSWORD&quot;</span></div>
+<div class="line"><span class="lineno">   24</span><span class="comment">    @endcode</span></div>
+<div class="line"><span class="lineno">   25</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/** @brief allows the user to enter a string in cooked mode</span></div>
+<div class="line"><span class="lineno">   28</span><span class="comment">    @note allows line editing and other features</span></div>
+<div class="line"><span class="lineno">   29</span><span class="comment">    @note writes the prompt to stderr and the user&#39;s input to stdout</span></div>
+<div class="line"><span class="lineno">   30</span><span class="comment">    @note handles signals to ensure that the terminal settings are restored if</span></div>
+<div class="line"><span class="lineno">   31</span><span class="comment">   the program is interrupted. */</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="../../da/db7/a01088.html#a3c04138a5bfe5d72780bb7e82a18e627">   32</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d9/d10/a01103.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">struct</span> termios new_tioctl;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">char</span> in_str[<a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">char</span> *in_ptr = in_str;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">char</span> *msg;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">char</span> errmsg[128];</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        strcpy(errmsg, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        strcpy(errmsg, argv[1]);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_function" href="../../d6/de6/a01132.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a><a class="code hl_function" href="../../d6/de6/a01132.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">(</a><a class="code hl_function" href="../../d6/de6/a01132.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">)</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_function" href="../../db/d28/a01133.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../db/d28/a01133.html#gaca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../db/d28/a01133.html#gaca2de03f6d52d4b11237990e4e605177">)</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    new_tioctl = <a class="code hl_variable" href="../../d0/d39/a01112.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        msg = errmsg;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            write(2, msg++, 1);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">if</span> (read(2, in_str, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    }</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        write(1, in_ptr++, 1);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_function" href="../../db/d28/a01133.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a><a class="code hl_function" href="../../db/d28/a01133.html#ga06c1eb6cf3649dc187115565409f91af">(</a><a class="code hl_function" href="../../db/d28/a01133.html#ga06c1eb6cf3649dc187115565409f91af">)</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_function" href="../../d6/de6/a01132.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a><a class="code hl_function" href="../../d6/de6/a01132.html#gac5e3adb304b78910fc77761ef6a743f0">(</a><a class="code hl_function" href="../../d6/de6/a01132.html#gac5e3adb304b78910fc77761ef6a743f0">)</a>;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    exit(0);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
+<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
+<div class="ttc" id="aa01103_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d9/d10/a01103.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Capture the current terminal settings for later restoration.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d10/a01103_source.html#l00038">enterchr.c:38</a></div></div>
+<div class="ttc" id="aa01112_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d0/d39/a01112.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01132_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d6/de6/a01132.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01132_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d6/de6/a01132.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01133_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../db/d28/a01133.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d4d/a01079_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa01133_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../db/d28/a01133.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d4d/a01079_source.html#l00062">sig.c:62</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../da/db7/a01088.html">stripansi.c</a></li>
+    <li class="navelem"><a href="../../da/db7/a01088.html">enterstr.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

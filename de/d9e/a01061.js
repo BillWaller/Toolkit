@@ -1,8 +1,27 @@
 var a01061 =
 [
-    [ "fork_exec", "d6/d40/a01114.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "d6/d40/a01114.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "d6/d40/a01114.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "d8/ded/a01113.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "d6/d40/a01114.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "deselect_object", "d8/d84/a01131.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
+    [ "display_page", "d8/d84/a01131.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
+    [ "display_pick_help", "d8/d84/a01131.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
+    [ "exec_objects", "d8/d84/a01131.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
+    [ "init_pick", "d8/d84/a01131.html#ga1b2ee87543245e612c1710ea58930a17", null ],
+    [ "open_pick_win", "d8/d84/a01131.html#gaf20c847dc030116f9999adbba681000c", null ],
+    [ "output_objects", "d8/d84/a01131.html#ga8feb6cd586d503a676b831ec722576fb", null ],
+    [ "pick_engine", "d8/d84/a01131.html#gab97dcab41017c5132f52b682437a151e", null ],
+    [ "picker", "d8/d84/a01131.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
+    [ "read_pick_input", "d8/d84/a01131.html#gaabda879000cf8135245ef451de08f780", null ],
+    [ "reverse_object", "d8/d84/a01131.html#gab2173ff8fb800d126c180487744672d5", null ],
+    [ "save_object", "d8/d84/a01131.html#ga02f90007f2422dd2094ab64569e157f0", null ],
+    [ "toggle_object", "d8/d84/a01131.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
+    [ "unreverse_object", "d8/d84/a01131.html#ga650262f8279502ebc73607394dd7af13", null ],
+    [ "calculated_idx", "de/d9e/a01061.html#acdb9de82d81b176784185dea9063b57c", null ],
+    [ "obj_idx", "de/d9e/a01061.html#a4a50bfe3f8460978b34566ec3dff7adb", null ],
+    [ "pagers_editors", "de/d9e/a01061.html#a8f93294009502446912fa64f33731029", null ],
+    [ "pg_lines", "de/d9e/a01061.html#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d", null ],
+    [ "pipe_fd", "de/d9e/a01061.html#ac7ac4adf3c3409d847a57c140700f334", null ],
+    [ "tbl_col", "de/d9e/a01061.html#ab57f05e19e1e81af17fbbd3a766c405a", null ],
+    [ "tbl_cols", "de/d9e/a01061.html#a7df4e526a3af8e113bbc05ca011c2341", null ],
+    [ "tbl_line", "de/d9e/a01061.html#a25fe2a76cfd155c51a46c99d6a1cf4d9", null ],
+    [ "tbl_page", "de/d9e/a01061.html#ae7c3abf692920540a78bc3322d02828a", null ],
+    [ "tbl_pages", "de/d9e/a01061.html#acbe29ef30ea713ef47f3cd892310ca50", null ]
 ];
