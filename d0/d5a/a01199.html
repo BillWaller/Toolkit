@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /usr/local/src/C-Menu/src/enterchr.c</title>
+<title>C-Menu: Line Struct Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,68 +109,185 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d0/d5a/a01199.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterchr.c</div></div>
+  <div class="headertitle"><div class="title">Line Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line">key=$(enterchr <span class="stringliteral">&quot;Are you sure?: &quot;</span>)</div>
-<div class="line"><span class="keywordflow">if</span> [ <span class="stringliteral">&quot;$key&quot;</span> = <span class="stringliteral">&quot;Y&quot;</span> ]; then</div>
-<div class="line">    echo <span class="stringliteral">&quot;You entered Y&quot;</span></div>
-<div class="line"><span class="keywordflow">else</span></div>
-<div class="line">    echo <span class="stringliteral">&quot;You entered N&quot;</span></div>
-<div class="line">fi</div>
-</div><!-- fragment --><div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;fcntl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d6/d80/a01076.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line">    <span class="keywordtype">char</span> c = <span class="charliteral">&#39;Y&#39;</span>;</div>
-<div class="line">    <span class="keywordtype">char</span> *msg;</div>
-<div class="line">    <span class="keyword">struct </span>termios raw_tioctl;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;Press any key&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
-<div class="line">    <a id="a2" name="a2"></a><a class="code hl_function" href="../../de/d1d/a01105.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line">    raw_tioctl = <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d2/df3/a01085.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../de/d1d/a01105.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(&amp;raw_tioctl);</div>
-<div class="line">    tcflush(0, TCOFLUSH);</div>
-<div class="line">    <span class="keywordflow">while</span> (1) {</div>
-<div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
-<div class="line">        <span class="keywordflow">while</span> (*msg) {</div>
-<div class="line">            write(2, msg++, 1);</div>
-<div class="line">        }</div>
-<div class="line">        <span class="keywordflow">if</span> (read(0, &amp;c, 1) &gt; 0) {</div>
-<div class="line">            write(1, &amp;c, 1);</div>
-<div class="line">            <span class="keywordflow">break</span>;</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../de/d1d/a01105.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line">    <span class="keywordflow">if</span> (c == (<span class="keywordtype">char</span>)0x1b)</div>
-<div class="line">        <span class="keywordflow">return</span> (1);</div>
-<div class="line">    <span class="keywordflow">return</span> (0);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
-<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d7c/a01073_source.html#l00084">futil.c:84</a></div></div>
-<div class="ttc" id="aa01076_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d6/d80/a01076.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Capture the current terminal settings for later restoration.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d80/a01076_source.html#l00038">enterchr.c:38</a></div></div>
-<div class="ttc" id="aa01085_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d2/df3/a01085.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d2/df3/a01085_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01105_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../de/d1d/a01105.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d2/df3/a01085_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01105_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../de/d1d/a01105.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../d2/df3/a01085_source.html#l00118">scriou.c:118</a></div></div>
-<div class="ttc" id="aa01105_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../de/d1d/a01105.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d2/df3/a01085_source.html#l00055">scriou.c:55</a></div></div>
-</div><!-- fragment --> </div><!-- contents -->
+
+<p>The <a class="el" href="../../d0/d5a/a01199.html" title="The Line strutures are attached to the Menu main structure.">Line</a> strutures are attached to the <a class="el" href="../../da/d1f/a01203.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> main structure.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../df/df7/a00731_source.html">menu.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Line:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/d10/a01197.svg" width="264" height="207"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a6d158be9cbd3c4180df373ddf462330d" id="r_a6d158be9cbd3c4180df373ddf462330d"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="#a6d158be9cbd3c4180df373ddf462330d">type</a></td></tr>
+<tr class="memitem:a514130f5368bc6edaa5928f08be2bd4f" id="r_a514130f5368bc6edaa5928f08be2bd4f"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a514130f5368bc6edaa5928f08be2bd4f">raw_text</a></td></tr>
+<tr class="memitem:a1588ee0394f3e3076e6b03b8afab5cc9" id="r_a1588ee0394f3e3076e6b03b8afab5cc9"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a1588ee0394f3e3076e6b03b8afab5cc9">choice_text</a></td></tr>
+<tr class="memitem:ad244e20485560be4e557528c8fa1321c" id="r_ad244e20485560be4e557528c8fa1321c"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ad244e20485560be4e557528c8fa1321c">choice_letter</a></td></tr>
+<tr class="memitem:a928bd3d2b73020b5529f9da018ce5e2f" id="r_a928bd3d2b73020b5529f9da018ce5e2f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a928bd3d2b73020b5529f9da018ce5e2f">letter_pos</a></td></tr>
+<tr class="memitem:acce58adaa7cf043f8f905d3d69a7f3a0" id="r_acce58adaa7cf043f8f905d3d69a7f3a0"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="#acce58adaa7cf043f8f905d3d69a7f3a0">command_type</a></td></tr>
+<tr class="memitem:a5caaf06576322b837ebfbce757377455" id="r_a5caaf06576322b837ebfbce757377455"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a5caaf06576322b837ebfbce757377455">command_str</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="../../d0/d5a/a01199.html" title="The Line strutures are attached to the Menu main structure.">Line</a> strutures are attached to the <a class="el" href="../../da/d1f/a01203.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> main structure. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00048">48</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="ad244e20485560be4e557528c8fa1321c" name="ad244e20485560be4e557528c8fa1321c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad244e20485560be4e557528c8fa1321c">&#9670;&#160;</a></span>choice_letter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Line::choice_letter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The letter that the user can press to select this menu line, if it is a choice line, used for selection purposes </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00057">57</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/dea/a01094_source.html#l00117">menu_cmd_processor()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a1588ee0394f3e3076e6b03b8afab5cc9" name="a1588ee0394f3e3076e6b03b8afab5cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1588ee0394f3e3076e6b03b8afab5cc9">&#9670;&#160;</a></span>choice_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* Line::choice_text</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The formatted text of the menu line, after processing any variables and formatting, used for display purposes </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00054">54</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d22/a01049_source.html#l00169">destroy_menu()</a>, <a class="el" href="../../d6/dea/a01094_source.html#l00117">menu_cmd_processor()</a>, <a class="el" href="../../d6/dea/a01094_source.html#l00037">menu_engine()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a5caaf06576322b837ebfbce757377455" name="a5caaf06576322b837ebfbce757377455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5caaf06576322b837ebfbce757377455">&#9670;&#160;</a></span>command_str</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* Line::command_str</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The command string associated with this menu line, which may be a command to execute, a menu to display, a form to show, etc., depending on the command type, used to determine the specific action to take when this menu line is selected </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00070">70</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d22/a01049_source.html#l00169">destroy_menu()</a>, <a class="el" href="../../d6/dea/a01094_source.html#l00117">menu_cmd_processor()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="acce58adaa7cf043f8f905d3d69a7f3a0" name="acce58adaa7cf043f8f905d3d69a7f3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acce58adaa7cf043f8f905d3d69a7f3a0">&#9670;&#160;</a></span>command_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Line::command_type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The type of command associated with this menu line, e.g. CT_RETURNMAIN for a command that returns to the main menu, CT_EXEC for a command that executes a program, CT_HELP for a command that displays help information, etc., used to determine what action to take when this menu line is selected </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00064">64</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/dea/a01094_source.html#l00117">menu_cmd_processor()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a928bd3d2b73020b5529f9da018ce5e2f" name="a928bd3d2b73020b5529f9da018ce5e2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a928bd3d2b73020b5529f9da018ce5e2f">&#9670;&#160;</a></span>letter_pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Line::letter_pos</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The position of the choice letter in the text, for highlighting purposes, used to determine where to highlight the choice letter in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00060">60</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a514130f5368bc6edaa5928f08be2bd4f" name="a514130f5368bc6edaa5928f08be2bd4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514130f5368bc6edaa5928f08be2bd4f">&#9670;&#160;</a></span>raw_text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* Line::raw_text</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The raw text of the menu line, as read from the menu description file, before processing any variables or formatting </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00051">51</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d22/a01049_source.html#l00169">destroy_menu()</a>, <a class="el" href="../../d6/dea/a01094_source.html#l00117">menu_cmd_processor()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a6d158be9cbd3c4180df373ddf462330d" name="a6d158be9cbd3c4180df373ddf462330d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d158be9cbd3c4180df373ddf462330d">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Line::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The type of menu line, e.g. MT_TEXT for a text line, MT_CHOICE for a choice line </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00049">49</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/dea/a01094_source.html#l00117">menu_cmd_processor()</a>, <a class="el" href="../../d6/dea/a01094_source.html#l00037">menu_engine()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="../../df/df7/a00731_source.html">menu.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../d0/d5a/a01199.html">Line</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

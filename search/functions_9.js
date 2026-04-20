@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['left_5fjustify_0',['left_justify',['../dd/de4/a01121.html#ga425021d4c87474159a36d395e4dcdf65',1,'fields.c']]],
-  ['lf_5ffind_1',['lf_find',['../de/de5/a01123.html#gadb7f2fa06eb129782d7fa24a6a973244',1,'lf_find(const char *, const char *, const char *, int, long, time_t, time_t, intmax_t):&#160;futil.c'],['../de/de5/a01123.html#gadb7f2fa06eb129782d7fa24a6a973244',1,'lf_find(const char *base_path, const char *re, const char *ere, int max_depth, long flags, time_t after_t, time_t before_t, intmax_t file_size_min):&#160;futil.c']]],
-  ['lf_5fprocess_2',['lf_process',['../de/de5/a01123.html#gaf67e76b4ca8bfa50e60de63eb805eda0',1,'futil.c']]],
-  ['list_5fcolors_3',['list_colors',['../dd/d09/a01118.html#ga482af92e265df3405f0620b4d6158b4e',1,'dwin.c']]],
-  ['locate_5ffile_5fin_5fpath_4',['locate_file_in_path',['../de/de5/a01123.html#ga02792428710078b7a2ca59ef70ae83fa',1,'locate_file_in_path(char *, char *):&#160;futil.c'],['../de/de5/a01123.html#ga02792428710078b7a2ca59ef70ae83fa',1,'locate_file_in_path(char *file_spec, char *file_name):&#160;futil.c']]],
-  ['lp_5',['lp',['../dd/de2/a01134.html#ga219efbc4d9d70ebc47fafa540b370247',1,'view_engine.c']]]
+  ['left_5fjustify_0',['left_justify',['../d0/dc8/a01124.html#ga425021d4c87474159a36d395e4dcdf65',1,'fields.c']]],
+  ['lf_5ffind_1',['lf_find',['../db/d1e/a01126.html#gadb7f2fa06eb129782d7fa24a6a973244',1,'lf_find(const char *, const char *, const char *, int, long, time_t, time_t, intmax_t):&#160;futil.c'],['../db/d1e/a01126.html#gadb7f2fa06eb129782d7fa24a6a973244',1,'lf_find(const char *base_path, const char *re, const char *ere, int max_depth, long flags, time_t after_t, time_t before_t, intmax_t file_size_min):&#160;futil.c']]],
+  ['lf_5fprocess_2',['lf_process',['../db/d1e/a01126.html#gaf67e76b4ca8bfa50e60de63eb805eda0',1,'futil.c']]],
+  ['line_5feditor_3',['line_editor',['../d8/db9/a00725.html#a0879d9748eca7ee5500e91995d4e7598',1,'line_editor(WINDOW *, WINDOW *, Chyron *, int, char *):&#160;pick_engine.c'],['../d9/db3/a01064.html#a681b923bfeea7f56034a6fad0325e424',1,'line_editor(WINDOW *win, WINDOW *win2, Chyron *chyron, int flen, char *field):&#160;pick_engine.c']]],
+  ['list_5fcolors_4',['list_colors',['../dd/de4/a01121.html#ga482af92e265df3405f0620b4d6158b4e',1,'dwin.c']]],
+  ['locate_5ffile_5fin_5fpath_5',['locate_file_in_path',['../db/d1e/a01126.html#ga02792428710078b7a2ca59ef70ae83fa',1,'locate_file_in_path(char *, char *):&#160;futil.c'],['../db/d1e/a01126.html#ga02792428710078b7a2ca59ef70ae83fa',1,'locate_file_in_path(char *file_spec, char *file_name):&#160;futil.c']]],
+  ['lp_6',['lp',['../d6/d6e/a01137.html#ga219efbc4d9d70ebc47fafa540b370247',1,'view_engine.c']]]
 ];

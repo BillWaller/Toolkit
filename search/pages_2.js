@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['2_208_202026_2002_2004_0',['[0.2.8]- 2026-02-04',['../d7/da4/a01287.html#autotoc_md028--2026-02-04',1,'']]],
-  ['2_209_20pre_20release_1',['0.2.9 - Pre-Release',['../dc/dd5/a01293.html#autotoc_md029---pre-release',1,'']]],
-  ['2_209_20tasks_20to_20complete_20before_200_203_200_2',['0.2.9 Tasks to Complete before 0.3.0',['../dc/dd5/a01293.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
-  ['2_209_20wrap_20up_3',['0.2.9 Wrap-Up',['../dc/dd5/a01293.html#autotoc_md029-wrap-up',1,'']]],
-  ['2_20build_20c_20menu_20with_20provided_20scripts_4',['2 Build C Menu with Provided Scripts',['../d4/da0/a01291.html#option-2---build-c-menu-with-provided-scripts',1,'Option 2 - Build C-Menu with Provided Scripts'],['../index.html#option-2---build-c-menu-with-provided-scripts-1',1,'Option 2 - Build C-Menu with Provided Scripts']]],
-  ['2026_2002_2004_5',['2026 02 04',['../d7/da4/a01287.html#autotoc_md028--2026-02-04',1,'[0.2.8]- 2026-02-04'],['../d7/da4/a01287.html#released---2026-02-04',1,'[Released] - 2026-02-04']]]
+  ['2_208_202026_2002_2004_0',['[0.2.8]- 2026-02-04',['../dc/ded/a01290.html#autotoc_md028--2026-02-04',1,'']]],
+  ['2_209_20pre_20release_1',['0.2.9 - Pre-Release',['../d4/d64/a01296.html#autotoc_md029---pre-release',1,'']]],
+  ['2_209_20tasks_20to_20complete_20before_200_203_200_2',['0.2.9 Tasks to Complete before 0.3.0',['../d4/d64/a01296.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
+  ['2_209_20wrap_20up_3',['0.2.9 Wrap-Up',['../d4/d64/a01296.html#autotoc_md029-wrap-up',1,'']]],
+  ['2_20build_20c_20menu_20with_20provided_20scripts_4',['2 Build C Menu with Provided Scripts',['../d7/d88/a01294.html#option-2---build-c-menu-with-provided-scripts',1,'Option 2 - Build C-Menu with Provided Scripts'],['../index.html#option-2---build-c-menu-with-provided-scripts-1',1,'Option 2 - Build C-Menu with Provided Scripts']]],
+  ['2026_2002_2004_5',['2026 02 04',['../dc/ded/a01290.html#autotoc_md028--2026-02-04',1,'[0.2.8]- 2026-02-04'],['../dc/ded/a01290.html#released---2026-02-04',1,'[Released] - 2026-02-04']]]
 ];
