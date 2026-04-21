@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['xterm256_5fidx_5fto_5frgb_0',['xterm256_idx_to_rgb',['../dd/de4/a01121.html#ga31ee0d93c7b527f92559fc410152f768',1,'xterm256_idx_to_rgb(int idx):&#160;dwin.c'],['../dd/de4/a01121.html#ga31ee0d93c7b527f92559fc410152f768',1,'xterm256_idx_to_rgb(int):&#160;dwin.c']]],
-  ['xwgetch_1',['xwgetch',['../d0/d02/a01119.html#ga2feaacf50ca2c7d00b73e21faca59702',1,'xwgetch(WINDOW *win, Chyron *chyron, int n):&#160;dwin.c'],['../d0/d02/a01119.html#ga2feaacf50ca2c7d00b73e21faca59702',1,'xwgetch(WINDOW *, Chyron *, int):&#160;dwin.c']]]
+  ['xterm256_5fidx_5fto_5frgb_0',['xterm256_idx_to_rgb',['../dd/d09/a01118.html#ga31ee0d93c7b527f92559fc410152f768',1,'xterm256_idx_to_rgb(int idx):&#160;dwin.c'],['../dd/d09/a01118.html#ga31ee0d93c7b527f92559fc410152f768',1,'xterm256_idx_to_rgb(int):&#160;dwin.c']]],
+  ['xwgetch_1',['xwgetch',['../d4/dc5/a01116.html#ga2feaacf50ca2c7d00b73e21faca59702',1,'xwgetch(WINDOW *win, Chyron *chyron, int n):&#160;dwin.c'],['../d4/dc5/a01116.html#ga2feaacf50ca2c7d00b73e21faca59702',1,'xwgetch(WINDOW *, Chyron *, int):&#160;dwin.c']]]
 ];

@@ -1,18 +1,15 @@
 var a01134 =
 [
-    [ "deselect_object", "dd/de2/a01134.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "dd/de2/a01134.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "dd/de2/a01134.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "dd/de2/a01134.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "dd/de2/a01134.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "match_objects", "dd/de2/a01134.html#ga91b2cda407803ee4367f7efd5487863c", null ],
-    [ "open_pick_win", "dd/de2/a01134.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "dd/de2/a01134.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_engine", "dd/de2/a01134.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "dd/de2/a01134.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
-    [ "read_pick_input", "dd/de2/a01134.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "dd/de2/a01134.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "dd/de2/a01134.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "dd/de2/a01134.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "dd/de2/a01134.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "get_next_char", "dd/de2/a01134.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
+    [ "get_prev_char", "dd/de2/a01134.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
+    [ "build_prompt", "dd/de2/a01134.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
+    [ "cat_file", "dd/de2/a01134.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "enter_file_spec", "dd/de2/a01134.html#ga2ffea5674e85f124a70e19f745a66583", null ],
+    [ "get_cmd_arg", "dd/de2/a01134.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
+    [ "get_cmd_char", "dd/de2/a01134.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
+    [ "lp", "dd/de2/a01134.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
+    [ "remove_file", "dd/de2/a01134.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
+    [ "view_cmd_processor", "dd/de2/a01134.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
+    [ "view_file", "dd/de2/a01134.html#ga0bd4dc056ab5010547129bb87819789b", null ],
+    [ "write_view_buffer", "dd/de2/a01134.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
 ];

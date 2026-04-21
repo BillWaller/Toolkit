@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d0/d00/a01286.
   <div class="headertitle"><div class="title">C-Menu-UG </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4"></a> <img src="../../User-Guide.png" alt="" class="inline" title="C-Menu User Guide"/>    </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4"></a> <img src="../../../screenshots/User-Guide.png" alt="C-Menu User Guide" class="inline"/></p>
 <h1 class="doxsection"><a class="anchor" id="how-to-get-c-menu-1"></a>
 How to get C-Menu</h1>
 <p><a class="el" href="#c-menu-form-in-depth" title="C-Menu Form In Depth">**_NEW_** C-Menu Form In Depth</a></p>
@@ -133,11 +133,55 @@ Table of Contents</h2>
 </li>
 <li><a class="el" href="#getting-started" title="Getting Started">Getting Started</a><ul>
 <li><a class="el" href="#c-menu-environment-variables" title="C-Menu Environment Variables">C-Menu Environment Variables</a></li>
+<li><a class="el" href="#c-menu-file-layout" title="C-Menu File Layout">C-Menu File Layout</a></li>
+<li><a class="el" href="#rsh-safety-features" title="RSH Safety Features">RSH Safety Features</a></li>
+<li><a class="el" href="#using-rsh" title="Using RSH">Using RSH</a></li>
+<li><a class="el" href="#rsh---a-use-case" title="RSH - A Use Case">RSH - A Use Case</a></li>
 </ul>
 </li>
-<li>- Comment line (ignored)</li>
-<li>Comment line (ignored)</li>
-<li><a class="el" href="../../dd/dd8/a00719.html#aebbffe794ab6e157b91e4c1666bb5aeb" title="minitrc">~/.minitrc</a></li>
+<li><a class="el" href="#starting-c-menu" title="Starting C-Menu">Starting C-Menu</a></li>
+<li><a class="el" href="#c-menu-configuration" title="C-Menu configuration">C-Menu configuration</a></li>
+<li><a class="el" href="#programming-c-menu-menu" title="Programming C-Menu Menu">Programming C-Menu Menu</a><ul>
+<li><a class="el" href="#menu-example" title="Menu Example">Menu Example</a></li>
+<li><a class="el" href="#menu-description-file-format" title="Menu Description File Format">Menu Description File Format</a></li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-form-in-depth" title="C-Menu Form In Depth">C-Menu Form In Depth</a><ul>
+<li><a class="el" href="#form-field-editor" title="Form field editor">Form field editor</a><ul>
+<li><a class="el" href="#form-line-type-specifiers" title="Form Line Type Specifiers">Form Line Type Specifiers</a></li>
+<li><a class="el" href="#form-field-delimiters" title="Form Field Delimiters">Form Field Delimiters</a></li>
+<li><a class="el" href="#form-data-types" title="Form Data Types">Form Data Types</a></li>
+<li><a class="el" href="#form-line-syntax" title="Form Line Syntax">Form Line Syntax</a></li>
+<li><a class="el" href="#form-options" title="Form Options">Form Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-pick" title="C-Menu Pick">C-Menu Pick</a><ul>
+<li><a class="el" href="#pick-usage" title="Pick Usage">Pick Usage</a><ul>
+<li><a class="el" href="#selecting-items" title="Selecting Items">Selecting Items</a></li>
+</ul>
+</li>
+<li><a class="el" href="#pick-options" title="Pick Options">Pick Options</a></li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-view" title="C-Menu View">C-Menu View</a><ul>
+<li><a class="el" href="#view-options" title="View Options">View Options</a><ul>
+<li><a class="el" href="#view-navigation" title="View Navigation">View Navigation</a></li>
+<li><a class="el" href="#searching-forward" title="Searching Forward">Searching Forward</a></li>
+<li><a class="el" href="#searching-backward" title="Searching Backward">Searching Backward</a></li>
+<li><a class="el" href="#horizontal-scrolling" title="Horizontal Scrolling">Horizontal Scrolling</a></li>
+<li><a class="el" href="#motion-keys" title="Motion Keys">Motion Keys</a></li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-options" title="C-Menu Options">C-Menu Options</a></li>
+<li><a class="el" href="#c-menu-configuration-file-example" title="C-Menu configuration file example">C-Menu configuration file example</a></li>
+<li><a class="el" href="#lf" title="lf">lf</a></li>
+<li><a class="el" href="#whence" title="whence">whence</a></li>
+</ul>
+</li>
+<li><a class="el" href="#troubleshooting" title="Troubleshooting">Troubleshooting</a></li>
+<li><a class="el" href="../../d1/d1a/a01285.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository" title="🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.">🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository</a></li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="introduction-1"></a>
 Introduction</h2>
@@ -188,24 +232,23 @@ C-Menu Environment Variables</h3>
 <div class="fragment"><div class="line">CMENU_SRC=/usr/local/src/C-Menu/src</div>
 <div class="line">CMENU_HOME=&quot;$HOME&quot;/menuapp</div>
 <div class="line">CMENU_APPNAME=C-Menu_dev</div>
-</div><!-- fragment --><div class="fragment"><div class="line">### C-Menu File Layout</div>
-<div class="line"> </div>
-<div class="line">```bash</div>
-<div class="line">   ** menuapp</div>
-<div class="line">   ** ├── bin          C-Menu executable binaries and scripts</div>
-<div class="line">      ├── data         Data files</div>
-<div class="line">      ├── doc          C-Menu documentation files</div>
-<div class="line">      ├── help         C-Menu Help files</div>
-<div class="line">      ├── include      C-Menu include files (.h)</div>
-<div class="line">      ├── lib64        C-Menu libraries</div>
-<div class="line">      │   └── cmake    cmake configuration files</div>
-<div class="line">      │       └── cm   cmake configuration files</div>
-<div class="line">    * ├── msrc         C-Menu Source Description Files</div>
-<div class="line">      ├── scripts      User Scripts</div>
-<div class="line">      ├── test         C-Menu test files</div>
-<div class="line">      │   └── tty      C-Menu tty test files</div>
-<div class="line">      ├── tmp          Temporary files</div>
-<div class="line">      └── user         User Files</div>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="c-menu-file-layout"></a>
+C-Menu File Layout</h3>
+<div class="fragment"><div class="line">** menuapp</div>
+<div class="line">** ├── bin          C-Menu executable binaries and scripts</div>
+<div class="line">   ├── data         Data files</div>
+<div class="line">   ├── doc          C-Menu documentation files</div>
+<div class="line">   ├── help         C-Menu Help files</div>
+<div class="line">   ├── include      C-Menu include files (.h)</div>
+<div class="line">   ├── lib64        C-Menu libraries</div>
+<div class="line">   │   └── cmake    cmake configuration files</div>
+<div class="line">   │       └── cm   cmake configuration files</div>
+<div class="line"> * ├── msrc         C-Menu Source Description Files</div>
+<div class="line">   ├── scripts      User Scripts</div>
+<div class="line">   ├── test         C-Menu test files</div>
+<div class="line">   │   └── tty      C-Menu tty test files</div>
+<div class="line">   ├── tmp          Temporary files</div>
+<div class="line">   └── user         User Files</div>
 </div><!-- fragment --><p>You can place C-Menu files anywhere you like, so long as you configure your system accordingly. However, for a first-time install, it will be much easier to use the suggested default configuration. These instructions will assume the default and give you some pointers on how you can modify the layout to suit your objectives. These instructions will serve as an example of one way to install C-Menu.</p>
 <p>First, edit your .bashrc or .zshrc and prepend the C-Menu binary directory onto your path:</p>
 <div class="fragment"><div class="line">export &quot;$HOME/menuapp/bin:$PATH&quot;</div>
@@ -260,16 +303,10 @@ Using RSH</h3>
 RSH - A Use Case</h3>
 <p>Note: the following listing uses "lsd" by default, and may not look the same on your system if you do not have "lsd" installed with patched fonts. You can modify the "Makefile" to use "ls" instead.</p>
 <p>Once RSH, "xx", and "x" are installed, subsequent make install processes will appear as follows:</p>
-<div class="image">
-<img src="../../Makefile-out.png" alt=""/>
-<div class="caption">
-make</div></div>
-    <p>Here's another example with the C-Make build. You will notice that the compilation portion of make is executed without root privileges, while the installation portion is executed with root privileges. This is a safer approach, as it minimizes the amount of code that runs with elevated privileges.</p>
-<div class="image">
-<img src="../../cmake_install.png" alt=""/>
-<div class="caption">
-make cmake</div></div>
-    <p>When finished, take some time to explore the ~/menuapp directory to familiarize yourself with its features.</p>
+<p><img src="../../../screenshots/Makefile-out.png" alt="make" class="inline"/></p>
+<p>Here's another example with the C-Make build. You will notice that the compilation portion of make is executed without root privileges, while the installation portion is executed with root privileges. This is a safer approach, as it minimizes the amount of code that runs with elevated privileges.</p>
+<p><img src="../../../screenshots/cmake_install.png" alt="make cmake" class="inline"/></p>
+<p>When finished, take some time to explore the ~/menuapp directory to familiarize yourself with its features.</p>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="starting-c-menu"></a>
 Starting C-Menu</h2>
@@ -289,16 +326,10 @@ Programming C-Menu Menu</h2>
 <p>C-Menu parses a menu description file, which contains text lines to display and command lines, which are essentially operating system commands.</p>
 <h3 class="doxsection"><a class="anchor" id="menu-example"></a>
 Menu Example</h3>
-<div class="image">
-<img src="../../menu-desc.png" alt=""/>
-<div class="caption">
-C-Menu Application Menu</div></div>
-    <p>In this example, "Neovim" is a menu item that, when selected, will execute the command <span class="tt">nvim</span>. The user can select it by clicking on "Neovim" or by typing the corresponding letter assigned to it.</p>
-<div class="image">
-<img src="../../applications_menu.png" alt=""/>
-<div class="caption">
-C-Menu Applications Menu</div></div>
-    <h3 class="doxsection"><a class="anchor" id="menu-description-file-format"></a>
+<p><img src="../../../screenshots/menu-desc.png" alt="C-Menu Application Menu" class="inline"/></p>
+<p>In this example, "Neovim" is a menu item that, when selected, will execute the command <span class="tt">nvim</span>. The user can select it by clicking on "Neovim" or by typing the corresponding letter assigned to it.</p>
+<p><img src="../../../screenshots/applications_menu.png" alt="C-Menu Applications Menu" class="inline"/></p>
+<h3 class="doxsection"><a class="anchor" id="menu-description-file-format"></a>
 Menu Description File Format</h3>
 <ul>
 <li><a class="el" href="../../d1/d35/a01184.html" title="structure for form fields">Text</a> lines start with a colon (:) in column 0.</li>
@@ -329,35 +360,23 @@ C-Menu Form In Depth</h2>
 </pre><h3 class="doxsection"><a class="anchor" id="form-field-editor"></a>
 Form field editor</h3>
 <p>In the image below, <a class="el" href="../../d2/db4/a01192.html">Form</a> is configured to use '_' as the fill character, which gives the user a visual cue of the field length.</p>
-<div class="image">
-<img src="../../iloan.png" alt=""/>
-<div class="caption">
-Form Initial Display</div></div>
-    <p>The default field entry mode is overwrite, which can be toggled to insert by pressing the insert key, or clicking the "INS" label in they chyron. When <a class="el" href="../../d2/db4/a01192.html">Form</a> is in insert mode, the "INS" label will be highlighted.</p>
+<p><img src="../../../screenshots/iloan.png" alt="Form Initial Display" class="inline"/></p>
+<p>The default field entry mode is overwrite, which can be toggled to insert by pressing the insert key, or clicking the "INS" label in they chyron. When <a class="el" href="../../d2/db4/a01192.html">Form</a> is in insert mode, the "INS" label will be highlighted.</p>
 <p>If the field is a decimal numeric type, then only numbers and a single decimal point can be entered.</p>
 <p>In overwrite mode, each character entered will replace the existing character at the cursor position. In insert mode, characters will be inserted at the cursor position, pushing existing characters to the right. The user can toggle between these modes as needed while filling out the form. Insert mode is not effective when the field is full.</p>
 <p>When entering times or dates, don't enter punctuation, just numbers. When you press tab or enter to accept the field, <a class="el" href="../../d2/db4/a01192.html">Form</a> will convert the input to the appropriate format. For example, if you enter "20240601" in a date field, <a class="el" href="../../d2/db4/a01192.html">Form</a> will convert it to "2024-06-01" when you move to the next field.</p>
 <p>Each field has a display mode and an edit mode. In display mode, formatted numbers are right-aligned and text is left-aligned. In edit mode, fields are left-aligned. The cursor is initially positioned at the first character of the field.</p>
 <p>When finished entering or editing a field, the user can press the Tab key to move to the next field, or Shift+Tab to move to the previous field. Pressing Enter will also move to the next field. However, the tab and enter keys work differently depending on the setting of the configuration flag, "f_erase_remainder". When set to true, pressing the enter key will accept the field and erase any remaining characters to the right of the cursor, while pressing tab will move to the next field without erasing any characters. When "f_erase_remainder" is set to false, pressing the enter key will accept the field without erasing any characters.</p>
 <p>When finished entering or editing the form, the can press F10 to continue with submission.</p>
-<div class="image">
-<img src="../../iloan2.png" alt=""/>
-<div class="caption">
-After F10 Continue</div></div>
-    <p>Notice, in the above image, the Number of Months has been changed from 120 to 180. The user pressed enter in the Payment Amount field giving it a value of 0.</p>
+<p><img src="../../../screenshots/iloan2.png" alt="After F10 Continue" class="inline"/></p>
+<p>Notice, in the above image, the Number of Months has been changed from 120 to 180. The user pressed enter in the Payment Amount field giving it a value of 0.</p>
 <p>When the User pressed F10, the chyron changed, adding a command "F5 Process", which is highlighted with a yellow background as a clue to the user that it is the next logical step.</p>
 <p>The user presses F5 or clicks on the "F5 Process" label, and with no flickering or disruption of the screen, the Payment Amount is instantly calculated and the Payment Amount field is updated. The chyron changes again, adding "F5 Edit" and "F10 Commit" commands.</p>
-<div class="image">
-<img src="../../iloan3.png" alt=""/>
-<div class="caption">
-After F5 Process</div></div>
-    <p>The user can try another calculation by pressing the "F5 Edit" key or "F10
+<p><img src="../../../screenshots/iloan3.png" alt="After F5 Process" class="inline"/></p>
+<p>The user can try another calculation by pressing the "F5 Edit" key or "F10
 Commit" to have <a class="el" href="../../d2/db4/a01192.html">Form</a> dispatch the final data according to the configuration.</p>
-<div class="image">
-<img src="../../iloan.f.png" alt=""/>
-<div class="caption">
-Form Description File</div></div>
-    <h4 class="doxsection"><a class="anchor" id="form-line-type-specifiers"></a>
+<p><img src="../../../screenshots/iloan.f.png" alt="Form Description File" class="inline"/></p>
+<h4 class="doxsection"><a class="anchor" id="form-line-type-specifiers"></a>
 Form Line Type Specifiers</h4>
 <div class="fragment"><div class="line">? - Help file</div>
 <div class="line"># - Comment line (ignored)</div>
@@ -382,7 +401,6 @@ Form Line Syntax</h4>
 <div class="line">T&lt;delimiter&gt;Line&lt;delimiter&gt;Column&lt;delimiter&gt;Length&lt;delimiter&gt;Text</div>
 <div class="line">F&lt;delimiter&gt;Line&lt;delimiter&gt;Column&lt;delimiter&gt;Length&lt;delimiter&gt;Type</div>
 <div class="line">?&lt;delimiter&gt;Help File Path</div>
-<div class="line"># Comment line (ignored)</div>
 </div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="form-options"></a>
 Form Options</h4>
 <div class="fragment"><div class="line">-h Display help information</div>
@@ -492,11 +510,8 @@ C-Menu Options</h3>
 <p>The option field names may be specified in the configuration file, one per line, without the leading hyphen (-).</p>
 <p>The single letter options in column 6 may be specified on the command line as hyphen[letter], such as (-a). Some of the options, specifically those without a designated letter, may be entered from the command line as hyphen[option]=[value], such as (-mapp_data="My
 C-Menu_Data_Directory").</p>
-<div class="image">
-<img src="../../options.png" alt=""/>
-<div class="caption">
-C-Menu Options</div></div>
-    <h3 class="doxsection"><a class="anchor" id="c-menu-configuration-file-example"></a>
+<p><img src="../../../screenshots/options.png" alt="C-Menu Options" class="inline"/></p>
+<h3 class="doxsection"><a class="anchor" id="c-menu-configuration-file-example"></a>
 C-Menu configuration file example</h3>
 <div class="fragment"><div class="line"># ~/.minitrc</div>
 <div class="line">tab_stop=4</div>
@@ -546,11 +561,8 @@ C-Menu configuration file example</h3>
 lf</h3>
 <p>(list files)</p>
 <p>"lf" is a very lightweight alternative to find. It was designed to provide input to C-Menu <a class="el" href="../../d7/d5a/a01204.html" title="Pick data structure.">Pick</a>, but can be used stand-alone as well. It is similar to the Unix "find" command, but with a much simpler syntax and fewer features.</p>
-<div class="image">
-<img src="../../lf-help.png" alt=""/>
-<div class="caption">
-lf help</div></div>
-    <p>Unless depth is specified with the -d option, lf defaults to unlimited depth.</p>
+<p><img src="../../../screenshots/lf-help.png" alt="lf help" class="inline"/></p>
+<p>Unless depth is specified with the -d option, lf defaults to unlimited depth.</p>
 <p>Examples:</p>
 <p>List all files in the current directory and its subdirectories ending with .c or .h.</p>
 <div class="fragment"><div class="line">lf /home/user &#39;.*\.[ch]$&#39;</div>
@@ -562,11 +574,8 @@ lf help</div></div>
 <div class="fragment"><div class="line">lf -i -e &#39;.*\.jpg$&#39; -t f /home/bill</div>
 </div><!-- fragment --><p>Exclude all files and directories that end in ".txt", ".sh", or ".md".</p>
 <div class="fragment"><div class="line">lf -e &#39;.*\.(txt|sh|md)$&#39; /home/bill</div>
-</div><!-- fragment --><div class="image">
-<img src="../../lf-dates.png" alt=""/>
-<div class="caption">
-lf File Finder</div></div>
-    <p>The screenshot above is an example of how you might use the date-time options of lf to list files between two date-times (after and before) and the sample output. We hope you find the format format to be intuitive and easy to use.</p>
+</div><!-- fragment --><p><img src="../../../screenshots/lf-dates.png" alt="lf File Finder" class="inline"/></p>
+<p>The screenshot above is an example of how you might use the date-time options of lf to list files between two date-times (after and before) and the sample output. We hope you find the format format to be intuitive and easy to use.</p>
 <p>The following is an actual benchmark of execution times for lf and find. The find and lf commands, approximate common usage, and produce identical results.</p>
 <div class="fragment"><div class="line">time find . -maxdepth 9 -type f -regex &#39;.*\.[ch]$&#39; &gt; find.out</div>
 <div class="line"> </div>
@@ -593,7 +602,7 @@ lf File Finder</div></div>
 <div class="line">time lf -a -d 5 -t f | xargs ls -l &gt;lf.out</div>
 </div><!-- fragment --><div class="fragment"><div class="line">wc -l find.out lf.out</div>
 </div><!-- fragment --><div class="image">
-<img src="../../lf-vs-find2.png" alt=""/>
+<img src="../../lf-vs-find.png" alt=""/>
 <div class="caption">
 lf File Finder</div></div>
     <p>For a great cheat sheet on regular expressions, see</p>
@@ -602,8 +611,8 @@ lf File Finder</div></div>
 whence</h3>
 <p>"whence" is a simple utility that reports the location of a command in the user's PATH. It is similar to the Unix "which" command, but with a simpler syntax and fewer features. It can be used to verify that a command is accessible and to determine its location.</p>
 <p>You may be wondering whence "whence", and why it is included in the C-Menu package when there are already commands like "which" and "type" that provide similar and functionality and more. I could tell you that whence was designed to be a lightweight and efficient utility, but that's not the reason for its inclusion in the C-Menu package. The truth is that I wrote which back in the mid 1980's before the "which" command was widely available. I didn't invent it, but after using a version of whence that didn't work as I expected, I wrote my own version, and I have been using it since.</p>
-<p>If you will permit a tangential excursion, vi wasn't my first editor. It was the first editor to which I instantly bonded. Barely aware that my fingers were moving, code streamed onto the screen at the speed of thought. I was wired in. What ever happened to Jolt Cola?</p>
-<p>Whence is a loyal and trustworthy companion that has served me for many years, and I refuse to abandon it. Of course, if it develops a bug, I'll throw it out like yesterday's garbage. It is just a program. Feel free to delete it and use which if that makes you feel better.</p>
+<p>If you will permit a tangential excursion, vi was not my first editor. It was the first editor to which I instantly bonded. Barely aware that my fingers were moving, code streamed onto the screen at the speed of thought. I was wired in. What ever happened to Jolt Cola?</p>
+<p>Whence is a loyal and trustworthy companion that has served me for many years, and I refuse to abandon it. Of course, if it develops a bug, I will throw it out like yesterday\'s garbage. It is just a program. Feel free to delete it and use which if that makes you feel better.</p>
 <h2 class="doxsection"><a class="anchor" id="troubleshooting"></a>
 Troubleshooting</h2>
 <p>If you encounter issues while using C-Menu, consider the following troubleshooting steps:</p>
@@ -616,13 +625,13 @@ Troubleshooting</h2>
 <li>Check your PATH environment variable to ensure all necessary executables are accessible. For example, if view doesn't seem to be working, verify its location.</li>
 </ul>
 <p>On some systems, "/usr/bin/view" may be a link to "/usr/bin/vim" or "/usr/bin/alts". Make sure ~/menuapp/bin is at the front of your PATH. You can check the location of a command using:</p>
-<div class="fragment"><div class="line">which &lt;command_name&gt;</div>
+<div class="fragment"><div class="line">which [command_name]</div>
 </div><!-- fragment --><ul>
 <li>If you experience issues with root access features, ensure that RSH is installed with the correct permissions and that you understand the security implications.</li>
 </ul>
 <hr  />
 <h2 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1"></a>
-🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h2>
+🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository</h2>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

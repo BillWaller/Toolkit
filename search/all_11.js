@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['key_0',['key',['../de/df1/a01151.html#afae4703fe8eb6cfce07372508666dea6',1,'Chyron']]],
-  ['key_20features_1',['Key Features',['../d2/d68/a01295.html#form-key-features',1,'Form Key Features'],['../d2/d68/a01295.html#key-features',1,'Key Features']]],
+  ['key_0',['key',['../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6',1,'Chyron']]],
+  ['key_20features_1',['Key Features',['../d8/d7a/a01292.html#form-key-features',1,'Form Key Features'],['../d8/d7a/a01292.html#key-features',1,'Key Features']]],
   ['key_5faltdel_2',['KEY_ALTDEL',['../d8/db9/a00725.html#a994bc87be1eb918768f1ab7f9f325f1c',1,'cm.h']]],
   ['key_5faltdown_3',['KEY_ALTDOWN',['../d8/db9/a00725.html#a199a6d2613c848c2d31b6b63997afdf2',1,'cm.h']]],
   ['key_5faltend_4',['KEY_ALTEND',['../d8/db9/a00725.html#a109cb8d491e7b42b53b2ece262cd213a',1,'cm.h']]],
@@ -14,12 +14,12 @@ var searchData=
   ['key_5faltpgup_11',['KEY_ALTPGUP',['../d8/db9/a00725.html#aad065eab63ceb77e0e601dfdc9968d70',1,'cm.h']]],
   ['key_5faltright_12',['KEY_ALTRIGHT',['../d8/db9/a00725.html#a8bfe766d44a69587427b117680587450',1,'cm.h']]],
   ['key_5faltup_13',['KEY_ALTUP',['../d8/db9/a00725.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b',1,'cm.h']]],
-  ['keyboard_20mouse_20input_14',['C-Keys - Diagnose Keyboard/Mouse Input',['../d2/d68/a01295.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keycode_15',['keycode',['../d8/ddb/a01147.html#a86b6864ce0ecfeef4be8a88c24b98082',1,'ChyronKey']]],
-  ['keys_16',['Motion Keys',['../d9/dda/a01289.html#motion-keys',1,'']]],
-  ['keys_20diagnose_20keyboard_20mouse_20input_17',['C-Keys - Diagnose Keyboard/Mouse Input',['../d2/d68/a01295.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keys_20rsh_20and_20lf_18',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../d2/d68/a01295.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
-  ['kitty_19',['Kitty',['../d4/da0/a01291.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../dc/d8c/a01297.html#kitty',1,'Kitty']]],
-  ['kitty_20configuration_20',['Kitty Configuration',['../d8/d7a/a01292.html#kitty-configuration',1,'']]],
-  ['kstrlen_21',['KSTRLEN',['../de/d9e/a01061.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
+  ['keyboard_20mouse_20input_14',['C-Keys - Diagnose Keyboard/Mouse Input',['../d8/d7a/a01292.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keycode_15',['keycode',['../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082',1,'ChyronKey']]],
+  ['keys_16',['Motion Keys',['../d0/d00/a01286.html#motion-keys',1,'']]],
+  ['keys_20diagnose_20keyboard_20mouse_20input_17',['C-Keys - Diagnose Keyboard/Mouse Input',['../d8/d7a/a01292.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keys_20rsh_20and_20lf_18',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../d8/d7a/a01292.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
+  ['kitty_19',['Kitty',['../d7/d8d/a01288.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../d7/d88/a01294.html#kitty',1,'Kitty']]],
+  ['kitty_20configuration_20',['Kitty Configuration',['../d9/dda/a01289.html#kitty-configuration',1,'']]],
+  ['kstrlen_21',['KSTRLEN',['../d5/d4c/a01058.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
 ];

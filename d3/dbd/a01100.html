@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: init.c File Reference</title>
+<title>C-Menu: futil.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,415 +109,543 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d3/dbd/a01100.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">init.c File Reference</div></div>
+  <div class="headertitle"><div class="title">futil.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Initialization for <a class="el" href="../../da/d1f/a01203.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Application Programs.  
+<p>General utility functions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;argp.h&gt;</code><br />
-<code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;locale.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;grp.h&gt;</code><br />
+<code>#include &lt;pwd.h&gt;</code><br />
+<code>#include &lt;regex.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wait.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for init.c:</div>
+Include dependency graph for futil.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d99/a01101.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d99/a01101.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d3/dbd/a01100_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a8fba11b18e45631d27d71f508b9b5b6b" id="r_a8fba11b18e45631d27d71f508b9b5b6b"><td class="memItemLeft">enum &#160;</td><td class="memItemRight">{ <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268">IN_SPEC</a> = 257
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4">OUT_SPEC</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240">BG_XCLR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122">BO_XCLR</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99">FG_XCLR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0">LN_BG_CLR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df">LN_XCLR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148">GM_BLUE</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d">GM_GRAY</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27">GM_GREEN</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167">GM_RED</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c">XBBLACK</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956">XBBLUE</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1">XBCYAN</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b">XBGREEN</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611">XBLACK</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5">XBLUE</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63">XBMAGENTA</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913">XBRED</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258">XBWHITE</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d">XBYELLOW</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0">XCYAN</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8">CM_EDITOR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e">XGREEN</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08">XMAGENTA</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7">XRED</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63">XWHITE</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94">XYELLOW</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b">MAPP_DATA</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154">MAPP_HELP</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc">MAPP_HOME</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de">MAPP_MSRC</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50">MAPP_USER</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2">MAPP_HELP_DIR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3">MAPP_DATA_DIR</a>
-, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6">MAPP_SPEC</a>
-, <br />
-&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80">HELP_SPEC</a>
-<br />
- }</td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ae14db1df03a3127c0e4ff5a1307e89cc" id="r_ae14db1df03a3127c0e4ff5a1307e89cc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae14db1df03a3127c0e4ff5a1307e89cc">LF_LNK</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a0ac18add284994be76aca1ea5c500c2d" id="r_a0ac18add284994be76aca1ea5c500c2d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0ac18add284994be76aca1ea5c500c2d">LF_DIR</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:a7089bd4cb667475a891d92b36239cc66" id="r_a7089bd4cb667475a891d92b36239cc66"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7089bd4cb667475a891d92b36239cc66">LF_REG</a>&#160;&#160;&#160;4</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga4b671c384affcc6dc1ed59a04d666cc7" id="r_ga4b671c384affcc6dc1ed59a04d666cc7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga4b671c384affcc6dc1ed59a04d666cc7">write_config</a> (<a class="el" href="../../db/db2/a01143.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga4b671c384affcc6dc1ed59a04d666cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current configuration to a file specified in init-&gt;minitrc.  <br /></td></tr>
-<tr class="memitem:ga33abf350aae0212c85a5903e41764025" id="r_ga33abf350aae0212c85a5903e41764025"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga33abf350aae0212c85a5903e41764025">display_version</a> ()</td></tr>
-<tr class="memdesc:ga33abf350aae0212c85a5903e41764025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the version information of the application.  <br /></td></tr>
-<tr class="memitem:gaccd65939c0ce6f0d940c5cf795a1e8fa" id="r_gaccd65939c0ce6f0d940c5cf795a1e8fa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#gaccd65939c0ce6f0d940c5cf795a1e8fa">mapp_initialization</a> (<a class="el" href="../../db/db2/a01143.html">Init</a> *init, int argc, char **argv)</td></tr>
-<tr class="memdesc:gaccd65939c0ce6f0d940c5cf795a1e8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main initialization function for MAPP - <a class="el" href="../../da/d1f/a01203.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Application.  <br /></td></tr>
-<tr class="memitem:gae9b71868d00a28cdcf5f4514e662edfe" id="r_gae9b71868d00a28cdcf5f4514e662edfe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a> (<a class="el" href="../../db/db2/a01143.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gae9b71868d00a28cdcf5f4514e662edfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize optional arguments in the <a class="el" href="../../db/db2/a01143.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> struct to default values.  <br /></td></tr>
-<tr class="memitem:ga5836f1ea8f972e3ca12e2772dc76fb32" id="r_ga5836f1ea8f972e3ca12e2772dc76fb32"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga5836f1ea8f972e3ca12e2772dc76fb32">parse_config</a> (<a class="el" href="../../db/db2/a01143.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga5836f1ea8f972e3ca12e2772dc76fb32"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse the configuration file specified in init-&gt;minitrc and set <a class="el" href="../../db/db2/a01143.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> struct values accordingly  <br /></td></tr>
-<tr class="memitem:ad6015c63ffee9cbe9023397848d56953" id="r_ad6015c63ffee9cbe9023397848d56953"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad6015c63ffee9cbe9023397848d56953">parse_opt_args</a> (<a class="el" href="../../db/db2/a01143.html">Init</a> *, int, char **)</td></tr>
-<tr class="memitem:ga1af490b85f0487c201f369333b84e540" id="r_ga1af490b85f0487c201f369333b84e540"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga1af490b85f0487c201f369333b84e540">dump_config</a> (<a class="el" href="../../db/db2/a01143.html">Init</a> *init, char *msg)</td></tr>
-<tr class="memdesc:ga1af490b85f0487c201f369333b84e540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump the current configuration to stdout for debugging purposes.  <br /></td></tr>
-<tr class="memitem:ga20c40545a1e05954b496c6d674d31458" id="r_ga20c40545a1e05954b496c6d674d31458"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga20c40545a1e05954b496c6d674d31458">derive_file_spec</a> (char *file_spec, char *dir, char *file_name)</td></tr>
-<tr class="memdesc:ga20c40545a1e05954b496c6d674d31458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive full file specification from directory and file name.  <br /></td></tr>
-<tr class="memitem:ga3d0b179ebc74f8a911a4152f54e7a8a7" id="r_ga3d0b179ebc74f8a911a4152f54e7a8a7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga3d0b179ebc74f8a911a4152f54e7a8a7">opt_prt_char</a> (const char *o, const char *name, const char *value)</td></tr>
-<tr class="memdesc:ga3d0b179ebc74f8a911a4152f54e7a8a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner.  <br /></td></tr>
-<tr class="memitem:ga086c2240ffa5e497b67d630ea0d206b5" id="r_ga086c2240ffa5e497b67d630ea0d206b5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga086c2240ffa5e497b67d630ea0d206b5">opt_prt_str</a> (const char *o, const char *name, const char *value)</td></tr>
-<tr class="memdesc:ga086c2240ffa5e497b67d630ea0d206b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for integer values.  <br /></td></tr>
-<tr class="memitem:ga4e6bf4b5062dd9bd0c76a7a4402b3a9e" id="r_ga4e6bf4b5062dd9bd0c76a7a4402b3a9e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e">opt_prt_int</a> (const char *o, const char *name, int value)</td></tr>
-<tr class="memdesc:ga4e6bf4b5062dd9bd0c76a7a4402b3a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for integer values.  <br /></td></tr>
-<tr class="memitem:ga365153038835675ce050503313cea890" id="r_ga365153038835675ce050503313cea890"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga365153038835675ce050503313cea890">opt_prt_double</a> (const char *o, const char *name, double value)</td></tr>
-<tr class="memdesc:ga365153038835675ce050503313cea890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for double values.  <br /></td></tr>
-<tr class="memitem:ga4cea5ec97a8076e2a944e2c441ebb091" id="r_ga4cea5ec97a8076e2a944e2c441ebb091"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/d17/a01129.html#ga4cea5ec97a8076e2a944e2c441ebb091">opt_prt_bool</a> (const char *o, const char *name, bool value)</td></tr>
-<tr class="memdesc:ga4cea5ec97a8076e2a944e2c441ebb091"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for boolean values.  <br /></td></tr>
+<tr class="memitem:ga32c0e93e47af5ea782230648fcf60ad7" id="r_ga32c0e93e47af5ea782230648fcf60ad7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga32c0e93e47af5ea782230648fcf60ad7">write_cmenu_log</a> (char *msg)</td></tr>
+<tr class="memdesc:ga32c0e93e47af5ea782230648fcf60ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write message to C-Menu log file with timestamp.  <br /></td></tr>
+<tr class="memitem:ga7c278cdbc2bc6cf35cfa7e90db42bbcc" id="r_ga7c278cdbc2bc6cf35cfa7e90db42bbcc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga7c278cdbc2bc6cf35cfa7e90db42bbcc">open_cmenu_log</a> ()</td></tr>
+<tr class="memdesc:ga7c278cdbc2bc6cf35cfa7e90db42bbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open new C-Menu log file.  <br /></td></tr>
+<tr class="memitem:gadb7f2fa06eb129782d7fa24a6a973244" id="r_gadb7f2fa06eb129782d7fa24a6a973244"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gadb7f2fa06eb129782d7fa24a6a973244">lf_find</a> (const char *base_path, const char *re, const char *ere, int max_depth, long flags, time_t after_t, time_t before_t, intmax_t file_size_min)</td></tr>
+<tr class="memdesc:gadb7f2fa06eb129782d7fa24a6a973244"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find files in a directory matching a regular expression.  <br /></td></tr>
+<tr class="memitem:gaf67e76b4ca8bfa50e60de63eb805eda0" id="r_gaf67e76b4ca8bfa50e60de63eb805eda0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gaf67e76b4ca8bfa50e60de63eb805eda0">lf_process</a> (const char *base_path, regex_t *compiled_re, regex_t *compiled_ere, int depth, int max_depth, long flags, time_t after_t, time_t before_t, intmax_t file_size_min)</td></tr>
+<tr class="memdesc:gaf67e76b4ca8bfa50e60de63eb805eda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process files in a directory matching regular expressions and flags.  <br /></td></tr>
+<tr class="memitem:ga82896df8e50776b7e7b0cede4e45b523" id="r_ga82896df8e50776b7e7b0cede4e45b523"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a> (char *d, char *s)</td></tr>
+<tr class="memdesc:ga82896df8e50776b7e7b0cede4e45b523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strips ANSI SGR escape sequences (ending in 'm') from string s to d.  <br /></td></tr>
+<tr class="memitem:gab96e4c73a7b3ba1310044b479733cdd9" id="r_gab96e4c73a7b3ba1310044b479733cdd9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a> (char *s, bool *a_toi_error)</td></tr>
+<tr class="memdesc:gab96e4c73a7b3ba1310044b479733cdd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">a safer alternative to atoi() for converting ASCII strings to integers.  <br /></td></tr>
+<tr class="memitem:gae2be7c771d0ee7a8c81ebf10331bd449" id="r_gae2be7c771d0ee7a8c81ebf10331bd449"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gae2be7c771d0ee7a8c81ebf10331bd449">chrep</a> (char *s, char old_chr, char new_chr)</td></tr>
+<tr class="memdesc:gae2be7c771d0ee7a8c81ebf10331bd449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces all occurrences of old_chr in s with new_chr in place.  <br /></td></tr>
+<tr class="memitem:ga34703756fd5be0fde758400f320db047" id="r_ga34703756fd5be0fde758400f320db047"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga34703756fd5be0fde758400f320db047">trim</a> (char *s)</td></tr>
+<tr class="memdesc:ga34703756fd5be0fde758400f320db047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trims leading and trailing spaces from string s in place.  <br /></td></tr>
+<tr class="memitem:a4f42956462e811d96c9fb881a85dada4" id="r_a4f42956462e811d96c9fb881a85dada4"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a4f42956462e811d96c9fb881a85dada4">rtrim</a> (char *s)</td></tr>
+<tr class="memdesc:a4f42956462e811d96c9fb881a85dada4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trims trailing spaces from string s in place.  <br /></td></tr>
+<tr class="memitem:ga32204f694cf5e28c888a1045a1b383a4" id="r_ga32204f694cf5e28c888a1045a1b383a4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga32204f694cf5e28c888a1045a1b383a4">stripz_quotes</a> (char *s)</td></tr>
+<tr class="memdesc:ga32204f694cf5e28c888a1045a1b383a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes leading and trailing double quotes if present  <br /></td></tr>
+<tr class="memitem:ga671225aa841321cad803a383ba99db11" id="r_ga671225aa841321cad803a383ba99db11"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga671225aa841321cad803a383ba99db11">strip_quotes</a> (char *s)</td></tr>
+<tr class="memdesc:ga671225aa841321cad803a383ba99db11"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes leading and trailing double quotes if present  <br /></td></tr>
+<tr class="memitem:afba98c475b8ccba7fffaebf81eda9adf" id="r_afba98c475b8ccba7fffaebf81eda9adf"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afba98c475b8ccba7fffaebf81eda9adf">str_to_bool</a> (const char *s)</td></tr>
+<tr class="memdesc:afba98c475b8ccba7fffaebf81eda9adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to boolean true or false.  <br /></td></tr>
+<tr class="memitem:gaf717756d0ca49bc436d1fb69ae0d6c05" id="r_gaf717756d0ca49bc436d1fb69ae0d6c05"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a> (char **argv, char *arg_str, int max_args)</td></tr>
+<tr class="memdesc:gaf717756d0ca49bc436d1fb69ae0d6c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string into an array of argument strings.  <br /></td></tr>
+<tr class="memitem:ga4db64c5f94e5859f353740840d85beb5" id="r_ga4db64c5f94e5859f353740840d85beb5"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga4db64c5f94e5859f353740840d85beb5">str_to_double</a> (char *s)</td></tr>
+<tr class="memdesc:ga4db64c5f94e5859f353740840d85beb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts string to double  <br /></td></tr>
+<tr class="memitem:ga4fb9a5e513fb39d3dd8eadef0f2cd44b" id="r_ga4fb9a5e513fb39d3dd8eadef0f2cd44b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga4fb9a5e513fb39d3dd8eadef0f2cd44b">str_to_lower</a> (char *s)</td></tr>
+<tr class="memdesc:ga4fb9a5e513fb39d3dd8eadef0f2cd44b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to lowercase.  <br /></td></tr>
+<tr class="memitem:ga4221f925d0d107e59e77faf4e8a40810" id="r_ga4221f925d0d107e59e77faf4e8a40810"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga4221f925d0d107e59e77faf4e8a40810">str_to_upper</a> (char *s)</td></tr>
+<tr class="memdesc:ga4221f925d0d107e59e77faf4e8a40810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to uppercase.  <br /></td></tr>
+<tr class="memitem:gafdfe43ceedb63f84c987e95eeff76db4" id="r_gafdfe43ceedb63f84c987e95eeff76db4"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gafdfe43ceedb63f84c987e95eeff76db4">strz</a> (char *s)</td></tr>
+<tr class="memdesc:gafdfe43ceedb63f84c987e95eeff76db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminates string at new line or carriage return.  <br /></td></tr>
+<tr class="memitem:ga636608f26d1193b5d860f2312cd8ee49" id="r_ga636608f26d1193b5d860f2312cd8ee49"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a> (char *s, size_t max_len)</td></tr>
+<tr class="memdesc:ga636608f26d1193b5d860f2312cd8ee49"><td class="mdescLeft">&#160;</td><td class="mdescRight">terminates string at New <a class="el" href="../../d2/d22/a01196.html" title="The Line strutures are attached to the Menu main structure.">Line</a>, Carriage Return, or max_len  <br /></td></tr>
+<tr class="memitem:gab6ae8b51eae6da91d345cd4018a20bfa" id="r_gab6ae8b51eae6da91d345cd4018a20bfa"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gab6ae8b51eae6da91d345cd4018a20bfa">strnlf</a> (char *s, size_t max_len)</td></tr>
+<tr class="memdesc:gab6ae8b51eae6da91d345cd4018a20bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">terminates string with line feed  <br /></td></tr>
+<tr class="memitem:gaa3967ab49e69c2f867cd7058ccf26eb1" id="r_gaa3967ab49e69c2f867cd7058ccf26eb1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gaa3967ab49e69c2f867cd7058ccf26eb1">str_subc</a> (char *d, char *s, char ReplaceChr, char *Withstr, int l)</td></tr>
+<tr class="memdesc:gaa3967ab49e69c2f867cd7058ccf26eb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces "ReplaceChr" in "s" with "Withstr" in "d" won't copy more than "l" bytes to "d" Replaces all occurrences of a character in a string with another string, copying the result to a destination buffer.  <br /></td></tr>
+<tr class="memitem:gab19b53c3f569332292039c471719eb6b" id="r_gab19b53c3f569332292039c471719eb6b"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gab19b53c3f569332292039c471719eb6b">rep_substring</a> (const char *org_s, const char *tgt_s, const char *rep_s)</td></tr>
+<tr class="memdesc:gab19b53c3f569332292039c471719eb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace all occurrences of "tgt_s" in "org_s" with "rep_s".  <br /></td></tr>
+<tr class="memitem:gaeb688a44147992813f7e456cb6360b1f" id="r_gaeb688a44147992813f7e456cb6360b1f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gaeb688a44147992813f7e456cb6360b1f">normalize_file_spec</a> (char *fs)</td></tr>
+<tr class="memdesc:gaeb688a44147992813f7e456cb6360b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">replace backslashes with forward lashes  <br /></td></tr>
+<tr class="memitem:ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8" id="r_ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8">file_spec_path</a> (char *fp, char *fs)</td></tr>
+<tr class="memdesc:ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">extracts the path component of a file specification  <br /></td></tr>
+<tr class="memitem:gac22d2bbc3de5560fd33f66c17f2918f2" id="r_gac22d2bbc3de5560fd33f66c17f2918f2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gac22d2bbc3de5560fd33f66c17f2918f2">file_spec_name</a> (char *fn, char *fs)</td></tr>
+<tr class="memdesc:gac22d2bbc3de5560fd33f66c17f2918f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">extracts the file name component of a file specification  <br /></td></tr>
+<tr class="memitem:gab190e75e095b7d3da114fce21ab8c8ea" id="r_gab190e75e095b7d3da114fce21ab8c8ea"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gab190e75e095b7d3da114fce21ab8c8ea">verify_file</a> (char *in_spec, int imode)</td></tr>
+<tr class="memdesc:gab190e75e095b7d3da114fce21ab8c8ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the file specified by "in_spec" exists and is accessible with the permissions specified by "imode".  <br /></td></tr>
+<tr class="memitem:gae14a4e790b69c8c2e50d1eb5cdf1fd19" id="r_gae14a4e790b69c8c2e50d1eb5cdf1fd19"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gae14a4e790b69c8c2e50d1eb5cdf1fd19">verify_dir</a> (char *spec, int imode)</td></tr>
+<tr class="memdesc:gae14a4e790b69c8c2e50d1eb5cdf1fd19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the directory specified by "spec" exists and is accessible with the permissions specified by "imode".  <br /></td></tr>
+<tr class="memitem:ga02792428710078b7a2ca59ef70ae83fa" id="r_ga02792428710078b7a2ca59ef70ae83fa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga02792428710078b7a2ca59ef70ae83fa">locate_file_in_path</a> (char *file_spec, char *file_name)</td></tr>
+<tr class="memdesc:ga02792428710078b7a2ca59ef70ae83fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locates a file in the system PATH.  <br /></td></tr>
+<tr class="memitem:ga0d44c51feb7f300fecb49dbf223a62f8" id="r_ga0d44c51feb7f300fecb49dbf223a62f8"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga0d44c51feb7f300fecb49dbf223a62f8">canonicalize_file_spec</a> (char *spec)</td></tr>
+<tr class="memdesc:ga0d44c51feb7f300fecb49dbf223a62f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes quotes and trims at first space.  <br /></td></tr>
+<tr class="memitem:ga36904413ff36a25decee4eafa2c5c108" id="r_ga36904413ff36a25decee4eafa2c5c108"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga36904413ff36a25decee4eafa2c5c108">is_directory</a> (const char *path)</td></tr>
+<tr class="memdesc:ga36904413ff36a25decee4eafa2c5c108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given path is a directory.  <br /></td></tr>
+<tr class="memitem:ga76cb87971fb4e63944ec6627c56c0ffb" id="r_ga76cb87971fb4e63944ec6627c56c0ffb"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a> (const char *pattern)</td></tr>
+<tr class="memdesc:ga76cb87971fb4e63944ec6627c56c0ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given regular expression pattern is valid.  <br /></td></tr>
+<tr class="memitem:ga63eb94756fb011a456a3dec900709cd8" id="r_ga63eb94756fb011a456a3dec900709cd8"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a> (char *buf, size_t buf_size, const char *format,...)</td></tr>
+<tr class="memdesc:ga63eb94756fb011a456a3dec900709cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">ssnprintf was designed to be a safer alternative to snprintf.  <br /></td></tr>
+<tr class="memitem:ga0de2e40df9bd7efc8fd9afb8ad2257e6" id="r_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a> (char *d, const char *s, size_t max_len)</td></tr>
+<tr class="memdesc:ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncpy  <br /></td></tr>
+<tr class="memitem:gaa0145c044cfdde3a1c83323410a59f25" id="r_gaa0145c044cfdde3a1c83323410a59f25"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a> (char *d, const char *s, size_t max_len)</td></tr>
+<tr class="memdesc:gaa0145c044cfdde3a1c83323410a59f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncat  <br /></td></tr>
+<tr class="memitem:ga1d8368ef59a9e415c859d20794d6b26d" id="r_ga1d8368ef59a9e415c859d20794d6b26d"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dc8/a01124.html#ga1d8368ef59a9e415c859d20794d6b26d">string_cpy</a> (<a class="el" href="../../d4/da6/a01168.html">String</a> *dest, const <a class="el" href="../../d4/da6/a01168.html">String</a> *src)</td></tr>
+<tr class="memdesc:ga1d8368ef59a9e415c859d20794d6b26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy src <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary.  <br /></td></tr>
+<tr class="memitem:ga8e2af68338c74351899a7a35adc6cda0" id="r_ga8e2af68338c74351899a7a35adc6cda0"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dc8/a01124.html#ga8e2af68338c74351899a7a35adc6cda0">string_cat</a> (<a class="el" href="../../d4/da6/a01168.html">String</a> *dest, const <a class="el" href="../../d4/da6/a01168.html">String</a> *src)</td></tr>
+<tr class="memdesc:ga8e2af68338c74351899a7a35adc6cda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates src <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary.  <br /></td></tr>
+<tr class="memitem:gae86995f3322d0448e2890ecb7d3624dc" id="r_gae86995f3322d0448e2890ecb7d3624dc"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dc8/a01124.html#gae86995f3322d0448e2890ecb7d3624dc">string_ncat</a> (<a class="el" href="../../d4/da6/a01168.html">String</a> *dest, const <a class="el" href="../../d4/da6/a01168.html">String</a> *src, size_t n)</td></tr>
+<tr class="memdesc:gae86995f3322d0448e2890ecb7d3624dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates up to n characters from src <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary.  <br /></td></tr>
+<tr class="memitem:ga5ea62e2fba431b9cecaac045daff6105" id="r_ga5ea62e2fba431b9cecaac045daff6105"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dc8/a01124.html#ga5ea62e2fba431b9cecaac045daff6105">string_ncpy</a> (<a class="el" href="../../d4/da6/a01168.html">String</a> *dest, const <a class="el" href="../../d4/da6/a01168.html">String</a> *src, size_t n)</td></tr>
+<tr class="memdesc:ga5ea62e2fba431b9cecaac045daff6105"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies up to n characters from src <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary  <br /></td></tr>
+<tr class="memitem:ga3e61ddee7c9ff9a346d3656d0054615f" id="r_ga3e61ddee7c9ff9a346d3656d0054615f"><td class="memItemLeft"><a class="el" href="../../d4/da6/a01168.html">String</a>&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dc8/a01124.html#ga3e61ddee7c9ff9a346d3656d0054615f">to_string</a> (const char *s)</td></tr>
+<tr class="memdesc:ga3e61ddee7c9ff9a346d3656d0054615f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> functions provide a simple string library to facilitate string manipulation in C, allowing developers to easily create, copy, concatenate, and free strings without having to manage memory manually.  <br /></td></tr>
+<tr class="memitem:a54d1c02afad60732c1d2ce92e50cb970" id="r_a54d1c02afad60732c1d2ce92e50cb970"><td class="memItemLeft"><a class="el" href="../../d4/da6/a01168.html">String</a>&#160;</td><td class="memItemRight"><a class="el" href="#a54d1c02afad60732c1d2ce92e50cb970">mk_string</a> (size_t l)</td></tr>
+<tr class="memdesc:a54d1c02afad60732c1d2ce92e50cb970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct with a dynamically allocated string.  <br /></td></tr>
+<tr class="memitem:ga9733005966bd730252e081c3ef9bb2c2" id="r_ga9733005966bd730252e081c3ef9bb2c2"><td class="memItemLeft"><a class="el" href="../../d4/da6/a01168.html">String</a>&#160;</td><td class="memItemRight"><a class="el" href="../../d0/dc8/a01124.html#ga9733005966bd730252e081c3ef9bb2c2">free_string</a> (<a class="el" href="../../d4/da6/a01168.html">String</a> string)</td></tr>
+<tr class="memdesc:ga9733005966bd730252e081c3ef9bb2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the dynamically allocated <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>.  <br /></td></tr>
+<tr class="memitem:ga082298bbac34a058e64086abf4436bbe" id="r_ga082298bbac34a058e64086abf4436bbe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga082298bbac34a058e64086abf4436bbe">destroy_argv</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:ga082298bbac34a058e64086abf4436bbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates memory allocated for argument strings in argv.  <br /></td></tr>
+<tr class="memitem:ga807bfe01a82eb1728ab8ae01426d02e1" id="r_ga807bfe01a82eb1728ab8ae01426d02e1"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga807bfe01a82eb1728ab8ae01426d02e1">strnz_dup</a> (char *s, size_t l)</td></tr>
+<tr class="memdesc:ga807bfe01a82eb1728ab8ae01426d02e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates memory for and duplicates string s up to length l or until line feed or carriage return.  <br /></td></tr>
+<tr class="memitem:ga5c2214ee3dfaca5bf1cd5bbd6e6cf40d" id="r_ga5c2214ee3dfaca5bf1cd5bbd6e6cf40d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga5c2214ee3dfaca5bf1cd5bbd6e6cf40d">strnfill</a> (char *s, char c, int n)</td></tr>
+<tr class="memdesc:ga5c2214ee3dfaca5bf1cd5bbd6e6cf40d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills string s with character c n.  <br /></td></tr>
+<tr class="memitem:ae0b8de8444761f121a49d3b4abb82246" id="r_ae0b8de8444761f121a49d3b4abb82246"><td class="memItemLeft">unsigned long long&#160;</td><td class="memItemRight"><a class="el" href="#ae0b8de8444761f121a49d3b4abb82246">a_to_ull</a> (const char *str)</td></tr>
+<tr class="memitem:gad7f9941ba28a6cca3ccce953c4d77e32" id="r_gad7f9941ba28a6cca3ccce953c4d77e32"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gad7f9941ba28a6cca3ccce953c4d77e32">expand_tilde</a> (char *path, int path_maxlen)</td></tr>
+<tr class="memdesc:gad7f9941ba28a6cca3ccce953c4d77e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace Leading Tilde With Home Directory.  <br /></td></tr>
+<tr class="memitem:gafb4a0bc0d88592caff5cd1436dd426a0" id="r_gafb4a0bc0d88592caff5cd1436dd426a0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gafb4a0bc0d88592caff5cd1436dd426a0">trim_path</a> (char *dir)</td></tr>
+<tr class="memdesc:gafb4a0bc0d88592caff5cd1436dd426a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trims trailing spaces and slashes from directory path in place.  <br /></td></tr>
+<tr class="memitem:ga205b5e8c6415958a75c80e49db06b251" id="r_ga205b5e8c6415958a75c80e49db06b251"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga205b5e8c6415958a75c80e49db06b251">trim_ext</a> (char *buf, char *filename)</td></tr>
+<tr class="memdesc:ga205b5e8c6415958a75c80e49db06b251"><td class="mdescLeft">&#160;</td><td class="mdescRight">trims the file extension from "filename" and copies the result to "buf"  <br /></td></tr>
+<tr class="memitem:gae3d67c8c0b5b559664942e539256605b" id="r_gae3d67c8c0b5b559664942e539256605b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gae3d67c8c0b5b559664942e539256605b">base_name</a> (char *buf, char *path)</td></tr>
+<tr class="memdesc:gae3d67c8c0b5b559664942e539256605b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the base name of a file specification.  <br /></td></tr>
+<tr class="memitem:ga4981b07a1fc8048829e8b0bf8327bfad" id="r_ga4981b07a1fc8048829e8b0bf8327bfad"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga4981b07a1fc8048829e8b0bf8327bfad">dir_name</a> (char *buf, char *path)</td></tr>
+<tr class="memdesc:ga4981b07a1fc8048829e8b0bf8327bfad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the directory name of a file specification.  <br /></td></tr>
+<tr class="memitem:ga8d34fd1e4f0b6caab029f02814092794" id="r_ga8d34fd1e4f0b6caab029f02814092794"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#ga8d34fd1e4f0b6caab029f02814092794">mk_dir</a> (char *dir)</td></tr>
+<tr class="memdesc:ga8d34fd1e4f0b6caab029f02814092794"><td class="mdescLeft">&#160;</td><td class="mdescRight">If directory doesn't exist, make it.  <br /></td></tr>
+<tr class="memitem:gab0df3034e2ed84e1d878fba903da46ba" id="r_gab0df3034e2ed84e1d878fba903da46ba"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d6/dc4/a01125.html#gab0df3034e2ed84e1d878fba903da46ba">segmentation_fault</a> ()</td></tr>
+<tr class="memdesc:gab0df3034e2ed84e1d878fba903da46ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to intentionally cause a segmentation fault for testing purposes.  <br /></td></tr>
+<tr class="memitem:gad8ab690263920a3b88cb9d8c97fadf98" id="r_gad8ab690263920a3b88cb9d8c97fadf98"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../de/de5/a01123.html#gad8ab690263920a3b88cb9d8c97fadf98">write_cmenu_log_nt</a> (char *msg)</td></tr>
+<tr class="memdesc:gad8ab690263920a3b88cb9d8c97fadf98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write message to C-Menu log file without timestamp.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ae148746fdd7938021e7d7d4d31118517" id="r_ae148746fdd7938021e7d7d4d31118517"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae148746fdd7938021e7d7d4d31118517">f_write_config</a> = false</td></tr>
-<tr class="memitem:a34792d55b383aa7122cd2c3a889605bf" id="r_a34792d55b383aa7122cd2c3a889605bf"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a34792d55b383aa7122cd2c3a889605bf">f_dump_config</a> = false</td></tr>
-<tr class="memitem:a3d163d0928a8410a38d85fddf9b0d0d8" id="r_a3d163d0928a8410a38d85fddf9b0d0d8"><td class="memItemLeft"><a class="el" href="../../db/db2/a01143.html">Init</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a3d163d0928a8410a38d85fddf9b0d0d8">init</a> = NULL</td></tr>
-<tr class="memitem:a96c3f93bf7b1b8ff028d4cf6404e3b5f" id="r_a96c3f93bf7b1b8ff028d4cf6404e3b5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a96c3f93bf7b1b8ff028d4cf6404e3b5f">executor</a> = 0</td></tr>
-<tr class="memitem:a62f73ea01c816f1996aed4c66f57c4fb" id="r_a62f73ea01c816f1996aed4c66f57c4fb"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a62f73ea01c816f1996aed4c66f57c4fb">argp_program_version</a> = <a class="el" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td></tr>
-<tr class="memitem:aaa037e59f26a80a8a2e35e6f2364004d" id="r_aaa037e59f26a80a8a2e35e6f2364004d"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#aaa037e59f26a80a8a2e35e6f2364004d">argp_program_bug_address</a> = &quot;billxwaller@gmail.com&quot;</td></tr>
-<tr class="memitem:a58091fd364c61e43e81975fa6e2d9ec1" id="r_a58091fd364c61e43e81975fa6e2d9ec1"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a58091fd364c61e43e81975fa6e2d9ec1">opt_doc_col</a> = 33</td></tr>
+<tr class="memitem:a1d3c4907a8d017c7a1ae4c68435284db" id="r_a1d3c4907a8d017c7a1ae4c68435284db"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1d3c4907a8d017c7a1ae4c68435284db">cmenu_log_fd</a></td></tr>
+<tr class="memitem:a67227506d7050fd4fd59e06e2628a364" id="r_a67227506d7050fd4fd59e06e2628a364"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a67227506d7050fd4fd59e06e2628a364">earg_str</a> [<a class="el" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a075d6920297448f7d044417b9f8594b0" id="r_a075d6920297448f7d044417b9f8594b0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a075d6920297448f7d044417b9f8594b0">eargc</a></td></tr>
+<tr class="memitem:aba17a3c518eb2ffd68f0219cc8c1792b" id="r_aba17a3c518eb2ffd68f0219cc8c1792b"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a> [<a class="el" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>]</td></tr>
+<tr class="memitem:ae66f0b659923d81fd95da97e0d5ca496" id="r_ae66f0b659923d81fd95da97e0d5ca496"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a> [<a class="el" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a0a32839f250d5202affa7776054a9b11" id="r_a0a32839f250d5202affa7776054a9b11"><td class="memItemLeft">error_info_t&#160;</td><td class="memItemRight"><a class="el" href="#a0a32839f250d5202affa7776054a9b11">error_info</a></td></tr>
+<tr class="memitem:a09d25a210ee1084fd3d45f62111a28d8" id="r_a09d25a210ee1084fd3d45f62111a28d8"><td class="memItemLeft">error_source_t&#160;</td><td class="memItemRight"><a class="el" href="#a09d25a210ee1084fd3d45f62111a28d8">error_source</a></td></tr>
+<tr class="memitem:aa670ef5be75293b6dc34466aad6cd297" id="r_aa670ef5be75293b6dc34466aad6cd297"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa670ef5be75293b6dc34466aad6cd297">wait_timeout</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Initialization for <a class="el" href="../../da/d1f/a01203.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Application Programs. </p>
+<div class="textblock"><p>General utility functions. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
-</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
-<a id="a8fba11b18e45631d27d71f508b9b5b6b" name="a8fba11b18e45631d27d71f508b9b5b6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fba11b18e45631d27d71f508b9b5b6b">&#9670;&#160;</a></span>anonymous enum</h2>
+<p class="definition">Definition in file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a0ac18add284994be76aca1ea5c500c2d" name="a0ac18add284994be76aca1ea5c500c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac18add284994be76aca1ea5c500c2d">&#9670;&#160;</a></span>LF_DIR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">anonymous enum</td>
+          <td class="memname">#define LF_DIR&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268" name="a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268"></a>IN_SPEC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4" name="a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4"></a>OUT_SPEC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240" name="a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240"></a>BG_XCLR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122" name="a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122"></a>BO_XCLR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99" name="a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99"></a>FG_XCLR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0" name="a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0"></a>LN_BG_CLR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df" name="a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df"></a>LN_XCLR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148" name="a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148"></a>GM_BLUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d" name="a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d"></a>GM_GRAY&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27" name="a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27"></a>GM_GREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167" name="a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167"></a>GM_RED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c" name="a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c"></a>XBBLACK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956" name="a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956"></a>XBBLUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1" name="a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1"></a>XBCYAN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b" name="a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b"></a>XBGREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611" name="a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611"></a>XBLACK&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5" name="a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5"></a>XBLUE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63" name="a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63"></a>XBMAGENTA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913" name="a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913"></a>XBRED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258" name="a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258"></a>XBWHITE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d" name="a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d"></a>XBYELLOW&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0" name="a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0"></a>XCYAN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8" name="a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8"></a>CM_EDITOR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e" name="a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e"></a>XGREEN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08" name="a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08"></a>XMAGENTA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7" name="a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7"></a>XRED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63" name="a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63"></a>XWHITE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94" name="a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94"></a>XYELLOW&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b" name="a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b"></a>MAPP_DATA&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154" name="a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154"></a>MAPP_HELP&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc" name="a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc"></a>MAPP_HOME&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de" name="a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de"></a>MAPP_MSRC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50" name="a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50"></a>MAPP_USER&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2" name="a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2"></a>MAPP_HELP_DIR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3" name="a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3"></a>MAPP_DATA_DIR&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6" name="a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6"></a>MAPP_SPEC&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80" name="a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80"></a>HELP_SPEC&#160;</td><td class="fielddoc"></td></tr>
-</table>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00028">28</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   28</span>     {</div>
-<div class="line"><span class="lineno">   29</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268">IN_SPEC</a> = 257,</div>
-<div class="line"><span class="lineno">   30</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4">OUT_SPEC</a>,</div>
-<div class="line"><span class="lineno">   31</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240">BG_XCLR</a>,</div>
-<div class="line"><span class="lineno">   32</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122">BO_XCLR</a>,</div>
-<div class="line"><span class="lineno">   33</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99">FG_XCLR</a>,</div>
-<div class="line"><span class="lineno">   34</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0">LN_BG_CLR</a>,</div>
-<div class="line"><span class="lineno">   35</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df">LN_XCLR</a>,</div>
-<div class="line"><span class="lineno">   36</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148">GM_BLUE</a>,</div>
-<div class="line"><span class="lineno">   37</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d">GM_GRAY</a>,</div>
-<div class="line"><span class="lineno">   38</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27">GM_GREEN</a>,</div>
-<div class="line"><span class="lineno">   39</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167">GM_RED</a>,</div>
-<div class="line"><span class="lineno">   40</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c">XBBLACK</a>,</div>
-<div class="line"><span class="lineno">   41</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956">XBBLUE</a>,</div>
-<div class="line"><span class="lineno">   42</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1">XBCYAN</a>,</div>
-<div class="line"><span class="lineno">   43</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b">XBGREEN</a>,</div>
-<div class="line"><span class="lineno">   44</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611">XBLACK</a>,</div>
-<div class="line"><span class="lineno">   45</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5">XBLUE</a>,</div>
-<div class="line"><span class="lineno">   46</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63">XBMAGENTA</a>,</div>
-<div class="line"><span class="lineno">   47</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913">XBRED</a>,</div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258">XBWHITE</a>,</div>
-<div class="line"><span class="lineno">   49</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d">XBYELLOW</a>,</div>
-<div class="line"><span class="lineno">   50</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0">XCYAN</a>,</div>
-<div class="line"><span class="lineno">   51</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8">CM_EDITOR</a>,</div>
-<div class="line"><span class="lineno">   52</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e">XGREEN</a>,</div>
-<div class="line"><span class="lineno">   53</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08">XMAGENTA</a>,</div>
-<div class="line"><span class="lineno">   54</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7">XRED</a>,</div>
-<div class="line"><span class="lineno">   55</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63">XWHITE</a>,</div>
-<div class="line"><span class="lineno">   56</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94">XYELLOW</a>,</div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b">MAPP_DATA</a>,</div>
-<div class="line"><span class="lineno">   58</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154">MAPP_HELP</a>,</div>
-<div class="line"><span class="lineno">   59</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc">MAPP_HOME</a>,</div>
-<div class="line"><span class="lineno">   60</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de">MAPP_MSRC</a>,</div>
-<div class="line"><span class="lineno">   61</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50">MAPP_USER</a>,</div>
-<div class="line"><span class="lineno">   62</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2">MAPP_HELP_DIR</a>,</div>
-<div class="line"><span class="lineno">   63</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3">MAPP_DATA_DIR</a>,</div>
-<div class="line"><span class="lineno">   64</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6">MAPP_SPEC</a>,</div>
-<div class="line"><span class="lineno">   65</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80">HELP_SPEC</a>,</div>
-<div class="line"><span class="lineno">   66</span>};</div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913">XBRED</a></div><div class="ttdeci">@ XBRED</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00047">init.c:47</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc">MAPP_HOME</a></div><div class="ttdeci">@ MAPP_HOME</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00059">init.c:59</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e">XGREEN</a></div><div class="ttdeci">@ XGREEN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00052">init.c:52</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7">XRED</a></div><div class="ttdeci">@ XRED</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00054">init.c:54</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b">MAPP_DATA</a></div><div class="ttdeci">@ MAPP_DATA</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00057">init.c:57</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1">XBCYAN</a></div><div class="ttdeci">@ XBCYAN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00042">init.c:42</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94">XYELLOW</a></div><div class="ttdeci">@ XYELLOW</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00056">init.c:56</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99">FG_XCLR</a></div><div class="ttdeci">@ FG_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00033">init.c:33</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6">MAPP_SPEC</a></div><div class="ttdeci">@ MAPP_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00064">init.c:64</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d">XBYELLOW</a></div><div class="ttdeci">@ XBYELLOW</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00049">init.c:49</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122">BO_XCLR</a></div><div class="ttdeci">@ BO_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00032">init.c:32</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148">GM_BLUE</a></div><div class="ttdeci">@ GM_BLUE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00036">init.c:36</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0">XCYAN</a></div><div class="ttdeci">@ XCYAN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00050">init.c:50</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c">XBBLACK</a></div><div class="ttdeci">@ XBBLACK</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00040">init.c:40</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5">XBLUE</a></div><div class="ttdeci">@ XBLUE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00045">init.c:45</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63">XWHITE</a></div><div class="ttdeci">@ XWHITE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00055">init.c:55</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d">GM_GRAY</a></div><div class="ttdeci">@ GM_GRAY</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00037">init.c:37</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27">GM_GREEN</a></div><div class="ttdeci">@ GM_GREEN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00038">init.c:38</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240">BG_XCLR</a></div><div class="ttdeci">@ BG_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00031">init.c:31</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80">HELP_SPEC</a></div><div class="ttdeci">@ HELP_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00065">init.c:65</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4">OUT_SPEC</a></div><div class="ttdeci">@ OUT_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00030">init.c:30</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0">LN_BG_CLR</a></div><div class="ttdeci">@ LN_BG_CLR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00034">init.c:34</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258">XBWHITE</a></div><div class="ttdeci">@ XBWHITE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00048">init.c:48</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3">MAPP_DATA_DIR</a></div><div class="ttdeci">@ MAPP_DATA_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00063">init.c:63</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50">MAPP_USER</a></div><div class="ttdeci">@ MAPP_USER</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00061">init.c:61</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b">XBGREEN</a></div><div class="ttdeci">@ XBGREEN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00043">init.c:43</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2">MAPP_HELP_DIR</a></div><div class="ttdeci">@ MAPP_HELP_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00062">init.c:62</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de">MAPP_MSRC</a></div><div class="ttdeci">@ MAPP_MSRC</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00060">init.c:60</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611">XBLACK</a></div><div class="ttdeci">@ XBLACK</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00044">init.c:44</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63">XBMAGENTA</a></div><div class="ttdeci">@ XBMAGENTA</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00046">init.c:46</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956">XBBLUE</a></div><div class="ttdeci">@ XBBLUE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00041">init.c:41</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268">IN_SPEC</a></div><div class="ttdeci">@ IN_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00029">init.c:29</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df">LN_XCLR</a></div><div class="ttdeci">@ LN_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00035">init.c:35</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167">GM_RED</a></div><div class="ttdeci">@ GM_RED</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00039">init.c:39</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8">CM_EDITOR</a></div><div class="ttdeci">@ CM_EDITOR</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00051">init.c:51</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08">XMAGENTA</a></div><div class="ttdeci">@ XMAGENTA</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00053">init.c:53</a></div></div>
-<div class="ttc" id="aa01100_html_a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154">MAPP_HELP</a></div><div class="ttdeci">@ MAPP_HELP</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00058">init.c:58</a></div></div>
-</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00040">40</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+</div>
+</div>
+<a id="ae14db1df03a3127c0e4ff5a1307e89cc" name="ae14db1df03a3127c0e4ff5a1307e89cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae14db1df03a3127c0e4ff5a1307e89cc">&#9670;&#160;</a></span>LF_LNK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LF_LNK&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00039">39</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+</div>
+</div>
+<a id="a7089bd4cb667475a891d92b36239cc66" name="a7089bd4cb667475a891d92b36239cc66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7089bd4cb667475a891d92b36239cc66">&#9670;&#160;</a></span>LF_REG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LF_REG&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00041">41</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ad6015c63ffee9cbe9023397848d56953" name="ad6015c63ffee9cbe9023397848d56953"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6015c63ffee9cbe9023397848d56953">&#9670;&#160;</a></span>parse_opt_args()</h2>
+<a id="ae0b8de8444761f121a49d3b4abb82246" name="ae0b8de8444761f121a49d3b4abb82246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0b8de8444761f121a49d3b4abb82246">&#9670;&#160;</a></span>a_to_ull()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int parse_opt_args </td>
+          <td class="memname">unsigned long long a_to_ull </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../db/db2/a01143.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00402">402</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  402</span>                                                      {</div>
-<div class="line"><span class="lineno">  403</span>    <a class="code hl_variable" href="../../dd/dd8/a00719.html#a1617336ac3622ce8b5d0009862d3b3e7">init</a>-&gt;argc = 0;</div>
-<div class="line"><span class="lineno">  404</span>    argp_parse(&amp;argp, argc, argv, 0, 0, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a1617336ac3622ce8b5d0009862d3b3e7">init</a>);</div>
-<div class="line"><span class="lineno">  405</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  406</span>}</div>
-<div class="ttc" id="aa00719_html_a1617336ac3622ce8b5d0009862d3b3e7"><div class="ttname"><a href="../../dd/dd8/a00719.html#a1617336ac3622ce8b5d0009862d3b3e7">init</a></div><div class="ttdeci">Init * init</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00183">common.h:183</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00523">523</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  523</span>                                             {</div>
+<div class="line"><span class="lineno">  524</span>    <span class="keywordtype">char</span> *endptr;</div>
+<div class="line"><span class="lineno">  525</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> value = strtoull(str, &amp;endptr, 10);</div>
+<div class="line"><span class="lineno">  526</span>    <span class="keywordflow">if</span> (endptr == str)</div>
+<div class="line"><span class="lineno">  527</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  528</span>    <span class="keywordflow">switch</span> (tolower(*endptr)) {</div>
+<div class="line"><span class="lineno">  529</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;g&#39;</span>:</div>
+<div class="line"><span class="lineno">  530</span>        <span class="keywordflow">return</span> value * 1024ULL * 1024ULL * 1024ULL;</div>
+<div class="line"><span class="lineno">  531</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;m&#39;</span>:</div>
+<div class="line"><span class="lineno">  532</span>        <span class="keywordflow">return</span> value * 1024ULL * 1024ULL;</div>
+<div class="line"><span class="lineno">  533</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;k&#39;</span>:</div>
+<div class="line"><span class="lineno">  534</span>        <span class="keywordflow">return</span> value * 1024ULL;</div>
+<div class="line"><span class="lineno">  535</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  536</span>        <span class="keywordflow">return</span> value;</div>
+<div class="line"><span class="lineno">  537</span>    }</div>
+<div class="line"><span class="lineno">  538</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/dd8/a00719_source.html#l00121">Init::argc</a>.</p>
+</div>
+</div>
+<a id="a54d1c02afad60732c1d2ce92e50cb970" name="a54d1c02afad60732c1d2ce92e50cb970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54d1c02afad60732c1d2ce92e50cb970">&#9670;&#160;</a></span>mk_string()</h2>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d17/a01046_source.html#l00087">popup_form()</a>, <a class="el" href="../../da/d17/a01046_source.html#l00026">popup_menu()</a>, <a class="el" href="../../da/d17/a01046_source.html#l00056">popup_pick()</a>, and <a class="el" href="../../da/d17/a01046_source.html#l00121">popup_view()</a>.</p>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/da6/a01168.html">String</a> mk_string </td>
+          <td>(</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>l</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct with a dynamically allocated string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>length of string to create including null terminator </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The returned <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct contains a dynamically allocated string of he specified length </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d0/dc8/a01124.html#ga9733005966bd730252e081c3ef9bb2c2" title="Free the dynamically allocated String.">free_string</a> </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>the caller is responsible for calling free_string to free the allocated memory. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l01494">1494</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1495</span>                           {</div>
+<div class="line"><span class="lineno"> 1496</span>    <span class="keywordflow">if</span> (l == 0) {</div>
+<div class="line"><span class="lineno"> 1497</span>        <a class="code hl_struct" href="../../d4/da6/a01168.html">String</a> str;</div>
+<div class="line"><span class="lineno"> 1498</span>        str.<a class="code hl_variable" href="../../d4/da6/a01168.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = 0;</div>
+<div class="line"><span class="lineno"> 1499</span>        str.<a class="code hl_variable" href="../../d4/da6/a01168.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1500</span>        <span class="keywordflow">return</span> str;</div>
+<div class="line"><span class="lineno"> 1501</span>    }</div>
+<div class="line"><span class="lineno"> 1502</span>    <a class="code hl_struct" href="../../d4/da6/a01168.html">String</a> str;</div>
+<div class="line"><span class="lineno"> 1503</span>    str.<a class="code hl_variable" href="../../d4/da6/a01168.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = l + 1;</div>
+<div class="line"><span class="lineno"> 1504</span>    str.<a class="code hl_variable" href="../../d4/da6/a01168.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = (<span class="keywordtype">char</span> *)malloc(str.<a class="code hl_variable" href="../../d4/da6/a01168.html#a4aa4561aec0c1fdce969da7953bb7848">l</a>);</div>
+<div class="line"><span class="lineno"> 1505</span>    str.<a class="code hl_variable" href="../../d4/da6/a01168.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1506</span>    <span class="keywordflow">return</span> str;</div>
+<div class="ttc" id="aa01168_html"><div class="ttname"><a href="../../d4/da6/a01168.html">String</a></div><div class="ttdoc">The String structure represents a string object with a pointer to the string and its allocated length...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00619">cm.h:619</a></div></div>
+<div class="ttc" id="aa01168_html_a4aa4561aec0c1fdce969da7953bb7848"><div class="ttname"><a href="../../d4/da6/a01168.html#a4aa4561aec0c1fdce969da7953bb7848">String::l</a></div><div class="ttdeci">size_t l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00621">cm.h:621</a></div></div>
+<div class="ttc" id="aa01168_html_a8904978bb99a49a64f7e146a4ab7ff4d"><div class="ttname"><a href="../../d4/da6/a01168.html#a8904978bb99a49a64f7e146a4ab7ff4d">String::s</a></div><div class="ttdeci">char * s</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00620">cm.h:620</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00621">String::l</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00620">String::s</a>.</p>
+
+</div>
+</div>
+<a id="a4f42956462e811d96c9fb881a85dada4" name="a4f42956462e811d96c9fb881a85dada4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f42956462e811d96c9fb881a85dada4">&#9670;&#160;</a></span>rtrim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rtrim </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trims trailing spaces from string s in place. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>- string to trim </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>length of trimmed string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00111">111</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>                      {</div>
+<div class="line"><span class="lineno">  112</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span> || *s == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">return</span> (<span class="keywordtype">size_t</span>)0;</div>
+<div class="line"><span class="lineno">  114</span>    <span class="keywordtype">char</span> *p = s + strlen(s) - 1;</div>
+<div class="line"><span class="lineno">  115</span>    <span class="keywordflow">while</span> (p &gt;= s &amp;&amp; *p == <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><span class="lineno">  116</span>        p--;</div>
+<div class="line"><span class="lineno">  117</span>    *(p + 1) = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  118</span>    <span class="keywordflow">return</span> (<span class="keywordtype">size_t</span>)(p - s + 1);</div>
+<div class="line"><span class="lineno">  119</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d6/d80/a01076_source.html#l01655">fmt_line()</a>, and <a class="el" href="../../de/d9e/a01061_source.html#l00847">picker()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/dbd/a01100_ad6015c63ffee9cbe9023397848d56953_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/dbd/a01100_a4f42956462e811d96c9fb881a85dada4_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="afba98c475b8ccba7fffaebf81eda9adf" name="afba98c475b8ccba7fffaebf81eda9adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afba98c475b8ccba7fffaebf81eda9adf">&#9670;&#160;</a></span>str_to_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool str_to_bool </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts <a class="el" href="../../d4/da6/a01168.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to boolean true or false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>- string to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean true or false </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00671">671</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  672</span>                                {</div>
+<div class="line"><span class="lineno">  673</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span> || *s == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  674</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  675</span>    <span class="keywordflow">switch</span> (s[0]) {</div>
+<div class="line"><span class="lineno">  676</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;t&#39;</span>:</div>
+<div class="line"><span class="lineno">  677</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;T&#39;</span>:</div>
+<div class="line"><span class="lineno">  678</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;y&#39;</span>:</div>
+<div class="line"><span class="lineno">  679</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;Y&#39;</span>:</div>
+<div class="line"><span class="lineno">  680</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;1&#39;</span>:</div>
+<div class="line"><span class="lineno">  681</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  682</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;o&#39;</span>:</div>
+<div class="line"><span class="lineno">  683</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;O&#39;</span>:</div>
+<div class="line"><span class="lineno">  684</span>        <span class="keywordflow">switch</span> (s[1]) {</div>
+<div class="line"><span class="lineno">  685</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;n&#39;</span>:</div>
+<div class="line"><span class="lineno">  686</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;N&#39;</span>:</div>
+<div class="line"><span class="lineno">  687</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  688</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  689</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  690</span>        }</div>
+<div class="line"><span class="lineno">  691</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  692</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  693</span>    }</div>
+<div class="line"><span class="lineno">  694</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d1/dfa/a01097_source.html#l00451">parse_config()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/dbd/a01100_afba98c475b8ccba7fffaebf81eda9adf_icgraph.svg" width="554" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="aaa037e59f26a80a8a2e35e6f2364004d" name="aaa037e59f26a80a8a2e35e6f2364004d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa037e59f26a80a8a2e35e6f2364004d">&#9670;&#160;</a></span>argp_program_bug_address</h2>
+<a id="a1d3c4907a8d017c7a1ae4c68435284db" name="a1d3c4907a8d017c7a1ae4c68435284db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3c4907a8d017c7a1ae4c68435284db">&#9670;&#160;</a></span>cmenu_log_fd</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* argp_program_bug_address = &quot;billxwaller@gmail.com&quot;</td>
+          <td class="memname">int cmenu_log_fd</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00085">85</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00045">45</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/dbd/a01100_source.html#l01618">open_cmenu_log()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l01635">write_cmenu_log()</a>, and <a class="el" href="../../d3/dbd/a01100_source.html#l01651">write_cmenu_log_nt()</a>.</p>
 
 </div>
 </div>
-<a id="a62f73ea01c816f1996aed4c66f57c4fb" name="a62f73ea01c816f1996aed4c66f57c4fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62f73ea01c816f1996aed4c66f57c4fb">&#9670;&#160;</a></span>argp_program_version</h2>
+<a id="a67227506d7050fd4fd59e06e2628a364" name="a67227506d7050fd4fd59e06e2628a364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67227506d7050fd4fd59e06e2628a364">&#9670;&#160;</a></span>earg_str</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* argp_program_version = <a class="el" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td>
+          <td class="memname">char earg_str[<a class="el" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>earg - general use argument string general use argument string, for external commands or error messages </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00084">84</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00047">47</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/d80/a01076_source.html#l01997">enter_file_spec()</a>, and <a class="el" href="../../d6/d0d/a01091_source.html#l00117">menu_cmd_processor()</a>.</p>
 
 </div>
 </div>
-<a id="a96c3f93bf7b1b8ff028d4cf6404e3b5f" name="a96c3f93bf7b1b8ff028d4cf6404e3b5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96c3f93bf7b1b8ff028d4cf6404e3b5f">&#9670;&#160;</a></span>executor</h2>
+<a id="a075d6920297448f7d044417b9f8594b0" name="a075d6920297448f7d044417b9f8594b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a075d6920297448f7d044417b9f8594b0">&#9670;&#160;</a></span>eargc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int executor = 0</td>
+          <td class="memname">int eargc</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>general use argument count, for external commands or error messages </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00082">82</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00048">48</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d9e/a01061_source.html#l00809">display_pick_help()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l01997">enter_file_spec()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00114">form_engine()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>, and <a class="el" href="../../d6/d0d/a01091_source.html#l00117">menu_cmd_processor()</a>.</p>
 
 </div>
 </div>
-<a id="a34792d55b383aa7122cd2c3a889605bf" name="a34792d55b383aa7122cd2c3a889605bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34792d55b383aa7122cd2c3a889605bf">&#9670;&#160;</a></span>f_dump_config</h2>
+<a id="aba17a3c518eb2ffd68f0219cc8c1792b" name="aba17a3c518eb2ffd68f0219cc8c1792b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba17a3c518eb2ffd68f0219cc8c1792b">&#9670;&#160;</a></span>eargv</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool f_dump_config = false</td>
+          <td class="memname">char* eargv[<a class="el" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>eargv - argument vector for external commands, or error messages </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00069">69</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00049">49</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d3/dbd/a01100_source.html#l00328">mapp_initialization()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/d9e/a01061_source.html#l00809">display_pick_help()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l01997">enter_file_spec()</a>, and <a class="el" href="../../d6/d0d/a01091_source.html#l00117">menu_cmd_processor()</a>.</p>
 
 </div>
 </div>
-<a id="ae148746fdd7938021e7d7d4d31118517" name="ae148746fdd7938021e7d7d4d31118517"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae148746fdd7938021e7d7d4d31118517">&#9670;&#160;</a></span>f_write_config</h2>
+<a id="ae66f0b659923d81fd95da97e0d5ca496" name="ae66f0b659923d81fd95da97e0d5ca496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f0b659923d81fd95da97e0d5ca496">&#9670;&#160;</a></span>errmsg</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool f_write_config = false</td>
+          <td class="memname">char errmsg[<a class="el" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Global variables for error reporting </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00068">68</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d3/dbd/a01100_source.html#l00328">mapp_initialization()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00093">93</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="a3d163d0928a8410a38d85fddf9b0d0d8" name="a3d163d0928a8410a38d85fddf9b0d0d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d163d0928a8410a38d85fddf9b0d0d8">&#9670;&#160;</a></span>init</h2>
+<a id="a0a32839f250d5202affa7776054a9b11" name="a0a32839f250d5202affa7776054a9b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a32839f250d5202affa7776054a9b11">&#9670;&#160;</a></span>error_info</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../db/db2/a01143.html">Init</a>* init = NULL</td>
+          <td class="memname">error_info_t error_info</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00074">74</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d2/d49/a01067_source.html#l00043">main()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00105">105</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="a58091fd364c61e43e81975fa6e2d9ec1" name="a58091fd364c61e43e81975fa6e2d9ec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58091fd364c61e43e81975fa6e2d9ec1">&#9670;&#160;</a></span>opt_doc_col</h2>
+<a id="a09d25a210ee1084fd3d45f62111a28d8" name="a09d25a210ee1084fd3d45f62111a28d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09d25a210ee1084fd3d45f62111a28d8">&#9670;&#160;</a></span>error_source</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int opt_doc_col = 33</td>
+          <td class="memname">error_source_t error_source</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00088">88</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">init.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00106">106</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+</div>
+</div>
+<a id="aa670ef5be75293b6dc34466aad6cd297" name="aa670ef5be75293b6dc34466aad6cd297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa670ef5be75293b6dc34466aad6cd297">&#9670;&#160;</a></span>wait_timeout</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int wait_timeout</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/dbd/a01100_source.html#l00107">107</a> of file <a class="el" href="../../d3/dbd/a01100_source.html">futil.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d1/dfa/a01097_source.html#l00932">dump_config()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00060">init_pick()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00451">parse_config()</a>, <a class="el" href="../../d0/d22/a01049_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../d1/dfa/a01097_source.html#l00736">write_config()</a>.</p>
 
 </div>
 </div>
@@ -534,7 +662,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d3/dbd/a01100.html">init.c</a></li>
+    <li class="navelem"><a href="../../d3/dbd/a01100.html">futil.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

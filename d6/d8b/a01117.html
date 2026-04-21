@@ -134,8 +134,6 @@ Functions</h2></td></tr>
 <tr class="memdesc:gac8edae1b92a3fc0dc55aa1d91433700f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert multibyte string to complex character array.  <br /></td></tr>
 <tr class="memitem:ga4298f891699300bfc4e6e56fd2a8d574" id="r_ga4298f891699300bfc4e6e56fd2a8d574"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga4298f891699300bfc4e6e56fd2a8d574">get_chyron_key</a> (<a class="el" href="../../db/d17/a01148.html">Chyron</a> *chyron, int x)</td></tr>
 <tr class="memdesc:ga4298f891699300bfc4e6e56fd2a8d574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get keycode from chyron.  <br /></td></tr>
-<tr class="memitem:gae36640465370bd716799eabb7dc058c5" id="r_gae36640465370bd716799eabb7dc058c5"><td class="memItemLeft">cchar_t *&#160;</td><td class="memItemRight"><a class="el" href="#gae36640465370bd716799eabb7dc058c5">mk_cmplx_buf</a> (const char *s)</td></tr>
-<tr class="memdesc:gae36640465370bd716799eabb7dc058c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create complex character buffer from multibyte string.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Create and manage the <a class="el" href="../../db/d17/a01148.html">Chyron</a>. </p>
@@ -164,50 +162,50 @@ Functions</h2></td></tr>
 </dl>
 <p>The chyron string is constructed by concatenating the labels of the set keys, separated by " | ". The end_pos values for each key are set to determine the zones for mouse clicks. When a mouse click occurs, the get_chyron_key function uses the end_pos values to determine which key was clicked based on the X position of the click. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00269">269</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  269</span>                                    {</div>
-<div class="line"><span class="lineno">  270</span>    <span class="keywordtype">int</span> end_pos = 0;</div>
-<div class="line"><span class="lineno">  271</span>    <span class="keywordtype">int</span> k = 0;</div>
-<div class="line"><span class="lineno">  272</span>    <span class="keywordtype">int</span> pos = 0;</div>
-<div class="line"><span class="lineno">  273</span>    <span class="keywordtype">int</span> cp = <a class="code hl_variable" href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a>;</div>
-<div class="line"><span class="lineno">  274</span>    cchar_t *cx;</div>
-<div class="line"><span class="lineno">  275</span>    <span class="keywordflow">while</span> (k &lt; <a class="code hl_define" href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a>) {</div>
-<div class="line"><span class="lineno">  276</span>        <span class="keywordflow">if</span> (chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">  277</span>            k++;</div>
-<div class="line"><span class="lineno">  278</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  279</span>        }</div>
-<div class="line"><span class="lineno">  280</span>        <span class="keywordflow">if</span> (end_pos == 0) {</div>
-<div class="line"><span class="lineno">  281</span>            cx = chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>;</div>
-<div class="line"><span class="lineno">  282</span>            <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(cx, <span class="stringliteral">&quot; &quot;</span>, WA_NORMAL, <a class="code hl_variable" href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a>, &amp;pos, <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  283</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  284</span>            <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>, <span class="stringliteral">&quot;|&quot;</span>, WA_NORMAL, <a class="code hl_variable" href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a>, &amp;pos,</div>
-<div class="line"><span class="lineno">  285</span>                     <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  286</span>        }</div>
-<div class="line"><span class="lineno">  287</span>        cx = chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>;</div>
-<div class="line"><span class="lineno">  288</span>        cp = chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a45d631eb5ccac403124e17bf2b171ae8">cp</a>;</div>
-<div class="line"><span class="lineno">  289</span>        <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(cx, chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>, WA_NORMAL, cp, &amp;pos, <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  290</span>        end_pos = pos;</div>
-<div class="line"><span class="lineno">  291</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447">l</a> = end_pos;</div>
-<div class="line"><span class="lineno">  292</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a4188edd9eed7c9bcf267deaa4fa1c439">end_pos</a> = end_pos;</div>
-<div class="line"><span class="lineno">  293</span>        k++;</div>
-<div class="line"><span class="lineno">  294</span>    }</div>
-<div class="line"><span class="lineno">  295</span>    <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>, <span class="stringliteral">&quot; &quot;</span>, WA_NORMAL, cp, &amp;pos, <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  296</span>    chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447">l</a> = end_pos;</div>
-<div class="line"><span class="lineno">  297</span>}</div>
-<div class="ttc" id="aa00725_html_a5069d4241bf871aa21c9d0808c97f2e4"><div class="ttname"><a href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a></div><div class="ttdeci">#define CHYRON_KEYS</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00238">cm.h:238</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00280">280</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  280</span>                                    {</div>
+<div class="line"><span class="lineno">  281</span>    <span class="keywordtype">int</span> end_pos = 0;</div>
+<div class="line"><span class="lineno">  282</span>    <span class="keywordtype">int</span> k = 0;</div>
+<div class="line"><span class="lineno">  283</span>    <span class="keywordtype">int</span> pos = 0;</div>
+<div class="line"><span class="lineno">  284</span>    <span class="keywordtype">int</span> cp = <a class="code hl_variable" href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a>;</div>
+<div class="line"><span class="lineno">  285</span>    cchar_t *cx;</div>
+<div class="line"><span class="lineno">  286</span>    <span class="keywordflow">while</span> (k &lt; <a class="code hl_define" href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a>) {</div>
+<div class="line"><span class="lineno">  287</span>        <span class="keywordflow">if</span> (chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  288</span>            k++;</div>
+<div class="line"><span class="lineno">  289</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  290</span>        }</div>
+<div class="line"><span class="lineno">  291</span>        <span class="keywordflow">if</span> (end_pos == 0) {</div>
+<div class="line"><span class="lineno">  292</span>            cx = chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>;</div>
+<div class="line"><span class="lineno">  293</span>            <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(cx, <span class="stringliteral">&quot; &quot;</span>, WA_NORMAL, <a class="code hl_variable" href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a>, &amp;pos, <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  294</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  295</span>            <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>, <span class="stringliteral">&quot;|&quot;</span>, WA_NORMAL, <a class="code hl_variable" href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a>, &amp;pos,</div>
+<div class="line"><span class="lineno">  296</span>                     <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  297</span>        }</div>
+<div class="line"><span class="lineno">  298</span>        cx = chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>;</div>
+<div class="line"><span class="lineno">  299</span>        cp = chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a45d631eb5ccac403124e17bf2b171ae8">cp</a>;</div>
+<div class="line"><span class="lineno">  300</span>        <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(cx, chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>, WA_NORMAL, cp, &amp;pos, <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  301</span>        end_pos = pos;</div>
+<div class="line"><span class="lineno">  302</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447">l</a> = end_pos;</div>
+<div class="line"><span class="lineno">  303</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a4188edd9eed7c9bcf267deaa4fa1c439">end_pos</a> = end_pos;</div>
+<div class="line"><span class="lineno">  304</span>        k++;</div>
+<div class="line"><span class="lineno">  305</span>    }</div>
+<div class="line"><span class="lineno">  306</span>    <a class="code hl_function" href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a>(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">cmplx_buf</a>, <span class="stringliteral">&quot; &quot;</span>, WA_NORMAL, cp, &amp;pos, <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  307</span>    chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447">l</a> = end_pos;</div>
+<div class="line"><span class="lineno">  308</span>}</div>
+<div class="ttc" id="aa00725_html_a5069d4241bf871aa21c9d0808c97f2e4"><div class="ttname"><a href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a></div><div class="ttdeci">#define CHYRON_KEYS</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00239">cm.h:239</a></div></div>
 <div class="ttc" id="aa01058_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d4c/a01058_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01106_html_aeb07b69a39f8759a6c32d7536c067ef3"><div class="ttname"><a href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a></div><div class="ttdeci">int cp_reverse</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00140">dwin.c:140</a></div></div>
-<div class="ttc" id="aa01117_html_gac8edae1b92a3fc0dc55aa1d91433700f"><div class="ttname"><a href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a></div><div class="ttdeci">int mb_to_cc(cchar_t *, char *, attr_t, int, int *, int)</div><div class="ttdoc">Convert multibyte string to complex character array.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00322">dwin.c:322</a></div></div>
-<div class="ttc" id="aa01144_html_a26a5a1b51ba82579294838ee52a18af3"><div class="ttname"><a href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">ChyronKey::text</a></div><div class="ttdeci">char text[CHYRON_KEY_MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00241">cm.h:241</a></div></div>
-<div class="ttc" id="aa01144_html_a4188edd9eed7c9bcf267deaa4fa1c439"><div class="ttname"><a href="../../db/d51/a01144.html#a4188edd9eed7c9bcf267deaa4fa1c439">ChyronKey::end_pos</a></div><div class="ttdeci">int end_pos</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00244">cm.h:244</a></div></div>
-<div class="ttc" id="aa01144_html_a45d631eb5ccac403124e17bf2b171ae8"><div class="ttname"><a href="../../db/d51/a01144.html#a45d631eb5ccac403124e17bf2b171ae8">ChyronKey::cp</a></div><div class="ttdeci">int cp</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00245">cm.h:245</a></div></div>
-<div class="ttc" id="aa01148_html_a0664a24c199473e38c5475d9e3a31447"><div class="ttname"><a href="../../db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447">Chyron::l</a></div><div class="ttdeci">int l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00252">cm.h:252</a></div></div>
-<div class="ttc" id="aa01148_html_aa8fc2fd6fd4c5df0bb22c96071cb5dc2"><div class="ttname"><a href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">Chyron::cmplx_buf</a></div><div class="ttdeci">cchar_t cmplx_buf[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00251">cm.h:251</a></div></div>
-<div class="ttc" id="aa01148_html_afae4703fe8eb6cfce07372508666dea6"><div class="ttname"><a href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">Chyron::key</a></div><div class="ttdeci">ChyronKey * key[CHYRON_KEYS]</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00249">cm.h:249</a></div></div>
+<div class="ttc" id="aa01106_html_aeb07b69a39f8759a6c32d7536c067ef3"><div class="ttname"><a href="../../da/d4e/a01106.html#aeb07b69a39f8759a6c32d7536c067ef3">cp_reverse</a></div><div class="ttdeci">int cp_reverse</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00151">dwin.c:151</a></div></div>
+<div class="ttc" id="aa01117_html_gac8edae1b92a3fc0dc55aa1d91433700f"><div class="ttname"><a href="#gac8edae1b92a3fc0dc55aa1d91433700f">mb_to_cc</a></div><div class="ttdeci">int mb_to_cc(cchar_t *, char *, attr_t, int, int *, int)</div><div class="ttdoc">Convert multibyte string to complex character array.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00333">dwin.c:333</a></div></div>
+<div class="ttc" id="aa01144_html_a26a5a1b51ba82579294838ee52a18af3"><div class="ttname"><a href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">ChyronKey::text</a></div><div class="ttdeci">char text[CHYRON_KEY_MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00242">cm.h:242</a></div></div>
+<div class="ttc" id="aa01144_html_a4188edd9eed7c9bcf267deaa4fa1c439"><div class="ttname"><a href="../../db/d51/a01144.html#a4188edd9eed7c9bcf267deaa4fa1c439">ChyronKey::end_pos</a></div><div class="ttdeci">int end_pos</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00245">cm.h:245</a></div></div>
+<div class="ttc" id="aa01144_html_a45d631eb5ccac403124e17bf2b171ae8"><div class="ttname"><a href="../../db/d51/a01144.html#a45d631eb5ccac403124e17bf2b171ae8">ChyronKey::cp</a></div><div class="ttdeci">int cp</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00246">cm.h:246</a></div></div>
+<div class="ttc" id="aa01148_html_a0664a24c199473e38c5475d9e3a31447"><div class="ttname"><a href="../../db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447">Chyron::l</a></div><div class="ttdeci">int l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00253">cm.h:253</a></div></div>
+<div class="ttc" id="aa01148_html_aa8fc2fd6fd4c5df0bb22c96071cb5dc2"><div class="ttname"><a href="../../db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2">Chyron::cmplx_buf</a></div><div class="ttdeci">cchar_t cmplx_buf[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00252">cm.h:252</a></div></div>
+<div class="ttc" id="aa01148_html_afae4703fe8eb6cfce07372508666dea6"><div class="ttname"><a href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">Chyron::key</a></div><div class="ttdeci">ChyronKey * key[CHYRON_KEYS]</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00250">cm.h:250</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00251">Chyron::cmplx_buf</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00245">ChyronKey::cp</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00140">cp_reverse</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00244">ChyronKey::end_pos</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00252">Chyron::l</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00322">mb_to_cc()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00241">ChyronKey::text</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00252">Chyron::cmplx_buf</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00246">ChyronKey::cp</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00151">cp_reverse</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00245">ChyronKey::end_pos</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00253">Chyron::l</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00333">mb_to_cc()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00242">ChyronKey::text</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01229">action_disposition()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00999">answer_yn()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01059">display_error()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00608">display_page()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00059">field_editor()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00510">form_display_fields()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00194">form_post()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01115">Perror()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00300">pick_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01166">wait_mk_chyron()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01331">action_disposition()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01101">answer_yn()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01161">display_error()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00059">field_editor()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00510">form_display_fields()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00194">form_post()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01217">Perror()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00306">pick_engine()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00847">picker()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01268">wait_mk_chyron()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -245,25 +243,25 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>nullptr </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00199">199</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  199</span>                                       {</div>
-<div class="line"><span class="lineno">  200</span>    <span class="keywordtype">int</span> i;</div>
-<div class="line"><span class="lineno">  201</span> </div>
-<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">if</span> (!chyron)</div>
-<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code hl_define" href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a>; i++) {</div>
-<div class="line"><span class="lineno">  205</span>        <span class="keywordflow">if</span> (chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i])</div>
-<div class="line"><span class="lineno">  206</span>            free(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i]);</div>
-<div class="line"><span class="lineno">  207</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  208</span>    }</div>
-<div class="line"><span class="lineno">  209</span>    free(chyron);</div>
-<div class="line"><span class="lineno">  210</span>    chyron = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  211</span>    <span class="keywordflow">return</span> chyron;</div>
-<div class="line"><span class="lineno">  212</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00210">210</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  210</span>                                       {</div>
+<div class="line"><span class="lineno">  211</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">  212</span> </div>
+<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">if</span> (!chyron)</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  215</span>    <span class="keywordflow">for</span> (i = 0; i &lt; <a class="code hl_define" href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a>; i++) {</div>
+<div class="line"><span class="lineno">  216</span>        <span class="keywordflow">if</span> (chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i])</div>
+<div class="line"><span class="lineno">  217</span>            free(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i]);</div>
+<div class="line"><span class="lineno">  218</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  219</span>    }</div>
+<div class="line"><span class="lineno">  220</span>    free(chyron);</div>
+<div class="line"><span class="lineno">  221</span>    chyron = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">return</span> chyron;</div>
+<div class="line"><span class="lineno">  223</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01229">action_disposition()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00999">answer_yn()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01059">display_error()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00059">init_form()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01115">Perror()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00300">pick_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01208">wait_destroy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01331">action_disposition()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01101">answer_yn()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01161">display_error()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00059">init_form()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01217">Perror()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00306">pick_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01310">wait_destroy()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -304,19 +302,19 @@ Here is the caller graph for this function:</div>
 <dd>
 The chyron functions provide <a class="el" href="../../d4/dc5/a01116.html#ga2feaacf50ca2c7d00b73e21faca59702" title="Wrapper for wgetch that handles signals, mouse events, checks for clicks on the chyron line,...">xwgetch()</a> with a mechanism to translate mouse click positions into key codes based on the labels set in the chyron structure. When a mouse click occurs, <a class="el" href="../../d4/dc5/a01116.html#ga2feaacf50ca2c7d00b73e21faca59702" title="Wrapper for wgetch that handles signals, mouse events, checks for clicks on the chyron line,...">xwgetch()</a> can call <a class="el" href="#ga4298f891699300bfc4e6e56fd2a8d574" title="Get keycode from chyron.">get_chyron_key()</a> with the X position of the click to determine which function key was clicked, allowing for dynamic and customizable function key behavior in the chyron area of the interface. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00370">370</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  370</span>                                          {</div>
-<div class="line"><span class="lineno">  371</span>    <span class="keywordtype">int</span> i;</div>
-<div class="line"><span class="lineno">  372</span>    <span class="keywordflow">for</span> (i = 0; chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a4188edd9eed7c9bcf267deaa4fa1c439">end_pos</a> != -1; i++)</div>
-<div class="line"><span class="lineno">  373</span>        <span class="keywordflow">if</span> (x &lt; chyron-&gt;key[i]-&gt;end_pos)</div>
-<div class="line"><span class="lineno">  374</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  375</span>    <span class="keywordflow">return</span> chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082">keycode</a>;</div>
-<div class="line"><span class="lineno">  376</span>}</div>
-<div class="ttc" id="aa01144_html_a86b6864ce0ecfeef4be8a88c24b98082"><div class="ttname"><a href="../../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082">ChyronKey::keycode</a></div><div class="ttdeci">int keycode</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00243">cm.h:243</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00381">381</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  381</span>                                          {</div>
+<div class="line"><span class="lineno">  382</span>    <span class="keywordtype">int</span> i;</div>
+<div class="line"><span class="lineno">  383</span>    <span class="keywordflow">for</span> (i = 0; chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a4188edd9eed7c9bcf267deaa4fa1c439">end_pos</a> != -1; i++)</div>
+<div class="line"><span class="lineno">  384</span>        <span class="keywordflow">if</span> (x &lt; chyron-&gt;key[i]-&gt;end_pos)</div>
+<div class="line"><span class="lineno">  385</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  386</span>    <span class="keywordflow">return</span> chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082">keycode</a>;</div>
+<div class="line"><span class="lineno">  387</span>}</div>
+<div class="ttc" id="aa01144_html_a86b6864ce0ecfeef4be8a88c24b98082"><div class="ttname"><a href="../../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082">ChyronKey::keycode</a></div><div class="ttdeci">int keycode</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00244">cm.h:244</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00244">ChyronKey::end_pos</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00243">ChyronKey::keycode</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00245">ChyronKey::end_pos</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00244">ChyronKey::keycode</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01364">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01575">dxwgetch()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01504">xwgetch()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -354,15 +352,15 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if set, false if not set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00218">218</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  218</span>                                              {</div>
-<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">if</span> (chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] != <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  220</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  221</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  222</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  223</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00229">229</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  229</span>                                              {</div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">if</span> (chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  233</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  234</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00241">ChyronKey::text</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00242">ChyronKey::text</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d5/d67/a01070_source.html#l00194">form_post()</a>, and <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>.</p>
 <div class="dynheader">
@@ -427,101 +425,47 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>Number of bytes processed from the input string</dd></dl>
 <p>This function converts a multibyte string to an array of complex characters (cchar_t) that can be used with NCurses functions. It handles multibyte characters and applies the specified color pair to each character. The pos parameter is updated to reflect the current position in the output buffer, and the function ensures that it does not exceed the maximum length. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00322">322</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  323</span>                         {</div>
-<div class="line"><span class="lineno">  324</span>    <span class="keywordtype">int</span> i = 0, len = 0;</div>
-<div class="line"><span class="lineno">  325</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *s;</div>
-<div class="line"><span class="lineno">  326</span>    cchar_t cc = {0};</div>
-<div class="line"><span class="lineno">  327</span>    <span class="keywordtype">wchar_t</span> wstr[2] = {L<span class="charliteral">&#39;\0&#39;</span>, L<span class="charliteral">&#39;\0&#39;</span>};</div>
-<div class="line"><span class="lineno">  328</span>    mbstate_t mbstate;</div>
-<div class="line"><span class="lineno">  329</span>    memset(&amp;mbstate, 0, <span class="keyword">sizeof</span>(mbstate));</div>
-<div class="line"><span class="lineno">  330</span>    attr = WA_NORMAL;</div>
-<div class="line"><span class="lineno">  331</span>    <span class="keywordflow">if</span> (*pos &gt;= maxlen - 1)</div>
-<div class="line"><span class="lineno">  332</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  333</span>    <span class="keywordflow">while</span> (str[i] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">  334</span>        s = &amp;str[i];</div>
-<div class="line"><span class="lineno">  335</span>        len = mbrtowc(wstr, s, MB_CUR_MAX, &amp;mbstate);</div>
-<div class="line"><span class="lineno">  336</span>        <span class="keywordflow">if</span> (len &lt;= 0) {</div>
-<div class="line"><span class="lineno">  337</span>            wstr[0] = L<span class="charliteral">&#39;?&#39;</span>;</div>
-<div class="line"><span class="lineno">  338</span>            wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  339</span>            len = 1;</div>
-<div class="line"><span class="lineno">  340</span>        }</div>
-<div class="line"><span class="lineno">  341</span>        wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  342</span>        <span class="keywordflow">if</span> (*pos &gt;= maxlen - 1)</div>
-<div class="line"><span class="lineno">  343</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  344</span>        <span class="keywordflow">if</span> (setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>) != ERR) {</div>
-<div class="line"><span class="lineno">  345</span>            <span class="keywordflow">if</span> (len &gt; 0 &amp;&amp; (*pos + len) &lt; <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1)</div>
-<div class="line"><span class="lineno">  346</span>                cmplx_buf[(*pos)++] = cc;</div>
-<div class="line"><span class="lineno">  347</span>        }</div>
-<div class="line"><span class="lineno">  348</span>        i += len;</div>
-<div class="line"><span class="lineno">  349</span>    }</div>
-<div class="line"><span class="lineno">  350</span>    wstr[0] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  351</span>    wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  352</span>    setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">  353</span>    cmplx_buf[*pos] = cc;</div>
-<div class="line"><span class="lineno">  354</span>    <span class="keywordflow">return</span> *pos;</div>
-<div class="line"><span class="lineno">  355</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00333">333</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  334</span>                         {</div>
+<div class="line"><span class="lineno">  335</span>    <span class="keywordtype">int</span> i = 0, len = 0;</div>
+<div class="line"><span class="lineno">  336</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *s;</div>
+<div class="line"><span class="lineno">  337</span>    cchar_t cc = {0};</div>
+<div class="line"><span class="lineno">  338</span>    <span class="keywordtype">wchar_t</span> wstr[2] = {L<span class="charliteral">&#39;\0&#39;</span>, L<span class="charliteral">&#39;\0&#39;</span>};</div>
+<div class="line"><span class="lineno">  339</span>    mbstate_t mbstate;</div>
+<div class="line"><span class="lineno">  340</span>    memset(&amp;mbstate, 0, <span class="keyword">sizeof</span>(mbstate));</div>
+<div class="line"><span class="lineno">  341</span>    attr = WA_NORMAL;</div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">if</span> (*pos &gt;= maxlen - 1)</div>
+<div class="line"><span class="lineno">  343</span>        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  344</span>    <span class="keywordflow">while</span> (str[i] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  345</span>        s = &amp;str[i];</div>
+<div class="line"><span class="lineno">  346</span>        len = mbrtowc(wstr, s, MB_CUR_MAX, &amp;mbstate);</div>
+<div class="line"><span class="lineno">  347</span>        <span class="keywordflow">if</span> (len &lt;= 0) {</div>
+<div class="line"><span class="lineno">  348</span>            wstr[0] = L<span class="charliteral">&#39;?&#39;</span>;</div>
+<div class="line"><span class="lineno">  349</span>            wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  350</span>            len = 1;</div>
+<div class="line"><span class="lineno">  351</span>        }</div>
+<div class="line"><span class="lineno">  352</span>        wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  353</span>        <span class="keywordflow">if</span> (*pos &gt;= maxlen - 1)</div>
+<div class="line"><span class="lineno">  354</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  355</span>        <span class="keywordflow">if</span> (setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>) != ERR) {</div>
+<div class="line"><span class="lineno">  356</span>            <span class="keywordflow">if</span> (len &gt; 0 &amp;&amp; (*pos + len) &lt; <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1)</div>
+<div class="line"><span class="lineno">  357</span>                cmplx_buf[(*pos)++] = cc;</div>
+<div class="line"><span class="lineno">  358</span>        }</div>
+<div class="line"><span class="lineno">  359</span>        i += len;</div>
+<div class="line"><span class="lineno">  360</span>    }</div>
+<div class="line"><span class="lineno">  361</span>    wstr[0] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  362</span>    wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  363</span>    setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  364</span>    cmplx_buf[*pos] = cc;</div>
+<div class="line"><span class="lineno">  365</span>    <span class="keywordflow">return</span> *pos;</div>
+<div class="line"><span class="lineno">  366</span>}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l00269">compile_chyron()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l00280">compile_chyron()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d8b/a01117_gac8edae1b92a3fc0dc55aa1d91433700f_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
-
-</div>
-</div>
-<a id="gae36640465370bd716799eabb7dc058c5" name="gae36640465370bd716799eabb7dc058c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae36640465370bd716799eabb7dc058c5">&#9670;&#160;</a></span>mk_cmplx_buf()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">cchar_t * mk_cmplx_buf </td>
-          <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create complex character buffer from multibyte string. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>Input multibyte string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to complex character buffer</dd></dl>
-<p>This function creates a complex character buffer from a multibyte string. It allocates memory for the buffer and converts the multibyte string to complex characters using the mb_to_cc function. The color pair used for the complex characters is cp_norm. The caller is responsible for freeing the allocated buffer when it is no longer needed. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00387">387</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  387</span>                                     {</div>
-<div class="line"><span class="lineno">  388</span>    cchar_t *cmplx_buf = (cchar_t *)calloc(<a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>, <span class="keyword">sizeof</span>(cchar_t));</div>
-<div class="line"><span class="lineno">  389</span>    <span class="keywordtype">int</span> j = 0;</div>
-<div class="line"><span class="lineno">  390</span>    <span class="keywordtype">int</span> len;</div>
-<div class="line"><span class="lineno">  391</span>    attr_t attr = WA_NORMAL;</div>
-<div class="line"><span class="lineno">  392</span>    <span class="keywordtype">int</span> cpx = <a class="code hl_variable" href="../../da/d4e/a01106.html#a15ccdd7a5984dcef14aefbd5f45671e7">cp_win</a>;</div>
-<div class="line"><span class="lineno">  393</span>    <span class="keywordtype">wchar_t</span> wc = L<span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  394</span>    cchar_t cc = {0};</div>
-<div class="line"><span class="lineno">  395</span>    mbstate_t mbstate;</div>
-<div class="line"><span class="lineno">  396</span>    memset(&amp;mbstate, 0, <span class="keyword">sizeof</span>(mbstate));</div>
-<div class="line"><span class="lineno">  397</span>    len = mbrtowc(&amp;wc, s, MB_CUR_MAX, &amp;mbstate);</div>
-<div class="line"><span class="lineno">  398</span>    <span class="keywordflow">if</span> (len &lt;= 0) {</div>
-<div class="line"><span class="lineno">  399</span>        wc = L<span class="charliteral">&#39;?&#39;</span>;</div>
-<div class="line"><span class="lineno">  400</span>        len = 1;</div>
-<div class="line"><span class="lineno">  401</span>    }</div>
-<div class="line"><span class="lineno">  402</span>    <span class="keywordflow">if</span> (setcchar(&amp;cc, &amp;wc, attr, cpx, <span class="keyword">nullptr</span>) != ERR) {</div>
-<div class="line"><span class="lineno">  403</span>        <span class="keywordflow">if</span> (len &gt; 0 &amp;&amp; (j + len) &lt; <a class="code hl_define" href="../../d5/d4c/a01058.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1) {</div>
-<div class="line"><span class="lineno">  404</span>            cmplx_buf[j++] = cc;</div>
-<div class="line"><span class="lineno">  405</span>        }</div>
-<div class="line"><span class="lineno">  406</span>    }</div>
-<div class="line"><span class="lineno">  407</span>    <span class="keywordflow">return</span> cmplx_buf;</div>
-<div class="line"><span class="lineno">  408</span>}</div>
-<div class="ttc" id="aa01106_html_a15ccdd7a5984dcef14aefbd5f45671e7"><div class="ttname"><a href="../../da/d4e/a01106.html#a15ccdd7a5984dcef14aefbd5f45671e7">cp_win</a></div><div class="ttdeci">int cp_win</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00138">dwin.c:138</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d4e/a01106_source.html#l00138">cp_win</a>.</p>
 
 </div>
 </div>
@@ -544,24 +488,24 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>pointer to new <a class="el" href="../../db/d17/a01148.html">Chyron</a> structure</dd></dl>
 <p>This function allocates memory for a new <a class="el" href="../../db/d17/a01148.html">Chyron</a> structure and initializes the key pointers. Each key pointer is allocated memory for a <a class="el" href="../../db/d51/a01144.html">ChyronKey</a> structure. The <a class="el" href="../../db/d17/a01148.html">Chyron</a> structure is used to manage function key labels and their associated keycodes for mouse click handling in the chyron area of the interface. </p><dl class="section note"><dt>Note</dt><dd>The use of calloc ensures that the allocated memory is initialized to zero, which means that the text for each key will be initialized to an empty string and the keycodes will be initialized to zero. This allows the is_set_chyron_key function to check if a key is set by checking if the first character of the text is not '\0'. If any memory allocation fails, the function will call abend to handle the error and return nullptr. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00184">184</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  184</span>                     {</div>
-<div class="line"><span class="lineno">  185</span>    <a class="code hl_struct" href="../../db/d17/a01148.html">Chyron</a> *chyron = (<a class="code hl_struct" href="../../db/d17/a01148.html">Chyron</a> *)calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="../../db/d17/a01148.html">Chyron</a>));</div>
-<div class="line"><span class="lineno">  186</span>    <span class="keywordflow">if</span> (!chyron) {</div>
-<div class="line"><span class="lineno">  187</span>        <a class="code hl_function" href="../../d0/d02/a01119.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;calloc chyron failed&quot;</span>);</div>
-<div class="line"><span class="lineno">  188</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  189</span>    }</div>
-<div class="line"><span class="lineno">  190</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_define" href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a>; i++)</div>
-<div class="line"><span class="lineno">  191</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i] = (<a class="code hl_struct" href="../../db/d51/a01144.html">ChyronKey</a> *)calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="../../db/d51/a01144.html">ChyronKey</a>));</div>
-<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">return</span> chyron;</div>
-<div class="line"><span class="lineno">  193</span>}</div>
-<div class="ttc" id="aa01119_html_ga8f6c45ca4a7f6a41c4c88314e697565a"><div class="ttname"><a href="../../d0/d02/a01119.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a></div><div class="ttdeci">void abend(int, char *)</div><div class="ttdoc">Abnormal program termination.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l01336">dwin.c:1336</a></div></div>
-<div class="ttc" id="aa01144_html"><div class="ttname"><a href="../../db/d51/a01144.html">ChyronKey</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00240">cm.h:240</a></div></div>
-<div class="ttc" id="aa01148_html"><div class="ttname"><a href="../../db/d17/a01148.html">Chyron</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00248">cm.h:248</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00195">195</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  195</span>                     {</div>
+<div class="line"><span class="lineno">  196</span>    <a class="code hl_struct" href="../../db/d17/a01148.html">Chyron</a> *chyron = (<a class="code hl_struct" href="../../db/d17/a01148.html">Chyron</a> *)calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="../../db/d17/a01148.html">Chyron</a>));</div>
+<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">if</span> (!chyron) {</div>
+<div class="line"><span class="lineno">  198</span>        <a class="code hl_function" href="../../d0/d02/a01119.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;calloc chyron failed&quot;</span>);</div>
+<div class="line"><span class="lineno">  199</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  200</span>    }</div>
+<div class="line"><span class="lineno">  201</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_define" href="../../d8/db9/a00725.html#a5069d4241bf871aa21c9d0808c97f2e4">CHYRON_KEYS</a>; i++)</div>
+<div class="line"><span class="lineno">  202</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[i] = (<a class="code hl_struct" href="../../db/d51/a01144.html">ChyronKey</a> *)calloc(1, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="../../db/d51/a01144.html">ChyronKey</a>));</div>
+<div class="line"><span class="lineno">  203</span>    <span class="keywordflow">return</span> chyron;</div>
+<div class="line"><span class="lineno">  204</span>}</div>
+<div class="ttc" id="aa01119_html_ga8f6c45ca4a7f6a41c4c88314e697565a"><div class="ttname"><a href="../../d0/d02/a01119.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a></div><div class="ttdeci">void abend(int, char *)</div><div class="ttdoc">Abnormal program termination.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l01438">dwin.c:1438</a></div></div>
+<div class="ttc" id="aa01144_html"><div class="ttname"><a href="../../db/d51/a01144.html">ChyronKey</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00241">cm.h:241</a></div></div>
+<div class="ttc" id="aa01148_html"><div class="ttname"><a href="../../db/d17/a01148.html">Chyron</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00249">cm.h:249</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d4e/a01106_source.html#l01336">abend()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>.</p>
+<p class="reference">References <a class="el" href="../../da/d4e/a01106_source.html#l01438">abend()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01229">action_disposition()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00999">answer_yn()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01059">display_error()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00510">form_display_fields()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01115">Perror()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00300">pick_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01166">wait_mk_chyron()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l01331">action_disposition()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01101">answer_yn()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01161">display_error()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00510">form_display_fields()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01217">Perror()</a>, <a class="el" href="../../de/d9e/a01061_source.html#l00306">pick_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l01268">wait_mk_chyron()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -622,21 +566,21 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This function sets the label and keycode for a chyron key. The label is copied into the chyron structure, and the keycode is stored for later retrieval when theire is a mouse click. The compile_chyron function uses the keycode values to determine which key was clicked based on the mouse X position. If the label string is empty, the key is unset by setting the first character of the text to '\0'. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00238">238</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  238</span>                                                                       {</div>
-<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">if</span> (*s != <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  240</span>        <a class="code hl_function" href="../../de/de5/a01123.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>, <a class="code hl_define" href="../../d8/db9/a00725.html#a8da05f3fdf70360f7c152b7d8a272117">CHYRON_KEY_MAXLEN</a> - 1, <span class="stringliteral">&quot;%s&quot;</span>, s);</div>
-<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  242</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  243</span>    chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082">keycode</a> = kc;</div>
-<div class="line"><span class="lineno">  244</span>    chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a45d631eb5ccac403124e17bf2b171ae8">cp</a> = cp;</div>
-<div class="line"><span class="lineno">  245</span>}</div>
-<div class="ttc" id="aa00725_html_a8da05f3fdf70360f7c152b7d8a272117"><div class="ttname"><a href="../../d8/db9/a00725.html#a8da05f3fdf70360f7c152b7d8a272117">CHYRON_KEY_MAXLEN</a></div><div class="ttdeci">#define CHYRON_KEY_MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00235">cm.h:235</a></div></div>
-<div class="ttc" id="aa01123_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../de/de5/a01123.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00156">futil.c:156</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00249">249</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  249</span>                                                                       {</div>
+<div class="line"><span class="lineno">  250</span>    <span class="keywordflow">if</span> (*s != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  251</span>        <a class="code hl_function" href="../../de/de5/a01123.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>, <a class="code hl_define" href="../../d8/db9/a00725.html#a8da05f3fdf70360f7c152b7d8a272117">CHYRON_KEY_MAXLEN</a> - 1, <span class="stringliteral">&quot;%s&quot;</span>, s);</div>
+<div class="line"><span class="lineno">  252</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  253</span>        chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  254</span>    chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a86b6864ce0ecfeef4be8a88c24b98082">keycode</a> = kc;</div>
+<div class="line"><span class="lineno">  255</span>    chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a45d631eb5ccac403124e17bf2b171ae8">cp</a> = cp;</div>
+<div class="line"><span class="lineno">  256</span>}</div>
+<div class="ttc" id="aa00725_html_a8da05f3fdf70360f7c152b7d8a272117"><div class="ttname"><a href="../../d8/db9/a00725.html#a8da05f3fdf70360f7c152b7d8a272117">CHYRON_KEY_MAXLEN</a></div><div class="ttdeci">#define CHYRON_KEY_MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00236">cm.h:236</a></div></div>
+<div class="ttc" id="aa01123_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../de/de5/a01123.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dbd/a01100_source.html#l00153">futil.c:153</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00245">ChyronKey::cp</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00243">ChyronKey::keycode</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00156">ssnprintf()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00241">ChyronKey::text</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00246">ChyronKey::cp</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00244">ChyronKey::keycode</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00153">ssnprintf()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00242">ChyronKey::text</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d8/dbf/a01109_source.html#l00059">field_editor()</a>, and <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d8/dbf/a01109_source.html#l00059">field_editor()</a>, <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>, and <a class="el" href="../../de/d9e/a01061_source.html#l00847">picker()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -645,7 +589,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d8b/a01117_ga4c179e7657e744f1847506e11a476580_icgraph.svg" width="100%" height="574"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d8b/a01117_ga4c179e7657e744f1847506e11a476580_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -678,10 +622,10 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00259">259</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  259</span>{ chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] = <span class="charliteral">&#39;\0&#39;</span>; }</div>
+<p class="definition">Definition at line <a class="el" href="../../da/d4e/a01106_source.html#l00270">270</a> of file <a class="el" href="../../da/d4e/a01106_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  270</span>{ chyron-&gt;<a class="code hl_variable" href="../../db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6">key</a>[k]-&gt;<a class="code hl_variable" href="../../db/d51/a01144.html#a26a5a1b51ba82579294838ee52a18af3">text</a>[0] = <span class="charliteral">&#39;\0&#39;</span>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00249">Chyron::key</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00241">ChyronKey::text</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00242">ChyronKey::text</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d5/d67/a01070_source.html#l00194">form_post()</a>, and <a class="el" href="../../d5/d67/a01070_source.html#l00278">form_process()</a>.</p>
 <div class="dynheader">

@@ -7,7 +7,7 @@ var a01118 =
     [ "init_clr_palette", "dd/d09/a01118.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
     [ "init_hex_clr", "dd/d09/a01118.html#ga61af7829a5d63d766e76930a0893d574", null ],
     [ "list_colors", "dd/d09/a01118.html#ga482af92e265df3405f0620b4d6158b4e", null ],
-    [ "mkccc", "dd/d09/a01118.html#ga08537e2322c1207f7e6ae571bac1c9fd", null ],
+    [ "mkccc", "dd/d09/a01118.html#gac91daf9ece9fc94bd0f23a353dc2d622", null ],
     [ "rgb_to_curses_clr", "dd/d09/a01118.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
     [ "rgb_to_xterm256_idx", "dd/d09/a01118.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
     [ "xterm256_idx_to_rgb", "dd/d09/a01118.html#ga31ee0d93c7b527f92559fc410152f768", null ]
