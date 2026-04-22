@@ -81,13 +81,12 @@ var searchData=
   ['log_20file_20with_20editor_78',['Log File With Editor',['../d8/d7a/a01292.html#log-file-with-editor',1,'']]],
   ['logging_79',['Shell Logging',['../d7/d88/a01294.html#shell-logging',1,'']]],
   ['loop_80',['Pick Objects Loop',['../d8/d84/a01131.html#pick-objects-loop',1,'']]],
-  ['loop_81',['Field editing loop',['../d8/d84/a01131.html#field-editing-loop',1,'']]],
-  ['lp_82',['lp',['../dd/de2/a01134.html#ga219efbc4d9d70ebc47fafa540b370247',1,'view_engine.c']]],
-  ['ls_83',['Use lsd instead of ls',['../d7/d88/a01294.html#use-lsd-instead-of-ls',1,'']]],
-  ['lsd_84',['lsd',['../d9/dda/a01289.html#lsd',1,'']]],
-  ['lsd_20instead_20of_20ls_85',['Use lsd instead of ls',['../d7/d88/a01294.html#use-lsd-instead-of-ls',1,'']]],
-  ['lsd_20on_20linux_86',['lsd On Linux',['../d9/dda/a01289.html#lsd-on-linux',1,'']]],
-  ['lsd_20on_20macos_87',['lsd On macOS',['../d9/dda/a01289.html#lsd-on-macos',1,'']]],
-  ['lsd_20on_20windows_88',['lsd On Windows',['../d9/dda/a01289.html#lsd-on-windows',1,'']]],
-  ['lua_89',['To Install Norcalli&apos;s nvim-colorizer.lua',['../d9/dda/a01289.html#to-install-norcallis-nvim-colorizerlua',1,'']]]
+  ['lp_81',['lp',['../dd/de2/a01134.html#ga219efbc4d9d70ebc47fafa540b370247',1,'view_engine.c']]],
+  ['ls_82',['Use lsd instead of ls',['../d7/d88/a01294.html#use-lsd-instead-of-ls',1,'']]],
+  ['lsd_83',['lsd',['../d9/dda/a01289.html#lsd',1,'']]],
+  ['lsd_20instead_20of_20ls_84',['Use lsd instead of ls',['../d7/d88/a01294.html#use-lsd-instead-of-ls',1,'']]],
+  ['lsd_20on_20linux_85',['lsd On Linux',['../d9/dda/a01289.html#lsd-on-linux',1,'']]],
+  ['lsd_20on_20macos_86',['lsd On macOS',['../d9/dda/a01289.html#lsd-on-macos',1,'']]],
+  ['lsd_20on_20windows_87',['lsd On Windows',['../d9/dda/a01289.html#lsd-on-windows',1,'']]],
+  ['lua_88',['To Install Norcalli&apos;s nvim-colorizer.lua',['../d9/dda/a01289.html#to-install-norcallis-nvim-colorizerlua',1,'']]]
 ];
