@@ -7,7 +7,7 @@ var searchData=
   ['nc_4',['NC',['../da/d4e/a01106.html#a1fa2460e32327ade49189c95740bc1b5',1,'dwin.c']]],
   ['ncurses_5ffp_5',['ncurses_fp',['../da/d4e/a01106.html#aab4cb2245aeb44f6e09e2e1ab6ecb659',1,'dwin.c']]],
   ['ncurses_5fwidechar_6',['NCURSES_WIDECHAR',['../d8/db9/a00725.html#aa16fa3d6aa4e0d8100f2919690417da7',1,'NCURSES_WIDECHAR:&#160;cm.h'],['../dd/dd8/a00719.html#aa16fa3d6aa4e0d8100f2919690417da7',1,'NCURSES_WIDECHAR:&#160;common.h'],['../d6/dc0/a00734.html#aa16fa3d6aa4e0d8100f2919690417da7',1,'NCURSES_WIDECHAR:&#160;view.h']]],
-  ['neovim_7',['Neovim',['../d8/d7a/a01292.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../d9/dda/a01289.html#neovim',1,'Neovim']]],
+  ['neovim_7',['Neovim',['../d8/d7a/a01292.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../index.html#c-menu-api-completions-in-neovim',1,'C-Menu API Completions in Neovim'],['../d9/dda/a01289.html#neovim',1,'Neovim']]],
   ['neovim_20configuration_8',['Neovim Configuration',['../d9/dda/a01289.html#neovim-configuration',1,'']]],
   ['neovim_20linkage_20to_20the_20c_20menu_20api_9',['Neovim Linkage to the C-Menu API',['../d9/dda/a01289.html#neovim-linkage-to-the-c-menu-api',1,'']]],
   ['neovim_20unicode_20art_20in_20snacks_20nvim_10',['To Use the Neovim Unicode Art in Snacks.nvim',['../d9/dda/a01289.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'']]],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['navigation_0',['View Navigation',['../d0/d00/a01286.html#view-navigation',1,'']]],
-  ['neovim_1',['Neovim',['../d8/d7a/a01292.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../d9/dda/a01289.html#neovim',1,'Neovim']]],
+  ['neovim_1',['Neovim',['../d8/d7a/a01292.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../index.html#c-menu-api-completions-in-neovim',1,'C-Menu API Completions in Neovim'],['../d9/dda/a01289.html#neovim',1,'Neovim']]],
   ['neovim_20configuration_2',['Neovim Configuration',['../d9/dda/a01289.html#neovim-configuration',1,'']]],
   ['neovim_20linkage_20to_20the_20c_20menu_20api_3',['Neovim Linkage to the C-Menu API',['../d9/dda/a01289.html#neovim-linkage-to-the-c-menu-api',1,'']]],
   ['neovim_20unicode_20art_20in_20snacks_20nvim_4',['To Use the Neovim Unicode Art in Snacks.nvim',['../d9/dda/a01289.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'']]],

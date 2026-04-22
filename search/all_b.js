@@ -54,9 +54,10 @@ var searchData=
   ['exit_5fcode_51',['exit_code',['../da/d4e/a01106.html#ab1729158be557ef60548f7b7575ea4dd',1,'exit_code:&#160;dwin.c'],['../d8/db9/a00725.html#ab1729158be557ef60548f7b7575ea4dd',1,'exit_code:&#160;dwin.c']]],
   ['expand_5ftilde_52',['expand_tilde',['../de/de5/a01123.html#gad7f9941ba28a6cca3ccce953c4d77e32',1,'expand_tilde(char *, int):&#160;futil.c'],['../de/de5/a01123.html#gad7f9941ba28a6cca3ccce953c4d77e32',1,'expand_tilde(char *path, int path_maxlen):&#160;futil.c']]],
   ['expected_20output_53',['Expected Output',['../d2/d68/a01295.html#expected-output',1,'']]],
-  ['expressions_54',['lf - List Files Using Regular Expressions',['../d8/d7a/a01292.html#lf---list-files-using-regular-expressions',1,'']]],
-  ['external_20commands_55',['External Commands',['../dc/d51/a01120.html',1,'']]],
-  ['external_20executables_56',['Menu Form - Integrating External Executables',['../dc/ded/a01290.html#menu-form---integrating-external-executables',1,'']]],
-  ['extras_57',['extras',['../d9/dda/a01289.html',1,'']]],
-  ['extras_2emd_58',['extras.md',['../d1/dd8/a01022.html',1,'']]]
+  ['expression_20file_20finder_54',['lf - A Regular Expression File Finder',['../index.html#lf---a-regular-expression-file-finder',1,'']]],
+  ['expressions_55',['lf - List Files Using Regular Expressions',['../d8/d7a/a01292.html#lf---list-files-using-regular-expressions',1,'']]],
+  ['external_20commands_56',['External Commands',['../dc/d51/a01120.html',1,'']]],
+  ['external_20executables_57',['Menu Form - Integrating External Executables',['../dc/ded/a01290.html#menu-form---integrating-external-executables',1,'']]],
+  ['extras_58',['extras',['../d9/dda/a01289.html',1,'']]],
+  ['extras_2emd_59',['extras.md',['../d1/dd8/a01022.html',1,'']]]
 ];
