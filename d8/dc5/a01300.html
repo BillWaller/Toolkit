@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d8/dc5/a01300.
   <div class="headertitle"><div class="title">snippets </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md93"></a> <img src="../../System-Configuration.png" alt="" class="inline" title="Configuration"/>    </p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md92"></a> <img src="../../System-Configuration.png" alt="" class="inline" title="Configuration"/>    </p>
 <h1 class="doxsection"><a class="anchor" id="table-of-contents-5"></a>
 Table of Contents</h1>
 <ul>
@@ -129,7 +129,7 @@ Table of Contents</h1>
 <li><a class="el" href="#if-you-cant-stop-typing-vi" title="If You Can&#39;t Stop Typing &quot;vi&quot;">If You Can't Stop Typing &quot;vi&quot;</a></li>
 <li><a class="el" href="#c-menu-startup-with-mm" title="C-Menu Startup with &quot;mm&quot;">C-Menu Startup with &quot;mm&quot;</a></li>
 <li><a class="el" href="#curses-escape-delay" title="Curses Escape Delay">Curses Escape Delay</a></li>
-<li><a class="el" href="#use-lsd-instead-of-ls" title="Use lsd instead of ls">Use lsd instead of ls</a></li>
+<li><a class="el" href="#use-lsd-or-eza-instead-of-ls" title="Use lsd or eza instead of ls">Use lsd or eza instead of ls</a></li>
 <li><a class="el" href="#locale-settings" title="Locale Settings">Locale Settings</a></li>
 <li><a class="el" href="#system-specific-environment-variables" title="System Specific Environment Variables">System Specific Environment Variables</a></li>
 </ul>
@@ -305,14 +305,27 @@ Curses Escape Delay</h3>
 <div class="fragment"><div class="line">export ESCDELAY=200</div>
 <div class="line">export ESCDELAY=50</div>
 </div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="use-lsd-instead-of-ls"></a>
-Use lsd instead of ls</h3>
-<div class="fragment"><div class="line">PREFER_LSD=1</div>
-<div class="line">if [ &quot;$PREFER_LSD&quot; = &quot;1&quot; ]; then</div>
-<div class="line">    which lsd &gt;/dev/null 2&gt;&amp;1 &amp;&amp; ls() { /usr/bin/lsd &quot;$@&quot;; }</div>
-<div class="line">else</div>
-<div class="line">    which ls &gt;/dev/null 2&gt;&amp;1 &amp;&amp; ls() { /bin/ls --color=auto &quot;$@&quot;; }</div>
-<div class="line">fi</div>
+<h3 class="doxsection"><a class="anchor" id="use-lsd-or-eza-instead-of-ls"></a>
+Use lsd or eza instead of ls</h3>
+<div class="fragment"><div class="line"># LS=eza</div>
+<div class="line">LS=lsd</div>
+<div class="line">export LS</div>
+<div class="line">ls() {</div>
+<div class="line">    if [ &quot;$LS&quot; = eza ] &amp;&amp; which eza &gt;/dev/null 2&gt;&amp;1; then</div>
+<div class="line">        echo using eza</div>
+<div class="line">        /usr/bin/eza --color=always --icons=always &quot;$@&quot;</div>
+<div class="line">    else</div>
+<div class="line">        if [ &quot;$LS&quot; = &quot;lsd&quot; ] &amp;&amp; which lsd &gt;/dev/null 2&gt;&amp;1; then</div>
+<div class="line">            echo using lsd</div>
+<div class="line">            /usr/bin/lsd --color always --icon always --icon-theme fancy &quot;$@&quot;</div>
+<div class="line">        else</div>
+<div class="line">            if which ls &gt;/dev/null 2&gt;&amp;1; then</div>
+<div class="line">                echo using ls</div>
+<div class="line">                /usr/bin/ls --color=auto &quot;$@&quot;</div>
+<div class="line">            fi</div>
+<div class="line">        fi</div>
+<div class="line">    fi</div>
+<div class="line">}</div>
 </div><!-- fragment --><hr  />
 <h3 class="doxsection"><a class="anchor" id="locale-settings"></a>
 Locale Settings</h3>

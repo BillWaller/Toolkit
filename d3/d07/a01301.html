@@ -113,23 +113,29 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d3/d07/a01301.
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="running-valgrind-against-c-menu"></a></p>
-<p>This document explains how to run <a href="https://valgrind.org/">Valgrind</a> against C-Menu and what to expect in its output.</p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="background"></a>
-Background</h1>
-<p>Valgrind's <span class="tt">--show-leak-kinds=all</span> mode reports four categories of memory at program exit:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Category  </th><th class="markdownTableHeadNone">Meaning  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>definitely lost</b>  </td><td class="markdownTableBodyNone">Memory that can no longer be reached — a true leak.  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>indirectly lost</b>  </td><td class="markdownTableBodyNone">Memory reachable only through a definitely-lost block.  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>possibly lost</b>  </td><td class="markdownTableBodyNone">Heuristic: may or may not be reachable.  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>still reachable</b>  </td><td class="markdownTableBodyNone">Memory still pointed to by a live pointer at exit. Often intentional (library caches, global singletons, etc.).  </td></tr>
-</table>
+<p>The "grind" is pronounced with a short 'i' &ndash; ie. "grinned" (rhymes with send, mend, tinned, friend, spend, lend, bend, fend, blend").
+
+This document explains how to run &lt;a href="<a href="https://valgrind.org/">https://valgrind.org/</a>" &gt;Valgrind&lt;/a&gt; against
+C-Menu and what to expect in its output.
+
+&lt;hr&gt;
+
+@section background Background
+
+Valgrind's &lt;tt&gt;--show-leak-kinds=all&lt;/tt&gt; mode reports four categories of memory at
+program exit:
+
+&lt;table class="markdownTable"&gt;
+  &lt;tr class="markdownTableHead"&gt;    &lt;th class="markdownTableHeadNone"&gt; Category  </p>
+<p>Meaning  </p>
+<p><b>definitely lost</b>  </p>
+<p>Memory that can no longer be reached — a true leak.  </p>
+<p><b>indirectly lost</b>  </p>
+<p>Memory reachable only through a definitely-lost block.  </p>
+<p><b>possibly lost</b>  </p>
+<p>Heuristic: may or may not be reachable.  </p>
+<p><b>still reachable</b>  </p>
+<p>Memory still pointed to by a live pointer at exit. Often intentional (library caches, global singletons, etc.).  </p>
 <p>C-Menu aims for <b>zero</b> <span class="tt">definitely lost</span> / <span class="tt">indirectly lost</span> / <span class="tt">possibly lost</span> bytes, and suppresses the known ncurses <span class="tt">still reachable</span> allocations that the ncurses library intentionally retains as global caches.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="suppression-file"></a>
