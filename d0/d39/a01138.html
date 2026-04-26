@@ -243,26 +243,26 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>- the character read from terminal </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>restores terminal settings </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/d09/a01118_source.html#l00139">139</a> of file <a class="el" href="../../dd/d09/a01118_source.html">scriou.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  139</span>                {</div>
-<div class="line"><span class="lineno">  140</span>    <span class="keyword">struct </span>termios org_tioctl, new_tioctl;</div>
-<div class="line"><span class="lineno">  141</span>    <span class="keywordtype">char</span> buf;</div>
-<div class="line"><span class="lineno">  142</span> </div>
-<div class="line"><span class="lineno">  143</span>    <span class="keywordflow">if</span> (tcgetattr(2, &amp;org_tioctl) == -1) {</div>
-<div class="line"><span class="lineno">  144</span>        fprintf(stderr, <span class="stringliteral">&quot;\ndi_getch: tcgetattr failed\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  145</span>        <span class="keywordflow">return</span> (0);</div>
-<div class="line"><span class="lineno">  146</span>    }</div>
-<div class="line"><span class="lineno">  147</span>    new_tioctl = org_tioctl;</div>
-<div class="line"><span class="lineno">  148</span>    new_tioctl.c_lflag &amp;= ~(ECHO | ICANON);</div>
-<div class="line"><span class="lineno">  149</span>    new_tioctl.c_cc[VMIN] = 1;</div>
-<div class="line"><span class="lineno">  150</span>    new_tioctl.c_cc[VTIME] = 0;</div>
-<div class="line"><span class="lineno">  151</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
-<div class="line"><span class="lineno">  152</span>    read(2, &amp;buf, 1);</div>
-<div class="line"><span class="lineno">  153</span>    tcsetattr(2, TCSAFLUSH, &amp;org_tioctl);</div>
-<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">return</span> (buf);</div>
-<div class="line"><span class="lineno">  155</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../dd/d09/a01118_source.html#l00145">145</a> of file <a class="el" href="../../dd/d09/a01118_source.html">scriou.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>                {</div>
+<div class="line"><span class="lineno">  146</span>    <span class="keyword">struct </span>termios org_tioctl, new_tioctl;</div>
+<div class="line"><span class="lineno">  147</span>    <span class="keywordtype">char</span> buf;</div>
+<div class="line"><span class="lineno">  148</span> </div>
+<div class="line"><span class="lineno">  149</span>    <span class="keywordflow">if</span> (tcgetattr(2, &amp;org_tioctl) == -1) {</div>
+<div class="line"><span class="lineno">  150</span>        fprintf(stderr, <span class="stringliteral">&quot;\ndi_getch: tcgetattr failed\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  151</span>        <span class="keywordflow">return</span> (0);</div>
+<div class="line"><span class="lineno">  152</span>    }</div>
+<div class="line"><span class="lineno">  153</span>    new_tioctl = org_tioctl;</div>
+<div class="line"><span class="lineno">  154</span>    new_tioctl.c_lflag &amp;= ~(ECHO | ICANON);</div>
+<div class="line"><span class="lineno">  155</span>    new_tioctl.c_cc[VMIN] = 1;</div>
+<div class="line"><span class="lineno">  156</span>    new_tioctl.c_cc[VTIME] = 0;</div>
+<div class="line"><span class="lineno">  157</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line"><span class="lineno">  158</span>    read(2, &amp;buf, 1);</div>
+<div class="line"><span class="lineno">  159</span>    tcsetattr(2, TCSAFLUSH, &amp;org_tioctl);</div>
+<div class="line"><span class="lineno">  160</span>    <span class="keywordflow">return</span> (buf);</div>
+<div class="line"><span class="lineno">  161</span>}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01427">nf_error()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01426">nf_error()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -313,10 +313,16 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  130</span>    t_p-&gt;c_cc[VMIN] = 1;</div>
 <div class="line"><span class="lineno">  131</span>    t_p-&gt;c_cc[VTIME] = 0;</div>
 <div class="line"><span class="lineno">  132</span>    tcsetattr(0, TCSAFLUSH, t_p);</div>
-<div class="line"><span class="lineno">  133</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  134</span>}</div>
+<div class="line"><span class="lineno">  133</span>    tcgetattr(2, t_p);</div>
+<div class="line"><span class="lineno">  134</span>    t_p-&gt;c_lflag |= ISIG;</div>
+<div class="line"><span class="lineno">  135</span>    t_p-&gt;c_lflag &amp;= ~(ECHO | ICANON);</div>
+<div class="line"><span class="lineno">  136</span>    t_p-&gt;c_cc[VMIN] = 1;</div>
+<div class="line"><span class="lineno">  137</span>    t_p-&gt;c_cc[VTIME] = 0;</div>
+<div class="line"><span class="lineno">  138</span>    tcsetattr(2, TCSAFLUSH, t_p);</div>
+<div class="line"><span class="lineno">  139</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  140</span>}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00038">main()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00038">main()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -357,7 +363,7 @@ Here is the caller graph for this function:</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../dd/d09/a01118_source.html#l00037">curses_err_tioctl</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00035">curses_in_tioctl</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00036">curses_out_tioctl</a>, and <a class="el" href="../../dd/d09/a01118_source.html#l00025">f_have_curses_tioctl</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00623">exec_objects()</a>, <a class="el" href="../../d9/d7c/a01073_source.html#l00128">fork_exec()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00060">init_pick()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00609">exec_objects()</a>, <a class="el" href="../../d9/d7c/a01073_source.html#l00128">fork_exec()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00060">init_pick()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -397,7 +403,7 @@ Here is the caller graph for this function:</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../dd/d09/a01118_source.html#l00024">f_have_shell_tioctl</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01438">abend()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d9/d7c/a01073_source.html#l00128">fork_exec()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, and <a class="el" href="../../d8/dbf/a01109_source.html#l00038">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01437">abend()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d9/d7c/a01073_source.html#l00128">fork_exec()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, and <a class="el" href="../../d8/dbf/a01109_source.html#l00038">main()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">

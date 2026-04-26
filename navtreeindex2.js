@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d5/d32/a01214.html#a2a3a77093e0afceec7d57d39f45eff9f":[13,0,16,86],
 "d5/d32/a01214.html#a2cdd72645649efd52f6f1f14cd39bfdd":[13,0,16,90],
 "d5/d32/a01214.html#a2e908a64131c7a68ae615532ece64479":[13,0,16,54],
 "d5/d32/a01214.html#a2e960af6414614ac7c725715122b152b":[13,0,16,48],
@@ -138,6 +139,7 @@ var NAVTREEINDEX2 =
 "d6/d6e/a01137.html":[12,15],
 "d6/d6e/a01137.html#ga02f90007f2422dd2094ab64569e157f0":[12,15,12],
 "d6/d6e/a01137.html#ga036c2f9cdf302cced4d9b703022664c0":[12,15,13],
+"d6/d6e/a01137.html#ga0dae7df97392da1a79cba0f852c11f5f":[12,15,9],
 "d6/d6e/a01137.html#ga1b2ee87543245e612c1710ea58930a17":[12,15,4],
 "d6/d6e/a01137.html#ga650262f8279502ebc73607394dd7af13":[12,15,14],
 "d6/d6e/a01137.html#ga8feb6cd586d503a676b831ec722576fb":[12,15,7],
@@ -146,7 +148,6 @@ var NAVTREEINDEX2 =
 "d6/d6e/a01137.html#gaabda879000cf8135245ef451de08f780":[12,15,10],
 "d6/d6e/a01137.html#gab2173ff8fb800d126c180487744672d5":[12,15,11],
 "d6/d6e/a01137.html#gab97dcab41017c5132f52b682437a151e":[12,15,8],
-"d6/d6e/a01137.html#gabb0969a6d1c7e78be46c3b325754c802":[12,15,9],
 "d6/d6e/a01137.html#gacd6b9991f2aa305f622f5d2515815bba":[12,15,1],
 "d6/d6e/a01137.html#gaeebc4c0b94ca97d753e10a0cd1798730":[12,15,2],
 "d6/d6e/a01137.html#gaf20c847dc030116f9999adbba681000c":[12,15,6],
@@ -216,11 +217,11 @@ var NAVTREEINDEX2 =
 "d6/dea/a01094_source.html":[14,0,5],
 "d7/d88/a01294.html":[4],
 "d7/d88/a01294.html#alacritty-and-kitty":[4,0,1,2],
-"d7/d88/a01294.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2":[4,0,2],
 "d7/d88/a01294.html#exercise-1-system-configurations":[4,0,1],
 "d7/d88/a01294.html#ghostty-configuration":[4,0,1,1],
 "d7/d88/a01294.html#introduction-2":[4,0,0],
 "d7/d88/a01294.html#requisites":[4,0,1,0,0],
+"d7/d88/a01294.html#rustlings-exercises":[4,0,1,3],
 "d7/d88/a01294.html#sddm-background-configuration":[4,0,1,0],
 "d7/d88/a01294.html#table-of-contents-1":[4,0],
 "d8/d11/a01178.html":[13,0,17],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "d8/d7a/a01292.html#c-menu-file-layout":[2,0,4,1],
 "d8/d7a/a01292.html#c-menu-form-in-depth":[2,0,8],
 "d8/d7a/a01292.html#c-menu-options":[2,0,10,1],
-"d8/d7a/a01292.html#c-menu-pick":[2,0,9],
-"d8/d7a/a01292.html#c-menu-view":[2,0,10]
+"d8/d7a/a01292.html#c-menu-pick":[2,0,9]
 };

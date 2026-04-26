@@ -349,37 +349,37 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l01331">1331</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1331</span>                                                       {</div>
-<div class="line"><span class="lineno"> 1332</span>    <span class="keywordtype">int</span> len;</div>
-<div class="line"><span class="lineno"> 1333</span>    <span class="keywordtype">int</span> line, col;</div>
-<div class="line"><span class="lineno"> 1334</span>    WINDOW *action_disposition_win;</div>
-<div class="line"><span class="lineno"> 1335</span> </div>
-<div class="line"><span class="lineno"> 1336</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
-<div class="line"><span class="lineno"> 1337</span>        fprintf(stderr, <span class="stringliteral">&quot;\n%s\n&quot;</span>, title);</div>
-<div class="line"><span class="lineno"> 1338</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, action_str);</div>
-<div class="line"><span class="lineno"> 1339</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1340</span>    }</div>
-<div class="line"><span class="lineno"> 1341</span>    <a class="code hl_struct" href="../../d5/d16/a01154.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/de5/a01123.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1342</span>    <a class="code hl_function" href="#ad1b7aa3694d915e1fd1aef4387a947b8">set_chyron_key</a>(chyron, 10, <span class="stringliteral">&quot;F10 Continue&quot;</span>, KEY_F(10));</div>
-<div class="line"><span class="lineno"> 1343</span>    <a class="code hl_function" href="../../de/de5/a01123.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1344</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(strlen(title), strlen(action_str));</div>
-<div class="line"><span class="lineno"> 1345</span>    col = (COLS - len - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1346</span>    line = (LINES - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1347</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../db/d32/a01122.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(2, len + 2, line, col, title, <span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno"> 1348</span>        <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../d9/db3/a01064.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s) failed&quot;</span>, 4,</div>
-<div class="line"><span class="lineno"> 1349</span>                  line, line, col, title);</div>
-<div class="line"><span class="lineno"> 1350</span>        <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<a class="code hl_variable" href="#abef31515478e58cca8e39168552fca30">em0</a>);</div>
-<div class="line"><span class="lineno"> 1351</span>    }</div>
-<div class="line"><span class="lineno"> 1352</span>    action_disposition_win = <a class="code hl_variable" href="#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
-<div class="line"><span class="lineno"> 1353</span>    mvwaddstr(action_disposition_win, 0, 1, action_str);</div>
-<div class="line"><span class="lineno"> 1354</span>    <a class="code hl_function" href="#a3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(action_disposition_win, chyron, 1, 0);</div>
-<div class="line"><span class="lineno"> 1355</span>    wmove(action_disposition_win, 1, chyron-&gt;<a class="code hl_variable" href="../../d5/d16/a01154.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1356</span>    <a class="code hl_variable" href="#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../db/d32/a01122.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(action_disposition_win, chyron, 1);</div>
-<div class="line"><span class="lineno"> 1357</span>    <a class="code hl_function" href="../../db/d32/a01122.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
-<div class="line"><span class="lineno"> 1358</span>    <a class="code hl_function" href="../../de/de5/a01123.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1359</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1360</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l01330">1330</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1330</span>                                                       {</div>
+<div class="line"><span class="lineno"> 1331</span>    <span class="keywordtype">int</span> len;</div>
+<div class="line"><span class="lineno"> 1332</span>    <span class="keywordtype">int</span> line, col;</div>
+<div class="line"><span class="lineno"> 1333</span>    WINDOW *action_disposition_win;</div>
+<div class="line"><span class="lineno"> 1334</span> </div>
+<div class="line"><span class="lineno"> 1335</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
+<div class="line"><span class="lineno"> 1336</span>        fprintf(stderr, <span class="stringliteral">&quot;\n%s\n&quot;</span>, title);</div>
+<div class="line"><span class="lineno"> 1337</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, action_str);</div>
+<div class="line"><span class="lineno"> 1338</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1339</span>    }</div>
+<div class="line"><span class="lineno"> 1340</span>    <a class="code hl_struct" href="../../d5/d16/a01154.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/de5/a01123.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
+<div class="line"><span class="lineno"> 1341</span>    <a class="code hl_function" href="#ad1b7aa3694d915e1fd1aef4387a947b8">set_chyron_key</a>(chyron, 10, <span class="stringliteral">&quot;F10 Continue&quot;</span>, KEY_F(10));</div>
+<div class="line"><span class="lineno"> 1342</span>    <a class="code hl_function" href="../../de/de5/a01123.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
+<div class="line"><span class="lineno"> 1343</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(strlen(title), strlen(action_str));</div>
+<div class="line"><span class="lineno"> 1344</span>    col = (COLS - len - 4) / 2;</div>
+<div class="line"><span class="lineno"> 1345</span>    line = (LINES - 4) / 2;</div>
+<div class="line"><span class="lineno"> 1346</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../db/d32/a01122.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(2, len + 2, line, col, title, <span class="keyword">true</span>)) {</div>
+<div class="line"><span class="lineno"> 1347</span>        <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../d9/db3/a01064.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s) failed&quot;</span>, 4,</div>
+<div class="line"><span class="lineno"> 1348</span>                  line, line, col, title);</div>
+<div class="line"><span class="lineno"> 1349</span>        <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<a class="code hl_variable" href="#abef31515478e58cca8e39168552fca30">em0</a>);</div>
+<div class="line"><span class="lineno"> 1350</span>    }</div>
+<div class="line"><span class="lineno"> 1351</span>    action_disposition_win = <a class="code hl_variable" href="#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
+<div class="line"><span class="lineno"> 1352</span>    mvwaddstr(action_disposition_win, 0, 1, action_str);</div>
+<div class="line"><span class="lineno"> 1353</span>    <a class="code hl_function" href="#a3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(action_disposition_win, chyron, 1, 0);</div>
+<div class="line"><span class="lineno"> 1354</span>    wmove(action_disposition_win, 1, chyron-&gt;<a class="code hl_variable" href="../../d5/d16/a01154.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
+<div class="line"><span class="lineno"> 1355</span>    <a class="code hl_variable" href="#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../db/d32/a01122.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(action_disposition_win, chyron, 1);</div>
+<div class="line"><span class="lineno"> 1356</span>    <a class="code hl_function" href="../../db/d32/a01122.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
+<div class="line"><span class="lineno"> 1357</span>    <a class="code hl_function" href="../../de/de5/a01123.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
+<div class="line"><span class="lineno"> 1358</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno"> 1359</span>}</div>
 <div class="ttc" id="aa00725_html_a44f81ebcc5b6c685cbdfe388eb420313"><div class="ttname"><a href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a></div><div class="ttdeci">bool f_curses_open</div><div class="ttdef"><b>Definition</b> <a href="../../d2/df3/a01085_source.html#l00033">sig.c:33</a></div></div>
 <div class="ttc" id="aa00725_html_affe776513b24d84b39af8ab0930fef7f"><div class="ttname"><a href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a></div><div class="ttdeci">#define max(a, b)</div><div class="ttdoc">max macro evaluates two expressions, returning greatest result.</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00049">cm.h:49</a></div></div>
 <div class="ttc" id="aa01064_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d9/db3/a01064.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d9/db3/a01064_source.html#l00015">curskeys.c:15</a></div></div>
@@ -389,18 +389,18 @@ Variables</h2></td></tr>
 <div class="ttc" id="aa01112_html_aa7c8c79b6f580386dedaacce81b2e2b5"><div class="ttname"><a href="#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a></div><div class="ttdeci">int win_ptr</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00133">dwin.c:133</a></div></div>
 <div class="ttc" id="aa01112_html_abef31515478e58cca8e39168552fca30"><div class="ttname"><a href="#abef31515478e58cca8e39168552fca30">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00144">dwin.c:144</a></div></div>
 <div class="ttc" id="aa01112_html_ad1b7aa3694d915e1fd1aef4387a947b8"><div class="ttname"><a href="#ad1b7aa3694d915e1fd1aef4387a947b8">set_chyron_key</a></div><div class="ttdeci">void set_chyron_key(Chyron *, int, char *, int)</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00257">dwin.c:257</a></div></div>
-<div class="ttc" id="aa01122_html_ga2feaacf50ca2c7d00b73e21faca59702"><div class="ttname"><a href="../../db/d32/a01122.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a></div><div class="ttdeci">int xwgetch(WINDOW *, Chyron *, int)</div><div class="ttdoc">Wrapper for wgetch that handles signals, mouse events, checks for clicks on the chyron line,...</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01504">dwin.c:1504</a></div></div>
-<div class="ttc" id="aa01122_html_ga38d50d5b402b7b2328874329ae003d7d"><div class="ttname"><a href="../../db/d32/a01122.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a></div><div class="ttdeci">int box_new(int, int, int, int, char *, bool)</div><div class="ttdoc">Create a new window with optional box and title.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00815">dwin.c:815</a></div></div>
-<div class="ttc" id="aa01122_html_ga9dd598e1d49c8764af1eec42c682623e"><div class="ttname"><a href="../../db/d32/a01122.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a></div><div class="ttdeci">WINDOW * win_del()</div><div class="ttdoc">Delete the current window and its associated box window.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00963">dwin.c:963</a></div></div>
+<div class="ttc" id="aa01122_html_ga2feaacf50ca2c7d00b73e21faca59702"><div class="ttname"><a href="../../db/d32/a01122.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a></div><div class="ttdeci">int xwgetch(WINDOW *, Chyron *, int)</div><div class="ttdoc">Wrapper for wgetch that handles signals, mouse events, checks for clicks on the chyron line,...</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01500">dwin.c:1500</a></div></div>
+<div class="ttc" id="aa01122_html_ga38d50d5b402b7b2328874329ae003d7d"><div class="ttname"><a href="../../db/d32/a01122.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a></div><div class="ttdeci">int box_new(int, int, int, int, char *, bool)</div><div class="ttdoc">Create a new window with optional box and title.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00814">dwin.c:814</a></div></div>
+<div class="ttc" id="aa01122_html_ga9dd598e1d49c8764af1eec42c682623e"><div class="ttname"><a href="../../db/d32/a01122.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a></div><div class="ttdeci">WINDOW * win_del()</div><div class="ttdoc">Delete the current window and its associated box window.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00962">dwin.c:962</a></div></div>
 <div class="ttc" id="aa01123_html_ga3f3feb40fd703913c5c136331f627c91"><div class="ttname"><a href="../../de/de5/a01123.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a></div><div class="ttdeci">Chyron * destroy_chyron(Chyron *chyron)</div><div class="ttdoc">Destroy Chyron structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00210">dwin.c:210</a></div></div>
 <div class="ttc" id="aa01123_html_ga645871e46277e31736bc36d0f3dce4bd"><div class="ttname"><a href="../../de/de5/a01123.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a></div><div class="ttdeci">void compile_chyron(Chyron *)</div><div class="ttdoc">construct the chyron string from the chyron structure</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00280">dwin.c:280</a></div></div>
 <div class="ttc" id="aa01123_html_gad37d5808ff30ae6894780425d865abae"><div class="ttname"><a href="../../de/de5/a01123.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a></div><div class="ttdeci">Chyron * new_chyron()</div><div class="ttdoc">Create and initialize Chyron structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00195">dwin.c:195</a></div></div>
-<div class="ttc" id="aa01125_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01217">dwin.c:1217</a></div></div>
+<div class="ttc" id="aa01125_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01216">dwin.c:1216</a></div></div>
 <div class="ttc" id="aa01129_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00153">futil.c:153</a></div></div>
 <div class="ttc" id="aa01154_html"><div class="ttname"><a href="../../d5/d16/a01154.html">Chyron</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00249">cm.h:249</a></div></div>
 <div class="ttc" id="aa01154_html_a0664a24c199473e38c5475d9e3a31447"><div class="ttname"><a href="../../d5/d16/a01154.html#a0664a24c199473e38c5475d9e3a31447">Chyron::l</a></div><div class="ttdeci">int l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00253">cm.h:253</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00129">cmd_key</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00280">compile_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00210">destroy_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00309">display_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00144">em0</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00253">Chyron::l</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00195">new_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01217">Perror()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00257">set_chyron_key()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00153">ssnprintf()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00963">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00133">win_ptr</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00125">win_win</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00129">cmd_key</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00280">compile_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00210">destroy_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00309">display_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00144">em0</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00253">Chyron::l</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00195">new_chyron()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01216">Perror()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00257">set_chyron_key()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00153">ssnprintf()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00962">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00133">win_ptr</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00125">win_win</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -424,43 +424,46 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l01053">1053</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1053</span>                        {</div>
-<div class="line"><span class="lineno"> 1054</span>    <span class="keywordtype">int</span> x, y;</div>
-<div class="line"><span class="lineno"> 1055</span>    <span class="keywordtype">int</span> maxx;</div>
-<div class="line"><span class="lineno"> 1056</span>    <span class="keywordtype">int</span> maxy;</div>
-<div class="line"><span class="lineno"> 1057</span> </div>
-<div class="line"><span class="lineno"> 1058</span>    maxx = getmaxx(box);</div>
-<div class="line"><span class="lineno"> 1059</span>    maxx--;</div>
-<div class="line"><span class="lineno"> 1060</span>    mvwaddnwstr(box, 0, 0, &amp;<a class="code hl_variable" href="#a26a8de94bb9f636074d149970b64e58c">bw_tl</a>, 1);</div>
-<div class="line"><span class="lineno"> 1061</span>    <span class="keywordflow">for</span> (x = 1; x &lt; maxx; x++)</div>
-<div class="line"><span class="lineno"> 1062</span>        waddnwstr(box, &amp;<a class="code hl_variable" href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a>, 1);</div>
-<div class="line"><span class="lineno"> 1063</span>    waddnwstr(box, &amp;<a class="code hl_variable" href="#a598486fa325c11b5d4c9f097ea37c68d">bw_tr</a>, 1);</div>
-<div class="line"><span class="lineno"> 1064</span>    maxy = getmaxy(box);</div>
-<div class="line"><span class="lineno"> 1065</span>    <span class="comment">// Verticals</span></div>
-<div class="line"><span class="lineno"> 1066</span>    <span class="keywordflow">for</span> (y = 1; y &lt; maxy - 4; y++) {</div>
-<div class="line"><span class="lineno"> 1067</span>        mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
-<div class="line"><span class="lineno"> 1068</span>        mvwaddnwstr(box, y, maxx, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
-<div class="line"><span class="lineno"> 1069</span>    }</div>
-<div class="line"><span class="lineno"> 1070</span>    <span class="comment">// Separator line</span></div>
-<div class="line"><span class="lineno"> 1071</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#a7bef9ff53fbc9a7b38220fd5ac150f15">bw_lt</a>, 1);</div>
-<div class="line"><span class="lineno"> 1072</span>    <span class="keywordflow">for</span> (x = 1; x &lt; maxx; x++)</div>
-<div class="line"><span class="lineno"> 1073</span>        waddnwstr(box, &amp;<a class="code hl_variable" href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a>, 1);</div>
-<div class="line"><span class="lineno"> 1074</span>    waddnwstr(box, &amp;<a class="code hl_variable" href="#a0aa9bf26801498404f8bea286da44500">bw_rt</a>, 1);</div>
-<div class="line"><span class="lineno"> 1075</span>    <span class="comment">// Window 2</span></div>
-<div class="line"><span class="lineno"> 1076</span>    y++;</div>
-<div class="line"><span class="lineno"> 1077</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
-<div class="line"><span class="lineno"> 1078</span>    mvwaddnwstr(box, y, maxx, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
-<div class="line"><span class="lineno"> 1079</span>    y++;</div>
-<div class="line"><span class="lineno"> 1080</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
-<div class="line"><span class="lineno"> 1081</span>    mvwaddnwstr(box, y, maxx, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
-<div class="line"><span class="lineno"> 1082</span>    <span class="comment">// Bottom</span></div>
-<div class="line"><span class="lineno"> 1083</span>    y++;</div>
-<div class="line"><span class="lineno"> 1084</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#aa6f50dac9169ce11bcb06617d58c8086">bw_bl</a>, 1);</div>
-<div class="line"><span class="lineno"> 1085</span>    <span class="keywordflow">for</span> (x = 1; x &lt; maxx; x++)</div>
-<div class="line"><span class="lineno"> 1086</span>        waddnwstr(box, &amp;<a class="code hl_variable" href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a>, 1);</div>
-<div class="line"><span class="lineno"> 1087</span>    waddnwstr(box, &amp;<a class="code hl_variable" href="#afbacc56e9dbf0e3bb81ce86866abee32">bw_br</a>, 1);</div>
-<div class="line"><span class="lineno"> 1088</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l01049">1049</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1049</span>                        {</div>
+<div class="line"><span class="lineno"> 1050</span>    <span class="keywordtype">int</span> x, y;</div>
+<div class="line"><span class="lineno"> 1051</span>    <span class="keywordtype">int</span> maxx;</div>
+<div class="line"><span class="lineno"> 1052</span>    <span class="keywordtype">int</span> maxy;</div>
+<div class="line"><span class="lineno"> 1053</span> </div>
+<div class="line"><span class="lineno"> 1054</span>    maxx = getmaxx(box);</div>
+<div class="line"><span class="lineno"> 1055</span>    maxx--;</div>
+<div class="line"><span class="lineno"> 1056</span>    mvwaddnwstr(box, 0, 0, &amp;<a class="code hl_variable" href="#a26a8de94bb9f636074d149970b64e58c">bw_tl</a>, 1);</div>
+<div class="line"><span class="lineno"> 1057</span>    <span class="keywordflow">for</span> (x = 1; x &lt; maxx; x++)</div>
+<div class="line"><span class="lineno"> 1058</span>        waddnwstr(box, &amp;<a class="code hl_variable" href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a>, 1);</div>
+<div class="line"><span class="lineno"> 1059</span>    waddnwstr(box, &amp;<a class="code hl_variable" href="#a598486fa325c11b5d4c9f097ea37c68d">bw_tr</a>, 1);</div>
+<div class="line"><span class="lineno"> 1060</span>    maxy = getmaxy(box);</div>
+<div class="line"><span class="lineno"> 1061</span>    <span class="comment">// Verticals</span></div>
+<div class="line"><span class="lineno"> 1062</span>    <span class="keywordflow">for</span> (y = 1; y &lt; maxy - 4; y++) {</div>
+<div class="line"><span class="lineno"> 1063</span>        mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
+<div class="line"><span class="lineno"> 1064</span>        mvwaddnwstr(box, y, maxx, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
+<div class="line"><span class="lineno"> 1065</span>    }</div>
+<div class="line"><span class="lineno"> 1066</span>    <span class="comment">// Separator line</span></div>
+<div class="line"><span class="lineno"> 1067</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#a7bef9ff53fbc9a7b38220fd5ac150f15">bw_lt</a>, 1);</div>
+<div class="line"><span class="lineno"> 1068</span>    <span class="comment">// line 00, page 00</span></div>
+<div class="line"><span class="lineno"> 1069</span>    mvwaddnwstr(box, y, 1, &amp;<a class="code hl_variable" href="#a0aa9bf26801498404f8bea286da44500">bw_rt</a>, 1);</div>
+<div class="line"><span class="lineno"> 1070</span>    mvwaddnwstr(box, y, 24, &amp;<a class="code hl_variable" href="#a7bef9ff53fbc9a7b38220fd5ac150f15">bw_lt</a>, 1);</div>
+<div class="line"><span class="lineno"> 1071</span>    <span class="keywordflow">for</span> (x = 25; x &lt; maxx; x++)</div>
+<div class="line"><span class="lineno"> 1072</span>        waddnwstr(box, &amp;<a class="code hl_variable" href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a>, 1);</div>
+<div class="line"><span class="lineno"> 1073</span>    waddnwstr(box, &amp;<a class="code hl_variable" href="#a0aa9bf26801498404f8bea286da44500">bw_rt</a>, 1);</div>
+<div class="line"><span class="lineno"> 1074</span>    <span class="comment">// Window 2</span></div>
+<div class="line"><span class="lineno"> 1075</span>    y++;</div>
+<div class="line"><span class="lineno"> 1076</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
+<div class="line"><span class="lineno"> 1077</span>    mvwaddnwstr(box, y, maxx, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
+<div class="line"><span class="lineno"> 1078</span>    y++;</div>
+<div class="line"><span class="lineno"> 1079</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
+<div class="line"><span class="lineno"> 1080</span>    mvwaddnwstr(box, y, maxx, &amp;<a class="code hl_variable" href="#ad2cc2b8cc2c9eef9f20ed9650da0b3f9">bw_ve</a>, 1);</div>
+<div class="line"><span class="lineno"> 1081</span>    <span class="comment">// Bottom</span></div>
+<div class="line"><span class="lineno"> 1082</span>    y++;</div>
+<div class="line"><span class="lineno"> 1083</span>    mvwaddnwstr(box, y, 0, &amp;<a class="code hl_variable" href="#aa6f50dac9169ce11bcb06617d58c8086">bw_bl</a>, 1);</div>
+<div class="line"><span class="lineno"> 1084</span>    <span class="keywordflow">for</span> (x = 1; x &lt; maxx; x++)</div>
+<div class="line"><span class="lineno"> 1085</span>        waddnwstr(box, &amp;<a class="code hl_variable" href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a>, 1);</div>
+<div class="line"><span class="lineno"> 1086</span>    waddnwstr(box, &amp;<a class="code hl_variable" href="#afbacc56e9dbf0e3bb81ce86866abee32">bw_br</a>, 1);</div>
+<div class="line"><span class="lineno"> 1087</span>}</div>
 <div class="ttc" id="aa01112_html_a0aa9bf26801498404f8bea286da44500"><div class="ttname"><a href="#a0aa9bf26801498404f8bea286da44500">bw_rt</a></div><div class="ttdeci">const wchar_t bw_rt</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00106">dwin.c:106</a></div></div>
 <div class="ttc" id="aa01112_html_a0b66386fcca36a42f23788aaa4a7ac60"><div class="ttname"><a href="#a0b66386fcca36a42f23788aaa4a7ac60">bw_ho</a></div><div class="ttdeci">const wchar_t bw_ho</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00099">dwin.c:99</a></div></div>
 <div class="ttc" id="aa01112_html_a26a8de94bb9f636074d149970b64e58c"><div class="ttname"><a href="#a26a8de94bb9f636074d149970b64e58c">bw_tl</a></div><div class="ttdeci">const wchar_t bw_tl</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00101">dwin.c:101</a></div></div>
@@ -472,7 +475,7 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d0/d39/a01112_source.html#l00103">bw_bl</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00104">bw_br</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00099">bw_ho</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00105">bw_lt</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00106">bw_rt</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00101">bw_tl</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00102">bw_tr</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00100">bw_ve</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -524,7 +527,7 @@ Here is the caller graph for this function:</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00252">Chyron::cmplx_buf</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01331">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01101">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01161">display_error()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00115">form_engine()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01217">Perror()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01322">wait_continue()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01279">wait_mk_win()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01330">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01100">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01160">display_error()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00115">form_engine()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01216">Perror()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01321">wait_continue()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01278">wait_mk_win()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -563,81 +566,81 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <p>This is a version of xwgetch that checks for mouse clicks in two windows. Sets mouse_win to the window that was clicked and click_y and click_x to the coordinates of the click. If the click is in the chyron line of the second window, it gets the corresponding key command. Otherwise, it stores the click coordinates and returns 0. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l01575">1575</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1575</span>                                                               {</div>
-<div class="line"><span class="lineno"> 1576</span>    <span class="keywordtype">int</span> c;</div>
-<div class="line"><span class="lineno"> 1577</span>    MEVENT event;</div>
-<div class="line"><span class="lineno"> 1578</span>    mousemask(BUTTON1_CLICKED | BUTTON1_DOUBLE_CLICKED | BUTTON4_PRESSED |</div>
-<div class="line"><span class="lineno"> 1579</span>                  BUTTON5_PRESSED,</div>
-<div class="line"><span class="lineno"> 1580</span>              <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno"> 1581</span>    <a class="code hl_variable" href="#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> = <span class="keyword">event</span>.y = -1;</div>
-<div class="line"><span class="lineno"> 1582</span>    <a class="code hl_variable" href="#a89aa1c1525f82269298a01d552e60037">click_x</a> = <span class="keyword">event</span>.x = -1;</div>
-<div class="line"><span class="lineno"> 1583</span> </div>
-<div class="line"><span class="lineno"> 1584</span>    <span class="keywordflow">if</span> (n == -1) {</div>
-<div class="line"><span class="lineno"> 1585</span>        <span class="keyword">struct </span>termios raw_tioctl;</div>
-<div class="line"><span class="lineno"> 1586</span>        raw_tioctl = <a class="code hl_variable" href="../../d8/db9/a00725.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>;</div>
-<div class="line"><span class="lineno"> 1587</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(&amp;raw_tioctl);</div>
-<div class="line"><span class="lineno"> 1588</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (n == 0)</div>
-<div class="line"><span class="lineno"> 1589</span>        halfdelay(1);</div>
-<div class="line"><span class="lineno"> 1590</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 1591</span>        halfdelay(<a class="code hl_define" href="../../d8/db9/a00725.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(255, <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(0, n * 10)));</div>
-<div class="line"><span class="lineno"> 1592</span>    tcflush(2, TCIFLUSH);</div>
-<div class="line"><span class="lineno"> 1593</span>    curs_set(1);</div>
-<div class="line"><span class="lineno"> 1594</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno"> 1595</span>        c = wgetch(<a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>);</div>
-<div class="line"><span class="lineno"> 1596</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/db9/a00725.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> != 0) {</div>
-<div class="line"><span class="lineno"> 1597</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/db9/a00725.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal</a>(<a class="code hl_variable" href="../../d8/db9/a00725.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a>))</div>
-<div class="line"><span class="lineno"> 1598</span>                c = <a class="code hl_function" href="../../d6/dc4/a01125.html#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a>(<a class="code hl_variable" href="#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_variable" href="#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_variable" href="#af8ae7d202360c017575b322f4d1d890f">em2</a>, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno"> 1599</span>            <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;q&#39;</span> || c == <span class="charliteral">&#39;Q&#39;</span> || c == KEY_F(9))</div>
-<div class="line"><span class="lineno"> 1600</span>                exit(EXIT_FAILURE);</div>
+<p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l01571">1571</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1571</span>                                                               {</div>
+<div class="line"><span class="lineno"> 1572</span>    <span class="keywordtype">int</span> c;</div>
+<div class="line"><span class="lineno"> 1573</span>    MEVENT event;</div>
+<div class="line"><span class="lineno"> 1574</span>    mousemask(BUTTON1_CLICKED | BUTTON1_DOUBLE_CLICKED | BUTTON4_PRESSED |</div>
+<div class="line"><span class="lineno"> 1575</span>                  BUTTON5_PRESSED,</div>
+<div class="line"><span class="lineno"> 1576</span>              <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno"> 1577</span>    <a class="code hl_variable" href="#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> = <span class="keyword">event</span>.y = -1;</div>
+<div class="line"><span class="lineno"> 1578</span>    <a class="code hl_variable" href="#a89aa1c1525f82269298a01d552e60037">click_x</a> = <span class="keyword">event</span>.x = -1;</div>
+<div class="line"><span class="lineno"> 1579</span> </div>
+<div class="line"><span class="lineno"> 1580</span>    <span class="keywordflow">if</span> (n == -1) {</div>
+<div class="line"><span class="lineno"> 1581</span>        <span class="keyword">struct </span>termios raw_tioctl;</div>
+<div class="line"><span class="lineno"> 1582</span>        raw_tioctl = <a class="code hl_variable" href="../../d8/db9/a00725.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a>;</div>
+<div class="line"><span class="lineno"> 1583</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(&amp;raw_tioctl);</div>
+<div class="line"><span class="lineno"> 1584</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (n == 0)</div>
+<div class="line"><span class="lineno"> 1585</span>        halfdelay(1);</div>
+<div class="line"><span class="lineno"> 1586</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno"> 1587</span>        halfdelay(<a class="code hl_define" href="../../d8/db9/a00725.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(255, <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(0, n * 10)));</div>
+<div class="line"><span class="lineno"> 1588</span>    tcflush(2, TCIFLUSH);</div>
+<div class="line"><span class="lineno"> 1589</span>    curs_set(1);</div>
+<div class="line"><span class="lineno"> 1590</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><span class="lineno"> 1591</span>        c = wgetch(<a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>);</div>
+<div class="line"><span class="lineno"> 1592</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d8/db9/a00725.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> != 0) {</div>
+<div class="line"><span class="lineno"> 1593</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/db9/a00725.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal</a>(<a class="code hl_variable" href="../../d8/db9/a00725.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a>))</div>
+<div class="line"><span class="lineno"> 1594</span>                c = <a class="code hl_function" href="../../d6/dc4/a01125.html#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a>(<a class="code hl_variable" href="#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_variable" href="#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_variable" href="#af8ae7d202360c017575b322f4d1d890f">em2</a>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno"> 1595</span>            <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;q&#39;</span> || c == <span class="charliteral">&#39;Q&#39;</span> || c == KEY_F(9))</div>
+<div class="line"><span class="lineno"> 1596</span>                exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno"> 1597</span>        }</div>
+<div class="line"><span class="lineno"> 1598</span>        <span class="keywordflow">if</span> (n &gt; 0 &amp;&amp; c == ERR) {</div>
+<div class="line"><span class="lineno"> 1599</span>            c = 0;</div>
+<div class="line"><span class="lineno"> 1600</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><span class="lineno"> 1601</span>        }</div>
-<div class="line"><span class="lineno"> 1602</span>        <span class="keywordflow">if</span> (n &gt; 0 &amp;&amp; c == ERR) {</div>
-<div class="line"><span class="lineno"> 1603</span>            c = 0;</div>
-<div class="line"><span class="lineno"> 1604</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1605</span>        }</div>
-<div class="line"><span class="lineno"> 1606</span>        <span class="keywordflow">if</span> (c == ERR)</div>
-<div class="line"><span class="lineno"> 1607</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1608</span>        <span class="keywordflow">if</span> (c == KEY_MOUSE) {</div>
-<div class="line"><span class="lineno"> 1609</span>            <span class="keywordflow">if</span> (getmouse(&amp;event) != OK) {</div>
-<div class="line"><span class="lineno"> 1610</span>                c = 0;</div>
-<div class="line"><span class="lineno"> 1611</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno"> 1612</span>            }</div>
-<div class="line"><span class="lineno"> 1613</span>            <span class="keywordflow">if</span> (event.bstate &amp; BUTTON4_PRESSED) {</div>
-<div class="line"><span class="lineno"> 1614</span>                curs_set(0);</div>
-<div class="line"><span class="lineno"> 1615</span>                <span class="keywordflow">return</span> KEY_UP;</div>
-<div class="line"><span class="lineno"> 1616</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.bstate &amp; BUTTON5_PRESSED) {</div>
-<div class="line"><span class="lineno"> 1617</span>                curs_set(0);</div>
-<div class="line"><span class="lineno"> 1618</span>                <span class="keywordflow">return</span> KEY_DOWN;</div>
-<div class="line"><span class="lineno"> 1619</span>            }</div>
-<div class="line"><span class="lineno"> 1620</span>            <span class="keywordflow">if</span> (event.bstate &amp; BUTTON1_CLICKED ||</div>
-<div class="line"><span class="lineno"> 1621</span>                event.bstate &amp; BUTTON1_DOUBLE_CLICKED) {</div>
-<div class="line"><span class="lineno"> 1622</span>                <span class="comment">// Check if the click is in win or win2, and set mouse_win</span></div>
-<div class="line"><span class="lineno"> 1623</span>                <span class="comment">// accordingly</span></div>
-<div class="line"><span class="lineno"> 1624</span>                <span class="comment">// don&#39;t free mouse_win, since it is borrowed</span></div>
-<div class="line"><span class="lineno"> 1625</span>                <a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1626</span>                <span class="keywordflow">if</span> (wenclose(<a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>, event.y, event.x)) {</div>
-<div class="line"><span class="lineno"> 1627</span>                    <span class="keywordflow">if</span> (wmouse_trafo(<a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>, &amp;event.y, &amp;event.x, <span class="keyword">false</span>))</div>
-<div class="line"><span class="lineno"> 1628</span>                        <a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> = <a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>;</div>
-<div class="line"><span class="lineno"> 1629</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (win2 != <span class="keyword">nullptr</span> &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1630</span>                           wenclose(win2, event.y, event.x) &amp;&amp;</div>
-<div class="line"><span class="lineno"> 1631</span>                           wmouse_trafo(win2, &amp;event.y, &amp;event.x, <span class="keyword">false</span>))</div>
-<div class="line"><span class="lineno"> 1632</span>                    <a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> = win2;</div>
-<div class="line"><span class="lineno"> 1633</span>                <a class="code hl_variable" href="#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> = <span class="keyword">event</span>.y;</div>
-<div class="line"><span class="lineno"> 1634</span>                <a class="code hl_variable" href="#a89aa1c1525f82269298a01d552e60037">click_x</a> = <span class="keyword">event</span>.x;</div>
-<div class="line"><span class="lineno"> 1635</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno"> 1636</span>                    c = 0;</div>
-<div class="line"><span class="lineno"> 1637</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1638</span>                }</div>
-<div class="line"><span class="lineno"> 1639</span>                <span class="keywordflow">if</span> (chyron &amp;&amp; event.y == getmaxy(<a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a>) - 1)</div>
-<div class="line"><span class="lineno"> 1640</span>                    c = <a class="code hl_function" href="../../de/de5/a01123.html#ga4298f891699300bfc4e6e56fd2a8d574">get_chyron_key</a>(chyron, event.x);</div>
-<div class="line"><span class="lineno"> 1641</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1642</span>            }</div>
-<div class="line"><span class="lineno"> 1643</span>        }</div>
-<div class="line"><span class="lineno"> 1644</span>    } <span class="keywordflow">while</span> (c == ERR);</div>
-<div class="line"><span class="lineno"> 1645</span>    curs_set(0);</div>
-<div class="line"><span class="lineno"> 1646</span>    <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><span class="lineno"> 1647</span>    <span class="keywordflow">return</span> c;</div>
-<div class="line"><span class="lineno"> 1648</span>}</div>
+<div class="line"><span class="lineno"> 1602</span>        <span class="keywordflow">if</span> (c == ERR)</div>
+<div class="line"><span class="lineno"> 1603</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1604</span>        <span class="keywordflow">if</span> (c == KEY_MOUSE) {</div>
+<div class="line"><span class="lineno"> 1605</span>            <span class="keywordflow">if</span> (getmouse(&amp;event) != OK) {</div>
+<div class="line"><span class="lineno"> 1606</span>                c = 0;</div>
+<div class="line"><span class="lineno"> 1607</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1608</span>            }</div>
+<div class="line"><span class="lineno"> 1609</span>            <span class="keywordflow">if</span> (event.bstate &amp; BUTTON4_PRESSED) {</div>
+<div class="line"><span class="lineno"> 1610</span>                curs_set(0);</div>
+<div class="line"><span class="lineno"> 1611</span>                <span class="keywordflow">return</span> KEY_UP;</div>
+<div class="line"><span class="lineno"> 1612</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event.bstate &amp; BUTTON5_PRESSED) {</div>
+<div class="line"><span class="lineno"> 1613</span>                curs_set(0);</div>
+<div class="line"><span class="lineno"> 1614</span>                <span class="keywordflow">return</span> KEY_DOWN;</div>
+<div class="line"><span class="lineno"> 1615</span>            }</div>
+<div class="line"><span class="lineno"> 1616</span>            <span class="keywordflow">if</span> (event.bstate &amp; BUTTON1_CLICKED ||</div>
+<div class="line"><span class="lineno"> 1617</span>                event.bstate &amp; BUTTON1_DOUBLE_CLICKED) {</div>
+<div class="line"><span class="lineno"> 1618</span>                <span class="comment">// Check if the click is in win or win2, and set mouse_win</span></div>
+<div class="line"><span class="lineno"> 1619</span>                <span class="comment">// accordingly</span></div>
+<div class="line"><span class="lineno"> 1620</span>                <span class="comment">// don&#39;t free mouse_win, since it is borrowed</span></div>
+<div class="line"><span class="lineno"> 1621</span>                <a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1622</span>                <span class="keywordflow">if</span> (wenclose(<a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>, event.y, event.x)) {</div>
+<div class="line"><span class="lineno"> 1623</span>                    <span class="keywordflow">if</span> (wmouse_trafo(<a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>, &amp;event.y, &amp;event.x, <span class="keyword">false</span>))</div>
+<div class="line"><span class="lineno"> 1624</span>                        <a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> = <a class="code hl_variable" href="#a09d962b38c0d24e36078d717d2a6ed96">win</a>;</div>
+<div class="line"><span class="lineno"> 1625</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (win2 != <span class="keyword">nullptr</span> &amp;&amp;</div>
+<div class="line"><span class="lineno"> 1626</span>                           wenclose(win2, event.y, event.x) &amp;&amp;</div>
+<div class="line"><span class="lineno"> 1627</span>                           wmouse_trafo(win2, &amp;event.y, &amp;event.x, <span class="keyword">false</span>))</div>
+<div class="line"><span class="lineno"> 1628</span>                    <a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> = win2;</div>
+<div class="line"><span class="lineno"> 1629</span>                <a class="code hl_variable" href="#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> = <span class="keyword">event</span>.y;</div>
+<div class="line"><span class="lineno"> 1630</span>                <a class="code hl_variable" href="#a89aa1c1525f82269298a01d552e60037">click_x</a> = <span class="keyword">event</span>.x;</div>
+<div class="line"><span class="lineno"> 1631</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a> == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno"> 1632</span>                    c = 0;</div>
+<div class="line"><span class="lineno"> 1633</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno"> 1634</span>                }</div>
+<div class="line"><span class="lineno"> 1635</span>                <span class="keywordflow">if</span> (chyron &amp;&amp; event.y == getmaxy(<a class="code hl_variable" href="#a592d2a61b55c0c5b295fd1f299c7e517">mouse_win</a>) - 1)</div>
+<div class="line"><span class="lineno"> 1636</span>                    c = <a class="code hl_function" href="../../de/de5/a01123.html#ga4298f891699300bfc4e6e56fd2a8d574">get_chyron_key</a>(chyron, event.x);</div>
+<div class="line"><span class="lineno"> 1637</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno"> 1638</span>            }</div>
+<div class="line"><span class="lineno"> 1639</span>        }</div>
+<div class="line"><span class="lineno"> 1640</span>    } <span class="keywordflow">while</span> (c == ERR);</div>
+<div class="line"><span class="lineno"> 1641</span>    curs_set(0);</div>
+<div class="line"><span class="lineno"> 1642</span>    <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
+<div class="line"><span class="lineno"> 1643</span>    <span class="keywordflow">return</span> c;</div>
+<div class="line"><span class="lineno"> 1644</span>}</div>
 <div class="ttc" id="aa00725_html_a01a99fc32bd5b471123f6223503c9616"><div class="ttname"><a href="../../d8/db9/a00725.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a></div><div class="ttdeci">volatile sig_atomic_t sig_received</div><div class="ttdef"><b>Definition</b> <a href="../../d2/df3/a01085_source.html#l00031">sig.c:31</a></div></div>
 <div class="ttc" id="aa00725_html_a0667873879b5846c3fe2fa2cc96059d6"><div class="ttname"><a href="../../d8/db9/a00725.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal</a></div><div class="ttdeci">bool handle_signal(sig_atomic_t)</div></div>
 <div class="ttc" id="aa00725_html_a5080741aab7f17e1d5b24e5ad63cf5e6"><div class="ttname"><a href="../../d8/db9/a00725.html#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl curses_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d09/a01118_source.html#l00034">scriou.c:34</a></div></div>
@@ -648,13 +651,13 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="aa01112_html_aba43294be5cc34c20fa3d3a58af45f0d"><div class="ttname"><a href="#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a></div><div class="ttdeci">int click_y</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00047">dwin.c:47</a></div></div>
 <div class="ttc" id="aa01112_html_af8ae7d202360c017575b322f4d1d890f"><div class="ttname"><a href="#af8ae7d202360c017575b322f4d1d890f">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00146">dwin.c:146</a></div></div>
 <div class="ttc" id="aa01123_html_ga4298f891699300bfc4e6e56fd2a8d574"><div class="ttname"><a href="../../de/de5/a01123.html#ga4298f891699300bfc4e6e56fd2a8d574">get_chyron_key</a></div><div class="ttdeci">int get_chyron_key(Chyron *, int)</div><div class="ttdoc">Get keycode from chyron.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00381">dwin.c:381</a></div></div>
-<div class="ttc" id="aa01125_html_ga67659f8a701b74f4dec0d36227a10d1c"><div class="ttname"><a href="../../d6/dc4/a01125.html#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a></div><div class="ttdeci">int display_error(char *em0, char *em1, char *em2, char *em3)</div><div class="ttdoc">Display an error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01161">dwin.c:1161</a></div></div>
+<div class="ttc" id="aa01125_html_ga67659f8a701b74f4dec0d36227a10d1c"><div class="ttname"><a href="../../d6/dc4/a01125.html#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a></div><div class="ttdeci">int display_error(char *em0, char *em1, char *em2, char *em3)</div><div class="ttdoc">Display an error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01160">dwin.c:1160</a></div></div>
 <div class="ttc" id="aa01138_html_ga1c8e0f0a02e08c783231a20093fb8410"><div class="ttname"><a href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a></div><div class="ttdeci">bool restore_curses_tioctl()</div><div class="ttdoc">restore_curses_tioctl() - restore curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d09/a01118_source.html#l00081">scriou.c:81</a></div></div>
 <div class="ttc" id="aa01138_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../d0/d39/a01138.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d09/a01118_source.html#l00126">scriou.c:126</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d39/a01112_source.html#l00048">click_x</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00047">click_y</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00034">curses_tioctl</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01161">display_error()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00144">em0</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00145">em1</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00146">em2</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00381">get_chyron_key()</a>, <a class="el" href="../../d8/db9/a00725.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00126">mk_raw_tioctl()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00049">mouse_win</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00081">restore_curses_tioctl()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00031">sig_received</a>.</p>
+<p class="reference">References <a class="el" href="../../d0/d39/a01112_source.html#l00048">click_x</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00047">click_y</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00034">curses_tioctl</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01160">display_error()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00144">em0</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00145">em1</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00146">em2</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00381">get_chyron_key()</a>, <a class="el" href="../../d8/db9/a00725.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00126">mk_raw_tioctl()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00049">mouse_win</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00081">restore_curses_tioctl()</a>, and <a class="el" href="../../d2/df3/a01085_source.html#l00031">sig_received</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -732,7 +735,7 @@ Here is the caller graph for this function:</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00246">ChyronKey::cp</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00151">cp_reverse</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00250">Chyron::key</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00244">ChyronKey::keycode</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00153">ssnprintf()</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00242">ChyronKey::text</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01331">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01101">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01161">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00115">form_engine()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01217">Perror()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00306">pick_engine()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01268">wait_mk_chyron()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01330">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01100">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01160">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00115">form_engine()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01216">Perror()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00295">pick_engine()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01267">wait_mk_chyron()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -799,7 +802,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00103">103</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01030">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01026">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>.</p>
 
 </div>
 </div>
@@ -818,7 +821,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00104">104</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01030">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01026">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>.</p>
 
 </div>
 </div>
@@ -854,7 +857,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00099">99</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01030">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01026">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>.</p>
 
 </div>
 </div>
@@ -907,7 +910,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00105">105</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -960,7 +963,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00106">106</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -979,7 +982,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00107">107</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -998,7 +1001,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00101">101</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01030">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01026">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1020,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00102">102</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01030">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01026">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>.</p>
 
 </div>
 </div>
@@ -1053,7 +1056,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00100">100</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01030">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01053">cbox2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01026">cbox()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01049">cbox2()</a>.</p>
 
 </div>
 </div>
@@ -1088,7 +1091,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00160">160</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00265">view_win_resize()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -1125,7 +1128,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00157">157</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00963">win_del()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00962">win_del()</a>.</p>
 
 </div>
 </div>
@@ -1181,7 +1184,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00158">158</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00884">win2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00858">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00883">win2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00857">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -1200,7 +1203,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00048">48</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00117">menu_cmd_processor()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00117">menu_cmd_processor()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -1219,7 +1222,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00047">47</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00117">menu_cmd_processor()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00203">form_post()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00117">menu_cmd_processor()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -1295,7 +1298,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00129">129</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01331">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01101">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01161">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00410">field_navigator()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00765">form_read_data()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01322">wait_continue()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01452">waitpid_with_timeout()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01330">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01100">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01160">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00420">field_navigator()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00775">form_read_data()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01321">wait_continue()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01451">waitpid_with_timeout()</a>.</p>
 
 </div>
 </div>
@@ -1326,7 +1329,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 <div class="line"><span class="lineno">   97</span>    <span class="stringliteral">&quot;white&quot;</span>,   <span class="stringliteral">&quot;orange&quot;</span>, <span class="stringliteral">&quot;bg&quot;</span>,    <span class="stringliteral">&quot;abg&quot;</span>,      <span class="stringliteral">&quot;bblack&quot;</span>, <span class="stringliteral">&quot;bred&quot;</span>,    <span class="stringliteral">&quot;bgreen&quot;</span>,</div>
 <div class="line"><span class="lineno">   98</span>    <span class="stringliteral">&quot;byellow&quot;</span>, <span class="stringliteral">&quot;bblue&quot;</span>,  <span class="stringliteral">&quot;bcyan&quot;</span>, <span class="stringliteral">&quot;bmagenta&quot;</span>, <span class="stringliteral">&quot;bwhite&quot;</span>, <span class="stringliteral">&quot;borange&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01389">clr_name_to_idx()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01407">list_colors()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01388">clr_name_to_idx()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01406">list_colors()</a>.</p>
 
 </div>
 </div>
@@ -1345,7 +1348,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00150">150</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, and <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, and <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>.</p>
 
 </div>
 </div>
@@ -1402,7 +1405,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00151">151</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00280">compile_chyron()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00257">set_chyron_key()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00280">compile_chyron()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00257">set_chyron_key()</a>.</p>
 
 </div>
 </div>
@@ -1421,7 +1424,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00152">152</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, and <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00059">field_editor()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, and <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>.</p>
 
 </div>
 </div>
@@ -1459,7 +1462,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00144">144</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01331">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l02011">enter_file_spec()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00880">form_desc_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00540">form_parse_desc()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00765">form_read_data()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00829">form_write()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00489">get_clr_pair()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01005">lf_find()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01292">mk_dir()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00200">new_pick()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00313">new_view()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01620">open_cmenu_log()</a>, <a class="el" href="../../da/db7/a01088_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00865">verify_dir()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00916">verify_file()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01452">waitpid_with_timeout()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01330">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l02011">enter_file_spec()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00890">form_desc_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00550">form_parse_desc()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00775">form_read_data()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00839">form_write()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00489">get_clr_pair()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01005">lf_find()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01292">mk_dir()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00200">new_pick()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00313">new_view()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01632">open_cmenu_log()</a>, <a class="el" href="../../da/db7/a01088_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00865">verify_dir()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00916">verify_file()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01451">waitpid_with_timeout()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -1478,7 +1481,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00145">145</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l02011">enter_file_spec()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00880">form_desc_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00540">form_parse_desc()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00765">form_read_data()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00829">form_write()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00489">get_clr_pair()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01005">lf_find()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01292">mk_dir()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00200">new_pick()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00313">new_view()</a>, <a class="el" href="../../da/db7/a01088_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00865">verify_dir()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00916">verify_file()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01637">write_cmenu_log()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l02011">enter_file_spec()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00890">form_desc_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00550">form_parse_desc()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00775">form_read_data()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00839">form_write()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00489">get_clr_pair()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01005">lf_find()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01292">mk_dir()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00200">new_pick()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00313">new_view()</a>, <a class="el" href="../../da/db7/a01088_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00865">verify_dir()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00916">verify_file()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01649">write_cmenu_log()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -1497,7 +1500,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00146">146</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l02011">enter_file_spec()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00880">form_desc_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00540">form_parse_desc()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00765">form_read_data()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00829">form_write()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00489">get_clr_pair()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01005">lf_find()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01292">mk_dir()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00313">new_view()</a>, <a class="el" href="../../da/db7/a01088_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00865">verify_dir()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00916">verify_file()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01504">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l02011">enter_file_spec()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00890">form_desc_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00550">form_parse_desc()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00287">form_process()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00775">form_read_data()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00839">form_write()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00489">get_clr_pair()</a>, <a class="el" href="../../d2/df3/a01085_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01005">lf_find()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l01292">mk_dir()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/dce/a01052_source.html#l00313">new_view()</a>, <a class="el" href="../../da/db7/a01088_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00865">verify_dir()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00916">verify_file()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00443">view_init_input()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l01500">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -1709,7 +1712,7 @@ The order of these names corresponds to the <a class="el" href="../../d8/db9/a00
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00049">49</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01575">dxwgetch()</a>, and <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01571">dxwgetch()</a>, and <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>.</p>
 
 </div>
 </div>
@@ -1935,8 +1938,6 @@ These colors can be overridden in ".minitrc" </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00165">165</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>.</p>
-
 </div>
 </div>
 <a id="a09d962b38c0d24e36078d717d2a6ed96" name="a09d962b38c0d24e36078d717d2a6ed96"></a>
@@ -1954,7 +1955,7 @@ These colors can be overridden in ".minitrc" </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00124">124</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d2/d49/a01067_source.html#l00848">picker()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d2/d49/a01067_source.html#l00836">picker()</a>.</p>
 
 </div>
 </div>
@@ -1990,7 +1991,7 @@ These colors can be overridden in ".minitrc" </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00127">127</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00470">form_display_screen()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00785">open_pick_win()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01004">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00884">win2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00963">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00858">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00480">form_display_screen()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00772">open_pick_win()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01003">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00883">win2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00962">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00857">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -2009,7 +2010,7 @@ These colors can be overridden in ".minitrc" </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00133">133</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01331">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01101">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01161">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00470">form_display_screen()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00785">open_pick_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01217">Perror()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01004">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01279">wait_mk_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00884">win2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00963">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00858">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01330">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01100">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01160">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00480">form_display_screen()</a>, <a class="el" href="../../d2/d71/a01055_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00402">open_curses()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00772">open_pick_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01216">Perror()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01003">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01278">wait_mk_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00883">win2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00962">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00857">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -2028,7 +2029,7 @@ These colors can be overridden in ".minitrc" </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00125">125</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01331">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01101">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00815">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01161">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00470">form_display_screen()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00785">open_pick_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01217">Perror()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01004">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01279">wait_mk_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00963">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00858">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00911">win_resize()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l01330">action_disposition()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01100">answer_yn()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00814">box_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01160">display_error()</a>, <a class="el" href="../../d6/d80/a01076_source.html#l00480">form_display_screen()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00037">menu_engine()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00772">open_pick_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01216">Perror()</a>, <a class="el" href="../../d9/db3/a01064_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01003">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l01278">wait_mk_win()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00962">win_del()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00857">win_new()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00910">win_resize()</a>.</p>
 
 </div>
 </div>
@@ -2047,7 +2048,7 @@ These colors can be overridden in ".minitrc" </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d0/d39/a01112_source.html#l00126">126</a> of file <a class="el" href="../../d0/d39/a01112_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00767">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00785">open_pick_win()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00884">win2_new()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00766">box2_new()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00717">destroy_curses()</a>, <a class="el" href="../../d2/d49/a01067_source.html#l00772">open_pick_win()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00883">win2_new()</a>.</p>
 
 </div>
 </div>

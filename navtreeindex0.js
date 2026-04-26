@@ -197,7 +197,7 @@ var NAVTREEINDEX0 =
 "d2/d68/a01295.html#ai-overview-of-developer-norcalli":[5,0,14,1,0],
 "d2/d68/a01295.html#alacritty-configuration":[5,0,18,2,1,2],
 "d2/d68/a01295.html#alternate-bash-executable":[5,0,18,0],
-"d2/d68/a01295.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-3":[5,0,21],
+"d2/d68/a01295.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2":[5,0,21],
 "d2/d68/a01295.html#bat-on-linux":[5,0,5,0],
 "d2/d68/a01295.html#bat-on-macos":[5,0,5,1],
 "d2/d68/a01295.html#bat-on-windows":[5,0,5,2],

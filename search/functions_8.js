@@ -13,10 +13,11 @@ var searchData=
   ['init_5fview_5ffiles_10',['init_view_files',['../dd/de2/a01134.html#gac5213483d722f8f1bd5c28fbbb55369e',1,'mem.c']]],
   ['init_5fview_5ffull_5fscreen_11',['init_view_full_screen',['../db/d28/a01133.html#ga5d69ccbd704b60891cdc788693d436d4',1,'init_view_full_screen(Init *):&#160;init_view.c'],['../db/d28/a01133.html#ga5d69ccbd704b60891cdc788693d436d4',1,'init_view_full_screen(Init *init):&#160;init_view.c']]],
   ['initialize_5fline_5ftable_12',['initialize_line_table',['../de/df6/a01141.html#gaa260d59836439e16d00ad5a6bc4b4829',1,'view_engine.c']]],
-  ['is_5fdirectory_13',['is_directory',['../d9/d17/a01129.html#ga36904413ff36a25decee4eafa2c5c108',1,'is_directory(const char *):&#160;futil.c'],['../d9/d17/a01129.html#ga36904413ff36a25decee4eafa2c5c108',1,'is_directory(const char *path):&#160;futil.c']]],
+  ['is_5fdirectory_13',['is_directory',['../d9/d17/a01129.html#gac249fdf8ca8987f71eb6cb3c60e88ade',1,'is_directory(const char *):&#160;futil.c'],['../d9/d17/a01129.html#gac249fdf8ca8987f71eb6cb3c60e88ade',1,'is_directory(const char *path):&#160;futil.c']]],
   ['is_5fnumeric_14',['is_numeric',['../d5/d4c/a01058.html#ac2aed50ae3ec0cf7176c57f7d96f6df0',1,'iloan.c']]],
   ['is_5fset_5fchyron_5fkey_15',['is_set_chyron_key',['../de/de5/a01123.html#ga15d3a32179f7063332ae621c5565d645',1,'is_set_chyron_key(Chyron *chyron, int k):&#160;dwin.c'],['../de/de5/a01123.html#ga15d3a32179f7063332ae621c5565d645',1,'is_set_chyron_key(Chyron *, int):&#160;dwin.c']]],
-  ['is_5fvalid_5fdate_16',['is_valid_date',['../d9/d5b/a01127.html#ga353546f4d99ef7ec908d371187f033de',1,'fields.c']]],
-  ['is_5fvalid_5fregex_17',['is_valid_regex',['../d9/d17/a01129.html#ga76cb87971fb4e63944ec6627c56c0ffb',1,'is_valid_regex(const char *):&#160;futil.c'],['../d9/d17/a01129.html#ga76cb87971fb4e63944ec6627c56c0ffb',1,'is_valid_regex(const char *pattern):&#160;futil.c']]],
-  ['is_5fvalid_5ftime_18',['is_valid_time',['../d9/d5b/a01127.html#ga56bbb25c4d0944e1b96b9a723cde2ae9',1,'fields.c']]]
+  ['is_5fsymlink_5fto_5fdir_16',['is_symlink_to_dir',['../d9/d17/a01129.html#ga5d82ccbd79a082d3dde94fc456ef76d6',1,'is_symlink_to_dir(const char *):&#160;futil.c'],['../d9/d17/a01129.html#ga5d82ccbd79a082d3dde94fc456ef76d6',1,'is_symlink_to_dir(const char *path):&#160;futil.c']]],
+  ['is_5fvalid_5fdate_17',['is_valid_date',['../d9/d5b/a01127.html#ga353546f4d99ef7ec908d371187f033de',1,'fields.c']]],
+  ['is_5fvalid_5fregex_18',['is_valid_regex',['../d9/d17/a01129.html#ga76cb87971fb4e63944ec6627c56c0ffb',1,'is_valid_regex(const char *):&#160;futil.c'],['../d9/d17/a01129.html#ga76cb87971fb4e63944ec6627c56c0ffb',1,'is_valid_regex(const char *pattern):&#160;futil.c']]],
+  ['is_5fvalid_5ftime_19',['is_valid_time',['../d9/d5b/a01127.html#ga56bbb25c4d0944e1b96b9a723cde2ae9',1,'fields.c']]]
 ];

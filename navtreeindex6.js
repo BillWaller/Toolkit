@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"de/df6/a01141.html#ga03bfb3d8d09d33f4f59930485f283ead":[12,19,16],
+"de/df6/a01141.html#ga395b27e6a9716bf49e3fc04d53987b33":[12,19,0],
 "de/df6/a01141.html#ga46145f1d3680a48cb9391a8ae95db9ad":[12,19,4],
 "de/df6/a01141.html#ga5dbc34981815690a92812e34d1cf478f":[12,19,12],
 "de/df6/a01141.html#ga5f639aa1a1f03fa05888c724bc17d99c":[12,19,15],
@@ -160,7 +162,7 @@ var NAVTREEINDEX6 =
 "globals_z.html":[14,1,0,23],
 "index.html":[],
 "index.html":[0],
-"index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-5":[0,14],
+"index.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4":[0,14],
 "index.html#build-c-menu-from-source-1":[0,13],
 "index.html#c-menu-api-1":[0,8],
 "index.html#c-menu-api-completions-in-neovim":[0,9],

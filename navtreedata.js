@@ -113,9 +113,9 @@ var NAVTREE =
             [ "Requisites", "d7/d88/a01294.html#requisites", null ]
           ] ],
           [ "Ghostty Configuration", "d7/d88/a01294.html#ghostty-configuration", null ],
-          [ "Alacritty and Kitty", "d7/d88/a01294.html#alacritty-and-kitty", null ]
-        ] ],
-        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d7/d88/a01294.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2", null ]
+          [ "Alacritty and Kitty", "d7/d88/a01294.html#alacritty-and-kitty", null ],
+          [ "Rustlings Exercises", "d7/d88/a01294.html#rustlings-exercises", null ]
+        ] ]
       ] ]
     ] ],
     [ "extras", "d2/d68/a01295.html", [
@@ -193,7 +193,7 @@ var NAVTREE =
           [ "Other Resources", "d2/d68/a01295.html#other-resources", null ]
         ] ],
         [ "Conclusion", "d2/d68/a01295.html#conclusion", null ],
-        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d68/a01295.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-3", null ]
+        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.", "d2/d68/a01295.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2", null ]
       ] ]
     ] ],
     [ "FAQ", "d4/d64/a01296.html", [
@@ -238,7 +238,7 @@ var NAVTREE =
         [ "Build C-Menu from Source", "dc/d8c/a01297.html#build-c-menu-from-source", [
           [ "Finish the installation", "dc/d8c/a01297.html#finish-the-installation", null ]
         ] ],
-        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository", "dc/d8c/a01297.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4", null ]
+        [ "🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository", "dc/d8c/a01297.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-3", null ]
       ] ]
     ] ],
     [ "OVERVIEW", "d4/d34/a01298.html", [
@@ -375,11 +375,11 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d2/d68/a01295.html#tree-sitter-parsers-on-macos",
-"d5/d32/a01214.html#a2cdd72645649efd52f6f1f14cd39bfdd",
-"d8/d7a/a01292.html#form-data-types",
-"d8/db9/a00725.html#ae916cef9ebf00ff41380ce9f38a362e0",
-"db/d32/a01122.html#gaedecb8bdc3f4f521877caf0134124fc8",
-"de/df6/a01141.html#ga46145f1d3680a48cb9391a8ae95db9ad"
+"d5/d32/a01214.html#a2a3a77093e0afceec7d57d39f45eff9f",
+"d8/d7a/a01292.html#c-menu-view",
+"d8/db9/a00725.html#ae8adfe777bf037477b137885824c5168",
+"db/d32/a01122.html#gac9adcf7339be4a05ab1a7350c236b8a5",
+"de/df6/a01141.html#ga03bfb3d8d09d33f4f59930485f283ead"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

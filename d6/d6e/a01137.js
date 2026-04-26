@@ -9,7 +9,7 @@ var a01137 =
     [ "open_pick_win", "d6/d6e/a01137.html#gaf20c847dc030116f9999adbba681000c", null ],
     [ "output_objects", "d6/d6e/a01137.html#ga8feb6cd586d503a676b831ec722576fb", null ],
     [ "pick_engine", "d6/d6e/a01137.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d6/d6e/a01137.html#gabb0969a6d1c7e78be46c3b325754c802", null ],
+    [ "picker", "d6/d6e/a01137.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
     [ "read_pick_input", "d6/d6e/a01137.html#gaabda879000cf8135245ef451de08f780", null ],
     [ "reverse_object", "d6/d6e/a01137.html#gab2173ff8fb800d126c180487744672d5", null ],
     [ "save_object", "d6/d6e/a01137.html#ga02f90007f2422dd2094ab64569e157f0", null ],

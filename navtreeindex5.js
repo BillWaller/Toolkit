@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"db/d32/a01122.html#gac9adcf7339be4a05ab1a7350c236b8a5":[12,0,2],
+"db/d32/a01122.html#gad53d9343e97260272389adc8131eedc5":[12,0,12],
 "db/d32/a01122.html#gaedecb8bdc3f4f521877caf0134124fc8":[12,0,14],
 "db/d32/a01122.html#gafc0985a403e3eac0b2cd8f0fab500256":[12,0,3],
 "db/d32/a01122.html#gafe05b547e64abc42a760ec6c9470bbbf":[12,0,13],
@@ -28,7 +30,7 @@ var NAVTREEINDEX5 =
 "dc/d64/a01140.html#gaf01721a6369d49d9f1eebfc4ba6d0a95":[12,18,2],
 "dc/d64/a01140.html#gafa98387c57104e28e438d8bbc23b26eb":[12,18,0],
 "dc/d8c/a01297.html":[7],
-"dc/d8c/a01297.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-4":[7,0,3],
+"dc/d8c/a01297.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-3":[7,0,3],
 "dc/d8c/a01297.html#build-c-menu-from-source":[7,0,2],
 "dc/d8c/a01297.html#c-menu-binaries-for-linux-x86_64":[7,0,1],
 "dc/d8c/a01297.html#finish-the-installation":[7,0,2,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "de/de5/a01123.html#gaa7a0ffb208b4367906c5f228d418232f":[12,1,7],
 "de/de5/a01123.html#gac8edae1b92a3fc0dc55aa1d91433700f":[12,1,4],
 "de/de5/a01123.html#gad37d5808ff30ae6894780425d865abae":[12,1,5],
-"de/df6/a01141.html":[12,19],
-"de/df6/a01141.html#ga03bfb3d8d09d33f4f59930485f283ead":[12,19,16],
-"de/df6/a01141.html#ga395b27e6a9716bf49e3fc04d53987b33":[12,19,0]
+"de/df6/a01141.html":[12,19]
 };

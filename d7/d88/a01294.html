@@ -124,9 +124,9 @@ Table of Contents</h1>
 </li>
 <li><a class="el" href="#ghostty-configuration" title="Ghostty Configuration">Ghostty Configuration</a></li>
 <li><a class="el" href="#alacritty-and-kitty" title="Alacritty and Kitty">Alacritty and Kitty</a></li>
+<li><a class="el" href="#rustlings-exercises" title="Rustlings Exercises">Rustlings Exercises</a></li>
 </ul>
 </li>
-<li><a class="el" href="../../d4/da0/a01291.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository" title="🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.">🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</a></li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="introduction-2"></a>
 Introduction</h2>
@@ -298,8 +298,48 @@ Alacritty and Kitty</h3>
 <div class="caption">
 Workstation Configuration</div></div>
     <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2"></a>
-🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h2>
+<h3 class="doxsection"><a class="anchor" id="rustlings-exercises"></a>
+Rustlings Exercises</h3>
+<p>The objective of this exercise is to streamline the process of iteratively editing the Rustlings exercises with C-Menu <a class="el" href="../../d2/da6/a01210.html" title="Pick data structure.">Pick</a>. Of course, there is a simpler and fully automatic way to do this, but this exercise is meant to give you practice with C-Menu <a class="el" href="../../d2/da6/a01210.html" title="Pick data structure.">Pick</a> for similar projects without the built-in tracking that Rustlings provides. For example, see the following bash script:</p>
+<div class="fragment"><div class="line">#!/bin/bash</div>
+<div class="line">while true; do</div>
+<div class="line">    {</div>
+<div class="line">        vi $(find exercises -name $(sed -n &#39;3p&#39; .rustlings-state.txt).rs)</div>
+<div class="line">        echo Edit $(sed -n &#39;3p&#39; .rustlings-state.txt).rs</div>
+<div class="line">        if [ $(enterchr &quot;Y or N&quot;) != &quot;Y&quot; ]; then</div>
+<div class="line">            echo</div>
+<div class="line">            exit 0</div>
+<div class="line">        fi</div>
+<div class="line">    }</div>
+<div class="line">done</div>
+</div><!-- fragment --><p>But, don't use the above script. It hasn't been fully tested and there are probably instances in which it won't work. C-Menu <a class="el" href="../../d2/da6/a01210.html" title="Pick data structure.">Pick</a> is more fun, and it provides a more controlled way to edit the Rustlings exercises.</p>
+<p>Before starting this exercise, you will need to install the Rust toolchain and Rustlings. The easiest way to do this is as follows:</p>
+<ul>
+<li>Install Rustup:</li>
+</ul>
+<div class="fragment"><div class="line">curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh</div>
+</div><!-- fragment --><ul>
+<li>Install Rustlings in your home directory:</li>
+</ul>
+<p><a href="https://rustlings.rust-lang.org/setup/">See Rustlings</a></p>
+<hr  />
+<ul>
+<li>Create a bash script with the following content and save it in ~/menuapp/bin/rust_src.</li>
+</ul>
+<div class="fragment"><div class="line">lf rustlings -d 5 &#39;exercises.*\.rs$&#39; | sort</div>
+</div><!-- fragment --><ul>
+<li>Add the following two lines to ~/menuapp/msrc/main.m if it isn't already there.</li>
+</ul>
+<div class="fragment"><div class="line">:     Rustlings Source</div>
+<div class="line">!pick -S rust_src -n 1 -T &quot;Rustlings Source - Edit&quot; -c nvim.sh %%</div>
+</div><!-- fragment --><p>Start Rustlings:</p>
+<div class="fragment"><div class="line">cd rustlings</div>
+<div class="line">rustlings</div>
+</div><!-- fragment --><p>At the bottom of the display, you will notice the line, "Current exercise: " and the relative path of the Rust source file for the current exercise. This is the file you will be editing with C-Menu <a class="el" href="../../d2/da6/a01210.html" title="Pick data structure.">Pick</a>.</p>
+<p>Start C-Menu and select the Rustlings Source option. This will list the Rust source files for the exercises. Type the last few characters of the file name in the line editor window. For example, if the current exercise is "exercises/variables/variables1.rs", you can type "bles1". As you type, the list of files will be filtered to match your input. When you see the file you want to edit, select it.</p>
+<p>When you select a file, it will open in Neovim (or your preferred editor if you change nvim.sh) for editing.</p>
+<p>After you finish editing, save the file, and Rustlings will check your work automatically. If you were successful, you can press "n" in the Rustlings terminal to advance to the next exercise.</p>
+<p>🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
