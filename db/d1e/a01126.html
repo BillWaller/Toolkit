@@ -232,58 +232,57 @@ Uses default shell if SHELL environment variable is not set. </dd></dl>
 <div class="line"><span class="lineno">  156</span>            <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<span class="stringliteral">&quot;open(/dev/null) failed in init_pick child process&quot;</span>);</div>
 <div class="line"><span class="lineno">  157</span>            exit(EXIT_FAILURE);</div>
 <div class="line"><span class="lineno">  158</span>        }</div>
-<div class="line"><span class="lineno">  159</span>        dup2(dev_null, STDOUT_FILENO);</div>
-<div class="line"><span class="lineno">  160</span>        dup2(dev_null, STDERR_FILENO);</div>
-<div class="line"><span class="lineno">  161</span>        close(dev_null);</div>
-<div class="line"><span class="lineno">  162</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">  163</span>        werase(stdscr);</div>
-<div class="line"><span class="lineno">  164</span>        wrefresh(stdscr);</div>
-<div class="line"><span class="lineno">  165</span>        execvp(argv[0], argv);</div>
-<div class="line"><span class="lineno">  166</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><span class="lineno">  167</span>        <a class="code hl_function" href="../../d5/d3e/a01139.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">  168</span>        keypad(stdscr, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  169</span>        <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str), <span class="stringliteral">&quot;execvp failed: %s, errno: %d&quot;</span>,</div>
-<div class="line"><span class="lineno">  170</span>                  argv[0], errno);</div>
-<div class="line"><span class="lineno">  171</span>        <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
-<div class="line"><span class="lineno">  172</span>        exit(-1);</div>
-<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">default</span>: <span class="comment">// parent</span></div>
-<div class="line"><span class="lineno">  174</span>        rc = 0;</div>
-<div class="line"><span class="lineno">  175</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><span class="lineno">  176</span>        <a class="code hl_function" href="../../d5/d3e/a01139.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">  177</span>        waitpid(pid, &amp;status, 0);</div>
-<div class="line"><span class="lineno">  178</span>        <span class="keywordflow">if</span> (WIFEXITED(status)) {</div>
-<div class="line"><span class="lineno">  179</span>            rc = WEXITSTATUS(status);</div>
-<div class="line"><span class="lineno">  180</span>            <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><span class="lineno">  181</span>                keypad(stdscr, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  182</span>                <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str),</div>
-<div class="line"><span class="lineno">  183</span>                          <span class="stringliteral">&quot;Child %s exited  with status %d&quot;</span>, argv[0], rc);</div>
-<div class="line"><span class="lineno">  184</span>            }</div>
-<div class="line"><span class="lineno">  185</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  186</span>            <span class="keywordflow">if</span> (WIFSIGNALED(status)) {</div>
-<div class="line"><span class="lineno">  187</span>                rc = WTERMSIG(status);</div>
-<div class="line"><span class="lineno">  188</span>                keypad(stdscr, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  189</span>                <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str),</div>
-<div class="line"><span class="lineno">  190</span>                          <span class="stringliteral">&quot;Child %s terminated by signal %d&quot;</span>, argv[0], rc);</div>
-<div class="line"><span class="lineno">  191</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  192</span>                keypad(stdscr, <span class="keyword">true</span>);</div>
-<div class="line"><span class="lineno">  193</span>                <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str),</div>
-<div class="line"><span class="lineno">  194</span>                          <span class="stringliteral">&quot;Child %s terminated abnormally&quot;</span>, argv[0]);</div>
-<div class="line"><span class="lineno">  195</span>            }</div>
-<div class="line"><span class="lineno">  196</span>        }</div>
-<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  198</span>    }</div>
-<div class="line"><span class="lineno">  199</span>    <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><span class="lineno">  200</span>    <a class="code hl_function" href="../../d5/d3e/a01139.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">  201</span>    touchwin(stdscr);</div>
-<div class="line"><span class="lineno">  202</span>    wnoutrefresh(stdscr);</div>
-<div class="line"><span class="lineno">  203</span>    wrefresh(stdscr);</div>
-<div class="line"><span class="lineno">  204</span>    <a class="code hl_function" href="../../db/d32/a01122.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a>();</div>
-<div class="line"><span class="lineno">  205</span>    tmp_str[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">if</span> (tmp_str[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">  207</span>        <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
-<div class="line"><span class="lineno">  208</span>    }</div>
-<div class="line"><span class="lineno">  209</span>    <span class="keywordflow">return</span> (rc);</div>
-<div class="line"><span class="lineno">  210</span>}</div>
+<div class="line"><span class="lineno">  159</span>        dup2(dev_null, STDERR_FILENO);</div>
+<div class="line"><span class="lineno">  160</span>        close(dev_null);</div>
+<div class="line"><span class="lineno">  161</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line"><span class="lineno">  162</span>        werase(stdscr);</div>
+<div class="line"><span class="lineno">  163</span>        wrefresh(stdscr);</div>
+<div class="line"><span class="lineno">  164</span>        execvp(argv[0], argv);</div>
+<div class="line"><span class="lineno">  165</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
+<div class="line"><span class="lineno">  166</span>        <a class="code hl_function" href="../../d5/d3e/a01139.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line"><span class="lineno">  167</span>        keypad(stdscr, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  168</span>        <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str), <span class="stringliteral">&quot;execvp failed: %s, errno: %d&quot;</span>,</div>
+<div class="line"><span class="lineno">  169</span>                  argv[0], errno);</div>
+<div class="line"><span class="lineno">  170</span>        <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
+<div class="line"><span class="lineno">  171</span>        exit(-1);</div>
+<div class="line"><span class="lineno">  172</span>    <span class="keywordflow">default</span>: <span class="comment">// parent</span></div>
+<div class="line"><span class="lineno">  173</span>        rc = 0;</div>
+<div class="line"><span class="lineno">  174</span>        <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
+<div class="line"><span class="lineno">  175</span>        <a class="code hl_function" href="../../d5/d3e/a01139.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line"><span class="lineno">  176</span>        waitpid(pid, &amp;status, 0);</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordflow">if</span> (WIFEXITED(status)) {</div>
+<div class="line"><span class="lineno">  178</span>            rc = WEXITSTATUS(status);</div>
+<div class="line"><span class="lineno">  179</span>            <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><span class="lineno">  180</span>                keypad(stdscr, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  181</span>                <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str),</div>
+<div class="line"><span class="lineno">  182</span>                          <span class="stringliteral">&quot;Child %s exited  with status %d&quot;</span>, argv[0], rc);</div>
+<div class="line"><span class="lineno">  183</span>            }</div>
+<div class="line"><span class="lineno">  184</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  185</span>            <span class="keywordflow">if</span> (WIFSIGNALED(status)) {</div>
+<div class="line"><span class="lineno">  186</span>                rc = WTERMSIG(status);</div>
+<div class="line"><span class="lineno">  187</span>                keypad(stdscr, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  188</span>                <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str),</div>
+<div class="line"><span class="lineno">  189</span>                          <span class="stringliteral">&quot;Child %s terminated by signal %d&quot;</span>, argv[0], rc);</div>
+<div class="line"><span class="lineno">  190</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  191</span>                keypad(stdscr, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  192</span>                <a class="code hl_function" href="../../d9/d17/a01129.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <span class="keyword">sizeof</span>(tmp_str),</div>
+<div class="line"><span class="lineno">  193</span>                          <span class="stringliteral">&quot;Child %s terminated abnormally&quot;</span>, argv[0]);</div>
+<div class="line"><span class="lineno">  194</span>            }</div>
+<div class="line"><span class="lineno">  195</span>        }</div>
+<div class="line"><span class="lineno">  196</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  197</span>    }</div>
+<div class="line"><span class="lineno">  198</span>    <a class="code hl_function" href="../../d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
+<div class="line"><span class="lineno">  199</span>    <a class="code hl_function" href="../../d5/d3e/a01139.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line"><span class="lineno">  200</span>    touchwin(stdscr);</div>
+<div class="line"><span class="lineno">  201</span>    wnoutrefresh(stdscr);</div>
+<div class="line"><span class="lineno">  202</span>    wrefresh(stdscr);</div>
+<div class="line"><span class="lineno">  203</span>    <a class="code hl_function" href="../../db/d32/a01122.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a>();</div>
+<div class="line"><span class="lineno">  204</span>    tmp_str[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  205</span>    <span class="keywordflow">if</span> (tmp_str[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  206</span>        <a class="code hl_function" href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
+<div class="line"><span class="lineno">  207</span>    }</div>
+<div class="line"><span class="lineno">  208</span>    <span class="keywordflow">return</span> (rc);</div>
+<div class="line"><span class="lineno">  209</span>}</div>
 <div class="ttc" id="aa01064_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d9/db3/a01064.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d9/db3/a01064_source.html#l00015">curskeys.c:15</a></div></div>
 <div class="ttc" id="aa01122_html_ga40858af5b0d68549fb483f77c97eb82c"><div class="ttname"><a href="../../db/d32/a01122.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a></div><div class="ttdeci">void restore_wins()</div><div class="ttdoc">Restore all windows after a screen resize.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01003">dwin.c:1003</a></div></div>
 <div class="ttc" id="aa01125_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l01216">dwin.c:1216</a></div></div>
@@ -477,7 +476,7 @@ If the SHELL environment variable is not set, use /bin/sh. </dd></dl>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../d9/d7c/a01073_source.html#l00128">fork_exec()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d6/d80/a01076_source.html#l00818">form_exec_cmd()</a>, <a class="el" href="../../d9/d7c/a01073_source.html#l00060">full_screen_shell()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00938">lp()</a>, and <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d6/d80/a01076_source.html#l00817">form_exec_cmd()</a>, <a class="el" href="../../d9/d7c/a01073_source.html#l00060">full_screen_shell()</a>, <a class="el" href="../../dd/df1/a01082_source.html#l00938">lp()</a>, and <a class="el" href="../../dd/df1/a01082_source.html#l00178">view_cmd_processor()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
