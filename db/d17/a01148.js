@@ -1,7 +1,5 @@
 var a01148 =
 [
-    [ "cmplx_buf", "db/d17/a01148.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2", null ],
-    [ "key", "db/d17/a01148.html#afae4703fe8eb6cfce07372508666dea6", null ],
-    [ "l", "db/d17/a01148.html#a0664a24c199473e38c5475d9e3a31447", null ],
-    [ "s", "db/d17/a01148.html#ad9e5bdc4bce57a1bbf514562bbb35988", null ]
+    [ "get_command_type", "db/d17/a01148.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "db/d17/a01148.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

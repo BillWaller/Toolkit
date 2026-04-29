@@ -1,10 +1,7 @@
 var a01138 =
 [
-    [ "capture_curses_tioctl", "d0/d39/a01138.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "d0/d39/a01138.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "d0/d39/a01138.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "d0/d39/a01138.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "d0/d39/a01138.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "d0/d39/a01138.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "d0/d39/a01138.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "fork_exec", "d0/d39/a01138.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d0/d39/a01138.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d0/d39/a01138.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "d0/d39/a01138.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

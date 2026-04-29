@@ -1,18 +1,14 @@
 var a01137 =
 [
-    [ "deselect_object", "d6/d6e/a01137.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "d6/d6e/a01137.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "d6/d6e/a01137.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "d6/d6e/a01137.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d6/d6e/a01137.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "match_objects", "d6/d6e/a01137.html#ga91b2cda407803ee4367f7efd5487863c", null ],
-    [ "open_pick_win", "d6/d6e/a01137.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "d6/d6e/a01137.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_engine", "d6/d6e/a01137.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d6/d6e/a01137.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
-    [ "read_pick_input", "d6/d6e/a01137.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d6/d6e/a01137.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d6/d6e/a01137.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d6/d6e/a01137.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d6/d6e/a01137.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "abend", "d6/d6e/a01137.html#ga8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "action_disposition", "d6/d6e/a01137.html#ga251bd97abc13e656e92e0ad484d1725d", null ],
+    [ "answer_yn", "d6/d6e/a01137.html#ga483e2ea4802aa6360588c11adb871464", null ],
+    [ "display_error", "d6/d6e/a01137.html#ga67659f8a701b74f4dec0d36227a10d1c", null ],
+    [ "nf_error", "d6/d6e/a01137.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "Perror", "d6/d6e/a01137.html#ga61b4f28456257f68ed042bed7f187efd", null ],
+    [ "wait_continue", "d6/d6e/a01137.html#ga45c5bf79120644a22ffef896119fb672", null ],
+    [ "wait_destroy", "d6/d6e/a01137.html#ga1659db421e92afe23911f5ae0a469bc5", null ],
+    [ "wait_mk_chyron", "d6/d6e/a01137.html#gaab76ab3464d34674d9d4cd80c87999e7", null ],
+    [ "wait_mk_win", "d6/d6e/a01137.html#ga5f404e9a570fd5981638c80af3d6e54d", null ],
+    [ "waitpid_with_timeout", "d6/d6e/a01137.html#ga1c2e4b3dca428f3a8a78343cc854c3c6", null ]
 ];
