@@ -1,13 +1,20 @@
 var a01125 =
 [
-    [ "abend", "d6/dc4/a01125.html#ga8f6c45ca4a7f6a41c4c88314e697565a", null ],
-    [ "answer_yn", "d6/dc4/a01125.html#ga483e2ea4802aa6360588c11adb871464", null ],
-    [ "display_error", "d6/dc4/a01125.html#ga67659f8a701b74f4dec0d36227a10d1c", null ],
-    [ "nf_error", "d6/dc4/a01125.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "Perror", "d6/dc4/a01125.html#ga61b4f28456257f68ed042bed7f187efd", null ],
-    [ "wait_continue", "d6/dc4/a01125.html#ga45c5bf79120644a22ffef896119fb672", null ],
-    [ "wait_destroy", "d6/dc4/a01125.html#ga1659db421e92afe23911f5ae0a469bc5", null ],
-    [ "wait_mk_chyron", "d6/dc4/a01125.html#gaab76ab3464d34674d9d4cd80c87999e7", null ],
-    [ "wait_mk_win", "d6/dc4/a01125.html#ga5f404e9a570fd5981638c80af3d6e54d", null ],
-    [ "waitpid_with_timeout", "d6/dc4/a01125.html#ga1c2e4b3dca428f3a8a78343cc854c3c6", null ]
+    [ "box2_new", "d6/dc4/a01125.html#ga3b519e8501ce2a37d60f07262f9546bc", null ],
+    [ "box_new", "d6/dc4/a01125.html#ga38d50d5b402b7b2328874329ae003d7d", null ],
+    [ "cbox", "d6/dc4/a01125.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
+    [ "cbox2", "d6/dc4/a01125.html#gadf3e1d675e04bb6827d598ebbcca0d4a", null ],
+    [ "destroy_curses", "d6/dc4/a01125.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "d6/dc4/a01125.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "d6/dc4/a01125.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "d6/dc4/a01125.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "view_full_screen_resize", "d6/dc4/a01125.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_win_resize", "d6/dc4/a01125.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
+    [ "win2_new", "d6/dc4/a01125.html#gac986c6794183f92e962912c5d2f9a924", null ],
+    [ "win_del", "d6/dc4/a01125.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
+    [ "win_init_attrs", "d6/dc4/a01125.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "d6/dc4/a01125.html#gad53d9343e97260272389adc8131eedc5", null ],
+    [ "win_redraw", "d6/dc4/a01125.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "d6/dc4/a01125.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "d6/dc4/a01125.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
 ];

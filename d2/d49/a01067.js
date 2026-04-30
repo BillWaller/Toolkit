@@ -1,6 +1,6 @@
 var a01067 =
 [
-    [ "ABEND", "d2/d49/a01067.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
-    [ "main", "d2/d49/a01067.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "f_verbose", "d2/d49/a01067.html#aaada0e40d7855fd811f41c576cd785fe", null ]
+    [ "KSTRLEN", "d2/d49/a01067.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "d2/d49/a01067.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "d2/d49/a01067.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

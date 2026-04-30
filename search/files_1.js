@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['c_2dmenu_2dug_2emd_0',['C-Menu-UG.md',['../db/d23/a01025.html',1,'']]],
-  ['changelog_2emd_1',['CHANGELOG.md',['../d0/d22/a01049.html',1,'']]],
+  ['c_2dmenu_2dug_2emd_0',['C-Menu-UG.md',['../d1/dd8/a01022.html',1,'']]],
+  ['changelog_2emd_1',['CHANGELOG.md',['../da/d17/a01046.html',1,'']]],
   ['cm_2eh_2',['cm.h',['../d8/db9/a00725.html',1,'']]],
   ['common_2eh_3',['common.h',['../dd/dd8/a00719.html',1,'']]],
-  ['curskeys_2ec_4',['curskeys.c',['../d5/d67/a01070.html',1,'']]]
+  ['curskeys_2ec_4',['curskeys.c',['../d2/d49/a01067.html',1,'']]]
 ];

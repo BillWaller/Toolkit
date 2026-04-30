@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['base_5fname_0',['base_name',['../de/de4/a01135.html#gae3d67c8c0b5b559664942e539256605b',1,'base_name(char *, char *):&#160;futil.c'],['../de/de4/a01135.html#gae3d67c8c0b5b559664942e539256605b',1,'base_name(char *buf, char *path):&#160;futil.c']]],
-  ['box2_5fnew_1',['box2_new',['../d9/d12/a01128.html#ga3b519e8501ce2a37d60f07262f9546bc',1,'box2_new(int wlines, int wcols, int wbegy, int wbegx, char *wtitle, bool win_pair):&#160;dwin.c'],['../d9/d12/a01128.html#ga3b519e8501ce2a37d60f07262f9546bc',1,'box2_new(int, int, int, int, char *, bool):&#160;dwin.c']]],
-  ['box_5fnew_2',['box_new',['../d9/d12/a01128.html#ga38d50d5b402b7b2328874329ae003d7d',1,'box_new(int wlines, int wcols, int wbegy, int wbegx, char *wtitle, bool win_pair):&#160;dwin.c'],['../d9/d12/a01128.html#ga38d50d5b402b7b2328874329ae003d7d',1,'box_new(int, int, int, int, char *, bool):&#160;dwin.c']]],
-  ['build_5fprompt_3',['build_prompt',['../de/d07/a01146.html#gaf01721a6369d49d9f1eebfc4ba6d0a95',1,'view_engine.c']]]
+  ['base_5fname_0',['base_name',['../d6/de6/a01132.html#gae3d67c8c0b5b559664942e539256605b',1,'base_name(char *, char *):&#160;futil.c'],['../d6/de6/a01132.html#gae3d67c8c0b5b559664942e539256605b',1,'base_name(char *buf, char *path):&#160;futil.c']]],
+  ['box2_5fnew_1',['box2_new',['../d6/dc4/a01125.html#ga3b519e8501ce2a37d60f07262f9546bc',1,'box2_new(int wlines, int wcols, int wbegy, int wbegx, char *wtitle, bool win_pair):&#160;dwin.c'],['../d6/dc4/a01125.html#ga3b519e8501ce2a37d60f07262f9546bc',1,'box2_new(int, int, int, int, char *, bool):&#160;dwin.c']]],
+  ['box_5fnew_2',['box_new',['../d6/dc4/a01125.html#ga38d50d5b402b7b2328874329ae003d7d',1,'box_new(int wlines, int wcols, int wbegy, int wbegx, char *wtitle, bool win_pair):&#160;dwin.c'],['../d6/dc4/a01125.html#ga38d50d5b402b7b2328874329ae003d7d',1,'box_new(int, int, int, int, char *, bool):&#160;dwin.c']]],
+  ['build_5fprompt_3',['build_prompt',['../db/db2/a01143.html#gaf01721a6369d49d9f1eebfc4ba6d0a95',1,'view_engine.c']]]
 ];
