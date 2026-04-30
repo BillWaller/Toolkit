@@ -1,7 +1,10 @@
 var a01061 =
 [
-    [ "popup_form", "de/d9e/a01061.html#a13f8b084e552c96d7d15383a8474d954", null ],
-    [ "popup_menu", "de/d9e/a01061.html#a6b007a96a02f8503343c038608ddf369", null ],
-    [ "popup_pick", "de/d9e/a01061.html#abed833a4802d8e3274c2e3991ddac66c", null ],
-    [ "popup_view", "de/d9e/a01061.html#af54153eccf65174a2a2c9a4e551395cc", null ]
+    [ "init_view_boxwin", "d5/d3e/a01139.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d5/d3e/a01139.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_calc_full_screen_dimensions", "d5/d3e/a01139.html#gaa64cfaf51c250788f093130763495ac4", null ],
+    [ "view_calc_win_dimensions", "d5/d3e/a01139.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
+    [ "view_full_screen_resize", "d9/d12/a01128.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_init_input", "d5/d3e/a01139.html#gab050f5482419339e9207dbdc65a7b49e", null ],
+    [ "view_win_resize", "d9/d12/a01128.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ]
 ];

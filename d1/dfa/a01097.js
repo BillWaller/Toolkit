@@ -1,10 +1,9 @@
 var a01097 =
 [
-    [ "MAX_FRAMES", "d1/dfa/a01097.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "de/df1/a01151.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "de/df1/a01151.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "de/df1/a01151.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "de/df1/a01151.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "d1/dfa/a01097.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "d1/dfa/a01097.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "__USE_XOPEN", "d1/dfa/a01097.html#a8773045a81f883f2ab00761f45e8642c", null ],
+    [ "main", "d1/dfa/a01097.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "argp_program_bug_address", "d1/dfa/a01097.html#aaa037e59f26a80a8a2e35e6f2364004d", null ],
+    [ "argp_program_version", "d1/dfa/a01097.html#a62f73ea01c816f1996aed4c66f57c4fb", null ],
+    [ "doc", "d1/dfa/a01097.html#a9c5c8462bbe0ea90777f94557d6d5ac9", null ],
+    [ "tm_info", "d1/dfa/a01097.html#ac8014a14db6bb31fcf044a9b2f2b5297", null ]
 ];

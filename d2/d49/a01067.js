@@ -1,10 +1,6 @@
 var a01067 =
 [
-    [ "init_view_boxwin", "d9/d65/a01145.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d9/d65/a01145.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "d9/d65/a01145.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "d9/d65/a01145.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_full_screen_resize", "dd/de2/a01134.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
-    [ "view_init_input", "d9/d65/a01145.html#gab050f5482419339e9207dbdc65a7b49e", null ],
-    [ "view_win_resize", "dd/de2/a01134.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ]
+    [ "ABEND", "d2/d49/a01067.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "d2/d49/a01067.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "f_verbose", "d2/d49/a01067.html#aaada0e40d7855fd811f41c576cd785fe", null ]
 ];

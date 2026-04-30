@@ -1,9 +1,7 @@
 var a01145 =
 [
-    [ "init_view.c", "d2/d49/a01067.html", null ],
-    [ "init_view_boxwin", "d9/d65/a01145.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d9/d65/a01145.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "d9/d65/a01145.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "d9/d65/a01145.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_init_input", "d9/d65/a01145.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "handle_signal", "d9/d65/a01145.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d9/d65/a01145.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d9/d65/a01145.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d9/d65/a01145.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];
