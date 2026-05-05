@@ -49,7 +49,7 @@ var NAVTREE =
         [ "Edit .c Files in Current Directory", "index.html#edit-c-files-in-current-directory", null ],
         [ "View C-Menu Source With Tree-Sitter", "index.html#view-c-menu-source-with-tree-sitter", null ]
       ] ],
-      [ "Sneaky Optimization Techniques", "index.html#sneaky-optimization-techniques", null ],
+      [ "Sneakey Optimization Techniques", "index.html#sneakey-optimization-techniques", null ],
       [ "How to get C-Menu", "db/d4b/a01309.html#how-to-get-c-menu", [
         [ "Get C-Menu on Github", "db/d4b/a01309.html#get-c-menu-on-github", null ],
         [ "Introduction", "db/d4b/a01309.html#introduction", null ],

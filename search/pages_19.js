@@ -6,7 +6,7 @@ var searchData=
   ['table_20of_20contents_3',['Table of Contents',['../da/d79/a01310.html#table-of-contents',1,'Table of Contents'],['../de/d90/a01313.html#table-of-contents-1',1,'Table of Contents'],['../d9/de6/a01314.html#table-of-contents-2',1,'Table of Contents'],['../d2/d8e/a01315.html#table-of-contents-3',1,'Table of Contents'],['../d4/d49/a01316.html#table-of-contents-4',1,'Table of Contents'],['../df/db8/a01317.html#table-of-contents-5',1,'Table of Contents'],['../df/dec/a01320.html#table-of-contents-6',1,'Table of Contents']]],
   ['target_20recommended_4',['Using the Makefile target (recommended)',['../d9/d5c/a01321.html#using-the-makefile-target-recommended',1,'']]],
   ['tasks_20to_20complete_20before_200_203_200_5',['0.2.9 Tasks to Complete before 0.3.0',['../d1/d72/a01319.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
-  ['techniques_6',['Sneaky Optimization Techniques',['../index.html#sneaky-optimization-techniques',1,'']]],
+  ['techniques_6',['Sneakey Optimization Techniques',['../index.html#sneakey-optimization-techniques',1,'']]],
   ['terminal_20and_20editor_20settings_7',['Terminal and Editor Settings',['../df/dec/a01320.html#terminal-and-editor-settings',1,'']]],
   ['terminal_20configurations_8',['Terminal Configurations',['../d9/de6/a01314.html#example-terminal-configurations',1,'Example Terminal Configurations'],['../df/dec/a01320.html#terminal-configurations',1,'Terminal Configurations']]],
   ['terminal_20emulator_9',['Customize Your Terminal Emulator',['../d9/de6/a01314.html#customize-your-terminal-emulator',1,'']]],

@@ -1665,42 +1665,44 @@ Line editor loop</h1>
 <div class="line"><span class="lineno"> 1331</span>                <span class="keywordflow">continue</span>;</div>
 <div class="line"><span class="lineno"> 1332</span> </div>
 <div class="line"><span class="lineno"> 1333</span>            <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno"> 1334</span>                <span class="keywordflow">if</span> (ptr &gt;= fend) {</div>
+<div class="line"><span class="lineno"> 1334</span>                <span class="keywordflow">if</span> (in_key &lt; <span class="charliteral">&#39; &#39;</span> || in_key &gt; <span class="charliteral">&#39;~&#39;</span>) {</div>
 <div class="line"><span class="lineno"> 1335</span>                    in_key = 0;</div>
 <div class="line"><span class="lineno"> 1336</span>                    <span class="keywordflow">continue</span>;</div>
 <div class="line"><span class="lineno"> 1337</span>                }</div>
-<div class="line"><span class="lineno"> 1338</span>                <span class="keywordflow">if</span> (in_key &gt;= <span class="charliteral">&#39; &#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1339</span>                    <span class="keywordflow">if</span> (f_insert) {</div>
-<div class="line"><span class="lineno"> 1340</span>                        <span class="keywordflow">if</span> (str_end &lt; fend) {</div>
-<div class="line"><span class="lineno"> 1341</span>                            s = str_end - 1;</div>
-<div class="line"><span class="lineno"> 1342</span>                            d = str_end;</div>
-<div class="line"><span class="lineno"> 1343</span>                            <span class="keywordflow">while</span> (s &gt;= ptr)</div>
-<div class="line"><span class="lineno"> 1344</span>                                *d-- = *s--;</div>
-<div class="line"><span class="lineno"> 1345</span>                            *ptr++ = in_key;</div>
-<div class="line"><span class="lineno"> 1346</span>                            str_end++;</div>
-<div class="line"><span class="lineno"> 1347</span>                            pos++;</div>
-<div class="line"><span class="lineno"> 1348</span>                        }</div>
-<div class="line"><span class="lineno"> 1349</span>                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1350</span>                        <span class="keywordflow">if</span> (ptr &lt; fend) {</div>
-<div class="line"><span class="lineno"> 1351</span>                            <span class="keywordflow">if</span> (ptr &lt; str_end) {</div>
-<div class="line"><span class="lineno"> 1352</span>                                *ptr++ = in_key;</div>
-<div class="line"><span class="lineno"> 1353</span>                                pos++;</div>
-<div class="line"><span class="lineno"> 1354</span>                            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ptr == str_end) {</div>
-<div class="line"><span class="lineno"> 1355</span>                                *ptr++ = in_key;</div>
-<div class="line"><span class="lineno"> 1356</span>                                *ptr = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1357</span>                                str_end = ptr;</div>
-<div class="line"><span class="lineno"> 1358</span>                                pos++;</div>
-<div class="line"><span class="lineno"> 1359</span>                            }</div>
-<div class="line"><span class="lineno"> 1360</span>                        }</div>
-<div class="line"><span class="lineno"> 1361</span>                    }</div>
-<div class="line"><span class="lineno"> 1362</span>                    in_key = 0;</div>
-<div class="line"><span class="lineno"> 1363</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1338</span>                <span class="keywordflow">if</span> (ptr &gt;= fend) {</div>
+<div class="line"><span class="lineno"> 1339</span>                    in_key = 0;</div>
+<div class="line"><span class="lineno"> 1340</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1341</span>                }</div>
+<div class="line"><span class="lineno"> 1342</span>                <span class="keywordflow">if</span> (f_insert) {</div>
+<div class="line"><span class="lineno"> 1343</span>                    <span class="keywordflow">if</span> (str_end &lt; fend) {</div>
+<div class="line"><span class="lineno"> 1344</span>                        s = str_end - 1;</div>
+<div class="line"><span class="lineno"> 1345</span>                        d = str_end;</div>
+<div class="line"><span class="lineno"> 1346</span>                        <span class="keywordflow">while</span> (s &gt;= ptr)</div>
+<div class="line"><span class="lineno"> 1347</span>                            *d-- = *s--;</div>
+<div class="line"><span class="lineno"> 1348</span>                        *ptr++ = in_key;</div>
+<div class="line"><span class="lineno"> 1349</span>                        str_end++;</div>
+<div class="line"><span class="lineno"> 1350</span>                        pos++;</div>
+<div class="line"><span class="lineno"> 1351</span>                    }</div>
+<div class="line"><span class="lineno"> 1352</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno"> 1353</span>                    <span class="keywordflow">if</span> (ptr &lt; fend) {</div>
+<div class="line"><span class="lineno"> 1354</span>                        <span class="keywordflow">if</span> (ptr &lt; str_end) {</div>
+<div class="line"><span class="lineno"> 1355</span>                            *ptr++ = in_key;</div>
+<div class="line"><span class="lineno"> 1356</span>                            pos++;</div>
+<div class="line"><span class="lineno"> 1357</span>                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ptr == str_end) {</div>
+<div class="line"><span class="lineno"> 1358</span>                            *ptr++ = in_key;</div>
+<div class="line"><span class="lineno"> 1359</span>                            *ptr = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1360</span>                            str_end = ptr;</div>
+<div class="line"><span class="lineno"> 1361</span>                            pos++;</div>
+<div class="line"><span class="lineno"> 1362</span>                        }</div>
+<div class="line"><span class="lineno"> 1363</span>                    }</div>
 <div class="line"><span class="lineno"> 1364</span>                }</div>
-<div class="line"><span class="lineno"> 1365</span>            }</div>
-<div class="line"><span class="lineno"> 1366</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1367</span>        }</div>
-<div class="line"><span class="lineno"> 1368</span>    }</div>
-<div class="line"><span class="lineno"> 1369</span>}</div>
+<div class="line"><span class="lineno"> 1365</span>                in_key = 0;</div>
+<div class="line"><span class="lineno"> 1366</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno"> 1367</span>            }</div>
+<div class="line"><span class="lineno"> 1368</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno"> 1369</span>        }</div>
+<div class="line"><span class="lineno"> 1370</span>    }</div>
+<div class="line"><span class="lineno"> 1371</span>}</div>
 <div class="ttc" id="aa00725_html_a02e25a45a793eb58557ae52b1c8b2b33"><div class="ttname"><a href="../../d8/db9/a00725.html#a02e25a45a793eb58557ae52b1c8b2b33">rtrim</a></div><div class="ttdeci">size_t rtrim(char *)</div><div class="ttdoc">Trims trailing spaces from string s in place.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/dc8/a01124_source.html#l00111">futil.c:111</a></div></div>
 <div class="ttc" id="aa00725_html_a7b6d5fc8db749d1173653946366cfdf0"><div class="ttname"><a href="../../d8/db9/a00725.html#a7b6d5fc8db749d1173653946366cfdf0">BW_RAN</a></div><div class="ttdeci">#define BW_RAN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00459">cm.h:459</a></div></div>
 <div class="ttc" id="aa00725_html_af475c4649f5ac3f8f9901d7a7b9c1b93"><div class="ttname"><a href="../../d8/db9/a00725.html#af475c4649f5ac3f8f9901d7a7b9c1b93">Ctrl</a></div><div class="ttdeci">#define Ctrl(c)</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00034">cm.h:34</a></div></div>

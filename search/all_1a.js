@@ -15,7 +15,7 @@ var searchData=
   ['tbl_5flines_12',['tbl_lines',['../de/d16/a01228.html#a1025cf6e8bee58b227c766f599061117',1,'Pick']]],
   ['tbl_5fpage_13',['tbl_page',['../de/d16/a01228.html#a72743911d1232e84de2d2ad766aa53de',1,'Pick::tbl_page'],['../d2/df3/a01085.html#ae7c3abf692920540a78bc3322d02828a',1,'tbl_page:&#160;pick_engine.c']]],
   ['tbl_5fpages_14',['tbl_pages',['../de/d16/a01228.html#a1a15072ff90a8438f838250ad3a0d27b',1,'Pick::tbl_pages'],['../d2/df3/a01085.html#acbe29ef30ea713ef47f3cd892310ca50',1,'tbl_pages:&#160;pick_engine.c']]],
-  ['techniques_15',['Sneaky Optimization Techniques',['../index.html#sneaky-optimization-techniques',1,'']]],
+  ['techniques_15',['Sneakey Optimization Techniques',['../index.html#sneakey-optimization-techniques',1,'']]],
   ['terminal_20and_20editor_20settings_16',['Terminal and Editor Settings',['../df/dec/a01320.html#terminal-and-editor-settings',1,'']]],
   ['terminal_20configurations_17',['Terminal Configurations',['../d9/de6/a01314.html#example-terminal-configurations',1,'Example Terminal Configurations'],['../df/dec/a01320.html#terminal-configurations',1,'Terminal Configurations']]],
   ['terminal_20emulator_18',['Customize Your Terminal Emulator',['../d9/de6/a01314.html#customize-your-terminal-emulator',1,'']]],

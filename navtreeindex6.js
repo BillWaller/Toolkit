@@ -192,7 +192,7 @@ var NAVTREEINDEX6 =
 "index.html#menu-line-by-line-breakdown-1":[2],
 "index.html#other-c-menu-documentation":[0],
 "index.html#rustlings-source":[4,0],
-"index.html#sneaky-optimization-techniques":[5],
+"index.html#sneakey-optimization-techniques":[5],
 "index.html#sub-menus-1":[2,2],
 "index.html#text-1":[3,0,0],
 "index.html#text-lines-1":[2,1],

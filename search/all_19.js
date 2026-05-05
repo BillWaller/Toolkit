@@ -85,7 +85,7 @@ var searchData=
   ['sminrow_82',['sminrow',['../d0/d67/a01232.html#ab060f790bba470d8b05d16354ef1449d',1,'View']]],
   ['snacks_20nvim_83',['Snacks nvim',['../d9/de6/a01314.html#folkes-snacksnvim',1,'Folke&apos;s Snacks.nvim'],['../d9/de6/a01314.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'To Use the Neovim Unicode Art in Snacks.nvim']]],
   ['snacks_20nvim_20colorizer_84',['To Install Folke&apos;s Snacks.nvim-colorizer',['../d9/de6/a01314.html#to-install-folkes-snacksnvim-colorizer',1,'']]],
-  ['sneaky_20optimization_20techniques_85',['Sneaky Optimization Techniques',['../index.html#sneaky-optimization-techniques',1,'']]],
+  ['sneakey_20optimization_20techniques_85',['Sneakey Optimization Techniques',['../index.html#sneakey-optimization-techniques',1,'']]],
   ['snippets_86',['snippets',['../df/dec/a01320.html',1,'']]],
   ['snippets_2emd_87',['snippets.md',['../d2/d41/a01037.html',1,'']]],
   ['soap_20box_88',['Visual Aids Soap-box',['../d2/d8e/a01315.html#visual-aids-soap-box',1,'']]],
