@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: scriou.c File Reference</title>
+<title>C-Menu: init.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,186 +109,355 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/de4/a01121.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">scriou.c File Reference</div></div>
+  <div class="headertitle"><div class="title">init.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Screen IO Support for MENU.  
+<p>Initialization for <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Application Programs.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;argp.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
+<code>#include &lt;locale.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for scriou.c:</div>
+Include dependency graph for init.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d32/a01122.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d32/a01122.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../dd/de4/a01121_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a8fba11b18e45631d27d71f508b9b5b6b" id="r_a8fba11b18e45631d27d71f508b9b5b6b"><td class="memItemLeft">enum &#160;</td><td class="memItemRight">{ <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268">IN_SPEC</a> = 257
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4">OUT_SPEC</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240">BG_XCLR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122">BO_XCLR</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99">FG_XCLR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0">LN_BG_CLR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df">LN_XCLR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148">GM_BLUE</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d">GM_GRAY</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27">GM_GREEN</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167">GM_RED</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c">XBBLACK</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956">XBBLUE</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1">XBCYAN</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b">XBGREEN</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611">XBLACK</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5">XBLUE</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63">XBMAGENTA</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913">XBRED</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258">XBWHITE</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d">XBYELLOW</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0">XCYAN</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8">CM_EDITOR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e">XGREEN</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08">XMAGENTA</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7">XRED</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63">XWHITE</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94">XYELLOW</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b">MAPP_DATA</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154">MAPP_HELP</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc">MAPP_HOME</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de">MAPP_MSRC</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50">MAPP_USER</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2">MAPP_HELP_DIR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3">MAPP_DATA_DIR</a>
+, <a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6">MAPP_SPEC</a>
+, <br />
+&#160;&#160;<a class="el" href="#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80">HELP_SPEC</a>
+<br />
+ }</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga0d6d5d9834cd5c2a9d14349bf7ab6274" id="r_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a> ()</td></tr>
-<tr class="memdesc:ga0d6d5d9834cd5c2a9d14349bf7ab6274"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../de/df6/a01141.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274" title="capture_shell_tioctl() - capture shell terminal settings">capture_shell_tioctl()</a> - capture shell terminal settings  <br /></td></tr>
-<tr class="memitem:gac5e3adb304b78910fc77761ef6a743f0" id="r_gac5e3adb304b78910fc77761ef6a743f0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a> ()</td></tr>
-<tr class="memdesc:gac5e3adb304b78910fc77761ef6a743f0"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../de/df6/a01141.html#gac5e3adb304b78910fc77761ef6a743f0" title="restore_shell_tioctl() - restore shell terminal settings">restore_shell_tioctl()</a> - restore shell terminal settings  <br /></td></tr>
-<tr class="memitem:ga4d0a6767e791cf93a268ebe9ba02aa24" id="r_ga4d0a6767e791cf93a268ebe9ba02aa24"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a> ()</td></tr>
-<tr class="memdesc:ga4d0a6767e791cf93a268ebe9ba02aa24"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../de/df6/a01141.html#ga4d0a6767e791cf93a268ebe9ba02aa24" title="capture_curses_tioctl() - capture curses terminal settings">capture_curses_tioctl()</a> - capture curses terminal settings  <br /></td></tr>
-<tr class="memitem:ga1c8e0f0a02e08c783231a20093fb8410" id="r_ga1c8e0f0a02e08c783231a20093fb8410"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a> ()</td></tr>
-<tr class="memdesc:ga1c8e0f0a02e08c783231a20093fb8410"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../de/df6/a01141.html#ga1c8e0f0a02e08c783231a20093fb8410" title="restore_curses_tioctl() - restore curses terminal settings">restore_curses_tioctl()</a> - restore curses terminal settings  <br /></td></tr>
-<tr class="memitem:gab69b11814964ea732c1e8e0ca6d22c1c" id="r_gab69b11814964ea732c1e8e0ca6d22c1c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#gab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a> (struct termios *t_p)</td></tr>
-<tr class="memdesc:gab69b11814964ea732c1e8e0ca6d22c1c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../de/df6/a01141.html#gab69b11814964ea732c1e8e0ca6d22c1c" title="set_sane_tioctl() - set terminal to sane settings for C-MENU">set_sane_tioctl()</a> - set terminal to sane settings for C-MENU  <br /></td></tr>
-<tr class="memitem:ga9595fce25a583a656ca51a8b8f7494ae" id="r_ga9595fce25a583a656ca51a8b8f7494ae"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a> (struct termios *t_p)</td></tr>
-<tr class="memdesc:ga9595fce25a583a656ca51a8b8f7494ae"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../de/df6/a01141.html#ga9595fce25a583a656ca51a8b8f7494ae" title="mk_raw_tioctl() - set terminal to raw mode">mk_raw_tioctl()</a> - set terminal to raw mode  <br /></td></tr>
-<tr class="memitem:ga11948dfa6be15e54c80072e4b3df0e12" id="r_ga11948dfa6be15e54c80072e4b3df0e12"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="../../de/df6/a01141.html#ga11948dfa6be15e54c80072e4b3df0e12">di_getch</a> ()</td></tr>
-<tr class="memdesc:ga11948dfa6be15e54c80072e4b3df0e12"><td class="mdescLeft">&#160;</td><td class="mdescRight">sget single character from terminal in raw mode  <br /></td></tr>
+<tr class="memitem:ga4b671c384affcc6dc1ed59a04d666cc7" id="r_ga4b671c384affcc6dc1ed59a04d666cc7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga4b671c384affcc6dc1ed59a04d666cc7">write_config</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga4b671c384affcc6dc1ed59a04d666cc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the current configuration to a file specified in init-&gt;minitrc.  <br /></td></tr>
+<tr class="memitem:ga33abf350aae0212c85a5903e41764025" id="r_ga33abf350aae0212c85a5903e41764025"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga33abf350aae0212c85a5903e41764025">display_version</a> ()</td></tr>
+<tr class="memdesc:ga33abf350aae0212c85a5903e41764025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the version information of the application.  <br /></td></tr>
+<tr class="memitem:gaccd65939c0ce6f0d940c5cf795a1e8fa" id="r_gaccd65939c0ce6f0d940c5cf795a1e8fa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#gaccd65939c0ce6f0d940c5cf795a1e8fa">mapp_initialization</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init, int argc, char **argv)</td></tr>
+<tr class="memdesc:gaccd65939c0ce6f0d940c5cf795a1e8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main initialization function for MAPP - <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Application.  <br /></td></tr>
+<tr class="memitem:gae9b71868d00a28cdcf5f4514e662edfe" id="r_gae9b71868d00a28cdcf5f4514e662edfe"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#gae9b71868d00a28cdcf5f4514e662edfe">zero_opt_args</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gae9b71868d00a28cdcf5f4514e662edfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize optional arguments in the <a class="el" href="../../d2/dd2/a01164.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> struct to default values.  <br /></td></tr>
+<tr class="memitem:ga5836f1ea8f972e3ca12e2772dc76fb32" id="r_ga5836f1ea8f972e3ca12e2772dc76fb32"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga5836f1ea8f972e3ca12e2772dc76fb32">parse_config</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga5836f1ea8f972e3ca12e2772dc76fb32"><td class="mdescLeft">&#160;</td><td class="mdescRight">parse the configuration file specified in init-&gt;minitrc and set <a class="el" href="../../d2/dd2/a01164.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> struct values accordingly  <br /></td></tr>
+<tr class="memitem:ga11b56c5001e3ca95f4d0a28903b29609" id="r_ga11b56c5001e3ca95f4d0a28903b29609"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga11b56c5001e3ca95f4d0a28903b29609">parse_opt_args</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init, int argc, char **argv)</td></tr>
+<tr class="memdesc:ga11b56c5001e3ca95f4d0a28903b29609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse command-line options and set <a class="el" href="../../d2/dd2/a01164.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> struct values accordingly.  <br /></td></tr>
+<tr class="memitem:ga1af490b85f0487c201f369333b84e540" id="r_ga1af490b85f0487c201f369333b84e540"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga1af490b85f0487c201f369333b84e540">dump_config</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init, char *msg)</td></tr>
+<tr class="memdesc:ga1af490b85f0487c201f369333b84e540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump the current configuration to stdout for debugging purposes.  <br /></td></tr>
+<tr class="memitem:ga20c40545a1e05954b496c6d674d31458" id="r_ga20c40545a1e05954b496c6d674d31458"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga20c40545a1e05954b496c6d674d31458">derive_file_spec</a> (char *file_spec, char *dir, char *file_name)</td></tr>
+<tr class="memdesc:ga20c40545a1e05954b496c6d674d31458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derive full file specification from directory and file name.  <br /></td></tr>
+<tr class="memitem:ga3d0b179ebc74f8a911a4152f54e7a8a7" id="r_ga3d0b179ebc74f8a911a4152f54e7a8a7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga3d0b179ebc74f8a911a4152f54e7a8a7">opt_prt_char</a> (const char *o, const char *name, const char *value)</td></tr>
+<tr class="memdesc:ga3d0b179ebc74f8a911a4152f54e7a8a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner.  <br /></td></tr>
+<tr class="memitem:ga086c2240ffa5e497b67d630ea0d206b5" id="r_ga086c2240ffa5e497b67d630ea0d206b5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga086c2240ffa5e497b67d630ea0d206b5">opt_prt_str</a> (const char *o, const char *name, const char *value)</td></tr>
+<tr class="memdesc:ga086c2240ffa5e497b67d630ea0d206b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for integer values.  <br /></td></tr>
+<tr class="memitem:ga4e6bf4b5062dd9bd0c76a7a4402b3a9e" id="r_ga4e6bf4b5062dd9bd0c76a7a4402b3a9e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e">opt_prt_int</a> (const char *o, const char *name, int value)</td></tr>
+<tr class="memdesc:ga4e6bf4b5062dd9bd0c76a7a4402b3a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for integer values.  <br /></td></tr>
+<tr class="memitem:ga365153038835675ce050503313cea890" id="r_ga365153038835675ce050503313cea890"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga365153038835675ce050503313cea890">opt_prt_double</a> (const char *o, const char *name, double value)</td></tr>
+<tr class="memdesc:ga365153038835675ce050503313cea890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for double values.  <br /></td></tr>
+<tr class="memitem:ga4cea5ec97a8076e2a944e2c441ebb091" id="r_ga4cea5ec97a8076e2a944e2c441ebb091"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d2/d7b/a01150.html#ga4cea5ec97a8076e2a944e2c441ebb091">opt_prt_bool</a> (const char *o, const char *name, bool value)</td></tr>
+<tr class="memdesc:ga4cea5ec97a8076e2a944e2c441ebb091"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print an option and its value in a formatted manner for boolean values.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a6683c571cfe7d874546506ebf41fc3d3" id="r_a6683c571cfe7d874546506ebf41fc3d3"><td class="memItemLeft">struct termios&#160;</td><td class="memItemRight"><a class="el" href="#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></td></tr>
-<tr class="memitem:a5080741aab7f17e1d5b24e5ad63cf5e6" id="r_a5080741aab7f17e1d5b24e5ad63cf5e6"><td class="memItemLeft">struct termios&#160;</td><td class="memItemRight"><a class="el" href="#a5080741aab7f17e1d5b24e5ad63cf5e6">curses_tioctl</a></td></tr>
-<tr class="memitem:a1e8b2f4dea5e88e7af17541140207df0" id="r_a1e8b2f4dea5e88e7af17541140207df0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1e8b2f4dea5e88e7af17541140207df0">f_have_shell_tioctl</a> = false</td></tr>
-<tr class="memitem:ac46bd98f4cec1758c1d600920caa7f39" id="r_ac46bd98f4cec1758c1d600920caa7f39"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac46bd98f4cec1758c1d600920caa7f39">f_have_curses_tioctl</a> = false</td></tr>
-<tr class="memitem:afcd0e5aee1f3f7445581428cb02b2115" id="r_afcd0e5aee1f3f7445581428cb02b2115"><td class="memItemLeft">struct termios shell_in_tioctl&#160;</td><td class="memItemRight"><a class="el" href="#afcd0e5aee1f3f7445581428cb02b2115">curses_in_tioctl</a></td></tr>
-<tr class="memitem:ad9964c09cd96ce9748052b5494f30fc6" id="r_ad9964c09cd96ce9748052b5494f30fc6"><td class="memItemLeft">struct termios shell_out_tioctl&#160;</td><td class="memItemRight"><a class="el" href="#ad9964c09cd96ce9748052b5494f30fc6">curses_out_tioctl</a></td></tr>
-<tr class="memitem:afe4863a6b75c5a20c2008f36f86cfeed" id="r_afe4863a6b75c5a20c2008f36f86cfeed"><td class="memItemLeft">struct termios shell_err_tioctl&#160;</td><td class="memItemRight"><a class="el" href="#afe4863a6b75c5a20c2008f36f86cfeed">curses_err_tioctl</a></td></tr>
+<tr class="memitem:ae148746fdd7938021e7d7d4d31118517" id="r_ae148746fdd7938021e7d7d4d31118517"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae148746fdd7938021e7d7d4d31118517">f_write_config</a> = false</td></tr>
+<tr class="memitem:a34792d55b383aa7122cd2c3a889605bf" id="r_a34792d55b383aa7122cd2c3a889605bf"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a34792d55b383aa7122cd2c3a889605bf">f_dump_config</a> = false</td></tr>
+<tr class="memitem:a3d163d0928a8410a38d85fddf9b0d0d8" id="r_a3d163d0928a8410a38d85fddf9b0d0d8"><td class="memItemLeft"><a class="el" href="../../d2/dd2/a01164.html">Init</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a3d163d0928a8410a38d85fddf9b0d0d8">init</a> = <a class="el" href="../../d8/db9/a00725.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a></td></tr>
+<tr class="memitem:a96c3f93bf7b1b8ff028d4cf6404e3b5f" id="r_a96c3f93bf7b1b8ff028d4cf6404e3b5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a96c3f93bf7b1b8ff028d4cf6404e3b5f">executor</a> = 0</td></tr>
+<tr class="memitem:a62f73ea01c816f1996aed4c66f57c4fb" id="r_a62f73ea01c816f1996aed4c66f57c4fb"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a62f73ea01c816f1996aed4c66f57c4fb">argp_program_version</a> = <a class="el" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td></tr>
+<tr class="memitem:aaa037e59f26a80a8a2e35e6f2364004d" id="r_aaa037e59f26a80a8a2e35e6f2364004d"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#aaa037e59f26a80a8a2e35e6f2364004d">argp_program_bug_address</a> = &quot;billxwaller@gmail.com&quot;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Screen IO Support for MENU. </p>
+<div class="textblock"><p>Initialization for <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Application Programs. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
-</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="afe4863a6b75c5a20c2008f36f86cfeed" name="afe4863a6b75c5a20c2008f36f86cfeed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe4863a6b75c5a20c2008f36f86cfeed">&#9670;&#160;</a></span>curses_err_tioctl</h2>
+<p class="definition">Definition in file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a8fba11b18e45631d27d71f508b9b5b6b" name="a8fba11b18e45631d27d71f508b9b5b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fba11b18e45631d27d71f508b9b5b6b">&#9670;&#160;</a></span>anonymous enum</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct termios shell_err_tioctl curses_err_tioctl</td>
+          <td class="memname">anonymous enum</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268" name="a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268"></a>IN_SPEC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4" name="a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4"></a>OUT_SPEC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240" name="a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240"></a>BG_XCLR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122" name="a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122"></a>BO_XCLR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99" name="a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99"></a>FG_XCLR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0" name="a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0"></a>LN_BG_CLR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df" name="a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df"></a>LN_XCLR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148" name="a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148"></a>GM_BLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d" name="a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d"></a>GM_GRAY&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27" name="a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27"></a>GM_GREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167" name="a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167"></a>GM_RED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c" name="a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c"></a>XBBLACK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956" name="a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956"></a>XBBLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1" name="a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1"></a>XBCYAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b" name="a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b"></a>XBGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611" name="a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611"></a>XBLACK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5" name="a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5"></a>XBLUE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63" name="a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63"></a>XBMAGENTA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913" name="a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913"></a>XBRED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258" name="a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258"></a>XBWHITE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d" name="a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d"></a>XBYELLOW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0" name="a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0"></a>XCYAN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8" name="a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8"></a>CM_EDITOR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e" name="a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e"></a>XGREEN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08" name="a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08"></a>XMAGENTA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7" name="a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7"></a>XRED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63" name="a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63"></a>XWHITE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94" name="a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94"></a>XYELLOW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b" name="a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b"></a>MAPP_DATA&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154" name="a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154"></a>MAPP_HELP&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc" name="a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc"></a>MAPP_HOME&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de" name="a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de"></a>MAPP_MSRC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50" name="a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50"></a>MAPP_USER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2" name="a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2"></a>MAPP_HELP_DIR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3" name="a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3"></a>MAPP_DATA_DIR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6" name="a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6"></a>MAPP_SPEC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80" name="a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80"></a>HELP_SPEC&#160;</td><td class="fielddoc"></td></tr>
+</table>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00037">37</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00068">capture_curses_tioctl()</a>, and <a class="el" href="../../dd/de4/a01121_source.html#l00081">restore_curses_tioctl()</a>.</p>
-
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00028">28</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   28</span>     {</div>
+<div class="line"><span class="lineno">   29</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268">IN_SPEC</a> = 257,</div>
+<div class="line"><span class="lineno">   30</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4">OUT_SPEC</a>,</div>
+<div class="line"><span class="lineno">   31</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240">BG_XCLR</a>,</div>
+<div class="line"><span class="lineno">   32</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122">BO_XCLR</a>,</div>
+<div class="line"><span class="lineno">   33</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99">FG_XCLR</a>,</div>
+<div class="line"><span class="lineno">   34</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0">LN_BG_CLR</a>,</div>
+<div class="line"><span class="lineno">   35</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df">LN_XCLR</a>,</div>
+<div class="line"><span class="lineno">   36</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148">GM_BLUE</a>,</div>
+<div class="line"><span class="lineno">   37</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d">GM_GRAY</a>,</div>
+<div class="line"><span class="lineno">   38</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27">GM_GREEN</a>,</div>
+<div class="line"><span class="lineno">   39</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167">GM_RED</a>,</div>
+<div class="line"><span class="lineno">   40</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c">XBBLACK</a>,</div>
+<div class="line"><span class="lineno">   41</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956">XBBLUE</a>,</div>
+<div class="line"><span class="lineno">   42</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1">XBCYAN</a>,</div>
+<div class="line"><span class="lineno">   43</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b">XBGREEN</a>,</div>
+<div class="line"><span class="lineno">   44</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611">XBLACK</a>,</div>
+<div class="line"><span class="lineno">   45</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5">XBLUE</a>,</div>
+<div class="line"><span class="lineno">   46</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63">XBMAGENTA</a>,</div>
+<div class="line"><span class="lineno">   47</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913">XBRED</a>,</div>
+<div class="line"><span class="lineno">   48</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258">XBWHITE</a>,</div>
+<div class="line"><span class="lineno">   49</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d">XBYELLOW</a>,</div>
+<div class="line"><span class="lineno">   50</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0">XCYAN</a>,</div>
+<div class="line"><span class="lineno">   51</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8">CM_EDITOR</a>,</div>
+<div class="line"><span class="lineno">   52</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e">XGREEN</a>,</div>
+<div class="line"><span class="lineno">   53</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08">XMAGENTA</a>,</div>
+<div class="line"><span class="lineno">   54</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7">XRED</a>,</div>
+<div class="line"><span class="lineno">   55</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63">XWHITE</a>,</div>
+<div class="line"><span class="lineno">   56</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94">XYELLOW</a>,</div>
+<div class="line"><span class="lineno">   57</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b">MAPP_DATA</a>,</div>
+<div class="line"><span class="lineno">   58</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154">MAPP_HELP</a>,</div>
+<div class="line"><span class="lineno">   59</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc">MAPP_HOME</a>,</div>
+<div class="line"><span class="lineno">   60</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de">MAPP_MSRC</a>,</div>
+<div class="line"><span class="lineno">   61</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50">MAPP_USER</a>,</div>
+<div class="line"><span class="lineno">   62</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2">MAPP_HELP_DIR</a>,</div>
+<div class="line"><span class="lineno">   63</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3">MAPP_DATA_DIR</a>,</div>
+<div class="line"><span class="lineno">   64</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6">MAPP_SPEC</a>,</div>
+<div class="line"><span class="lineno">   65</span>    <a class="code hl_enumvalue" href="#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80">HELP_SPEC</a>,</div>
+<div class="line"><span class="lineno">   66</span>};</div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba0c9b9e811f093b6fe99f7bc77f137913">XBRED</a></div><div class="ttdeci">@ XBRED</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00047">init.c:47</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba13d1b98dd78f810cab5685ddfdf4d3dc">MAPP_HOME</a></div><div class="ttdeci">@ MAPP_HOME</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00059">init.c:59</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba14e444aa22374700074c6fb261264b6e">XGREEN</a></div><div class="ttdeci">@ XGREEN</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00052">init.c:52</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba1eace6163f72a67b9f7d15e54a6293e7">XRED</a></div><div class="ttdeci">@ XRED</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00054">init.c:54</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba23c28b83bda4333be9f85635b544210b">MAPP_DATA</a></div><div class="ttdeci">@ MAPP_DATA</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00057">init.c:57</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba29d4ef12c9ac0265d4986f0df17165f1">XBCYAN</a></div><div class="ttdeci">@ XBCYAN</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00042">init.c:42</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba2b166dd4699c64488888479bce287f94">XYELLOW</a></div><div class="ttdeci">@ XYELLOW</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00056">init.c:56</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba2fb104eb3a87173ed3740c5702147a99">FG_XCLR</a></div><div class="ttdeci">@ FG_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00033">init.c:33</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba398973374baa4d523fe470c5550f74b6">MAPP_SPEC</a></div><div class="ttdeci">@ MAPP_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00064">init.c:64</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba3f1ac12cbe3b06a57dd4e258a9a87f4d">XBYELLOW</a></div><div class="ttdeci">@ XBYELLOW</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00049">init.c:49</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba45e5eac0beea3970a7970fb93b248122">BO_XCLR</a></div><div class="ttdeci">@ BO_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00032">init.c:32</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba6ad605c1a34457251bd19e0fe451d148">GM_BLUE</a></div><div class="ttdeci">@ GM_BLUE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00036">init.c:36</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba6d0276ada687c5462fa013e77634a4a0">XCYAN</a></div><div class="ttdeci">@ XCYAN</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00050">init.c:50</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba7411d014536a60256b838138a774393c">XBBLACK</a></div><div class="ttdeci">@ XBBLACK</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00040">init.c:40</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba75f50a1ba77d2081ec869d4388f5c4d5">XBLUE</a></div><div class="ttdeci">@ XBLUE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00045">init.c:45</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba768bad79c2af5c6da04d8791bcea4e63">XWHITE</a></div><div class="ttdeci">@ XWHITE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00055">init.c:55</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba7a7e0051da44e9e4e20adade1a28bf5d">GM_GRAY</a></div><div class="ttdeci">@ GM_GRAY</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00037">init.c:37</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba814181b0f0e01bda1d398fe59bda7f27">GM_GREEN</a></div><div class="ttdeci">@ GM_GREEN</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00038">init.c:38</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba8597eaa42e8ef2a9c204cd40243cf240">BG_XCLR</a></div><div class="ttdeci">@ BG_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00031">init.c:31</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba868fc405cf495f2b0b8a939b4c471d80">HELP_SPEC</a></div><div class="ttdeci">@ HELP_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00065">init.c:65</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6ba96d229d3aab3fa830c22f014691550e4">OUT_SPEC</a></div><div class="ttdeci">@ OUT_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00030">init.c:30</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baa081f7c9e537757f4aac80127e6d58e0">LN_BG_CLR</a></div><div class="ttdeci">@ LN_BG_CLR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00034">init.c:34</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baa0ac26db463c23f6bcd8033e61841258">XBWHITE</a></div><div class="ttdeci">@ XBWHITE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00048">init.c:48</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baa23eebd292aeb6a2095f9977d28f33c3">MAPP_DATA_DIR</a></div><div class="ttdeci">@ MAPP_DATA_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00063">init.c:63</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baae63f5d0210a353a6bd7cbf508e17e50">MAPP_USER</a></div><div class="ttdeci">@ MAPP_USER</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00061">init.c:61</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bab27264d993654e6b990f56d4e635d46b">XBGREEN</a></div><div class="ttdeci">@ XBGREEN</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00043">init.c:43</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bab6239545e8e293a9685f5f99b40b6ba2">MAPP_HELP_DIR</a></div><div class="ttdeci">@ MAPP_HELP_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00062">init.c:62</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6babe512cb25e936e19605f30ea962473de">MAPP_MSRC</a></div><div class="ttdeci">@ MAPP_MSRC</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00060">init.c:60</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bac109b3ec66104251e76a1edd392b5611">XBLACK</a></div><div class="ttdeci">@ XBLACK</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00044">init.c:44</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6badece9f6137d6de49c433ae5dd09a3d63">XBMAGENTA</a></div><div class="ttdeci">@ XBMAGENTA</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00046">init.c:46</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bae2fbedfa5b807a9d71db36c45282e956">XBBLUE</a></div><div class="ttdeci">@ XBBLUE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00041">init.c:41</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bae535181da055c6d522612508f6932268">IN_SPEC</a></div><div class="ttdeci">@ IN_SPEC</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00029">init.c:29</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baeadbe4ccde5e2c5527b6b203b6a3f9df">LN_XCLR</a></div><div class="ttdeci">@ LN_XCLR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00035">init.c:35</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baf135e7937f142d296c92aa8e6f6fd167">GM_RED</a></div><div class="ttdeci">@ GM_RED</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00039">init.c:39</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baf466b7afc25c3dddab823032513e20c8">CM_EDITOR</a></div><div class="ttdeci">@ CM_EDITOR</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00051">init.c:51</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6baf7eaa2f90b6da8d94b32f95ceeee1c08">XMAGENTA</a></div><div class="ttdeci">@ XMAGENTA</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00053">init.c:53</a></div></div>
+<div class="ttc" id="aa01121_html_a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154"><div class="ttname"><a href="#a8fba11b18e45631d27d71f508b9b5b6bafcd9e9db3f541b8b1cd36332e2ae4154">MAPP_HELP</a></div><div class="ttdeci">@ MAPP_HELP</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00058">init.c:58</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="afcd0e5aee1f3f7445581428cb02b2115" name="afcd0e5aee1f3f7445581428cb02b2115"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcd0e5aee1f3f7445581428cb02b2115">&#9670;&#160;</a></span>curses_in_tioctl</h2>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="aaa037e59f26a80a8a2e35e6f2364004d" name="aaa037e59f26a80a8a2e35e6f2364004d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa037e59f26a80a8a2e35e6f2364004d">&#9670;&#160;</a></span>argp_program_bug_address</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct termios shell_in_tioctl curses_in_tioctl</td>
+          <td class="memname">const char* argp_program_bug_address = &quot;billxwaller@gmail.com&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00035">35</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00068">capture_curses_tioctl()</a>, and <a class="el" href="../../dd/de4/a01121_source.html#l00081">restore_curses_tioctl()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00085">85</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
 
 </div>
 </div>
-<a id="ad9964c09cd96ce9748052b5494f30fc6" name="ad9964c09cd96ce9748052b5494f30fc6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9964c09cd96ce9748052b5494f30fc6">&#9670;&#160;</a></span>curses_out_tioctl</h2>
+<a id="a62f73ea01c816f1996aed4c66f57c4fb" name="a62f73ea01c816f1996aed4c66f57c4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f73ea01c816f1996aed4c66f57c4fb">&#9670;&#160;</a></span>argp_program_version</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct termios shell_out_tioctl curses_out_tioctl</td>
+          <td class="memname">const char* argp_program_version = <a class="el" href="../../df/d3b/a00728.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00036">36</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00068">capture_curses_tioctl()</a>, and <a class="el" href="../../dd/de4/a01121_source.html#l00081">restore_curses_tioctl()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00084">84</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
 
 </div>
 </div>
-<a id="a5080741aab7f17e1d5b24e5ad63cf5e6" name="a5080741aab7f17e1d5b24e5ad63cf5e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5080741aab7f17e1d5b24e5ad63cf5e6">&#9670;&#160;</a></span>curses_tioctl</h2>
+<a id="a96c3f93bf7b1b8ff028d4cf6404e3b5f" name="a96c3f93bf7b1b8ff028d4cf6404e3b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c3f93bf7b1b8ff028d4cf6404e3b5f">&#9670;&#160;</a></span>executor</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct termios <a class="el" href="#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a> curses_tioctl</td>
+          <td class="memname">int executor = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00023">23</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l01587">dxwgetch()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l01516">xwgetch()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00082">82</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
 
 </div>
 </div>
-<a id="ac46bd98f4cec1758c1d600920caa7f39" name="ac46bd98f4cec1758c1d600920caa7f39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac46bd98f4cec1758c1d600920caa7f39">&#9670;&#160;</a></span>f_have_curses_tioctl</h2>
+<a id="a34792d55b383aa7122cd2c3a889605bf" name="a34792d55b383aa7122cd2c3a889605bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34792d55b383aa7122cd2c3a889605bf">&#9670;&#160;</a></span>f_dump_config</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool f_have_curses_tioctl = false</td>
+          <td class="memname">bool f_dump_config = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>curses tioctl captured </p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00025">25</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00069">69</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00068">capture_curses_tioctl()</a>, and <a class="el" href="../../dd/de4/a01121_source.html#l00081">restore_curses_tioctl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00328">mapp_initialization()</a>.</p>
 
 </div>
 </div>
-<a id="a1e8b2f4dea5e88e7af17541140207df0" name="a1e8b2f4dea5e88e7af17541140207df0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e8b2f4dea5e88e7af17541140207df0">&#9670;&#160;</a></span>f_have_shell_tioctl</h2>
+<a id="ae148746fdd7938021e7d7d4d31118517" name="ae148746fdd7938021e7d7d4d31118517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae148746fdd7938021e7d7d4d31118517">&#9670;&#160;</a></span>f_write_config</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool f_have_shell_tioctl = false</td>
+          <td class="memname">bool f_write_config = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>shell tioctl captured </p>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00024">24</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00068">68</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00043">capture_shell_tioctl()</a>, and <a class="el" href="../../dd/de4/a01121_source.html#l00056">restore_shell_tioctl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../dd/de4/a01121_source.html#l00328">mapp_initialization()</a>.</p>
 
 </div>
 </div>
-<a id="a6683c571cfe7d874546506ebf41fc3d3" name="a6683c571cfe7d874546506ebf41fc3d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6683c571cfe7d874546506ebf41fc3d3">&#9670;&#160;</a></span>shell_tioctl</h2>
+<a id="a3d163d0928a8410a38d85fddf9b0d0d8" name="a3d163d0928a8410a38d85fddf9b0d0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d163d0928a8410a38d85fddf9b0d0d8">&#9670;&#160;</a></span>init</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct termios shell_tioctl</td>
+          <td class="memname"><a class="el" href="../../d2/dd2/a01164.html">Init</a>* init = <a class="el" href="../../d8/db9/a00725.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../dd/dad/a01235.html#_a3">/usr/local/src/C-Menu/src/enterchr.c</a>, and <a class="el" href="../../dc/dab/a01237.html#_a6">/usr/local/src/C-Menu/src/enterstr.c</a>.</dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00022">22</a> of file <a class="el" href="../../dd/de4/a01121_source.html">scriou.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dd/de4/a01121_source.html#l00074">74</a> of file <a class="el" href="../../dd/de4/a01121_source.html">init.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d0/d39/a01112_source.html#l00038">main()</a>, and <a class="el" href="../../da/db7/a01088_source.html#l00095">signal_handler()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/db7/a01088_source.html#l00043">main()</a>.</p>
 
 </div>
 </div>
@@ -305,7 +474,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dd/de4/a01121.html">scriou.c</a></li>
+    <li class="navelem"><a href="../../dd/de4/a01121.html">init.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

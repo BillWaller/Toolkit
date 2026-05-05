@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['c_20menu_20initialization_0',['C-Menu Initialization',['../de/de4/a01135.html',1,'']]],
-  ['chyron_20management_1',['Chyron Management',['../db/d1e/a01126.html',1,'']]],
-  ['color_20management_2',['Color Management',['../d9/d5b/a01127.html',1,'']]],
-  ['commands_3',['External Commands',['../d9/d17/a01129.html',1,'']]]
+  ['c_20menu_20initialization_0',['C-Menu Initialization',['../d2/d7b/a01150.html',1,'']]],
+  ['chyron_20management_1',['Chyron Management',['../de/df6/a01141.html',1,'']]],
+  ['color_20management_2',['Color Management',['../d3/ddc/a01142.html',1,'']]],
+  ['commands_3',['External Commands',['../db/d51/a01144.html',1,'']]]
 ];

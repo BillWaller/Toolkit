@@ -1,7 +1,10 @@
 var a01156 =
 [
-    [ "cp", "d9/d42/a01156.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
-    [ "end_pos", "d9/d42/a01156.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
-    [ "keycode", "d9/d42/a01156.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
-    [ "text", "d9/d42/a01156.html#a26a5a1b51ba82579294838ee52a18af3", null ]
+    [ "capture_curses_tioctl", "d9/d42/a01156.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "d9/d42/a01156.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "d9/d42/a01156.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "d9/d42/a01156.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "d9/d42/a01156.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "d9/d42/a01156.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "d9/d42/a01156.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
 ];

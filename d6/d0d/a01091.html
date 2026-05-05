@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: parse_menu_desc.c File Reference</title>
+<title>C-Menu: exec.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,38 +109,49 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d6/d0d/a01091.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">parse_menu_desc.c File Reference</div></div>
+  <div class="headertitle"><div class="title">exec.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Parse menu description file and create <a class="el" href="../../de/d04/a01209.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.  
+<p>Functions to execute external commands.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for parse_menu_desc.c:</div>
+Include dependency graph for exec.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d9c/a01092.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d9c/a01092.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d6/d0d/a01091_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gadd4bd5f0e9c89c717e460b2eb9952e6a" id="r_gadd4bd5f0e9c89c717e460b2eb9952e6a"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../d5/d3e/a01139.html#gadd4bd5f0e9c89c717e460b2eb9952e6a">parse_menu_description</a> (<a class="el" href="../../d8/d02/a01149.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gadd4bd5f0e9c89c717e460b2eb9952e6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse menu description file and create <a class="el" href="../../de/d04/a01209.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.  <br /></td></tr>
-<tr class="memitem:ga1989771e09ef0e00c4cec786094d1d26" id="r_ga1989771e09ef0e00c4cec786094d1d26"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../d5/d3e/a01139.html#ga1989771e09ef0e00c4cec786094d1d26">get_command_type</a> (char *t)</td></tr>
-<tr class="memdesc:ga1989771e09ef0e00c4cec786094d1d26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get command type from command string.  <br /></td></tr>
+<tr class="memitem:ga907dc4a5b8c29a03d23bdc87f41b5f1b" id="r_ga907dc4a5b8c29a03d23bdc87f41b5f1b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/d51/a01144.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a> (char **argv)</td></tr>
+<tr class="memdesc:ga907dc4a5b8c29a03d23bdc87f41b5f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command in full screen mode.  <br /></td></tr>
+<tr class="memitem:gaeb3e7eb282467134ce50fde7d9ebd19d" id="r_gaeb3e7eb282467134ce50fde7d9ebd19d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/d51/a01144.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a> (char *shellCmdPtr)</td></tr>
+<tr class="memdesc:gaeb3e7eb282467134ce50fde7d9ebd19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a shell command in full screen mode.  <br /></td></tr>
+<tr class="memitem:ga5c3ffccf49f08359334198f7fce3f9df" id="r_ga5c3ffccf49f08359334198f7fce3f9df"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/d51/a01144.html#ga5c3ffccf49f08359334198f7fce3f9df">shell</a> (char *shellCmdPtr)</td></tr>
+<tr class="memdesc:ga5c3ffccf49f08359334198f7fce3f9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a shell command.  <br /></td></tr>
+<tr class="memitem:ga386fad82c5208c7d3b2a5060882974f3" id="r_ga386fad82c5208c7d3b2a5060882974f3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/d51/a01144.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a> (char **argv)</td></tr>
+<tr class="memdesc:ga386fad82c5208c7d3b2a5060882974f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fork and exec a command.  <br /></td></tr>
+<tr class="memitem:ga2f2e1496a7c253b2d58446154c98a0bf" id="r_ga2f2e1496a7c253b2d58446154c98a0bf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../db/db2/a01143.html#ga2f2e1496a7c253b2d58446154c98a0bf">nf_error</a> (int ec, char *s)</td></tr>
+<tr class="memdesc:ga2f2e1496a7c253b2d58446154c98a0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display error message and wait for key press.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Parse menu description file and create <a class="el" href="../../de/d04/a01209.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>. </p>
+<div class="textblock"><p>Functions to execute external commands. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d6/d0d/a01091_source.html">parse_menu_desc.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../d6/d0d/a01091_source.html">exec.c</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -154,7 +165,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d6/d0d/a01091.html">parse_menu_desc.c</a></li>
+    <li class="navelem"><a href="../../d6/d0d/a01091.html">exec.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
