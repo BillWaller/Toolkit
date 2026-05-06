@@ -1,6 +1,5 @@
 var a01161 =
 [
-    [ "b", "dc/d81/a01161.html#a823a1befc95c064e6d179723edb056fa", null ],
-    [ "g", "dc/d81/a01161.html#ab49e03f25cd24170f9cd31b5696c7d1f", null ],
-    [ "r", "dc/d81/a01161.html#a43e48de3e3cf8c8fa9120830ffac424e", null ]
+    [ "get_command_type", "dc/d81/a01161.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "dc/d81/a01161.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

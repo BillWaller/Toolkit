@@ -1,5 +1,7 @@
 var a01179 =
 [
-    [ "l", "de/d1a/a01179.html#abf3dc917629596185d4d5615de0ee58f", null ],
-    [ "s", "de/d1a/a01179.html#af571d78b72396279aa4420c8bbe3ece9", null ]
+    [ "cp", "de/d1a/a01179.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
+    [ "end_pos", "de/d1a/a01179.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
+    [ "keycode", "de/d1a/a01179.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
+    [ "text", "de/d1a/a01179.html#a26a5a1b51ba82579294838ee52a18af3", null ]
 ];

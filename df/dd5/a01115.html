@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: menu_engine.c File Reference</title>
+<title>C-Menu: enterstr.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,40 +109,110 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('df/dd5/a01115.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">menu_engine.c File Reference</div></div>
+  <div class="headertitle"><div class="title">enterstr.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>The working part of C-Menu <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.  
+<p>Enter a string from keyboard.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/ioctl.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for menu_engine.c:</div>
+Include dependency graph for enterstr.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/dc5/a01116.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/dc5/a01116.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../df/dd5/a01115_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7d7973d7aac92759dcc86ec52bb038f4" id="r_ga7d7973d7aac92759dcc86ec52bb038f4"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d06/a01153.html#ga7d7973d7aac92759dcc86ec52bb038f4">menu_engine</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga7d7973d7aac92759dcc86ec52bb038f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The main loop of the menu system.  <br /></td></tr>
-<tr class="memitem:gaa5d0e30e7036b72b51c843d0a7e486a1" id="r_gaa5d0e30e7036b72b51c843d0a7e486a1"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d06/a01153.html#gaa5d0e30e7036b72b51c843d0a7e486a1">menu_cmd_processor</a> (<a class="el" href="../../d2/dd2/a01164.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaa5d0e30e7036b72b51c843d0a7e486a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes user input for the menu system.  <br /></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">allows the user to enter a string in cooked mode  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The working part of C-Menu <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>. </p>
+<div class="textblock"><p>Enter a string from keyboard. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../df/dd5/a01115_source.html">menu_engine.c</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../df/dd5/a01115_source.html">enterstr.c</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>allows the user to enter a string in cooked mode </p>
+<p>allows line editing and other features writes the prompt to stderr and the user's input to stdout handles signals to ensure that the terminal settings are restored if the program is interrupted. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00032">32</a> of file <a class="el" href="../../df/dd5/a01115_source.html">enterstr.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>                                {</div>
+<div class="line"><span class="lineno">   33</span>    <span class="keyword">struct </span>termios new_tioctl;</div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d2/d4d/a01079.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line"><span class="lineno">   35</span>    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../d2/d4d/a01079.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordtype">char</span> *msg;</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
+<div class="line"><span class="lineno">   38</span> </div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line"><span class="lineno">   40</span>        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   42</span>        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
+<div class="line"><span class="lineno">   43</span>    <a class="code hl_function" href="../../d6/d27/a01163.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line"><span class="lineno">   44</span>    <a class="code hl_function" href="../../d2/dd2/a01164.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line"><span class="lineno">   45</span>    new_tioctl = <a class="code hl_variable" href="../../d3/ddc/a01142.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line"><span class="lineno">   46</span>    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line"><span class="lineno">   47</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">   49</span>        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
+<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line"><span class="lineno">   51</span>            write(2, msg++, 1);</div>
+<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../d2/d4d/a01079.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   54</span>    }</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line"><span class="lineno">   56</span>        write(1, in_ptr++, 1);</div>
+<div class="line"><span class="lineno">   57</span>    <a class="code hl_function" href="../../d2/dd2/a01164.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
+<div class="line"><span class="lineno">   58</span>    <a class="code hl_function" href="../../d6/d27/a01163.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line"><span class="lineno">   59</span>    exit(0);</div>
+<div class="line"><span class="lineno">   60</span>}</div>
+<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d5b/a01127_source.html#l00093">futil.c:93</a></div></div>
+<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
+<div class="ttc" id="aa01079_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../d2/d4d/a01079.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d4d/a01079_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa01142_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d3/ddc/a01142.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01163_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d6/d27/a01163.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01163_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d6/d27/a01163.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01164_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d2/dd2/a01164.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa01164_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d2/dd2/a01164.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d4e/a01106_source.html#l00062">sig.c:62</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d3/ddc/a01142_source.html#l00043">capture_shell_tioctl()</a>, <a class="el" href="../../d3/ddc/a01142_source.html#l00056">restore_shell_tioctl()</a>, <a class="el" href="../../d3/ddc/a01142_source.html#l00022">shell_tioctl</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00042">sig_dfl_mode()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00062">sig_prog_mode()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../df/dd5/a01115_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="510"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -155,7 +225,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../df/dd5/a01115.html">menu_engine.c</a></li>
+    <li class="navelem"><a href="../../df/dd5/a01115.html">enterstr.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

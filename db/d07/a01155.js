@@ -1,18 +1,9 @@
 var a01155 =
 [
-    [ "deselect_object", "db/d07/a01155.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "db/d07/a01155.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "db/d07/a01155.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "db/d07/a01155.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "db/d07/a01155.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "match_objects", "db/d07/a01155.html#ga91b2cda407803ee4367f7efd5487863c", null ],
-    [ "open_pick_win", "db/d07/a01155.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "db/d07/a01155.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_engine", "db/d07/a01155.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "db/d07/a01155.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
-    [ "read_pick_input", "db/d07/a01155.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "db/d07/a01155.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "db/d07/a01155.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "db/d07/a01155.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "db/d07/a01155.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "free_string", "db/d07/a01155.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "db/d07/a01155.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "db/d07/a01155.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "db/d07/a01155.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "db/d07/a01155.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "db/d07/a01155.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];

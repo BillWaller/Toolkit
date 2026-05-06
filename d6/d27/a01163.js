@@ -1,5 +1,10 @@
 var a01163 =
 [
-    [ "l", "d6/d27/a01163.html#a8cffb4a348d6d6f90ce1c9efd99ad557", null ],
-    [ "s", "d6/d27/a01163.html#a1270cae1cd57356ffc567eed342b5d97", null ]
+    [ "capture_curses_tioctl", "d6/d27/a01163.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "d6/d27/a01163.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "d6/d27/a01163.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "d6/d27/a01163.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "d6/d27/a01163.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "d6/d27/a01163.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "d6/d27/a01163.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
 ];
