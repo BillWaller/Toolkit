@@ -24,7 +24,7 @@ var searchData=
   ['option_201_20build_20c_20menu_20using_20cmake_20directly_21',['Option 1 - Build C-Menu Using CMake Directly',['../d4/d2c/a01327.html#option-1---build-c-menu-using-cmake-directly',1,'']]],
   ['option_202_20build_20c_20menu_20with_20provided_20scripts_22',['Option 2 - Build C-Menu with Provided Scripts',['../d4/d2c/a01327.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
   ['option_203_20build_20c_20menu_20using_20makefile_23',['Option 3 - Build C-Menu Using Makefile',['../d4/d2c/a01327.html#option-3---build-c-menu-using-makefile',1,'']]],
-  ['options_24',['Options',['../d9/d5c/a01321.html#c-menu-options',1,'C-Menu Options'],['../d9/d5c/a01321.html#form-options',1,'Form Options'],['../d9/d5c/a01321.html#pick-options',1,'Pick Options'],['../d9/d5c/a01321.html#view-options',1,'View Options']]],
+  ['options_24',['Options',['../d9/d5c/a01321.html#c-menu-options',1,'C-Menu Options'],['../index.html#c-menu-start-up-options',1,'C-Menu Start-up Options'],['../d9/d5c/a01321.html#form-options',1,'Form Options'],['../d9/d5c/a01321.html#pick-options',1,'Pick Options'],['../d9/d5c/a01321.html#view-options',1,'View Options']]],
   ['options_20for_20lf_25',['&lt;b&gt;&lt;em&gt;New Options for lf&lt;/em&gt;&lt;/b&gt;',['../dc/dd9/a01328.html#_new-options-for-lf_',1,'']]],
   ['or_20eza_20instead_20of_20ls_26',['Use lsd or eza instead of ls',['../dc/d8e/a01331.html#use-lsd-or-eza-instead-of-ls',1,'']]],
   ['or_20have_20questions_20feel_20free_20to_20open_20an_20issue_20on_20the_20c_20menu_20github_20repository_27',['or have questions feel free to open an issue on the C Menu GitHub repository',['../d9/d5c/a01321.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository'],['../d4/d2c/a01327.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-3',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository'],['../df/dec/a01320.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.'],['../dd/d5d/a01325.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.']]],
@@ -36,6 +36,7 @@ var searchData=
   ['other_20resources_33',['Other Resources',['../dd/d5d/a01325.html#other-resources',1,'']]],
   ['output_34',['Expected Output',['../d9/d45/a01332.html#expected-output',1,'']]],
   ['overview_35',['OVERVIEW',['../dc/dd9/a01328.html',1,'']]],
-  ['overview_20of_20developer_20folke_36',['AI Overview of Developer Folke',['../dd/d5d/a01325.html#ai-overview-of-developer-folke',1,'']]],
-  ['overview_20of_20developer_20norcalli_37',['AI Overview of Developer Norcalli',['../dd/d5d/a01325.html#ai-overview-of-developer-norcalli',1,'']]]
+  ['overview_36',['C-Menu Overview',['../index.html#c-menu-overview',1,'']]],
+  ['overview_20of_20developer_20folke_37',['AI Overview of Developer Folke',['../dd/d5d/a01325.html#ai-overview-of-developer-folke',1,'']]],
+  ['overview_20of_20developer_20norcalli_38',['AI Overview of Developer Norcalli',['../dd/d5d/a01325.html#ai-overview-of-developer-norcalli',1,'']]]
 ];

@@ -30,7 +30,7 @@ var searchData=
   ['exercises_27',['exercises',['../d5/d53/a01324.html',1,'']]],
   ['exercises_20example_20use_20cases_28',['Exercises - Example Use Cases',['../d5/d78/a01330.html#exercises---example-use-cases',1,'']]],
   ['expected_20output_29',['Expected Output',['../d9/d45/a01332.html#expected-output',1,'']]],
-  ['expression_20file_20finder_30',['lf - A Regular Expression File Finder',['../d4/d2c/a01327.html#lf---a-regular-expression-file-finder',1,'']]],
+  ['expression_20file_20finder_30',['Expression File Finder',['../d4/d2c/a01327.html#lf---a-regular-expression-file-finder',1,'lf - A Regular Expression File Finder'],['../index.html#lf---a-regular-expression-file-finder-1',1,'lf - A Regular Expression File Finder']]],
   ['expressions_31',['lf - List Files Using Regular Expressions',['../dc/dd9/a01328.html#lf---list-files-using-regular-expressions',1,'']]],
   ['external_20executables_32',['Menu Form - Integrating External Executables',['../d1/d54/a01326.html#menu-form---integrating-external-executables',1,'']]],
   ['extras_33',['extras',['../dd/d5d/a01325.html',1,'']]],

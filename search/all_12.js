@@ -11,7 +11,7 @@ var searchData=
   ['let_20s_20get_20rusty_8',['Let&apos;s Get Rusty',['../dd/d5d/a01325.html#lets-get-rusty',1,'']]],
   ['letter_5fpos_9',['letter_pos',['../d0/d88/a01231.html#a928bd3d2b73020b5529f9da018ce5e2f',1,'Line']]],
   ['lf_10',['lf',['../dc/dd9/a01328.html#_new-options-for-lf_',1,'&lt;b&gt;&lt;em&gt;New Options for lf&lt;/em&gt;&lt;/b&gt;'],['../df/d29/a01329.html#c-menu-lightweight-find-lf',1,'C-Menu Lightweight Find (lf)'],['../d9/d5c/a01321.html#lf',1,'lf'],['../dc/dd9/a01328.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'Menu, Form, Pick, View, C-Keys, RSH, and lf']]],
-  ['lf_20a_20regular_20expression_20file_20finder_11',['lf - A Regular Expression File Finder',['../d4/d2c/a01327.html#lf---a-regular-expression-file-finder',1,'']]],
+  ['lf_20a_20regular_20expression_20file_20finder_11',['lf A Regular Expression File Finder',['../d4/d2c/a01327.html#lf---a-regular-expression-file-finder',1,'lf - A Regular Expression File Finder'],['../index.html#lf---a-regular-expression-file-finder-1',1,'lf - A Regular Expression File Finder']]],
   ['lf_20is_20fast_20but_20i_20rely_20on_20find_20s_20features_12',['lf is fast, but I rely on find&apos;s features',['../d1/d54/a01326.html#lf-is-fast-but-i-rely-on-finds-features',1,'']]],
   ['lf_20list_20files_20using_20regular_20expressions_13',['lf - List Files Using Regular Expressions',['../dc/dd9/a01328.html#lf---list-files-using-regular-expressions',1,'']]],
   ['lf_20match_20files_20with_20multiple_20suffixes_14',['Can lf match files with multiple suffixes',['../d1/d54/a01326.html#can-lf-match-files-with-multiple-suffixes',1,'']]],

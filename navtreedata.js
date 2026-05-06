@@ -27,6 +27,10 @@ var NAVTREE =
   [ "C-Menu", "index.html", [
     [ "API", "df/dec/a01320.html", [
       [ "Other C-Menu Documentation", "index.html#other-c-menu-documentation", null ],
+      [ "C-Menu Overview", "index.html#c-menu-overview", [
+        [ "C-Menu Features", "index.html#c-menu-features", null ],
+        [ "C-Menu Start-up Options", "index.html#c-menu-start-up-options", null ]
+      ] ],
       [ "C-Menu Menu", "index.html#c-menu-menu-1", null ],
       [ "Menu Line-by-Line Breakdown", "index.html#menu-line-by-line-breakdown-1", [
         [ "Title Line", "index.html#title-line-1", null ],
@@ -49,6 +53,9 @@ var NAVTREE =
         [ "Edit .c Files in Current Directory", "index.html#edit-c-files-in-current-directory", null ],
         [ "View C-Menu Source With Tree-Sitter", "index.html#view-c-menu-source-with-tree-sitter", null ]
       ] ],
+      [ "C-Menu View", "index.html#c-menu-view-2", null ],
+      [ "RSH - A Root Shell Alternative", "index.html#rsh---a-root-shell-alternative-1", null ],
+      [ "lf - A Regular Expression File Finder", "index.html#lf---a-regular-expression-file-finder-1", null ],
       [ "Sneakey Optimization Techniques", "index.html#sneakey-optimization-techniques", null ],
       [ "How to get C-Menu", "df/dec/a01320.html#how-to-get-c-menu", [
         [ "Get C-Menu on Github", "df/dec/a01320.html#get-c-menu-on-github", null ],
@@ -418,10 +425,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d3/ddc/a01142.html#afcd0e5aee1f3f7445581428cb02b2115",
-"d7/dbf/a01239.html#a655cf2ddf525d99ac416009db8710747",
-"d8/db9/a00725.html#a29b7451465deac204c5f7cb1f9c6e1fc",
-"d9/d5b/a01127.html#a09d25a210ee1084fd3d45f62111a28d8",
+"d3/ddc/a01142.html#afe4863a6b75c5a20c2008f36f86cfeed",
+"d7/dbf/a01239.html#a698f1cc5bcaad3eaccc7a47d07ea5b40",
+"d8/db9/a00725.html#a2c05e3c261f7b64f0d2c4f1e0d20f788",
+"d9/d5b/a01127.html#a0a32839f250d5202affa7776054a9b11",
 "dc/d70/a01187.html",
 "de/d07/a01146.html"
 ];

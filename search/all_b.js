@@ -58,7 +58,7 @@ var searchData=
   ['exit_5fcode_55',['exit_code',['../d1/dae/a01136.html#ab1729158be557ef60548f7b7575ea4dd',1,'exit_code:&#160;dwin.c'],['../d8/db9/a00725.html#ab1729158be557ef60548f7b7575ea4dd',1,'exit_code:&#160;dwin.c']]],
   ['expand_5ftilde_56',['expand_tilde',['../d5/d16/a01154.html#ga646c47b288ba3b43714f0c0e1f88c981',1,'expand_tilde(char *, int):&#160;futil.c'],['../d5/d16/a01154.html#ga646c47b288ba3b43714f0c0e1f88c981',1,'expand_tilde(char *str, int path_maxlen):&#160;futil.c']]],
   ['expected_20output_57',['Expected Output',['../d9/d45/a01332.html#expected-output',1,'']]],
-  ['expression_20file_20finder_58',['lf - A Regular Expression File Finder',['../d4/d2c/a01327.html#lf---a-regular-expression-file-finder',1,'']]],
+  ['expression_20file_20finder_58',['Expression File Finder',['../d4/d2c/a01327.html#lf---a-regular-expression-file-finder',1,'lf - A Regular Expression File Finder'],['../index.html#lf---a-regular-expression-file-finder-1',1,'lf - A Regular Expression File Finder']]],
   ['expressions_59',['lf - List Files Using Regular Expressions',['../dc/dd9/a01328.html#lf---list-files-using-regular-expressions',1,'']]],
   ['external_20commands_60',['External Commands',['../d2/d7b/a01150.html',1,'']]],
   ['external_20executables_61',['Menu Form - Integrating External Executables',['../d1/d54/a01326.html#menu-form---integrating-external-executables',1,'']]],

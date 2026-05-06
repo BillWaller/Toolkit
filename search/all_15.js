@@ -47,7 +47,7 @@ var searchData=
   ['option_201_20build_20c_20menu_20using_20cmake_20directly_44',['Option 1 - Build C-Menu Using CMake Directly',['../d4/d2c/a01327.html#option-1---build-c-menu-using-cmake-directly',1,'']]],
   ['option_202_20build_20c_20menu_20with_20provided_20scripts_45',['Option 2 - Build C-Menu with Provided Scripts',['../d4/d2c/a01327.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
   ['option_203_20build_20c_20menu_20using_20makefile_46',['Option 3 - Build C-Menu Using Makefile',['../d4/d2c/a01327.html#option-3---build-c-menu-using-makefile',1,'']]],
-  ['options_47',['Options',['../d9/d5c/a01321.html#c-menu-options',1,'C-Menu Options'],['../d9/d5c/a01321.html#form-options',1,'Form Options'],['../d9/d5c/a01321.html#pick-options',1,'Pick Options'],['../d9/d5c/a01321.html#view-options',1,'View Options']]],
+  ['options_47',['Options',['../d9/d5c/a01321.html#c-menu-options',1,'C-Menu Options'],['../index.html#c-menu-start-up-options',1,'C-Menu Start-up Options'],['../d9/d5c/a01321.html#form-options',1,'Form Options'],['../d9/d5c/a01321.html#pick-options',1,'Pick Options'],['../d9/d5c/a01321.html#view-options',1,'View Options']]],
   ['options_20for_20lf_48',['&lt;b&gt;&lt;em&gt;New Options for lf&lt;/em&gt;&lt;/b&gt;',['../dc/dd9/a01328.html#_new-options-for-lf_',1,'']]],
   ['opttype_49',['OptType',['../dd/dd8/a00719.html#a2809124eff04ad302ca62f63f9408f1e',1,'common.h']]],
   ['or_20eza_20instead_20of_20ls_50',['Use lsd or eza instead of ls',['../dc/d8e/a01331.html#use-lsd-or-eza-instead-of-ls',1,'']]],
@@ -70,7 +70,8 @@ var searchData=
   ['output_67',['Expected Output',['../d9/d45/a01332.html#expected-output',1,'']]],
   ['output_5fobjects_68',['output_objects',['../d4/d13/a01162.html#ga8feb6cd586d503a676b831ec722576fb',1,'output_objects(Pick *):&#160;pick_engine.c'],['../d4/d13/a01162.html#ga8feb6cd586d503a676b831ec722576fb',1,'output_objects(Pick *pick):&#160;pick_engine.c']]],
   ['overview_69',['OVERVIEW',['../dc/dd9/a01328.html',1,'']]],
-  ['overview_20of_20developer_20folke_70',['AI Overview of Developer Folke',['../dd/d5d/a01325.html#ai-overview-of-developer-folke',1,'']]],
-  ['overview_20of_20developer_20norcalli_71',['AI Overview of Developer Norcalli',['../dd/d5d/a01325.html#ai-overview-of-developer-norcalli',1,'']]],
-  ['overview_2emd_72',['OVERVIEW.md',['../d2/d41/a01037.html',1,'']]]
+  ['overview_70',['C-Menu Overview',['../index.html#c-menu-overview',1,'']]],
+  ['overview_20of_20developer_20folke_71',['AI Overview of Developer Folke',['../dd/d5d/a01325.html#ai-overview-of-developer-folke',1,'']]],
+  ['overview_20of_20developer_20norcalli_72',['AI Overview of Developer Norcalli',['../dd/d5d/a01325.html#ai-overview-of-developer-norcalli',1,'']]],
+  ['overview_2emd_73',['OVERVIEW.md',['../d2/d41/a01037.html',1,'']]]
 ];
