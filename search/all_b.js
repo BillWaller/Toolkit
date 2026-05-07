@@ -62,7 +62,8 @@ var searchData=
   ['expressions_59',['lf - List Files Using Regular Expressions',['../dc/dd9/a01328.html#lf---list-files-using-regular-expressions',1,'']]],
   ['external_20commands_60',['External Commands',['../d2/d7b/a01150.html',1,'']]],
   ['external_20executables_61',['Menu Form - Integrating External Executables',['../d1/d54/a01326.html#menu-form---integrating-external-executables',1,'']]],
-  ['extras_62',['extras',['../dd/d5d/a01325.html',1,'']]],
-  ['extras_2emd_63',['extras.md',['../da/d17/a01046.html',1,'']]],
-  ['eza_20instead_20of_20ls_64',['Use lsd or eza instead of ls',['../dc/d8e/a01331.html#use-lsd-or-eza-instead-of-ls',1,'']]]
+  ['external_5freceiver_5fcommand_62',['external_receiver_command',['../d0/d39/a01112.html#ac054b50581abb3a560b2d285add9e15f',1,'lf.c']]],
+  ['extras_63',['extras',['../dd/d5d/a01325.html',1,'']]],
+  ['extras_2emd_64',['extras.md',['../da/d17/a01046.html',1,'']]],
+  ['eza_20instead_20of_20ls_65',['Use lsd or eza instead of ls',['../dc/d8e/a01331.html#use-lsd-or-eza-instead-of-ls',1,'']]]
 ];
