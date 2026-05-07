@@ -21,6 +21,16 @@ var a00716 =
       [ "FF_APR", "d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55af8346e29b3bb06510cdba6d949f00640", null ],
       [ "FF_INVALID", "d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a99eaf0729b2968cb39328d77737224ae", null ]
     ] ],
+    [ "FormAction", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955f", [
+      [ "FA_CONTINUE", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955faf4773194b9a8e8396e1b6414de0cf6cc", null ],
+      [ "FA_ACCEPT", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fa3aea665d14c26546307406979e044edf", null ],
+      [ "FA_HELP", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fa6c8e9135a37be5c9ab4262fb4309aeb5", null ],
+      [ "FA_CANCEL", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955faf0094ba02f4562b8fa2cbb967f3b06d0", null ],
+      [ "FA_REFUSE", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fab089e064cb23370a1599d98fb5626276", null ],
+      [ "FA_CALC", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fa52988afee649db88629ad5e976479479", null ],
+      [ "FA_EDIT", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fa41e518fe63cd54b48f60adff72abb6d1", null ],
+      [ "FA_END", "d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fa2f7450f6173290c5b033adf0cdffc08e", null ]
+    ] ],
     [ "field_editor", "d9/d97/a01152.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
     [ "field_navigator", "dc/d06/a01153.html#gae570c2569ffef8c9d38184b6d9446812", null ],
     [ "form_desc_error", "dc/d06/a01153.html#ga02cf855a99051ac21f4966aa92b9544f", null ],

@@ -89,7 +89,7 @@ var a00719 =
     [ "view_win_resize", "de/d07/a01146.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
     [ "write_config", "d9/d25/a01157.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
     [ "zero_opt_args", "d9/d25/a01157.html#gae9b71868d00a28cdcf5f4514e662edfe", null ],
-    [ "init", "dd/dd8/a00719.html#a1617336ac3622ce8b5d0009862d3b3e7", null ],
+    [ "init", "dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8", null ],
     [ "init_cnt", "dd/dd8/a00719.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32", null ],
     [ "minitrc", "dd/dd8/a00719.html#aebbffe794ab6e157b91e4c1666bb5aeb", null ]
 ];

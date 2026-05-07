@@ -13,11 +13,11 @@ var a00734 =
     [ "NULSL", "d6/dc0/a00734.html#a3f15836bdfb0ecbf8ed781532654a435", null ],
     [ "PAD_COLS", "d6/dc0/a00734.html#adc3d88deb82e66426d66e559bba7ef1e", null ],
     [ "VBUFSIZ", "d6/dc0/a00734.html#a5259eafdce2c5489c29df7b44a782b88", null ],
-    [ "PROMPT_TYPE", "d6/dc0/a00734.html#adb849ef0de5c311417c91c292799a846", [
-      [ "PT_NONE", "d6/dc0/a00734.html#adb849ef0de5c311417c91c292799a846a5e8a3bf54d8aa3d0e50d59ef9b2f1398", null ],
-      [ "PT_SHORT", "d6/dc0/a00734.html#adb849ef0de5c311417c91c292799a846aaa481826e984e7266a1f7c20896b2490", null ],
-      [ "PT_LONG", "d6/dc0/a00734.html#adb849ef0de5c311417c91c292799a846ab5ab669b6988ceb66aac8500c3ccfa0a", null ],
-      [ "PT_STRING", "d6/dc0/a00734.html#adb849ef0de5c311417c91c292799a846a2bd50da1a59fe6894d91a88928bdcbef", null ]
+    [ "PromptType", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808c", [
+      [ "PT_NONE", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398", null ],
+      [ "PT_SHORT", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490", null ],
+      [ "PT_LONG", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a", null ],
+      [ "PT_STRING", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef", null ]
     ] ],
     [ "cat_file", "d8/d92/a01165.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
     [ "get_cmd_spec", "d6/dc0/a00734.html#a92b33aa9664abadbfbf0a51737d68af2", null ],
