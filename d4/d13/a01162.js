@@ -1,18 +1,9 @@
 var a01162 =
 [
-    [ "deselect_object", "d4/d13/a01162.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "d4/d13/a01162.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "d4/d13/a01162.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "d4/d13/a01162.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d4/d13/a01162.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "match_objects", "d4/d13/a01162.html#ga91b2cda407803ee4367f7efd5487863c", null ],
-    [ "open_pick_win", "d4/d13/a01162.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "d4/d13/a01162.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_engine", "d4/d13/a01162.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d4/d13/a01162.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
-    [ "read_pick_input", "d4/d13/a01162.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d4/d13/a01162.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d4/d13/a01162.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d4/d13/a01162.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d4/d13/a01162.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "init_view.c", "d2/d4d/a01079.html", null ],
+    [ "init_view_boxwin", "d4/d13/a01162.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d4/d13/a01162.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_calc_full_screen_dimensions", "d4/d13/a01162.html#gaa64cfaf51c250788f093130763495ac4", null ],
+    [ "view_calc_win_dimensions", "d4/d13/a01162.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
+    [ "view_init_input", "d4/d13/a01162.html#gab050f5482419339e9207dbdc65a7b49e", null ]
 ];

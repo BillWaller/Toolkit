@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['y_0',['y',['../d7/dbf/a01239.html#afeda653d0965974396dcb51bb928290d',1,'Pick']]],
-  ['y_5foffset_1',['y_offset',['../d7/dbf/a01239.html#addc0ff4e89261e6a37a5a7d43656f4b2',1,'Pick']]],
-  ['yellow_2',['yellow',['../da/d3f/a01215.html#a265ad18d9a132a8c4c0280b116ca3203',1,'SIO']]]
+  ['x_0',['x',['../d8/db0/a01243.html#a86d0b88cd863c97fa393b58eb0c2afe2',1,'Pick']]]
 ];

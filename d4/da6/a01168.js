@@ -1,7 +1,7 @@
 var a01168 =
 [
-    [ "cp", "d4/da6/a01168.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
-    [ "end_pos", "d4/da6/a01168.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
-    [ "keycode", "d4/da6/a01168.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
-    [ "text", "d4/da6/a01168.html#a26a5a1b51ba82579294838ee52a18af3", null ]
+    [ "handle_signal", "d4/da6/a01168.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d4/da6/a01168.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d4/da6/a01168.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d4/da6/a01168.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];

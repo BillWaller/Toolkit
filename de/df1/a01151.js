@@ -1,9 +1,12 @@
 var a01151 =
 [
-    [ "init_view.c", "d9/d7c/a01073.html", null ],
-    [ "init_view_boxwin", "de/df1/a01151.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "de/df1/a01151.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "de/df1/a01151.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "de/df1/a01151.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_init_input", "de/df1/a01151.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "compile_chyron", "de/df1/a01151.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "de/df1/a01151.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "display_chyron", "de/df1/a01151.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
+    [ "get_chyron_key", "de/df1/a01151.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "de/df1/a01151.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "de/df1/a01151.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "new_chyron", "de/df1/a01151.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key_cp", "de/df1/a01151.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "de/df1/a01151.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

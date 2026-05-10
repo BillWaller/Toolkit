@@ -1,11 +1,10 @@
 var a01167 =
 [
-    [ "display_line", "d7/dd6/a01167.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_prompt", "d7/dd6/a01167.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "fmt_line", "d7/dd6/a01167.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "d7/dd6/a01167.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "d7/dd6/a01167.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "view_display_help", "d7/dd6/a01167.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "d7/dd6/a01167.html#gae6f141401cf9f104dbe14f09603d5178", null ],
-    [ "view_restore_wins", "d7/dd6/a01167.html#ga322b7dfe2d426fe7cfb2b4f59bf6fc78", null ]
+    [ "capture_curses_tioctl", "d7/dd6/a01167.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "d7/dd6/a01167.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "d7/dd6/a01167.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "d7/dd6/a01167.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "d7/dd6/a01167.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "d7/dd6/a01167.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "d7/dd6/a01167.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
 ];

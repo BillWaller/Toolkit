@@ -1,7 +1,5 @@
 var a01164 =
 [
-    [ "handle_signal", "d2/dd2/a01164.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "d2/dd2/a01164.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "d2/dd2/a01164.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "d2/dd2/a01164.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
+    [ "menu_cmd_processor", "d2/dd2/a01164.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
+    [ "menu_engine", "d2/dd2/a01164.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
 ];

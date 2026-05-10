@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: API</title>
+<title>C-Menu: /usr/local/src/C-Menu/src/enterstr.c</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -108,112 +108,66 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/d39/a01271.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">API </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a> <img src="../../API-Reference.png" alt="" class="inline" title="API Reference"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="how-to-get-c-menu"></a>
-How to get C-Menu</h1>
-<h2 class="doxsection"><a class="anchor" id="get-c-menu-on-github"></a>
-Get C-Menu on Github</h2>
-<p>Click the link below to access the C-Menu Documentation:</p>
-<p><a href="https://decision-inc.com">C-Menu on Github</a></p>
-<p><a href="https://github.com/BillWaller/C-Menu.git">Download C-Menu from Github</a></p>
-<p>or</p>
-<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="introduction"></a>
-Introduction</h2>
-<p>The C-Menu API is a set of functions and tools that allow developers to extend the capabilities of C-Menu and develop custom applications that integrate with C-Menu.</p>
-<div class="image">
-<img src="../../api-help1.png" alt=""/>
-<div class="caption">
-C-Menu API Help in Neovim</div></div>
-    <p>The C-Menu API documentation is available in Neovim. As you are typing the function name, a list of matching signatures appears along with a brief description of each function and its parameters. This makes it easier to to use the API without having to leave your coding environment. You can select the one you want with the arrow keys and press Enter to insert it into your code. You can also hover over a function and press Shift-K to view the full documentation in a pop-up window.</p>
-<p><b><em>NOTE:</em></b> Requires Neovim properly configured with support for LSP and a plugin that provides LSP functionality, such as nvim-lspconfig.</p>
-<h2 class="doxsection"><a class="anchor" id="api-organization"></a>
-API Organization</h2>
-<p>The C-Menu API is organized into modules, each containing functions related to a specific aspect of C-Menu's functionality. The most important directories in the C-Menu source are src and menuapp. The src directory contains the source code for C-Menu, including the implementation of the API functions. The menuapp directory contains the application code that uses the API to create the C-Menu user interface and handle user interactions. To familiarize yourself with the API, you can explore the src and src/include directories while you explore the C-Menu documentation at:</p>
-<p><a href="https://decision-inc.com">C-Menu Documentation</a></p>
-<p>Start by opening the C-Menu top-level directory explore the various subdirectories.</p>
-<div class="image">
-<img src="../../cmenu-tree.png" alt=""/>
-<div class="caption">
-C-Menu Top-Level Directory</div></div>
-    <h3 class="doxsection"><a class="anchor" id="c-menu-header-files"></a>
-C-Menu Header Files</h3>
-<p>The src/include directory contains header files that define the API functions and data structures. These header files are located in src/include. They are:</p>
-<h4 class="doxsection"><a class="anchor" id="includecmh"></a>
-include/cm.h</h4>
-<p><a class="el" href="../../d8/db9/a00725.html" title="Headder for C-Menu API library, libcm.so.">cm.h</a>: This header file includes generic functions and data that are used throughout C-Menu, but aren't specific to the application layer. It contains general-purpose functions and data structures that can be used in various contexts, not just within C-Menu. <a class="el" href="../../d8/db9/a00725.html" title="Headder for C-Menu API library, libcm.so.">cm.h</a> contains:</p>
-<ul>
-<li>struct <a class="el" href="../../da/dfb/a01174.html" title="The SIO structure encapsulates various aspects of the terminal&#39;s state and configuration,...">SIO</a> for managing screen input/output operations</li>
-<li><a class="el" href="../../d3/ddc/a01142.html">Chyron</a> manager for handling on-screen text and messages</li>
-<li>File management capabilities for handling files and directories</li>
-<li><a class="el" href="../../d4/d13/a01162.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> manipulation functions for working with strings in C</li>
-<li>Color and color pair management functions, color initialization, and conversion to and from CGA, XTerm256 (EGA), True-Color (16.7M), and NCurses (1B) color types in decimal, hexadecimal, and ANSI formats.</li>
-<li>3 Channel color and grayscale gamma correction</li>
-<li>Error reporting</li>
-<li>Signal handling including SIGSEGV graceful termination</li>
-<li>Logging functions for debugging and error reporting</li>
-<li>Ncurses support including WACS characters, mouse support, and terminal capabilities</li>
-</ul>
-<h4 class="doxsection"><a class="anchor" id="includecommonh"></a>
-include/common.h</h4>
-<p><a class="el" href="../../dd/dd8/a00719.html" title="Headder for C-Menu Menu, Form, Pick, and View components.">common.h</a>: This header file contains the common data structure, "Init", which is used in <a class="el" href="../../d9/d2e/a01194.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d9/dbb/a01186.html">Form</a>, <a class="el" href="../../d0/d32/a01198.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d4/d5d/a01202.html">View</a>. The "Init" structure is a fundamental part of the C-Menu API and is used to initialize and configure various components of the C-Menu application. It contains fields that specify the properties and behavior of menu items, forms, picks, and views. The functions that utilize the "Init" structure are essential for setting up and managing the user interface elements in C-Menu.</p>
-<p>The data in the <a class="el" href="../../dd/de2/a01134.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> structure is substantially stored in ~/.minitrc. This file is read on startup, and along with certain environment variables, and command-line arguments, is used to initialize the C-Menu application and configure its behavior. A default ~/.minitrc file is provided with C-Menu. Any of the C-Menu main programs will create a new configuration file when invoked with the -D option. (dump-config).</p>
-<p>Each user can have any number of configuration files by specifying the -a option with the name of the configuration file. For example, if you have a configuration file named "myconfig.minitrc", you can start C-Menu with that configuration by running:</p>
-<div class="fragment"><div class="line">menu -a myconfig.minitrc</div>
-</div><!-- fragment --><div class="fragment"><div class="line">export MINITRC=myconfig.minitrc</div>
-</div><!-- fragment --><p>You can also view the contents of the default configuration by running:</p>
-<div class="fragment"><div class="line">options</div>
-</div><!-- fragment --><div class="image">
-<img src="../../options.png" alt=""/>
-<div class="caption">
-C-Menu Configuration</div></div>
-    <p>This is very useful because field name is also the name of the C variable used by the C-Menu API. For example, the "title" field in the <a class="el" href="../../dd/de2/a01134.html" title="Gathers runtime information for C-Menu Menu, Form, Pick, and View components, used for passing common...">Init</a> structure corresponds to the "title" variable in the C-Menu API. In instances where a long option is needed, the field name is also the long option name. For example, the "mapp_help" field corresponds to the "--mapp_help" long option in the command-line interface. This allows developers to easily understand how to use the API functions and how to configure their applications using the configuration file.</p>
-<h4 class="doxsection"><a class="anchor" id="includemenuh-formh-pickh-and-viewh"></a>
-include/menu.h, form.h, pick.h, and view.h</h4>
-<p>These are the application layer header files that define the API functions and data structures specific to <a class="el" href="../../d9/d2e/a01194.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d9/dbb/a01186.html">Form</a>, <a class="el" href="../../d0/d32/a01198.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d4/d5d/a01202.html">View</a> components of C-Menu. Each of these header files contains functions and data structures specific to their respective components, allowing developers to create and manage menus, forms, picks, and views in their C-Menu applications.</p>
-<h4 class="doxsection"><a class="anchor" id="includeversionh-and-versionh"></a>
-include/version.h and version.h</h4>
-<p><a class="el" href="../../df/d3b/a00728.html">version.h</a>: This header file contains version information for C-Menu, including the major, minor, and patch version numbers. <a class="el" href="../../df/d3b/a00728.html">version.h</a> is generated from version.h.in during the build process and contains the actual version numbers for the C-Menu application. This information is useful for developers to ensure compatibility with specific versions of C-Menu when developing their applications. The version information can be accessed through the API functions, allowing developers to check the version of C-Menu they are working with and ensure that their applications are compatible with that version.</p>
-<h4 class="doxsection"><a class="anchor" id="version-compatibility"></a>
-Version Compatibility</h4>
-<ul>
-<li>Why it matters: All libcm.so.0.x.x versions of libcm are compatible with all C-Menu 0.x.x version, but libcm.so.1.x.x is only compatible with libcm.so.1.x.x. However, it is perfectly reasonable to have multiple versions of libcm installed on the same system, as long as they are properly managed and linked to the correct C-Menu application. This allows developers to work with different versions of C-Menu and ensure that their applications are compatible with the specific version they are targeting. The dynamic linker handles the loading of the correct version of libcm based on the version information specified in the C-Menu application and the available versions of libcm on the system. This allows for flexibility and compatibility when developing applications that use the C-Menu API.</li>
-</ul>
-<p>To be continued in the next version of the documentation. The C-Menu API is extensive and covers a wide range of functionality, so this documentation will be expanded to include more detailed information about each module, function, and data structure in the API. Future updates will also include examples and best practices for using the C-Menu API effectively in your applications. Stay tuned for more updates!</p>
-<p>In the meantime, you can explore the extensive C-Menu documentation available at:</p>
-<p><a href="https://decision-inc.com">C-Menu Documentation</a></p>
-<h4 class="doxsection"><a class="anchor" id="roadmap-for-api-documentation-and-user-guide"></a>
-Roadmap for API Documentation and User Guide</h4>
-<p><b><em>Note:</em></b> The C-Menu Documentation is developing along two tracks. The API documentation is geared for developers who want to use the C-Menu API to create custom applications, or perhaps contribute to the C-Menu codebase. The User Guide is geared for administrators, developers, and end-users who want to use C-Menu as an adjunct to their workflow, or perhaps customize C-Menu for their specific needs. Both tracks are important and will be developed in parallel, but the API documentation is currently the focus of development. The User Guide will be expanded in future updates to include more detailed information about using C-Menu effectively, including tips and best practices for customizing C-Menu to fit your specific needs. I will also try to add more to the Exercises section, which is intended to demonstrate how to use C-Menu to solve real-world problems and to provide hands-on experience with the C-Menu API. The exercises will cover a range of topics, from basic usage of C-Menu to more advanced features and customization options. Stay tuned for more updates on the User Guide and Exercises sections of the documentation!</p>
-<hr  />
-<h4 class="doxsection"><a class="anchor" id="documentation"></a>
-Documentation</h4>
-<p><img src="../../topics.png" alt="" class="inline" title="Topics"/>    </p>
-<p><img src="../../function.png" alt="" class="inline" title="Function Documentation"/>    </p>
-<div class="image">
-<img src="../../graph.png" alt=""/>
-<div class="caption">
-Caller Graph for xwgetch()</div></div>
-    <p><a class="el" href="../../dd/dd8/a00719.html#a5abe1ba66f71bb3a1bc22393854d33df">Caller</a> and Callee graphs are provided in the HTML documentation for all API functions. These graphs show the relationships between functions in the C-Menu codebase, allowing developers to understand how different functions interact with each other and how they are used in the context of the C-Menu application. This can be particularly useful for understanding the flow of data and control in the application, as well as for identifying potential areas for optimization or improvement in the code.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository"></a>
-🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h2>
-<hr  />
-<p>=== <b>_ INCOMPLETE CONTENT _</b> === </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
+<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
+<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
+<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
+</div><!-- fragment --><div class="fragment"><div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../db/d28/a01133.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a id="_a2" name="_a2"></a><a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line">    <span class="keywordtype">char</span> *msg;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
+<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d7/dd6/a01167.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../d4/da6/a01168.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line">    new_tioctl = <a id="_a6" name="_a6"></a><a class="code hl_variable" href="../../d9/d65/a01145.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
+<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line">            write(2, msg++, 1);</div>
+<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line">        write(1, in_ptr++, 1);</div>
+<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../d4/da6/a01168.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
+<div class="line">    <a id="a8" name="a8"></a><a class="code hl_function" href="../../d7/dd6/a01167.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line">    exit(0);</div>
+<div class="line">}</div>
+<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
+<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l00122">futil.c:122</a></div></div>
+<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
+<div class="ttc" id="aa01082_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df1/a01082_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa01133_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../db/d28/a01133.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00034">amort.c:34</a></div></div>
+<div class="ttc" id="aa01145_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d9/d65/a01145.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d65/a01145_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01167_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d7/dd6/a01167.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d65/a01145_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01167_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d7/dd6/a01167.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d65/a01145_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01168_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d4/da6/a01168.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d8/dbf/a01109_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa01168_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d4/da6/a01168.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d8/dbf/a01109_source.html#l00062">sig.c:62</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

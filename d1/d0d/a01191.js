@@ -1,6 +1,6 @@
 var a01191 =
 [
-    [ "bg", "d1/d0d/a01191.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
-    [ "fg", "d1/d0d/a01191.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
-    [ "pair_id", "d1/d0d/a01191.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
+    [ "b", "d1/d0d/a01191.html#a823a1befc95c064e6d179723edb056fa", null ],
+    [ "g", "d1/d0d/a01191.html#ab49e03f25cd24170f9cd31b5696c7d1f", null ],
+    [ "r", "d1/d0d/a01191.html#a43e48de3e3cf8c8fa9120830ffac424e", null ]
 ];
