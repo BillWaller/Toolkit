@@ -52,12 +52,11 @@ var searchData=
   ['with_20view_49',['Screenshot of the Same File With View',['../d7/d57/a01348.html#screenshot-of-the-same-file-with-view',1,'']]],
   ['with_20view_50',['View - How to Use Tree-Sitter with View',['../d9/de4/a01346.html#view---how-to-use-tree-sitter-with-view',1,'']]],
   ['work_51',['Some Menu Selections Don&apos;t work',['../d9/de4/a01346.html#some-menu-selections-dont-work',1,'']]],
-  ['worker_52',['worker',['../df/dd5/a01115.html#a15b16453216ed29570af03009e7c7c63',1,'lf.c']]],
-  ['works_53',['How C-Menu Menu Works',['../de/da0/a01341.html#how-c-menu-menu-works',1,'']]],
-  ['wrap_20up_54',['0.2.9 Wrap-Up',['../da/d61/a01350.html#autotoc_md029-wrap-up',1,'']]],
-  ['write_5fcmenu_5flog_55',['write_cmenu_log',['../df/db5/a01158.html#ga32c0e93e47af5ea782230648fcf60ad7',1,'write_cmenu_log(char *):&#160;futil.c'],['../df/db5/a01158.html#ga32c0e93e47af5ea782230648fcf60ad7',1,'write_cmenu_log(char *msg):&#160;futil.c']]],
-  ['write_5fcmenu_5flog_5fnt_56',['write_cmenu_log_nt',['../df/db5/a01158.html#gad8ab690263920a3b88cb9d8c97fadf98',1,'write_cmenu_log_nt(char *):&#160;futil.c'],['../df/db5/a01158.html#gad8ab690263920a3b88cb9d8c97fadf98',1,'write_cmenu_log_nt(char *msg):&#160;futil.c']]],
-  ['write_5fconfig_57',['write_config',['../dc/d81/a01161.html#ga4b671c384affcc6dc1ed59a04d666cc7',1,'write_config(Init *):&#160;init.c'],['../dc/d81/a01161.html#ga4b671c384affcc6dc1ed59a04d666cc7',1,'write_config(Init *init):&#160;init.c']]],
-  ['write_5flog_58',['write_log',['../d8/db9/a00725.html#a633e3284681efaaab713d43906da1399',1,'cm.h']]],
-  ['write_5fview_5fbuffer_59',['write_view_buffer',['../d7/daf/a01169.html#ga30ab3b4282eabd18619c5b053ff8b0b1',1,'view_engine.c']]]
+  ['works_52',['How C-Menu Menu Works',['../de/da0/a01341.html#how-c-menu-menu-works',1,'']]],
+  ['wrap_20up_53',['0.2.9 Wrap-Up',['../da/d61/a01350.html#autotoc_md029-wrap-up',1,'']]],
+  ['write_5fcmenu_5flog_54',['write_cmenu_log',['../df/db5/a01158.html#ga32c0e93e47af5ea782230648fcf60ad7',1,'write_cmenu_log(char *):&#160;futil.c'],['../df/db5/a01158.html#ga32c0e93e47af5ea782230648fcf60ad7',1,'write_cmenu_log(char *msg):&#160;futil.c']]],
+  ['write_5fcmenu_5flog_5fnt_55',['write_cmenu_log_nt',['../df/db5/a01158.html#gad8ab690263920a3b88cb9d8c97fadf98',1,'write_cmenu_log_nt(char *):&#160;futil.c'],['../df/db5/a01158.html#gad8ab690263920a3b88cb9d8c97fadf98',1,'write_cmenu_log_nt(char *msg):&#160;futil.c']]],
+  ['write_5fconfig_56',['write_config',['../dc/d81/a01161.html#ga4b671c384affcc6dc1ed59a04d666cc7',1,'write_config(Init *):&#160;init.c'],['../dc/d81/a01161.html#ga4b671c384affcc6dc1ed59a04d666cc7',1,'write_config(Init *init):&#160;init.c']]],
+  ['write_5flog_57',['write_log',['../d8/db9/a00725.html#a633e3284681efaaab713d43906da1399',1,'cm.h']]],
+  ['write_5fview_5fbuffer_58',['write_view_buffer',['../d7/daf/a01169.html#ga30ab3b4282eabd18619c5b053ff8b0b1',1,'view_engine.c']]]
 ];

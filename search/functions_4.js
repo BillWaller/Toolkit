@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['enqueue_0',['enqueue',['../df/dd5/a01115.html#a5cd91d68b579174eb83403b9867848f5',1,'lf.c']]],
+  ['enqueue_5fdir_0',['enqueue_dir',['../df/dd5/a01115.html#ad0f4d0a190e7c6726ff8eccced6da910',1,'lf.c']]],
   ['enter_5ffile_5fspec_1',['enter_file_spec',['../d7/daf/a01169.html#ga2ffea5674e85f124a70e19f745a66583',1,'view_engine.c']]],
   ['enter_5foption_2',['enter_option',['../d8/db9/a00725.html#a4a9979ad9428af9c09b21db490c2acfa',1,'cm.h']]],
   ['error_5fpress_5fany_5fkey_3',['error_press_any_key',['../dd/df1/a01082.html#ab4561d0b4e00154d5a4af0aca0af2df7',1,'iloan.c']]],

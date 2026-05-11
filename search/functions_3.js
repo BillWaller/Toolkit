@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['dequeue_0',['dequeue',['../df/dd5/a01115.html#af791b4f6fb71c4f8e3ae6002ee9fa8d7',1,'lf.c']]],
+  ['dequeue_5fdir_0',['dequeue_dir',['../df/dd5/a01115.html#aaac63a384018fab4605668d9dc7d8b3b',1,'lf.c']]],
   ['derive_5ffile_5fspec_1',['derive_file_spec',['../dc/d81/a01161.html#ga20c40545a1e05954b496c6d674d31458',1,'derive_file_spec(char *, char *, char *):&#160;init.c'],['../dc/d81/a01161.html#ga20c40545a1e05954b496c6d674d31458',1,'derive_file_spec(char *file_spec, char *dir, char *file_name):&#160;init.c']]],
   ['deselect_5fobject_2',['deselect_object',['../dc/dee/a01166.html#ga98b36615c0627c4195c40b6c23d6062a',1,'pick_engine.c']]],
   ['destroy_5fargv_3',['destroy_argv',['../df/db5/a01158.html#ga10b60618e5fef6711dbe90389d60c049',1,'destroy_argv(int argc, char **argv):&#160;futil.c'],['../df/db5/a01158.html#ga10b60618e5fef6711dbe90389d60c049',1,'destroy_argv(int argc, char **argv):&#160;futil.c']]],

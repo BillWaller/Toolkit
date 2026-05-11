@@ -24,7 +24,7 @@ var searchData=
   ['delete_20by_20inode_21',['Menu - What Happened to Delete by Inode',['../d9/de4/a01346.html#menu---what-happened-to-delete-by-inode',1,'']]],
   ['delimiters_22',['Delimiters',['../de/da0/a01341.html#form-field-delimiters',1,'Form Field Delimiters'],['../d9/de4/a01346.html#menu-form---field-delimiters',1,'Menu Form - Field Delimiters']]],
   ['demand_20paged_20virtual_20address_20space_23',['Demand Paged Virtual Address Space',['../d7/d57/a01348.html#demand-paged-virtual-address-space',1,'']]],
-  ['dequeue_24',['dequeue',['../df/dd5/a01115.html#af791b4f6fb71c4f8e3ae6002ee9fa8d7',1,'lf.c']]],
+  ['dequeue_5fdir_24',['dequeue_dir',['../df/dd5/a01115.html#aaac63a384018fab4605668d9dc7d8b3b',1,'lf.c']]],
   ['derive_5ffile_5fspec_25',['derive_file_spec',['../dc/d81/a01161.html#ga20c40545a1e05954b496c6d674d31458',1,'derive_file_spec(char *, char *, char *):&#160;init.c'],['../dc/d81/a01161.html#ga20c40545a1e05954b496c6d674d31458',1,'derive_file_spec(char *file_spec, char *dir, char *file_name):&#160;init.c']]],
   ['description_20file_26',['Description File',['../d5/da0/a01342.html#description-file',1,'Description File'],['../d7/d57/a01348.html#sample-menu-description-file',1,'Sample Menu Description File']]],
   ['description_20file_20format_27',['Menu Description File Format',['../de/da0/a01341.html#menu-description-file-format',1,'']]],
