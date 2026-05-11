@@ -1,7 +1,7 @@
 var searchData=
 [
   ['r_20menu_0',['About C-Menu and R-Menu',['../d4/deb/a01345.html#about-c-menu-and-r-menu',1,'']]],
-  ['receipts_1',['Cash Receipts',['../d5/da0/a01342.html#cash-receipts',1,'']]],
+  ['receipts_1',['Receipts',['../d5/da0/a01342.html#cash-receipts',1,'Cash Receipts'],['../index.html#cash-receipts-1',1,'Cash Receipts']]],
   ['recommended_2',['Not Required, But Recommended',['../de/da0/a01341.html#not-required-but-recommended',1,'']]],
   ['recommended_3',['Using the Makefile target (recommended)',['../d0/d85/a01352.html#using-the-makefile-target-recommended',1,'']]],
   ['reference_4',['Reference',['../d0/d85/a01352.html#reference',1,'']]],
@@ -27,7 +27,7 @@ var searchData=
   ['rsh_20and_20lf_24',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../d7/d57/a01348.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
   ['rsh_20helpers_25',['RSH Helpers',['../d1/dcd/a01351.html#rsh-helpers',1,'']]],
   ['rsh_20safety_20features_26',['RSH Safety Features',['../de/da0/a01341.html#rsh-safety-features',1,'']]],
-  ['rsh_20static_20linking_27',['RSH Static Linking',['../df/d96/a01347.html#rsh-static-linking',1,'RSH Static Linking'],['../index.html#rsh-static-linking-1',1,'RSH Static Linking']]],
+  ['rsh_20static_20linking_27',['RSH Static Linking',['../df/d96/a01347.html#rsh-static-linking',1,'']]],
   ['run_28',['How to Run',['../d0/d85/a01352.html#how-to-run',1,'']]],
   ['running_20manually_29',['Running manually',['../d0/d85/a01352.html#running-manually',1,'']]],
   ['running_20valgrind_20against_20c_20menu_30',['Running Valgrind Against C-Menu',['../d0/d85/a01352.html',1,'']]],
@@ -35,6 +35,6 @@ var searchData=
   ['rust_20on_20linux_20and_20macos_32',['Installing Rust On Linux and macOS',['../d4/deb/a01345.html#installing-rust-on-linux-and-macos',1,'']]],
   ['rustlings_33',['Rustlings',['../d4/deb/a01345.html#rustlings',1,'']]],
   ['rustlings_20exercises_34',['Rustlings Exercises',['../dc/d54/a01344.html#rustlings-exercises',1,'']]],
-  ['rustlings_20source_35',['Rustlings Source',['../d5/da0/a01342.html#rustlings-source',1,'']]],
+  ['rustlings_20source_35',['Rustlings Source',['../d5/da0/a01342.html#rustlings-source',1,'Rustlings Source'],['../index.html#rustlings-source-1',1,'Rustlings Source']]],
   ['rusty_36',['Let&apos;s Get Rusty',['../d4/deb/a01345.html#lets-get-rusty',1,'']]]
 ];

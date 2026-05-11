@@ -5,7 +5,7 @@ var searchData=
   ['raw_5ftext_2',['raw_text',['../dd/dad/a01235.html#a514130f5368bc6edaa5928f08be2bd4f',1,'Line']]],
   ['read_5fpick_5finput_3',['read_pick_input',['../dc/dee/a01166.html#gaabda879000cf8135245ef451de08f780',1,'pick_engine.c']]],
   ['readme_2emd_4',['README.md',['../d5/d67/a01070.html',1,'']]],
-  ['receipts_5',['Cash Receipts',['../d5/da0/a01342.html#cash-receipts',1,'']]],
+  ['receipts_5',['Receipts',['../d5/da0/a01342.html#cash-receipts',1,'Cash Receipts'],['../index.html#cash-receipts-1',1,'Cash Receipts']]],
   ['receiver_5fcmd_6',['receiver_cmd',['../de/d1a/a01179.html#a6effd5bc8e6acdead7bd8385976bb1ca',1,'Init::receiver_cmd'],['../d0/d88/a01231.html#a47dcf50799bc839ea12f79372b8c55ee',1,'Form::receiver_cmd'],['../d7/dbf/a01239.html#a950711fc29da5549a7d8311632a69e68',1,'Menu::receiver_cmd'],['../d8/db0/a01243.html#abb443fafd1ee254f8d5bd696ff4b87c6',1,'Pick::receiver_cmd'],['../dd/d95/a01247.html#a75ffab6cbc3e29bbce23d8b865141fce',1,'View::receiver_cmd']]],
   ['recommended_7',['Not Required, But Recommended',['../de/da0/a01341.html#not-required-but-recommended',1,'']]],
   ['recommended_8',['Using the Makefile target (recommended)',['../d0/d85/a01352.html#using-the-makefile-target-recommended',1,'']]],
@@ -47,7 +47,7 @@ var searchData=
   ['rsh_20and_20lf_44',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../d7/d57/a01348.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
   ['rsh_20helpers_45',['RSH Helpers',['../d1/dcd/a01351.html#rsh-helpers',1,'']]],
   ['rsh_20safety_20features_46',['RSH Safety Features',['../de/da0/a01341.html#rsh-safety-features',1,'']]],
-  ['rsh_20static_20linking_47',['RSH Static Linking',['../df/d96/a01347.html#rsh-static-linking',1,'RSH Static Linking'],['../index.html#rsh-static-linking-1',1,'RSH Static Linking']]],
+  ['rsh_20static_20linking_47',['RSH Static Linking',['../df/d96/a01347.html#rsh-static-linking',1,'']]],
   ['rsh_2ec_48',['rsh.c',['../d2/df3/a01085.html',1,'']]],
   ['rtrim_49',['rtrim',['../d8/db9/a00725.html#a02e25a45a793eb58557ae52b1c8b2b33',1,'rtrim(char *):&#160;futil.c'],['../d0/d61/a01130.html#a4f42956462e811d96c9fb881a85dada4',1,'rtrim(char *s):&#160;futil.c']]],
   ['run_50',['How to Run',['../d0/d85/a01352.html#how-to-run',1,'']]],
@@ -57,6 +57,6 @@ var searchData=
   ['rust_20on_20linux_20and_20macos_54',['Installing Rust On Linux and macOS',['../d4/deb/a01345.html#installing-rust-on-linux-and-macos',1,'']]],
   ['rustlings_55',['Rustlings',['../d4/deb/a01345.html#rustlings',1,'']]],
   ['rustlings_20exercises_56',['Rustlings Exercises',['../dc/d54/a01344.html#rustlings-exercises',1,'']]],
-  ['rustlings_20source_57',['Rustlings Source',['../d5/da0/a01342.html#rustlings-source',1,'']]],
+  ['rustlings_20source_57',['Rustlings Source',['../d5/da0/a01342.html#rustlings-source',1,'Rustlings Source'],['../index.html#rustlings-source-1',1,'Rustlings Source']]],
   ['rusty_58',['Let&apos;s Get Rusty',['../d4/deb/a01345.html#lets-get-rusty',1,'']]]
 ];

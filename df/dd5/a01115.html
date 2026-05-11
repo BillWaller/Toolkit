@@ -239,40 +239,40 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to a <a class="el" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> containing the directory path and depth, or NULL if the queue is empty and shutdown has been initiated.</dd></dl>
 <p>This function removes and returns the next <a class="el" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> from the global queue. It uses a mutex to ensure thread-safe access to the queue, and waits on a condition variable if the queue is empty. The function also checks for shutdown conditions to allow finder threads to exit gracefully when there is no more work to process. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00524">524</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  524</span>                    {</div>
-<div class="line"><span class="lineno">  525</span>    pthread_mutex_lock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  526</span>    <span class="keywordflow">while</span> (<a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> == NULL &amp;&amp; !<a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a>) {</div>
-<div class="line"><span class="lineno">  527</span>        <span class="comment">// Exit condition: No work in queue AND no threads busy</span></div>
-<div class="line"><span class="lineno">  528</span>        <span class="keywordflow">if</span> (atomic_load(&amp;<a class="code hl_variable" href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a>) == 0) {</div>
-<div class="line"><span class="lineno">  529</span>            <a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a> = 1;</div>
-<div class="line"><span class="lineno">  530</span>            pthread_cond_broadcast(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>);</div>
-<div class="line"><span class="lineno">  531</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  532</span>        }</div>
-<div class="line"><span class="lineno">  533</span>        pthread_cond_wait(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>, &amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  534</span>    }</div>
-<div class="line"><span class="lineno">  535</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a> &amp;&amp; <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> == NULL) {</div>
-<div class="line"><span class="lineno">  536</span>        pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  537</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  538</span>    }</div>
-<div class="line"><span class="lineno">  539</span>    <a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> *temp = <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a>;</div>
-<div class="line"><span class="lineno">  540</span>    <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> = <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a>-&gt;next;</div>
-<div class="line"><span class="lineno">  541</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a>)</div>
-<div class="line"><span class="lineno">  542</span>        <a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a> = NULL;</div>
-<div class="line"><span class="lineno">  543</span>    pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  544</span>    <span class="keywordflow">return</span> temp;</div>
-<div class="line"><span class="lineno">  545</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00533">533</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  533</span>                    {</div>
+<div class="line"><span class="lineno">  534</span>    pthread_mutex_lock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  535</span>    <span class="keywordflow">while</span> (<a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> == NULL &amp;&amp; !<a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a>) {</div>
+<div class="line"><span class="lineno">  536</span>        <span class="comment">// Exit condition: No work in queue AND no threads busy</span></div>
+<div class="line"><span class="lineno">  537</span>        <span class="keywordflow">if</span> (atomic_load(&amp;<a class="code hl_variable" href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a>) == 0) {</div>
+<div class="line"><span class="lineno">  538</span>            <a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a> = 1;</div>
+<div class="line"><span class="lineno">  539</span>            pthread_cond_broadcast(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>);</div>
+<div class="line"><span class="lineno">  540</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  541</span>        }</div>
+<div class="line"><span class="lineno">  542</span>        pthread_cond_wait(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>, &amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  543</span>    }</div>
+<div class="line"><span class="lineno">  544</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a> &amp;&amp; <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> == NULL) {</div>
+<div class="line"><span class="lineno">  545</span>        pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  546</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  547</span>    }</div>
+<div class="line"><span class="lineno">  548</span>    <a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> *temp = <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a>;</div>
+<div class="line"><span class="lineno">  549</span>    <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> = <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a>-&gt;next;</div>
+<div class="line"><span class="lineno">  550</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a>)</div>
+<div class="line"><span class="lineno">  551</span>        <a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a> = NULL;</div>
+<div class="line"><span class="lineno">  552</span>    pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  553</span>    <span class="keywordflow">return</span> temp;</div>
+<div class="line"><span class="lineno">  554</span>}</div>
 <div class="ttc" id="aa01115_html_a3b09f37e675bcd48a01bf22155996872"><div class="ttname"><a href="#a3b09f37e675bcd48a01bf22155996872">Node</a></div><div class="ttdeci">struct Node Node</div></div>
-<div class="ttc" id="aa01115_html_a5161d377a61befc3f8103e794d5cb582"><div class="ttname"><a href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a></div><div class="ttdeci">int shutdown</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00278">lf.c:278</a></div></div>
-<div class="ttc" id="aa01115_html_a52fe88c7c7c544421140515e160778ed"><div class="ttname"><a href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a></div><div class="ttdeci">atomic_int active_tasks</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00277">lf.c:277</a></div></div>
-<div class="ttc" id="aa01115_html_a843722c9a2e85257454ee66ef07a522d"><div class="ttname"><a href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a></div><div class="ttdeci">pthread_cond_t cond_var</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00276">lf.c:276</a></div></div>
-<div class="ttc" id="aa01115_html_aa3e81b47ac0637ebb1ea7cc12812405a"><div class="ttname"><a href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a></div><div class="ttdeci">Node * head</div><div class="ttdoc">Global Synchronization State.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00274">lf.c:274</a></div></div>
-<div class="ttc" id="aa01115_html_acc4be9200c8ec4a2152e10a7c33b3704"><div class="ttname"><a href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a></div><div class="ttdeci">pthread_mutex_t queue_mutex</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00275">lf.c:275</a></div></div>
-<div class="ttc" id="aa01115_html_af42a067912fcce282e4cfc26f0c66ef4"><div class="ttname"><a href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a></div><div class="ttdeci">Node * tail</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00274">lf.c:274</a></div></div>
+<div class="ttc" id="aa01115_html_a5161d377a61befc3f8103e794d5cb582"><div class="ttname"><a href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a></div><div class="ttdeci">int shutdown</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00283">lf.c:283</a></div></div>
+<div class="ttc" id="aa01115_html_a52fe88c7c7c544421140515e160778ed"><div class="ttname"><a href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a></div><div class="ttdeci">atomic_int active_tasks</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00282">lf.c:282</a></div></div>
+<div class="ttc" id="aa01115_html_a843722c9a2e85257454ee66ef07a522d"><div class="ttname"><a href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a></div><div class="ttdeci">pthread_cond_t cond_var</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00281">lf.c:281</a></div></div>
+<div class="ttc" id="aa01115_html_aa3e81b47ac0637ebb1ea7cc12812405a"><div class="ttname"><a href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a></div><div class="ttdeci">Node * head</div><div class="ttdoc">Global Synchronization State.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00279">lf.c:279</a></div></div>
+<div class="ttc" id="aa01115_html_acc4be9200c8ec4a2152e10a7c33b3704"><div class="ttname"><a href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a></div><div class="ttdeci">pthread_mutex_t queue_mutex</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00280">lf.c:280</a></div></div>
+<div class="ttc" id="aa01115_html_af42a067912fcce282e4cfc26f0c66ef4"><div class="ttname"><a href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a></div><div class="ttdeci">Node * tail</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00279">lf.c:279</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00277">active_tasks</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00276">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00274">head</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00275">queue_mutex</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00278">shutdown</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00274">tail</a>.</p>
+<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00282">active_tasks</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00281">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00279">head</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00280">queue_mutex</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00283">shutdown</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00279">tail</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00558">finder()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00567">finder()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -310,27 +310,27 @@ Here is the caller graph for this function:</div>
 </dl>
 <p>This function creates a new <a class="el" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> containing the specified directory path and depth, and adds it to the global queue. It uses a mutex to ensure thread-safe access to the queue, and signals finder threads that new work is available. The function also checks for shutdown conditions to prevent enqueuing new work when the program is exiting. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00500">500</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  500</span>                                              {</div>
-<div class="line"><span class="lineno">  501</span>    <a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> *new_node = malloc(<span class="keyword">sizeof</span>(<a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a>));</div>
-<div class="line"><span class="lineno">  502</span>    <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(new_node-&gt;path, path, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  503</span>    new_node-&gt;depth = depth;</div>
-<div class="line"><span class="lineno">  504</span>    new_node-&gt;next = NULL;</div>
-<div class="line"><span class="lineno">  505</span> </div>
-<div class="line"><span class="lineno">  506</span>    pthread_mutex_lock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  507</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a>)</div>
-<div class="line"><span class="lineno">  508</span>        <a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a>-&gt;next = new_node;</div>
-<div class="line"><span class="lineno">  509</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  510</span>        <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> = new_node;</div>
-<div class="line"><span class="lineno">  511</span>    <a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a> = new_node;</div>
-<div class="line"><span class="lineno">  512</span>    pthread_cond_signal(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>);</div>
-<div class="line"><span class="lineno">  513</span>    pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  514</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00509">509</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  509</span>                                              {</div>
+<div class="line"><span class="lineno">  510</span>    <a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> *new_node = malloc(<span class="keyword">sizeof</span>(<a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a>));</div>
+<div class="line"><span class="lineno">  511</span>    <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(new_node-&gt;path, path, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  512</span>    new_node-&gt;depth = depth;</div>
+<div class="line"><span class="lineno">  513</span>    new_node-&gt;next = NULL;</div>
+<div class="line"><span class="lineno">  514</span> </div>
+<div class="line"><span class="lineno">  515</span>    pthread_mutex_lock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  516</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a>)</div>
+<div class="line"><span class="lineno">  517</span>        <a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a>-&gt;next = new_node;</div>
+<div class="line"><span class="lineno">  518</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  519</span>        <a class="code hl_variable" href="#aa3e81b47ac0637ebb1ea7cc12812405a">head</a> = new_node;</div>
+<div class="line"><span class="lineno">  520</span>    <a class="code hl_variable" href="#af42a067912fcce282e4cfc26f0c66ef4">tail</a> = new_node;</div>
+<div class="line"><span class="lineno">  521</span>    pthread_cond_signal(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>);</div>
+<div class="line"><span class="lineno">  522</span>    pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  523</span>}</div>
 <div class="ttc" id="aa01158_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l00306">futil.c:306</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00276">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00274">head</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00275">queue_mutex</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00274">tail</a>.</p>
+<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00281">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00279">head</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00280">queue_mutex</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00279">tail</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00558">finder()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00387">init_find()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00567">finder()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00394">init_find()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -369,59 +369,72 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>NULL</dd></dl>
 <p>This function continuously dequeues directory paths from the global queue and processes them. For each directory, it lists its contents and applies the specified filters to each file. If a subdirectory is found and it meets the criteria for further searching (e.g., not hidden if hidden files are suppressed, and within max depth), it is enqueued for processing. The function uses atomic operations to track active tasks and condition variables to manage thread synchronization and shutdown when all work is complete. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00558">558</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  558</span>                        {</div>
-<div class="line"><span class="lineno">  559</span>    SearchFilters *f = (SearchFilters *)arg;</div>
-<div class="line"><span class="lineno">  560</span>    <span class="comment">// regmatch_t pmatch;</span></div>
-<div class="line"><span class="lineno">  561</span> </div>
-<div class="line"><span class="lineno">  562</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno">  563</span>        <a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> *current = <a class="code hl_function" href="#aaac63a384018fab4605668d9dc7d8b3b">dequeue_dir</a>();</div>
-<div class="line"><span class="lineno">  564</span>        <span class="keywordflow">if</span> (!current)</div>
-<div class="line"><span class="lineno">  565</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  566</span> </div>
-<div class="line"><span class="lineno">  567</span>        atomic_fetch_add(&amp;<a class="code hl_variable" href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a>, 1);</div>
-<div class="line"><span class="lineno">  568</span> </div>
-<div class="line"><span class="lineno">  569</span>        DIR *dir = opendir(current-&gt;path);</div>
-<div class="line"><span class="lineno">  570</span>        <span class="keywordflow">if</span> (dir) {</div>
-<div class="line"><span class="lineno">  571</span>            <span class="keyword">struct </span>dirent *entry;</div>
-<div class="line"><span class="lineno">  572</span>            <span class="keywordflow">while</span> ((entry = readdir(dir)) != NULL) {</div>
-<div class="line"><span class="lineno">  573</span>                <span class="keywordflow">if</span> (strcmp(entry-&gt;d_name, <span class="stringliteral">&quot;.&quot;</span>) == 0 ||</div>
-<div class="line"><span class="lineno">  574</span>                    strcmp(entry-&gt;d_name, <span class="stringliteral">&quot;..&quot;</span>) == 0)</div>
-<div class="line"><span class="lineno">  575</span>                    <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  576</span>                <span class="keywordtype">char</span> full_path[PATH_MAX];</div>
-<div class="line"><span class="lineno">  577</span>                <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(full_path, current-&gt;path, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  578</span>                <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(full_path, <span class="stringliteral">&quot;/&quot;</span>, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  579</span>                <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(full_path, entry-&gt;d_name, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  580</span>                <span class="keywordflow">if</span> (entry-&gt;d_type == DT_DIR) {</div>
-<div class="line"><span class="lineno">  581</span>                    <span class="keywordflow">if</span> (!((f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a>) &amp;&amp; (entry-&gt;d_name[0] == <span class="charliteral">&#39;.&#39;</span>))) {</div>
-<div class="line"><span class="lineno">  582</span>                        <span class="keywordflow">if</span> (f-&gt;max_depth == 0 ||</div>
-<div class="line"><span class="lineno">  583</span>                            current-&gt;depth + 1 &lt; f-&gt;max_depth) {</div>
-<div class="line"><span class="lineno">  584</span>                            <a class="code hl_function" href="#ad0f4d0a190e7c6726ff8eccced6da910">enqueue_dir</a>(full_path, current-&gt;depth + 1);</div>
-<div class="line"><span class="lineno">  585</span>                        }</div>
-<div class="line"><span class="lineno">  586</span>                    }</div>
-<div class="line"><span class="lineno">  587</span>                } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  588</span>                    <a class="code hl_function" href="#a94d43c847372f49828fe8c3e4c3fe5d1">scan_file</a>(current-&gt;path, f, entry);</div>
-<div class="line"><span class="lineno">  589</span>                }</div>
-<div class="line"><span class="lineno">  590</span>            }</div>
-<div class="line"><span class="lineno">  591</span>            closedir(dir);</div>
-<div class="line"><span class="lineno">  592</span>        }</div>
-<div class="line"><span class="lineno">  593</span> </div>
-<div class="line"><span class="lineno">  594</span>        free(current);</div>
-<div class="line"><span class="lineno">  595</span>        atomic_fetch_sub(&amp;<a class="code hl_variable" href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a>, 1);</div>
-<div class="line"><span class="lineno">  596</span>        pthread_cond_broadcast(</div>
-<div class="line"><span class="lineno">  597</span>            &amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>); <span class="comment">// Wake up threads checking for idle exit</span></div>
-<div class="line"><span class="lineno">  598</span>    }</div>
-<div class="line"><span class="lineno">  599</span>    <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  600</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00567">567</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  567</span>                        {</div>
+<div class="line"><span class="lineno">  568</span>    SearchFilters *f = (SearchFilters *)arg;</div>
+<div class="line"><span class="lineno">  569</span>    <span class="keyword">struct </span>stat st;</div>
+<div class="line"><span class="lineno">  570</span>    <span class="comment">// regmatch_t pmatch;</span></div>
+<div class="line"><span class="lineno">  571</span> </div>
+<div class="line"><span class="lineno">  572</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">  573</span>        <a class="code hl_typedef" href="#a3b09f37e675bcd48a01bf22155996872">Node</a> *current = <a class="code hl_function" href="#aaac63a384018fab4605668d9dc7d8b3b">dequeue_dir</a>();</div>
+<div class="line"><span class="lineno">  574</span>        <span class="keywordflow">if</span> (!current)</div>
+<div class="line"><span class="lineno">  575</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  576</span> </div>
+<div class="line"><span class="lineno">  577</span>        atomic_fetch_add(&amp;<a class="code hl_variable" href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a>, 1);</div>
+<div class="line"><span class="lineno">  578</span> </div>
+<div class="line"><span class="lineno">  579</span>        DIR *dir = opendir(current-&gt;path);</div>
+<div class="line"><span class="lineno">  580</span>        <span class="keywordflow">if</span> (dir) {</div>
+<div class="line"><span class="lineno">  581</span>            <span class="keyword">struct </span>dirent *entry;</div>
+<div class="line"><span class="lineno">  582</span>            <span class="keywordflow">while</span> ((entry = readdir(dir)) != NULL) {</div>
+<div class="line"><span class="lineno">  583</span>                <span class="keywordflow">if</span> (strcmp(entry-&gt;d_name, <span class="stringliteral">&quot;.&quot;</span>) == 0 ||</div>
+<div class="line"><span class="lineno">  584</span>                    strcmp(entry-&gt;d_name, <span class="stringliteral">&quot;..&quot;</span>) == 0)</div>
+<div class="line"><span class="lineno">  585</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  586</span>                <span class="keywordtype">char</span> full_path[PATH_MAX];</div>
+<div class="line"><span class="lineno">  587</span>                <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(full_path, current-&gt;path, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  588</span>                <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(full_path, <span class="stringliteral">&quot;/&quot;</span>, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  589</span>                <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(full_path, entry-&gt;d_name, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  590</span>                <span class="keywordtype">int</span> isdir = 0;</div>
+<div class="line"><span class="lineno">  591</span>                <span class="keywordtype">bool</span> suppress = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  592</span>                <span class="keywordflow">if</span> (entry-&gt;d_type == DT_LNK) {</div>
+<div class="line"><span class="lineno">  593</span>                    <span class="keywordflow">if</span> (stat(full_path, &amp;st) == 0) {</div>
+<div class="line"><span class="lineno">  594</span>                        isdir = S_ISDIR(st.st_mode);</div>
+<div class="line"><span class="lineno">  595</span>                        <span class="keywordflow">if</span> (isdir &amp;&amp; f-&gt;f_lnk_dir)</div>
+<div class="line"><span class="lineno">  596</span>                            entry-&gt;d_type = DT_DIR;</div>
+<div class="line"><span class="lineno">  597</span>                        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  598</span>                            suppress = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  599</span>                    }</div>
+<div class="line"><span class="lineno">  600</span>                }</div>
+<div class="line"><span class="lineno">  601</span>                <span class="keywordflow">if</span> (entry-&gt;d_type == DT_DIR) {</div>
+<div class="line"><span class="lineno">  602</span>                    <span class="keywordflow">if</span> (!((f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a>) &amp;&amp; (entry-&gt;d_name[0] == <span class="charliteral">&#39;.&#39;</span>))) {</div>
+<div class="line"><span class="lineno">  603</span>                        <span class="keywordflow">if</span> (f-&gt;max_depth == 0 ||</div>
+<div class="line"><span class="lineno">  604</span>                            current-&gt;depth + 1 &lt; f-&gt;max_depth) {</div>
+<div class="line"><span class="lineno">  605</span>                            <a class="code hl_function" href="#ad0f4d0a190e7c6726ff8eccced6da910">enqueue_dir</a>(full_path, current-&gt;depth + 1);</div>
+<div class="line"><span class="lineno">  606</span>                        }</div>
+<div class="line"><span class="lineno">  607</span>                    }</div>
+<div class="line"><span class="lineno">  608</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  609</span>                    <span class="keywordflow">if</span> (!suppress)</div>
+<div class="line"><span class="lineno">  610</span>                        <a class="code hl_function" href="#a94d43c847372f49828fe8c3e4c3fe5d1">scan_file</a>(current-&gt;path, f, entry);</div>
+<div class="line"><span class="lineno">  611</span>                }</div>
+<div class="line"><span class="lineno">  612</span>            }</div>
+<div class="line"><span class="lineno">  613</span>            closedir(dir);</div>
+<div class="line"><span class="lineno">  614</span>        }</div>
+<div class="line"><span class="lineno">  615</span> </div>
+<div class="line"><span class="lineno">  616</span>        free(current);</div>
+<div class="line"><span class="lineno">  617</span>        atomic_fetch_sub(&amp;<a class="code hl_variable" href="#a52fe88c7c7c544421140515e160778ed">active_tasks</a>, 1);</div>
+<div class="line"><span class="lineno">  618</span>        pthread_cond_broadcast(</div>
+<div class="line"><span class="lineno">  619</span>            &amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>); <span class="comment">// Wake up threads checking for idle exit</span></div>
+<div class="line"><span class="lineno">  620</span>    }</div>
+<div class="line"><span class="lineno">  621</span>    <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno">  622</span>}</div>
 <div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a></div><div class="ttdeci">@ LF_HIDE</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00151">cm.h:151</a></div></div>
-<div class="ttc" id="aa01115_html_a94d43c847372f49828fe8c3e4c3fe5d1"><div class="ttname"><a href="#a94d43c847372f49828fe8c3e4c3fe5d1">scan_file</a></div><div class="ttdeci">int scan_file(char *, SearchFilters *, struct dirent *)</div><div class="ttdoc">Scan a single file against the search filters and print if it matches.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00634">lf.c:634</a></div></div>
-<div class="ttc" id="aa01115_html_aaac63a384018fab4605668d9dc7d8b3b"><div class="ttname"><a href="#aaac63a384018fab4605668d9dc7d8b3b">dequeue_dir</a></div><div class="ttdeci">Node * dequeue_dir()</div><div class="ttdoc">Dequeue a directory path for processing by finder threads.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00524">lf.c:524</a></div></div>
-<div class="ttc" id="aa01115_html_ad0f4d0a190e7c6726ff8eccced6da910"><div class="ttname"><a href="#ad0f4d0a190e7c6726ff8eccced6da910">enqueue_dir</a></div><div class="ttdeci">void enqueue_dir(const char *, int)</div><div class="ttdoc">Enqueue a directory path for processing by finder threads.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00500">lf.c:500</a></div></div>
+<div class="ttc" id="aa01115_html_a94d43c847372f49828fe8c3e4c3fe5d1"><div class="ttname"><a href="#a94d43c847372f49828fe8c3e4c3fe5d1">scan_file</a></div><div class="ttdeci">int scan_file(char *, SearchFilters *, struct dirent *)</div><div class="ttdoc">Scan a single file against the search filters and print if it matches.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00656">lf.c:656</a></div></div>
+<div class="ttc" id="aa01115_html_aaac63a384018fab4605668d9dc7d8b3b"><div class="ttname"><a href="#aaac63a384018fab4605668d9dc7d8b3b">dequeue_dir</a></div><div class="ttdeci">Node * dequeue_dir()</div><div class="ttdoc">Dequeue a directory path for processing by finder threads.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00533">lf.c:533</a></div></div>
+<div class="ttc" id="aa01115_html_ad0f4d0a190e7c6726ff8eccced6da910"><div class="ttname"><a href="#ad0f4d0a190e7c6726ff8eccced6da910">enqueue_dir</a></div><div class="ttdeci">void enqueue_dir(const char *, int)</div><div class="ttdoc">Enqueue a directory path for processing by finder threads.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00509">lf.c:509</a></div></div>
 <div class="ttc" id="aa01158_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l00335">futil.c:335</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00277">active_tasks</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00276">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00500">enqueue_dir()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00151">LF_HIDE</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00634">scan_file()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00335">strnz__cat()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>.</p>
+<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00282">active_tasks</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00281">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00509">enqueue_dir()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00151">LF_HIDE</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00656">scan_file()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00335">strnz__cat()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00387">init_find()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00394">init_find()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -461,127 +474,129 @@ Here is the caller graph for this function:</div>
 <p>This function processes the flags and options specified in the SearchFilters struct to set up the search criteria. It compiles any regular expressions provided by the user and initializes the queue with the base directory. It then creates a number of finder threads equal to the number of CPU cores to perform the directory traversal and file scanning concurrently. The function waits for all finder threads to complete before cleaning up resources and returning. </p>
 <p>suppress file types that aren't included</p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00387">387</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  387</span>                                 {</div>
-<div class="line"><span class="lineno">  388</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a>)</div>
-<div class="line"><span class="lineno">  389</span>        f-&gt;user_id = f-&gt;flags &gt;&gt; 24 &amp; 0xffff;</div>
-<div class="line"><span class="lineno">  390</span>    f-&gt;include_types = f-&gt;flags &gt;&gt; 8 &amp; 0xff;</div>
-<div class="line"><span class="lineno">  392</span>    <span class="keywordflow">if</span> (f-&gt;include_types)</div>
-<div class="line"><span class="lineno">  393</span>        f-&gt;suppress_types = f-&gt;include_types ^ 0xff;</div>
-<div class="line"><span class="lineno">  394</span>    f-&gt;permissions = f-&gt;flags &gt;&gt; 16 &amp; 0xff;</div>
-<div class="line"><span class="lineno">  395</span>    f-&gt;suppress_hidden = f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  396</span>    f-&gt;blk = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  397</span>    f-&gt;chr = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  398</span>    f-&gt;dir = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  399</span>    f-&gt;fifo = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  400</span>    f-&gt;lnk = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  401</span>    f-&gt;reg = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  402</span>    f-&gt;sock = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  403</span>    f-&gt;unknown = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a> ? true : <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  404</span>    <span class="keywordtype">int</span> reti = 0;</div>
-<div class="line"><span class="lineno">  405</span>    f-&gt;reg_flags = REG_EXTENDED;</div>
-<div class="line"><span class="lineno">  406</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a">LF_ICASE</a>)</div>
-<div class="line"><span class="lineno">  407</span>        f-&gt;reg_flags |= REG_ICASE;</div>
-<div class="line"><span class="lineno">  408</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>) {</div>
-<div class="line"><span class="lineno">  409</span>        reti = regcomp(&amp;f-&gt;compiled_re, f-&gt;re, f-&gt;reg_flags);</div>
-<div class="line"><span class="lineno">  410</span>        <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno">  411</span>            fprintf(stderr, <span class="stringliteral">&quot;lf: &#39;%s&#39; Invalid pattern\n&quot;</span>, f-&gt;re);</div>
-<div class="line"><span class="lineno">  412</span>            regfree(&amp;f-&gt;compiled_re);</div>
-<div class="line"><span class="lineno">  413</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  414</span>        }</div>
-<div class="line"><span class="lineno">  415</span>    }</div>
-<div class="line"><span class="lineno">  416</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>) {</div>
-<div class="line"><span class="lineno">  417</span>        reti = regcomp(&amp;f-&gt;compiled_ere, f-&gt;ere, f-&gt;reg_flags);</div>
-<div class="line"><span class="lineno">  418</span>        <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno">  419</span>            fprintf(stderr, <span class="stringliteral">&quot;lf: &#39;%s&#39; Invalid exclude pattern\n&quot;</span>, f-&gt;ere);</div>
-<div class="line"><span class="lineno">  420</span>            regfree(&amp;f-&gt;compiled_ere);</div>
-<div class="line"><span class="lineno">  421</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  422</span>        }</div>
-<div class="line"><span class="lineno">  423</span>    }</div>
-<div class="line"><span class="lineno">  424</span>    <span class="keywordtype">int</span> thread_count = get_nprocs();</div>
-<div class="line"><span class="lineno">  425</span>    <span class="keywordflow">if</span> (f-&gt;debug) {</div>
-<div class="line"><span class="lineno">  426</span>        fprintf(stderr, <span class="stringliteral">&quot;Starting search in: %s\n&quot;</span>, f-&gt;base_path);</div>
-<div class="line"><span class="lineno">  427</span>        fprintf(stderr, <span class="stringliteral">&quot;Using %d threads\n&quot;</span>, thread_count);</div>
-<div class="line"><span class="lineno">  428</span>        fprintf(stderr, <span class="stringliteral">&quot; include_types=%08b\n&quot;</span>, f-&gt;include_types);</div>
-<div class="line"><span class="lineno">  429</span>        fprintf(stderr, <span class="stringliteral">&quot;suppress_types=%08b\n&quot;</span>, f-&gt;suppress_types);</div>
-<div class="line"><span class="lineno">  430</span>        <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>)</div>
-<div class="line"><span class="lineno">  431</span>            fprintf(stderr, <span class="stringliteral">&quot;Include regex: %s\n&quot;</span>, f-&gt;re);</div>
-<div class="line"><span class="lineno">  432</span>        <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>)</div>
-<div class="line"><span class="lineno">  433</span>            fprintf(stderr, <span class="stringliteral">&quot;Exclude regex: %s\n&quot;</span>, f-&gt;ere);</div>
-<div class="line"><span class="lineno">  434</span>        <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a>)</div>
-<div class="line"><span class="lineno">  435</span>            fprintf(stderr, <span class="stringliteral">&quot;User ID filter: %ju\n&quot;</span>, f-&gt;user_id);</div>
-<div class="line"><span class="lineno">  436</span>        <span class="keywordflow">if</span> (f-&gt;after)</div>
-<div class="line"><span class="lineno">  437</span>            fprintf(stderr, <span class="stringliteral">&quot;Modified after: %s&quot;</span>, ctime(&amp;f-&gt;after));</div>
-<div class="line"><span class="lineno">  438</span>        <span class="keywordflow">if</span> (f-&gt;before)</div>
-<div class="line"><span class="lineno">  439</span>            fprintf(stderr, <span class="stringliteral">&quot;Modified before: %s&quot;</span>, ctime(&amp;f-&gt;before));</div>
-<div class="line"><span class="lineno">  440</span>        <span class="keywordflow">if</span> (f-&gt;file_size_min)</div>
-<div class="line"><span class="lineno">  441</span>            fprintf(stderr, <span class="stringliteral">&quot;Minimum file size: %jd bytes\n&quot;</span>,</div>
-<div class="line"><span class="lineno">  442</span>                    (intmax_t)f-&gt;file_size_min);</div>
-<div class="line"><span class="lineno">  443</span>        <span class="keywordflow">if</span> (f-&gt;max_depth)</div>
-<div class="line"><span class="lineno">  444</span>            fprintf(stderr, <span class="stringliteral">&quot;Max depth: %d\n&quot;</span>, f-&gt;max_depth);</div>
-<div class="line"><span class="lineno">  445</span>        <span class="keywordflow">if</span> (f-&gt;f_hidden)</div>
-<div class="line"><span class="lineno">  446</span>            fprintf(stderr, <span class="stringliteral">&quot;Include hidden files.\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  447</span>        <span class="keywordflow">if</span> (f-&gt;include_types) {</div>
-<div class="line"><span class="lineno">  448</span>            fprintf(stderr, <span class="stringliteral">&quot;Included file types:&quot;</span>);</div>
-<div class="line"><span class="lineno">  449</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a>)</div>
-<div class="line"><span class="lineno">  450</span>                fprintf(stderr, <span class="stringliteral">&quot; block&quot;</span>);</div>
-<div class="line"><span class="lineno">  451</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a>)</div>
-<div class="line"><span class="lineno">  452</span>                fprintf(stderr, <span class="stringliteral">&quot; character&quot;</span>);</div>
-<div class="line"><span class="lineno">  453</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a>)</div>
-<div class="line"><span class="lineno">  454</span>                fprintf(stderr, <span class="stringliteral">&quot; character&quot;</span>);</div>
-<div class="line"><span class="lineno">  455</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a>)</div>
-<div class="line"><span class="lineno">  456</span>                fprintf(stderr, <span class="stringliteral">&quot; directory&quot;</span>);</div>
-<div class="line"><span class="lineno">  457</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a>)</div>
-<div class="line"><span class="lineno">  458</span>                fprintf(stderr, <span class="stringliteral">&quot; pipe&quot;</span>);</div>
-<div class="line"><span class="lineno">  459</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a>)</div>
-<div class="line"><span class="lineno">  460</span>                fprintf(stderr, <span class="stringliteral">&quot; link&quot;</span>);</div>
-<div class="line"><span class="lineno">  461</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a>)</div>
-<div class="line"><span class="lineno">  462</span>                fprintf(stderr, <span class="stringliteral">&quot; regular&quot;</span>);</div>
-<div class="line"><span class="lineno">  463</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a>)</div>
-<div class="line"><span class="lineno">  464</span>                fprintf(stderr, <span class="stringliteral">&quot; socket&quot;</span>);</div>
-<div class="line"><span class="lineno">  465</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a>)</div>
-<div class="line"><span class="lineno">  466</span>                fprintf(stderr, <span class="stringliteral">&quot; unknown&quot;</span>);</div>
-<div class="line"><span class="lineno">  467</span>            fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><span class="lineno">  468</span>        }</div>
-<div class="line"><span class="lineno">  469</span>    }</div>
-<div class="line"><span class="lineno">  470</span>    <a class="code hl_function" href="#ad0f4d0a190e7c6726ff8eccced6da910">enqueue_dir</a>(f-&gt;base_path, 0);</div>
-<div class="line"><span class="lineno">  471</span>    pthread_t threads[thread_count];</div>
-<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; thread_count; i++)</div>
-<div class="line"><span class="lineno">  473</span>        pthread_create(&amp;threads[i], NULL, <a class="code hl_function" href="#a25a21d1e1bfadedc242c55d79859a2dc">finder</a>, f);</div>
-<div class="line"><span class="lineno">  474</span>    pthread_mutex_lock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  475</span>    <span class="keywordflow">while</span> (!<a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a>) {</div>
-<div class="line"><span class="lineno">  476</span>        pthread_cond_wait(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>, &amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  477</span>    }</div>
-<div class="line"><span class="lineno">  478</span>    pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
-<div class="line"><span class="lineno">  479</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; thread_count; i++)</div>
-<div class="line"><span class="lineno">  480</span>        pthread_join(threads[i], NULL);</div>
-<div class="line"><span class="lineno">  481</span>    <span class="comment">// End Program</span></div>
-<div class="line"><span class="lineno">  482</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>)</div>
-<div class="line"><span class="lineno">  483</span>        regfree(&amp;f-&gt;compiled_re);</div>
-<div class="line"><span class="lineno">  484</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>)</div>
-<div class="line"><span class="lineno">  485</span>        regfree(&amp;f-&gt;compiled_ere);</div>
-<div class="line"><span class="lineno">  486</span>    free(f);</div>
-<div class="line"><span class="lineno">  487</span>    <span class="keywordflow">if</span> (reti)</div>
-<div class="line"><span class="lineno">  488</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  489</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  490</span>}</div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a></div><div class="ttdeci">@ FT_UNKNOWN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00173">cm.h:173</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a></div><div class="ttdeci">@ FT_SOCK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00172">cm.h:172</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a></div><div class="ttdeci">@ FT_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00168">cm.h:168</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a></div><div class="ttdeci">@ FT_FIFO</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00169">cm.h:169</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a></div><div class="ttdeci">@ FT_REG</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00171">cm.h:171</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a></div><div class="ttdeci">@ FT_CHR</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00167">cm.h:167</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a></div><div class="ttdeci">@ FT_BLK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00166">cm.h:166</a></div></div>
-<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a></div><div class="ttdeci">@ FT_LNK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00170">cm.h:170</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00394">394</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  394</span>                                 {</div>
+<div class="line"><span class="lineno">  395</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a>)</div>
+<div class="line"><span class="lineno">  396</span>        f-&gt;user_id = f-&gt;flags &gt;&gt; 24 &amp; 0xffff;</div>
+<div class="line"><span class="lineno">  397</span>    f-&gt;include_types = f-&gt;flags &gt;&gt; 8 &amp; 0xff;</div>
+<div class="line"><span class="lineno">  399</span>    <span class="keywordflow">if</span> (f-&gt;include_types)</div>
+<div class="line"><span class="lineno">  400</span>        f-&gt;suppress_types = f-&gt;include_types ^ 0xff;</div>
+<div class="line"><span class="lineno">  401</span>    f-&gt;permissions = f-&gt;flags &gt;&gt; 16 &amp; 0xff;</div>
+<div class="line"><span class="lineno">  402</span>    f-&gt;suppress_hidden = f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  403</span>    f-&gt;blk = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  404</span>    f-&gt;chr = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  405</span>    f-&gt;dir = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  406</span>    f-&gt;fifo = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  407</span>    f-&gt;lnk = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  408</span>    f-&gt;reg = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  409</span>    f-&gt;sock = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  410</span>    f-&gt;unknown = f-&gt;suppress_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a> ? true : <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  411</span>    <span class="keywordtype">int</span> reti = 0;</div>
+<div class="line"><span class="lineno">  412</span>    f-&gt;reg_flags = REG_EXTENDED;</div>
+<div class="line"><span class="lineno">  413</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a">LF_ICASE</a>)</div>
+<div class="line"><span class="lineno">  414</span>        f-&gt;reg_flags |= REG_ICASE;</div>
+<div class="line"><span class="lineno">  415</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>) {</div>
+<div class="line"><span class="lineno">  416</span>        reti = regcomp(&amp;f-&gt;compiled_re, f-&gt;re, f-&gt;reg_flags);</div>
+<div class="line"><span class="lineno">  417</span>        <span class="keywordflow">if</span> (reti) {</div>
+<div class="line"><span class="lineno">  418</span>            fprintf(stderr, <span class="stringliteral">&quot;lf: &#39;%s&#39; Invalid pattern\n&quot;</span>, f-&gt;re);</div>
+<div class="line"><span class="lineno">  419</span>            regfree(&amp;f-&gt;compiled_re);</div>
+<div class="line"><span class="lineno">  420</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  421</span>        }</div>
+<div class="line"><span class="lineno">  422</span>    }</div>
+<div class="line"><span class="lineno">  423</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>) {</div>
+<div class="line"><span class="lineno">  424</span>        reti = regcomp(&amp;f-&gt;compiled_ere, f-&gt;ere, f-&gt;reg_flags);</div>
+<div class="line"><span class="lineno">  425</span>        <span class="keywordflow">if</span> (reti) {</div>
+<div class="line"><span class="lineno">  426</span>            fprintf(stderr, <span class="stringliteral">&quot;lf: &#39;%s&#39; Invalid exclude pattern\n&quot;</span>, f-&gt;ere);</div>
+<div class="line"><span class="lineno">  427</span>            regfree(&amp;f-&gt;compiled_ere);</div>
+<div class="line"><span class="lineno">  428</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  429</span>        }</div>
+<div class="line"><span class="lineno">  430</span>    }</div>
+<div class="line"><span class="lineno">  431</span>    <span class="keywordtype">int</span> thread_count = get_nprocs();</div>
+<div class="line"><span class="lineno">  432</span>    <span class="keywordflow">if</span> (f-&gt;debug) {</div>
+<div class="line"><span class="lineno">  433</span>        fprintf(stderr, <span class="stringliteral">&quot;Starting search in: %s\n&quot;</span>, f-&gt;base_path);</div>
+<div class="line"><span class="lineno">  434</span>        fprintf(stderr, <span class="stringliteral">&quot;Using %d threads\n&quot;</span>, thread_count);</div>
+<div class="line"><span class="lineno">  435</span>        fprintf(stderr, <span class="stringliteral">&quot; include_types=%08b\n&quot;</span>, f-&gt;include_types);</div>
+<div class="line"><span class="lineno">  436</span>        fprintf(stderr, <span class="stringliteral">&quot;suppress_types=%08b\n&quot;</span>, f-&gt;suppress_types);</div>
+<div class="line"><span class="lineno">  437</span>        <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>)</div>
+<div class="line"><span class="lineno">  438</span>            fprintf(stderr, <span class="stringliteral">&quot;Include regex: %s\n&quot;</span>, f-&gt;re);</div>
+<div class="line"><span class="lineno">  439</span>        <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>)</div>
+<div class="line"><span class="lineno">  440</span>            fprintf(stderr, <span class="stringliteral">&quot;Exclude regex: %s\n&quot;</span>, f-&gt;ere);</div>
+<div class="line"><span class="lineno">  441</span>        <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a>)</div>
+<div class="line"><span class="lineno">  442</span>            fprintf(stderr, <span class="stringliteral">&quot;User ID filter: %ju\n&quot;</span>, f-&gt;user_id);</div>
+<div class="line"><span class="lineno">  443</span>        <span class="keywordflow">if</span> (f-&gt;after)</div>
+<div class="line"><span class="lineno">  444</span>            fprintf(stderr, <span class="stringliteral">&quot;Modified after: %s&quot;</span>, ctime(&amp;f-&gt;after));</div>
+<div class="line"><span class="lineno">  445</span>        <span class="keywordflow">if</span> (f-&gt;before)</div>
+<div class="line"><span class="lineno">  446</span>            fprintf(stderr, <span class="stringliteral">&quot;Modified before: %s&quot;</span>, ctime(&amp;f-&gt;before));</div>
+<div class="line"><span class="lineno">  447</span>        <span class="keywordflow">if</span> (f-&gt;file_size_min)</div>
+<div class="line"><span class="lineno">  448</span>            fprintf(stderr, <span class="stringliteral">&quot;Minimum file size: %jd bytes\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  449</span>                    (intmax_t)f-&gt;file_size_min);</div>
+<div class="line"><span class="lineno">  450</span>        <span class="keywordflow">if</span> (f-&gt;max_depth)</div>
+<div class="line"><span class="lineno">  451</span>            fprintf(stderr, <span class="stringliteral">&quot;Max depth: %d\n&quot;</span>, f-&gt;max_depth);</div>
+<div class="line"><span class="lineno">  452</span>        <span class="keywordflow">if</span> (f-&gt;f_hidden)</div>
+<div class="line"><span class="lineno">  453</span>            fprintf(stderr, <span class="stringliteral">&quot;Include hidden files.\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  454</span>        <span class="keywordflow">if</span> (f-&gt;f_lnk_dir)</div>
+<div class="line"><span class="lineno">  455</span>            fprintf(stderr, <span class="stringliteral">&quot;Follow symbolic links.\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  456</span>        <span class="keywordflow">if</span> (f-&gt;include_types) {</div>
+<div class="line"><span class="lineno">  457</span>            fprintf(stderr, <span class="stringliteral">&quot;Included file types:&quot;</span>);</div>
+<div class="line"><span class="lineno">  458</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a>)</div>
+<div class="line"><span class="lineno">  459</span>                fprintf(stderr, <span class="stringliteral">&quot; block&quot;</span>);</div>
+<div class="line"><span class="lineno">  460</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a>)</div>
+<div class="line"><span class="lineno">  461</span>                fprintf(stderr, <span class="stringliteral">&quot; character&quot;</span>);</div>
+<div class="line"><span class="lineno">  462</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a>)</div>
+<div class="line"><span class="lineno">  463</span>                fprintf(stderr, <span class="stringliteral">&quot; character&quot;</span>);</div>
+<div class="line"><span class="lineno">  464</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a>)</div>
+<div class="line"><span class="lineno">  465</span>                fprintf(stderr, <span class="stringliteral">&quot; directory&quot;</span>);</div>
+<div class="line"><span class="lineno">  466</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a>)</div>
+<div class="line"><span class="lineno">  467</span>                fprintf(stderr, <span class="stringliteral">&quot; pipe&quot;</span>);</div>
+<div class="line"><span class="lineno">  468</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a>)</div>
+<div class="line"><span class="lineno">  469</span>                fprintf(stderr, <span class="stringliteral">&quot; link&quot;</span>);</div>
+<div class="line"><span class="lineno">  470</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a>)</div>
+<div class="line"><span class="lineno">  471</span>                fprintf(stderr, <span class="stringliteral">&quot; regular&quot;</span>);</div>
+<div class="line"><span class="lineno">  472</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a>)</div>
+<div class="line"><span class="lineno">  473</span>                fprintf(stderr, <span class="stringliteral">&quot; socket&quot;</span>);</div>
+<div class="line"><span class="lineno">  474</span>            <span class="keywordflow">if</span> (f-&gt;include_types &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a>)</div>
+<div class="line"><span class="lineno">  475</span>                fprintf(stderr, <span class="stringliteral">&quot; unknown&quot;</span>);</div>
+<div class="line"><span class="lineno">  476</span>            fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  477</span>        }</div>
+<div class="line"><span class="lineno">  478</span>    }</div>
+<div class="line"><span class="lineno">  479</span>    <a class="code hl_function" href="#ad0f4d0a190e7c6726ff8eccced6da910">enqueue_dir</a>(f-&gt;base_path, 0);</div>
+<div class="line"><span class="lineno">  480</span>    pthread_t threads[thread_count];</div>
+<div class="line"><span class="lineno">  481</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; thread_count; i++)</div>
+<div class="line"><span class="lineno">  482</span>        pthread_create(&amp;threads[i], NULL, <a class="code hl_function" href="#a25a21d1e1bfadedc242c55d79859a2dc">finder</a>, f);</div>
+<div class="line"><span class="lineno">  483</span>    pthread_mutex_lock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  484</span>    <span class="keywordflow">while</span> (!<a class="code hl_variable" href="#a5161d377a61befc3f8103e794d5cb582">shutdown</a>) {</div>
+<div class="line"><span class="lineno">  485</span>        pthread_cond_wait(&amp;<a class="code hl_variable" href="#a843722c9a2e85257454ee66ef07a522d">cond_var</a>, &amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  486</span>    }</div>
+<div class="line"><span class="lineno">  487</span>    pthread_mutex_unlock(&amp;<a class="code hl_variable" href="#acc4be9200c8ec4a2152e10a7c33b3704">queue_mutex</a>);</div>
+<div class="line"><span class="lineno">  488</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; thread_count; i++)</div>
+<div class="line"><span class="lineno">  489</span>        pthread_join(threads[i], NULL);</div>
+<div class="line"><span class="lineno">  490</span>    <span class="comment">// End Program</span></div>
+<div class="line"><span class="lineno">  491</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>)</div>
+<div class="line"><span class="lineno">  492</span>        regfree(&amp;f-&gt;compiled_re);</div>
+<div class="line"><span class="lineno">  493</span>    <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>)</div>
+<div class="line"><span class="lineno">  494</span>        regfree(&amp;f-&gt;compiled_ere);</div>
+<div class="line"><span class="lineno">  495</span>    free(f);</div>
+<div class="line"><span class="lineno">  496</span>    <span class="keywordflow">if</span> (reti)</div>
+<div class="line"><span class="lineno">  497</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  498</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  499</span>}</div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda243dddb0098b8124ca1fba51b53ab078">FT_UNKNOWN</a></div><div class="ttdeci">@ FT_UNKNOWN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00175">cm.h:175</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda32e31c7c2dba6966126627714e9dd73d">FT_SOCK</a></div><div class="ttdeci">@ FT_SOCK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00174">cm.h:174</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda4c066b95febbda4a85f3dca06a6f985a">FT_DIR</a></div><div class="ttdeci">@ FT_DIR</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00170">cm.h:170</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda6b6795da6b5fa2c625aafbc46aa657de">FT_FIFO</a></div><div class="ttdeci">@ FT_FIFO</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00171">cm.h:171</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9a82398648490d62eb28ecdb37e444ae">FT_REG</a></div><div class="ttdeci">@ FT_REG</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00173">cm.h:173</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6eda9f141b4ea5fced6c2c529f33f2ddb2fe">FT_CHR</a></div><div class="ttdeci">@ FT_CHR</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00169">cm.h:169</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edaa86430c5a906288642e524b883010841">FT_BLK</a></div><div class="ttdeci">@ FT_BLK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00168">cm.h:168</a></div></div>
+<div class="ttc" id="aa00725_html_a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe"><div class="ttname"><a href="../../d8/db9/a00725.html#a530fd019ea5f51cfee9e35be2ac0d6edac210d11f77ad308bccca486fb7e15dbe">FT_LNK</a></div><div class="ttdeci">@ FT_LNK</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00172">cm.h:172</a></div></div>
 <div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a></div><div class="ttdeci">@ LF_EXC_REGEX</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00153">cm.h:153</a></div></div>
 <div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa9bec5021508b0df81f9392a2fba8c06a">LF_ICASE</a></div><div class="ttdeci">@ LF_ICASE</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00152">cm.h:152</a></div></div>
 <div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a></div><div class="ttdeci">@ LF_REGEX</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00154">cm.h:154</a></div></div>
 <div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a></div><div class="ttdeci">@ LF_USER</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00156">cm.h:156</a></div></div>
-<div class="ttc" id="aa01115_html_a25a21d1e1bfadedc242c55d79859a2dc"><div class="ttname"><a href="#a25a21d1e1bfadedc242c55d79859a2dc">finder</a></div><div class="ttdeci">void * finder(void *)</div><div class="ttdoc">Worker thread function to process directories from the queue.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00558">lf.c:558</a></div></div>
+<div class="ttc" id="aa01115_html_a25a21d1e1bfadedc242c55d79859a2dc"><div class="ttname"><a href="#a25a21d1e1bfadedc242c55d79859a2dc">finder</a></div><div class="ttdeci">void * finder(void *)</div><div class="ttdoc">Worker thread function to process directories from the queue.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00567">lf.c:567</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00276">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00500">enqueue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00558">finder()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00166">FT_BLK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00167">FT_CHR</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00168">FT_DIR</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00169">FT_FIFO</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00170">FT_LNK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00171">FT_REG</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00172">FT_SOCK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00173">FT_UNKNOWN</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00153">LF_EXC_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00151">LF_HIDE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00152">LF_ICASE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00154">LF_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00156">LF_USER</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00275">queue_mutex</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00278">shutdown</a>.</p>
+<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00281">cond_var</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00509">enqueue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00567">finder()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00168">FT_BLK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00169">FT_CHR</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00170">FT_DIR</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00171">FT_FIFO</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00172">FT_LNK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00173">FT_REG</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00174">FT_SOCK</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00175">FT_UNKNOWN</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00153">LF_EXC_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00151">LF_HIDE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00152">LF_ICASE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00154">LF_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00156">LF_USER</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00280">queue_mutex</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00283">shutdown</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00280">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00285">main()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -615,103 +630,105 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 <p>If sorting is requested, execute the file finder and pipe its output to the sort command. We can achieve this by creating a child process that runs the sort command, and redirecting the output of the file finder to the input of the sort command using a pipe. The parent process will run the file finder and write its output to the pipe, while the child process will read from the pipe and execute the sort command.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00280">280</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  280</span>                                {</div>
-<div class="line"><span class="lineno">  281</span> </div>
-<div class="line"><span class="lineno">  282</span>    SearchFilters *f = (SearchFilters *)calloc(1, <span class="keyword">sizeof</span>(SearchFilters));</div>
-<div class="line"><span class="lineno">  283</span>    f-&gt;f_ignore_case = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  284</span>    f-&gt;f_sort = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  285</span>    f-&gt;f_reverse = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  286</span>    f-&gt;f_hidden = <span class="keyword">false</span>; <span class="comment">// By default, hidden files are suppressed. Use -H to</span></div>
-<div class="line"><span class="lineno">  287</span>                         <span class="comment">// include them.</span></div>
-<div class="line"><span class="lineno">  288</span>    f-&gt;flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a>; <span class="comment">// Hide hidden files</span></div>
-<div class="line"><span class="lineno">  289</span>    f-&gt;args[0] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  290</span>    f-&gt;args[1] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  291</span>    argp_parse(&amp;argp, argc, argv, 0, 0, f);</div>
-<div class="line"><span class="lineno">  292</span>    <span class="keywordflow">if</span> (f-&gt;argc &gt; 0) {</div>
-<div class="line"><span class="lineno">  293</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#gac249fdf8ca8987f71eb6cb3c60e88ade">is_directory</a>(f-&gt;args[0]))</div>
-<div class="line"><span class="lineno">  294</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[0], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  295</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#ga5d82ccbd79a082d3dde94fc456ef76d6">is_symlink_to_dir</a>(f-&gt;args[0]))</div>
-<div class="line"><span class="lineno">  296</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[0], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  297</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a>(f-&gt;args[0])) {</div>
-<div class="line"><span class="lineno">  298</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;re, f-&gt;args[0], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  299</span>            f-&gt;flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
-<div class="line"><span class="lineno">  300</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  301</span>            fprintf(stderr,</div>
-<div class="line"><span class="lineno">  302</span>                    <span class="stringliteral">&quot;arg1: &#39;%s&#39; is neither a directory nor a valid regex.\n&quot;</span>,</div>
-<div class="line"><span class="lineno">  303</span>                    f-&gt;args[0]);</div>
-<div class="line"><span class="lineno">  304</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  305</span>        }</div>
-<div class="line"><span class="lineno">  306</span>    }</div>
-<div class="line"><span class="lineno">  307</span>    <span class="keywordflow">if</span> (f-&gt;argc &gt; 1) {</div>
-<div class="line"><span class="lineno">  308</span>        <span class="keywordflow">if</span> (f-&gt;base_path[0] == <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; <a class="code hl_function" href="../../df/db5/a01158.html#gac249fdf8ca8987f71eb6cb3c60e88ade">is_directory</a>(f-&gt;args[1]))</div>
-<div class="line"><span class="lineno">  309</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[1], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  310</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (f-&gt;base_path[0] == <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; <a class="code hl_function" href="../../df/db5/a01158.html#ga5d82ccbd79a082d3dde94fc456ef76d6">is_symlink_to_dir</a>(f-&gt;args[1]))</div>
-<div class="line"><span class="lineno">  311</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[1], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  312</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a>(f-&gt;args[1])) {</div>
-<div class="line"><span class="lineno">  313</span>            <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>) {</div>
-<div class="line"><span class="lineno">  314</span>                fprintf(stderr, <span class="stringliteral">&quot;lf: %s is not a valid directory.\n&quot;</span>,</div>
-<div class="line"><span class="lineno">  315</span>                        f-&gt;args[0]);</div>
-<div class="line"><span class="lineno">  316</span>                exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  317</span>            }</div>
-<div class="line"><span class="lineno">  318</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;re, f-&gt;args[1], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  319</span>            f-&gt;flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
-<div class="line"><span class="lineno">  320</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  321</span>            fprintf(stderr,</div>
-<div class="line"><span class="lineno">  322</span>                    <span class="stringliteral">&quot;arg2: &#39;%s&#39; is neither a directory nor a valid regex.\n&quot;</span>,</div>
-<div class="line"><span class="lineno">  323</span>                    f-&gt;args[1]);</div>
-<div class="line"><span class="lineno">  324</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  325</span>        }</div>
-<div class="line"><span class="lineno">  326</span>    }</div>
-<div class="line"><span class="lineno">  327</span>    <span class="keywordflow">if</span> (f-&gt;base_path[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  328</span>        <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  329</span>    <span class="keywordflow">if</span> (f-&gt;f_sort) {</div>
-<div class="line"><span class="lineno">  337</span>        <span class="keywordtype">char</span> *<a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_define" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>];</div>
-<div class="line"><span class="lineno">  338</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = 0;</div>
-<div class="line"><span class="lineno">  339</span>        <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a>++] = strdup(<span class="stringliteral">&quot;sort&quot;</span>);</div>
-<div class="line"><span class="lineno">  340</span>        <span class="keywordflow">if</span> (f-&gt;f_reverse)</div>
-<div class="line"><span class="lineno">  341</span>            <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a>++] = strdup(<span class="stringliteral">&quot;-r&quot;</span>);</div>
-<div class="line"><span class="lineno">  342</span>        <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a>] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">  343</span>        <span class="keywordtype">int</span> wstatus;</div>
-<div class="line"><span class="lineno">  344</span>        <span class="keywordtype">int</span> save_fd = dup(STDOUT_FILENO); <span class="comment">// save current STDOUT</span></div>
-<div class="line"><span class="lineno">  345</span>        <span class="keywordtype">int</span> fds[2];</div>
-<div class="line"><span class="lineno">  346</span>        pipe(fds); <span class="comment">// Create the pipes</span></div>
-<div class="line"><span class="lineno">  347</span>        pid_t pid1 = fork();</div>
-<div class="line"><span class="lineno">  348</span>        <span class="keywordflow">if</span> (pid1 == 0) {                <span class="comment">// Child process</span></div>
-<div class="line"><span class="lineno">  349</span>            close(fds[1]);              <span class="comment">// Close child write pipe</span></div>
-<div class="line"><span class="lineno">  350</span>            dup2(fds[0], STDIN_FILENO); <span class="comment">// Clone child read pipe to STDIN_FILENO</span></div>
-<div class="line"><span class="lineno">  351</span>            close(fds[0]);              <span class="comment">// Close child read pipe after cloning</span></div>
-<div class="line"><span class="lineno">  352</span>            execvp(<a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0], <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);    <span class="comment">// Execute the external command</span></div>
-<div class="line"><span class="lineno">  353</span>        }</div>
-<div class="line"><span class="lineno">  354</span>        <span class="comment">// Parent process</span></div>
-<div class="line"><span class="lineno">  355</span>        close(fds[0]);               <span class="comment">// Close read end of pipe</span></div>
-<div class="line"><span class="lineno">  356</span>        dup2(fds[1], STDOUT_FILENO); <span class="comment">// Clone write pipe to STDOUT_FILENO</span></div>
-<div class="line"><span class="lineno">  357</span>        close(fds[1]);               <span class="comment">// Close duplicated write pipe</span></div>
-<div class="line"><span class="lineno">  358</span>        setvbuf(stdout, NULL, _IOLBF, 0);</div>
-<div class="line"><span class="lineno">  359</span>        <span class="comment">// line buffering is essential to ensure that output is flushed to the</span></div>
-<div class="line"><span class="lineno">  360</span>        <span class="comment">// sort process in a timely manner, preventing deadlocks and ensuring</span></div>
-<div class="line"><span class="lineno">  361</span>        <span class="comment">// that the sort process can start processing input as soon as it is</span></div>
-<div class="line"><span class="lineno">  362</span>        <span class="comment">// available. Without line buffering, the output may be buffered until</span></div>
-<div class="line"><span class="lineno">  363</span>        <span class="comment">// the buffer is full, which could lead to delays in processing and</span></div>
-<div class="line"><span class="lineno">  364</span>        <span class="comment">// potential deadlocks if the sort process is waiting for input that</span></div>
-<div class="line"><span class="lineno">  365</span>        <span class="comment">// hasn&#39;t been flushed yet.</span></div>
-<div class="line"><span class="lineno">  366</span>        <a class="code hl_function" href="#a89547ddc0ec3f5ad84236a07a213aa34">init_find</a>(f); <span class="comment">// Initialize and transfer control to the file finder</span></div>
-<div class="line"><span class="lineno">  367</span>        dup2(save_fd, STDOUT_FILENO); <span class="comment">// restore STDOUT</span></div>
-<div class="line"><span class="lineno">  368</span>        waitpid(pid1, &amp;wstatus, 0);</div>
-<div class="line"><span class="lineno">  369</span>    } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  370</span>        <a class="code hl_function" href="#a89547ddc0ec3f5ad84236a07a213aa34">init_find</a>(f); <span class="comment">// Initialize and transfer control to the file finder</span></div>
-<div class="line"><span class="lineno">  371</span>    exit(EXIT_SUCCESS);</div>
-<div class="line"><span class="lineno">  372</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00285">285</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  285</span>                                {</div>
+<div class="line"><span class="lineno">  286</span> </div>
+<div class="line"><span class="lineno">  287</span>    SearchFilters *f = (SearchFilters *)calloc(1, <span class="keyword">sizeof</span>(SearchFilters));</div>
+<div class="line"><span class="lineno">  288</span>    f-&gt;f_ignore_case = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  289</span>    f-&gt;f_sort = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  290</span>    f-&gt;f_reverse = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  291</span>    f-&gt;f_hidden = <span class="keyword">false</span>;  <span class="comment">// By default, hidden files are suppressed. Use -H to</span></div>
+<div class="line"><span class="lineno">  292</span>                          <span class="comment">// include them.</span></div>
+<div class="line"><span class="lineno">  293</span>    f-&gt;flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa6d8ca7a7a347d618ff11cd3ca786d7da">LF_HIDE</a>;  <span class="comment">// Hide hidden files</span></div>
+<div class="line"><span class="lineno">  294</span>    f-&gt;f_lnk_dir = <span class="keyword">false</span>; <span class="comment">// By default, symbolic links are not followed. Use -L</span></div>
+<div class="line"><span class="lineno">  295</span>                          <span class="comment">// to follow them.</span></div>
+<div class="line"><span class="lineno">  296</span>    f-&gt;args[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  297</span>    f-&gt;args[1] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  298</span>    argp_parse(&amp;argp, argc, argv, 0, 0, f);</div>
+<div class="line"><span class="lineno">  299</span>    <span class="keywordflow">if</span> (f-&gt;argc &gt; 0) {</div>
+<div class="line"><span class="lineno">  300</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#gac249fdf8ca8987f71eb6cb3c60e88ade">is_directory</a>(f-&gt;args[0]))</div>
+<div class="line"><span class="lineno">  301</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[0], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  302</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#ga5d82ccbd79a082d3dde94fc456ef76d6">is_symlink_to_dir</a>(f-&gt;args[0]))</div>
+<div class="line"><span class="lineno">  303</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[0], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  304</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a>(f-&gt;args[0])) {</div>
+<div class="line"><span class="lineno">  305</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;re, f-&gt;args[0], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  306</span>            f-&gt;flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
+<div class="line"><span class="lineno">  307</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  308</span>            fprintf(stderr,</div>
+<div class="line"><span class="lineno">  309</span>                    <span class="stringliteral">&quot;arg1: &#39;%s&#39; is neither a directory nor a valid regex.\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  310</span>                    f-&gt;args[0]);</div>
+<div class="line"><span class="lineno">  311</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  312</span>        }</div>
+<div class="line"><span class="lineno">  313</span>    }</div>
+<div class="line"><span class="lineno">  314</span>    <span class="keywordflow">if</span> (f-&gt;argc &gt; 1) {</div>
+<div class="line"><span class="lineno">  315</span>        <span class="keywordflow">if</span> (f-&gt;base_path[0] == <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; <a class="code hl_function" href="../../df/db5/a01158.html#gac249fdf8ca8987f71eb6cb3c60e88ade">is_directory</a>(f-&gt;args[1]))</div>
+<div class="line"><span class="lineno">  316</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[1], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  317</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (f-&gt;base_path[0] == <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; <a class="code hl_function" href="../../df/db5/a01158.html#ga5d82ccbd79a082d3dde94fc456ef76d6">is_symlink_to_dir</a>(f-&gt;args[1]))</div>
+<div class="line"><span class="lineno">  318</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, f-&gt;args[1], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  319</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_function" href="../../df/db5/a01158.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a>(f-&gt;args[1])) {</div>
+<div class="line"><span class="lineno">  320</span>            <span class="keywordflow">if</span> (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>) {</div>
+<div class="line"><span class="lineno">  321</span>                fprintf(stderr, <span class="stringliteral">&quot;lf: %s is not a valid directory.\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  322</span>                        f-&gt;args[0]);</div>
+<div class="line"><span class="lineno">  323</span>                exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  324</span>            }</div>
+<div class="line"><span class="lineno">  325</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;re, f-&gt;args[1], <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  326</span>            f-&gt;flags |= <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>;</div>
+<div class="line"><span class="lineno">  327</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  328</span>            fprintf(stderr,</div>
+<div class="line"><span class="lineno">  329</span>                    <span class="stringliteral">&quot;arg2: &#39;%s&#39; is neither a directory nor a valid regex.\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  330</span>                    f-&gt;args[1]);</div>
+<div class="line"><span class="lineno">  331</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  332</span>        }</div>
+<div class="line"><span class="lineno">  333</span>    }</div>
+<div class="line"><span class="lineno">  334</span>    <span class="keywordflow">if</span> (f-&gt;base_path[0] == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  335</span>        <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(f-&gt;base_path, <span class="stringliteral">&quot;.&quot;</span>, <a class="code hl_define" href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  336</span>    <span class="keywordflow">if</span> (f-&gt;f_sort) {</div>
+<div class="line"><span class="lineno">  344</span>        <span class="keywordtype">char</span> *<a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_define" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>];</div>
+<div class="line"><span class="lineno">  345</span>        <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a> = 0;</div>
+<div class="line"><span class="lineno">  346</span>        <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a>++] = strdup(<span class="stringliteral">&quot;sort&quot;</span>);</div>
+<div class="line"><span class="lineno">  347</span>        <span class="keywordflow">if</span> (f-&gt;f_reverse)</div>
+<div class="line"><span class="lineno">  348</span>            <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a>++] = strdup(<span class="stringliteral">&quot;-r&quot;</span>);</div>
+<div class="line"><span class="lineno">  349</span>        <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[<a class="code hl_variable" href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a>] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  350</span>        <span class="keywordtype">int</span> wstatus;</div>
+<div class="line"><span class="lineno">  351</span>        <span class="keywordtype">int</span> save_fd = dup(STDOUT_FILENO); <span class="comment">// save current STDOUT</span></div>
+<div class="line"><span class="lineno">  352</span>        <span class="keywordtype">int</span> fds[2];</div>
+<div class="line"><span class="lineno">  353</span>        pipe(fds); <span class="comment">// Create the pipes</span></div>
+<div class="line"><span class="lineno">  354</span>        pid_t pid1 = fork();</div>
+<div class="line"><span class="lineno">  355</span>        <span class="keywordflow">if</span> (pid1 == 0) {                <span class="comment">// Child process</span></div>
+<div class="line"><span class="lineno">  356</span>            close(fds[1]);              <span class="comment">// Close child write pipe</span></div>
+<div class="line"><span class="lineno">  357</span>            dup2(fds[0], STDIN_FILENO); <span class="comment">// Clone child read pipe to STDIN_FILENO</span></div>
+<div class="line"><span class="lineno">  358</span>            close(fds[0]);              <span class="comment">// Close child read pipe after cloning</span></div>
+<div class="line"><span class="lineno">  359</span>            execvp(<a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0], <a class="code hl_variable" href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);    <span class="comment">// Execute the external command</span></div>
+<div class="line"><span class="lineno">  360</span>        }</div>
+<div class="line"><span class="lineno">  361</span>        <span class="comment">// Parent process</span></div>
+<div class="line"><span class="lineno">  362</span>        close(fds[0]);               <span class="comment">// Close read end of pipe</span></div>
+<div class="line"><span class="lineno">  363</span>        dup2(fds[1], STDOUT_FILENO); <span class="comment">// Clone write pipe to STDOUT_FILENO</span></div>
+<div class="line"><span class="lineno">  364</span>        close(fds[1]);               <span class="comment">// Close duplicated write pipe</span></div>
+<div class="line"><span class="lineno">  365</span>        setvbuf(stdout, NULL, _IOLBF, 0);</div>
+<div class="line"><span class="lineno">  366</span>        <span class="comment">// line buffering is essential to ensure that output is flushed to the</span></div>
+<div class="line"><span class="lineno">  367</span>        <span class="comment">// sort process in a timely manner, preventing deadlocks and ensuring</span></div>
+<div class="line"><span class="lineno">  368</span>        <span class="comment">// that the sort process can start processing input as soon as it is</span></div>
+<div class="line"><span class="lineno">  369</span>        <span class="comment">// available. Without line buffering, the output may be buffered until</span></div>
+<div class="line"><span class="lineno">  370</span>        <span class="comment">// the buffer is full, which could lead to delays in processing and</span></div>
+<div class="line"><span class="lineno">  371</span>        <span class="comment">// potential deadlocks if the sort process is waiting for input that</span></div>
+<div class="line"><span class="lineno">  372</span>        <span class="comment">// hasn&#39;t been flushed yet.</span></div>
+<div class="line"><span class="lineno">  373</span>        <a class="code hl_function" href="#a89547ddc0ec3f5ad84236a07a213aa34">init_find</a>(f); <span class="comment">// Initialize and transfer control to the file finder</span></div>
+<div class="line"><span class="lineno">  374</span>        dup2(save_fd, STDOUT_FILENO); <span class="comment">// restore STDOUT</span></div>
+<div class="line"><span class="lineno">  375</span>        waitpid(pid1, &amp;wstatus, 0);</div>
+<div class="line"><span class="lineno">  376</span>    } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  377</span>        <a class="code hl_function" href="#a89547ddc0ec3f5ad84236a07a213aa34">init_find</a>(f); <span class="comment">// Initialize and transfer control to the file finder</span></div>
+<div class="line"><span class="lineno">  378</span>    exit(EXIT_SUCCESS);</div>
+<div class="line"><span class="lineno">  379</span>}</div>
 <div class="ttc" id="aa00725_html_a41101847771d39a4f0a7f9395061c629"><div class="ttname"><a href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a></div><div class="ttdeci">#define MAXARGS</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00030">cm.h:30</a></div></div>
 <div class="ttc" id="aa01088_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../da/db7/a01088.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../da/db7/a01088_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01115_html_a89547ddc0ec3f5ad84236a07a213aa34"><div class="ttname"><a href="#a89547ddc0ec3f5ad84236a07a213aa34">init_find</a></div><div class="ttdeci">bool init_find(SearchFilters *)</div><div class="ttdoc">Initialize the file search based on the provided SearchFilters and start finder threads.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00387">lf.c:387</a></div></div>
+<div class="ttc" id="aa01115_html_a89547ddc0ec3f5ad84236a07a213aa34"><div class="ttname"><a href="#a89547ddc0ec3f5ad84236a07a213aa34">init_find</a></div><div class="ttdeci">bool init_find(SearchFilters *)</div><div class="ttdoc">Initialize the file search based on the provided SearchFilters and start finder threads.</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00394">lf.c:394</a></div></div>
 <div class="ttc" id="aa01130_html_a075d6920297448f7d044417b9f8594b0"><div class="ttname"><a href="../../d0/d61/a01130.html#a075d6920297448f7d044417b9f8594b0">eargc</a></div><div class="ttdeci">int eargc</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l00048">futil.c:48</a></div></div>
 <div class="ttc" id="aa01130_html_aba17a3c518eb2ffd68f0219cc8c1792b"><div class="ttname"><a href="../../d0/d61/a01130.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a></div><div class="ttdeci">char * eargv[MAXARGS]</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l00049">futil.c:49</a></div></div>
 <div class="ttc" id="aa01158_html_ga5d82ccbd79a082d3dde94fc456ef76d6"><div class="ttname"><a href="../../df/db5/a01158.html#ga5d82ccbd79a082d3dde94fc456ef76d6">is_symlink_to_dir</a></div><div class="ttdeci">int is_symlink_to_dir(const char *)</div><div class="ttdoc">Checks if the given path is a symbolic link to a directory.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l01081">futil.c:1081</a></div></div>
 <div class="ttc" id="aa01158_html_ga76cb87971fb4e63944ec6627c56c0ffb"><div class="ttname"><a href="../../df/db5/a01158.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a></div><div class="ttdeci">bool is_valid_regex(const char *)</div><div class="ttdoc">Checks if the given regular expression pattern is valid.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l01093">futil.c:1093</a></div></div>
 <div class="ttc" id="aa01158_html_gac249fdf8ca8987f71eb6cb3c60e88ade"><div class="ttname"><a href="../../df/db5/a01158.html#gac249fdf8ca8987f71eb6cb3c60e88ade">is_directory</a></div><div class="ttdeci">int is_directory(const char *)</div><div class="ttdoc">Checks if the given path is a directory.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d61/a01130_source.html#l01070">futil.c:1070</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00387">init_find()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01070">is_directory()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01081">is_symlink_to_dir()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01093">is_valid_regex()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00151">LF_HIDE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00154">LF_REGEX</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>.</p>
+<p class="reference">References <a class="el" href="../../df/dd5/a01115_source.html#l00394">init_find()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01070">is_directory()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01081">is_symlink_to_dir()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01093">is_valid_regex()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00151">LF_HIDE</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00154">LF_REGEX</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -759,159 +776,159 @@ Here is the call graph for this function:</div>
 regex matching is opttimized by pre-compiling the regular expressions in <a class="el" href="#a89547ddc0ec3f5ad84236a07a213aa34" title="Initialize the file search based on the provided SearchFilters and start finder threads.">init_find()</a> and using regexec() for each file, which is more efficient than compiling the regex for each file. Additionally, the function minimizes calls to regexec() by first checking simpler filters (like file type and hidden status) before performing regex matching, thus avoiding unnecessary regex evaluations for files that are already excluded by other criteria.</dd></dl>
 <p>Exclude files not owned by specified user</p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00634">634</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  634</span>                                                                           {</div>
-<div class="line"><span class="lineno">  635</span> </div>
-<div class="line"><span class="lineno">  636</span>    <span class="keywordtype">char</span> tmp_str[PATH_MAX];</div>
-<div class="line"><span class="lineno">  637</span>    <span class="keywordtype">char</span> file_spec[PATH_MAX];</div>
-<div class="line"><span class="lineno">  638</span> </div>
-<div class="line"><span class="lineno">  639</span>    regmatch_t pmatch[2];</div>
-<div class="line"><span class="lineno">  640</span>    <span class="keywordtype">bool</span> f_stat = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  641</span>    <span class="keywordtype">bool</span> suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  642</span> </div>
-<div class="line"><span class="lineno">  643</span>    <span class="keywordflow">if</span> (dir_st-&gt;d_name[0] == <span class="charliteral">&#39;.&#39;</span> &amp;&amp; f-&gt;suppress_hidden)</div>
-<div class="line"><span class="lineno">  644</span>        suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  645</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
-<div class="line"><span class="lineno">  646</span>        <span class="keywordflow">switch</span> (dir_st-&gt;d_type) {</div>
-<div class="line"><span class="lineno">  647</span>        <span class="keywordflow">case</span> DT_BLK:</div>
-<div class="line"><span class="lineno">  648</span>            <span class="keywordflow">if</span> (f-&gt;blk)</div>
-<div class="line"><span class="lineno">  649</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  650</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  651</span>        <span class="keywordflow">case</span> DT_CHR:</div>
-<div class="line"><span class="lineno">  652</span>            <span class="keywordflow">if</span> (f-&gt;chr)</div>
-<div class="line"><span class="lineno">  653</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  654</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  655</span>        <span class="keywordflow">case</span> DT_DIR:</div>
-<div class="line"><span class="lineno">  656</span>            <span class="keywordflow">if</span> (f-&gt;dir)</div>
-<div class="line"><span class="lineno">  657</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  658</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  659</span>        <span class="keywordflow">case</span> DT_FIFO:</div>
-<div class="line"><span class="lineno">  660</span>            <span class="keywordflow">if</span> (f-&gt;fifo)</div>
-<div class="line"><span class="lineno">  661</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  662</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  663</span>        <span class="keywordflow">case</span> DT_LNK:</div>
-<div class="line"><span class="lineno">  664</span>            <span class="keywordflow">if</span> (f-&gt;lnk)</div>
-<div class="line"><span class="lineno">  665</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  666</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  667</span>        <span class="keywordflow">case</span> DT_REG:</div>
-<div class="line"><span class="lineno">  668</span>            <span class="keywordflow">if</span> (f-&gt;reg)</div>
-<div class="line"><span class="lineno">  669</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  670</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  671</span>        <span class="keywordflow">case</span> DT_SOCK:</div>
-<div class="line"><span class="lineno">  672</span>            <span class="keywordflow">if</span> (f-&gt;sock)</div>
-<div class="line"><span class="lineno">  673</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  674</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  675</span>        <span class="keywordflow">case</span> DT_UNKNOWN:</div>
-<div class="line"><span class="lineno">  676</span>            <span class="keywordflow">if</span> (f-&gt;unknown)</div>
-<div class="line"><span class="lineno">  677</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  678</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  679</span>        <span class="keywordflow">default</span>:</div>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00656">656</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  656</span>                                                                           {</div>
+<div class="line"><span class="lineno">  657</span> </div>
+<div class="line"><span class="lineno">  658</span>    <span class="keywordtype">char</span> tmp_str[PATH_MAX];</div>
+<div class="line"><span class="lineno">  659</span>    <span class="keywordtype">char</span> file_spec[PATH_MAX];</div>
+<div class="line"><span class="lineno">  660</span> </div>
+<div class="line"><span class="lineno">  661</span>    regmatch_t pmatch[2];</div>
+<div class="line"><span class="lineno">  662</span>    <span class="keywordtype">bool</span> f_stat = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  663</span>    <span class="keywordtype">bool</span> suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  664</span> </div>
+<div class="line"><span class="lineno">  665</span>    <span class="keywordflow">if</span> (dir_st-&gt;d_name[0] == <span class="charliteral">&#39;.&#39;</span> &amp;&amp; f-&gt;suppress_hidden)</div>
+<div class="line"><span class="lineno">  666</span>        suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  667</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
+<div class="line"><span class="lineno">  668</span>        <span class="keywordflow">switch</span> (dir_st-&gt;d_type) {</div>
+<div class="line"><span class="lineno">  669</span>        <span class="keywordflow">case</span> DT_BLK:</div>
+<div class="line"><span class="lineno">  670</span>            <span class="keywordflow">if</span> (f-&gt;blk)</div>
+<div class="line"><span class="lineno">  671</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  672</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  673</span>        <span class="keywordflow">case</span> DT_CHR:</div>
+<div class="line"><span class="lineno">  674</span>            <span class="keywordflow">if</span> (f-&gt;chr)</div>
+<div class="line"><span class="lineno">  675</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  676</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  677</span>        <span class="keywordflow">case</span> DT_DIR:</div>
+<div class="line"><span class="lineno">  678</span>            <span class="keywordflow">if</span> (f-&gt;dir)</div>
+<div class="line"><span class="lineno">  679</span>                suppress_file = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  680</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  681</span>        }</div>
-<div class="line"><span class="lineno">  682</span>    }</div>
-<div class="line"><span class="lineno">  683</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
-<div class="line"><span class="lineno">  684</span>        <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, current_path, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  685</span>        <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, <span class="stringliteral">&quot;/&quot;</span>, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  686</span>        <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, dir_st-&gt;d_name, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  687</span>    }</div>
-<div class="line"><span class="lineno">  688</span>    <span class="comment">/* Exclude non-matching files */</span></div>
-<div class="line"><span class="lineno">  689</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>)) {</div>
-<div class="line"><span class="lineno">  690</span>        <span class="keywordtype">int</span> reti = regexec(&amp;f-&gt;compiled_re, file_spec,</div>
-<div class="line"><span class="lineno">  691</span>                           f-&gt;compiled_re.re_nsub + 1, pmatch, f-&gt;reg_flags);</div>
-<div class="line"><span class="lineno">  692</span>        <span class="keywordflow">if</span> (reti == REG_NOMATCH) {</div>
-<div class="line"><span class="lineno">  693</span>            suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  694</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno">  695</span>            regerror(reti, &amp;f-&gt;compiled_re, tmp_str, <span class="keyword">sizeof</span>(tmp_str));</div>
-<div class="line"><span class="lineno">  696</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  697</span>            <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, tmp_str, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  698</span>            <a class="code hl_function" href="../../dc/d06/a01153.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
-<div class="line"><span class="lineno">  699</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  700</span>        }</div>
-<div class="line"><span class="lineno">  701</span>    }</div>
-<div class="line"><span class="lineno">  702</span>    <span class="comment">/* Exclude matching files */</span></div>
-<div class="line"><span class="lineno">  703</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>)) {</div>
-<div class="line"><span class="lineno">  704</span>        <span class="keywordtype">int</span> reti = regexec(&amp;f-&gt;compiled_ere, file_spec,</div>
-<div class="line"><span class="lineno">  705</span>                           f-&gt;compiled_re.re_nsub + 1, pmatch, f-&gt;reg_flags);</div>
-<div class="line"><span class="lineno">  706</span>        <span class="keywordflow">if</span> (reti == 0)</div>
-<div class="line"><span class="lineno">  707</span>            suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  708</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti == REG_NOMATCH)</div>
-<div class="line"><span class="lineno">  709</span>            suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  710</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
-<div class="line"><span class="lineno">  711</span>            regerror(reti, &amp;f-&gt;compiled_re, tmp_str, <span class="keyword">sizeof</span>(tmp_str));</div>
-<div class="line"><span class="lineno">  712</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  713</span>            <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, tmp_str, PATH_MAX - 1);</div>
-<div class="line"><span class="lineno">  714</span>            <a class="code hl_function" href="../../dc/d06/a01153.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
-<div class="line"><span class="lineno">  715</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  716</span>        }</div>
-<div class="line"><span class="lineno">  717</span>    }</div>
-<div class="line"><span class="lineno">  718</span>    f_stat = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  719</span>    <span class="keyword">struct </span>stat sb;</div>
-<div class="line"><span class="lineno">  721</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
-<div class="line"><span class="lineno">  722</span>        <span class="keywordflow">if</span> ((f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a>) &amp;&amp; stat(file_spec, &amp;sb) == 0) {</div>
-<div class="line"><span class="lineno">  723</span>            f_stat = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  724</span>            <span class="keywordflow">if</span> (sb.st_uid != f-&gt;user_id)</div>
-<div class="line"><span class="lineno">  725</span>                suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  726</span>        }</div>
-<div class="line"><span class="lineno">  727</span>    }</div>
-<div class="line"><span class="lineno">  728</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;permissions) {</div>
-<div class="line"><span class="lineno">  729</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
-<div class="line"><span class="lineno">  730</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
-<div class="line"><span class="lineno">  731</span>                f_stat = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  732</span>        }</div>
-<div class="line"><span class="lineno">  733</span>        suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  734</span>        <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa2b810225ea41814277b89964e004002f">LF_PERM_R</a>) &amp;&amp; (sb.st_mode &amp; S_IRUSR))</div>
-<div class="line"><span class="lineno">  735</span>            suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  736</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa47cba791a8e5f4d1c67d552ffc212e97">LF_PERM_W</a>) &amp;&amp; (sb.st_mode &amp; S_IWUSR))</div>
-<div class="line"><span class="lineno">  737</span>            suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  738</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fab3a60c54cad364edb58f76508c4b32aa">LF_PERM_X</a>) &amp;&amp; (sb.st_mode &amp; S_IXUSR))</div>
-<div class="line"><span class="lineno">  739</span>            suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  740</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6facd44901c152db604a218bb1e9b1ef52e">LF_SETUID</a>) &amp;&amp; (sb.st_mode &amp; S_ISUID))</div>
-<div class="line"><span class="lineno">  741</span>            suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  742</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6faa81acaa8a122fe728adf7296e398a4a2">LF_SETGID</a>) &amp;&amp; (sb.st_mode &amp; S_ISGID))</div>
-<div class="line"><span class="lineno">  743</span>            suppress_file = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  744</span>    }</div>
-<div class="line"><span class="lineno">  745</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;before) {</div>
-<div class="line"><span class="lineno">  746</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
-<div class="line"><span class="lineno">  747</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
-<div class="line"><span class="lineno">  748</span>                f_stat = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  749</span>        }</div>
-<div class="line"><span class="lineno">  750</span>        <span class="keywordflow">if</span> (f_stat &amp;&amp; sb.st_mtime &gt; f-&gt;before)</div>
-<div class="line"><span class="lineno">  751</span>            suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  752</span>    }</div>
-<div class="line"><span class="lineno">  753</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;after) {</div>
-<div class="line"><span class="lineno">  754</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
-<div class="line"><span class="lineno">  755</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
-<div class="line"><span class="lineno">  756</span>                f_stat = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  757</span>        }</div>
-<div class="line"><span class="lineno">  758</span>        <span class="keywordflow">if</span> (f_stat &amp;&amp; sb.st_mtime &lt; f-&gt;after)</div>
-<div class="line"><span class="lineno">  759</span>            suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  760</span>    }</div>
-<div class="line"><span class="lineno">  761</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;file_size_min) {</div>
-<div class="line"><span class="lineno">  762</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
-<div class="line"><span class="lineno">  763</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
-<div class="line"><span class="lineno">  764</span>                f_stat = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  765</span>        }</div>
-<div class="line"><span class="lineno">  766</span>        <span class="keywordflow">if</span> (f_stat &amp;&amp; sb.st_size &lt; f-&gt;file_size_min)</div>
-<div class="line"><span class="lineno">  767</span>            suppress_file = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  768</span>    }</div>
-<div class="line"><span class="lineno">  769</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
-<div class="line"><span class="lineno">  770</span>        <span class="keywordflow">if</span> (file_spec[0] == <span class="charliteral">&#39;.&#39;</span> &amp;&amp; file_spec[1] == <span class="charliteral">&#39;/&#39;</span>)</div>
-<div class="line"><span class="lineno">  771</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, &amp;file_spec[2]);</div>
-<div class="line"><span class="lineno">  772</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  773</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, file_spec);</div>
+<div class="line"><span class="lineno">  681</span>        <span class="keywordflow">case</span> DT_FIFO:</div>
+<div class="line"><span class="lineno">  682</span>            <span class="keywordflow">if</span> (f-&gt;fifo)</div>
+<div class="line"><span class="lineno">  683</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  684</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  685</span>        <span class="keywordflow">case</span> DT_LNK:</div>
+<div class="line"><span class="lineno">  686</span>            <span class="keywordflow">if</span> (f-&gt;lnk)</div>
+<div class="line"><span class="lineno">  687</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  688</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  689</span>        <span class="keywordflow">case</span> DT_REG:</div>
+<div class="line"><span class="lineno">  690</span>            <span class="keywordflow">if</span> (f-&gt;reg)</div>
+<div class="line"><span class="lineno">  691</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  692</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  693</span>        <span class="keywordflow">case</span> DT_SOCK:</div>
+<div class="line"><span class="lineno">  694</span>            <span class="keywordflow">if</span> (f-&gt;sock)</div>
+<div class="line"><span class="lineno">  695</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  696</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  697</span>        <span class="keywordflow">case</span> DT_UNKNOWN:</div>
+<div class="line"><span class="lineno">  698</span>            <span class="keywordflow">if</span> (f-&gt;unknown)</div>
+<div class="line"><span class="lineno">  699</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  700</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  701</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  702</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  703</span>        }</div>
+<div class="line"><span class="lineno">  704</span>    }</div>
+<div class="line"><span class="lineno">  705</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
+<div class="line"><span class="lineno">  706</span>        <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, current_path, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  707</span>        <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, <span class="stringliteral">&quot;/&quot;</span>, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  708</span>        <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, dir_st-&gt;d_name, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  709</span>    }</div>
+<div class="line"><span class="lineno">  710</span>    <span class="comment">/* Exclude non-matching files */</span></div>
+<div class="line"><span class="lineno">  711</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fad8d4283986d31f5b3e1892714f47bc37">LF_REGEX</a>)) {</div>
+<div class="line"><span class="lineno">  712</span>        <span class="keywordtype">int</span> reti = regexec(&amp;f-&gt;compiled_re, file_spec,</div>
+<div class="line"><span class="lineno">  713</span>                           f-&gt;compiled_re.re_nsub + 1, pmatch, f-&gt;reg_flags);</div>
+<div class="line"><span class="lineno">  714</span>        <span class="keywordflow">if</span> (reti == REG_NOMATCH) {</div>
+<div class="line"><span class="lineno">  715</span>            suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  716</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
+<div class="line"><span class="lineno">  717</span>            regerror(reti, &amp;f-&gt;compiled_re, tmp_str, <span class="keyword">sizeof</span>(tmp_str));</div>
+<div class="line"><span class="lineno">  718</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  719</span>            <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, tmp_str, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  720</span>            <a class="code hl_function" href="../../dc/d06/a01153.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
+<div class="line"><span class="lineno">  721</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  722</span>        }</div>
+<div class="line"><span class="lineno">  723</span>    }</div>
+<div class="line"><span class="lineno">  724</span>    <span class="comment">/* Exclude matching files */</span></div>
+<div class="line"><span class="lineno">  725</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; (f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa0648bcfdaade6d56767b268c3e3546f1">LF_EXC_REGEX</a>)) {</div>
+<div class="line"><span class="lineno">  726</span>        <span class="keywordtype">int</span> reti = regexec(&amp;f-&gt;compiled_ere, file_spec,</div>
+<div class="line"><span class="lineno">  727</span>                           f-&gt;compiled_re.re_nsub + 1, pmatch, f-&gt;reg_flags);</div>
+<div class="line"><span class="lineno">  728</span>        <span class="keywordflow">if</span> (reti == 0)</div>
+<div class="line"><span class="lineno">  729</span>            suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  730</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti == REG_NOMATCH)</div>
+<div class="line"><span class="lineno">  731</span>            suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  732</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (reti) {</div>
+<div class="line"><span class="lineno">  733</span>            regerror(reti, &amp;f-&gt;compiled_re, tmp_str, <span class="keyword">sizeof</span>(tmp_str));</div>
+<div class="line"><span class="lineno">  734</span>            <a class="code hl_function" href="../../df/db5/a01158.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_str, <span class="stringliteral">&quot;Regex match failed: &quot;</span>, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  735</span>            <a class="code hl_function" href="../../df/db5/a01158.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(tmp_str, tmp_str, PATH_MAX - 1);</div>
+<div class="line"><span class="lineno">  736</span>            <a class="code hl_function" href="../../dc/d06/a01153.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(tmp_str);</div>
+<div class="line"><span class="lineno">  737</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  738</span>        }</div>
+<div class="line"><span class="lineno">  739</span>    }</div>
+<div class="line"><span class="lineno">  740</span>    f_stat = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  741</span>    <span class="keyword">struct </span>stat sb;</div>
+<div class="line"><span class="lineno">  743</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
+<div class="line"><span class="lineno">  744</span>        <span class="keywordflow">if</span> ((f-&gt;flags &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fadb9cb91d4e4649a1ee86e5f71423fb31">LF_USER</a>) &amp;&amp; stat(file_spec, &amp;sb) == 0) {</div>
+<div class="line"><span class="lineno">  745</span>            f_stat = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  746</span>            <span class="keywordflow">if</span> (sb.st_uid != f-&gt;user_id)</div>
+<div class="line"><span class="lineno">  747</span>                suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  748</span>        }</div>
+<div class="line"><span class="lineno">  749</span>    }</div>
+<div class="line"><span class="lineno">  750</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;permissions) {</div>
+<div class="line"><span class="lineno">  751</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
+<div class="line"><span class="lineno">  752</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
+<div class="line"><span class="lineno">  753</span>                f_stat = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  754</span>        }</div>
+<div class="line"><span class="lineno">  755</span>        suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  756</span>        <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa2b810225ea41814277b89964e004002f">LF_PERM_R</a>) &amp;&amp; (sb.st_mode &amp; S_IRUSR))</div>
+<div class="line"><span class="lineno">  757</span>            suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  758</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa47cba791a8e5f4d1c67d552ffc212e97">LF_PERM_W</a>) &amp;&amp; (sb.st_mode &amp; S_IWUSR))</div>
+<div class="line"><span class="lineno">  759</span>            suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  760</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fab3a60c54cad364edb58f76508c4b32aa">LF_PERM_X</a>) &amp;&amp; (sb.st_mode &amp; S_IXUSR))</div>
+<div class="line"><span class="lineno">  761</span>            suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  762</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6facd44901c152db604a218bb1e9b1ef52e">LF_SETUID</a>) &amp;&amp; (sb.st_mode &amp; S_ISUID))</div>
+<div class="line"><span class="lineno">  763</span>            suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  764</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((f-&gt;permissions &amp; <a class="code hl_enumvalue" href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6faa81acaa8a122fe728adf7296e398a4a2">LF_SETGID</a>) &amp;&amp; (sb.st_mode &amp; S_ISGID))</div>
+<div class="line"><span class="lineno">  765</span>            suppress_file = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  766</span>    }</div>
+<div class="line"><span class="lineno">  767</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;before) {</div>
+<div class="line"><span class="lineno">  768</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
+<div class="line"><span class="lineno">  769</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
+<div class="line"><span class="lineno">  770</span>                f_stat = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  771</span>        }</div>
+<div class="line"><span class="lineno">  772</span>        <span class="keywordflow">if</span> (f_stat &amp;&amp; sb.st_mtime &gt; f-&gt;before)</div>
+<div class="line"><span class="lineno">  773</span>            suppress_file = <span class="keyword">true</span>;</div>
 <div class="line"><span class="lineno">  774</span>    }</div>
-<div class="line"><span class="lineno">  775</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  776</span>}</div>
-<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa2b810225ea41814277b89964e004002f"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa2b810225ea41814277b89964e004002f">LF_PERM_R</a></div><div class="ttdeci">@ LF_PERM_R</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00159">cm.h:159</a></div></div>
-<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa47cba791a8e5f4d1c67d552ffc212e97"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa47cba791a8e5f4d1c67d552ffc212e97">LF_PERM_W</a></div><div class="ttdeci">@ LF_PERM_W</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00160">cm.h:160</a></div></div>
-<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6faa81acaa8a122fe728adf7296e398a4a2"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6faa81acaa8a122fe728adf7296e398a4a2">LF_SETGID</a></div><div class="ttdeci">@ LF_SETGID</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00158">cm.h:158</a></div></div>
-<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fab3a60c54cad364edb58f76508c4b32aa"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fab3a60c54cad364edb58f76508c4b32aa">LF_PERM_X</a></div><div class="ttdeci">@ LF_PERM_X</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00161">cm.h:161</a></div></div>
-<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6facd44901c152db604a218bb1e9b1ef52e"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6facd44901c152db604a218bb1e9b1ef52e">LF_SETUID</a></div><div class="ttdeci">@ LF_SETUID</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00157">cm.h:157</a></div></div>
+<div class="line"><span class="lineno">  775</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;after) {</div>
+<div class="line"><span class="lineno">  776</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
+<div class="line"><span class="lineno">  777</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
+<div class="line"><span class="lineno">  778</span>                f_stat = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  779</span>        }</div>
+<div class="line"><span class="lineno">  780</span>        <span class="keywordflow">if</span> (f_stat &amp;&amp; sb.st_mtime &lt; f-&gt;after)</div>
+<div class="line"><span class="lineno">  781</span>            suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  782</span>    }</div>
+<div class="line"><span class="lineno">  783</span>    <span class="keywordflow">if</span> (!suppress_file &amp;&amp; f-&gt;file_size_min) {</div>
+<div class="line"><span class="lineno">  784</span>        <span class="keywordflow">if</span> (!f_stat) {</div>
+<div class="line"><span class="lineno">  785</span>            <span class="keywordflow">if</span> (stat(file_spec, &amp;sb) == 0)</div>
+<div class="line"><span class="lineno">  786</span>                f_stat = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  787</span>        }</div>
+<div class="line"><span class="lineno">  788</span>        <span class="keywordflow">if</span> (f_stat &amp;&amp; sb.st_size &lt; f-&gt;file_size_min)</div>
+<div class="line"><span class="lineno">  789</span>            suppress_file = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  790</span>    }</div>
+<div class="line"><span class="lineno">  791</span>    <span class="keywordflow">if</span> (!suppress_file) {</div>
+<div class="line"><span class="lineno">  792</span>        <span class="keywordflow">if</span> (file_spec[0] == <span class="charliteral">&#39;.&#39;</span> &amp;&amp; file_spec[1] == <span class="charliteral">&#39;/&#39;</span>)</div>
+<div class="line"><span class="lineno">  793</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, &amp;file_spec[2]);</div>
+<div class="line"><span class="lineno">  794</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  795</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, file_spec);</div>
+<div class="line"><span class="lineno">  796</span>    }</div>
+<div class="line"><span class="lineno">  797</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  798</span>}</div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa2b810225ea41814277b89964e004002f"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa2b810225ea41814277b89964e004002f">LF_PERM_R</a></div><div class="ttdeci">@ LF_PERM_R</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00161">cm.h:161</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fa47cba791a8e5f4d1c67d552ffc212e97"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fa47cba791a8e5f4d1c67d552ffc212e97">LF_PERM_W</a></div><div class="ttdeci">@ LF_PERM_W</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00162">cm.h:162</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6faa81acaa8a122fe728adf7296e398a4a2"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6faa81acaa8a122fe728adf7296e398a4a2">LF_SETGID</a></div><div class="ttdeci">@ LF_SETGID</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00160">cm.h:160</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6fab3a60c54cad364edb58f76508c4b32aa"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6fab3a60c54cad364edb58f76508c4b32aa">LF_PERM_X</a></div><div class="ttdeci">@ LF_PERM_X</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00163">cm.h:163</a></div></div>
+<div class="ttc" id="aa00725_html_aac04c5533f2d11a31cc2a30e3a8fef6facd44901c152db604a218bb1e9b1ef52e"><div class="ttname"><a href="../../d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6facd44901c152db604a218bb1e9b1ef52e">LF_SETUID</a></div><div class="ttdeci">@ LF_SETUID</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00159">cm.h:159</a></div></div>
 <div class="ttc" id="aa01153_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../dc/d06/a01153.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l01222">dwin.c:1222</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00153">LF_EXC_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00159">LF_PERM_R</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00160">LF_PERM_W</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00161">LF_PERM_X</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00154">LF_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00158">LF_SETGID</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00157">LF_SETUID</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00156">LF_USER</a>, <a class="el" href="../../d5/d3e/a01139_source.html#l01222">Perror()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00335">strnz__cat()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00153">LF_EXC_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00161">LF_PERM_R</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00162">LF_PERM_W</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00163">LF_PERM_X</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00154">LF_REGEX</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00160">LF_SETGID</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00159">LF_SETUID</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00156">LF_USER</a>, <a class="el" href="../../d5/d3e/a01139_source.html#l01222">Perror()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00335">strnz__cat()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00306">strnz__cpy()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00558">finder()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00567">finder()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -938,9 +955,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00277">277</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00282">282</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00558">finder()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00567">finder()</a>.</p>
 
 </div>
 </div>
@@ -988,9 +1005,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00276">276</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00281">281</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00500">enqueue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00558">finder()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00387">init_find()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00509">enqueue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00567">finder()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00394">init_find()</a>.</p>
 
 </div>
 </div>
@@ -1028,9 +1045,9 @@ Here is the caller graph for this function:</div>
 
 <p>Global Synchronization State. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00274">274</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00279">279</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00500">enqueue_dir()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00509">enqueue_dir()</a>.</p>
 
 </div>
 </div>
@@ -1046,9 +1063,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00275">275</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00280">280</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00500">enqueue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00387">init_find()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00509">enqueue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00394">init_find()</a>.</p>
 
 </div>
 </div>
@@ -1064,9 +1081,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00278">278</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00283">283</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00387">init_find()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00394">init_find()</a>.</p>
 
 </div>
 </div>
@@ -1082,9 +1099,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00274">274</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../df/dd5/a01115_source.html#l00279">279</a> of file <a class="el" href="../../df/dd5/a01115_source.html">lf.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00524">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00500">enqueue_dir()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../df/dd5/a01115_source.html#l00533">dequeue_dir()</a>, and <a class="el" href="../../df/dd5/a01115_source.html#l00509">enqueue_dir()</a>.</p>
 
 </div>
 </div>

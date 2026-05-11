@@ -1,7 +1,7 @@
 var searchData=
 [
   ['x_0',['x',['../d8/db0/a01243.html#a86d0b88cd863c97fa393b58eb0c2afe2',1,'Pick']]],
-  ['x86_5f64_1',['x86_64',['../df/d96/a01347.html#c-menu-binaries-for-linux-x86_64',1,'C-Menu Binaries for Linux x86_64'],['../index.html#c-menu-binaries-for-linux-x86_64-1',1,'C-Menu Binaries for Linux x86_64']]],
+  ['x86_5f64_1',['C-Menu Binaries for Linux x86_64',['../df/d96/a01347.html#c-menu-binaries-for-linux-x86_64',1,'']]],
   ['xbblack_2',['XBBLACK',['../d9/d5b/a01127.html#a964fa61be5e30597c14ae6b1e24a7994a7411d014536a60256b838138a774393c',1,'init.c']]],
   ['xbblue_3',['XBBLUE',['../d9/d5b/a01127.html#a964fa61be5e30597c14ae6b1e24a7994ae2fbedfa5b807a9d71db36c45282e956',1,'init.c']]],
   ['xbcyan_4',['XBCYAN',['../d9/d5b/a01127.html#a964fa61be5e30597c14ae6b1e24a7994a29d4ef12c9ac0265d4986f0df17165f1',1,'init.c']]],

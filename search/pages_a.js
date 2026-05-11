@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['edit_20c_20files_20in_20current_20directory_0',['Edit .c Files in Current Directory',['../d5/da0/a01342.html#edit-c-files-in-current-directory',1,'']]],
+  ['edit_20c_20files_20in_20current_20directory_0',['Edit c Files in Current Directory',['../d5/da0/a01342.html#edit-c-files-in-current-directory',1,'Edit .c Files in Current Directory'],['../index.html#edit-c-files-in-current-directory-1',1,'Edit .c Files in Current Directory']]],
   ['editing_1',['Form for Data Entry and Editing',['../d7/d57/a01348.html#form-for-data-entry-and-editing',1,'']]],
   ['editor_2',['Editor',['../d7/d57/a01348.html#example-manual-page-using-editor',1,'Example Manual Page Using Editor'],['../d7/d57/a01348.html#log-file-with-editor',1,'Log File With Editor']]],
   ['editor_3',['Form field editor',['../de/da0/a01341.html#form-field-editor',1,'']]],
@@ -21,7 +21,7 @@ var searchData=
   ['example_20manual_20page_20using_20editor_18',['Example Manual Page Using Editor',['../d7/d57/a01348.html#example-manual-page-using-editor',1,'']]],
   ['example_20terminal_20configurations_19',['Example Terminal Configurations',['../d4/deb/a01345.html#example-terminal-configurations',1,'']]],
   ['example_20use_20cases_20',['Exercises - Example Use Cases',['../da/d61/a01350.html#exercises---example-use-cases',1,'']]],
-  ['examples_21',['Examples',['../d5/da0/a01342.html#examples',1,'']]],
+  ['examples_21',['Examples',['../d5/da0/a01342.html#examples',1,'Examples'],['../index.html#examples-1',1,'Examples']]],
   ['executable_22',['Alternate Bash Executable',['../d4/deb/a01345.html#alternate-bash-executable',1,'']]],
   ['executables_23',['Executables',['../d9/de4/a01346.html#menu-form---integrating-external-executables',1,'Menu Form - Integrating External Executables'],['../d9/de4/a01346.html#multiple-executables',1,'Multiple Executables'],['../d9/de4/a01346.html#static-executables',1,'Static Executables']]],
   ['exercise_201_3a_20system_20configurations_24',['Exercise 1: System Configurations',['../dc/d54/a01344.html#exercise-1-system-configurations',1,'']]],

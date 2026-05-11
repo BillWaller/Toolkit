@@ -7,7 +7,7 @@ var searchData=
   ['nc_4',['NC',['../d5/d3e/a01139.html#a1fa2460e32327ade49189c95740bc1b5',1,'dwin.c']]],
   ['ncurses_5ffp_5',['ncurses_fp',['../d5/d3e/a01139.html#aab4cb2245aeb44f6e09e2e1ab6ecb659',1,'dwin.c']]],
   ['ncurses_5fwidechar_6',['NCURSES_WIDECHAR',['../d8/db9/a00725.html#aa16fa3d6aa4e0d8100f2919690417da7',1,'NCURSES_WIDECHAR:&#160;cm.h'],['../dd/dd8/a00719.html#aa16fa3d6aa4e0d8100f2919690417da7',1,'NCURSES_WIDECHAR:&#160;common.h'],['../d6/dc0/a00734.html#aa16fa3d6aa4e0d8100f2919690417da7',1,'NCURSES_WIDECHAR:&#160;view.h']]],
-  ['neovim_7',['Neovim',['../d7/d57/a01348.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../df/d96/a01347.html#completions-in-neovim',1,'Completions in Neovim'],['../index.html#completions-in-neovim-1',1,'Completions in Neovim'],['../d4/deb/a01345.html#neovim',1,'Neovim']]],
+  ['neovim_7',['Neovim',['../d7/d57/a01348.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../df/d96/a01347.html#completions-in-neovim',1,'Completions in Neovim'],['../d4/deb/a01345.html#neovim',1,'Neovim']]],
   ['neovim_20configuration_8',['Neovim Configuration',['../d4/deb/a01345.html#neovim-configuration',1,'']]],
   ['neovim_20linkage_20to_20the_20c_20menu_20api_9',['Neovim Linkage to the C-Menu API',['../d4/deb/a01345.html#neovim-linkage-to-the-c-menu-api',1,'']]],
   ['neovim_20unicode_20art_20in_20snacks_20nvim_10',['To Use the Neovim Unicode Art in Snacks.nvim',['../d4/deb/a01345.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'']]],

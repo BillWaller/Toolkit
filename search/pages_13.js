@@ -1,7 +1,7 @@
 var searchData=
 [
   ['navigation_0',['View Navigation',['../de/da0/a01341.html#view-navigation',1,'']]],
-  ['neovim_1',['Neovim',['../d7/d57/a01348.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../df/d96/a01347.html#completions-in-neovim',1,'Completions in Neovim'],['../index.html#completions-in-neovim-1',1,'Completions in Neovim'],['../d4/deb/a01345.html#neovim',1,'Neovim']]],
+  ['neovim_1',['Neovim',['../d7/d57/a01348.html#_new-api-integration-with-neovim_',1,'&lt;b&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/b&gt;'],['../df/d96/a01347.html#completions-in-neovim',1,'Completions in Neovim'],['../d4/deb/a01345.html#neovim',1,'Neovim']]],
   ['neovim_20configuration_2',['Neovim Configuration',['../d4/deb/a01345.html#neovim-configuration',1,'']]],
   ['neovim_20linkage_20to_20the_20c_20menu_20api_3',['Neovim Linkage to the C-Menu API',['../d4/deb/a01345.html#neovim-linkage-to-the-c-menu-api',1,'']]],
   ['neovim_20unicode_20art_20in_20snacks_20nvim_4',['To Use the Neovim Unicode Art in Snacks.nvim',['../d4/deb/a01345.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'']]],
