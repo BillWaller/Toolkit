@@ -20,7 +20,7 @@ var searchData=
   ['c_20menu_20environment_20variables_17',['C Menu Environment Variables',['../de/da0/a01341.html#c-menu-environment-variables',1,'C-Menu Environment Variables'],['../d1/dcd/a01351.html#helpful-c-menu-environment-variables',1,'Helpful C-Menu Environment Variables']]],
   ['c_20menu_20example_20applications_20menu_18',['C-Menu Example Applications Menu',['../de/da0/a01341.html#c-menu-example-applications-menu',1,'']]],
   ['c_20menu_20exercises_19',['C-Menu Exercises',['../d7/d57/a01348.html#c-menu-exercises',1,'']]],
-  ['c_20menu_20features_20',['C Menu Features',['../d5/da0/a01342.html#c-menu-features',1,'C-Menu Features'],['../index.html#c-menu-features-1',1,'C-Menu Features']]],
+  ['c_20menu_20features_20',['C-Menu Features',['../d5/da0/a01342.html#c-menu-features',1,'']]],
   ['c_20menu_20file_20layout_21',['C-Menu File Layout',['../de/da0/a01341.html#c-menu-file-layout',1,'']]],
   ['c_20menu_20form_22',['C Menu Form',['../d5/da0/a01342.html#c-menu-form',1,'C-Menu Form'],['../index.html#c-menu-form-1',1,'C-Menu Form']]],
   ['c_20menu_20from_20source_23',['Build C-Menu from Source',['../df/d96/a01347.html#build-c-menu-from-source',1,'']]],

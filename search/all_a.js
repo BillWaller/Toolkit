@@ -26,7 +26,7 @@ var searchData=
   ['demand_20paged_20virtual_20address_20space_23',['Demand Paged Virtual Address Space',['../d7/d57/a01348.html#demand-paged-virtual-address-space',1,'']]],
   ['dequeue_5fdir_24',['dequeue_dir',['../df/dd5/a01115.html#aaac63a384018fab4605668d9dc7d8b3b',1,'lf.c']]],
   ['derive_5ffile_5fspec_25',['derive_file_spec',['../dc/d81/a01161.html#ga20c40545a1e05954b496c6d674d31458',1,'derive_file_spec(char *, char *, char *):&#160;init.c'],['../dc/d81/a01161.html#ga20c40545a1e05954b496c6d674d31458',1,'derive_file_spec(char *file_spec, char *dir, char *file_name):&#160;init.c']]],
-  ['description_20file_26',['Description File',['../d5/da0/a01342.html#description-file',1,'Description File'],['../index.html#description-file-1',1,'Description File'],['../d7/d57/a01348.html#sample-menu-description-file',1,'Sample Menu Description File']]],
+  ['description_20file_26',['Description File',['../d5/da0/a01342.html#description-file',1,'Description File'],['../index.html#description-file-1',1,'Description File'],['../index.html#menu-description-file',1,'Menu Description File'],['../d7/d57/a01348.html#sample-menu-description-file',1,'Sample Menu Description File']]],
   ['description_20file_20format_27',['Menu Description File Format',['../de/da0/a01341.html#menu-description-file-format',1,'']]],
   ['deselect_5fobject_28',['deselect_object',['../dc/dee/a01166.html#ga98b36615c0627c4195c40b6c23d6062a',1,'pick_engine.c']]],
   ['design_20philosophy_20and_20optimizations_29',['Design Philosophy and Optimizations',['../de/d6c/a01349.html#design-philosophy-and-optimizations',1,'']]],

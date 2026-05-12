@@ -46,7 +46,7 @@ var searchData=
   ['sitter_20with_20view_43',['View - How to Use Tree-Sitter with View',['../d9/de4/a01346.html#view---how-to-use-tree-sitter-with-view',1,'']]],
   ['snacks_20nvim_44',['Snacks nvim',['../d4/deb/a01345.html#folkes-snacksnvim',1,'Folke&apos;s Snacks.nvim'],['../d4/deb/a01345.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'To Use the Neovim Unicode Art in Snacks.nvim']]],
   ['snacks_20nvim_20colorizer_45',['To Install Folke&apos;s Snacks.nvim-colorizer',['../d4/deb/a01345.html#to-install-folkes-snacksnvim-colorizer',1,'']]],
-  ['sneakey_20optimization_20techniques_46',['Sneakey Optimization Techniques',['../d5/da0/a01342.html#sneakey-optimization-techniques',1,'Sneakey Optimization Techniques'],['../index.html#sneakey-optimization-techniques-1',1,'Sneakey Optimization Techniques']]],
+  ['sneakey_20optimization_20techniques_46',['Sneakey Optimization Techniques',['../d5/da0/a01342.html#sneakey-optimization-techniques',1,'']]],
   ['snippets_47',['snippets',['../d1/dcd/a01351.html',1,'']]],
   ['soap_20box_48',['Visual Aids Soap-box',['../d9/de4/a01346.html#visual-aids-soap-box',1,'']]],
   ['some_20menu_20selections_20don_20t_20work_49',['Some Menu Selections Don&apos;t work',['../d9/de4/a01346.html#some-menu-selections-dont-work',1,'']]],

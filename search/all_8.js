@@ -40,7 +40,7 @@ var searchData=
   ['box_5fattr_37',['box_attr',['../d5/d3e/a01139.html#a016e8893ca4a8c072b92cee09f16c537',1,'dwin.c']]],
   ['box_5fnew_38',['box_new',['../d2/d7b/a01150.html#ga38d50d5b402b7b2328874329ae003d7d',1,'box_new(int wlines, int wcols, int wbegy, int wbegx, char *wtitle, bool win_pair):&#160;dwin.c'],['../d2/d7b/a01150.html#ga38d50d5b402b7b2328874329ae003d7d',1,'box_new(int, int, int, int, char *, bool):&#160;dwin.c']]],
   ['brackets_39',['brackets',['../de/d1a/a01179.html#ab096b6e0317060e36d801ff52b967fca',1,'Init::brackets'],['../d0/d88/a01231.html#ad5ee35969e855d0560700a7758f86106',1,'Form::brackets']]],
-  ['breakdown_40',['Breakdown',['../d5/da0/a01342.html#menu-line-by-line-breakdown',1,'Menu Line-by-Line Breakdown'],['../index.html#menu-line-by-line-breakdown-1',1,'Menu Line-by-Line Breakdown']]],
+  ['breakdown_40',['Menu Line-by-Line Breakdown',['../d5/da0/a01342.html#menu-line-by-line-breakdown',1,'']]],
   ['bred_41',['bred',['../d5/d39/a01219.html#a1f8af703bfb694dc23e30fbbfee11f9c',1,'SIO']]],
   ['brktl_42',['brktl',['../d0/d88/a01231.html#a80a6769a33b10e4f9d03a0161d6b5766',1,'Form']]],
   ['brktr_43',['brktr',['../d0/d88/a01231.html#a10586395722ec75d5d640a9d1f7ca4b7',1,'Form']]],
@@ -97,6 +97,6 @@ var searchData=
   ['bw_5fve_94',['bw_ve',['../d5/d3e/a01139.html#ad2cc2b8cc2c9eef9f20ed9650da0b3f9',1,'bw_ve:&#160;dwin.c'],['../d8/db9/a00725.html#ad2cc2b8cc2c9eef9f20ed9650da0b3f9',1,'bw_ve:&#160;dwin.c']]],
   ['bwhite_95',['bwhite',['../d5/d39/a01219.html#a6a5d23dd4c2e2b5deaa8eafa4c6665f2',1,'SIO']]],
   ['by_20inode_96',['Menu - What Happened to Delete by Inode',['../d9/de4/a01346.html#menu---what-happened-to-delete-by-inode',1,'']]],
-  ['by_20line_20breakdown_97',['by Line Breakdown',['../d5/da0/a01342.html#menu-line-by-line-breakdown',1,'Menu Line-by-Line Breakdown'],['../index.html#menu-line-by-line-breakdown-1',1,'Menu Line-by-Line Breakdown']]],
+  ['by_20line_20breakdown_97',['Menu Line-by-Line Breakdown',['../d5/da0/a01342.html#menu-line-by-line-breakdown',1,'']]],
   ['byellow_98',['byellow',['../d5/d39/a01219.html#a69809a335c5fee940c3067e89378a825',1,'SIO']]]
 ];

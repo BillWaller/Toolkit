@@ -40,7 +40,7 @@ var searchData=
   ['opt_5fprt_5fint_37',['opt_prt_int',['../dc/d81/a01161.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e',1,'init.c']]],
   ['opt_5fprt_5fstr_38',['opt_prt_str',['../dc/d81/a01161.html#ga086c2240ffa5e497b67d630ea0d206b5',1,'init.c']]],
   ['optgroup_39',['OptGroup',['../dd/dd8/a00719.html#a87b22b8c9213bcf6c0fae14e67950b2b',1,'common.h']]],
-  ['optimization_20techniques_40',['Optimization Techniques',['../d5/da0/a01342.html#sneakey-optimization-techniques',1,'Sneakey Optimization Techniques'],['../index.html#sneakey-optimization-techniques-1',1,'Sneakey Optimization Techniques']]],
+  ['optimization_20techniques_40',['Sneakey Optimization Techniques',['../d5/da0/a01342.html#sneakey-optimization-techniques',1,'']]],
   ['optimizations_41',['Design Philosophy and Optimizations',['../de/d6c/a01349.html#design-philosophy-and-optimizations',1,'']]],
   ['optind_42',['optind',['../de/d1a/a01179.html#adb07b533ed57d48fcbefe1342eb5b8dd',1,'Init::optind'],['../dd/d95/a01247.html#a18bde5d8928ed5adfc03533cecfde052',1,'View::optind']]],
   ['option_201_20build_20c_20menu_20using_20cmake_20directly_43',['Option 1 - Build C-Menu Using CMake Directly',['../df/d96/a01347.html#option-1---build-c-menu-using-cmake-directly',1,'']]],

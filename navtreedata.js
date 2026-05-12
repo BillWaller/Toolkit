@@ -28,13 +28,10 @@ var NAVTREE =
     [ "API", "d7/d51/a01340.html", [
       [ "Other C-Menu Documentation", "index.html#other-c-menu-documentation-1", null ],
       [ "C-Menu Overview", "index.html#c-menu-overview-1", [
-        [ "C-Menu Features", "index.html#c-menu-features-1", null ],
         [ "C-Menu Start-up Options", "index.html#c-menu-start-up-options-1", null ]
       ] ],
       [ "C-Menu Menu", "index.html#c-menu-menu-1", null ],
-      [ "Menu Line-by-Line Breakdown", "index.html#menu-line-by-line-breakdown-1", [
-        [ "Title Line", "index.html#title-line-1", null ],
-        [ "Text Lines", "index.html#text-lines-1", null ],
+      [ "Menu Description File", "index.html#menu-description-file", [
         [ "Sub-Menus", "index.html#sub-menus-1", null ]
       ] ],
       [ "C-Menu Form", "index.html#c-menu-form-1", [
@@ -56,7 +53,6 @@ var NAVTREE =
       [ "C-Menu View", "index.html#c-menu-view-2", null ],
       [ "RSH - A Root Shell Alternative", "index.html#rsh---a-root-shell-alternative-2", null ],
       [ "lf - A Regular Expression File Finder", "index.html#lf---a-regular-expression-file-finder-2", null ],
-      [ "Sneakey Optimization Techniques", "index.html#sneakey-optimization-techniques-1", null ],
       [ "How to get C-Menu", "d7/d51/a01340.html#how-to-get-c-menu", [
         [ "Get C-Menu on Github", "d7/d51/a01340.html#get-c-menu-on-github", null ],
         [ "Introduction", "d7/d51/a01340.html#introduction", null ],
