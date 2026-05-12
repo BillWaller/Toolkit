@@ -1,7 +1,7 @@
 var searchData=
 [
   ['save_5fobject_0',['save_object',['../dc/dee/a01166.html#ga02f90007f2422dd2094ab64569e157f0',1,'save_object(Pick *, char *):&#160;pick_engine.c'],['../dc/dee/a01166.html#ga02f90007f2422dd2094ab64569e157f0',1,'save_object(Pick *pick, char *s):&#160;pick_engine.c']]],
-  ['scan_5ffile_1',['scan_file',['../df/dd5/a01115.html#a94d43c847372f49828fe8c3e4c3fe5d1',1,'lf.c']]],
+  ['scan_5ffile_1',['scan_file',['../df/dd5/a01115.html#aba11ea64be225c75b52311cb890dede0',1,'lf.c']]],
   ['scroll_5fdown_5fn_5flines_2',['scroll_down_n_lines',['../d3/dc7/a01170.html#gaa79b8294ebf98c84d4a844fd7d9e4862',1,'view_engine.c']]],
   ['scroll_5fup_5fn_5flines_3',['scroll_up_n_lines',['../d3/dc7/a01170.html#gab08fc8983cc3bdb21b438c82ece16346',1,'view_engine.c']]],
   ['search_4',['search',['../d3/dc7/a01170.html#ga5f639aa1a1f03fa05888c724bc17d99c',1,'view_engine.c']]],

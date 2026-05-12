@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"globals_t.html":[15,1,0,19],
 "globals_type.html":[15,1,3],
 "globals_u.html":[15,1,0,20],
 "globals_v.html":[15,1,0,21],
@@ -42,7 +43,7 @@ var NAVTREEINDEX7 =
 "index.html#fields-1":[4,0,1],
 "index.html#installment-loan-calculations-1":[4,1,0],
 "index.html#lf---a-regular-expression-file-finder-2":[8],
-"index.html#menu-description-file":[3],
+"index.html#menu-description-file-1":[3],
 "index.html#other-c-menu-documentation-1":[0],
 "index.html#rsh---a-root-shell-alternative-2":[7],
 "index.html#rustlings-source-1":[5,0],

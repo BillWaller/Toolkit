@@ -7,7 +7,7 @@ var searchData=
   ['delete_20by_20inode_4',['Menu - What Happened to Delete by Inode',['../d9/de4/a01346.html#menu---what-happened-to-delete-by-inode',1,'']]],
   ['delimiters_5',['Delimiters',['../de/da0/a01341.html#form-field-delimiters',1,'Form Field Delimiters'],['../d9/de4/a01346.html#menu-form---field-delimiters',1,'Menu Form - Field Delimiters']]],
   ['demand_20paged_20virtual_20address_20space_6',['Demand Paged Virtual Address Space',['../d7/d57/a01348.html#demand-paged-virtual-address-space',1,'']]],
-  ['description_20file_7',['Description File',['../d5/da0/a01342.html#description-file',1,'Description File'],['../index.html#description-file-1',1,'Description File'],['../index.html#menu-description-file',1,'Menu Description File'],['../d7/d57/a01348.html#sample-menu-description-file',1,'Sample Menu Description File']]],
+  ['description_20file_7',['Description File',['../d5/da0/a01342.html#description-file',1,'Description File'],['../index.html#description-file-1',1,'Description File'],['../d5/da0/a01342.html#menu-description-file',1,'Menu Description File'],['../index.html#menu-description-file-1',1,'Menu Description File'],['../d7/d57/a01348.html#sample-menu-description-file',1,'Sample Menu Description File']]],
   ['description_20file_20format_8',['Menu Description File Format',['../de/da0/a01341.html#menu-description-file-format',1,'']]],
   ['design_20philosophy_20and_20optimizations_9',['Design Philosophy and Optimizations',['../de/d6c/a01349.html#design-philosophy-and-optimizations',1,'']]],
   ['desktop_20files_10',['C-Menu Desktop Files',['../d1/dcd/a01351.html#c-menu-desktop-files',1,'']]],

@@ -31,7 +31,7 @@ var NAVTREE =
         [ "C-Menu Start-up Options", "index.html#c-menu-start-up-options-1", null ]
       ] ],
       [ "C-Menu Menu", "index.html#c-menu-menu-1", null ],
-      [ "Menu Description File", "index.html#menu-description-file", [
+      [ "Menu Description File", "index.html#menu-description-file-1", [
         [ "Sub-Menus", "index.html#sub-menus-1", null ]
       ] ],
       [ "C-Menu Form", "index.html#c-menu-form-1", [
@@ -427,7 +427,7 @@ var NAVTREEINDEX =
 "d9/d5b/a01127.html#a964fa61be5e30597c14ae6b1e24a7994a868fc405cf495f2b0b8a939b4c471d80",
 "dd/d95/a01247.html#a7906e9353c8042af2eff087719123eea",
 "de/da0/a01341.html#menu-description-file-format",
-"globals_type.html"
+"globals_t.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
