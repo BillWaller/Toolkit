@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['scriou_2ec_0',['scriou.c',['../d9/d65/a01145.html',1,'']]],
-  ['sig_2ec_1',['sig.c',['../d8/dbf/a01109.html',1,'']]],
-  ['snippets_2emd_2',['snippets.md',['../d8/d27/a01043.html',1,'']]],
-  ['stripansi_2ec_3',['stripansi.c',['../d0/dc8/a01124.html',1,'']]]
+  ['readme_2emd_0',['README.md',['../d5/d67/a01070.html',1,'']]],
+  ['roadmap_2emd_1',['ROADMAP.md',['../de/d9e/a01061.html',1,'']]],
+  ['rsh_2ec_2',['rsh.c',['../d2/df3/a01085.html',1,'']]]
 ];

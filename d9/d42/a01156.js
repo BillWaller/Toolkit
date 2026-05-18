@@ -1,14 +1,20 @@
 var a01156 =
 [
-    [ "field_editor", "d9/d42/a01156.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
-    [ "form_display_field", "d9/d42/a01156.html#gabd1710f59277202b0a58f840d4da322e", null ],
-    [ "form_display_field_n", "d9/d42/a01156.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
-    [ "form_fmt_field", "d9/d42/a01156.html#ga07a8d9311c88786e7310fef638d34a41", null ],
-    [ "form_validate_field", "d9/d42/a01156.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
-    [ "is_valid_date", "d9/d42/a01156.html#ga353546f4d99ef7ec908d371187f033de", null ],
-    [ "is_valid_time", "d9/d42/a01156.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
-    [ "left_justify", "d9/d42/a01156.html#ga425021d4c87474159a36d395e4dcdf65", null ],
-    [ "mk_filler", "d9/d42/a01156.html#gaac069c6892f64ea6307044a92b179faa", null ],
-    [ "numeric", "d9/d42/a01156.html#ga18db59e4c79e823f79310378183ac25c", null ],
-    [ "right_justify", "d9/d42/a01156.html#ga21ebe9713e3b003715a7a2c3b64cbf55", null ]
+    [ "box2_new", "d9/d42/a01156.html#ga3b519e8501ce2a37d60f07262f9546bc", null ],
+    [ "box_new", "d9/d42/a01156.html#ga38d50d5b402b7b2328874329ae003d7d", null ],
+    [ "cbox", "d9/d42/a01156.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
+    [ "cbox2", "d9/d42/a01156.html#gadf3e1d675e04bb6827d598ebbcca0d4a", null ],
+    [ "destroy_curses", "d9/d42/a01156.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "d9/d42/a01156.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "d9/d42/a01156.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "d9/d42/a01156.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "view_full_screen_resize", "d9/d42/a01156.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_win_resize", "d9/d42/a01156.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
+    [ "win2_new", "d9/d42/a01156.html#gac986c6794183f92e962912c5d2f9a924", null ],
+    [ "win_del", "d9/d42/a01156.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
+    [ "win_init_attrs", "d9/d42/a01156.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "d9/d42/a01156.html#gad53d9343e97260272389adc8131eedc5", null ],
+    [ "win_redraw", "d9/d42/a01156.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "d9/d42/a01156.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "d9/d42/a01156.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
 ];

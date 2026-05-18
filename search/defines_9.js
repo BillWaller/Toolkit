@@ -5,7 +5,7 @@ var searchData=
   ['max_2',['max',['../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f',1,'cm.h']]],
   ['max_5fargs_3',['MAX_ARGS',['../d8/db9/a00725.html#a29b7451465deac204c5f7cb1f9c6e1fc',1,'cm.h']]],
   ['max_5fdepth_4',['MAX_DEPTH',['../d8/db9/a00725.html#a5db49eeef5c9bb774f02996f684df238',1,'cm.h']]],
-  ['max_5fframes_5',['MAX_FRAMES',['../d8/dbf/a01109.html#a5b4055201d2d8170e179b1ceaa438b9c',1,'sig.c']]],
+  ['max_5fframes_5',['MAX_FRAMES',['../d0/d39/a01112.html#a5b4055201d2d8170e179b1ceaa438b9c',1,'sig.c']]],
   ['max_5fmenu_5flines_6',['MAX_MENU_LINES',['../df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1',1,'menu.h']]],
   ['max_5fpick_5fobjs_7',['MAX_PICK_OBJS',['../dd/dd8/a00719.html#ae582f6dcc163a8e2ed0f9c10647a9423',1,'common.h']]],
   ['max_5fwide_5flen_8',['MAX_WIDE_LEN',['../dd/dd8/a00719.html#a0bedd31d9b9bfd4ac1906ebb99ff4101',1,'common.h']]],
