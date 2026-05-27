@@ -1,10 +1,11 @@
 var a01230 =
 [
-    [ "choice_letter", "d0/d58/a01230.html#ad244e20485560be4e557528c8fa1321c", null ],
-    [ "choice_text", "d0/d58/a01230.html#a1588ee0394f3e3076e6b03b8afab5cc9", null ],
-    [ "command_str", "d0/d58/a01230.html#a5caaf06576322b837ebfbce757377455", null ],
-    [ "command_type", "d0/d58/a01230.html#acce58adaa7cf043f8f905d3d69a7f3a0", null ],
-    [ "letter_pos", "d0/d58/a01230.html#a928bd3d2b73020b5529f9da018ce5e2f", null ],
-    [ "raw_text", "d0/d58/a01230.html#a514130f5368bc6edaa5928f08be2bd4f", null ],
-    [ "type", "d0/d58/a01230.html#a6d158be9cbd3c4180df373ddf462330d", null ]
+    [ "accept_s", "d0/d58/a01230.html#a259801946ce7b016e71fee1b90139fcf", null ],
+    [ "col", "d0/d58/a01230.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
+    [ "display_s", "d0/d58/a01230.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
+    [ "ff", "d0/d58/a01230.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
+    [ "filler_s", "d0/d58/a01230.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
+    [ "input_s", "d0/d58/a01230.html#a977c015992c0cf877017eff6326f1979", null ],
+    [ "len", "d0/d58/a01230.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
+    [ "line", "d0/d58/a01230.html#a04e622df503776af67f8abd30d97a4a2", null ]
 ];

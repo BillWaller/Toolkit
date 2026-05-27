@@ -1,5 +1,6 @@
 var a01198 =
 [
-    [ "n", "d0/d32/a01198.html#ac4631c83bda44884c03470b9ed22cf7e", null ],
-    [ "v", "d0/d32/a01198.html#aa044ab06de65e1e9ecc89b07f3d71f71", null ]
+    [ "bg", "d0/d32/a01198.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
+    [ "fg", "d0/d32/a01198.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
+    [ "pair_id", "d0/d32/a01198.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
 ];

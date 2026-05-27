@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../d5/d67/a01070.html',1,'']]],
-  ['roadmap_2emd_1',['ROADMAP.md',['../de/d9e/a01061.html',1,'']]],
-  ['rsh_2ec_2',['rsh.c',['../d2/df3/a01085.html',1,'']]]
+  ['scriou_2ec_0',['scriou.c',['../db/d17/a01148.html',1,'']]],
+  ['sig_2ec_1',['sig.c',['../d0/d39/a01112.html',1,'']]],
+  ['snippets_2emd_2',['snippets.md',['../d8/d27/a01043.html',1,'']]],
+  ['stripansi_2ec_3',['stripansi.c',['../d9/d5b/a01127.html',1,'']]]
 ];
