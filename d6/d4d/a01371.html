@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: lf notes</title>
+<title>C-Menu: C-Menu ROADMAP</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -16,7 +16,8 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -109,225 +110,82 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d6/d4d/a01371.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">lf notes </div></div>
+  <div class="headertitle"><div class="title">C-Menu ROADMAP </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="lf-notes"></a></p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"># @name findperf</div>
-<div class="line"># @desc Compare the performance of fd, find, and lf with -H -L options</div>
-<div class="line"># @usage findperf &lt;directory&gt;</div>
-<div class="line"> </div>
-<div class="line">if [ -z &quot;$1&quot; ]; then</div>
-<div class="line">    echo &quot;Usage: $0 &lt;directory&gt;&quot;</div>
-<div class="line">    exit 1</div>
-<div class="line">fi</div>
-<div class="line">echo</div>
-<div class="line">echo</div>
-<div class="line">echo fd: -H inlude hidden files, -L follow links, -I no ignore files</div>
-<div class="line">files=&quot;$(/usr/bin/time -f &quot;%C (%euser)&quot; fd . --full-path $1 -H -L -I | wc -l)&quot;</div>
-<div class="line">echo &quot;$files&quot; files</div>
-<div class="line">echo</div>
-<div class="line">echo find: -H inlude hidden files, -L follow links</div>
-<div class="line">files=&quot;$(/usr/bin/time -f &quot;%C (%euser)&quot; find -H -L $1 | wc -l)&quot;</div>
-<div class="line">echo &quot;$files&quot; files \&zwj;(may need to subtract 1 for base path\&zwj;)</div>
-<div class="line">echo</div>
-<div class="line">echo lf: -H inlude hidden files, -L follow links, -T threads</div>
-<div class="line">files=&quot;$(/usr/bin/time -f &#39;%C (%euser)&#39; lf $1 -H -L -T 6 | wc -l)&quot;</div>
-<div class="line">echo &quot;$files&quot; files</div>
-<div class="line">echo</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="lf-without-mmap"></a>
-lf Without MMAP</h1>
-<h2 class="doxsection"><a class="anchor" id="test-1-without-mmap"></a>
-Test 1 Without MMAP</h2>
-<div class="fragment"><div class="line">bill@bw1(1)src▶findperf /home/bill</div>
-</div><!-- fragment --><p>Output:</p>
-<p>fd: -H inlude hidden files, -L follow links, -I no ignore files fd . &ndash;full-path /home/bill -H -L -I (0.10user) 347608 files</p>
-<p>find: -H inlude hidden files, -L follow links find -H -L /home/bill (0.70user) 347609 files (may need to subtract 1 for base path)</p>
-<p>lf: -H inlude hidden files, -L follow links, -T threads lf /home/bill -H -L -T 6 (0.21user) 347608 files</p>
-<h2 class="doxsection"><a class="anchor" id="test-2-without-mmap"></a>
-Test 2 Without MMAP</h2>
-<div class="fragment"><div class="line">bill@bw1(1)src▶findperf rustlings</div>
-</div><!-- fragment --><p>fd: -H inlude hidden files, -L follow links, -I no ignore files fd . &ndash;full-path rustlings -H -L -I (0.01user) 4648 files</p>
-<p>find: -H inlude hidden files, -L follow links find -H -L rustlings (0.01user) 4649 files (may need to subtract 1 for base path)</p>
-<p>lf: -H inlude hidden files, -L follow links, -T threads lf rustlings -H -L -T 6 (0.00user) 4648 files</p>
-<h1 class="doxsection"><a class="anchor" id="lf-with-mmap"></a>
-lf With MMAP</h1>
-<h2 class="doxsection"><a class="anchor" id="test-1"></a>
-Test 1</h2>
-<div class="fragment"><div class="line">bill@bw1(1)src▶findperf /home/bill</div>
-</div><!-- fragment --><p>fd: -H inlude hidden files, -L follow links, -I no ignore files fd . &ndash;full-path /home/bill -H -L -I (0.10user) 347615 files</p>
-<p>find: -H inlude hidden files, -L follow links find -H -L /home/bill (0.70user) 347616 files (may need to subtract 1 for base path)</p>
-<p>lf: -H inlude hidden files, -L follow links, -T threads lf /home/bill -H -L -T 6 (0.26user) 324825 files</p>
-<div class="fragment"><div class="line">lf is short 22790 files</div>
-</div><!-- fragment --><div class="fragment"><div class="line">bill@bw1(2)src▶lf rustlings -H -L -T 6 | sort &gt;lf-without-mmap.s</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="test-2"></a>
-Test 2</h2>
-<div class="fragment"><div class="line">bill@bw1(1)src▶findperf rustlings</div>
-</div><!-- fragment --><p>fd: -H inlude hidden files, -L follow links, -I no ignore files fd . &ndash;full-path rustlings -H -L -I (0.01user) 4648 files</p>
-<p>find: -H inlude hidden files, -L follow links find -H -L rustlings (0.01user) 4649 files (may need to subtract 1 for base path)</p>
-<p>lf: -H inlude hidden files, -L follow links, -T threads lf rustlings -H -L -T 6 (0.00user) 4637 files</p>
-<div class="fragment"><div class="line">lf -s short 11 files</div>
-</div><!-- fragment --><div class="fragment"><div class="line">bill@bw1(2)src▶lf rustlings -H -L -T 6 | sort &gt;lf-with-mmap.s</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="lf-rustlings"></a>
-lf rustlings</h1>
-<div class="fragment"></div><!-- fragment --><div class="fragment"><div class="line">--- lf-without-mmap.s 2026-05-14 22:33:33.730073453 -0500</div>
-<div class="line">+++ lf-with-mmap.s 2026-05-14 22:30:08.726299272 -0500</div>
-<div class="line">@@ -308,2 +307,0 @@</div>
-<div class="line">-rustlings/target/debug/clippy1</div>
-<div class="line">-rustlings/target/debug/clippy1.d</div>
-<div class="line">@@ -631 +628,0 @@</div>
-<div class="line">-rustlings/target/debug/enums2</div>
-<div class="line">@@ -637 +633,0 @@</div>
-<div class="line">-rustlings/target/debug/errors4</div>
-<div class="line">@@ -4564 +4559,0 @@</div>
-<div class="line">-rustlings/target/debug/intro1</div>
-<div class="line">@@ -4570 +4564,0 @@</div>
-<div class="line">-rustlings/target/debug/iterators3</div>
-<div class="line">@@ -4597 +4590,0 @@</div>
-<div class="line">-rustlings/target/debug/primitive_types5.d</div>
-<div class="line">@@ -4610 +4602,0 @@</div>
-<div class="line">-rustlings/target/debug/strings2</div>
-<div class="line">@@ -4618 +4609,0 @@</div>
-<div class="line">-rustlings/target/debug/structs2</div>
-<div class="line">@@ -4632 +4622,0 @@</div>
-<div class="line">-rustlings/target/debug/variables2</div>
-<div class="line">@@ -4642 +4631,0 @@</div>
-<div class="line">-rustlings/target/debug/vecs1</div>
-</div><!-- fragment --><div class="fragment"><div class="line">cd rustlings/target/debug</div>
-<div class="line">ls -l</div>
-</div><!-- fragment --><p>Output</p>
-<div class="fragment"><div class="line">drwxr-xr-x bill bill 4.0 KB Mon Apr  6 16:08:43 2026  build</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Fri Apr 24 15:28:29 2026  clippy1</div>
-<div class="line">.rw-r--r-- bill bill  95 B  Fri Apr 24 15:28:29 2026  clippy1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:29 2026  clippy2</div>
-<div class="line">.rw-r--r-- bill bill  95 B  Fri Apr 24 15:28:29 2026  clippy2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Fri Apr 24 15:28:29 2026  clippy3</div>
-<div class="line">.rw-r--r-- bill bill  95 B  Fri Apr 24 15:28:29 2026  clippy3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:28 2026  cow1</div>
-<div class="line">.rw-r--r-- bill bill  97 B  Fri Apr 24 15:28:28 2026  cow1.d</div>
-<div class="line">drwxr-xr-x bill bill  36 KB Thu Apr 30 17:12:40 2026  deps</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Sun Apr 26 12:42:42 2026  enums1</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Sun Apr 26 12:42:42 2026  enums1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Sun Apr 26 12:45:42 2026  enums2</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Sun Apr 26 12:45:25 2026  enums2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Sun Apr 26 22:21:15 2026  enums3</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Fri Apr 24 15:28:23 2026  enums3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:25 2026  errors1</div>
-<div class="line">.rw-r--r-- bill bill 103 B  Fri Apr 24 15:28:25 2026  errors1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:25 2026  errors4</div>
-<div class="line">.rw-r--r-- bill bill 103 B  Fri Apr 24 15:28:25 2026  errors4.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:26 2026  errors6</div>
-<div class="line">.rw-r--r-- bill bill 103 B  Fri Apr 24 15:28:26 2026  errors6.d</div>
-<div class="line">drwxr-xr-x bill bill 4.0 KB Mon Apr  6 16:08:43 2026  examples</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:49:56 2026  functions1</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:49:56 2026  functions1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Wed Apr  8 12:50:33 2026  functions2</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:50:33 2026  functions2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:51:30 2026  functions3</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:51:30 2026  functions3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:53:58 2026  functions4</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:53:58 2026  functions4.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:54:41 2026  functions5</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:54:41 2026  functions5.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:26 2026  generics2</div>
-<div class="line">.rw-r--r-- bill bill 101 B  Fri Apr 24 15:28:26 2026  generics2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Mon Apr 27 16:25:47 2026  hashmaps1</div>
-<div class="line">.rw-r--r-- bill bill 101 B  Mon Apr 27 16:24:52 2026  hashmaps1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Thu Apr 30 12:16:25 2026  hashmaps2</div>
-<div class="line">.rw-r--r-- bill bill 101 B  Fri Apr 24 15:28:25 2026  hashmaps2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Thu Apr 30 17:02:57 2026  hashmaps3</div>
-<div class="line">.rw-r--r-- bill bill 101 B  Fri Apr 24 15:28:25 2026  hashmaps3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:55:41 2026  if1</div>
-<div class="line">.rw-r--r-- bill bill  83 B  Wed Apr  8 12:55:41 2026  if1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:58:45 2026  if2</div>
-<div class="line">.rw-r--r-- bill bill  83 B  Wed Apr  8 12:57:09 2026  if2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:49:33 2026  if3</div>
-<div class="line">.rw-r--r-- bill bill  83 B  Fri Apr 17 07:49:33 2026  if3.d</div>
-<div class="line">drwxr-xr-x bill bill  12 KB Thu Apr 30 17:11:34 2026  incremental</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:23 2026  intro1</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Mon Apr  6 16:08:43 2026  intro1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:23 2026  intro2</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Mon Apr  6 16:11:06 2026  intro2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:28 2026  iterators1</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Fri Apr 24 15:28:28 2026  iterators1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:28 2026  iterators3</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Fri Apr 24 15:28:28 2026  iterators3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Mon Apr 27 16:09:29 2026  modules1</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 16:09:29 2026  modules1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Mon Apr 27 16:20:40 2026  modules2</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 16:20:08 2026  modules2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Mon Apr 27 16:23:08 2026  modules3</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 16:22:52 2026  modules3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 08:11:29 2026  move_semantics1</div>
-<div class="line">.rw-r--r-- bill bill 119 B  Fri Apr 17 08:11:29 2026  move_semantics1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Sat Apr 18 07:22:27 2026  move_semantics2</div>
-<div class="line">.rw-r--r-- bill bill 119 B  Sat Apr 18 07:18:49 2026  move_semantics2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:23 2026  move_semantics3</div>
-<div class="line">.rw-r--r-- bill bill 119 B  Fri Apr 24 13:54:27 2026  move_semantics3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 14:23:59 2026  move_semantics4</div>
-<div class="line">.rw-r--r-- bill bill 119 B  Fri Apr 24 13:54:31 2026  move_semantics4.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Fri Apr 24 14:27:50 2026  move_semantics5</div>
-<div class="line">.rw-r--r-- bill bill 119 B  Fri Apr 24 14:27:23 2026  move_semantics5.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:51:36 2026  primitive_types1</div>
-<div class="line">.rw-r--r-- bill bill 122 B  Fri Apr 17 07:51:36 2026  primitive_types1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:53:39 2026  primitive_types2</div>
-<div class="line">.rw-r--r-- bill bill 122 B  Fri Apr 17 07:53:34 2026  primitive_types2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:54:16 2026  primitive_types3</div>
-<div class="line">.rw-r--r-- bill bill 122 B  Fri Apr 17 07:54:16 2026  primitive_types3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:55:01 2026  primitive_types4</div>
-<div class="line">.rw-r--r-- bill bill 122 B  Fri Apr 17 07:54:21 2026  primitive_types4.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Fri Apr 17 07:56:04 2026  primitive_types5</div>
-<div class="line">.rw-r--r-- bill bill 122 B  Fri Apr 17 07:56:04 2026  primitive_types5.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:56:55 2026  primitive_types6</div>
-<div class="line">.rw-r--r-- bill bill 122 B  Fri Apr 17 07:56:15 2026  primitive_types6.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:50:39 2026  quiz1</div>
-<div class="line">.rw-r--r-- bill bill  89 B  Fri Apr 17 07:49:41 2026  quiz1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Thu Apr 30 17:12:39 2026  quiz2</div>
-<div class="line">.rw-r--r-- bill bill  89 B  Fri Apr 24 15:28:25 2026  quiz2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:27 2026  quiz3</div>
-<div class="line">.rw-r--r-- bill bill  89 B  Fri Apr 24 15:28:27 2026  quiz3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:28 2026  rc1</div>
-<div class="line">.rw-r--r-- bill bill  95 B  Fri Apr 24 15:28:28 2026  rc1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Mon Apr 27 11:31:51 2026  strings1</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 11:31:51 2026  strings1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.2 MB Mon Apr 27 11:37:34 2026  strings2</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 11:37:30 2026  strings2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Mon Apr 27 12:40:48 2026  strings3</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 12:40:48 2026  strings3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.4 MB Mon Apr 27 12:45:46 2026  strings4</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Mon Apr 27 12:45:46 2026  strings4.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 22:42:23 2026  structs1</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Fri Apr 24 15:25:51 2026  structs1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Sun Apr 26 09:54:58 2026  structs2</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Fri Apr 24 15:28:24 2026  structs2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Sun Apr 26 12:41:48 2026  structs3</div>
-<div class="line">.rw-r--r-- bill bill  98 B  Fri Apr 24 15:28:24 2026  structs3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:27 2026  tests1</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Fri Apr 24 15:28:27 2026  tests1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:27 2026  tests2</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Fri Apr 24 15:28:27 2026  tests2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:27 2026  tests3</div>
-<div class="line">.rw-r--r-- bill bill  92 B  Fri Apr 24 15:28:27 2026  tests3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 24 15:28:26 2026  traits2</div>
-<div class="line">.rw-r--r-- bill bill  95 B  Fri Apr 24 15:28:26 2026  traits2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Mon Apr  6 16:33:15 2026  variables1</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Mon Apr  6 16:12:11 2026  variables1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Mon Apr  6 17:48:52 2026  variables2</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Mon Apr  6 17:48:52 2026  variables2.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Mon Apr  6 17:49:47 2026  variables3</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Mon Apr  6 17:49:47 2026  variables3.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:46:18 2026  variables4</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:46:18 2026  variables4.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:47:37 2026  variables5</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:47:37 2026  variables5.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Wed Apr  8 12:49:12 2026  variables6</div>
-<div class="line">.rw-r--r-- bill bill 104 B  Wed Apr  8 12:49:08 2026  variables6.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 07:59:28 2026  vecs1</div>
-<div class="line">.rw-r--r-- bill bill  89 B  Fri Apr 17 07:59:28 2026  vecs1.d</div>
-<div class="line">.rwxr-xr-x bill bill 4.1 MB Fri Apr 17 08:10:02 2026  vecs2</div>
-<div class="line">.rw-r--r-- bill bill  89 B  Fri Apr 17 08:10:02 2026  vecs2.d</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="c-menu-roadmap"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md029-tasks-to-complete-before-030"></a>
+0.2.9 Tasks to Complete before 0.3.0</h1>
+<p>Before we added the Ncurses virtual pad and line numbers, C-Menu <a class="el" href="../../d7/d88/a01255.html">View</a>'s window would resize automatically if the user decreased the size of the terminal window. That capability was broken by adding the pad, the line number window, and a separate command line window. Now, we must go back and resize all four windows instead of two. It's not just a matter of resizing but also sequencing the resizing and redrawing of the windows to avoid flickering and other visual artifacts. This is a non-trivial task, but it is necessary to ensure that C-Menu <a class="el" href="../../d7/d88/a01255.html">View</a> remains user-friendly and visually appealing.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md030-on-the-horizon"></a>
+0.3.0 On the Horizon</h1>
+<h2 class="doxsection"><a class="anchor" id="asynchronous-communication-and-serialization"></a>
+Asynchronous Communication and Serialization</h2>
+<ul>
+<li>Currently, C-Menu can communicate via command-line arguments, pipes, or files, but a facility is needed for handling asynchronous submission over a network. One fairly simple way to get started would be to set up an MQTT broker.</li>
+<li>As C-Menu continues to employ more sophisticated technologies, the old text file configurations are wearing thin. I would like to move the information in the description files to a more structured format, such as JSON Forms. It looks like JSON is the standard, but I would like to have some input from users.</li>
+<li>Why not develop a C-Menu system to manage IOT devices. IOT uses M2M communication, generally over MQTT.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md029-wrap-up"></a>
+0.2.9 Wrap-Up</h1>
+<ul>
+<li><a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d7/d88/a01255.html">View</a> Pop-ups. <a class="el" href="../../d7/d88/a01255.html">View</a> currently uses a <a class="el" href="../../d7/dbf/a01239.html">Form</a> pop-up for entering file names. That capability is being polished and expanded to be more flexible and user-friendly. The idea is to have simple function calls with minimal parameters to easily create pop-up's. Once we have that debugged and working well, we will expand the ability to create pop-ups in the description files.</li>
+<li><a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d7/d88/a01255.html">View</a>, and CKeys have been combined into a single executable. The individual executables were running about 150K, and the single executable is only 158K. The individual executables have been removed from the repository. You can create form, pick, view, and ckeys as symbolic links to "menu" and from the command line, they will work exactly as the individual executables did before.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md029---pre-release"></a>
+0.2.9 - Pre-Release</h1>
+<p><a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d7/d88/a01255.html">View</a>, and General features are still being developed and de-bugged.When the features are ready, the version will be updated to 1.0.0 and the roadmap will be updated with the new features and enhancements.</p>
+<p>There are a few more features that will be added prior to the 1.0.0 release, but they are not yet finalized and may change based on user feedback and testing.</p>
+<h2 class="doxsection"><a class="anchor" id="form-1"></a>
+Form</h2>
+<ul>
+<li><a class="el" href="../../d7/dbf/a01239.html">Form</a> Pop-ups. <a class="el" href="../../d7/d88/a01255.html">View</a> currently uses a <a class="el" href="../../d7/dbf/a01239.html">Form</a> pop-up for entering file names, but that capability needs to be polished and expanded to be more flexible and user-friendly. The idea is to have a simple function call with minimal parameters to create a <a class="el" href="../../d7/dbf/a01239.html">Form</a> pop-up. The function should default to sane values, but allow styling and layout to be customizable.</li>
+<li>Currently, data can be communicated via command-line arguments, pipes, or files, but a facility is needed for handling asynchronous submission over a network. This will be added in a future release.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="pick"></a>
+Pick</h2>
+<ul>
+<li><a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> pop-ups and drop-downs. Pic currently supports communication via command-line arguments, pipes, and files, but it needs a more user-friendly interface for selecting options. The idea is to have a simple function call with minimal parameters to create a <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> pop-up or drop-down. The function should default to sane values, but allow styling and layout to be customizable.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="exercises---example-use-cases"></a>
+Exercises - Example Use Cases</h2>
+<ul>
+<li>This may be more of a learning than a teaching tool. The idea is to have a set of exercises that demonstrate how to use the various features of C-Menu in different scenarios. These exercises will be designed to be simple and easy to follow, and will cover a range of use cases from basic to advanced. While developing these exercises, We, I and any collaborators who volunteer to help, will be looking for feedback from users to ensure that they are useful and relevant. There is no doubt that developing these exercises will expose areas of C-Menu that need improvement, and we will be using that feedback to make C-Menu better for everyone.</li>
+</ul>
+<p>Ideas for exercises include:</p>
+<ul>
+<li>UI for sqlite3 General Ledger, A/R, or Payables</li>
+<li>UI for NetworkManager like nmtui</li>
+<li>UI for systemctl, journalctl, and other systemd utilities</li>
+<li>UI for System Troubleshooting and Maintenance</li>
+<li>UI for Update-Alternatives</li>
+<li>UI for Rescue CD</li>
+<li>UI for Linux From Scratch Installation</li>
+<li>Plugins for Neovim, Vim, Emacs, and other text editors</li>
+<li>UI for Server and Embedded System Management</li>
+<li>UI for managing IOT devices</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="view-1"></a>
+View</h2>
+<ul>
+<li><a class="el" href="../../d7/d88/a01255.html">View</a> is looking pretty good at this point. The line number table was a major improvement, and not just for the pretty display. In conjunction with memory mapped file I-O, the line number table dramatically simplifies internal navigation and boosts performance to obscene levels.</li>
+</ul>
+<p>There is one improvement I would like to make, and that is to add multi-threading support to populate the line number table in the background while the user is viewing the file. That would involve creating a separate thread with a separate buffer that won't interfere with the main thread's use of it's buffer. That should be no problem as both buffers would be read-only. No one has complained, so this may be vanity work, but it would be a fun challenge.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md100---initial-release"></a>
+1.0.0 - Initial Release</h1>
+<h2 class="doxsection"><a class="anchor" id="general"></a>
+General</h2>
+<ul>
+<li>JSON - Look at MaterialUI</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md110---feature-enhancements"></a>
+1.1.0 - Feature Enhancements</h1>
+<h2 class="doxsection"><a class="anchor" id="general-1"></a>
+General</h2>
+<ul>
+<li>Consider a snap-on GUI front end. </li>
+</ul>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Running Valgrind Against C-Menu</title>
+<title>C-Menu: Performance</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,78 +110,50 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d8/dbe/a01370.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Running Valgrind Against C-Menu </div></div>
+  <div class="headertitle"><div class="title">Performance </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="running-valgrind-against-c-menu"></a></p>
-<p>The "grind" is pronounced with a short 'i' &ndash; ie. "grinned" (rhymes with send, mend, tinned, friend, spend, lend, bend, fend, blend").
-
-This document explains how to run &lt;a href="<a href="https://valgrind.org/">https://valgrind.org/</a>" &gt;Valgrind&lt;/a&gt; against
-C-Menu and what to expect in its output.
-
-&lt;hr&gt;
-
-@section background Background
-
-Valgrind's &lt;tt&gt;--show-leak-kinds=all&lt;/tt&gt; mode reports four categories of memory at
-program exit:
-
-&lt;table class="markdownTable"&gt;
-  &lt;tr class="markdownTableHead"&gt;    &lt;th class="markdownTableHeadNone"&gt; Category  </p>
-<p>Meaning  </p>
-<p><b>definitely lost</b>  </p>
-<p>Memory that can no longer be reached — a true leak.  </p>
-<p><b>indirectly lost</b>  </p>
-<p>Memory reachable only through a definitely-lost block.  </p>
-<p><b>possibly lost</b>  </p>
-<p>Heuristic: may or may not be reachable.  </p>
-<p><b>still reachable</b>  </p>
-<p>Memory still pointed to by a live pointer at exit. Often intentional (library caches, global singletons, etc.).  </p>
-<p>C-Menu aims for <b>zero</b> <span class="tt">definitely lost</span> / <span class="tt">indirectly lost</span> / <span class="tt">possibly lost</span> bytes, and suppresses the known ncurses <span class="tt">still reachable</span> allocations that the ncurses library intentionally retains as global caches.</p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="suppression-file"></a>
-Suppression File</h1>
-<p><span class="tt">src/valgrind.supp</span> suppresses the following known-harmless ncurses <span class="tt">still reachable</span> records (all rooted in frames such as <span class="tt">_nc_first_db</span>, <span class="tt">_nc_setupterm</span>, <span class="tt">_nc_acs_map</span>, and <span class="tt">update_getenv</span> inside <span class="tt">libncursesw</span> / <span class="tt">libtinfo</span>). These allocations are reachable through ncurses global state and are freed by the OS on process exit; suppressing them keeps Valgrind output actionable.</p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="how-to-run"></a>
-How to Run</h1>
-<h2 class="doxsection"><a class="anchor" id="using-the-makefile-target-recommended"></a>
-Using the Makefile target (recommended)</h2>
-<div class="fragment"><div class="line">cd C-Menu/src</div>
-<div class="line">make valgrind</div>
-</div><!-- fragment --><p>This builds <span class="tt"><a class="el" href="../../df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></span> (if needed) and then runs:</p>
-<div class="fragment"><div class="line">valgrind --leak-check=full --show-leak-kinds=all \</div>
-<div class="line">         --leak-resolution=high --track-origins=yes \</div>
-<div class="line">         --suppressions=valgrind.supp \</div>
-<div class="line">         ./menu</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="running-manually"></a>
-Running manually</h2>
-<div class="fragment"><div class="line">cd C-Menu/src</div>
-<div class="line">valgrind --leak-check=full --show-leak-kinds=all \</div>
-<div class="line">         --leak-resolution=high --track-origins=yes \</div>
-<div class="line">         --suppressions=valgrind.supp \</div>
-<div class="line">         ./menu [your-menu-args]</div>
-</div><!-- fragment --><p>You can substitute <span class="tt"><a class="el" href="../../d2/d94/a00716.html#adb98384f3771d341017b7b3add874515">form</a></span>, <span class="tt"><a class="el" href="../../db/d7c/a00722.html#aa0984c16af72bfdf57c5d88de1d314f9">pick</a></span>, <span class="tt"><a class="el" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a></span>, or <span class="tt">ckeys</span> in place of <span class="tt"><a class="el" href="../../df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></span>.</p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="expected-output"></a>
-Expected Output</h1>
-<p>With the suppression file applied, Valgrind should report:</p>
-<div class="fragment"><div class="line">LEAK SUMMARY:</div>
-<div class="line">   definitely lost: 0 bytes in 0 blocks</div>
-<div class="line">   indirectly lost: 0 bytes in 0 blocks</div>
-<div class="line">     possibly lost: 0 bytes in 0 blocks</div>
-<div class="line">   still reachable: 0 bytes in 0 blocks   (suppressed)</div>
-<div class="line">        suppressed: N bytes in N blocks</div>
-<div class="line">ERROR SUMMARY: 0 errors from 0 contexts (suppressed: N from N)</div>
-</div><!-- fragment --><p>Any non-zero <span class="tt">definitely lost</span>, <span class="tt">indirectly lost</span>, or <span class="tt">possibly lost</span> values indicate a real leak that should be investigated.</p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="reference"></a>
-Reference</h1>
+<div class="textblock"><p><a class="anchor" id="autotoc_md109"></a> <img src="../../Performance.png" alt="" class="inline" title="C-Menu Performance"/>    </p>
+<p><b><em>NEW</em></b> C-Menu Installation Guide</p>
+<p><a class="el" href="../../da/dab/a01362.html" title="C-Menu-UG">C-Menu User Guide</a></p>
+<p><a class="el" href="../../dd/d0c/a01368.html" title="C-Menu - A User Interface Toolkit">C-Menu Installation Guide</a></p>
+<h1 class="doxsection"><a class="anchor" id="design-philosophy-and-optimizations"></a>
+Design Philosophy and Optimizations</h1>
+<p>To build truly outstanding applications with C-Menu, it is essential to understand the design philosophy and optimizations that C-Menu provides and how to leverage them.</p>
+<p>C-Menu was not meant to replace GUI or Sell-based applications, but to compliment them by providing an alternative to users who demand the performance and efficiency possible with terminal-based interfaces. C-Menu's design philosophy is centered around simplicity, efficiency, and directness.</p>
+<p>C-Menu provides a powerful set of internal functions that allow you to create complex and responsive applications while minimizing the need for external executables or shells. By using C-Menu's internal functions and direct execution capabilities, you can achieve performance levels that are orders of magnitude faster than traditional shell and GUI based menu systems.</p>
+<p>Hard-core, veteran programmers tend to prefer the black screen terminal over flashy GUIs. This is not just a matter of aesthetics, but a reflection of the underlying design philosophy and optimizations that terminal-based applications can provide. Terminal applications often have a more direct and efficient interface to the underlying system, allowing for better performance and greater control over resources.</p>
+<p>Less experienced users prefer a GUI interface, and that is understandable because a raw terminal interface, while powerful, can be terse and unforgiving. Becoming truly proficient with the terminal environment requires a significant investment of time and effort to learn the necessary commands, syntax, and workflows. In contrast, GUI interfaces are generally more intuitive and user-friendly, especially for those who are not familiar with the Unix command-line. A GUI provides visual cues and interactive elements that can make it easier for users to navigate and perform tasks without needing to remember complex commands or syntax.</p>
+<p>C-Menu's design objective is to provide the best of both worlds by combining the speed and efficiency of terminal-based applications with an attractive, intuitive, and user-friendly framework. C-Menu's internal functions and direct execution capabilities allow you to create applications that are fast and responsive, while its menu system provides a more accessible, intuitive, and visually appealing interface.</p>
+<p>With the C-Menu applications you create, intelligent users will discover a new sense of freedom, unbridled by slugish response times that wreck continuity of thought.</p>
+<h2 class="doxsection"><a class="anchor" id="c-menu-launcher"></a>
+C-Menu Launcher</h2>
+<p>When you use C-Menu's Example Application <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, you will notice that most menu selections respond instantaneously with no perceptible delay. It just snaps. That level of optimization is achieved in part by avoiding the overhead and unpredictability of using a shell to execute command lines. C-Menu provides direct execution, which results in start-up times an order of magnitude faster than traditional shell-based menu systems. But, C-Menu has something even faster. You can take C-Menu performance to the next level by letting C-Menu call it's internal functions directly, bypassing the start-up overhead of external executables. <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d7/d88/a01255.html">View</a>, and CKeys are internal functions. In the Example Applications <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, all except the first command line are internal function calls, which execute in nanoseconds compared to the milliseconds it takes to launch an external executable.</p>
+<p>Here's a breakdown of the performance levels you can expect when using C-Menu:</p>
+<p>Relative performance:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Performance level  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadNone">Elapsed Time  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Somewhat Slugish  </td><td class="markdownTableBodyNone">Shell based execution  </td><td class="markdownTableBodyNone">10-100 ms  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Fast  </td><td class="markdownTableBodyNone">Direct execution  </td><td class="markdownTableBodyNone">1-10 ms  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Instantaneous  </td><td class="markdownTableBodyNone">Internal function calls  </td><td class="markdownTableBodyNone">0.001 ms  </td></tr>
+</table>
+<p>At 200 ms response, a user will perceive an application as sluggish. At 20 ms, the user will perceive a smooth and responsive experience. At 1 ms, the user will perceive an instantaneous response. Admittedly, no one really cares whether a program loads in 0.001 ms or 1,000 times slower at 1 ms, but in practical applications iterative processes often take thousands of cycles to complete.</p>
+<p>Sometimes it is expedient to use a shell to execute a command line, such as when you want to use shell features like globbing, variable expansion, or complex command pipelines. In those cases, you can explicitly invoke a shell by including "sh -c" or a shell script on the command line.</p>
+<p>When designing with C-Menu, you should select a method in the following order:</p>
 <ul>
-<li>Suppression file: <a href="../../../src/valgrind.supp"><span class="tt">src/valgrind.supp</span></a></li>
-<li>Sample Valgrind output (before fixes): <a href="../../../src/valgrind.out"><span class="tt">src/valgrind.out</span></a> </li>
+<li>C-Menu internals, such as <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d7/d88/a01255.html">View</a></li>
+<li>direct execution</li>
+<li>shell</li>
 </ul>
-</div></div><!-- contents -->
+<p>If an internal function call will work, use an internal function call. If not, consider direct execution. Finally, if you need features provided by a shell, use a shell. There is nothing wrong with using a shell when it is appropriate, but you should be aware of the performance implications and use it judiciously.</p>
+<p>C-Menu was designed to support internal function calls and direct execution, so it provides the most commonly needed conveniences such as tilde expansion, file location based on the environment, and piped input and output.</p>
+<p>For piped input and output with internal function calls and direct execution, C-Menu allows the specification of providers and receivers for pipe I-O. Instead of using I/O redirection on the command line with pipe symbols, C-Menu provides more controllable alternatives such as "-S" for specifying a command to execute as a provider (source) of input to a form, pick, or view, "-R" for specifying a command to receive standard output from a form, pick, or view, and "-c" for specifying a command to execute with the selected item as an argument. These features allow you to create powerful and flexible menu items that can interact with other applications and scripts in a more controlled and efficient manner.</p>
+<hr  />
+ </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

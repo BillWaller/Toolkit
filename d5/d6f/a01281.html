@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /usr/local/src/C-Menu/src/enterstr.c</title>
+<title>C-Menu: /usr/local/src/C-Menu/src/enterchr.c</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -16,7 +16,8 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -109,63 +110,62 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/d6f/a01281.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterstr.c</div></div>
+  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterchr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
-<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
-<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
-<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
+<div class="fragment"><div class="line">key=$(enterchr <span class="stringliteral">&quot;Are you sure?: &quot;</span>)</div>
+<div class="line"><span class="keywordflow">if</span> [ <span class="stringliteral">&quot;$key&quot;</span> = <span class="stringliteral">&quot;Y&quot;</span> ]; then</div>
+<div class="line">    echo <span class="stringliteral">&quot;You entered Y&quot;</span></div>
+<div class="line"><span class="keywordflow">else</span></div>
+<div class="line">    echo <span class="stringliteral">&quot;You entered N&quot;</span></div>
+<div class="line">fi</div>
 </div><!-- fragment --><div class="fragment"><div class="line"></div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;fcntl.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d5/d3e/a01139.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a id="_a2" name="_a2"></a><a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
-<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d3/ddc/a01142.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line">    <span class="keywordtype">char</span> c = <span class="charliteral">&#39;Y&#39;</span>;</div>
 <div class="line">    <span class="keywordtype">char</span> *msg;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
+<div class="line">    <span class="keyword">struct </span>termios raw_tioctl;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;Press any key&quot;</span>);</div>
 <div class="line">    <span class="keywordflow">else</span></div>
 <div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
-<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d7/d0c/a01173.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../da/dfb/a01174.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line">    new_tioctl = <a id="_a6" name="_a6"></a><a class="code hl_variable" href="../../de/df1/a01151.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
-<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line">    <a id="a2" name="a2"></a><a class="code hl_function" href="../../d6/df2/a01175.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line">    raw_tioctl = <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d5/d16/a01154.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d6/df2/a01175.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(&amp;raw_tioctl);</div>
+<div class="line">    tcflush(0, TCOFLUSH);</div>
 <div class="line">    <span class="keywordflow">while</span> (1) {</div>
 <div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
-<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line">        <span class="keywordflow">while</span> (*msg) {</div>
 <div class="line">            write(2, msg++, 1);</div>
-<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span> (read(0, &amp;c, 1) &gt; 0) {</div>
+<div class="line">            write(1, &amp;c, 1);</div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
-<div class="line">        write(1, in_ptr++, 1);</div>
-<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../da/dfb/a01174.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
-<div class="line">    <a id="a8" name="a8"></a><a class="code hl_function" href="../../d7/d0c/a01173.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line">    exit(0);</div>
+<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../d6/df2/a01175.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line">    <span class="keywordflow">if</span> (c == (<span class="keywordtype">char</span>)0x1b)</div>
+<div class="line">        <span class="keywordflow">return</span> (1);</div>
+<div class="line">    <span class="keywordflow">return</span> (0);</div>
 <div class="line">}</div>
 <div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
-<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dae/a01136_source.html#l00120">futil.c:120</a></div></div>
-<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
-<div class="ttc" id="aa01082_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../dd/df1/a01082.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df1/a01082_source.html#l00020">iloan.c:20</a></div></div>
-<div class="ttc" id="aa01139_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d5/d3e/a01139.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l00034">amort.c:34</a></div></div>
-<div class="ttc" id="aa01151_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../de/df1/a01151.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01173_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d7/d0c/a01173.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01173_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d7/d0c/a01173.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00056">scriou.c:56</a></div></div>
-<div class="ttc" id="aa01174_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../da/dfb/a01174.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00042">sig.c:42</a></div></div>
-<div class="ttc" id="aa01174_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../da/dfb/a01174.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00062">sig.c:62</a></div></div>
+<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l00124">futil.c:124</a></div></div>
+<div class="ttc" id="aa01142_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d3/ddc/a01142.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00034">amort.c:34</a></div></div>
+<div class="ttc" id="aa01154_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d5/d16/a01154.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01175_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d6/df2/a01175.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01175_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../d6/df2/a01175.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00126">scriou.c:126</a></div></div>
+<div class="ttc" id="aa01175_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d6/df2/a01175.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00056">scriou.c:56</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

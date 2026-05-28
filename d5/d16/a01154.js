@@ -1,16 +1,17 @@
 var a01154 =
 [
-    [ "apply_gamma", "d5/d16/a01154.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
-    [ "clr_name_to_idx", "d5/d16/a01154.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
-    [ "display_cmplx_str", "d5/d16/a01154.html#ga25ca148d8928c4184b2d1f86a6f3e726", null ],
-    [ "get_clr_pair", "d5/d16/a01154.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
-    [ "hex_clr_str_to_rgb", "d5/d16/a01154.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
-    [ "init_clr_palette", "d5/d16/a01154.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
-    [ "init_hex_clr", "d5/d16/a01154.html#ga61af7829a5d63d766e76930a0893d574", null ],
-    [ "list_colors", "d5/d16/a01154.html#ga482af92e265df3405f0620b4d6158b4e", null ],
-    [ "mk_cmplx_str", "d5/d16/a01154.html#ga60c3e9277d1099929230f213115f58f7", null ],
-    [ "mkccc", "d5/d16/a01154.html#gac91daf9ece9fc94bd0f23a353dc2d622", null ],
-    [ "rgb_to_curses_clr", "d5/d16/a01154.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
-    [ "rgb_to_xterm256_idx", "d5/d16/a01154.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
-    [ "xterm256_idx_to_rgb", "d5/d16/a01154.html#ga31ee0d93c7b527f92559fc410152f768", null ]
+    [ "capture_curses_tioctl", "d6/df2/a01175.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "d6/df2/a01175.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "d6/df2/a01175.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "d6/df2/a01175.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "d6/df2/a01175.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "d6/df2/a01175.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "d6/df2/a01175.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ],
+    [ "curses_err_tioctl", "d5/d16/a01154.html#afe4863a6b75c5a20c2008f36f86cfeed", null ],
+    [ "curses_in_tioctl", "d5/d16/a01154.html#afcd0e5aee1f3f7445581428cb02b2115", null ],
+    [ "curses_out_tioctl", "d5/d16/a01154.html#ad9964c09cd96ce9748052b5494f30fc6", null ],
+    [ "curses_tioctl", "d5/d16/a01154.html#a5080741aab7f17e1d5b24e5ad63cf5e6", null ],
+    [ "f_have_curses_tioctl", "d5/d16/a01154.html#ac46bd98f4cec1758c1d600920caa7f39", null ],
+    [ "f_have_shell_tioctl", "d5/d16/a01154.html#a1e8b2f4dea5e88e7af17541140207df0", null ],
+    [ "shell_tioctl", "d5/d16/a01154.html#a6683c571cfe7d874546506ebf41fc3d3", null ]
 ];

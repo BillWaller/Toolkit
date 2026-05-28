@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sio_0',['SIO',['../d8/d8e/a01224.html',1,'']]],
-  ['string_1',['String',['../dc/db6/a01212.html',1,'']]]
+  ['sio_0',['SIO',['../d9/da8/a01227.html',1,'']]],
+  ['string_1',['String',['../da/d3f/a01215.html',1,'']]]
 ];

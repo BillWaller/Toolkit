@@ -1,6 +1,7 @@
 var a01191 =
 [
-    [ "b", "d1/d0d/a01191.html#a823a1befc95c064e6d179723edb056fa", null ],
-    [ "g", "d1/d0d/a01191.html#ab49e03f25cd24170f9cd31b5696c7d1f", null ],
-    [ "r", "d1/d0d/a01191.html#a43e48de3e3cf8c8fa9120830ffac424e", null ]
+    [ "cp", "d1/d0d/a01191.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
+    [ "end_pos", "d1/d0d/a01191.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
+    [ "keycode", "d1/d0d/a01191.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
+    [ "text", "d1/d0d/a01191.html#a26a5a1b51ba82579294838ee52a18af3", null ]
 ];

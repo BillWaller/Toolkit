@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['manage_20view_20display_0',['Manage View Display',['../d3/d32/a01176.html',1,'']]],
-  ['management_1',['Management',['../d7/de8/a01159.html',1,'Chyron Management'],['../d9/d25/a01157.html',1,'Color Management'],['../d4/da6/a01168.html',1,'Memory Management']]],
-  ['memory_20management_2',['Memory Management',['../d4/da6/a01168.html',1,'']]],
-  ['menu_20engine_3',['Menu Engine',['../d7/daf/a01169.html',1,'']]],
-  ['menu_20initialization_4',['C-Menu Initialization',['../dc/dee/a01166.html',1,'']]],
-  ['menu_20parser_5',['Menu Parser',['../d3/dc7/a01170.html',1,'']]]
+  ['manage_20view_20display_0',['Manage View Display',['../de/d1a/a01179.html',1,'']]],
+  ['management_1',['Management',['../d4/d13/a01162.html',1,'Chyron Management'],['../da/d20/a01160.html',1,'Color Management'],['../d2/d22/a01171.html',1,'Memory Management']]],
+  ['memory_20management_2',['Memory Management',['../d2/d22/a01171.html',1,'']]],
+  ['menu_20engine_3',['Menu Engine',['../d6/db6/a01172.html',1,'']]],
+  ['menu_20initialization_4',['C-Menu Initialization',['../d7/daf/a01169.html',1,'']]],
+  ['menu_20parser_5',['Menu Parser',['../d7/d0c/a01173.html',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: enterchr.c Source File</title>
+<title>C-Menu: amort.c Source File</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,87 +110,121 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d3/ddc/a01142_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">enterchr.c</div></div>
+  <div class="headertitle"><div class="title">amort.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d3/ddc/a01142.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file enterchr.c</span></div>
-<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Enter a single character from keyboard</span></div>
+<a href="../../d3/ddc/a01142.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file amort.c</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Installment Loan Amortization</span></div>
 <div class="line"><span class="lineno">    3</span><span class="comment">    @author Bill Waller</span></div>
-<div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2025</span></div>
+<div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2026</span></div>
 <div class="line"><span class="lineno">    5</span><span class="comment">    MIT License</span></div>
 <div class="line"><span class="lineno">    6</span><span class="comment">    billxwaller@gmail.com</span></div>
-<div class="line"><span class="lineno">    7</span><span class="comment">    @date 2026-02-09</span></div>
+<div class="line"><span class="lineno">    7</span><span class="comment">    @date 2026-05-05</span></div>
 <div class="line"><span class="lineno">    8</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">fcntl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../d3/ddc/a01142.html#a78c99ffd76a7bb3c8c74db76207e9ab4">   10</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">_XOPEN_SOURCE</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">locale</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">ioctl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/** @example</span></div>
-<div class="line"><span class="lineno">   19</span><span class="comment">    @code</span></div>
-<div class="line"><span class="lineno">   20</span><span class="comment">    key=$(enterchr &quot;Are you sure?: &quot;)</span></div>
-<div class="line"><span class="lineno">   21</span><span class="comment">    if [ &quot;$key&quot; = &quot;Y&quot; ]; then</span></div>
-<div class="line"><span class="lineno">   22</span><span class="comment">        echo &quot;You entered Y&quot;</span></div>
-<div class="line"><span class="lineno">   23</span><span class="comment">    else</span></div>
-<div class="line"><span class="lineno">   24</span><span class="comment">        echo &quot;You entered N&quot;</span></div>
-<div class="line"><span class="lineno">   25</span><span class="comment">    fi</span></div>
-<div class="line"><span class="lineno">   26</span><span class="comment">    @endcode</span></div>
-<div class="line"><span class="lineno">   27</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/** @brief Capture the current terminal settings for later restoration.</span></div>
-<div class="line"><span class="lineno">   30</span><span class="comment">    @details can be used in scripts to get a single character response from a</span></div>
-<div class="line"><span class="lineno">   31</span><span class="comment">    user. For example: response=$(./enterchr &quot;Enter Y or N: &quot;) if [ &quot;$response&quot;</span></div>
-<div class="line"><span class="lineno">   32</span><span class="comment">    = &quot;Y&quot; ]; then echo &quot;You entered Yes&quot; else echo &quot;You entered No&quot; fi</span></div>
-<div class="line"><span class="lineno">   33</span><span class="comment">    This function saves the current terminal settings into a global</span></div>
-<div class="line"><span class="lineno">   34</span><span class="comment">   variable so that they can be restored later. It should be called before</span></div>
-<div class="line"><span class="lineno">   35</span><span class="comment">   modifying the terminal settings to ensure that the original settings can be</span></div>
-<div class="line"><span class="lineno">   36</span><span class="comment">   restored when the program exits or is interrupted.</span></div>
-<div class="line"><span class="lineno">   37</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="../../d3/ddc/a01142.html#a3c04138a5bfe5d72780bb7e82a18e627">   38</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d5/d3e/a01139.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">char</span> c = <span class="stringliteral">&#39;Y&#39;</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">char</span> *msg;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">struct</span> termios raw_tioctl;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">char</span> errmsg[128];</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        strcpy(errmsg, <span class="stringliteral">&quot;Press any key&quot;</span>);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        strcpy(errmsg, argv[1]);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_function" href="../../d6/db6/a01172.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a><a class="code hl_function" href="../../d6/db6/a01172.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">(</a><a class="code hl_function" href="../../d6/db6/a01172.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">)</a>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    raw_tioctl = <a class="code hl_variable" href="../../de/df1/a01151.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_function" href="../../d6/db6/a01172.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a><a class="code hl_function" href="../../d6/db6/a01172.html#ga9595fce25a583a656ca51a8b8f7494ae">(</a>&amp;raw_tioctl<a class="code hl_function" href="../../d6/db6/a01172.html#ga9595fce25a583a656ca51a8b8f7494ae">)</a>;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    tcflush(0, TCOFLUSH);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        msg = errmsg;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">while</span> (*msg) {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            write(2, msg++, 1);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        }</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <span class="keywordflow">if</span> (read(0, &amp;c, 1) &gt; 0) {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            write(1, &amp;c, 1);</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_function" href="../../d6/db6/a01172.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a><a class="code hl_function" href="../../d6/db6/a01172.html#gac5e3adb304b78910fc77761ef6a743f0">(</a><a class="code hl_function" href="../../d6/db6/a01172.html#gac5e3adb304b78910fc77761ef6a743f0">)</a>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordflow">if</span> (c == (<span class="keywordtype">char</span>)0x1b)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> (1);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> (0);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
-<div class="ttc" id="aa01139_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d5/d3e/a01139.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l00034">amort.c:34</a></div></div>
-<div class="ttc" id="aa01151_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../de/df1/a01151.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01172_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d6/db6/a01172.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01172_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../d6/db6/a01172.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00126">scriou.c:126</a></div></div>
-<div class="ttc" id="aa01172_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d6/db6/a01172.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00056">scriou.c:56</a></div></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdlib</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">time</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="../../d3/ddc/a01142.html#afd34f9817ea7498cdc5d76058dac3a5f">   19</a></span><span class="keywordtype">char</span> <a class="code hl_variable" href="../../d3/ddc/a01142.html#afd34f9817ea7498cdc5d76058dac3a5f">month</a>[12][4] = {<span class="stringliteral">&quot;Jan&quot;</span>, <span class="stringliteral">&quot;Feb&quot;</span>, <span class="stringliteral">&quot;Mar&quot;</span>, <span class="stringliteral">&quot;Apr&quot;</span>, <span class="stringliteral">&quot;May&quot;</span>, <span class="stringliteral">&quot;Jun&quot;</span>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>                     <span class="stringliteral">&quot;Jul&quot;</span>, <span class="stringliteral">&quot;Aug&quot;</span>, <span class="stringliteral">&quot;Sep&quot;</span>, <span class="stringliteral">&quot;Oct&quot;</span>, <span class="stringliteral">&quot;Nov&quot;</span>, <span class="stringliteral">&quot;Dec&quot;</span>};</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">typedef</span> <span class="keyword">struct</span> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">double</span> pv;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">double</span> pmt;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">double</span> i;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">double</span> n;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">double</span> interest;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">double</span> principal;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">double</span> year_total_interest;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>} Amort;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a>(Amort *);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../d3/ddc/a01142.html#a3c04138a5bfe5d72780bb7e82a18e627">   34</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d3/ddc/a01142.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    setlocale(LC_NUMERIC, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (argc &gt; 1 &amp;&amp;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        ((strcmp(argv[1], <span class="stringliteral">&quot;--help&quot;</span>) == 0 || strcmp(argv[1], <span class="stringliteral">&quot;-h&quot;</span>) == 0) ||</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>         argc &lt; 5)) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        printf(<span class="stringliteral">&quot;Usage: amort [present_value][number_of_payments]&quot;</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>               <span class="stringliteral">&quot;[interest_rate][payment_amount][yyyy-mm-dd]\n\n&quot;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        exit(EXIT_SUCCESS);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">struct</span> tm tm;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    Amort *amort = malloc(<span class="keyword">sizeof</span>(Amort));</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    sscanf(argv[1], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;pv);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    sscanf(argv[2], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;n);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    sscanf(argv[3], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;i);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    sscanf(argv[4], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;pmt);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">if</span> (amort-&gt;pv == 0 || amort-&gt;n == 0 || amort-&gt;i == 0 || amort-&gt;pmt == 0 ||</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        argv[5][0] == <span class="stringliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: All arguments must be non-zero.\n&quot;</span>);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    amort-&gt;interest = amort-&gt;pv * amort-&gt;i / 1200;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> (amort-&gt;interest &gt; amort-&gt;pmt) {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: Payment amount less than interest\n&quot;</span>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    }</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    memset(&amp;tm, 0, <span class="keyword">sizeof</span>(tm));</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">if</span> (strptime(argv[5], <span class="stringliteral">&quot;%Y-%m-%d&quot;</span>, &amp;tm) == NULL)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordflow">if</span> (strptime(argv[5], <span class="stringliteral">&quot;%Y%m%d&quot;</span>, &amp;tm) == NULL)</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            printf(<span class="stringliteral">&quot;Error: Invalid date format. Use yyyy-mm-dd or yyyymmdd.\n&quot;</span>),</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    amort-&gt;year_total_interest = 0;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    printf(<span class="stringliteral">&quot;First Payment: %04d-%02d-%02d\n\n&quot;</span>, tm.tm_year + 1900,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>           tm.tm_mon + 1, tm.tm_mday);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    printf(<span class="stringliteral">&quot; Per  Mth Year    Balance     Payment   Principal  Interest\n&quot;</span>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    printf(<span class="stringliteral">&quot;----  --- ---- ------------ ---------- ---------- ----------\n&quot;</span>);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">int</span> m = 0;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; amort-&gt;n; x++) {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">if</span> (amort-&gt;pv &lt;= 0)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        m = (x + tm.tm_mon) % 12;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">int</span> y = ((x + tm.tm_mon) / 12) + tm.tm_year + 1900;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        amort-&gt;interest = amort-&gt;pv * amort-&gt;i / 1200;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        amort-&gt;year_total_interest += amort-&gt;interest;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> (amort-&gt;pv + amort-&gt;interest &lt; amort-&gt;pmt) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            amort-&gt;pmt = amort-&gt;pv + amort-&gt;interest;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            amort-&gt;principal = amort-&gt;pv;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        } <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            amort-&gt;principal = amort-&gt;pmt - amort-&gt;interest;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        amort-&gt;pv -= amort-&gt;principal;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        printf(<span class="stringliteral">&quot;%4d %4s %4d %&#39;12.2f %&#39;10.2f %&#39;10.2f %&#39;10.2f\n&quot;</span>, x + 1, <a class="code hl_variable" href="../../d3/ddc/a01142.html#afd34f9817ea7498cdc5d76058dac3a5f">month</a>[m],</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>               y, amort-&gt;pv, amort-&gt;pmt, amort-&gt;principal, amort-&gt;interest);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">if</span> (m == 11)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a><a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">(</a>amort<a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">)</a>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">if</span> (m != 11)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a><a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">(</a>amort<a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">)</a>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    free(amort);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">   94</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a>(Amort *amort) {</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    printf(<span class="stringliteral">&quot;                                                  &quot;</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>           <span class="stringliteral">&quot;----------\n&quot;</span>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    printf(<span class="stringliteral">&quot;                                                  %&#39;10.2f\n&quot;</span>,</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>           amort-&gt;year_total_interest);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    printf(<span class="stringliteral">&quot;                                                  &quot;</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>           <span class="stringliteral">&quot;==========\n\n&quot;</span>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    amort-&gt;year_total_interest = 0;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
+<div class="ttc" id="aa01142_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d3/ddc/a01142.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="#l00034">amort.c:34</a></div></div>
+<div class="ttc" id="aa01142_html_abbfae4c10b55e300ca22e10fdc9e84ff"><div class="ttname"><a href="../../d3/ddc/a01142.html#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a></div><div class="ttdeci">void print_totals(Amort *)</div><div class="ttdef"><b>Definition</b> <a href="#l00094">amort.c:94</a></div></div>
+<div class="ttc" id="aa01142_html_afd34f9817ea7498cdc5d76058dac3a5f"><div class="ttname"><a href="../../d3/ddc/a01142.html#afd34f9817ea7498cdc5d76058dac3a5f">month</a></div><div class="ttdeci">char month[12][4]</div><div class="ttdef"><b>Definition</b> <a href="#l00019">amort.c:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d3/ddc/a01142.html">enterchr.c</a></li>
+    <li class="navelem"><a href="../../d3/ddc/a01142.html">amort.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
