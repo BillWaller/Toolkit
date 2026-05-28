@@ -1,5 +1,9 @@
 var a01167 =
 [
-    [ "menu_cmd_processor", "d7/dd6/a01167.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
-    [ "menu_engine", "d7/dd6/a01167.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
+    [ "init_view.c", "d2/df3/a01085.html", null ],
+    [ "init_view_boxwin", "d7/dd6/a01167.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d7/dd6/a01167.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_calc_full_screen_dimensions", "d7/dd6/a01167.html#gaa64cfaf51c250788f093130763495ac4", null ],
+    [ "view_calc_win_dimensions", "d7/dd6/a01167.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
+    [ "view_init_input", "d7/dd6/a01167.html#gab050f5482419339e9207dbdc65a7b49e", null ]
 ];

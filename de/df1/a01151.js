@@ -1,12 +1,17 @@
 var a01151 =
 [
-    [ "compile_chyron", "de/df1/a01151.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
-    [ "destroy_chyron", "de/df1/a01151.html#ga3f3feb40fd703913c5c136331f627c91", null ],
-    [ "display_chyron", "de/df1/a01151.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
-    [ "get_chyron_key", "de/df1/a01151.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
-    [ "is_set_chyron_key", "de/df1/a01151.html#ga15d3a32179f7063332ae621c5565d645", null ],
-    [ "mb_to_cc", "de/df1/a01151.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
-    [ "new_chyron", "de/df1/a01151.html#gad37d5808ff30ae6894780425d865abae", null ],
-    [ "set_chyron_key_cp", "de/df1/a01151.html#ga4c179e7657e744f1847506e11a476580", null ],
-    [ "unset_chyron_key", "de/df1/a01151.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
+    [ "capture_curses_tioctl", "d6/db6/a01172.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "d6/db6/a01172.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "d6/db6/a01172.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "d6/db6/a01172.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "d6/db6/a01172.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "d6/db6/a01172.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "d6/db6/a01172.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ],
+    [ "curses_err_tioctl", "de/df1/a01151.html#afe4863a6b75c5a20c2008f36f86cfeed", null ],
+    [ "curses_in_tioctl", "de/df1/a01151.html#afcd0e5aee1f3f7445581428cb02b2115", null ],
+    [ "curses_out_tioctl", "de/df1/a01151.html#ad9964c09cd96ce9748052b5494f30fc6", null ],
+    [ "curses_tioctl", "de/df1/a01151.html#a5080741aab7f17e1d5b24e5ad63cf5e6", null ],
+    [ "f_have_curses_tioctl", "de/df1/a01151.html#ac46bd98f4cec1758c1d600920caa7f39", null ],
+    [ "f_have_shell_tioctl", "de/df1/a01151.html#a1e8b2f4dea5e88e7af17541140207df0", null ],
+    [ "shell_tioctl", "de/df1/a01151.html#a6683c571cfe7d874546506ebf41fc3d3", null ]
 ];

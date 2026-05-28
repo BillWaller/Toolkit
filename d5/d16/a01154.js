@@ -1,12 +1,16 @@
 var a01154 =
 [
-    [ "compile_chyron", "d5/d16/a01154.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
-    [ "destroy_chyron", "d5/d16/a01154.html#ga3f3feb40fd703913c5c136331f627c91", null ],
-    [ "display_chyron", "d5/d16/a01154.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
-    [ "get_chyron_key", "d5/d16/a01154.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
-    [ "is_set_chyron_key", "d5/d16/a01154.html#ga15d3a32179f7063332ae621c5565d645", null ],
-    [ "mb_to_cc", "d5/d16/a01154.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
-    [ "new_chyron", "d5/d16/a01154.html#gad37d5808ff30ae6894780425d865abae", null ],
-    [ "set_chyron_key_cp", "d5/d16/a01154.html#ga4c179e7657e744f1847506e11a476580", null ],
-    [ "unset_chyron_key", "d5/d16/a01154.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
+    [ "apply_gamma", "d5/d16/a01154.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
+    [ "clr_name_to_idx", "d5/d16/a01154.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
+    [ "display_cmplx_str", "d5/d16/a01154.html#ga25ca148d8928c4184b2d1f86a6f3e726", null ],
+    [ "get_clr_pair", "d5/d16/a01154.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
+    [ "hex_clr_str_to_rgb", "d5/d16/a01154.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "init_clr_palette", "d5/d16/a01154.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
+    [ "init_hex_clr", "d5/d16/a01154.html#ga61af7829a5d63d766e76930a0893d574", null ],
+    [ "list_colors", "d5/d16/a01154.html#ga482af92e265df3405f0620b4d6158b4e", null ],
+    [ "mk_cmplx_str", "d5/d16/a01154.html#ga60c3e9277d1099929230f213115f58f7", null ],
+    [ "mkccc", "d5/d16/a01154.html#gac91daf9ece9fc94bd0f23a353dc2d622", null ],
+    [ "rgb_to_curses_clr", "d5/d16/a01154.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
+    [ "rgb_to_xterm256_idx", "d5/d16/a01154.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
+    [ "xterm256_idx_to_rgb", "d5/d16/a01154.html#ga31ee0d93c7b527f92559fc410152f768", null ]
 ];

@@ -1,15 +1,20 @@
 var a01175 =
 [
-    [ "get_next_char", "d6/df2/a01175.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "d6/df2/a01175.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "d6/df2/a01175.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "d6/df2/a01175.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "d6/df2/a01175.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "d6/df2/a01175.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "d6/df2/a01175.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "d6/df2/a01175.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "d6/df2/a01175.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "d6/df2/a01175.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "d6/df2/a01175.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "d6/df2/a01175.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "get_next_line", "d6/df2/a01175.html#ga395b27e6a9716bf49e3fc04d53987b33", null ],
+    [ "get_pos_next_line", "d6/df2/a01175.html#gaf692bba071d771ceea47707fc26127bd", null ],
+    [ "get_pos_prev_line", "d6/df2/a01175.html#gaaf8cff992778d85e44351a834ad2b81a", null ],
+    [ "get_prev_line", "d6/df2/a01175.html#gab49fb9f9417c7cf790cea1679e4e5edc", null ],
+    [ "go_to_eof", "d6/df2/a01175.html#ga46145f1d3680a48cb9391a8ae95db9ad", null ],
+    [ "go_to_line", "d6/df2/a01175.html#gac81796e830049e74987a6b526cfc296f", null ],
+    [ "go_to_mark", "d6/df2/a01175.html#gada77a15a548ce444426d43fd39a1cce4", null ],
+    [ "go_to_percent", "d6/df2/a01175.html#gae6623cc4892a014fc9c40b3bca1db7d9", null ],
+    [ "go_to_position", "d6/df2/a01175.html#ga5f74dca8730faaa3ff362fc1e01b12ce", null ],
+    [ "increment_ln", "d6/df2/a01175.html#gadd75615038c32b4c07a6842dfe2fc37a", null ],
+    [ "initialize_line_table", "d6/df2/a01175.html#gaa260d59836439e16d00ad5a6bc4b4829", null ],
+    [ "next_page", "d6/df2/a01175.html#gacf1bfbd6d2fd4ad9a0385009ef25015c", null ],
+    [ "prev_page", "d6/df2/a01175.html#ga5dbc34981815690a92812e34d1cf478f", null ],
+    [ "scroll_down_n_lines", "d6/df2/a01175.html#gaa79b8294ebf98c84d4a844fd7d9e4862", null ],
+    [ "scroll_up_n_lines", "d6/df2/a01175.html#gab08fc8983cc3bdb21b438c82ece16346", null ],
+    [ "search", "d6/df2/a01175.html#ga5f639aa1a1f03fa05888c724bc17d99c", null ],
+    [ "sync_ln", "d6/df2/a01175.html#ga03bfb3d8d09d33f4f59930485f283ead", null ]
 ];

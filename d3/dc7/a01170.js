@@ -1,10 +1,5 @@
 var a01170 =
 [
-    [ "capture_curses_tioctl", "d3/dc7/a01170.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "d3/dc7/a01170.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "d3/dc7/a01170.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "d3/dc7/a01170.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "d3/dc7/a01170.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "d3/dc7/a01170.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "d3/dc7/a01170.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "get_command_type", "d3/dc7/a01170.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d3/dc7/a01170.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

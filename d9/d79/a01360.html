@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: extras</title>
+<title>C-Menu: Changelog</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,635 +110,145 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d79/a01360.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">extras </div></div>
+  <div class="headertitle"><div class="title">Changelog </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md23"></a> <img src="../../Augmentation.png" alt="" class="inline" title="Augmenting C-Menu"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="how-to-get-c-menu-2"></a>
-How to get C-Menu</h1>
-<h2 class="doxsection"><a class="anchor" id="get-c-menu-on-github-2"></a>
-Get C-Menu on Github</h2>
-<p>Click the link below to access the C-Menu Documentation:</p>
-<p><a href="https://decision-inc.com">C-Menu on Github</a></p>
-<p><a href="https://github.com/BillWaller/C-Menu.git">Download C-Menu from Github</a></p>
-<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="table-of-contents-2"></a>
-Table of Contents</h2>
+<div class="textblock"><p><a class="anchor" id="changelog"></a></p>
+<h1 class="doxsection"><a class="anchor" id="released---2026-02-04"></a>
+[Released] - 2026-02-04</h1>
+<p>0.2.9 - 2026-05-25</p>
+<p>lf is coming along very well. To demonstrate its flexibility and power, I created a simple little script, ~/menuapp/bin/checkdir, to scan a specified directory and reports potential problems such as cyclic symbolic links, non-existent links, links that cannot be read due to lack of permissions, and other issues. The operative commands are listed below:</p>
+<div class="fragment"><div class="line">lf -L -H -T7 -D458 $dir</div>
+<div class="line">lf -L -H -T7 -ps $dir</div>
+</div><!-- fragment --><div class="image">
+<img src="../../checkdir.png" alt=""/>
+<div class="caption">
+checkdir output</div></div>
+    <p>The script made 3 passes of 413,557 files in 1.163 seconds.</p>
+<p>This script is designed to help users identify and resolve issues with their file system. The output produced by lf is the error type, the file path, and the target of the symbolic link if applicable. The output can easily be converted into a script to remove or fix the problematic links, which can be a huge time saver. Both lf and find print errors, but in preliminary tests, both miss some files that lf catches. The script is available in the C-Menu repository, and it can be easily modified to suit specific needs. This is just one example of how lf can be used to create powerful and flexible file management tools. With lf, checkdir is just a bare starting point. Make it a sleuthing tool by adding more options to the lf command, such as -e to exclude certain files or directories, or -t to specify the types of files to check. The possibilities are endless, and with lf's speed and efficiency, you can quickly scan even large directories for potential issues.</p>
+<p>0.2.9 - 2026-05-16</p>
+<p>Performance improvements to lf have resulted in a significant increase in speed, especially when listing large directories. The improvements include optimized file system traversal and more efficient filtering of files based on the specified options. In benchmark testing, lf performed exceptionally well, and it is now one of the fastest file listing utilities available.</p>
+<p>The optimization strategy currently in place is thread pool with a circular queue. The thread pool allows for multiple threads to be used for file system traversal, which can significantly speed up the process, especially on systems with multiple CPU cores. The circular queue is used to manage the tasks for the threads, allowing for efficient scheduling and load balancing. This approach has proven to be effective in improving the performance of lf, and it has been well-received by users.</p>
+<p>The next step in the optimization process will be to implement a more sophisticated task scheduling algorithm using io_uring to further improve performance, especially on systems with high I/O workloads. This will allow for even faster file listing and better responsiveness, particularly when dealing with large directories or complex file structures.</p>
+<p>I also tried and rejected using mmap for directories, as it is not well-suited for this purpose due to the dynamic nature of directory contents and the need for efficient traversal and filtering. The thread pool with a circular queue has proven to be a more effective solution for optimizing lf's performance.</p>
+<p>You can specify the number of threads by using lf's -T option. If you don't specify a -T option, lf will choose a reasonable number of threads based on the number of CPU cores available on the system.</p>
+<p>0.2.9 - 2026-04-25</p>
+<p>The recent changes to the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> Engine have introduced a number of bugs, or euphemistically, opportunities for refinement. Please be assured that testing continues and issues are being handled as they arise with the objective of having a stable release.</p>
+<p>0.2.9 - 2026-04-22</p>
+<p>A line editor has been added to the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> Engine, which allows the user to enter a match string to filter the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> objects. The user can toggle between the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> window and the line editor by pressing the tab key.</p>
+<p>0.2.9 - 2026-04-15</p>
+<p>The -N option (line numbering) in view originally required an argument of true, false, yes, no, t, f, y, or n, but a user suggested that this was a little clumsy, and that it would be more intuitive if the -N option simply turned on line numbering when included, and turned it off when omitted. I agreed with this suggestion, and I have changed the behavior of the -N option accordingly. So, the -N option has been changed to be consistent with other boolean options. <a class="el" href="../../d5/d6e/a01240.html" title="The Line strutures are attached to the Menu main structure.">Line</a> numbering will be turned on by specifying the -N option, whether or not it is followed by an affirmative indicator. In the case that you have f_ln set to true in your configuration, you can still turn off line numbering by including the "-N f" or "-N n" option, which will override the configuration setting. You can also toggle line numbering on and off from within view by pressing -N from a command prompt. I am trying to keep <a class="el" href="../../d0/d33/a01252.html">View</a>'s operation as close to vi, vim, nvim, and less as possible</p>
+<p>0.2.9 - 2026-04-14</p>
+<p>After thinking about the resizing issue in view, I decided to implement yet another option, and that is to fill the terminal emulator screen. My reasoning was that a user typically shrinks the terminal window to make more room for another application window, not to make the viewing area smaller. And, when a user expands the terminal window which contains the view window, they want to see more of the document. So, when resizing, the view window will first fill the terminal emulator window, and the user can continue to shrink the terminal window, but no viewing area will be lost to blank space. The objective is to achieve the most efficient use of screen area.</p>
+<p>The really obnoxious bugs that emerged during the resizing refactor have been fixed, and I will be doing a lot of testing to find and fix any remaining bugs. The resizing code is sort of complicated, and it is likely that there are still some edge cases that I haven't encountered yet.</p>
+<p>0.2.9 - 2026-04-12</p>
+<p>Refactoring of <a class="el" href="../../d0/d33/a01252.html">View</a>'s live resizing for both full screen and box window modes. If you need to shrink the <a class="el" href="../../d0/d33/a01252.html">View</a> window, simply resize the terminal window. Expansion is a little more complicated. The issue is not so much technical, but rather expectations. If the <a class="el" href="../../d0/d33/a01252.html">View</a> window is in box mode, and it is originally sized to be 3/4 of the terminal window, on resizing of the terminal window, should it calculate resize lines and columns based on the ratio of the <a class="el" href="../../d0/d33/a01252.html">View</a> window to the terminal window, should it add the difference in size to the <a class="el" href="../../d0/d33/a01252.html">View</a> window, or should it fill the terminal emulator screen? My current impulse is to implement the first option, which is to calculate the new size based on the ratio of the <a class="el" href="../../d0/d33/a01252.html">View</a> window to the terminal window. This seems to be the most intuitive and consistent behavior, but I am open to feedback on this.</p>
+<p>0.2.9 - 2026-04-11</p>
+<p>Major progress is being made in refactoring the main components of C-Menu to provide pop-up and drop-down helper widgets. This is a major step in the evolution of C-Menu, and it will allow for much more flexible and powerful user interfaces. The first component to be refactored is the chyron, which is a pop-up widget that can be used to display information and options to the user. The chyron is implemented as a separate module, and it can be easily integrated into any C-Menu program. The next step will be to refactor the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> module to use the chyron for displaying options, which will allow for much more dynamic and context-sensitive user interfaces. For example, when entering form fields, the user can press or click the help button to display a list of possible ogjects with which to fill the field and then select one with the mouse or keyboard. This will be a much more intuitive and efficient way to fill out forms, and it will also allow for much more complex forms with many fields. This is in preparation for the next major release, which will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
+<p>Resizing of the <a class="el" href="../../d0/d33/a01252.html">View</a> windows is underway. This will require much testing as there are four windows within the <a class="el" href="../../d0/d33/a01252.html">View</a> window, the box window, the line number window, the command line window, and the virtual pad that must be resized and sequenced perfectly to avoid distracting artifacts.</p>
+<p>0.2.9 - 2026-04-10</p>
+<p>Used valgrind to find and fix a number of memory leaks and other memory-related issues. At this point, C-Menu is exiting with no memory leaks.</p>
+<p>Removed the -a (list hidden files) option from lf, made that the default behavior, and added -n option to exclude hidden files.</p>
+<p>Until now, the default maximum depth for lf was set to 3, which was convenient for testing, but could be confusing for users accustomed to find. The default maximum depth has been changed to 0, which means no limit. Users may want to specify a reasonable maximum depth to avoid unnecessary voluminous output.</p>
+<p>In benchmark testing, lf performed exceptionally well. It's fast.</p>
+<p>0.2.9 - 2026-04-01</p>
+<p>Most of the known bugs have been fixed, and the code is in a much more stable state. I will be doing a lot of testing and debugging to find and fix any remaining bugs, but I am confident that the code is in a good state for the next release, which will be version 0.3.x. The next release will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
+<p>0.2.9 - 2026-03-31</p>
+<p>More bugs fixed related to transition to argp.</p>
+<p>Added <a class="el" href="../../d7/de8/a01159.html#ga4c179e7657e744f1847506e11a476580" title="Set chyron key with color pair (cp).">set_chyron_key_cp()</a> function to allow the caller to specify a custom color pair for individual chyron keys. This allows for more flexible and customizable chyrons, and it can be used to highlight important options or to differentiate between different types of options. The color pair is specified as a six-digit hexadecimal <a class="el" href="../../d2/d22/a01196.html">RGB</a> value, and it can be set to any color the user desires. This function is part of the larger effort to integrate the chyron facility into all C-Menu programs, which will allow for much more dynamic and context-sensitive user interfaces.</p>
+<p>0.2.9 - 2026-03-30</p>
+<p>Continued testing and debugging after having substantially refactored the main components of C-Menu to provide pop-up and drop-down helper widgets. This is a major step in the evolution of C-Menu, and it will allow for much more flexible and powerful user interfaces. The first component to be refactored is the chyron, which is a pop-up widget that can be used to display information and options to the user. The chyron is implemented as a separate module, and it can be easily integrated into any C-Menu program. The next step will be to refactor the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> module to use the chyron for displaying options, which will allow for much more dynamic and context-sensitive user interfaces. For example, when entering form fields, the user can press or click the help button to display a list of possible objects with which to fill the field and then select one with the mouse or keyboard. This will be a much more intuitive and efficient way to fill out forms, and it will also allow for much more complex forms with many fields. This is in preparation for the next major release, which will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
+<p>Specifically, the following improvements have been made: Combined <a class="el" href="../../d4/dd5/a01244.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d8/d2b/a01236.html">Form</a>, <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d0/d33/a01252.html">View</a>, and CKeys into a single executable Incorporated argp for option processing Added Popup and Drop-down facility for <a class="el" href="../../d4/dd5/a01244.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d8/d2b/a01236.html">Form</a>, <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d0/d33/a01252.html">View</a>, and CKeys Added line numbering to <a class="el" href="../../d0/d33/a01252.html">View</a> Refactored <a class="el" href="../../d0/d33/a01252.html">View</a> navigation to maintain a line number table and use the table to improve navigation performance Added file type selection to lf Added an exclude regular expression option to lf Modified <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> to return to the picker after executed the selected action Added a new Exercises section to the documentation, which includes a number of exercises designed to help developers learn how to use C-Menu and to provide a test bed for debugging. The first exercise is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database. Added SSH authentication and logging to RSH Added a wait popup to <a class="el" href="../../d0/d33/a01252.html">View</a> and <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> for slow provider programs</p>
+<p>This has no doubt introduced some bugs, so I will be doing a lot of testing and debugging before moving on to the next release, which will be version 0.3.x. The next release will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
+<p>0.2.9 - 2026-03-29</p>
+<p>If anyone knows of bugs that I need to address, now is the time to let me know. I will continue working with the pop-ups and drop-downs and I will be adding more exercises to the documentation, but I want to make sure the code is as error-free as possible before moving on to the next release, as version 0.3.x will embark on some major new features.</p>
+<p>Testing has revealed a number of off-by-one errors in view, which I have fixed, at least all those that I know about. I have also added a wait popup to view and pick, which will be displayed in the unlikely event that a provider program takes longer than 200ms to respond. The wait popup is a simple window with a message that counts down in seconds until input arrives or timeout, at which time the user is presented with an option to cancel. This is a possibility in the event that the provider program produces no output or stops waiting on user input. The timer checks the open pipe for input and also checks that the provider has terminated. If the program seems to be hung, the user can press Ctrl-C to cause a SIGTERM interrupt and then choose F9 to cancel. The wait popup is implemented in the parent process, which allows the countdown to timeout to be displayed without blocking the main thread of the program. The wait popup is designed to be non-intrusive, so it doesn't interfere with the user's workflow.</p>
+<p>0.2.9 - 2026-03-28</p>
+<p>Accomplished the first step in refactoring the main components of C-Menu to provide pop-up and drop-down helper widgets. This is a major step in the evolution of C-Menu, and it will allow for much more flexible and powerful user interfaces. The first component to be refactored is the chyron, which is a pop-up widget that can be used to display information and options to the user. The chyron is implemented as a separate module, and it can be easily integrated into any C-Menu program. The next step will be to refactor the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> module to use the chyron for displaying options, which will allow for much more dynamic and context-sensitive user interfaces. For example, when entering form fields, the user can press or click the help button to display a list of possible ogjects with which to fill the field and then select one with the mouse or keyboard. This will be a much more intuitive and efficient way to fill out forms, and it will also allow for much more complex forms with many fields. This is in preparation for the next major release, which will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
+<p>0.2.9 - 2026-03-24</p>
+<p>Addes SSH authentication to RSH for extra security, and also implemented logging to the system log for all RSH sessions. The SSH authentication is implemented using the libssh library, and it allows users to authenticate using their SSH keys instead of passwords. This is a much more secure method of authentication, and it also allows for easier management of user credentials. The logging to the system log is implemented using the syslog() function, and it allows administrators to keep track of all RSH sessions for auditing purposes. On systems with systemd, the user can type journalctl -t rsh to view the log entries for RSH sessions.</p>
+<p>Added a wait popup to <a class="el" href="../../d0/d33/a01252.html">View</a> and <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a>, for the unlikely cases in which a provider program takes longer than 200ms to respond. The wait popup is a simple window with a message that counts down in seconds until input arrives or timeout, at which time the user is presented with an option to cancel. This is a possibility in the event that the provider program produces no output or stops waiting on user input. The timer checks the open pipe for input and also checks that the provider has terminated. If the program seems to be hung, the user can press Ctrl-C to cause a SIGTERM interrupt and then choose F9 to cancel. The wait popup is implemented in the parent process, which allows the countdown to timeout to be displayed without blocking the main thread of the program. The wait popup is designed to be non-intrusive, so it doesn't interfere with the user's workflow.</p>
+<p>0.2.9 - 2026-03-19</p>
+<p>Added line numbering option "-N" to <a class="el" href="../../d0/d33/a01252.html">View</a> to display line numbers in the left margin. The line numbers have a separate window, so it doesn't interfere with horizontal scrolling. The line numbers are right-aligned and padded with spaces to maintain a consistent width. The C-Menu configuration now has options for foreground and background colors for line numbers. These are six-digit hexadecimal <a class="el" href="../../d2/d22/a01196.html">RGB</a> values, and they can be set to any color the user desires.</p>
+<p>Also refactored <a class="el" href="../../d0/d33/a01252.html">View</a> navigation to maintain a line number table and use the table to improve navigation performance. The table is allocated dynamically, and consumes four bytes per line. The line number table is updated whenever the user scrolls vertically, and it allows for much faster navigation to specific lines, especially in large documents. The line number table is also used to maintain the correct line numbers in the left margin when the user scrolls horizontally.</p>
+<p>0.2.9 - 2026-03-13</p>
+<p>Added additional file selection options to lf. Now, you can list files of specific types by specifying -t bcdplfsu (in any order or combination) b block devices c character devices d directories p named pipes l symbolic links f regular files s sockets u unknown file types You can select multiple file types and any you don't select will not be emitted. For example, lf -t d will only list directories, while lf -t f will only list regular files. lf -t df will list both directories and regular files, and lf -t bcdplfsu will list all file types, which is the default behavior with no -t option.</p>
+<p>0.2.9 - 2026-03-13</p>
+<p>Modified <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> to return to the picker after executed the selected action. This is a much more intuitive behavior, and it allows the user to execute multiple actions without having to reopen the picker each time. One of the new Exercises will make this abundantly clear.</p>
+<p>Added a new Exercises section to the documentation, which includes a number of exercises designed to help developers learn how to use C-Menu and to provide a test bed for debugging. The first exercise is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database.</p>
+<p>0.2.9 - 2026-03-10</p>
+<p>Moved documentation to a separate repository and website, which is now available at:</p>
+<p><a href="https://decision-inc.com/">C-Menu Comprehensive Reference</a></p>
+<p>This was necessary because the documentation had become too large and unwieldy to be easily navigable within the C-Menu repository, so only the main page was available. With the new website on Github Pages, I was able to include all the Doxygen pages including function cross references and diagrams.</p>
+<p>The new website is much more user-friendly and easier to navigate, and it will allow me to keep the documentation up-to-date more easily.</p>
+<p>0.2.9 - 2026-03-09</p>
+<p>Much more work on chyron integration. Appears to be working as intended. In the process, I found and fixed a number of bugs in form and one in lf. The debugging process is somewhat tedious following disruptive feature additions, but we are making progress.</p>
+<p>Still more work on inte</p>
+<p>0.2.9 - 2026-03-08</p>
+<p>Continuing to work on chyron integration into <a class="el" href="../../d8/d2b/a01236.html">Form</a> and <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a>. When using the Installment Loan example, the chyron has been adjusted to only include relevant options, and the key handling has been reworked to accommodate the new structure. For example, when the user finishes entering all the fields in the form, the chyron provides only F1 Help, F5 Calculate, and F9 Cancel, which makes sense because the form is still in edit mode and the user can continue to edit fields by using movement keys or by clicking on the fields. Once the user clicks calculate, the chyron changes to include F1 Help, F4 Edit, F9 Cancel, and F10 Commit. Upon clicking F9 Commit (or pressing the F9 key), <a class="el" href="../../d8/d2b/a01236.html">Form</a> will execute the appropriate action specified by the user.</p>
+<p>0.2.9 - 2026-03-07</p>
+<p>Corrected <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> Page Down and Page Up key handling, which had been broken by the integration of the chyron facility into xwgetch. This was a major problem, and it caused the <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> module to be completely unusable. I have reimplemented the key handling, and it is now working as intended.</p>
+<p>Modified <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> so that the chyron only includes Page Up and Page Down options when there is more than 1 page of <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a> ojbects. This is part of a larger effort to integrate the chyron facility into all C-Menu programs. The chyron facility allows C-Menu to generate dynamic chyrons based on the current state of the program, while automatically keeping track of click zones so that xwgetch can interpret mouse clicks as key codes. The idea is that the chyron should only include relevant options.</p>
+<p>0.2.9 - 2026-03-06</p>
+<p>Added -e exclude regular expression to lf, which allows users to exclude files from the listing based on a regular expression. This is a powerful feature that can be used to filter out unwanted files from the listing.</p>
+<p>Replaced mouse handling in <a class="el" href="../../da/de0/a01248.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d8/d2b/a01236.html">Form</a>, and <a class="el" href="../../d4/dd5/a01244.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> with xwgetch, which reads chyron mouse selections as key codes. Now all mouse events are handled through a single function. xwgetch also handles asynchronous signal events.</p>
+<p>Some code in <a class="el" href="../../d9/d5b/a01127.html" title="The working part of C-Menu Menu.">menu_engine.c</a>, which handled hierarchical menu navigation, had somehow been deleted. This was a major problem, and it caused the menu system to be completely broken. I have reimplemented it, and it is now working as intended.</p>
+<p>The addition of an Exercises section will provide a test bed for debugging as well as a proof-of-concept for C-Menu. The first project is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database.</p>
+<p>0.2.9 - 2026-02-27</p>
+<p>Added a number of improvements to CMake build to accommodate C-Menu's revised file structure. Both CMake and straight Makefile builds produce similar results, but CMake is more flexible, easier to work with, and less prone to difficult-to-solve problems.</p>
+<p><a class="el" href="../../d0/d33/a01252.html">View</a>'s search function has been reworked to fix a number of issues with buffer and page management, such as off-by-one page top and bottom positioning.</p>
+<p>lf (list files) - recursive option has been replaced by a depth option and lf's core logic has been reworked to enhance reliability. Also removed mangled lf syntax which had been used in some scripts to compensate for deficiencies in lf's option handler.</p>
+<p>Many documentation updates - API/ABI documentation is substantially complete. Function Call Graphs, Called Graphs, and forward and backward references added.</p>
+<p>Every function is documented, and most variables. All documentation has been consolidated into a single html file available at:</p>
+<p><a href="https://billwaller.github.io/C-Menu/">C-Menu Comprehensive Reference</a></p>
+<p>In <a class="el" href="../../d0/d33/a01252.html">View</a>, replaced calls to mbtowc() with mbrtowc() because of spurious accent marks populating the complex characters structures (cchar_t). Apparently, mbtowc() is broken. mbrtowc() is the new and improved replacement.</p>
+<p>The ANSI SGR parser and gamma correction in <a class="el" href="../../d0/d33/a01252.html">View</a> is working perfectly. Try a setting of 2.2 in ~/.minitrc to brighten up dull documents.</p>
+<p>0.2.9 - 2026-02-09</p>
+<p>Split the large <a class="el" href="../../df/df7/a00731.html" title="Menu data structures, enums, types, end external declarations.">menu.h</a> into Separate .h files for each module, which should make it easier for developers who want to work on a particular feature.</p>
+<p>Modified Makefile and CMakeLists.txt to reflect the new file structure, and to add the new shared library libcm.so</p>
+<p>Many unimplemented functions have been implemented, and the project is now in a much more complete state. I am still working on the documentation, but I have made significant progress on it, and I will be uploading it to the repository as I go.</p>
+<p>I will look into adding a website for the project, and I will be uploading the documentation to the repository as I go. I am also working on a website for the project, which will be up soon.</p>
+<hr  />
+<p>[0.2.8] - 2026-02-04</p>
+<p>Makefile</p>
+<p>menu - <a class="el" href="../../d3/dbd/a01100.html" title="Command line start-up for C-Menu components.">menu.c</a> <a class="el" href="../../d9/d5b/a01127.html" title="The working part of C-Menu Menu.">menu_engine.c</a> <a class="el" href="../../dd/d09/a01118.html" title="Parse menu description file and create Menu.">parse_menu_desc.c</a></p>
+<p>form - form.c</p>
+<p>pick - pick.c</p>
+<p>view - view.c</p>
+<p>ckeys - ckeys.c</p>
+<p>enterchr - <a class="el" href="../../d3/ddc/a01142.html" title="Enter a single character from keyboard.">enterchr.c</a></p>
+<p>enterstr - <a class="el" href="../../d0/dc8/a01124.html" title="Enter a string from keyboard.">enterstr.c</a></p>
+<p>optsp - optsp.c</p>
+<p>whence - <a class="el" href="../../d8/dbf/a01109.html" title="Find the full path of a file in the directories specified by the.">whence.c</a></p>
+<p>stripansi - <a class="el" href="../../d0/d61/a01130.html" title="removes ansi escape sequences beginning with &quot;\033[&quot;&quot; and ending in&quot;m&quot; or &quot;K&quot;">stripansi.c</a></p>
+<p>iloan - <a class="el" href="../../da/db7/a01088.html" title="Installment Loan Calculator.">iloan.c</a></p>
+<p>lf - <a class="el" href="../../dd/de4/a01121.html" title="list files matching a regular expression">lf.c</a></p>
+<p>add_executable(form form.c) target_sources(form PRIVATE $&lt;TARGET_OBJECTS:cmenu&gt;) target_link_libraries(form cm ${LIBS})</p>
+<p>add_executable(enterchr <a class="el" href="../../d3/ddc/a01142.html" title="Enter a single character from keyboard.">enterchr.c</a>) target_link_libraries(enterchr cm ${LIBS})</p>
+<p>add_executable(enterstr <a class="el" href="../../d0/dc8/a01124.html" title="Enter a string from keyboard.">enterstr.c</a>) target_link_libraries(enterstr cm ${LIBS})</p>
+<p>add_executable(iloan <a class="el" href="../../da/db7/a01088.html" title="Installment Loan Calculator.">iloan.c</a>) target_link_libraries(iloan cm ${LIBS})</p>
+<p>add_executable(lf <a class="el" href="../../dd/de4/a01121.html" title="list files matching a regular expression">lf.c</a>) target_link_libraries(lf cm ${LIBS})</p>
+<p>add_executable(pick pick.c) target_sources(pick PRIVATE $&lt;TARGET_OBJECTS:cmenu&gt;) target_link_libraries(pick cm ${LIBS})</p>
+<p>TARGETS menu form pick view ckeys enterchr enterstr lf optsp stripansi whence cm</p>
+<p><a class="el" href="../../d9/d65/a01145.html" title="Window support for C-Menu - EXPERIMENTAL.">dwin.c</a> <a class="el" href="../../d1/dae/a01136.html" title="General utility functions.">futil.c</a> <a class="el" href="../../de/df1/a01151.html" title="Screen IO Support for MENU.">scriou.c</a> <a class="el" href="../../d9/d10/a01103.html" title="Functions to execute external commands.">exec.c</a> <a class="el" href="../../df/dd5/a01115.html" title="signal handling for interrupt signals">sig.c</a></p>
+<p>COMMON_SRCS <a class="el" href="../../d6/dea/a01094.html" title="Test Curses Keys.">curskeys.c</a> <a class="el" href="../../db/d17/a01148.html" title="Field Edit and Entry for C-Menu Form.">fields.c</a> <a class="el" href="../../da/d4e/a01106.html" title="The working part of C-Menu Form.">form_engine.c</a> <a class="el" href="../../d2/df3/a01085.html" title="Initialize C-Menu View Screen IO and Input.">init_view.c</a> <a class="el" href="../../d1/dfa/a01097.html" title="pick from a list of choices">pick_engine.c</a> <a class="el" href="../../d0/d39/a01112.html" title="The working part of View.">view_engine.c</a> <a class="el" href="../../db/d28/a01133.html" title="Initialization for Menu Application Programs.">init.c</a> <a class="el" href="../../dd/df1/a01082.html" title="Create and destroy main data structures for C-Menu.">mem.c</a> mview.c opts.c)</p>
 <ul>
-<li><a class="el" href="../../d8/d4e/a01355.html#introduction" title="Introduction">Introduction</a></li>
-<li><a class="el" href="#installing-rust" title="Installing Rust">Installing Rust</a><ul>
-<li><a class="el" href="#installing-rust-on-linux-and-macos" title="Installing Rust On Linux and macOS">Installing Rust On Linux and macOS</a></li>
+<li>0.2.8 - 2026-02-03</li>
+<li>0.2.9 - 2026-02-04</li>
 </ul>
-</li>
-<li><a class="el" href="#about-c-menu-and-r-menu" title="About C-Menu and R-Menu">About C-Menu and R-Menu</a></li>
-<li><a class="el" href="#installing-bat" title="Installing Bat">Installing Bat</a><ul>
-<li><a class="el" href="#bat-on-linux" title="Bat On Linux">Bat On Linux</a></li>
-<li><a class="el" href="#bat-on-macos" title="Bat On macOS">Bat On macOS</a></li>
-<li><a class="el" href="#bat-on-windows" title="Bat On Windows">Bat On Windows</a></li>
-</ul>
-</li>
-<li><a class="el" href="#installing-ripgrep" title="Installing Ripgrep">Installing Ripgrep</a><ul>
-<li><a class="el" href="#ripgrep-on-linux" title="Ripgrep On Linux">Ripgrep On Linux</a></li>
-<li><a class="el" href="#ripgrep-on-macos" title="Ripgrep On macOS">Ripgrep On macOS</a></li>
-<li><a class="el" href="#ripgrep-on-windows" title="Ripgrep On Windows">Ripgrep On Windows</a></li>
-</ul>
-</li>
-<li><a class="el" href="#lsd" title="lsd">lsd</a><ul>
-<li><a class="el" href="#lsd-on-linux" title="lsd On Linux">lsd On Linux</a></li>
-<li><a class="el" href="#lsd-on-macos" title="lsd On macOS">lsd On macOS</a></li>
-<li><a class="el" href="#lsd-on-windows" title="lsd On Windows">lsd On Windows</a></li>
-</ul>
-</li>
-<li><a class="el" href="#highlighting" title="Highlighting">Highlighting</a></li>
-<li><a class="el" href="#tree-sitter" title="Tree-Sitter">Tree-Sitter</a><ul>
-<li><a class="el" href="#tree-sitter-on-linux" title="Tree-Sitter On Linux">Tree-Sitter On Linux</a></li>
-<li><a class="el" href="#tree-sitter-on-macos" title="Tree-Sitter On macOS">Tree-Sitter On macOS</a></li>
-<li><a class="el" href="#tree-sitter-on-windows" title="Tree-Sitter On Windows">Tree-Sitter On Windows</a></li>
-</ul>
-</li>
-<li><a class="el" href="#tree-sitter-cli" title="Tree-Sitter-CLI">Tree-Sitter-CLI</a><ul>
-<li><a class="el" href="#tree-sitter-cli-on-linux" title="Tree-Sitter-CLI On Linux">Tree-Sitter-CLI On Linux</a></li>
-<li><a class="el" href="#tree-sitter-cli-on-macos" title="Tree-Sitter-CLI On macOS">Tree-Sitter-CLI On macOS</a></li>
-<li><a class="el" href="#tree-sitter-cli-on-windows" title="Tree-Sitter-CLI On Windows">Tree-Sitter-CLI On Windows</a></li>
-</ul>
-</li>
-<li><a class="el" href="#tree-sitter-parsers" title="Tree-Sitter Parsers">Tree-Sitter Parsers</a><ul>
-<li><a class="el" href="#tree-sitter-parsers-on-linux" title="Tree-Sitter Parsers On Linux">Tree-Sitter Parsers On Linux</a></li>
-<li><a class="el" href="#tree-sitter-parsers-on-macos" title="Tree-Sitter Parsers On macOS">Tree-Sitter Parsers On macOS</a></li>
-<li><a class="el" href="#tree-sitter-parsers-on-windows" title="Tree-Sitter Parsers On Windows">Tree-Sitter Parsers On Windows</a></li>
-<li><a class="el" href="#testing-tree-sitter" title="Testing Tree-Sitter">Testing Tree-Sitter</a></li>
-</ul>
-</li>
-<li><a class="el" href="#rustlings" title="Rustlings">Rustlings</a></li>
-<li><a class="el" href="#neovim" title="Neovim">Neovim</a></li>
-<li><a class="el" href="#neovim-configuration" title="Neovim Configuration">Neovim Configuration</a><ul>
-<li><a class="el" href="#custom-highlights" title="Custom Highlights">Custom Highlights</a></li>
-<li><a class="el" href="#norcalli-colorizer" title="Norcalli Colorizer">Norcalli Colorizer</a><ul>
-<li><a class="el" href="#ai-overview-of-developer-norcalli" title="AI Overview of Developer Norcalli">AI Overview of Developer Norcalli</a></li>
-</ul>
-</li>
-<li><a class="el" href="#to-install-norcallis-nvim-colorizerlua" title="To Install Norcalli&#39;s nvim-colorizer.lua">To Install Norcalli's nvim-colorizer.lua</a></li>
-</ul>
-</li>
-<li><a class="el" href="#folkes-snacksnvim" title="Folke&#39;s Snacks.nvim">Folke's Snacks.nvim</a><ul>
-<li><a class="el" href="#ai-overview-of-developer-folke" title="AI Overview of Developer Folke">AI Overview of Developer Folke</a><ul>
-<li><a class="el" href="#to-install-folkes-lazyvim" title="To Install Folke&#39;s LazyVim">To Install Folke's LazyVim</a></li>
-<li><a class="el" href="#to-install-folkes-snacksnvim-colorizer" title="To Install Folke&#39;s Snacks.nvim-colorizer">To Install Folke's Snacks.nvim-colorizer</a></li>
-<li><a class="el" href="#to-use-the-neovim-unicode-art-in-snacksnvim" title="To Use the Neovim Unicode Art in Snacks.nvim">To Use the Neovim Unicode Art in Snacks.nvim</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="#neovim-linkage-to-the-c-menu-api" title="Neovim Linkage to the C-Menu API">Neovim Linkage to the C-Menu API</a></li>
-<li><a class="el" href="#ghostty" title="Ghostty">Ghostty</a><ul>
-<li><a class="el" href="#ghostty-on-linux" title="Ghostty On Linux">Ghostty On Linux</a></li>
-<li><a class="el" href="#ghostty-on-macos" title="Ghostty On macOS">Ghostty On macOS</a></li>
-<li><a class="el" href="#ghostty-on-windows" title="Ghostty On Windows">Ghostty On Windows</a></li>
-</ul>
-</li>
-<li><a class="el" href="#useful-configurations" title="Useful Configurations">Useful Configurations</a><ul>
-<li><a class="el" href="#alternate-bash-executable" title="Alternate Bash Executable">Alternate Bash Executable</a></li>
-<li><a class="el" href="#shell-configuration" title="Shell Configuration">Shell Configuration</a></li>
-<li><a class="el" href="#customize-your-terminal-emulator" title="Customize Your Terminal Emulator">Customize Your Terminal Emulator</a><ul>
-<li><a class="el" href="#fonts" title="Fonts">Fonts</a></li>
-<li><a class="el" href="#example-terminal-configurations" title="Example Terminal Configurations">Example Terminal Configurations</a><ul>
-<li><a class="el" href="../../dc/d4b/a01359.html#ghostty-configuration" title="Ghostty Configuration">Ghostty Configuration</a></li>
-<li><a class="el" href="#kitty-configuration" title="Kitty Configuration">Kitty Configuration</a></li>
-<li><a class="el" href="#alacritty-configuration" title="Alacritty Configuration">Alacritty Configuration</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="el" href="#additional-resources" title="Additional Resources">Additional Resources</a><ul>
-<li><a class="el" href="#lets-get-rusty" title="Let&#39;s Get Rusty">Let's Get Rusty</a></li>
-<li><a class="el" href="#folke" title="Folke">Folke</a></li>
-<li><a class="el" href="#other-resources" title="Other Resources">Other Resources</a></li>
-</ul>
-</li>
-<li><a class="el" href="#conclusion" title="Conclusion">Conclusion</a></li>
-<li><a class="el" href="../../d8/d4e/a01355.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository" title="🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.">🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</a></li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="introduction-3"></a>
-Introduction</h2>
-<p>C-Menu is a powerful C-based suite of programs that you can use to create a front-end infrastructure for applications. It includes <a class="el" href="../../d7/dc5/a01242.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d6/d1e/a01234.html">Form</a>, <a class="el" href="../../d7/d04/a01246.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d4/d22/a01250.html">View</a>, lf (list files), C-Keys, and RSH. Howver, the C-Menu examples rely on software that may not be included in all OS distributions. You may very well already have some or all of these tools installed.</p>
-<p>Because Rust's Cargo, is generally the easiest to use, and most dependable, the installation methods described in this document use Cargo wherever practical. You may prefer to use another package manager, and most Distro Package Managers are exceptional. If so, please refer to the documentation for that package manager for installation instructions.</p>
-<p>This guide will walk you through the installation process for Rust and some of the most useful tools that complement C-Menu.</p>
-<p>Not all of these applications are written in Rust. Ghostty is written in Zig and Neovim is written in C. I havent listed the terminal emulators, Kitty or Alacritty, but I have used both and they are excellent terminal emulators. I have all three installed on my desktop. I use Ghostty most because it lives up to the ethos of Rust. It's solid, fast, and reliable.</p>
-<p>The ability to span the two worlds of C and Rust is far more valuable than being proficient in either language, and one computer language is never enough.</p>
-<p>By using C-Menu now, and better yet, contributing to the C-Menu project, you can gain first-hand knowledge of the transition to Rust, shape the future of the tool, and add software migration expert to your skill set.</p>
-<h2 class="doxsection"><a class="anchor" id="installing-rust"></a>
-Installing Rust</h2>
-<p>C-Menu is written in C, but there are many amazing tools written in Rust that can augment your experience using C-Menu. Even if you never plan to write code in rust, the Cargo package manager that comes with Rust is worth the effort to install Rust. You will notice immediately that Cargo is the easiest and most reliable way to install Rust-based tools and their dependencies. Below are instructions on how to install Rust and some of my favorite Rust-based tools.</p>
-<p>So much for the preamble. Let's jump in.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="installing-rust-on-linux-and-macos"></a>
-Installing Rust On Linux and macOS</h3>
-<p>Run the following in your terminal, then follow the onscreen instructions.</p>
-<div class="fragment"><div class="line">curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh</div>
-</div><!-- fragment --><p>For more detailed instructions, visit</p>
-<p><a href="https://www.rust-lang.org/tools/install">the official Rust installation page</a></p>
-<p>After installation, ensure that your environment is set up correctly by running:</p>
-<div class="fragment"><div class="line">source $HOME/.cargo/env</div>
-</div><!-- fragment --><p>You can verify the installation by checking the Rust version:</p>
-<div class="fragment"><div class="line">rustc --version</div>
-</div><!-- fragment --><p>This should display the installed Rust version, confirming that Rust is successfully installed on your system.</p>
-<p>You can update Rust and Cargo at any time by running:</p>
-<div class="fragment"><div class="line">rustup update</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="about-c-menu-and-r-menu"></a>
-About C-Menu and R-Menu</h2>
-<p>Eventually, if there is enough interest in C-Menu, it will be ported to Rust. The plan is to thoroughly test and debug the C version, and incrementally incorporate Rust-like coding paradigms into the C codebase. Once the C version is stable and feature complete, we begin the porting process, we will begin refactoring C-Menu to use more modular code structures and rust-like paradigms that will facilitate the eventual port to Rust.</p>
-<p>Come along with us on this exciting journey. If you already know Rust, we could use your help. If you don't know Rust, you can learn with us. You can contribute to R-Menu's evolution, and get involved in the Rust community. Add Rust to your CV or Resume.</p>
-<p>And, then you can say, you were a part of the team that created R-Menu. 😀</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="installing-bat"></a>
-Installing Bat</h2>
-<p>Bat is a popular Rust-based tool that serves as a cat clone with syntax highlighting. It's easier to install and accommodates a variety of file types not addressed by Tree-Sitter. To install Bat, use the following commands based on your operating system:</p>
-<h3 class="doxsection"><a class="anchor" id="bat-on-linux"></a>
-Bat On Linux</h3>
-<p>After installing Rust, you can install Bat using Cargo, Rust's package manager:</p>
-<div class="fragment"><div class="line">cargo install bat</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="bat-on-macos"></a>
-Bat On macOS</h3>
-<div class="fragment"><div class="line">brew install bat</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="bat-on-windows"></a>
-Bat On Windows</h3>
-<div class="fragment"><div class="line">choco install bat</div>
-</div><!-- fragment --><p>After installation, you can verify that Bat is installed correctly by running:</p>
-<div class="fragment"><div class="line">bat --version</div>
-</div><!-- fragment --><p>This should display the installed Bat version, confirming that Bat is successfully installed on your system.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="installing-ripgrep"></a>
-Installing Ripgrep</h2>
-<p>Ripgrep is a modernized and powerful replacement for grep. It is amazingly fast and incorporates many features not available in grep.</p>
-<p>To install Ripgrep, you can use the following commands depending on your operating system</p>
-<h3 class="doxsection"><a class="anchor" id="ripgrep-on-linux"></a>
-Ripgrep On Linux</h3>
-<p>After installing Rust, you can install Ripgrep using Cargo, Rust's package manager:</p>
-<div class="fragment"><div class="line">cargo install ripgrep</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="ripgrep-on-macos"></a>
-Ripgrep On macOS</h3>
-<div class="fragment"><div class="line">brew install ripgrep</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="ripgrep-on-windows"></a>
-Ripgrep On Windows</h3>
-<div class="fragment"><div class="line">choco install ripgrep</div>
-</div><!-- fragment --><p>After installation, you can verify that Ripgrep is installed correctly by running:</p>
-<div class="fragment"><div class="line">rg --version</div>
-</div><!-- fragment --><p>This should display the installed Ripgrep version, confirming that Ripgrep is successfully installed on your system.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="lsd"></a>
-lsd</h2>
-<p>To install lsd, a modern replacement for 'ls' with colorful output and additional features, you can use the following commands based on your operating system:</p>
-<h3 class="doxsection"><a class="anchor" id="lsd-on-linux"></a>
-lsd On Linux</h3>
-<p>After installing Rust, you can install lsd using Cargo, Rust's package manager:</p>
-<div class="fragment"><div class="line">cargo install lsd</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="lsd-on-macos"></a>
-lsd On macOS</h3>
-<div class="fragment"><div class="line">brew install lsd</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="lsd-on-windows"></a>
-lsd On Windows</h3>
-<div class="fragment"><div class="line">choco install lsd</div>
-</div><!-- fragment --><p>After installation, you can verify that lsd is installed correctly by running:</p>
-<div class="fragment"><div class="line">lsd --version</div>
-</div><!-- fragment --><p>This should display the installed lsd version, confirming that lsd is successfully installed on your system.</p>
-<p>A word of caution here, "lsd" in a different context, is an acronym for a powerful hallucinogenic drug. Don't tell your grandmother you use lsd without explaining that it's "ls Deluxe", a file listing utility, and not the "LSD" she remembers from her college days at UC Berkeley. 😎</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="highlighting"></a>
-Highlighting</h2>
-<p>Highlighted text is more pleasing to most, but there is more to it than mere aesthetics. Highlighting can improve code readability and comprehension, making it easier to identify syntax errors, keywords, and other important elements in the code. This can lead to increased productivity and reduced errors when working with code.</p>
-<p>Currently, there is no shortage of software for highlighting, and most are easy enough to install and use. Here are a few popular options:</p>
-<p>GNU's Source Highlight is a widely used and very capable tool. It works well with a large number of programming languages. It works better with some than others.</p>
-<p>Pygments, is another popular syntax highlighter written in Python. Pygments also offers a wide variety of language support and customization options.</p>
-<p>I have found the Rust-based tool, bat, to perform spectacularly in some applications, but not so well in others. It's a relatively new tool, so you will have to be patient with a few glitches in the edge cases.</p>
-<p>Lastly, there is Tree-Sitter, which is a powerful and efficient parsing library that can be used for syntax highlighting and code analysis. It deserves it's own section. Keep reading.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="tree-sitter"></a>
-Tree-Sitter</h2>
-<p>To put it mildly, Tree-Sitter is a game-changer when it comes to parsing and analyzing source code. It provides a robust and efficient way to build incremental parsers for programming languages, enabling advanced features like syntax highlighting, code folding, and more. Tree-Sitter is widely adopted in various code editors and IDEs, making it an essential tool for developers who work with code on a regular basis.</p>
-<p>The syntax highlighting provided by Tree-Sitter is top-notch, offering precise and context-aware highlighting that enhances code readability and understanding. It can handle complex language constructs and edge cases that traditional syntax highlighters often struggle with.</p>
-<p>In a phrase, it'll knock your socks off! 😮</p>
-<div class="image">
-<img src="../../Tree-sitter-small.png" alt=""/>
-<div class="caption">
-Tree-Sitter</div></div>
-    <p>Tree-Sitter works with Neovim, C-Menu, and many other editors and pagers to provide advanced syntax highlighting and code analysis features.</p>
-<div class="image">
-<img src="../../tree-sitter1.png" alt=""/>
-<div class="caption">
-Tree-Sitter in C-Menu View</div></div>
-    <p>To install Tree-Sitter, you can use the following commands depending on your operating system.</p>
-<h3 class="doxsection"><a class="anchor" id="tree-sitter-on-linux"></a>
-Tree-Sitter On Linux</h3>
-<p>After installing Rust, you can install Tree-Sitter using Cargo, Rust's package manager. Cargo install is designed for programs, and the tree-sitter package consists of libraries, so it has to be installed as a dependency. Insert a line in the Dependency section of any Cargo.toml and type "cargo add tree-sitter".</p>
-<div class="fragment"><div class="line">[Dependencies]</div>
-<div class="line">tree-sitter = &quot;0.26.5&quot;</div>
-</div><!-- fragment --><div class="fragment"><div class="line">cargo add tree-sitter</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="tree-sitter-on-macos"></a>
-Tree-Sitter On macOS</h3>
-<div class="fragment"><div class="line">brew install tree-sitter</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="tree-sitter-on-windows"></a>
-Tree-Sitter On Windows</h3>
-<div class="fragment"><div class="line">choco install tree-sitter</div>
-</div><!-- fragment --><p>After installation, you can verify that Tree-Sitter is installed correctly by running:</p>
-<div class="fragment"><div class="line">tree-sitter --version</div>
-</div><!-- fragment --><p>This should display the installed Tree-Sitter version, confirming that Tree-Sitter is successfully installed on your system.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="tree-sitter-cli"></a>
-Tree-Sitter-CLI</h2>
-<p>To install Tree-Sitter-CLI, a command-line interface for Tree-Sitter, you can use the following commands based on your operating system:</p>
-<h3 class="doxsection"><a class="anchor" id="tree-sitter-cli-on-linux"></a>
-Tree-Sitter-CLI On Linux</h3>
-<p>After installing Rust, you can install Tree-Sitter-CLI using Cargo, Rust's package manager</p>
-<div class="fragment"><div class="line">cargo install tree-sitter-cli</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="tree-sitter-cli-on-macos"></a>
-Tree-Sitter-CLI On macOS</h3>
-<div class="fragment"><div class="line">brew install tree-sitter-cli</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="tree-sitter-cli-on-windows"></a>
-Tree-Sitter-CLI On Windows</h3>
-<div class="fragment"><div class="line">choco install tree-sitter-cli</div>
-</div><!-- fragment --><p>After installation, you can verify that Tree-Sitter-CLI is installed correctly by running:</p>
-<div class="fragment"><div class="line">tree-sitter --version</div>
-</div><!-- fragment --><p>This should display the installed Tree-Sitter-CLI version, confirming that Tree-Sitter-CLI is successfully installed on your system.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="tree-sitter-parsers"></a>
-Tree-Sitter Parsers</h2>
-<p>To install Tree-Sitter parsers for various programming languages, you can use the following commands based on your operating system:</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="tree-sitter-parsers-on-linux"></a>
-Tree-Sitter Parsers On Linux</h3>
-<p>After installing Rust, you can install Tree-Sitter parsers using Cargo, Rust's package manager. As always, I highly recommend installing only the parsers you need. Here are some examples:</p>
-<div class="fragment"><div class="line">cargo install tree-sitter-python</div>
-<div class="line">cargo install tree-sitter-javascript</div>
-<div class="line">cargo install tree-sitter-rust</div>
-<div class="line">cargo install tree-sitter-go</div>
-<div class="line">cargo install tree-sitter-cpp</div>
-</div><!-- fragment --><p>I installed my tree-sitter parsers in the following directory structure:</p>
-<div class="fragment"><div class="line">~/.config/tree-sitter</div>
-<div class="line">  ├── config.json</div>
-<div class="line">  └── parsers</div>
-<div class="line">  ├── tree-sitter-awk</div>
-<div class="line">  ├── tree-sitter-bash</div>
-<div class="line">  ├── tree-sitter-cpp</div>
-<div class="line">  ├── tree-sitter-c</div>
-<div class="line">  ├── tree-sitter-go</div>
-<div class="line">  ├── tree-sitter-lua</div>
-<div class="line">  ├── tree-sitter-markdown</div>
-<div class="line">  ├── tree-sitter-rust</div>
-<div class="line">  └── tree-sitter-zig</div>
-</div><!-- fragment --><p>The <span class="tt">config.json</span> file contains configuration settings for Tree-Sitter. You will find a sample config.json file in the tree-sitter directory of thie repository.</p>
-<p>The <span class="tt">parsers</span> directory contains the installed Tree-Sitter parsers for different programming languages.</p>
-<p>To let Tree-Sitter know where to find your custom parsers, you need to specify the parser directories in the <span class="tt">config.json</span> file. Tree-sitter will automatically look in ~/.config/tree-sitter. Here's an example of how to do this:</p>
-<div class="fragment"><div class="line">cd ~/.config/tree-sitter</div>
-<div class="line">vi config.json</div>
-<div class="line"> </div>
-<div class="line">&quot;parser-directories&quot;: [</div>
-<div class="line">   /home/bill/.config/tree-sitter/parsers</div>
-<div class="line">]</div>
-</div><!-- fragment --><p>Below is an example file arrangement for Tree-Sitter parsers and configuration files. ~/.config/tree-sitter/parsers contains the installed Tree-Sitter parsers.</p>
-<div class="image">
-<img src="../../tree-sitter-parsers.png" alt=""/>
-<div class="caption">
-Tree-Sitter Parsers</div></div>
-    <p>You can also configure a custom color scheme in the config.json file if you like. Here's mine:</p>
-<div class="image">
-<img src="../../tree-sitter-config.json.png" alt=""/>
-<div class="caption">
-~/.config/tree-sitter/config.json</div></div>
-    <p>The ~/tree-sitter/config.json distributed with tree-sitter uses the 256 color xterm palette, but you can also use HTML style six digit hex numbers as shown above. Refer to the Tree-Sitter documentation for more details on configuring the color scheme.</p>
-<p>Note: I find it much easier to use the six-digit hex color codes when configuring Tree-Sitter colors. This way, I can easily match the colors used in my terminal emulator and other applications. The 256 color xterm palette can be limiting and may not provide the exact colors I want for syntax highlighting. Using hex codes gives me more flexibility and allows for a more consistent color scheme across my development environment. They are also more intuitive to work with since they directly represent <a class="el" href="../../d9/d2e/a01194.html">RGB</a> values.</p>
-<div class="fragment"><div class="line">cargo install tree-sitter-&lt;language&gt;</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="tree-sitter-parsers-on-macos"></a>
-Tree-Sitter Parsers On macOS</h3>
-<div class="fragment"><div class="line">brew install tree-sitter-&lt;language&gt;</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="tree-sitter-parsers-on-windows"></a>
-Tree-Sitter Parsers On Windows</h3>
-<div class="fragment"><div class="line">choco install tree-sitter-&lt;language&gt;</div>
-</div><!-- fragment --><p>After installation, you can verify that the Tree-Sitter parser for your chosen language is installed correctly by running:</p>
-<div class="fragment"><div class="line">tree-sitter &lt;language&gt; --version</div>
-</div><!-- fragment --><p>This should display the installed Tree-Sitter parser version for your chosen language, confirming that it is successfully installed on your system. Replace <span class="tt">&lt;language&gt;</span> with the specific programming language you want to install the parser for, such as <span class="tt">python</span>, <span class="tt">javascript</span>, <span class="tt">rust</span>, etc.</p>
-<p>To put it bluntly, nothing compares with Tree-Sitter for syntax highlighting and code analysis. Once you start using it, you'll wonder how you ever lived without it.</p>
-<div class="image">
-<img src="../../tree-sitter4.png" alt=""/>
-<div class="caption">
-Tree-Sitter in C-Menu View</div></div>
-    <hr  />
-<h3 class="doxsection"><a class="anchor" id="testing-tree-sitter"></a>
-Testing Tree-Sitter</h3>
-<p>To test Tree-Sitter, you can use the following command:</p>
-<div class="fragment"><div class="line">tree-sitter parse &lt;source-file&gt;</div>
-</div><!-- fragment --><p>This command will parse the specified source file and output the syntax tree to the terminal. You can use this command to verify that Tree-Sitter is working correctly and tosee how it parses different programming languages. Replace <span class="tt">&lt;source-file&gt;</span> with the path to a source code file in a programming language for which you have installed a Tree-Sitter parser. For example, if you have installed the Tree-Sitter parser for Python, you can test it with a Python source file like this:</p>
-<div class="fragment"><div class="line">tree-sitter parse example.py</div>
-</div><!-- fragment --><p>This will output the syntax tree for the <span class="tt">example.py</span> file, allowing you to see how Tree-Sitter parses the Python code. You can test it with source files in other programming languages as well, depending on which Tree-Sitter parsers you have installed.</p>
-<p>To test Tree-Sitter's syntax highlighting capabilities, you can use it in conjunction with a compatible code editor or pager that supports Tree-Sitter. For example, if you are using Neovim, you can enable Tree-Sitter-based syntax highlighting by configuring Neovim to use the installed Tree-Sitter parsers. Once configured, open a source code file in Neovim, and you should see enhanced syntax highlighting based on the Tree-Sitter parsing of the code.</p>
-<p>Or type:</p>
-<div class="fragment"><div class="line">tree-sitter highlight &lt;source-file&gt; | view</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="rustlings"></a>
-Rustlings</h2>
-<p>Even if you are an experienced programmer, Rust is not an easy language to learn. The ownership model and borrow checker are unique concepts that require a different way of thinking about memory management and data lifetimes. If you are new to programming, Rust can be even more challenging because it requires a solid understanding of programming fundamentals.</p>
-<p>However, with dedication and practice, anyone can learn Rust. There are many great resources available online, including the official Rust documentation, tutorials, and community forums. Additionally, there are many books and courses that can help you learn Rust from scratch.</p>
-<p>Start with the Rust Book, and concurrently do the exercises in Rustlings. Rustlings is an invaluable companion to the Rust Book.</p>
-<p><a href="https://doc.rust-lang.org/book/">The Rust Book</a></p>
-<p><img src="../../screenshots/rustlings1.png" alt="Rustlings" class="inline"/></p>
-<p><img src="../../screenshots/rustlings2.png" alt="Rustlings" class="inline"/></p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="neovim"></a>
-Neovim</h2>
-<p>I consider Vim/Neovim not just essential, but indispensable. I loved vim and used it for many years. I can't say whether Vim or Neovim is better because both have evolved to provide competitive features. I can say, for me, Neovim plugins seem more accessible, and it has everything I want.</p>
-<div class="image">
-<img src="../../Neovim.png" alt=""/>
-<div class="caption">
-Neovim</div></div>
-    <hr  />
-<h2 class="doxsection"><a class="anchor" id="neovim-configuration"></a>
-Neovim Configuration</h2>
-<h3 class="doxsection"><a class="anchor" id="custom-highlights"></a>
-Custom Highlights</h3>
-<p>To use custom_highlights.lua, you can copy it to your nvim config directory. For example, if your nvim config directory is located at ~/.config/nvim, you can run the following command:</p>
-<div class="fragment"><div class="line">cp custom_highlights.lua ~/.config/nvim/lua/config</div>
-</div><!-- fragment --><p>and add the following line to your init.lua file:</p>
-<div class="fragment"><div class="line">require(&quot;config.custom_highlights&quot;)</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="norcalli-colorizer"></a>
-Norcalli Colorizer</h3>
-<p><a href="https://github.com/norcalli">Norcalli</a></p>
-<p><a href="https://github.com/norcalli/nvim-colorizer.lua">Norcalli nvim-colorizer Repo</a></p>
-<h4 class="doxsection"><a class="anchor" id="ai-overview-of-developer-norcalli"></a>
-AI Overview of Developer Norcalli</h4>
-<p>from <a href="https://chat.openai.com/">ChatGPT</a></p>
-<p>The GitHub profile for the user "Norcalli" (Ashkan Kiani), a core developer on the Neovim project, can be found at <a href="https://github.com/norcalli">Norcalli</a>.</p>
-<p>This developer has created several popular Neovim plugins in Lua, including:</p>
-<p>[nvim-colorizer.lua]: A high-performance, dependency-free plugin that highlights color codes in your buffer.</p>
-<p><a href="https://github.com/norcalli/nvim.lua">nvim.lua</a>: A Lua module providing useful shortcut/magic methods for mappings.</p>
-<p><a href="https://github.com/norcalli/profiler.nvim">profiler.nvim</a>: A profiling tool for Neovim.</p>
-<p>typeracer.nvim: A Neovim game to practice typing speed.</p>
-<p><a href="https://github.com/norcalli/nvim-terminal.lua">nvim-terminal.lua</a>: A high performance filetype mode for Neovim leveraging conceal and highlights.</p>
-<p><a href="https://github.com/norcalli/nvim-base16.lua">nvim-base16.lua</a>: A programmatic Lua library for setting base16 themes in Neovim.</p>
-<p><a href="https://github.com/norcalli/neovim-plugin">neovim-plugin</a>: A Lua library to help standardize the creation of Lua-based Neovim plugins.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="to-install-norcallis-nvim-colorizerlua"></a>
-To Install Norcalli's nvim-colorizer.lua</h3>
-<p>Add colorizer.lua containing the following code to lua/plugins directory:</p>
-<div class="fragment"><div class="line">return {</div>
-<div class="line">    {</div>
-<div class="line">        &quot;norcalli/nvim-colorizer.lua&quot;,</div>
-<div class="line">        config = function()</div>
-<div class="line">            require(&quot;colorizer&quot;).setup({</div>
-<div class="line">                &quot;*&quot;,</div>
-<div class="line">            })</div>
-<div class="line">        end,</div>
-<div class="line">    },</div>
-<div class="line">}</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="folkes-snacksnvim"></a>
-Folke's Snacks.nvim</h2>
-<p><a href="https://github.com/folke">Folke</a></p>
-<p><a href="https://github.com/LazyVim/LazyVim">Folke LazyVim Repo</a></p>
-<p><a href="https://github.com/folke/snacks.nvim">Folke Snacks Repo</a></p>
-<h4 class="doxsection"><a class="anchor" id="ai-overview-of-developer-folke"></a>
-AI Overview of Developer Folke</h4>
-<p>from <a href="https://chat.openai.com/">ChatGPT</a></p>
-<p>Folke Lemaitre, known as "folke" on GitHub, is a prominent developer in the Neovim community, most recognized as the author of the popular plugin manager lazy.nvim and the comprehensive Neovim configuration framework LazyVim.</p>
-<p>He has developed a suite of widely used Neovim plugins, including:</p>
-<p><a href="https://github.com/folke/lazy.nvim">lazy.nvim</a>: A modern plugin manager known for its powerful UI, automatic caching, bytecode compilation for fast startup times, and focus on easy configuration.</p>
-<p><a href="http://www.lazyvim.org/">LazyVim</a>: A full-featured Neovim setup powered by lazy.nvim, designed to be easily customizable and extended.</p>
-<p><a href="https://github.com/folke/snacks.nvim">which-key.nvim</a>: A plugin that helps users remember keymaps by showing available keybindings in a popup as they type.</p>
-<p><a href="https://github.com/folke/neodev.nvim">noice.nvim</a>: A highly experimental plugin that completely replaces the UI for messages, the command line, and the popup menu.</p>
-<p><a href="https://github.com/folke/drop.nvim">trouble.nvim</a> A utility for pretty display of diagnostics, references, quickfix lists, and more to help manage code issues.</p>
-<p><a href="https://github.com/folke/flash.nvim">flsh.nvim</a>: A plugin that enhances code navigation with search labels, improved character motions, and Treesitter integration.</p>
-<p><a href="https://github.com/folke/ts-comments.nvim">tokyonight.nvim</a>: A plugin that provides a distraction-free coding environment by focusing on the active window.</p>
-<p>Folke's contributions are significant in shaping the modern Neovim experience, particularly by leveraging Lua for more powerful and efficient configurations and plugins. Many of his projects can be explored on his <a href="https://github.com/folke">GitHub profile</a> or the <a href="https://dotfyle.com/folke">Dotfyle</a> community page.</p>
-<hr  />
-<h4 class="doxsection"><a class="anchor" id="to-install-folkes-lazyvim"></a>
-To Install Folke's LazyVim</h4>
-<p><a href="https://www.lazyvim.org/installation">LazyVim Installation</a></p>
-<p>Lazyvim is a Neovim configuration that is designed to be fast, minimal, and easy to use. It comes with a set of pre-configured plugins and settings that enhance the Neovim experience. Lazyvim is highly customizable, allowing users to tailor their Neovim setup to their specific needs.</p>
-<h4 class="doxsection"><a class="anchor" id="to-install-folkes-snacksnvim-colorizer"></a>
-To Install Folke's Snacks.nvim-colorizer</h4>
-<div class="fragment"><div class="line">{</div>
-<div class="line">  &quot;folke/snacks.nvim&quot;,</div>
-<div class="line">  priority = 1000,</div>
-<div class="line">  lazy = false,</div>
-<div class="line">  opts = {</div>
-<div class="line">    -- your configuration comes here</div>
-<div class="line">    -- or leave it empty to use the default settings</div>
-<div class="line">    dashboard = { enabled = true },</div>
-<div class="line">    indent = { enabled = true },</div>
-<div class="line">    picker = { enabled = true },</div>
-<div class="line">    -- ...</div>
-<div class="line">  },</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>Snacks is a Neovim plugin that provides a collection of useful snippets and utilities for Neovim users. One of the features of Snacks is the ability to display a slick Neovim logo in the splash screen when Neovim starts up.</p>
-<h4 class="doxsection"><a class="anchor" id="to-use-the-neovim-unicode-art-in-snacksnvim"></a>
-To Use the Neovim Unicode Art in Snacks.nvim</h4>
-<p>You will find a copy of this Unicode Art in the C-Menu root directory under:</p>
-<p>configs/nvim/lua/plugins/snacks.lua</p>
-<p>I don't know who created this particular Neovim Unicode Art, but it has been shared widely in the Neovim community and is often used as a splash screen for Neovim configurations. It is possible that the original creator of this logo is unknown or that it was created by multiple people over time. One clue is that it exclusively uses the Unicode code points listed below:</p>
-<div class="fragment"><div class="line">█  2588</div>
-<div class="line">  E0BA</div>
-<div class="line">  E0B8</div>
-<div class="line">  E0BE</div>
-<div class="line">  E0BC</div>
-</div><!-- fragment --><div class="fragment"><div class="line">[[</div>
-<div class="line">      ████ ██████           █████      ██</div>
-<div class="line">     ███████████             █████ </div>
-<div class="line">     █████████ ███████████████████ ███   ███████████</div>
-<div class="line">    █████████  ███    █████████████ █████ ██████████████</div>
-<div class="line">   █████████ ██████████ █████████ █████ █████ ████ █████</div>
-<div class="line"> ███████████ ███    ███ █████████ █████ █████ ████ █████</div>
-<div class="line">██████  █████████████████████ ████ █████ █████ ████ ██████]],</div>
-</div><!-- fragment --><ul>
-<li>Note 1: If the above Unicode Art does not display correctly, make sure you have a font that supports the necessary Unicode characters, such as a Nerd Font or a font with good Unicode coverage. Additionally, ensure that your terminal emulator is configured to use a compatible font and that it supports the Private Use Area of Unicode where some of these characters are located.</li>
-<li>Note 2: Even if you have a compatible font, the Unicode Art may not appear as intended in your web browser. If it looks blocky or misaligned, try copying and pasting the Unicode Art into a terminal emulator that supports the necessary Unicode characters, such as Neovim or a modern terminal emulator with good Unicode support. It is likely that the Unicode code points will render correctly in a terminal emulator if you have a compatible font installed.</li>
-</ul>
-<p>You may have noticed that all but the first code points are in the Private Use Area of Unicode, which means they are not assigned to any specific character and can be used for custom purposes. This is a common practice in ASCII Art and Unicode Art to create unique designs without relying on standard characters. If anyone knows the original creator of this logo, please let me know so I can give them proper credit.</p>
-<hr  />
-<p>Once you have Snacks.nvim installed, you can enable the Neovim logo in the splash screen by configuring the plugin settings. The logo will be displayed when you start Neovim, providing a visually appealing welcome screen.</p>
-<p>The image below shows the Neovim logo in the splash screen of Neovim when using Snacks.nvim:</p>
-<div class="image">
-<img src="../../Lazyvim.png" alt=""/>
-<div class="caption">
-Lazyvim</div></div>
-    <p>To install Neovim and Lazyvim, follow the instructions on the <a href="https://www.lazyvim.org/installation">Lazyvim website</a></p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="neovim-linkage-to-the-c-menu-api"></a>
-Neovim Linkage to the C-Menu API</h2>
-<p>Neovim can be linked to the C-Menu API to provide an enhanced editing experience when working with source code files in C-Menu. By configuring Neovim to use the C-Menu API, you can take advantage of Neovim's powerful editing features while working within the C-Menu environment.</p>
-<p>For example, you want to use one of the C-Menu API functions, but you don't remember the exact syntax. Just type the function name in Neovim, move the cursor over the function name, and press Shift-K. You will get a pop-up documenting the function parameters, data types, and signature as below:</p>
-<div class="image">
-<img src="../../ShiftK.png" alt=""/>
-<div class="caption">
-Neovim / C-Menu API</div></div>
-    <hr  />
-<h2 class="doxsection"><a class="anchor" id="ghostty"></a>
-Ghostty</h2>
-<p>Ghostty is a terminal emulator that is designed to be fast, lightweight, and highly customizable. It is built with Zig and leverages modern technologies to provide a smooth and efficient terminal experience. Ghostty supports features such as GPU acceleration, ligatures, and a wide range of customization options.</p>
-<p>To install Ghostty, you can use the following commands based on your operating system:</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="ghostty-on-linux"></a>
-Ghostty On Linux</h3>
-<p>After installing Rust on Linux, you can install Ghostty using Cargo, Rust's package manager:</p>
-<div class="fragment"><div class="line">cargo install ghostty</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="ghostty-on-macos"></a>
-Ghostty On macOS</h3>
-<div class="fragment"><div class="line">brew install ghostty</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="ghostty-on-windows"></a>
-Ghostty On Windows</h3>
-<div class="fragment"><div class="line">choco install ghostty</div>
-</div><!-- fragment --><p>After installation, you can verify that Ghostty is installed correctly by running:</p>
-<div class="fragment"><div class="line">ghostty --version</div>
-</div><!-- fragment --><hr  />
-<p>What you see below may not be essential for development projects, but it demonstrates Neovim, Ghostty, and Lazyvim working together in harmony to provide great flexibility.</p>
-<div class="image">
-<img src="../../Ghostty.png" alt=""/>
-<div class="caption">
-Ghostty With Neovim and Lazyvim</div></div>
-    <div class="image">
-<img src="../../Neovim-v.png" alt=""/>
-<div class="caption">
-Ghostty With Neovim and Lazyvim</div></div>
-    <p>This feature is actually quite useful when searching for a particular source file among many files in a large project. You can quickly preview files without opening them fully in Neovim.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="useful-configurations"></a>
-Useful Configurations</h2>
-<p>This document describes some useful configurations for C-Menu and terminal emulators. These configurations are optional but recommended for a better user experience.</p>
-<h3 class="doxsection"><a class="anchor" id="alternate-bash-executable"></a>
-Alternate Bash Executable</h3>
-<p>If you have had problems with the bash executable distributed with your OS, you may want to download the bash source distribution and build your own bash executable. There are many reasons why you might want to do this, including security concerns, bugs in the bash version provided by your OS, or the need for a specific feature that is not available in your OS's bash version.</p>
-<p>After building your own bash executable, you should consider renaming it to something other than "bash". For example, you might name it "jcalc", "mmdb", or "xmlock", something that will blend in with a ps listing. This is especially important if you are using a system where the default bash executable is known to have security vulnerabilities or other issues.</p>
-<p>There are horror stories about systems that have been compromised because the bash executable was exploited. In one instance, an OS update overwrote the bash executable with one that would only start in restricted mode. It wouldn't even allow running executables from /bin and /sbin. By using a custom-named bash executable, you can reduce the risk of such exploits and mistakes. You can leave the original bash executable intact as a backup.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="shell-configuration"></a>
-Shell Configuration</h3>
-<p>The following shell commands are sourced by xsh, bash, and sh.</p>
-<p>This snippet, stolen from bashfaq #24 prepends directories to PATH if the directories exist and aren't already in PATH. It also defines two convenience functions, xx and mm, to start a root shell and the menuapp, respectively. It sets the default shell to xsh if available, otherwise bash.</p>
-<p>It sets a shorter delay for curses escape sequences</p>
-<p>and configures a colorful prompt with red for root and green for normal users.</p>
+<h2 class="doxsection"><a class="anchor" id="fixed"></a>
+Fixed</h2>
 <ul>
-<li>prepend_path makes it easy to prepend directories to PATH without producing duplicate entries. Use it to prepend ~/menuapp/bin or other directories to PATH.</li>
+<li>Prevent segmentation fault upon <span class="tt">close()</span> ([#28](link-to-pr))</li>
 </ul>
-<div class="fragment"><div class="line">pp() {</div>
-<div class="line">    case &quot;:${PATH}:&quot; in</div>
-<div class="line">    *:&quot;$1&quot;:*) ;;</div>
-<div class="line">    *)</div>
-<div class="line">        PATH=&quot;$1:$PATH&quot;</div>
-<div class="line">        ;;</div>
-<div class="line">    esac</div>
-<div class="line">}</div>
-<div class="line">PATH=/usr/bin:/bin:/usr/sbin:/sbin</div>
-<div class="line">for P in /usr/local/sbin \</div>
-<div class="line">    /usr/local/bin \</div>
-<div class="line">    /usr/lib64/qt6/bin \</div>
-<div class="line">    /usr/lib/qt6/bin \</div>
-<div class="line">    &quot;$HOME&quot;/.local/bin \</div>
-<div class="line">    &quot;$HOME&quot;/.cargo/bin \</div>
-<div class="line">    /usr/local/bin/zig-0.15.2 \</div>
-<div class="line">    &quot;$HOME&quot;/menuapp/bin; do</div>
-<div class="line">    [ -d &quot;$P&quot; ] &amp;&amp; pp &quot;$P&quot;</div>
-<div class="line">done</div>
-<div class="line">export PATH</div>
-</div><!-- fragment --><ul>
-<li>from a shell prompt, type xx to start a root shell</li>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md028--2026-02-04"></a>
+[0.2.8]- 2026-02-04</h1>
+<h2 class="doxsection"><a class="anchor" id="added"></a>
+Added</h2>
+<ul>
+<li>Initial release of the project ([<span class="tt">a1b2c3d</span>](link-to-commit))</li>
 </ul>
-<div class="fragment"><div class="line">which rsh &gt;/dev/null 2&gt;&amp;1 &amp;&amp; xx() { rsh; }</div>
-</div><!-- fragment --><ul>
-<li>from a shell prompt, type mm to start menuapp</li>
-</ul>
-<div class="fragment"><div class="line">which menu &gt;/dev/null 2&gt;&amp;1 &amp;&amp; mm() { menu; }</div>
-</div><!-- fragment --><ul>
-<li>Prefer xsh over bash</li>
-</ul>
-<div class="fragment"><div class="line">export SHELL=bash</div>
-<div class="line">which xsh &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export SHELL=xsh</div>
-</div><!-- fragment --><ul>
-<li>set a shorter delay for curses escape sequences</li>
-</ul>
-<div class="fragment"><div class="line">export ESCDELAY=50</div>
-</div><!-- fragment --><ul>
-<li>set colorful prompt, red for root, green for normal user</li>
-</ul>
-<div class="fragment"><div class="line">export XUSER=&quot;$(id -un)&quot;</div>
-<div class="line">export PS1=&quot;\&zwj;[\e[1;32m\&zwj;]\u@\h:\w&gt;\&zwj;[\e[0m\&zwj;] &quot;</div>
-<div class="line">[ &quot;$XUSER&quot; = &quot;root&quot; ] &amp;&amp; export PS1=&quot;\&zwj;[\e[1;31m\&zwj;]\u@\h:\w&gt;\&zwj;[\e[0m\&zwj;] &quot;</div>
-<div class="line">echo PS1=&quot;$PS1&quot;</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="customize-your-terminal-emulator"></a>
-Customize Your Terminal Emulator</h3>
-<p>The configurations herein are not required to run the C-Menu system, but provided as an example of how to customize the terminal emulator to your liking. You may want to modify the font, font size, window dimensions, colors, and other settings to suit your preferences.</p>
-<p>Regardless of which terminal emulator you use, you might want tile the terminal windows side by side to maximize the use of screen real estate. For example, if you use KDE, you can edit ~/.config/kwinrc. Under the [Windows] section you will find Placement. Set it to Smart or MinimalOverlapping depending on your version of KDE to enable tiling of windows. You can also set the following options to prevent windows from maximizing when dragged to the top of the screen, and to allow windows to be dragged to the current desktop when dragging them from another desktop.</p>
-<div class="fragment"><div class="line">[Windows]</div>
-<div class="line">ActivationDesktopPolicy=BringToCurrentDesktop</div>
-<div class="line">ElectricBorderMaximize=false</div>
-<div class="line">ElectricBorderTiling=false</div>
-<div class="line">Placement=Smart</div>
-</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="fonts"></a>
-Fonts</h4>
-<p>If you don't already have a patched font, you may want to install JetBrains Mono. It is a free, open-source, monospaced font designed for developers. It includes a large number of programming ligatures and is optimized for readability on screens of all sizes.</p>
-<p>The JetBrains Mono font is available from:</p>
-<p><a href="https://www.jetbrains.com/lp/mono/">JetBrains</a></p>
-<p>Also check out Nerd Fonts for other patched fonts that include programming ligatures and icons.</p>
-<p><a href="https://www.nerdfonts.com/">NerdFonts</a></p>
-<h4 class="doxsection"><a class="anchor" id="example-terminal-configurations"></a>
-Example Terminal Configurations</h4>
-<p>The standard color palette is rather drab, so you may want to include a more colorful palette such as the high contrast palette below.</p>
-<p>This configuration was designed for a dark terminal background and a resolution of 3840x2160 (4k). You may want to adjust the font size and window dimensions for your own display. The window dimensions are specified in character cells. For example, a window-width of 95 means 95 character cells wide. The actual pixel width of the window will depend on the font size and the font used.</p>
-<p>You can find the following configurations in C-Menu/configs, or:</p>
-<p><a class="el" href="../../d6/dfe/a01366.html" title="snippets">Snippets</a></p>
-<h5 class="doxsection"><a class="anchor" id="ghostty-configuration-1"></a>
-Ghostty Configuration</h5>
-<div class="image">
-<img src="../../ghostty.config.png" alt=""/>
-<div class="caption">
-Ghostty Configuration</div></div>
-    <p>Note: You can see that Colorize.awk failed to highlight the six-digit hex color codes on the last five lines above. That's because Colorize.awk was designed to highlight six hex digits immediately following the '#' symbol. In this case, "bat", for some reason inserted ansi codes after the '#' symbol, and before the six hex digits, so Colorize.awk didn't recognize them as hex color codes. This is an edge case that I haven't yet addressed in Colorize.awk, but there is a solution.</p>
-<p>I opened ghostty.config with neovim and it highlighted the six-digit hex color code correctly. It's always good to have multiple tools in your toolbox. 😀</p>
-<div class="image">
-<img src="../../ghostty.config2.png" alt=""/>
-<div class="caption">
-Ghostty Configuration in Neovim</div></div>
-    <h5 class="doxsection"><a class="anchor" id="kitty-configuration"></a>
-Kitty Configuration</h5>
-<div class="image">
-<img src="../../kitty.conf.png" alt=""/>
-<div class="caption">
-Kitty Configuration</div></div>
-    <h5 class="doxsection"><a class="anchor" id="alacritty-configuration"></a>
-Alacritty Configuration</h5>
-<div class="image">
-<img src="../../alacritty.toml.png" alt=""/>
-<div class="caption">
-Alacritty Configuration</div></div>
-    <hr  />
-<h2 class="doxsection"><a class="anchor" id="additional-resources"></a>
-Additional Resources</h2>
-<p>For more information on Rust and its tools, you can visit the following resources:</p>
-<h3 class="doxsection"><a class="anchor" id="lets-get-rusty"></a>
-Let's Get Rusty</h3>
-<p>If you are interested in learning Rust, I highly recommend the Let's Get Rusty YouTube channel. It offers a wide range of tutorials and videos on Rust programming, covering topics from beginner to advanced levels. The channel is well-known for its clear explanations and practical examples, making it an excellent resource for anyone looking to learn Rust.</p>
-<p><a href="https://www.letsgetrusty.com/">Let's Get Rusty</a></p>
-<p><a href="https://www.youtube.com/c/LetsGetRusty">Let's Get Rusty YouTube Channel</a></p>
-<h3 class="doxsection"><a class="anchor" id="folke"></a>
-Folke</h3>
-<p>Folke is a prominent developer in the Neovim community, known for creating popular plugins such as lazy.nvim and LazyVim. His contributions have significantly shaped the modern Neovim experience, particularly by leveraging Lua for more powerful and efficient configurations and plugins. Many of his projects can be explored on his <a href="https://github.com/folke">GitHub profile</a> or the <a href="https://dotfyle.com/folke">Dotfyle</a> community page.</p>
-<p><a href="https://www.lazyvim.org/">Lazyvim</a></p>
-<h3 class="doxsection"><a class="anchor" id="other-resources"></a>
-Other Resources</h3>
-<p><a href="https://doc.rust-lang.org/book/">The Rust Programming Language Book</a></p>
-<p><a href="https://rustlings.rust-lang.org/">Rustlings Exercises</a></p>
-<p><a href="https://doc.rust-lang.org/cargo/">Cargo Documentation</a></p>
-<p><a href="https://github.com/sharkdp/bat">Bat GitHub Repository</a></p>
-<p><a href="https://bat.dev/">Bat Official Website</a></p>
-<p><a href="https://github.com/BurntSushi/ripgrep">Ripgrep GitHub Repository</a></p>
-<p><a href="../../tree-sitter.github.io/tree-sitter">Tree-Sitter GitHub Repository</a></p>
-<p><a href="https://neovim.io/">Neovim Official Website</a></p>
-<h2 class="doxsection"><a class="anchor" id="conclusion"></a>
-Conclusion</h2>
-<p>By following the above instructions, you can easily install Rust and various Rust-based tools to enhance your C-Menu experience. Enjoy coding with these powerful tools!</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2"></a>
-🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.</h2>
+<p>: <a href="https://github.com/BillWAller/C-Menu/releases/tag/C-Menu-0.2.8">https://github.com/BillWAller/C-Menu/releases/tag/C-Menu-0.2.8</a> : <a href="https://github.com/BillWaller/C-Menu/releases/tag/C-Menu-0.2.8">https://github.com/BillWaller/C-Menu/releases/tag/C-Menu-0.2.8</a> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

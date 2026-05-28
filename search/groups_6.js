@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['i_20o_0',['Initializing View I/O',['../d8/d92/a01165.html',1,'']]],
-  ['initialization_1',['C-Menu Initialization',['../d2/dd2/a01164.html',1,'']]],
-  ['initializing_20view_20i_20o_2',['Initializing View I/O',['../d8/d92/a01165.html',1,'']]],
-  ['io_20support_3',['Screen IO Support',['../d3/dc7/a01170.html',1,'']]]
+  ['manage_20view_20display_0',['Manage View Display',['../d3/d32/a01176.html',1,'']]],
+  ['management_1',['Management',['../d7/de8/a01159.html',1,'Chyron Management'],['../d9/d25/a01157.html',1,'Color Management'],['../d4/da6/a01168.html',1,'Memory Management']]],
+  ['memory_20management_2',['Memory Management',['../d4/da6/a01168.html',1,'']]],
+  ['menu_20engine_3',['Menu Engine',['../d7/daf/a01169.html',1,'']]],
+  ['menu_20initialization_4',['C-Menu Initialization',['../dc/dee/a01166.html',1,'']]],
+  ['menu_20parser_5',['Menu Parser',['../d3/dc7/a01170.html',1,'']]]
 ];
