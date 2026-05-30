@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: enterstr.c File Reference</title>
+<title>C-Menu: view_engine.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,106 +110,177 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d5b/a01127.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">enterstr.c File Reference</div></div>
+  <div class="headertitle"><div class="title">view_engine.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Enter a string from keyboard.  
+<p>The working part of <a class="el" href="../../d4/d41/a01267.html">View</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;regex.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/ioctl.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;sys/param.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for enterstr.c:</div>
+Include dependency graph for view_engine.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d12/a01128.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d12/a01128.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d9/d5b/a01127_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:gafa98387c57104e28e438d8bbc23b26eb" id="r_gafa98387c57104e28e438d8bbc23b26eb"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>()</td></tr>
+<tr class="memdesc:gafa98387c57104e28e438d8bbc23b26eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the next characater from the virtual file  <br /></td></tr>
+<tr class="memitem:ga56a278d5d4b1808207f550ee3a61c476" id="r_ga56a278d5d4b1808207f550ee3a61c476"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga56a278d5d4b1808207f550ee3a61c476">get_prev_char</a>()</td></tr>
+<tr class="memdesc:ga56a278d5d4b1808207f550ee3a61c476"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the previous characater from the virtual fileThere is no need to track line numbers when moving backwards as they are stored in the line table and accessed as needed. When reading in reverse, the Beginning of Data (BOD) flag is set when the file position is zero, and cleared when the position or reading direction changes. Carriage-returns are ignored as they should be.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">allows the user to enter a string in cooked mode  <br /></td></tr>
+<tr class="memitem:gab96e4c73a7b3ba1310044b479733cdd9" id="r_gab96e4c73a7b3ba1310044b479733cdd9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d11/a01178.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a> (char *, bool *)</td></tr>
+<tr class="memdesc:gab96e4c73a7b3ba1310044b479733cdd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">a safer alternative to atoi() for converting ASCII strings to integers.  <br /></td></tr>
+<tr class="memitem:gaf01721a6369d49d9f1eebfc4ba6d0a95" id="r_gaf01721a6369d49d9f1eebfc4ba6d0a95"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:gaf01721a6369d49d9f1eebfc4ba6d0a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build Prompt <a class="el" href="../../d9/da8/a01227.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>.  <br /></td></tr>
+<tr class="memitem:ga6543444a87ef174a7b63fa3adcb16c58" id="r_ga6543444a87ef174a7b63fa3adcb16c58"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga6543444a87ef174a7b63fa3adcb16c58">cat_file</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga6543444a87ef174a7b63fa3adcb16c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate File to Standard Output.  <br /></td></tr>
+<tr class="memitem:ga16a4b855ead8402d4744e77a5504082a" id="r_ga16a4b855ead8402d4744e77a5504082a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#ga16a4b855ead8402d4744e77a5504082a">display_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga16a4b855ead8402d4744e77a5504082a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> on Padparam <a class="el" href="../../d4/d41/a01267.html">View</a> *view data structure.  <br /></td></tr>
+<tr class="memitem:ga3d81b9c4dd32748b26cd0fd94224d21c" id="r_ga3d81b9c4dd32748b26cd0fd94224d21c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, char *s)</td></tr>
+<tr class="memdesc:ga3d81b9c4dd32748b26cd0fd94224d21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Command <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Prompt.  <br /></td></tr>
+<tr class="memitem:ga2ffea5674e85f124a70e19f745a66583" id="r_ga2ffea5674e85f124a70e19f745a66583"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga2ffea5674e85f124a70e19f745a66583">enter_file_spec</a> (<a class="el" href="../../d0/d5a/a01199.html">Init</a> *init, char *file_spec)</td></tr>
+<tr class="memdesc:ga2ffea5674e85f124a70e19f745a66583"><td class="mdescLeft">&#160;</td><td class="mdescRight">use form to enter a file specification  <br /></td></tr>
+<tr class="memitem:ga747411d59b020ad11d4567ab0b3db8c2" id="r_ga747411d59b020ad11d4567ab0b3db8c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#ga747411d59b020ad11d4567ab0b3db8c2">fmt_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga747411d59b020ad11d4567ab0b3db8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> for Display.  <br /></td></tr>
+<tr class="memitem:ga8e98d9f33c5f6aa78ea2fbc13c75b3a9" id="r_ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9">get_cmd_arg</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, char *prompt)</td></tr>
+<tr class="memdesc:ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Command Argument from User Input.  <br /></td></tr>
+<tr class="memitem:gab3d3c80c5b7bb6dc461a8e5746be7690" id="r_gab3d3c80c5b7bb6dc461a8e5746be7690"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#gab3d3c80c5b7bb6dc461a8e5746be7690">get_cmd_char</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t *n)</td></tr>
+<tr class="memdesc:gab3d3c80c5b7bb6dc461a8e5746be7690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Command Character and Numeric Argument.  <br /></td></tr>
+<tr class="memitem:ga395b27e6a9716bf49e3fc04d53987b33" id="r_ga395b27e6a9716bf49e3fc04d53987b33"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#ga395b27e6a9716bf49e3fc04d53987b33">get_next_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t pos)</td></tr>
+<tr class="memdesc:ga395b27e6a9716bf49e3fc04d53987b33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Next <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> from View-&gt;buf.  <br /></td></tr>
+<tr class="memitem:gaf692bba071d771ceea47707fc26127bd" id="r_gaf692bba071d771ceea47707fc26127bd"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gaf692bba071d771ceea47707fc26127bd">get_pos_next_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t pos)</td></tr>
+<tr class="memdesc:gaf692bba071d771ceea47707fc26127bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Position of Next <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
+<tr class="memitem:gaaf8cff992778d85e44351a834ad2b81a" id="r_gaaf8cff992778d85e44351a834ad2b81a"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gaaf8cff992778d85e44351a834ad2b81a">get_pos_prev_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t pos)</td></tr>
+<tr class="memdesc:gaaf8cff992778d85e44351a834ad2b81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Position of Previous <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
+<tr class="memitem:gab49fb9f9417c7cf790cea1679e4e5edc" id="r_gab49fb9f9417c7cf790cea1679e4e5edc"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gab49fb9f9417c7cf790cea1679e4e5edc">get_prev_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t pos)</td></tr>
+<tr class="memdesc:gab49fb9f9417c7cf790cea1679e4e5edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Previous <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> from View-&gt;buf.  <br /></td></tr>
+<tr class="memitem:ga46145f1d3680a48cb9391a8ae95db9ad" id="r_ga46145f1d3680a48cb9391a8ae95db9ad"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#ga46145f1d3680a48cb9391a8ae95db9ad">go_to_eof</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga46145f1d3680a48cb9391a8ae95db9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to End of File.  <br /></td></tr>
+<tr class="memitem:gac81796e830049e74987a6b526cfc296f" id="r_gac81796e830049e74987a6b526cfc296f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gac81796e830049e74987a6b526cfc296f">go_to_line</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t line_idx)</td></tr>
+<tr class="memdesc:gac81796e830049e74987a6b526cfc296f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Specific <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
+<tr class="memitem:gada77a15a548ce444426d43fd39a1cce4" id="r_gada77a15a548ce444426d43fd39a1cce4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gada77a15a548ce444426d43fd39a1cce4">go_to_mark</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, int c)</td></tr>
+<tr class="memdesc:gada77a15a548ce444426d43fd39a1cce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Mark.  <br /></td></tr>
+<tr class="memitem:gae6623cc4892a014fc9c40b3bca1db7d9" id="r_gae6623cc4892a014fc9c40b3bca1db7d9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gae6623cc4892a014fc9c40b3bca1db7d9">go_to_percent</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, int percent)</td></tr>
+<tr class="memdesc:gae6623cc4892a014fc9c40b3bca1db7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Percent of File.  <br /></td></tr>
+<tr class="memitem:ga5f74dca8730faaa3ff362fc1e01b12ce" id="r_ga5f74dca8730faaa3ff362fc1e01b12ce"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#ga5f74dca8730faaa3ff362fc1e01b12ce">go_to_position</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, off_t go_to_pos)</td></tr>
+<tr class="memdesc:ga5f74dca8730faaa3ff362fc1e01b12ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Specific File Position.  <br /></td></tr>
+<tr class="memitem:gadd75615038c32b4c07a6842dfe2fc37a" id="r_gadd75615038c32b4c07a6842dfe2fc37a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gadd75615038c32b4c07a6842dfe2fc37a">increment_ln</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:gadd75615038c32b4c07a6842dfe2fc37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Index and Update <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
+<tr class="memitem:gaa260d59836439e16d00ad5a6bc4b4829" id="r_gaa260d59836439e16d00ad5a6bc4b4829"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:gaa260d59836439e16d00ad5a6bc4b4829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
+<tr class="memitem:ga219efbc4d9d70ebc47fafa540b370247" id="r_ga219efbc4d9d70ebc47fafa540b370247"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga219efbc4d9d70ebc47fafa540b370247">lp</a> (char *PrintFile)</td></tr>
+<tr class="memdesc:ga219efbc4d9d70ebc47fafa540b370247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send File to Print Queue.  <br /></td></tr>
+<tr class="memitem:gacf1bfbd6d2fd4ad9a0385009ef25015c" id="r_gacf1bfbd6d2fd4ad9a0385009ef25015c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gacf1bfbd6d2fd4ad9a0385009ef25015c">next_page</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:gacf1bfbd6d2fd4ad9a0385009ef25015c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advance to Next Page.  <br /></td></tr>
+<tr class="memitem:ga1a2aaed7961f7ff0b171ee01801fcadf" id="r_ga1a2aaed7961f7ff0b171ee01801fcadf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga1a2aaed7961f7ff0b171ee01801fcadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh Pad and <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Number Window.  <br /></td></tr>
+<tr class="memitem:ga9fc984ba8ce6c4059b33a915d526357f" id="r_ga9fc984ba8ce6c4059b33a915d526357f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#ga9fc984ba8ce6c4059b33a915d526357f">parse_ansi_str</a> (char *ansi_str, attr_t *attr, int *cpx)</td></tr>
+<tr class="memdesc:ga9fc984ba8ce6c4059b33a915d526357f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse ANSI SGR Escape Sequence.  <br /></td></tr>
+<tr class="memitem:ga5dbc34981815690a92812e34d1cf478f" id="r_ga5dbc34981815690a92812e34d1cf478f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#ga5dbc34981815690a92812e34d1cf478f">prev_page</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga5dbc34981815690a92812e34d1cf478f"><td class="mdescLeft">&#160;</td><td class="mdescRight">display previous page  <br /></td></tr>
+<tr class="memitem:ga677ea54b0c727a5475d0b3efe71f5a7c" id="r_ga677ea54b0c727a5475d0b3efe71f5a7c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga677ea54b0c727a5475d0b3efe71f5a7c">remove_file</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga677ea54b0c727a5475d0b3efe71f5a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove File.  <br /></td></tr>
+<tr class="memitem:gaa79b8294ebf98c84d4a844fd7d9e4862" id="r_gaa79b8294ebf98c84d4a844fd7d9e4862"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gaa79b8294ebf98c84d4a844fd7d9e4862">scroll_down_n_lines</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, int n)</td></tr>
+<tr class="memdesc:gaa79b8294ebf98c84d4a844fd7d9e4862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll N Lines.  <br /></td></tr>
+<tr class="memitem:gab08fc8983cc3bdb21b438c82ece16346" id="r_gab08fc8983cc3bdb21b438c82ece16346"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#gab08fc8983cc3bdb21b438c82ece16346">scroll_up_n_lines</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, int n)</td></tr>
+<tr class="memdesc:gab08fc8983cc3bdb21b438c82ece16346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll Up N Lines.  <br /></td></tr>
+<tr class="memitem:ga5f639aa1a1f03fa05888c724bc17d99c" id="r_ga5f639aa1a1f03fa05888c724bc17d99c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#ga5f639aa1a1f03fa05888c724bc17d99c">search</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view, int *search_cmd, char *regex_pattern)</td></tr>
+<tr class="memdesc:ga5f639aa1a1f03fa05888c724bc17d99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for Regular Expression Pattern.  <br /></td></tr>
+<tr class="memitem:ga03bfb3d8d09d33f4f59930485f283ead" id="r_ga03bfb3d8d09d33f4f59930485f283ead"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d19/a01190.html#ga03bfb3d8d09d33f4f59930485f283ead">sync_ln</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:ga03bfb3d8d09d33f4f59930485f283ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize <a class="el" href="../../d7/d88/a01255.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table with Current File Position.  <br /></td></tr>
+<tr class="memitem:ga9c4b3ba5f73c18b486646c62b933972a" id="r_ga9c4b3ba5f73c18b486646c62b933972a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga9c4b3ba5f73c18b486646c62b933972a">view_cmd_processor</a> (<a class="el" href="../../d0/d5a/a01199.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga9c4b3ba5f73c18b486646c62b933972a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main Command Processing Loop for <a class="el" href="../../d4/d41/a01267.html">View</a>.  <br /></td></tr>
+<tr class="memitem:gad997ba9f8591568c77291fb1b44601b2" id="r_gad997ba9f8591568c77291fb1b44601b2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#gad997ba9f8591568c77291fb1b44601b2">view_display_help</a> (<a class="el" href="../../d0/d5a/a01199.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gad997ba9f8591568c77291fb1b44601b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display <a class="el" href="../../d4/d41/a01267.html">View</a> Help File.  <br /></td></tr>
+<tr class="memitem:gae6f141401cf9f104dbe14f09603d5178" id="r_gae6f141401cf9f104dbe14f09603d5178"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#gae6f141401cf9f104dbe14f09603d5178">view_display_page</a> (<a class="el" href="../../d4/d41/a01267.html">View</a> *view)</td></tr>
+<tr class="memdesc:gae6f141401cf9f104dbe14f09603d5178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Current Page.  <br /></td></tr>
+<tr class="memitem:ga0bd4dc056ab5010547129bb87819789b" id="r_ga0bd4dc056ab5010547129bb87819789b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a> (<a class="el" href="../../d0/d5a/a01199.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga0bd4dc056ab5010547129bb87819789b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start view.  <br /></td></tr>
+<tr class="memitem:ga322b7dfe2d426fe7cfb2b4f59bf6fc78" id="r_ga322b7dfe2d426fe7cfb2b4f59bf6fc78"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0d/a01191.html#ga322b7dfe2d426fe7cfb2b4f59bf6fc78">view_restore_wins</a> ()</td></tr>
+<tr class="memdesc:ga322b7dfe2d426fe7cfb2b4f59bf6fc78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore <a class="el" href="../../d4/d41/a01267.html">View</a> Windows.  <br /></td></tr>
+<tr class="memitem:ga30ab3b4282eabd18619c5b053ff8b0b1" id="r_ga30ab3b4282eabd18619c5b053ff8b0b1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d10/a01189.html#ga30ab3b4282eabd18619c5b053ff8b0b1">write_view_buffer</a> (<a class="el" href="../../d0/d5a/a01199.html">Init</a> *init, bool f_strip_ansi)</td></tr>
+<tr class="memdesc:ga30ab3b4282eabd18619c5b053ff8b0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write buffer contents to files.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad66e7725d860b08afcaa58c5534c4405" id="r_ad66e7725d860b08afcaa58c5534c4405"><td class="memItemLeft">FILE *&#160;</td><td class="memItemRight"><a class="el" href="#ad66e7725d860b08afcaa58c5534c4405">dbgfp</a></td></tr>
+<tr class="memitem:ab01cd88e27f549b782cb4220d1742373" id="r_ab01cd88e27f549b782cb4220d1742373"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ab01cd88e27f549b782cb4220d1742373">err_msg</a> [<a class="el" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a963dfb3ff1f86d65cf46829388b1b3bc" id="r_a963dfb3ff1f86d65cf46829388b1b3bc"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a> [<a class="el" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Enter a string from keyboard. </p>
+<div class="textblock"><p>The working part of <a class="el" href="../../d4/d41/a01267.html">View</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d9/d5b/a01127_source.html">enterstr.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+<p class="definition">Definition in file <a class="el" href="../../d9/d5b/a01127_source.html">view_engine.c</a>.</p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="ad66e7725d860b08afcaa58c5534c4405" name="ad66e7725d860b08afcaa58c5534c4405"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad66e7725d860b08afcaa58c5534c4405">&#9670;&#160;</a></span>dbgfp</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+          <td class="memname">FILE* dbgfp</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>allows the user to enter a string in cooked mode </p>
-<p>allows line editing and other features writes the prompt to stderr and the user's input to stdout handles signals to ensure that the terminal settings are restored if the program is interrupted. </p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d5b/a01127_source.html#l00081">81</a> of file <a class="el" href="../../d9/d5b/a01127_source.html">view_engine.c</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d5b/a01127_source.html#l00032">32</a> of file <a class="el" href="../../d9/d5b/a01127_source.html">enterstr.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   32</span>                                {</div>
-<div class="line"><span class="lineno">   33</span>    <span class="keyword">struct </span>termios new_tioctl;</div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d6/d0d/a01091.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../d6/d0d/a01091.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
-<div class="line"><span class="lineno">   36</span>    <span class="keywordtype">char</span> *msg;</div>
-<div class="line"><span class="lineno">   37</span>    <span class="keywordtype">char</span> <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
-<div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line"><span class="lineno">   40</span>        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   42</span>        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
-<div class="line"><span class="lineno">   43</span>    <a class="code hl_function" href="../../d6/df2/a01175.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">   44</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">   45</span>    new_tioctl = <a class="code hl_variable" href="../../d5/d16/a01154.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line"><span class="lineno">   46</span>    new_tioctl.c_lflag |= ICANON;</div>
-<div class="line"><span class="lineno">   47</span>    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
-<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno">   49</span>        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
-<div class="line"><span class="lineno">   50</span>        <span class="keywordflow">while</span> (*msg)</div>
-<div class="line"><span class="lineno">   51</span>            write(2, msg++, 1);</div>
-<div class="line"><span class="lineno">   52</span>        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../d6/d0d/a01091.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
-<div class="line"><span class="lineno">   53</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">while</span> (*in_ptr)</div>
-<div class="line"><span class="lineno">   56</span>        write(1, in_ptr++, 1);</div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
-<div class="line"><span class="lineno">   58</span>    <a class="code hl_function" href="../../d6/df2/a01175.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">   59</span>    exit(0);</div>
-<div class="line"><span class="lineno">   60</span>}</div>
-<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l00124">futil.c:124</a></div></div>
-<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
-<div class="ttc" id="aa01091_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../d6/d0d/a01091.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d0d/a01091_source.html#l00020">iloan.c:20</a></div></div>
-<div class="ttc" id="aa01154_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d5/d16/a01154.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01175_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d6/df2/a01175.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01175_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d6/df2/a01175.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00056">scriou.c:56</a></div></div>
-<div class="ttc" id="aa01176_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d3/d32/a01176.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d09/a01118_source.html#l00042">sig.c:42</a></div></div>
-<div class="ttc" id="aa01176_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d3/d32/a01176.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d09/a01118_source.html#l00062">sig.c:62</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d5/d16/a01154_source.html#l00043">capture_shell_tioctl()</a>, <a class="el" href="../../d5/d16/a01154_source.html#l00056">restore_shell_tioctl()</a>, <a class="el" href="../../d5/d16/a01154_source.html#l00022">shell_tioctl</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00042">sig_dfl_mode()</a>, and <a class="el" href="../../dd/d09/a01118_source.html#l00062">sig_prog_mode()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d5b/a01127_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="510"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
+</div>
+<a id="ab01cd88e27f549b782cb4220d1742373" name="ab01cd88e27f549b782cb4220d1742373"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab01cd88e27f549b782cb4220d1742373">&#9670;&#160;</a></span>err_msg</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char err_msg[<a class="el" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d5b/a01127_source.html#l00117">117</a> of file <a class="el" href="../../d9/d5b/a01127_source.html">view_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a963dfb3ff1f86d65cf46829388b1b3bc" name="a963dfb3ff1f86d65cf46829388b1b3bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a963dfb3ff1f86d65cf46829388b1b3bc">&#9670;&#160;</a></span>prev_regex_pattern</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char prev_regex_pattern[<a class="el" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d5b/a01127_source.html#l00080">80</a> of file <a class="el" href="../../d9/d5b/a01127_source.html">view_engine.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>.</p>
 
 </div>
 </div>
@@ -226,7 +297,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d9/d5b/a01127.html">enterstr.c</a></li>
+    <li class="navelem"><a href="../../d9/d5b/a01127.html">view_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

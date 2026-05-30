@@ -1,7 +1,15 @@
 var a01163 =
 [
-    [ "fork_exec", "d6/d27/a01163.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "d6/d27/a01163.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "d6/d27/a01163.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "shell", "d6/d27/a01163.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "field_editor", "d3/d32/a01176.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
+    [ "form_display_field", "d3/d32/a01176.html#gabd1710f59277202b0a58f840d4da322e", null ],
+    [ "form_display_field_n", "d3/d32/a01176.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
+    [ "form_fmt_field", "d3/d32/a01176.html#ga07a8d9311c88786e7310fef638d34a41", null ],
+    [ "form_validate_field", "d3/d32/a01176.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
+    [ "is_valid_date", "d3/d32/a01176.html#ga353546f4d99ef7ec908d371187f033de", null ],
+    [ "is_valid_time", "d3/d32/a01176.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
+    [ "left_justify", "d3/d32/a01176.html#ga425021d4c87474159a36d395e4dcdf65", null ],
+    [ "mk_filler", "d3/d32/a01176.html#gaac069c6892f64ea6307044a92b179faa", null ],
+    [ "numeric", "d3/d32/a01176.html#ga18db59e4c79e823f79310378183ac25c", null ],
+    [ "right_justify", "d3/d32/a01176.html#ga21ebe9713e3b003715a7a2c3b64cbf55", null ],
+    [ "ff_tbl", "d6/d27/a01163.html#ab2b1f7bf9cce5974d1459eba268c0211", null ]
 ];

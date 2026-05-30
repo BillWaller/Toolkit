@@ -1,8 +1,6 @@
 var a01106 =
 [
-    [ "fork_exec", "d6/d27/a01163.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "d6/d27/a01163.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "d6/d27/a01163.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "dc/d81/a01161.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "d6/d27/a01163.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "ABEND", "da/d4e/a01106.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "da/d4e/a01106.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "f_verbose", "da/d4e/a01106.html#aaada0e40d7855fd811f41c576cd785fe", null ]
 ];

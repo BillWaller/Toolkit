@@ -1,10 +1,8 @@
 var a01118 =
 [
-    [ "MAX_FRAMES", "dd/d09/a01118.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "d3/d32/a01176.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "d3/d32/a01176.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "d3/d32/a01176.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "d3/d32/a01176.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "dd/d09/a01118.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "dd/d09/a01118.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "fork_exec", "d6/df2/a01175.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d6/df2/a01175.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d6/df2/a01175.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d7/d0c/a01173.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "d6/df2/a01175.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

@@ -1,4 +1,5 @@
 var a01133 =
 [
-    [ "main", "db/d28/a01133.html#a0ddf1224851353fc92bfbff6f499fa97", null ]
+    [ "get_command_type", "d3/dd3/a01185.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d3/dd3/a01185.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

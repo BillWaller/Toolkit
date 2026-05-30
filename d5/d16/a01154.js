@@ -1,17 +1,7 @@
 var a01154 =
 [
-    [ "capture_curses_tioctl", "d6/df2/a01175.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "d6/df2/a01175.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "d6/df2/a01175.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "d6/df2/a01175.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "d6/df2/a01175.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "d6/df2/a01175.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "d6/df2/a01175.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ],
-    [ "curses_err_tioctl", "d5/d16/a01154.html#afe4863a6b75c5a20c2008f36f86cfeed", null ],
-    [ "curses_in_tioctl", "d5/d16/a01154.html#afcd0e5aee1f3f7445581428cb02b2115", null ],
-    [ "curses_out_tioctl", "d5/d16/a01154.html#ad9964c09cd96ce9748052b5494f30fc6", null ],
-    [ "curses_tioctl", "d5/d16/a01154.html#a5080741aab7f17e1d5b24e5ad63cf5e6", null ],
-    [ "f_have_curses_tioctl", "d5/d16/a01154.html#ac46bd98f4cec1758c1d600920caa7f39", null ],
-    [ "f_have_shell_tioctl", "d5/d16/a01154.html#a1e8b2f4dea5e88e7af17541140207df0", null ],
-    [ "shell_tioctl", "d5/d16/a01154.html#a6683c571cfe7d874546506ebf41fc3d3", null ]
+    [ "_XOPEN_SOURCE", "d5/d16/a01154.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
+    [ "main", "d5/d16/a01154.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "print_totals", "d5/d16/a01154.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
+    [ "month", "d5/d16/a01154.html#afd34f9817ea7498cdc5d76058dac3a5f", null ]
 ];

@@ -1,15 +1,16 @@
 var a01177 =
 [
-    [ "get_next_char", "dc/d98/a01177.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "dc/d98/a01177.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "dc/d98/a01177.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "dc/d98/a01177.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "dc/d98/a01177.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "dc/d98/a01177.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "dc/d98/a01177.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "dc/d98/a01177.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "dc/d98/a01177.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "dc/d98/a01177.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "dc/d98/a01177.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "dc/d98/a01177.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "display_form", "dc/d98/a01177.html#gaff3b11b68ec51ef3034ce5498913a211", null ],
+    [ "field_navigator", "dc/d98/a01177.html#gae570c2569ffef8c9d38184b6d9446812", null ],
+    [ "form_desc_error", "dc/d98/a01177.html#ga02cf855a99051ac21f4966aa92b9544f", null ],
+    [ "form_display_fields", "dc/d98/a01177.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
+    [ "form_engine", "dc/d98/a01177.html#gada302551bf41bf8ed6132fd34328a47e", null ],
+    [ "form_exec_cmd", "dc/d98/a01177.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
+    [ "form_exec_receiver", "dc/d98/a01177.html#ga0fb740802cbc6c8ba386f4751139f0a0", null ],
+    [ "form_parse_desc", "dc/d98/a01177.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
+    [ "form_post", "dc/d98/a01177.html#gac63d5f05787a038d4ae5f4741eafbe50", null ],
+    [ "form_process", "dc/d98/a01177.html#ga7b01ef5c3435083eeec419451b61aa85", null ],
+    [ "form_read_data", "dc/d98/a01177.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
+    [ "form_write", "dc/d98/a01177.html#ga2839acac3143be9233fbf99458b77e64", null ],
+    [ "init_form", "dc/d98/a01177.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
 ];

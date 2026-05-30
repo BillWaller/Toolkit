@@ -1,11 +1,9 @@
 var a01179 =
 [
-    [ "display_line", "de/d1a/a01179.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_prompt", "de/d1a/a01179.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "fmt_line", "de/d1a/a01179.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "de/d1a/a01179.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "de/d1a/a01179.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "view_display_help", "de/d1a/a01179.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "de/d1a/a01179.html#gae6f141401cf9f104dbe14f09603d5178", null ],
-    [ "view_restore_wins", "de/d1a/a01179.html#ga322b7dfe2d426fe7cfb2b4f59bf6fc78", null ]
+    [ "free_string", "de/d1a/a01179.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "de/d1a/a01179.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "de/d1a/a01179.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "de/d1a/a01179.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "de/d1a/a01179.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "de/d1a/a01179.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];
