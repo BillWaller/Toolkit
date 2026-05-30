@@ -1,18 +1,16 @@
 var a01183 =
 [
-    [ "destroy_form", "dc/d2d/a01183.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
-    [ "destroy_init", "dc/d2d/a01183.html#gaac196563b2f701fba2d1580ac8813de7", null ],
-    [ "destroy_menu", "dc/d2d/a01183.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
-    [ "destroy_pick", "dc/d2d/a01183.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
-    [ "destroy_view", "dc/d2d/a01183.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
-    [ "init_form_files", "dc/d2d/a01183.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
-    [ "init_menu_files", "dc/d2d/a01183.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
-    [ "init_pick_files", "dc/d2d/a01183.html#gab40bb77758b149f33cbde8063f341b00", null ],
-    [ "init_view_files", "dc/d2d/a01183.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
-    [ "new_form", "dc/d2d/a01183.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
-    [ "new_init", "dc/d2d/a01183.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
-    [ "new_menu", "dc/d2d/a01183.html#ga861e6162a19e089468fdc2a1479b547f", null ],
-    [ "new_pick", "dc/d2d/a01183.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
-    [ "new_view", "dc/d2d/a01183.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
-    [ "verify_spec_arg", "dc/d2d/a01183.html#ga75ce293fe4e007a3337a190647408000", null ]
+    [ "derive_file_spec", "dc/d2d/a01183.html#ga20c40545a1e05954b496c6d674d31458", null ],
+    [ "display_version", "dc/d2d/a01183.html#ga33abf350aae0212c85a5903e41764025", null ],
+    [ "dump_config", "dc/d2d/a01183.html#ga1af490b85f0487c201f369333b84e540", null ],
+    [ "mapp_initialization", "dc/d2d/a01183.html#gaccd65939c0ce6f0d940c5cf795a1e8fa", null ],
+    [ "opt_prt_bool", "dc/d2d/a01183.html#ga4cea5ec97a8076e2a944e2c441ebb091", null ],
+    [ "opt_prt_char", "dc/d2d/a01183.html#ga3d0b179ebc74f8a911a4152f54e7a8a7", null ],
+    [ "opt_prt_double", "dc/d2d/a01183.html#ga365153038835675ce050503313cea890", null ],
+    [ "opt_prt_int", "dc/d2d/a01183.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e", null ],
+    [ "opt_prt_str", "dc/d2d/a01183.html#ga086c2240ffa5e497b67d630ea0d206b5", null ],
+    [ "parse_config", "dc/d2d/a01183.html#ga5836f1ea8f972e3ca12e2772dc76fb32", null ],
+    [ "parse_opt_args", "dc/d2d/a01183.html#ga11b56c5001e3ca95f4d0a28903b29609", null ],
+    [ "write_config", "dc/d2d/a01183.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
+    [ "zero_opt_args", "dc/d2d/a01183.html#gae9b71868d00a28cdcf5f4514e662edfe", null ]
 ];

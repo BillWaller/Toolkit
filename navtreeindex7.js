@@ -91,6 +91,7 @@ var NAVTREEINDEX7 =
 "index.html#documentation-1":[0,8],
 "index.html#examples-1":[0,7],
 "index.html#form-2":[0,7,1],
+"index.html#installment-loan-calculator---built-with-c-menu":[0,0,0],
 "index.html#lf-1":[0,7,4],
 "index.html#menu-2":[0,7,0],
 "index.html#new-features-for-lf":[0,0],

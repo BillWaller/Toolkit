@@ -1,6 +1,8 @@
 var index =
 [
-    [ "New Features for lf", "index.html#new-features-for-lf", null ],
+    [ "New Features for lf", "index.html#new-features-for-lf", [
+      [ "Installment Loan Calculator - Built with C-Menu", "index.html#installment-loan-calculator---built-with-c-menu", null ]
+    ] ],
     [ "C-Menu Introduction", "index.html#c-menu-introduction-1", null ],
     [ "Table of Contents", "index.html#table-of-contents-7", null ],
     [ "Why C-Menu", "index.html#why-c-menu", null ],
