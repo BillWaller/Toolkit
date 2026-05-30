@@ -181,7 +181,7 @@ var a00725 =
     [ "full_screen_shell", "d6/df2/a01175.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
     [ "get_chyron_key", "da/dfb/a01174.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
     [ "get_clr_pair", "d6/db6/a01172.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
-    [ "get_ip_addresses", "d8/db9/a00725.html#a75ffbc27c06b714cea8943db0c8ebdbf", null ],
+    [ "get_ip_addresses", "d8/d11/a01178.html#gaeb33fd23094646ae1161efc4df11675d", null ],
     [ "get_local_timestamp", "d8/d11/a01178.html#ga35e3a7ccc0c4172355b6886c7980c646", null ],
     [ "get_rfc3339_s", "d8/db9/a00725.html#a1dd1169f478ae9c30a3f3d9314452bf5", null ],
     [ "get_user_str", "d8/d11/a01178.html#gaf7a1a752acebb6ec74ad40298464ceac", null ],

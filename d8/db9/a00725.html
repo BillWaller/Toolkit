@@ -388,7 +388,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:ga4298f891699300bfc4e6e56fd2a8d574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get keycode from chyron.  <br /></td></tr>
 <tr class="memitem:gaf0ba4efbc81c259a2519ca41dd9d1599" id="r_gaf0ba4efbc81c259a2519ca41dd9d1599"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d6/db6/a01172.html#gaf0ba4efbc81c259a2519ca41dd9d1599">get_clr_pair</a> (int, int)</td></tr>
 <tr class="memdesc:gaf0ba4efbc81c259a2519ca41dd9d1599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get color pair index for foreground and background colors.  <br /></td></tr>
-<tr class="memitem:a75ffbc27c06b714cea8943db0c8ebdbf" id="r_a75ffbc27c06b714cea8943db0c8ebdbf"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a75ffbc27c06b714cea8943db0c8ebdbf">get_ip_addresses</a> (char *, int)</td></tr>
+<tr class="memitem:gaeb33fd23094646ae1161efc4df11675d" id="r_gaeb33fd23094646ae1161efc4df11675d"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d11/a01178.html#gaeb33fd23094646ae1161efc4df11675d">get_ip_addresses</a> (char *, int)</td></tr>
+<tr class="memdesc:gaeb33fd23094646ae1161efc4df11675d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the IP addresses of the local machine and formats them into a string.  <br /></td></tr>
 <tr class="memitem:ga35e3a7ccc0c4172355b6886c7980c646" id="r_ga35e3a7ccc0c4172355b6886c7980c646"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d11/a01178.html#ga35e3a7ccc0c4172355b6886c7980c646">get_local_timestamp</a> ()</td></tr>
 <tr class="memdesc:ga35e3a7ccc0c4172355b6886c7980c646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current local time as an ISO 8601 formatted string.  <br /></td></tr>
 <tr class="memitem:a1dd1169f478ae9c30a3f3d9314452bf5" id="r_a1dd1169f478ae9c30a3f3d9314452bf5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1dd1169f478ae9c30a3f3d9314452bf5">get_rfc3339_s</a> (char *, size_t)</td></tr>
@@ -2557,86 +2558,6 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a75ffbc27c06b714cea8943db0c8ebdbf" name="a75ffbc27c06b714cea8943db0c8ebdbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75ffbc27c06b714cea8943db0c8ebdbf">&#9670;&#160;</a></span>get_ip_addresses()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">char * get_ip_addresses </td>
-          <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>ip_str</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>maxlen</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00238">238</a> of file <a class="el" href="../../de/df1/a01151_source.html">futil.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  238</span>                                                 {</div>
-<div class="line"><span class="lineno">  239</span>    <span class="keywordtype">char</span> tmp_str[<a class="code hl_define" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno">  240</span>    <span class="keyword">struct </span>ifaddrs *ifaddr, *ifa;</div>
-<div class="line"><span class="lineno">  241</span>    <span class="keywordtype">char</span> host[INET_ADDRSTRLEN];</div>
-<div class="line"><span class="lineno">  242</span>    <span class="keywordtype">bool</span> comma_before = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  243</span>    <span class="comment">// getifaddrs returns a linked list of network interface structures</span></div>
-<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">if</span> (getifaddrs(&amp;ifaddr) == -1) {</div>
-<div class="line"><span class="lineno">  245</span>        perror(<span class="stringliteral">&quot;getifaddrs&quot;</span>);</div>
-<div class="line"><span class="lineno">  246</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  247</span>    }</div>
-<div class="line"><span class="lineno">  248</span>    ip_str[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  249</span>    <span class="comment">// Walk through the linked list</span></div>
-<div class="line"><span class="lineno">  250</span>    <span class="keywordflow">for</span> (ifa = ifaddr; ifa != NULL; ifa = ifa-&gt;ifa_next) {</div>
-<div class="line"><span class="lineno">  251</span>        <span class="keywordflow">if</span> (ifa-&gt;ifa_addr == NULL)</div>
-<div class="line"><span class="lineno">  252</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  253</span>        <span class="comment">// Check for IPv4 addresses</span></div>
-<div class="line"><span class="lineno">  254</span>        <span class="keywordflow">if</span> (ifa-&gt;ifa_addr-&gt;sa_family == AF_INET) {</div>
-<div class="line"><span class="lineno">  255</span>            <span class="keyword">struct </span>sockaddr_in *pAddr = (<span class="keyword">struct </span>sockaddr_in *)ifa-&gt;ifa_addr;</div>
-<div class="line"><span class="lineno">  256</span> </div>
-<div class="line"><span class="lineno">  257</span>            <span class="comment">// Convert binary IP to human-readable string</span></div>
-<div class="line"><span class="lineno">  258</span>            inet_ntop(AF_INET, &amp;pAddr-&gt;sin_addr, host, INET_ADDRSTRLEN);</div>
-<div class="line"><span class="lineno">  259</span> </div>
-<div class="line"><span class="lineno">  260</span>            <span class="keywordflow">if</span> (comma_before)</div>
-<div class="line"><span class="lineno">  261</span>                snprintf(tmp_str, <a class="code hl_define" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;,[%s-%s]&quot;</span>, ifa-&gt;ifa_name, host);</div>
-<div class="line"><span class="lineno">  262</span>            <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  263</span>                snprintf(tmp_str, <a class="code hl_define" href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;[%s-%s]&quot;</span>, ifa-&gt;ifa_name, host);</div>
-<div class="line"><span class="lineno">  264</span>            <a class="code hl_function" href="../../d8/d11/a01178.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(ip_str, tmp_str, maxlen - 1);</div>
-<div class="line"><span class="lineno">  265</span>            comma_before = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  266</span>        }</div>
-<div class="line"><span class="lineno">  267</span>    }</div>
-<div class="line"><span class="lineno">  268</span>    freeifaddrs(ifaddr); <span class="comment">// Clean up the memory allocated by getifaddrs</span></div>
-<div class="line"><span class="lineno">  269</span>    <span class="keywordflow">return</span> ip_str;</div>
-<div class="line"><span class="lineno">  270</span>}</div>
-<div class="ttc" id="aa01109_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d8/dbf/a01109.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d8/dbf/a01109_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01178_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../d8/d11/a01178.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../de/df1/a01151_source.html#l00458">futil.c:458</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../de/df1/a01151_source.html#l00458">strnz__cat()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d1/dae/a01136_source.html#l00583">debug_out()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/db9/a00725_a75ffbc27c06b714cea8943db0c8ebdbf_cgraph.svg" width="280" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/db9/a00725_a75ffbc27c06b714cea8943db0c8ebdbf_icgraph.svg" width="667" height="64"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
 <a id="a1dd1169f478ae9c30a3f3d9314452bf5" name="a1dd1169f478ae9c30a3f3d9314452bf5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1dd1169f478ae9c30a3f3d9314452bf5">&#9670;&#160;</a></span>get_rfc3339_s()</h2>
 
@@ -2756,19 +2677,19 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d9/da8/a01227.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct</dd></dl>
 <p>The returned <a class="el" href="../../d9/da8/a01227.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct contains a dynamically allocated string of he specified length </p><dl class="section note"><dt>Note</dt><dd>the caller is responsible for calling free_string to free the allocated memory. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l01398">1398</a> of file <a class="el" href="../../de/df1/a01151_source.html">futil.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1399</span>                           {</div>
-<div class="line"><span class="lineno"> 1400</span>    <span class="keywordflow">if</span> (l == 0) {</div>
-<div class="line"><span class="lineno"> 1401</span>        <a class="code hl_struct" href="../../d9/da8/a01227.html">String</a> str;</div>
-<div class="line"><span class="lineno"> 1402</span>        str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = 0;</div>
-<div class="line"><span class="lineno"> 1403</span>        str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1404</span>        <span class="keywordflow">return</span> str;</div>
-<div class="line"><span class="lineno"> 1405</span>    }</div>
-<div class="line"><span class="lineno"> 1406</span>    <a class="code hl_struct" href="../../d9/da8/a01227.html">String</a> str;</div>
-<div class="line"><span class="lineno"> 1407</span>    str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = l + 1;</div>
-<div class="line"><span class="lineno"> 1408</span>    str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = (<span class="keywordtype">char</span> *)malloc(str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">l</a>);</div>
-<div class="line"><span class="lineno"> 1409</span>    str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1410</span>    <span class="keywordflow">return</span> str;</div>
+<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l01404">1404</a> of file <a class="el" href="../../de/df1/a01151_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1405</span>                           {</div>
+<div class="line"><span class="lineno"> 1406</span>    <span class="keywordflow">if</span> (l == 0) {</div>
+<div class="line"><span class="lineno"> 1407</span>        <a class="code hl_struct" href="../../d9/da8/a01227.html">String</a> str;</div>
+<div class="line"><span class="lineno"> 1408</span>        str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = 0;</div>
+<div class="line"><span class="lineno"> 1409</span>        str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1410</span>        <span class="keywordflow">return</span> str;</div>
+<div class="line"><span class="lineno"> 1411</span>    }</div>
+<div class="line"><span class="lineno"> 1412</span>    <a class="code hl_struct" href="../../d9/da8/a01227.html">String</a> str;</div>
+<div class="line"><span class="lineno"> 1413</span>    str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = l + 1;</div>
+<div class="line"><span class="lineno"> 1414</span>    str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = (<span class="keywordtype">char</span> *)malloc(str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">l</a>);</div>
+<div class="line"><span class="lineno"> 1415</span>    str.<a class="code hl_variable" href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1416</span>    <span class="keywordflow">return</span> str;</div>
 <div class="ttc" id="aa01227_html"><div class="ttname"><a href="../../d9/da8/a01227.html">String</a></div><div class="ttdoc">The String structure represents a string object with a pointer to the string and its allocated length...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00652">cm.h:652</a></div></div>
 <div class="ttc" id="aa01227_html_a4aa4561aec0c1fdce969da7953bb7848"><div class="ttname"><a href="../../d9/da8/a01227.html#a4aa4561aec0c1fdce969da7953bb7848">String::l</a></div><div class="ttdeci">size_t l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00654">cm.h:654</a></div></div>
 <div class="ttc" id="aa01227_html_a8904978bb99a49a64f7e146a4ab7ff4d"><div class="ttname"><a href="../../d9/da8/a01227.html#a8904978bb99a49a64f7e146a4ab7ff4d">String::s</a></div><div class="ttdeci">char * s</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00653">cm.h:653</a></div></div>
@@ -2975,30 +2896,30 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>boolean true or false </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00869">869</a> of file <a class="el" href="../../de/df1/a01151_source.html">futil.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  870</span>                                {</div>
-<div class="line"><span class="lineno">  871</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span> || *s == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  872</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  873</span>    <span class="keywordflow">switch</span> (s[0]) {</div>
-<div class="line"><span class="lineno">  874</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;t&#39;</span>:</div>
-<div class="line"><span class="lineno">  875</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;T&#39;</span>:</div>
-<div class="line"><span class="lineno">  876</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;y&#39;</span>:</div>
-<div class="line"><span class="lineno">  877</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;Y&#39;</span>:</div>
-<div class="line"><span class="lineno">  878</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;1&#39;</span>:</div>
-<div class="line"><span class="lineno">  879</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  880</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;o&#39;</span>:</div>
-<div class="line"><span class="lineno">  881</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;O&#39;</span>:</div>
-<div class="line"><span class="lineno">  882</span>        <span class="keywordflow">switch</span> (s[1]) {</div>
-<div class="line"><span class="lineno">  883</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;n&#39;</span>:</div>
-<div class="line"><span class="lineno">  884</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;N&#39;</span>:</div>
-<div class="line"><span class="lineno">  885</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  886</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  887</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  888</span>        }</div>
-<div class="line"><span class="lineno">  889</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  890</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  891</span>    }</div>
-<div class="line"><span class="lineno">  892</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00875">875</a> of file <a class="el" href="../../de/df1/a01151_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  876</span>                                {</div>
+<div class="line"><span class="lineno">  877</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span> || *s == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  878</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  879</span>    <span class="keywordflow">switch</span> (s[0]) {</div>
+<div class="line"><span class="lineno">  880</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;t&#39;</span>:</div>
+<div class="line"><span class="lineno">  881</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;T&#39;</span>:</div>
+<div class="line"><span class="lineno">  882</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;y&#39;</span>:</div>
+<div class="line"><span class="lineno">  883</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;Y&#39;</span>:</div>
+<div class="line"><span class="lineno">  884</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;1&#39;</span>:</div>
+<div class="line"><span class="lineno">  885</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  886</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;o&#39;</span>:</div>
+<div class="line"><span class="lineno">  887</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;O&#39;</span>:</div>
+<div class="line"><span class="lineno">  888</span>        <span class="keywordflow">switch</span> (s[1]) {</div>
+<div class="line"><span class="lineno">  889</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;n&#39;</span>:</div>
+<div class="line"><span class="lineno">  890</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;N&#39;</span>:</div>
+<div class="line"><span class="lineno">  891</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  892</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  893</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  894</span>        }</div>
+<div class="line"><span class="lineno">  895</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  896</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  897</span>    }</div>
+<div class="line"><span class="lineno">  898</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 </div><!-- fragment -->
 <p class="reference">Referenced by <a class="el" href="../../db/d17/a01148_source.html#l00461">parse_config()</a>.</p>
 <div class="dynheader">
@@ -4195,7 +4116,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00048">48</a> of file <a class="el" href="../../de/df1/a01151_source.html">futil.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01522">open_cmenu_log()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01540">write_cmenu_log()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01556">write_cmenu_log_nt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01528">open_cmenu_log()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01546">write_cmenu_log()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01562">write_cmenu_log_nt()</a>.</p>
 
 </div>
 </div>
@@ -4759,7 +4680,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00141">141</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d20/a01160_source.html#l01286">action_disposition()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00697">box2_new()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00745">box_new()</a>, <a class="el" href="../../da/d20/a01160_source.html#l01723">dxwgetch()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01086">form_desc_error()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00579">form_parse_desc()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00292">form_process()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00806">form_read_data()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01034">form_write()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01175">mk_dir()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00070">new_init()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00200">new_pick()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00313">new_view()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01522">open_cmenu_log()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00443">view_init_input()</a>, <a class="el" href="../../da/d20/a01160_source.html#l01603">waitpid_with_timeout()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../da/d20/a01160_source.html#l01651">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d20/a01160_source.html#l01286">action_disposition()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00697">box2_new()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00745">box_new()</a>, <a class="el" href="../../da/d20/a01160_source.html#l01723">dxwgetch()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01086">form_desc_error()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00579">form_parse_desc()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00292">form_process()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00806">form_read_data()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01034">form_write()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01181">mk_dir()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00070">new_init()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00200">new_pick()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00313">new_view()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01528">open_cmenu_log()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00443">view_init_input()</a>, <a class="el" href="../../da/d20/a01160_source.html#l01603">waitpid_with_timeout()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../da/d20/a01160_source.html#l01651">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -4786,7 +4707,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00142">142</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d20/a01160_source.html#l01723">dxwgetch()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01086">form_desc_error()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00579">form_parse_desc()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00292">form_process()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00806">form_read_data()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01034">form_write()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01175">mk_dir()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00070">new_init()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00200">new_pick()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00313">new_view()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00443">view_init_input()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01540">write_cmenu_log()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../da/d20/a01160_source.html#l01651">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d20/a01160_source.html#l01723">dxwgetch()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01086">form_desc_error()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00579">form_parse_desc()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00292">form_process()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00806">form_read_data()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01034">form_write()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01181">mk_dir()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00070">new_init()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00200">new_pick()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00313">new_view()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00443">view_init_input()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01546">write_cmenu_log()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../da/d20/a01160_source.html#l01651">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -4813,7 +4734,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00143">143</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../da/d20/a01160_source.html#l01723">dxwgetch()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01086">form_desc_error()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00579">form_parse_desc()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00292">form_process()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00806">form_read_data()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01034">form_write()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01175">mk_dir()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00070">new_init()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00313">new_view()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00443">view_init_input()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../da/d20/a01160_source.html#l01651">xwgetch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../da/d20/a01160_source.html#l01723">dxwgetch()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01086">form_desc_error()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00579">form_parse_desc()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00292">form_process()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l00806">form_read_data()</a>, <a class="el" href="../../dd/de4/a01121_source.html#l01034">form_write()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01181">mk_dir()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00070">new_init()</a>, <a class="el" href="../../d1/dfa/a01097_source.html#l00313">new_view()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../d8/dbf/a01109_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../d3/dbd/a01100_source.html#l00443">view_init_input()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../da/d20/a01160_source.html#l01651">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -4840,7 +4761,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00144">144</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>.</p>
 
 </div>
 </div>
@@ -5046,7 +4967,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00140">140</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>.</p>
 
 </div>
 </div>
@@ -5356,7 +5277,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00138">138</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>.</p>
 
 </div>
 </div>
@@ -5383,7 +5304,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d20/a01160_source.html#l00139">139</a> of file <a class="el" href="../../da/d20/a01160_source.html">dwin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01044">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01095">verify_file()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l01050">verify_dir()</a>, and <a class="el" href="../../de/df1/a01151_source.html#l01101">verify_file()</a>.</p>
 
 </div>
 </div>
