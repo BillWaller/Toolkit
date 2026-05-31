@@ -167,6 +167,7 @@ var a00725 =
     [ "display_curses_keys", "d8/db9/a00725.html#ae916cef9ebf00ff41380ce9f38a362e0", null ],
     [ "display_error", "d6/df2/a01175.html#ga67659f8a701b74f4dec0d36227a10d1c", null ],
     [ "display_ok_message", "d8/db9/a00725.html#a319b2bc0c2804ea764a91e074810fa6a", null ],
+    [ "dmon", "dc/d98/a01177.html#ga66a2a7fc4520823920375c0e7eae40e7", null ],
     [ "dump_opts", "d8/db9/a00725.html#a518c63d1d53a636e68ed360015d81207", null ],
     [ "dump_opts_by_use", "d8/db9/a00725.html#a9db3558f23b5ec217a3d9c6866d527c8", null ],
     [ "dxwgetch", "d8/db9/a00725.html#a497ee5eea2f201722fa701156ab3c09c", null ],

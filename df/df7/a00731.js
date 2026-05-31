@@ -12,6 +12,7 @@ var a00731 =
     ] ],
     [ "MenuCommandType", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848b", [
       [ "CT_NULL", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848bad2d309b7edc58785e7d1e189d12b8a6c", null ],
+      [ "CT_DMON", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848badea38da886faba1bbbea8d549f641d00", null ],
       [ "CT_EXEC", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848baac443bbe06b475583356f8c55a80d5de", null ],
       [ "CT_HELP", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848ba78c3f6613108c896fb097e2a55189f3a", null ],
       [ "CT_ABOUT", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848bad3b7c2320a0b10b68578b31a3ee57b34", null ],
