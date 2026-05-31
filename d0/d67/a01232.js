@@ -1,11 +1,5 @@
 var a01232 =
 [
-    [ "accept_s", "d0/d67/a01232.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "d0/d67/a01232.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_s", "d0/d67/a01232.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "d0/d67/a01232.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_s", "d0/d67/a01232.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "d0/d67/a01232.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "d0/d67/a01232.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "d0/d67/a01232.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "get_command_type", "d0/d67/a01232.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d0/d67/a01232.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

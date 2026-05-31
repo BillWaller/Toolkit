@@ -1,5 +1,7 @@
 var a01235 =
 [
-    [ "l", "dd/dad/a01235.html#abf3dc917629596185d4d5615de0ee58f", null ],
-    [ "s", "dd/dad/a01235.html#af571d78b72396279aa4420c8bbe3ece9", null ]
+    [ "handle_signal", "dd/dad/a01235.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "dd/dad/a01235.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "dd/dad/a01235.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "dd/dad/a01235.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];

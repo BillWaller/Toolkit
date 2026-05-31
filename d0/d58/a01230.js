@@ -1,11 +1,18 @@
 var a01230 =
 [
-    [ "accept_s", "d0/d58/a01230.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "d0/d58/a01230.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_s", "d0/d58/a01230.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "d0/d58/a01230.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_s", "d0/d58/a01230.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "d0/d58/a01230.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "d0/d58/a01230.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "d0/d58/a01230.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "destroy_form", "d0/d58/a01230.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "d0/d58/a01230.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "d0/d58/a01230.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "d0/d58/a01230.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "d0/d58/a01230.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "d0/d58/a01230.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "d0/d58/a01230.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "d0/d58/a01230.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "d0/d58/a01230.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "d0/d58/a01230.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
+    [ "new_init", "d0/d58/a01230.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "d0/d58/a01230.html#ga861e6162a19e089468fdc2a1479b547f", null ],
+    [ "new_pick", "d0/d58/a01230.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
+    [ "new_view", "d0/d58/a01230.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "d0/d58/a01230.html#ga75ce293fe4e007a3337a190647408000", null ]
 ];

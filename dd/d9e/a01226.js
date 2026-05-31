@@ -1,7 +1,9 @@
 var a01226 =
 [
-    [ "col", "dd/d9e/a01226.html#a5d4a771a0f5b8f8542a2c235001ca70a", null ],
-    [ "len", "dd/d9e/a01226.html#a5227944302f4c823078fcc29c8205114", null ],
-    [ "line", "dd/d9e/a01226.html#a8fe1ec2a1ec422e83737ccb864bce0da", null ],
-    [ "str", "dd/d9e/a01226.html#a639b26c7f0903f268998f88470840ba0", null ]
+    [ "free_string", "dd/d9e/a01226.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "dd/d9e/a01226.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "dd/d9e/a01226.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "dd/d9e/a01226.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "dd/d9e/a01226.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "dd/d9e/a01226.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];
