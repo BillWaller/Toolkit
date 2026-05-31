@@ -1,9 +1,7 @@
 var a01121 =
 [
-    [ "dmon", "dc/d98/a01177.html#ga66a2a7fc4520823920375c0e7eae40e7", null ],
-    [ "fork_exec", "dc/d98/a01177.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "dc/d98/a01177.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "dc/d98/a01177.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "d6/df2/a01175.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "dc/d98/a01177.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "_XOPEN_SOURCE", "dd/de4/a01121.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
+    [ "main", "dd/de4/a01121.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "print_totals", "dd/de4/a01121.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
+    [ "month", "dd/de4/a01121.html#afd34f9817ea7498cdc5d76058dac3a5f", null ]
 ];

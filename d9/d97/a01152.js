@@ -1,14 +1,18 @@
 var a01152 =
 [
-    [ "apply_gamma", "d9/d97/a01152.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
-    [ "clr_name_to_idx", "d9/d97/a01152.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
-    [ "get_clr_pair", "d9/d97/a01152.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
-    [ "hex_clr_str_to_rgb", "d9/d97/a01152.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
-    [ "init_clr_palette", "d9/d97/a01152.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
-    [ "init_hex_clr", "d9/d97/a01152.html#ga61af7829a5d63d766e76930a0893d574", null ],
-    [ "list_colors", "d9/d97/a01152.html#ga482af92e265df3405f0620b4d6158b4e", null ],
-    [ "mkccc", "d9/d97/a01152.html#gac91daf9ece9fc94bd0f23a353dc2d622", null ],
-    [ "rgb_to_curses_clr", "d9/d97/a01152.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
-    [ "rgb_to_xterm256_idx", "d9/d97/a01152.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
-    [ "xterm256_idx_to_rgb", "d9/d97/a01152.html#ga31ee0d93c7b527f92559fc410152f768", null ]
+    [ "deselect_object", "d9/d97/a01152.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
+    [ "display_page", "d9/d97/a01152.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
+    [ "display_pick_help", "d9/d97/a01152.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
+    [ "exec_objects", "d9/d97/a01152.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
+    [ "init_pick", "d9/d97/a01152.html#ga1b2ee87543245e612c1710ea58930a17", null ],
+    [ "match_objects", "d9/d97/a01152.html#ga91b2cda407803ee4367f7efd5487863c", null ],
+    [ "open_pick_win", "d9/d97/a01152.html#gaf20c847dc030116f9999adbba681000c", null ],
+    [ "output_objects", "d9/d97/a01152.html#ga8feb6cd586d503a676b831ec722576fb", null ],
+    [ "pick_engine", "d9/d97/a01152.html#gab97dcab41017c5132f52b682437a151e", null ],
+    [ "picker", "d9/d97/a01152.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
+    [ "read_pick_input", "d9/d97/a01152.html#gaabda879000cf8135245ef451de08f780", null ],
+    [ "reverse_object", "d9/d97/a01152.html#gab2173ff8fb800d126c180487744672d5", null ],
+    [ "save_object", "d9/d97/a01152.html#ga02f90007f2422dd2094ab64569e157f0", null ],
+    [ "toggle_object", "d9/d97/a01152.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
+    [ "unreverse_object", "d9/d97/a01152.html#ga650262f8279502ebc73607394dd7af13", null ]
 ];

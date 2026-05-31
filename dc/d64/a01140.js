@@ -1,20 +1,13 @@
 var a01140 =
 [
-    [ "box2_new", "dc/d64/a01140.html#ga3b519e8501ce2a37d60f07262f9546bc", null ],
-    [ "box_new", "dc/d64/a01140.html#ga38d50d5b402b7b2328874329ae003d7d", null ],
-    [ "cbox", "dc/d64/a01140.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
-    [ "cbox2", "dc/d64/a01140.html#gadf3e1d675e04bb6827d598ebbcca0d4a", null ],
-    [ "destroy_curses", "dc/d64/a01140.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
-    [ "mvwaddstr_fill", "dc/d64/a01140.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
-    [ "open_curses", "dc/d64/a01140.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
-    [ "restore_wins", "dc/d64/a01140.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
-    [ "view_full_screen_resize", "dc/d64/a01140.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
-    [ "view_win_resize", "dc/d64/a01140.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
-    [ "win2_new", "dc/d64/a01140.html#gac986c6794183f92e962912c5d2f9a924", null ],
-    [ "win_del", "dc/d64/a01140.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
-    [ "win_init_attrs", "dc/d64/a01140.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
-    [ "win_new", "dc/d64/a01140.html#gad53d9343e97260272389adc8131eedc5", null ],
-    [ "win_redraw", "dc/d64/a01140.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
-    [ "win_resize", "dc/d64/a01140.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
-    [ "xwgetch", "dc/d64/a01140.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
+    [ "compile_chyron", "dc/d64/a01140.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "dc/d64/a01140.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "display_chyron", "dc/d64/a01140.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
+    [ "get_chyron_key", "dc/d64/a01140.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "dc/d64/a01140.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "dc/d64/a01140.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "new_chyron", "dc/d64/a01140.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key", "dc/d64/a01140.html#ga208ce92c197fdd6d2b007987e534aa3b", null ],
+    [ "set_chyron_key_cp", "dc/d64/a01140.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "dc/d64/a01140.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

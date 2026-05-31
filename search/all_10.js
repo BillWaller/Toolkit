@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['json_0',['Tree-Sitter config.json',['../d3/deb/a01386.html#tree-sitter-configjson',1,'']]],
-  ['just_20do_20it_1',['Just Do It',['../de/dfe/a01383.html#just-do-it',1,'']]]
+  ['json_0',['Tree-Sitter config.json',['../d1/dcd/a01351.html#tree-sitter-configjson',1,'']]],
+  ['just_20do_20it_1',['Just Do It',['../df/d96/a01347.html#just-do-it',1,'']]]
 ];
