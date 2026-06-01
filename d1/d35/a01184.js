@@ -1,9 +1,7 @@
 var a01184 =
 [
-    [ "init_view.c", "d9/d10/a01103.html", null ],
-    [ "init_view_boxwin", "d1/d35/a01184.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d1/d35/a01184.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "d1/d35/a01184.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "d1/d35/a01184.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_init_input", "d1/d35/a01184.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "cp", "d1/d35/a01184.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
+    [ "end_pos", "d1/d35/a01184.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
+    [ "keycode", "d1/d35/a01184.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
+    [ "text", "d1/d35/a01184.html#a26a5a1b51ba82579294838ee52a18af3", null ]
 ];

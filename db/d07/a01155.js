@@ -1,15 +1,13 @@
 var a01155 =
 [
-    [ "get_next_char", "db/d07/a01155.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "db/d07/a01155.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "db/d07/a01155.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "db/d07/a01155.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "db/d07/a01155.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "db/d07/a01155.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "db/d07/a01155.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "db/d07/a01155.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "db/d07/a01155.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "db/d07/a01155.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "db/d07/a01155.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "db/d07/a01155.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "compile_chyron", "db/d07/a01155.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "db/d07/a01155.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "display_chyron", "db/d07/a01155.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
+    [ "get_chyron_key", "db/d07/a01155.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "db/d07/a01155.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "db/d07/a01155.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "new_chyron", "db/d07/a01155.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key", "db/d07/a01155.html#ga208ce92c197fdd6d2b007987e534aa3b", null ],
+    [ "set_chyron_key_cp", "db/d07/a01155.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "db/d07/a01155.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

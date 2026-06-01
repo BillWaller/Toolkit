@@ -1,5 +1,9 @@
 var a01100 =
 [
-    [ "get_command_type", "de/df1/a01151.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "de/df1/a01151.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "dmon", "d9/d42/a01156.html#ga66a2a7fc4520823920375c0e7eae40e7", null ],
+    [ "fork_exec", "d9/d42/a01156.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d9/d42/a01156.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d9/d42/a01156.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d5/d16/a01154.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "d9/d42/a01156.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

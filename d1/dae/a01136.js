@@ -1,5 +1,7 @@
 var a01136 =
 [
-    [ "get_command_type", "dc/d70/a01187.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "dc/d70/a01187.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "_XOPEN_SOURCE", "d1/dae/a01136.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
+    [ "main", "d1/dae/a01136.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "print_totals", "d1/dae/a01136.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
+    [ "month", "d1/dae/a01136.html#afd34f9817ea7498cdc5d76058dac3a5f", null ]
 ];

@@ -1,9 +1,15 @@
 var a01170 =
 [
-    [ "init_view.c", "da/db7/a01088.html", null ],
-    [ "init_view_boxwin", "d3/dc7/a01170.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d3/dc7/a01170.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "d3/dc7/a01170.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "d3/dc7/a01170.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_init_input", "d3/dc7/a01170.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "get_next_char", "d3/dc7/a01170.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
+    [ "get_prev_char", "d3/dc7/a01170.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
+    [ "build_prompt", "d3/dc7/a01170.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
+    [ "cat_file", "d3/dc7/a01170.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "enter_file_spec", "d3/dc7/a01170.html#ga2ffea5674e85f124a70e19f745a66583", null ],
+    [ "get_cmd_arg", "d3/dc7/a01170.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
+    [ "get_cmd_char", "d3/dc7/a01170.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
+    [ "lp", "d3/dc7/a01170.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
+    [ "remove_file", "d3/dc7/a01170.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
+    [ "view_cmd_processor", "d3/dc7/a01170.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
+    [ "view_file", "d3/dc7/a01170.html#ga0bd4dc056ab5010547129bb87819789b", null ],
+    [ "write_view_buffer", "d3/dc7/a01170.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
 ];

@@ -1,15 +1,10 @@
 var a01236 =
 [
-    [ "get_next_char", "d8/d2b/a01236.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "d8/d2b/a01236.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "d8/d2b/a01236.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "d8/d2b/a01236.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "d8/d2b/a01236.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "d8/d2b/a01236.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "d8/d2b/a01236.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "d8/d2b/a01236.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "d8/d2b/a01236.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "d8/d2b/a01236.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "d8/d2b/a01236.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "d8/d2b/a01236.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "choice_letter", "d8/d2b/a01236.html#ad244e20485560be4e557528c8fa1321c", null ],
+    [ "choice_text", "d8/d2b/a01236.html#a1588ee0394f3e3076e6b03b8afab5cc9", null ],
+    [ "command_str", "d8/d2b/a01236.html#a5caaf06576322b837ebfbce757377455", null ],
+    [ "command_type", "d8/d2b/a01236.html#acce58adaa7cf043f8f905d3d69a7f3a0", null ],
+    [ "letter_pos", "d8/d2b/a01236.html#a928bd3d2b73020b5529f9da018ce5e2f", null ],
+    [ "raw_text", "d8/d2b/a01236.html#a514130f5368bc6edaa5928f08be2bd4f", null ],
+    [ "type", "d8/d2b/a01236.html#a6d158be9cbd3c4180df373ddf462330d", null ]
 ];

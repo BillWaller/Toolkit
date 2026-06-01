@@ -1,20 +1,8 @@
 var a01156 =
 [
-    [ "get_next_line", "d9/d42/a01156.html#ga395b27e6a9716bf49e3fc04d53987b33", null ],
-    [ "get_pos_next_line", "d9/d42/a01156.html#gaf692bba071d771ceea47707fc26127bd", null ],
-    [ "get_pos_prev_line", "d9/d42/a01156.html#gaaf8cff992778d85e44351a834ad2b81a", null ],
-    [ "get_prev_line", "d9/d42/a01156.html#gab49fb9f9417c7cf790cea1679e4e5edc", null ],
-    [ "go_to_eof", "d9/d42/a01156.html#ga46145f1d3680a48cb9391a8ae95db9ad", null ],
-    [ "go_to_line", "d9/d42/a01156.html#gac81796e830049e74987a6b526cfc296f", null ],
-    [ "go_to_mark", "d9/d42/a01156.html#gada77a15a548ce444426d43fd39a1cce4", null ],
-    [ "go_to_percent", "d9/d42/a01156.html#gae6623cc4892a014fc9c40b3bca1db7d9", null ],
-    [ "go_to_position", "d9/d42/a01156.html#ga5f74dca8730faaa3ff362fc1e01b12ce", null ],
-    [ "increment_ln", "d9/d42/a01156.html#gadd75615038c32b4c07a6842dfe2fc37a", null ],
-    [ "initialize_line_table", "d9/d42/a01156.html#gaa260d59836439e16d00ad5a6bc4b4829", null ],
-    [ "next_page", "d9/d42/a01156.html#gacf1bfbd6d2fd4ad9a0385009ef25015c", null ],
-    [ "prev_page", "d9/d42/a01156.html#ga5dbc34981815690a92812e34d1cf478f", null ],
-    [ "scroll_down_n_lines", "d9/d42/a01156.html#gaa79b8294ebf98c84d4a844fd7d9e4862", null ],
-    [ "scroll_up_n_lines", "d9/d42/a01156.html#gab08fc8983cc3bdb21b438c82ece16346", null ],
-    [ "search", "d9/d42/a01156.html#ga5f639aa1a1f03fa05888c724bc17d99c", null ],
-    [ "sync_ln", "d9/d42/a01156.html#ga03bfb3d8d09d33f4f59930485f283ead", null ]
+    [ "dmon", "d9/d42/a01156.html#ga66a2a7fc4520823920375c0e7eae40e7", null ],
+    [ "fork_exec", "d9/d42/a01156.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d9/d42/a01156.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d9/d42/a01156.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "d9/d42/a01156.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

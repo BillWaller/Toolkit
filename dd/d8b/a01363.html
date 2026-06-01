@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Changelog</title>
+<title>C-Menu: OVERVIEW</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,145 +110,451 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/d8b/a01363.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Changelog </div></div>
+  <div class="headertitle"><div class="title">OVERVIEW </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="changelog"></a></p>
-<h1 class="doxsection"><a class="anchor" id="released---2026-02-04"></a>
-[Released] - 2026-02-04</h1>
-<p>0.2.9 - 2026-05-25</p>
-<p>lf is coming along very well. To demonstrate its flexibility and power, I created a simple little script, ~/menuapp/bin/checkdir, to scan a specified directory and reports potential problems such as cyclic symbolic links, non-existent links, links that cannot be read due to lack of permissions, and other issues. The operative commands are listed below:</p>
-<div class="fragment"><div class="line">lf -L -H -T7 -D458 $dir</div>
-<div class="line">lf -L -H -T7 -ps $dir</div>
-</div><!-- fragment --><div class="image">
-<img src="../../checkdir.png" alt=""/>
-<div class="caption">
-checkdir output</div></div>
-    <p>The script made 3 passes of 413,557 files in 1.163 seconds.</p>
-<p>This script is designed to help users identify and resolve issues with their file system. The output produced by lf is the error type, the file path, and the target of the symbolic link if applicable. The output can easily be converted into a script to remove or fix the problematic links, which can be a huge time saver. Both lf and find print errors, but in preliminary tests, both miss some files that lf catches. The script is available in the C-Menu repository, and it can be easily modified to suit specific needs. This is just one example of how lf can be used to create powerful and flexible file management tools. With lf, checkdir is just a bare starting point. Make it a sleuthing tool by adding more options to the lf command, such as -e to exclude certain files or directories, or -t to specify the types of files to check. The possibilities are endless, and with lf's speed and efficiency, you can quickly scan even large directories for potential issues.</p>
-<p>0.2.9 - 2026-05-16</p>
-<p>Performance improvements to lf have resulted in a significant increase in speed, especially when listing large directories. The improvements include optimized file system traversal and more efficient filtering of files based on the specified options. In benchmark testing, lf performed exceptionally well, and it is now one of the fastest file listing utilities available.</p>
-<p>The optimization strategy currently in place is thread pool with a circular queue. The thread pool allows for multiple threads to be used for file system traversal, which can significantly speed up the process, especially on systems with multiple CPU cores. The circular queue is used to manage the tasks for the threads, allowing for efficient scheduling and load balancing. This approach has proven to be effective in improving the performance of lf, and it has been well-received by users.</p>
-<p>The next step in the optimization process will be to implement a more sophisticated task scheduling algorithm using io_uring to further improve performance, especially on systems with high I/O workloads. This will allow for even faster file listing and better responsiveness, particularly when dealing with large directories or complex file structures.</p>
-<p>I also tried and rejected using mmap for directories, as it is not well-suited for this purpose due to the dynamic nature of directory contents and the need for efficient traversal and filtering. The thread pool with a circular queue has proven to be a more effective solution for optimizing lf's performance.</p>
-<p>You can specify the number of threads by using lf's -T option. If you don't specify a -T option, lf will choose a reasonable number of threads based on the number of CPU cores available on the system.</p>
-<p>0.2.9 - 2026-04-25</p>
-<p>The recent changes to the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> Engine have introduced a number of bugs, or euphemistically, opportunities for refinement. Please be assured that testing continues and issues are being handled as they arise with the objective of having a stable release.</p>
-<p>0.2.9 - 2026-04-22</p>
-<p>A line editor has been added to the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> Engine, which allows the user to enter a match string to filter the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> objects. The user can toggle between the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> window and the line editor by pressing the tab key.</p>
-<p>0.2.9 - 2026-04-15</p>
-<p>The -N option (line numbering) in view originally required an argument of true, false, yes, no, t, f, y, or n, but a user suggested that this was a little clumsy, and that it would be more intuitive if the -N option simply turned on line numbering when included, and turned it off when omitted. I agreed with this suggestion, and I have changed the behavior of the -N option accordingly. So, the -N option has been changed to be consistent with other boolean options. <a class="el" href="../../d8/db0/a01243.html" title="The Line strutures are attached to the Menu main structure.">Line</a> numbering will be turned on by specifying the -N option, whether or not it is followed by an affirmative indicator. In the case that you have f_ln set to true in your configuration, you can still turn off line numbering by including the "-N f" or "-N n" option, which will override the configuration setting. You can also toggle line numbering on and off from within view by pressing -N from a command prompt. I am trying to keep <a class="el" href="../../d7/d88/a01255.html">View</a>'s operation as close to vi, vim, nvim, and less as possible</p>
-<p>0.2.9 - 2026-04-14</p>
-<p>After thinking about the resizing issue in view, I decided to implement yet another option, and that is to fill the terminal emulator screen. My reasoning was that a user typically shrinks the terminal window to make more room for another application window, not to make the viewing area smaller. And, when a user expands the terminal window which contains the view window, they want to see more of the document. So, when resizing, the view window will first fill the terminal emulator window, and the user can continue to shrink the terminal window, but no viewing area will be lost to blank space. The objective is to achieve the most efficient use of screen area.</p>
-<p>The really obnoxious bugs that emerged during the resizing refactor have been fixed, and I will be doing a lot of testing to find and fix any remaining bugs. The resizing code is sort of complicated, and it is likely that there are still some edge cases that I haven't encountered yet.</p>
-<p>0.2.9 - 2026-04-12</p>
-<p>Refactoring of <a class="el" href="../../d7/d88/a01255.html">View</a>'s live resizing for both full screen and box window modes. If you need to shrink the <a class="el" href="../../d7/d88/a01255.html">View</a> window, simply resize the terminal window. Expansion is a little more complicated. The issue is not so much technical, but rather expectations. If the <a class="el" href="../../d7/d88/a01255.html">View</a> window is in box mode, and it is originally sized to be 3/4 of the terminal window, on resizing of the terminal window, should it calculate resize lines and columns based on the ratio of the <a class="el" href="../../d7/d88/a01255.html">View</a> window to the terminal window, should it add the difference in size to the <a class="el" href="../../d7/d88/a01255.html">View</a> window, or should it fill the terminal emulator screen? My current impulse is to implement the first option, which is to calculate the new size based on the ratio of the <a class="el" href="../../d7/d88/a01255.html">View</a> window to the terminal window. This seems to be the most intuitive and consistent behavior, but I am open to feedback on this.</p>
-<p>0.2.9 - 2026-04-11</p>
-<p>Major progress is being made in refactoring the main components of C-Menu to provide pop-up and drop-down helper widgets. This is a major step in the evolution of C-Menu, and it will allow for much more flexible and powerful user interfaces. The first component to be refactored is the chyron, which is a pop-up widget that can be used to display information and options to the user. The chyron is implemented as a separate module, and it can be easily integrated into any C-Menu program. The next step will be to refactor the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> module to use the chyron for displaying options, which will allow for much more dynamic and context-sensitive user interfaces. For example, when entering form fields, the user can press or click the help button to display a list of possible ogjects with which to fill the field and then select one with the mouse or keyboard. This will be a much more intuitive and efficient way to fill out forms, and it will also allow for much more complex forms with many fields. This is in preparation for the next major release, which will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
-<p>Resizing of the <a class="el" href="../../d7/d88/a01255.html">View</a> windows is underway. This will require much testing as there are four windows within the <a class="el" href="../../d7/d88/a01255.html">View</a> window, the box window, the line number window, the command line window, and the virtual pad that must be resized and sequenced perfectly to avoid distracting artifacts.</p>
-<p>0.2.9 - 2026-04-10</p>
-<p>Used valgrind to find and fix a number of memory leaks and other memory-related issues. At this point, C-Menu is exiting with no memory leaks.</p>
-<p>Removed the -a (list hidden files) option from lf, made that the default behavior, and added -n option to exclude hidden files.</p>
-<p>Until now, the default maximum depth for lf was set to 3, which was convenient for testing, but could be confusing for users accustomed to find. The default maximum depth has been changed to 0, which means no limit. Users may want to specify a reasonable maximum depth to avoid unnecessary voluminous output.</p>
-<p>In benchmark testing, lf performed exceptionally well. It's fast.</p>
-<p>0.2.9 - 2026-04-01</p>
-<p>Most of the known bugs have been fixed, and the code is in a much more stable state. I will be doing a lot of testing and debugging to find and fix any remaining bugs, but I am confident that the code is in a good state for the next release, which will be version 0.3.x. The next release will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
-<p>0.2.9 - 2026-03-31</p>
-<p>More bugs fixed related to transition to argp.</p>
-<p>Added <a class="el" href="../../d4/d13/a01162.html#ga4c179e7657e744f1847506e11a476580" title="Set chyron key with color pair (cp).">set_chyron_key_cp()</a> function to allow the caller to specify a custom color pair for individual chyron keys. This allows for more flexible and customizable chyrons, and it can be used to highlight important options or to differentiate between different types of options. The color pair is specified as a six-digit hexadecimal <a class="el" href="../../d0/d5a/a01199.html">RGB</a> value, and it can be set to any color the user desires. This function is part of the larger effort to integrate the chyron facility into all C-Menu programs, which will allow for much more dynamic and context-sensitive user interfaces.</p>
-<p>0.2.9 - 2026-03-30</p>
-<p>Continued testing and debugging after having substantially refactored the main components of C-Menu to provide pop-up and drop-down helper widgets. This is a major step in the evolution of C-Menu, and it will allow for much more flexible and powerful user interfaces. The first component to be refactored is the chyron, which is a pop-up widget that can be used to display information and options to the user. The chyron is implemented as a separate module, and it can be easily integrated into any C-Menu program. The next step will be to refactor the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> module to use the chyron for displaying options, which will allow for much more dynamic and context-sensitive user interfaces. For example, when entering form fields, the user can press or click the help button to display a list of possible objects with which to fill the field and then select one with the mouse or keyboard. This will be a much more intuitive and efficient way to fill out forms, and it will also allow for much more complex forms with many fields. This is in preparation for the next major release, which will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
-<p>Specifically, the following improvements have been made: Combined <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d7/d88/a01255.html">View</a>, and CKeys into a single executable Incorporated argp for option processing Added Popup and Drop-down facility for <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d7/d88/a01255.html">View</a>, and CKeys Added line numbering to <a class="el" href="../../d7/d88/a01255.html">View</a> Refactored <a class="el" href="../../d7/d88/a01255.html">View</a> navigation to maintain a line number table and use the table to improve navigation performance Added file type selection to lf Added an exclude regular expression option to lf Modified <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> to return to the picker after executed the selected action Added a new Exercises section to the documentation, which includes a number of exercises designed to help developers learn how to use C-Menu and to provide a test bed for debugging. The first exercise is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database. Added SSH authentication and logging to RSH Added a wait popup to <a class="el" href="../../d7/d88/a01255.html">View</a> and <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> for slow provider programs</p>
-<p>This has no doubt introduced some bugs, so I will be doing a lot of testing and debugging before moving on to the next release, which will be version 0.3.x. The next release will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
-<p>0.2.9 - 2026-03-29</p>
-<p>If anyone knows of bugs that I need to address, now is the time to let me know. I will continue working with the pop-ups and drop-downs and I will be adding more exercises to the documentation, but I want to make sure the code is as error-free as possible before moving on to the next release, as version 0.3.x will embark on some major new features.</p>
-<p>Testing has revealed a number of off-by-one errors in view, which I have fixed, at least all those that I know about. I have also added a wait popup to view and pick, which will be displayed in the unlikely event that a provider program takes longer than 200ms to respond. The wait popup is a simple window with a message that counts down in seconds until input arrives or timeout, at which time the user is presented with an option to cancel. This is a possibility in the event that the provider program produces no output or stops waiting on user input. The timer checks the open pipe for input and also checks that the provider has terminated. If the program seems to be hung, the user can press Ctrl-C to cause a SIGTERM interrupt and then choose F9 to cancel. The wait popup is implemented in the parent process, which allows the countdown to timeout to be displayed without blocking the main thread of the program. The wait popup is designed to be non-intrusive, so it doesn't interfere with the user's workflow.</p>
-<p>0.2.9 - 2026-03-28</p>
-<p>Accomplished the first step in refactoring the main components of C-Menu to provide pop-up and drop-down helper widgets. This is a major step in the evolution of C-Menu, and it will allow for much more flexible and powerful user interfaces. The first component to be refactored is the chyron, which is a pop-up widget that can be used to display information and options to the user. The chyron is implemented as a separate module, and it can be easily integrated into any C-Menu program. The next step will be to refactor the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> module to use the chyron for displaying options, which will allow for much more dynamic and context-sensitive user interfaces. For example, when entering form fields, the user can press or click the help button to display a list of possible ogjects with which to fill the field and then select one with the mouse or keyboard. This will be a much more intuitive and efficient way to fill out forms, and it will also allow for much more complex forms with many fields. This is in preparation for the next major release, which will include a number of new features and improvements, including plug-ins for external data, such as weather, news, stock quotes, and more.</p>
-<p>0.2.9 - 2026-03-24</p>
-<p>Addes SSH authentication to RSH for extra security, and also implemented logging to the system log for all RSH sessions. The SSH authentication is implemented using the libssh library, and it allows users to authenticate using their SSH keys instead of passwords. This is a much more secure method of authentication, and it also allows for easier management of user credentials. The logging to the system log is implemented using the syslog() function, and it allows administrators to keep track of all RSH sessions for auditing purposes. On systems with systemd, the user can type journalctl -t rsh to view the log entries for RSH sessions.</p>
-<p>Added a wait popup to <a class="el" href="../../d7/d88/a01255.html">View</a> and <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, for the unlikely cases in which a provider program takes longer than 200ms to respond. The wait popup is a simple window with a message that counts down in seconds until input arrives or timeout, at which time the user is presented with an option to cancel. This is a possibility in the event that the provider program produces no output or stops waiting on user input. The timer checks the open pipe for input and also checks that the provider has terminated. If the program seems to be hung, the user can press Ctrl-C to cause a SIGTERM interrupt and then choose F9 to cancel. The wait popup is implemented in the parent process, which allows the countdown to timeout to be displayed without blocking the main thread of the program. The wait popup is designed to be non-intrusive, so it doesn't interfere with the user's workflow.</p>
-<p>0.2.9 - 2026-03-19</p>
-<p>Added line numbering option "-N" to <a class="el" href="../../d7/d88/a01255.html">View</a> to display line numbers in the left margin. The line numbers have a separate window, so it doesn't interfere with horizontal scrolling. The line numbers are right-aligned and padded with spaces to maintain a consistent width. The C-Menu configuration now has options for foreground and background colors for line numbers. These are six-digit hexadecimal <a class="el" href="../../d0/d5a/a01199.html">RGB</a> values, and they can be set to any color the user desires.</p>
-<p>Also refactored <a class="el" href="../../d7/d88/a01255.html">View</a> navigation to maintain a line number table and use the table to improve navigation performance. The table is allocated dynamically, and consumes four bytes per line. The line number table is updated whenever the user scrolls vertically, and it allows for much faster navigation to specific lines, especially in large documents. The line number table is also used to maintain the correct line numbers in the left margin when the user scrolls horizontally.</p>
-<p>0.2.9 - 2026-03-13</p>
-<p>Added additional file selection options to lf. Now, you can list files of specific types by specifying -t bcdplfsu (in any order or combination) b block devices c character devices d directories p named pipes l symbolic links f regular files s sockets u unknown file types You can select multiple file types and any you don't select will not be emitted. For example, lf -t d will only list directories, while lf -t f will only list regular files. lf -t df will list both directories and regular files, and lf -t bcdplfsu will list all file types, which is the default behavior with no -t option.</p>
-<p>0.2.9 - 2026-03-13</p>
-<p>Modified <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> to return to the picker after executed the selected action. This is a much more intuitive behavior, and it allows the user to execute multiple actions without having to reopen the picker each time. One of the new Exercises will make this abundantly clear.</p>
-<p>Added a new Exercises section to the documentation, which includes a number of exercises designed to help developers learn how to use C-Menu and to provide a test bed for debugging. The first exercise is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database.</p>
-<p>0.2.9 - 2026-03-10</p>
-<p>Moved documentation to a separate repository and website, which is now available at:</p>
-<p><a href="https://decision-inc.com/">C-Menu Comprehensive Reference</a></p>
-<p>This was necessary because the documentation had become too large and unwieldy to be easily navigable within the C-Menu repository, so only the main page was available. With the new website on Github Pages, I was able to include all the Doxygen pages including function cross references and diagrams.</p>
-<p>The new website is much more user-friendly and easier to navigate, and it will allow me to keep the documentation up-to-date more easily.</p>
-<p>0.2.9 - 2026-03-09</p>
-<p>Much more work on chyron integration. Appears to be working as intended. In the process, I found and fixed a number of bugs in form and one in lf. The debugging process is somewhat tedious following disruptive feature additions, but we are making progress.</p>
-<p>Still more work on inte</p>
-<p>0.2.9 - 2026-03-08</p>
-<p>Continuing to work on chyron integration into <a class="el" href="../../d7/dbf/a01239.html">Form</a> and <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>. When using the Installment Loan example, the chyron has been adjusted to only include relevant options, and the key handling has been reworked to accommodate the new structure. For example, when the user finishes entering all the fields in the form, the chyron provides only F1 Help, F5 Calculate, and F9 Cancel, which makes sense because the form is still in edit mode and the user can continue to edit fields by using movement keys or by clicking on the fields. Once the user clicks calculate, the chyron changes to include F1 Help, F4 Edit, F9 Cancel, and F10 Commit. Upon clicking F9 Commit (or pressing the F9 key), <a class="el" href="../../d7/dbf/a01239.html">Form</a> will execute the appropriate action specified by the user.</p>
-<p>0.2.9 - 2026-03-07</p>
-<p>Corrected <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> Page Down and Page Up key handling, which had been broken by the integration of the chyron facility into xwgetch. This was a major problem, and it caused the <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> module to be completely unusable. I have reimplemented the key handling, and it is now working as intended.</p>
-<p>Modified <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> so that the chyron only includes Page Up and Page Down options when there is more than 1 page of <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a> ojbects. This is part of a larger effort to integrate the chyron facility into all C-Menu programs. The chyron facility allows C-Menu to generate dynamic chyrons based on the current state of the program, while automatically keeping track of click zones so that xwgetch can interpret mouse clicks as key codes. The idea is that the chyron should only include relevant options.</p>
-<p>0.2.9 - 2026-03-06</p>
-<p>Added -e exclude regular expression to lf, which allows users to exclude files from the listing based on a regular expression. This is a powerful feature that can be used to filter out unwanted files from the listing.</p>
-<p>Replaced mouse handling in <a class="el" href="../../dc/dc2/a01251.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d7/dbf/a01239.html">Form</a>, and <a class="el" href="../../dd/d95/a01247.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> with xwgetch, which reads chyron mouse selections as key codes. Now all mouse events are handled through a single function. xwgetch also handles asynchronous signal events.</p>
-<p>Some code in <a class="el" href="../../d0/d61/a01130.html" title="The working part of C-Menu Menu.">menu_engine.c</a>, which handled hierarchical menu navigation, had somehow been deleted. This was a major problem, and it caused the menu system to be completely broken. I have reimplemented it, and it is now working as intended.</p>
-<p>The addition of an Exercises section will provide a test bed for debugging as well as a proof-of-concept for C-Menu. The first project is a suite of Workstation Configuration programs for SDDM, Ghostty, Kitty, and Alacritty. These have been integrated into the C-Menu example main menu. I will continue to add more exercises along with documentation. The exercises will be designed to be both educational and practical, and they will cover a wide range of topics related to C-Menu development. One of the next projects, if time allows, will be a C-Menu based general ledger using SQLite as the backend database.</p>
-<p>0.2.9 - 2026-02-27</p>
-<p>Added a number of improvements to CMake build to accommodate C-Menu's revised file structure. Both CMake and straight Makefile builds produce similar results, but CMake is more flexible, easier to work with, and less prone to difficult-to-solve problems.</p>
-<p><a class="el" href="../../d7/d88/a01255.html">View</a>'s search function has been reworked to fix a number of issues with buffer and page management, such as off-by-one page top and bottom positioning.</p>
-<p>lf (list files) - recursive option has been replaced by a depth option and lf's core logic has been reworked to enhance reliability. Also removed mangled lf syntax which had been used in some scripts to compensate for deficiencies in lf's option handler.</p>
-<p>Many documentation updates - API/ABI documentation is substantially complete. Function Call Graphs, Called Graphs, and forward and backward references added.</p>
-<p>Every function is documented, and most variables. All documentation has been consolidated into a single html file available at:</p>
-<p><a href="https://billwaller.github.io/C-Menu/">C-Menu Comprehensive Reference</a></p>
-<p>In <a class="el" href="../../d7/d88/a01255.html">View</a>, replaced calls to mbtowc() with mbrtowc() because of spurious accent marks populating the complex characters structures (cchar_t). Apparently, mbtowc() is broken. mbrtowc() is the new and improved replacement.</p>
-<p>The ANSI SGR parser and gamma correction in <a class="el" href="../../d7/d88/a01255.html">View</a> is working perfectly. Try a setting of 2.2 in ~/.minitrc to brighten up dull documents.</p>
-<p>0.2.9 - 2026-02-09</p>
-<p>Split the large <a class="el" href="../../df/df7/a00731.html" title="Menu data structures, enums, types, end external declarations.">menu.h</a> into Separate .h files for each module, which should make it easier for developers who want to work on a particular feature.</p>
-<p>Modified Makefile and CMakeLists.txt to reflect the new file structure, and to add the new shared library libcm.so</p>
-<p>Many unimplemented functions have been implemented, and the project is now in a much more complete state. I am still working on the documentation, but I have made significant progress on it, and I will be uploading it to the repository as I go.</p>
-<p>I will look into adding a website for the project, and I will be uploading the documentation to the repository as I go. I am also working on a website for the project, which will be up soon.</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md83"></a> <img src="../../Overview.png" alt="" class="inline" title="C-Menu Overview"/>    </p>
+<h1 class="doxsection"><a class="anchor" id="table-of-contents-5"></a>
+Table of Contents</h1>
+<ul>
+<li><a class="el" href="#other-c-menu-documents" title="Other C-Menu Documents">Other C-Menu Documents</a></li>
+<li><a class="el" href="../../d4/dad/a01353.html#get-c-menu-on-github" title="Get C-Menu on Github">Get C-Menu on Github</a><ul>
+<li><a class="el" href="#c-menu-introduction" title="C-Menu Introduction">C-Menu Introduction</a></li>
+<li><a class="el" href="#view-line-numbering" title="View Line Numbering">View Line Numbering</a></li>
+<li><a class="el" href="#large-log-file-in-view" title="Large Log File in View">Large Log File in View</a></li>
+<li><a class="el" href="#_new-api-integration-with-neovim_" title="&lt;strong&gt;&lt;em&gt;New API Integration With Neovim&lt;/em&gt;&lt;/strong&gt;">**_New API Integration With Neovim_**</a></li>
+<li><a class="el" href="#_new-options-for-lf_" title="&lt;strong&gt;&lt;em&gt;New Options for lf&lt;/em&gt;&lt;/strong&gt;">**_New Options for lf_**</a></li>
+</ul>
+</li>
+<li><a class="el" href="#c-menu-exercises" title="C-Menu Exercises">C-Menu Exercises</a></li>
+<li><a class="el" href="#menu-form-pick-view-c-keys-rsh-and-lf" title="Menu, Form, Pick, View, C-Keys, RSH, and lf">Menu, Form, Pick, View, C-Keys, RSH, and lf</a><ul>
+<li><a class="el" href="#c-menu-api" title="C-Menu API">C-Menu API</a></li>
+<li><a class="el" href="#elements-of-c-menu" title="Elements of C-Menu">Elements of C-Menu</a></li>
+<li><a class="el" href="#key-features" title="Key Features">Key Features</a></li>
+<li><a class="el" href="#highlights-pun-intended" title="Highlights (Pun Intended)">Highlights (Pun Intended)</a></li>
+<li><a class="el" href="#just-do-it" title="Just Do It">Just Do It</a></li>
+<li><a class="el" href="../../d2/d1f/a01361.html#menu" title="Menu">Menu</a></li>
+<li><a class="el" href="#c-keys---diagnose-keyboardmouse-input" title="C-Keys - Diagnose Keyboard/Mouse Input">C-Keys - Diagnose Keyboard/Mouse Input</a></li>
+<li><a class="el" href="#pick---a-picker" title="Pick - A Picker">Pick - A Picker</a></li>
+<li><a class="el" href="#form-for-data-entry-and-editing" title="Form for Data Entry and Editing">Form for Data Entry and Editing</a></li>
+<li><a class="el" href="#form-key-features" title="Form Key Features">Form Key Features</a></li>
+<li><a class="el" href="../../d7/dc4/a01354.html#form-data-types" title="Form Data Types">Form Data Types</a></li>
+<li><a class="el" href="#sample-menu-description-file" title="Sample Menu Description File">Sample Menu Description File</a></li>
+<li><a class="el" href="#view" title="View">View</a><ul>
+<li><a class="el" href="#log-file-with-editor" title="Log File With Editor">Log File With Editor</a></li>
+<li><a class="el" href="#screenshot-of-the-same-file-with-view" title="Screenshot of the Same File With View">Screenshot of the Same File With View</a></li>
+</ul>
+</li>
+<li><a class="el" href="#view-and-color-manual-pages" title="View and Color Manual Pages">View and Color Manual Pages</a></li>
+<li><a class="el" href="#example-manual-page-using-editor" title="Example Manual Page Using Editor">Example Manual Page Using Editor</a></li>
+<li><a class="el" href="#example-manual-page" title="Example Manual Page">Example Manual Page</a></li>
+<li><a class="el" href="#demand-paged-virtual-address-space" title="Demand Paged Virtual Address Space">Demand Paged Virtual Address Space</a></li>
+<li><a class="el" href="#view---other-features" title="View - Other Features">View - Other Features</a></li>
+<li><a class="el" href="#autotoc_md3-channel-gamma-correction" title="3-Channel Gamma Correction">3-Channel Gamma Correction</a></li>
+<li><a class="el" href="#gray-gamma" title="Gray Gamma">Gray Gamma</a></li>
+<li><a class="el" href="#rsh" title="RSH">RSH</a></li>
+<li><a class="el" href="#maintaining-security-with-rsh" title="Maintaining Security with RSH">Maintaining Security with RSH</a></li>
+<li><a class="el" href="#lf---list-files-using-regular-expressions" title="lf - List Files Using Regular Expressions">lf - List Files Using Regular Expressions</a></li>
+</ul>
+</li>
+<li><a class="el" href="#features" title="Features">Features</a></li>
+<li><a class="el" href="#configuration" title="Configuration">Configuration</a></li>
+<li><a class="el" href="#mit-license" title="MIT License">MIT License</a></li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="other-c-menu-documents"></a>
+Other C-Menu Documents</h2>
+<p><a class="el" href="../../d2/d3f/a01356.html" title="Changelog">Change Log</a></p>
+<p><a class="el" href="../../d4/dad/a01353.html" title="API">API Documentation</a></p>
+<p><a class="el" href="../../d8/d4e/a01355.html" title="C-Menu-UG">C-Menu User Guide</a></p>
+<p><a class="el" href="../../df/d10/a01357.html" title="exercises">Exercises</a></p>
+<p><a class="el" href="../../de/d5c/a01358.html" title="extras">Augmenting C-Menu</a></p>
+<p><a class="el" href="../../dc/d4b/a01359.html" title="FAQ">Frequently Asked Questions</a></p>
+<p><a class="el" href="../../d2/d1f/a01361.html" title="C-Menu - A User Interface Toolkit">Installation Instructions</a></p>
+<p><a class="el" href="../../dd/d86/a01367.html" title="snippets">Configuration Snippets</a></p>
+<p><a class="el" href="../../d6/dfe/a01366.html" title="C-Menu ROADMAP">Road Map</a></p>
+<p><a href="https://decision-inc.com">C-Menu HTML Documentation</a></p>
+<h2 class="doxsection"><a class="anchor" id="get-c-menu-on-github-3"></a>
+Get C-Menu on Github</h2>
+<p><a href="https://github.com/BillWaller/C-Menu.git">Download C-Menu from Github</a></p>
+<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="c-menu-introduction"></a>
+C-Menu Introduction</h3>
+<p>C-Menu-0.2.9 - 2026-03-30</p>
+<p>C-Menu is a Terminal based User Interface (TUI) toolkit you can use to quickly and easily create powerful and visually appealing applications. With C-Menu you can design and implement menus, forms, pickers, and <a class="el" href="../../da/de0/a01248.html">View</a> to improve the user experience and make your product shine.</p>
+<p>C-Menu doesn't waste space or time rendering complex graphics. At only 151k, the executable is lean, efficient, and easy to maintain. It's a real TUI. No fluff, no bloat, no distractions. Just sleek, powerful and fast.</p>
+<p>User interaction with C-Menu is natural and intuitive. On modern hardware, C-Menu is so fast and responsive you might even forget your fingers are moving as you watch your thoughts flow effortlessly onto the screen. As a bonus, C-Menu integrates powerful tools like Tree-sitter to boost perceptual efficiency, comprehension, and retention through the intelligent use of color. Want more? The C-Menu API provides documentation and auto-completion in the Neovim editor.</p>
+<p>In short, C-Menu gets out of your way and lets you focus on what matters most. Even on older hardware over slow connections, C-Menu is blazingly fast, making it an ideal choice for a wide range of applications, including <b><em>DevOps</em></b>, <b><em>CI/CD</em></b>, <b><em>IOT</em></b>, <b><em>Embedded Systems</em></b>, <b><em>Servers</em></b>, <b><em>System Administration</em></b>, <b><em>Application Development</em></b>, and <b><em>Terminal Enthusiasts</em></b>. Administrators, developers, and users of all skill levels can benefit from C-Menu's powerful features and ease of use. Whether you're managing a complex infrastructure, developing applications, or simply looking for a more efficient way to interact with your system, C-Menu has you covered.</p>
+<p>C-Menu is not just low cost, it is <b><em>ABSOLUTELY FREE</em></b> and open-source under the <b><em>MIT License</em></b>. You can use it, modify it, and share it with anyone you like. C-Menu is a labor of love, and I'm excited to share it with you and the world. I hope you find it useful, enjoyable, and profitable.</p>
 <hr  />
-<p>[0.2.8] - 2026-02-04</p>
-<p>Makefile</p>
-<p>menu - <a class="el" href="../../d9/d10/a01103.html" title="Command line start-up for C-Menu components.">menu.c</a> <a class="el" href="../../d0/d61/a01130.html" title="The working part of C-Menu Menu.">menu_engine.c</a> <a class="el" href="../../dd/de4/a01121.html" title="Parse menu description file and create Menu.">parse_menu_desc.c</a></p>
-<p>form - form.c</p>
-<p>pick - pick.c</p>
-<p>view - view.c</p>
-<p>ckeys - ckeys.c</p>
-<p>enterchr - <a class="el" href="../../d9/d65/a01145.html" title="Enter a single character from keyboard.">enterchr.c</a></p>
-<p>enterstr - <a class="el" href="../../d9/d5b/a01127.html" title="Enter a string from keyboard.">enterstr.c</a></p>
-<p>optsp - optsp.c</p>
-<p>whence - <a class="el" href="../../d0/d39/a01112.html" title="Find the full path of a file in the directories specified by the.">whence.c</a></p>
-<p>stripansi - <a class="el" href="../../db/d28/a01133.html" title="removes ansi escape sequences beginning with &quot;\033[&quot;&quot; and ending in&quot;m&quot; or &quot;K&quot;">stripansi.c</a></p>
-<p>iloan - <a class="el" href="../../d6/d0d/a01091.html" title="Installment Loan Calculator.">iloan.c</a></p>
-<p>lf - <a class="el" href="../../d0/dc8/a01124.html" title="list files matching a regular expression">lf.c</a></p>
-<p>add_executable(form form.c) target_sources(form PRIVATE $&lt;TARGET_OBJECTS:cmenu&gt;) target_link_libraries(form cm ${LIBS})</p>
-<p>add_executable(enterchr <a class="el" href="../../d9/d65/a01145.html" title="Enter a single character from keyboard.">enterchr.c</a>) target_link_libraries(enterchr cm ${LIBS})</p>
-<p>add_executable(enterstr <a class="el" href="../../d9/d5b/a01127.html" title="Enter a string from keyboard.">enterstr.c</a>) target_link_libraries(enterstr cm ${LIBS})</p>
-<p>add_executable(iloan <a class="el" href="../../d6/d0d/a01091.html" title="Installment Loan Calculator.">iloan.c</a>) target_link_libraries(iloan cm ${LIBS})</p>
-<p>add_executable(lf <a class="el" href="../../d0/dc8/a01124.html" title="list files matching a regular expression">lf.c</a>) target_link_libraries(lf cm ${LIBS})</p>
-<p>add_executable(pick pick.c) target_sources(pick PRIVATE $&lt;TARGET_OBJECTS:cmenu&gt;) target_link_libraries(pick cm ${LIBS})</p>
-<p>TARGETS menu form pick view ckeys enterchr enterstr lf optsp stripansi whence cm</p>
-<p><a class="el" href="../../db/d17/a01148.html" title="Window support for C-Menu - EXPERIMENTAL.">dwin.c</a> <a class="el" href="../../d5/d3e/a01139.html" title="General utility functions.">futil.c</a> <a class="el" href="../../d5/d16/a01154.html" title="Screen IO Support for MENU.">scriou.c</a> <a class="el" href="../../da/d4e/a01106.html" title="Functions to execute external commands.">exec.c</a> <a class="el" href="../../dd/d09/a01118.html" title="signal handling for interrupt signals">sig.c</a></p>
-<p>COMMON_SRCS <a class="el" href="../../d1/dfa/a01097.html" title="Test Curses Keys.">curskeys.c</a> <a class="el" href="../../de/df1/a01151.html" title="Field Edit and Entry for C-Menu Form.">fields.c</a> <a class="el" href="../../d8/dbf/a01109.html" title="The working part of C-Menu Form.">form_engine.c</a> <a class="el" href="../../da/db7/a01088.html" title="Initialize C-Menu View Screen IO and Input.">init_view.c</a> <a class="el" href="../../d3/dbd/a01100.html" title="pick from a list of choices">pick_engine.c</a> <a class="el" href="../../df/dd5/a01115.html" title="The working part of View.">view_engine.c</a> <a class="el" href="../../d1/dae/a01136.html" title="Initialization for Menu Application Programs.">init.c</a> <a class="el" href="../../d2/df3/a01085.html" title="Create and destroy main data structures for C-Menu.">mem.c</a> mview.c opts.c)</p>
+<h3 class="doxsection"><a class="anchor" id="view-line-numbering"></a>
+View Line Numbering</h3>
+<div class="image">
+<img src="../../tree-sitter3.png" alt=""/>
+<div class="caption">
+View C Source</div></div>
+    <p>Turn line numbering on in the configuration by setting f_ln to true or use the -N command line option. <a class="el" href="../../da/de0/a01248.html">View</a> creates a separate panel for line numbers, so it doesn't get pushed off the screen when you scroll horizontally. Foreground and background colors for the line number panel can be specified in the configuration file.</p>
+<h3 class="doxsection"><a class="anchor" id="large-log-file-in-view"></a>
+Large Log File in View</h3>
+<div class="image">
+<img src="../../new_view2.png" alt=""/>
+<div class="caption">
+View Large Log File</div></div>
+    <p>Even though this lsp.log is 109Mb, it loads instantly and traversal from beginning to takes only a few milliseconds. <a class="el" href="../../da/de0/a01248.html">View</a>'s demand paged virtual memory is a game changer for working with large text files. You can open and navigate through multi-gigabyte log files without any lag, making it an invaluable tool for system administrators and developers who need to analyze large logs efficiently.</p>
+<h3 class="doxsection"><a class="anchor" id="_new-api-integration-with-neovim_"></a>
+<b><em>New API Integration With Neovim</em></b></h3>
+<div class="image">
+<img src="../../api-help.png" alt=""/>
+<div class="caption">
+Neovim API Integration</div></div>
+    <p>Step aside CodeView. As you are typing the name of a C-Menu API function, a list of matching signatures appears along with a brief description and parameters. This makes it easier to to use the API without having to leave your coding environment. You can select the function you want with the arrow keys and press Enter to insert it into your code. You can also hover over a function and press Shift-K to view the documentation in a pop-up window.</p>
+<h3 class="doxsection"><a class="anchor" id="_new-options-for-lf_"></a>
+<b><em>New Options for lf</em></b></h3>
+<div class="image">
+<img src="../../lf-debug.png" alt=""/>
+<div class="caption">
+lf options</div></div>
+    <p>The speed of C-Menu's ultra-lightweight executables is almost obscene. Designed to be used in pipelines, they won't slow you down.</p>
+<p>One of the menu items under Diagnostic</p>
+<h2 class="doxsection"><a class="anchor" id="c-menu-exercises"></a>
+C-Menu Exercises</h2>
+<p>The screenshots below are practical examples from the C-Menu Exercises. This is a new section that will be updated with more examples as they are developed. The exercises are designed to demonstrate the capabilities of C-Menu and provide users with hands-on experience in creating menus,forms, and pickers using the C-Menu framework. Each exercise will include a description of the task, the corresponding configuration files, and screenshots of the resulting interfaces. These exercises are intended to help users understand how to utilize C-Menu effectively and inspire them to create their own custom interfaces for their applications. Stay tuned for more updates in the Exercises section!</p>
+<p><img src="../../workstation_config2.png" alt="" class="inline" title="Exercises"/>    </p>
+<p><img src="../../workstation_config.png" alt="" class="inline" title="Exercises"/>    </p>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="menu-form-pick-view-c-keys-rsh-and-lf"></a>
+Menu, Form, Pick, View, C-Keys, RSH, and lf</h2>
+<div class="image">
+<img src="../../minitrc.png" alt=""/>
+<div class="caption">
+C-Menu</div></div>
+    <h3 class="doxsection"><a class="anchor" id="c-menu-api"></a>
+C-Menu API</h3>
+<p>The C-Menu API is a set of functions and tools that allow developers to extend the capabilities of C-Menu and develop custom applications that integrate with C-Menu, and to integrate C-Menu into applications like Neovim.</p>
+<div class="image">
+<img src="../../api-help1.png" alt=""/>
+<div class="caption">
+C-Menu API Help in Neovim</div></div>
+    <p>As you are typing the name of a C-Menu API function, a list of matching signatures appears along with a brief description, the function signature, and its parameters. This makes it easier to to use the API without having to leave your coding environment. You can select the function you want with the arrow keys and press Enter to insert it into your code. You can also hover over a function and press Shift-K to view the documentation in a pop-up window.</p>
+<p>But C-Menu is not just for developers. It's also a powerful tool for users who want to create custom interfaces for their applications. With C-Menu, you can easily design and implement menus, forms, and pickers that enhance the user experience and streamline interactions with your applications. Whether you're a developer looking to create intuitive interfaces or a user seeking a more engaging way to interact with applications, C-Menu has you covered. Dive in and explore the possibilities!</p>
+<p><b><em>NOTE:</em></b> Requires Neovim properly configured with support for LSP and a plugin that provides LSP functionality, such as nvim-lspconfig.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="elements-of-c-menu"></a>
+Elements of C-Menu</h3>
+<p><b><em><a class="el" href="../../d5/d6e/a01240.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a></em></b> - Navigate Application Hierarchy</p>
+<p><b><em><a class="el" href="../../d0/d67/a01232.html">Form</a></em></b> - <a class="el" href="../../de/d16/a01228.html" title="structure for form fields">Field</a> Entry, Formatting, Validation, and Editing</p>
+<p><b><em><a class="el" href="../../d4/dd5/a01244.html" title="Pick data structure.">Pick</a></em></b> - Select Objects From Lists and Tables</p>
+<p><b><em><a class="el" href="../../da/de0/a01248.html">View</a></em></b> - Search, Format, and Display Data</p>
+<p><b><em>RSH</em></b> - Expeditious Root Privilege On/Off</p>
+<p><b><em>CKeys</em></b> - Diagnose Mouse and Keyboard Issues</p>
+<p><b><em>lf</em></b> - Select and List Files Using Regular Expressions</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="key-features"></a>
+Key Features</h3>
 <ul>
-<li>0.2.8 - 2026-02-03</li>
-<li>0.2.9 - 2026-02-04</li>
+<li>Easy to Design Menus and Forms With Simple <a class="el" href="../../d8/d8e/a01224.html" title="structure for form fields">Text</a> Files</li>
+<li>Highly Customizable Appearance and Behavior</li>
+<li>Blazingly Fast, Even on Older Hardware</li>
+<li>Supports Tree-Sitter Syntax Highlighting</li>
+<li>Colorize Manual Pages</li>
+<li>Customizable Color Schemes</li>
+<li>24-Bit (16777216-Color) True Color ANSI</li>
+<li>HTML Style Six-Digit Hex Color Codes</li>
+<li>User Selectable 3-Channel + Grayscale Gamma Correction</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="fixed"></a>
-Fixed</h2>
+<h3 class="doxsection"><a class="anchor" id="highlights-pun-intended"></a>
+Highlights (Pun Intended)</h3>
+<p>Cast some light on dull information with C-Menu's vibrant colorization features. With support for 24-bit true color ANSI and HTML-style six-digit hex color codes, you can customize your interface to suit your preferences. Whether you want to highlight important information or simply make your terminal more visually appealing, C-Menu has the tools you need.</p>
+<h3 class="doxsection"><a class="anchor" id="just-do-it"></a>
+Just Do It</h3>
+<p>C-Menu is more than just a tool; it's a gateway to a more efficient and enjoyable computing experience. Whether you're a developer looking to create intuitive interfaces or a user seeking a more engaging way to interact with applications, C-Menu has you covered. Dive in and explore the possibilities!</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="menu-1"></a>
+Menu</h3>
+<p>At the top of the stack is C-Menu <a class="el" href="../../d5/d6e/a01240.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, which reads a simple description file like the one below and displays a colorful and easy-to -follow menu to the user. When the user selects an item, with either keyboard or mouse, C-Menu executes the corresponding command. It's like writing shell scripts, but with a snazzy menu interface.</p>
+<p>A <a class="el" href="../../d5/d6e/a01240.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> description file consists of Choices and Commands. The Choice is the label that appears in the menu, and the Command is the shell command that gets executed when the user selects that choice. Some commands are internal, such as menu, form, pick, view, and ckeys, which invoke the corresponding C-Menu applications. Other commands can be any shell command, including scripts and executables.</p>
+<p>The description file can also include comments, which are lines that start with a hash symbol (#). These comments are ignored by C-Menu and can be used to provide explanations or notes about the menu items.</p>
+<p>If you can think of a way to make a menu builder easier to use, please let me know and I will build it into C-Menu.</p>
+<p><img src="../../applications_menu.m.png" alt="" class="inline" title="Sample Description File"/>    </p>
+<p><img src="../../applications_menu.png" alt="" class="inline" title="Sample Menu"/>    </p>
+<p>From the above examples, you can get an idea of how C-Menu works. Examine line-21 in "main.m" above. C-Menu <a class="el" href="../../d5/d6e/a01240.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> starts C-Menu <a class="el" href="../../da/de0/a01248.html">View</a>, which in turn executes "tree-sitter highlight view_engine.c". Tree -Sitter doesn't need to know anything about C-Menu <a class="el" href="../../da/de0/a01248.html">View</a>. It just sends output to it's standard output device, which happens to be a pipe into C-Menu <a class="el" href="../../da/de0/a01248.html">View</a>'s receiver. C-Menu <a class="el" href="../../da/de0/a01248.html">View</a> maps Tree-Sitter's output to the Kernel's demand paged virtual memory and you get:</p>
+<div class="image">
+<img src="../../tree-sitter.png" alt=""/>
+<div class="caption">
+Tree-Sitter</div></div>
+    <hr  />
+<h3 class="doxsection"><a class="anchor" id="c-keys---diagnose-keyboardmouse-input"></a>
+C-Keys - Diagnose Keyboard/Mouse Input</h3>
+<p>With C-Keys, you can diagnose and resolve keyboard and mouse issues quickly and easily. Just press a key and get the Octal, Decimal, Hexadecimal, the Escape Sequence Binding, and the NCurses Identifier. It's definitely easier than rummaging through hardware documentation and NCurses header files. It's also a good way to identify which keys are reserved by your terminal emulator, and gives you the specific key codes so you can easily add your own Extended NCurses keys.</p>
+<p><img src="../../ckeys-alt.png" alt="" class="inline" title="C-Keys"/>    </p>
+<p><img src="../../extended-keys.png" alt="" class="inline" title="Extend Your Keyboard"/>    </p>
+<p>C-Keys also provides diagnostics for mouse actions and geometry.</p>
+<div class="image">
+<img src="../../ckeys-mouse.png" alt=""/>
+<div class="caption">
+Ckeys Mouse</div></div>
+    <p>Just add hot water, stir, and Bob's your uncle, you have soup! 😀</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="pick---a-picker"></a>
+Pick - A Picker</h3>
+<div class="image">
+<img src="../../Pick.png" alt=""/>
+<div class="caption">
+Pick</div></div>
+    <p><a class="el" href="../../d4/dd5/a01244.html" title="Pick data structure.">Pick</a> provides a list of objects from arguments, piped input, or a text file. The user selects an object by using cursor movement keys, up, down, left, right, page-up, or page-down and pressing the space bar. Alternatively, the user can use the mouse and click on the object. When finished selecting objects, the user presses the Enter or F(10) key. If the "number_of_selections" variable is set to 1 (one), <a class="el" href="../../d4/dd5/a01244.html" title="Pick data structure.">Pick</a> will assume the user is finished and perform the specified action. Output can be piped to standard output, or provided as arguments to an executable file specified in the description file.</p>
+<p>Here's a simple way to use <a class="el" href="../../d4/dd5/a01244.html" title="Pick data structure.">Pick</a>:</p>
+<p><a class="el" href="../../d4/dd5/a01244.html" title="Pick data structure.">Pick</a> a file to view using "lf", a utility to search for files using regular expressions, and which is included with C-Menu:</p>
+<div class="fragment"><div class="line">view -S &quot;lf . .*\.c$&quot;</div>
+</div><!-- fragment --><p>Execute a program or script on a picked file:</p>
+<div class="fragment"><div class="line">pick -S &quot;lf . .*\.c$&quot; -n 1 -c my_executable</div>
+</div><!-- fragment --><p>Note that the syntax for "lf" (list files) is not similar to Unix "ls".</p>
+<p>The usage of "lf" is:</p>
+<div class="fragment"><div class="line">lf directory regular_expression</div>
+</div><!-- fragment --><p>If you type "lf \*.c", it will fail for lack of a valid regular expression. That's because "ls" uses shell expansion, while "lf" uses regular expressions. Find supports regular expressions, but such a comprehensive program carries a penalty in size and overhead. "lf" is streamlined to provide input for a picker.</p>
+<div class="fragment"><div class="line">find -regex &#39;.*\.c$&#39; | sed &#39;s/^..//&#39;</div>
+</div><!-- fragment --><div class="fragment"><div class="line">lf . &#39;.*\.c$&#39;</div>
+</div><!-- fragment --><hr  />
+<h3 class="doxsection"><a class="anchor" id="form-for-data-entry-and-editing"></a>
+Form for Data Entry and Editing</h3>
+<p>FORM is a lightweight and flexible form handling library designed to simplify the process of creating, validating, and managing forms.</p>
+<p>It provides a straightforward API for defining form fields, handling user input, and performing validation checks.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="form-key-features"></a>
+Form Key Features</h3>
 <ul>
-<li>Prevent segmentation fault upon <span class="tt">close()</span> ([#28](link-to-pr))</li>
+<li>Easy <a class="el" href="../../d0/d67/a01232.html">Form</a> Creation: Define forms with various field types such as text, number, email, and more.</li>
+<li>Validation: Built-in validation rules to ensure data integrity, including required fields, format checks, and custom validators.</li>
+<li>User Input Handling: Seamlessly capture and process user input from the command line or text-based interfaces.</li>
+<li>Customizable: Extendable architecture allowing developers to create custom field types and validation rules.</li>
+<li>Integration: Designed to work well with other components of the C -<a class="el" href="../../d5/d6e/a01240.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Project, enabling a cohesive development experience.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md028--2026-02-04"></a>
-[0.2.8]- 2026-02-04</h1>
-<h2 class="doxsection"><a class="anchor" id="added"></a>
-Added</h2>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="form-data-types-2"></a>
+Form Data Types</h3>
+<p><img src="../../data-types.f.png" alt="" class="inline" title="Data Types"/>    </p>
+<p><img src="../../data-types.png" alt="" class="inline" title="Data Types"/>    </p>
+<p>FORM displays data entry forms based on a description file. It allows users to input data in a structured manner. The entered data can then be processed by a specified command or script. Internally, the numeric entries are converted to binary integer, long, float, or double.</p>
+<div class="image">
+<img src="../../Receipt.png" alt=""/>
+<div class="caption">
+Form - Example</div></div>
+    <p>The two Cash Receipts entry forms above are identical except the top form has field brackets turned on and the bottom form has fill characters set to underscore. This is a simple configuration option from the command line or the configuration file.</p>
+<p>If you make a mistake, in the form description syntax, as I did below, you will get a notification pinpointing the problem. In this message, we can see that the format field on line 3 of "receipt.f" is invalid.</p>
+<p>I have a "3", and it should have been "String". The corrected line would be: "F!2!18!10!String".</p>
+<div class="image">
+<img src="../../form-error.png" alt=""/>
+<div class="caption">
+Form Error</div></div>
+    <p>Need quick and easy Cash Receipts, General Journal, or wedding invitation list? FORM has you covered. The application shown above took about 10 minutes from design to test. It doesn't post transactions, or keep running balances yet, but that's why we have people like you.</p>
+<p>FORM also makes a great front-end for SQL database queries.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="sample-menu-description-file"></a>
+Sample Menu Description File</h3>
+<p><img src="../../applications_menu.m.png" alt="" class="inline" title="Sample Description File"/>    </p>
+<p>As you can see, the description file is straightforward and easy to read. Each menu item consists of a label and a command to execute. The label is displayed in the menu, and the command is executed when the user selects that item.</p>
+<div class="image">
+<img src="../../pick-edit.png" alt=""/>
+<div class="caption">
+Pick</div></div>
+    <p>Here's just one example of how easy it is to create useful programs with the C-Menu <a class="el" href="../../d0/d67/a01232.html">Form</a> facility.</p>
+<div class="image">
+<img src="../../iloan_f.png" alt=""/>
+<div class="caption">
+Iloan - A Simple Demonstration</div></div>
+    <p><img src="../../iloan.png" alt="" class="inline" title="Iloan Display"/>    </p>
+<p>We hope you find C-Menu useful for your projects. It's a powerful tool that can greatly simplify the process of creating text-based user interfaces for your applications.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="view"></a>
+View</h3>
+<p>VIEW is an easy-to-use text file viewer that allows users to view text files in a terminal environment. It supports basic navigation, regular expression search functionality, horizontal scrolling, ANSI escape highlighting, Unicode, and NCurses wide characters. VIEW can be invoked from within MENU, FORM, or PICK to provide contextual help or stand -alone, full-screen as a system pager.</p>
+<h4 class="doxsection"><a class="anchor" id="log-file-with-editor"></a>
+Log File With Editor</h4>
+<div class="image">
+<img src="../../nvim-log.png" alt=""/>
+<div class="caption">
+Log File With Editor</div></div>
+    <h4 class="doxsection"><a class="anchor" id="screenshot-of-the-same-file-with-view"></a>
+Screenshot of the Same File With View</h4>
+<p><img src="../../screenshots/view.png" alt="View Log File" class="inline"/> One especially useful feature of <a class="el" href="../../da/de0/a01248.html">View</a> is its incredible speed with large text files, like system logs. <a class="el" href="../../da/de0/a01248.html">View</a> can open and display multi-gigabyte text files almost instantaneously. Seek from beginning to end of a 1 gigabyte file takes a few milliseconds.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="view-and-color-manual-pages"></a>
+View and Color Manual Pages</h3>
+<p>To use <a class="el" href="../../da/de0/a01248.html">View</a> as your system pager, add the following line to your shell configuration file (e.g., .bashrc or .zshrc):</p>
+<div class="fragment"><div class="line">export PAGER=&quot;view&quot;</div>
+</div><!-- fragment --><p>You can also filter manual pages through ~/menuapp/msrc/man.sed to colorize underlined emboldened, and italicized text. This sed script is included with C-Menu. To use it, you can run the following command in your terminal:</p>
+<div class="fragment"><div class="line">man -Tutf8 bash.ls | sed -f ~/menuapp/msrc/man.sed | view</div>
+</div><!-- fragment --><hr  />
+<h3 class="doxsection"><a class="anchor" id="example-manual-page-using-editor"></a>
+Example Manual Page Using Editor</h3>
+<div class="image">
+<img src="../../nvim-man-page.png" alt=""/>
+<div class="caption">
+Manual Page With Editor</div></div>
+    <hr  />
+<h3 class="doxsection"><a class="anchor" id="example-manual-page"></a>
+Example Manual Page</h3>
+<div class="image">
+<img src="../../man-page.png" alt=""/>
+<div class="caption">
+Manual Page With View</div></div>
+    <p>For the screenshot above, I used the "Man" command, which is a function in my .bashrc.</p>
+<div class="fragment"><div class="line">Man() {</div>
+<div class="line">    man -Tutf8 &quot;$@&quot; | sed -f ~/menuapp/msrc/man.sed | view</div>
+<div class="line">}</div>
+</div><!-- fragment --><p>This function formats the manual page for UTF-8 output, pipes it through the colorizing sed script, and then opens it in <a class="el" href="../../da/de0/a01248.html">View</a>.</p>
+<div class="fragment"><div class="line">s/\&zwj;[1m/\&zwj;[36;1m/g</div>
+<div class="line">s/\&zwj;[2m/\&zwj;[35;2m/g</div>
+<div class="line">s/\&zwj;[3m/\&zwj;[33;3m/g</div>
+<div class="line">s/\&zwj;[4m/\&zwj;[31;3;1m/g</div>
+<div class="line">s/\&zwj;[22m/\&zwj;[22;0m/g</div>
+<div class="line">s/\&zwj;[23m/\&zwj;[23;0m/g</div>
+<div class="line">s/\&zwj;[24m/\&zwj;[24;0m/g</div>
+</div><!-- fragment --><p>I don't know about you, but I find colorized manual pages much easier to read. The different text styles help to distinguish between various elements, making it easier to find the information I need. I also modified the underline ([4m]) to red-italics-bold ([31;3;1m) because I find that easier to read.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="demand-paged-virtual-address-space"></a>
+Demand Paged Virtual Address Space</h3>
 <ul>
-<li>Initial release of the project ([<span class="tt">a1b2c3d</span>](link-to-commit))</li>
+<li><a class="el" href="../../da/de0/a01248.html">View</a> doesn't employ seek and read operations in a complicated buffering scheme. There is a better way.</li>
+<li><a class="el" href="../../da/de0/a01248.html">View</a> accesses files as arrays, using the Kernel's sophisticated demand paged virtual memory.</li>
+<li>Lazy loading means that <a class="el" href="../../da/de0/a01248.html">View</a> doesn't waste time seeking, reading, and populating buffers that will never be used.</li>
+<li>Zero-Copy I-O - Conventional programs copy file buffers into heap address space. <a class="el" href="../../da/de0/a01248.html">View</a> bypasses that step and reads directly from the Kernel's virtual memory.</li>
+<li>Simplicity - <a class="el" href="../../da/de0/a01248.html">View</a> has no reads, no seeks, no complicated buffer management schemes, not for view. The following snippet includes</li>
 </ul>
-<p>: <a href="https://github.com/BillWAller/C-Menu/releases/tag/C-Menu-0.2.8">https://github.com/BillWAller/C-Menu/releases/tag/C-Menu-0.2.8</a> : <a href="https://github.com/BillWaller/C-Menu/releases/tag/C-Menu-0.2.8">https://github.com/BillWaller/C-Menu/releases/tag/C-Menu-0.2.8</a> </p>
+<p>"all" of <a class="el" href="../../da/de0/a01248.html">View</a>'s file I-O on lines 22 and 12.</p>
+<hr  />
+<p><img src="../../file-io.png" alt="" class="inline" title="View File I/O"/>    </p>
+<p>In technical parlance, I'll explain precisely how it works. See if you can follow me. 😁</p>
+<p><a class="el" href="../../da/de0/a01248.html">View</a>'s File I-O subsystem does three things:</p>
+<ul>
+<li>Get the next byte,</li>
+<li>Get the previous byte, or</li>
+<li>Get a byte from a specified position</li>
+</ul>
+<p><a class="el" href="../../da/de0/a01248.html">View</a> is blazingly fast because it leverages the Kernel's demand paged virtual memory system. When a file is opened, <a class="el" href="../../da/de0/a01248.html">View</a> maps the file into the process's virtual address space using the mmap system call. Zero-copy I-O is achieved by mapping the file directly from kernel address space.</p>
+<p>When <a class="el" href="../../da/de0/a01248.html">View</a> needs to access a byte at a specific position, it simply calculates the corresponding memory address based on the file offset and reads the byte directly from that address. If the required page is not already in memory, the Kernel automatically handles the page fault by loading the necessary data from the file into memory. This approach eliminates the need for explicit read and seek operations, and copying data to the processes memory, resulting in faster access times and reduced overhead.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="view---other-features"></a>
+View - Other Features</h3>
+<p>Horizontal scrolling for long lines. <a class="el" href="../../da/de0/a01248.html">View</a> writes output to a virtual screen, a Ncurses pad, to accommodate lines longer than the physical screen.</p>
+<p><a class="el" href="../../da/de0/a01248.html">View</a> has full support for Unicode, translating ASCII text and multi-byte-sequences to wide characters (wchar_t), and wide characters and ANSI SGR sequences to complex characters (cchar_t). The complex characters combine displayable characters plus attributes, such as bold, italic, underline, reverse, and foreground and background colors. NCurses can display more than 16 million colors.</p>
+<p><a class="el" href="../../da/de0/a01248.html">View</a> supports mouse wheel vertical scrolling.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="autotoc_md3-channel-gamma-correction"></a>
+3-Channel Gamma Correction</h3>
+<p>When using utilities such as "tree-sitter highlighter", "pygmentize", or "bat" to highlight files, the text is sometimes almost unreadable. On the left-hand side of the following screenshot, "less" does a great job of rendering the output of pygmentize, but with gamma correction can do better. It's all about perceptual luminosity. Either from the command line or the minitrc file, the user can specify a gamma correction value for each of the three color channels, red, green, and blue. It's a minor thing, really, but we programmers aren't "automatons" A pleasing visual appearance makes work funner.</p>
+<p>In the right-hand image below, gamma has been increased for red, green, and blue.</p>
+<div class="image">
+<img src="../../gamma1.png" alt=""/>
+<div class="caption">
+RGB Gamma Correction</div></div>
+    <p><img src="../../gamma2.png" alt="" class="inline" title="More Gamma Correction"/>    </p>
+<p>The image on the left, above is a source file highlighted with bat. It seems a little dark and difficult to read. No problem. Crank up the gamma in <a class="el" href="../../da/de0/a01248.html">View</a> and Winner Winner Chicken Dinner!</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="gray-gamma"></a>
+Gray Gamma</h3>
+<p>Gray gamma, as you might guess, applies to shades of gray, colors in which red, green, and blue components are of equal value.</p>
+<p><a href="https://pubmed.ncbi.nlm.nih.gov/6534013/">Bezold-Brücke hue shift</a> <a href="https://www.w3.org/TR/WCAG22/">Web Content Accessibility Guidelines (WCAG) 2.2</a></p>
+<hr  />
+<div class="image">
+<img src="../../view-help.png" alt=""/>
+<div class="caption">
+View Help File</div></div>
+    <ul>
+<li>That's a Bobby Dazzler</li>
+</ul>
+<p>(Australian TV show)</p>
+<p>With Unicode glyphs, ANSI escape highlighting, and 3-Channel gamma correction, your application is bound to <b>Wow</b> your clients. Nobody wants an ugly program. Of course, beauty is in the eye of the beholder. That's why we give you control.</p>
+<h3 class="doxsection"><a class="anchor" id="rsh"></a>
+RSH</h3>
+<div class="image">
+<img src="../../rsh.png" alt=""/>
+<div class="caption">
+RSH Source</div></div>
+    <p>Despite its name, RSH is not a shell. It is a shell runner, which allows you to specify your shell of choice, and provides a consistent environment for running shell scripts and commands. RSH was designed to be invoked from within MENU, FORM, or PICK to execute commands that require elevated privileges, but its functionality extends beyond that.</p>
+<p>You can execute commands in either user or root mode, making it a versatile tool for developing application front-ends. RSH ensures that your scripts and executables run in a controlled environment, reducing the chances of unexpected behavior due to differing shell environments. RSH forks and waits for its spawn to complete before returning control to the calling program. When executed under C-Menu's signal handler, it catches and displays the exit status of the command, allowing for better error handling. Instead of using su -c or sudo to run commands as root, you can use rsh -c to achieve the same result in a more streamlined manner. You can literally have root access within a fraction of a second, making it ideal for work that requires frequent switching between user and root modes for various administrative tasks.</p>
+<p>Many system administrators and developers find RSH invaluable for tasks that require elevated privileges. RSH eliminates the need to repeatedly enter passwords or switch users, streamlining workflows and improving efficiency. We all know it's not a good idea to run everything as root, but sometimes a user want's to avoid precious seconds it takes to enter passwords for su. With RSH, it takes three keystrokes to enter root mode and two keystrokes to get out.</p>
+<h3 class="doxsection"><a class="anchor" id="maintaining-security-with-rsh"></a>
+Maintaining Security with RSH</h3>
+<p>Here's an example of the proper way to use RSH.</p>
+<ol type="1">
+<li>Type "xx" to assume root privileges.</li>
+<li>Type "make install"</li>
+<li>Type "x" to relinquish root privileges.</li>
+</ol>
+<p><img src="../../Makefile-out.png" alt="" class="inline" title="Accepted Practices"/>    </p>
+<p>Notice that the bash prompt changes from green to red as a reminder that you are wielding a loaded gun with the safety off. In this state, it only takes a minor typo. You mean to type "rm -r tmp/\*", but inadvertently put an extra space after tmp. I can't even type the resulting expression.</p>
+<div class="fragment"><div class="line">rm -r tmp/*</div>
+</div><!-- fragment --><p>Be very careful when using RSH in setuid root mode. Keep the executable protected in your home directory with appropriate permissions to prevent promiscuous access by unauthorized users. RSH should be provided only to trusted users who understand the implications of executing commands with elevated privileges. Used inappropriately, it can lead to system instability or security vulnerabilities.</p>
+<p>RSH is as safe or unsafe as we choose to make it. It requires root access to install, and the installer should make sure it cannot be used by other users. If you are reading this, you know how to do that. Please use it responsibly.</p>
+<div class="image">
+<img src="../../cmake_install.png" alt=""/>
+<div class="caption">
+Building C-Menu With CMake</div></div>
+    <p>You will notice that the build was completed under normal user privileges. Only the install portion required root access. We typed "xx" to assume root privileges, installed the package, and then immediately reverted to normal user access by typing "x".</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="lf---list-files-using-regular-expressions"></a>
+lf - List Files Using Regular Expressions</h3>
+<p>lf is a utility included with C-Menu that allows you to list files in a directory based on regular expression patterns. It provides a powerful way to search for files that match specific criteria</p>
+<div class="image">
+<img src="../../lf-help.png" alt=""/>
+<div class="caption">
+lf</div></div>
+    <p>lf is a streamlined, efficient, and easy-to-use alternative to find addressing the majority of use cases in which the complexity of find is not required.</p>
+<p>lf is not intended to replace find, but to give the developer a simple, focused, and robust tool for listing files based on regular expressions.</p>
+<p>lf is very fast compared to find. In some instances, it can be up to 50 times faster than find, especially when searching for files in large directories or when using complex regular expressions. The performance difference is due to lf's optimized algorithms and streamlined codebase, which minimizes overhead and maximizes efficiency.</p>
+<div class="image">
+<img src="../../lf-benchmarks.png" alt=""/>
+<div class="caption">
+**_NEW_** Performance: lf vs find</div></div>
+    <hr  />
+<h2 class="doxsection"><a class="anchor" id="features"></a>
+Features</h2>
+<p>Create and manage multiple menus, forms, and pickers</p>
+<p>Define interfaces using simple configuration files</p>
+<p>Perfect for shell scripting, command-line, and terminal based applications</p>
+<p>Made for Linux and Unix-like operating systems</p>
+<p>Blazingly fast, even on older hardware</p>
+<p>Text-based user interface (TUI) using ncurses</p>
+<p>Easily customize menu options and actions</p>
+<p>Any level of sub-menus</p>
+<p>Navigation using keyboard inputs the way God intended</p>
+<p>Configurable appearance and behavior</p>
+<p>Cross-platform compatibility</p>
+<p>MIT License - Open-source and free to use</p>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="configuration"></a>
+Configuration</h2>
+<div class="image">
+<img src="../../options.png" alt=""/>
+<div class="caption">
+Configuration File</div></div>
+    <p>User's can have multiple runtime configurations. In the snippet above, the standard ISO 6429 / ECMA-48 colors have been redefined and orange has been added.</p>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="mit-license"></a>
+MIT License</h2>
+<div class="fragment"><div class="line">MIT License</div>
+<div class="line"> </div>
+<div class="line">Copyright (c) 2025 William Dudley (Bill) Waller</div>
+<div class="line"> </div>
+<div class="line">Permission is hereby granted, free of charge, to any person obtaining a copy</div>
+<div class="line">of this software and associated documentation files (the &quot;Software&quot;), to deal</div>
+<div class="line">in the Software without restriction, including without limitation the rights</div>
+<div class="line">to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</div>
+<div class="line">copies of the Software, and to permit persons to whom the Software is</div>
+<div class="line">furnished to do so, subject to the following conditions:</div>
+<div class="line"> </div>
+<div class="line">The above copyright notice and this permission notice shall be included in all</div>
+<div class="line">copies or substantial portions of the Software.</div>
+<div class="line"> </div>
+<div class="line">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,</div>
+<div class="line">EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES</div>
+<div class="line">OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND</div>
+<div class="line">NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT</div>
+<div class="line">HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,</div>
+<div class="line">WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</div>
+<div class="line">FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR</div>
+<div class="line">OTHER DEALINGS IN THE SOFTWARE.</div>
+</div><!-- fragment --><hr  />
+<p>🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
