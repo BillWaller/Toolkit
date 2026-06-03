@@ -1,7 +1,5 @@
 var a01224 =
 [
-    [ "col", "d8/d8e/a01224.html#a5d4a771a0f5b8f8542a2c235001ca70a", null ],
-    [ "len", "d8/d8e/a01224.html#a5227944302f4c823078fcc29c8205114", null ],
-    [ "line", "d8/d8e/a01224.html#a8fe1ec2a1ec422e83737ccb864bce0da", null ],
-    [ "str", "d8/d8e/a01224.html#a639b26c7f0903f268998f88470840ba0", null ]
+    [ "l", "d8/d8e/a01224.html#a8cffb4a348d6d6f90ce1c9efd99ad557", null ],
+    [ "s", "d8/d8e/a01224.html#a1270cae1cd57356ffc567eed342b5d97", null ]
 ];

@@ -8,7 +8,7 @@ var index =
     [ "Components", "index.html#components-1", null ],
     [ "Quick Start", "index.html#quick-start-1", null ],
     [ "Core Concepts", "index.html#core-concepts-1", null ],
-    [ "Examples", "index.html#examples-3", [
+    [ "Examples", "index.html#examples-7", [
       [ "Menu", "index.html#menu-3", null ],
       [ "Form", "index.html#form-3", null ],
       [ "Pick", "index.html#pick-2", null ],
@@ -17,7 +17,7 @@ var index =
       [ "rsh", "index.html#rsh-2", null ]
     ] ],
     [ "Documentation", "index.html#documentation-2", null ],
-    [ "Configuration", "index.html#configuration-2", null ],
+    [ "Configuration", "index.html#configuration-4", null ],
     [ "Platform and Requirements", "index.html#platform-and-requirements-1", null ],
     [ "Security Notes", "index.html#security-notes-1", null ],
     [ "Why the Design Works", "index.html#why-the-design-works-1", null ],

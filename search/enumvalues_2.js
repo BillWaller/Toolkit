@@ -18,6 +18,6 @@ var searchData=
   ['ff_5finvalid_15',['FF_INVALID',['../d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a99eaf0729b2968cb39328d77737224ae',1,'form.h']]],
   ['ff_5fstring_16',['FF_STRING',['../d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a16d0b76d2287afb9c99b501f10d10d30',1,'form.h']]],
   ['ff_5fyyyymmdd_17',['FF_YYYYMMDD',['../d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a390c81c702e6e15430fb291417a3deb1',1,'form.h']]],
-  ['fg_5fxclr_18',['FG_XCLR',['../d0/d61/a01130.html#a964fa61be5e30597c14ae6b1e24a7994a2fb104eb3a87173ed3740c5702147a99',1,'init.c']]],
+  ['fg_5fxclr_18',['FG_XCLR',['../d5/d16/a01154.html#a964fa61be5e30597c14ae6b1e24a7994a2fb104eb3a87173ed3740c5702147a99',1,'init.c']]],
   ['form_19',['FORM',['../dd/dd8/a00719.html#a5abe1ba66f71bb3a1bc22393854d33dfa037bb825c7463f533fd72ce3181c4d41',1,'common.h']]]
 ];

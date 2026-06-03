@@ -1,9 +1,16 @@
 var searchData=
 [
-  ['lf_5fdir_0',['LF_DIR',['../db/d28/a01133.html#a0ac18add284994be76aca1ea5c500c2d',1,'futil.c']]],
-  ['lf_5flnk_1',['LF_LNK',['../db/d28/a01133.html#ae14db1df03a3127c0e4ff5a1307e89cc',1,'futil.c']]],
-  ['lf_5freg_2',['LF_REG',['../db/d28/a01133.html#a7089bd4cb667475a891d92b36239cc66',1,'futil.c']]],
-  ['line_5ftbl_5fincr_3',['LINE_TBL_INCR',['../d6/dc0/a00734.html#a19bdbce530a383c51614a22810676b3b',1,'view.h']]],
-  ['ln_5fbg_5fcolor_4',['LN_BG_COLOR',['../d8/db9/a00725.html#a3639e7f2e87d09ce545bc4e501f11513',1,'cm.h']]],
-  ['ln_5fcolor_5',['LN_COLOR',['../d8/db9/a00725.html#ae8a307de5bf5009130fee8f389819c4f',1,'cm.h']]]
+  ['key_5faltdel_0',['KEY_ALTDEL',['../d8/db9/a00725.html#a994bc87be1eb918768f1ab7f9f325f1c',1,'cm.h']]],
+  ['key_5faltdown_1',['KEY_ALTDOWN',['../d8/db9/a00725.html#a199a6d2613c848c2d31b6b63997afdf2',1,'cm.h']]],
+  ['key_5faltend_2',['KEY_ALTEND',['../d8/db9/a00725.html#a109cb8d491e7b42b53b2ece262cd213a',1,'cm.h']]],
+  ['key_5faltf_3',['KEY_ALTF',['../d8/db9/a00725.html#ac7313ad568317821d17a552906d64dd6',1,'cm.h']]],
+  ['key_5faltf0_4',['KEY_ALTF0',['../d8/db9/a00725.html#a37aa7d966c4b387326f3150cbcd05946',1,'cm.h']]],
+  ['key_5falthome_5',['KEY_ALTHOME',['../d8/db9/a00725.html#a272a96c66d7bfc452b0554680dcd44c9',1,'cm.h']]],
+  ['key_5faltins_6',['KEY_ALTINS',['../d8/db9/a00725.html#aea36fe4dd03774dbbb8e0a17dea982b3',1,'cm.h']]],
+  ['key_5faltleft_7',['KEY_ALTLEFT',['../d8/db9/a00725.html#a1260c2bb8f4151873b53d277321e76bb',1,'cm.h']]],
+  ['key_5faltpgdn_8',['KEY_ALTPGDN',['../d8/db9/a00725.html#a7a22a59d37fe680b6baafb90b5e383ba',1,'cm.h']]],
+  ['key_5faltpgup_9',['KEY_ALTPGUP',['../d8/db9/a00725.html#aad065eab63ceb77e0e601dfdc9968d70',1,'cm.h']]],
+  ['key_5faltright_10',['KEY_ALTRIGHT',['../d8/db9/a00725.html#a8bfe766d44a69587427b117680587450',1,'cm.h']]],
+  ['key_5faltup_11',['KEY_ALTUP',['../d8/db9/a00725.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b',1,'cm.h']]],
+  ['kstrlen_12',['KSTRLEN',['../df/dd5/a01115.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
 ];

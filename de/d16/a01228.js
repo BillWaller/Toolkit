@@ -1,11 +1,5 @@
 var a01228 =
 [
-    [ "accept_s", "de/d16/a01228.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "de/d16/a01228.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_s", "de/d16/a01228.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "de/d16/a01228.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_s", "de/d16/a01228.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "de/d16/a01228.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "de/d16/a01228.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "de/d16/a01228.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "n", "de/d16/a01228.html#ac4631c83bda44884c03470b9ed22cf7e", null ],
+    [ "v", "de/d16/a01228.html#aa044ab06de65e1e9ecc89b07f3d71f71", null ]
 ];

@@ -17,7 +17,6 @@
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
-<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -168,69 +167,61 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  231</span>    <a class="code hl_function" href="../../d7/daf/a01169.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
 <div class="line"><span class="lineno">  232</span> </div>
 <div class="line"><span class="lineno">  233</span>    <span class="keywordflow">if</span> (pid &lt; 0) {</div>
-<div class="line"><span class="lineno">  234</span>        fprintf(stderr, <span class="stringliteral">&quot;Failed to fork: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><span class="lineno">  235</span>        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><span class="lineno">  234</span>        fprintf(stderr, <span class="stringliteral">&quot;First fork failed: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><span class="lineno">  235</span>        exit(EXIT_FAILURE);</div>
 <div class="line"><span class="lineno">  236</span>    }</div>
-<div class="line"><span class="lineno">  237</span>    <span class="keywordflow">if</span> (pid &gt; 0) {</div>
-<div class="line"><span class="lineno">  238</span>        <a class="code hl_function" href="../../d4/da6/a01168.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a>();</div>
-<div class="line"><span class="lineno">  239</span>        <a class="code hl_function" href="../../d7/daf/a01169.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">  240</span>        touchwin(stdscr);</div>
-<div class="line"><span class="lineno">  241</span>        wnoutrefresh(stdscr);</div>
-<div class="line"><span class="lineno">  242</span>        wrefresh(stdscr);</div>
-<div class="line"><span class="lineno">  243</span>        <a class="code hl_function" href="../../d9/d97/a01152.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a>();</div>
-<div class="line"><span class="lineno">  244</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  245</span>    }</div>
-<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">if</span> (setsid() &lt; 0) {</div>
-<div class="line"><span class="lineno">  247</span>        fprintf(stderr, <span class="stringliteral">&quot;Failed to set session ID: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><span class="lineno">  248</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  249</span>    }</div>
-<div class="line"><span class="lineno">  250</span>    pid = fork();</div>
-<div class="line"><span class="lineno">  251</span>    <span class="keywordflow">if</span> (pid &lt; 0) {</div>
-<div class="line"><span class="lineno">  252</span>        fprintf(stderr, <span class="stringliteral">&quot;Second fork failed: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><span class="lineno">  253</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  254</span>    }</div>
-<div class="line"><span class="lineno">  255</span>    <span class="keywordflow">if</span> (pid &gt; 0) {</div>
-<div class="line"><span class="lineno">  256</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><span class="lineno">  257</span>    }</div>
-<div class="line"><span class="lineno">  258</span>    <span class="keywordtype">char</span> *e = getenv(<span class="stringliteral">&quot;HOME&quot;</span>);</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keywordflow">if</span> (e != NULL) {</div>
-<div class="line"><span class="lineno">  260</span>        <span class="keywordflow">if</span> (chdir(e) &lt; 0)</div>
-<div class="line"><span class="lineno">  261</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  262</span>    }</div>
-<div class="line"><span class="lineno">  263</span>    umask(0);</div>
-<div class="line"><span class="lineno">  264</span>    close(STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  265</span>    close(STDOUT_FILENO);</div>
-<div class="line"><span class="lineno">  266</span>    close(STDERR_FILENO);</div>
-<div class="line"><span class="lineno">  267</span>    <span class="keywordtype">int</span> dev_null = open(<span class="stringliteral">&quot;/dev/null&quot;</span>, O_RDWR);</div>
-<div class="line"><span class="lineno">  268</span>    <span class="keywordflow">if</span> (dev_null != -1) {</div>
-<div class="line"><span class="lineno">  269</span>        dup2(dev_null, STDIN_FILENO);</div>
-<div class="line"><span class="lineno">  270</span>        dup2(dev_null, STDOUT_FILENO);</div>
-<div class="line"><span class="lineno">  271</span>        dup2(dev_null, STDERR_FILENO);</div>
-<div class="line"><span class="lineno">  272</span>        <span class="keywordflow">if</span> (dev_null &gt; 2) {</div>
-<div class="line"><span class="lineno">  273</span>            close(dev_null);</div>
-<div class="line"><span class="lineno">  274</span>        }</div>
-<div class="line"><span class="lineno">  275</span>    }</div>
-<div class="line"><span class="lineno">  276</span>    <span class="keywordtype">long</span> max_fd = sysconf(_SC_OPEN_MAX);</div>
-<div class="line"><span class="lineno">  277</span>    <span class="keywordflow">for</span> (<span class="keywordtype">long</span> fd = 3; fd &lt; max_fd; fd++) {</div>
-<div class="line"><span class="lineno">  278</span>        close(fd);</div>
-<div class="line"><span class="lineno">  279</span>    }</div>
-<div class="line"><span class="lineno">  280</span>    execvp(<a class="code hl_variable" href="../../db/d28/a01133.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0], <a class="code hl_variable" href="../../db/d28/a01133.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
-<div class="line"><span class="lineno">  281</span>    exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  282</span>}</div>
+<div class="line"><span class="lineno">  237</span>    <span class="keywordflow">if</span> (pid == 0) {</div>
+<div class="line"><span class="lineno">  238</span>        <span class="keywordflow">if</span> (setsid() &lt; 0) {</div>
+<div class="line"><span class="lineno">  239</span>            fprintf(stderr, <span class="stringliteral">&quot;Set session ID failed: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><span class="lineno">  240</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  241</span>        }</div>
+<div class="line"><span class="lineno">  242</span>        pid_t pid2 = fork();</div>
+<div class="line"><span class="lineno">  243</span>        <span class="keywordflow">if</span> (pid2 &lt; 0) {</div>
+<div class="line"><span class="lineno">  244</span>            fprintf(stderr, <span class="stringliteral">&quot;Second fork failed: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><span class="lineno">  245</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  246</span>        }</div>
+<div class="line"><span class="lineno">  247</span>        <span class="keywordflow">if</span> (pid2 == 0) {</div>
+<div class="line"><span class="lineno">  248</span>            execvp(<a class="code hl_variable" href="../../db/d28/a01133.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>[0], <a class="code hl_variable" href="../../db/d28/a01133.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a>);</div>
+<div class="line"><span class="lineno">  249</span> </div>
+<div class="line"><span class="lineno">  250</span>            perror(<span class="stringliteral">&quot;execvp failed&quot;</span>);</div>
+<div class="line"><span class="lineno">  251</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  252</span>        }</div>
+<div class="line"><span class="lineno">  253</span>    }</div>
+<div class="line"><span class="lineno">  254</span>    exit(EXIT_SUCCESS);</div>
+<div class="line"><span class="lineno">  255</span>    <span class="comment">// char *e = getenv(&quot;HOME&quot;);</span></div>
+<div class="line"><span class="lineno">  256</span>    <span class="comment">// if (e != NULL) {</span></div>
+<div class="line"><span class="lineno">  257</span>    <span class="comment">//     if (chdir(e) &lt; 0)</span></div>
+<div class="line"><span class="lineno">  258</span>    <span class="comment">//         exit(EXIT_FAILURE);</span></div>
+<div class="line"><span class="lineno">  259</span>    <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">  260</span>    <span class="comment">// umask(0);</span></div>
+<div class="line"><span class="lineno">  261</span>    <span class="comment">// close(STDIN_FILENO);</span></div>
+<div class="line"><span class="lineno">  262</span>    <span class="comment">// close(STDOUT_FILENO);</span></div>
+<div class="line"><span class="lineno">  263</span>    <span class="comment">// close(STDERR_FILENO);</span></div>
+<div class="line"><span class="lineno">  264</span>    <span class="comment">// int dev_null = open(&quot;/dev/null&quot;, O_RDWR);</span></div>
+<div class="line"><span class="lineno">  265</span>    <span class="comment">// if (dev_null != -1) {</span></div>
+<div class="line"><span class="lineno">  266</span>    <span class="comment">//     dup2(dev_null, STDIN_FILENO);</span></div>
+<div class="line"><span class="lineno">  267</span>    <span class="comment">//     dup2(dev_null, STDOUT_FILENO);</span></div>
+<div class="line"><span class="lineno">  268</span>    <span class="comment">//     dup2(dev_null, STDERR_FILENO);</span></div>
+<div class="line"><span class="lineno">  269</span>    <span class="comment">//     if (dev_null &gt; 2) {</span></div>
+<div class="line"><span class="lineno">  270</span>    <span class="comment">//         close(dev_null);</span></div>
+<div class="line"><span class="lineno">  271</span>    <span class="comment">//     }</span></div>
+<div class="line"><span class="lineno">  272</span>    <span class="comment">// }</span></div>
+<div class="line"><span class="lineno">  273</span>    <span class="comment">// long max_fd = sysconf(_SC_OPEN_MAX);</span></div>
+<div class="line"><span class="lineno">  274</span>    <span class="comment">// for (long fd = 3; fd &lt; max_fd; fd++)</span></div>
+<div class="line"><span class="lineno">  275</span>    <span class="comment">//     close(fd);</span></div>
+<div class="line"><span class="lineno">  276</span>    <span class="comment">// execvp(eargv[0], eargv);</span></div>
+<div class="line"><span class="lineno">  277</span>}</div>
 <div class="ttc" id="aa01133_html_aba17a3c518eb2ffd68f0219cc8c1792b"><div class="ttname"><a href="../../db/d28/a01133.html#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a></div><div class="ttdeci">char * eargv[MAXARGS]</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00052">futil.c:52</a></div></div>
-<div class="ttc" id="aa01152_html_ga40858af5b0d68549fb483f77c97eb82c"><div class="ttname"><a href="../../d9/d97/a01152.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a></div><div class="ttdeci">void restore_wins()</div><div class="ttdoc">Restore all windows after a screen resize.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00933">dwin.c:933</a></div></div>
-<div class="ttc" id="aa01168_html_ga1c8e0f0a02e08c783231a20093fb8410"><div class="ttname"><a href="../../d4/da6/a01168.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a></div><div class="ttdeci">bool restore_curses_tioctl()</div><div class="ttdoc">restore_curses_tioctl() - restore curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d17/a01148_source.html#l00081">scriou.c:81</a></div></div>
 <div class="ttc" id="aa01168_html_ga4d0a6767e791cf93a268ebe9ba02aa24"><div class="ttname"><a href="../../d4/da6/a01168.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a></div><div class="ttdeci">bool capture_curses_tioctl()</div><div class="ttdoc">capture_curses_tioctl() - capture curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d17/a01148_source.html#l00068">scriou.c:68</a></div></div>
 <div class="ttc" id="aa01169_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d7/daf/a01169.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00042">sig.c:42</a></div></div>
-<div class="ttc" id="aa01169_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d7/daf/a01169.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00062">sig.c:62</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../db/d17/a01148_source.html#l00068">capture_curses_tioctl()</a>, <a class="el" href="../../db/d17/a01148_source.html#l00081">restore_curses_tioctl()</a>, <a class="el" href="../../d3/ddc/a01142_source.html#l00933">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00042">sig_dfl_mode()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00062">sig_prog_mode()</a>.</p>
+<p class="reference">References <a class="el" href="../../db/d17/a01148_source.html#l00068">capture_curses_tioctl()</a>, and <a class="el" href="../../d0/d39/a01112_source.html#l00042">sig_dfl_mode()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="../../d0/dc8/a01124_source.html#l00133">menu_cmd_processor()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d42/a01156_ga66a2a7fc4520823920375c0e7eae40e7_cgraph.svg" width="100%" height="580"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d42/a01156_ga66a2a7fc4520823920375c0e7eae40e7_cgraph.svg" width="276" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -352,9 +343,12 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  213</span>    <span class="keywordflow">return</span> (rc);</div>
 <div class="line"><span class="lineno">  214</span>}</div>
 <div class="ttc" id="aa01091_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d6/d0d/a01091.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d0d/a01091_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa01152_html_ga40858af5b0d68549fb483f77c97eb82c"><div class="ttname"><a href="../../d9/d97/a01152.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a></div><div class="ttdeci">void restore_wins()</div><div class="ttdoc">Restore all windows after a screen resize.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00933">dwin.c:933</a></div></div>
 <div class="ttc" id="aa01154_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d5/d16/a01154.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l01162">dwin.c:1162</a></div></div>
 <div class="ttc" id="aa01159_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../d7/de8/a01159.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00311">futil.c:311</a></div></div>
+<div class="ttc" id="aa01168_html_ga1c8e0f0a02e08c783231a20093fb8410"><div class="ttname"><a href="../../d4/da6/a01168.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a></div><div class="ttdeci">bool restore_curses_tioctl()</div><div class="ttdoc">restore_curses_tioctl() - restore curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d17/a01148_source.html#l00081">scriou.c:81</a></div></div>
 <div class="ttc" id="aa01168_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d4/da6/a01168.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d17/a01148_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01169_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d7/daf/a01169.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d39/a01112_source.html#l00062">sig.c:62</a></div></div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="../../db/d17/a01148_source.html#l00068">capture_curses_tioctl()</a>, <a class="el" href="../../d3/ddc/a01142_source.html#l01162">Perror()</a>, <a class="el" href="../../db/d17/a01148_source.html#l00081">restore_curses_tioctl()</a>, <a class="el" href="../../db/d17/a01148_source.html#l00056">restore_shell_tioctl()</a>, <a class="el" href="../../d3/ddc/a01142_source.html#l00933">restore_wins()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00042">sig_dfl_mode()</a>, <a class="el" href="../../d0/d39/a01112_source.html#l00062">sig_prog_mode()</a>, and <a class="el" href="../../db/d28/a01133_source.html#l00311">ssnprintf()</a>.</p>
 

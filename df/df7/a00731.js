@@ -1,7 +1,7 @@
 var a00731 =
 [
-    [ "Line", "d8/d2b/a01236.html", "d8/d2b/a01236" ],
-    [ "Menu", "d5/d6e/a01240.html", "d5/d6e/a01240" ],
+    [ "Line", "d7/da3/a01260.html", "d7/da3/a01260" ],
+    [ "Menu", "d3/d51/a01264.html", "d3/d51/a01264" ],
     [ "MAX_MENU_LINES", "df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1", null ],
     [ "MenuAction", "df/df7/a00731.html#ab99074a1f6b7e8ff7730342913aae3a3", [
       [ "MA_NEW", "df/df7/a00731.html#ab99074a1f6b7e8ff7730342913aae3a3a5967abe3643398691f224c1af8cf764b", null ],
@@ -12,7 +12,7 @@ var a00731 =
     ] ],
     [ "MenuCommandType", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848b", [
       [ "CT_NULL", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848bad2d309b7edc58785e7d1e189d12b8a6c", null ],
-      [ "CT_DMON", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848badea38da886faba1bbbea8d549f641d00", null ],
+      [ "CT_DEXE", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848ba1b59f255a8ea424491048c13476521f7", null ],
       [ "CT_EXEC", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848baac443bbe06b475583356f8c55a80d5de", null ],
       [ "CT_HELP", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848ba78c3f6613108c896fb097e2a55189f3a", null ],
       [ "CT_ABOUT", "df/df7/a00731.html#a9195bb80c2888f3629800633d42d848bad3b7c2320a0b10b68578b31a3ee57b34", null ],
@@ -34,6 +34,6 @@ var a00731 =
       [ "MT_CHOICE", "df/df7/a00731.html#a76a655b009bde19236e4bbc30df8ceeca95865ba7b6fd4876e243bffae44a5761", null ]
     ] ],
     [ "free_menu_line", "df/df7/a00731.html#a9751cef6e3e322c8aac50c78e4f70089", null ],
-    [ "get_command_type", "dc/dee/a01166.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "get_command_type", "dc/d19/a01190.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
     [ "menu", "df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb", null ]
 ];

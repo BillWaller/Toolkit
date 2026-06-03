@@ -1,5 +1,4 @@
 var a01151 =
 [
-    [ "get_command_type", "de/df1/a01151.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "de/df1/a01151.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "main", "de/df1/a01151.html#a0ddf1224851353fc92bfbff6f499fa97", null ]
 ];

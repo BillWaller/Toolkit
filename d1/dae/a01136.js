@@ -1,7 +1,10 @@
 var a01136 =
 [
-    [ "_XOPEN_SOURCE", "d1/dae/a01136.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
-    [ "main", "d1/dae/a01136.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "print_totals", "d1/dae/a01136.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
-    [ "month", "d1/dae/a01136.html#afd34f9817ea7498cdc5d76058dac3a5f", null ]
+    [ "MAX_FRAMES", "d1/dae/a01136.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
+    [ "handle_signal", "dd/d43/a01193.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "dd/d43/a01193.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "dd/d43/a01193.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "dd/d43/a01193.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
+    [ "f_curses_open", "d1/dae/a01136.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
+    [ "sig_received", "d1/dae/a01136.html#a01a99fc32bd5b471123f6223503c9616", null ]
 ];

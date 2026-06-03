@@ -1,9 +1,7 @@
 var a01100 =
 [
-    [ "dmon", "d9/d42/a01156.html#ga66a2a7fc4520823920375c0e7eae40e7", null ],
-    [ "fork_exec", "d9/d42/a01156.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "d9/d42/a01156.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "d9/d42/a01156.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "d5/d16/a01154.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "d9/d42/a01156.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "popup_form", "d3/dbd/a01100.html#a13f8b084e552c96d7d15383a8474d954", null ],
+    [ "popup_menu", "d3/dbd/a01100.html#a6b007a96a02f8503343c038608ddf369", null ],
+    [ "popup_pick", "d3/dbd/a01100.html#abed833a4802d8e3274c2e3991ddac66c", null ],
+    [ "popup_view", "d3/dbd/a01100.html#af54153eccf65174a2a2c9a4e551395cc", null ]
 ];

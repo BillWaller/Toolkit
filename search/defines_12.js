@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['xterm_5f256color_0',['XTERM_256COLOR',['../d8/db9/a00725.html#a7f3d823d96cd8f54e859ad7afe014c17',1,'cm.h']]]
+  ['vbufsiz_0',['VBUFSIZ',['../d6/dc0/a00734.html#a5259eafdce2c5489c29df7b44a782b88',1,'view.h']]],
+  ['view_5fhelp_5ffile_1',['VIEW_HELP_FILE',['../dd/dd8/a00719.html#ad204138a3f2767514dbe0dfe548a28f9',1,'common.h']]],
+  ['view_5fprt_5ffile_2',['VIEW_PRT_FILE',['../dd/dd8/a00719.html#a262b9132ae6d68fe411d5b72f0e499ab',1,'common.h']]]
 ];

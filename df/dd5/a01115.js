@@ -1,5 +1,6 @@
 var a01115 =
 [
-    [ "get_command_type", "dc/dee/a01166.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "dc/dee/a01166.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "KSTRLEN", "df/dd5/a01115.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "df/dd5/a01115.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];
