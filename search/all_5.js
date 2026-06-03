@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['9_20pre_20release_0',['0.2.9 - Pre-Release',['../d2/df5/a01395.html#autotoc_md029---pre-release',1,'']]],
-  ['9_20tasks_20to_20complete_20before_200_203_200_1',['0.2.9 Tasks to Complete before 0.3.0',['../d2/df5/a01395.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
-  ['9_20wrap_20up_2',['0.2.9 Wrap-Up',['../d2/df5/a01395.html#autotoc_md029-wrap-up',1,'']]]
+  ['9_20pre_20release_0',['0.2.9 - Pre-Release',['../da/de3/a01398.html#autotoc_md029---pre-release',1,'']]],
+  ['9_20tasks_20to_20complete_20before_200_203_200_1',['0.2.9 Tasks to Complete before 0.3.0',['../da/de3/a01398.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
+  ['9_20wrap_20up_2',['0.2.9 Wrap-Up',['../da/de3/a01398.html#autotoc_md029-wrap-up',1,'']]]
 ];

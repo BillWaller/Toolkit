@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: C-Menu ROADMAP</title>
+<title>C-Menu: Performance</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,82 +110,50 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d2/df5/a01395.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">C-Menu ROADMAP </div></div>
+  <div class="headertitle"><div class="title">Performance </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="c-menu-roadmap"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md029-tasks-to-complete-before-030"></a>
-0.2.9 Tasks to Complete before 0.3.0</h1>
-<p>Before we added the Ncurses virtual pad and line numbers, C-Menu <a class="el" href="../../d4/d0e/a01272.html">View</a>'s window would resize automatically if the user decreased the size of the terminal window. That capability was broken by adding the pad, the line number window, and a separate command line window. Now, we must go back and resize all four windows instead of two. It's not just a matter of resizing but also sequencing the resizing and redrawing of the windows to avoid flickering and other visual artifacts. This is a non-trivial task, but it is necessary to ensure that C-Menu <a class="el" href="../../d4/d0e/a01272.html">View</a> remains user-friendly and visually appealing.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md030-on-the-horizon"></a>
-0.3.0 On the Horizon</h1>
-<h2 class="doxsection"><a class="anchor" id="asynchronous-communication-and-serialization"></a>
-Asynchronous Communication and Serialization</h2>
+<div class="textblock"><p><a class="anchor" id="autotoc_md118"></a> <img src="../../Performance.png" alt="" class="inline" title="C-Menu Performance"/>    </p>
+<p><b><em>NEW</em></b> C-Menu Installation Guide</p>
+<p><a class="el" href="../../de/d9d/a01382.html" title="C-Menu-UG">C-Menu User Guide</a></p>
+<p><a class="el" href="../../d5/d8e/a01390.html" title="C-Menu - A User Interface Toolkit">C-Menu Installation Guide</a></p>
+<h1 class="doxsection"><a class="anchor" id="design-philosophy-and-optimizations"></a>
+Design Philosophy and Optimizations</h1>
+<p>To build truly outstanding applications with C-Menu, it is essential to understand the design philosophy and optimizations that C-Menu provides and how to leverage them.</p>
+<p>C-Menu was not meant to replace GUI or shell-based applications, but to compliment them by providing an alternative to users who demand the performance and efficiency possible with terminal-based interfaces. C-Menu's design philosophy is centered around simplicity, efficiency, and directness.</p>
+<p>C-Menu provides a powerful set of internal functions that allow you to create complex and responsive applications while minimizing the need for external executables or shells. By using C-Menu's internal functions and direct execution capabilities, you can achieve performance levels that are orders of magnitude beyond than traditional shell and GUI based menu systems.</p>
+<p>Hard-core, veteran programmers tend to prefer the black screen terminal over flashy GUIs for good reason. It's not just a matter of aesthetics, but a reflection of the underlying design philosophy and optimizations that terminal-based applications can provide. Terminal applications have a more direct and efficient interface to the underlying operating system, resulting in exceptional performance and greater control over resources.</p>
+<p>Understandably, less experienced users prefer a GUI interface because a raw terminal interface, while powerful, can be terse and unforgiving. Becoming truly proficient with the terminal environment requires a significant investment of time and effort. In contrast, GUI interfaces are generally more intuitive and user-friendly, especially for those who are not familiar with the Unix command-line. A GUI provides visual cues and interactive elements that can make it easier for users to navigate and perform tasks without needing to remember complex commands or syntax.</p>
+<p>C-Menu's design objective is to provide the best of both worlds by combining the speed and efficiency of terminal-based applications with an attractive, intuitive, and user-friendly framework. C-Menu's internal functions and direct execution capabilities allow you to create applications that are fast and responsive, while its menu system provides a more accessible, intuitive, and visually appealing interface.</p>
+<p>With the C-Menu applications you create, intelligent users will discover a new sense of freedom, unbridled by slugish response times that wreck continuity of thought.</p>
+<h2 class="doxsection"><a class="anchor" id="c-menu-launcher"></a>
+C-Menu Launcher</h2>
+<p>When you use C-Menu's Example Application <a class="el" href="../../d4/d41/a01267.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, you will notice that most menu selections respond instantaneously with no perceptible delay. It just snaps. That level of optimization is achieved in part by avoiding the overhead and unpredictability of using a shell to execute command lines. C-Menu provides direct execution, which results in start-up times an order of magnitude faster than traditional shell-based menu systems. But, C-Menu has something even faster. You can take C-Menu performance to the next level by letting C-Menu call it's internal functions directly, bypassing the start-up overhead of external executables. <a class="el" href="../../d4/d41/a01267.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../dd/d42/a01259.html">Form</a>, <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d3/d42/a01275.html">View</a>, and CKeys are internal functions. In the Example Applications <a class="el" href="../../d4/d41/a01267.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, all except the first command line are internal function calls, which execute in nanoseconds compared to the milliseconds it takes to launch an external executable.</p>
+<p>Here's a breakdown of the performance levels you can expect when using C-Menu:</p>
+<p>Relative performance:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Performance level  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadNone">Elapsed Time  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Somewhat Slugish  </td><td class="markdownTableBodyNone">Shell based execution  </td><td class="markdownTableBodyNone">10-100 ms  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Fast  </td><td class="markdownTableBodyNone">Direct execution  </td><td class="markdownTableBodyNone">1-10 ms  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Instantaneous  </td><td class="markdownTableBodyNone">Internal function calls  </td><td class="markdownTableBodyNone">0.001 ms  </td></tr>
+</table>
+<p>At 200 ms response, a user will perceive an application as sluggish. At 20 ms, the user will perceive a smooth and responsive experience. At 1 ms, the user will perceive an instantaneous response. Admittedly, no one really cares whether a program loads in 0.001 ms or 1,000 times slower at 1 ms, but in practical applications iterative processes often take thousands of cycles to complete.</p>
+<p>Sometimes it is expedient to use a shell to execute a command line, such as when you want to use shell features like globbing, variable expansion, or complex command pipelines. In those cases, you can explicitly invoke a shell by including "sh -c" or a shell script on the command line.</p>
+<p>When designing with C-Menu, you should select a method in the following order:</p>
 <ul>
-<li>Currently, C-Menu can communicate via command-line arguments, pipes, or files, but a facility is needed for handling asynchronous submission over a network. One fairly simple way to get started would be to set up an MQTT broker.</li>
-<li>As C-Menu continues to employ more sophisticated technologies, the old text file configurations are wearing thin. I would like to move the information in the description files to a more structured format, such as JSON Forms. It looks like JSON is the standard, but I would like to have some input from users.</li>
-<li>Why not develop a C-Menu system to manage IOT devices. IOT uses M2M communication, generally over MQTT.</li>
+<li>C-Menu internals, such as <a class="el" href="../../d4/d41/a01267.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../dd/d42/a01259.html">Form</a>, <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d3/d42/a01275.html">View</a></li>
+<li>direct execution</li>
+<li>shell</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md029-wrap-up"></a>
-0.2.9 Wrap-Up</h1>
-<ul>
-<li><a class="el" href="../../d3/d51/a01264.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d6/d0f/a01256.html">Form</a>, <a class="el" href="../../dc/dd9/a01268.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d4/d0e/a01272.html">View</a> Pop-ups. <a class="el" href="../../d4/d0e/a01272.html">View</a> currently uses a <a class="el" href="../../d6/d0f/a01256.html">Form</a> pop-up for entering file names. That capability is being polished and expanded to be more flexible and user-friendly. The idea is to have simple function calls with minimal parameters to easily create pop-up's. Once we have that debugged and working well, we will expand the ability to create pop-ups in the description files.</li>
-<li><a class="el" href="../../d3/d51/a01264.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d6/d0f/a01256.html">Form</a>, <a class="el" href="../../dc/dd9/a01268.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d4/d0e/a01272.html">View</a>, and CKeys have been combined into a single executable. The individual executables were running about 150K, and the single executable is only 158K. The individual executables have been removed from the repository. You can create form, pick, view, and ckeys as symbolic links to "menu" and from the command line, they will work exactly as the individual executables did before.</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md029---pre-release"></a>
-0.2.9 - Pre-Release</h1>
-<p><a class="el" href="../../d3/d51/a01264.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d6/d0f/a01256.html">Form</a>, <a class="el" href="../../dc/dd9/a01268.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d4/d0e/a01272.html">View</a>, and General features are still being developed and de-bugged.When the features are ready, the version will be updated to 1.0.0 and the roadmap will be updated with the new features and enhancements.</p>
-<p>There are a few more features that will be added prior to the 1.0.0 release, but they are not yet finalized and may change based on user feedback and testing.</p>
-<h2 class="doxsection"><a class="anchor" id="form-2"></a>
-Form</h2>
-<ul>
-<li><a class="el" href="../../d6/d0f/a01256.html">Form</a> Pop-ups. <a class="el" href="../../d4/d0e/a01272.html">View</a> currently uses a <a class="el" href="../../d6/d0f/a01256.html">Form</a> pop-up for entering file names, but that capability needs to be polished and expanded to be more flexible and user-friendly. The idea is to have a simple function call with minimal parameters to create a <a class="el" href="../../d6/d0f/a01256.html">Form</a> pop-up. The function should default to sane values, but allow styling and layout to be customizable.</li>
-<li>Currently, data can be communicated via command-line arguments, pipes, or files, but a facility is needed for handling asynchronous submission over a network. This will be added in a future release.</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="pick-1"></a>
-Pick</h2>
-<ul>
-<li><a class="el" href="../../dc/dd9/a01268.html" title="Pick data structure.">Pick</a> pop-ups and drop-downs. Pic currently supports communication via command-line arguments, pipes, and files, but it needs a more user-friendly interface for selecting options. The idea is to have a simple function call with minimal parameters to create a <a class="el" href="../../dc/dd9/a01268.html" title="Pick data structure.">Pick</a> pop-up or drop-down. The function should default to sane values, but allow styling and layout to be customizable.</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="exercises---example-use-cases"></a>
-Exercises - Example Use Cases</h2>
-<ul>
-<li>This may be more of a learning than a teaching tool. The idea is to have a set of exercises that demonstrate how to use the various features of C-Menu in different scenarios. These exercises will be designed to be simple and easy to follow, and will cover a range of use cases from basic to advanced. While developing these exercises, We, I and any collaborators who volunteer to help, will be looking for feedback from users to ensure that they are useful and relevant. There is no doubt that developing these exercises will expose areas of C-Menu that need improvement, and we will be using that feedback to make C-Menu better for everyone.</li>
-</ul>
-<p>Ideas for exercises include:</p>
-<ul>
-<li>UI for sqlite3 General Ledger, A/R, or Payables</li>
-<li>UI for NetworkManager like nmtui</li>
-<li>UI for systemctl, journalctl, and other systemd utilities</li>
-<li>UI for System Troubleshooting and Maintenance</li>
-<li>UI for Update-Alternatives</li>
-<li>UI for Rescue CD</li>
-<li>UI for Linux From Scratch Installation</li>
-<li>Plugins for Neovim, Vim, Emacs, and other text editors</li>
-<li>UI for Server and Embedded System Management</li>
-<li>UI for managing IOT devices</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="view-2"></a>
-View</h2>
-<ul>
-<li><a class="el" href="../../d4/d0e/a01272.html">View</a> is looking pretty good at this point. The line number table was a major improvement, and not just for the pretty display. In conjunction with memory mapped file I-O, the line number table dramatically simplifies internal navigation and boosts performance to obscene levels.</li>
-</ul>
-<p>There is one improvement I would like to make, and that is to add multi-threading support to populate the line number table in the background while the user is viewing the file. That would involve creating a separate thread with a separate buffer that won't interfere with the main thread's use of it's buffer. That should be no problem as both buffers would be read-only. No one has complained, so this may be vanity work, but it would be a fun challenge.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md100---initial-release"></a>
-1.0.0 - Initial Release</h1>
-<h2 class="doxsection"><a class="anchor" id="general"></a>
-General</h2>
-<ul>
-<li>JSON - Look at MaterialUI</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md110---feature-enhancements"></a>
-1.1.0 - Feature Enhancements</h1>
-<h2 class="doxsection"><a class="anchor" id="general-1"></a>
-General</h2>
-<ul>
-<li>Consider a snap-on GUI front end. </li>
-</ul>
-</div></div><!-- contents -->
+<p>If an internal function call will work, use an internal function call. If not, consider direct execution. Finally, if you need features provided by a shell, use a shell. There is nothing wrong with using a shell when it is appropriate, but you should be aware of the performance implications and use it judiciously.</p>
+<p>C-Menu was designed to support internal function calls and direct execution, so it provides the most commonly needed conveniences such as tilde expansion, file location based on the environment, and piped input and output.</p>
+<p>For piped input and output with internal function calls and direct execution, C-Menu allows the specification of providers and receivers for pipe I-O. Instead of using I/O redirection on the command line with pipe symbols, C-Menu provides more controllable alternatives such as "-S" for specifying a command to execute as a provider (source) of input to a form, pick, or view, "-R" for specifying a command to receive standard output from a form, pick, or view, and "-c" for specifying a command to execute with the selected item as an argument. These features allow you to create powerful and flexible menu items that can interact with other applications and scripts in a more controlled and efficient manner.</p>
+<hr  />
+ </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

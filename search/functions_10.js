@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['to_5fstring_0',['to_string',['../d1/d35/a01184.html#ga3e61ddee7c9ff9a346d3656d0054615f',1,'to_string(const char *):&#160;futil.c'],['../d1/d35/a01184.html#ga3e61ddee7c9ff9a346d3656d0054615f',1,'to_string(const char *s):&#160;futil.c']]],
-  ['toggle_5fobject_1',['toggle_object',['../d1/d0d/a01191.html#ga036c2f9cdf302cced4d9b703022664c0',1,'toggle_object(Pick *):&#160;pick_engine.c'],['../d1/d0d/a01191.html#ga036c2f9cdf302cced4d9b703022664c0',1,'toggle_object(Pick *pick):&#160;pick_engine.c']]],
-  ['trim_2',['trim',['../dc/d2d/a01183.html#ga34703756fd5be0fde758400f320db047',1,'trim(char *):&#160;futil.c'],['../dc/d2d/a01183.html#ga34703756fd5be0fde758400f320db047',1,'trim(char *s):&#160;futil.c']]],
-  ['trim_5fext_3',['trim_ext',['../dc/d2d/a01183.html#ga205b5e8c6415958a75c80e49db06b251',1,'trim_ext(char *, char *):&#160;futil.c'],['../dc/d2d/a01183.html#ga205b5e8c6415958a75c80e49db06b251',1,'trim_ext(char *buf, char *filename):&#160;futil.c']]],
-  ['trim_5fpath_4',['trim_path',['../dc/d2d/a01183.html#gafb4a0bc0d88592caff5cd1436dd426a0',1,'trim_path(char *):&#160;futil.c'],['../dc/d2d/a01183.html#gafb4a0bc0d88592caff5cd1436dd426a0',1,'trim_path(char *dir):&#160;futil.c']]]
+  ['to_5fstring_0',['to_string',['../dc/d70/a01187.html#ga3e61ddee7c9ff9a346d3656d0054615f',1,'to_string(const char *):&#160;futil.c'],['../dc/d70/a01187.html#ga3e61ddee7c9ff9a346d3656d0054615f',1,'to_string(const char *s):&#160;futil.c']]],
+  ['toggle_5fobject_1',['toggle_object',['../d9/d2e/a01194.html#ga036c2f9cdf302cced4d9b703022664c0',1,'toggle_object(Pick *):&#160;pick_engine.c'],['../d9/d2e/a01194.html#ga036c2f9cdf302cced4d9b703022664c0',1,'toggle_object(Pick *pick):&#160;pick_engine.c']]],
+  ['trim_2',['trim',['../d9/dbb/a01186.html#ga34703756fd5be0fde758400f320db047',1,'trim(char *):&#160;futil.c'],['../d9/dbb/a01186.html#ga34703756fd5be0fde758400f320db047',1,'trim(char *s):&#160;futil.c']]],
+  ['trim_5fext_3',['trim_ext',['../d9/dbb/a01186.html#ga205b5e8c6415958a75c80e49db06b251',1,'trim_ext(char *, char *):&#160;futil.c'],['../d9/dbb/a01186.html#ga205b5e8c6415958a75c80e49db06b251',1,'trim_ext(char *buf, char *filename):&#160;futil.c']]],
+  ['trim_5fpath_4',['trim_path',['../d9/dbb/a01186.html#gafb4a0bc0d88592caff5cd1436dd426a0',1,'trim_path(char *):&#160;futil.c'],['../d9/dbb/a01186.html#gafb4a0bc0d88592caff5cd1436dd426a0',1,'trim_path(char *dir):&#160;futil.c']]]
 ];

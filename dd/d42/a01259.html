@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /usr/local/src/C-Menu/src/enterchr.c</title>
+<title>C-Menu: Form Struct Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,68 +110,971 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/d42/a01259.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterchr.c</div></div>
+  <div class="headertitle"><div class="title">Form Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line">key=$(enterchr <span class="stringliteral">&quot;Are you sure?: &quot;</span>)</div>
-<div class="line"><span class="keywordflow">if</span> [ <span class="stringliteral">&quot;$key&quot;</span> = <span class="stringliteral">&quot;Y&quot;</span> ]; then</div>
-<div class="line">    echo <span class="stringliteral">&quot;You entered Y&quot;</span></div>
-<div class="line"><span class="keywordflow">else</span></div>
-<div class="line">    echo <span class="stringliteral">&quot;You entered N&quot;</span></div>
-<div class="line">fi</div>
-</div><!-- fragment --><div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;fcntl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../dd/de4/a01121.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line">    <span class="keywordtype">char</span> c = <span class="charliteral">&#39;Y&#39;</span>;</div>
-<div class="line">    <span class="keywordtype">char</span> *msg;</div>
-<div class="line">    <span class="keyword">struct </span>termios raw_tioctl;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;Press any key&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
-<div class="line">    <a id="a2" name="a2"></a><a class="code hl_function" href="../../dc/d06/a01153.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line">    raw_tioctl = <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../db/d28/a01133.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../dc/d06/a01153.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a>(&amp;raw_tioctl);</div>
-<div class="line">    tcflush(0, TCOFLUSH);</div>
-<div class="line">    <span class="keywordflow">while</span> (1) {</div>
-<div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
-<div class="line">        <span class="keywordflow">while</span> (*msg) {</div>
-<div class="line">            write(2, msg++, 1);</div>
-<div class="line">        }</div>
-<div class="line">        <span class="keywordflow">if</span> (read(0, &amp;c, 1) &gt; 0) {</div>
-<div class="line">            write(1, &amp;c, 1);</div>
-<div class="line">            <span class="keywordflow">break</span>;</div>
-<div class="line">        }</div>
-<div class="line">    }</div>
-<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../dc/d06/a01153.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line">    <span class="keywordflow">if</span> (c == (<span class="keywordtype">char</span>)0x1b)</div>
-<div class="line">        <span class="keywordflow">return</span> (1);</div>
-<div class="line">    <span class="keywordflow">return</span> (0);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
-<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d09/a01118_source.html#l00130">futil.c:130</a></div></div>
-<div class="ttc" id="aa01121_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../dd/de4/a01121.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de4/a01121_source.html#l00034">amort.c:34</a></div></div>
-<div class="ttc" id="aa01133_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../db/d28/a01133.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01153_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../dc/d06/a01153.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01153_html_ga9595fce25a583a656ca51a8b8f7494ae"><div class="ttname"><a href="../../dc/d06/a01153.html#ga9595fce25a583a656ca51a8b8f7494ae">mk_raw_tioctl</a></div><div class="ttdeci">bool mk_raw_tioctl(struct termios *)</div><div class="ttdoc">mk_raw_tioctl() - set terminal to raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00126">scriou.c:126</a></div></div>
-<div class="ttc" id="aa01153_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../dc/d06/a01153.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00056">scriou.c:56</a></div></div>
-</div><!-- fragment --> </div><!-- contents -->
+
+<p><code>#include &lt;<a class="el" href="../../d2/d94/a00716_source.html">form.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Form:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/de7/a01257.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a6653f46bca869b288a179288f99b1a33" id="r_a6653f46bca869b288a179288f99b1a33"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6653f46bca869b288a179288f99b1a33">begx</a></td></tr>
+<tr class="memitem:a4d4c95706516c2f82db0cc0e41f21c09" id="r_a4d4c95706516c2f82db0cc0e41f21c09"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4d4c95706516c2f82db0cc0e41f21c09">begy</a></td></tr>
+<tr class="memitem:a70deab6154f1284fe3baaefd73c58fcd" id="r_a70deab6154f1284fe3baaefd73c58fcd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a70deab6154f1284fe3baaefd73c58fcd">bg_clr_idx</a></td></tr>
+<tr class="memitem:a96ead0b4b706183a33b1d114b9275a43" id="r_a96ead0b4b706183a33b1d114b9275a43"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a96ead0b4b706183a33b1d114b9275a43">bo_clr_idx</a></td></tr>
+<tr class="memitem:a45f186b7d0df7ae8ca11342ef4ff90ce" id="r_a45f186b7d0df7ae8ca11342ef4ff90ce"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#a45f186b7d0df7ae8ca11342ef4ff90ce">box</a></td></tr>
+<tr class="memitem:ad5ee35969e855d0560700a7758f86106" id="r_ad5ee35969e855d0560700a7758f86106"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ad5ee35969e855d0560700a7758f86106">brackets</a> [3]</td></tr>
+<tr class="memitem:a80a6769a33b10e4f9d03a0161d6b5766" id="r_a80a6769a33b10e4f9d03a0161d6b5766"><td class="memItemLeft">cchar_t&#160;</td><td class="memItemRight"><a class="el" href="#a80a6769a33b10e4f9d03a0161d6b5766">brktl</a></td></tr>
+<tr class="memitem:a10586395722ec75d5d640a9d1f7ca4b7" id="r_a10586395722ec75d5d640a9d1f7ca4b7"><td class="memItemLeft">cchar_t&#160;</td><td class="memItemRight"><a class="el" href="#a10586395722ec75d5d640a9d1f7ca4b7">brktr</a></td></tr>
+<tr class="memitem:a94fb40ca0f91f1c028f87d3ae1869732" id="r_a94fb40ca0f91f1c028f87d3ae1869732"><td class="memItemLeft"><a class="el" href="../../da/d3f/a01215.html">Chyron</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a94fb40ca0f91f1c028f87d3ae1869732">chyron</a></td></tr>
+<tr class="memitem:ad11eb27bcd8066c7c13a069723e6ec50" id="r_ad11eb27bcd8066c7c13a069723e6ec50"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ad11eb27bcd8066c7c13a069723e6ec50">cmd</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a5d1fb911c5e8234c35db105dbf673ce5" id="r_a5d1fb911c5e8234c35db105dbf673ce5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5d1fb911c5e8234c35db105dbf673ce5">cols</a></td></tr>
+<tr class="memitem:ad83e5dd7c235ed1a90d2b534ddc5ebf1" id="r_ad83e5dd7c235ed1a90d2b534ddc5ebf1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad83e5dd7c235ed1a90d2b534ddc5ebf1">dcnt</a></td></tr>
+<tr class="memitem:a4ab9bceeebbbe8e8927850993b2b2a92" id="r_a4ab9bceeebbbe8e8927850993b2b2a92"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4ab9bceeebbbe8e8927850993b2b2a92">didx</a></td></tr>
+<tr class="memitem:a6f73bfedb479dfacad108b05a3c4fbd8" id="r_a6f73bfedb479dfacad108b05a3c4fbd8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6f73bfedb479dfacad108b05a3c4fbd8">f_calculate</a></td></tr>
+<tr class="memitem:a7e34fe0026fece3f9501a99cdb611f68" id="r_a7e34fe0026fece3f9501a99cdb611f68"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7e34fe0026fece3f9501a99cdb611f68">f_cmd</a></td></tr>
+<tr class="memitem:a361bda867f7f605471aa14089f92c074" id="r_a361bda867f7f605471aa14089f92c074"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a361bda867f7f605471aa14089f92c074">f_erase_remainder</a></td></tr>
+<tr class="memitem:a89a54cb87c241686c0c928f7a4e6261f" id="r_a89a54cb87c241686c0c928f7a4e6261f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a89a54cb87c241686c0c928f7a4e6261f">f_help_spec</a></td></tr>
+<tr class="memitem:a221e71ec2ce5a62897124aca0a70bb95" id="r_a221e71ec2ce5a62897124aca0a70bb95"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a221e71ec2ce5a62897124aca0a70bb95">f_in_pipe</a></td></tr>
+<tr class="memitem:af264476b116e126d5f8f621a6b20209d" id="r_af264476b116e126d5f8f621a6b20209d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af264476b116e126d5f8f621a6b20209d">f_in_spec</a></td></tr>
+<tr class="memitem:a2bcfabfb103444602d4a70c35fe8bae0" id="r_a2bcfabfb103444602d4a70c35fe8bae0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2bcfabfb103444602d4a70c35fe8bae0">f_mapp_spec</a></td></tr>
+<tr class="memitem:ababc20368a328695d3b35d1ec59fa5e9" id="r_ababc20368a328695d3b35d1ec59fa5e9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ababc20368a328695d3b35d1ec59fa5e9">f_multiple_cmd_args</a></td></tr>
+<tr class="memitem:a667d9c813993b4df64acab53231bbaae" id="r_a667d9c813993b4df64acab53231bbaae"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a667d9c813993b4df64acab53231bbaae">f_out_pipe</a></td></tr>
+<tr class="memitem:aefe9de4c8f51c0ff9c50d3b172d6eace" id="r_aefe9de4c8f51c0ff9c50d3b172d6eace"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aefe9de4c8f51c0ff9c50d3b172d6eace">f_out_spec</a></td></tr>
+<tr class="memitem:a4aa0609f16e6ef777e95bc215ca500ce" id="r_a4aa0609f16e6ef777e95bc215ca500ce"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4aa0609f16e6ef777e95bc215ca500ce">f_process</a></td></tr>
+<tr class="memitem:a6c5442a9e9209fac4d72ac34f1e968d0" id="r_a6c5442a9e9209fac4d72ac34f1e968d0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6c5442a9e9209fac4d72ac34f1e968d0">f_provider_cmd</a></td></tr>
+<tr class="memitem:a597dac7e65a6bb47a1c8f9715f026052" id="r_a597dac7e65a6bb47a1c8f9715f026052"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a597dac7e65a6bb47a1c8f9715f026052">f_query</a></td></tr>
+<tr class="memitem:ab2deb4a469ce6a5b28c7016eb840acb9" id="r_ab2deb4a469ce6a5b28c7016eb840acb9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab2deb4a469ce6a5b28c7016eb840acb9">f_receiver_cmd</a></td></tr>
+<tr class="memitem:a651ec2a5108da10f7ce614c95c5e5fdf" id="r_a651ec2a5108da10f7ce614c95c5e5fdf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a651ec2a5108da10f7ce614c95c5e5fdf">fcnt</a></td></tr>
+<tr class="memitem:ae420f30e8466abeff6e11fecc64ba093" id="r_ae420f30e8466abeff6e11fecc64ba093"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae420f30e8466abeff6e11fecc64ba093">fg_clr_idx</a></td></tr>
+<tr class="memitem:a6b54bc2ec5d12fe0f1803f3d4f0f077d" id="r_a6b54bc2ec5d12fe0f1803f3d4f0f077d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6b54bc2ec5d12fe0f1803f3d4f0f077d">fidx</a></td></tr>
+<tr class="memitem:a4645455b39a9c4ca49e405d0ab0b3898" id="r_a4645455b39a9c4ca49e405d0ab0b3898"><td class="memItemLeft"><a class="el" href="../../d7/d88/a01255.html">Field</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a4645455b39a9c4ca49e405d0ab0b3898">field</a> [<a class="el" href="../../d2/d94/a00716.html#af91c7a81dc65f1c28fc200661849df96">FIELD_MAXCNT</a>]</td></tr>
+<tr class="memitem:a73f44eaad41d6ddd55a4bed168a6c469" id="r_a73f44eaad41d6ddd55a4bed168a6c469"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a73f44eaad41d6ddd55a4bed168a6c469">fill_char</a> [4]</td></tr>
+<tr class="memitem:a7871c999b2903e67671067690d7720da" id="r_a7871c999b2903e67671067690d7720da"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7871c999b2903e67671067690d7720da">help</a></td></tr>
+<tr class="memitem:afda92971c71bdae13d0c27c2a5f4092c" id="r_afda92971c71bdae13d0c27c2a5f4092c"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#afda92971c71bdae13d0c27c2a5f4092c">help_spec</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:af842c03e821da7bd570853c691a1d202" id="r_af842c03e821da7bd570853c691a1d202"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af842c03e821da7bd570853c691a1d202">in_fd</a></td></tr>
+<tr class="memitem:a8f6a814fc9bbb37ba3034c708ac839e3" id="r_a8f6a814fc9bbb37ba3034c708ac839e3"><td class="memItemLeft">FILE *&#160;</td><td class="memItemRight"><a class="el" href="#a8f6a814fc9bbb37ba3034c708ac839e3">in_fp</a></td></tr>
+<tr class="memitem:ac788f41caf6c9e123dee28817577f5f5" id="r_ac788f41caf6c9e123dee28817577f5f5"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ac788f41caf6c9e123dee28817577f5f5">in_spec</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a60b72490d18fdef61b248341087d39ed" id="r_a60b72490d18fdef61b248341087d39ed"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a60b72490d18fdef61b248341087d39ed">lines</a></td></tr>
+<tr class="memitem:acb8a2de3949c02b8555ffc1dafa8333e" id="r_acb8a2de3949c02b8555ffc1dafa8333e"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#acb8a2de3949c02b8555ffc1dafa8333e">mapp_spec</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:a5bd0b7936433f7dea39be4e8535e353a" id="r_a5bd0b7936433f7dea39be4e8535e353a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5bd0b7936433f7dea39be4e8535e353a">out_fd</a></td></tr>
+<tr class="memitem:a1d587df88b8f69255e46d55e6fd9fd29" id="r_a1d587df88b8f69255e46d55e6fd9fd29"><td class="memItemLeft">FILE *&#160;</td><td class="memItemRight"><a class="el" href="#a1d587df88b8f69255e46d55e6fd9fd29">out_fp</a></td></tr>
+<tr class="memitem:a8f8c9f9b5c1949ee8560f0f09438e70d" id="r_a8f8c9f9b5c1949ee8560f0f09438e70d"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a8f8c9f9b5c1949ee8560f0f09438e70d">out_spec</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a544ebaab20ac33298ee9739326c17b56" id="r_a544ebaab20ac33298ee9739326c17b56"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a544ebaab20ac33298ee9739326c17b56">provider_cmd</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a47dcf50799bc839ea12f79372b8c55ee" id="r_a47dcf50799bc839ea12f79372b8c55ee"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a47dcf50799bc839ea12f79372b8c55ee">receiver_cmd</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a1e66400c76145293e533ea5dc69087ba" id="r_a1e66400c76145293e533ea5dc69087ba"><td class="memItemLeft"><a class="el" href="../../dc/dc2/a01251.html">Text</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a1e66400c76145293e533ea5dc69087ba">text</a> [<a class="el" href="../../d2/d94/a00716.html#af91c7a81dc65f1c28fc200661849df96">FIELD_MAXCNT</a>]</td></tr>
+<tr class="memitem:ad201eaa48edc48004ac60348e2097c1a" id="r_ad201eaa48edc48004ac60348e2097c1a"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ad201eaa48edc48004ac60348e2097c1a">title</a> [<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:af22f4d391713b67c6835e74b5fba7f35" id="r_af22f4d391713b67c6835e74b5fba7f35"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#af22f4d391713b67c6835e74b5fba7f35">win</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00147">147</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a6653f46bca869b288a179288f99b1a33" name="a6653f46bca869b288a179288f99b1a33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6653f46bca869b288a179288f99b1a33">&#9670;&#160;</a></span>begx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::begx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the screen column number for the upper left corner of the form window </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00155">155</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00904">form_exec_receiver()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00266">new_form()</a>.</p>
+
+</div>
+</div>
+<a id="a4d4c95706516c2f82db0cc0e41f21c09" name="a4d4c95706516c2f82db0cc0e41f21c09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4c95706516c2f82db0cc0e41f21c09">&#9670;&#160;</a></span>begy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::begy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the screen line number for the upper left corner of the form window </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00153">153</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00904">form_exec_receiver()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00266">new_form()</a>.</p>
+
+</div>
+</div>
+<a id="a70deab6154f1284fe3baaefd73c58fcd" name="a70deab6154f1284fe3baaefd73c58fcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70deab6154f1284fe3baaefd73c58fcd">&#9670;&#160;</a></span>bg_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::bg_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the background color for the form window </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00149">149</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+</div>
+</div>
+<a id="a96ead0b4b706183a33b1d114b9275a43" name="a96ead0b4b706183a33b1d114b9275a43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96ead0b4b706183a33b1d114b9275a43">&#9670;&#160;</a></span>bo_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::bo_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the border color for the form window </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00150">150</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+</div>
+</div>
+<a id="a45f186b7d0df7ae8ca11342ef4ff90ce" name="a45f186b7d0df7ae8ca11342ef4ff90ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f186b7d0df7ae8ca11342ef4ff90ce">&#9670;&#160;</a></span>box</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* Form::box</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ncurses window structure for form box border </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00158">158</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00373">form_display_field()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00211">form_post()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>.</p>
+
+</div>
+</div>
+<a id="ad5ee35969e855d0560700a7758f86106" name="ad5ee35969e855d0560700a7758f86106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ee35969e855d0560700a7758f86106">&#9670;&#160;</a></span>brackets</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::brackets[3]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the characters used to indicate field input areas in the form description file, e.g. "[]" for square brackets or "&lt;&gt;" for angle brackets. The first character is the left bracket and the second character is the right bracket. These characters may be left blank, especially if fill_char is used. The choice of brackets can affect the visual appearance of the form and how users perceive the input areas for each field, with some preferring the traditional look of brackets while others may prefer a cleaner look without them. The use of brackets can also help to visually separate the field input areas from other text on the form, making it easier for users to identify where they need to enter their input during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00280">280</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00266">new_form()</a>.</p>
+
+</div>
+</div>
+<a id="a80a6769a33b10e4f9d03a0161d6b5766" name="a80a6769a33b10e4f9d03a0161d6b5766"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80a6769a33b10e4f9d03a0161d6b5766">&#9670;&#160;</a></span>brktl</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cchar_t Form::brktl</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the ncurses cchar_t representation of the left bracket character, used for displaying the left bracket in the form window during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00293">293</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>.</p>
+
+</div>
+</div>
+<a id="a10586395722ec75d5d640a9d1f7ca4b7" name="a10586395722ec75d5d640a9d1f7ca4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10586395722ec75d5d640a9d1f7ca4b7">&#9670;&#160;</a></span>brktr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cchar_t Form::brktr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the ncurses cchar_t representation of the right bracket character, used for displaying the right bracket in the form window during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00296">296</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>.</p>
+
+</div>
+</div>
+<a id="a94fb40ca0f91f1c028f87d3ae1869732" name="a94fb40ca0f91f1c028f87d3ae1869732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94fb40ca0f91f1c028f87d3ae1869732">&#9670;&#160;</a></span>chyron</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../da/d3f/a01215.html">Chyron</a>* Form::chyron</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>a structure for managing the chyron string and its display properties on the form window during form processing. The chyron can be used to provide instructions, feedback, or other information to the user during form processing, and it can be updated dynamically based on user actions or other events to enhance the user experience and provide context- sensitive information as needed. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00365">365</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00211">form_post()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>.</p>
+
+</div>
+</div>
+<a id="ad11eb27bcd8066c7c13a069723e6ec50" name="ad11eb27bcd8066c7c13a069723e6ec50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad11eb27bcd8066c7c13a069723e6ec50">&#9670;&#160;</a></span>cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::cmd[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>a command that can be executed in the foreground, possibly taking control of the screen, by the menu application, e.g. an editor. This command can be used to allow the user to perform additional actions or tasks as part of the form processing, such as editing a file or running a script, providing a more interactive and flexible user experience during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00187">187</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a5d1fb911c5e8234c35db105dbf673ce5" name="a5d1fb911c5e8234c35db105dbf673ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d1fb911c5e8234c35db105dbf673ce5">&#9670;&#160;</a></span>cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the number of columns for the form windowi </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00152">152</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>.</p>
+
+</div>
+</div>
+<a id="ad83e5dd7c235ed1a90d2b534ddc5ebf1" name="ad83e5dd7c235ed1a90d2b534ddc5ebf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad83e5dd7c235ed1a90d2b534ddc5ebf1">&#9670;&#160;</a></span>dcnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::dcnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the number of text strings to be displayed on the form window, used for iterating through the text array and managing the display of text during form processing. This count can be used to determine how many text strings need to be displayed on the form window and to validate that all necessary text has been provided for display during form processing. The dcnt can also be used to dynamically allocate resources or manage memory for the text data during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00332">332</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>.</p>
+
+</div>
+</div>
+<a id="a4ab9bceeebbbe8e8927850993b2b2a92" name="a4ab9bceeebbbe8e8927850993b2b2a92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ab9bceeebbbe8e8927850993b2b2a92">&#9670;&#160;</a></span>didx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::didx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>an index to the array of text strings to be displayed on the form window, used for iterating through the text array and managing the display of text during form processing. This index can be updated as needed to control which text strings are currently being displayed on the form window, allowing for dynamic updates to the form's content based on user actions or other events during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00325">325</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>.</p>
+
+</div>
+</div>
+<a id="a6f73bfedb479dfacad108b05a3c4fbd8" name="a6f73bfedb479dfacad108b05a3c4fbd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f73bfedb479dfacad108b05a3c4fbd8">&#9670;&#160;</a></span>f_calculate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_calculate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, <a class="el" href="../../dd/d42/a01259.html">Form</a> presents an option to perform an external query or calculation. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00246">246</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>.</p>
+
+</div>
+</div>
+<a id="a7e34fe0026fece3f9501a99cdb611f68" name="a7e34fe0026fece3f9501a99cdb611f68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e34fe0026fece3f9501a99cdb611f68">&#9670;&#160;</a></span>f_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, indicates that the command has been verified and is valid for execution. This can be used to ensure that the command specified in the form structure is valid and can be executed successfully during form processing, allowing for additional actions or tasks to be performed as part of the form's functionality, such as editing a file or running a script. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00273">273</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a361bda867f7f605471aa14089f92c074" name="a361bda867f7f605471aa14089f92c074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a361bda867f7f605471aa14089f92c074">&#9670;&#160;</a></span>f_erase_remainder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_erase_remainder</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, causes the data above the cursor and to the right to be cleared when the user presses the enter key, e.g. to prevent leftover characters from previous field values from being left on the screen when a shorter value is entered in a field. This is essential for veteran keyboard users, accountants and the like, who rarely even look at the screen during data entry. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00237">237</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a89a54cb87c241686c0c928f7a4e6261f" name="a89a54cb87c241686c0c928f7a4e6261f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a54cb87c241686c0c928f7a4e6261f">&#9670;&#160;</a></span>f_help_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_help_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - help_spec verified, indicating that the help file spec has been validated and is ready for use during form processing </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00233">233</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a221e71ec2ce5a62897124aca0a70bb95" name="a221e71ec2ce5a62897124aca0a70bb95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221e71ec2ce5a62897124aca0a70bb95">&#9670;&#160;</a></span>f_in_pipe</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_in_pipe</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - in_spec is a pipe, indicating that the input file spec is a command that can be executed to provide input data for the form fields during form processing, allowing for dynamic and flexible input sources for the form fields. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00223">223</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00835">form_read_data()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>.</p>
+
+</div>
+</div>
+<a id="af264476b116e126d5f8f621a6b20209d" name="af264476b116e126d5f8f621a6b20209d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af264476b116e126d5f8f621a6b20209d">&#9670;&#160;</a></span>f_in_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_in_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - in_spec verified, indicating that the input file spec has been validated and is ready for use during form processing </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00217">217</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00835">form_read_data()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a2bcfabfb103444602d4a70c35fe8bae0" name="a2bcfabfb103444602d4a70c35fe8bae0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bcfabfb103444602d4a70c35fe8bae0">&#9670;&#160;</a></span>f_mapp_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_mapp_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - mapp_spec verified </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00194">194</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="ababc20368a328695d3b35d1ec59fa5e9" name="ababc20368a328695d3b35d1ec59fa5e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ababc20368a328695d3b35d1ec59fa5e9">&#9670;&#160;</a></span>f_multiple_cmd_args</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_multiple_cmd_args</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag: multiple command arguments </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00245">245</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00904">form_exec_receiver()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a667d9c813993b4df64acab53231bbaae" name="a667d9c813993b4df64acab53231bbaae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a667d9c813993b4df64acab53231bbaae">&#9670;&#160;</a></span>f_out_pipe</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_out_pipe</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - out_spec is a pipe, indicating that the output file spec is a command that can be executed to handle the accepted field values for the form fields during form processing, allowing for dynamic and flexible output handling for the form results. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00228">228</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>.</p>
+
+</div>
+</div>
+<a id="aefe9de4c8f51c0ff9c50d3b172d6eace" name="aefe9de4c8f51c0ff9c50d3b172d6eace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefe9de4c8f51c0ff9c50d3b172d6eace">&#9670;&#160;</a></span>f_out_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_out_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - out_spec verified, indicating that the output file spec has been validated and is ready for use during form processing </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00220">220</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00877">form_exec_cmd()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a4aa0609f16e6ef777e95bc215ca500ce" name="a4aa0609f16e6ef777e95bc215ca500ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aa0609f16e6ef777e95bc215ca500ce">&#9670;&#160;</a></span>f_process</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_process</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, <a class="el" href="../../dd/d42/a01259.html">Form</a> presents an option to perform an external query or calculation. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00248">248</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00430">field_navigator()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00877">form_exec_cmd()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>.</p>
+
+</div>
+</div>
+<a id="a6c5442a9e9209fac4d72ac34f1e968d0" name="a6c5442a9e9209fac4d72ac34f1e968d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c5442a9e9209fac4d72ac34f1e968d0">&#9670;&#160;</a></span>f_provider_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_provider_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, indicates that the provider command has been verified and is valid for execution. This can be used to ensure that the provider command specified in the form structure is valid and can be executed successfully during form processing, allowing for dynamic content generation or retrieval as part of the form's functionality. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00258">258</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a597dac7e65a6bb47a1c8f9715f026052" name="a597dac7e65a6bb47a1c8f9715f026052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a597dac7e65a6bb47a1c8f9715f026052">&#9670;&#160;</a></span>f_query</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_query</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, the action key label will be "query" instead of "process" or "calculate". </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00250">250</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>.</p>
+
+</div>
+</div>
+<a id="ab2deb4a469ce6a5b28c7016eb840acb9" name="ab2deb4a469ce6a5b28c7016eb840acb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2deb4a469ce6a5b28c7016eb840acb9">&#9670;&#160;</a></span>f_receiver_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::f_receiver_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, indicates that the receiver command has been verified and is valid for execution. This can be used to ensure that the receiver command specified in the form structure is valid and can be executed successfully during form processing, allowing for dynamic handling of the results or output generated by process programs or commands as part of the form's functionality. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00265">265</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a651ec2a5108da10f7ce614c95c5e5fdf" name="a651ec2a5108da10f7ce614c95c5e5fdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a651ec2a5108da10f7ce614c95c5e5fdf">&#9670;&#160;</a></span>fcnt</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::fcnt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the number of fields in the form, used for iterating through the field array and managing field data during form processing. This count can be used to determine when the user has reached the end of the fields or to validate that all required fields have been completed before accepting the form. The fcnt can also be used to dynamically allocate resources or manage memory for the field data during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00318">318</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00430">field_navigator()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00877">form_exec_cmd()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00904">form_exec_receiver()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00474">form_yx_to_fidx()</a>.</p>
+
+</div>
+</div>
+<a id="ae420f30e8466abeff6e11fecc64ba093" name="ae420f30e8466abeff6e11fecc64ba093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae420f30e8466abeff6e11fecc64ba093">&#9670;&#160;</a></span>fg_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::fg_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the foreground color for the form window </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00148">148</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+</div>
+</div>
+<a id="a6b54bc2ec5d12fe0f1803f3d4f0f077d" name="a6b54bc2ec5d12fe0f1803f3d4f0f077d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b54bc2ec5d12fe0f1803f3d4f0f077d">&#9670;&#160;</a></span>fidx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::fidx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the index of the currently selected field, used for highlighting and selection purposes during form processing. This index corresponds to the position of the field in the field array, allowing for easy access to the current field's data and properties during form processing. The fidx can be updated as the user navigates through the form fields, providing visual feedback and allowing for dynamic interactions based on the selected field. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00310">310</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00430">field_navigator()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00373">form_display_field()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00352">form_display_field_n()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00429">form_fmt_field()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00835">form_read_data()</a>, and <a class="el" href="../../d6/db6/a01172_source.html#l00533">form_validate_field()</a>.</p>
+
+</div>
+</div>
+<a id="a4645455b39a9c4ca49e405d0ab0b3898" name="a4645455b39a9c4ca49e405d0ab0b3898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4645455b39a9c4ca49e405d0ab0b3898">&#9670;&#160;</a></span>field</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/d88/a01255.html">Field</a>* Form::field[<a class="el" href="../../d2/d94/a00716.html#af91c7a81dc65f1c28fc200661849df96">FIELD_MAXCNT</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>an array of pointers to the field structures for the fields in this form, used for managing and processing the form fields during form processing. Each pointer in this array corresponds to a <a class="el" href="../../d7/d88/a01255.html" title="structure for form fields">Field</a> structure that contains the line, column, length, field format, input string, accepted string, display string, and filler string information for a specific field in the form. This allows for dynamic management of the form fields, enabling validation, formatting, and processing of user input based on the specified field formats and properties during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00353">353</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l00289">destroy_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00373">form_display_field()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00877">form_exec_cmd()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00904">form_exec_receiver()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00429">form_fmt_field()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00533">form_validate_field()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00474">form_yx_to_fidx()</a>.</p>
+
+</div>
+</div>
+<a id="a73f44eaad41d6ddd55a4bed168a6c469" name="a73f44eaad41d6ddd55a4bed168a6c469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73f44eaad41d6ddd55a4bed168a6c469">&#9670;&#160;</a></span>fill_char</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::fill_char[4]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the character used to fill the field input areas in the form, e.g. "_" for underscores or " " for spaces. This character is used to visually indicate the input area for each field in the form, and it can be used in conjunction with brackets or on its own if brackets are not used. Many feel that using fill characters without brackets creates a cleaner and more modern look for the form, while others prefer the traditional look of brackets. The choice of whether to use brackets, fill characters, or both is a matter of personal preference and design style for the form. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00299">299</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00266">new_form()</a>.</p>
+
+</div>
+</div>
+<a id="a7871c999b2903e67671067690d7720da" name="a7871c999b2903e67671067690d7720da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7871c999b2903e67671067690d7720da">&#9670;&#160;</a></span>help</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Form::help</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>flag - if set, indicates that the user has requested help during form processing, e.g. by pressing a help key or button. This can be used to trigger the display of context-sensitive help information for the form, providing guidance and assistance to the user based on their current actions or the specific form they are working with. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00252">252</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+</div>
+</div>
+<a id="afda92971c71bdae13d0c27c2a5f4092c" name="afda92971c71bdae13d0c27c2a5f4092c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afda92971c71bdae13d0c27c2a5f4092c">&#9670;&#160;</a></span>help_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::help_spec[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the menu application help file spec, e.g. a qualified path to a file containing help information for the menu application and its associated forms. This file can be used to provide context-sensitive help to the user during form processing, allowing them to access relevant information and guidance based on their current actions or the specific form they are working with. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00195">195</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="af842c03e821da7bd570853c691a1d202" name="af842c03e821da7bd570853c691a1d202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af842c03e821da7bd570853c691a1d202">&#9670;&#160;</a></span>in_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::in_fd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>input file descriptor, e.g. for reading from a file or pipe </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00165">165</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+</div>
+</div>
+<a id="a8f6a814fc9bbb37ba3034c708ac839e3" name="a8f6a814fc9bbb37ba3034c708ac839e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f6a814fc9bbb37ba3034c708ac839e3">&#9670;&#160;</a></span>in_fp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE* Form::in_fp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>input stream pointer, e.g. for reading from a file or pipe </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00161">161</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00835">form_read_data()</a>.</p>
+
+</div>
+</div>
+<a id="ac788f41caf6c9e123dee28817577f5f5" name="ac788f41caf6c9e123dee28817577f5f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac788f41caf6c9e123dee28817577f5f5">&#9670;&#160;</a></span>in_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::in_spec[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the input file spec, e.g. a qualified path to a file containing initial values for the form fields. This file can be used to pre-populate the form fields with existing data or default values during form processing, allowing for a more efficient and user-friendly experience when working with forms that require input values. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00203">203</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00835">form_read_data()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a60b72490d18fdef61b248341087d39ed" name="a60b72490d18fdef61b248341087d39ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60b72490d18fdef61b248341087d39ed">&#9670;&#160;</a></span>lines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::lines</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the number of lines for the form window </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00151">151</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00211">form_post()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>.</p>
+
+</div>
+</div>
+<a id="acb8a2de3949c02b8555ffc1dafa8333e" name="acb8a2de3949c02b8555ffc1dafa8333e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8a2de3949c02b8555ffc1dafa8333e">&#9670;&#160;</a></span>mapp_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::mapp_spec[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the menu application description file spec </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00169">169</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l01115">form_desc_error()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a5bd0b7936433f7dea39be4e8535e353a" name="a5bd0b7936433f7dea39be4e8535e353a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd0b7936433f7dea39be4e8535e353a">&#9670;&#160;</a></span>out_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Form::out_fd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>output file descriptor, e.g. for writing to a file or pipe </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00167">167</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>.</p>
+
+</div>
+</div>
+<a id="a1d587df88b8f69255e46d55e6fd9fd29" name="a1d587df88b8f69255e46d55e6fd9fd29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d587df88b8f69255e46d55e6fd9fd29">&#9670;&#160;</a></span>out_fp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE* Form::out_fp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>output stream pointer, e.g. for writing to a file or pipe </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00163">163</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>.</p>
+
+</div>
+</div>
+<a id="a8f8c9f9b5c1949ee8560f0f09438e70d" name="a8f8c9f9b5c1949ee8560f0f09438e70d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f8c9f9b5c1949ee8560f0f09438e70d">&#9670;&#160;</a></span>out_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::out_spec[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the output file spec, e.g. a qualified path to a file where the accepted values for the form fields will be written after form processing. This file can be used to save or export the results of the form processing, allowing for further use or analysis of the accepted field values after the form has been completed. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00210">210</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00877">form_exec_cmd()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l01063">form_write()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a544ebaab20ac33298ee9739326c17b56" name="a544ebaab20ac33298ee9739326c17b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a544ebaab20ac33298ee9739326c17b56">&#9670;&#160;</a></span>provider_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::provider_cmd[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the provider command, which can be executed in the background to provide dynamic content for a program called by the menu application. This command can be used to generate or retrieve data that will be displayed on the form or used for processing the form fields, allowing for dynamic and interactive forms that can adapt to changing data or user input during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00171">171</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a47dcf50799bc839ea12f79372b8c55ee" name="a47dcf50799bc839ea12f79372b8c55ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47dcf50799bc839ea12f79372b8c55ee">&#9670;&#160;</a></span>receiver_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::receiver_cmd[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the receiver command, which can be executed in the background to process the output of a program called by the menu application. This command can be used to handle the results or output generated by a program that is executed as part of the form processing, allowing for dynamic and interactive forms that can respond to the results of process programs or commands during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00179">179</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00877">form_exec_cmd()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00904">form_exec_receiver()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="a1e66400c76145293e533ea5dc69087ba" name="a1e66400c76145293e533ea5dc69087ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e66400c76145293e533ea5dc69087ba">&#9670;&#160;</a></span>text</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/dc2/a01251.html">Text</a>* Form::text[<a class="el" href="../../d2/d94/a00716.html#af91c7a81dc65f1c28fc200661849df96">FIELD_MAXCNT</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>an array of pointers to the text structures for the text strings to be displayed on the form window, used for managing and displaying the text content of the form during form processing. Each pointer in this array corresponds to a <a class="el" href="../../dc/dc2/a01251.html" title="structure for form fields">Text</a> structure that contains the line, column, string, and length information for a specific text string to be displayed on the form window. This allows for dynamic management of the text content on the form, enabling updates and changes to the displayed text based on user actions or other events during form processing. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00340">340</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d4e/a01106_source.html#l00289">destroy_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>.</p>
+
+</div>
+</div>
+<a id="ad201eaa48edc48004ac60348e2097c1a" name="ad201eaa48edc48004ac60348e2097c1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad201eaa48edc48004ac60348e2097c1a">&#9670;&#160;</a></span>title</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Form::title[<a class="el" href="../../dd/d09/a01118.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the title of the form, displayed in the form box border </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00159">159</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00677">init_form_files()</a>.</p>
+
+</div>
+</div>
+<a id="af22f4d391713b67c6835e74b5fba7f35" name="af22f4d391713b67c6835e74b5fba7f35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af22f4d391713b67c6835e74b5fba7f35">&#9670;&#160;</a></span>win</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* Form::win</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>ncurses window structure for form </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00157">157</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d61/a01130_source.html#l00490">display_form()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00054">field_editor()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00373">form_display_field()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00555">form_display_fields()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00124">form_engine()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00211">form_post()</a>, <a class="el" href="../../d0/d61/a01130_source.html#l00296">form_process()</a>, and <a class="el" href="../../d0/d61/a01130_source.html#l00061">init_form()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="../../d2/d94/a00716_source.html">form.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../dd/d42/a01259.html">Form</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

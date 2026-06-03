@@ -1,9 +1,9 @@
 var a01187 =
 [
-    [ "init_view.c", "da/d4e/a01106.html", null ],
-    [ "init_view_boxwin", "dc/d70/a01187.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "dc/d70/a01187.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "dc/d70/a01187.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "dc/d70/a01187.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_init_input", "dc/d70/a01187.html#gab050f5482419339e9207dbdc65a7b49e", null ]
+    [ "free_string", "dc/d70/a01187.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "dc/d70/a01187.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "dc/d70/a01187.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "dc/d70/a01187.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "dc/d70/a01187.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "dc/d70/a01187.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];
