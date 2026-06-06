@@ -1,11 +1,10 @@
 var a01213 =
 [
-    [ "accept_s", "d5/d54/a01213.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "d5/d54/a01213.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_s", "d5/d54/a01213.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "d5/d54/a01213.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_s", "d5/d54/a01213.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "d5/d54/a01213.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "d5/d54/a01213.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "d5/d54/a01213.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "capture_curses_tioctl", "d5/d54/a01213.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
+    [ "capture_shell_tioctl", "d5/d54/a01213.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "d5/d54/a01213.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "d5/d54/a01213.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_curses_tioctl", "d5/d54/a01213.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
+    [ "restore_shell_tioctl", "d5/d54/a01213.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "d5/d54/a01213.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
 ];

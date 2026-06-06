@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Error Handling</title>
+<title>C-Menu: futil.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,856 +110,509 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d8/d11/a01178.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Error Handling </div></div>
+  <div class="headertitle"><div class="title">futil.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Display Error messages.  
+<p>General utility functions.  
 <a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
+<code>#include &lt;dirent.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;grp.h&gt;</code><br />
+<code>#include &lt;ifaddrs.h&gt;</code><br />
+<code>#include &lt;pwd.h&gt;</code><br />
+<code>#include &lt;regex.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wait.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for futil.c:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d1a/a01179.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</div>
+<p><a href="../../d8/d11/a01178_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a0ac18add284994be76aca1ea5c500c2d" id="r_a0ac18add284994be76aca1ea5c500c2d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a0ac18add284994be76aca1ea5c500c2d">LF_DIR</a>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:ae14db1df03a3127c0e4ff5a1307e89cc" id="r_ae14db1df03a3127c0e4ff5a1307e89cc"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae14db1df03a3127c0e4ff5a1307e89cc">LF_LNK</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a7089bd4cb667475a891d92b36239cc66" id="r_a7089bd4cb667475a891d92b36239cc66"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7089bd4cb667475a891d92b36239cc66">LF_REG</a>&#160;&#160;&#160;4</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga8f6c45ca4a7f6a41c4c88314e697565a" id="r_ga8f6c45ca4a7f6a41c4c88314e697565a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a> (int ec, char *s)</td></tr>
-<tr class="memdesc:ga8f6c45ca4a7f6a41c4c88314e697565a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abnormal program termination.  <br /></td></tr>
-<tr class="memitem:ga251bd97abc13e656e92e0ad484d1725d" id="r_ga251bd97abc13e656e92e0ad484d1725d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga251bd97abc13e656e92e0ad484d1725d">action_disposition</a> (char *title, char *action_str)</td></tr>
-<tr class="memdesc:ga251bd97abc13e656e92e0ad484d1725d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a simple action disposition message window or print to stderr.  <br /></td></tr>
-<tr class="memitem:ga483e2ea4802aa6360588c11adb871464" id="r_ga483e2ea4802aa6360588c11adb871464"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga483e2ea4802aa6360588c11adb871464">answer_yn</a> (char *em0, char *em1, char *em2, char *em3)</td></tr>
-<tr class="memdesc:ga483e2ea4802aa6360588c11adb871464"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accept a single letter answer.  <br /></td></tr>
-<tr class="memitem:ga67659f8a701b74f4dec0d36227a10d1c" id="r_ga67659f8a701b74f4dec0d36227a10d1c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga67659f8a701b74f4dec0d36227a10d1c">display_error</a> (char *em0, char *em1, char *em2, char *em3)</td></tr>
-<tr class="memdesc:ga67659f8a701b74f4dec0d36227a10d1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display an error message window or print to stderr.  <br /></td></tr>
-<tr class="memitem:ga2f2e1496a7c253b2d58446154c98a0bf" id="r_ga2f2e1496a7c253b2d58446154c98a0bf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga2f2e1496a7c253b2d58446154c98a0bf">nf_error</a> (int ec, char *s)</td></tr>
-<tr class="memdesc:ga2f2e1496a7c253b2d58446154c98a0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display error message and wait for key press.  <br /></td></tr>
-<tr class="memitem:ga61b4f28456257f68ed042bed7f187efd" id="r_ga61b4f28456257f68ed042bed7f187efd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga61b4f28456257f68ed042bed7f187efd">Perror</a> (char *emsg_str)</td></tr>
-<tr class="memdesc:ga61b4f28456257f68ed042bed7f187efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a simple error message window or print to stderr.  <br /></td></tr>
-<tr class="memitem:ga45c5bf79120644a22ffef896119fb672" id="r_ga45c5bf79120644a22ffef896119fb672"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga45c5bf79120644a22ffef896119fb672">wait_continue</a> (WINDOW *wait_win, <a class="el" href="../../dc/db6/a01212.html">Chyron</a> *chyron, int remaining)</td></tr>
-<tr class="memdesc:ga45c5bf79120644a22ffef896119fb672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the waiting message with remaining time and check for user input.  <br /></td></tr>
-<tr class="memitem:ga1659db421e92afe23911f5ae0a469bc5" id="r_ga1659db421e92afe23911f5ae0a469bc5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga1659db421e92afe23911f5ae0a469bc5">wait_destroy</a> (<a class="el" href="../../dc/db6/a01212.html">Chyron</a> *chyron)</td></tr>
-<tr class="memdesc:ga1659db421e92afe23911f5ae0a469bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the waiting message window and chyron.  <br /></td></tr>
-<tr class="memitem:gaab76ab3464d34674d9d4cd80c87999e7" id="r_gaab76ab3464d34674d9d4cd80c87999e7"><td class="memItemLeft"><a class="el" href="../../dc/db6/a01212.html">Chyron</a> *&#160;</td><td class="memItemRight"><a class="el" href="#gaab76ab3464d34674d9d4cd80c87999e7">wait_mk_chyron</a> ()</td></tr>
-<tr class="memdesc:gaab76ab3464d34674d9d4cd80c87999e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="../../dc/db6/a01212.html">Chyron</a> struct for the waiting message.  <br /></td></tr>
-<tr class="memitem:ga5f404e9a570fd5981638c80af3d6e54d" id="r_ga5f404e9a570fd5981638c80af3d6e54d"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#ga5f404e9a570fd5981638c80af3d6e54d">wait_mk_win</a> (<a class="el" href="../../dc/db6/a01212.html">Chyron</a> *chyron, char *title)</td></tr>
-<tr class="memdesc:ga5f404e9a570fd5981638c80af3d6e54d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a popup waiting message.  <br /></td></tr>
-<tr class="memitem:ga1c2e4b3dca428f3a8a78343cc854c3c6" id="r_ga1c2e4b3dca428f3a8a78343cc854c3c6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga1c2e4b3dca428f3a8a78343cc854c3c6">waitpid_with_timeout</a> (pid_t pid, int timeout)</td></tr>
-<tr class="memdesc:ga1c2e4b3dca428f3a8a78343cc854c3c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for a process to finish with a timeout and optional user cancellation.  <br /></td></tr>
+<tr class="memitem:gafdca75bb91fdd5b5ff09ee6604792ce1" id="r_gafdca75bb91fdd5b5ff09ee6604792ce1"><td class="memItemLeft">unsigned long&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gafdca75bb91fdd5b5ff09ee6604792ce1">a_to_ul</a> (const char *str)</td></tr>
+<tr class="memdesc:gafdca75bb91fdd5b5ff09ee6604792ce1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to an unsigned long long integer, with support for suffixes K, M, and G for kilobytes, megabytes, and gigabytes respectively.  <br /></td></tr>
+<tr class="memitem:gab96e4c73a7b3ba1310044b479733cdd9" id="r_gab96e4c73a7b3ba1310044b479733cdd9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a> (char *s, bool *a_toi_error)</td></tr>
+<tr class="memdesc:gab96e4c73a7b3ba1310044b479733cdd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">a safer alternative to atoi() for converting ASCII strings to integers.  <br /></td></tr>
+<tr class="memitem:gae3d67c8c0b5b559664942e539256605b" id="r_gae3d67c8c0b5b559664942e539256605b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gae3d67c8c0b5b559664942e539256605b">base_name</a> (char *buf, char *path)</td></tr>
+<tr class="memdesc:gae3d67c8c0b5b559664942e539256605b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the base name of a file specification.  <br /></td></tr>
+<tr class="memitem:ga0d44c51feb7f300fecb49dbf223a62f8" id="r_ga0d44c51feb7f300fecb49dbf223a62f8"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga0d44c51feb7f300fecb49dbf223a62f8">canonicalize_file_spec</a> (char *spec)</td></tr>
+<tr class="memdesc:ga0d44c51feb7f300fecb49dbf223a62f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes quotes and trims at first space.  <br /></td></tr>
+<tr class="memitem:gae2be7c771d0ee7a8c81ebf10331bd449" id="r_gae2be7c771d0ee7a8c81ebf10331bd449"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gae2be7c771d0ee7a8c81ebf10331bd449">chrep</a> (char *s, char old_chr, char new_chr)</td></tr>
+<tr class="memdesc:gae2be7c771d0ee7a8c81ebf10331bd449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces all occurrences of old_chr in s with new_chr in place.  <br /></td></tr>
+<tr class="memitem:ga10b60618e5fef6711dbe90389d60c049" id="r_ga10b60618e5fef6711dbe90389d60c049"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga10b60618e5fef6711dbe90389d60c049">destroy_argv</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:ga10b60618e5fef6711dbe90389d60c049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocates memory allocated for argument strings in argv.  <br /></td></tr>
+<tr class="memitem:ga4981b07a1fc8048829e8b0bf8327bfad" id="r_ga4981b07a1fc8048829e8b0bf8327bfad"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga4981b07a1fc8048829e8b0bf8327bfad">dir_name</a> (char *buf, char *path)</td></tr>
+<tr class="memdesc:ga4981b07a1fc8048829e8b0bf8327bfad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the directory name of a file specification.  <br /></td></tr>
+<tr class="memitem:ga646c47b288ba3b43714f0c0e1f88c981" id="r_ga646c47b288ba3b43714f0c0e1f88c981"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a> (char *str, int path_maxlen)</td></tr>
+<tr class="memdesc:ga646c47b288ba3b43714f0c0e1f88c981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces "~/" in string with the user's home directory.  <br /></td></tr>
+<tr class="memitem:gac22d2bbc3de5560fd33f66c17f2918f2" id="r_gac22d2bbc3de5560fd33f66c17f2918f2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gac22d2bbc3de5560fd33f66c17f2918f2">file_spec_name</a> (char *fn, char *fs)</td></tr>
+<tr class="memdesc:gac22d2bbc3de5560fd33f66c17f2918f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">extracts the file name component of a file specification  <br /></td></tr>
+<tr class="memitem:ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8" id="r_ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8">file_spec_path</a> (char *fp, char *fs)</td></tr>
+<tr class="memdesc:ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">extracts the path component of a file specification  <br /></td></tr>
+<tr class="memitem:gaee5521bb387211a2d16e3d56585f144d" id="r_gaee5521bb387211a2d16e3d56585f144d"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a> (time_t t, char *buf, size_t n)</td></tr>
+<tr class="memdesc:gaee5521bb387211a2d16e3d56585f144d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a time_t as an ISO 8601 string in local time.  <br /></td></tr>
+<tr class="memitem:ga9733005966bd730252e081c3ef9bb2c2" id="r_ga9733005966bd730252e081c3ef9bb2c2"><td class="memItemLeft"><a class="el" href="../../d3/d0b/a01253.html">String</a>&#160;</td><td class="memItemRight"><a class="el" href="../../de/d61/a01205.html#ga9733005966bd730252e081c3ef9bb2c2">free_string</a> (<a class="el" href="../../d3/d0b/a01253.html">String</a> string)</td></tr>
+<tr class="memdesc:ga9733005966bd730252e081c3ef9bb2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the dynamically allocated <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>.  <br /></td></tr>
+<tr class="memitem:gaeb33fd23094646ae1161efc4df11675d" id="r_gaeb33fd23094646ae1161efc4df11675d"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaeb33fd23094646ae1161efc4df11675d">get_ip_addresses</a> (char *ip_str, int maxlen)</td></tr>
+<tr class="memdesc:gaeb33fd23094646ae1161efc4df11675d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the IP addresses of the local machine and formats them into a string.  <br /></td></tr>
+<tr class="memitem:ga35e3a7ccc0c4172355b6886c7980c646" id="r_ga35e3a7ccc0c4172355b6886c7980c646"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga35e3a7ccc0c4172355b6886c7980c646">get_local_timestamp</a> ()</td></tr>
+<tr class="memdesc:ga35e3a7ccc0c4172355b6886c7980c646"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current local time as an ISO 8601 formatted string.  <br /></td></tr>
+<tr class="memitem:gaf7a1a752acebb6ec74ad40298464ceac" id="r_gaf7a1a752acebb6ec74ad40298464ceac"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaf7a1a752acebb6ec74ad40298464ceac">get_user_str</a> (char *user_str, size_t maxlen)</td></tr>
+<tr class="memdesc:gaf7a1a752acebb6ec74ad40298464ceac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current user's name and UID, and formats it into a string.  <br /></td></tr>
+<tr class="memitem:ga36904413ff36a25decee4eafa2c5c108" id="r_ga36904413ff36a25decee4eafa2c5c108"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga36904413ff36a25decee4eafa2c5c108">is_directory</a> (const char *path)</td></tr>
+<tr class="memdesc:ga36904413ff36a25decee4eafa2c5c108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given path is a directory.  <br /></td></tr>
+<tr class="memitem:gab40c2f4abdea04b8f80ff6354cb6879c" id="r_gab40c2f4abdea04b8f80ff6354cb6879c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gab40c2f4abdea04b8f80ff6354cb6879c">is_symlink_to_dir</a> (const char *path)</td></tr>
+<tr class="memdesc:gab40c2f4abdea04b8f80ff6354cb6879c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given path is a symbolic link to a directory.  <br /></td></tr>
+<tr class="memitem:ga76cb87971fb4e63944ec6627c56c0ffb" id="r_ga76cb87971fb4e63944ec6627c56c0ffb"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga76cb87971fb4e63944ec6627c56c0ffb">is_valid_regex</a> (const char *pattern)</td></tr>
+<tr class="memdesc:ga76cb87971fb4e63944ec6627c56c0ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the given regular expression pattern is valid.  <br /></td></tr>
+<tr class="memitem:gaff3e0bcd9247acc8e2edd227f0293f8c" id="r_gaff3e0bcd9247acc8e2edd227f0293f8c"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaff3e0bcd9247acc8e2edd227f0293f8c">iso8601_time</a> (char *buf, int n, time_t *t, bool local)</td></tr>
+<tr class="memdesc:gaff3e0bcd9247acc8e2edd227f0293f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formats a struct tm as an ISO 8601 string.  <br /></td></tr>
+<tr class="memitem:ga02792428710078b7a2ca59ef70ae83fa" id="r_ga02792428710078b7a2ca59ef70ae83fa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga02792428710078b7a2ca59ef70ae83fa">locate_file_in_path</a> (char *file_spec, char *file_name)</td></tr>
+<tr class="memdesc:ga02792428710078b7a2ca59ef70ae83fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locates a file in the system PATH.  <br /></td></tr>
+<tr class="memitem:ga8d34fd1e4f0b6caab029f02814092794" id="r_ga8d34fd1e4f0b6caab029f02814092794"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga8d34fd1e4f0b6caab029f02814092794">mk_dir</a> (char *dir)</td></tr>
+<tr class="memdesc:ga8d34fd1e4f0b6caab029f02814092794"><td class="mdescLeft">&#160;</td><td class="mdescRight">If directory doesn't exist, make it.  <br /></td></tr>
+<tr class="memitem:a54d1c02afad60732c1d2ce92e50cb970" id="r_a54d1c02afad60732c1d2ce92e50cb970"><td class="memItemLeft"><a class="el" href="../../d3/d0b/a01253.html">String</a>&#160;</td><td class="memItemRight"><a class="el" href="#a54d1c02afad60732c1d2ce92e50cb970">mk_string</a> (size_t l)</td></tr>
+<tr class="memdesc:a54d1c02afad60732c1d2ce92e50cb970"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct with a dynamically allocated string.  <br /></td></tr>
+<tr class="memitem:gaeb688a44147992813f7e456cb6360b1f" id="r_gaeb688a44147992813f7e456cb6360b1f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaeb688a44147992813f7e456cb6360b1f">normalize_file_spec</a> (char *fs)</td></tr>
+<tr class="memdesc:gaeb688a44147992813f7e456cb6360b1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">replace backslashes with forward lashes  <br /></td></tr>
+<tr class="memitem:ga7c278cdbc2bc6cf35cfa7e90db42bbcc" id="r_ga7c278cdbc2bc6cf35cfa7e90db42bbcc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga7c278cdbc2bc6cf35cfa7e90db42bbcc">open_cmenu_log</a> ()</td></tr>
+<tr class="memdesc:ga7c278cdbc2bc6cf35cfa7e90db42bbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open new C-Menu log file.  <br /></td></tr>
+<tr class="memitem:ga1ee26caf58dfc798273ba095a394cde8" id="r_ga1ee26caf58dfc798273ba095a394cde8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a> (const char *s, time_t *out)</td></tr>
+<tr class="memdesc:ga1ee26caf58dfc798273ba095a394cde8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses an ISO 8601 timestamp string in local time and converts it to time_t.  <br /></td></tr>
+<tr class="memitem:gab19b53c3f569332292039c471719eb6b" id="r_gab19b53c3f569332292039c471719eb6b"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gab19b53c3f569332292039c471719eb6b">rep_substring</a> (const char *org_s, const char *tgt_s, const char *rep_s)</td></tr>
+<tr class="memdesc:gab19b53c3f569332292039c471719eb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace all occurrences of "tgt_s" in "org_s" with "rep_s".  <br /></td></tr>
+<tr class="memitem:a4f42956462e811d96c9fb881a85dada4" id="r_a4f42956462e811d96c9fb881a85dada4"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a4f42956462e811d96c9fb881a85dada4">rtrim</a> (char *s)</td></tr>
+<tr class="memdesc:a4f42956462e811d96c9fb881a85dada4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trims trailing spaces from string s in place.  <br /></td></tr>
+<tr class="memitem:gab0df3034e2ed84e1d878fba903da46ba" id="r_gab0df3034e2ed84e1d878fba903da46ba"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d9e/a01206.html#gab0df3034e2ed84e1d878fba903da46ba">segmentation_fault</a> ()</td></tr>
+<tr class="memdesc:gab0df3034e2ed84e1d878fba903da46ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to intentionally cause a segmentation fault for testing purposes.  <br /></td></tr>
+<tr class="memitem:ga63eb94756fb011a456a3dec900709cd8" id="r_ga63eb94756fb011a456a3dec900709cd8"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a> (char *buf, size_t buf_size, const char *format,...)</td></tr>
+<tr class="memdesc:ga63eb94756fb011a456a3dec900709cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">ssnprintf was designed to be a safer alternative to snprintf.  <br /></td></tr>
+<tr class="memitem:gaa3967ab49e69c2f867cd7058ccf26eb1" id="r_gaa3967ab49e69c2f867cd7058ccf26eb1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaa3967ab49e69c2f867cd7058ccf26eb1">str_subc</a> (char *d, char *s, char ReplaceChr, char *Withstr, int l)</td></tr>
+<tr class="memdesc:gaa3967ab49e69c2f867cd7058ccf26eb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces "ReplaceChr" in "s" with "Withstr" in "d" won't copy more than "l" bytes to "d" Replaces all occurrences of a character in a string with another string, copying the result to a destination buffer.  <br /></td></tr>
+<tr class="memitem:gaf717756d0ca49bc436d1fb69ae0d6c05" id="r_gaf717756d0ca49bc436d1fb69ae0d6c05"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaf717756d0ca49bc436d1fb69ae0d6c05">str_to_args</a> (char **argv, char *arg_str, int max_args)</td></tr>
+<tr class="memdesc:gaf717756d0ca49bc436d1fb69ae0d6c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string into an array of argument strings.  <br /></td></tr>
+<tr class="memitem:afba98c475b8ccba7fffaebf81eda9adf" id="r_afba98c475b8ccba7fffaebf81eda9adf"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afba98c475b8ccba7fffaebf81eda9adf">str_to_bool</a> (const char *s)</td></tr>
+<tr class="memdesc:afba98c475b8ccba7fffaebf81eda9adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to boolean true or false.  <br /></td></tr>
+<tr class="memitem:ga4db64c5f94e5859f353740840d85beb5" id="r_ga4db64c5f94e5859f353740840d85beb5"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga4db64c5f94e5859f353740840d85beb5">str_to_double</a> (char *s)</td></tr>
+<tr class="memdesc:ga4db64c5f94e5859f353740840d85beb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts string to double  <br /></td></tr>
+<tr class="memitem:ga4fb9a5e513fb39d3dd8eadef0f2cd44b" id="r_ga4fb9a5e513fb39d3dd8eadef0f2cd44b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga4fb9a5e513fb39d3dd8eadef0f2cd44b">str_to_lower</a> (char *s)</td></tr>
+<tr class="memdesc:ga4fb9a5e513fb39d3dd8eadef0f2cd44b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to lowercase.  <br /></td></tr>
+<tr class="memitem:ga4221f925d0d107e59e77faf4e8a40810" id="r_ga4221f925d0d107e59e77faf4e8a40810"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga4221f925d0d107e59e77faf4e8a40810">str_to_upper</a> (char *s)</td></tr>
+<tr class="memdesc:ga4221f925d0d107e59e77faf4e8a40810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to uppercase.  <br /></td></tr>
+<tr class="memitem:ga8e2af68338c74351899a7a35adc6cda0" id="r_ga8e2af68338c74351899a7a35adc6cda0"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/d61/a01205.html#ga8e2af68338c74351899a7a35adc6cda0">string_cat</a> (<a class="el" href="../../d3/d0b/a01253.html">String</a> *dest, const <a class="el" href="../../d3/d0b/a01253.html">String</a> *src)</td></tr>
+<tr class="memdesc:ga8e2af68338c74351899a7a35adc6cda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates src <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary.  <br /></td></tr>
+<tr class="memitem:ga1d8368ef59a9e415c859d20794d6b26d" id="r_ga1d8368ef59a9e415c859d20794d6b26d"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/d61/a01205.html#ga1d8368ef59a9e415c859d20794d6b26d">string_cpy</a> (<a class="el" href="../../d3/d0b/a01253.html">String</a> *dest, const <a class="el" href="../../d3/d0b/a01253.html">String</a> *src)</td></tr>
+<tr class="memdesc:ga1d8368ef59a9e415c859d20794d6b26d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy src <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary.  <br /></td></tr>
+<tr class="memitem:gae86995f3322d0448e2890ecb7d3624dc" id="r_gae86995f3322d0448e2890ecb7d3624dc"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/d61/a01205.html#gae86995f3322d0448e2890ecb7d3624dc">string_ncat</a> (<a class="el" href="../../d3/d0b/a01253.html">String</a> *dest, const <a class="el" href="../../d3/d0b/a01253.html">String</a> *src, size_t n)</td></tr>
+<tr class="memdesc:gae86995f3322d0448e2890ecb7d3624dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates up to n characters from src <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary.  <br /></td></tr>
+<tr class="memitem:ga5ea62e2fba431b9cecaac045daff6105" id="r_ga5ea62e2fba431b9cecaac045daff6105"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../de/d61/a01205.html#ga5ea62e2fba431b9cecaac045daff6105">string_ncpy</a> (<a class="el" href="../../d3/d0b/a01253.html">String</a> *dest, const <a class="el" href="../../d3/d0b/a01253.html">String</a> *src, size_t n)</td></tr>
+<tr class="memdesc:ga5ea62e2fba431b9cecaac045daff6105"><td class="mdescLeft">&#160;</td><td class="mdescRight">copies up to n characters from src <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>, allocating additional memory for dest <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> if necessary  <br /></td></tr>
+<tr class="memitem:ga82896df8e50776b7e7b0cede4e45b523" id="r_ga82896df8e50776b7e7b0cede4e45b523"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a> (char *d, char *s)</td></tr>
+<tr class="memdesc:ga82896df8e50776b7e7b0cede4e45b523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strips ANSI SGR escape sequences (ending in 'm') from string s to d.  <br /></td></tr>
+<tr class="memitem:ga671225aa841321cad803a383ba99db11" id="r_ga671225aa841321cad803a383ba99db11"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga671225aa841321cad803a383ba99db11">strip_quotes</a> (char *s)</td></tr>
+<tr class="memdesc:ga671225aa841321cad803a383ba99db11"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes leading and trailing double quotes if present  <br /></td></tr>
+<tr class="memitem:ga32204f694cf5e28c888a1045a1b383a4" id="r_ga32204f694cf5e28c888a1045a1b383a4"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga32204f694cf5e28c888a1045a1b383a4">stripz_quotes</a> (char *s)</td></tr>
+<tr class="memdesc:ga32204f694cf5e28c888a1045a1b383a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes leading and trailing double quotes if present  <br /></td></tr>
+<tr class="memitem:gab6ae8b51eae6da91d345cd4018a20bfa" id="r_gab6ae8b51eae6da91d345cd4018a20bfa"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gab6ae8b51eae6da91d345cd4018a20bfa">strnlf</a> (char *s, size_t max_len)</td></tr>
+<tr class="memdesc:gab6ae8b51eae6da91d345cd4018a20bfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">terminates string with line feed  <br /></td></tr>
+<tr class="memitem:ga636608f26d1193b5d860f2312cd8ee49" id="r_ga636608f26d1193b5d860f2312cd8ee49"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a> (char *s, size_t max_len)</td></tr>
+<tr class="memdesc:ga636608f26d1193b5d860f2312cd8ee49"><td class="mdescLeft">&#160;</td><td class="mdescRight">terminates string at New <a class="el" href="../../d5/d6f/a01281.html" title="The Line strutures are attached to the Menu main structure.">Line</a>, Carriage Return, or max_len  <br /></td></tr>
+<tr class="memitem:gaa0145c044cfdde3a1c83323410a59f25" id="r_gaa0145c044cfdde3a1c83323410a59f25"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a> (char *d, const char *s, size_t max_len)</td></tr>
+<tr class="memdesc:gaa0145c044cfdde3a1c83323410a59f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncat  <br /></td></tr>
+<tr class="memitem:ga0de2e40df9bd7efc8fd9afb8ad2257e6" id="r_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a> (char *d, const char *s, size_t max_len)</td></tr>
+<tr class="memdesc:ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncpy  <br /></td></tr>
+<tr class="memitem:ga807bfe01a82eb1728ab8ae01426d02e1" id="r_ga807bfe01a82eb1728ab8ae01426d02e1"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga807bfe01a82eb1728ab8ae01426d02e1">strnz_dup</a> (char *s, size_t l)</td></tr>
+<tr class="memdesc:ga807bfe01a82eb1728ab8ae01426d02e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocates memory for and duplicates string s up to length l or until line feed or carriage return.  <br /></td></tr>
+<tr class="memitem:gafdfe43ceedb63f84c987e95eeff76db4" id="r_gafdfe43ceedb63f84c987e95eeff76db4"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gafdfe43ceedb63f84c987e95eeff76db4">strz</a> (char *s)</td></tr>
+<tr class="memdesc:gafdfe43ceedb63f84c987e95eeff76db4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Terminates string at new line or carriage return.  <br /></td></tr>
+<tr class="memitem:ga3e61ddee7c9ff9a346d3656d0054615f" id="r_ga3e61ddee7c9ff9a346d3656d0054615f"><td class="memItemLeft"><a class="el" href="../../d3/d0b/a01253.html">String</a>&#160;</td><td class="memItemRight"><a class="el" href="../../de/d61/a01205.html#ga3e61ddee7c9ff9a346d3656d0054615f">to_string</a> (const char *s)</td></tr>
+<tr class="memdesc:ga3e61ddee7c9ff9a346d3656d0054615f"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> functions provide a simple string library to facilitate string manipulation in C, allowing developers to easily create, copy, concatenate, and free strings without having to manage memory manually.  <br /></td></tr>
+<tr class="memitem:ga34703756fd5be0fde758400f320db047" id="r_ga34703756fd5be0fde758400f320db047"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga34703756fd5be0fde758400f320db047">trim</a> (char *s)</td></tr>
+<tr class="memdesc:ga34703756fd5be0fde758400f320db047"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trims leading and trailing spaces from string s in place.  <br /></td></tr>
+<tr class="memitem:ga205b5e8c6415958a75c80e49db06b251" id="r_ga205b5e8c6415958a75c80e49db06b251"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga205b5e8c6415958a75c80e49db06b251">trim_ext</a> (char *buf, char *filename)</td></tr>
+<tr class="memdesc:ga205b5e8c6415958a75c80e49db06b251"><td class="mdescLeft">&#160;</td><td class="mdescRight">trims the file extension from "filename" and copies the result to "buf"  <br /></td></tr>
+<tr class="memitem:gafb4a0bc0d88592caff5cd1436dd426a0" id="r_gafb4a0bc0d88592caff5cd1436dd426a0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gafb4a0bc0d88592caff5cd1436dd426a0">trim_path</a> (char *dir)</td></tr>
+<tr class="memdesc:gafb4a0bc0d88592caff5cd1436dd426a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trims trailing spaces and slashes from directory path in place.  <br /></td></tr>
+<tr class="memitem:gae14a4e790b69c8c2e50d1eb5cdf1fd19" id="r_gae14a4e790b69c8c2e50d1eb5cdf1fd19"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gae14a4e790b69c8c2e50d1eb5cdf1fd19">verify_dir</a> (char *spec, int imode)</td></tr>
+<tr class="memdesc:gae14a4e790b69c8c2e50d1eb5cdf1fd19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the directory specified by "spec" exists and is accessible with the permissions specified by "imode".  <br /></td></tr>
+<tr class="memitem:gab190e75e095b7d3da114fce21ab8c8ea" id="r_gab190e75e095b7d3da114fce21ab8c8ea"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gab190e75e095b7d3da114fce21ab8c8ea">verify_file</a> (char *in_spec, int imode)</td></tr>
+<tr class="memdesc:gab190e75e095b7d3da114fce21ab8c8ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the file specified by "in_spec" exists and is accessible with the permissions specified by "imode".  <br /></td></tr>
+<tr class="memitem:ga32c0e93e47af5ea782230648fcf60ad7" id="r_ga32c0e93e47af5ea782230648fcf60ad7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#ga32c0e93e47af5ea782230648fcf60ad7">write_cmenu_log</a> (char *msg)</td></tr>
+<tr class="memdesc:ga32c0e93e47af5ea782230648fcf60ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write message to C-Menu log file with timestamp.  <br /></td></tr>
+<tr class="memitem:gad8ab690263920a3b88cb9d8c97fadf98" id="r_gad8ab690263920a3b88cb9d8c97fadf98"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d5a/a01204.html#gad8ab690263920a3b88cb9d8c97fadf98">write_cmenu_log_nt</a> (char *msg)</td></tr>
+<tr class="memdesc:gad8ab690263920a3b88cb9d8c97fadf98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write message to C-Menu log file without timestamp.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1d3c4907a8d017c7a1ae4c68435284db" id="r_a1d3c4907a8d017c7a1ae4c68435284db"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1d3c4907a8d017c7a1ae4c68435284db">cmenu_log_fd</a></td></tr>
+<tr class="memitem:a67227506d7050fd4fd59e06e2628a364" id="r_a67227506d7050fd4fd59e06e2628a364"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a67227506d7050fd4fd59e06e2628a364">earg_str</a> [<a class="el" href="../../d1/dae/a01136.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a075d6920297448f7d044417b9f8594b0" id="r_a075d6920297448f7d044417b9f8594b0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a075d6920297448f7d044417b9f8594b0">eargc</a></td></tr>
+<tr class="memitem:aba17a3c518eb2ffd68f0219cc8c1792b" id="r_aba17a3c518eb2ffd68f0219cc8c1792b"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#aba17a3c518eb2ffd68f0219cc8c1792b">eargv</a> [<a class="el" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>]</td></tr>
+<tr class="memitem:ae66f0b659923d81fd95da97e0d5ca496" id="r_ae66f0b659923d81fd95da97e0d5ca496"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ae66f0b659923d81fd95da97e0d5ca496">errmsg</a> [<a class="el" href="../../d1/dae/a01136.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a0a32839f250d5202affa7776054a9b11" id="r_a0a32839f250d5202affa7776054a9b11"><td class="memItemLeft">error_info_t&#160;</td><td class="memItemRight"><a class="el" href="#a0a32839f250d5202affa7776054a9b11">error_info</a></td></tr>
+<tr class="memitem:a09d25a210ee1084fd3d45f62111a28d8" id="r_a09d25a210ee1084fd3d45f62111a28d8"><td class="memItemLeft">error_source_t&#160;</td><td class="memItemRight"><a class="el" href="#a09d25a210ee1084fd3d45f62111a28d8">error_source</a></td></tr>
+<tr class="memitem:aa670ef5be75293b6dc34466aad6cd297" id="r_aa670ef5be75293b6dc34466aad6cd297"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa670ef5be75293b6dc34466aad6cd297">wait_timeout</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Display Error messages. </p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ga8f6c45ca4a7f6a41c4c88314e697565a" name="ga8f6c45ca4a7f6a41c4c88314e697565a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8f6c45ca4a7f6a41c4c88314e697565a">&#9670;&#160;</a></span>abend()</h2>
+<div class="textblock"><p>General utility functions. </p>
+<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a0ac18add284994be76aca1ea5c500c2d" name="a0ac18add284994be76aca1ea5c500c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ac18add284994be76aca1ea5c500c2d">&#9670;&#160;</a></span>LF_DIR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void abend </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ec</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+          <td class="memname">#define LF_DIR&#160;&#160;&#160;2</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Abnormal program termination. </p>
-<p>abend </p><dl class="params"><dt>Parameters</dt><dd>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00043">43</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+
+</div>
+</div>
+<a id="ae14db1df03a3127c0e4ff5a1307e89cc" name="ae14db1df03a3127c0e4ff5a1307e89cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae14db1df03a3127c0e4ff5a1307e89cc">&#9670;&#160;</a></span>LF_LNK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LF_LNK&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00042">42</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+
+</div>
+</div>
+<a id="a7089bd4cb667475a891d92b36239cc66" name="a7089bd4cb667475a891d92b36239cc66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7089bd4cb667475a891d92b36239cc66">&#9670;&#160;</a></span>LF_REG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LF_REG&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00044">44</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a54d1c02afad60732c1d2ce92e50cb970" name="a54d1c02afad60732c1d2ce92e50cb970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54d1c02afad60732c1d2ce92e50cb970">&#9670;&#160;</a></span>mk_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d3/d0b/a01253.html">String</a> mk_string </td>
+          <td>(</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>l</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct with a dynamically allocated string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ec</td><td>Exit code </td></tr>
-    <tr><td class="paramname">s</td><td>Error message </td></tr>
+    <tr><td class="paramname">l</td><td>length of string to create including null terminator </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct</dd></dl>
+<p>The returned <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> struct contains a dynamically allocated string of he specified length </p><dl class="section note"><dt>Note</dt><dd>the caller is responsible for calling free_string to free the allocated memory. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01659">1659</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1659</span>                            {</div>
-<div class="line"><span class="lineno"> 1660</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#gafc0985a403e3eac0b2cd8f0fab500256">destroy_curses</a>();</div>
-<div class="line"><span class="lineno"> 1661</span>    <a class="code hl_function" href="../../d2/db4/a01192.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno"> 1662</span>    <a class="code hl_function" href="../../dd/d43/a01193.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
-<div class="line"><span class="lineno"> 1663</span>    fprintf(stderr, <span class="stringliteral">&quot;\n\nABEND: %s (code: %d)\n&quot;</span>, s, ec);</div>
-<div class="line"><span class="lineno"> 1664</span>    exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno"> 1665</span>}</div>
-<div class="ttc" id="aa01176_html_gafc0985a403e3eac0b2cd8f0fab500256"><div class="ttname"><a href="../../d3/d32/a01176.html#gafc0985a403e3eac0b2cd8f0fab500256">destroy_curses</a></div><div class="ttdeci">void destroy_curses()</div><div class="ttdoc">Gracefully shut down NCurses and restore terminal settings.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00540">dwin.c:540</a></div></div>
-<div class="ttc" id="aa01192_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d2/db4/a01192.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00056">scriou.c:56</a></div></div>
-<div class="ttc" id="aa01193_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../dd/d43/a01193.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dae/a01136_source.html#l00042">sig.c:42</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l01361">1361</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1362</span>                           {</div>
+<div class="line"><span class="lineno"> 1363</span>    <span class="keywordflow">if</span> (l == 0) {</div>
+<div class="line"><span class="lineno"> 1364</span>        <a class="code hl_struct" href="../../d3/d0b/a01253.html">String</a> str;</div>
+<div class="line"><span class="lineno"> 1365</span>        str.<a class="code hl_variable" href="../../d3/d0b/a01253.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = 0;</div>
+<div class="line"><span class="lineno"> 1366</span>        str.<a class="code hl_variable" href="../../d3/d0b/a01253.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1367</span>        <span class="keywordflow">return</span> str;</div>
+<div class="line"><span class="lineno"> 1368</span>    }</div>
+<div class="line"><span class="lineno"> 1369</span>    <a class="code hl_struct" href="../../d3/d0b/a01253.html">String</a> str;</div>
+<div class="line"><span class="lineno"> 1370</span>    str.<a class="code hl_variable" href="../../d3/d0b/a01253.html#a4aa4561aec0c1fdce969da7953bb7848">l</a> = l + 1;</div>
+<div class="line"><span class="lineno"> 1371</span>    str.<a class="code hl_variable" href="../../d3/d0b/a01253.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a> = (<span class="keywordtype">char</span> *)malloc(str.<a class="code hl_variable" href="../../d3/d0b/a01253.html#a4aa4561aec0c1fdce969da7953bb7848">l</a>);</div>
+<div class="line"><span class="lineno"> 1372</span>    str.<a class="code hl_variable" href="../../d3/d0b/a01253.html#a8904978bb99a49a64f7e146a4ab7ff4d">s</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1373</span>    <span class="keywordflow">return</span> str;</div>
+<div class="ttc" id="aa01253_html"><div class="ttname"><a href="../../d3/d0b/a01253.html">String</a></div><div class="ttdoc">The String structure represents a string object with a pointer to the string and its allocated length...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00684">cm.h:684</a></div></div>
+<div class="ttc" id="aa01253_html_a4aa4561aec0c1fdce969da7953bb7848"><div class="ttname"><a href="../../d3/d0b/a01253.html#a4aa4561aec0c1fdce969da7953bb7848">String::l</a></div><div class="ttdeci">size_t l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00686">cm.h:686</a></div></div>
+<div class="ttc" id="aa01253_html_a8904978bb99a49a64f7e146a4ab7ff4d"><div class="ttname"><a href="../../d3/d0b/a01253.html#a8904978bb99a49a64f7e146a4ab7ff4d">String::s</a></div><div class="ttdeci">char * s</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00685">cm.h:685</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l00540">destroy_curses()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00056">restore_shell_tioctl()</a>, and <a class="el" href="../../d1/dae/a01136_source.html#l00042">sig_dfl_mode()</a>.</p>
+<p class="reference">References <a class="el" href="../../d8/db9/a00725_source.html#l00686">String::l</a>, and <a class="el" href="../../d8/db9/a00725_source.html#l00685">String::s</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/dee/a01166_source.html#l01112">answer_yn()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00768">box2_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00816">box_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01173">display_error()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00528">init_menu_files()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../d5/d16/a01154_source.html#l00328">mapp_initialization()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01407">new_chyron()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00266">new_form()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00148">new_menu()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00200">new_pick()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00313">new_view()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00192">open_curses()</a>, <a class="el" href="../../d5/d3e/a01139_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01233">Perror()</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00062">sig_prog_mode()</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00095">signal_handler()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01297">wait_mk_win()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga8f6c45ca4a7f6a41c4c88314e697565a_cgraph.svg" width="434" height="103"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+</div>
+<a id="a4f42956462e811d96c9fb881a85dada4" name="a4f42956462e811d96c9fb881a85dada4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f42956462e811d96c9fb881a85dada4">&#9670;&#160;</a></span>rtrim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t rtrim </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Trims trailing spaces from string s in place. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>- string to trim </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>length of trimmed string </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00229">229</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  229</span>                      {</div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span> || *s == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">return</span> (<span class="keywordtype">size_t</span>)0;</div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordtype">char</span> *p = s + strlen(s) - 1;</div>
+<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">while</span> (p &gt;= s &amp;&amp; *p == <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><span class="lineno">  234</span>        p--;</div>
+<div class="line"><span class="lineno">  235</span>    *(p + 1) = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">return</span> (<span class="keywordtype">size_t</span>)(p - s + 1);</div>
+<div class="line"><span class="lineno">  237</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l01655">fmt_line()</a>, and <a class="el" href="../../d5/d3e/a01139_source.html#l00829">picker()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga8f6c45ca4a7f6a41c4c88314e697565a_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_a4f42956462e811d96c9fb881a85dada4_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="ga251bd97abc13e656e92e0ad484d1725d" name="ga251bd97abc13e656e92e0ad484d1725d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga251bd97abc13e656e92e0ad484d1725d">&#9670;&#160;</a></span>action_disposition()</h2>
+<a id="afba98c475b8ccba7fffaebf81eda9adf" name="afba98c475b8ccba7fffaebf81eda9adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afba98c475b8ccba7fffaebf81eda9adf">&#9670;&#160;</a></span>str_to_bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool action_disposition </td>
+          <td class="memname">bool str_to_bool </td>
           <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>title</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>action_str</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Display a simple action disposition message window or print to stderr. </p>
-<p>action_disposition </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Converts <a class="el" href="../../d3/d0b/a01253.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a> to boolean true or false. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">title</td><td>Window title </td></tr>
-    <tr><td class="paramname">action_str</td><td>Action description string </td></tr>
+    <tr><td class="paramname">s</td><td>- string to convert </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>boolean true or false </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01357">1357</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1357</span>                                                       {</div>
-<div class="line"><span class="lineno"> 1358</span>    <span class="keywordtype">int</span> len;</div>
-<div class="line"><span class="lineno"> 1359</span>    <span class="keywordtype">int</span> line, col;</div>
-<div class="line"><span class="lineno"> 1360</span>    WINDOW *action_disposition_win;</div>
-<div class="line"><span class="lineno"> 1361</span> </div>
-<div class="line"><span class="lineno"> 1362</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
-<div class="line"><span class="lineno"> 1363</span>        fprintf(stderr, <span class="stringliteral">&quot;\n%s\n&quot;</span>, title);</div>
-<div class="line"><span class="lineno"> 1364</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, action_str);</div>
-<div class="line"><span class="lineno"> 1365</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1366</span>    }</div>
-<div class="line"><span class="lineno"> 1367</span>    <a class="code hl_struct" href="../../dc/db6/a01212.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/d1a/a01179.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1368</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 10, <span class="stringliteral">&quot;F10 Continue&quot;</span>, KEY_F(10));</div>
-<div class="line"><span class="lineno"> 1369</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1370</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(strlen(title), strlen(action_str));</div>
-<div class="line"><span class="lineno"> 1371</span>    col = (COLS - len - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1372</span>    line = (LINES - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1373</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d3/d32/a01176.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(2, len + 2, line, col, title, <span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno"> 1374</span>        <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s) failed&quot;</span>, 4,</div>
-<div class="line"><span class="lineno"> 1375</span>                  line, line, col, title);</div>
-<div class="line"><span class="lineno"> 1376</span>        <a class="code hl_function" href="#ga61b4f28456257f68ed042bed7f187efd">Perror</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>);</div>
-<div class="line"><span class="lineno"> 1377</span>    }</div>
-<div class="line"><span class="lineno"> 1378</span>    action_disposition_win = <a class="code hl_variable" href="../../dc/dee/a01166.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../dc/dee/a01166.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
-<div class="line"><span class="lineno"> 1379</span>    mvwaddstr(action_disposition_win, 0, 1, action_str);</div>
-<div class="line"><span class="lineno"> 1380</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(action_disposition_win, chyron, 1, 0);</div>
-<div class="line"><span class="lineno"> 1381</span>    wmove(action_disposition_win, 1, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1382</span>    <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../d3/d32/a01176.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(action_disposition_win, chyron, 1);</div>
-<div class="line"><span class="lineno"> 1383</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
-<div class="line"><span class="lineno"> 1384</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1385</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1386</span>}</div>
-<div class="ttc" id="aa00725_html_a44f81ebcc5b6c685cbdfe388eb420313"><div class="ttname"><a href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a></div><div class="ttdeci">bool f_curses_open</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dae/a01136_source.html#l00033">sig.c:33</a></div></div>
-<div class="ttc" id="aa00725_html_affe776513b24d84b39af8ab0930fef7f"><div class="ttname"><a href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a></div><div class="ttdeci">#define max(a, b)</div><div class="ttdoc">max macro evaluates two expressions, returning greatest result.</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00049">cm.h:49</a></div></div>
-<div class="ttc" id="aa01115_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../df/dd5/a01115_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01166_html_a074978098f88d8581fb16f72ff260bc4"><div class="ttname"><a href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a></div><div class="ttdeci">unsigned int cmd_key</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00126">dwin.c:126</a></div></div>
-<div class="ttc" id="aa01166_html_a1bd8f5499dde00a4810e8cc7dd44f414"><div class="ttname"><a href="../../dc/dee/a01166.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a></div><div class="ttdeci">WINDOW * win_win[MAXWIN]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00122">dwin.c:122</a></div></div>
-<div class="ttc" id="aa01166_html_aa7c8c79b6f580386dedaacce81b2e2b5"><div class="ttname"><a href="../../dc/dee/a01166.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a></div><div class="ttdeci">int win_ptr</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00130">dwin.c:130</a></div></div>
-<div class="ttc" id="aa01166_html_abef31515478e58cca8e39168552fca30"><div class="ttname"><a href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00141">dwin.c:141</a></div></div>
-<div class="ttc" id="aa01176_html_ga2feaacf50ca2c7d00b73e21faca59702"><div class="ttname"><a href="../../d3/d32/a01176.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a></div><div class="ttdeci">int xwgetch(WINDOW *, Chyron *, int)</div><div class="ttdoc">Wrapper for wgetch that handles signals, mouse events, checks for clicks on the chyron line,...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01722">dwin.c:1722</a></div></div>
-<div class="ttc" id="aa01176_html_ga38d50d5b402b7b2328874329ae003d7d"><div class="ttname"><a href="../../d3/d32/a01176.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a></div><div class="ttdeci">int box_new(int, int, int, int, char *, bool)</div><div class="ttdoc">Create a new window with optional box and title.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00816">dwin.c:816</a></div></div>
-<div class="ttc" id="aa01176_html_ga9dd598e1d49c8764af1eec42c682623e"><div class="ttname"><a href="../../d3/d32/a01176.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a></div><div class="ttdeci">WINDOW * win_del()</div><div class="ttdoc">Delete the current window and its associated box window.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00964">dwin.c:964</a></div></div>
-<div class="ttc" id="aa01178_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01233">dwin.c:1233</a></div></div>
-<div class="ttc" id="aa01179_html_ga208ce92c197fdd6d2b007987e534aa3b"><div class="ttname"><a href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a></div><div class="ttdeci">void set_chyron_key(Chyron *, int, char *, int)</div><div class="ttdoc">Set chyron key with default color pair (cp_nt_rev).</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01482">dwin.c:1482</a></div></div>
-<div class="ttc" id="aa01179_html_ga3854b84b6d0347dcb55947552f137d0d"><div class="ttname"><a href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a></div><div class="ttdeci">void display_chyron(WINDOW *win, Chyron *chyron, int line, int col)</div><div class="ttdoc">Display chyron on window.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01547">dwin.c:1547</a></div></div>
-<div class="ttc" id="aa01179_html_ga3f3feb40fd703913c5c136331f627c91"><div class="ttname"><a href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a></div><div class="ttdeci">Chyron * destroy_chyron(Chyron *chyron)</div><div class="ttdoc">Destroy Chyron structure.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01423">dwin.c:1423</a></div></div>
-<div class="ttc" id="aa01179_html_ga645871e46277e31736bc36d0f3dce4bd"><div class="ttname"><a href="../../de/d1a/a01179.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a></div><div class="ttdeci">void compile_chyron(Chyron *)</div><div class="ttdoc">construct the chyron string from the chyron structure</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01507">dwin.c:1507</a></div></div>
-<div class="ttc" id="aa01179_html_gad37d5808ff30ae6894780425d865abae"><div class="ttname"><a href="../../de/d1a/a01179.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a></div><div class="ttdeci">Chyron * new_chyron()</div><div class="ttdoc">Create and initialize Chyron structure.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01407">dwin.c:1407</a></div></div>
-<div class="ttc" id="aa01183_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d25/a01157_source.html#l00311">futil.c:311</a></div></div>
-<div class="ttc" id="aa01212_html"><div class="ttname"><a href="../../dc/db6/a01212.html">Chyron</a></div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00276">cm.h:276</a></div></div>
-<div class="ttc" id="aa01212_html_a0664a24c199473e38c5475d9e3a31447"><div class="ttname"><a href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">Chyron::l</a></div><div class="ttdeci">int l</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00280">cm.h:280</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00832">832</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  833</span>                                {</div>
+<div class="line"><span class="lineno">  834</span>    <span class="keywordflow">if</span> (s == <span class="keyword">nullptr</span> || *s == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  835</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  836</span>    <span class="keywordflow">switch</span> (s[0]) {</div>
+<div class="line"><span class="lineno">  837</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;t&#39;</span>:</div>
+<div class="line"><span class="lineno">  838</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;T&#39;</span>:</div>
+<div class="line"><span class="lineno">  839</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;y&#39;</span>:</div>
+<div class="line"><span class="lineno">  840</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;Y&#39;</span>:</div>
+<div class="line"><span class="lineno">  841</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;1&#39;</span>:</div>
+<div class="line"><span class="lineno">  842</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  843</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;o&#39;</span>:</div>
+<div class="line"><span class="lineno">  844</span>    <span class="keywordflow">case</span> <span class="charliteral">&#39;O&#39;</span>:</div>
+<div class="line"><span class="lineno">  845</span>        <span class="keywordflow">switch</span> (s[1]) {</div>
+<div class="line"><span class="lineno">  846</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;n&#39;</span>:</div>
+<div class="line"><span class="lineno">  847</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;N&#39;</span>:</div>
+<div class="line"><span class="lineno">  848</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  849</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  850</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  851</span>        }</div>
+<div class="line"><span class="lineno">  852</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  853</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  854</span>    }</div>
+<div class="line"><span class="lineno">  855</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l00816">box_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00126">cmd_key</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01507">compile_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01423">destroy_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01547">display_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00141">em0</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00280">Chyron::l</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01407">new_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01233">Perror()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01482">set_chyron_key()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00964">win_del()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00130">win_ptr</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00122">win_win</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01722">xwgetch()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga251bd97abc13e656e92e0ad484d1725d_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="ga483e2ea4802aa6360588c11adb871464" name="ga483e2ea4802aa6360588c11adb871464"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga483e2ea4802aa6360588c11adb871464">&#9670;&#160;</a></span>answer_yn()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int answer_yn </td>
-          <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em0</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em1</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em2</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em3</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Accept a single letter answer. </p>
-<p>answer_yn </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">em0</td><td>First error message line </td></tr>
-    <tr><td class="paramname">em1</td><td>Second error message line </td></tr>
-    <tr><td class="paramname">em2</td><td>Third error message line </td></tr>
-    <tr><td class="paramname">em3</td><td>Fourth error message line </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Key code of user command </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01112">1112</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1112</span>                                                          {</div>
-<div class="line"><span class="lineno"> 1113</span>    <span class="keywordtype">char</span> title[<a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno"> 1114</span>    <span class="keywordtype">int</span> line, pos, em_l, em0_l, em1_l, em2_l, em3_l;</div>
-<div class="line"><span class="lineno"> 1115</span>    WINDOW *error_win;</div>
-<div class="line"><span class="lineno"> 1116</span> </div>
-<div class="line"><span class="lineno"> 1117</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
-<div class="line"><span class="lineno"> 1118</span>        fprintf(stderr, <span class="stringliteral">&quot;\n\n%s\n%s\n%s\n%s\n\n&quot;</span>, <a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, <a class="code hl_variable" href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, <a class="code hl_variable" href="../../dc/dee/a01166.html#ac5f5de170a9cd6b4f0b683b81b9e8734">em3</a>);</div>
-<div class="line"><span class="lineno"> 1119</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><span class="lineno"> 1120</span>    }</div>
-<div class="line"><span class="lineno"> 1121</span> </div>
-<div class="line"><span class="lineno"> 1122</span>    <a class="code hl_struct" href="../../dc/db6/a01212.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/d1a/a01179.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1123</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 1, <span class="stringliteral">&quot;F1 Help&quot;</span>, KEY_F(1));</div>
-<div class="line"><span class="lineno"> 1124</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 2, <span class="stringliteral">&quot;N - No&quot;</span>, <span class="charliteral">&#39;n&#39;</span>);</div>
-<div class="line"><span class="lineno"> 1125</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 3, <span class="stringliteral">&quot;Y - Yes&quot;</span>, <span class="charliteral">&#39;y&#39;</span>);</div>
-<div class="line"><span class="lineno"> 1126</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1127</span> </div>
-<div class="line"><span class="lineno"> 1128</span>    em0_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1129</span>    em1_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1130</span>    em2_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1131</span>    em3_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1132</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em0_l, em1_l);</div>
-<div class="line"><span class="lineno"> 1133</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em_l, em2_l);</div>
-<div class="line"><span class="lineno"> 1134</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em_l, em3_l);</div>
-<div class="line"><span class="lineno"> 1135</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em_l, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1136</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(em_l, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1137</span> </div>
-<div class="line"><span class="lineno"> 1138</span>    pos = ((COLS - em_l) - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1139</span>    line = (LINES - 6) / 2;</div>
-<div class="line"><span class="lineno"> 1140</span>    <a class="code hl_function" href="../../dc/d2d/a01183.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(title, <span class="stringliteral">&quot;Notification&quot;</span>, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1141</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d3/d32/a01176.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(5, em_l + 2, line, pos, title, <span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno"> 1142</span>        <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(title, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s) failed&quot;</span>, 5,</div>
-<div class="line"><span class="lineno"> 1143</span>                  em_l + 2, line, pos, title);</div>
-<div class="line"><span class="lineno"> 1144</span>        <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1145</span>        <a class="code hl_function" href="#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, title);</div>
-<div class="line"><span class="lineno"> 1146</span>    }</div>
-<div class="line"><span class="lineno"> 1147</span>    error_win = <a class="code hl_variable" href="../../dc/dee/a01166.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../dc/dee/a01166.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
-<div class="line"><span class="lineno"> 1148</span>    mvwaddstr(error_win, 0, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>);</div>
-<div class="line"><span class="lineno"> 1149</span>    mvwaddstr(error_win, 1, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>);</div>
-<div class="line"><span class="lineno"> 1150</span>    mvwaddstr(error_win, 2, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a>);</div>
-<div class="line"><span class="lineno"> 1151</span>    mvwaddstr(error_win, 3, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#ac5f5de170a9cd6b4f0b683b81b9e8734">em3</a>);</div>
-<div class="line"><span class="lineno"> 1152</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(error_win, chyron, 4, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a> + 1);</div>
-<div class="line"><span class="lineno"> 1153</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno"> 1154</span>        curs_set(1);</div>
-<div class="line"><span class="lineno"> 1155</span>        <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../d3/d32/a01176.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(error_win, chyron, -1);</div>
-<div class="line"><span class="lineno"> 1156</span>        curs_set(0);</div>
-<div class="line"><span class="lineno"> 1157</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == KEY_F(1) || <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == <span class="charliteral">&#39;N&#39;</span> || <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == <span class="charliteral">&#39;n&#39;</span> ||</div>
-<div class="line"><span class="lineno"> 1158</span>            <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == <span class="charliteral">&#39;Y&#39;</span> || <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == <span class="charliteral">&#39;y&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1159</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1160</span>    } <span class="keywordflow">while</span> (1);</div>
-<div class="line"><span class="lineno"> 1161</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
-<div class="line"><span class="lineno"> 1162</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1163</span>    <span class="keywordflow">return</span> (<a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a>);</div>
-<div class="line"><span class="lineno"> 1164</span>}</div>
-<div class="ttc" id="aa00725_html_abb702d8b501669a23aa0ab3b281b9384"><div class="ttname"><a href="../../d8/db9/a00725.html#abb702d8b501669a23aa0ab3b281b9384">min</a></div><div class="ttdeci">#define min(x, y)</div><div class="ttdoc">min macro evaluates two expressions, returning least result</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00056">cm.h:56</a></div></div>
-<div class="ttc" id="aa01166_html_a2c05e3c261f7b64f0d2c4f1e0d20f788"><div class="ttname"><a href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00142">dwin.c:142</a></div></div>
-<div class="ttc" id="aa01166_html_ac5f5de170a9cd6b4f0b683b81b9e8734"><div class="ttname"><a href="../../dc/dee/a01166.html#ac5f5de170a9cd6b4f0b683b81b9e8734">em3</a></div><div class="ttdeci">char em3[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00144">dwin.c:144</a></div></div>
-<div class="ttc" id="aa01166_html_af8ae7d202360c017575b322f4d1d890f"><div class="ttname"><a href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00143">dwin.c:143</a></div></div>
-<div class="ttc" id="aa01178_html_ga8f6c45ca4a7f6a41c4c88314e697565a"><div class="ttname"><a href="#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a></div><div class="ttdeci">void abend(int, char *)</div><div class="ttdoc">Abnormal program termination.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01659">dwin.c:1659</a></div></div>
-<div class="ttc" id="aa01183_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../dc/d2d/a01183.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d25/a01157_source.html#l00435">futil.c:435</a></div></div>
-<div class="ttc" id="aa01183_html_ga636608f26d1193b5d860f2312cd8ee49"><div class="ttname"><a href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a></div><div class="ttdeci">size_t strnz(char *, size_t)</div><div class="ttdoc">terminates string at New Line, Carriage Return, or max_len</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d25/a01157_source.html#l00506">futil.c:506</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l01659">abend()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00816">box_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00126">cmd_key</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01507">compile_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01423">destroy_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01547">display_chyron()</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00280">Chyron::l</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01407">new_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01482">set_chyron_key()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00506">strnz()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00435">strnz__cpy()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00964">win_del()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00130">win_ptr</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00122">win_win</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01722">xwgetch()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../db/d28/a01133_source.html#l00879">write_view_buffer()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga483e2ea4802aa6360588c11adb871464_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="reference">Referenced by <a class="el" href="../../d6/df2/a01175_source.html#l00525">process_config_file()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga483e2ea4802aa6360588c11adb871464_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_afba98c475b8ccba7fffaebf81eda9adf_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="ga67659f8a701b74f4dec0d36227a10d1c" name="ga67659f8a701b74f4dec0d36227a10d1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga67659f8a701b74f4dec0d36227a10d1c">&#9670;&#160;</a></span>display_error()</h2>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a1d3c4907a8d017c7a1ae4c68435284db" name="a1d3c4907a8d017c7a1ae4c68435284db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3c4907a8d017c7a1ae4c68435284db">&#9670;&#160;</a></span>cmenu_log_fd</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int display_error </td>
-          <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em0</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em1</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em2</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>em3</em></span>&#160;)</td>
+          <td class="memname">int cmenu_log_fd</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Display an error message window or print to stderr. </p>
-<p>display_error </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">em0</td><td>First error message line </td></tr>
-    <tr><td class="paramname">em1</td><td>Second error message line </td></tr>
-    <tr><td class="paramname">em2</td><td>Third error message line </td></tr>
-    <tr><td class="paramname">em3</td><td>Fourth error message line </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Key code of user command </dd></dl>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00048">48</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01173">1173</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1173</span>                                                              {</div>
-<div class="line"><span class="lineno"> 1174</span>    <span class="keywordtype">char</span> title[<a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno"> 1175</span>    <span class="keywordtype">int</span> line, pos, em_l, em0_l, em1_l, em2_l, em3_l;</div>
-<div class="line"><span class="lineno"> 1176</span>    WINDOW *error_win;</div>
-<div class="line"><span class="lineno"> 1177</span> </div>
-<div class="line"><span class="lineno"> 1178</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
-<div class="line"><span class="lineno"> 1179</span>        fprintf(stderr, <span class="stringliteral">&quot;\n\n%s\n&quot;</span>, <a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>);</div>
-<div class="line"><span class="lineno"> 1180</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>);</div>
-<div class="line"><span class="lineno"> 1181</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_variable" href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a>);</div>
-<div class="line"><span class="lineno"> 1182</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n\n&quot;</span>, <a class="code hl_variable" href="../../dc/dee/a01166.html#ac5f5de170a9cd6b4f0b683b81b9e8734">em3</a>);</div>
-<div class="line"><span class="lineno"> 1183</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><span class="lineno"> 1184</span>    }</div>
-<div class="line"><span class="lineno"> 1185</span> </div>
-<div class="line"><span class="lineno"> 1186</span>    <a class="code hl_struct" href="../../dc/db6/a01212.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/d1a/a01179.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1187</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 1, <span class="stringliteral">&quot;F1 Help&quot;</span>, KEY_F(1));</div>
-<div class="line"><span class="lineno"> 1188</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 9, <span class="stringliteral">&quot;F9 Cancel&quot;</span>, KEY_F(9));</div>
-<div class="line"><span class="lineno"> 1189</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 10, <span class="stringliteral">&quot;F10 Continue&quot;</span>, KEY_F(10));</div>
-<div class="line"><span class="lineno"> 1190</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1191</span> </div>
-<div class="line"><span class="lineno"> 1192</span>    em0_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1193</span>    em1_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1194</span>    em2_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1195</span>    em3_l = <a class="code hl_function" href="../../dc/d2d/a01183.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1196</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em0_l, em1_l);</div>
-<div class="line"><span class="lineno"> 1197</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em_l, em2_l);</div>
-<div class="line"><span class="lineno"> 1198</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em_l, em3_l);</div>
-<div class="line"><span class="lineno"> 1199</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(em_l, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1200</span>    em_l = <a class="code hl_define" href="../../d8/db9/a00725.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(em_l, COLS - 4);</div>
-<div class="line"><span class="lineno"> 1201</span> </div>
-<div class="line"><span class="lineno"> 1202</span>    pos = ((COLS - em_l) - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1203</span>    line = (LINES - 6) / 2;</div>
-<div class="line"><span class="lineno"> 1204</span>    <a class="code hl_function" href="../../dc/d2d/a01183.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(title, <span class="stringliteral">&quot;Notification&quot;</span>, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1205</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d3/d32/a01176.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(5, em_l + 2, line, pos, title, <span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno"> 1206</span>        <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(title, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s) failed&quot;</span>, 5,</div>
-<div class="line"><span class="lineno"> 1207</span>                  em_l + 2, line, pos, title);</div>
-<div class="line"><span class="lineno"> 1208</span>        <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1209</span>        <a class="code hl_function" href="#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, title);</div>
-<div class="line"><span class="lineno"> 1210</span>    }</div>
-<div class="line"><span class="lineno"> 1211</span>    error_win = <a class="code hl_variable" href="../../dc/dee/a01166.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../dc/dee/a01166.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
-<div class="line"><span class="lineno"> 1212</span>    mvwaddstr(error_win, 0, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>);</div>
-<div class="line"><span class="lineno"> 1213</span>    mvwaddstr(error_win, 1, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#a2c05e3c261f7b64f0d2c4f1e0d20f788">em1</a>);</div>
-<div class="line"><span class="lineno"> 1214</span>    mvwaddstr(error_win, 2, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#af8ae7d202360c017575b322f4d1d890f">em2</a>);</div>
-<div class="line"><span class="lineno"> 1215</span>    mvwaddstr(error_win, 3, 1, <a class="code hl_variable" href="../../dc/dee/a01166.html#ac5f5de170a9cd6b4f0b683b81b9e8734">em3</a>);</div>
-<div class="line"><span class="lineno"> 1216</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(error_win, chyron, 4, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a> + 1);</div>
-<div class="line"><span class="lineno"> 1217</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno"> 1218</span>        <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../d3/d32/a01176.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(error_win, chyron, -1);</div>
-<div class="line"><span class="lineno"> 1219</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == KEY_F(9) || <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == KEY_F(10) || <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == <span class="charliteral">&#39;q&#39;</span> ||</div>
-<div class="line"><span class="lineno"> 1220</span>            <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == <span class="charliteral">&#39;Q&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1221</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1222</span>    } <span class="keywordflow">while</span> (1);</div>
-<div class="line"><span class="lineno"> 1223</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
-<div class="line"><span class="lineno"> 1224</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1225</span>    <span class="keywordflow">return</span> (<a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a>);</div>
-<div class="line"><span class="lineno"> 1226</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l01659">abend()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00816">box_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00126">cmd_key</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01507">compile_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01423">destroy_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01547">display_chyron()</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00280">Chyron::l</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01407">new_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01482">set_chyron_key()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00506">strnz()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00435">strnz__cpy()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00964">win_del()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00130">win_ptr</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00122">win_win</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01722">xwgetch()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dc/dee/a01166_source.html#l01799">dxwgetch()</a>, <a class="el" href="../../db/d28/a01133_source.html#l02018">enter_file_spec()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l01115">form_desc_error()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00608">form_parse_desc()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00296">form_process()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00835">form_read_data()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l01063">form_write()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00284">get_clr_pair()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00172">init_view_boxwin()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l01149">mk_dir()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00200">new_pick()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00313">new_view()</a>, <a class="el" href="../../d5/d3e/a01139_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l01018">verify_dir()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l01069">verify_file()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00879">write_view_buffer()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01722">xwgetch()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga67659f8a701b74f4dec0d36227a10d1c_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga67659f8a701b74f4dec0d36227a10d1c_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="reference">Referenced by <a class="el" href="../../d8/d11/a01178_source.html#l01485">open_cmenu_log()</a>, <a class="el" href="../../d8/d11/a01178_source.html#l01503">write_cmenu_log()</a>, and <a class="el" href="../../d8/d11/a01178_source.html#l01519">write_cmenu_log_nt()</a>.</p>
 
 </div>
 </div>
-<a id="ga2f2e1496a7c253b2d58446154c98a0bf" name="ga2f2e1496a7c253b2d58446154c98a0bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2f2e1496a7c253b2d58446154c98a0bf">&#9670;&#160;</a></span>nf_error()</h2>
+<a id="a67227506d7050fd4fd59e06e2628a364" name="a67227506d7050fd4fd59e06e2628a364"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67227506d7050fd4fd59e06e2628a364">&#9670;&#160;</a></span>earg_str</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int nf_error </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>ec</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+          <td class="memname">char earg_str[<a class="el" href="../../d1/dae/a01136.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Display error message and wait for key press. </p>
-<p>nf_error </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ec</td><td>Error code </td></tr>
-    <tr><td class="paramname">s</td><td>Error message </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01647">1647</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1647</span>                              {</div>
-<div class="line"><span class="lineno"> 1648</span>    fprintf(stderr, <span class="stringliteral">&quot;ERROR: %s code: %d\n&quot;</span>, s, ec);</div>
-<div class="line"><span class="lineno"> 1649</span>    fprintf(stderr, <span class="stringliteral">&quot;Press a key to continue&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1650</span>    <a class="code hl_function" href="../../d2/db4/a01192.html#ga11948dfa6be15e54c80072e4b3df0e12">di_getch</a>();</div>
-<div class="line"><span class="lineno"> 1651</span>    fprintf(stderr, <span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1652</span>    <span class="keywordflow">return</span> ec;</div>
-<div class="line"><span class="lineno"> 1653</span>}</div>
-<div class="ttc" id="aa01192_html_ga11948dfa6be15e54c80072e4b3df0e12"><div class="ttname"><a href="../../d2/db4/a01192.html#ga11948dfa6be15e54c80072e4b3df0e12">di_getch</a></div><div class="ttdeci">char di_getch()</div><div class="ttdoc">get single character from terminal in raw mode</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00148">scriou.c:148</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/db6/a01172_source.html#l00148">di_getch()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga2f2e1496a7c253b2d58446154c98a0bf_cgraph.svg" width="208" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00050">50</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="ga61b4f28456257f68ed042bed7f187efd" name="ga61b4f28456257f68ed042bed7f187efd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga61b4f28456257f68ed042bed7f187efd">&#9670;&#160;</a></span>Perror()</h2>
+<a id="a075d6920297448f7d044417b9f8594b0" name="a075d6920297448f7d044417b9f8594b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a075d6920297448f7d044417b9f8594b0">&#9670;&#160;</a></span>eargc</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Perror </td>
-          <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>emsg_str</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">int eargc</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Display a simple error message window or print to stderr. </p>
-<p>Perror </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">emsg_str</td><td>Error message string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Key code of user command </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01233">1233</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1233</span>                           {</div>
-<div class="line"><span class="lineno"> 1234</span>    <span class="keywordtype">char</span> emsg[80];</div>
-<div class="line"><span class="lineno"> 1235</span>    <span class="keywordtype">int</span> emsg_max_len = 80;</div>
-<div class="line"><span class="lineno"> 1236</span>    <span class="keywordtype">unsigned</span> <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a>;</div>
-<div class="line"><span class="lineno"> 1237</span>    WINDOW *error_win;</div>
-<div class="line"><span class="lineno"> 1238</span>    <span class="keywordtype">int</span> len, line, pos;</div>
-<div class="line"><span class="lineno"> 1239</span>    <span class="keywordtype">char</span> title[<a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno"> 1240</span>    <span class="keywordtype">bool</span> f_xwgetch = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1241</span>    <span class="keywordflow">if</span> (emsg_str[0] == <span class="charliteral">&#39;&#x241B;&#39;</span> &amp;&amp; emsg_str[1] == <span class="charliteral">&#39;w&#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1242</span>        emsg_str += 2;</div>
-<div class="line"><span class="lineno"> 1243</span>        f_xwgetch = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1244</span>    }</div>
-<div class="line"><span class="lineno"> 1245</span>    <a class="code hl_function" href="../../dc/d2d/a01183.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(emsg, emsg_str, emsg_max_len - 1);</div>
-<div class="line"><span class="lineno"> 1246</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
-<div class="line"><span class="lineno"> 1247</span>        fprintf(stderr, <span class="stringliteral">&quot;\n%s\n&quot;</span>, emsg);</div>
-<div class="line"><span class="lineno"> 1248</span>        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><span class="lineno"> 1249</span>    }</div>
-<div class="line"><span class="lineno"> 1250</span>    <a class="code hl_struct" href="../../dc/db6/a01212.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/d1a/a01179.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1251</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 1, <span class="stringliteral">&quot;F1 Help&quot;</span>, KEY_F(1));</div>
-<div class="line"><span class="lineno"> 1252</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 9, <span class="stringliteral">&quot;F9 Cancel&quot;</span>, KEY_F(9));</div>
-<div class="line"><span class="lineno"> 1253</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 10, <span class="stringliteral">&quot;F10 Continue&quot;</span>, KEY_F(10));</div>
-<div class="line"><span class="lineno"> 1254</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1255</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(strlen(title), strlen(emsg));</div>
-<div class="line"><span class="lineno"> 1256</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(len, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1257</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(len, 40);</div>
-<div class="line"><span class="lineno"> 1258</span>    pos = (COLS - len - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1259</span>    line = (LINES - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1260</span>    <a class="code hl_function" href="../../dc/d2d/a01183.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(title, <span class="stringliteral">&quot;Notification&quot;</span>, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1261</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d3/d32/a01176.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(2, len + 2, line, pos, title, <span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno"> 1262</span>        <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(title, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s, %b) failed&quot;</span>,</div>
-<div class="line"><span class="lineno"> 1263</span>                  4, line, line, pos, title);</div>
-<div class="line"><span class="lineno"> 1264</span>        <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1265</span>        <a class="code hl_function" href="#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, title);</div>
-<div class="line"><span class="lineno"> 1266</span>    }</div>
-<div class="line"><span class="lineno"> 1267</span>    error_win = <a class="code hl_variable" href="../../dc/dee/a01166.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../dc/dee/a01166.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
-<div class="line"><span class="lineno"> 1268</span>    mvwaddstr(error_win, 0, 1, emsg);</div>
-<div class="line"><span class="lineno"> 1269</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(error_win, chyron, 1, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a> + 1);</div>
-<div class="line"><span class="lineno"> 1270</span>    <span class="keywordflow">if</span> (f_xwgetch) {</div>
-<div class="line"><span class="lineno"> 1271</span>        curs_set(1);</div>
-<div class="line"><span class="lineno"> 1272</span>        <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../d3/d32/a01176.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(error_win, chyron, -1);</div>
-<div class="line"><span class="lineno"> 1273</span>        curs_set(0);</div>
-<div class="line"><span class="lineno"> 1274</span>        <a class="code hl_function" href="../../d3/d32/a01176.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
-<div class="line"><span class="lineno"> 1275</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno"> 1276</span>        <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = KEY_F(10);</div>
-<div class="line"><span class="lineno"> 1277</span>    }</div>
-<div class="line"><span class="lineno"> 1278</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1279</span>    <span class="keywordflow">return</span> (<a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a>);</div>
-<div class="line"><span class="lineno"> 1280</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l01659">abend()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00816">box_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01507">compile_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01423">destroy_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01547">display_chyron()</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00280">Chyron::l</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01407">new_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01482">set_chyron_key()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00435">strnz__cpy()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00964">win_del()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00130">win_ptr</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00122">win_win</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01722">xwgetch()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dc/dee/a01166_source.html#l01357">action_disposition()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00490">display_form()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00602">exec_objects()</a>, <a class="el" href="../../d7/daf/a01169_source.html#l00054">field_editor()</a>, <a class="el" href="../../d0/dc8/a01124_source.html#l00130">fork_exec()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00124">form_engine()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00904">form_exec_receiver()</a>, <a class="el" href="../../d7/daf/a01169_source.html#l00429">form_fmt_field()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00296">form_process()</a>, <a class="el" href="../../d7/daf/a01169_source.html#l00533">form_validate_field()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00964">go_to_mark()</a>, <a class="el" href="../../db/d28/a01133_source.html#l01486">go_to_percent()</a>, <a class="el" href="../../db/d28/a01133_source.html#l01550">increment_ln()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00061">init_form()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, <a class="el" href="../../db/d28/a01133_source.html#l01529">initialize_line_table()</a>, <a class="el" href="../../db/d17/a01148_source.html#l00038">menu_engine()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00070">new_init()</a>, <a class="el" href="../../d9/d10/a01103_source.html#l00200">new_pick()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00764">open_pick_win()</a>, <a class="el" href="../../db/d28/a01133_source.html#l01169">pad_refresh()</a>, <a class="el" href="../../d5/d3e/a01139_source.html#l00029">parse_menu_description()</a>, <a class="el" href="../../df/dd5/a01115_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00993">search()</a>, <a class="el" href="../../db/d28/a01133_source.html#l00178">view_cmd_processor()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../d5/d16/a01154_source.html#l00797">write_config()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga61b4f28456257f68ed042bed7f187efd_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga61b4f28456257f68ed042bed7f187efd_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00051">51</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="ga45c5bf79120644a22ffef896119fb672" name="ga45c5bf79120644a22ffef896119fb672"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga45c5bf79120644a22ffef896119fb672">&#9670;&#160;</a></span>wait_continue()</h2>
+<a id="aba17a3c518eb2ffd68f0219cc8c1792b" name="aba17a3c518eb2ffd68f0219cc8c1792b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba17a3c518eb2ffd68f0219cc8c1792b">&#9670;&#160;</a></span>eargv</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int wait_continue </td>
-          <td>(</td>
-          <td class="paramtype">WINDOW *</td>          <td class="paramname"><span class="paramname"><em>wait_win</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../dc/db6/a01212.html">Chyron</a> *</td>          <td class="paramname"><span class="paramname"><em>chyron</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>remaining</em></span>&#160;)</td>
+          <td class="memname">char* eargv[<a class="el" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Update the waiting message with remaining time and check for user input. </p>
-<p>wait_continue </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">chyron</td><td>Pointer to <a class="el" href="../../dc/db6/a01212.html">Chyron</a> struct for displaying key options </td></tr>
-    <tr><td class="paramname">wait_win</td><td>Pointer to the waiting message window </td></tr>
-    <tr><td class="paramname">remaining</td><td>Time remaining for the wait in seconds </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the wait should continue, false if it should be cancelled </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01342">1342</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1342</span>                                                                   {</div>
-<div class="line"><span class="lineno"> 1343</span>    <span class="keywordtype">char</span> time_str[10];</div>
-<div class="line"><span class="lineno"> 1344</span>    <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(time_str, 9, <span class="stringliteral">&quot;%-4d&quot;</span>, remaining);</div>
-<div class="line"><span class="lineno"> 1345</span>    mvwaddstr(wait_win, 0, 21, time_str);</div>
-<div class="line"><span class="lineno"> 1346</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(wait_win, chyron, 1, 0);</div>
-<div class="line"><span class="lineno"> 1347</span>    wmove(wait_win, 1, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1348</span>    <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="../../d3/d32/a01176.html#ga2feaacf50ca2c7d00b73e21faca59702">xwgetch</a>(wait_win, chyron, 1);</div>
-<div class="line"><span class="lineno"> 1349</span>    <span class="keywordflow">return</span> <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a>;</div>
-<div class="line"><span class="lineno"> 1350</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l00126">cmd_key</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01547">display_chyron()</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00280">Chyron::l</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01722">xwgetch()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01674">waitpid_with_timeout()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga45c5bf79120644a22ffef896119fb672_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga45c5bf79120644a22ffef896119fb672_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00052">52</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="ga1659db421e92afe23911f5ae0a469bc5" name="ga1659db421e92afe23911f5ae0a469bc5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1659db421e92afe23911f5ae0a469bc5">&#9670;&#160;</a></span>wait_destroy()</h2>
+<a id="ae66f0b659923d81fd95da97e0d5ca496" name="ae66f0b659923d81fd95da97e0d5ca496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f0b659923d81fd95da97e0d5ca496">&#9670;&#160;</a></span>errmsg</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool wait_destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../dc/db6/a01212.html">Chyron</a> *</td>          <td class="paramname"><span class="paramname"><em>chyron</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">char errmsg[<a class="el" href="../../d1/dae/a01136.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Global variables for error reporting </p>
 
-<p>Destroy the waiting message window and chyron. </p>
-<p>wait_destroy </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">chyron</td><td>Pointer to <a class="el" href="../../dc/db6/a01212.html">Chyron</a> struct for displaying key options </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01329">1329</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1329</span>                                  {</div>
-<div class="line"><span class="lineno"> 1330</span>    <a class="code hl_function" href="../../d3/d32/a01176.html#ga9dd598e1d49c8764af1eec42c682623e">win_del</a>();</div>
-<div class="line"><span class="lineno"> 1331</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3f3feb40fd703913c5c136331f627c91">destroy_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1332</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1333</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l01423">destroy_chyron()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l00964">win_del()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01674">waitpid_with_timeout()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga1659db421e92afe23911f5ae0a469bc5_cgraph.svg" width="286" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga1659db421e92afe23911f5ae0a469bc5_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00130">130</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="gaab76ab3464d34674d9d4cd80c87999e7" name="gaab76ab3464d34674d9d4cd80c87999e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaab76ab3464d34674d9d4cd80c87999e7">&#9670;&#160;</a></span>wait_mk_chyron()</h2>
+<a id="a0a32839f250d5202affa7776054a9b11" name="a0a32839f250d5202affa7776054a9b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a32839f250d5202affa7776054a9b11">&#9670;&#160;</a></span>error_info</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../dc/db6/a01212.html">Chyron</a> * wait_mk_chyron </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">error_info_t error_info</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create a <a class="el" href="../../dc/db6/a01212.html">Chyron</a> struct for the waiting message. </p>
-<p>wait_mk_chyron </p><dl class="section return"><dt>Returns</dt><dd>Pointer to the chyron struct </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01285">1285</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1285</span>                         {</div>
-<div class="line"><span class="lineno"> 1286</span>    <a class="code hl_struct" href="../../dc/db6/a01212.html">Chyron</a> *chyron = <a class="code hl_function" href="../../de/d1a/a01179.html#gad37d5808ff30ae6894780425d865abae">new_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1287</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga208ce92c197fdd6d2b007987e534aa3b">set_chyron_key</a>(chyron, 9, <span class="stringliteral">&quot;F9 Cancel&quot;</span>, KEY_F(9));</div>
-<div class="line"><span class="lineno"> 1288</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga645871e46277e31736bc36d0f3dce4bd">compile_chyron</a>(chyron);</div>
-<div class="line"><span class="lineno"> 1289</span>    <span class="keywordflow">return</span> chyron;</div>
-<div class="line"><span class="lineno"> 1290</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l01507">compile_chyron()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01407">new_chyron()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01482">set_chyron_key()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01674">waitpid_with_timeout()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_gaab76ab3464d34674d9d4cd80c87999e7_cgraph.svg" width="100%" height="407"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_gaab76ab3464d34674d9d4cd80c87999e7_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00142">142</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="ga5f404e9a570fd5981638c80af3d6e54d" name="ga5f404e9a570fd5981638c80af3d6e54d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5f404e9a570fd5981638c80af3d6e54d">&#9670;&#160;</a></span>wait_mk_win()</h2>
+<a id="a09d25a210ee1084fd3d45f62111a28d8" name="a09d25a210ee1084fd3d45f62111a28d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09d25a210ee1084fd3d45f62111a28d8">&#9670;&#160;</a></span>error_source</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">WINDOW * wait_mk_win </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../dc/db6/a01212.html">Chyron</a> *</td>          <td class="paramname"><span class="paramname"><em>chyron</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>title</em></span>&#160;)</td>
+          <td class="memname">error_source_t error_source</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Display a popup waiting message. </p>
-<p>wait_mk_win </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">chyron</td><td>Pointer to <a class="el" href="../../dc/db6/a01212.html">Chyron</a> struct for displaying key options </td></tr>
-    <tr><td class="paramname">title</td><td>window title </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>WINDOW * struct </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01297">1297</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1297</span>                                                 {</div>
-<div class="line"><span class="lineno"> 1298</span>    <span class="keywordtype">char</span> wm1[] = <span class="stringliteral">&quot;Seconds remaining:&quot;</span>;</div>
-<div class="line"><span class="lineno"> 1299</span>    <span class="keywordtype">int</span> len;</div>
-<div class="line"><span class="lineno"> 1300</span>    <span class="keywordtype">int</span> line, col;</div>
-<div class="line"><span class="lineno"> 1301</span>    WINDOW *wait_win;</div>
-<div class="line"><span class="lineno"> 1302</span> </div>
-<div class="line"><span class="lineno"> 1303</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d8/db9/a00725.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>) {</div>
-<div class="line"><span class="lineno"> 1304</span>        fprintf(stderr, <span class="stringliteral">&quot;\n%s\n&quot;</span>, title);</div>
-<div class="line"><span class="lineno"> 1305</span>        fprintf(stderr, <span class="stringliteral">&quot;%s\n&quot;</span>, wm1);</div>
-<div class="line"><span class="lineno"> 1306</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno"> 1307</span>    }</div>
-<div class="line"><span class="lineno"> 1308</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(strlen(title), strlen(wm1));</div>
-<div class="line"><span class="lineno"> 1309</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(len, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1310</span>    len = <a class="code hl_define" href="../../d8/db9/a00725.html#affe776513b24d84b39af8ab0930fef7f">max</a>(len, 40);</div>
-<div class="line"><span class="lineno"> 1311</span>    col = (COLS - len - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1312</span>    line = (LINES - 4) / 2;</div>
-<div class="line"><span class="lineno"> 1313</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d3/d32/a01176.html#ga38d50d5b402b7b2328874329ae003d7d">box_new</a>(2, len + 2, line, col, title, <span class="keyword">true</span>)) {</div>
-<div class="line"><span class="lineno"> 1314</span>        <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(title, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;box_new(%d, %d, %d, %d, %s) failed&quot;</span>, 4,</div>
-<div class="line"><span class="lineno"> 1315</span>                  line, line, col, title);</div>
-<div class="line"><span class="lineno"> 1316</span>        <a class="code hl_function" href="#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, title);</div>
-<div class="line"><span class="lineno"> 1317</span>    }</div>
-<div class="line"><span class="lineno"> 1318</span>    wait_win = <a class="code hl_variable" href="../../dc/dee/a01166.html#a1bd8f5499dde00a4810e8cc7dd44f414">win_win</a>[<a class="code hl_variable" href="../../dc/dee/a01166.html#aa7c8c79b6f580386dedaacce81b2e2b5">win_ptr</a>];</div>
-<div class="line"><span class="lineno"> 1319</span>    mvwaddstr(wait_win, 0, 1, wm1);</div>
-<div class="line"><span class="lineno"> 1320</span>    <a class="code hl_function" href="../../de/d1a/a01179.html#ga3854b84b6d0347dcb55947552f137d0d">display_chyron</a>(wait_win, chyron, 1, 0);</div>
-<div class="line"><span class="lineno"> 1321</span>    wmove(wait_win, 1, chyron-&gt;<a class="code hl_variable" href="../../dc/db6/a01212.html#a0664a24c199473e38c5475d9e3a31447">l</a>);</div>
-<div class="line"><span class="lineno"> 1322</span>    <span class="keywordflow">return</span> wait_win;</div>
-<div class="line"><span class="lineno"> 1323</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l01659">abend()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00816">box_new()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01547">display_chyron()</a>, <a class="el" href="../../d1/dae/a01136_source.html#l00033">f_curses_open</a>, <a class="el" href="../../d8/db9/a00725_source.html#l00280">Chyron::l</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00130">win_ptr</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l00122">win_win</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01674">waitpid_with_timeout()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga5f404e9a570fd5981638c80af3d6e54d_cgraph.svg" width="100%" height="491"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga5f404e9a570fd5981638c80af3d6e54d_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00143">143</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
 </div>
 </div>
-<a id="ga1c2e4b3dca428f3a8a78343cc854c3c6" name="ga1c2e4b3dca428f3a8a78343cc854c3c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1c2e4b3dca428f3a8a78343cc854c3c6">&#9670;&#160;</a></span>waitpid_with_timeout()</h2>
+<a id="aa670ef5be75293b6dc34466aad6cd297" name="aa670ef5be75293b6dc34466aad6cd297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa670ef5be75293b6dc34466aad6cd297">&#9670;&#160;</a></span>wait_timeout</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool waitpid_with_timeout </td>
-          <td>(</td>
-          <td class="paramtype">pid_t</td>          <td class="paramname"><span class="paramname"><em>pid</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span>&#160;)</td>
+          <td class="memname">int wait_timeout</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wait for a process to finish with a timeout and optional user cancellation. </p>
-<p>waitpid_with_timeout </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pid</td><td>Process ID to wait for </td></tr>
-    <tr><td class="paramname">timeout</td><td>Time in seconds to wait before timing out </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the process finished, false if it timed out or was cancelled </dd></dl>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00144">144</a> of file <a class="el" href="../../d8/d11/a01178_source.html">futil.c</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/dee/a01166_source.html#l01674">1674</a> of file <a class="el" href="../../dc/dee/a01166_source.html">dwin.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1674</span>                                                  {</div>
-<div class="line"><span class="lineno"> 1675</span>    <span class="keywordtype">int</span> status;</div>
-<div class="line"><span class="lineno"> 1676</span>    <a class="code hl_struct" href="../../dc/db6/a01212.html">Chyron</a> *wait_chyron;</div>
-<div class="line"><span class="lineno"> 1677</span>    WINDOW *wait_win;</div>
-<div class="line"><span class="lineno"> 1678</span>    <span class="keywordtype">int</span> remaining = timeout;</div>
-<div class="line"><span class="lineno"> 1679</span> </div>
-<div class="line"><span class="lineno"> 1680</span>    waitpid(pid, &amp;status, WNOHANG);</div>
-<div class="line"><span class="lineno"> 1681</span>    <span class="keywordflow">if</span> (WIFEXITED(status) || WIFSIGNALED(status))</div>
-<div class="line"><span class="lineno"> 1682</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1683</span>    usleep(100000); <span class="comment">// Sleep for 200ms */</span></div>
-<div class="line"><span class="lineno"> 1684</span>    wait_chyron = <a class="code hl_function" href="#gaab76ab3464d34674d9d4cd80c87999e7">wait_mk_chyron</a>();</div>
-<div class="line"><span class="lineno"> 1685</span>    <a class="code hl_function" href="../../dc/d2d/a01183.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>, <a class="code hl_define" href="../../df/dd5/a01115.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;Waiting for process %d to finish...&quot;</span>, pid);</div>
-<div class="line"><span class="lineno"> 1686</span>    wait_win = <a class="code hl_function" href="#ga5f404e9a570fd5981638c80af3d6e54d">wait_mk_win</a>(wait_chyron, <a class="code hl_variable" href="../../dc/dee/a01166.html#abef31515478e58cca8e39168552fca30">em0</a>);</div>
-<div class="line"><span class="lineno"> 1687</span>    <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = 0;</div>
-<div class="line"><span class="lineno"> 1688</span>    <span class="keywordflow">while</span> (remaining &gt; 0 &amp;&amp; <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> != KEY_F(9)) {</div>
-<div class="line"><span class="lineno"> 1689</span>        <a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> = <a class="code hl_function" href="#ga45c5bf79120644a22ffef896119fb672">wait_continue</a>(wait_win, wait_chyron, remaining);</div>
-<div class="line"><span class="lineno"> 1690</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../dc/dee/a01166.html#a074978098f88d8581fb16f72ff260bc4">cmd_key</a> == KEY_F(9))</div>
-<div class="line"><span class="lineno"> 1691</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1692</span>        remaining--;</div>
-<div class="line"><span class="lineno"> 1693</span>        waitpid(pid, &amp;status, WNOHANG);</div>
-<div class="line"><span class="lineno"> 1694</span>        <span class="keywordflow">if</span> (WIFEXITED(status) || WIFSIGNALED(status)) {</div>
-<div class="line"><span class="lineno"> 1695</span>            <a class="code hl_function" href="#ga1659db421e92afe23911f5ae0a469bc5">wait_destroy</a>(wait_chyron);</div>
-<div class="line"><span class="lineno"> 1696</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno"> 1697</span>        }</div>
-<div class="line"><span class="lineno"> 1698</span>    }</div>
-<div class="line"><span class="lineno"> 1699</span>    <a class="code hl_function" href="#ga1659db421e92afe23911f5ae0a469bc5">wait_destroy</a>(wait_chyron);</div>
-<div class="line"><span class="lineno"> 1700</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1701</span>}</div>
-<div class="ttc" id="aa01178_html_ga1659db421e92afe23911f5ae0a469bc5"><div class="ttname"><a href="#ga1659db421e92afe23911f5ae0a469bc5">wait_destroy</a></div><div class="ttdeci">bool wait_destroy(Chyron *)</div><div class="ttdoc">Destroy the waiting message window and chyron.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01329">dwin.c:1329</a></div></div>
-<div class="ttc" id="aa01178_html_ga45c5bf79120644a22ffef896119fb672"><div class="ttname"><a href="#ga45c5bf79120644a22ffef896119fb672">wait_continue</a></div><div class="ttdeci">int wait_continue(WINDOW *, Chyron *, int)</div><div class="ttdoc">Update the waiting message with remaining time and check for user input.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01342">dwin.c:1342</a></div></div>
-<div class="ttc" id="aa01178_html_ga5f404e9a570fd5981638c80af3d6e54d"><div class="ttname"><a href="#ga5f404e9a570fd5981638c80af3d6e54d">wait_mk_win</a></div><div class="ttdeci">WINDOW * wait_mk_win(Chyron *, char *)</div><div class="ttdoc">Display a popup waiting message.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01297">dwin.c:1297</a></div></div>
-<div class="ttc" id="aa01178_html_gaab76ab3464d34674d9d4cd80c87999e7"><div class="ttname"><a href="#gaab76ab3464d34674d9d4cd80c87999e7">wait_mk_chyron</a></div><div class="ttdeci">Chyron * wait_mk_chyron()</div><div class="ttdoc">Create a Chyron struct for the waiting message.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l01285">dwin.c:1285</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/dee/a01166_source.html#l00126">cmd_key</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00141">em0</a>, <a class="el" href="../../d9/d25/a01157_source.html#l00311">ssnprintf()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01342">wait_continue()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01329">wait_destroy()</a>, <a class="el" href="../../dc/dee/a01166_source.html#l01285">wait_mk_chyron()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l01297">wait_mk_win()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d9/d5b/a01127_source.html#l00296">form_process()</a>, <a class="el" href="../../dd/d09/a01118_source.html#l00060">init_pick()</a>, and <a class="el" href="../../da/d4e/a01106_source.html#l00443">view_init_input()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga1c2e4b3dca428f3a8a78343cc854c3c6_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ga1c2e4b3dca428f3a8a78343cc854c3c6_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="reference">Referenced by <a class="el" href="../../d6/df2/a01175_source.html#l01078">dump_config()</a>, <a class="el" href="../../db/d17/a01148_source.html#l00296">form_process()</a>, <a class="el" href="../../d5/d3e/a01139_source.html#l00060">init_pick()</a>, <a class="el" href="../../d6/df2/a01175_source.html#l00525">process_config_file()</a>, <a class="el" href="../../d9/d5b/a01127_source.html#l00443">view_init_input()</a>, and <a class="el" href="../../d6/df2/a01175_source.html#l00866">write_config()</a>.</p>
 
 </div>
 </div>
@@ -976,6 +629,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../d8/d11/a01178.html">futil.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

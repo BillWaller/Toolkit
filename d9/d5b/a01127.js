@@ -1,9 +1,10 @@
 var a01127 =
 [
-    [ "fork_detach_execvp", "dc/d2d/a01183.html#gaf878519c68b24567c915493739b6e979", null ],
-    [ "fork_exec", "dc/d2d/a01183.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "dc/d2d/a01183.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "dc/d2d/a01183.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "nf_error", "de/db5/a01181.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
-    [ "shell", "dc/d2d/a01183.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "init_view_boxwin", "d9/d31/a01208.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d9/d31/a01208.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_calc_full_screen_dimensions", "d9/d31/a01208.html#gaa64cfaf51c250788f093130763495ac4", null ],
+    [ "view_calc_win_dimensions", "d9/d31/a01208.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
+    [ "view_full_screen_resize", "d4/d10/a01197.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_init_input", "d9/d31/a01208.html#gab050f5482419339e9207dbdc65a7b49e", null ],
+    [ "view_win_resize", "d4/d10/a01197.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ]
 ];

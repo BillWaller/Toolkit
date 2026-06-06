@@ -1,15 +1,20 @@
 var a01197 =
 [
-    [ "get_next_char", "d4/d10/a01197.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "d4/d10/a01197.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "d4/d10/a01197.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "d4/d10/a01197.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "d4/d10/a01197.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "d4/d10/a01197.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "d4/d10/a01197.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "d4/d10/a01197.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "d4/d10/a01197.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "d4/d10/a01197.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "d4/d10/a01197.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "d4/d10/a01197.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "box2_new", "d4/d10/a01197.html#ga3b519e8501ce2a37d60f07262f9546bc", null ],
+    [ "box_new", "d4/d10/a01197.html#ga38d50d5b402b7b2328874329ae003d7d", null ],
+    [ "cbox", "d4/d10/a01197.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
+    [ "cbox2", "d4/d10/a01197.html#gadf3e1d675e04bb6827d598ebbcca0d4a", null ],
+    [ "destroy_curses", "d4/d10/a01197.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "d4/d10/a01197.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "d4/d10/a01197.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "d4/d10/a01197.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "view_full_screen_resize", "d4/d10/a01197.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_win_resize", "d4/d10/a01197.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
+    [ "win2_new", "d4/d10/a01197.html#gac986c6794183f92e962912c5d2f9a924", null ],
+    [ "win_del", "d4/d10/a01197.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
+    [ "win_init_attrs", "d4/d10/a01197.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "d4/d10/a01197.html#gad53d9343e97260272389adc8131eedc5", null ],
+    [ "win_redraw", "d4/d10/a01197.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "d4/d10/a01197.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "d4/d10/a01197.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
 ];

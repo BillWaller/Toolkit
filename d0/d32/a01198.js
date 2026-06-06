@@ -1,20 +1,16 @@
 var a01198 =
 [
-    [ "get_next_line", "d0/d32/a01198.html#ga395b27e6a9716bf49e3fc04d53987b33", null ],
-    [ "get_pos_next_line", "d0/d32/a01198.html#gaf692bba071d771ceea47707fc26127bd", null ],
-    [ "get_pos_prev_line", "d0/d32/a01198.html#gaaf8cff992778d85e44351a834ad2b81a", null ],
-    [ "get_prev_line", "d0/d32/a01198.html#gab49fb9f9417c7cf790cea1679e4e5edc", null ],
-    [ "go_to_eof", "d0/d32/a01198.html#ga46145f1d3680a48cb9391a8ae95db9ad", null ],
-    [ "go_to_line", "d0/d32/a01198.html#gac81796e830049e74987a6b526cfc296f", null ],
-    [ "go_to_mark", "d0/d32/a01198.html#gada77a15a548ce444426d43fd39a1cce4", null ],
-    [ "go_to_percent", "d0/d32/a01198.html#gae6623cc4892a014fc9c40b3bca1db7d9", null ],
-    [ "go_to_position", "d0/d32/a01198.html#ga5f74dca8730faaa3ff362fc1e01b12ce", null ],
-    [ "increment_ln", "d0/d32/a01198.html#gadd75615038c32b4c07a6842dfe2fc37a", null ],
-    [ "initialize_line_table", "d0/d32/a01198.html#gaa260d59836439e16d00ad5a6bc4b4829", null ],
-    [ "next_page", "d0/d32/a01198.html#gacf1bfbd6d2fd4ad9a0385009ef25015c", null ],
-    [ "prev_page", "d0/d32/a01198.html#ga5dbc34981815690a92812e34d1cf478f", null ],
-    [ "scroll_down_n_lines", "d0/d32/a01198.html#gaa79b8294ebf98c84d4a844fd7d9e4862", null ],
-    [ "scroll_up_n_lines", "d0/d32/a01198.html#gab08fc8983cc3bdb21b438c82ece16346", null ],
-    [ "search", "d0/d32/a01198.html#ga5f639aa1a1f03fa05888c724bc17d99c", null ],
-    [ "sync_ln", "d0/d32/a01198.html#ga03bfb3d8d09d33f4f59930485f283ead", null ]
+    [ "apply_gamma", "d0/d32/a01198.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
+    [ "clr_name_to_idx", "d0/d32/a01198.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
+    [ "display_cmplx_str", "d0/d32/a01198.html#ga25ca148d8928c4184b2d1f86a6f3e726", null ],
+    [ "get_clr_pair", "d0/d32/a01198.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
+    [ "hex_clr_str_to_rgb", "d0/d32/a01198.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "init_clr_palette", "d0/d32/a01198.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
+    [ "init_hex_clr", "d0/d32/a01198.html#ga61af7829a5d63d766e76930a0893d574", null ],
+    [ "list_colors", "d0/d32/a01198.html#ga482af92e265df3405f0620b4d6158b4e", null ],
+    [ "mk_cmplx_str", "d0/d32/a01198.html#ga60c3e9277d1099929230f213115f58f7", null ],
+    [ "mkcc", "d0/d32/a01198.html#ga306c937e4d861a19f53370481575c76a", null ],
+    [ "rgb_to_curses_clr", "d0/d32/a01198.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
+    [ "rgb_to_xterm256_idx", "d0/d32/a01198.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
+    [ "xterm256_idx_to_rgb", "d0/d32/a01198.html#ga31ee0d93c7b527f92559fc410152f768", null ]
 ];

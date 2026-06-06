@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['view_0',['VIEW',['../dd/dd8/a00719.html#a5abe1ba66f71bb3a1bc22393854d33dfa577616539ca6eda467d3b4b6e6a551d5',1,'common.h']]]
+  ['title_5fbg_0',['TITLE_BG',['../d6/df2/a01175.html#a964fa61be5e30597c14ae6b1e24a7994ab4fbf7e63a00441680971c0f5545e35f',1,'init.c']]],
+  ['title_5ffg_1',['TITLE_FG',['../d6/df2/a01175.html#a964fa61be5e30597c14ae6b1e24a7994a212aceb6b00ecc262318690ee79efde3',1,'init.c']]]
 ];
