@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: exercises</title>
+<title>C-Menu: rsh</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,258 +110,92 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/ddc/a01423.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">exercises </div></div>
+  <div class="headertitle"><div class="title">rsh </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md20"></a> <img src="../../Exercises.png" alt="" class="inline" title="C-Menu Exercises"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="table-of-contents-1"></a>
-Table of Contents</h1>
-<ul>
-<li><a class="el" href="../../d0/d7d/a01419.html#introduction" title="Introduction">Introduction</a></li>
-<li><a class="el" href="#exercise-1-system-configurations" title="Exercise 1: System Configurations">Exercise 1: System Configurations</a><ul>
-<li><a class="el" href="#sddm-background-configuration" title="SDDM Background Configuration">SDDM Background Configuration</a><ul>
-<li><a class="el" href="#requisites" title="Requisites">Requisites</a></li>
-</ul>
-</li>
-<li><a class="el" href="#ghostty-configuration" title="Ghostty Configuration">Ghostty Configuration</a></li>
-<li><a class="el" href="#alacritty-and-kitty" title="Alacritty and Kitty">Alacritty and Kitty</a></li>
-<li><a class="el" href="#rustlings-exercises" title="Rustlings Exercises">Rustlings Exercises</a></li>
-</ul>
-</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="introduction-2"></a>
-Introduction</h2>
-<p>The purpose of the EXERCISES section is to provide you with practice problems similar to those you might encounter as a developer or system administrator. We are just barely getting started, so please be patient. The exercises will become more complex as we progress through the course.</p>
-<p>As an added benefit, the exercises will provide a great test bed for debugging the C-Menu code. As always, your comments and suggestions (even complaints) are welcome.</p>
-<h2 class="doxsection"><a class="anchor" id="exercise-1-system-configurations"></a>
-Exercise 1: System Configurations</h2>
-<h3 class="doxsection"><a class="anchor" id="sddm-background-configuration"></a>
-SDDM Background Configuration</h3>
-<p>The objective of this exercise is to Create a C-Menu <a class="el" href="../../d7/d8c/a01306.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> that allows users to safely and easily configure their system settings. We will start with a simple menu that allows users to select a new SDDM background image. This exercise assumes you have sddm installed and that the sddm theme is located in /usr/share/sddm/themes.</p>
-<h4 class="doxsection"><a class="anchor" id="requisites"></a>
-Requisites</h4>
-<ul>
-<li>A working C-Menu installation.</li>
-<li>SDDM installed and configured on your system.</li>
-<li>A collection of background images available in the SDDM theme directory. For this exercise, we will assume the SDDM theme is located at /usr/share/sddm/themes/sddm-corporate-theme/Backgrounds, and that they are of type Portable Network Graphics (*.png). This exercise assumes that the Backgrounds directory contains a default.png image that is currently being used as the SDDM background. For the sddm-corporate-theme, the background image is specified in Themes/corporate.conf as Background=Backgrounds/default.png. You may want to install the sddm-corporate-theme as it is set up perfectly for this exercise.</li>
-</ul>
-<p><a href="https://github.com/BillWaller/sddm-corporate-theme.git">sddm-corporate-theme</a></p>
-<p>1️⃣ In your editor, open a new file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>2️⃣ Add the following content to the file and save it:</p>
-<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
-<div class="line">:</div>
-<div class="line">:   Select SDDM Background</div>
-<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
-<div class="line">!help</div>
-<div class="line">:   Exit Workstation Configuration</div>
-<div class="line">!return</div>
-</div><!-- fragment --><p>3️⃣ Open another file to create a bash script:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
-<div class="line">cd &quot;$bkgd_dir&quot;</div>
-<div class="line">for bg in $(lf -e &#39;.*default\.png$&#39; . &#39;.*\.png$&#39;); do</div>
-<div class="line">    echo $(basename &quot;$bg&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>This script will change the ownership of the SDDM background directory to the current user, allowing them to select a new background image. It will then list the available background images which will provide input for C-Menu <a class="el" href="../../da/d79/a01310.html" title="Pick data structure.">Pick</a>. Don't forget to make the script executable.</p>
-<div class="fragment"><div class="line">chmod +x ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>5️⃣ Now, create another bash script:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/sddm_chbg.sh</div>
-</div><!-- fragment --><p>6️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">bkgd_dir=&quot;/usr/share/sddm/themes/sddm-corporate-theme/Backgrounds&quot;</div>
-<div class="line"> </div>
-<div class="line">rsh -c &quot;chown -R $U:$G $bkgd_dir&quot;</div>
-<div class="line">cd &quot;$bkgd_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default.png</div>
-</div><!-- fragment --><p><a class="el" href="../../da/d79/a01310.html" title="Pick data structure.">Pick</a> will execute this script, passing the selected background image as an argument. The script will create a symbolic link named default.png that points to the selected background image, effectively changing the SDDM background.</p>
-<p>7️⃣ Finally, test your menu by running it from the command line:</p>
-<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>8️⃣ You may want to add the Workstation Configuration option to your main menu. To do this, open your main menu file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/main.m</div>
-</div><!-- fragment --><p>9️⃣ Add the following lines to include the Workstation Configuration menu:</p>
-<div class="fragment"><div class="line">:   Workstation Configuration</div>
-<div class="line">!menu workstation_config.m</div>
-</div><!-- fragment --><p>From the C-Menu main menu, you should now see an option for Workstation Configuration. Selecting it will take you to the menu where you can choose a new SDDM background image.</p>
-<div class="image">
-<img src="../../workstation_config.png" alt=""/>
-<div class="caption">
-Select SDDM Background</div></div>
-    <p>To verify that the background has been changed, you can log out of your session and return to the SDDM login screen. You should see the new background image you selected. Or, you can check the symbolic link in the SDDM background directory to confirm it points to the correct image.</p>
-<div class="image">
-<img src="../../sddm_backgrounds.png" alt=""/>
-<div class="caption">
-SDDM Backgrounds</div></div>
-    <p>The above image shows the SDDM background directory before and after selecting the space_force.png background image.</p>
-<h3 class="doxsection"><a class="anchor" id="ghostty-configuration"></a>
-Ghostty Configuration</h3>
-<p>1️⃣ In this exercise, we will add Ghostty configurations for color themes and fonts to the Workstation Configuration. First, open the <a class="el" href="../../d3/dbd/a01100.html">workstation_config.m</a> file:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>2️⃣ Add the following lines to the <a class="el" href="../../d3/dbd/a01100.html">workstation_config.m</a> to include options for Ghostty themes and fonts:</p>
-<div class="fragment"><div class="line">:   Select Ghostty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-</div><!-- fragment --><p>3️⃣ Next, create the ghostty_themes.sh and ghostty_chtheme.sh scripts:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_themes.sh</div>
-</div><!-- fragment --><p>4️⃣ Add the following content to the file, save it, and make it executable:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
-<div class="line">cd &quot;$themes_dir&quot;</div>
-<div class="line">for theme in $(lf -d 1 -t f -e &#39;.*default_theme$&#39; . &#39;.*&#39;); do</div>
-<div class="line">    echo $(basename &quot;$theme&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>5️⃣ Now, create the ~/menuapp/bin/ghostty_chtheme.sh script, add the following content, save it, and make it executable.</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">themes_dir=&quot;$HOME&quot;/.config/ghostty/themes</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $themes_dir&quot;</div>
-<div class="line">cd &quot;$themes_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default_theme</div>
-</div><!-- fragment --><p>6️⃣ Finally, create the ghostty_fonts.sh and ghostty_chfont.sh scripts:</p>
-<div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_fonts.sh</div>
-</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
-<div class="line">cd &quot;$fonts_dir&quot;</div>
-<div class="line">for font in $(lf -d 1 -t f -e &#39;.*default_font$&#39; . &#39;.*&#39;); do</div>
-<div class="line">    echo $(basename &quot;$font&quot;)</div>
-<div class="line">done</div>
-</div><!-- fragment --><div class="fragment"><div class="line">vi ~/menuapp/bin/ghostty_chfont.sh</div>
-</div><!-- fragment --><div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">U=$(id -un)</div>
-<div class="line">G=$(id -gn)</div>
-<div class="line">fonts_dir=&quot;$HOME&quot;/.config/ghostty/fonts</div>
-<div class="line">rsh -c &quot;chown -R $U:$G $fonts_dir&quot;</div>
-<div class="line">cd &quot;$fonts_dir&quot;</div>
-<div class="line">ln -sf &quot;$1&quot; default_font</div>
-</div><!-- fragment --><p>7️⃣ Test your menu again by running it from the command line:</p>
-<div class="fragment"><div class="line">menu ~/menuapp/msrc/workstation_config.m</div>
-</div><!-- fragment --><p>Or, if you have installed the ~/.bashrc configurations described in <a class="el" href="../../d5/da5/a01424.html" title="extras">Augmenting C-Menu</a>, you can just type mm to start C-Menu and navigate to the Workstation Configuration menu.</p>
-<h3 class="doxsection"><a class="anchor" id="alacritty-and-kitty"></a>
-Alacritty and Kitty</h3>
-<p>The process for adding Alacritty and Kitty configurations is similar to the Ghostty configuration. You will need to create scripts to list available themes and fonts for Alacritty and Kitty, as well as scripts to change the default theme and font by creating symbolic links.</p>
-<p>You may want to automate the creation of these scripts by using sed to replace "ghostty" with "alacritty" and "kitty" in the existing Ghostty scripts. Here's an example of how you can do this:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"> </div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_fonts.sh &gt;kitty_fonts.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chfont.sh &gt;kitty_chfont.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_themes.sh &gt;kitty_themes.sh</div>
-<div class="line">sed &#39;s/ghostty/kitty/g&#39; ghostty_chtheme.sh &gt;kitty_chtheme.sh</div>
-<div class="line">chmod a+x kitty_*.sh</div>
-<div class="line">cp kitty_*.sh ~/menuapp/bin/</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_fonts.sh &gt;alacritty_fonts.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chfont.sh &gt;alacritty_chfont.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_themes.sh &gt;alacritty_themes.sh</div>
-<div class="line">sed &#39;s/ghostty/alacritty/g&#39; ghostty_chtheme.sh &gt;alacritty_chtheme.sh</div>
-<div class="line">chmod a+x alacritty_*.sh</div>
-<div class="line">cp alacritty_*.sh ~/menuapp/bin/</div>
-</div><!-- fragment --><p>Here is the final content of the <a class="el" href="../../d3/dbd/a01100.html">workstation_config.m</a> file after adding the Alacritty and Kitty configuration options:</p>
-<div class="fragment"><div class="line">:   WORKSTATION CONFIGURATION</div>
-<div class="line">:</div>
-<div class="line">:   Select SDDM Background</div>
-<div class="line">!pick -n 1 -T &quot;Select SDDM Background&quot; -S sddm_bg.sh -c &quot;sddm_chbg.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Font&quot; -S ghostty_fonts.sh -c &quot;ghostty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Ghostty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Ghostty Theme&quot; -S ghostty_themes.sh -c &quot;ghostty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Kitty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Kitty Font&quot; -S kitty_font.sh -c &quot;kitty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Kitty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Kitty Theme&quot; -S kitty_themes.sh -c &quot;kitty_chtheme.sh %%&quot;</div>
-<div class="line">:   Select Alacritty Font</div>
-<div class="line">!pick -n 1 -T &quot;Select Alacritty Font&quot; -S alacritty_fonts.sh -c &quot;alacritty_chfont.sh %%&quot;</div>
-<div class="line">:   Select Alacritty Theme</div>
-<div class="line">!pick -n 1 -T &quot;Select Alacritty Theme&quot; -S alacritty_themes.sh -c &quot;alacritty_chtheme.sh %%&quot;</div>
-<div class="line">:     Help</div>
-<div class="line">!help</div>
-<div class="line">:     Exit Workstation Configuration</div>
-<div class="line">!return</div>
-</div><!-- fragment --><div class="image">
-<img src="../../workstation_config2.png" alt=""/>
-<div class="caption">
-Workstation Configuration</div></div>
-    <hr  />
-<h3 class="doxsection"><a class="anchor" id="rustlings-exercises"></a>
-Rustlings Exercises</h3>
-<p>The objective of this exercise is to streamline the process of iteratively editing the Rustlings exercises with C-Menu <a class="el" href="../../da/d79/a01310.html" title="Pick data structure.">Pick</a>. Of course, there is a simpler and fully automatic way to do this, but this exercise is meant to give you practice with C-Menu <a class="el" href="../../da/d79/a01310.html" title="Pick data structure.">Pick</a> for similar projects without the built-in tracking that Rustlings provides. For example, see the following bash script:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">while true; do</div>
-<div class="line">    {</div>
-<div class="line">        vi $(find exercises -name $(sed -n &#39;3p&#39; .rustlings-state.txt).rs)</div>
-<div class="line">        echo Edit $(sed -n &#39;3p&#39; .rustlings-state.txt).rs</div>
-<div class="line">        if [ $(enterchr &quot;Y or N&quot;) != &quot;Y&quot; ]; then</div>
-<div class="line">            echo</div>
-<div class="line">            exit 0</div>
-<div class="line">        fi</div>
-<div class="line">    }</div>
-<div class="line">done</div>
-</div><!-- fragment --><p>But, don't use the above script. It hasn't been fully tested and there are probably instances in which it won't work. C-Menu <a class="el" href="../../da/d79/a01310.html" title="Pick data structure.">Pick</a> is more fun, and it provides a more controlled way to edit the Rustlings exercises.</p>
-<p>Before starting this exercise, you will need to install the Rust toolchain and Rustlings. The easiest way to do this is as follows:</p>
-<ul>
-<li>Install Rustup:</li>
-</ul>
-<div class="fragment"><div class="line">curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh</div>
-</div><!-- fragment --><ul>
-<li>Install Rustlings in your home directory:</li>
-</ul>
-<p><a href="https://rustlings.rust-lang.org/setup/">See Rustlings</a></p>
-<hr  />
-<ul>
-<li>Create a bash script with the following content and save it in ~/menuapp/bin/rust_src.</li>
-</ul>
-<div class="fragment"><div class="line">lf rustlings -d 5 &#39;exercises.*\.rs$&#39; | sort</div>
-</div><!-- fragment --><ul>
-<li>Add the following two lines to ~/menuapp/msrc/main.m if it isn't already there.</li>
-</ul>
-<div class="fragment"><div class="line">:     Rustlings Source</div>
-<div class="line">!pick -S rust_src -n 1 -T &quot;Rustlings Source - Edit&quot; -c nvim.sh %%</div>
-</div><!-- fragment --><p>Start Rustlings:</p>
-<div class="fragment"><div class="line">cd rustlings</div>
-<div class="line">rustlings</div>
-</div><!-- fragment --><div class="image">
-<img src="../../rustlings-a1.png" alt=""/>
-<div class="caption">
-Rustlings A1</div></div>
-    <p>At the bottom of the rustlings display, you will notice the line, "Current exercise: " and the relative path of the Rust source file for the current exercise. This is the file you will be editing with C-Menu <a class="el" href="../../da/d79/a01310.html" title="Pick data structure.">Pick</a>.</p>
-<p>Start C-Menu and select the Rustlings Source option. When it appears, press the tab key to activate the line editor. Type the last few characters of the file name in the line editor window. For example, "maps2".</p>
-<p>Press the tab key again to activate the object selector. Select the line containing the file name that matches the current exercise. In this case, there is only one file that matches, so press the space bar to select it. The selected file will be opened in Neovim (or your preferred editor if you change nvim.sh) for editing.</p>
-<div class="image">
-<img src="../../rustlings-a2.png" alt=""/>
-<div class="caption">
-Rustlings A2</div></div>
-    <p>Edit the Rustlings source file to correct the compiler errors and save it.</p>
-<div class="image">
-<img src="../../rustlings5.png" alt=""/>
-<div class="caption">
-Rustlings 5</div></div>
-    <p>When you save the file, Rustlings will automatically check your work.</p>
-<div class="image">
-<img src="../../rustlings6.png" alt=""/>
-<div class="caption">
-Rustlings 6</div></div>
-    <p>If you were successful, you can press "n" in the Rustlings terminal to advance to the next exercise.</p>
-<p>Then, repeat the process of selecting the Rustlings Source option in C-Menu and editing the next exercise.</p>
-<p>If the line editor refuses to accept a typed character, it is probably because of the preemptive error checking. If the character you are trying to enter would result in no matches, the line editor will reject it.</p>
-<p>🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository </p>
-</div></div><!-- contents -->
+<div class="textblock"><h2 class="doxsection"><a class="anchor" id="ianchor-autotoc_md124ilinebr"></a>
+ianchor-autotoc_md124ilinebr</h2>
+<p>title: "rsh" section: 1 header: User Manuals footer: C-Menu Version 0.2.9 author: Bill Waller </p>
+<h2 class="doxsection"><a class="anchor" id="date-june-2026-3"></a>
+date: June 2026</h2>
+<h1 class="doxsection"><a class="anchor" id="name-2"></a>
+NAME</h1>
+<p>rsh - Root Shell Helper</p>
+<h1 class="doxsection"><a class="anchor" id="synopsis-3"></a>
+SYNOPSIS</h1>
+<p>rsh [-i] [-D] [COMMAND_ARGUMENTS...]</p>
+<h1 class="doxsection"><a class="anchor" id="description-3"></a>
+DESCRIPTION</h1>
+<p>rsh is a helper utility for C-Menu that allows users to execute commands with root privileges. It provides a secure and convenient way to run commands that require elevated permissions.</p>
+<h1 class="doxsection"><a class="anchor" id="note"></a>
+NOTE</h1>
+<p>Throughout this manual, you will see references to "user_name". This is a placeholder for the actual username of the user who has installed C-Menu. When you see "user_name", replace it with the actual user name to ensure that the instructions and commands work correctly on your system.</p>
+<h1 class="doxsection"><a class="anchor" id="root-authority"></a>
+ROOT AUTHORITY</h1>
+<p>C-Menu build installs rsh with root ownership and the setuid bit turned on. This means that when a user executes rsh, it runs with the privileges of the root user, allowing it to perform actions with elevated permissions. Although useful, this feature must be used with caution, as it can potentially be exploited if not properly secured.</p>
+<p>The first line of protection is inherent to the OS. If rsh is not owned by root with its setuid bit turned on, it is no more dangerous than any other binary.</p>
+<p>We will assume the person who installed C-Menu is a trusted user, who will understand the implications and take necessary precautions to secure the rsh binary and limit its usage to authorized users only. While there are compelling reasons for top-level administrators and developers to have and use rsh, there is no case for allowing unrestricted access.</p>
+<h1 class="doxsection"><a class="anchor" id="maintaining-security-with-rsh-1"></a>
+MAINTAINING SECURITY WITH RSH</h1>
+<p>To mitigate potential vulnerabilities associated with rsh, it is crucial to follow secure practices when using and managing the rsh binary. This includes restricting access to the binary, monitoring its usage, and configuring it to use additional security measures such as PAM (Pluggable Authentication Modules) or ACL (access control lists).</p>
+<h1 class="doxsection"><a class="anchor" id="best-practices-for-using-rsh"></a>
+BEST PRACTICES FOR USING RSH</h1>
+<p>Administrators and developers need root access frequently in the normal course of their work. The best practice is to operate with root privileges only as required to accomplish specific tasks. Still, bopping in and out of a root shell, entering a password every time, is like a series of speed bumps shifting your focus and disrupting your mental pace. It is tempting to just remain in a root shell and get your job done, but that is living dangerously.</p>
+<p>rsh makes the transition to and from privileged access so quick and easy that it becomes unimposing and habitual almost immediately. </p><pre class="fragment">1. You type xx and your prompt turns bright red. You have root privileges.
+2. You do your business as root, and type x. Your prompt returns to its normal color, and you resume with normal privileges.
+</pre><p>Requires:</p>
+<p>Environment variables, PS1 and XUSER set appropriately. For example:</p>
+<div class="fragment"><div class="line">export PS1=&quot;\&zwj;[\e[1;32m\&zwj;]\u@\h(\l)\W▶\&zwj;[\e[0m\&zwj;]&quot;</div>
+<div class="line">export XUSER=&quot;$(id -un)&quot;</div>
+<div class="line">[ &quot;$XUSER&quot; = &quot;root&quot; ] &amp;&amp; export PS1=&quot;\&zwj;[\e[1;31m\&zwj;]\u@\h(\l)\W▶\&zwj;[\e[0m\&zwj;]&quot;</div>
+</div><!-- fragment --><p>Environment functions xx and x defined as follows:</p>
+<div class="fragment"><div class="line">xx() { rsh -i &quot;$@&quot;; }</div>
+<div class="line">x() { exit; }</div>
+</div><!-- fragment --><p>It ain't rocket science. It's just CYA.</p>
+<h1 class="doxsection"><a class="anchor" id="restrict-access-to-rsh"></a>
+RESTRICT ACCESS TO RSH</h1>
+<p>Distribute fully enabled rsh binaries only to trusted users who need administrative access to accomplish their work. Set appropriate file permissions and use access control lists (ACLs) if necessary. For example, you can set the permissions to allow only specific users or groups to execute rsh: </p><pre class="fragment">chmod 4750 /home/user_name/menuapp/bin/rsh
+chown root:admin_group /home/user_name/menuapp/bin/rsh
+</pre><h1 class="doxsection"><a class="anchor" id="monitor-rsh-usage"></a>
+MONITOR RSH USAGE</h1>
+<p>Regularly monitor the usage of rsh to detect any unauthorized access or suspicious activity. This can be done by reviewing system logs and using intrusion detection systems (IDS) to identify potential threats. If you have systemd, use journalctl to audit rsh usage as follows: </p><pre class="fragment">journalctl -r /home/user_name/menuapp/bin/rsh
+</pre><p>Requires rsh to be built with -DRSH_LOG</p>
+<h1 class="doxsection"><a class="anchor" id="pam"></a>
+PAM</h1>
+<p>rsh can be configured to use Pluggable Authentication Modules (PAM) for additional security. This allows for more flexible authentication methods and can help prevent unauthorized access.</p>
+<p>Requires rsh to be built with -DRSH_PAM</p>
+<h1 class="doxsection"><a class="anchor" id="usage"></a>
+USAGE</h1>
+<pre class="fragment">rsh [-i] [-D2] [COMMAND_ARGUMENTS...]
+</pre><h1 class="doxsection"><a class="anchor" id="options-3"></a>
+OPTIONS</h1>
+<pre class="fragment">-i  interactive shell
+
+    rsh starts a login shell by default.
+
+-D2  display result of authentication
+
+    By default, rsh does not display the result of the authentication process. This option enables the display of authentication results, which can be useful for debugging or verifying that the authentication process is working correctly.
+</pre><h1 class="doxsection"><a class="anchor" id="examples-7"></a>
+EXAMPLES</h1>
+<p>To start a login shell: </p><pre class="fragment">rsh
+</pre><p>To start an interactive root shell: </p><pre class="fragment">rsh -i
+</pre><p>To execute a command with root privileges: </p><pre class="fragment">rsh vi /etc/passwd
+</pre><h1 class="doxsection"><a class="anchor" id="reporting-bugs-2"></a>
+REPORTING BUGS</h1>
+<p>Report bugs to <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a>.</p>
+<h1 class="doxsection"><a class="anchor" id="copyright-3"></a>
+COPYRIGHT</h1>
+<p>Copyright © 2026 Bill Waller.</p>
+<h1 class="doxsection"><a class="anchor" id="license-3"></a>
+LICENSE</h1>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<h1 class="doxsection"><a class="anchor" id="see-also-3"></a>
+SEE ALSO</h1>
+<p>C-Menu <a class="el" href="../../d4/da0/a01291.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d5/da7/a01283.html">Form</a>, <a class="el" href="../../d2/d68/a01295.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d8/d38/a01299.html">View</a>, RSH, C-Keys</p>
+<div class="fragment"></div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

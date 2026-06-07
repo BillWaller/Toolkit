@@ -1,6 +1,11 @@
 var a01223 =
 [
-    [ "bg", "d7/ddd/a01223.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
-    [ "fg", "d7/ddd/a01223.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
-    [ "pair_id", "d7/ddd/a01223.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
+    [ "display_line", "d7/ddd/a01223.html#ga16a4b855ead8402d4744e77a5504082a", null ],
+    [ "display_prompt", "d7/ddd/a01223.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
+    [ "fmt_line", "d7/ddd/a01223.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
+    [ "pad_refresh", "d7/ddd/a01223.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
+    [ "parse_ansi_str", "d7/ddd/a01223.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
+    [ "view_display_help", "d7/ddd/a01223.html#gad997ba9f8591568c77291fb1b44601b2", null ],
+    [ "view_display_page", "d7/ddd/a01223.html#gae6f141401cf9f104dbe14f09603d5178", null ],
+    [ "view_restore_wins", "d7/ddd/a01223.html#ga322b7dfe2d426fe7cfb2b4f59bf6fc78", null ]
 ];

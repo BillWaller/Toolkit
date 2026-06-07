@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['2_208_202026_2002_2004_0',['[0.2.8]- 2026-02-04',['../dc/df4/a01401.html#autotoc_md028--2026-02-04',1,'']]],
-  ['2_209_20pre_20release_1',['0.2.9 - Pre-Release',['../d5/dec/a01416.html#autotoc_md029---pre-release',1,'']]],
-  ['2_209_20tasks_20to_20complete_20before_200_203_200_2',['0.2.9 Tasks to Complete before 0.3.0',['../d5/dec/a01416.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
-  ['2_209_20wrap_20up_3',['0.2.9 Wrap-Up',['../d5/dec/a01416.html#autotoc_md029-wrap-up',1,'']]],
-  ['2_20build_20c_20menu_20with_20provided_20scripts_4',['Option 2 - Build C-Menu with Provided Scripts',['../df/d84/a01408.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
-  ['2026_5',['2026',['../d0/dc7/a01402.html#date-june-2026',1,'date: June 2026'],['../d9/d6e/a01409.html#date-june-2026-1',1,'date: June 2026'],['../d8/d01/a01410.html#date-june-2026-2',1,'date: June 2026'],['../de/daf/a01417.html#date-june-2026-3',1,'date: June 2026']]],
-  ['2026_2002_2004_6',['2026 02 04',['../dc/df4/a01401.html#autotoc_md028--2026-02-04',1,'[0.2.8]- 2026-02-04'],['../dc/df4/a01401.html#released---2026-02-04',1,'[Released] - 2026-02-04']]]
+  ['2_208_202026_2002_2004_0',['[0.2.8]- 2026-02-04',['../d8/d31/a01407.html#autotoc_md028--2026-02-04',1,'']]],
+  ['2_209_20pre_20release_1',['0.2.9 - Pre-Release',['../d1/df4/a01422.html#autotoc_md029---pre-release',1,'']]],
+  ['2_209_20tasks_20to_20complete_20before_200_203_200_2',['0.2.9 Tasks to Complete before 0.3.0',['../d1/df4/a01422.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
+  ['2_209_20wrap_20up_3',['0.2.9 Wrap-Up',['../d1/df4/a01422.html#autotoc_md029-wrap-up',1,'']]],
+  ['2_20build_20c_20menu_20with_20provided_20scripts_4',['Option 2 - Build C-Menu with Provided Scripts',['../d8/df1/a01414.html#option-2---build-c-menu-with-provided-scripts',1,'']]],
+  ['2026_5',['2026',['../df/d84/a01408.html#date-june-2026',1,'date: June 2026'],['../de/d70/a01415.html#date-june-2026-1',1,'date: June 2026'],['../d5/dec/a01416.html#date-june-2026-2',1,'date: June 2026'],['../d9/ddc/a01423.html#date-june-2026-3',1,'date: June 2026']]],
+  ['2026_2002_2004_6',['2026 02 04',['../d8/d31/a01407.html#autotoc_md028--2026-02-04',1,'[0.2.8]- 2026-02-04'],['../d8/d31/a01407.html#released---2026-02-04',1,'[Released] - 2026-02-04']]]
 ];

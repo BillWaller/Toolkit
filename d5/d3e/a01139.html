@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: pick_engine.c File Reference</title>
+<title>C-Menu: rsh.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,247 +110,381 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/d3e/a01139.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">pick_engine.c File Reference</div></div>
+  <div class="headertitle"><div class="title">rsh.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>pick from a list of choices  
+<p>restricted shell to run bash as root  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;security/pam_appl.h&gt;</code><br />
+<code>#include &lt;security/pam_misc.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/resource.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;syslog.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for pick_engine.c:</div>
+Include dependency graph for rsh.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d64/a01140.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d64/a01140.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d5/d3e/a01139_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+<tr class="memitem:abbbcf3c42c997889127cc676754a6fea" id="r_abbbcf3c42c997889127cc676754a6fea"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#abbbcf3c42c997889127cc676754a6fea">HOST</a>&#160;&#160;&#160;&quot;localhost&quot;</td></tr>
+<tr class="memitem:ad99a14e97ac5a42831c0f5759c78e47c" id="r_ad99a14e97ac5a42831c0f5759c78e47c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad99a14e97ac5a42831c0f5759c78e47c">RSH_PAM</a></td></tr>
+<tr class="memitem:a6557db566bb2c2fee6d6de70bd0afd2f" id="r_a6557db566bb2c2fee6d6de70bd0afd2f"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a6557db566bb2c2fee6d6de70bd0afd2f">RSH_PAM</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga98b36615c0627c4195c40b6c23d6062a" id="r_ga98b36615c0627c4195c40b6c23d6062a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga98b36615c0627c4195c40b6c23d6062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deselects the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:gacd6b9991f2aa305f622f5d2515815bba" id="r_gacd6b9991f2aa305f622f5d2515815bba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gacd6b9991f2aa305f622f5d2515815bba">display_page</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:gacd6b9991f2aa305f622f5d2515815bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
-<tr class="memitem:gaeebc4c0b94ca97d753e10a0cd1798730" id="r_gaeebc4c0b94ca97d753e10a0cd1798730"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gaeebc4c0b94ca97d753e10a0cd1798730">display_pick_help</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaeebc4c0b94ca97d753e10a0cd1798730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the help screen for the pick interface using view.  <br /></td></tr>
-<tr class="memitem:gaf7fcbb1c8b67a4d11c86ba7209f397c2" id="r_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes specified command with selected objects as arguments.  <br /></td></tr>
-<tr class="memitem:ga1b2ee87543245e612c1710ea58930a17" id="r_ga1b2ee87543245e612c1710ea58930a17"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init, int argc, char **argv, int begy, int begx)</td></tr>
-<tr class="memdesc:ga1b2ee87543245e612c1710ea58930a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick structure and opens pick input file or pipe.  <br /></td></tr>
-<tr class="memitem:ga91b2cda407803ee4367f7efd5487863c" id="r_ga91b2cda407803ee4367f7efd5487863c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga91b2cda407803ee4367f7efd5487863c">match_objects</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick, char *s)</td></tr>
-<tr class="memdesc:ga91b2cda407803ee4367f7efd5487863c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
-<tr class="memitem:gaf20c847dc030116f9999adbba681000c" id="r_gaf20c847dc030116f9999adbba681000c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gaf20c847dc030116f9999adbba681000c">open_pick_win</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaf20c847dc030116f9999adbba681000c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the pick window based on the parameters specified in the <a class="el" href="../../d9/dda/a01289.html" title="Pick data structure.">Pick</a> structure.  <br /></td></tr>
-<tr class="memitem:ga8feb6cd586d503a676b831ec722576fb" id="r_ga8feb6cd586d503a676b831ec722576fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga8feb6cd586d503a676b831ec722576fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs selected objects to specified output file.  <br /></td></tr>
-<tr class="memitem:gab97dcab41017c5132f52b682437a151e" id="r_gab97dcab41017c5132f52b682437a151e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gab97dcab41017c5132f52b682437a151e">pick_engine</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gab97dcab41017c5132f52b682437a151e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick interface, calculates window size and position, and enters picker loop.  <br /></td></tr>
-<tr class="memitem:ga0dae7df97392da1a79cba0f852c11f5f" id="r_ga0dae7df97392da1a79cba0f852c11f5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init, char *field)</td></tr>
-<tr class="memdesc:ga0dae7df97392da1a79cba0f852c11f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop for handling user input and interactions in the pick interface.  <br /></td></tr>
-<tr class="memitem:gaabda879000cf8135245ef451de08f780" id="r_gaabda879000cf8135245ef451de08f780"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gaabda879000cf8135245ef451de08f780">read_pick_input</a> (<a class="el" href="../../d8/d53/a01225.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaabda879000cf8135245ef451de08f780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads pick input from file pointer and saves objects into pick structure.  <br /></td></tr>
-<tr class="memitem:gab2173ff8fb800d126c180487744672d5" id="r_gab2173ff8fb800d126c180487744672d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#gab2173ff8fb800d126c180487744672d5">reverse_object</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:gab2173ff8fb800d126c180487744672d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the display of the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:ga02f90007f2422dd2094ab64569e157f0" id="r_ga02f90007f2422dd2094ab64569e157f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga02f90007f2422dd2094ab64569e157f0">save_object</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick, char *s)</td></tr>
-<tr class="memdesc:ga02f90007f2422dd2094ab64569e157f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a string as an object in the pick structure.  <br /></td></tr>
-<tr class="memitem:ga036c2f9cdf302cced4d9b703022664c0" id="r_ga036c2f9cdf302cced4d9b703022664c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga036c2f9cdf302cced4d9b703022664c0">toggle_object</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga036c2f9cdf302cced4d9b703022664c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the selection state of the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:ga650262f8279502ebc73607394dd7af13" id="r_ga650262f8279502ebc73607394dd7af13"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/db6/a01212.html#ga650262f8279502ebc73607394dd7af13">unreverse_object</a> (<a class="el" href="../../d9/dda/a01289.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga650262f8279502ebc73607394dd7af13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unreverses the display of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:a1a86fc228ccdbf7d9cd46d250ecf9bd4" id="r_a1a86fc228ccdbf7d9cd46d250ecf9bd4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a> (int e, char const *)</td></tr>
+<tr class="memdesc:a1a86fc228ccdbf7d9cd46d250ecf9bd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abnormal termination - print an error message and exit.  <br /></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for rsh.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:acdb9de82d81b176784185dea9063b57c" id="r_acdb9de82d81b176784185dea9063b57c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdb9de82d81b176784185dea9063b57c">calculated_idx</a></td></tr>
-<tr class="memitem:a4a50bfe3f8460978b34566ec3dff7adb" id="r_a4a50bfe3f8460978b34566ec3dff7adb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4a50bfe3f8460978b34566ec3dff7adb">obj_idx</a></td></tr>
-<tr class="memitem:a8f93294009502446912fa64f33731029" id="r_a8f93294009502446912fa64f33731029"><td class="memItemLeft">char const&#160;</td><td class="memItemRight"><a class="el" href="#a8f93294009502446912fa64f33731029">pagers_editors</a> [12][10]</td></tr>
-<tr class="memitem:ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" id="r_ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">pg_lines</a></td></tr>
-<tr class="memitem:ac7ac4adf3c3409d847a57c140700f334" id="r_ac7ac4adf3c3409d847a57c140700f334"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac7ac4adf3c3409d847a57c140700f334">pipe_fd</a> [2]</td></tr>
-<tr class="memitem:ab57f05e19e1e81af17fbbd3a766c405a" id="r_ab57f05e19e1e81af17fbbd3a766c405a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab57f05e19e1e81af17fbbd3a766c405a">tbl_col</a></td></tr>
-<tr class="memitem:a7df4e526a3af8e113bbc05ca011c2341" id="r_a7df4e526a3af8e113bbc05ca011c2341"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7df4e526a3af8e113bbc05ca011c2341">tbl_cols</a></td></tr>
-<tr class="memitem:a25fe2a76cfd155c51a46c99d6a1cf4d9" id="r_a25fe2a76cfd155c51a46c99d6a1cf4d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">tbl_line</a></td></tr>
-<tr class="memitem:ae7c3abf692920540a78bc3322d02828a" id="r_ae7c3abf692920540a78bc3322d02828a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae7c3abf692920540a78bc3322d02828a">tbl_page</a></td></tr>
-<tr class="memitem:acbe29ef30ea713ef47f3cd892310ca50" id="r_acbe29ef30ea713ef47f3cd892310ca50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acbe29ef30ea713ef47f3cd892310ca50">tbl_pages</a></td></tr>
+<tr class="memitem:a9ea122171989176bc07376ae1eefc5c7" id="r_a9ea122171989176bc07376ae1eefc5c7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9ea122171989176bc07376ae1eefc5c7">F_VERBOSE</a> = false</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>pick from a list of choices </p>
+<div class="textblock"><p>restricted shell to run bash as root </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="acdb9de82d81b176784185dea9063b57c" name="acdb9de82d81b176784185dea9063b57c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdb9de82d81b176784185dea9063b57c">&#9670;&#160;</a></span>calculated_idx</h2>
+<p class="definition">Definition in file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int calculated_idx</td>
+          <td class="memname">#define _GNU_SOURCE</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00025">25</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00010">10</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
 
 </div>
 </div>
-<a id="a4a50bfe3f8460978b34566ec3dff7adb" name="a4a50bfe3f8460978b34566ec3dff7adb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a50bfe3f8460978b34566ec3dff7adb">&#9670;&#160;</a></span>obj_idx</h2>
+<a id="abbbcf3c42c997889127cc676754a6fea" name="abbbcf3c42c997889127cc676754a6fea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbbcf3c42c997889127cc676754a6fea">&#9670;&#160;</a></span>HOST</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int obj_idx</td>
+          <td class="memname">#define HOST&#160;&#160;&#160;&quot;localhost&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00025">25</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00034">34</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
 
 </div>
 </div>
-<a id="a8f93294009502446912fa64f33731029" name="a8f93294009502446912fa64f33731029"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f93294009502446912fa64f33731029">&#9670;&#160;</a></span>pagers_editors</h2>
+<a id="ad99a14e97ac5a42831c0f5759c78e47c" name="ad99a14e97ac5a42831c0f5759c78e47c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99a14e97ac5a42831c0f5759c78e47c">&#9670;&#160;</a></span>RSH_PAM <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char const pagers_editors[12][10]</td>
+          <td class="memname">#define RSH_PAM</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
-<div class="line">           <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
-<div class="line">           <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}</div>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00015">15</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
+
+</div>
+</div>
+<a id="a6557db566bb2c2fee6d6de70bd0afd2f" name="a6557db566bb2c2fee6d6de70bd0afd2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6557db566bb2c2fee6d6de70bd0afd2f">&#9670;&#160;</a></span>RSH_PAM <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RSH_PAM</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00015">15</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a1a86fc228ccdbf7d9cd46d250ecf9bd4" name="a1a86fc228ccdbf7d9cd46d250ecf9bd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">&#9670;&#160;</a></span>ABEND()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ABEND </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>e</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char const *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abnormal termination - print an error message and exit. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>Error code </td></tr>
+    <tr><td class="paramname">s</td><td>Error message</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function prints the provided error message along with the error code and its corresponding string representation, then exits the program with a failure status. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00237">237</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  237</span>                                 {</div>
+<div class="line"><span class="lineno">  238</span>    fprintf(stderr, <span class="stringliteral">&quot;%s: %d %s\n&quot;</span>, s, e, strerror(e));</div>
+<div class="line"><span class="lineno">  239</span>    exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  240</span>}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00042">42</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   42</span>                                  {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
-<div class="line"><span class="lineno">   43</span>                                     <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
-<div class="line"><span class="lineno">   44</span>                                     <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
+</div>
+</div>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main function for rsh. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>Argument count </td></tr>
+    <tr><td class="paramname">argv</td><td>Argument vector</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If executed as 'rsh', this program sets the user ID and group ID to 0 (root) and then executes the user's default shell (or /usr/bin/bash if SHELL is not set) with the provided arguments. If no arguments are given, it runs the shell in interactive mode. To work properly, this program must be compiled and set with the setuid bit: </p><div class="fragment"><div class="line">$ sudo -s</div>
+<div class="line">cc rsh.c -o rsh</div>
+<div class="line">sudo chown root:root rsh</div>
+<div class="line">sudo chmod 4755 rsh</div>
+<div class="line">exit</div>
+</div><!-- fragment --><p> to verify proper operation: </p><div class="fragment"><div class="line">$ rsh</div>
+<div class="line">$ whoami</div>
+<div class="line">root</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00082">82</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   82</span>                                {</div>
+<div class="line"><span class="lineno">   83</span>    <span class="keywordtype">char</span> *cargv[30];</div>
+<div class="line"><span class="lineno">   84</span>    <span class="keywordtype">char</span> exec_cmd[<a class="code hl_define" href="../../d3/ddc/a01142.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>] = <span class="stringliteral">&quot;/usr/bin/bash&quot;</span>;</div>
+<div class="line"><span class="lineno">   85</span><span class="preprocessor">#ifdef RSH_LOG</span></div>
+<div class="line"><span class="lineno">   86</span>    <span class="keywordtype">char</span> rsh_user[<a class="code hl_define" href="../../d3/ddc/a01142.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">   87</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordtype">char</span> *p;</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordtype">int</span> c;</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordtype">bool</span> ssh_login = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordtype">int</span> status;</div>
+<div class="line"><span class="lineno">   92</span>    pid_t pid;</div>
+<div class="line"><span class="lineno">   93</span><span class="preprocessor">#ifdef RSH_SSH</span></div>
+<div class="line"><span class="lineno">   94</span><span class="preprocessor">#define RSH_LOG</span></div>
+<div class="line"><span class="lineno">   95</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   96</span><span class="preprocessor">#ifdef RSH_LOG</span></div>
+<div class="line"><span class="lineno">   97</span>    <span class="keywordtype">char</span> ttyname[<a class="code hl_define" href="../../d3/ddc/a01142.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">   98</span>    p = getenv(<span class="stringliteral">&quot;USER&quot;</span>);</div>
+<div class="line"><span class="lineno">   99</span>    strncpy(rsh_user, p ? p : <span class="stringliteral">&quot;unknown&quot;</span>, <span class="keyword">sizeof</span>(rsh_user));</div>
+<div class="line"><span class="lineno">  100</span>    openlog(<span class="stringliteral">&quot;rsh&quot;</span>, LOG_PID | LOG_CONS, LOG_AUTH);</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">if</span> (ttyname_r(STDERR_FILENO, ttyname, <span class="keyword">sizeof</span>(ttyname)) != 0) {</div>
+<div class="line"><span class="lineno">  102</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;Error getting terminal name: %s&quot;</span>, strerror(errno));</div>
+<div class="line"><span class="lineno">  103</span>        fprintf(stderr, <span class="stringliteral">&quot;Error getting terminal name: %s&quot;</span>, strerror(errno));</div>
+<div class="line"><span class="lineno">  104</span>        strncpy(ttyname, <span class="stringliteral">&quot;unknown&quot;</span>, <span class="keyword">sizeof</span>(ttyname));</div>
+<div class="line"><span class="lineno">  105</span>    }</div>
+<div class="line"><span class="lineno">  106</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  107</span><span class="preprocessor">#define RSH_PAM</span></div>
+<div class="line"><span class="lineno">  108</span><span class="preprocessor">#ifdef RSH_PAM</span></div>
+<div class="line"><span class="lineno">  109</span>    pam_handle_t *pamh = NULL;</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordtype">int</span> retval;</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordtype">char</span> *username = getenv(<span class="stringliteral">&quot;USER&quot;</span>);</div>
+<div class="line"><span class="lineno">  112</span>    <span class="keywordflow">if</span> (username == NULL) {</div>
+<div class="line"><span class="lineno">  113</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;USER environment variable not set&quot;</span>);</div>
+<div class="line"><span class="lineno">  114</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: USER environment variable not set\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  115</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">  116</span>    }</div>
+<div class="line"><span class="lineno">  117</span>    retval = pam_start(<span class="stringliteral">&quot;rsh-auth&quot;</span>, username, &amp;conv, &amp;pamh);</div>
+<div class="line"><span class="lineno">  118</span>    <span class="keywordflow">if</span> (retval != PAM_SUCCESS) {</div>
+<div class="line"><span class="lineno">  119</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;PAM start failed: %s&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><span class="lineno">  120</span>        fprintf(stderr, <span class="stringliteral">&quot;PAM start failed: %s\n&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">  122</span>    }</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>    <span class="comment">// Authenticate the user using PAM. The configuration for this PAM service should</span></div>
+<div class="line"><span class="lineno">  125</span>    <span class="comment">// be set to allow passwordless authentication, for example by using pam_permit.so.</span></div>
+<div class="line"><span class="lineno">  126</span>    <span class="comment">// You can create a PAM configuration file named /etc/pam.d/pam_nopass with the</span></div>
+<div class="line"><span class="lineno">  127</span>    <span class="comment">// following content:</span></div>
+<div class="line"><span class="lineno">  128</span>    <span class="comment">//</span></div>
+<div class="line"><span class="lineno">  129</span>    <span class="comment">// /etc/pam.d/pam_nopass:</span></div>
+<div class="line"><span class="lineno">  130</span>    <span class="comment">// auth required pam_permit.so</span></div>
+<div class="line"><span class="lineno">  131</span>    <span class="comment">//</span></div>
+<div class="line"><span class="lineno">  132</span>    <span class="comment">//</span></div>
+<div class="line"><span class="lineno">  133</span>    retval = pam_authenticate(pamh, 0);</div>
+<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">if</span> (retval == PAM_SUCCESS) {</div>
+<div class="line"><span class="lineno">  135</span>        syslog(LOG_AUTH, <span class="stringliteral">&quot;Authentication succeeded for user &#39;%s&#39;: %s&quot;</span>, username, pam_strerror(pamh, retval));</div>
+<div class="line"><span class="lineno">  136</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  137</span>        syslog(LOG_AUTH, <span class="stringliteral">&quot;Authentication failed for user &#39;%s&#39;: %s&quot;</span>, username, pam_strerror(pamh, retval));</div>
+<div class="line"><span class="lineno">  138</span>        fprintf(stderr, <span class="stringliteral">&quot;Failure: Authentication failed: %s\n&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><span class="lineno">  139</span>    }</div>
+<div class="line"><span class="lineno">  140</span> </div>
+<div class="line"><span class="lineno">  141</span>    <span class="comment">// It&#39;s a wrap</span></div>
+<div class="line"><span class="lineno">  142</span>    pam_end(pamh, retval);</div>
+<div class="line"><span class="lineno">  143</span> </div>
+<div class="line"><span class="lineno">  144</span>    <span class="keywordflow">if</span> (retval != PAM_SUCCESS) {</div>
+<div class="line"><span class="lineno">  145</span>        fprintf(stderr, <span class="stringliteral">&quot;PAM authentication failed: %s\n&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><span class="lineno">  146</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  147</span>    }</div>
+<div class="line"><span class="lineno">  148</span> </div>
+<div class="line"><span class="lineno">  149</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span><span class="preprocessor">#ifdef RSH_SSH</span></div>
+<div class="line"><span class="lineno">  152</span>    ssh_session _ssh_session = ssh_new();</div>
+<div class="line"><span class="lineno">  153</span>    <span class="keywordflow">if</span> (_ssh_session == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  154</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;SSH session initialization failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><span class="lineno">  155</span>        fprintf(stderr, <span class="stringliteral">&quot;SSH session initialization failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><span class="lineno">  156</span>        ssh_free(_ssh_session);</div>
+<div class="line"><span class="lineno">  157</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  158</span>    }</div>
+<div class="line"><span class="lineno">  159</span>    <span class="keywordtype">int</span> rc = 0;</div>
+<div class="line"><span class="lineno">  160</span>    ssh_options_set(_ssh_session, SSH_OPTIONS_HOST, <a class="code hl_define" href="#abbbcf3c42c997889127cc676754a6fea">HOST</a>);</div>
+<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">if</span> ((rc = ssh_connect(_ssh_session)) != SSH_OK) {</div>
+<div class="line"><span class="lineno">  162</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;SSH connection failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><span class="lineno">  163</span>        fprintf(stderr, <span class="stringliteral">&quot;SSH connection failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><span class="lineno">  164</span>        ssh_free(_ssh_session);</div>
+<div class="line"><span class="lineno">  165</span>        ssh_free(_ssh_session);</div>
+<div class="line"><span class="lineno">  166</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  167</span>    }</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">if</span> (ssh_userauth_publickey_auto(_ssh_session, NULL, NULL) !=</div>
+<div class="line"><span class="lineno">  169</span>        SSH_AUTH_SUCCESS) {</div>
+<div class="line"><span class="lineno">  170</span>        syslog(LOG_AUTH, <span class="stringliteral">&quot;SSH authentication failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><span class="lineno">  171</span>        fprintf(stderr, <span class="stringliteral">&quot;SSH authentication failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><span class="lineno">  172</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  173</span>    }</div>
+<div class="line"><span class="lineno">  174</span>    ssh_disconnect(_ssh_session);</div>
+<div class="line"><span class="lineno">  175</span>    ssh_free(_ssh_session);</div>
+<div class="line"><span class="lineno">  176</span>    syslog(LOG_AUTH, <span class="stringliteral">&quot;rsh SSH authentication succeeded for user &#39;%s&#39; on terminal &#39;%s&#39;&quot;</span>, rsh_user, ttyname);</div>
+<div class="line"><span class="lineno">  177</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  178</span><span class="preprocessor">#ifdef RSH_LOG</span></div>
+<div class="line"><span class="lineno">  179</span>    closelog();</div>
+<div class="line"><span class="lineno">  180</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">if</span> ((p = getenv(<span class="stringliteral">&quot;SHELL&quot;</span>)))</div>
+<div class="line"><span class="lineno">  182</span>        strncpy(exec_cmd, p, <a class="code hl_define" href="../../d3/ddc/a01142.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  183</span>    cargv[0] = strdup(exec_cmd);</div>
+<div class="line"><span class="lineno">  184</span>    c = 1;</div>
+<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">if</span> (argc &gt; 0) {</div>
+<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; argc; i++) {</div>
+<div class="line"><span class="lineno">  187</span>            <span class="keywordflow">if</span> (strcmp(argv[i], <span class="stringliteral">&quot;-i&quot;</span>) == 0) {</div>
+<div class="line"><span class="lineno">  188</span>                cargv[c++] = strdup(<span class="stringliteral">&quot;-i&quot;</span>);</div>
+<div class="line"><span class="lineno">  189</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(argv[i], <span class="stringliteral">&quot;-D1&quot;</span>) == 0 &amp;&amp; ssh_login) {</div>
+<div class="line"><span class="lineno">  190</span>                fprintf(stderr, <span class="stringliteral">&quot;SSH authentication succeeded\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  191</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  192</span>                cargv[c++] = strdup(argv[i]);</div>
+<div class="line"><span class="lineno">  193</span>            }</div>
+<div class="line"><span class="lineno">  194</span>        }</div>
+<div class="line"><span class="lineno">  195</span>    }</div>
+<div class="line"><span class="lineno">  196</span>    cargv[c] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  197</span>    pid = fork();</div>
+<div class="line"><span class="lineno">  198</span>    <span class="keywordflow">switch</span> (pid) {</div>
+<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">case</span> -1:</div>
+<div class="line"><span class="lineno">  200</span>        <a class="code hl_function" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a>(EXIT_FAILURE, <span class="stringliteral">&quot;fork() fatal error&quot;</span>);</div>
+<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">case</span> 0: <span class="comment">// Child</span></div>
+<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">if</span> (argv[0] &amp;&amp; strstr(argv[0], <span class="stringliteral">&quot;rsh&quot;</span>)) {</div>
+<div class="line"><span class="lineno">  204</span>            <span class="keywordflow">if</span> (setuid(0) || setgid(0))</div>
+<div class="line"><span class="lineno">  205</span>                <a class="code hl_function" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a>(EXIT_FAILURE, <span class="stringliteral">&quot;setuid(0) fatal error&quot;</span>);</div>
+<div class="line"><span class="lineno">  206</span>            <span class="keyword">struct </span>rlimit rl;</div>
+<div class="line"><span class="lineno">  207</span>            getrlimit(RLIMIT_FSIZE, &amp;rl);</div>
+<div class="line"><span class="lineno">  208</span>            rl.rlim_cur = RLIM_INFINITY;</div>
+<div class="line"><span class="lineno">  209</span>            rl.rlim_max = RLIM_INFINITY;</div>
+<div class="line"><span class="lineno">  210</span>            setrlimit(RLIMIT_FSIZE, &amp;rl);</div>
+<div class="line"><span class="lineno">  211</span>        }</div>
+<div class="line"><span class="lineno">  212</span>        execvp(exec_cmd, cargv);</div>
+<div class="line"><span class="lineno">  213</span>        <a class="code hl_function" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a>(EXIT_FAILURE, <span class="stringliteral">&quot;execvp() fatal error&quot;</span>);</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  215</span>    <span class="keywordflow">default</span>: <span class="comment">// Parent</span></div>
+<div class="line"><span class="lineno">  216</span>        waitpid(pid, &amp;status, 0);</div>
+<div class="line"><span class="lineno">  217</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; c; i++)</div>
+<div class="line"><span class="lineno">  218</span>            free(cargv[i]);</div>
+<div class="line"><span class="lineno">  219</span><span class="preprocessor">#ifdef F_VERBOSE</span></div>
+<div class="line"><span class="lineno">  220</span>        <span class="keywordflow">if</span> (WIFEXITED(status)) {</div>
+<div class="line"><span class="lineno">  221</span>            rc = WEXITSTATUS(status);</div>
+<div class="line"><span class="lineno">  222</span>            <span class="keywordflow">if</span> (rc != 0)</div>
+<div class="line"><span class="lineno">  223</span>                <a class="code hl_function" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a>(rc, <span class="stringliteral">&quot;Child process exited&quot;</span>);</div>
+<div class="line"><span class="lineno">  224</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  225</span>            <span class="keywordflow">if</span> (WIFSIGNALED(status)) {</div>
+<div class="line"><span class="lineno">  226</span>                rc = WTERMSIG(status);</div>
+<div class="line"><span class="lineno">  227</span>                <a class="code hl_function" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a>(rc, <span class="stringliteral">&quot;Child process terminated by signal&quot;</span>);</div>
+<div class="line"><span class="lineno">  228</span>            } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  229</span>                <a class="code hl_function" href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a>(EXIT_FAILURE, <span class="stringliteral">&quot;Child process terminated abnormally&quot;</span>);</div>
+<div class="line"><span class="lineno">  230</span>        }</div>
+<div class="line"><span class="lineno">  231</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  232</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  233</span>    }</div>
+<div class="line"><span class="lineno">  234</span>    exit(EXIT_SUCCESS);</div>
+<div class="line"><span class="lineno">  235</span>}</div>
+<div class="ttc" id="aa01139_html_a1a86fc228ccdbf7d9cd46d250ecf9bd4"><div class="ttname"><a href="#a1a86fc228ccdbf7d9cd46d250ecf9bd4">ABEND</a></div><div class="ttdeci">void ABEND(int e, char const *)</div><div class="ttdoc">Abnormal termination - print an error message and exit.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l00237">rsh.c:237</a></div></div>
+<div class="ttc" id="aa01139_html_abbbcf3c42c997889127cc676754a6fea"><div class="ttname"><a href="#abbbcf3c42c997889127cc676754a6fea">HOST</a></div><div class="ttdeci">#define HOST</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d3e/a01139_source.html#l00034">rsh.c:34</a></div></div>
+<div class="ttc" id="aa01142_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d3/ddc/a01142.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00015">curskeys.c:15</a></div></div>
 </div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d1/dae/a01136_source.html#l00402">ABEND()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d3e/a01139_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="180" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
 </div>
 </div>
-<a id="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" name="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">&#9670;&#160;</a></span>pg_lines</h2>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a9ea122171989176bc07376ae1eefc5c7" name="a9ea122171989176bc07376ae1eefc5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ea122171989176bc07376ae1eefc5c7">&#9670;&#160;</a></span>F_VERBOSE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int pg_lines</td>
+          <td class="memname">bool F_VERBOSE = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00024">24</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="ac7ac4adf3c3409d847a57c140700f334" name="ac7ac4adf3c3409d847a57c140700f334"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7ac4adf3c3409d847a57c140700f334">&#9670;&#160;</a></span>pipe_fd</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int pipe_fd[2]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00040">40</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d5/d3e/a01139_source.html#l00060">init_pick()</a>.</p>
-
-</div>
-</div>
-<a id="ab57f05e19e1e81af17fbbd3a766c405a" name="ab57f05e19e1e81af17fbbd3a766c405a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab57f05e19e1e81af17fbbd3a766c405a">&#9670;&#160;</a></span>tbl_col</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_col</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00024">24</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a7df4e526a3af8e113bbc05ca011c2341" name="a7df4e526a3af8e113bbc05ca011c2341"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7df4e526a3af8e113bbc05ca011c2341">&#9670;&#160;</a></span>tbl_cols</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_cols</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00024">24</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a25fe2a76cfd155c51a46c99d6a1cf4d9" name="a25fe2a76cfd155c51a46c99d6a1cf4d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">&#9670;&#160;</a></span>tbl_line</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_line</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00024">24</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="ae7c3abf692920540a78bc3322d02828a" name="ae7c3abf692920540a78bc3322d02828a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c3abf692920540a78bc3322d02828a">&#9670;&#160;</a></span>tbl_page</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_page</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00024">24</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="acbe29ef30ea713ef47f3cd892310ca50" name="acbe29ef30ea713ef47f3cd892310ca50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbe29ef30ea713ef47f3cd892310ca50">&#9670;&#160;</a></span>tbl_pages</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_pages</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00024">24</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d3e/a01139_source.html#l00042">42</a> of file <a class="el" href="../../d5/d3e/a01139_source.html">rsh.c</a>.</p>
 
 </div>
 </div>
@@ -367,7 +501,7 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d5/d3e/a01139.html">pick_engine.c</a></li>
+    <li class="navelem"><a href="../../d5/d3e/a01139.html">rsh.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

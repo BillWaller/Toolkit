@@ -1,10 +1,15 @@
 var a01221 =
 [
-    [ "choice_letter", "dd/d3f/a01221.html#ad244e20485560be4e557528c8fa1321c", null ],
-    [ "choice_text", "dd/d3f/a01221.html#a1588ee0394f3e3076e6b03b8afab5cc9", null ],
-    [ "command_str", "dd/d3f/a01221.html#a5caaf06576322b837ebfbce757377455", null ],
-    [ "command_type", "dd/d3f/a01221.html#acce58adaa7cf043f8f905d3d69a7f3a0", null ],
-    [ "letter_pos", "dd/d3f/a01221.html#a928bd3d2b73020b5529f9da018ce5e2f", null ],
-    [ "raw_text", "dd/d3f/a01221.html#a514130f5368bc6edaa5928f08be2bd4f", null ],
-    [ "type", "dd/d3f/a01221.html#a6d158be9cbd3c4180df373ddf462330d", null ]
+    [ "get_next_char", "dd/d3f/a01221.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
+    [ "get_prev_char", "dd/d3f/a01221.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
+    [ "build_prompt", "dd/d3f/a01221.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
+    [ "cat_file", "dd/d3f/a01221.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "enter_file_spec", "dd/d3f/a01221.html#ga2ffea5674e85f124a70e19f745a66583", null ],
+    [ "get_cmd_arg", "dd/d3f/a01221.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
+    [ "get_cmd_char", "dd/d3f/a01221.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
+    [ "lp", "dd/d3f/a01221.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
+    [ "remove_file", "dd/d3f/a01221.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
+    [ "view_cmd_processor", "dd/d3f/a01221.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
+    [ "view_file", "dd/d3f/a01221.html#ga0bd4dc056ab5010547129bb87819789b", null ],
+    [ "write_view_buffer", "dd/d3f/a01221.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
 ];

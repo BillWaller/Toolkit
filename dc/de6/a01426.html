@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: DATE/TIME CONUNDRUM</title>
+<title>C-Menu: C-Menu View</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,184 +110,85 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dc/de6/a01426.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">DATE/TIME CONUNDRUM </div></div>
+  <div class="headertitle"><div class="title">C-Menu View </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="datetime-conundrum"></a></p>
-<p>Bill Waller Copyright (c) 2026 <br  />
- 2026-05-25 <br  />
- MIT License <br  />
- <a href="../../email@billxwaller@gmail.com">bill waller email</a></p>
-<h1 class="doxsection"><a class="anchor" id="overview"></a>
-Overview</h1>
-<p>This note documents an issue encountered while parsing local date/time text with <span class="tt">strptime()</span>, converting the result to <span class="tt">time_t</span> with <span class="tt">mktime()</span>, and then formatting the resulting value after conversion back to local time with <span class="tt">localtime_r()</span>.</p>
-<p>At first glance, the behavior can look like a GNU <span class="tt">gmtime_r()</span> or <span class="tt">localtime_r()</span> bug because the formatted output appears to shift by one hour depending on whether the <span class="tt">struct tm</span> was first cleared with <span class="tt">memset()</span>. In practice, the real problem is usually the value of <span class="tt">tm_isdst</span> before calling <span class="tt">mktime()</span>.</p>
-<p><span class="tt">strptime()</span> fills only the fields specified by the format string. It does <b>not</b> guarantee that the rest of the <span class="tt">struct tm</span> is initialized to useful values. One of the most important remaining fields is <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">tm_isdst = 0</span> means standard time is in effect.</li>
-<li><span class="tt">tm_isdst = 1</span> means daylight saving time is in effect.</li>
-<li><span class="tt">tm_isdst = -1</span> means "determine DST automatically."</li>
+<div class="textblock"><p><a class="anchor" id="c-menu-view-1"></a></p>
+<p><a class="el" href="../../d8/d38/a01299.html">View</a> has Unicode support, line numbering, regular expression searching, and a large virtual pad for horizontal scrolling. <a class="el" href="../../d8/d38/a01299.html">View</a> works great with tree-sitter, source-highlight, pygments, bat, manual pages, and other syntax highlighters. <a class="el" href="../../d8/d38/a01299.html">View</a> doesn't alter the file you are viewing. It uses the highlighter in a pipe, and reads the output, so the original file is never changed. And, if you happen to have a file that has been highlighted by another application, view can strip the ANSI codes for convenient editing. <a class="el" href="../../d8/d38/a01299.html">View</a> is lightning fast, especially with huge log files.</p>
+<p>Throughout C-Menu, and especially <a class="el" href="../../d8/d38/a01299.html">View</a>, you will find many optimizations that contribute to it's efficiency and speed. Traditionally, large file I-O has relied on user-space buffering schemes in which chunks of data are copied from mass storage into local buffers using seek and read operations. The application must keep track of buffer contents, manage buffer lifecycles, and handle edge cases such as partial reads, end-of-file conditions, and error handling. This approach can be complex, error-prone, and inefficient, especially when dealing with large files or high-throughput applications. C-Menu's view takes a different approach to large file I-O by leveraging the operating system's virtual memory management capabilities to provide direct access to file data through memory mapping. Instead of relying on user-space buffering, C-Menu's view provides a direct-to-kernel, demand paged, memory mapped virtual address space for file access. This eliminates the overhead and complexity associated with user-space buffering, and allows for more efficient and reliable access to large files. With C-Menu's view, applications can access any part of a multi-gigabyte file instantly without the need for copying data into user-space buffers or managing buffer lifecycles. This results in unmatched reliability and performance when working with large files, making C-Menu's view ideal for applications that require high-throughput file access or need to work with large datasets.</p>
+<p>If you work with large datasets, you will love view. No fluff, no bloat, no nonsense, just blazing fast performance.</p>
+<div class="image">
+<img src="../../tree-sitter5.png" alt=""/>
+<div class="caption">
+C-Menu View with Syntax Highlighting</div></div>
+    <h1 class="doxsection"><a class="anchor" id="rsh---a-root-shell-alternative-1"></a>
+RSH - A Root Shell Alternative</h1>
+<p><b><em>RSH</em></b> - RSH provides an alternative to su and sudo for executing commands with elevated privileges. It allows developers and system administrators to get in and out of root shells and execute commands with root privileges without the need for a password, for example, by authenticating with an ssh key as you would on gethub.</p>
+<p>In the following example, make install requires root privilege, so the user types xx, is authenticated with an ssh key, and then types make install. When the make install is finished, the user types x to exit the root shell and relinquish root privilege.</p>
+<div class="image">
+<img src="../../Makefile-out.png" alt=""/>
+<div class="caption">
+RSH SSH Authentication</div></div>
+    <ul>
+<li>The Green prompt indicates user privilege, and Red indicates root privilege.</li>
 </ul>
-<p>That means:</p>
+<h1 class="doxsection"><a class="anchor" id="lf---a-regular-expression-file-finder-1"></a>
+lf - A Regular Expression File Finder</h1>
+<p><b><em>lf</em></b> - is a sleek, easy-to-use, and fast file finder. The name, lf, can be thought of in the imperative sense as "list files", or in the noun sense, "lightweight find."</p>
+<div class="image">
+<img src="../../lf-help.png" alt=""/>
+<div class="caption">
+lf help</div></div>
+    <p>The ../screenshot above is the help output of lf piped through bat and displayed in <a class="el" href="../../d8/d38/a01299.html">View</a>.</p>
+<p>Note: lf's default behavior of including hidden files has been changed and the default is now to exclude hidden files. Before this update, the "-n" option directed lf to exclude hidden files, but that is no longer necessary and a new "-H" option has been added to direct lf to include hidden files. This change was made to align with the behavior of other popular file finders such as fd and find.</p>
+<p>Find's built-in -exec is one of its most often used options and conspicuously, lf doesn't have a built-in -exec option. However, lf achieves identical results in a fraction of the time by piping the output of lf into xargs. There would be no benefit to adding an -exec option to lf because xargs leaves nothing to be desired.</p>
+<p>time find . -maxdepth 5 -type f -exec ls -l {} \; &gt;find.out</p>
+<p>time lf -d 4 -t f | xargs ls -l &gt;lf.out</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m0.469s  </td><td class="markdownTableBodyNone">0m0.160s  </td><td class="markdownTableBodyNone">0m0.288s  </td><td class="markdownTableBodyNone">142  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.008s  </td><td class="markdownTableBodyNone">0m0.004s  </td><td class="markdownTableBodyNone">0m0.006s  </td><td class="markdownTableBodyNone">142  </td></tr>
+</table>
+<p>time find . -maxdepth 4 -type f -exec ls -l {} \; &gt;find.out</p>
+<p>time lf -d 4 -t f | xargs ls -l &gt;lf.out</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m2.123s  </td><td class="markdownTableBodyNone">0m0.788s  </td><td class="markdownTableBodyNone">0m0.281s  </td><td class="markdownTableBodyNone">598  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.014s  </td><td class="markdownTableBodyNone">0m0.007s  </td><td class="markdownTableBodyNone">0m0.009s  </td><td class="markdownTableBodyNone">598  </td></tr>
+</table>
+<p>The results were unequivocal. lf with xargs is significantly faster than find with its built-in exec option.</p>
+<p>The command lines below are simple and straightforward, with no complex options or filters. Benchmark comparisons are notoriously subject to manipulation, so take them with a grain of salt. There are so many variations in hardware, file systems, the actual data, and system caching states that can skew results. You wouldn't buy a new Corvette without a test drive, so take C-Menu for a spin, do your own comparisons, and decide for yourself. (Why does it feel so sneaky to say that? (-: (-: )</p>
+<p>time find . -type f | wc</p>
+<p>time lf . -t f | wc</p>
+<p>time fd . -H -t f | wc</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m0.793s  </td><td class="markdownTableBodyNone">0m0.470s  </td><td class="markdownTableBodyNone">0m0.453s  </td><td class="markdownTableBodyNone">307440  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.214s  </td><td class="markdownTableBodyNone">0m0.036s  </td><td class="markdownTableBodyNone">0m0.214s  </td><td class="markdownTableBodyNone">307440  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">fd  </td><td class="markdownTableBodyNone">0m0.221s  </td><td class="markdownTableBodyNone">0m0.319s  </td><td class="markdownTableBodyNone">0m0.821s  </td><td class="markdownTableBodyNone">291969  </td></tr>
+</table>
+<p>Even without its speed advantage, lf would still be a compelling alternative due to its simplicity, portability, and ease of use. With fewer options and a more intuitive syntax, lf is a breeze to learn and use for the most common file searching tasks.</p>
+<p>Here's an example of how easy it is to use lf to find files modified between two dates. The command line below uses lf to find files modified after 2024-01-01 and before 2024-06-01, and then pipes the output to xargs to execute ls -l on the found files.</p>
 <ul>
-<li>If the structure is zeroed with <span class="tt">memset()</span>, then <span class="tt">tm_isdst</span> becomes <span class="tt">0</span>, which forces <span class="tt">mktime()</span> to interpret the input as standard time even when the date falls in CDT.</li>
-<li>If the structure is <b>not</b> initialized first, <span class="tt">tm_isdst</span> may retain leftover data from prior use, which can accidentally make one test case appear correct and another appear incorrect.</li>
+<li>You don't have to enter the T00:00:00 time component if you just want to include files modified between two dates. Keep in mind that the time will default to 00:00:00 if you specify a date without a time component, so -b 2026-06-01 will include files modified through the end of the day on 2026-05-31, but will exclude files modified on 2026-06-01.</li>
 </ul>
-<p>So the one-hour discrepancy is not caused by <span class="tt">localtime_r()</span> itself. The incorrect value is usually created earlier by <span class="tt">mktime()</span> when it receives an incompletely initialized <span class="tt">struct tm</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="correct-workaround"></a>
-Correct workaround</h1>
-<p>The safe pattern is:</p>
-<ol type="1">
-<li>Clear the full <span class="tt">struct tm</span>.</li>
-<li>Set <span class="tt">tm_isdst = -1</span>.</li>
-<li>Call <span class="tt">strptime()</span>.</li>
-<li>Call <span class="tt">mktime()</span>.</li>
-</ol>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm tm1;</div>
-<div class="line">memset(&amp;tm1, 0, <span class="keyword">sizeof</span> tm1);</div>
-<div class="line">tm1.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1) == NULL) {</div>
-<div class="line">    <span class="comment">/* parse error */</span></div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">time_t t1 = mktime(&amp;tm1);</div>
-</div><!-- fragment --><p>Then format for display using a separate output structure:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm out;</div>
-<div class="line">localtime_r(&amp;t1, &amp;out);</div>
-<div class="line">strftime(buf, <span class="keyword">sizeof</span> buf, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;out);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="why-the-previous-results-looked-contradictory"></a>
-Why the previous results looked contradictory</h1>
-<p>The earlier examples showed this pattern:</p>
-<ul>
-<li>Zeroing the structure appeared to break CDT dates.</li>
-<li>Not zeroing the structure appeared to break CST dates.</li>
-</ul>
-<p>That happens because the tests were effectively toggling the initial value of <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">memset(..., 0, ...)</span> forced <span class="tt">tm_isdst = 0</span>, i.e. standard time.</li>
-<li>Reusing the same structure without reinitializing it allowed <span class="tt">tm_isdst</span> to carry stale state from earlier operations.</li>
-</ul>
-<p>As a result, the code was not consistently asking <span class="tt">mktime()</span> to determine DST from the input date. Once <span class="tt">tm_isdst</span> is explicitly set to <span class="tt">-1</span>, both standard-time and daylight-time dates should round-trip correctly in the local timezone.</p>
-<h1 class="doxsection"><a class="anchor" id="important-note-about-gmtime_r"></a>
-Important note about <span class="tt">gmtime_r()</span></h1>
-<p><span class="tt">gmtime_r()</span> converts a <span class="tt">time_t</span> to UTC. It does not use the local timezone rules to decide whether the original parsed time was CST or CDT. If the UTC result appears to be off by one hour, that usually means the <span class="tt">time_t</span> value produced by <span class="tt">mktime()</span> was already wrong.</p>
-<h1 class="doxsection"><a class="anchor" id="recommended-helper"></a>
-Recommended helper</h1>
-<p>A simple helper for parsing local timestamps safely:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> <a class="code hl_function" href="../../d8/d53/a01225.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, time_t *out)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    memset(&amp;tmv, 0, <span class="keyword">sizeof</span> tmv);</div>
-<div class="line">    tmv.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (strptime(s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv) == NULL)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    time_t t = mktime(&amp;tmv);</div>
-<div class="line">    <span class="keywordflow">if</span> (t == (time_t)-1)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    *out = t;</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01225_html_ga1ee26caf58dfc798273ba095a394cde8"><div class="ttname"><a href="../../d8/d53/a01225.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a></div><div class="ttdeci">bool parse_local_timestamp(const char *, time_t *)</div><div class="ttdoc">Parses an ISO 8601 timestamp string in local time and converts it to time_t.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d5a/a01199_source.html#l00171">futil.c:171</a></div></div>
-</div><!-- fragment --><p>And a matching formatter:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="../../d8/d53/a01225.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a>(time_t t, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> n)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    localtime_r(&amp;t, &amp;tmv);</div>
-<div class="line">    strftime(buf, n, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01225_html_gaee5521bb387211a2d16e3d56585f144d"><div class="ttname"><a href="../../d8/d53/a01225.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a></div><div class="ttdeci">char * format_local_timestamp(time_t, char *, size_t)</div><div class="ttdoc">Formats a time_t as an ISO 8601 string in local time.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d5a/a01199_source.html#l00194">futil.c:194</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="revised-interpretation-of-the-original-test-cases"></a>
-Revised interpretation of the original test cases</h1>
-<p>The original test cases are still useful because they show that leaving <span class="tt">tm_isdst</span> uncontrolled produces different behavior across DST boundaries. However, they do <b>not</b> demonstrate a <span class="tt">localtime_r()</span> or <span class="tt">gmtime_r()</span> bug. They demonstrate that <span class="tt">mktime()</span> needs a fully initialized <span class="tt">struct tm</span>, with <span class="tt">tm_isdst</span> set appropriately.</p>
-<h1 class="doxsection"><a class="anchor" id="original-demonstration-code"></a>
-Original demonstration code</h1>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define _GNU_SOURCE</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="../../d4/d5d/a01202.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>() {</div>
-<div class="line">    <span class="keywordtype">char</span> buf[100];</div>
-<div class="line">    <span class="keywordtype">char</span> time_s[32];</div>
-<div class="line">    <span class="keyword">struct </span>tm tm1;</div>
-<div class="line">    time_t t1 = time(NULL);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    printf(<span class="stringliteral">&quot;with memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; NOT MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; NOT MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01202_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d4/d5d/a01202.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l00034">amort.c:34</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="fragment"><div class="line">lf -d 5 -t f -a 2024-01-01 -b 2024-06-01 | xargs ls -l</div>
+</div><!-- fragment --><div class="image">
+<img src="../../lf-dates.png" alt=""/>
+<div class="caption">
+lf File Finder</div></div>
+    <p>The ../screenshot above shows how you might use the date-time options of lf to list files between two date-times (after and before) and the sample output. We believe you will find this format intuitive and easy to use. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

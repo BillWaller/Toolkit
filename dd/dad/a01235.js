@@ -1,5 +1,7 @@
 var a01235 =
 [
-    [ "l", "dd/dad/a01235.html#a4aa4561aec0c1fdce969da7953bb7848", null ],
-    [ "s", "dd/dad/a01235.html#a8904978bb99a49a64f7e146a4ab7ff4d", null ]
+    [ "cp", "dd/dad/a01235.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
+    [ "end_pos", "dd/dad/a01235.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
+    [ "keycode", "dd/dad/a01235.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
+    [ "text", "dd/dad/a01235.html#a26a5a1b51ba82579294838ee52a18af3", null ]
 ];

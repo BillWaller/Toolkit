@@ -1,10 +1,10 @@
 var a01133 =
 [
-    [ "_GNU_SOURCE", "db/d28/a01133.html#a369266c24eacffb87046522897a570d5", null ],
-    [ "HOST", "db/d28/a01133.html#abbbcf3c42c997889127cc676754a6fea", null ],
-    [ "RSH_PAM", "db/d28/a01133.html#ad99a14e97ac5a42831c0f5759c78e47c", null ],
-    [ "RSH_PAM", "db/d28/a01133.html#a6557db566bb2c2fee6d6de70bd0afd2f", null ],
-    [ "ABEND", "db/d28/a01133.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
-    [ "main", "db/d28/a01133.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "F_VERBOSE", "db/d28/a01133.html#a9ea122171989176bc07376ae1eefc5c7", null ]
+    [ "init_view_boxwin", "d5/d32/a01214.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
+    [ "init_view_full_screen", "d5/d32/a01214.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_calc_full_screen_dimensions", "d5/d32/a01214.html#gaa64cfaf51c250788f093130763495ac4", null ],
+    [ "view_calc_win_dimensions", "d5/d32/a01214.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
+    [ "view_full_screen_resize", "da/d1f/a01203.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_init_input", "d5/d32/a01214.html#gab050f5482419339e9207dbdc65a7b49e", null ],
+    [ "view_win_resize", "da/d1f/a01203.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ]
 ];
