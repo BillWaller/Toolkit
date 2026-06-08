@@ -509,14 +509,14 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955fa2f7450f6173290c5b033adf0cdffc08e",
-"d5/d54/a01213.html#ga1af490b85f0487c201f369333b84e540",
-"d8/d01/a01410.html#installing-ripgrep",
-"d8/db9/a00725.html#a4407a60bc4387adae24cee658711f2d9",
-"d9/d31/a01208.html#ga353546f4d99ef7ec908d371187f033de",
-"dd/d39/a01271.html#add99e85e551d7f387be9f66d1aa4ac06",
-"de/db5/a01181.html#a964fa61be5e30597c14ae6b1e24a7994a23e80b20c0b0f0cd521f26c28f8bcef4",
-"index.html#why-the-design-works-1"
+"d2/d94/a00716.html#aa0c422feb50e02872eae279b3787955f",
+"d5/d54/a01213.html#ga11b56c5001e3ca95f4d0a28903b29609",
+"d8/d01/a01410.html#installing-bat",
+"d8/db9/a00725.html#a4368e17b6beaf8d5be879e213f071cf4",
+"d9/d31/a01208.html#ga07a8d9311c88786e7310fef638d34a41",
+"dd/d39/a01271.html#acb663428d3ca73d6b982860ef0dc3202",
+"de/db5/a01181.html#a964fa61be5e30597c14ae6b1e24a7994",
+"index.html#examples-8"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

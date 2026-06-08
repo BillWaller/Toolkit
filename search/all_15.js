@@ -66,14 +66,13 @@ var searchData=
   ['other_20resources_63',['Other Resources',['../d8/d01/a01410.html#other-resources',1,'']]],
   ['out_5ffd_64',['out_fd',['../d5/da7/a01283.html#a5bd0b7936433f7dea39be4e8535e353a',1,'Form::out_fd'],['../d2/d68/a01295.html#a9004acf141630ef2730d47c2da8c7d55',1,'Pick::out_fd'],['../d8/d38/a01299.html#acbd7aad5735b2141d14815b36267596e',1,'View::out_fd']]],
   ['out_5ffp_65',['out_fp',['../d5/da7/a01283.html#a1d587df88b8f69255e46d55e6fd9fd29',1,'Form::out_fp'],['../d2/d68/a01295.html#ad2d519910782d690abd79ec28c0dba57',1,'Pick::out_fp']]],
-  ['out_5fspec_66',['OUT_SPEC',['../de/db5/a01181.html#a964fa61be5e30597c14ae6b1e24a7994a96d229d3aab3fa830c22f014691550e4',1,'init.c']]],
-  ['out_5fspec_67',['out_spec',['../d0/d88/a01231.html#aa86e4f7114deec9b277b29e8779f0da4',1,'Init::out_spec'],['../d5/da7/a01283.html#a8f8c9f9b5c1949ee8560f0f09438e70d',1,'Form::out_spec'],['../d2/d68/a01295.html#af81b2364a4596ddea7478104f4817b82',1,'Pick::out_spec'],['../d8/d38/a01299.html#ab9871a420aa7ea431c8e834ea3f13e62',1,'View::out_spec']]],
-  ['output_68',['INPUT/OUTPUT',['../d5/dec/a01416.html#inputoutput',1,'']]],
-  ['output_69',['Expected Output',['../db/df2/a01425.html#expected-output',1,'']]],
-  ['output_5fobjects_70',['output_objects',['../d8/d15/a01218.html#ga8feb6cd586d503a676b831ec722576fb',1,'output_objects(Pick *):&#160;pick_engine.c'],['../d8/d15/a01218.html#ga8feb6cd586d503a676b831ec722576fb',1,'output_objects(Pick *pick):&#160;pick_engine.c']]],
-  ['overview_71',['OVERVIEW',['../d4/d3c/a01418.html',1,'']]],
-  ['overview_72',['Overview',['../dc/d25/a01406.html#c-menu-overview',1,'C-Menu Overview'],['../d7/d68/a01413.html#overview',1,'Overview']]],
-  ['overview_20of_20developer_20folke_73',['AI Overview of Developer Folke',['../d8/d01/a01410.html#ai-overview-of-developer-folke',1,'']]],
-  ['overview_20of_20developer_20norcalli_74',['AI Overview of Developer Norcalli',['../d8/d01/a01410.html#ai-overview-of-developer-norcalli',1,'']]],
-  ['overview_2emd_75',['OVERVIEW.md',['../d2/df3/a01085.html',1,'']]]
+  ['out_5fspec_66',['out_spec',['../d0/d88/a01231.html#aa86e4f7114deec9b277b29e8779f0da4',1,'Init::out_spec'],['../d5/da7/a01283.html#a8f8c9f9b5c1949ee8560f0f09438e70d',1,'Form::out_spec'],['../d2/d68/a01295.html#af81b2364a4596ddea7478104f4817b82',1,'Pick::out_spec'],['../d8/d38/a01299.html#ab9871a420aa7ea431c8e834ea3f13e62',1,'View::out_spec']]],
+  ['output_67',['INPUT/OUTPUT',['../d5/dec/a01416.html#inputoutput',1,'']]],
+  ['output_68',['Expected Output',['../db/df2/a01425.html#expected-output',1,'']]],
+  ['output_5fobjects_69',['output_objects',['../d8/d15/a01218.html#ga8feb6cd586d503a676b831ec722576fb',1,'output_objects(Pick *):&#160;pick_engine.c'],['../d8/d15/a01218.html#ga8feb6cd586d503a676b831ec722576fb',1,'output_objects(Pick *pick):&#160;pick_engine.c']]],
+  ['overview_70',['OVERVIEW',['../d4/d3c/a01418.html',1,'']]],
+  ['overview_71',['Overview',['../dc/d25/a01406.html#c-menu-overview',1,'C-Menu Overview'],['../d7/d68/a01413.html#overview',1,'Overview']]],
+  ['overview_20of_20developer_20folke_72',['AI Overview of Developer Folke',['../d8/d01/a01410.html#ai-overview-of-developer-folke',1,'']]],
+  ['overview_20of_20developer_20norcalli_73',['AI Overview of Developer Norcalli',['../d8/d01/a01410.html#ai-overview-of-developer-norcalli',1,'']]],
+  ['overview_2emd_74',['OVERVIEW.md',['../d2/df3/a01085.html',1,'']]]
 ];

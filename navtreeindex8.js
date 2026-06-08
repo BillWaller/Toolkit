@@ -1,5 +1,19 @@
 var NAVTREEINDEX8 =
 {
+"index.html#examples-8":[0,9],
+"index.html#form-3":[0,9,1],
+"index.html#installment-loan-calculator---built-with-c-menu-1":[0,1],
+"index.html#lf-2":[0,9,4],
+"index.html#menu-3":[0,9,0],
+"index.html#new-features-for-lf-1":[0,2],
+"index.html#pick-2":[0,9,2],
+"index.html#platform-and-requirements-1":[0,12],
+"index.html#quick-start-1":[0,7],
+"index.html#rsh-2":[0,9,5],
+"index.html#security-notes-1":[0,13],
+"index.html#table-of-contents-8":[0,4],
+"index.html#view-3":[0,9,3],
+"index.html#why-c-menu-1":[0,5],
 "index.html#why-the-design-works-1":[0,14],
 "pages.html":[],
 "topics.html":[25]

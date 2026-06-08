@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d5/d54/a01213.html#ga11b56c5001e3ca95f4d0a28903b29609":[25,0,9],
 "d5/d54/a01213.html#ga1af490b85f0487c201f369333b84e540":[25,0,2],
 "d5/d54/a01213.html#ga20c40545a1e05954b496c6d674d31458":[25,0,0],
 "d5/d54/a01213.html#ga33abf350aae0212c85a5903e41764025":[25,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "d8/d01/a01410.html#ghostty-on-macos":[7,0,17,1],
 "d8/d01/a01410.html#ghostty-on-windows":[7,0,17,2],
 "d8/d01/a01410.html#highlighting":[7,0,8],
-"d8/d01/a01410.html#how-to-get-c-menu-2":[7,0],
-"d8/d01/a01410.html#installing-bat":[7,0,5]
+"d8/d01/a01410.html#how-to-get-c-menu-2":[7,0]
 };

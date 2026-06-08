@@ -15,6 +15,7 @@ var a01184 =
     [ "file_spec_path", "d2/da6/a01210.html#ga3daf5e92dfdb5cb48ee14a2ecb3ff7c8", null ],
     [ "format_local_timestamp", "d2/da6/a01210.html#gaee5521bb387211a2d16e3d56585f144d", null ],
     [ "free_string", "d1/d34/a01211.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "get_argp_doc_by_name", "d1/d35/a01184.html#ab05fa7b538867a712df9e3abecacf7e8", null ],
     [ "get_ip_addresses", "d2/da6/a01210.html#gaeb33fd23094646ae1161efc4df11675d", null ],
     [ "get_local_timestamp", "d2/da6/a01210.html#ga35e3a7ccc0c4172355b6886c7980c646", null ],
     [ "get_user_str", "d2/da6/a01210.html#gaf7a1a752acebb6ec74ad40298464ceac", null ],
