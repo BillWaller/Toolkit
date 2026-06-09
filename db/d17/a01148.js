@@ -1,4 +1,6 @@
 var a01148 =
 [
-    [ "main", "db/d17/a01148.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
+    [ "KSTRLEN", "db/d17/a01148.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "popup_ckeys", "db/d17/a01148.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

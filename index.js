@@ -1,5 +1,6 @@
 var index =
 [
+    [ "C-Menu Detached Executables", "index.html#c-menu-detached-executables", null ],
     [ "C-Menu Themes", "index.html#c-menu-themes", null ],
     [ "Installment Loan Calculator - Built with C-Menu", "index.html#installment-loan-calculator---built-with-c-menu-1", null ],
     [ "New Features for lf", "index.html#new-features-for-lf-1", null ],
