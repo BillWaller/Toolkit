@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: themes</title>
+<title>C-Menu: C-Menu ROADMAP</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,60 +110,81 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('df/d75/a01447.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">themes </div></div>
+  <div class="headertitle"><div class="title">C-Menu ROADMAP </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md149"></a> <img src="../../Themes.png" alt="" class="inline" title="C-Menu Themes"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="c-menu-how-to-themes"></a>
-C-Menu How-To Themes</h1>
-<p>C-Menu supports themes, which allow you to customize the appearance of the menu. You can create your own themes or use one of the built-in themes.</p>
-<h2 class="doxsection"><a class="anchor" id="selecting-themes"></a>
-Selecting Themes</h2>
-<p>To select a theme, go to the C-Menu Workstation Configuration <a class="el" href="../../d7/d41/a01312.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> and select the "Select C-Menu Theme" option. This will display a list of available themes. Select the theme you want by clicking on it, or use the arrow keys to position the cursor on the theme and press "t" or " " (spacebar) to select it.")
-
-@image html screenshots/GreenDark.png "Select Theme"    </p>
-<p>That's it. The windows will instantly render with the theme you selected.</p>
-<h2 class="doxsection"><a class="anchor" id="creating-new-themes"></a>
-Creating New Themes</h2>
-<p>To create a new theme, select "Create C-Menu Theme" from the C-Menu Workstation Configuration <a class="el" href="../../d7/d41/a01312.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>. C-Menu <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> will open a screen similar to the one used for selecting themes, but the title will be "Choose Theme Template". Select a theme template to use as a starting point for you new theme.</p>
-<p>When you select a theme template, C-Menu <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> will make a copy of the file you selected as a template and o pen it in your default text editor. Below, you can see how the file looks when opened in Neovim with the Colorizer plugin enabled. The Colorizer plugin will display the colors and update them as you edit the file, making it easier to see the changes you are making to the theme.</p>
-<p><a href="https://github.com/norcalli/nvim-colorizer.lua">Neovim Colorizer on github</a></p>
-<p>The C-Menu theme files are extensions of the C-Menu configuration file. Any key value pair recognized by the C-Menu configuration file parser may be placed in either the C-Menu main configuration, (generally ~/menuapp/.minitrc) or a theme file. See C-Menu Configuration Files below for more information on the C-Menu configuration file format and parsing rules.</p>
-<div class="image">
-<img src="../../edit_theme.png" alt=""/>
-<div class="caption">
-Edit C-Menu Theme</div></div>
-    <h2 class="doxsection"><a class="anchor" id="key-value-pairs"></a>
-Key Value Pairs</h2>
-<p>The colors are standard six-digit html-style hex color codes in the format '#RRGGBB', where RR, GG, and BB are two-digit hexadecimal numbers representing the red, green, and blue components of the color, respectively. For example, '#FF0000' represents pure red, '#00FF00' represents pure green, and '#0000FF' represents pure blue.</p>
-<p>The hex color codes must begin with a '#" character, followed by exactly six hexadecimal digits.
-
-@subsection comments Comments
-
-A '#' character that is not part of a value is treated as a comment character,
-and the rest of the line is ignored. This allows you to add comments documenting
-your entries in the theme file.
-
-@subsection saving-the-theme-file Saving the Theme File
-
-When you are finished editing the theme file, save it and close the text editor. You may use the name assigned, which will be in the form, "New.XXXXX", where "XXXXX" is a random string of characters, or you can rename the file to something more descriptive.
-There is no restriction on the names of theme files except that "default" is
-reserved for the default theme. The new theme will be available for selection in the "Select C-Menu Theme" menu.</p>
-<h2 class="doxsection"><a class="anchor" id="c-menu-configuration-files"></a>
-C-Menu Configuration Files</h2>
-<p>C-Menu configuration files are text files that contain key value pairs that configure the appearance and behavior of C-Menu.</p>
-<h3 class="doxsection"><a class="anchor" id="processing-order"></a>
-Processing Order</h3>
-<p>C-Menu processes key value pairs in reading order from its main configuraiton file, ~/ menuapp /.minitrc, and any other configuration files sourced with include statements such as the following:</p>
-<div class="fragment"><div class="line">include = ~/menuapp/themes/default</div>
-</div><!-- fragment --><p>Assuming your configuration file is in ~/menuapp/themes/Red, you could create a symbolic link named default that points to Red, and then include default in your main configuration file. (Actually ~/menuapp/.minitrc already includes default, so you would only need to create the theme file and the symbolic link.</p>
-<div class="fragment"><div class="line">ln -s Red default</div>
-</div><!-- fragment --><p>Key value pairs included from configuration files (including theme files) are processed in reading order as they are included.</p>
-<p>This is significant in the event that a key is included more than once in the configuration file and / or included files. Only the last value read for a key will be used by C-Menu.</p>
-<p>If you want to override key values in the C-Menu configuration file, you can do so by including a supplemental configuration file that contains the desired key value pairs. The key value pairs in the included file will be processed in reading order after the key value pairs in the main configuration file, so they will override any duplicate key values in the main configuration file. Conversely, if you want to use a supplemental configuration as the default, include it first.</p>
-<h3 class="doxsection"><a class="anchor" id="parsing-rules"></a>
-Parsing Rules</h3>
-<p>Parsing: Lines beginning with # are comments and are ignored. Lines containing key=value pairs are parsed and the key and value are extracted. Lines without an '=' are ignored. Values are stripped of leading and trailing whitespace and quotes. Values can be enclosed in single or double quotes to preserve leading and trailing whitespace. Values can also be specified as hex color codes such as #ff0000 for red. If a value is specified as a hex color code, it is parsed and stored as a hex color code in the configuration. An unquoted '#' that is not part of a six digit hex color code and after key values have been extracted is the beginning of a comment. </p>
+<div class="textblock"><p><a class="anchor" id="c-menu-roadmap"></a></p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md029-tasks-to-complete-before-030"></a>
+0.2.9 Tasks to Complete before 0.3.0</h1>
+<p>Before we added the Ncurses virtual pad and line numbers, C-Menu <a class="el" href="../../db/da8/a01323.html">View</a>'s window would resize automatically if the user decreased the size of the terminal window. That capability was broken by adding the pad, the line number window, and a separate command line window. Now, we must go back and resize all four windows instead of two. It's not just a matter of resizing but also sequencing the resizing and redrawing of the windows to avoid flickering and other visual artifacts. This is a non-trivial task, but it is necessary to ensure that C-Menu <a class="el" href="../../db/da8/a01323.html">View</a> remains user-friendly and visually appealing.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md030-on-the-horizon"></a>
+0.3.0 On the Horizon</h1>
+<h2 class="doxsection"><a class="anchor" id="asynchronous-communication-and-serialization"></a>
+Asynchronous Communication and Serialization</h2>
+<ul>
+<li>Currently, C-Menu can communicate via command-line arguments, pipes, or files, but a facility is needed for handling asynchronous submission over a network. One fairly simple way to get started would be to set up an MQTT broker.</li>
+<li>As C-Menu continues to employ more sophisticated technologies, the old text file configurations are wearing thin. I would like to move the information in the description files to a more structured format, such as JSON Forms. It looks like JSON is the standard, but I would like to have some input from users.</li>
+<li>Why not develop a C-Menu system to manage IOT devices. IOT uses M2M communication, generally over MQTT.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md029-wrap-up"></a>
+0.2.9 Wrap-Up</h1>
+<ul>
+<li><a class="el" href="../../d2/d8e/a01315.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d2/d4c/a01307.html">Form</a>, <a class="el" href="../../d1/d72/a01319.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../db/da8/a01323.html">View</a> Pop-ups. <a class="el" href="../../db/da8/a01323.html">View</a> currently uses a <a class="el" href="../../d2/d4c/a01307.html">Form</a> pop-up for entering file names. That capability is being polished and expanded to be more flexible and user-friendly. The idea is to have simple function calls with minimal parameters to easily create pop-up's. Once we have that debugged and working well, we will expand the ability to create pop-ups in the description files.</li>
+<li><a class="el" href="../../d2/d8e/a01315.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d2/d4c/a01307.html">Form</a>, <a class="el" href="../../d1/d72/a01319.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../db/da8/a01323.html">View</a>, and CKeys have been combined into a single executable. The individual executables were running about 150K, and the single executable is only 158K. The individual executables have been removed from the repository. You can create form, pick, view, and ckeys as symbolic links to "menu" and from the command line, they will work exactly as the individual executables did before.</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md029---pre-release"></a>
+0.2.9 - Pre-Release</h1>
+<p><a class="el" href="../../d2/d8e/a01315.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d2/d4c/a01307.html">Form</a>, <a class="el" href="../../d1/d72/a01319.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../db/da8/a01323.html">View</a>, and General features are still being developed and de-bugged.When the features are ready, the version will be updated to 1.0.0 and the roadmap will be updated with the new features and enhancements.</p>
+<p>There are a few more features that will be added prior to the 1.0.0 release, but they are not yet finalized and may change based on user feedback and testing.</p>
+<h2 class="doxsection"><a class="anchor" id="form-2"></a>
+Form</h2>
+<ul>
+<li><a class="el" href="../../d2/d4c/a01307.html">Form</a> Pop-ups. <a class="el" href="../../db/da8/a01323.html">View</a> currently uses a <a class="el" href="../../d2/d4c/a01307.html">Form</a> pop-up for entering file names, but that capability needs to be polished and expanded to be more flexible and user-friendly. The idea is to have a simple function call with minimal parameters to create a <a class="el" href="../../d2/d4c/a01307.html">Form</a> pop-up. The function should default to sane values, but allow styling and layout to be customizable.</li>
+<li>Currently, data can be communicated via command-line arguments, pipes, or files, but a facility is needed for handling asynchronous submission over a network. This will be added in a future release.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="pick-1"></a>
+Pick</h2>
+<ul>
+<li><a class="el" href="../../d1/d72/a01319.html" title="Pick data structure.">Pick</a> pop-ups and drop-downs. Pic currently supports communication via command-line arguments, pipes, and files, but it needs a more user-friendly interface for selecting options. The idea is to have a simple function call with minimal parameters to create a <a class="el" href="../../d1/d72/a01319.html" title="Pick data structure.">Pick</a> pop-up or drop-down. The function should default to sane values, but allow styling and layout to be customizable.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="exercises---example-use-cases"></a>
+Exercises - Example Use Cases</h2>
+<ul>
+<li>This may be more of a learning than a teaching tool. The idea is to have a set of exercises that demonstrate how to use the various features of C-Menu in different scenarios. These exercises will be designed to be simple and easy to follow, and will cover a range of use cases from basic to advanced. While developing these exercises, We, I and any collaborators who volunteer to help, will be looking for feedback from users to ensure that they are useful and relevant. There is no doubt that developing these exercises will expose areas of C-Menu that need improvement, and we will be using that feedback to make C-Menu better for everyone.</li>
+</ul>
+<p>Ideas for exercises include:</p>
+<ul>
+<li>UI for sqlite3 General Ledger, A/R, or Payables</li>
+<li>UI for NetworkManager like nmtui</li>
+<li>UI for systemctl, journalctl, and other systemd utilities</li>
+<li>UI for System Troubleshooting and Maintenance</li>
+<li>UI for Update-Alternatives</li>
+<li>UI for Rescue CD</li>
+<li>UI for Linux From Scratch Installation</li>
+<li>Plugins for Neovim, Vim, Emacs, and other text editors</li>
+<li>UI for Server and Embedded System Management</li>
+<li>UI for managing IOT devices</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="view-2"></a>
+View</h2>
+<ul>
+<li><a class="el" href="../../db/da8/a01323.html">View</a> is looking pretty good at this point. The line number table was a major improvement, and not just for the pretty display. In conjunction with memory mapped file I-O, the line number table dramatically simplifies internal navigation and boosts performance to obscene levels.</li>
+</ul>
+<p>There is one improvement I would like to make, and that is to add multi-threading support to populate the line number table in the background while the user is viewing the file. That would involve creating a separate thread with a separate buffer that won't interfere with the main thread's use of it's buffer. That should be no problem as both buffers would be read-only. No one has complained, so this may be vanity work, but it would be a fun challenge.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md100---initial-release"></a>
+1.0.0 - Initial Release</h1>
+<h2 class="doxsection"><a class="anchor" id="general"></a>
+General</h2>
+<ul>
+<li>JSON - Look at MaterialUI</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md110---feature-enhancements"></a>
+1.1.0 - Feature Enhancements</h1>
+<h2 class="doxsection"><a class="anchor" id="general-1"></a>
+General</h2>
+<ul>
+<li>Consider a snap-on GUI front end. </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -1,7 +1,7 @@
 var a00731 =
 [
-    [ "Line", "d1/d56/a01308.html", "d1/d56/a01308" ],
-    [ "Menu", "d7/d41/a01312.html", "d7/d41/a01312" ],
+    [ "Line", "de/d69/a01311.html", "de/d69/a01311" ],
+    [ "Menu", "d2/d8e/a01315.html", "d2/d8e/a01315" ],
     [ "MAX_MENU_LINES", "df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1", null ],
     [ "MenuAction", "df/df7/a00731.html#ab99074a1f6b7e8ff7730342913aae3a3", [
       [ "MA_NEW", "df/df7/a00731.html#ab99074a1f6b7e8ff7730342913aae3a3a5967abe3643398691f224c1af8cf764b", null ],
@@ -34,6 +34,6 @@ var a00731 =
       [ "MT_CHOICE", "df/df7/a00731.html#a76a655b009bde19236e4bbc30df8ceeca95865ba7b6fd4876e243bffae44a5761", null ]
     ] ],
     [ "free_menu_line", "df/df7/a00731.html#a9751cef6e3e322c8aac50c78e4f70089", null ],
-    [ "get_command_type", "d8/ddf/a01238.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "get_command_type", "d3/d07/a01241.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
     [ "menu", "df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb", null ]
 ];

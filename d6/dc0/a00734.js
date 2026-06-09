@@ -1,6 +1,6 @@
 var a00734 =
 [
-    [ "View", "df/dec/a01320.html", "df/dec/a01320" ],
+    [ "View", "db/da8/a01323.html", "db/da8/a01323" ],
     [ "_XOPEN_SOURCE_EXTENDED", "d6/dc0/a00734.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
     [ "BUFSIZ", "d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe", null ],
     [ "COLOR_LEN", "d6/dc0/a00734.html#ab5557ed18d83facb69dd68b30629c37e", null ],
@@ -19,7 +19,7 @@ var a00734 =
       [ "PT_LONG", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a", null ],
       [ "PT_STRING", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef", null ]
     ] ],
-    [ "cat_file", "d7/dc5/a01242.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "cat_file", "d1/d31/a01245.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
     [ "get_cmd_spec", "d6/dc0/a00734.html#a92b33aa9664abadbfbf0a51737d68af2", null ],
     [ "go_to_position", "d6/dc0/a00734.html#abb914e12c6340c1b5a3d887cdf4ddc31", null ],
     [ "err_msg", "d6/dc0/a00734.html#ab01cd88e27f549b782cb4220d1742373", null ],
