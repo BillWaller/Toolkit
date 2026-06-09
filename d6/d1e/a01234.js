@@ -1,10 +1,15 @@
 var a01234 =
 [
-    [ "capture_curses_tioctl", "d6/d1e/a01234.html#ga4d0a6767e791cf93a268ebe9ba02aa24", null ],
-    [ "capture_shell_tioctl", "d6/d1e/a01234.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "d6/d1e/a01234.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "d6/d1e/a01234.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_curses_tioctl", "d6/d1e/a01234.html#ga1c8e0f0a02e08c783231a20093fb8410", null ],
-    [ "restore_shell_tioctl", "d6/d1e/a01234.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "d6/d1e/a01234.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "derive_file_spec", "d6/d1e/a01234.html#ga20c40545a1e05954b496c6d674d31458", null ],
+    [ "display_version", "d6/d1e/a01234.html#ga33abf350aae0212c85a5903e41764025", null ],
+    [ "mapp_initialization", "d6/d1e/a01234.html#gaccd65939c0ce6f0d940c5cf795a1e8fa", null ],
+    [ "opt_prt_bool", "d6/d1e/a01234.html#ga4cea5ec97a8076e2a944e2c441ebb091", null ],
+    [ "opt_prt_char", "d6/d1e/a01234.html#ga3d0b179ebc74f8a911a4152f54e7a8a7", null ],
+    [ "opt_prt_double", "d6/d1e/a01234.html#ga365153038835675ce050503313cea890", null ],
+    [ "opt_prt_int", "d6/d1e/a01234.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e", null ],
+    [ "opt_prt_str", "d6/d1e/a01234.html#ga086c2240ffa5e497b67d630ea0d206b5", null ],
+    [ "parse_opt_args", "d6/d1e/a01234.html#ga11b56c5001e3ca95f4d0a28903b29609", null ],
+    [ "process_config_files", "d6/d1e/a01234.html#ga58156f315145adb8845909687dec31f0", null ],
+    [ "write_config", "d6/d1e/a01234.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
+    [ "zero_opt_args", "d6/d1e/a01234.html#gae9b71868d00a28cdcf5f4514e662edfe", null ]
 ];

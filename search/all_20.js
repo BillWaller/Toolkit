@@ -1,4 +1,11 @@
 var searchData=
 [
-  ['zero_5fopt_5fargs_0',['zero_opt_args',['../de/d7e/a01222.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *):&#160;init.c'],['../de/d7e/a01222.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *init):&#160;init.c']]]
+  ['y_0',['y',['../d4/d49/a01316.html#afeda653d0965974396dcb51bb928290d',1,'Pick']]],
+  ['y_5foffset_1',['y_offset',['../d4/d49/a01316.html#addc0ff4e89261e6a37a5a7d43656f4b2',1,'Pick']]],
+  ['yellow_2',['yellow',['../d8/d7a/a01292.html#a265ad18d9a132a8c4c0280b116ca3203',1,'SIO']]],
+  ['you_20can_20t_20stop_20typing_20vi_3',['If You Can&apos;t Stop Typing &quot;vi&quot;',['../d8/d22/a01446.html#if-you-cant-stop-typing-vi',1,'']]],
+  ['you_20encounter_20any_20issues_20or_20have_20questions_20feel_20free_20to_20open_20an_20issue_20on_20the_20c_20menu_20github_20repository_4',['you encounter any issues or have questions feel free to open an issue on the C Menu GitHub repository',['../dc/de6/a01426.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-1',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository'],['../db/df2/a01425.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.'],['../db/dff/a01432.html#autotoc_md-enjoy-using-c-menu-if-you-encounter-any-issues-or-have-questions-feel-free-to-open-an-issue-on-the-c-menu-github-repository-2',1,'🐸 Enjoy using C-Menu! If you encounter any issues or have questions, feel free to open an issue on the C-Menu GitHub repository.']]],
+  ['your_20changes_5',['2. Make Your Changes',['../d8/dd0/a01430.html#autotoc_md2-make-your-changes',1,'']]],
+  ['your_20environment_6',['1. Set Up Your Environment',['../d8/dd0/a01430.html#autotoc_md1-set-up-your-environment',1,'']]],
+  ['your_20terminal_20emulator_7',['Customize Your Terminal Emulator',['../db/dff/a01432.html#customize-your-terminal-emulator',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: pick_engine.c File Reference</title>
+<title>C-Menu: init_view.c File Reference</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,337 +110,55 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('de/df1/a01151.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">pick_engine.c File Reference</div></div>
+  <div class="headertitle"><div class="title">init_view.c File Reference<div class="ingroups"><a class="el" href="../../dd/dad/a01235.html">Initializing View I/O</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>pick from a list of choices  
+<p>Initialize C-Menu <a class="el" href="../../df/dec/a01320.html">View</a> Screen IO and Input.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;sys/wait.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;sys/sysmacros.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wait.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for pick_engine.c:</div>
+Include dependency graph for init_view.c:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d97/a01152.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../de/df1/a01151_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ac7cb90f8bfd3ab578f6d2db91dd93565" id="r_ac7cb90f8bfd3ab578f6d2db91dd93565"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac7cb90f8bfd3ab578f6d2db91dd93565">DEBUG_IMMEDOK</a></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga98b36615c0627c4195c40b6c23d6062a" id="r_ga98b36615c0627c4195c40b6c23d6062a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga98b36615c0627c4195c40b6c23d6062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deselects the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:gacd6b9991f2aa305f622f5d2515815bba" id="r_gacd6b9991f2aa305f622f5d2515815bba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gacd6b9991f2aa305f622f5d2515815bba">display_page</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:gacd6b9991f2aa305f622f5d2515815bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
-<tr class="memitem:gaeebc4c0b94ca97d753e10a0cd1798730" id="r_gaeebc4c0b94ca97d753e10a0cd1798730"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gaeebc4c0b94ca97d753e10a0cd1798730">display_pick_help</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaeebc4c0b94ca97d753e10a0cd1798730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the help screen for the pick interface using view.  <br /></td></tr>
-<tr class="memitem:gaf7fcbb1c8b67a4d11c86ba7209f397c2" id="r_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes specified command with selected objects as arguments.  <br /></td></tr>
-<tr class="memitem:ga1b2ee87543245e612c1710ea58930a17" id="r_ga1b2ee87543245e612c1710ea58930a17"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init, int argc, char **argv, int begy, int begx)</td></tr>
-<tr class="memdesc:ga1b2ee87543245e612c1710ea58930a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick structure and opens pick input file or pipe.  <br /></td></tr>
-<tr class="memitem:ga91b2cda407803ee4367f7efd5487863c" id="r_ga91b2cda407803ee4367f7efd5487863c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga91b2cda407803ee4367f7efd5487863c">match_objects</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick, char *s)</td></tr>
-<tr class="memdesc:ga91b2cda407803ee4367f7efd5487863c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
-<tr class="memitem:gaf20c847dc030116f9999adbba681000c" id="r_gaf20c847dc030116f9999adbba681000c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gaf20c847dc030116f9999adbba681000c">open_pick_win</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaf20c847dc030116f9999adbba681000c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the pick window based on the parameters specified in the <a class="el" href="../../d6/dae/a01304.html" title="Pick data structure.">Pick</a> structure.  <br /></td></tr>
-<tr class="memitem:ga8feb6cd586d503a676b831ec722576fb" id="r_ga8feb6cd586d503a676b831ec722576fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga8feb6cd586d503a676b831ec722576fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs selected objects to specified output file.  <br /></td></tr>
-<tr class="memitem:gab97dcab41017c5132f52b682437a151e" id="r_gab97dcab41017c5132f52b682437a151e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gab97dcab41017c5132f52b682437a151e">pick_engine</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gab97dcab41017c5132f52b682437a151e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick interface, calculates window size and position, and enters picker loop.  <br /></td></tr>
-<tr class="memitem:ga0dae7df97392da1a79cba0f852c11f5f" id="r_ga0dae7df97392da1a79cba0f852c11f5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init, char *field)</td></tr>
-<tr class="memdesc:ga0dae7df97392da1a79cba0f852c11f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop for handling user input and interactions in the pick interface.  <br /></td></tr>
-<tr class="memitem:gaabda879000cf8135245ef451de08f780" id="r_gaabda879000cf8135245ef451de08f780"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gaabda879000cf8135245ef451de08f780">read_pick_input</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaabda879000cf8135245ef451de08f780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads pick input from file pointer and saves objects into pick structure.  <br /></td></tr>
-<tr class="memitem:a969bb5ac3fcb5f3565448e8d0da6efc4" id="r_a969bb5ac3fcb5f3565448e8d0da6efc4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a969bb5ac3fcb5f3565448e8d0da6efc4">read_theme</a> (<a class="el" href="../../d5/d6e/a01240.html">Init</a> *)</td></tr>
-<tr class="memitem:gab2173ff8fb800d126c180487744672d5" id="r_gab2173ff8fb800d126c180487744672d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#gab2173ff8fb800d126c180487744672d5">reverse_object</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:gab2173ff8fb800d126c180487744672d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the display of the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:ga02f90007f2422dd2094ab64569e157f0" id="r_ga02f90007f2422dd2094ab64569e157f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga02f90007f2422dd2094ab64569e157f0">save_object</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick, char *s)</td></tr>
-<tr class="memdesc:ga02f90007f2422dd2094ab64569e157f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a string as an object in the pick structure.  <br /></td></tr>
-<tr class="memitem:ga036c2f9cdf302cced4d9b703022664c0" id="r_ga036c2f9cdf302cced4d9b703022664c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga036c2f9cdf302cced4d9b703022664c0">toggle_object</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga036c2f9cdf302cced4d9b703022664c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the selection state of the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:ga650262f8279502ebc73607394dd7af13" id="r_ga650262f8279502ebc73607394dd7af13"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/da8/a01227.html#ga650262f8279502ebc73607394dd7af13">unreverse_object</a> (<a class="el" href="../../d6/dae/a01304.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga650262f8279502ebc73607394dd7af13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unreverses the display of the currently selected object in pick window.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:acdb9de82d81b176784185dea9063b57c" id="r_acdb9de82d81b176784185dea9063b57c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdb9de82d81b176784185dea9063b57c">calculated_idx</a></td></tr>
-<tr class="memitem:a4a50bfe3f8460978b34566ec3dff7adb" id="r_a4a50bfe3f8460978b34566ec3dff7adb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4a50bfe3f8460978b34566ec3dff7adb">obj_idx</a></td></tr>
-<tr class="memitem:a8f93294009502446912fa64f33731029" id="r_a8f93294009502446912fa64f33731029"><td class="memItemLeft">char const&#160;</td><td class="memItemRight"><a class="el" href="#a8f93294009502446912fa64f33731029">pagers_editors</a> [12][10]</td></tr>
-<tr class="memitem:ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" id="r_ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">pg_lines</a></td></tr>
-<tr class="memitem:ac7ac4adf3c3409d847a57c140700f334" id="r_ac7ac4adf3c3409d847a57c140700f334"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac7ac4adf3c3409d847a57c140700f334">pipe_fd</a> [2]</td></tr>
-<tr class="memitem:ab57f05e19e1e81af17fbbd3a766c405a" id="r_ab57f05e19e1e81af17fbbd3a766c405a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab57f05e19e1e81af17fbbd3a766c405a">tbl_col</a></td></tr>
-<tr class="memitem:a7df4e526a3af8e113bbc05ca011c2341" id="r_a7df4e526a3af8e113bbc05ca011c2341"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7df4e526a3af8e113bbc05ca011c2341">tbl_cols</a></td></tr>
-<tr class="memitem:a25fe2a76cfd155c51a46c99d6a1cf4d9" id="r_a25fe2a76cfd155c51a46c99d6a1cf4d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">tbl_line</a></td></tr>
-<tr class="memitem:ae7c3abf692920540a78bc3322d02828a" id="r_ae7c3abf692920540a78bc3322d02828a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae7c3abf692920540a78bc3322d02828a">tbl_page</a></td></tr>
-<tr class="memitem:acbe29ef30ea713ef47f3cd892310ca50" id="r_acbe29ef30ea713ef47f3cd892310ca50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acbe29ef30ea713ef47f3cd892310ca50">tbl_pages</a></td></tr>
+<tr class="memitem:ga8dd32c1a4c961ec715f63625a6f87b61" id="r_ga8dd32c1a4c961ec715f63625a6f87b61"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/dad/a01235.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a> (<a class="el" href="../../d0/d33/a01252.html">Init</a> *init, char *title)</td></tr>
+<tr class="memdesc:ga8dd32c1a4c961ec715f63625a6f87b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the C-Menu <a class="el" href="../../df/dec/a01320.html">View</a> in box window mode.  <br /></td></tr>
+<tr class="memitem:ga5d69ccbd704b60891cdc788693d436d4" id="r_ga5d69ccbd704b60891cdc788693d436d4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/dad/a01235.html#ga5d69ccbd704b60891cdc788693d436d4">init_view_full_screen</a> (<a class="el" href="../../d0/d33/a01252.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga5d69ccbd704b60891cdc788693d436d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize C-Menu <a class="el" href="../../df/dec/a01320.html">View</a> in full screen mode.  <br /></td></tr>
+<tr class="memitem:gaa64cfaf51c250788f093130763495ac4" id="r_gaa64cfaf51c250788f093130763495ac4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/dad/a01235.html#gaa64cfaf51c250788f093130763495ac4">view_calc_full_screen_dimensions</a> (<a class="el" href="../../d0/d33/a01252.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaa64cfaf51c250788f093130763495ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the dimensions for full screen mode.  <br /></td></tr>
+<tr class="memitem:ga0715aa3077a3c6ad7b2f7a86b30db967" id="r_ga0715aa3077a3c6ad7b2f7a86b30db967"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/dad/a01235.html#ga0715aa3077a3c6ad7b2f7a86b30db967">view_calc_win_dimensions</a> (<a class="el" href="../../d0/d33/a01252.html">Init</a> *init, char *title)</td></tr>
+<tr class="memdesc:ga0715aa3077a3c6ad7b2f7a86b30db967"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the dimensions and position of the box window for C-Menu <a class="el" href="../../df/dec/a01320.html">View</a>.  <br /></td></tr>
+<tr class="memitem:ga62d3266bd187c1e3cc267b6cbb60982e" id="r_ga62d3266bd187c1e3cc267b6cbb60982e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d8e/a01224.html#ga62d3266bd187c1e3cc267b6cbb60982e">view_full_screen_resize</a> (<a class="el" href="../../d0/d33/a01252.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga62d3266bd187c1e3cc267b6cbb60982e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the full screen view and its components.  <br /></td></tr>
+<tr class="memitem:gab050f5482419339e9207dbdc65a7b49e" id="r_gab050f5482419339e9207dbdc65a7b49e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/dad/a01235.html#gab050f5482419339e9207dbdc65a7b49e">view_init_input</a> (<a class="el" href="../../df/dec/a01320.html">View</a> *view, char *file_name)</td></tr>
+<tr class="memdesc:gab050f5482419339e9207dbdc65a7b49e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the input for a C-Menu <a class="el" href="../../df/dec/a01320.html">View</a>.  <br /></td></tr>
+<tr class="memitem:ga06d7686a3523351e9a2cfb3092a1e8b6" id="r_ga06d7686a3523351e9a2cfb3092a1e8b6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d8e/a01224.html#ga06d7686a3523351e9a2cfb3092a1e8b6">view_win_resize</a> (<a class="el" href="../../d0/d33/a01252.html">Init</a> *init, char *title)</td></tr>
+<tr class="memdesc:ga06d7686a3523351e9a2cfb3092a1e8b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resize the current window and its box, and update the title.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>pick from a list of choices </p>
+<div class="textblock"><p>Initialize C-Menu <a class="el" href="../../df/dec/a01320.html">View</a> Screen IO and Input. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="ac7cb90f8bfd3ab578f6d2db91dd93565" name="ac7cb90f8bfd3ab578f6d2db91dd93565"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7cb90f8bfd3ab578f6d2db91dd93565">&#9670;&#160;</a></span>DEBUG_IMMEDOK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define DEBUG_IMMEDOK</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00023">23</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a969bb5ac3fcb5f3565448e8d0da6efc4" name="a969bb5ac3fcb5f3565448e8d0da6efc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a969bb5ac3fcb5f3565448e8d0da6efc4">&#9670;&#160;</a></span>read_theme()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int read_theme </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d5/d6e/a01240.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00556">556</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  556</span>                           {</div>
-<div class="line"><span class="lineno">  557</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><span class="lineno">  558</span>    <span class="keywordtype">char</span> theme_control_file[<a class="code hl_define" href="../../db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno">  559</span>    <a class="code hl_function" href="../../d5/d39/a01219.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_theme, <a class="code hl_define" href="../../db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  560</span>    <a class="code hl_function" href="../../d5/d39/a01219.html#ga4981b07a1fc8048829e8b0bf8327bfad">dir_name</a>(theme_control_file, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_theme);</div>
-<div class="line"><span class="lineno">  561</span>    <a class="code hl_function" href="../../d5/d39/a01219.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(theme_control_file, <span class="stringliteral">&quot;/.control&quot;</span>, <a class="code hl_define" href="../../db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  562</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d5/d39/a01219.html#gaf067df63eb2058cb3a9dbaa05a3261b5">is_newer</a>(theme_control_file, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_theme)) {</div>
-<div class="line"><span class="lineno">  563</span>        rc = <a class="code hl_function" href="../../dd/dd8/a00719.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_theme, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
-<div class="line"><span class="lineno">  564</span>        <span class="keywordflow">if</span> (rc)</div>
-<div class="line"><span class="lineno">  565</span>            <span class="keywordflow">return</span> rc;</div>
-<div class="line"><span class="lineno">  566</span>        <a class="code hl_struct" href="../../d8/d0d/a01280.html">SIO</a> *<a class="code hl_variable" href="../../d4/d5d/a01202.html#aa0282924076d87477074665400a5f76e">sio</a> = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;sio;</div>
-<div class="line"><span class="lineno">  567</span>        <a class="code hl_function" href="../../dd/dd8/a00719.html#ab4ea966209f971ec87c0ec8cd48394c6">initialize_local_colors</a>(<a class="code hl_variable" href="../../d4/d5d/a01202.html#aa0282924076d87477074665400a5f76e">sio</a>);</div>
-<div class="line"><span class="lineno">  568</span>        wrefresh(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;pick-&gt;win);</div>
-<div class="line"><span class="lineno">  569</span>        <span class="comment">// wrefresh(init-&gt;pick-&gt;box);</span></div>
-<div class="line"><span class="lineno">  570</span>        <span class="comment">// wrefresh(init-&gt;pick-&gt;win);</span></div>
-<div class="line"><span class="lineno">  571</span>        <span class="comment">// wrefresh(init-&gt;pick-&gt;win2);</span></div>
-<div class="line"><span class="lineno">  572</span>        <span class="comment">// display_page(pick);</span></div>
-<div class="line"><span class="lineno">  573</span>    }</div>
-<div class="line"><span class="lineno">  574</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  575</span>}</div>
-<div class="ttc" id="aa00719_html_a3d163d0928a8410a38d85fddf9b0d0d8"><div class="ttname"><a href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a></div><div class="ttdeci">Init * init</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00088">init.c:88</a></div></div>
-<div class="ttc" id="aa00719_html_a50e5693f7cfa423d5e728cb7319e69df"><div class="ttname"><a href="../../dd/dd8/a00719.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a></div><div class="ttdeci">int process_config_file(char *, Init *)</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00606">init.c:606</a></div></div>
-<div class="ttc" id="aa00719_html_ab4ea966209f971ec87c0ec8cd48394c6"><div class="ttname"><a href="../../dd/dd8/a00719.html#ab4ea966209f971ec87c0ec8cd48394c6">initialize_local_colors</a></div><div class="ttdeci">void initialize_local_colors(SIO *)</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l00253">dwin.c:253</a></div></div>
-<div class="ttc" id="aa01148_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d17/a01148_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01202_html_aa0282924076d87477074665400a5f76e"><div class="ttname"><a href="../../d4/d5d/a01202.html#aa0282924076d87477074665400a5f76e">sio</a></div><div class="ttdeci">SIO * sio</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l00081">dwin.c:81</a></div></div>
-<div class="ttc" id="aa01219_html_ga4981b07a1fc8048829e8b0bf8327bfad"><div class="ttname"><a href="../../d5/d39/a01219.html#ga4981b07a1fc8048829e8b0bf8327bfad">dir_name</a></div><div class="ttdeci">bool dir_name(char *, char *)</div><div class="ttdoc">Returns the directory name of a file specification.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l01069">futil.c:1069</a></div></div>
-<div class="ttc" id="aa01219_html_ga646c47b288ba3b43714f0c0e1f88c981"><div class="ttname"><a href="../../d5/d39/a01219.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a></div><div class="ttdeci">bool expand_tilde(char *, int)</div><div class="ttdoc">Replaces &quot;~/&quot; in string with the user&#39;s home directory.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00963">futil.c:963</a></div></div>
-<div class="ttc" id="aa01219_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../d5/d39/a01219.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00566">futil.c:566</a></div></div>
-<div class="ttc" id="aa01219_html_gaf067df63eb2058cb3a9dbaa05a3261b5"><div class="ttname"><a href="../../d5/d39/a01219.html#gaf067df63eb2058cb3a9dbaa05a3261b5">is_newer</a></div><div class="ttdeci">bool is_newer(char *, char *)</div><div class="ttdoc">Checks if the file specified by &quot;fut&quot; is newer than the file specified by &quot;control&quot;.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00153">futil.c:153</a></div></div>
-<div class="ttc" id="aa01280_html"><div class="ttname"><a href="../../d8/d0d/a01280.html">SIO</a></div><div class="ttdoc">The SIO structure encapsulates various aspects of the terminal&#39;s state and configuration,...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00734">cm.h:734</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/d43/a01193_source.html#l01069">dir_name()</a>, <a class="el" href="../../dd/d43/a01193_source.html#l00963">expand_tilde()</a>, <a class="el" href="../../d4/d5d/a01202_source.html#l00253">initialize_local_colors()</a>, <a class="el" href="../../dd/d43/a01193_source.html#l00153">is_newer()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00151">Init::mapp_theme</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00185">Init::pick</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00606">process_config_file()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00115">Init::sio</a>, <a class="el" href="../../dd/d43/a01193_source.html#l00566">strnz__cat()</a>, and <a class="el" href="../../db/d7c/a00722_source.html#l00035">Pick::win</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l00288">pick_engine()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/df1/a01151_a969bb5ac3fcb5f3565448e8d0da6efc4_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/df1/a01151_a969bb5ac3fcb5f3565448e8d0da6efc4_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="acdb9de82d81b176784185dea9063b57c" name="acdb9de82d81b176784185dea9063b57c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdb9de82d81b176784185dea9063b57c">&#9670;&#160;</a></span>calculated_idx</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int calculated_idx</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00025">25</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a4a50bfe3f8460978b34566ec3dff7adb" name="a4a50bfe3f8460978b34566ec3dff7adb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a50bfe3f8460978b34566ec3dff7adb">&#9670;&#160;</a></span>obj_idx</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int obj_idx</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00025">25</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a8f93294009502446912fa64f33731029" name="a8f93294009502446912fa64f33731029"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f93294009502446912fa64f33731029">&#9670;&#160;</a></span>pagers_editors</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char const pagers_editors[12][10]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
-<div class="line">           <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
-<div class="line">           <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00043">43</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   43</span>                                  {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
-<div class="line"><span class="lineno">   44</span>                                     <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
-<div class="line"><span class="lineno">   45</span>                                     <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" name="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">&#9670;&#160;</a></span>pg_lines</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int pg_lines</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00024">24</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="ac7ac4adf3c3409d847a57c140700f334" name="ac7ac4adf3c3409d847a57c140700f334"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7ac4adf3c3409d847a57c140700f334">&#9670;&#160;</a></span>pipe_fd</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int pipe_fd[2]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00041">41</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../de/df1/a01151_source.html#l00061">init_pick()</a>.</p>
-
-</div>
-</div>
-<a id="ab57f05e19e1e81af17fbbd3a766c405a" name="ab57f05e19e1e81af17fbbd3a766c405a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab57f05e19e1e81af17fbbd3a766c405a">&#9670;&#160;</a></span>tbl_col</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_col</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00024">24</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a7df4e526a3af8e113bbc05ca011c2341" name="a7df4e526a3af8e113bbc05ca011c2341"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7df4e526a3af8e113bbc05ca011c2341">&#9670;&#160;</a></span>tbl_cols</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_cols</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00024">24</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a25fe2a76cfd155c51a46c99d6a1cf4d9" name="a25fe2a76cfd155c51a46c99d6a1cf4d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">&#9670;&#160;</a></span>tbl_line</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_line</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00024">24</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="ae7c3abf692920540a78bc3322d02828a" name="ae7c3abf692920540a78bc3322d02828a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c3abf692920540a78bc3322d02828a">&#9670;&#160;</a></span>tbl_page</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_page</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00024">24</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="acbe29ef30ea713ef47f3cd892310ca50" name="acbe29ef30ea713ef47f3cd892310ca50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbe29ef30ea713ef47f3cd892310ca50">&#9670;&#160;</a></span>tbl_pages</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_pages</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../de/df1/a01151_source.html#l00024">24</a> of file <a class="el" href="../../de/df1/a01151_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../de/df1/a01151_source.html">init_view.c</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -453,7 +171,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../de/df1/a01151.html">pick_engine.c</a></li>
+    <li class="navelem"><a href="../../de/df1/a01151.html">init_view.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: exec.c Source File</title>
+<title>C-Menu: rsh.c Source File</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,11 +110,11 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d25/a01157_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">exec.c</div></div>
+  <div class="headertitle"><div class="title">rsh.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d9/d25/a01157.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file exec.c</span></div>
-<div class="line"><span class="lineno">    2</span><span class="comment">    @brief Functions to execute external commands</span></div>
+<a href="../../d9/d25/a01157.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** @file rsh.c</span></div>
+<div class="line"><span class="lineno">    2</span><span class="comment">    @brief restricted shell to run bash as root</span></div>
 <div class="line"><span class="lineno">    3</span><span class="comment">    @author Bill Waller</span></div>
 <div class="line"><span class="lineno">    4</span><span class="comment">    Copyright (c) 2025</span></div>
 <div class="line"><span class="lineno">    5</span><span class="comment">    MIT License</span></div>
@@ -122,278 +122,250 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d25/a01157_
 <div class="line"><span class="lineno">    7</span><span class="comment">    @date 2026-02-09</span></div>
 <div class="line"><span class="lineno">    8</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/** @defgroup exec External Commands</span></div>
-<div class="line"><span class="lineno">   11</span><span class="comment">    @brief This module provides functions to execute external commands</span></div>
-<div class="line"><span class="lineno">   12</span><span class="comment">    @details Handles terminal settings, signal handling, and error reporting to</span></div>
-<div class="line"><span class="lineno">   13</span><span class="comment">   ensure a smooth user experience when executing commands from within the</span></div>
-<div class="line"><span class="lineno">   14</span><span class="comment">   application. The main functions include full_screen_fork_exec,</span></div>
-<div class="line"><span class="lineno">   15</span><span class="comment">   full_screen_shell, and fork_exec, which manage the execution of commands</span></div>
-<div class="line"><span class="lineno">   16</span><span class="comment">   while maintaining the integrity of the application&#39;s user interface.</span></div>
-<div class="line"><span class="lineno">   17</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">errno</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">fcntl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stddef</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdlib</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">stat</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">types</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">wait</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a>(<span class="keywordtype">char</span> **);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a>(<span class="keywordtype">char</span> *);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">shell</a>(<span class="keywordtype">char</span> *);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a>(<span class="keywordtype">char</span> **);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d5/d32/a01214.html#ga2f2e1496a7c253b2d58446154c98a0bf">nf_error</a>(<span class="keywordtype">int</span> ec, <span class="keywordtype">char</span> *s);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#gaf878519c68b24567c915493739b6e979">fork_detach_execvp</a>(<span class="keywordtype">char</span> **);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">/** @brief Execute a command in full screen mode</span></div>
-<div class="line"><span class="lineno">   38</span><span class="comment">    @ingroup exec</span></div>
-<div class="line"><span class="lineno">   39</span><span class="comment">    @param argv - array of arguments for the command to execute</span></div>
-<div class="line"><span class="lineno">   40</span><span class="comment">    @return the return code from the executed command</span></div>
-<div class="line"><span class="lineno">   41</span><span class="comment">    @details Clear the screen,</span></div>
-<div class="line"><span class="lineno">   42</span><span class="comment">    move the cursor to the bottom, and refresh the screen before executing</span></div>
-<div class="line"><span class="lineno">   43</span><span class="comment">   the command.</span></div>
-<div class="line"><span class="lineno">   44</span><span class="comment">    After the command completes, clear the screen, move the cursor to the</span></div>
-<div class="line"><span class="lineno">   45</span><span class="comment">   top, refresh the screen, and restore the windows. */</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="../../d8/df3/a01216.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">   46</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a>(<span class="keywordtype">char</span> **argv) {</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    fflush(stderr);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    wmove(stdscr, LINES - 1, 0);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    rc = <a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a><a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">(</a>argv<a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">)</a>;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordflow">return</span> (rc);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">/** @brief Execute a shell command in full screen mode</span></div>
-<div class="line"><span class="lineno">   55</span><span class="comment">    @ingroup exec</span></div>
-<div class="line"><span class="lineno">   56</span><span class="comment">    @param shellCmdPtr - pointer to the shell command string</span></div>
-<div class="line"><span class="lineno">   57</span><span class="comment">    @return the return code from the executed shell command</span></div>
-<div class="line"><span class="lineno">   58</span><span class="comment">    @details Clear the screen, move the cursor to the top, and refresh the</span></div>
-<div class="line"><span class="lineno">   59</span><span class="comment">   screen before executing the shell command. After the command completes,</span></div>
-<div class="line"><span class="lineno">   60</span><span class="comment">   restore the windows.</span></div>
-<div class="line"><span class="lineno">   61</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="../../d8/df3/a01216.html#gaeb3e7eb282467134ce50fde7d9ebd19d">   62</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a>(<span class="keywordtype">char</span> *shellCmdPtr) {</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    fflush(stderr);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    werase(stdscr);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    wmove(stdscr, 0, 0);</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    wrefresh(stdscr);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    rc = <a class="code hl_function" href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">shell</a><a class="code hl_function" href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">(</a>shellCmdPtr<a class="code hl_function" href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">)</a>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    touchwin(stdscr);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    wnoutrefresh(stdscr);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a><a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">(</a><a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">)</a>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    wrefresh(stdscr);</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordflow">return</span> (rc);</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">/** @brief Execute a shell command</span></div>
-<div class="line"><span class="lineno">   77</span><span class="comment">    @ingroup exec</span></div>
-<div class="line"><span class="lineno">   78</span><span class="comment">    @param shellCmdPtr - pointer to the shell command string</span></div>
-<div class="line"><span class="lineno">   79</span><span class="comment">    @return the return code from the executed shell command</span></div>
-<div class="line"><span class="lineno">   80</span><span class="comment">    @details Executes the command string using the user&#39;s shell.</span></div>
-<div class="line"><span class="lineno">   81</span><span class="comment">    If the SHELL environment variable is not set, use /bin/sh. */</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">   82</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">shell</a>(<span class="keywordtype">char</span> *shellCmdPtr) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">int</span> Eargc;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">char</span> *Eargv[<a class="code hl_define" href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a>];</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">char</span> *shellPtr;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    Eargc = 0;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    shellPtr = getenv(<span class="stringliteral">&quot;SHELL&quot;</span>);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">if</span> (shellPtr == <a class="code hl_define" href="../../d8/db9/a00725.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a> || *shellPtr == <span class="stringliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        shellPtr = <a class="code hl_define" href="../../d8/db9/a00725.html#a15eda0f69d9c3b732ff2a1420513031a">DEFAULTSHELL</a>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    Eargv[Eargc++] = strdup(shellPtr);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    Eargv[Eargc++] = <span class="stringliteral">&quot;-c&quot;</span>;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    Eargv[Eargc++] = shellCmdPtr;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    Eargv[Eargc++] = <a class="code hl_define" href="../../d8/db9/a00725.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    rc = <a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a><a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">(</a>Eargv<a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">)</a>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    free(Eargv[0]);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">return</span> (rc);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">/** @brief Fork and exec a command</span></div>
-<div class="line"><span class="lineno">  101</span><span class="comment">    @ingroup exec</span></div>
-<div class="line"><span class="lineno">  102</span><span class="comment">    @param argv - array of arguments for the command to execute</span></div>
-<div class="line"><span class="lineno">  103</span><span class="comment">    @return the return code from the executed command, or -1 on error</span></div>
-<div class="line"><span class="lineno">  104</span><span class="comment">    @details Captures and restores terminal settings around the fork and exec.</span></div>
-<div class="line"><span class="lineno">  105</span><span class="comment">    Sets signal handlers to default in the child process.</span></div>
-<div class="line"><span class="lineno">  106</span><span class="comment">    Waits for the child process to complete in the parent process.</span></div>
-<div class="line"><span class="lineno">  107</span><span class="comment">    Handles errors from fork and execvp, and reports child exit status.</span></div>
-<div class="line"><span class="lineno">  108</span><span class="comment">    Restores curses mode and keypad settings after execution.</span></div>
-<div class="line"><span class="lineno">  109</span><span class="comment">    Restores window states after execution.</span></div>
-<div class="line"><span class="lineno">  110</span><span class="comment">    Uses a temporary string buffer tmp_str for error messages.</span></div>
-<div class="line"><span class="lineno">  111</span><span class="comment">    Uses Perror for error reporting.</span></div>
-<div class="line"><span class="lineno">  112</span><span class="comment">    Uses sig_dfl_mode and sig_prog_mode for signal handling.</span></div>
-<div class="line"><span class="lineno">  113</span><span class="comment">    Uses capture_curses_tioctl and restore_curses_tioctl for terminal</span></div>
-<div class="line"><span class="lineno">  114</span><span class="comment">   settings.</span></div>
-<div class="line"><span class="lineno">  115</span><span class="comment">    Uses restore_shell_tioctl for shell terminal settings.</span></div>
-<div class="line"><span class="lineno">  116</span><span class="comment">    Uses waitpid to wait for the child process.</span></div>
-<div class="line"><span class="lineno">  117</span><span class="comment">    Uses WIFEXITED, WEXITSTATUS, WIFSIGNALED, and WTERMSIG to interpret</span></div>
-<div class="line"><span class="lineno">  118</span><span class="comment">   child status.</span></div>
-<div class="line"><span class="lineno">  119</span><span class="comment">    Uses keypad to manage keypad mode in curses.</span></div>
-<div class="line"><span class="lineno">  120</span><span class="comment">    Uses restore_wins to restore window states.</span></div>
-<div class="line"><span class="lineno">  121</span><span class="comment">    Uses errno for error codes.</span></div>
-<div class="line"><span class="lineno">  122</span><span class="comment">    Uses pid_t for process IDs.</span></div>
-<div class="line"><span class="lineno">  123</span><span class="comment">    Uses standard file descriptors STDIN_FILENO, STDOUT_FILENO,</span></div>
-<div class="line"><span class="lineno">  124</span><span class="comment">   STDERR_FILENO.</span></div>
-<div class="line"><span class="lineno">  125</span><span class="comment">    Uses execvp for executing the command.</span></div>
-<div class="line"><span class="lineno">  126</span><span class="comment">    Uses fork for creating a new process.</span></div>
-<div class="line"><span class="lineno">  127</span><span class="comment">    Uses ssnprintf for formatting error messages.</span></div>
-<div class="line"><span class="lineno">  128</span><span class="comment">    Uses switch-case for handling fork results.</span></div>
-<div class="line"><span class="lineno">  129</span><span class="comment">    Uses default shell if SHELL environment variable is not set. */</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">  130</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a>(<span class="keywordtype">char</span> **argv) {</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keywordtype">char</span> tmp_str[<a class="code hl_define" href="../../db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    pid_t pid;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordtype">int</span> status;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    <span class="keywordflow">if</span> (argv[0] == 0) {</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">(</a><span class="stringliteral">&quot;fork_exec: missing argument for execvp&quot;</span><a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">)</a>;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">return</span> (-1);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="../../d9/d25/a01157.html#a369266c24eacffb87046522897a570d5">   10</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">_GNU_SOURCE</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">errno</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">RSH_SSH</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">libssh</span><span class="preprocessor">/</span><span class="preprocessor">libssh</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../d9/d25/a01157.html#a6557db566bb2c2fee6d6de70bd0afd2f">   15</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">RSH_PAM</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <a class="code hl_define" href="../../d9/d25/a01157.html#a6557db566bb2c2fee6d6de70bd0afd2f">RSH_PAM</a></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">security</span><span class="preprocessor">/</span><span class="preprocessor">pam_appl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">security</span><span class="preprocessor">/</span><span class="preprocessor">pam_misc</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">cm</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">limits</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdbool</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stddef</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdlib</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">string</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">resource</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">types</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">sys</span><span class="preprocessor">/</span><span class="preprocessor">wait</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">syslog</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">termios</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="../../d9/d25/a01157.html#abbbcf3c42c997889127cc676754a6fea">   34</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">HOST</span> <span class="stringliteral">&quot;localhost&quot;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <a class="code hl_define" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">MAXLEN</span> 256</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">VERBOSE</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>bool F_VERBOSE = true;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#</span><span class="preprocessor">else</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="../../d9/d25/a01157.html#a9ea122171989176bc07376ae1eefc5c7">   42</a></span>bool <a class="code hl_variable" href="../../d9/d25/a01157.html#a9ea122171989176bc07376ae1eefc5c7">F_VERBOSE</a> = false;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <a class="code hl_define" href="../../d9/d25/a01157.html#a6557db566bb2c2fee6d6de70bd0afd2f">RSH_PAM</a></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">static</span> <span class="keyword">struct</span> pam_conv conv = {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    misc_conv,</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    NULL};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">/** @brief Abnormal termination - print an error message and exit</span></div>
+<div class="line"><span class="lineno">   52</span><span class="comment">    @param e Error code</span></div>
+<div class="line"><span class="lineno">   53</span><span class="comment">    @param s Error message</span></div>
+<div class="line"><span class="lineno">   54</span><span class="comment">    @details This function prints the provided error message along with the</span></div>
+<div class="line"><span class="lineno">   55</span><span class="comment">   error code and its corresponding string representation, then exits the</span></div>
+<div class="line"><span class="lineno">   56</span><span class="comment">   program with a failure status.</span></div>
+<div class="line"><span class="lineno">   57</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">ABEND</a>(<span class="keywordtype">int</span> e, <span class="keywordtype">char</span> <span class="keyword">const</span> *);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">/** @brief Main function for rsh</span></div>
+<div class="line"><span class="lineno">   61</span><span class="comment">    @param argc Argument count</span></div>
+<div class="line"><span class="lineno">   62</span><span class="comment">    @param argv Argument vector</span></div>
+<div class="line"><span class="lineno">   63</span><span class="comment">    @details If executed as &#39;rsh&#39;, this program sets the user ID and group ID to</span></div>
+<div class="line"><span class="lineno">   64</span><span class="comment">   0 (root) and then executes the user&#39;s default shell (or /usr/bin/bash if</span></div>
+<div class="line"><span class="lineno">   65</span><span class="comment">   SHELL is not set) with the provided arguments. If no arguments are given, it</span></div>
+<div class="line"><span class="lineno">   66</span><span class="comment">   runs the shell in interactive mode. To work properly, this program must be</span></div>
+<div class="line"><span class="lineno">   67</span><span class="comment">   compiled and set with the setuid bit:</span></div>
+<div class="line"><span class="lineno">   68</span><span class="comment">    @code</span></div>
+<div class="line"><span class="lineno">   69</span><span class="comment">    $ sudo -s</span></div>
+<div class="line"><span class="lineno">   70</span><span class="comment">    cc rsh.c -o rsh</span></div>
+<div class="line"><span class="lineno">   71</span><span class="comment">    sudo chown root:root rsh</span></div>
+<div class="line"><span class="lineno">   72</span><span class="comment">    sudo chmod 4755 rsh</span></div>
+<div class="line"><span class="lineno">   73</span><span class="comment">    exit</span></div>
+<div class="line"><span class="lineno">   74</span><span class="comment">    @endcode</span></div>
+<div class="line"><span class="lineno">   75</span><span class="comment">    to verify proper operation:</span></div>
+<div class="line"><span class="lineno">   76</span><span class="comment">    @code</span></div>
+<div class="line"><span class="lineno">   77</span><span class="comment">    $ rsh</span></div>
+<div class="line"><span class="lineno">   78</span><span class="comment">    $ whoami</span></div>
+<div class="line"><span class="lineno">   79</span><span class="comment">    root</span></div>
+<div class="line"><span class="lineno">   80</span><span class="comment">    @endcode</span></div>
+<div class="line"><span class="lineno">   81</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="../../d9/d25/a01157.html#a3c04138a5bfe5d72780bb7e82a18e627">   82</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d9/d31/a01208.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordtype">char</span> *cargv[30];</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">char</span> exec_cmd[<a class="code hl_define" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>] = <span class="stringliteral">&quot;/usr/bin/bash&quot;</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">RSH_LOG</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">char</span> rsh_user[MAXLEN];</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">char</span> *p;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">int</span> c;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    bool ssh_login = false;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordtype">int</span> status;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    pid_t pid;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">RSH_SSH</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">RSH_LOG</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">RSH_LOG</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">char</span> ttyname[MAXLEN];</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    p = getenv(<span class="stringliteral">&quot;USER&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    strncpy(rsh_user, p ? p : <span class="stringliteral">&quot;unknown&quot;</span>, <span class="keyword">sizeof</span>(rsh_user));</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    openlog(<span class="stringliteral">&quot;rsh&quot;</span>, LOG_PID | LOG_CONS, LOG_AUTH);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">if</span> (ttyname_r(STDERR_FILENO, ttyname, <span class="keyword">sizeof</span>(ttyname)) != 0) {</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;Error getting terminal name: %s&quot;</span>, strerror(errno));</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        fprintf(stderr, <span class="stringliteral">&quot;Error getting terminal name: %s&quot;</span>, strerror(errno));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        strncpy(ttyname, <span class="stringliteral">&quot;unknown&quot;</span>, <span class="keyword">sizeof</span>(ttyname));</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">RSH_PAM</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <a class="code hl_define" href="../../d9/d25/a01157.html#a6557db566bb2c2fee6d6de70bd0afd2f">RSH_PAM</a></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    pam_handle_t *pamh = NULL;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">int</span> retval;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">char</span> *username = getenv(<span class="stringliteral">&quot;USER&quot;</span>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> (username == NULL) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;USER environment variable not set&quot;</span>);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: USER environment variable not set\n&quot;</span>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    }</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    retval = pam_start(<span class="stringliteral">&quot;rsh-auth&quot;</span>, username, &amp;conv, &amp;pamh);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordflow">if</span> (retval != PAM_SUCCESS) {</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;PAM start failed: %s&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        fprintf(stderr, <span class="stringliteral">&quot;PAM start failed: %s\n&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <span class="comment">// Authenticate the user using PAM. The configuration for this PAM service should</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="comment">// be set to allow passwordless authentication, for example by using pam_permit.so.</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="comment">// You can create a PAM configuration file named /etc/pam.d/pam_nopass with the</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="comment">// following content:</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">// /etc/pam.d/pam_nopass:</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">// auth required pam_permit.so</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    retval = pam_authenticate(pamh, 0);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keywordflow">if</span> (retval == PAM_SUCCESS) {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        syslog(LOG_AUTH, <span class="stringliteral">&quot;Authentication succeeded for user &#39;%s&#39;: %s&quot;</span>, username, pam_strerror(pamh, retval));</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        syslog(LOG_AUTH, <span class="stringliteral">&quot;Authentication failed for user &#39;%s&#39;: %s&quot;</span>, username, pam_strerror(pamh, retval));</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        fprintf(stderr, <span class="stringliteral">&quot;Failure: Authentication failed: %s\n&quot;</span>, pam_strerror(pamh, retval));</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    }</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    <a class="code hl_function" href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">(</a><a class="code hl_function" href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">)</a>;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    curs_set(1);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">)</a>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="comment">// It&#39;s a wrap</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    pam_end(pamh, retval);</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    tmp_str[0] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    pid = fork();</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keywordflow">switch</span> (pid) {</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">case</span> -1: <span class="comment">// parent fork failed</span></div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">)</a>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        keypad(stdscr, true);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">(</a>tmp_str<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="keyword">sizeof</span>(tmp_str)<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="stringliteral">&quot;fork failed: %s, errno: %d&quot;</span><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a></div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                  argv[0]<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> errno<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">)</a>;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        <a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">)</a>;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        <span class="keywordflow">return</span> (-1);</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    <span class="keywordflow">case</span> 0: <span class="comment">// child</span></div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <a class="code hl_function" href="../../de/d16/a01228.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#gac5e3adb304b78910fc77761ef6a743f0">(</a><a class="code hl_function" href="../../de/d16/a01228.html#gac5e3adb304b78910fc77761ef6a743f0">)</a>;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        werase(stdscr);</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        wrefresh(stdscr);</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        execvp(argv[0], argv);</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">(</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">)</a>;</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">)</a>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        keypad(stdscr, true);</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        <a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">(</a>tmp_str<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="keyword">sizeof</span>(tmp_str)<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="stringliteral">&quot;execvp failed: %s, errno: %d&quot;</span><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a></div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                  argv[0]<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> errno<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">)</a>;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        <a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">)</a>;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        exit(-1);</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keywordflow">default</span>: <span class="comment">// parent</span></div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        rc = 0;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">(</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">)</a>;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        <a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">)</a>;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        waitpid(pid, &amp;status, 0);</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordflow">if</span> (WIFEXITED(status)) {</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            rc = WEXITSTATUS(status);</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                keypad(stdscr, true);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                <a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">(</a>tmp_str<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="keyword">sizeof</span>(tmp_str)<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a></div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                          <span class="stringliteral">&quot;Child %s exited  with status %d&quot;</span><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> argv[0]<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> rc<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">)</a>;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            }</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            <span class="keywordflow">if</span> (WIFSIGNALED(status)) {</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                rc = WTERMSIG(status);</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                keypad(stdscr, true);</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                <a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">(</a>tmp_str<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="keyword">sizeof</span>(tmp_str)<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a></div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>                          <span class="stringliteral">&quot;Child %s terminated by signal %d&quot;</span><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> argv[0]<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> rc<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">)</a>;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>                keypad(stdscr, true);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>                <a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">(</a>tmp_str<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> <span class="keyword">sizeof</span>(tmp_str)<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>                          <span class="stringliteral">&quot;Child %s terminated abnormally&quot;</span><a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">,</a> argv[0]<a class="code hl_function" href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">)</a>;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            }</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    }</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">(</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">)</a>;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>    <a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">)</a>;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    touchwin(stdscr);</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    wnoutrefresh(stdscr);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    wrefresh(stdscr);</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a><a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">(</a><a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">)</a>;</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    tmp_str[0] = <span class="stringliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">if</span> (tmp_str[0] != <span class="stringliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a><a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">(</a>tmp_str<a class="code hl_function" href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">)</a>;</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    }</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">return</span> (rc);</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>}</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment">/** @brief Fork and execute a command as a daemon</span></div>
-<div class="line"><span class="lineno">  205</span><span class="comment">    @ingroup exec</span></div>
-<div class="line"><span class="lineno">  206</span><span class="comment">    @param eargv - array of arguments for the command to execute</span></div>
-<div class="line"><span class="lineno">  207</span><span class="comment">    @return EXIT_SUCCESS on success, EXIT_FAILURE on failure</span></div>
-<div class="line"><span class="lineno">  208</span><span class="comment">    @details</span></div>
-<div class="line"><span class="lineno">  209</span><span class="comment">    Sets the session ID</span></div>
-<div class="line"><span class="lineno">  210</span><span class="comment">    Redirects standard file descriptors to /dev/null.</span></div>
-<div class="line"><span class="lineno">  211</span><span class="comment">    Closes all open file descriptors.</span></div>
-<div class="line"><span class="lineno">  212</span><span class="comment">    Executes the command using execvp.</span></div>
-<div class="line"><span class="lineno">  213</span><span class="comment">    Exits with failure if any step fails.</span></div>
-<div class="line"><span class="lineno">  214</span><span class="comment">    @note Tested 2026-06-05 on Linux - appears to be functioning properly */</span></div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d8/df3/a01216.html#gaf878519c68b24567c915493739b6e979">fork_detach_execvp</a>(<span class="keywordtype">char</span> **eargv) {</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    pid_t pid = fork();</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    <a class="code hl_function" href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">(</a><a class="code hl_function" href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">)</a>;</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    curs_set(1);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">)</a>;</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="keywordflow">if</span> (pid &lt; 0) {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        fprintf(stderr, <span class="stringliteral">&quot;First fork failed: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    }</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="keywordflow">if</span> (pid == 0) {</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordflow">if</span> (setsid() &lt; 0) {</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            fprintf(stderr, <span class="stringliteral">&quot;Set session ID failed: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        }</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        close(STDIN_FILENO);</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        close(STDOUT_FILENO);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        close(STDERR_FILENO);</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordtype">int</span> dev_null = open(<span class="stringliteral">&quot;/dev/null&quot;</span>, O_RDWR);</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        <span class="keywordflow">if</span> (dev_null != -1) {</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            dup2(dev_null, STDIN_FILENO);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            dup2(dev_null, STDOUT_FILENO);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            dup2(dev_null, STDERR_FILENO);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            <span class="keywordflow">if</span> (dev_null &gt; 2) {</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>                close(dev_null);</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>            }</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        }</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <span class="keywordtype">long</span> max_fd = sysconf(_SC_OPEN_MAX);</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        <span class="keywordflow">for</span> (<span class="keywordtype">long</span> fd = 3; fd &lt; max_fd; fd++)</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            close(fd);</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        execvp(eargv[0], eargv);</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        perror(<span class="stringliteral">&quot;execvp failed&quot;</span>);</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    }</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    <a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">(</a><a class="code hl_function" href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">)</a>;</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">(</a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">)</a>;</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    touchwin(stdscr);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    wnoutrefresh(stdscr);</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    wrefresh(stdscr);</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a><a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">(</a><a class="code hl_function" href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">)</a>;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>}</div>
-<div class="ttc" id="aa00725_html_a15eda0f69d9c3b732ff2a1420513031a"><div class="ttname"><a href="../../d8/db9/a00725.html#a15eda0f69d9c3b732ff2a1420513031a">DEFAULTSHELL</a></div><div class="ttdeci">#define DEFAULTSHELL</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00249">cm.h:249</a></div></div>
-<div class="ttc" id="aa00725_html_a41101847771d39a4f0a7f9395061c629"><div class="ttname"><a href="../../d8/db9/a00725.html#a41101847771d39a4f0a7f9395061c629">MAXARGS</a></div><div class="ttdeci">#define MAXARGS</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00032">cm.h:32</a></div></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <span class="keywordflow">if</span> (retval != PAM_SUCCESS) {</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        fprintf(stderr, <span class="stringliteral">&quot;PAM authentication failed: %s\n&quot;</span>, pam_strerror(pamh, retval));</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    }</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">RSH_SSH</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    ssh_session _ssh_session = ssh_new();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordflow">if</span> (_ssh_session == nullptr) {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;SSH session initialization failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        fprintf(stderr, <span class="stringliteral">&quot;SSH session initialization failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        ssh_free(_ssh_session);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <span class="keywordtype">int</span> rc = 0;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    ssh_options_set(_ssh_session, SSH_OPTIONS_HOST, HOST);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">if</span> ((rc = ssh_connect(_ssh_session)) != SSH_OK) {</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        syslog(LOG_ERR, <span class="stringliteral">&quot;SSH connection failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        fprintf(stderr, <span class="stringliteral">&quot;SSH connection failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        ssh_free(_ssh_session);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        ssh_free(_ssh_session);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    <span class="keywordflow">if</span> (ssh_userauth_publickey_auto(_ssh_session, NULL, NULL) !=</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        SSH_AUTH_SUCCESS) {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        syslog(LOG_AUTH, <span class="stringliteral">&quot;SSH authentication failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        fprintf(stderr, <span class="stringliteral">&quot;SSH authentication failed: %s&quot;</span>, ssh_get_error(_ssh_session));</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    }</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    ssh_disconnect(_ssh_session);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    ssh_free(_ssh_session);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    syslog(LOG_AUTH, <span class="stringliteral">&quot;rsh SSH authentication succeeded for user &#39;%s&#39; on terminal &#39;%s&#39;&quot;</span>, rsh_user, ttyname);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">RSH_LOG</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    closelog();</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    <span class="keywordflow">if</span> ((p = getenv(<span class="stringliteral">&quot;SHELL&quot;</span>)))</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        strncpy(exec_cmd, p, <a class="code hl_define" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    cargv[0] = strdup(exec_cmd);</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    c = 1;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keywordflow">if</span> (argc &gt; 0) {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt; argc; i++) {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            <span class="keywordflow">if</span> (strcmp(argv[i], <span class="stringliteral">&quot;-i&quot;</span>) == 0) {</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>                cargv[c++] = strdup(<span class="stringliteral">&quot;-i&quot;</span>);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (strcmp(argv[i], <span class="stringliteral">&quot;-D1&quot;</span>) == 0 &amp;&amp; ssh_login) {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>                fprintf(stderr, <span class="stringliteral">&quot;SSH authentication succeeded\n&quot;</span>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>                cargv[c++] = strdup(argv[i]);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            }</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    cargv[c] = <a class="code hl_define" href="../../d8/db9/a00725.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    pid = fork();</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    <span class="keywordflow">switch</span> (pid) {</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">case</span> -1:</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">ABEND</a><a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">(</a>EXIT_FAILURE<a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">,</a> <span class="stringliteral">&quot;fork() fatal error&quot;</span><a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">)</a>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordflow">case</span> 0: <span class="comment">// Child</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        <span class="keywordflow">if</span> (argv[0] &amp;&amp; strstr(argv[0], <span class="stringliteral">&quot;rsh&quot;</span>)) {</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            <span class="keywordflow">if</span> (setuid(0) || setgid(0))</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>                <a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">ABEND</a><a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">(</a>EXIT_FAILURE<a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">,</a> <span class="stringliteral">&quot;setuid(0) fatal error&quot;</span><a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">)</a>;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>            <span class="keyword">struct</span> rlimit rl;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            getrlimit(RLIMIT_FSIZE, &amp;rl);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            rl.rlim_cur = RLIM_INFINITY;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            rl.rlim_max = RLIM_INFINITY;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>            setrlimit(RLIMIT_FSIZE, &amp;rl);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        execvp(exec_cmd, cargv);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">ABEND</a><a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">(</a>EXIT_FAILURE<a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">,</a> <span class="stringliteral">&quot;execvp() fatal error&quot;</span><a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">)</a>;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordflow">default</span>: <span class="comment">// Parent</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        waitpid(pid, &amp;status, 0);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; c; i++)</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            free(cargv[i]);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">F_VERBOSE</span></div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">if</span> (WIFEXITED(status)) {</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            rc = WEXITSTATUS(status);</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <span class="keywordflow">if</span> (rc != 0)</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>                ABEND(rc, <span class="stringliteral">&quot;Child process exited&quot;</span>);</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">if</span> (WIFSIGNALED(status)) {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>                rc = WTERMSIG(status);</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                ABEND(rc, <span class="stringliteral">&quot;Child process terminated by signal&quot;</span>);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            } <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                ABEND(EXIT_FAILURE, <span class="stringliteral">&quot;Child process terminated abnormally&quot;</span>);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    }</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    exit(EXIT_SUCCESS);</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>}</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="../../d9/d25/a01157.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4">  237</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">ABEND</a>(<span class="keywordtype">int</span> e, <span class="keywordtype">char</span> <span class="keyword">const</span> *s) {</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    fprintf(stderr, <span class="stringliteral">&quot;%s: %d %s\n&quot;</span>, s, e, strerror(e));</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    exit(EXIT_FAILURE);</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>}</div>
 <div class="ttc" id="aa00725_html_ab979d9d4b4923f7c54d6caa6e1a61936"><div class="ttname"><a href="../../d8/db9/a00725.html#ab979d9d4b4923f7c54d6caa6e1a61936">nullptr</a></div><div class="ttdeci">#define nullptr</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00027">cm.h:27</a></div></div>
-<div class="ttc" id="aa01148_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../db/d17/a01148.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d17/a01148_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01212_html_ga40858af5b0d68549fb483f77c97eb82c"><div class="ttname"><a href="../../dc/db6/a01212.html#ga40858af5b0d68549fb483f77c97eb82c">restore_wins</a></div><div class="ttdeci">void restore_wins()</div><div class="ttdoc">Restore all windows after a screen resize.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01046">dwin.c:1046</a></div></div>
-<div class="ttc" id="aa01214_html_ga2f2e1496a7c253b2d58446154c98a0bf"><div class="ttname"><a href="../../d5/d32/a01214.html#ga2f2e1496a7c253b2d58446154c98a0bf">nf_error</a></div><div class="ttdeci">int nf_error(int, char *)</div><div class="ttdoc">Display error message and wait for key press.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01721">dwin.c:1721</a></div></div>
-<div class="ttc" id="aa01214_html_ga61b4f28456257f68ed042bed7f187efd"><div class="ttname"><a href="../../d5/d32/a01214.html#ga61b4f28456257f68ed042bed7f187efd">Perror</a></div><div class="ttdeci">int Perror(char *)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01301">dwin.c:1301</a></div></div>
-<div class="ttc" id="aa01216_html_ga386fad82c5208c7d3b2a5060882974f3"><div class="ttname"><a href="../../d8/df3/a01216.html#ga386fad82c5208c7d3b2a5060882974f3">fork_exec</a></div><div class="ttdeci">int fork_exec(char **)</div><div class="ttdoc">Fork and exec a command.</div><div class="ttdef"><b>Definition</b> <a href="#l00130">exec.c:130</a></div></div>
-<div class="ttc" id="aa01216_html_ga5c3ffccf49f08359334198f7fce3f9df"><div class="ttname"><a href="../../d8/df3/a01216.html#ga5c3ffccf49f08359334198f7fce3f9df">shell</a></div><div class="ttdeci">int shell(char *)</div><div class="ttdoc">Execute a shell command.</div><div class="ttdef"><b>Definition</b> <a href="#l00082">exec.c:82</a></div></div>
-<div class="ttc" id="aa01216_html_ga907dc4a5b8c29a03d23bdc87f41b5f1b"><div class="ttname"><a href="../../d8/df3/a01216.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b">full_screen_fork_exec</a></div><div class="ttdeci">int full_screen_fork_exec(char **)</div><div class="ttdoc">Execute a command in full screen mode.</div><div class="ttdef"><b>Definition</b> <a href="#l00046">exec.c:46</a></div></div>
-<div class="ttc" id="aa01216_html_gaeb3e7eb282467134ce50fde7d9ebd19d"><div class="ttname"><a href="../../d8/df3/a01216.html#gaeb3e7eb282467134ce50fde7d9ebd19d">full_screen_shell</a></div><div class="ttdeci">int full_screen_shell(char *)</div><div class="ttdoc">Execute a shell command in full screen mode.</div><div class="ttdef"><b>Definition</b> <a href="#l00062">exec.c:62</a></div></div>
-<div class="ttc" id="aa01216_html_gaf878519c68b24567c915493739b6e979"><div class="ttname"><a href="../../d8/df3/a01216.html#gaf878519c68b24567c915493739b6e979">fork_detach_execvp</a></div><div class="ttdeci">int fork_detach_execvp(char **eargv)</div><div class="ttdoc">Fork, set new session ID, close files, and execute detached command.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d19/a01190_source.html#l00018">detach.c:18</a></div></div>
-<div class="ttc" id="aa01219_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../d5/d39/a01219.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00413">futil.c:413</a></div></div>
-<div class="ttc" id="aa01228_html_ga1c8e0f0a02e08c783231a20093fb8410"><div class="ttname"><a href="../../de/d16/a01228.html#ga1c8e0f0a02e08c783231a20093fb8410">restore_curses_tioctl</a></div><div class="ttdeci">bool restore_curses_tioctl()</div><div class="ttdoc">restore_curses_tioctl() - restore curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00081">scriou.c:81</a></div></div>
-<div class="ttc" id="aa01228_html_ga4d0a6767e791cf93a268ebe9ba02aa24"><div class="ttname"><a href="../../de/d16/a01228.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a></div><div class="ttdeci">bool capture_curses_tioctl()</div><div class="ttdoc">capture_curses_tioctl() - capture curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00068">scriou.c:68</a></div></div>
-<div class="ttc" id="aa01228_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../de/d16/a01228.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00056">scriou.c:56</a></div></div>
-<div class="ttc" id="aa01229_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/daf/a01169_source.html#l00042">sig.c:42</a></div></div>
-<div class="ttc" id="aa01229_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/daf/a01169_source.html#l00062">sig.c:62</a></div></div>
+<div class="ttc" id="aa01154_html_a4a2db85232c335b75115eb065aa3eb44"><div class="ttname"><a href="../../d5/d16/a01154.html#a4a2db85232c335b75115eb065aa3eb44">ABEND</a></div><div class="ttdeci">void ABEND(int)</div><div class="ttdoc">The ABEND function is a signal handler that is called when the program receives certain signals (e....</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00419">iloan.c:419</a></div></div>
+<div class="ttc" id="aa01157_html_a6557db566bb2c2fee6d6de70bd0afd2f"><div class="ttname"><a href="../../d9/d25/a01157.html#a6557db566bb2c2fee6d6de70bd0afd2f">RSH_PAM</a></div><div class="ttdeci">#define RSH_PAM</div><div class="ttdef"><b>Definition</b> <a href="#l00015">rsh.c:15</a></div></div>
+<div class="ttc" id="aa01157_html_a9ea122171989176bc07376ae1eefc5c7"><div class="ttname"><a href="../../d9/d25/a01157.html#a9ea122171989176bc07376ae1eefc5c7">F_VERBOSE</a></div><div class="ttdeci">bool F_VERBOSE</div><div class="ttdef"><b>Definition</b> <a href="#l00042">rsh.c:42</a></div></div>
+<div class="ttc" id="aa01160_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d20/a01160_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa01208_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d9/d31/a01208.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00034">amort.c:34</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d9/d25/a01157.html">exec.c</a></li>
+    <li class="navelem"><a href="../../d9/d25/a01157.html">rsh.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

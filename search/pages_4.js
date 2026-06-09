@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['8_202026_2002_2004_0',['[0.2.8]- 2026-02-04',['../d5/dec/a01416.html#autotoc_md028--2026-02-04',1,'']]]
+  ['4_20open_20a_20pull_20request_0',['4. Open a Pull Request',['../d8/dd0/a01430.html#autotoc_md4-open-a-pull-request',1,'']]]
 ];

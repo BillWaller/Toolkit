@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: view_engine.c File Reference</title>
+<title>C-Menu: C-Menu Pick</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,182 +109,74 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d0/de2/a01442.
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">view_engine.c File Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">C-Menu Pick </div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>The working part of <a class="el" href="../../d9/de6/a01314.html">View</a>.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &lt;errno.h&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;regex.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/mman.h&gt;</code><br />
-<code>#include &lt;sys/param.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for view_engine.c:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d65/a01443.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-</div>
-<p><a href="../../d0/de2/a01442_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:gafa98387c57104e28e438d8bbc23b26eb" id="r_gafa98387c57104e28e438d8bbc23b26eb"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>()</td></tr>
-<tr class="memdesc:gafa98387c57104e28e438d8bbc23b26eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the next characater from the virtual file  <br /></td></tr>
-<tr class="memitem:ga56a278d5d4b1808207f550ee3a61c476" id="r_ga56a278d5d4b1808207f550ee3a61c476"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga56a278d5d4b1808207f550ee3a61c476">get_prev_char</a>()</td></tr>
-<tr class="memdesc:ga56a278d5d4b1808207f550ee3a61c476"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the previous characater from the virtual fileThere is no need to track line numbers when moving backwards as they are stored in the line table and accessed as needed. When reading in reverse, the Beginning of Data (BOD) flag is set when the file position is zero, and cleared when the position or reading direction changes. Carriage-returns are ignored as they should be.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:gab96e4c73a7b3ba1310044b479733cdd9" id="r_gab96e4c73a7b3ba1310044b479733cdd9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d53/a01225.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a> (char *, bool *)</td></tr>
-<tr class="memdesc:gab96e4c73a7b3ba1310044b479733cdd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">a safer alternative to atoi() for converting ASCII strings to integers.  <br /></td></tr>
-<tr class="memitem:gaf01721a6369d49d9f1eebfc4ba6d0a95" id="r_gaf01721a6369d49d9f1eebfc4ba6d0a95"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:gaf01721a6369d49d9f1eebfc4ba6d0a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build Prompt <a class="el" href="../../de/d33/a01274.html" title="The String structure represents a string object with a pointer to the string and its allocated length...">String</a>.  <br /></td></tr>
-<tr class="memitem:ga6543444a87ef174a7b63fa3adcb16c58" id="r_ga6543444a87ef174a7b63fa3adcb16c58"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga6543444a87ef174a7b63fa3adcb16c58">cat_file</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga6543444a87ef174a7b63fa3adcb16c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate File to Standard Output.  <br /></td></tr>
-<tr class="memitem:ga16a4b855ead8402d4744e77a5504082a" id="r_ga16a4b855ead8402d4744e77a5504082a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#ga16a4b855ead8402d4744e77a5504082a">display_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga16a4b855ead8402d4744e77a5504082a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> on Padparam <a class="el" href="../../d9/de6/a01314.html">View</a> *view data structure.  <br /></td></tr>
-<tr class="memitem:ga3d81b9c4dd32748b26cd0fd94224d21c" id="r_ga3d81b9c4dd32748b26cd0fd94224d21c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, char *s)</td></tr>
-<tr class="memdesc:ga3d81b9c4dd32748b26cd0fd94224d21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Command <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Prompt.  <br /></td></tr>
-<tr class="memitem:ga2ffea5674e85f124a70e19f745a66583" id="r_ga2ffea5674e85f124a70e19f745a66583"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga2ffea5674e85f124a70e19f745a66583">enter_file_spec</a> (<a class="el" href="../../d7/d04/a01246.html">Init</a> *init, char *file_spec)</td></tr>
-<tr class="memdesc:ga2ffea5674e85f124a70e19f745a66583"><td class="mdescLeft">&#160;</td><td class="mdescRight">use form to enter a file specification  <br /></td></tr>
-<tr class="memitem:ga747411d59b020ad11d4567ab0b3db8c2" id="r_ga747411d59b020ad11d4567ab0b3db8c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#ga747411d59b020ad11d4567ab0b3db8c2">fmt_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga747411d59b020ad11d4567ab0b3db8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> for Display.  <br /></td></tr>
-<tr class="memitem:ga8e98d9f33c5f6aa78ea2fbc13c75b3a9" id="r_ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9">get_cmd_arg</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, char *prompt)</td></tr>
-<tr class="memdesc:ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Command Argument from User Input.  <br /></td></tr>
-<tr class="memitem:gab3d3c80c5b7bb6dc461a8e5746be7690" id="r_gab3d3c80c5b7bb6dc461a8e5746be7690"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#gab3d3c80c5b7bb6dc461a8e5746be7690">get_cmd_char</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t *n)</td></tr>
-<tr class="memdesc:gab3d3c80c5b7bb6dc461a8e5746be7690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Command Character and Numeric Argument.  <br /></td></tr>
-<tr class="memitem:ga395b27e6a9716bf49e3fc04d53987b33" id="r_ga395b27e6a9716bf49e3fc04d53987b33"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#ga395b27e6a9716bf49e3fc04d53987b33">get_next_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t pos)</td></tr>
-<tr class="memdesc:ga395b27e6a9716bf49e3fc04d53987b33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Next <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> from View-&gt;buf.  <br /></td></tr>
-<tr class="memitem:gaf692bba071d771ceea47707fc26127bd" id="r_gaf692bba071d771ceea47707fc26127bd"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gaf692bba071d771ceea47707fc26127bd">get_pos_next_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t pos)</td></tr>
-<tr class="memdesc:gaf692bba071d771ceea47707fc26127bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Position of Next <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
-<tr class="memitem:gaaf8cff992778d85e44351a834ad2b81a" id="r_gaaf8cff992778d85e44351a834ad2b81a"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gaaf8cff992778d85e44351a834ad2b81a">get_pos_prev_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t pos)</td></tr>
-<tr class="memdesc:gaaf8cff992778d85e44351a834ad2b81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Position of Previous <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
-<tr class="memitem:gab49fb9f9417c7cf790cea1679e4e5edc" id="r_gab49fb9f9417c7cf790cea1679e4e5edc"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gab49fb9f9417c7cf790cea1679e4e5edc">get_prev_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t pos)</td></tr>
-<tr class="memdesc:gab49fb9f9417c7cf790cea1679e4e5edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Previous <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> from View-&gt;buf.  <br /></td></tr>
-<tr class="memitem:ga46145f1d3680a48cb9391a8ae95db9ad" id="r_ga46145f1d3680a48cb9391a8ae95db9ad"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#ga46145f1d3680a48cb9391a8ae95db9ad">go_to_eof</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga46145f1d3680a48cb9391a8ae95db9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to End of File.  <br /></td></tr>
-<tr class="memitem:gac81796e830049e74987a6b526cfc296f" id="r_gac81796e830049e74987a6b526cfc296f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gac81796e830049e74987a6b526cfc296f">go_to_line</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t line_idx)</td></tr>
-<tr class="memdesc:gac81796e830049e74987a6b526cfc296f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Specific <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
-<tr class="memitem:gada77a15a548ce444426d43fd39a1cce4" id="r_gada77a15a548ce444426d43fd39a1cce4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gada77a15a548ce444426d43fd39a1cce4">go_to_mark</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, int c)</td></tr>
-<tr class="memdesc:gada77a15a548ce444426d43fd39a1cce4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Mark.  <br /></td></tr>
-<tr class="memitem:gae6623cc4892a014fc9c40b3bca1db7d9" id="r_gae6623cc4892a014fc9c40b3bca1db7d9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gae6623cc4892a014fc9c40b3bca1db7d9">go_to_percent</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, int percent)</td></tr>
-<tr class="memdesc:gae6623cc4892a014fc9c40b3bca1db7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Percent of File.  <br /></td></tr>
-<tr class="memitem:ga5f74dca8730faaa3ff362fc1e01b12ce" id="r_ga5f74dca8730faaa3ff362fc1e01b12ce"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#ga5f74dca8730faaa3ff362fc1e01b12ce">go_to_position</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, off_t go_to_pos)</td></tr>
-<tr class="memdesc:ga5f74dca8730faaa3ff362fc1e01b12ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Specific File Position.  <br /></td></tr>
-<tr class="memitem:gadd75615038c32b4c07a6842dfe2fc37a" id="r_gadd75615038c32b4c07a6842dfe2fc37a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gadd75615038c32b4c07a6842dfe2fc37a">increment_ln</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:gadd75615038c32b4c07a6842dfe2fc37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Index and Update <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
-<tr class="memitem:gaa260d59836439e16d00ad5a6bc4b4829" id="r_gaa260d59836439e16d00ad5a6bc4b4829"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:gaa260d59836439e16d00ad5a6bc4b4829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
-<tr class="memitem:ga219efbc4d9d70ebc47fafa540b370247" id="r_ga219efbc4d9d70ebc47fafa540b370247"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga219efbc4d9d70ebc47fafa540b370247">lp</a> (char *PrintFile)</td></tr>
-<tr class="memdesc:ga219efbc4d9d70ebc47fafa540b370247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send File to Print Queue.  <br /></td></tr>
-<tr class="memitem:gacf1bfbd6d2fd4ad9a0385009ef25015c" id="r_gacf1bfbd6d2fd4ad9a0385009ef25015c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gacf1bfbd6d2fd4ad9a0385009ef25015c">next_page</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:gacf1bfbd6d2fd4ad9a0385009ef25015c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advance to Next Page.  <br /></td></tr>
-<tr class="memitem:ga1a2aaed7961f7ff0b171ee01801fcadf" id="r_ga1a2aaed7961f7ff0b171ee01801fcadf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga1a2aaed7961f7ff0b171ee01801fcadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh Pad and <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Number Window.  <br /></td></tr>
-<tr class="memitem:ga9fc984ba8ce6c4059b33a915d526357f" id="r_ga9fc984ba8ce6c4059b33a915d526357f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#ga9fc984ba8ce6c4059b33a915d526357f">parse_ansi_str</a> (char *ansi_str, attr_t *attr, int *cpx)</td></tr>
-<tr class="memdesc:ga9fc984ba8ce6c4059b33a915d526357f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse ANSI SGR Escape Sequence.  <br /></td></tr>
-<tr class="memitem:ga5dbc34981815690a92812e34d1cf478f" id="r_ga5dbc34981815690a92812e34d1cf478f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#ga5dbc34981815690a92812e34d1cf478f">prev_page</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga5dbc34981815690a92812e34d1cf478f"><td class="mdescLeft">&#160;</td><td class="mdescRight">display previous page  <br /></td></tr>
-<tr class="memitem:ga677ea54b0c727a5475d0b3efe71f5a7c" id="r_ga677ea54b0c727a5475d0b3efe71f5a7c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga677ea54b0c727a5475d0b3efe71f5a7c">remove_file</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga677ea54b0c727a5475d0b3efe71f5a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove File.  <br /></td></tr>
-<tr class="memitem:gaa79b8294ebf98c84d4a844fd7d9e4862" id="r_gaa79b8294ebf98c84d4a844fd7d9e4862"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gaa79b8294ebf98c84d4a844fd7d9e4862">scroll_down_n_lines</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, int n)</td></tr>
-<tr class="memdesc:gaa79b8294ebf98c84d4a844fd7d9e4862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll N Lines.  <br /></td></tr>
-<tr class="memitem:gab08fc8983cc3bdb21b438c82ece16346" id="r_gab08fc8983cc3bdb21b438c82ece16346"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#gab08fc8983cc3bdb21b438c82ece16346">scroll_up_n_lines</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, int n)</td></tr>
-<tr class="memdesc:gab08fc8983cc3bdb21b438c82ece16346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll Up N Lines.  <br /></td></tr>
-<tr class="memitem:ga5f639aa1a1f03fa05888c724bc17d99c" id="r_ga5f639aa1a1f03fa05888c724bc17d99c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#ga5f639aa1a1f03fa05888c724bc17d99c">search</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view, int *search_cmd, char *regex_pattern)</td></tr>
-<tr class="memdesc:ga5f639aa1a1f03fa05888c724bc17d99c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for Regular Expression Pattern.  <br /></td></tr>
-<tr class="memitem:ga03bfb3d8d09d33f4f59930485f283ead" id="r_ga03bfb3d8d09d33f4f59930485f283ead"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dab/a01237.html#ga03bfb3d8d09d33f4f59930485f283ead">sync_ln</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga03bfb3d8d09d33f4f59930485f283ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize <a class="el" href="../../dc/de0/a01302.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table with Current File Position.  <br /></td></tr>
-<tr class="memitem:ga9c4b3ba5f73c18b486646c62b933972a" id="r_ga9c4b3ba5f73c18b486646c62b933972a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga9c4b3ba5f73c18b486646c62b933972a">view_cmd_processor</a> (<a class="el" href="../../d7/d04/a01246.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga9c4b3ba5f73c18b486646c62b933972a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main Command Processing Loop for <a class="el" href="../../d9/de6/a01314.html">View</a>.  <br /></td></tr>
-<tr class="memitem:gad997ba9f8591568c77291fb1b44601b2" id="r_gad997ba9f8591568c77291fb1b44601b2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#gad997ba9f8591568c77291fb1b44601b2">view_display_help</a> (<a class="el" href="../../d7/d04/a01246.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gad997ba9f8591568c77291fb1b44601b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display <a class="el" href="../../d9/de6/a01314.html">View</a> Help File.  <br /></td></tr>
-<tr class="memitem:gae6f141401cf9f104dbe14f09603d5178" id="r_gae6f141401cf9f104dbe14f09603d5178"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#gae6f141401cf9f104dbe14f09603d5178">view_display_page</a> (<a class="el" href="../../d9/de6/a01314.html">View</a> *view)</td></tr>
-<tr class="memdesc:gae6f141401cf9f104dbe14f09603d5178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Current Page.  <br /></td></tr>
-<tr class="memitem:ga0bd4dc056ab5010547129bb87819789b" id="r_ga0bd4dc056ab5010547129bb87819789b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a> (<a class="el" href="../../d7/d04/a01246.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga0bd4dc056ab5010547129bb87819789b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start view.  <br /></td></tr>
-<tr class="memitem:ga322b7dfe2d426fe7cfb2b4f59bf6fc78" id="r_ga322b7dfe2d426fe7cfb2b4f59bf6fc78"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d8/ddf/a01238.html#ga322b7dfe2d426fe7cfb2b4f59bf6fc78">view_restore_wins</a> ()</td></tr>
-<tr class="memdesc:ga322b7dfe2d426fe7cfb2b4f59bf6fc78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore <a class="el" href="../../d9/de6/a01314.html">View</a> Windows.  <br /></td></tr>
-<tr class="memitem:ga30ab3b4282eabd18619c5b053ff8b0b1" id="r_ga30ab3b4282eabd18619c5b053ff8b0b1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d8/d2b/a01236.html#ga30ab3b4282eabd18619c5b053ff8b0b1">write_view_buffer</a> (<a class="el" href="../../d7/d04/a01246.html">Init</a> *init, bool f_strip_ansi)</td></tr>
-<tr class="memdesc:ga30ab3b4282eabd18619c5b053ff8b0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write buffer contents to files.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:ad66e7725d860b08afcaa58c5534c4405" id="r_ad66e7725d860b08afcaa58c5534c4405"><td class="memItemLeft">FILE *&#160;</td><td class="memItemRight"><a class="el" href="#ad66e7725d860b08afcaa58c5534c4405">dbgfp</a></td></tr>
-<tr class="memitem:ab01cd88e27f549b782cb4220d1742373" id="r_ab01cd88e27f549b782cb4220d1742373"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ab01cd88e27f549b782cb4220d1742373">err_msg</a> [<a class="el" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
-<tr class="memitem:a963dfb3ff1f86d65cf46829388b1b3bc" id="r_a963dfb3ff1f86d65cf46829388b1b3bc"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a963dfb3ff1f86d65cf46829388b1b3bc">prev_regex_pattern</a> [<a class="el" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
-</table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The working part of <a class="el" href="../../d9/de6/a01314.html">View</a>. </p>
-<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="../../d0/de2/a01442_source.html">view_engine.c</a>.</p>
-</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="ad66e7725d860b08afcaa58c5534c4405" name="ad66e7725d860b08afcaa58c5534c4405"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad66e7725d860b08afcaa58c5534c4405">&#9670;&#160;</a></span>dbgfp</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">FILE* dbgfp</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d0/de2/a01442_source.html#l00081">81</a> of file <a class="el" href="../../d0/de2/a01442_source.html">view_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="ab01cd88e27f549b782cb4220d1742373" name="ab01cd88e27f549b782cb4220d1742373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab01cd88e27f549b782cb4220d1742373">&#9670;&#160;</a></span>err_msg</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char err_msg[<a class="el" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d0/de2/a01442_source.html#l00117">117</a> of file <a class="el" href="../../d0/de2/a01442_source.html">view_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a963dfb3ff1f86d65cf46829388b1b3bc" name="a963dfb3ff1f86d65cf46829388b1b3bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a963dfb3ff1f86d65cf46829388b1b3bc">&#9670;&#160;</a></span>prev_regex_pattern</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char prev_regex_pattern[<a class="el" href="../../da/d20/a01160.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d0/de2/a01442_source.html#l00080">80</a> of file <a class="el" href="../../d0/de2/a01442_source.html">view_engine.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d0/de2/a01442_source.html#l00178">view_cmd_processor()</a>.</p>
-
-</div>
-</div>
-</div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="c-menu-pick-2"></a></p>
+<p>C-Menu <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> displays a list of items from which the user can select.</p>
+<p>Specification:</p>
+<div class="fragment"><div class="line">!pick [ -n maximum_number_of_selections ][-m] \</div>
+<div class="line">    [ -i input_file ][ -S executable_provider ] \</div>
+<div class="line">    [ -o output_file ][ -c executable %% ]</div>
+</div><!-- fragment --><p>-n maximum_number_of_selections. "-n n" is a convenience which directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to automatically accept selections when the specified maximum number of items, "n" have been selected. For example, "-n 1" is commonly used to direct <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to automatically accept the first item selected without requiring the user pressing to F10 Accept key. This feature is designed to optimize the user's economy of motion, making the selection process extremely fast and efficient. When "-n 1" is specified, the user can simply select an item and <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> will immediately dispatch the specified action.</p>
+<p>-c execute command substituting "%%" with the selected item(s). Whether the command specified with the -c option is executed once per selection or once for all selections is determined by the presence or absence of the "-m option". Without the "-m" option, by default, if multiple items are selected, the command specified with -c will be executed once for each selection with that selection as an argument.</p>
+<p>-m multiple_arguments flag. The -m option directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to construct a command line with all selections as individual arguments. The specified command is executed once with all selections combined as individual arguments on a single command line.</p>
+<p>An example use case for "-m" would be if you wanted to open multiple files in C-Menu <a class="el" href="../../df/dec/a01320.html">View</a> using <a class="el" href="../../df/dec/a01320.html">View</a>'s ":n" and ":p" commands to navigate between files. In that case, you would specify "-m" to have <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> execute <a class="el" href="../../df/dec/a01320.html">View</a> once with all selected files as arguments, allowing you to use <a class="el" href="../../df/dec/a01320.html">View</a>'s built-in file navigation features. The same technique works with Vim, nvim, and less.</p>
+<p>-i input_file directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to read input from the specified file</p>
+<p>-S executable_provider directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to execute the specified external command and read input from the command's standard output. The command specified with the -S option is executed when starting <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a>, and its output is used as the list of items from which selections are made.</p>
+<p>-o output_file directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to write selected items to the specified file when the user presses F10 Accept.</p>
+<p><a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> must have exactly one input method, either -i input_file or -S executable_provider_command. Combining -o and -c options is permissible, and will direct <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to write the list of selected items to the specified file and also pass the list of selected items to the command specified by -c according to the presence or absence of the -m option. The selections are written to file before executing the specified command, so the command can read the selections from the file if needed.</p>
+<h2 class="doxsection"><a class="anchor" id="rustlings-source-3"></a>
+Rustlings Source</h2>
+<p>Example:</p>
+<div class="fragment"><div class="line">:     Rustlings Source</div>
+<div class="line">!pick -S rust_src -n 1 -T &quot;Rustlings Source - Edit&quot; -c nvim %%</div>
+</div><!-- fragment --><p>-S specifies a script, "rust_src", located in ~/menuapp/bin, which calls lf to create a sorted file list.</p>
+<p>Below are the contents of "rust_src", a shell script. We use a shell script here instead of direct execution because we need to pipe the output through sort. It's still fairly quick. The "lf" command generates a list of Rust source files from the "exercises" directory, which is part of the Rustlings project.</p>
+<div class="fragment"><div class="line"># @name rust_src</div>
+<div class="line">lf rustlings -d 5 &#39;exercises.*\.rs$&#39; | sort</div>
+</div><!-- fragment --><p>The "-n 1" option directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to proceed with executing the command specified by the "-c nvim %%" option after 1 file is selected. If "-n 1" were not specified, <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> would wait for the user to press F10 Accept before executing the command specified by the "-c nvim %%" option.</p>
+<p>The -c nvim %% substitutes the "%%" with the selected file and <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> executes <br  />
+ nvim. If the "-n 1" option hadn't been specified, <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> would allow the user to select multiple files and press F10 Accept to accept those selections. In that case, nvim would be executed with multiple files as arguments, and the user could use nvim's ":n" and ":p" commands to open the files selectively. The "-n" option can also be used to specify the maximum number of selections before <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> automatically accepts and launches the specified executable.</p>
+<p>The use of "-S rust_src"" would be equivalent to "rust_src | pick" if we were
+executing pick as a stand-alone executable. In this instance, Pick launches "rust_src" and creates a pipe to receive its output".</p>
+<div class="image">
+<img src="../../rustlings.png" alt=""/>
+<div class="caption">
+Rustlings Source</div></div>
+    <p>The center window above shows <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> as it appears just after selecting Rustlings Source in the Applications <a class="el" href="../../d7/d41/a01312.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.</p>
+<p>The user presses tab to activate the line editor and types "maps2", the last few characters of the exercise name, and the <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> window on the right appears. The "maps2" expression filtered out all but one file name. The user doesn't need to press enter to accept the filter expression because <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> updates the <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> window in real time as the user types.</p>
+<p>At any time, the user can press tab to jump back to the selection window, and select the desired file with the mouse or position the cursor on the desired file and press spacebar to select. In this case, there is only one file listed, so the user can simply press spacebar to select the file. Because the "-n 1" option in the <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> command line directs <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to automatically accept when the user has selected the specified number of files.</p>
+<p>So, the user presses tab, the cursor jumps to the only file listed, and the user presses the spacebar to open the selected file with nvim. If there had been more than one file listed, the user could select a file with the mouse, arrow keys, or j for down, k for up, and when the desired file is highlighted, and pressing spacebar to select. When using the mouse to select, it is not necessary to press the spacebar.</p>
+<p>When finished editing in nvim, the user can type shift "zz" to exit. nvim closes, and the user is returned to the <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> window as it was before selecting the file. The user can press tab, backspace, 3, tab, spacebar, and nvim opens hashmaps3.rs, the next source file in the Rustlings sequence. This is a very quick and almost effortless way to step through the Rustlings exercises, but it can also apply to many other situations.</p>
+<h2 class="doxsection"><a class="anchor" id="edit-c-files-in-current-directory-3"></a>
+Edit .c Files in Current Directory</h2>
+<p>Edit .c Files in Current Directory is an example of how to use C-Menu lf and <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a> to navigate and select files from a directory. Once a file is selected, it is passed to the nvim.sh script to be opened in Neovim. This demonstrates how you can integrate C-Menu with external applications and scripts to create a seamless user experience.</p>
+<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
+<div class="line">!pick -S project_src -T &quot;Project Tree - Select File to Edit&quot; -c nvim.sh %%</div>
+</div><!-- fragment --><p>Actually, the above command line is a good example of how to write inefficient and unnecessary code. That's 100ms wasted each time you select that menu option. (-: :-) The nvim.sh script is not necessary. The command line could be written more efficiently as follows, which eliminates the need for an external script and directly opens the selected file in Neovim.</p>
+<p>The command line below demonstrates the preferred method of starting nvim.</p>
+<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
+<div class="line">!pick -S project_src -T &quot;Project Tree - Select File to Edit&quot; -c nvim %%</div>
+</div><!-- fragment --><p>Also, if you have a situation in which the script, "project_src" could be replaced by a direct command line, such as "lf -d 5 '.\*\.c$'", that would be more efficient than using an external script. The command line below demonstrates how to directly use the "lf" command to generate a list of .c files in the current directory and its subdirectories, without the need for an external script.</p>
+<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
+<div class="line">!pick -S &quot;lf -d 5 &#39;.*\.c$&#39;&quot; -T &quot;Project Tree - Select File to Edit&quot; -c nvim %%</div>
+</div><!-- fragment --><p>Look Mom! No scripts! Just direct command lines. This is the most efficient way to write your menu commands, but it may not always be the most practical or maintainable way, especially if you have complex command lines that are difficult to read and understand. In those cases, using shell scripts can help simplify your command lines and make them more readable and maintainable.</p>
+<h2 class="doxsection"><a class="anchor" id="view-c-menu-source-with-tree-sitter-1"></a>
+View C-Menu Source With Tree-Sitter</h2>
+<p><a class="el" href="../../df/dec/a01320.html">View</a> C-Menu Source with Tree-sitter demonstrates how to use shell scripts to simplify complex command lines. The command line below uses a shell script , "tree-sitter highlight", to apply syntax highlighting to the selected source file using Tree-Sitter.</p>
+<div class="fragment"><div class="line">: View CMenu Source with Tree-Sitter</div>
+<div class="line">!pick -S project_src -n 1 -T &quot;Select Project Source to Highlight&quot; -c &quot;view -L 60 -C 85 -S \&quot;tree-sitter highlight %%\&quot;&quot;</div>
+</div><!-- fragment --><div class="image">
+<img src="../../Pick_Source.png" alt=""/>
+<div class="caption">
+Pick C-Menu Source</div></div>
+    <p><img src="../../tree-sitter.png" alt="" class="inline" title="View C-Menu Source"/>    </p>
+<p>It is not necessary to use a filter expression in <a class="el" href="../../d4/d49/a01316.html" title="Pick data structure.">Pick</a>. You can just as easily mouse click the particular file you want to select. However, it comes in handy when you have several pages of files.</p>
+<p>This image of the <a class="el" href="../../df/dec/a01320.html">View</a> window has line numbers because f_ln is set to true in the C-Menu configuration file. If you don't have f_ln set to true in the configuration file, you can also use "-N" on the command line to enable line numbers. If you have f_ln set to true in the configuration file, and you don't want line numbers, you can specify "-Nf" on the command line to disable line numbers for that particular view instance. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -297,7 +189,6 @@ Variables</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d0/de2/a01442.html">view_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

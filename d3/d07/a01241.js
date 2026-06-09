@@ -1,6 +1,7 @@
 var a01241 =
 [
-    [ "bg", "d3/d07/a01241.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
-    [ "fg", "d3/d07/a01241.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
-    [ "pair_id", "d3/d07/a01241.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
+    [ "handle_signal", "d3/d07/a01241.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d3/d07/a01241.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d3/d07/a01241.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d3/d07/a01241.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];

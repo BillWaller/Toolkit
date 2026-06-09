@@ -1,18 +1,13 @@
 var a01227 =
 [
-    [ "deselect_object", "d9/da8/a01227.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "display_page", "d9/da8/a01227.html#gacd6b9991f2aa305f622f5d2515815bba", null ],
-    [ "display_pick_help", "d9/da8/a01227.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "exec_objects", "d9/da8/a01227.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d9/da8/a01227.html#ga1b2ee87543245e612c1710ea58930a17", null ],
-    [ "match_objects", "d9/da8/a01227.html#ga91b2cda407803ee4367f7efd5487863c", null ],
-    [ "open_pick_win", "d9/da8/a01227.html#gaf20c847dc030116f9999adbba681000c", null ],
-    [ "output_objects", "d9/da8/a01227.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_engine", "d9/da8/a01227.html#gab97dcab41017c5132f52b682437a151e", null ],
-    [ "picker", "d9/da8/a01227.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
-    [ "read_pick_input", "d9/da8/a01227.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d9/da8/a01227.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d9/da8/a01227.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d9/da8/a01227.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d9/da8/a01227.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "compile_chyron", "d9/da8/a01227.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "d9/da8/a01227.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "display_chyron", "d9/da8/a01227.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
+    [ "get_chyron_key", "d9/da8/a01227.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "d9/da8/a01227.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "d9/da8/a01227.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "new_chyron", "d9/da8/a01227.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key", "d9/da8/a01227.html#ga208ce92c197fdd6d2b007987e534aa3b", null ],
+    [ "set_chyron_key_cp", "d9/da8/a01227.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "d9/da8/a01227.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

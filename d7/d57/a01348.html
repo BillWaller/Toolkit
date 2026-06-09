@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Performance</title>
+<title>C-Menu: /usr/local/src/C-Menu/src/enterstr.c</title>
 <link rel="icon" href="../../decision.svg" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,60 +109,66 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d7/d57/a01348.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Performance </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md109"></a> <img src="../../Performance.png" alt="" class="inline" title="C-Menu Performance"/>    </p>
-<p><b><em>NEW</em></b> C-Menu Installation Guide</p>
-<p><a class="el" href="../../d7/d51/a01340.html" title="C-Menu-UG">C-Menu User Guide</a></p>
-<p><a class="el" href="../../d9/de4/a01346.html" title="C-Menu - A User Interface Toolkit">C-Menu Installation Guide</a></p>
-<h1 class="doxsection"><a class="anchor" id="design-philosophy-and-optimizations"></a>
-Design Philosophy and Optimizations</h1>
-<p>To build truly outstanding applications with C-Menu, it is essential to understand the design philosophy and optimizations that C-Menu provides and how to leverage them.</p>
-<p>C-Menu was not meant to replace GUI or shell-based applications, but to compliment them by providing an alternative to users who demand the performance and efficiency possible with terminal-based interfaces. C-Menu's design philosophy is centered around simplicity, efficiency, and directness.</p>
-<p>C-Menu provides a powerful set of internal functions that allow you to create complex and responsive applications while minimizing the need for external executables or shells. By using C-Menu's internal functions and direct execution capabilities, you can achieve performance levels that are orders of magnitude beyond than traditional shell and GUI based menu systems.</p>
-<p>Hard-core, veteran programmers tend to prefer the black screen terminal over flashy GUIs for good reason. It's not just a matter of aesthetics, but a reflection of the underlying design philosophy and optimizations that terminal-based applications can provide. Terminal applications have a more direct and efficient interface to the underlying operating system, resulting in exceptional performance and greater control over resources.</p>
-<p>Understandably, less experienced users prefer a GUI interface because a raw terminal interface, while powerful, can be terse and unforgiving. Becoming truly proficient with the terminal environment requires a significant investment of time and effort. In contrast, GUI interfaces are generally more intuitive and user-friendly, especially for those who are not familiar with the Unix command-line. A GUI provides visual cues and interactive elements that can make it easier for users to navigate and perform tasks without needing to remember complex commands or syntax.</p>
-<p>C-Menu's design objective is to provide the best of both worlds by combining the speed and efficiency of terminal-based applications with an attractive, intuitive, and user-friendly framework. C-Menu's internal functions and direct execution capabilities allow you to create applications that are fast and responsive, while its menu system provides a more accessible, intuitive, and visually appealing interface.</p>
-<p>With the C-Menu applications you create, intelligent users will discover a new sense of freedom, unbridled by slugish response times that wreck continuity of thought.</p>
-<h2 class="doxsection"><a class="anchor" id="c-menu-launcher"></a>
-C-Menu Launcher</h2>
-<p>When you use C-Menu's Example Application <a class="el" href="../../d8/d53/a01225.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, you will notice that most menu selections respond instantaneously with no perceptible delay. It just snaps. That level of optimization is achieved in part by avoiding the overhead and unpredictability of using a shell to execute command lines. C-Menu provides direct execution, which results in start-up times an order of magnitude faster than traditional shell-based menu systems. But, C-Menu has something even faster. You can take C-Menu performance to the next level by letting C-Menu call it's internal functions directly, bypassing the start-up overhead of external executables. <a class="el" href="../../d8/d53/a01225.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../da/d19/a01217.html">Form</a>, <a class="el" href="../../db/d1c/a01229.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d6/da1/a01233.html">View</a>, and CKeys are internal functions. In the Example Applications <a class="el" href="../../d8/d53/a01225.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, all except the first command line are internal function calls, which execute in nanoseconds compared to the milliseconds it takes to launch an external executable.</p>
-<p>Here's a breakdown of the performance levels you can expect when using C-Menu:</p>
-<p>Relative performance:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Performance level  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadNone">Elapsed Time  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Somewhat Slugish  </td><td class="markdownTableBodyNone">Shell based execution  </td><td class="markdownTableBodyNone">10-100 ms  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Fast  </td><td class="markdownTableBodyNone">Direct execution  </td><td class="markdownTableBodyNone">1-10 ms  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Instantaneous  </td><td class="markdownTableBodyNone">Internal function calls  </td><td class="markdownTableBodyNone">0.001 ms  </td></tr>
-</table>
-<p>At 200 ms response, a user will perceive an application as sluggish. At 20 ms, the user will perceive a smooth and responsive experience. At 1 ms, the user will perceive an instantaneous response. Admittedly, no one really cares whether a program loads in 0.001 ms or 1,000 times slower at 1 ms, but in practical applications iterative processes often take thousands of cycles to complete.</p>
-<p>Sometimes it is expedient to use a shell to execute a command line, such as when you want to use shell features like globbing, variable expansion, or complex command pipelines. In those cases, you can explicitly invoke a shell by including "sh -c" or a shell script on the command line.</p>
-<p>When designing with C-Menu, you should select a method in the following order:</p>
-<ul>
-<li>C-Menu internals, such as <a class="el" href="../../d8/d53/a01225.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../da/d19/a01217.html">Form</a>, <a class="el" href="../../db/d1c/a01229.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d6/da1/a01233.html">View</a></li>
-<li>direct execution</li>
-<li>shell</li>
-</ul>
-<p>If an internal function call will work, use an internal function call. If not, consider direct execution. Finally, if you need features provided by a shell, use a shell. There is nothing wrong with using a shell when it is appropriate, but you should be aware of the performance implications and use it judiciously.</p>
-<p>C-Menu was designed to support internal function calls and direct execution, so it provides the most commonly needed conveniences such as tilde expansion, file location based on the environment, and piped input and output.</p>
-<p>For piped input and output with internal function calls and direct execution, C-Menu allows the specification of providers and receivers for pipe I-O. Instead of using I/O redirection on the command line with pipe symbols, C-Menu provides more controllable alternatives such as "-S" for specifying a command to execute as a provider (source) of input to a form, pick, or view, "-R" for specifying a command to receive standard output from a form, pick, or view, and "-c" for specifying a command to execute with the selected item as an argument. These features allow you to create powerful and flexible menu items that can interact with other applications and scripts in a more controlled and efficient manner.</p>
-<hr  />
- </div></div><!-- contents -->
-</div><!-- PageDoc -->
+<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
+<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
+<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
+<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
+</div><!-- fragment --><div class="fragment"><div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d9/d31/a01208.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d5/d16/a01154.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a id="_a2" name="_a2"></a><a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../d5/d16/a01154.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line">    <span class="keywordtype">char</span> *msg;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
+<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d5/d6e/a01240.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../d3/d07/a01241.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line">    new_tioctl = <a id="_a6" name="_a6"></a><a class="code hl_variable" href="../../db/d42/a01220.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
+<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line">            write(2, msg++, 1);</div>
+<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../d5/d16/a01154.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line">        write(1, in_ptr++, 1);</div>
+<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../d3/d07/a01241.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
+<div class="line">    <a id="a8" name="a8"></a><a class="code hl_function" href="../../d5/d6e/a01240.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line">    exit(0);</div>
+<div class="line">}</div>
+<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
+<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../de/d61/a01205_source.html#l00131">futil.c:131</a></div></div>
+<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
+<div class="ttc" id="aa01154_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../d5/d16/a01154.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d16/a01154_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa01208_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d9/d31/a01208.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00034">amort.c:34</a></div></div>
+<div class="ttc" id="aa01220_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../db/d42/a01220.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01240_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d5/d6e/a01240.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01240_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d5/d6e/a01240.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01241_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d3/d07/a01241.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../de/db5/a01181_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa01241_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d3/d07/a01241.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../de/db5/a01181_source.html#l00062">sig.c:62</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
