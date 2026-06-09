@@ -122,7 +122,7 @@ Selecting Themes</h2>
 <p>To select a theme, go to the C-Menu Workstation Configuration <a class="el" href="../../d2/d8e/a01315.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> and select the "Select C-Menu Theme" option. This will display a list of available themes. Select the theme you want by clicking on it, or use the arrow keys to position the cursor on the theme and press "t" or " " (spacebar) to select it.")
 
 @image html screenshots/GreenDark.png "Select Theme"    </p>
-<p>That's it. The windows will instantly render with the theme you selected.</p>
+<p>That's it. C-Menu will instantly render any open C-Menu windows with the theme you selected.</p>
 <h2 class="doxsection"><a class="anchor" id="creating-new-themes"></a>
 Creating New Themes</h2>
 <p>To create a new theme, select "Create C-Menu Theme" from the C-Menu Workstation Configuration <a class="el" href="../../d2/d8e/a01315.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>. C-Menu <a class="el" href="../../d1/d72/a01319.html" title="Pick data structure.">Pick</a> will open a screen similar to the one used for selecting themes, but the title will be "Choose Theme Template". Select a theme template to use as a starting point for you new theme.</p>
@@ -140,9 +140,11 @@ C-Menu Configuration Files</h2>
 </div><!-- fragment --><p>The same information that can be included in the main configuration file can also be included in theme files and vice versa. The difference is that theme files are kept in ~/menuapp/themes as a convenience. The main C-Menu Configuration file normally includes all of the entries needed for a complete theme, so it is not necessary to include theme files in the main configuration file. The Theme file is just a supplementary configuration file, the key values of which override those in the main configuration file positioned before the include statement. C-Menu uses only the last occurrence of a key and its value.</p>
 <h2 class="doxsection"><a class="anchor" id="theme-files"></a>
 Theme Files</h2>
-<p>Theme files are just supplemental configuration files that configure the appearance of C-Menu. Theme files are kept separately to facilitate coherent organization of theme components and to make it easier to create and manage themes. Theme files are included in the C-Menu configuration file with include statements such as the following:</p>
+<p>Theme files are just supplemental configuration files that configure the appearance of C-Menu. Theme files are kept separately to facilitate coherent organization of theme components, to make it easier to create and manage themes, and most importantly, to allow the user to activate themes without reloading the main C-Menu Configuration. That's because a user may have started C-Menu with specific command line options that override the main configuration file, and reloading the main configuration file would override those command line options. By keeping themes in separate files, users can activate themes without reloading the main configuration file and overriding any command line options they may have used when starting C-Menu.</p>
+<p>Theme files are included in the main C-Menu configuration file with include statements such as the following:</p>
 <div class="fragment"><div class="line">include = ~/menuapp/themes/default</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="key-value-pairs"></a>
+</div><!-- fragment --><p>The placement of the include statement in the main configuration file is significant because C-Menu processes key value pairs in reading order, so the key value pairs in the included file will override any duplicate key values in the main configuration file that are positioned before the include statement. Conversely, if you want to use a supplemental configuration as the default, include it first.</p>
+<h2 class="doxsection"><a class="anchor" id="key-value-pairs"></a>
 Key Value Pairs</h2>
 <p>Key value pairs consist of a key, text from the beginning of a line delimited by an '=' character, and a value after the '=' character delimited by whitespace or including syntactically valid hex color codes. Values may be enclosed in single or double quotes to preserve leading and trailing whitespace, which will otherwise be stripped.</p>
 <h3 class="doxsection"><a class="anchor" id="colors"></a>
@@ -160,17 +162,14 @@ your entries in the theme file.
 
 When you are finished editing the theme file, save it and close the text editor. You may use the name assigned, which will be in the form, "New.XXXXX", where "XXXXX" is a random string of characters, or you can rename the file to something more descriptive.
 There is no restriction on the names of theme files except that "default" is
-reserved for the default theme. The new theme will be available for selection in the "Select C-Menu Theme" menu.</p>
-<h2 class="doxsection"><a class="anchor" id="configuration-line-processing-order"></a>
-Configuration Line Processing Order</h2>
-<p>C-Menu processes key value pairs in reading order from its main configuraiton file, ~/ menuapp /.minitrc, and any supplemental configuration files sourced with include statements such as the following:</p>
-<div class="fragment"><div class="line">include = ~/menuapp/themes/default</div>
-</div><!-- fragment --><p>Assuming your configuration file is in ~/menuapp/themes/Red, you could create a symbolic link named default that points to Red, and then include default in your main configuration file. (Actually ~/menuapp/.minitrc already includes default, so you would only need to create the theme file and the symbolic link.</p>
+reserved for the default theme. The new theme will be available for selection in the "Select C-Menu Theme" menu.
+
+@subsection setting-the-new-theme-as-the-default Setting the New Theme as the Default
+
+If you use the C-Menu Workstation Configuration Menu to select the new theme,
+C-Menu will automatically create a symbolic link named "default" that points to the theme file you selected, so you don't need to do anything else. However, if you want to set the new theme as the default without using the C-Menu Workstation Configuration Menu, you can create a symbolic link named "default" that points to your new theme file with the following command:</p>
 <div class="fragment"><div class="line">ln -s Red default</div>
-</div><!-- fragment --><p>Key value pairs included from configuration files (including theme files) are processed in reading order as they are included.</p>
-<p>This is significant in the event that a key is included more than once in the configuration file and / or included files. Only the last value read for a key will be used by C-Menu.</p>
-<p>If you want to override key values in the C-Menu configuration file, you can do so by including a supplemental configuration file that contains the desired key value pairs. The key value pairs in the included file will be processed in reading order after the key value pairs in the main configuration file, so they will override any duplicate key values in the main configuration file. Conversely, if you want to use a supplemental configuration as the default, include it first.</p>
-<h3 class="doxsection"><a class="anchor" id="parsing-rules"></a>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="parsing-rules"></a>
 Parsing Rules</h3>
 <p>Parsing: Lines beginning with # are comments and are ignored. Lines containing key=value pairs are parsed and the key and value are extracted. Lines without an '=' are ignored. Values are stripped of leading and trailing whitespace and quotes. Values can be enclosed in single or double quotes to preserve leading and trailing whitespace. Values can also be specified as hex color codes such as #ff0000 for red. If a value is specified as a hex color code, it is parsed and stored as a hex color code in the configuration. An unquoted '#' that is not part of a six digit hex color code and after key values have been extracted is the beginning of a comment. </p>
 </div></div><!-- contents -->

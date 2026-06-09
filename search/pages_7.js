@@ -59,6 +59,7 @@ var searchData=
   ['applications_20menu_56',['C-Menu Example Applications Menu',['../d1/d3b/a01429.html#c-menu-example-applications-menu',1,'']]],
   ['are_20my_20header_20files_57',['Menu lf - Where Are My Header Files?',['../dc/d85/a01436.html#menu-lf---where-are-my-header-files',1,'']]],
   ['art_20in_20snacks_20nvim_58',['To Use the Neovim Unicode Art in Snacks.nvim',['../d3/d95/a01435.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'']]],
-  ['asynchronous_20communication_20and_20serialization_59',['Asynchronous Communication and Serialization',['../df/d75/a01447.html#asynchronous-communication-and-serialization',1,'']]],
-  ['authority_60',['ROOT AUTHORITY',['../dd/d08/a01448.html#root-authority',1,'']]]
+  ['as_20the_20default_59',['Setting the New Theme as the Default',['../d3/da3/a01450.html#setting-the-new-theme-as-the-default',1,'']]],
+  ['asynchronous_20communication_20and_20serialization_60',['Asynchronous Communication and Serialization',['../df/d75/a01447.html#asynchronous-communication-and-serialization',1,'']]],
+  ['authority_61',['ROOT AUTHORITY',['../dd/d08/a01448.html#root-authority',1,'']]]
 ];

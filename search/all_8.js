@@ -86,6 +86,7 @@ var searchData=
   ['argv_83',['Argv',['../d9/de7/a01279.html',1,'']]],
   ['argv_84',['argv',['../d7/d88/a01255.html#ab6900a934df57e5b9971da7f6484eb41',1,'Init::argv'],['../d2/d8e/a01315.html#aefb3580ad8effc5bc4d18272dda1d8c1',1,'Menu::argv'],['../d1/d72/a01319.html#abf9dfbe77ff1ec9cef9baf5c4a0cba10',1,'Pick::argv'],['../db/da8/a01323.html#a1927285829c2fa879bf8cfd9dd06c595',1,'View::argv']]],
   ['art_20in_20snacks_20nvim_85',['To Use the Neovim Unicode Art in Snacks.nvim',['../d3/d95/a01435.html#to-use-the-neovim-unicode-art-in-snacksnvim',1,'']]],
-  ['asynchronous_20communication_20and_20serialization_86',['Asynchronous Communication and Serialization',['../df/d75/a01447.html#asynchronous-communication-and-serialization',1,'']]],
-  ['authority_87',['ROOT AUTHORITY',['../dd/d08/a01448.html#root-authority',1,'']]]
+  ['as_20the_20default_86',['Setting the New Theme as the Default',['../d3/da3/a01450.html#setting-the-new-theme-as-the-default',1,'']]],
+  ['asynchronous_20communication_20and_20serialization_87',['Asynchronous Communication and Serialization',['../df/d75/a01447.html#asynchronous-communication-and-serialization',1,'']]],
+  ['authority_88',['ROOT AUTHORITY',['../dd/d08/a01448.html#root-authority',1,'']]]
 ];

@@ -489,7 +489,7 @@ var NAVTREE =
           [ "Comments", "d3/da3/a01450.html#comments", null ]
         ] ],
         [ "Saving the Theme File", "d3/da3/a01450.html#saving-the-theme-file", null ],
-        [ "Configuration Line Processing Order", "d3/da3/a01450.html#configuration-line-processing-order", [
+        [ "Setting the New Theme as the Default", "d3/da3/a01450.html#setting-the-new-theme-as-the-default", [
           [ "Parsing Rules", "d3/da3/a01450.html#parsing-rules", null ]
         ] ]
       ] ]
