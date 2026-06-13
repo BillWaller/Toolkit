@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['faq_2emd_0',['FAQ.md',['../dd/de4/a01121.html',1,'']]],
-  ['fields_2ec_1',['fields.c',['../db/d42/a01220.html',1,'']]],
-  ['form_2eh_2',['form.h',['../d2/d94/a00716.html',1,'']]],
-  ['form_2emd_3',['form.md',['../d9/d7c/a01073.html',1,'']]],
-  ['form_5fengine_2ec_4',['form_engine.c',['../d6/df2/a01175.html',1,'']]],
-  ['futil_2ec_5',['futil.c',['../d9/d31/a01208.html',1,'']]]
+  ['enterchr_2ec_0',['enterchr.c',['../d7/ddd/a01223.html',1,'']]],
+  ['enterstr_2ec_1',['enterstr.c',['../d4/d5d/a01202.html',1,'']]],
+  ['exec_2ec_2',['exec.c',['../de/db5/a01181.html',1,'']]],
+  ['exercises_2emd_3',['exercises.md',['../d6/d80/a01076.html',1,'']]],
+  ['extras_2emd_4',['extras.md',['../dd/de4/a01121.html',1,'']]]
 ];

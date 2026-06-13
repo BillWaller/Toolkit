@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: DATE/TIME CONUNDRUM</title>
+<title>C-Menu: BUILD</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,185 +110,180 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/dd0/a01438.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">DATE/TIME CONUNDRUM </div></div>
+  <div class="headertitle"><div class="title">BUILD </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="datetime-conundrum"></a></p>
-<p>Bill Waller Copyright (c) 2026 <br  />
- 2026-05-25 <br  />
- MIT License <br  />
- <a href="../../email@billxwaller@gmail.com">bill waller email</a></p>
-<h1 class="doxsection"><a class="anchor" id="overview"></a>
-Overview</h1>
-<p>This note documents an issue encountered while parsing local date/time text with <span class="tt">strptime()</span>, converting the result to <span class="tt">time_t</span> with <span class="tt">mktime()</span>, and then formatting the resulting value after conversion back to local time with <span class="tt">localtime_r()</span>.</p>
-<p>I am including this documentation because the behavior can be confusing at first, and it is easy to misattribute the problem to <span class="tt">localtime_r()</span> when the real issue is usually an uninitialized <span class="tt">struct tm</span> field that affects how <span class="tt">mktime()</span> interprets the input.</p>
-<p>At first glance, the behavior can look like a GNU <span class="tt">gmtime_r()</span> or <span class="tt">localtime_r()</span> bug because the formatted output appears to shift by one hour depending on whether the <span class="tt">struct tm</span> was first cleared with <span class="tt">memset()</span>. In practice, the real problem is usually the value of <span class="tt">tm_isdst</span> before calling <span class="tt">mktime()</span>.</p>
-<p><span class="tt">strptime()</span> fills only the fields specified by the format string. It does <b>not</b> guarantee that the rest of the <span class="tt">struct tm</span> is initialized to useful values. One of the most important remaining fields is <span class="tt">tm_isdst</span>:</p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md4"></a> <img src="../../Build.png" alt="" class="inline" title="Installation Guide"/>    </p>
 <ul>
-<li><span class="tt">tm_isdst = 0</span> means standard time is in effect.</li>
-<li><span class="tt">tm_isdst = 1</span> means daylight saving time is in effect.</li>
-<li><span class="tt">tm_isdst = -1</span> means "determine DST automatically."</li>
+<li><a class="el" href="../../d9/db0/a01437.html#introduction" title="Introduction">Introduction</a><ul>
+<li><a class="el" href="#build-tool-choices" title="Build Tool Choices">Build Tool Choices</a></li>
+<li><a class="el" href="#build-type-choices" title="Build Type Choices">Build Type Choices</a></li>
+<li><a class="el" href="#prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a class="el" href="#preparing" title="Preparing">Preparing</a></li>
 </ul>
-<p>That means:</p>
-<ul>
-<li>If the structure is zeroed with <span class="tt">memset()</span>, then <span class="tt">tm_isdst</span> becomes <span class="tt">0</span>, which forces <span class="tt">mktime()</span> to interpret the input as standard time even when the date falls in CDT.</li>
-<li>If the structure is <b>not</b> initialized first, <span class="tt">tm_isdst</span> may retain leftover data from prior use, which can accidentally make one test case appear correct and another appear incorrect.</li>
+</li>
+<li><a class="el" href="#build" title="Build">Build</a><ul>
+<li><a class="el" href="#gnu-makefile" title="GNU Makefile">GNU Makefile</a></li>
+<li><a class="el" href="#cmake" title="CMake">CMake</a></li>
 </ul>
-<p>So the one-hour discrepancy is not caused by <span class="tt">localtime_r()</span> itself. The incorrect value is usually created earlier by <span class="tt">mktime()</span> when it receives an incompletely initialized <span class="tt">struct tm</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="correct-workaround"></a>
-Correct workaround</h1>
-<p>The safe pattern is:</p>
+</li>
+<li><a class="el" href="#install" title="Install">Install</a></li>
+<li><a class="el" href="#post-install" title="Post Install">Post Install</a><ul>
+<li><a class="el" href="#check-the-installation" title="Check the Installation">Check the Installation</a></li>
+<li><a class="el" href="#c-menu-libraries" title="C-Menu Libraries">C-Menu Libraries</a></li>
+<li><a class="el" href="#c-menu-binaries" title="C-Menu Binaries">C-Menu Binaries</a></li>
+<li><a class="el" href="#set-up-your-environment" title="Set Up Your Environment">Set Up Your Environment</a></li>
+<li><a class="el" href="#running-c-menu" title="Running C-Menu">Running C-Menu</a></li>
+</ul>
+</li>
+<li><a class="el" href="#conclusion" title="Conclusion">Conclusion</a></li>
+</ul>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="introduction-1"></a>
+Introduction</h2>
+<p>The instructions below will guide you through building and installing C-Menu from source.</p>
+<h3 class="doxsection"><a class="anchor" id="build-tool-choices"></a>
+Build Tool Choices</h3>
 <ol type="1">
-<li>Clear the full <span class="tt">struct tm</span>.</li>
-<li>Set <span class="tt">tm_isdst = -1</span>.</li>
-<li>Call <span class="tt">strptime()</span>.</li>
-<li>Call <span class="tt">mktime()</span>.</li>
+<li>GNU Makefile</li>
+<li>CMake</li>
 </ol>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm tm1;</div>
-<div class="line">memset(&amp;tm1, 0, <span class="keyword">sizeof</span> tm1);</div>
-<div class="line">tm1.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1) == NULL) {</div>
-<div class="line">    <span class="comment">/* parse error */</span></div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">time_t t1 = mktime(&amp;tm1);</div>
-</div><!-- fragment --><p>Then format for display using a separate output structure:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm out;</div>
-<div class="line">localtime_r(&amp;t1, &amp;out);</div>
-<div class="line">strftime(buf, <span class="keyword">sizeof</span> buf, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;out);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="why-the-previous-results-looked-contradictory"></a>
-Why the previous results looked contradictory</h1>
-<p>The earlier examples showed this pattern:</p>
+<p>If you plan to develop C-Menu, use the build tool you are most comfortable with, as both are fully supported and will produce similar results.</p>
+<h3 class="doxsection"><a class="anchor" id="build-type-choices"></a>
+Build Type Choices</h3>
+<ol type="1">
+<li>Debug (default)</li>
+<li>Release</li>
+</ol>
+<p>If you are building C-Menu for development or debugging purposes, use the default Debug build type. This creates unstripped executables with debugging symbols. As of C-Menu 0.2.9, the Debug binaries are about 6.5 Mb.</p>
+<p>If you are building C-Menu for deployment or want to optimize for size and performance, use the Release build type. As of C-Menu 0.2.9, the Release binaries are about 1.4 Mb.</p>
+<h3 class="doxsection"><a class="anchor" id="prerequisites"></a>
+Prerequisites</h3>
 <ul>
-<li>Zeroing the structure appeared to break CDT dates.</li>
-<li>Not zeroing the structure appeared to break CST dates.</li>
+<li>One of:<ul>
+<li>CMake 3.20 or higher, or</li>
+<li>GNU Make 4.3 or higher</li>
 </ul>
-<p>That happens because the tests were effectively toggling the initial value of <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">memset(..., 0, ...)</span> forced <span class="tt">tm_isdst = 0</span>, i.e. standard time.</li>
-<li>Reusing the same structure without reinitializing it allowed <span class="tt">tm_isdst</span> to carry stale state from earlier operations.</li>
+</li>
+<li>A C compiler that supports C23 or later (e.g., GCC 13 or later, Clang 15 or later)</li>
+<li>NCursesw development libraries 6.5 or later</li>
+<li>GNU GLIBC development files</li>
+<li>GNU Math Library (libm) development files</li>
 </ul>
-<p>As a result, the code was not consistently asking <span class="tt">mktime()</span> to determine DST from the input date. Once <span class="tt">tm_isdst</span> is explicitly set to <span class="tt">-1</span>, both standard-time and daylight-time dates should round-trip correctly in the local timezone.</p>
-<h1 class="doxsection"><a class="anchor" id="important-note-about-gmtime_r"></a>
-Important note about <span class="tt">gmtime_r()</span></h1>
-<p><span class="tt">gmtime_r()</span> converts a <span class="tt">time_t</span> to UTC. It does not use the local timezone rules to decide whether the original parsed time was CST or CDT. If the UTC result appears to be off by one hour, that usually means the <span class="tt">time_t</span> value produced by <span class="tt">mktime()</span> was already wrong.</p>
-<h1 class="doxsection"><a class="anchor" id="recommended-helper"></a>
-Recommended helper</h1>
-<p>A simple helper for parsing local timestamps safely:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> <a class="code hl_function" href="../../d6/d1e/a01234.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, time_t *out)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    memset(&amp;tmv, 0, <span class="keyword">sizeof</span> tmv);</div>
-<div class="line">    tmv.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (strptime(s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv) == NULL)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    time_t t = mktime(&amp;tmv);</div>
-<div class="line">    <span class="keywordflow">if</span> (t == (time_t)-1)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    *out = t;</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01234_html_ga1ee26caf58dfc798273ba095a394cde8"><div class="ttname"><a href="../../d6/d1e/a01234.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a></div><div class="ttdeci">bool parse_local_timestamp(const char *, time_t *)</div><div class="ttdoc">Parses an ISO 8601 timestamp string in local time and converts it to time_t.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00273">futil.c:273</a></div></div>
-</div><!-- fragment --><p>And a matching formatter:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="../../d6/d1e/a01234.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a>(time_t t, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> n)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    localtime_r(&amp;t, &amp;tmv);</div>
-<div class="line">    strftime(buf, n, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01234_html_gaee5521bb387211a2d16e3d56585f144d"><div class="ttname"><a href="../../d6/d1e/a01234.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a></div><div class="ttdeci">char * format_local_timestamp(time_t, char *, size_t)</div><div class="ttdoc">Formats a time_t as an ISO 8601 string in local time.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00296">futil.c:296</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="revised-interpretation-of-the-original-test-cases"></a>
-Revised interpretation of the original test cases</h1>
-<p>The original test cases are still useful because they show that leaving <span class="tt">tm_isdst</span> uncontrolled produces different behavior across DST boundaries. However, they do <b>not</b> demonstrate a <span class="tt">localtime_r()</span> or <span class="tt">gmtime_r()</span> bug. They demonstrate that <span class="tt">mktime()</span> needs a fully initialized <span class="tt">struct tm</span>, with <span class="tt">tm_isdst</span> set appropriately.</p>
-<h1 class="doxsection"><a class="anchor" id="original-demonstration-code"></a>
-Original demonstration code</h1>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define _GNU_SOURCE</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="../../d1/d34/a01211.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>() {</div>
-<div class="line">    <span class="keywordtype">char</span> buf[100];</div>
-<div class="line">    <span class="keywordtype">char</span> time_s[32];</div>
-<div class="line">    <span class="keyword">struct </span>tm tm1;</div>
-<div class="line">    time_t t1 = time(NULL);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    printf(<span class="stringliteral">&quot;with memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; NOT MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; NOT MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01211_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d1/d34/a01211.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d34/a01211_source.html#l00034">amort.c:34</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<h3 class="doxsection"><a class="anchor" id="preparing"></a>
+Preparing</h3>
+<p>It is strongly recommended that you build C-Menu as a regular user and only use root privileges for the installation step.</p>
+<p>Clone the C-Menu repository and change to the C-Menu/src directory.</p>
+<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
+</div><!-- fragment --><p>Change to the C-Menu/src directory.</p>
+<div class="fragment"><div class="line">cd C-Menu/src</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="build"></a>
+Build</h2>
+<h3 class="doxsection"><a class="anchor" id="gnu-makefile"></a>
+GNU Makefile</h3>
+<p>CAUTION: In the CMenu build system, C-Menu/src/Makefile is a temporary file which will be overwritten by CMake. It will be used for the GNU Makefile build and the CMake build, and CMake will overwrite it. This shouldn't be a problem because the original GNU Makefile is in C-Menu/src/GNUMakefile.</p>
+<p>What you don't want to do is spend time editing C-Menu/src/Makefile and then have CMake overwrite your changes. To avoid this, if you make changes to C-Menu/src/Makefile, copy it to C-Menu/src/GNUMakefile.XXX, where XXX is a descriptive suffix or version number.</p>
+<p>So you don't have to type "-f GNUMakefile" with every make command, copy C-Menu/src/GNUMakefile to Makefile</p>
+<div class="fragment"><div class="line">cp GNUMakefile Makefile</div>
+</div><!-- fragment --><p>To build the Debug version:</p>
+<div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p>To build the Release version:</p>
+<div class="fragment"><div class="line">make BUILD_TYPE=Release</div>
+</div><!-- fragment --><p>If you want to run the build in a separate build directory (recommended), you can use the following commands:</p>
+<div class="fragment"><div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cp ../GNUMakefile Makefile</div>
+<div class="line">ln -sf ../include .</div>
+<div class="line">make VPATH=.. BUILD_TYPE=Release</div>
+<div class="line">sudo make install</div>
+</div><!-- fragment --><p>Choosing the above method obviates the need for the install step below, as the last command completes the install.</p>
+<hr  />
+<h3 class="doxsection"><a class="anchor" id="cmake"></a>
+CMake</h3>
+<p>CAUTION: In the CMenu build system, C-Menu/src/Makefile is a temporary file which will be overwritten by CMake. It will be used for the GNU Makefile build and the CMake build, and CMake will overwrite it. This shouldn't be a problem because the original GNU Makefile is in C-Menu/src/GNUMakefile.</p>
+<p>What you don't want to do is spend time editing C-Menu/src/Makefile and then have CMake overwrite your changes. To avoid this, if you make changes to C-Menu/src/Makefile while you are building with GNU Makefile make, copy the Makefile to C-Menu/src/GNUMakefile.XXX, where XXX is a descriptive suffix or version number.</p>
+<p>You don't need to protect the CMake Makefile because it is generated by CMake from another file, C-Menu/src/CMakeLists.txt.</p>
+<p>To build with C-Make:</p>
+<div class="fragment"><div class="line">cmake .</div>
+</div><!-- fragment --><p>This will generate the necessary build files for your system. By default, CMake will configure the project to build the Debug variants of the C-Menu binaries. If you want to build the Release variants, specify the build type when configuring CMake:</p>
+<div class="fragment"><div class="line">cmake . -DCMAKE_BUILD_TYPE=Release</div>
+</div><!-- fragment --><p>You will now have a CMake makefile in C-Menu/src/Makefile. Build the project using the following command:</p>
+<div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p>If you want to run the build in a separate build directory (recommended), you can use the following commands:</p>
+<div class="fragment"><div class="line">cmake -S . -B build -DCMAKE_BUILD_TYPE=Release</div>
+<div class="line">cmake --build build</div>
+<div class="line">sudo cmake --install build</div>
+</div><!-- fragment --><p>Choosing the above method obviates the need for the install step below, as the last command completes the install.</p>
+<h2 class="doxsection"><a class="anchor" id="install"></a>
+Install</h2>
+<p>To install C-Menu binaries, run the following command with root privileges:</p>
+<div class="fragment"><div class="line">sudo make install</div>
+</div><!-- fragment --><p>This will install the C-Menu binaries and libraries to the specified PREFIX directory (e.g., /home/your_user_name/menuapp) and set the appropriate permissions.</p>
+<h2 class="doxsection"><a class="anchor" id="post-install"></a>
+Post Install</h2>
+<h3 class="doxsection"><a class="anchor" id="check-the-installation"></a>
+Check the Installation</h3>
+<p>After installation, you can verify that the C-Menu binaries and libraries have been installed to the correct directories (e.g., /home/your_user_name/menuapp/lib64 and /home/your_user_name/menuapp/bin) and that the permissions are set correctly. You can do this by running the following command:</p>
+<div class="fragment"><div class="line">cat manifest.txt</div>
+</div><!-- fragment --><p>This will display a list of all the files that were installed, along with their permissions and sizes. You should see entries for the C-Menu binaries in /home/your_user_name/menuapp/bin and the C-Menu libraries in /home/your_user_name/menuapp/lib64, as well as the configuration file for the dynamic linker in /etc/ld.so.conf.d/CMenu.conf.</p>
+<div class="fragment"><div class="line">-rwxrr-xr-x 1 root root      25 260613 0936 /etc/ld.so.conf.d/CMenu.conf*</div>
+<div class="line">lrwxrwxrwx 1 root root      22 260613 0948 /etc/pam.d/rsh-auth -&gt; /etc/pam.d/rsh-auth-pc</div>
+<div class="line">-rw-r--r-- 1 root root      28 260611 1729 /etc/pam.d/rsh-auth-pc</div>
+<div class="line">-rwxr-xr-x 1 root root   74720 260613 0947 /home/bill/menuapp/bin/amort*</div>
+<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/ckeys -&gt; /home/bill/menuapp/bin/menu*</div>
+<div class="line">-rwxr-xr-x 1 root root   77576 260613 0947 /home/bill/menuapp/bin/detach*</div>
+<div class="line">-rwxr-xr-x 1 root root  149888 260613 0947 /home/bill/menuapp/bin/enterchr*</div>
+<div class="line">-rwxr-xr-x 1 root root  142728 260613 0947 /home/bill/menuapp/bin/enterstr*</div>
+<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/form -&gt; /home/bill/menuapp/bin/menu*</div>
+<div class="line">-rwxr-xr-x 1 root root  100576 260613 0947 /home/bill/menuapp/bin/iloan*</div>
+<div class="line">-rwxr-xr-x 1 root root  566224 260613 0947 /home/bill/menuapp/bin/menu*</div>
+<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/pick -&gt; /home/bill/menuapp/bin/menu*</div>
+<div class="line">-rws--s--x 1 root root  140248 260613 0947 /home/bill/menuapp/bin/rsh*</div>
+<div class="line">-rws--s--x 1 root root  149168 260613 0947 /home/bill/menuapp/bin/rsh_pam*</div>
+<div class="line">-rws--s--x 1 root root 3529616 260613 0947 /home/bill/menuapp/bin/rsh_static*</div>
+<div class="line">-rwxr-xr-x 1 root root  129520 260613 0947 /home/bill/menuapp/bin/stripansi*</div>
+<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/view -&gt; /home/bill/menuapp/bin/menu*</div>
+<div class="line">-rwxr-xr-x 1 root root  145280 260613 0947 /home/bill/menuapp/bin/whence*</div>
+<div class="line">-rwxr-xr-x 1 root root   40626 260612 1706 /home/bill/menuapp/include/cm.h*</div>
+<div class="line">-rwxr-xr-x 1 root root    8567 260610 1530 /home/bill/menuapp/include/common.h*</div>
+<div class="line">-rwxr-xr-x 1 root root   26927 260602 1412 /home/bill/menuapp/include/form.h*</div>
+<div class="line">-rwxr-xr-x 1 root root   12761 260601 1356 /home/bill/menuapp/include/menu.h*</div>
+<div class="line">-rwxr-xr-x 1 root root    4682 260613 0848 /home/bill/menuapp/include/pick.h*</div>
+<div class="line">-rwxr-xr-x 1 root root   10400 260610 1531 /home/bill/menuapp/include/view.h*</div>
+<div class="line">-rwxr-xr-x 1 root root 1131618 260613 0947 /home/bill/menuapp/lib64/libcm.a*</div>
+<div class="line">lrwxrwxrwx 1 root root      39 260613 0948 /home/bill/menuapp/lib64/libcm.so -&gt; /home/bill/menuapp/lib64/libcm.so.0.2.9*</div>
+<div class="line">lrwxrwxrwx 1 root root      39 260613 0948 /home/bill/menuapp/lib64/libcm.so.0 -&gt; /home/bill/menuapp/lib64/libcm.so.0.2.9*</div>
+<div class="line">-rwxr-xr-x 1 root root  347880 260613 0947 /home/bill/menuapp/lib64/libcm.so.0.2.9*</div>
+<div class="line">-rwxr-xr-x 1 bill bill    6598 260604 1548 /home/bill/menuapp/man/man1/cmenu.1.gz*</div>
+<div class="line">-rwxr-xr-x 1 bill bill    3416 260604 1548 /home/bill/menuapp/man/man1/lf.1.gz*</div>
+<div class="line">-rwxr-xr-x 1 bill bill    3027 260604 1548 /home/bill/menuapp/man/man1/rsh.1.gz*</div>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="c-menu-libraries"></a>
+C-Menu Libraries</h3>
+<p>The C-Menu build system installs C-Menu libraries in:</p>
+<div class="fragment"><div class="line">$HOME/menuapp/lib64</div>
+</div><!-- fragment --><p>To run the C-Menu binaries, you need to ensure that the dynamic linker can find the C-Menu libraries. The build system installs a configuration file for the dynamic linker in:</p>
+<div class="fragment"><div class="line">/etc/ld.so.conf.d/CMenu.conf</div>
+</div><!-- fragment --><p>The contents of CMenu.conf should include the path to the C-Menu libraries, which is:</p>
+<div class="fragment"><div class="line">/home/your_user_name/menuapp/lib64</div>
+</div><!-- fragment --><p>/etc/ld.so.conf.d/CMenu.conf</p>
+<h3 class="doxsection"><a class="anchor" id="c-menu-binaries"></a>
+C-Menu Binaries</h3>
+<p>The C-Menu binaries are installed in:</p>
+<div class="fragment"><div class="line">$HOME/menuapp/bin</div>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="set-up-your-environment"></a>
+Set Up Your Environment</h3>
+<p>Put the following lines in your shell profile (e.g., ~/.bashrc, ~/.zshrc) to set up your environment for running C-Menu binaries:</p>
+<div class="fragment"><div class="line">export PATH=&quot;$HOME/menuapp/bin:$PATH&quot;</div>
+<div class="line">export LD_LIBRARY_PATH=&quot;$HOME/menuapp/lib64:$LD_LIBRARY_PATH&quot;</div>
+<div class="line">export CMENU_HOME=&quot;$HOME&quot;/menuapp</div>
+</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="running-c-menu"></a>
+Running C-Menu</h3>
+<p>After setting up your environment, you can run the C-Menu binaries from any terminal. For example, to run the <span class="tt"><a class="el" href="../../df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></span> binary, simply type:</p>
+<div class="fragment"><div class="line">menu</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="conclusion"></a>
+Conclusion</h2>
+<p>You have successfully built and installed C-Menu from source. You can now use the C-Menu binaries and libraries in your projects or run the C-Menu applications as needed. If you encounter any issues during the build or installation process, please refer to the documentation or seek help from the C-Menu community. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

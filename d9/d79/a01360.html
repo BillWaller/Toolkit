@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: DATE/TIME CONUNDRUM</title>
-<link rel="icon" href="../../decision.svg" type="image/x-icon" />
+<title>C-Menu: /usr/local/src/C-Menu/src/enterstr.c</title>
+<link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
 <link href="../../navtree.css" rel="stylesheet" type="text/css"/>
@@ -17,6 +17,7 @@
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -108,194 +109,66 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d79/a01360.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">DATE/TIME CONUNDRUM </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="datetime-conundrum"></a></p>
-<p>Bill Waller Copyright (c) 2026 <br  />
- 2026-05-25 <br  />
- MIT License <br  />
- <a href="../../email@billxwaller@gmail.com">bill waller email</a></p>
-<h1 class="doxsection"><a class="anchor" id="overview"></a>
-Overview</h1>
-<p>This note documents an issue encountered while parsing local date/time text with <span class="tt">strptime()</span>, converting the result to <span class="tt">time_t</span> with <span class="tt">mktime()</span>, and then formatting the resulting value after conversion back to local time with <span class="tt">localtime_r()</span>.</p>
-<p>At first glance, the behavior can look like a GNU <span class="tt">gmtime_r()</span> or <span class="tt">localtime_r()</span> bug because the formatted output appears to shift by one hour depending on whether the <span class="tt">struct tm</span> was first cleared with <span class="tt">memset()</span>. In practice, the real problem is usually the value of <span class="tt">tm_isdst</span> before calling <span class="tt">mktime()</span>.</p>
-<p><span class="tt">strptime()</span> fills only the fields specified by the format string. It does <b>not</b> guarantee that the rest of the <span class="tt">struct tm</span> is initialized to useful values. One of the most important remaining fields is <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">tm_isdst = 0</span> means standard time is in effect.</li>
-<li><span class="tt">tm_isdst = 1</span> means daylight saving time is in effect.</li>
-<li><span class="tt">tm_isdst = -1</span> means "determine DST automatically."</li>
-</ul>
-<p>That means:</p>
-<ul>
-<li>If the structure is zeroed with <span class="tt">memset()</span>, then <span class="tt">tm_isdst</span> becomes <span class="tt">0</span>, which forces <span class="tt">mktime()</span> to interpret the input as standard time even when the date falls in CDT.</li>
-<li>If the structure is <b>not</b> initialized first, <span class="tt">tm_isdst</span> may retain leftover data from prior use, which can accidentally make one test case appear correct and another appear incorrect.</li>
-</ul>
-<p>So the one-hour discrepancy is not caused by <span class="tt">localtime_r()</span> itself. The incorrect value is usually created earlier by <span class="tt">mktime()</span> when it receives an incompletely initialized <span class="tt">struct tm</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="correct-workaround"></a>
-Correct workaround</h1>
-<p>The safe pattern is:</p>
-<ol type="1">
-<li>Clear the full <span class="tt">struct tm</span>.</li>
-<li>Set <span class="tt">tm_isdst = -1</span>.</li>
-<li>Call <span class="tt">strptime()</span>.</li>
-<li>Call <span class="tt">mktime()</span>.</li>
-</ol>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm tm1;</div>
-<div class="line">memset(&amp;tm1, 0, <span class="keyword">sizeof</span> tm1);</div>
-<div class="line">tm1.tm_isdst = -1;</div>
+<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
+<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
+<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
+<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
+</div><!-- fragment --><div class="fragment"><div class="line"></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1) == NULL) {</div>
-<div class="line">    <span class="comment">/* parse error */</span></div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">time_t t1 = mktime(&amp;tm1);</div>
-</div><!-- fragment --><p>Then format for display using a separate output structure:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm out;</div>
-<div class="line">localtime_r(&amp;t1, &amp;out);</div>
-<div class="line">strftime(buf, <span class="keyword">sizeof</span> buf, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;out);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="why-the-previous-results-looked-contradictory"></a>
-Why the previous results looked contradictory</h1>
-<p>The earlier examples showed this pattern:</p>
-<ul>
-<li>Zeroing the structure appeared to break CDT dates.</li>
-<li>Not zeroing the structure appeared to break CST dates.</li>
-</ul>
-<p>That happens because the tests were effectively toggling the initial value of <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">memset(..., 0, ...)</span> forced <span class="tt">tm_isdst = 0</span>, i.e. standard time.</li>
-<li>Reusing the same structure without reinitializing it allowed <span class="tt">tm_isdst</span> to carry stale state from earlier operations.</li>
-</ul>
-<p>As a result, the code was not consistently asking <span class="tt">mktime()</span> to determine DST from the input date. Once <span class="tt">tm_isdst</span> is explicitly set to <span class="tt">-1</span>, both standard-time and daylight-time dates should round-trip correctly in the local timezone.</p>
-<h1 class="doxsection"><a class="anchor" id="important-note-about-gmtime_r"></a>
-Important note about <span class="tt">gmtime_r()</span></h1>
-<p><span class="tt">gmtime_r()</span> converts a <span class="tt">time_t</span> to UTC. It does not use the local timezone rules to decide whether the original parsed time was CST or CDT. If the UTC result appears to be off by one hour, that usually means the <span class="tt">time_t</span> value produced by <span class="tt">mktime()</span> was already wrong.</p>
-<h1 class="doxsection"><a class="anchor" id="recommended-helper"></a>
-Recommended helper</h1>
-<p>A simple helper for parsing local timestamps safely:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> <a class="code hl_function" href="../../d7/de8/a01159.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, time_t *out)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    memset(&amp;tmv, 0, <span class="keyword">sizeof</span> tmv);</div>
-<div class="line">    tmv.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (strptime(s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv) == NULL)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    time_t t = mktime(&amp;tmv);</div>
-<div class="line">    <span class="keywordflow">if</span> (t == (time_t)-1)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    *out = t;</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01159_html_ga1ee26caf58dfc798273ba095a394cde8"><div class="ttname"><a href="../../d7/de8/a01159.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a></div><div class="ttdeci">bool parse_local_timestamp(const char *, time_t *)</div><div class="ttdoc">Parses an ISO 8601 timestamp string in local time and converts it to time_t.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00171">futil.c:171</a></div></div>
-</div><!-- fragment --><p>And a matching formatter:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="../../d7/de8/a01159.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a>(time_t t, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> n)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    localtime_r(&amp;t, &amp;tmv);</div>
-<div class="line">    strftime(buf, n, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01159_html_gaee5521bb387211a2d16e3d56585f144d"><div class="ttname"><a href="../../d7/de8/a01159.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a></div><div class="ttdeci">char * format_local_timestamp(time_t, char *, size_t)</div><div class="ttdoc">Formats a time_t as an ISO 8601 string in local time.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d28/a01133_source.html#l00194">futil.c:194</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="revised-interpretation-of-the-original-test-cases"></a>
-Revised interpretation of the original test cases</h1>
-<p>The original test cases are still useful because they show that leaving <span class="tt">tm_isdst</span> uncontrolled produces different behavior across DST boundaries. However, they do <b>not</b> demonstrate a <span class="tt">localtime_r()</span> or <span class="tt">gmtime_r()</span> bug. They demonstrate that <span class="tt">mktime()</span> needs a fully initialized <span class="tt">struct tm</span>, with <span class="tt">tm_isdst</span> set appropriately.</p>
-<h1 class="doxsection"><a class="anchor" id="original-demonstration-code"></a>
-Original demonstration code</h1>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define _GNU_SOURCE</span></div>
-<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../db/d42/a01220.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../dc/dee/a01166.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a id="_a2" name="_a2"></a><a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../dc/dee/a01166.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line">    <span class="keywordtype">char</span> *msg;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="../../d1/dae/a01136.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>() {</div>
-<div class="line">    <span class="keywordtype">char</span> buf[100];</div>
-<div class="line">    <span class="keywordtype">char</span> time_s[32];</div>
-<div class="line">    <span class="keyword">struct </span>tm tm1;</div>
-<div class="line">    time_t t1 = time(NULL);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    printf(<span class="stringliteral">&quot;with memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; NOT MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; NOT MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
+<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
+<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d0/d33/a01252.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../d3/d0b/a01253.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line">    new_tioctl = <a id="_a6" name="_a6"></a><a class="code hl_variable" href="../../d0/d67/a01232.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
+<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line">            write(2, msg++, 1);</div>
+<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../dc/dee/a01166.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line">        write(1, in_ptr++, 1);</div>
+<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../d3/d0b/a01253.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
+<div class="line">    <a id="a8" name="a8"></a><a class="code hl_function" href="../../d0/d33/a01252.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line">    exit(0);</div>
 <div class="line">}</div>
-<div class="ttc" id="aa01136_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d1/dae/a01136.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d1/dae/a01136_source.html#l00034">amort.c:34</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
-</div><!-- PageDoc -->
+<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
+<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../da/d19/a01217_source.html#l00131">futil.c:131</a></div></div>
+<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
+<div class="ttc" id="aa01166_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../dc/dee/a01166.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa01220_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../db/d42/a01220.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00031">amort.c:31</a></div></div>
+<div class="ttc" id="aa01232_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d0/d67/a01232.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01252_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d0/d33/a01252.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01252_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../d0/d33/a01252.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01253_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d3/d0b/a01253.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa01253_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d3/d0b/a01253.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00062">sig.c:62</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

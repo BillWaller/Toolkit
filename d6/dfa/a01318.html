@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Performance</title>
-<link rel="icon" href="../../decision.svg" type="image/x-icon" />
+<title>C-Menu: Menu Struct Reference</title>
+<link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
 <link href="../../navtree.css" rel="stylesheet" type="text/css"/>
@@ -16,7 +16,8 @@
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+<link href="../../doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -108,83 +109,550 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d6/dfa/a01318.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">Performance </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">Menu Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md121"></a> <img src="../../Performance.png" alt="" class="inline" title="C-Menu Performance"/>    </p>
-<p><b><em>NEW</em></b> C-Menu Installation Guide</p>
-<p><a class="el" href="../../de/d69/a01311.html" title="C-Menu-UG">C-Menu User Guide</a></p>
-<p><a class="el" href="../../d4/d49/a01316.html" title="C-Menu - A User Interface Toolkit">C-Menu Installation Guide</a></p>
-<h1 class="doxsection"><a class="anchor" id="design-philosophy-and-optimizations"></a>
-Design Philosophy and Optimizations</h1>
-<p>To build truly outstanding applications with C-Menu, it is essential to understand the design philosophy and optimizations that C-Menu provides and how to leverage them. C-Menu was not meant to replace GUI or Sell-based applications, but to compliment them by providing an alternative to users who demand the performance and efficiency possible with terminal-based interfaces. C-Menu's design philosophy is centered around simplicity, efficiency, and directness.</p>
-<p>C-Menu provides a powerful set of internal functions that allow you to create complex and responsive applications while minimizing the need for external executables or shells. By using C-Menu's internal functions and direct execution capabilities, you can achieve performance levels that are orders of magnitude faster than traditional shell and GUI based menu systems.</p>
-<p>You may have noticed that hard-core, veteran programmers tend to prefer the black screen terminal over the flashy GUI. This is not just a matter of aesthetics, but a reflection of the underlying design philosophy and optimizations that terminal-based applications can provide. Terminal applications often have a more direct and efficient interface to the underlying system, allowing for faster performance and greater control over resources.</p>
-<p>It is understandable that less experienced users prefer a GUI interface. The raw terminal interface is powerful, but terse and unforgiving. Becoming truly proficient with terminal-based applications requires a significant investment of time and effort to learn the necessary commands, syntax, and workflows. In contrast, GUI interfaces are generally more intuitive and user-friendly, especially for those who are not familiar with command-line interfaces. They provide visual cues and interactive elements that can make it easier for users to navigate and perform tasks without needing to remember complex commands or syntax.</p>
-<p>C-Menu's design objective is to provide the best of both worlds by combining the speed and efficiency of terminal-based applications with an attractive, intuitive, and user-friendly framework. C-Menu's internal functions and direct execution capabilities allow you to create applications that are fast and responsive, while its menu system provides a more accessible and visually appealing interface for users who may not be comfortable with a raw terminal interface.</p>
-<p>With the C-Menu applications you create, intelligent users will discover a new sense of freedom, unbridled by slugish response times that wreck continuity of thought.</p>
-<h2 class="doxsection"><a class="anchor" id="c-menu-launcher"></a>
-C-Menu Launcher</h2>
-<p>When you use C-Menu's Example Application <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, you will notice that most menu selections respond instantaneously with no perceptible delay. It just snaps. That level of optimization is achieved in part by avoiding the overhead and unpredictability of using a shell to execute command lines. C-Menu provides direct execution, which results in start-up times an order of magnitude faster than traditional shell-based menu systems. But, C-Menu has something even faster. You can take C-Menu performance to the next level by letting C-Menu call it's internal functions directly, bypassing the start-up overhead of external executables. <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d8/df3/a01216.html">Form</a>, <a class="el" href="../../de/d16/a01228.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d0/d67/a01232.html">View</a>, and CKeys are internal functions. In the Example Applications <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, all except the first command line are internal function calls, which execute in nanoseconds compared to the milliseconds it takes to launch an external executable.</p>
-<p>Here's a breakdown of the performance levels you can expect when using C-Menu:</p>
-<p>Relative performance:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Performance level  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadNone">Elapsed Time  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Somewhat Slugish  </td><td class="markdownTableBodyNone">Shell based execution  </td><td class="markdownTableBodyNone">10-100 ms  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Fast  </td><td class="markdownTableBodyNone">Direct execution  </td><td class="markdownTableBodyNone">1-10 ms  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Instantaneous  </td><td class="markdownTableBodyNone">Internal function calls  </td><td class="markdownTableBodyNone">0.001 ms  </td></tr>
+
+<p>The <a class="el" href="../../d6/dfa/a01318.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> structure is the main data structure for the menu application, containing all the information about the menu, its lines, and its display properties.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../df/df7/a00731_source.html">menu.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Menu:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/d49/a01316.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a1a9cb8c933f8daee80d275fcae7bbb82" id="r_a1a9cb8c933f8daee80d275fcae7bbb82"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1a9cb8c933f8daee80d275fcae7bbb82">argc</a></td></tr>
+<tr class="memitem:aefb3580ad8effc5bc4d18272dda1d8c1" id="r_aefb3580ad8effc5bc4d18272dda1d8c1"><td class="memItemLeft">char **&#160;</td><td class="memItemRight"><a class="el" href="#aefb3580ad8effc5bc4d18272dda1d8c1">argv</a></td></tr>
+<tr class="memitem:af993204eff9ce22a781a2acea521d5e1" id="r_af993204eff9ce22a781a2acea521d5e1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af993204eff9ce22a781a2acea521d5e1">begx</a></td></tr>
+<tr class="memitem:a77d1b0a62fb29de721363d07477bfc68" id="r_a77d1b0a62fb29de721363d07477bfc68"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a77d1b0a62fb29de721363d07477bfc68">begy</a></td></tr>
+<tr class="memitem:ab15cbaaf7cfed77ecc3a0cc7ec10d956" id="r_ab15cbaaf7cfed77ecc3a0cc7ec10d956"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab15cbaaf7cfed77ecc3a0cc7ec10d956">bg_clr_idx</a></td></tr>
+<tr class="memitem:a664f3c9c44cf2ecfbbd913c723d5f1d0" id="r_a664f3c9c44cf2ecfbbd913c723d5f1d0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a664f3c9c44cf2ecfbbd913c723d5f1d0">bo_clr_idx</a></td></tr>
+<tr class="memitem:a2c4659773a201c01a5a6c19f4b7f83cc" id="r_a2c4659773a201c01a5a6c19f4b7f83cc"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#a2c4659773a201c01a5a6c19f4b7f83cc">box</a></td></tr>
+<tr class="memitem:aa4f64b4a48f488bfa7e64c2966c5db56" id="r_aa4f64b4a48f488bfa7e64c2966c5db56"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa4f64b4a48f488bfa7e64c2966c5db56">choice_max_len</a></td></tr>
+<tr class="memitem:a54de460c3cff50a338a658f039588d7b" id="r_a54de460c3cff50a338a658f039588d7b"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a54de460c3cff50a338a658f039588d7b">cmd</a> [<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a083f4025aa2d86510a1bf6e6a81e6b61" id="r_a083f4025aa2d86510a1bf6e6a81e6b61"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a083f4025aa2d86510a1bf6e6a81e6b61">cols</a></td></tr>
+<tr class="memitem:abeac01782bfd4822533c4de5d11b020c" id="r_abeac01782bfd4822533c4de5d11b020c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abeac01782bfd4822533c4de5d11b020c">f_cmd</a></td></tr>
+<tr class="memitem:a274319cb0d5ccabbd48105a5db38298d" id="r_a274319cb0d5ccabbd48105a5db38298d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a274319cb0d5ccabbd48105a5db38298d">f_help_spec</a></td></tr>
+<tr class="memitem:a88b3b7d9aeb982b80a2b2ac00305db83" id="r_a88b3b7d9aeb982b80a2b2ac00305db83"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a88b3b7d9aeb982b80a2b2ac00305db83">f_mapp_spec</a></td></tr>
+<tr class="memitem:a5df190bfb6018ea0f73f55b7499c3efd" id="r_a5df190bfb6018ea0f73f55b7499c3efd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5df190bfb6018ea0f73f55b7499c3efd">f_provider_cmd</a></td></tr>
+<tr class="memitem:aa0ba964c16b116524c64603becf5fdab" id="r_aa0ba964c16b116524c64603becf5fdab"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa0ba964c16b116524c64603becf5fdab">f_receiver_cmd</a></td></tr>
+<tr class="memitem:a7668a643c4d6f85dd86323b4ea6fbee3" id="r_a7668a643c4d6f85dd86323b4ea6fbee3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7668a643c4d6f85dd86323b4ea6fbee3">fg_clr_idx</a></td></tr>
+<tr class="memitem:ada47854331f8ae621f8aa2075c8950f7" id="r_ada47854331f8ae621f8aa2075c8950f7"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ada47854331f8ae621f8aa2075c8950f7">help_spec</a> [<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a999d70e9f9225e3c3ed2f5742a87d0b9" id="r_a999d70e9f9225e3c3ed2f5742a87d0b9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a999d70e9f9225e3c3ed2f5742a87d0b9">item_count</a></td></tr>
+<tr class="memitem:a2218d7db25938e8b1ece65be418eb26c" id="r_a2218d7db25938e8b1ece65be418eb26c"><td class="memItemLeft"><a class="el" href="../../d9/de6/a01314.html">Line</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a2218d7db25938e8b1ece65be418eb26c">line</a> [<a class="el" href="../../df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1">MAX_MENU_LINES</a>]</td></tr>
+<tr class="memitem:acdbfede3a378c73fcee7b174a8e41a4f" id="r_acdbfede3a378c73fcee7b174a8e41a4f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdbfede3a378c73fcee7b174a8e41a4f">line_idx</a></td></tr>
+<tr class="memitem:ae0407bd7b1dd2c0c91ba10ec0e3813d9" id="r_ae0407bd7b1dd2c0c91ba10ec0e3813d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae0407bd7b1dd2c0c91ba10ec0e3813d9">lines</a></td></tr>
+<tr class="memitem:a1a90724742b6bc7d4378e9f51744f8b7" id="r_a1a90724742b6bc7d4378e9f51744f8b7"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a1a90724742b6bc7d4378e9f51744f8b7">mapp_spec</a> [<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a033fe4ccdd7f83d51824b4649f933848" id="r_a033fe4ccdd7f83d51824b4649f933848"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a033fe4ccdd7f83d51824b4649f933848">provider_cmd</a> [<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a950711fc29da5549a7d8311632a69e68" id="r_a950711fc29da5549a7d8311632a69e68"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a950711fc29da5549a7d8311632a69e68">receiver_cmd</a> [<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a830f9a3ce81b56e60e9c56765be6aef6" id="r_a830f9a3ce81b56e60e9c56765be6aef6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a830f9a3ce81b56e60e9c56765be6aef6">text_max_len</a></td></tr>
+<tr class="memitem:af7f87761d323bc3a126687956e2b5211" id="r_af7f87761d323bc3a126687956e2b5211"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#af7f87761d323bc3a126687956e2b5211">title</a> [<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a2a5dff828fba2f8c0dda0fe4f7f7ca36" id="r_a2a5dff828fba2f8c0dda0fe4f7f7ca36"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#a2a5dff828fba2f8c0dda0fe4f7f7ca36">win</a></td></tr>
 </table>
-<p>At 200 ms response, a user will perceive an application as sluggish. At 20 ms, the user will perceive a smooth and responsive experience. At 1 ms, the user will perceive an instantaneous response. Admittedly, no one really cares whether a program loads in 0.001 ms or 1,000 times slower at 1 ms, but in practical applications iterative processes often take thousands of cycles to complete.</p>
-<p>Sometimes it is expedient to use a shell to execute a command line, such as when you want to use shell features like globbing, variable expansion, or complex command pipelines. In those cases, you can explicitly invoke a shell by including "sh -c" or a shell script on the command line.</p>
-<p>When designing with C-Menu, you should select a method in the following order:</p>
-<ul>
-<li>C-Menu internals, such as <a class="el" href="../../d8/d8e/a01224.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d8/df3/a01216.html">Form</a>, <a class="el" href="../../de/d16/a01228.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d0/d67/a01232.html">View</a></li>
-<li>direct execution</li>
-<li>shell</li>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="../../d6/dfa/a01318.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> structure is the main data structure for the menu application, containing all the information about the menu, its lines, and its display properties. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00090">90</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a1a9cb8c933f8daee80d275fcae7bbb82" name="a1a9cb8c933f8daee80d275fcae7bbb82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a9cb8c933f8daee80d275fcae7bbb82">&#9670;&#160;</a></span>argc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::argc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of arguments on the command line, used to determine how many arguments were passed to the menu application when it was executed </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00118">118</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="aefb3580ad8effc5bc4d18272dda1d8c1" name="aefb3580ad8effc5bc4d18272dda1d8c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefb3580ad8effc5bc4d18272dda1d8c1">&#9670;&#160;</a></span>argv</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** Menu::argv</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The argument vector from the command line, used to access the specific arguments passed to the menu application when it was executed </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00121">121</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="af993204eff9ce22a781a2acea521d5e1" name="af993204eff9ce22a781a2acea521d5e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af993204eff9ce22a781a2acea521d5e1">&#9670;&#160;</a></span>begx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::begx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The screen column for the upper left corner of the menu window, used to determine the horizontal position of the menu display on the screen </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00106">106</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../d5/d16/a01154_source.html#l00148">new_menu()</a>.</p>
+
+</div>
+</div>
+<a id="a77d1b0a62fb29de721363d07477bfc68" name="a77d1b0a62fb29de721363d07477bfc68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77d1b0a62fb29de721363d07477bfc68">&#9670;&#160;</a></span>begy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::begy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The screen line for the upper left corner of the menu window, used to determine the vertical position of the menu display on the screen </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00103">103</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../d5/d16/a01154_source.html#l00148">new_menu()</a>.</p>
+
+</div>
+</div>
+<a id="ab15cbaaf7cfed77ecc3a0cc7ec10d956" name="ab15cbaaf7cfed77ecc3a0cc7ec10d956"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab15cbaaf7cfed77ecc3a0cc7ec10d956">&#9670;&#160;</a></span>bg_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::bg_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00094">94</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a664f3c9c44cf2ecfbbd913c723d5f1d0" name="a664f3c9c44cf2ecfbbd913c723d5f1d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664f3c9c44cf2ecfbbd913c723d5f1d0">&#9670;&#160;</a></span>bo_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::bo_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>&lt;The background color for the menu display, used to determine the color of the background in the menu display The color for the box around the menu, used to determine the color of the box in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00097">97</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a2c4659773a201c01a5a6c19f4b7f83cc" name="a2c4659773a201c01a5a6c19f4b7f83cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c4659773a201c01a5a6c19f4b7f83cc">&#9670;&#160;</a></span>box</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* Menu::box</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The ncurses window structure for the box around the menu, used to manage the display of the box around the menu on the screen </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00112">112</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>.</p>
+
+</div>
+</div>
+<a id="aa4f64b4a48f488bfa7e64c2966c5db56" name="aa4f64b4a48f488bfa7e64c2966c5db56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f64b4a48f488bfa7e64c2966c5db56">&#9670;&#160;</a></span>choice_max_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::choice_max_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The longest choice text string of all menu lines, used to determine the width of the menu window, calculated based on the length of the choice_text for all menu lines and used to ensure that the menu window is wide enough to accommodate the longest choice text without truncation or wrapping </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00184">184</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a54de460c3cff50a338a658f039588d7b" name="a54de460c3cff50a338a658f039588d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54de460c3cff50a338a658f039588d7b">&#9670;&#160;</a></span>cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::cmd[<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A command that can be executed in the foreground, possibly taking control of the screen, by the menu application, such as an editor or other program that is called by the menu application, used to specify a command that can be run in the foreground when selected from the menu, which may take control of the screen and require user interaction </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00150">150</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a083f4025aa2d86510a1bf6e6a81e6b61" name="a083f4025aa2d86510a1bf6e6a81e6b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a083f4025aa2d86510a1bf6e6a81e6b61">&#9670;&#160;</a></span>cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of columns for the menu window size, used to determine the width of the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00101">101</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="abeac01782bfd4822533c4de5d11b020c" name="abeac01782bfd4822533c4de5d11b020c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeac01782bfd4822533c4de5d11b020c">&#9670;&#160;</a></span>f_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the foreground command has been verified, used to indicate whether the command specified by cmd has been successfully verified and can be executed in the foreground when selected from the menu </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00180">180</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a274319cb0d5ccabbd48105a5db38298d" name="a274319cb0d5ccabbd48105a5db38298d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a274319cb0d5ccabbd48105a5db38298d">&#9670;&#160;</a></span>f_help_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_help_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the menu application help file has been verified, used to indicate whether the help file specified by help_spec has been successfully verified and can be used to provide help information for the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00162">162</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00528">init_menu_files()</a>, and <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>.</p>
+
+</div>
+</div>
+<a id="a88b3b7d9aeb982b80a2b2ac00305db83" name="a88b3b7d9aeb982b80a2b2ac00305db83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b3b7d9aeb982b80a2b2ac00305db83">&#9670;&#160;</a></span>f_mapp_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_mapp_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the menu application description file has been verified, used to indicate whether the menu description file specified by mapp_spec has been successfully verified and can be used to populate the menu lines and their properties </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00157">157</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00528">init_menu_files()</a>.</p>
+
+</div>
+</div>
+<a id="a5df190bfb6018ea0f73f55b7499c3efd" name="a5df190bfb6018ea0f73f55b7499c3efd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df190bfb6018ea0f73f55b7499c3efd">&#9670;&#160;</a></span>f_provider_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_provider_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the provider command has been verified, used to indicate whether the provider command specified by provider_cmd has been successfully verified and can be executed in the background to provide dynamic content for the menu display or for a program called by the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00167">167</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="aa0ba964c16b116524c64603becf5fdab" name="aa0ba964c16b116524c64603becf5fdab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ba964c16b116524c64603becf5fdab">&#9670;&#160;</a></span>f_receiver_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_receiver_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the receiver command has been verified, used to indicate whether the receiver command specified by receiver_cmd has been successfully verified and can be executed in the background to process the output of a program called by the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00174">174</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a7668a643c4d6f85dd86323b4ea6fbee3" name="a7668a643c4d6f85dd86323b4ea6fbee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7668a643c4d6f85dd86323b4ea6fbee3">&#9670;&#160;</a></span>fg_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::fg_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The foreground color for the menu display, used to determine the color of the text and other elements in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00091">91</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="ada47854331f8ae621f8aa2075c8950f7" name="ada47854331f8ae621f8aa2075c8950f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada47854331f8ae621f8aa2075c8950f7">&#9670;&#160;</a></span>help_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::help_spec[<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The menu application help file spec, which may be a file name or a fully qualified path to a file, used to specify the location of the help file that contains the information about the menu application and how to use it </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00130">130</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00528">init_menu_files()</a>, and <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>.</p>
+
+</div>
+</div>
+<a id="a999d70e9f9225e3c3ed2f5742a87d0b9" name="a999d70e9f9225e3c3ed2f5742a87d0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a999d70e9f9225e3c3ed2f5742a87d0b9">&#9670;&#160;</a></span>item_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::item_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of menu lines in this menu, used to determine how many lines are currently defined in the menu and to manage the array of menu lines </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00196">196</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00169">destroy_menu()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a2218d7db25938e8b1ece65be418eb26c" name="a2218d7db25938e8b1ece65be418eb26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2218d7db25938e8b1ece65be418eb26c">&#9670;&#160;</a></span>line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d9/de6/a01314.html">Line</a>* Menu::line[<a class="el" href="../../df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1">MAX_MENU_LINES</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An array of pointers to the menu line structures in this menu, used to store the information about each menu line, including its type, text, choice letter, command type, and command string, and to manage the menu lines in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00203">203</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00169">destroy_menu()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="acdbfede3a378c73fcee7b174a8e41a4f" name="acdbfede3a378c73fcee7b174a8e41a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbfede3a378c73fcee7b174a8e41a4f">&#9670;&#160;</a></span>line_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::line_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The index of the currently selected menu line, used for highlighting and selection purposes, updated based on user input to indicate which menu line is currently selected and should be highlighted in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00199">199</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00169">destroy_menu()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="ae0407bd7b1dd2c0c91ba10ec0e3813d9" name="ae0407bd7b1dd2c0c91ba10ec0e3813d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0407bd7b1dd2c0c91ba10ec0e3813d9">&#9670;&#160;</a></span>lines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::lines</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of lines for the menu window size, used to determine the height of the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00099">99</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a1a90724742b6bc7d4378e9f51744f8b7" name="a1a90724742b6bc7d4378e9f51744f8b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a90724742b6bc7d4378e9f51744f8b7">&#9670;&#160;</a></span>mapp_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::mapp_spec[<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The menu application description file spec, which may be a file name or a fully qualified path to a file, used to specify the location of the menu description file that contains the information about the menu lines and their properties </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00124">124</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d16/a01154_source.html#l00528">init_menu_files()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a033fe4ccdd7f83d51824b4649f933848" name="a033fe4ccdd7f83d51824b4649f933848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033fe4ccdd7f83d51824b4649f933848">&#9670;&#160;</a></span>provider_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::provider_cmd[<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The provider command, which can be executed in the background to provide dynamic content for a program called by the menu application, used to specify a command that can be run in the background to generate dynamic content for the menu display or for a program that is called by the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00135">135</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a950711fc29da5549a7d8311632a69e68" name="a950711fc29da5549a7d8311632a69e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a950711fc29da5549a7d8311632a69e68">&#9670;&#160;</a></span>receiver_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::receiver_cmd[<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The receiver command, which can be executed in the background to process the output of a program called by the menu application, used to specify a command that can be run in the background to process the output of a program that is called by the menu application, such as parsing the output and updating the menu display or performing some other action based on the output </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00142">142</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a830f9a3ce81b56e60e9c56765be6aef6" name="a830f9a3ce81b56e60e9c56765be6aef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830f9a3ce81b56e60e9c56765be6aef6">&#9670;&#160;</a></span>text_max_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::text_max_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The longest text string of all menu lines, used to determine the width of the menu window, calculated based on the length of the raw_text for all menu lines and used to ensure that the menu window is wide enough to accommodate the longest text without truncation or wrapping </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00190">190</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="af7f87761d323bc3a126687956e2b5211" name="af7f87761d323bc3a126687956e2b5211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f87761d323bc3a126687956e2b5211">&#9670;&#160;</a></span>title</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::title[<a class="el" href="../../dc/dee/a01166.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The title to display on the top line of the box window, used to provide a title or header for the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00115">115</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a2a5dff828fba2f8c0dda0fe4f7f7ca36" name="a2a5dff828fba2f8c0dda0fe4f7f7ca36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a5dff828fba2f8c0dda0fe4f7f7ca36">&#9670;&#160;</a></span>win</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* Menu::win</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The ncurses window structure for the menu display, used to manage the display of the menu on the screen and handle user input </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00109">109</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d0/d5a/a01199_source.html#l00138">menu_cmd_processor()</a>, <a class="el" href="../../d0/d5a/a01199_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dc/dee/a01166_source.html#l00023">popup_ckeys()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="../../df/df7/a00731_source.html">menu.h</a></li>
 </ul>
-<p>If an internal function call will work, use an internal function call. If not, consider direct execution. Finally, if you need features provided by a shell, use a shell. There is nothing wrong with using a shell when it is appropriate, but you should be aware of the performance implications and use it judiciously.</p>
-<p>C-Menu was designed to support internal function calls and direct execution, so it provides the most commonly needed conveniences such as tilde expansion, file location based on the environment, and piped input and output.</p>
-<p>For piped input and output with internal function calls and direct execution, C-Menu allows the specification of providers and receivers for pipe I-O. Instead of using I/O redirection on the command line with pipe symbols, C-Menu provides more controllable alternatives such as "-S" for specifying a command to execute as a provider (source) of input to a form, pick, or view, "-R" for specifying a command to receive standard output from a form, pick, or view, and "-c" for specifying a command to execute with the selected item as an argument. These features allow you to create powerful and flexible menu items that can interact with other applications and scripts in a more controlled and efficient manner.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="c-menu-lightweight-find-lf"></a>
-C-Menu Lightweight Find (lf)</h2>
-<p>C-Menu's lf (lightweight find) is an alternative to Unix find. Although Unix find is an extremely powerful tool, and it is not slow, it can be unwieldy at times (see the 40 page manual). It does everything you could want, but with unnecessary overhead and complexity. C-Menu's lf is smaller, faster, and easier to use than Unix find, yet covers most of the day-to-day use cases.</p>
-<p>One of find's most often used features is the built-in -exec option, which executes a specified command on each file found. Conspicuously, lf does not have a built-in -exec option, and that is one of the first things people notice. However, lf achieves the same result, by piping the output of lf into xargs. Intuitively, it makes sense that find with its built-in exec option would be faster than lf using an external xargs command. We compared C-Menu's lf with xargs and find with its built-in -exec option. Both methods produced identical and accurate results, but the performance benchmarks were not what we expected.</p>
-<p>time find . -maxdepth 5 -type f -exec ls -l {} \; &gt;find.out</p>
-<p>time lf -d 4 -t f | xargs ls -l &gt;lf.out</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m0.469s  </td><td class="markdownTableBodyNone">0m0.160s  </td><td class="markdownTableBodyNone">0m0.288s  </td><td class="markdownTableBodyNone">142  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.008s  </td><td class="markdownTableBodyNone">0m0.004s  </td><td class="markdownTableBodyNone">0m0.006s  </td><td class="markdownTableBodyNone">142  </td></tr>
-</table>
-<p>time find . -maxdepth 4 -type f -exec ls -l {} \; &gt;find.out</p>
-<p>time lf -d 4 -t f | xargs ls -l &gt;lf.out</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m2.123s  </td><td class="markdownTableBodyNone">0m0.788s  </td><td class="markdownTableBodyNone">0m0.281s  </td><td class="markdownTableBodyNone">598  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.014s  </td><td class="markdownTableBodyNone">0m0.007s  </td><td class="markdownTableBodyNone">0m0.009s  </td><td class="markdownTableBodyNone">598  </td></tr>
-</table>
-<p>lf with xargs is significantly faster than find with its built-in -exec option. find, with its built-in exec option executes the specified command for each file found, which can be very inefficient when dealing with a large number of files. In contrast, using xargs allows you to execute the command on multiple files at once, which can significantly reduce the overhead and improve performance. In fairness, you can improve the performance of find dramatically by piping its output into xargs instead of using its built-in -exec option. In other benchmarks, lf performed about 35% faster than find.</p>
-<p>Even if lf wasn't faster than find, it would still be a compelling alternative due to its simplicity and ease of use. With fewer options and a more intuitive syntax, lf can be easier to learn and use for common file searching tasks. Additionally, lf's performance advantages make it an attractive choice for users who need to search through large directories or perform complex searches.</p>
-<p>With a variety of tools in your toolbox, use a tool that is fit for purpose. Don't drive tacks with pile driver or piles with a tack hammer. If the task calls for the full power of find, use find. If not, use lf.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="c-menu-view-1"></a>
-C-Menu View</h2>
-<p>Throughout C-Menu, and especially <a class="el" href="../../d0/d67/a01232.html">View</a>, you will find many optimizations that contribute to it's efficiency and speed. Traditionally, large file I-O has relied on user-space buffering schemes in which chunks of data are copied from mass storage into local buffers using seek and read operations. The application must keep track of buffer contents, manage buffer lifecycles, and handle edge cases such as partial reads, end-of-file conditions, and error handling. This approach can be complex, error-prone, and inefficient, especially when dealing with large files or high-throughput applications. C-Menu's view takes a different approach to large file I-O by leveraging the operating system's virtual memory management capabilities to provide direct access to file data through memory mapping. Instead of relying on user-space buffering, C-Menu's view provides a direct-to-kernel, demand paged, memory mapped virtual address space for file access. This eliminates the overhead and complexity associated with user-space buffering, and allows for more efficient and reliable access to large files. With C-Menu's view, applications can access any part of a multi-gigabyte file instantly without the need for copying data into user-space buffers or managing buffer lifecycles. This results in unmatched reliability and performance when working with large files, making C-Menu's view an ideal choice for applications that require high-throughput file access or need to work with large datasets.</p>
-<hr  />
- </div></div><!-- contents -->
-</div><!-- PageDoc -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -197,6 +665,7 @@ C-Menu View</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../d6/dfa/a01318.html">Menu</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

@@ -1,15 +1,18 @@
 var a01237 =
 [
-    [ "derive_file_spec", "dc/dab/a01237.html#ga20c40545a1e05954b496c6d674d31458", null ],
-    [ "display_version", "dc/dab/a01237.html#ga33abf350aae0212c85a5903e41764025", null ],
-    [ "mapp_initialization", "dc/dab/a01237.html#gaccd65939c0ce6f0d940c5cf795a1e8fa", null ],
-    [ "opt_prt_bool", "dc/dab/a01237.html#ga4cea5ec97a8076e2a944e2c441ebb091", null ],
-    [ "opt_prt_char", "dc/dab/a01237.html#ga3d0b179ebc74f8a911a4152f54e7a8a7", null ],
-    [ "opt_prt_double", "dc/dab/a01237.html#ga365153038835675ce050503313cea890", null ],
-    [ "opt_prt_int", "dc/dab/a01237.html#ga4e6bf4b5062dd9bd0c76a7a4402b3a9e", null ],
-    [ "opt_prt_str", "dc/dab/a01237.html#ga086c2240ffa5e497b67d630ea0d206b5", null ],
-    [ "parse_opt_args", "dc/dab/a01237.html#ga11b56c5001e3ca95f4d0a28903b29609", null ],
-    [ "process_config_files", "dc/dab/a01237.html#ga58156f315145adb8845909687dec31f0", null ],
-    [ "write_config", "dc/dab/a01237.html#ga4b671c384affcc6dc1ed59a04d666cc7", null ],
-    [ "zero_opt_args", "dc/dab/a01237.html#gae9b71868d00a28cdcf5f4514e662edfe", null ]
+    [ "apply_gamma", "dc/dab/a01237.html#gaa3a6b291c0820d9da545325a2dba5274", null ],
+    [ "clr_name_to_idx", "dc/dab/a01237.html#ga3d16b5f29cd6e5d2b5b9a6e577dba0e7", null ],
+    [ "display_cmplx_str", "dc/dab/a01237.html#ga25ca148d8928c4184b2d1f86a6f3e726", null ],
+    [ "get_clr_pair", "dc/dab/a01237.html#gaf0ba4efbc81c259a2519ca41dd9d1599", null ],
+    [ "hex_clr_str_to_rgb", "dc/dab/a01237.html#ga9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "init_clr_palette", "dc/dab/a01237.html#ga81bb6f1f6fcbd25e272e2ba301bec52f", null ],
+    [ "init_hex_clr", "dc/dab/a01237.html#ga61af7829a5d63d766e76930a0893d574", null ],
+    [ "initialize_local_colors", "dc/dab/a01237.html#ga23328c9c90961fc59a2061749fd87466", null ],
+    [ "list_colors", "dc/dab/a01237.html#ga482af92e265df3405f0620b4d6158b4e", null ],
+    [ "mk_cmplx_str", "dc/dab/a01237.html#ga60c3e9277d1099929230f213115f58f7", null ],
+    [ "mkcc", "dc/dab/a01237.html#ga306c937e4d861a19f53370481575c76a", null ],
+    [ "rgb_to_curses_clr", "dc/dab/a01237.html#ga4900dd34e828972e58b0ca549cf7d4d8", null ],
+    [ "rgb_to_xterm256_idx", "dc/dab/a01237.html#gab54dcac30b133be7e79e4de58ffa421e", null ],
+    [ "str_to_cc", "dc/dab/a01237.html#ga3819f27928a066b4d6a2a7ff30a37263", null ],
+    [ "xterm256_idx_to_rgb", "dc/dab/a01237.html#ga31ee0d93c7b527f92559fc410152f768", null ]
 ];

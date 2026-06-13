@@ -4,6 +4,7 @@ var index =
     [ "C-Menu Themes", "index.html#c-menu-themes", null ],
     [ "Installment Loan Calculator - Built with C-Menu", "index.html#installment-loan-calculator---built-with-c-menu-1", null ],
     [ "New Features for lf", "index.html#new-features-for-lf-1", null ],
+    [ "C-Menu View", "index.html#c-menu-view-2", null ],
     [ "C-Menu Introduction", "index.html#c-menu-introduction-2", null ],
     [ "Table of Contents", "index.html#table-of-contents-8", null ],
     [ "Why C-Menu", "index.html#why-c-menu-1", null ],

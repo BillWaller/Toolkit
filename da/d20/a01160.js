@@ -1,10 +1,23 @@
 var a01160 =
 [
-    [ "_GNU_SOURCE", "da/d20/a01160.html#a369266c24eacffb87046522897a570d5", null ],
-    [ "HOST", "da/d20/a01160.html#abbbcf3c42c997889127cc676754a6fea", null ],
-    [ "RSH_PAM", "da/d20/a01160.html#ad99a14e97ac5a42831c0f5759c78e47c", null ],
-    [ "RSH_PAM", "da/d20/a01160.html#a6557db566bb2c2fee6d6de70bd0afd2f", null ],
-    [ "ABEND", "da/d20/a01160.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
-    [ "main", "da/d20/a01160.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "F_VERBOSE", "da/d20/a01160.html#a9ea122171989176bc07376ae1eefc5c7", null ]
+    [ "destroy_form", "da/de0/a01248.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "da/de0/a01248.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "da/de0/a01248.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "da/de0/a01248.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "da/de0/a01248.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "da/de0/a01248.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "da/de0/a01248.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "da/de0/a01248.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "da/de0/a01248.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "da/de0/a01248.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
+    [ "new_init", "da/de0/a01248.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "da/de0/a01248.html#ga861e6162a19e089468fdc2a1479b547f", null ],
+    [ "new_pick", "da/de0/a01248.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
+    [ "new_view", "da/de0/a01248.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "da/de0/a01248.html#ga75ce293fe4e007a3337a190647408000", null ],
+    [ "form", "da/d20/a01160.html#adb98384f3771d341017b7b3add874515", null ],
+    [ "init_cnt", "da/d20/a01160.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32", null ],
+    [ "menu", "da/d20/a01160.html#a529b480d3d81a86e882c4d6ab8afa8bb", null ],
+    [ "pick", "da/d20/a01160.html#aa0984c16af72bfdf57c5d88de1d314f9", null ],
+    [ "view", "da/d20/a01160.html#af2dd70d8b95c32fb670ac6f9cc8df201", null ]
 ];

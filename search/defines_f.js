@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['s_5fquiet_0',['S_QUIET',['../d8/db9/a00725.html#ac0d28426799e4da770644952ec858461',1,'cm.h']]],
-  ['s_5ftolower_1',['S_TOLOWER',['../d8/db9/a00725.html#a6f55fbf6943d17be0f72c169fa757419',1,'cm.h']]],
-  ['s_5ftoupper_2',['S_TOUPPER',['../d8/db9/a00725.html#ad7551b5d8dfe11045160026bd97f8c1d',1,'cm.h']]],
-  ['s_5fwcok_3',['S_WCOK',['../d8/db9/a00725.html#ad34d5090eb39a3e2f33d4af2a44653a2',1,'cm.h']]],
-  ['scr_5fcols_4',['SCR_COLS',['../d8/db9/a00725.html#a9bef510e4a49836ed133025bcdba8a5c',1,'cm.h']]],
-  ['screen_5fmax_5flines_5',['SCREEN_MAX_LINES',['../d8/db9/a00725.html#aa761e98d3778d1759c049dcdcdac02bf',1,'cm.h']]]
+  ['to_5flowercase_0',['to_lowercase',['../d8/db9/a00725.html#ae8adfe777bf037477b137885824c5168',1,'cm.h']]],
+  ['to_5fuppercase_1',['to_uppercase',['../d8/db9/a00725.html#a635f0d7398213c4a7d8b94a700c1aa40',1,'to_uppercase:&#160;cm.h'],['../d8/db9/a00725.html#a9c062568a8a722c7f1e8d7d710bf55b6',1,'to_uppercase:&#160;cm.h']]],
+  ['true_2',['TRUE',['../dc/dee/a01166.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'TRUE:&#160;iloan.c'],['../dd/dd8/a00719.html#aa8cecfc5c5c054d2875c03e77b7be15d',1,'TRUE:&#160;common.h']]]
 ];

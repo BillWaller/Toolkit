@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /srv/www/htdocs/C-Menu/docs/README.md File Reference</title>
+<title>C-Menu: Performance</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,11 +109,52 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('da/df6/a01454.
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">/srv/www/htdocs/C-Menu/docs/README.md File Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Performance </div></div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="autotoc_md130"></a> <img src="../../Performance.png" alt="" class="inline" title="C-Menu Performance"/>    </p>
+<p><b><em>NEW</em></b> C-Menu Installation Guide</p>
+<p><a class="el" href="../../df/d31/a01440.html" title="C-Menu-UG">C-Menu User Guide</a></p>
+<p><a class="el" href="../../d2/d95/a01449.html" title="C-Menu - A User Interface Toolkit">C-Menu Installation Guide</a></p>
+<h1 class="doxsection"><a class="anchor" id="design-philosophy-and-optimizations"></a>
+Design Philosophy and Optimizations</h1>
+<p>To build truly outstanding applications with C-Menu, it is essential to understand the design philosophy and optimizations that C-Menu provides and how to leverage them.</p>
+<p>C-Menu was not meant to replace GUI or shell-based applications, but to compliment them by providing an alternative to users who demand the performance and efficiency possible with terminal-based interfaces. C-Menu's design philosophy is centered around simplicity, efficiency, and directness.</p>
+<p>C-Menu provides a powerful set of internal functions that allow you to create complex and responsive applications while minimizing the need for external executables or shells. By using C-Menu's internal functions and direct execution capabilities, you can achieve performance levels that are orders of magnitude beyond than traditional shell and GUI based menu systems.</p>
+<p>Hard-core, veteran programmers tend to prefer the black screen terminal over flashy GUIs for good reason. It's not just a matter of aesthetics, but a reflection of the underlying design philosophy and optimizations that terminal-based applications can provide. Terminal applications have a more direct and efficient interface to the underlying operating system, resulting in exceptional performance and greater control over resources.</p>
+<p>Understandably, less experienced users prefer a GUI interface because a raw terminal interface, while powerful, can be terse and unforgiving. Becoming truly proficient with the terminal environment requires a significant investment of time and effort. In contrast, GUI interfaces are generally more intuitive and user-friendly, especially for those who are not familiar with the Unix command-line. A GUI provides visual cues and interactive elements that can make it easier for users to navigate and perform tasks without needing to remember complex commands or syntax.</p>
+<p>C-Menu's design objective is to provide the best of both worlds by combining the speed and efficiency of terminal-based applications with an attractive, intuitive, and user-friendly framework. C-Menu's internal functions and direct execution capabilities allow you to create applications that are fast and responsive, while its menu system provides a more accessible, intuitive, and visually appealing interface.</p>
+<p>With the C-Menu applications you create, intelligent users will discover a new sense of freedom, unbridled by slugish response times that wreck continuity of thought.</p>
+<h2 class="doxsection"><a class="anchor" id="c-menu-launcher"></a>
+C-Menu Launcher</h2>
+<p>When you use C-Menu's Example Application <a class="el" href="../../d5/d53/a01324.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, you will notice that most menu selections respond instantaneously with no perceptible delay. It just snaps. That level of optimization is achieved in part by avoiding the overhead and unpredictability of using a shell to execute command lines. C-Menu provides direct execution, which results in start-up times an order of magnitude faster than traditional shell-based menu systems. But, C-Menu has something even faster. You can take C-Menu performance to the next level by letting C-Menu call it's internal functions directly, bypassing the start-up overhead of external executables. <a class="el" href="../../d5/d53/a01324.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d4/d49/a01316.html">Form</a>, <a class="el" href="../../dc/dd9/a01328.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../d9/d45/a01332.html">View</a>, and CKeys are internal functions. In the Example Applications <a class="el" href="../../d5/d53/a01324.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, all except the first command line are internal function calls, which execute in nanoseconds compared to the milliseconds it takes to launch an external executable.</p>
+<p>Here's a breakdown of the performance levels you can expect when using C-Menu:</p>
+<p>Relative performance:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Performance level  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadNone">Elapsed Time  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Somewhat Slugish  </td><td class="markdownTableBodyNone">Shell based execution  </td><td class="markdownTableBodyNone">10-100 ms  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Fast  </td><td class="markdownTableBodyNone">Direct execution  </td><td class="markdownTableBodyNone">1-10 ms  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Instantaneous  </td><td class="markdownTableBodyNone">Internal function calls  </td><td class="markdownTableBodyNone">0.001 ms  </td></tr>
+</table>
+<p>At 200 ms response, a user will perceive an application as sluggish. At 20 ms, the user will perceive a smooth and responsive experience. At 1 ms, the user will perceive an instantaneous response. Admittedly, no one really cares whether a program loads in 0.001 ms or 1,000 times slower at 1 ms, but in practical applications iterative processes often take thousands of cycles to complete.</p>
+<p>Sometimes it is expedient to use a shell to execute a command line, such as when you want to use shell features like globbing, variable expansion, or complex command pipelines. In those cases, you can explicitly invoke a shell by including "sh -c" or a shell script on the command line.</p>
+<p>When designing with C-Menu, you should select a method in the following order:</p>
+<ul>
+<li>C-Menu internals, such as <a class="el" href="../../d5/d53/a01324.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d4/d49/a01316.html">Form</a>, <a class="el" href="../../dc/dd9/a01328.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../d9/d45/a01332.html">View</a></li>
+<li>direct execution</li>
+<li>shell</li>
+</ul>
+<p>If an internal function call will work, use an internal function call. If not, consider direct execution. Finally, if you need features provided by a shell, use a shell. There is nothing wrong with using a shell when it is appropriate, but you should be aware of the performance implications and use it judiciously.</p>
+<p>C-Menu was designed to support internal function calls and direct execution, so it provides the most commonly needed conveniences such as tilde expansion, file location based on the environment, and piped input and output.</p>
+<p>For piped input and output with internal function calls and direct execution, C-Menu allows the specification of providers and receivers for pipe I-O. Instead of using I/O redirection on the command line with pipe symbols, C-Menu provides more controllable alternatives such as "-S" for specifying a command to execute as a provider (source) of input to a form, pick, or view, "-R" for specifying a command to receive standard output from a form, pick, or view, and "-c" for specifying a command to execute with the selected item as an argument. These features allow you to create powerful and flexible menu items that can interact with other applications and scripts in a more controlled and efficient manner.</p>
+<hr  />
+ </div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -126,7 +167,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('da/df6/a01454.
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../da/df6/a01454.html">README.md</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
