@@ -45,6 +45,7 @@ var NAVTREE =
       [ "Security Notes", "index.html#security-notes-1", null ],
       [ "Why the Design Works", "index.html#why-the-design-works-1", null ],
       [ "Contributing", "index.html#contributing-1", null ],
+      [ "See also", "index.html#see-also-4", null ],
       [ "How to get C-Menu", "d9/db0/a01437.html#how-to-get-c-menu", [
         [ "Get C-Menu on Github", "d9/db0/a01437.html#get-c-menu-on-github", null ],
         [ "Introduction", "d9/db0/a01437.html#introduction", null ],
