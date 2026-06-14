@@ -5,7 +5,7 @@ var searchData=
   ['raw_5ftext_2',['raw_text',['../df/dec/a01320.html#a514130f5368bc6edaa5928f08be2bd4f',1,'Line']]],
   ['read_5fpick_5finput_3',['read_pick_input',['../dc/dc2/a01251.html#gaabda879000cf8135245ef451de08f780',1,'pick_engine.c']]],
   ['read_5ftheme_4',['read_theme',['../d6/df2/a01175.html#a969bb5ac3fcb5f3565448e8d0da6efc4',1,'pick_engine.c']]],
-  ['readme_5',['C-Menu README',['../d4/d98/a01456.html',1,'']]],
+  ['readme_5',['README',['../d4/d98/a01456.html',1,'']]],
   ['readme_2emd_6',['README.md',['../db/d8b/a01464.html',1,'(Global Namespace)'],['../df/d5e/a01467.html',1,'(Global Namespace)']]],
   ['receipts_7',['Receipts',['../df/d31/a01440.html#cash-receipts',1,'Cash Receipts'],['../df/d31/a01440.html#cash-receipts-1',1,'Cash Receipts'],['../df/d75/a01447.html#cash-receipts-2',1,'Cash Receipts'],['../dd/d1c/a01452.html#cash-receipts-3',1,'Cash Receipts']]],
   ['receiver_5fcmd_8',['receiver_cmd',['../d3/d51/a01264.html#a6effd5bc8e6acdead7bd8385976bb1ca',1,'Init::receiver_cmd'],['../d4/d49/a01316.html#a47dcf50799bc839ea12f79372b8c55ee',1,'Form::receiver_cmd'],['../d5/d53/a01324.html#a950711fc29da5549a7d8311632a69e68',1,'Menu::receiver_cmd'],['../dc/dd9/a01328.html#abb443fafd1ee254f8d5bd696ff4b87c6',1,'Pick::receiver_cmd'],['../d9/d45/a01332.html#a75ffab6cbc3e29bbce23d8b865141fce',1,'View::receiver_cmd']]],

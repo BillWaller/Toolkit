@@ -1,7 +1,7 @@
 var searchData=
 [
   ['r_20menu_0',['About C-Menu and R-Menu',['../d9/d6f/a01445.html#about-c-menu-and-r-menu',1,'']]],
-  ['readme_1',['C-Menu README',['../d4/d98/a01456.html',1,'']]],
+  ['readme_1',['README',['../d4/d98/a01456.html',1,'']]],
   ['receipts_2',['Receipts',['../df/d31/a01440.html#cash-receipts',1,'Cash Receipts'],['../df/d31/a01440.html#cash-receipts-1',1,'Cash Receipts'],['../df/d75/a01447.html#cash-receipts-2',1,'Cash Receipts'],['../dd/d1c/a01452.html#cash-receipts-3',1,'Cash Receipts']]],
   ['recognition_3',['🚀 Recognition',['../d6/d65/a01443.html#autotoc_md-recognition',1,'']]],
   ['recommended_4',['Not Required, But Recommended',['../d7/dfd/a01439.html#not-required-but-recommended',1,'']]],

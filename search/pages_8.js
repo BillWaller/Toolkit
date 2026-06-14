@@ -26,8 +26,7 @@ var searchData=
   ['build_20tool_20choices_23',['Build Tool Choices',['../d5/dd0/a01438.html#build-tool-choices',1,'']]],
   ['build_20type_20choices_24',['Build Type Choices',['../d5/dd0/a01438.html#build-type-choices',1,'']]],
   ['builder_25',['NAME C-Menu Application Builder',['../d0/de2/a01442.html#name-c-menu-application-builder',1,'']]],
-  ['built_20with_20c_20menu_26',['Installment Loan Calculator - Built with C-Menu',['../d4/d98/a01456.html#installment-loan-calculator---built-with-c-menu',1,'']]],
-  ['but_20i_20rely_20on_20find_20s_20features_27',['lf is fast, but I rely on find&apos;s features',['../d8/d22/a01446.html#lf-is-fast-but-i-rely-on-finds-features',1,'']]],
-  ['but_20recommended_28',['Not Required, But Recommended',['../d7/dfd/a01439.html#not-required-but-recommended',1,'']]],
-  ['by_20inode_29',['Menu - What Happened to Delete by Inode',['../d8/d22/a01446.html#menu---what-happened-to-delete-by-inode',1,'']]]
+  ['but_20i_20rely_20on_20find_20s_20features_26',['lf is fast, but I rely on find&apos;s features',['../d8/d22/a01446.html#lf-is-fast-but-i-rely-on-finds-features',1,'']]],
+  ['but_20recommended_27',['Not Required, But Recommended',['../d7/dfd/a01439.html#not-required-but-recommended',1,'']]],
+  ['by_20inode_28',['Menu - What Happened to Delete by Inode',['../d8/d22/a01446.html#menu---what-happened-to-delete-by-inode',1,'']]]
 ];

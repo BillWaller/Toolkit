@@ -26,7 +26,7 @@ var NAVTREE =
 [
   [ "C-Menu", "index.html", [
     [ "API", "d9/db0/a01437.html", [
-      [ "What is C-Menu?", "index.html#what-is-c-menu", null ],
+      [ "What is C-Menu?", "index.html#what-is-c-menu-1", null ],
       [ "Why C-Menu?", "index.html#why-c-menu-1", null ],
       [ "Components", "index.html#components-1", null ],
       [ "Quick Start", "index.html#quick-start-1", null ],
@@ -45,7 +45,7 @@ var NAVTREE =
       [ "Security Notes", "index.html#security-notes-1", null ],
       [ "Why the Design Works", "index.html#why-the-design-works-1", null ],
       [ "Contributing", "index.html#contributing-1", null ],
-      [ "See also", "index.html#see-also-4", null ],
+      [ "See also", "index.html#see-also-5", null ],
       [ "How to get C-Menu", "d9/db0/a01437.html#how-to-get-c-menu", [
         [ "Get C-Menu on Github", "d9/db0/a01437.html#get-c-menu-on-github", null ],
         [ "Introduction", "d9/db0/a01437.html#introduction", null ],
@@ -405,31 +405,7 @@ var NAVTREE =
       ] ]
     ] ],
     [ "C-Menu Pick", "df/dc5/a01455.html", null ],
-    [ "C-Menu README", "d4/d98/a01456.html", [
-      [ "New Features for lf", "d4/d98/a01456.html#new-features-for-lf", [
-        [ "Installment Loan Calculator - Built with C-Menu", "d4/d98/a01456.html#installment-loan-calculator---built-with-c-menu", null ]
-      ] ],
-      [ "C-Menu Introduction", "d4/d98/a01456.html#c-menu-introduction-1", null ],
-      [ "Table of Contents", "d4/d98/a01456.html#table-of-contents-6", null ],
-      [ "Why C-Menu", "d4/d98/a01456.html#why-c-menu", null ],
-      [ "Components", "d4/d98/a01456.html#components", null ],
-      [ "Quick Start", "d4/d98/a01456.html#quick-start", null ],
-      [ "Core Concepts", "d4/d98/a01456.html#core-concepts", null ],
-      [ "Examples", "d4/d98/a01456.html#examples-6", [
-        [ "Menu", "d4/d98/a01456.html#menu-2", null ],
-        [ "Form", "d4/d98/a01456.html#form-1", null ],
-        [ "Pick", "d4/d98/a01456.html#pick", null ],
-        [ "View", "d4/d98/a01456.html#view-1", null ],
-        [ "lf", "d4/d98/a01456.html#lf-1", null ],
-        [ "rsh", "d4/d98/a01456.html#rsh-1", null ]
-      ] ],
-      [ "Documentation", "d4/d98/a01456.html#documentation-1", null ],
-      [ "Configuration", "d4/d98/a01456.html#configuration-2", null ],
-      [ "Platform and Requirements", "d4/d98/a01456.html#platform-and-requirements", null ],
-      [ "Security Notes", "d4/d98/a01456.html#security-notes", null ],
-      [ "Why the Design Works", "d4/d98/a01456.html#why-the-design-works", null ],
-      [ "Contributing", "d4/d98/a01456.html#contributing", null ]
-    ] ],
+    [ "README", "d4/d98/a01456.html", null ],
     [ "C-Menu ROADMAP", "da/df7/a01457.html", [
       [ "0.2.9 Tasks to Complete before 0.3.0", "da/df7/a01457.html#autotoc_md029-tasks-to-complete-before-030", null ],
       [ "0.3.0 On the Horizon", "da/df7/a01457.html#autotoc_md030-on-the-horizon", [
@@ -466,10 +442,10 @@ var NAVTREE =
       [ "REPORTING BUGS", "d7/dd1/a01458.html#reporting-bugs-2", null ],
       [ "COPYRIGHT", "d7/dd1/a01458.html#copyright-3", null ],
       [ "LICENSE", "d7/dd1/a01458.html#license-3", null ],
-      [ "SEE ALSO", "d7/dd1/a01458.html#see-also-3", null ]
+      [ "SEE ALSO", "d7/dd1/a01458.html#see-also-4", null ]
     ] ],
     [ "snippets", "d6/d3b/a01459.html", [
-      [ "Table of Contents", "d6/d3b/a01459.html#table-of-contents-7", [
+      [ "Table of Contents", "d6/d3b/a01459.html#table-of-contents-6", [
         [ "C-Menu Desktop Files", "d6/d3b/a01459.html#c-menu-desktop-files", null ],
         [ "C-Menu bashrc Configuration", "d6/d3b/a01459.html#c-menu-bashrc-configuration", [
           [ "Shell Logging", "d6/d3b/a01459.html#shell-logging", null ],
@@ -558,13 +534,13 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d3/d51/a01264.html#a22fc8ddb91593a8fdb857d2f971f6a83",
-"d6/d3b/a01459.html#ghostty-1",
-"d7/dfd/a01439.html#c-menu-options",
-"d8/db9/a00725.html#a714be2078ca48dd4a035455a5a4e710c",
-"d9/d45/a01332.html#a79c8fd3f18e0d3d0e749a10aecfd3f4c",
-"db/d7c/a00722_source.html",
-"dd/d9e/a01226.html#a915366d012d179624487e73a578d27f8",
-"globals_o.html"
+"d6/d65/a01443.html#autotoc_md-recognition",
+"d7/dfd/a01439.html#prerequisites-1",
+"d8/db9/a00725.html#a8da05f3fdf70360f7c152b7d8a272117",
+"d9/d45/a01332.html#a9c28306e1e789bc19cae062d994975df",
+"dc/d70/a01187.html#a62f73ea01c816f1996aed4c66f57c4fb",
+"dd/d9e/a01226.html#ae73f509d37ed68f90fda73b039a914b8",
+"globals_vars_o.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
