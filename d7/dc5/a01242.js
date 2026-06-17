@@ -1,16 +1,13 @@
 var a01242 =
 [
-    [ "display_form", "d7/dc5/a01242.html#gaff3b11b68ec51ef3034ce5498913a211", null ],
-    [ "field_navigator", "d7/dc5/a01242.html#gae570c2569ffef8c9d38184b6d9446812", null ],
-    [ "form_desc_error", "d7/dc5/a01242.html#ga02cf855a99051ac21f4966aa92b9544f", null ],
-    [ "form_display_fields", "d7/dc5/a01242.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
-    [ "form_engine", "d7/dc5/a01242.html#gada302551bf41bf8ed6132fd34328a47e", null ],
-    [ "form_exec_cmd", "d7/dc5/a01242.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
-    [ "form_exec_receiver", "d7/dc5/a01242.html#ga0fb740802cbc6c8ba386f4751139f0a0", null ],
-    [ "form_parse_desc", "d7/dc5/a01242.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
-    [ "form_post", "d7/dc5/a01242.html#gac63d5f05787a038d4ae5f4741eafbe50", null ],
-    [ "form_process", "d7/dc5/a01242.html#ga7b01ef5c3435083eeec419451b61aa85", null ],
-    [ "form_read_data", "d7/dc5/a01242.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
-    [ "form_write", "d7/dc5/a01242.html#ga2839acac3143be9233fbf99458b77e64", null ],
-    [ "init_form", "d7/dc5/a01242.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
+    [ "compile_chyron", "d7/dc5/a01242.html#ga645871e46277e31736bc36d0f3dce4bd", null ],
+    [ "destroy_chyron", "d7/dc5/a01242.html#ga3f3feb40fd703913c5c136331f627c91", null ],
+    [ "display_chyron", "d7/dc5/a01242.html#ga3854b84b6d0347dcb55947552f137d0d", null ],
+    [ "get_chyron_key", "d7/dc5/a01242.html#ga4298f891699300bfc4e6e56fd2a8d574", null ],
+    [ "is_set_chyron_key", "d7/dc5/a01242.html#ga15d3a32179f7063332ae621c5565d645", null ],
+    [ "mb_to_cc", "d7/dc5/a01242.html#gac8edae1b92a3fc0dc55aa1d91433700f", null ],
+    [ "new_chyron", "d7/dc5/a01242.html#gad37d5808ff30ae6894780425d865abae", null ],
+    [ "set_chyron_key", "d7/dc5/a01242.html#ga208ce92c197fdd6d2b007987e534aa3b", null ],
+    [ "set_chyron_key_cp", "d7/dc5/a01242.html#ga4c179e7657e744f1847506e11a476580", null ],
+    [ "unset_chyron_key", "d7/dc5/a01242.html#gaa7a0ffb208b4367906c5f228d418232f", null ]
 ];

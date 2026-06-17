@@ -1,6 +1,9 @@
 var a00734 =
 [
-    [ "View", "d9/d45/a01332.html", "d9/d45/a01332" ],
+    [ "Panel", "d4/d04/a01335.html", "d4/d04/a01335" ],
+    [ "View", "dd/d6e/a01339.html", "dd/d6e/a01339" ],
+    [ "ViewStack", "d3/da4/a01343.html", "d3/da4/a01343" ],
+    [ "_GNU_SOURCE", "d6/dc0/a00734.html#a369266c24eacffb87046522897a570d5", null ],
     [ "_XOPEN_SOURCE_EXTENDED", "d6/dc0/a00734.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
     [ "BUFSIZ", "d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe", null ],
     [ "COLOR_LEN", "d6/dc0/a00734.html#ab5557ed18d83facb69dd68b30629c37e", null ],
@@ -19,7 +22,7 @@ var a00734 =
       [ "PT_LONG", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a", null ],
       [ "PT_STRING", "d6/dc0/a00734.html#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef", null ]
     ] ],
-    [ "cat_file", "dc/d83/a01254.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "cat_file", "d9/de7/a01257.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
     [ "get_cmd_spec", "d6/dc0/a00734.html#a92b33aa9664abadbfbf0a51737d68af2", null ],
     [ "go_to_position", "d6/dc0/a00734.html#abb914e12c6340c1b5a3d887cdf4ddc31", null ],
     [ "err_msg", "d6/dc0/a00734.html#ab01cd88e27f549b782cb4220d1742373", null ],

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: menu.c File Reference</title>
+<title>C-Menu: pick_engine.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,16 +110,24 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d8/d11/a01178.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">menu.c File Reference</div></div>
+  <div class="headertitle"><div class="title">pick_engine.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Command line start-up for C-Menu components.  
+<p>pick from a list of choices  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for menu.c:</div>
+Include dependency graph for pick_engine.c:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/d1a/a01179.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
@@ -128,105 +136,491 @@ Include dependency graph for menu.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memitem:ga98b36615c0627c4195c40b6c23d6062a" id="r_ga98b36615c0627c4195c40b6c23d6062a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga98b36615c0627c4195c40b6c23d6062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deselects the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ae5e9dec3281da650ea8a72b457aef2c8" id="r_ae5e9dec3281da650ea8a72b457aef2c8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae5e9dec3281da650ea8a72b457aef2c8">destroy_pick_view</a> ()</td></tr>
+<tr class="memitem:gacd6b9991f2aa305f622f5d2515815bba" id="r_gacd6b9991f2aa305f622f5d2515815bba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gacd6b9991f2aa305f622f5d2515815bba">display_page</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gacd6b9991f2aa305f622f5d2515815bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
+<tr class="memitem:gaeebc4c0b94ca97d753e10a0cd1798730" id="r_gaeebc4c0b94ca97d753e10a0cd1798730"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gaeebc4c0b94ca97d753e10a0cd1798730">display_pick_help</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaeebc4c0b94ca97d753e10a0cd1798730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the help screen for the pick interface using view.  <br /></td></tr>
+<tr class="memitem:a1f95a0fa1e35211caccf3a6ae9ab93de" id="r_a1f95a0fa1e35211caccf3a6ae9ab93de"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1f95a0fa1e35211caccf3a6ae9ab93de">end_pick_view</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *)</td></tr>
+<tr class="memitem:gaf7fcbb1c8b67a4d11c86ba7209f397c2" id="r_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes specified command with selected objects as arguments.  <br /></td></tr>
+<tr class="memitem:ga1b2ee87543245e612c1710ea58930a17" id="r_ga1b2ee87543245e612c1710ea58930a17"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:ga1b2ee87543245e612c1710ea58930a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick structure and opens pick input file or pipe.  <br /></td></tr>
+<tr class="memitem:ga91b2cda407803ee4367f7efd5487863c" id="r_ga91b2cda407803ee4367f7efd5487863c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga91b2cda407803ee4367f7efd5487863c">match_objects</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick, char *s)</td></tr>
+<tr class="memdesc:ga91b2cda407803ee4367f7efd5487863c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
+<tr class="memitem:a5e885d06c6a1fd6df61223f806f5ac4a" id="r_a5e885d06c6a1fd6df61223f806f5ac4a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5e885d06c6a1fd6df61223f806f5ac4a">new_pick_view</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *)</td></tr>
+<tr class="memitem:aa55f544851e15ae7851b7a519c1ea521" id="r_aa55f544851e15ae7851b7a519c1ea521"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa55f544851e15ae7851b7a519c1ea521">new_view_file</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *, char *)</td></tr>
+<tr class="memitem:gaf20c847dc030116f9999adbba681000c" id="r_gaf20c847dc030116f9999adbba681000c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gaf20c847dc030116f9999adbba681000c">open_pick_win</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaf20c847dc030116f9999adbba681000c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the pick window based on the parameters specified in the <a class="el" href="../../dc/d8e/a01331.html" title="Pick data structure.">Pick</a> structure.  <br /></td></tr>
+<tr class="memitem:ga8feb6cd586d503a676b831ec722576fb" id="r_ga8feb6cd586d503a676b831ec722576fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga8feb6cd586d503a676b831ec722576fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs selected objects to specified output file.  <br /></td></tr>
+<tr class="memitem:gab97dcab41017c5132f52b682437a151e" id="r_gab97dcab41017c5132f52b682437a151e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gab97dcab41017c5132f52b682437a151e">pick_engine</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gab97dcab41017c5132f52b682437a151e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick interface, calculates window size and position, and enters picker loop.  <br /></td></tr>
+<tr class="memitem:ga0dae7df97392da1a79cba0f852c11f5f" id="r_ga0dae7df97392da1a79cba0f852c11f5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init, char *field)</td></tr>
+<tr class="memdesc:ga0dae7df97392da1a79cba0f852c11f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop for handling user input and interactions in the pick interface.  <br /></td></tr>
+<tr class="memitem:gaabda879000cf8135245ef451de08f780" id="r_gaabda879000cf8135245ef451de08f780"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gaabda879000cf8135245ef451de08f780">read_pick_input</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaabda879000cf8135245ef451de08f780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads pick input from file pointer and saves objects into pick structure.  <br /></td></tr>
+<tr class="memitem:a969bb5ac3fcb5f3565448e8d0da6efc4" id="r_a969bb5ac3fcb5f3565448e8d0da6efc4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a969bb5ac3fcb5f3565448e8d0da6efc4">read_theme</a> (<a class="el" href="../../d4/d41/a01267.html">Init</a> *)</td></tr>
+<tr class="memitem:gab2173ff8fb800d126c180487744672d5" id="r_gab2173ff8fb800d126c180487744672d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#gab2173ff8fb800d126c180487744672d5">reverse_object</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gab2173ff8fb800d126c180487744672d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the display of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga02f90007f2422dd2094ab64569e157f0" id="r_ga02f90007f2422dd2094ab64569e157f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga02f90007f2422dd2094ab64569e157f0">save_object</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick, char *s)</td></tr>
+<tr class="memdesc:ga02f90007f2422dd2094ab64569e157f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a string as an object in the pick structure.  <br /></td></tr>
+<tr class="memitem:ga036c2f9cdf302cced4d9b703022664c0" id="r_ga036c2f9cdf302cced4d9b703022664c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga036c2f9cdf302cced4d9b703022664c0">toggle_object</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga036c2f9cdf302cced4d9b703022664c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the selection state of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga650262f8279502ebc73607394dd7af13" id="r_ga650262f8279502ebc73607394dd7af13"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d83/a01254.html#ga650262f8279502ebc73607394dd7af13">unreverse_object</a> (<a class="el" href="../../dc/d8e/a01331.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga650262f8279502ebc73607394dd7af13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unreverses the display of the currently selected object in pick window.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:acdb9de82d81b176784185dea9063b57c" id="r_acdb9de82d81b176784185dea9063b57c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdb9de82d81b176784185dea9063b57c">calculated_idx</a></td></tr>
+<tr class="memitem:a4a50bfe3f8460978b34566ec3dff7adb" id="r_a4a50bfe3f8460978b34566ec3dff7adb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4a50bfe3f8460978b34566ec3dff7adb">obj_idx</a></td></tr>
+<tr class="memitem:a8f93294009502446912fa64f33731029" id="r_a8f93294009502446912fa64f33731029"><td class="memItemLeft">char const&#160;</td><td class="memItemRight"><a class="el" href="#a8f93294009502446912fa64f33731029">pagers_editors</a> [12][10]</td></tr>
+<tr class="memitem:ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" id="r_ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">pg_lines</a></td></tr>
+<tr class="memitem:ac7ac4adf3c3409d847a57c140700f334" id="r_ac7ac4adf3c3409d847a57c140700f334"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac7ac4adf3c3409d847a57c140700f334">pipe_fd</a> [2]</td></tr>
+<tr class="memitem:ab57f05e19e1e81af17fbbd3a766c405a" id="r_ab57f05e19e1e81af17fbbd3a766c405a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab57f05e19e1e81af17fbbd3a766c405a">tbl_col</a></td></tr>
+<tr class="memitem:a7df4e526a3af8e113bbc05ca011c2341" id="r_a7df4e526a3af8e113bbc05ca011c2341"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7df4e526a3af8e113bbc05ca011c2341">tbl_cols</a></td></tr>
+<tr class="memitem:a25fe2a76cfd155c51a46c99d6a1cf4d9" id="r_a25fe2a76cfd155c51a46c99d6a1cf4d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">tbl_line</a></td></tr>
+<tr class="memitem:ae7c3abf692920540a78bc3322d02828a" id="r_ae7c3abf692920540a78bc3322d02828a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae7c3abf692920540a78bc3322d02828a">tbl_page</a></td></tr>
+<tr class="memitem:acbe29ef30ea713ef47f3cd892310ca50" id="r_acbe29ef30ea713ef47f3cd892310ca50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acbe29ef30ea713ef47f3cd892310ca50">tbl_pages</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Command line start-up for C-Menu components. </p>
+<div class="textblock"><p>pick from a list of choices </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d8/d11/a01178_source.html">menu.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+<a id="ae5e9dec3281da650ea8a72b457aef2c8" name="ae5e9dec3281da650ea8a72b457aef2c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e9dec3281da650ea8a72b457aef2c8">&#9670;&#160;</a></span>destroy_pick_view()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">void destroy_pick_view </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00043">43</a> of file <a class="el" href="../../d8/d11/a01178_source.html">menu.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   43</span>                                {</div>
-<div class="line"><span class="lineno">   44</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordtype">char</span> pgm_name[<a class="code hl_define" href="../../d6/db6/a01172.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
-<div class="line"><span class="lineno">   46</span>    <a class="code hl_function" href="../../d0/d33/a01252.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">   47</span>    <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a> = <a class="code hl_function" href="../../da/de0/a01248.html#ga75cffbfad8930c347fa9ae68b69f3bdf">new_init</a>(argc, argv);</div>
-<div class="line"><span class="lineno">   48</span>    <a class="code hl_struct" href="../../d6/dae/a01304.html">SIO</a> *<a class="code hl_variable" href="../../dd/d9e/a01226.html#aa0282924076d87477074665400a5f76e">sio</a> = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;sio;</div>
-<div class="line"><span class="lineno">   49</span>    <a class="code hl_function" href="../../d7/d04/a01246.html#gaccd65939c0ce6f0d940c5cf795a1e8fa">mapp_initialization</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, argc, argv);</div>
-<div class="line"><span class="lineno">   50</span>    rc = atexit(end_pgm);</div>
-<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><span class="lineno">   52</span>        fprintf(stderr, <span class="stringliteral">&quot;\nCannot set exit function\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   53</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    <a class="code hl_function" href="../../d8/d2b/a01236.html#ga02c9f554eaa3f1d6599e75838da3cee6">open_curses</a>(<a class="code hl_variable" href="../../dd/d9e/a01226.html#aa0282924076d87477074665400a5f76e">sio</a>);</div>
-<div class="line"><span class="lineno">   56</span>    <a class="code hl_function" href="../../d3/d0b/a01253.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line"><span class="lineno">   57</span>    <a class="code hl_function" href="../../d0/d33/a01252.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a>();</div>
-<div class="line"><span class="lineno">   58</span>    <a class="code hl_function" href="../../d8/d2b/a01236.html#ga8f16f794ffa769e134d2a2fe07a35592">win_init_attrs</a>();</div>
-<div class="line"><span class="lineno">   59</span>    <a class="code hl_function" href="../../d8/db0/a01243.html#gae3d67c8c0b5b559664942e539256605b">base_name</a>(pgm_name, argv[0]);</div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">if</span> (!strcmp(pgm_name, <span class="stringliteral">&quot;menu&quot;</span>)) {</div>
-<div class="line"><span class="lineno">   61</span>        <a class="code hl_function" href="../../da/de0/a01248.html#ga861e6162a19e089468fdc2a1479b547f">new_menu</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argc, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argv, LINES / 14, COLS / 14);</div>
-<div class="line"><span class="lineno">   62</span>        <a class="code hl_variable" href="../../df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a> = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;menu;</div>
-<div class="line"><span class="lineno">   63</span>        <a class="code hl_function" href="../../d3/d7b/a01249.html#ga7d7973d7aac92759dcc86ec52bb038f4">menu_engine</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
-<div class="line"><span class="lineno">   64</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(pgm_name, <span class="stringliteral">&quot;form&quot;</span>)) {</div>
-<div class="line"><span class="lineno">   65</span>        <a class="code hl_function" href="../../d7/dc5/a01242.html#gabf1be20a8aad5f7ba09172ac1434a110">init_form</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argc, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argv, LINES / 14, COLS / 14);</div>
-<div class="line"><span class="lineno">   66</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(pgm_name, <span class="stringliteral">&quot;pick&quot;</span>)) {</div>
-<div class="line"><span class="lineno">   67</span>        <a class="code hl_function" href="../../dc/dc2/a01251.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argc, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argv, 0, 0);</div>
-<div class="line"><span class="lineno">   68</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(pgm_name, <span class="stringliteral">&quot;view&quot;</span>)) {</div>
-<div class="line"><span class="lineno">   69</span>        <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = <a class="code hl_function" href="../../da/de0/a01248.html#gaa46e79b1ded1c4de3bfabc5508c914c3">new_view</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
-<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;lines &gt; 0 || <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;cols &gt; 0) {</div>
-<div class="line"><span class="lineno">   71</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;h_shift == 0)</div>
-<div class="line"><span class="lineno">   72</span>                <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;h_shift = <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols / 3;</div>
-<div class="line"><span class="lineno">   73</span>            <span class="keywordflow">if</span> (!<a class="code hl_function" href="../../dd/d95/a01247.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;title)) {</div>
-<div class="line"><span class="lineno">   74</span>                <a class="code hl_function" href="../../dc/d83/a01254.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
-<div class="line"><span class="lineno">   75</span>            }</div>
-<div class="line"><span class="lineno">   76</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!<a class="code hl_function" href="../../dd/d95/a01247.html#ga5d69ccbd704b60891cdc788693d436d4">init_view_full_screen</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>)) {</div>
-<div class="line"><span class="lineno">   77</span>            <a class="code hl_function" href="../../dc/d83/a01254.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
-<div class="line"><span class="lineno">   78</span>        }</div>
-<div class="line"><span class="lineno">   79</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!strcmp(pgm_name, <span class="stringliteral">&quot;ckeys&quot;</span>))</div>
-<div class="line"><span class="lineno">   80</span>        <a class="code hl_function" href="../../d6/db6/a01172.html#a483e450445eab0cfdef426ba3f027c6f">popup_ckeys</a>();</div>
-<div class="line"><span class="lineno">   81</span>    <span class="comment">// end_pgm();</span></div>
-<div class="line"><span class="lineno">   82</span>}</div>
-<div class="ttc" id="aa00719_html_a3d163d0928a8410a38d85fddf9b0d0d8"><div class="ttname"><a href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a></div><div class="ttdeci">Init * init</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d34/a01211_source.html#l00088">init.c:88</a></div></div>
-<div class="ttc" id="aa00731_html_a529b480d3d81a86e882c4d6ab8afa8bb"><div class="ttname"><a href="../../df/df7/a00731.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></div><div class="ttdeci">Menu * menu</div><div class="ttdef"><b>Definition</b> <a href="../../da/d20/a01160_source.html#l00045">mem.c:45</a></div></div>
-<div class="ttc" id="aa00734_html_af2dd70d8b95c32fb670ac6f9cc8df201"><div class="ttname"><a href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a></div><div class="ttdeci">View * view</div><div class="ttdef"><b>Definition</b> <a href="../../da/d20/a01160_source.html#l00048">mem.c:48</a></div></div>
-<div class="ttc" id="aa01172_html_a483e450445eab0cfdef426ba3f027c6f"><div class="ttname"><a href="../../d6/db6/a01172.html#a483e450445eab0cfdef426ba3f027c6f">popup_ckeys</a></div><div class="ttdeci">int popup_ckeys()</div><div class="ttdoc">Display Curses Keys Responds to curses keys and mouse events, displaying the key code and description...</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00023">curskeys.c:23</a></div></div>
-<div class="ttc" id="aa01172_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d6/db6/a01172.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01226_html_aa0282924076d87477074665400a5f76e"><div class="ttname"><a href="../../dd/d9e/a01226.html#aa0282924076d87477074665400a5f76e">sio</a></div><div class="ttdeci">SIO * sio</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d9e/a01226_source.html#l00088">dwin.c:88</a></div></div>
-<div class="ttc" id="aa01236_html_ga02c9f554eaa3f1d6599e75838da3cee6"><div class="ttname"><a href="../../d8/d2b/a01236.html#ga02c9f554eaa3f1d6599e75838da3cee6">open_curses</a></div><div class="ttdeci">bool open_curses(SIO *)</div><div class="ttdoc">Initialize NCurses and color settings.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d9e/a01226_source.html#l00204">dwin.c:204</a></div></div>
-<div class="ttc" id="aa01236_html_ga8f16f794ffa769e134d2a2fe07a35592"><div class="ttname"><a href="../../d8/d2b/a01236.html#ga8f16f794ffa769e134d2a2fe07a35592">win_init_attrs</a></div><div class="ttdeci">void win_init_attrs()</div><div class="ttdoc">Initialize window attributes.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d9e/a01226_source.html#l00186">dwin.c:186</a></div></div>
-<div class="ttc" id="aa01242_html_gabf1be20a8aad5f7ba09172ac1434a110"><div class="ttname"><a href="../../d7/dc5/a01242.html#gabf1be20a8aad5f7ba09172ac1434a110">init_form</a></div><div class="ttdeci">int init_form(Init *, int, char **, int, int)</div><div class="ttdoc">Initialize form data structure and parse description file.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d35/a01184_source.html#l00061">form_engine.c:61</a></div></div>
-<div class="ttc" id="aa01243_html_gae3d67c8c0b5b559664942e539256605b"><div class="ttname"><a href="../../d8/db0/a01243.html#gae3d67c8c0b5b559664942e539256605b">base_name</a></div><div class="ttdeci">bool base_name(char *, char *)</div><div class="ttdoc">Returns the base name of a file specification.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d19/a01217_source.html#l01043">futil.c:1043</a></div></div>
-<div class="ttc" id="aa01246_html_gaccd65939c0ce6f0d940c5cf795a1e8fa"><div class="ttname"><a href="../../d7/d04/a01246.html#gaccd65939c0ce6f0d940c5cf795a1e8fa">mapp_initialization</a></div><div class="ttdeci">void mapp_initialization(Init *, int, char **)</div><div class="ttdoc">Main initialization function for MAPP - Menu Application.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d34/a01211_source.html#l00414">init.c:414</a></div></div>
-<div class="ttc" id="aa01247_html_ga5d69ccbd704b60891cdc788693d436d4"><div class="ttname"><a href="../../dd/d95/a01247.html#ga5d69ccbd704b60891cdc788693d436d4">init_view_full_screen</a></div><div class="ttdeci">int init_view_full_screen(Init *)</div><div class="ttdoc">Initialize C-Menu View in full screen mode.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00045">init_view.c:45</a></div></div>
-<div class="ttc" id="aa01247_html_ga8dd32c1a4c961ec715f63625a6f87b61"><div class="ttname"><a href="../../dd/d95/a01247.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a></div><div class="ttdeci">int init_view_boxwin(Init *, char *)</div><div class="ttdoc">Initialize the C-Menu View in box window mode.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00168">init_view.c:168</a></div></div>
-<div class="ttc" id="aa01248_html_ga75cffbfad8930c347fa9ae68b69f3bdf"><div class="ttname"><a href="../../da/de0/a01248.html#ga75cffbfad8930c347fa9ae68b69f3bdf">new_init</a></div><div class="ttdeci">Init * new_init(int, char **)</div><div class="ttdoc">Create and initialize Init structure.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d20/a01160_source.html#l00070">mem.c:70</a></div></div>
-<div class="ttc" id="aa01248_html_ga861e6162a19e089468fdc2a1479b547f"><div class="ttname"><a href="../../da/de0/a01248.html#ga861e6162a19e089468fdc2a1479b547f">new_menu</a></div><div class="ttdeci">Menu * new_menu(Init *, int, char **, int, int)</div><div class="ttdoc">Create and initialize Menu structure.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d20/a01160_source.html#l00148">mem.c:148</a></div></div>
-<div class="ttc" id="aa01248_html_gaa46e79b1ded1c4de3bfabc5508c914c3"><div class="ttname"><a href="../../da/de0/a01248.html#gaa46e79b1ded1c4de3bfabc5508c914c3">new_view</a></div><div class="ttdeci">View * new_view(Init *)</div><div class="ttdoc">Create and initialize View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d20/a01160_source.html#l00313">mem.c:313</a></div></div>
-<div class="ttc" id="aa01249_html_ga7d7973d7aac92759dcc86ec52bb038f4"><div class="ttname"><a href="../../d3/d7b/a01249.html#ga7d7973d7aac92759dcc86ec52bb038f4">menu_engine</a></div><div class="ttdeci">unsigned int menu_engine(Init *)</div><div class="ttdoc">The main loop of the menu system.</div><div class="ttdef"><b>Definition</b> <a href="../../de/d61/a01205_source.html#l00038">menu_engine.c:38</a></div></div>
-<div class="ttc" id="aa01251_html_ga1b2ee87543245e612c1710ea58930a17"><div class="ttname"><a href="../../dc/dc2/a01251.html#ga1b2ee87543245e612c1710ea58930a17">init_pick</a></div><div class="ttdeci">int init_pick(Init *, int, char **, int, int)</div><div class="ttdoc">Initializes pick structure and opens pick input file or pipe.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/df2/a01175_source.html#l00060">pick_engine.c:60</a></div></div>
-<div class="ttc" id="aa01252_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../d0/d33/a01252.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01252_html_ga4d0a6767e791cf93a268ebe9ba02aa24"><div class="ttname"><a href="../../d0/d33/a01252.html#ga4d0a6767e791cf93a268ebe9ba02aa24">capture_curses_tioctl</a></div><div class="ttdeci">bool capture_curses_tioctl()</div><div class="ttdoc">capture_curses_tioctl() - capture curses terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00068">scriou.c:68</a></div></div>
-<div class="ttc" id="aa01253_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d3/d0b/a01253.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00062">sig.c:62</a></div></div>
-<div class="ttc" id="aa01254_html_ga0bd4dc056ab5010547129bb87819789b"><div class="ttname"><a href="../../dc/d83/a01254.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a></div><div class="ttdeci">int view_file(Init *)</div><div class="ttdoc">Start view.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d19/a01190_source.html#l00128">view_engine.c:128</a></div></div>
-<div class="ttc" id="aa01304_html"><div class="ttname"><a href="../../d6/dae/a01304.html">SIO</a></div><div class="ttdoc">The SIO structure encapsulates various aspects of the terminal&#39;s state and configuration,...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00739">cm.h:739</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00254">254</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  254</span>                         {</div>
+<div class="line"><span class="lineno">  255</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../db/d7c/a00722.html#aa0984c16af72bfdf57c5d88de1d314f9">pick</a>-&gt;p_view_files) {</div>
+<div class="line"><span class="lineno">  256</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  257</span>            munmap(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf, <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size);</div>
+<div class="line"><span class="lineno">  258</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  259</span>        }</div>
+<div class="line"><span class="lineno">  260</span>    }</div>
+<div class="line"><span class="lineno">  261</span>    <a class="code hl_function" href="../../dc/dc2/a01251.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  262</span>}</div>
+<div class="ttc" id="aa00719_html_a3d163d0928a8410a38d85fddf9b0d0d8"><div class="ttname"><a href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a></div><div class="ttdeci">Init * init</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d32/a01214_source.html#l00090">init.c:90</a></div></div>
+<div class="ttc" id="aa00722_html_aa0984c16af72bfdf57c5d88de1d314f9"><div class="ttname"><a href="../../db/d7c/a00722.html#aa0984c16af72bfdf57c5d88de1d314f9">pick</a></div><div class="ttdeci">Pick * pick</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00046">mem.c:46</a></div></div>
+<div class="ttc" id="aa00734_html_af2dd70d8b95c32fb670ac6f9cc8df201"><div class="ttname"><a href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a></div><div class="ttdeci">View * view</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00048">mem.c:48</a></div></div>
+<div class="ttc" id="aa01251_html_ga519762bc6148577dc96caf851c3ebfe9"><div class="ttname"><a href="../../dc/dc2/a01251.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a></div><div class="ttdeci">View * destroy_view(Init *init)</div><div class="ttdoc">Destroy View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00359">mem.c:359</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/dd8/a00719_source.html#l00127">Init::argc</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00128">Init::argv</a>, <a class="el" href="../../da/d19/a01217_source.html#l01043">base_name()</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00068">capture_curses_tioctl()</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00043">capture_shell_tioctl()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00113">Init::cols</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00052">View::cols</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00177">Init::h_shift</a>, <a class="el" href="../../d1/d34/a01211_source.html#l00088">init</a>, <a class="el" href="../../d1/d35/a01184_source.html#l00061">init_form()</a>, <a class="el" href="../../d6/df2/a01175_source.html#l00060">init_pick()</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00168">init_view_boxwin()</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00045">init_view_full_screen()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00112">Init::lines</a>, <a class="el" href="../../d1/d34/a01211_source.html#l00414">mapp_initialization()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00178">Init::menu</a>, <a class="el" href="../../da/d20/a01160_source.html#l00045">menu</a>, <a class="el" href="../../de/d61/a01205_source.html#l00038">menu_engine()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00070">new_init()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00148">new_menu()</a>, <a class="el" href="../../da/d20/a01160_source.html#l00313">new_view()</a>, <a class="el" href="../../dd/d9e/a01226_source.html#l00204">open_curses()</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00023">popup_ckeys()</a>, <a class="el" href="../../dd/d43/a01193_source.html#l00062">sig_prog_mode()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00111">Init::sio</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00126">Init::title</a>, <a class="el" href="../../da/d20/a01160_source.html#l00048">view</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00128">view_file()</a>, and <a class="el" href="../../dd/d9e/a01226_source.html#l00186">win_init_attrs()</a>.</p>
+<p class="reference">References <a class="el" href="../../d6/dc0/a00734_source.html#l00160">View::buf</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00359">destroy_view()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00144">View::file_size</a>, <a class="el" href="../../d5/d32/a01214_source.html#l00090">init</a>, <a class="el" href="../../db/d7c/a00722_source.html#l00061">Pick::p_view_files</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00046">pick</a>, and <a class="el" href="../../d6/d27/a01163_source.html#l00048">view</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d11/a01178_source.html#l00064">init_pick()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ae5e9dec3281da650ea8a72b457aef2c8_cgraph.svg" width="464" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_ae5e9dec3281da650ea8a72b457aef2c8_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1f95a0fa1e35211caccf3a6ae9ab93de" name="a1f95a0fa1e35211caccf3a6ae9ab93de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f95a0fa1e35211caccf3a6ae9ab93de">&#9670;&#160;</a></span>end_pick_view()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void end_pick_view </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d41/a01267.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e885d06c6a1fd6df61223f806f5ac4a" name="a5e885d06c6a1fd6df61223f806f5ac4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e885d06c6a1fd6df61223f806f5ac4a">&#9670;&#160;</a></span>new_pick_view()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int new_pick_view </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d41/a01267.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l01404">1404</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1404</span>                              {</div>
+<div class="line"><span class="lineno"> 1405</span>    <span class="keywordtype">char</span> *e;</div>
+<div class="line"><span class="lineno"> 1406</span>    <span class="comment">// if (init-&gt;view != nullptr)</span></div>
+<div class="line"><span class="lineno"> 1407</span>    <span class="comment">// view_stack_push(&amp;view_stack, *init-&gt;view);</span></div>
+<div class="line"><span class="lineno"> 1408</span>    <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;view = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1409</span>    <a class="code hl_function" href="../../d7/d04/a01246.html#ga10b60618e5fef6711dbe90389d60c049">destroy_argv</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argc, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;argv);</div>
+<div class="line"><span class="lineno"> 1410</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = <a class="code hl_function" href="../../dc/dc2/a01251.html#gaa46e79b1ded1c4de3bfabc5508c914c3">new_view</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>); <span class="comment">// View struct allocation</span></div>
+<div class="line"><span class="lineno"> 1411</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;lines;</div>
+<div class="line"><span class="lineno"> 1412</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;cols;</div>
+<div class="line"><span class="lineno"> 1413</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begy;</div>
+<div class="line"><span class="lineno"> 1414</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;begx;</div>
+<div class="line"><span class="lineno"> 1415</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;receiver_cmd[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno"> 1416</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_ignore_case = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;f_ignore_case;</div>
+<div class="line"><span class="lineno"> 1417</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_at_end_remove = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;f_at_end_remove;</div>
+<div class="line"><span class="lineno"> 1418</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_squeeze = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;f_squeeze;</div>
+<div class="line"><span class="lineno"> 1419</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;tab_stop = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;tab_stop;</div>
+<div class="line"><span class="lineno"> 1420</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_ln = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;f_ln;</div>
+<div class="line"><span class="lineno"> 1421</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;h_shift = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;h_shift;</div>
+<div class="line"><span class="lineno"> 1422</span>    e = getenv(<span class="stringliteral">&quot;VIEW_HELP_FILE&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1423</span>    <span class="keywordflow">if</span> (e &amp;&amp; e[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno"> 1424</span>        <a class="code hl_function" href="../../d7/d04/a01246.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, e, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1425</span>    }</div>
+<div class="line"><span class="lineno"> 1426</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_help_spec =</div>
+<div class="line"><span class="lineno"> 1427</span>        <a class="code hl_function" href="../../dc/dc2/a01251.html#ga75ce293fe4e007a3337a190647408000">verify_spec_arg</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_help,</div>
+<div class="line"><span class="lineno"> 1428</span>                        <span class="stringliteral">&quot;~/menuapp/help&quot;</span>, R_OK);</div>
+<div class="line"><span class="lineno"> 1429</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_help_spec) {</div>
+<div class="line"><span class="lineno"> 1430</span>        <a class="code hl_function" href="../../d7/d04/a01246.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_home, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1431</span>        <a class="code hl_function" href="../../d7/d04/a01246.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <span class="stringliteral">&quot;/help/&quot;</span>, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1432</span>        <a class="code hl_function" href="../../d7/d04/a01246.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <a class="code hl_define" href="../../dd/dd8/a00719.html#ad204138a3f2767514dbe0dfe548a28f9">VIEW_HELP_FILE</a>, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1433</span>    }</div>
+<div class="line"><span class="lineno"> 1434</span>    <span class="keywordtype">int</span> rc = <a class="code hl_function" href="../../d4/d22/a01250.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><span class="lineno"> 1435</span>    <span class="keywordflow">return</span> rc;</div>
+<div class="line"><span class="lineno"> 1436</span>}</div>
+<div class="ttc" id="aa00719_html_ad204138a3f2767514dbe0dfe548a28f9"><div class="ttname"><a href="../../dd/dd8/a00719.html#ad204138a3f2767514dbe0dfe548a28f9">VIEW_HELP_FILE</a></div><div class="ttdeci">#define VIEW_HELP_FILE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00037">common.h:37</a></div></div>
+<div class="ttc" id="aa01175_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d6/df2/a01175_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa01246_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d7/d04/a01246.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00537">futil.c:537</a></div></div>
+<div class="ttc" id="aa01246_html_ga10b60618e5fef6711dbe90389d60c049"><div class="ttname"><a href="../../d7/d04/a01246.html#ga10b60618e5fef6711dbe90389d60c049">destroy_argv</a></div><div class="ttdeci">int destroy_argv(int argc, char **argv)</div><div class="ttdoc">Deallocates memory allocated for argument strings in argv.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00487">futil.c:487</a></div></div>
+<div class="ttc" id="aa01246_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../d7/d04/a01246.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00566">futil.c:566</a></div></div>
+<div class="ttc" id="aa01250_html_ga8dd32c1a4c961ec715f63625a6f87b61"><div class="ttname"><a href="../../d4/d22/a01250.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a></div><div class="ttdeci">int init_view_boxwin(Init *, char *)</div><div class="ttdoc">Initialize the C-Menu View in box window mode.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00183">init_view.c:183</a></div></div>
+<div class="ttc" id="aa01251_html_ga75ce293fe4e007a3337a190647408000"><div class="ttname"><a href="../../dc/dc2/a01251.html#ga75ce293fe4e007a3337a190647408000">verify_spec_arg</a></div><div class="ttdeci">bool verify_spec_arg(char *, char *, char *, char *, int)</div><div class="ttdoc">Verify file specification argument.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00420">mem.c:420</a></div></div>
+<div class="ttc" id="aa01251_html_gaa46e79b1ded1c4de3bfabc5508c914c3"><div class="ttname"><a href="../../dc/dc2/a01251.html#gaa46e79b1ded1c4de3bfabc5508c914c3">new_view</a></div><div class="ttdeci">View * new_view(Init *)</div><div class="ttdoc">Create and initialize View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d27/a01163_source.html#l00313">mem.c:313</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dd/dd8/a00719_source.html#l00132">Init::argc</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00133">Init::argv</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00120">Init::begx</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00061">View::begx</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00119">Init::begy</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00060">View::begy</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00118">Init::cols</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00059">View::cols</a>, <a class="el" href="../../db/d42/a01220_source.html#l00487">destroy_argv()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00137">Init::f_at_end_remove</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00072">View::f_at_end_remove</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00140">View::f_help_spec</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00135">Init::f_ignore_case</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00071">View::f_ignore_case</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00145">Init::f_ln</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00170">View::f_ln</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00139">Init::f_squeeze</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00073">View::f_squeeze</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00183">Init::h_shift</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00091">View::h_shift</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00137">View::help_spec</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00183">init_view_boxwin()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00117">Init::lines</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00058">View::lines</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00150">Init::mapp_help</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00148">Init::mapp_home</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00313">new_view()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00063">View::receiver_cmd</a>, <a class="el" href="../../db/d42/a01220_source.html#l00566">strnz__cat()</a>, <a class="el" href="../../db/d42/a01220_source.html#l00537">strnz__cpy()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00182">Init::tab_stop</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00090">View::tab_stop</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00420">verify_spec_arg()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00190">Init::view</a>, and <a class="el" href="../../d6/d27/a01163_source.html#l00048">view</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d11/a01178_source.html#l00823">open_pick_win()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_a5e885d06c6a1fd6df61223f806f5ac4a_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_a5e885d06c6a1fd6df61223f806f5ac4a_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="aa55f544851e15ae7851b7a519c1ea521" name="aa55f544851e15ae7851b7a519c1ea521"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa55f544851e15ae7851b7a519c1ea521">&#9670;&#160;</a></span>new_view_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void new_view_file </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d41/a01267.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l01438">1438</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1438</span>                                           {</div>
+<div class="line"><span class="lineno"> 1439</span>    <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;view;</div>
+<div class="line"><span class="lineno"> 1440</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno"> 1441</span>        munmap(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf, <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size);</div>
+<div class="line"><span class="lineno"> 1442</span>        <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno"> 1443</span>    }</div>
+<div class="line"><span class="lineno"> 1444</span>    <a class="code hl_function" href="../../d7/d04/a01246.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;provider_cmd, <span class="stringliteral">&quot;tree-sitter highlight &quot;</span>, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1445</span>    <a class="code hl_function" href="../../d7/d04/a01246.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;provider_cmd, file, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1446</span>    <a class="code hl_function" href="../../d7/d04/a01246.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;title, file, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno"> 1447</span>    <a class="code hl_function" href="../../db/d1c/a01229.html#a7de60019ff86cc64c93ce105b610b29b">box_title</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;box.win, <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;title);</div>
+<div class="line"><span class="lineno"> 1448</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d4/d22/a01250.html#gab050f5482419339e9207dbdc65a7b49e">view_init_input</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, file) == 0) {</div>
+<div class="line"><span class="lineno"> 1449</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf) {</div>
+<div class="line"><span class="lineno"> 1450</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_eod = 0;</div>
+<div class="line"><span class="lineno"> 1451</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_bod = 0;</div>
+<div class="line"><span class="lineno"> 1452</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;maxcol = 0;</div>
+<div class="line"><span class="lineno"> 1453</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos = 0;</div>
+<div class="line"><span class="lineno"> 1454</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_ln = 0;</div>
+<div class="line"><span class="lineno"> 1455</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_ln = 0;</div>
+<div class="line"><span class="lineno"> 1456</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln_max_pos = 0;</div>
+<div class="line"><span class="lineno"> 1457</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln = 0;</div>
+<div class="line"><span class="lineno"> 1458</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos = 0;</div>
+<div class="line"><span class="lineno"> 1459</span>            <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_pos = 0;</div>
+<div class="line"><span class="lineno"> 1460</span>            <a class="code hl_function" href="../../da/da1/a01258.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
+<div class="line"><span class="lineno"> 1461</span>            <a class="code hl_function" href="../../da/da1/a01258.html#gacf1bfbd6d2fd4ad9a0385009ef25015c">next_page</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
+<div class="line"><span class="lineno"> 1462</span>            <a class="code hl_function" href="../../d9/de7/a01257.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
+<div class="line"><span class="lineno"> 1463</span>            <a class="code hl_function" href="../../dd/d42/a01259.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, <a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;prompt_str);</div>
+<div class="line"><span class="lineno"> 1464</span>            <a class="code hl_function" href="../../dd/d42/a01259.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a>(<a class="code hl_variable" href="../../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
+<div class="line"><span class="lineno"> 1465</span>            update_panels();</div>
+<div class="line"><span class="lineno"> 1466</span>            doupdate();</div>
+<div class="line"><span class="lineno"> 1467</span>        }</div>
+<div class="line"><span class="lineno"> 1468</span>    }</div>
+<div class="line"><span class="lineno"> 1469</span>}</div>
+<div class="ttc" id="aa01229_html_a7de60019ff86cc64c93ce105b610b29b"><div class="ttname"><a href="../../db/d1c/a01229.html#a7de60019ff86cc64c93ce105b610b29b">box_title</a></div><div class="ttdeci">int box_title(WINDOW *box, char *wtitle)</div><div class="ttdef"><b>Definition</b> <a href="../../db/d1c/a01229_source.html#l00982">dwin.c:982</a></div></div>
+<div class="ttc" id="aa01250_html_gab050f5482419339e9207dbdc65a7b49e"><div class="ttname"><a href="../../d4/d22/a01250.html#gab050f5482419339e9207dbdc65a7b49e">view_init_input</a></div><div class="ttdeci">int view_init_input(View *, char *)</div><div class="ttdoc">Initialize the input for a C-Menu View.</div><div class="ttdef"><b>Definition</b> <a href="../../dc/dee/a01166_source.html#l00455">init_view.c:455</a></div></div>
+<div class="ttc" id="aa01257_html_gaf01721a6369d49d9f1eebfc4ba6d0a95"><div class="ttname"><a href="../../d9/de7/a01257.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a></div><div class="ttdeci">void build_prompt(View *)</div><div class="ttdoc">Build Prompt String.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00847">view_engine.c:847</a></div></div>
+<div class="ttc" id="aa01258_html_gaa260d59836439e16d00ad5a6bc4b4829"><div class="ttname"><a href="../../da/da1/a01258.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a></div><div class="ttdeci">void initialize_line_table(View *)</div><div class="ttdoc">Initialize Line Table.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l01549">view_engine.c:1549</a></div></div>
+<div class="ttc" id="aa01258_html_gacf1bfbd6d2fd4ad9a0385009ef25015c"><div class="ttname"><a href="../../da/da1/a01258.html#gacf1bfbd6d2fd4ad9a0385009ef25015c">next_page</a></div><div class="ttdeci">void next_page(View *)</div><div class="ttdoc">Advance to Next Page.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l01232">view_engine.c:1232</a></div></div>
+<div class="ttc" id="aa01259_html_ga1a2aaed7961f7ff0b171ee01801fcadf"><div class="ttname"><a href="../../dd/d42/a01259.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a></div><div class="ttdeci">int pad_refresh(View *)</div><div class="ttdoc">Refresh Pad and Line Number Window.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l01186">view_engine.c:1186</a></div></div>
+<div class="ttc" id="aa01259_html_ga3d81b9c4dd32748b26cd0fd94224d21c"><div class="ttname"><a href="../../dd/d42/a01259.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a></div><div class="ttdeci">int display_prompt(View *, char *)</div><div class="ttdoc">Display Command Line Prompt.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l01934">view_engine.c:1934</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d6/dc0/a00734_source.html#l00077">View::box</a>, <a class="el" href="../../db/d1c/a01229_source.html#l00982">box_title()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00160">View::buf</a>, <a class="el" href="../../dd/d43/a01193_source.html#l00847">build_prompt()</a>, <a class="el" href="../../dd/d43/a01193_source.html#l01934">display_prompt()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00094">View::f_bod</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00095">View::f_eod</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00145">View::file_pos</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00144">View::file_size</a>, <a class="el" href="../../dd/d43/a01193_source.html#l01549">initialize_line_table()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00171">View::ln</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00176">View::ln_max_pos</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00120">View::maxcol</a>, <a class="el" href="../../dd/d43/a01193_source.html#l01232">next_page()</a>, <a class="el" href="../../dd/d43/a01193_source.html#l01186">pad_refresh()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00178">View::page_bot_ln</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00148">View::page_bot_pos</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00177">View::page_top_ln</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00147">View::page_top_pos</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00066">View::prompt_str</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00062">View::provider_cmd</a>, <a class="el" href="../../db/d42/a01220_source.html#l00566">strnz__cat()</a>, <a class="el" href="../../db/d42/a01220_source.html#l00537">strnz__cpy()</a>, <a class="el" href="../../d6/dc0/a00734_source.html#l00067">View::title</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00190">Init::view</a>, <a class="el" href="../../d6/d27/a01163_source.html#l00048">view</a>, <a class="el" href="../../dc/dee/a01166_source.html#l00455">view_init_input()</a>, and <a class="el" href="../../d6/dc0/a00734_source.html#l00043">Panel::win</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d11/a01178_source.html#l00895">picker()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_aa55f544851e15ae7851b7a519c1ea521_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_aa55f544851e15ae7851b7a519c1ea521_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a969bb5ac3fcb5f3565448e8d0da6efc4" name="a969bb5ac3fcb5f3565448e8d0da6efc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969bb5ac3fcb5f3565448e8d0da6efc4">&#9670;&#160;</a></span>read_theme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int read_theme </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/d41/a01267.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00596">596</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  596</span>                           {</div>
+<div class="line"><span class="lineno">  597</span>    <span class="keywordtype">int</span> rc;</div>
+<div class="line"><span class="lineno">  598</span>    <a class="code hl_function" href="../../d7/d04/a01246.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_theme, <a class="code hl_define" href="../../d6/df2/a01175.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  599</span>    rc = <a class="code hl_function" href="../../dd/dd8/a00719.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a>(<a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;mapp_theme, <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>);</div>
+<div class="line"><span class="lineno">  600</span>    <span class="keywordflow">if</span> (rc)</div>
+<div class="line"><span class="lineno">  601</span>        <span class="keywordflow">return</span> rc;</div>
+<div class="line"><span class="lineno">  602</span>    <a class="code hl_struct" href="../../d2/d4c/a01307.html">SIO</a> *<a class="code hl_variable" href="../../db/d1c/a01229.html#aa0282924076d87477074665400a5f76e">sio</a> = <a class="code hl_variable" href="../../dd/dd8/a00719.html#a3d163d0928a8410a38d85fddf9b0d0d8">init</a>-&gt;sio;</div>
+<div class="line"><span class="lineno">  603</span>    <a class="code hl_function" href="../../d5/d6e/a01240.html#ga23328c9c90961fc59a2061749fd87466">initialize_local_colors</a>(<a class="code hl_variable" href="../../db/d1c/a01229.html#aa0282924076d87477074665400a5f76e">sio</a>);</div>
+<div class="line"><span class="lineno">  604</span>    update_panels();</div>
+<div class="line"><span class="lineno">  605</span>    doupdate();</div>
+<div class="line"><span class="lineno">  606</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  607</span>}</div>
+<div class="ttc" id="aa00719_html_a50e5693f7cfa423d5e728cb7319e69df"><div class="ttname"><a href="../../dd/dd8/a00719.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a></div><div class="ttdeci">int process_config_file(char *, Init *)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d32/a01214_source.html#l00609">init.c:609</a></div></div>
+<div class="ttc" id="aa01229_html_aa0282924076d87477074665400a5f76e"><div class="ttname"><a href="../../db/d1c/a01229.html#aa0282924076d87477074665400a5f76e">sio</a></div><div class="ttdeci">SIO * sio</div><div class="ttdef"><b>Definition</b> <a href="../../db/d1c/a01229_source.html#l00090">dwin.c:90</a></div></div>
+<div class="ttc" id="aa01240_html_ga23328c9c90961fc59a2061749fd87466"><div class="ttname"><a href="../../d5/d6e/a01240.html#ga23328c9c90961fc59a2061749fd87466">initialize_local_colors</a></div><div class="ttdeci">void initialize_local_colors(SIO *)</div><div class="ttdoc">Initialize local color variables and color pairs based on SIO settings.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d1c/a01229_source.html#l00300">dwin.c:300</a></div></div>
+<div class="ttc" id="aa01246_html_ga646c47b288ba3b43714f0c0e1f88c981"><div class="ttname"><a href="../../d7/d04/a01246.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a></div><div class="ttdeci">bool expand_tilde(char *, int)</div><div class="ttdoc">Replaces &quot;~/&quot; in string with the user&#39;s home directory.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d42/a01220_source.html#l00963">futil.c:963</a></div></div>
+<div class="ttc" id="aa01307_html"><div class="ttname"><a href="../../d2/d4c/a01307.html">SIO</a></div><div class="ttdoc">The SIO structure encapsulates various aspects of the terminal&#39;s state and configuration,...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00772">cm.h:772</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../db/d42/a01220_source.html#l00963">expand_tilde()</a>, <a class="el" href="../../db/d1c/a01229_source.html#l00300">initialize_local_colors()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00153">Init::mapp_theme</a>, <a class="el" href="../../d5/d32/a01214_source.html#l00609">process_config_file()</a>, and <a class="el" href="../../dd/dd8/a00719_source.html#l00116">Init::sio</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d11/a01178_source.html#l00302">pick_engine()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_a969bb5ac3fcb5f3565448e8d0da6efc4_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d11/a01178_a969bb5ac3fcb5f3565448e8d0da6efc4_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="acdb9de82d81b176784185dea9063b57c" name="acdb9de82d81b176784185dea9063b57c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb9de82d81b176784185dea9063b57c">&#9670;&#160;</a></span>calculated_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int calculated_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00025">25</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a4a50bfe3f8460978b34566ec3dff7adb" name="a4a50bfe3f8460978b34566ec3dff7adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a50bfe3f8460978b34566ec3dff7adb">&#9670;&#160;</a></span>obj_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int obj_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00025">25</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a8f93294009502446912fa64f33731029" name="a8f93294009502446912fa64f33731029"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f93294009502446912fa64f33731029">&#9670;&#160;</a></span>pagers_editors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char const pagers_editors[12][10]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00046">46</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   46</span>                                  {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
+<div class="line"><span class="lineno">   47</span>                                     <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
+<div class="line"><span class="lineno">   48</span>                                     <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" name="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">&#9670;&#160;</a></span>pg_lines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pg_lines</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00024">24</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="ac7ac4adf3c3409d847a57c140700f334" name="ac7ac4adf3c3409d847a57c140700f334"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7ac4adf3c3409d847a57c140700f334">&#9670;&#160;</a></span>pipe_fd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int pipe_fd[2]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00044">44</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d11/a01178_source.html#l00064">init_pick()</a>.</p>
+
+</div>
+</div>
+<a id="ab57f05e19e1e81af17fbbd3a766c405a" name="ab57f05e19e1e81af17fbbd3a766c405a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab57f05e19e1e81af17fbbd3a766c405a">&#9670;&#160;</a></span>tbl_col</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_col</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00024">24</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a7df4e526a3af8e113bbc05ca011c2341" name="a7df4e526a3af8e113bbc05ca011c2341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df4e526a3af8e113bbc05ca011c2341">&#9670;&#160;</a></span>tbl_cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00024">24</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a25fe2a76cfd155c51a46c99d6a1cf4d9" name="a25fe2a76cfd155c51a46c99d6a1cf4d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">&#9670;&#160;</a></span>tbl_line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00024">24</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="ae7c3abf692920540a78bc3322d02828a" name="ae7c3abf692920540a78bc3322d02828a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c3abf692920540a78bc3322d02828a">&#9670;&#160;</a></span>tbl_page</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_page</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00024">24</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="acbe29ef30ea713ef47f3cd892310ca50" name="acbe29ef30ea713ef47f3cd892310ca50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbe29ef30ea713ef47f3cd892310ca50">&#9670;&#160;</a></span>tbl_pages</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_pages</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d8/d11/a01178_source.html#l00024">24</a> of file <a class="el" href="../../d8/d11/a01178_source.html">pick_engine.c</a>.</p>
 
 </div>
 </div>
@@ -243,7 +637,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d8/d11/a01178.html">menu.c</a></li>
+    <li class="navelem"><a href="../../d8/d11/a01178.html">pick_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

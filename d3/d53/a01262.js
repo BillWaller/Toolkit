@@ -1,7 +1,10 @@
 var a01262 =
 [
-    [ "cp", "d3/d53/a01262.html#a45d631eb5ccac403124e17bf2b171ae8", null ],
-    [ "end_pos", "d3/d53/a01262.html#a4188edd9eed7c9bcf267deaa4fa1c439", null ],
-    [ "keycode", "d3/d53/a01262.html#a86b6864ce0ecfeef4be8a88c24b98082", null ],
-    [ "text", "d3/d53/a01262.html#a26a5a1b51ba82579294838ee52a18af3", null ]
+    [ "display_line", "d3/d53/a01262.html#ga16a4b855ead8402d4744e77a5504082a", null ],
+    [ "display_prompt", "d3/d53/a01262.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
+    [ "fmt_line", "d3/d53/a01262.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
+    [ "pad_refresh", "d3/d53/a01262.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
+    [ "parse_ansi_str", "d3/d53/a01262.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
+    [ "view_display_help", "d3/d53/a01262.html#gad997ba9f8591568c77291fb1b44601b2", null ],
+    [ "view_display_page", "d3/d53/a01262.html#gae6f141401cf9f104dbe14f09603d5178", null ]
 ];
