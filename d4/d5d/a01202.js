@@ -9,6 +9,7 @@ var a01202 =
     [ "enqueue_dir", "d4/d5d/a01202.html#ab37c05171f15f8bb51a1422e78bbdade", null ],
     [ "finder", "d4/d5d/a01202.html#a25a21d1e1bfadedc242c55d79859a2dc", null ],
     [ "init_find", "d4/d5d/a01202.html#ae2b7f07deed06b431e5c22575954e97d", null ],
+    [ "is_hidden", "d4/d5d/a01202.html#afcb720397ba2f647ab6d6408cf0ba094", null ],
     [ "main", "d4/d5d/a01202.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
     [ "scan_file", "d4/d5d/a01202.html#ad5f5b8e503e62829fb44127d61c38b83", null ],
     [ "sort_lf_output", "d4/d5d/a01202.html#a1d156fc75a60624d5053b4707cd6fb48", null ],

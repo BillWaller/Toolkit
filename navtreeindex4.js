@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"d8/db9/a00725.html#aa761e98d3778d1759c049dcdcdac02bf":[28,0,0,0,76],
-"d8/db9/a00725.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b":[28,0,0,0,57],
 "d8/db9/a00725.html#aa7c8c79b6f580386dedaacce81b2e2b5":[28,0,0,0,346],
 "d8/db9/a00725.html#aaa8e733b95d6f6a4edda4127b73bc2cd":[28,0,0,0,213],
 "d8/db9/a00725.html#aac04c5533f2d11a31cc2a30e3a8fef6f":[28,0,0,0,84],
@@ -247,7 +245,9 @@ var NAVTREEINDEX4 =
 "da/df7/a01457.html#examples-2":[5,10],
 "da/df7/a01457.html#function-call-vs-direct-execution-vs-shell":[5,5],
 "da/df7/a01457.html#gamma":[5,4,3],
-"da/df7/a01457.html#ianchor-autotoc_md23ilinebr":[0],
+"da/df7/a01457.html#ianchor-autotoc_md22ilinebr":[0],
 "da/df7/a01457.html#license":[5,9],
-"da/df7/a01457.html#name-c-menu-application-builder":[5,0]
+"da/df7/a01457.html#name-c-menu-application-builder":[5,0],
+"da/df7/a01457.html#options":[5,4],
+"da/df7/a01457.html#see-also":[5,11]
 };

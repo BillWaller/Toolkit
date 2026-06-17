@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚀_20recognition_0',['🚀 Recognition',['../d7/dd1/a01458.html#autotoc_md-recognition',1,'']]]
+  ['🛠️_20how_20to_20submit_20code_20pull_20request_20process_0',['🛠️ How to Submit Code (Pull Request Process)',['../d7/dd1/a01458.html#️-how-to-submit-code-pull-request-process',1,'']]]
 ];

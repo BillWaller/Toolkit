@@ -118,12 +118,7 @@ var NAVTREE =
     ] ],
     [ "C-Menu-UG", "df/dc5/a01455.html", null ],
     [ "Changelog", "d4/d98/a01456.html", [
-      [ "[Released] - 2026-02-04", "d4/d98/a01456.html#released---2026-02-04", [
-        [ "Fixed", "d4/d98/a01456.html#fixed", null ]
-      ] ],
-      [ "[0.2.8]- 2026-02-04", "d4/d98/a01456.html#autotoc_md028--2026-02-04", [
-        [ "Added", "d4/d98/a01456.html#added", null ]
-      ] ]
+      [ "[Released] - 2026-02-04", "d4/d98/a01456.html#released---2026-02-04", null ]
     ] ],
     [ "cmenu", "da/df7/a01457.html", [
       [ "NAME C-Menu Application Builder", "da/df7/a01457.html#name-c-menu-application-builder", null ],
@@ -131,7 +126,7 @@ var NAVTREE =
       [ "DESCRIPTION", "da/df7/a01457.html#description", null ],
       [ "ANCILLARY COMPONENTS", "da/df7/a01457.html#ancillary-components", null ],
       [ "OPTIONS", "da/df7/a01457.html#options", [
-        [ "ianchor-autotoc_md23ilinebr", "da/df7/a01457.html#ianchor-autotoc_md23ilinebr", null ],
+        [ "ianchor-autotoc_md22ilinebr", "da/df7/a01457.html#ianchor-autotoc_md22ilinebr", null ],
         [ "date: June 2026", "da/df7/a01457.html#date-june-2026", null ],
         [ "THEME", "da/df7/a01457.html#theme", null ],
         [ "GAMMA", "da/df7/a01457.html#gamma", null ],
@@ -336,7 +331,7 @@ var NAVTREE =
       [ "SYNOPSIS", "d5/d67/a01466.html#synopsis-2", null ],
       [ "DESCRIPTION", "d5/d67/a01466.html#description-2", null ],
       [ "OPTIONS", "d5/d67/a01466.html#options-2", [
-        [ "ianchor-autotoc_md101ilinebr", "d5/d67/a01466.html#ianchor-autotoc_md101ilinebr", null ],
+        [ "ianchor-autotoc_md100ilinebr", "d5/d67/a01466.html#ianchor-autotoc_md100ilinebr", null ],
         [ "date: June 2026", "d5/d67/a01466.html#date-june-2026-2", null ],
         [ "GEOMETRY", "d5/d67/a01466.html#geometry", null ],
         [ "CONFIGURATION", "d5/d67/a01466.html#configuration", null ],
@@ -535,13 +530,13 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d2/d8e/a01315.html#aa3e505e5c866dcbd20a1c518944294b6",
-"d5/d32/a01214.html#a964fa61be5e30597c14ae6b1e24a7994",
-"d7/daf/a01169.html#a3c04138a5bfe5d72780bb7e82a18e627",
-"d8/db9/a00725.html#aa761e98d3778d1759c049dcdcdac02bf",
-"da/df7/a01457.html#options",
-"dc/d83/a01254.html#gaeebc4c0b94ca97d753e10a0cd1798730",
-"dd/d95/a01247.html#ga9733005966bd730252e081c3ef9bb2c2",
-"functions_vars_c.html"
+"d5/d32/a01214.html#a964fa61be5e30597c14ae6b1e24a7994a0c9b9e811f093b6fe99f7bc77f137913",
+"d7/daf/a01169.html#a487515b67e372105a75db08e8c522492",
+"d8/db9/a00725.html#aa7c8c79b6f580386dedaacce81b2e2b5",
+"da/df7/a01457.html#standard-colors",
+"dc/d83/a01254.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2",
+"dd/d9e/a01226.html",
+"functions_vars_e.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
