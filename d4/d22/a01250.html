@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_theme.h File Reference</title>
+<title>C-Menu: ui/ui_ncurses_input.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,123 +110,50 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d4/d22/a01250.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_theme.h File Reference</div></div>
+  <div class="headertitle"><div class="title">ui_ncurses_input.c File Reference<div class="ingroups"><a class="el" href="../../dd/d18/a01284.html">Ncurses UI Implementation</a></div></div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="../../d6/dc0/a00734_source.html">ui_backend.h</a>&quot;</code><br />
+
+<p>Input handling for ncurses-based UI.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d4/dd5/a01244_source.html">ui_ncurses_internal.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_theme.h:</div>
+Include dependency graph for ui_ncurses_input.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/dc2/a01251.svg" width="284" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/dc2/a01251.svg" width="579" height="266"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../d4/d22/a01250_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:UiTheme" id="r_UiTheme"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="../../d5/da5/a01424.html">UiTheme</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:a2e0fdd8ded12c1aceddc991c3763a267" id="r_a2e0fdd8ded12c1aceddc991c3763a267"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267">UiRole</a> { <br />
-&#160;&#160;<a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a6d9745669fbc5c6c421a0bb21658b187">UI_ROLE_DEFAULT</a> = 0
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a8f0f7cada4538f85fe43351bb00a901d">UI_ROLE_NORMAL</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a526592258010f72edfbc1c721c51f00b">UI_ROLE_NORMAL_REVERSE</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a363618fae73b75f8b13695565c21a309">UI_ROLE_NORMAL_HIGHLIGHT</a>
-, <br />
-&#160;&#160;<a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267acebe0fc5bcfcaeac5cafb4b88479a96b">UI_ROLE_NORMAL_HIGHLIGHT_REVERSE</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a027faa0558ba1dc4de4b9bed099e79b4">UI_ROLE_BOX</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267ad74d2d59d0c5607e0bd6058d753152be">UI_ROLE_TITLE</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267ab5dfb745fd0ea2952844411336f49a36">UI_ROLE_LINENO</a>
-, <br />
-&#160;&#160;<a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267aac03ef1e518a9beded78b7889f006f18">UI_ROLE_CMDLINE</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a69f976e9140f0635413cd927b8e04314">UI_ROLE_BOLD</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267ab05d17a0f3fe1cb0636d30d376e0bc98">UI_ROLE_FILL</a>
-, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267a2679b3984fde58b29457cf7c206b846b">UI_ROLE_BRACKET</a>
-<br />
- }</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ab0393b727c7e79f337449144e0aaf3eb" id="r_ab0393b727c7e79f337449144e0aaf3eb"><td class="memItemLeft">const <a class="el" href="../../d2/d82/a01404.html">UiStyle</a> *&#160;</td><td class="memItemRight"><a class="el" href="#ab0393b727c7e79f337449144e0aaf3eb">ui_theme_style</a> (const <a class="el" href="../../d5/da5/a01424.html">UiTheme</a> *theme, <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267">UiRole</a> role)</td></tr>
+<tr class="memitem:gaf250dbf909f22474b80da86f7bacd4bd" id="r_gaf250dbf909f22474b80da86f7bacd4bd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gaf250dbf909f22474b80da86f7bacd4bd">ui_get_event</a> (<a class="el" href="../../d7/d1c/a01397.html">UiRuntime</a> *ui, <a class="el" href="../../dc/df4/a01401.html">UiSurface</a> *target, <a class="el" href="../../d7/d68/a01413.html">UiEvent</a> *ev, int timeout_ms)</td></tr>
+<tr class="memdesc:gaf250dbf909f22474b80da86f7bacd4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an input event from the specified UI surface.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a9717e7bbecb906637e86cef6da3d83c2" id="r_a9717e7bbecb906637e86cef6da3d83c2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9717e7bbecb906637e86cef6da3d83c2">return</a></td></tr>
 </table>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
-<a id="a2e0fdd8ded12c1aceddc991c3763a267" name="a2e0fdd8ded12c1aceddc991c3763a267"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e0fdd8ded12c1aceddc991c3763a267">&#9670;&#160;</a></span>UiRole</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Input handling for ncurses-based UI. </p>
+<p>This file implements the input handling for the ncurses-based UI. It translates ncurses key codes into the UI's internal key representation and handles mouse events. </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d4/d22/a01250_source.html">ui_ncurses_input.c</a>.</p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a9717e7bbecb906637e86cef6da3d83c2" name="a9717e7bbecb906637e86cef6da3d83c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9717e7bbecb906637e86cef6da3d83c2">&#9670;&#160;</a></span>return</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267">UiRole</a></td>
+          <td class="memname">return</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a6d9745669fbc5c6c421a0bb21658b187" name="a2e0fdd8ded12c1aceddc991c3763a267a6d9745669fbc5c6c421a0bb21658b187"></a>UI_ROLE_DEFAULT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a8f0f7cada4538f85fe43351bb00a901d" name="a2e0fdd8ded12c1aceddc991c3763a267a8f0f7cada4538f85fe43351bb00a901d"></a>UI_ROLE_NORMAL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a526592258010f72edfbc1c721c51f00b" name="a2e0fdd8ded12c1aceddc991c3763a267a526592258010f72edfbc1c721c51f00b"></a>UI_ROLE_NORMAL_REVERSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a363618fae73b75f8b13695565c21a309" name="a2e0fdd8ded12c1aceddc991c3763a267a363618fae73b75f8b13695565c21a309"></a>UI_ROLE_NORMAL_HIGHLIGHT&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267acebe0fc5bcfcaeac5cafb4b88479a96b" name="a2e0fdd8ded12c1aceddc991c3763a267acebe0fc5bcfcaeac5cafb4b88479a96b"></a>UI_ROLE_NORMAL_HIGHLIGHT_REVERSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a027faa0558ba1dc4de4b9bed099e79b4" name="a2e0fdd8ded12c1aceddc991c3763a267a027faa0558ba1dc4de4b9bed099e79b4"></a>UI_ROLE_BOX&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267ad74d2d59d0c5607e0bd6058d753152be" name="a2e0fdd8ded12c1aceddc991c3763a267ad74d2d59d0c5607e0bd6058d753152be"></a>UI_ROLE_TITLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267ab5dfb745fd0ea2952844411336f49a36" name="a2e0fdd8ded12c1aceddc991c3763a267ab5dfb745fd0ea2952844411336f49a36"></a>UI_ROLE_LINENO&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267aac03ef1e518a9beded78b7889f006f18" name="a2e0fdd8ded12c1aceddc991c3763a267aac03ef1e518a9beded78b7889f006f18"></a>UI_ROLE_CMDLINE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a69f976e9140f0635413cd927b8e04314" name="a2e0fdd8ded12c1aceddc991c3763a267a69f976e9140f0635413cd927b8e04314"></a>UI_ROLE_BOLD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267ab05d17a0f3fe1cb0636d30d376e0bc98" name="a2e0fdd8ded12c1aceddc991c3763a267ab05d17a0f3fe1cb0636d30d376e0bc98"></a>UI_ROLE_FILL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2e0fdd8ded12c1aceddc991c3763a267a2679b3984fde58b29457cf7c206b846b" name="a2e0fdd8ded12c1aceddc991c3763a267a2679b3984fde58b29457cf7c206b846b"></a>UI_ROLE_BRACKET&#160;</td><td class="fielddoc"></td></tr>
-</table>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d22/a01250_source.html#l00006">6</a> of file <a class="el" href="../../d4/d22/a01250_source.html">ui_theme.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    6</span>             {</div>
-<div class="line"><span class="lineno">    7</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a6d9745669fbc5c6c421a0bb21658b187">UI_ROLE_DEFAULT</a> = 0,</div>
-<div class="line"><span class="lineno">    8</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a8f0f7cada4538f85fe43351bb00a901d">UI_ROLE_NORMAL</a>,</div>
-<div class="line"><span class="lineno">    9</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a526592258010f72edfbc1c721c51f00b">UI_ROLE_NORMAL_REVERSE</a>,</div>
-<div class="line"><span class="lineno">   10</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a363618fae73b75f8b13695565c21a309">UI_ROLE_NORMAL_HIGHLIGHT</a>,</div>
-<div class="line"><span class="lineno">   11</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267acebe0fc5bcfcaeac5cafb4b88479a96b">UI_ROLE_NORMAL_HIGHLIGHT_REVERSE</a>,</div>
-<div class="line"><span class="lineno">   12</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a027faa0558ba1dc4de4b9bed099e79b4">UI_ROLE_BOX</a>,</div>
-<div class="line"><span class="lineno">   13</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267ad74d2d59d0c5607e0bd6058d753152be">UI_ROLE_TITLE</a>,</div>
-<div class="line"><span class="lineno">   14</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267ab5dfb745fd0ea2952844411336f49a36">UI_ROLE_LINENO</a>,</div>
-<div class="line"><span class="lineno">   15</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267aac03ef1e518a9beded78b7889f006f18">UI_ROLE_CMDLINE</a>,</div>
-<div class="line"><span class="lineno">   16</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a69f976e9140f0635413cd927b8e04314">UI_ROLE_BOLD</a>,</div>
-<div class="line"><span class="lineno">   17</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267ab05d17a0f3fe1cb0636d30d376e0bc98">UI_ROLE_FILL</a>,</div>
-<div class="line"><span class="lineno">   18</span>    <a class="code hl_enumvalue" href="#a2e0fdd8ded12c1aceddc991c3763a267a2679b3984fde58b29457cf7c206b846b">UI_ROLE_BRACKET</a></div>
-<div class="line"><span class="lineno">   19</span>} <a class="code hl_enumeration" href="#a2e0fdd8ded12c1aceddc991c3763a267">UiRole</a>;</div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267">UiRole</a></div><div class="ttdeci">UiRole</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00006">ui_theme.h:6</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a027faa0558ba1dc4de4b9bed099e79b4"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a027faa0558ba1dc4de4b9bed099e79b4">UI_ROLE_BOX</a></div><div class="ttdeci">@ UI_ROLE_BOX</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00012">ui_theme.h:12</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a2679b3984fde58b29457cf7c206b846b"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a2679b3984fde58b29457cf7c206b846b">UI_ROLE_BRACKET</a></div><div class="ttdeci">@ UI_ROLE_BRACKET</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00018">ui_theme.h:18</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a363618fae73b75f8b13695565c21a309"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a363618fae73b75f8b13695565c21a309">UI_ROLE_NORMAL_HIGHLIGHT</a></div><div class="ttdeci">@ UI_ROLE_NORMAL_HIGHLIGHT</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00010">ui_theme.h:10</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a526592258010f72edfbc1c721c51f00b"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a526592258010f72edfbc1c721c51f00b">UI_ROLE_NORMAL_REVERSE</a></div><div class="ttdeci">@ UI_ROLE_NORMAL_REVERSE</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00009">ui_theme.h:9</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a69f976e9140f0635413cd927b8e04314"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a69f976e9140f0635413cd927b8e04314">UI_ROLE_BOLD</a></div><div class="ttdeci">@ UI_ROLE_BOLD</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00016">ui_theme.h:16</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a6d9745669fbc5c6c421a0bb21658b187"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a6d9745669fbc5c6c421a0bb21658b187">UI_ROLE_DEFAULT</a></div><div class="ttdeci">@ UI_ROLE_DEFAULT</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00007">ui_theme.h:7</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267a8f0f7cada4538f85fe43351bb00a901d"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267a8f0f7cada4538f85fe43351bb00a901d">UI_ROLE_NORMAL</a></div><div class="ttdeci">@ UI_ROLE_NORMAL</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00008">ui_theme.h:8</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267aac03ef1e518a9beded78b7889f006f18"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267aac03ef1e518a9beded78b7889f006f18">UI_ROLE_CMDLINE</a></div><div class="ttdeci">@ UI_ROLE_CMDLINE</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00015">ui_theme.h:15</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267ab05d17a0f3fe1cb0636d30d376e0bc98"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267ab05d17a0f3fe1cb0636d30d376e0bc98">UI_ROLE_FILL</a></div><div class="ttdeci">@ UI_ROLE_FILL</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00017">ui_theme.h:17</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267ab5dfb745fd0ea2952844411336f49a36"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267ab5dfb745fd0ea2952844411336f49a36">UI_ROLE_LINENO</a></div><div class="ttdeci">@ UI_ROLE_LINENO</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00014">ui_theme.h:14</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267acebe0fc5bcfcaeac5cafb4b88479a96b"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267acebe0fc5bcfcaeac5cafb4b88479a96b">UI_ROLE_NORMAL_HIGHLIGHT_REVERSE</a></div><div class="ttdeci">@ UI_ROLE_NORMAL_HIGHLIGHT_REVERSE</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00011">ui_theme.h:11</a></div></div>
-<div class="ttc" id="aa01250_html_a2e0fdd8ded12c1aceddc991c3763a267ad74d2d59d0c5607e0bd6058d753152be"><div class="ttname"><a href="#a2e0fdd8ded12c1aceddc991c3763a267ad74d2d59d0c5607e0bd6058d753152be">UI_ROLE_TITLE</a></div><div class="ttdeci">@ UI_ROLE_TITLE</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d22/a01250_source.html#l00013">ui_theme.h:13</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ab0393b727c7e79f337449144e0aaf3eb" name="ab0393b727c7e79f337449144e0aaf3eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0393b727c7e79f337449144e0aaf3eb">&#9670;&#160;</a></span>ui_theme_style()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="../../d2/d82/a01404.html">UiStyle</a> * ui_theme_style </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d5/da5/a01424.html">UiTheme</a> *</td>          <td class="paramname"><span class="paramname"><em>theme</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="#a2e0fdd8ded12c1aceddc991c3763a267">UiRole</a></td>          <td class="paramname"><span class="paramname"><em>role</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p class="definition">Definition at line <a class="el" href="../../d4/d22/a01250_source.html#l00151">151</a> of file <a class="el" href="../../d4/d22/a01250_source.html">ui_ncurses_input.c</a>.</p>
 
 </div>
 </div>
@@ -243,7 +170,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d4/d22/a01250.html">ui_theme.h</a></li>
+    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d4/d22/a01250.html">ui_ncurses_input.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

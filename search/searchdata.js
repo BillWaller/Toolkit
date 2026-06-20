@@ -9,7 +9,7 @@ var indexSectionsWithContent =
   6: "cfilmopuw",
   7: "bcefghlmnoptuvwx",
   8: "_abcdefhklmnopstuvx",
-  9: "cdefhimnopstuvw",
+  9: "bcdefhimnopstuvw",
   10: "012349abcdefghijklmnopqrstuvwxy🐛🐸💡📜🚀🛠"
 };
 

@@ -1,7 +1,13 @@
 var a01259 =
 [
-    [ "handle_signal", "dd/d42/a01259.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "dd/d42/a01259.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "dd/d42/a01259.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "dd/d42/a01259.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
+    [ "ui_draw_border", "dd/d18/a01284.html#ga2a4b66406ca8fdaae18b9e4d5e36d581", null ],
+    [ "ui_draw_box_title", "dd/d18/a01284.html#gaca44263e5a2802ca111c6211b532c50e", null ],
+    [ "ui_draw_hline", "dd/d18/a01284.html#gaf435ec21d1e804c5266f1878f756cf14", null ],
+    [ "ui_draw_text", "dd/d18/a01284.html#gad8dfcde97d6b2c89103e9d44d2feb0b1", null ],
+    [ "ui_draw_text_n", "dd/d18/a01284.html#gad07c4b1ea059d6b7f656a803bbf75e1e", null ],
+    [ "ui_draw_vline", "dd/d18/a01284.html#ga00a0f7871e6ea99bd76555cb04f228c5", null ],
+    [ "ui_ncurses_color_pair_from_style", "dd/d18/a01284.html#gaf21ce5ccc76232c9e59007aadd6c0e7c", null ],
+    [ "ui_ncurses_style_apply", "dd/d18/a01284.html#ga7340721e819b16b9e37bb999e19d0c60", null ],
+    [ "ui_surface_set_base", "dd/d18/a01284.html#gab640de44654a656fb3fd9aa060854988", null ],
+    [ "ui_surface_set_style", "dd/d18/a01284.html#gadb6c336da546adb736fc2414cb50f35c", null ]
 ];

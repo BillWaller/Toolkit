@@ -1,6 +1,5 @@
 var a01244 =
 [
-    [ "UiFramedSurface", "d0/d05/a01420.html", "d0/d05/a01420" ],
-    [ "ui_framed_surface_destroy", "d4/dd5/a01244.html#afa5c28ac5692fdbb5931d41a4e76b572", null ],
-    [ "ui_framed_surface_new", "d4/dd5/a01244.html#ac053420e4eeb1d4e9031bf2c5a8c646f", null ]
+    [ "ui_ncurses_color_pair_from_style", "d1/d1a/a01285.html#gaf21ce5ccc76232c9e59007aadd6c0e7c", null ],
+    [ "ui_ncurses_style_apply", "dd/d18/a01284.html#ga7340721e819b16b9e37bb999e19d0c60", null ]
 ];

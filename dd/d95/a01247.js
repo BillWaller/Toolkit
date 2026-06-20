@@ -1,5 +1,5 @@
 var a01247 =
 [
-    [ "ui_get_event", "dd/d95/a01247.html#af250dbf909f22474b80da86f7bacd4bd", null ],
-    [ "return", "dd/d95/a01247.html#a9717e7bbecb906637e86cef6da3d83c2", null ]
+    [ "ui_framed_surface_destroy", "d1/d1a/a01285.html#gafa5c28ac5692fdbb5931d41a4e76b572", null ],
+    [ "ui_framed_surface_new", "d1/d1a/a01285.html#gac053420e4eeb1d4e9031bf2c5a8c646f", null ]
 ];

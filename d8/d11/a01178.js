@@ -1,6 +1,8 @@
 var a01178 =
 [
-    [ "KSTRLEN", "d8/d11/a01178.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
-    [ "MAXLEN", "d8/d11/a01178.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
-    [ "popup_ckeys", "d8/d11/a01178.html#a483e450445eab0cfdef426ba3f027c6f", null ]
+    [ "_GNU_SOURCE", "d8/d11/a01178.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "HOST", "d8/d11/a01178.html#abbbcf3c42c997889127cc676754a6fea", null ],
+    [ "ABEND", "d8/d11/a01178.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "d8/d11/a01178.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "F_VERBOSE", "d8/d11/a01178.html#a9ea122171989176bc07376ae1eefc5c7", null ]
 ];
