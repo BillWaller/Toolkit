@@ -1,7 +1,18 @@
 var a01272 =
 [
-    [ "cmplx_buf", "d4/d0e/a01272.html#aa8fc2fd6fd4c5df0bb22c96071cb5dc2", null ],
-    [ "key", "d4/d0e/a01272.html#afae4703fe8eb6cfce07372508666dea6", null ],
-    [ "l", "d4/d0e/a01272.html#a0664a24c199473e38c5475d9e3a31447", null ],
-    [ "s", "d4/d0e/a01272.html#ad9e5bdc4bce57a1bbf514562bbb35988", null ]
+    [ "destroy_form", "d4/d0e/a01272.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "d4/d0e/a01272.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "d4/d0e/a01272.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "d4/d0e/a01272.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "d4/d0e/a01272.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "d4/d0e/a01272.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "d4/d0e/a01272.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "d4/d0e/a01272.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "d4/d0e/a01272.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "d4/d0e/a01272.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
+    [ "new_init", "d4/d0e/a01272.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "d4/d0e/a01272.html#ga861e6162a19e089468fdc2a1479b547f", null ],
+    [ "new_pick", "d4/d0e/a01272.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
+    [ "new_view", "d4/d0e/a01272.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "d4/d0e/a01272.html#ga75ce293fe4e007a3337a190647408000", null ]
 ];

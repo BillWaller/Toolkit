@@ -2,7 +2,7 @@ var searchData=
 [
   ['bg_5fcolor_0',['BG_COLOR',['../d8/db9/a00725.html#ae7ed5ea1d43fb2b71b3eaea2397fb5ca',1,'cm.h']]],
   ['bo_5fcolor_1',['BO_COLOR',['../d8/db9/a00725.html#ad1ec42c0323104fe2e8902c7fee7a8b6',1,'cm.h']]],
-  ['bufsiz_2',['BUFSIZ',['../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe',1,'view.h']]],
+  ['bufsiz_2',['BUFSIZ',['../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe',1,'view.h']]],
   ['bw_5fbl_3',['BW_BL',['../d8/db9/a00725.html#a68dc64ce5bc9d36979e5e5aeeae6aa9c',1,'cm.h']]],
   ['bw_5fbr_4',['BW_BR',['../d8/db9/a00725.html#a2248c706b02306ffb7e9c56502d86a48',1,'cm.h']]],
   ['bw_5fbt_5',['BW_BT',['../d8/db9/a00725.html#afb8209fd9e32a5f41a2ec3a5b24f86cd',1,'cm.h']]],

@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: C-Menu Pick</title>
-<link rel="icon" href="../../decision.svg" type="image/x-icon" />
+<title>C-Menu: UiSurface Struct Reference</title>
+<link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
 <link href="../../navtree.css" rel="stylesheet" type="text/css"/>
@@ -109,74 +109,200 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d9/d45/a01396.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">C-Menu Pick </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">UiSurface Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="c-menu-pick-2"></a></p>
-<p>C-Menu <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> displays a list of items from which the user can select.</p>
-<p>Specification:</p>
-<div class="fragment"><div class="line">!pick [ -n maximum_number_of_selections ][-m] \</div>
-<div class="line">    [ -i input_file ][ -S executable_provider ] \</div>
-<div class="line">    [ -o output_file ][ -c executable %% ]</div>
-</div><!-- fragment --><p>-n maximum_number_of_selections. "-n n" is a convenience which directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to automatically accept selections when the specified maximum number of items, "n" have been selected. For example, "-n 1" is commonly used to direct <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to automatically accept the first item selected without requiring the user pressing to F10 Accept key. This feature is designed to optimize the user's economy of motion, making the selection process extremely fast and efficient. When "-n 1" is specified, the user can simply select an item and <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> will immediately dispatch the specified action.</p>
-<p>-c execute command substituting "%%" with the selected item(s). Whether the command specified with the -c option is executed once per selection or once for all selections is determined by the presence or absence of the "-m option". Without the "-m" option, by default, if multiple items are selected, the command specified with -c will be executed once for each selection with that selection as an argument.</p>
-<p>-m multiple_arguments flag. The -m option directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to construct a command line with all selections as individual arguments. The specified command is executed once with all selections combined as individual arguments on a single command line.</p>
-<p>An example use case for "-m" would be if you wanted to open multiple files in C-Menu <a class="el" href="../../d3/d42/a01275.html">View</a> using <a class="el" href="../../d3/d42/a01275.html">View</a>'s ":n" and ":p" commands to navigate between files. In that case, you would specify "-m" to have <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> execute <a class="el" href="../../d3/d42/a01275.html">View</a> once with all selected files as arguments, allowing you to use <a class="el" href="../../d3/d42/a01275.html">View</a>'s built-in file navigation features. The same technique works with Vim, nvim, and less.</p>
-<p>-i input_file directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to read input from the specified file</p>
-<p>-S executable_provider directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to execute the specified external command and read input from the command's standard output. The command specified with the -S option is executed when starting <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a>, and its output is used as the list of items from which selections are made.</p>
-<p>-o output_file directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to write selected items to the specified file when the user presses F10 Accept.</p>
-<p><a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> must have exactly one input method, either -i input_file or -S executable_provider_command. Combining -o and -c options is permissible, and will direct <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to write the list of selected items to the specified file and also pass the list of selected items to the command specified by -c according to the presence or absence of the -m option. The selections are written to file before executing the specified command, so the command can read the selections from the file if needed.</p>
-<h2 class="doxsection"><a class="anchor" id="rustlings-source-3"></a>
-Rustlings Source</h2>
-<p>Example:</p>
-<div class="fragment"><div class="line">:     Rustlings Source</div>
-<div class="line">!pick -S rust_src -n 1 -T &quot;Rustlings Source - Edit&quot; -c nvim %%</div>
-</div><!-- fragment --><p>-S specifies a script, "rust_src", located in ~/menuapp/bin, which calls lf to create a sorted file list.</p>
-<p>Below are the contents of "rust_src", a shell script. We use a shell script here instead of direct execution because we need to pipe the output through sort. It's still fairly quick. The "lf" command generates a list of Rust source files from the "exercises" directory, which is part of the Rustlings project.</p>
-<div class="fragment"><div class="line"># @name rust_src</div>
-<div class="line">lf rustlings -d 5 &#39;exercises.*\.rs$&#39; | sort</div>
-</div><!-- fragment --><p>The "-n 1" option directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to proceed with executing the command specified by the "-c nvim %%" option after 1 file is selected. If "-n 1" were not specified, <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> would wait for the user to press F10 Accept before executing the command specified by the "-c nvim %%" option.</p>
-<p>The -c nvim %% substitutes the "%%" with the selected file and <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> executes <br  />
- nvim. If the "-n 1" option hadn't been specified, <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> would allow the user to select multiple files and press F10 Accept to accept those selections. In that case, nvim would be executed with multiple files as arguments, and the user could use nvim's ":n" and ":p" commands to open the files selectively. The "-n" option can also be used to specify the maximum number of selections before <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> automatically accepts and launches the specified executable.</p>
-<p>The use of "-S rust_src"" would be equivalent to "rust_src | pick" if we were
-executing pick as a stand-alone executable. In this instance, Pick launches "rust_src" and creates a pipe to receive its output".</p>
-<div class="image">
-<img src="../../rustlings.png" alt=""/>
-<div class="caption">
-Rustlings Source</div></div>
-    <p>The center window above shows <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> as it appears just after selecting Rustlings Source in the Applications <a class="el" href="../../d4/d41/a01267.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.</p>
-<p>The user presses tab to activate the line editor and types "maps2", the last few characters of the exercise name, and the <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> window on the right appears. The "maps2" expression filtered out all but one file name. The user doesn't need to press enter to accept the filter expression because <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> updates the <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> window in real time as the user types.</p>
-<p>At any time, the user can press tab to jump back to the selection window, and select the desired file with the mouse or position the cursor on the desired file and press spacebar to select. In this case, there is only one file listed, so the user can simply press spacebar to select the file. Because the "-n 1" option in the <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> command line directs <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to automatically accept when the user has selected the specified number of files.</p>
-<p>So, the user presses tab, the cursor jumps to the only file listed, and the user presses the spacebar to open the selected file with nvim. If there had been more than one file listed, the user could select a file with the mouse, arrow keys, or j for down, k for up, and when the desired file is highlighted, and pressing spacebar to select. When using the mouse to select, it is not necessary to press the spacebar.</p>
-<p>When finished editing in nvim, the user can type shift "zz" to exit. nvim closes, and the user is returned to the <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> window as it was before selecting the file. The user can press tab, backspace, 3, tab, spacebar, and nvim opens hashmaps3.rs, the next source file in the Rustlings sequence. This is a very quick and almost effortless way to step through the Rustlings exercises, but it can also apply to many other situations.</p>
-<h2 class="doxsection"><a class="anchor" id="edit-c-files-in-current-directory-3"></a>
-Edit .c Files in Current Directory</h2>
-<p>Edit .c Files in Current Directory is an example of how to use C-Menu lf and <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a> to navigate and select files from a directory. Once a file is selected, it is passed to the nvim.sh script to be opened in Neovim. This demonstrates how you can integrate C-Menu with external applications and scripts to create a seamless user experience.</p>
-<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
-<div class="line">!pick -S project_src -T &quot;Project Tree - Select File to Edit&quot; -c nvim.sh %%</div>
-</div><!-- fragment --><p>Actually, the above command line is a good example of how to write inefficient and unnecessary code. That's 100ms wasted each time you select that menu option. (-: :-) The nvim.sh script is not necessary. The command line could be written more efficiently as follows, which eliminates the need for an external script and directly opens the selected file in Neovim.</p>
-<p>The command line below demonstrates the preferred method of starting nvim.</p>
-<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
-<div class="line">!pick -S project_src -T &quot;Project Tree - Select File to Edit&quot; -c nvim %%</div>
-</div><!-- fragment --><p>Also, if you have a situation in which the script, "project_src" could be replaced by a direct command line, such as "lf -d 5 '.\*\.c$'", that would be more efficient than using an external script. The command line below demonstrates how to directly use the "lf" command to generate a list of .c files in the current directory and its subdirectories, without the need for an external script.</p>
-<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
-<div class="line">!pick -S &quot;lf -d 5 &#39;.*\.c$&#39;&quot; -T &quot;Project Tree - Select File to Edit&quot; -c nvim %%</div>
-</div><!-- fragment --><p>Look Mom! No scripts! Just direct command lines. This is the most efficient way to write your menu commands, but it may not always be the most practical or maintainable way, especially if you have complex command lines that are difficult to read and understand. In those cases, using shell scripts can help simplify your command lines and make them more readable and maintainable.</p>
-<h2 class="doxsection"><a class="anchor" id="view-c-menu-source-with-tree-sitter-1"></a>
-View C-Menu Source With Tree-Sitter</h2>
-<p><a class="el" href="../../d3/d42/a01275.html">View</a> C-Menu Source with Tree-sitter demonstrates how to use shell scripts to simplify complex command lines. The command line below uses a shell script , "tree-sitter highlight", to apply syntax highlighting to the selected source file using Tree-Sitter.</p>
-<div class="fragment"><div class="line">: View CMenu Source with Tree-Sitter</div>
-<div class="line">!pick -S project_src -n 1 -T &quot;Select Project Source to Highlight&quot; -c &quot;view -L 60 -C 85 -S \&quot;tree-sitter highlight %%\&quot;&quot;</div>
-</div><!-- fragment --><div class="image">
-<img src="../../Pick_Source.png" alt=""/>
-<div class="caption">
-Pick C-Menu Source</div></div>
-    <p><img src="../../tree-sitter.png" alt="" class="inline" title="View C-Menu Source"/>    </p>
-<p>It is not necessary to use a filter expression in <a class="el" href="../../dd/d39/a01271.html" title="Pick data structure.">Pick</a>. You can just as easily mouse click the particular file you want to select. However, it comes in handy when you have several pages of files.</p>
-<p>This image of the <a class="el" href="../../d3/d42/a01275.html">View</a> window has line numbers because f_ln is set to true in the C-Menu configuration file. If you don't have f_ln set to true in the configuration file, you can also use "-N" on the command line to enable line numbers. If you have f_ln set to true in the configuration file, and you don't want line numbers, you can specify "-Nf" on the command line to disable line numbers for that particular view instance. </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+
+<p><code>#include &lt;<a class="el" href="../../d3/d07/a01241_source.html">/usr/local/src/C-Menu/src/ui/ui_ncurses_internal.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for UiSurface:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d2f/a01394.svg" width="510" height="350"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:ad918e8067683c4edfed3495c6ec46d0d" id="r_ad918e8067683c4edfed3495c6ec46d0d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad918e8067683c4edfed3495c6ec46d0d">cols</a></td></tr>
+<tr class="memitem:a19a156d558185080c1599f705a80ca94" id="r_a19a156d558185080c1599f705a80ca94"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a19a156d558185080c1599f705a80ca94">hidden</a></td></tr>
+<tr class="memitem:ab1fc031b0c523de12a70d77f30d79a28" id="r_ab1fc031b0c523de12a70d77f30d79a28"><td class="memItemLeft">PANEL *&#160;</td><td class="memItemRight"><a class="el" href="#ab1fc031b0c523de12a70d77f30d79a28">pan</a></td></tr>
+<tr class="memitem:a3ff958d01cb09528c05d424b670bcb01" id="r_a3ff958d01cb09528c05d424b670bcb01"><td class="memItemLeft">struct <a class="el" href="../../d9/d45/a01396.html">UiSurface</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a3ff958d01cb09528c05d424b670bcb01">parent</a></td></tr>
+<tr class="memitem:ae73f10e684cbef3db4a4eea8ec37e4ab" id="r_ae73f10e684cbef3db4a4eea8ec37e4ab"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae73f10e684cbef3db4a4eea8ec37e4ab">rows</a></td></tr>
+<tr class="memitem:af75f738eaa479f42876845ff028dfa21" id="r_af75f738eaa479f42876845ff028dfa21"><td class="memItemLeft">struct <a class="el" href="../../d1/dcc/a01392.html">UiRuntime</a> *&#160;</td><td class="memItemRight"><a class="el" href="#af75f738eaa479f42876845ff028dfa21">runtime</a></td></tr>
+<tr class="memitem:aeeda1c9db595926ab7c950eb7d069e6e" id="r_aeeda1c9db595926ab7c950eb7d069e6e"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#aeeda1c9db595926ab7c950eb7d069e6e">win</a></td></tr>
+<tr class="memitem:af1b64930cac7948219a8437126893898" id="r_af1b64930cac7948219a8437126893898"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af1b64930cac7948219a8437126893898">x</a></td></tr>
+<tr class="memitem:aafd826fc271ae353a4013bf5f1cad120" id="r_aafd826fc271ae353a4013bf5f1cad120"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aafd826fc271ae353a4013bf5f1cad120">y</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00017">17</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="ad918e8067683c4edfed3495c6ec46d0d" name="ad918e8067683c4edfed3495c6ec46d0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad918e8067683c4edfed3495c6ec46d0d">&#9670;&#160;</a></span>cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00025">25</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>, and <a class="el" href="../../d3/d0b/a01253_source.html#l00057">ui_surface_resize()</a>.</p>
+
+</div>
+</div>
+<a id="a19a156d558185080c1599f705a80ca94" name="a19a156d558185080c1599f705a80ca94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19a156d558185080c1599f705a80ca94">&#9670;&#160;</a></span>hidden</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UiSurface::hidden</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00026">26</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00087">ui_surface_hide()</a>, and <a class="el" href="../../d3/d0b/a01253_source.html#l00079">ui_surface_show()</a>.</p>
+
+</div>
+</div>
+<a id="ab1fc031b0c523de12a70d77f30d79a28" name="ab1fc031b0c523de12a70d77f30d79a28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1fc031b0c523de12a70d77f30d79a28">&#9670;&#160;</a></span>pan</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PANEL* UiSurface::pan</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00019">19</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00039">ui_surface_destroy()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00087">ui_surface_hide()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00049">ui_surface_move()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>, and <a class="el" href="../../d3/d0b/a01253_source.html#l00079">ui_surface_show()</a>.</p>
+
+</div>
+</div>
+<a id="a3ff958d01cb09528c05d424b670bcb01" name="a3ff958d01cb09528c05d424b670bcb01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ff958d01cb09528c05d424b670bcb01">&#9670;&#160;</a></span>parent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d9/d45/a01396.html">UiSurface</a>* UiSurface::parent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00021">21</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<a id="ae73f10e684cbef3db4a4eea8ec37e4ab" name="ae73f10e684cbef3db4a4eea8ec37e4ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73f10e684cbef3db4a4eea8ec37e4ab">&#9670;&#160;</a></span>rows</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::rows</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00024">24</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>, and <a class="el" href="../../d3/d0b/a01253_source.html#l00057">ui_surface_resize()</a>.</p>
+
+</div>
+</div>
+<a id="af75f738eaa479f42876845ff028dfa21" name="af75f738eaa479f42876845ff028dfa21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af75f738eaa479f42876845ff028dfa21">&#9670;&#160;</a></span>runtime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d1/dcc/a01392.html">UiRuntime</a>* UiSurface::runtime</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00020">20</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<a id="aeeda1c9db595926ab7c950eb7d069e6e" name="aeeda1c9db595926ab7c950eb7d069e6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeda1c9db595926ab7c950eb7d069e6e">&#9670;&#160;</a></span>win</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* UiSurface::win</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00018">18</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00095">ui_cursor_move()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00079">ui_draw_border()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00099">ui_draw_box_title()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00061">ui_draw_hline()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00043">ui_draw_text()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00052">ui_draw_text_n()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00070">ui_draw_vline()</a>, <a class="el" href="../../dd/d95/a01247_source.html#l00079">ui_get_event()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00065">ui_surface_clear()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00039">ui_surface_destroy()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00072">ui_surface_erase()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>, <a class="el" href="../../d3/d0b/a01253_source.html#l00057">ui_surface_resize()</a>, <a class="el" href="../../d6/d0f/a01256_source.html#l00034">ui_surface_set_base()</a>, and <a class="el" href="../../d6/d0f/a01256_source.html#l00028">ui_surface_set_style()</a>.</p>
+
+</div>
+</div>
+<a id="af1b64930cac7948219a8437126893898" name="af1b64930cac7948219a8437126893898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1b64930cac7948219a8437126893898">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00023">23</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00049">ui_surface_move()</a>, and <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<a id="aafd826fc271ae353a4013bf5f1cad120" name="aafd826fc271ae353a4013bf5f1cad120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd826fc271ae353a4013bf5f1cad120">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00022">22</a> of file <a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d0b/a01253_source.html#l00049">ui_surface_move()</a>, and <a class="el" href="../../d3/d0b/a01253_source.html#l00006">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>ui/<a class="el" href="../../d3/d07/a01241_source.html">ui_ncurses_internal.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -189,6 +315,7 @@ Pick C-Menu Source</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../d9/d45/a01396.html">UiSurface</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

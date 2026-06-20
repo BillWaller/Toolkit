@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /usr/local/src/C-Menu/src/enterstr.c</title>
-<link rel="icon" href="../../decision.svg" type="image/x-icon" />
+<title>C-Menu: Field Struct Reference</title>
+<link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
 <link href="../../navtree.css" rel="stylesheet" type="text/css"/>
@@ -110,69 +110,245 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('df/d93/a01336.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterstr.c</div></div>
+  <div class="headertitle"><div class="title">Field Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
-<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
-<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
-<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
-</div><!-- fragment --><div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d2/d22/a01196.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
-<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d3/ddc/a01142.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a id="_a2" name="_a2"></a><a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
-<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../d3/ddc/a01142.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
-<div class="line">    <span class="keywordtype">char</span> *msg;</div>
-<div class="line">    <span class="keywordtype">char</span> <a id="_a3" name="_a3"></a><a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>[128];</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, <span class="stringliteral">&quot;input:&quot;</span>);</div>
-<div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">        strcpy(<a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>, argv[1]);</div>
-<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../de/d16/a01228.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
-<div class="line">    <a id="a5" name="a5"></a><a class="code hl_function" href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
-<div class="line">    new_tioctl = <a id="_a6" name="_a6"></a><a class="code hl_variable" href="../../d9/d31/a01208.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
-<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
-<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
-<div class="line">    <span class="keywordflow">while</span> (1) {</div>
-<div class="line">        msg = <a class="code hl_variable" href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a>;</div>
-<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
-<div class="line">            write(2, msg++, 1);</div>
-<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../d3/ddc/a01142.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
-<div class="line">            <span class="keywordflow">break</span>;</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
-<div class="line">        write(1, in_ptr++, 1);</div>
-<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
-<div class="line">    <a id="a8" name="a8"></a><a class="code hl_function" href="../../de/d16/a01228.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line">    exit(0);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
-<div class="ttc" id="aa00725_html_aa727ae567cf5e8b92d5252706a85f1b2"><div class="ttname"><a href="../../d8/db9/a00725.html#aa727ae567cf5e8b92d5252706a85f1b2">errmsg</a></div><div class="ttdeci">char errmsg[]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00131">futil.c:131</a></div></div>
-<div class="ttc" id="aa00734_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../d6/dc0/a00734.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../d6/dc0/a00734_source.html#l00029">view.h:29</a></div></div>
-<div class="ttc" id="aa01142_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../d3/ddc/a01142.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../d3/ddc/a01142_source.html#l00020">iloan.c:20</a></div></div>
-<div class="ttc" id="aa01196_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d2/d22/a01196.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d22/a01196_source.html#l00034">amort.c:34</a></div></div>
-<div class="ttc" id="aa01208_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d9/d31/a01208.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa01228_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../de/d16/a01228.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00043">scriou.c:43</a></div></div>
-<div class="ttc" id="aa01228_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../de/d16/a01228.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d31/a01208_source.html#l00056">scriou.c:56</a></div></div>
-<div class="ttc" id="aa01229_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../db/d1c/a01229.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/daf/a01169_source.html#l00042">sig.c:42</a></div></div>
-<div class="ttc" id="aa01229_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../db/d1c/a01229.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/daf/a01169_source.html#l00062">sig.c:62</a></div></div>
-</div><!-- fragment --> </div><!-- contents -->
+
+<p>structure for form fields  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../d2/d94/a00716_source.html">form.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Field:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/dd1/a01334.svg" width="274" height="207"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a259801946ce7b016e71fee1b90139fcf" id="r_a259801946ce7b016e71fee1b90139fcf"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a259801946ce7b016e71fee1b90139fcf">accept_s</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:a8bd4963ac0722be3f5732bf1cb6ce150" id="r_a8bd4963ac0722be3f5732bf1cb6ce150"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a8bd4963ac0722be3f5732bf1cb6ce150">col</a></td></tr>
+<tr class="memitem:abffe323f69ca8f112987e1886cd0885e" id="r_abffe323f69ca8f112987e1886cd0885e"><td class="memItemLeft">cchar_t&#160;</td><td class="memItemRight"><a class="el" href="#abffe323f69ca8f112987e1886cd0885e">display_cc</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:a18d2c5754ac6b197cee2426c7da8ce16" id="r_a18d2c5754ac6b197cee2426c7da8ce16"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a18d2c5754ac6b197cee2426c7da8ce16">display_s</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:a680e7cfa27a7c7ab3e91ddd9a2395924" id="r_a680e7cfa27a7c7ab3e91ddd9a2395924"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a680e7cfa27a7c7ab3e91ddd9a2395924">ff</a></td></tr>
+<tr class="memitem:aa3e505e5c866dcbd20a1c518944294b6" id="r_aa3e505e5c866dcbd20a1c518944294b6"><td class="memItemLeft">cchar_t&#160;</td><td class="memItemRight"><a class="el" href="#aa3e505e5c866dcbd20a1c518944294b6">filler_cc</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:aeb21dc3ca54d5787eea676e40b78e1fc" id="r_aeb21dc3ca54d5787eea676e40b78e1fc"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#aeb21dc3ca54d5787eea676e40b78e1fc">filler_s</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:a977c015992c0cf877017eff6326f1979" id="r_a977c015992c0cf877017eff6326f1979"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a977c015992c0cf877017eff6326f1979">input_s</a> [<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td></tr>
+<tr class="memitem:ae63c50f9ea7ea1af0778d3eb78a4f50a" id="r_ae63c50f9ea7ea1af0778d3eb78a4f50a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae63c50f9ea7ea1af0778d3eb78a4f50a">len</a></td></tr>
+<tr class="memitem:a04e622df503776af67f8abd30d97a4a2" id="r_a04e622df503776af67f8abd30d97a4a2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a04e622df503776af67f8abd30d97a4a2">line</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>structure for form fields </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00114">114</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a259801946ce7b016e71fee1b90139fcf" name="a259801946ce7b016e71fee1b90139fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259801946ce7b016e71fee1b90139fcf">&#9670;&#160;</a></span>accept_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Field::accept_s[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the accepted string for this field, used for storing the validated and accepted value for this field after processing the user's input during form processing </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00128">128</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/dad/a01235_source.html#l00054">field_editor()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00881">form_exec_cmd()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00908">form_exec_receiver()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00445">form_fmt_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00298">form_process()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00549">form_validate_field()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l01069">form_write()</a>.</p>
+
+</div>
+</div>
+<a id="a8bd4963ac0722be3f5732bf1cb6ce150" name="a8bd4963ac0722be3f5732bf1cb6ce150"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd4963ac0722be3f5732bf1cb6ce150">&#9670;&#160;</a></span>col</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Field::col</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the column number on the form window where this field should be displayed </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00117">117</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d19/a01190_source.html#l00494">display_form()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00054">field_editor()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00387">form_display_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00611">form_parse_desc()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00478">form_yx_to_fidx()</a>.</p>
+
+</div>
+</div>
+<a id="abffe323f69ca8f112987e1886cd0885e" name="abffe323f69ca8f112987e1886cd0885e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abffe323f69ca8f112987e1886cd0885e">&#9670;&#160;</a></span>display_cc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cchar_t Field::display_cc[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>display complex character array </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00137">137</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/dad/a01235_source.html#l00387">form_display_field()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>.</p>
+
+</div>
+</div>
+<a id="a18d2c5754ac6b197cee2426c7da8ce16" name="a18d2c5754ac6b197cee2426c7da8ce16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18d2c5754ac6b197cee2426c7da8ce16">&#9670;&#160;</a></span>display_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Field::display_s[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the display string for this field, used for storing the formatted string that will be displayed in the field input area on the form window during form processing, based on the accepted value and the field format </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00132">132</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/dad/a01235_source.html#l00387">form_display_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>, and <a class="el" href="../../dd/dad/a01235_source.html#l00445">form_fmt_field()</a>.</p>
+
+</div>
+</div>
+<a id="a680e7cfa27a7c7ab3e91ddd9a2395924" name="a680e7cfa27a7c7ab3e91ddd9a2395924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a680e7cfa27a7c7ab3e91ddd9a2395924">&#9670;&#160;</a></span>ff</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Field::ff</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the field format, represented as an integer corresponding to the <a class="el" href="../../d2/d94/a00716.html#a5f05b2e7f2944a6b3e8fec73da1f4a55">FieldFormat</a> enum values, e.g. FF_STRING, FF_DECIMAL_INT, etc. This is used for validating and formatting the field input values according to their specified formats. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00121">121</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/dad/a01235_source.html#l00054">field_editor()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00445">form_fmt_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00611">form_parse_desc()</a>, and <a class="el" href="../../dd/dad/a01235_source.html#l00549">form_validate_field()</a>.</p>
+
+</div>
+</div>
+<a id="aa3e505e5c866dcbd20a1c518944294b6" name="aa3e505e5c866dcbd20a1c518944294b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3e505e5c866dcbd20a1c518944294b6">&#9670;&#160;</a></span>filler_cc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">cchar_t Field::filler_cc[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>filler complex character array </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00143">143</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/dad/a01235_source.html#l00387">form_display_field()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>.</p>
+
+</div>
+</div>
+<a id="aeb21dc3ca54d5787eea676e40b78e1fc" name="aeb21dc3ca54d5787eea676e40b78e1fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb21dc3ca54d5787eea676e40b78e1fc">&#9670;&#160;</a></span>filler_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Field::filler_s[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the filler string for this field, used for storing the string that will be used to fill the field input area on the form window during form processing, based on the field length and the fill character specified in the form structure </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00138">138</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>.</p>
+
+</div>
+</div>
+<a id="a977c015992c0cf877017eff6326f1979" name="a977c015992c0cf877017eff6326f1979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a977c015992c0cf877017eff6326f1979">&#9670;&#160;</a></span>input_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Field::input_s[<a class="el" href="../../d2/d94/a00716.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the input string for this field, used for storing the user's input value for this field during form processing </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00125">125</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dd/dad/a01235_source.html#l00445">form_fmt_field()</a>.</p>
+
+</div>
+</div>
+<a id="ae63c50f9ea7ea1af0778d3eb78a4f50a" name="ae63c50f9ea7ea1af0778d3eb78a4f50a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae63c50f9ea7ea1af0778d3eb78a4f50a">&#9670;&#160;</a></span>len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Field::len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the length of the field input area, used for display and formatting purposes </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00119">119</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d19/a01190_source.html#l00494">display_form()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00054">field_editor()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00387">form_display_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00445">form_fmt_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00611">form_parse_desc()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00478">form_yx_to_fidx()</a>.</p>
+
+</div>
+</div>
+<a id="a04e622df503776af67f8abd30d97a4a2" name="a04e622df503776af67f8abd30d97a4a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04e622df503776af67f8abd30d97a4a2">&#9670;&#160;</a></span>line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Field::line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the line number on the form window where this field should be displayed </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d2/d94/a00716_source.html#l00115">115</a> of file <a class="el" href="../../d2/d94/a00716_source.html">form.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d19/a01190_source.html#l00494">display_form()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00054">field_editor()</a>, <a class="el" href="../../dd/dad/a01235_source.html#l00387">form_display_field()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00560">form_display_fields()</a>, <a class="el" href="../../dc/d19/a01190_source.html#l00611">form_parse_desc()</a>, and <a class="el" href="../../dc/d19/a01190_source.html#l00478">form_yx_to_fidx()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="../../d2/d94/a00716_source.html">form.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../df/d93/a01336.html">Field</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

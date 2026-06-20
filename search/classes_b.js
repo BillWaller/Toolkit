@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['wcstr_0',['WCStr',['../d8/d38/a01299.html',1,'']]]
+  ['view_0',['View',['../d9/d79/a01360.html',1,'']]],
+  ['viewstack_1',['ViewStack',['../de/d1f/a01364.html',1,'']]]
 ];

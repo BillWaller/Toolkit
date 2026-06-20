@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['detach_2ec_0',['detach.c',['../da/d19/a01217.html',1,'']]],
-  ['dwin_2ec_1',['dwin.c',['../db/d1c/a01229.html',1,'']]]
+  ['detach_2ec_0',['detach.c',['../db/d42/a01220.html',1,'']]],
+  ['dwin_2ec_1',['dwin.c',['../d0/d67/a01232.html',1,'']]]
 ];

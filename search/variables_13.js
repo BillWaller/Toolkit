@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['v_0',['v',['../d4/da0/a01291.html#aa044ab06de65e1e9ecc89b07f3d71f71',1,'Argv']]],
-  ['view_1',['view',['../d4/d41/a01267.html#aacef1d241555eb2516a58cd6b496746b',1,'Init::view'],['../d6/dc0/a00734.html#af2dd70d8b95c32fb670ac6f9cc8df201',1,'view:&#160;mem.c'],['../d6/d27/a01163.html#af2dd70d8b95c32fb670ac6f9cc8df201',1,'view:&#160;mem.c']]],
-  ['view_5fcnt_2',['view_cnt',['../d4/d41/a01267.html#aaf90110dd120ff67d0502a659cd3385c',1,'Init']]],
-  ['view_5fstack_3',['view_stack',['../dd/dd8/a00719.html#ac7f5b6614c7f476026767c4f3e1bde23',1,'view_stack:&#160;init_view.c'],['../dc/dee/a01166.html#ac7f5b6614c7f476026767c4f3e1bde23',1,'view_stack:&#160;init_view.c']]]
+  ['ui_5fruntime_0',['ui_runtime',['../dc/d54/a01344.html#a3d70a46d748818bf6b6d5f31b87f82d7',1,'Line']]],
+  ['ui_5fsurface_1',['ui_surface',['../dc/d54/a01344.html#a2f744b8180b28d89da78d31b9a863f11',1,'Line']]],
+  ['underline_2',['underline',['../d2/d82/a01404.html#a3b2cbf397bc08d68184bf5bfdcd654a3',1,'UiStyle']]],
+  ['use_5frgb_3',['use_rgb',['../dc/d35/a01400.html#ab1d136b78509282c757feee8e1c32245',1,'UiColor']]]
 ];

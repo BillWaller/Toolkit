@@ -1,10 +1,7 @@
 var a01259 =
 [
-    [ "display_line", "dd/d42/a01259.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_prompt", "dd/d42/a01259.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "fmt_line", "dd/d42/a01259.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "dd/d42/a01259.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "dd/d42/a01259.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "view_display_help", "dd/d42/a01259.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "dd/d42/a01259.html#gae6f141401cf9f104dbe14f09603d5178", null ]
+    [ "handle_signal", "dd/d42/a01259.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "dd/d42/a01259.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "dd/d42/a01259.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "dd/d42/a01259.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];

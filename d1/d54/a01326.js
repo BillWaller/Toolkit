@@ -6,5 +6,7 @@ var a01326 =
     [ "command_type", "d1/d54/a01326.html#acce58adaa7cf043f8f905d3d69a7f3a0", null ],
     [ "letter_pos", "d1/d54/a01326.html#a928bd3d2b73020b5529f9da018ce5e2f", null ],
     [ "raw_text", "d1/d54/a01326.html#a514130f5368bc6edaa5928f08be2bd4f", null ],
-    [ "type", "d1/d54/a01326.html#a6d158be9cbd3c4180df373ddf462330d", null ]
+    [ "type", "d1/d54/a01326.html#a6d158be9cbd3c4180df373ddf462330d", null ],
+    [ "ui_runtime", "d1/d54/a01326.html#a3d70a46d748818bf6b6d5f31b87f82d7", null ],
+    [ "ui_surface", "d1/d54/a01326.html#a2f744b8180b28d89da78d31b9a863f11", null ]
 ];

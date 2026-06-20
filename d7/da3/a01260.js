@@ -1,15 +1,19 @@
 var a01260 =
 [
-    [ "get_next_char", "d7/da3/a01260.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "d7/da3/a01260.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "d7/da3/a01260.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "d7/da3/a01260.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "d7/da3/a01260.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "d7/da3/a01260.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "d7/da3/a01260.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "d7/da3/a01260.html#ga219efbc4d9d70ebc47fafa540b370247", null ],
-    [ "remove_file", "d7/da3/a01260.html#ga677ea54b0c727a5475d0b3efe71f5a7c", null ],
-    [ "view_cmd_processor", "d7/da3/a01260.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "d7/da3/a01260.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "d7/da3/a01260.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "box2_new", "d7/da3/a01260.html#ga3b519e8501ce2a37d60f07262f9546bc", null ],
+    [ "box_new", "d7/da3/a01260.html#ga38d50d5b402b7b2328874329ae003d7d", null ],
+    [ "cbox", "d7/da3/a01260.html#gac9adcf7339be4a05ab1a7350c236b8a5", null ],
+    [ "cbox2", "d7/da3/a01260.html#gadf3e1d675e04bb6827d598ebbcca0d4a", null ],
+    [ "destroy_curses", "d7/da3/a01260.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "d7/da3/a01260.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "d7/da3/a01260.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "d7/da3/a01260.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "view_full_screen_resize", "d7/da3/a01260.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_win_resize", "d7/da3/a01260.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
+    [ "win_del", "d7/da3/a01260.html#ga9dd598e1d49c8764af1eec42c682623e", null ],
+    [ "win_init_attrs", "d7/da3/a01260.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "d7/da3/a01260.html#ga84e02ea4b1a3c2da71b7f7dc1f78d31b", null ],
+    [ "win_redraw", "d7/da3/a01260.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "d7/da3/a01260.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "d7/da3/a01260.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
 ];

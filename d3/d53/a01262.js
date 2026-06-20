@@ -1,10 +1,15 @@
 var a01262 =
 [
-    [ "display_line", "d3/d53/a01262.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_prompt", "d3/d53/a01262.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "fmt_line", "d3/d53/a01262.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "d3/d53/a01262.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "d3/d53/a01262.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "view_display_help", "d3/d53/a01262.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "d3/d53/a01262.html#gae6f141401cf9f104dbe14f09603d5178", null ]
+    [ "abend", "d3/d53/a01262.html#ga8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "action_disposition", "d3/d53/a01262.html#ga251bd97abc13e656e92e0ad484d1725d", null ],
+    [ "answer_yn", "d3/d53/a01262.html#ga419792ccc6d058f03c63c0a454da7c14", null ],
+    [ "display_error", "d3/d53/a01262.html#gace6da1791caec4c3aa1246533f4d974a", null ],
+    [ "message_win", "d3/d53/a01262.html#ga111306371178afbbf2b078ee62b64ff0", null ],
+    [ "nf_error", "d3/d53/a01262.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "Perror", "d3/d53/a01262.html#ga61b4f28456257f68ed042bed7f187efd", null ],
+    [ "wait_continue", "d3/d53/a01262.html#ga45c5bf79120644a22ffef896119fb672", null ],
+    [ "wait_destroy", "d3/d53/a01262.html#ga1659db421e92afe23911f5ae0a469bc5", null ],
+    [ "wait_mk_chyron", "d3/d53/a01262.html#gaab76ab3464d34674d9d4cd80c87999e7", null ],
+    [ "wait_mk_win", "d3/d53/a01262.html#ga5f404e9a570fd5981638c80af3d6e54d", null ],
+    [ "waitpid_with_timeout", "d3/d53/a01262.html#ga1c2e4b3dca428f3a8a78343cc854c3c6", null ]
 ];
