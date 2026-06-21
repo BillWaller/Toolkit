@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: C-Menu Pick</title>
+<title>C-Menu: DATE/TIME CONUNDRUM</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,72 +110,185 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d7/db6/a01556.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">C-Menu Pick </div></div>
+  <div class="headertitle"><div class="title">DATE/TIME CONUNDRUM </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="c-menu-pick-2"></a></p>
-<p>C-Menu <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> displays a list of items from which the user can select.</p>
-<p>Specification:</p>
-<div class="fragment"><div class="line">!pick [ -n maximum_number_of_selections ][-m] \</div>
-<div class="line">    [ -i input_file ][ -S executable_provider ] \</div>
-<div class="line">    [ -o output_file ][ -c executable %% ]</div>
-</div><!-- fragment --><p>-n maximum_number_of_selections. "-n n" is a convenience which directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to automatically accept selections when the specified maximum number of items, "n" have been selected. For example, "-n 1" is commonly used to direct <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to automatically accept the first item selected without requiring the user pressing to F10 Accept key. This feature is designed to optimize the user's economy of motion, making the selection process extremely fast and efficient. When "-n 1" is specified, the user can simply select an item and <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> will immediately dispatch the specified action.</p>
-<p>-c execute command substituting "%%" with the selected item(s). Whether the command specified with the -c option is executed once per selection or once for all selections is determined by the presence or absence of the "-m option". Without the "-m" option, by default, if multiple items are selected, the command specified with -c will be executed once for each selection with that selection as an argument.</p>
-<p>-m multiple_arguments flag. The -m option directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to construct a command line with all selections as individual arguments. The specified command is executed once with all selections combined as individual arguments on a single command line.</p>
-<p>An example use case for "-m" would be if you wanted to open multiple files in C-Menu <a class="el" href="../../d7/d81/a01365.html">View</a> using <a class="el" href="../../d7/d81/a01365.html">View</a>'s ":n" and ":p" commands to navigate between files. In that case, you would specify "-m" to have <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> execute <a class="el" href="../../d7/d81/a01365.html">View</a> once with all selected files as arguments, allowing you to use <a class="el" href="../../d7/d81/a01365.html">View</a>'s built-in file navigation features. The same technique works with Vim, nvim, and less.</p>
-<p>-i input_file directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to read input from the specified file</p>
-<p>-S executable_provider directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to execute the specified external command and read input from the command's standard output. The command specified with the -S option is executed when starting <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a>, and its output is used as the list of items from which selections are made.</p>
-<p>-o output_file directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to write selected items to the specified file when the user presses F10 Accept.</p>
-<p><a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> must have exactly one input method, either -i input_file or -S executable_provider_command. Combining -o and -c options is permissible, and will direct <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to write the list of selected items to the specified file and also pass the list of selected items to the command specified by -c according to the presence or absence of the -m option. The selections are written to file before executing the specified command, so the command can read the selections from the file if needed.</p>
-<h2 class="doxsection"><a class="anchor" id="rustlings-source-3"></a>
-Rustlings Source</h2>
+<div class="textblock"><p><a class="anchor" id="datetime-conundrum"></a></p>
+<p>Bill Waller Copyright (c) 2026 <br  />
+ 2026-05-25 <br  />
+ MIT License <br  />
+ <a href="../../email@billxwaller@gmail.com">bill waller email</a></p>
+<h1 class="doxsection"><a class="anchor" id="overview"></a>
+Overview</h1>
+<p>This note documents an issue encountered while parsing local date/time text with <span class="tt">strptime()</span>, converting the result to <span class="tt">time_t</span> with <span class="tt">mktime()</span>, and then formatting the resulting value after conversion back to local time with <span class="tt">localtime_r()</span>.</p>
+<p>I am including this documentation because the behavior can be confusing at first, and it is easy to misattribute the problem to <span class="tt">localtime_r()</span> when the real issue is usually an uninitialized <span class="tt">struct tm</span> field that affects how <span class="tt">mktime()</span> interprets the input.</p>
+<p>At first glance, the behavior can look like a GNU <span class="tt">gmtime_r()</span> or <span class="tt">localtime_r()</span> bug because the formatted output appears to shift by one hour depending on whether the <span class="tt">struct tm</span> was first cleared with <span class="tt">memset()</span>. In practice, the real problem is usually the value of <span class="tt">tm_isdst</span> before calling <span class="tt">mktime()</span>.</p>
+<p><span class="tt">strptime()</span> fills only the fields specified by the format string. It does <b>not</b> guarantee that the rest of the <span class="tt">struct tm</span> is initialized to useful values. One of the most important remaining fields is <span class="tt">tm_isdst</span>:</p>
+<ul>
+<li><span class="tt">tm_isdst = 0</span> means standard time is in effect.</li>
+<li><span class="tt">tm_isdst = 1</span> means daylight saving time is in effect.</li>
+<li><span class="tt">tm_isdst = -1</span> means "determine DST automatically."</li>
+</ul>
+<p>That means:</p>
+<ul>
+<li>If the structure is zeroed with <span class="tt">memset()</span>, then <span class="tt">tm_isdst</span> becomes <span class="tt">0</span>, which forces <span class="tt">mktime()</span> to interpret the input as standard time even when the date falls in CDT.</li>
+<li>If the structure is <b>not</b> initialized first, <span class="tt">tm_isdst</span> may retain leftover data from prior use, which can accidentally make one test case appear correct and another appear incorrect.</li>
+</ul>
+<p>So the one-hour discrepancy is not caused by <span class="tt">localtime_r()</span> itself. The incorrect value is usually created earlier by <span class="tt">mktime()</span> when it receives an incompletely initialized <span class="tt">struct tm</span>.</p>
+<h1 class="doxsection"><a class="anchor" id="correct-workaround"></a>
+Correct workaround</h1>
+<p>The safe pattern is:</p>
+<ol type="1">
+<li>Clear the full <span class="tt">struct tm</span>.</li>
+<li>Set <span class="tt">tm_isdst = -1</span>.</li>
+<li>Call <span class="tt">strptime()</span>.</li>
+<li>Call <span class="tt">mktime()</span>.</li>
+</ol>
 <p>Example:</p>
-<div class="fragment"><div class="line">:     Rustlings Source</div>
-<div class="line">!pick -S rust_src -n 1 -T &quot;Rustlings Source - Edit&quot; -c nvim %%</div>
-</div><!-- fragment --><p>-S specifies a script, "rust_src", located in ~/menuapp/bin, which calls lf to create a sorted file list.</p>
-<p>Below are the contents of "rust_src", a shell script. We use a shell script here instead of direct execution because we need to pipe the output through sort. It's still fairly quick. The "lf" command generates a list of Rust source files from the "exercises" directory, which is part of the Rustlings project.</p>
-<div class="fragment"><div class="line"># @name rust_src</div>
-<div class="line">lf rustlings -d 5 &#39;exercises.*\.rs$&#39; | sort</div>
-</div><!-- fragment --><p>The "-n 1" option directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to proceed with executing the command specified by the "-c nvim %%" option after 1 file is selected. If "-n 1" were not specified, <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> would wait for the user to press F10 Accept before executing the command specified by the "-c nvim %%" option.</p>
-<p>The -c nvim %% substitutes the "%%" with the selected file and <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> executes <br  />
- nvim. If the "-n 1" option hadn't been specified, <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> would allow the user to select multiple files and press F10 Accept to accept those selections. In that case, nvim would be executed with multiple files as arguments, and the user could use nvim's ":n" and ":p" commands to open the files selectively. The "-n" option can also be used to specify the maximum number of selections before <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> automatically accepts and launches the specified executable.</p>
-<p>The use of "-S rust_src"" would be equivalent to "rust_src | pick" if we were
-executing pick as a stand-alone executable. In this instance, Pick launches "rust_src" and creates a pipe to receive its output".</p>
-<div class="image">
-<img src="../../rustlings.png" alt=""/>
-<div class="caption">
-Rustlings Source</div></div>
-    <p>The center window above shows <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> as it appears just after selecting Rustlings Source in the Applications <a class="el" href="../../d4/dad/a01353.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>.</p>
-<p>The user presses tab to activate the line editor and types "maps2", the last few characters of the exercise name, and the <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> window on the right appears. The "maps2" expression filtered out all but one file name. The user doesn't need to press enter to accept the filter expression because <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> updates the <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> window in real time as the user types.</p>
-<p>At any time, the user can press tab to jump back to the selection window, and select the desired file with the mouse or position the cursor on the desired file and press spacebar to select. In this case, there is only one file listed, so the user can simply press spacebar to select the file. Because the "-n 1" option in the <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> command line directs <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to automatically accept when the user has selected the specified number of files.</p>
-<p>So, the user presses tab, the cursor jumps to the only file listed, and the user presses the spacebar to open the selected file with nvim. If there had been more than one file listed, the user could select a file with the mouse, arrow keys, or j for down, k for up, and when the desired file is highlighted, and pressing spacebar to select. When using the mouse to select, it is not necessary to press the spacebar.</p>
-<p>When finished editing in nvim, the user can type shift "zz" to exit. nvim closes, and the user is returned to the <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> window as it was before selecting the file. The user can press tab, backspace, 3, tab, spacebar, and nvim opens hashmaps3.rs, the next source file in the Rustlings sequence. This is a very quick and almost effortless way to step through the Rustlings exercises, but it can also apply to many other situations.</p>
-<h2 class="doxsection"><a class="anchor" id="edit-c-files-in-current-directory-3"></a>
-Edit .c Files in Current Directory</h2>
-<p>Edit .c Files in Current Directory is an example of how to use C-Menu lf and <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a> to navigate and select files from a directory. Once a file is selected, it is passed to the nvim.sh script to be opened in Neovim. This demonstrates how you can integrate C-Menu with external applications and scripts to create a seamless user experience.</p>
-<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
-<div class="line">!pick -S project_src -T &quot;Project Tree - Select File to Edit&quot; -c nvim.sh %%</div>
-</div><!-- fragment --><p>Actually, the above command line is a good example of how to write inefficient and unnecessary code. That's 100ms wasted each time you select that menu option. (-: :-) The nvim.sh script is not necessary. The command line could be written more efficiently as follows, which eliminates the need for an external script and directly opens the selected file in Neovim.</p>
-<p>The command line below demonstrates the preferred method of starting nvim.</p>
-<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
-<div class="line">!pick -S project_src -T &quot;Project Tree - Select File to Edit&quot; -c nvim %%</div>
-</div><!-- fragment --><p>Also, if you have a situation in which the script, "project_src" could be replaced by a direct command line, such as "lf -d 5 '.\*\.c$'", that would be more efficient than using an external script. The command line below demonstrates how to directly use the "lf" command to generate a list of .c files in the current directory and its subdirectories, without the need for an external script.</p>
-<div class="fragment"><div class="line">: Edit .c Files in Current Directory</div>
-<div class="line">!pick -S &quot;lf -d 5 &#39;.*\.c$&#39;&quot; -T &quot;Project Tree - Select File to Edit&quot; -c nvim %%</div>
-</div><!-- fragment --><p>Look Mom! No scripts! Just direct command lines. This is the most efficient way to write your menu commands, but it may not always be the most practical or maintainable way, especially if you have complex command lines that are difficult to read and understand. In those cases, using shell scripts can help simplify your command lines and make them more readable and maintainable.</p>
-<h2 class="doxsection"><a class="anchor" id="view-c-menu-source-with-tree-sitter-1"></a>
-View C-Menu Source With Tree-Sitter</h2>
-<p><a class="el" href="../../d7/d81/a01365.html">View</a> C-Menu Source with Tree-sitter demonstrates how to use shell scripts to simplify complex command lines. The command line below uses a shell script , "tree-sitter highlight", to apply syntax highlighting to the selected source file using Tree-Sitter.</p>
-<div class="fragment"><div class="line">: View CMenu Source with Tree-Sitter</div>
-<div class="line">!pick -S project_src -n 1 -T &quot;Select Project Source to Highlight&quot; -c &quot;view -L 60 -C 85 -S \&quot;tree-sitter highlight %%\&quot;&quot;</div>
-</div><!-- fragment --><div class="image">
-<img src="../../Pick_Source.png" alt=""/>
-<div class="caption">
-Pick C-Menu Source</div></div>
-    <p><img src="../../tree-sitter.png" alt="" class="inline" title="View C-Menu Source"/>    </p>
-<p>It is not necessary to use a filter expression in <a class="el" href="../../df/d10/a01357.html" title="Pick data structure.">Pick</a>. You can just as easily mouse click the particular file you want to select. However, it comes in handy when you have several pages of files.</p>
-<p>This image of the <a class="el" href="../../d7/d81/a01365.html">View</a> window has line numbers because f_ln is set to true in the C-Menu configuration file. If you don't have f_ln set to true in the configuration file, you can also use "-N" on the command line to enable line numbers. If you have f_ln set to true in the configuration file, and you don't want line numbers, you can specify "-Nf" on the command line to disable line numbers for that particular view instance. </p>
-</div></div><!-- contents -->
+<div class="fragment"><div class="line"><span class="keyword">struct </span>tm tm1;</div>
+<div class="line">memset(&amp;tm1, 0, <span class="keyword">sizeof</span> tm1);</div>
+<div class="line">tm1.tm_isdst = -1;</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordflow">if</span> (strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1) == NULL) {</div>
+<div class="line">    <span class="comment">/* parse error */</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">time_t t1 = mktime(&amp;tm1);</div>
+</div><!-- fragment --><p>Then format for display using a separate output structure:</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>tm out;</div>
+<div class="line">localtime_r(&amp;t1, &amp;out);</div>
+<div class="line">strftime(buf, <span class="keyword">sizeof</span> buf, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;out);</div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="why-the-previous-results-looked-contradictory"></a>
+Why the previous results looked contradictory</h1>
+<p>The earlier examples showed this pattern:</p>
+<ul>
+<li>Zeroing the structure appeared to break CDT dates.</li>
+<li>Not zeroing the structure appeared to break CST dates.</li>
+</ul>
+<p>That happens because the tests were effectively toggling the initial value of <span class="tt">tm_isdst</span>:</p>
+<ul>
+<li><span class="tt">memset(..., 0, ...)</span> forced <span class="tt">tm_isdst = 0</span>, i.e. standard time.</li>
+<li>Reusing the same structure without reinitializing it allowed <span class="tt">tm_isdst</span> to carry stale state from earlier operations.</li>
+</ul>
+<p>As a result, the code was not consistently asking <span class="tt">mktime()</span> to determine DST from the input date. Once <span class="tt">tm_isdst</span> is explicitly set to <span class="tt">-1</span>, both standard-time and daylight-time dates should round-trip correctly in the local timezone.</p>
+<h1 class="doxsection"><a class="anchor" id="important-note-about-gmtime_r"></a>
+Important note about <span class="tt">gmtime_r()</span></h1>
+<p><span class="tt">gmtime_r()</span> converts a <span class="tt">time_t</span> to UTC. It does not use the local timezone rules to decide whether the original parsed time was CST or CDT. If the UTC result appears to be off by one hour, that usually means the <span class="tt">time_t</span> value produced by <span class="tt">mktime()</span> was already wrong.</p>
+<h1 class="doxsection"><a class="anchor" id="recommended-helper"></a>
+Recommended helper</h1>
+<p>A simple helper for parsing local timestamps safely:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">bool</span> <a class="code hl_function" href="../../d5/d37/a01276.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, time_t *out)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
+<div class="line">    memset(&amp;tmv, 0, <span class="keyword">sizeof</span> tmv);</div>
+<div class="line">    tmv.tm_isdst = -1;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (strptime(s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv) == NULL)</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">    time_t t = mktime(&amp;tmv);</div>
+<div class="line">    <span class="keywordflow">if</span> (t == (time_t)-1)</div>
+<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"> </div>
+<div class="line">    *out = t;</div>
+<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="aa01276_html_ga1ee26caf58dfc798273ba095a394cde8"><div class="ttname"><a href="../../d5/d37/a01276.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a></div><div class="ttdeci">bool parse_local_timestamp(const char *, time_t *)</div><div class="ttdoc">Parses an ISO 8601 timestamp string in local time and converts it to time_t.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00273">futil.c:273</a></div></div>
+</div><!-- fragment --><p>And a matching formatter:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="../../d5/d37/a01276.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a>(time_t t, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> n)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
+<div class="line">    localtime_r(&amp;t, &amp;tmv);</div>
+<div class="line">    strftime(buf, n, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv);</div>
+<div class="line">}</div>
+<div class="ttc" id="aa01276_html_gaee5521bb387211a2d16e3d56585f144d"><div class="ttname"><a href="../../d5/d37/a01276.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a></div><div class="ttdeci">char * format_local_timestamp(time_t, char *, size_t)</div><div class="ttdoc">Formats a time_t as an ISO 8601 string in local time.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00296">futil.c:296</a></div></div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="revised-interpretation-of-the-original-test-cases"></a>
+Revised interpretation of the original test cases</h1>
+<p>The original test cases are still useful because they show that leaving <span class="tt">tm_isdst</span> uncontrolled produces different behavior across DST boundaries. However, they do <b>not</b> demonstrate a <span class="tt">localtime_r()</span> or <span class="tt">gmtime_r()</span> bug. They demonstrate that <span class="tt">mktime()</span> needs a fully initialized <span class="tt">struct tm</span>, with <span class="tt">tm_isdst</span> set appropriately.</p>
+<h1 class="doxsection"><a class="anchor" id="original-demonstration-code"></a>
+Original demonstration code</h1>
+<div class="fragment"><div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#define _GNU_SOURCE</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="../../d7/ddd/a01223.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>() {</div>
+<div class="line">    <span class="keywordtype">char</span> buf[100];</div>
+<div class="line">    <span class="keywordtype">char</span> time_s[32];</div>
+<div class="line">    <span class="keyword">struct </span>tm tm1;</div>
+<div class="line">    time_t t1 = time(NULL);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// CDT &amp;&amp; MEMSET - INCORRECT</span></div>
+<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
+<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
+<div class="line">    printf(<span class="stringliteral">&quot;with memset(&amp;tm1)\n&quot;</span>);</div>
+<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    t1 = mktime(&amp;tm1);</div>
+<div class="line"> </div>
+<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// CDT &amp;&amp; NOT MEMSET - CORRECT</span></div>
+<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
+<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    t1 = mktime(&amp;tm1);</div>
+<div class="line"> </div>
+<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// NOT CDT &amp;&amp; NOT MEMSET - INCORRECT</span></div>
+<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
+<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    t1 = mktime(&amp;tm1);</div>
+<div class="line"> </div>
+<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// NOT CDT &amp;&amp; MEMSET - CORRECT</span></div>
+<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
+<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
+<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    t1 = mktime(&amp;tm1);</div>
+<div class="line"> </div>
+<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
+<div class="line"> </div>
+<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
+<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
+<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
+<div class="line">}</div>
+<div class="ttc" id="aa01223_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="../../d7/ddd/a01223.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> <a href="../../d7/ddd/a01223_source.html#l00019">nc.c:19</a></div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

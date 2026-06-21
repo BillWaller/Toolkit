@@ -2,13 +2,13 @@ var a00734 =
 [
     [ "UiRuntime", "d6/dc0/a00734.html#a406e7678285536385cc79c495000723a", null ],
     [ "UiSurface", "d6/dc0/a00734.html#ad141bee12edf95763809accb0f6d8bce", null ],
-    [ "UiBorderKind", "d1/d1a/a01285.html#gaeb489b99dbf37b489c68b6281563c1a8", [
+    [ "UiBorderKind", "d4/da0/a01291.html#gaeb489b99dbf37b489c68b6281563c1a8", [
       [ "UI_BORDER_NONE", "d6/dc0/a00734.html#gaeb489b99dbf37b489c68b6281563c1a8ac5c9a484734a35c3aed892457df8b43d", null ],
       [ "UI_BORDER_ASCII", "d6/dc0/a00734.html#gaeb489b99dbf37b489c68b6281563c1a8a132f8eaf4402accf8617e9cf5d7a3a2c", null ],
       [ "UI_BORDER_LIGHT", "d6/dc0/a00734.html#gaeb489b99dbf37b489c68b6281563c1a8a6f9f2712da73ae6a98d8ffd9054ecaae", null ],
       [ "UI_BORDER_ROUNDED", "d6/dc0/a00734.html#gaeb489b99dbf37b489c68b6281563c1a8a0d5528c4a2d0a93d08c8b57f36e63c00", null ]
     ] ],
-    [ "UiKey", "d1/d1a/a01285.html#ga3ca2b6a10186035b35b260c8da9b1277", [
+    [ "UiKey", "d4/da0/a01291.html#ga3ca2b6a10186035b35b260c8da9b1277", [
       [ "UI_KEY_NONE", "d6/dc0/a00734.html#ga3ca2b6a10186035b35b260c8da9b1277a8ecd2613425040ca8c23199e394f45ba", null ],
       [ "UI_KEY_CHAR", "d6/dc0/a00734.html#ga3ca2b6a10186035b35b260c8da9b1277a507d019c3e61dac006052aafd4f62e1c", null ],
       [ "UI_KEY_ENTER", "d6/dc0/a00734.html#ga3ca2b6a10186035b35b260c8da9b1277ac42b09716e89f0d9a2af26bfe2987a2e", null ],
@@ -41,7 +41,7 @@ var a00734 =
       [ "UI_KEY_F11", "d6/dc0/a00734.html#ga3ca2b6a10186035b35b260c8da9b1277a639492e618d763bad2855f10b62a4265", null ],
       [ "UI_KEY_F12", "d6/dc0/a00734.html#ga3ca2b6a10186035b35b260c8da9b1277ad995b2b569bf56b0262389476b04911e", null ]
     ] ],
-    [ "UiMouseAction", "d1/d1a/a01285.html#gae6ce556aca51dfaed5454fe001433be0", [
+    [ "UiMouseAction", "d4/da0/a01291.html#gae6ce556aca51dfaed5454fe001433be0", [
       [ "UI_MOUSE_NONE", "d6/dc0/a00734.html#gae6ce556aca51dfaed5454fe001433be0a532415e89c6eefd9d340a8bc5dc83d7d", null ],
       [ "UI_MOUSE_PRESS", "d6/dc0/a00734.html#gae6ce556aca51dfaed5454fe001433be0a3e963a1678d502b12cbab0c95675c65b", null ],
       [ "UI_MOUSE_RELEASE", "d6/dc0/a00734.html#gae6ce556aca51dfaed5454fe001433be0ad9d328ee18526423b6c593715c0b14f7", null ],
@@ -49,30 +49,30 @@ var a00734 =
       [ "UI_MOUSE_SCROLL_UP", "d6/dc0/a00734.html#gae6ce556aca51dfaed5454fe001433be0a5223948b39f369698b2552249eca4adf", null ],
       [ "UI_MOUSE_SCROLL_DOWN", "d6/dc0/a00734.html#gae6ce556aca51dfaed5454fe001433be0a24373ba3a87a4fa08acb1ba92bca0abb", null ]
     ] ],
-    [ "ui_clear_screen", "dd/d18/a01284.html#ga93aa953ffdffb65d10c9745bc19603d7", null ],
-    [ "ui_cursor_enable", "dd/d18/a01284.html#gaf610af67da19dac8446bd2f543534b63", null ],
-    [ "ui_cursor_move", "dd/d18/a01284.html#gab8f1d850d756921883a7304beca43088", null ],
-    [ "ui_draw_border", "dd/d18/a01284.html#ga2a4b66406ca8fdaae18b9e4d5e36d581", null ],
-    [ "ui_draw_box_title", "dd/d18/a01284.html#gaca44263e5a2802ca111c6211b532c50e", null ],
-    [ "ui_draw_hline", "dd/d18/a01284.html#gaf435ec21d1e804c5266f1878f756cf14", null ],
-    [ "ui_draw_text", "dd/d18/a01284.html#gad8dfcde97d6b2c89103e9d44d2feb0b1", null ],
-    [ "ui_draw_text_n", "dd/d18/a01284.html#gad07c4b1ea059d6b7f656a803bbf75e1e", null ],
-    [ "ui_draw_vline", "dd/d18/a01284.html#ga00a0f7871e6ea99bd76555cb04f228c5", null ],
-    [ "ui_get_event", "dd/d18/a01284.html#gaf250dbf909f22474b80da86f7bacd4bd", null ],
-    [ "ui_get_screen_size", "dd/d18/a01284.html#ga2d1084f028b2b885751a8f215e51b024", null ],
-    [ "ui_init", "dd/d18/a01284.html#gaa41d4760f359879d38791a9c558b6928", null ],
-    [ "ui_render", "dd/d18/a01284.html#ga5ef47b9e3365c44869d26e2391fed39d", null ],
-    [ "ui_resume", "dd/d18/a01284.html#gadba2866ac13b9d39898ecca5369f12a5", null ],
-    [ "ui_shutdown", "dd/d18/a01284.html#ga8fa465e92c3f0bf755b938d09aabf474", null ],
-    [ "ui_surface_clear", "dd/d18/a01284.html#ga23e848384f5f7f1cd84ed24a5395ef0b", null ],
-    [ "ui_surface_destroy", "dd/d18/a01284.html#ga6af7c6c514535d5998f7a762374bc370", null ],
-    [ "ui_surface_erase", "dd/d18/a01284.html#ga96dd35cc737ad4ad1df00be412f1f1fb", null ],
-    [ "ui_surface_hide", "dd/d18/a01284.html#ga234f78eee651b5a68d810a6ca3d05b59", null ],
-    [ "ui_surface_move", "dd/d18/a01284.html#gadd807a747f2b70d3642b9d45e697da7c", null ],
-    [ "ui_surface_new", "dd/d18/a01284.html#ga167278003ecb19e2eb778b134913b504", null ],
-    [ "ui_surface_resize", "dd/d18/a01284.html#gae3f0fdff358ddbefc084ac60f1dee1d1", null ],
-    [ "ui_surface_set_base", "dd/d18/a01284.html#gab640de44654a656fb3fd9aa060854988", null ],
-    [ "ui_surface_set_style", "dd/d18/a01284.html#gadb6c336da546adb736fc2414cb50f35c", null ],
-    [ "ui_surface_show", "dd/d18/a01284.html#ga7ecb5254d5bcb79b25c92ea346d8a572", null ],
-    [ "ui_suspend", "dd/d18/a01284.html#gac31772949760230c556ccb3b5f99714b", null ]
+    [ "ui_clear_screen", "dc/ded/a01290.html#ga93aa953ffdffb65d10c9745bc19603d7", null ],
+    [ "ui_cursor_enable", "dc/ded/a01290.html#gaf610af67da19dac8446bd2f543534b63", null ],
+    [ "ui_cursor_move", "dc/ded/a01290.html#gab8f1d850d756921883a7304beca43088", null ],
+    [ "ui_draw_border", "dc/ded/a01290.html#ga2a4b66406ca8fdaae18b9e4d5e36d581", null ],
+    [ "ui_draw_box_title", "dc/ded/a01290.html#gaca44263e5a2802ca111c6211b532c50e", null ],
+    [ "ui_draw_hline", "dc/ded/a01290.html#gaf435ec21d1e804c5266f1878f756cf14", null ],
+    [ "ui_draw_text", "dc/ded/a01290.html#gad8dfcde97d6b2c89103e9d44d2feb0b1", null ],
+    [ "ui_draw_text_n", "dc/ded/a01290.html#gad07c4b1ea059d6b7f656a803bbf75e1e", null ],
+    [ "ui_draw_vline", "dc/ded/a01290.html#ga00a0f7871e6ea99bd76555cb04f228c5", null ],
+    [ "ui_get_event", "dc/ded/a01290.html#gaf250dbf909f22474b80da86f7bacd4bd", null ],
+    [ "ui_get_screen_size", "dc/ded/a01290.html#ga2d1084f028b2b885751a8f215e51b024", null ],
+    [ "ui_init", "dc/ded/a01290.html#gaa41d4760f359879d38791a9c558b6928", null ],
+    [ "ui_render", "dc/ded/a01290.html#ga5ef47b9e3365c44869d26e2391fed39d", null ],
+    [ "ui_resume", "dc/ded/a01290.html#gadba2866ac13b9d39898ecca5369f12a5", null ],
+    [ "ui_shutdown", "dc/ded/a01290.html#ga8fa465e92c3f0bf755b938d09aabf474", null ],
+    [ "ui_surface_clear", "dc/ded/a01290.html#ga23e848384f5f7f1cd84ed24a5395ef0b", null ],
+    [ "ui_surface_destroy", "dc/ded/a01290.html#ga6af7c6c514535d5998f7a762374bc370", null ],
+    [ "ui_surface_erase", "dc/ded/a01290.html#ga96dd35cc737ad4ad1df00be412f1f1fb", null ],
+    [ "ui_surface_hide", "dc/ded/a01290.html#ga234f78eee651b5a68d810a6ca3d05b59", null ],
+    [ "ui_surface_move", "dc/ded/a01290.html#gadd807a747f2b70d3642b9d45e697da7c", null ],
+    [ "ui_surface_new", "dc/ded/a01290.html#ga167278003ecb19e2eb778b134913b504", null ],
+    [ "ui_surface_resize", "dc/ded/a01290.html#gae3f0fdff358ddbefc084ac60f1dee1d1", null ],
+    [ "ui_surface_set_base", "dc/ded/a01290.html#gab640de44654a656fb3fd9aa060854988", null ],
+    [ "ui_surface_set_style", "dc/ded/a01290.html#gadb6c336da546adb736fc2414cb50f35c", null ],
+    [ "ui_surface_show", "dc/ded/a01290.html#ga7ecb5254d5bcb79b25c92ea346d8a572", null ],
+    [ "ui_suspend", "dc/ded/a01290.html#gac31772949760230c556ccb3b5f99714b", null ]
 ];

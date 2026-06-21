@@ -1,5 +1,5 @@
 var a01250 =
 [
-    [ "ui_get_event", "dd/d18/a01284.html#gaf250dbf909f22474b80da86f7bacd4bd", null ],
-    [ "return", "d4/d22/a01250.html#a9717e7bbecb906637e86cef6da3d83c2", null ]
+    [ "ui_ncurses_color_pair_from_style", "d4/da0/a01291.html#gaf21ce5ccc76232c9e59007aadd6c0e7c", null ],
+    [ "ui_ncurses_style_apply", "dc/ded/a01290.html#ga7340721e819b16b9e37bb999e19d0c60", null ]
 ];

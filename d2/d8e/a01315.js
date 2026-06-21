@@ -1,13 +1,6 @@
 var a01315 =
 [
-    [ "accept_s", "d2/d8e/a01315.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "d2/d8e/a01315.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_cc", "d2/d8e/a01315.html#abffe323f69ca8f112987e1886cd0885e", null ],
-    [ "display_s", "d2/d8e/a01315.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "d2/d8e/a01315.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_cc", "d2/d8e/a01315.html#aa3e505e5c866dcbd20a1c518944294b6", null ],
-    [ "filler_s", "d2/d8e/a01315.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "d2/d8e/a01315.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "d2/d8e/a01315.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "d2/d8e/a01315.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "bg", "d2/d8e/a01315.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
+    [ "fg", "d2/d8e/a01315.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
+    [ "pair_id", "d2/d8e/a01315.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
 ];

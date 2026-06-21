@@ -1,5 +1,5 @@
 var a01335 =
 [
-    [ "pan", "d4/d04/a01335.html#ad37016cf3de9005aabd2d5b7d4418792", null ],
-    [ "win", "d4/d04/a01335.html#a0804eee6017d3ed62e339bc632ef13a1", null ]
+    [ "l", "d4/d04/a01335.html#abf3dc917629596185d4d5615de0ee58f", null ],
+    [ "s", "d4/d04/a01335.html#af571d78b72396279aa4420c8bbe3ece9", null ]
 ];

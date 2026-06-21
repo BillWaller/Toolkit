@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: snippets</title>
+<title>C-Menu: C-Menu Start-up Options</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,549 +110,131 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('de/d89/a01560.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">snippets </div></div>
+  <div class="headertitle"><div class="title">C-Menu Start-up Options </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md133"></a> <img src="../../System-Configuration.png" alt="" class="inline" title="Configuration"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="table-of-contents-6"></a>
-Table of Contents</h1>
-<ul>
-<li><a class="el" href="#c-menu-desktop-files" title="C-Menu Desktop Files">C-Menu Desktop Files</a></li>
-<li><a class="el" href="#c-menu-bashrc-configuration" title="C-Menu bashrc Configuration">C-Menu bashrc Configuration</a><ul>
-<li><a class="el" href="#shell-logging" title="Shell Logging">Shell Logging</a></li>
-<li><a class="el" href="#prepend-path" title="Prepend Path">Prepend Path</a></li>
-<li><a class="el" href="#helpful-c-menu-environment-variables" title="Helpful C-Menu Environment Variables">Helpful C-Menu Environment Variables</a></li>
-<li><a class="el" href="#security-through-obscurity" title="Security Through Obscurity">Security Through Obscurity</a></li>
-<li><a class="el" href="#rsh-helpers" title="RSH Helpers">RSH Helpers</a></li>
-<li><a class="el" href="#privilege-indicator-shell-prompts" title="Privilege Indicator Shell Prompts">Privilege Indicator Shell Prompts</a></li>
-<li><a class="el" href="#terminal-and-editor-settings" title="Terminal and Editor Settings">Terminal and Editor Settings</a></li>
-<li><a class="el" href="#gdb-debugging-setup" title="GDB Debugging Setup">GDB Debugging Setup</a></li>
-<li><a class="el" href="#if-you-cant-stop-typing-vi" title="If You Can&#39;t Stop Typing &quot;vi&quot;">If You Can't Stop Typing &quot;vi&quot;</a></li>
-<li><a class="el" href="#c-menu-startup-with-mm" title="C-Menu Startup with &quot;mm&quot;">C-Menu Startup with &quot;mm&quot;</a></li>
-<li><a class="el" href="#curses-escape-delay" title="Curses Escape Delay">Curses Escape Delay</a></li>
-<li><a class="el" href="#use-lsd-or-eza-instead-of-ls" title="Use lsd or eza instead of ls">Use lsd or eza instead of ls</a></li>
-<li><a class="el" href="#locale-settings" title="Locale Settings">Locale Settings</a></li>
-<li><a class="el" href="#system-specific-environment-variables" title="System Specific Environment Variables">System Specific Environment Variables</a></li>
-</ul>
-</li>
-<li><a class="el" href="../../d3/d4c/a01540.html#c-menu-configuration" title="C-Menu configuration">C-Menu Configuration</a></li>
-<li><a class="el" href="#terminal-configurations" title="Terminal Configurations">Terminal Configurations</a><ul>
-<li><a class="el" href="../../d9/da1/a01546.html#ghostty" title="Ghostty">Ghostty</a></li>
-<li><a class="el" href="#kitty" title="Kitty">Kitty</a></li>
-<li><a class="el" href="#alacritty" title="Alacritty">Alacritty</a></li>
-</ul>
-</li>
-<li><a class="el" href="../../d9/da1/a01546.html#tree-sitter" title="Tree-Sitter">Tree-Sitter</a><ul>
-<li><a class="el" href="#tree-sitter-configjson" title="Tree-Sitter config.json">Tree-Sitter config.json</a></li>
-</ul>
-</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="c-menu-desktop-files"></a>
-C-Menu Desktop Files</h2>
-<p>You may find it useful to create desktop files to start C-Menu by clicking a desktop icon. You will find desktop files to start C-Menu in Ghostty, Kitty, and Alacritty in the C-Menu/example_configs/Desktop directory.</p>
-<p>Each of these desktop files have two modified lines, Exec and Icon. The Exec line is the command that is executed when you click the desktop icon. You can substitute your choice of icons for Decision.svg.</p>
-<p>Icon=/usr/share/pixmaps/Decision.svg Exec=alacritty -e menu</p>
-<p>The script, install_desktop.sh, in the C-Menu/example_configs/Desktop directory, will copy these desktop files to your local applications directory, or you can modify it to copy them to a different location. You can also create your own desktop files using the examples as a templates.</p>
-<h2 class="doxsection"><a class="anchor" id="c-menu-bashrc-configuration"></a>
-C-Menu bashrc Configuration</h2>
-<p>This sample bashrc almost certainly contains settings that are not appropriate for your system. It is provided as a reference only. You should carefully review and modify this file to suit your specific needs and environment.</p>
-<p>Do NOT blindly copy this file to your $HOME/.bashrc</p>
-<p>It is recommended to back up your existing .bashrc before replacing it with any of the contents in the following snippets.</p>
-<p>Use at your own risk.</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line">.bashrc</div>
-<div class="line">shellcheck disable=SC2155</div>
-<div class="line">shellcheck source=/dev/null</div>
-</div><!-- fragment --><p>The lines beginning with shellcheck are to prevent false positives from the shellcheck linter.</p>
-<div class="fragment"><div class="line">IFS=&quot;</div>
-<div class="line">&quot;</div>
-</div><!-- fragment --><p>The line above sets the Internal <a class="el" href="../../de/da0/a01341.html" title="structure for form fields">Field</a> Separator (IFS) to only a newline character. This prevents word splitting on spaces and tabs, which can lead to unexpected behavior in scripts and commands.</p>
-<h3 class="doxsection"><a class="anchor" id="shell-logging"></a>
-Shell Logging</h3>
-<p>To activate shell startup logging, create a file named .shelllog in your home directory. Each time a shell starts, it will append a log entry to /var/log/shell.log</p>
-<div class="fragment"><div class="line">export BASHRC=1</div>
-<div class="line">unset BASHLOG</div>
-<div class="line">if [ -f &quot;$HOME&quot;/.shelllog ]; then</div>
-<div class="line">    export BASHLOG=&quot;1&quot;</div>
-<div class="line">fi</div>
-<div class="line">this_file=&quot;$HOME&quot;/.bashrc</div>
-<div class="line">ShellLog() {</div>
-<div class="line">    if [ &quot;$BASHLOG = &quot;1&quot; ] &amp;&amp; [ -w /var/log/shell.log ]; then</div>
-<div class="line">        echo &quot;$(rfc3339)&quot; &quot;$this_file&quot; &quot;$1&quot; else &gt;&gt;/var/log/shell.log;</div>
-<div class="line">    else</div>
-<div class="line">        return 1;</div>
-<div class="line">    fi</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="prepend-path"></a>
-Prepend Path</h3>
-<p>This technique for managing the PATH environment variable is from bashfaq #24. It's elegant and efficient. Usage: prepend_path /some/directory It checks if the directory is already in PATH. If not, it prepends it to PATH.</p>
-<div class="fragment"><div class="line">pp() {</div>
-<div class="line">case &quot;:${PATH}:&quot; in</div>
-<div class="line">    *:&quot;$1&quot;:*) ;;</div>
-<div class="line">    *)</div>
-<div class="line">        PATH=&quot;$1:$PATH&quot;</div>
-<div class="line">        ;;</div>
-<div class="line">esac</div>
-<div class="line">}</div>
-<div class="line">PATH=/usr/bin:/bin:/usr/sbin:/sbin</div>
-<div class="line">for P in /usr/local/sbin \</div>
-<div class="line">/usr/local/bin \</div>
-<div class="line">/usr/lib64/qt6/bin \</div>
-<div class="line">/usr/lib/qt6/bin \</div>
-<div class="line">&quot;$HOME&quot;/.local/bin \</div>
-<div class="line">&quot;$HOME&quot;/.cargo/bin \</div>
-<div class="line">/usr/local/bin/zig-0.15.2 \</div>
-<div class="line">&quot;$HOME&quot;/menuapp/bin; do</div>
-<div class="line">    [ -d &quot;$P&quot; ] &amp;&amp; pp &quot;$P&quot;</div>
-<div class="line">done</div>
-<div class="line">export PATH</div>
-</div><!-- fragment --><p><b><em>WARNING:</em></b> /usr/bin/view is generally a link to vim, which will obscure C-Menu <a class="el" href="../../d7/d81/a01365.html">View</a> if /usr/bin preceedes $HOME/menuapp/bin in your PATH environment variable.</p>
-<p>If you use the prepend path function above and have $HOME/menuapp/bin early in your PATH, you should be fine. In the abovew example, it is first in the PATH because it was prepended last.</p>
-<p>If you have issues starting C-Menu <a class="el" href="../../d7/d81/a01365.html">View</a> by typing "view" at the shell prompt, examine your PATH environment variable.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="helpful-c-menu-environment-variables"></a>
-Helpful C-Menu Environment Variables</h3>
-<div class="fragment"><div class="line">export CMENU_SRC=/usr/local/src/cmenu/src</div>
-<div class="line">export CMENU_HOME=&quot;$HOME&quot;/menuapp</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="security-through-obscurity"></a>
-Security Through Obscurity</h3>
-<p>Having a shell with an obscure name can be beneficial. Using xsh, or some other alias reduces visibility and vulnerability to some automated attacks and even well-meaning, but misguided distributors who, in an unknown set of circumstancs, might turn on shell restrictions for common shells like bash.</p>
-<div class="fragment"><div class="line">export SHELL=bash</div>
-<div class="line">which xsh &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export SHELL=xsh</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="rsh-helpers"></a>
-RSH Helpers</h3>
-<p>xx and x are convenience functions for starting and exiting a root shell using rsh.</p>
-<div class="fragment"><div class="line">xx() {</div>
-<div class="line">    if file &quot;$HOME&quot;/menuapp/bin/rsh | grep setuid &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">        &quot;$HOME&quot;/menuapp/bin/rsh</div>
-<div class="line">    else</div>
-<div class="line">        if file /usr/local/bin/rsh | grep setuid &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">            /usr/local/bin/rsh</div>
-<div class="line">        fi</div>
-<div class="line">    fi</div>
-<div class="line">}</div>
-</div><!-- fragment --><p>Exit functions that suppress output.</p>
-<div class="fragment"><div class="line">x() { exit &gt;/dev/null 2&gt;&amp;1; }</div>
-<div class="line">q() { exit &gt;/dev/null 2&gt;&amp;1; }</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="privilege-indicator-shell-prompts"></a>
-Privilege Indicator Shell Prompts</h3>
-<p>A green prompt for normal users, red for root. You can customize this prompt or use whatever prompt you like, but an obvious indicator of privilege level is highly recommended.</p>
-<p>This is a very minimal prompt, but serves the purpose of indicating privilege level. You can customize it to include more information if you like, but be careful not to make it too cluttered or slow to render. The key is to have a clear visual indicator of whether you are running as root or a normal user, to help prevent accidentally running commands with elevated privileges.</p>
-<p>The inclusion of \W in the prompt is a common practice to show the current working directory, which can be helpful for context. If you want the full directory, use \w (lower case). The color coding (green for normal users and red for root) provides an immediate visual cue about the privilege level of the shell session. You can even make it hot-pink if you want it to be really annoying. The key is to have a clear and distinct visual indicator of privilege level, to help prevent accidental misuse of root privileges.</p>
-<div class="fragment"><div class="line">export PS1=&quot;\&zwj;[\e[1;32m\&zwj;]\u@\h(\l)\W-&gt;\&zwj;[\e[0m\&zwj;] &quot;</div>
-<div class="line">export XUSER=&quot;$(id -un)&quot;</div>
-<div class="line">[ &quot;$XUSER&quot; = &quot;root&quot; ] &amp;&amp; export PS1=&quot;\&zwj;[\e[1;31m\&zwj;]\u@\h(\l)\W-&gt;\&zwj;[\e[0m\&zwj;] &quot;</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="terminal-and-editor-settings"></a>
-Terminal and Editor Settings</h3>
-<div class="fragment"><div class="line">export TERM=xterm-256color</div>
-<div class="line">export TTYPATH=&quot;$(dirname &quot;$(tty)&quot;)&quot;</div>
-<div class="line">export EDITOR=nvim</div>
-<div class="line">clear() {</div>
-<div class="line">    tput clear</div>
-<div class="line">}</div>
-<div class="line">stty ixany</div>
-<div class="line">set -o vi</div>
-<div class="line">export MANPAGER=&quot;nvim +Man!&quot;</div>
-<div class="line">export MANWIDTH=80</div>
-<div class="line">which less &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export PAGER=less</div>
-<div class="line">## -----------</div>
-<div class="line">VIEW_FAKE=false</div>
-<div class="line">FILE=$(which view)</div>
-<div class="line">if [ -L &quot;$FILE&quot; ] &amp;&amp; [ -e &quot;$FILE&quot; ]; then</div>
-<div class="line">    LINKTO=$(readlink &quot;$FILE&quot;)</div>
-<div class="line">    if [ &quot;$LINKTO&quot; = &quot;vi&quot; ] || [ &quot;$LINKTO&quot; = &quot;vim&quot; ]; then</div>
-<div class="line">        ShellLog &quot;$FILE is a symbolic link to vim&quot;</div>
-<div class="line">        VIEW_FAKE=true</div>
-<div class="line">    fi</div>
-<div class="line">fi</div>
-<div class="line">if [ &quot;$VIEW_FAKE&quot; = &quot;false&quot; ]; then</div>
-<div class="line">    which view &gt;/dev/null 2&gt;&amp;1 &amp;&amp; export PAGER=view</div>
-<div class="line">    export PAGER=$(which view 2&gt;/dev/null)</div>
-<div class="line">fi</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="gdb-debugging-setup"></a>
-GDB Debugging Setup</h3>
-<p>This is useful when debugging programs that require user input</p>
-<div class="fragment"><div class="line">which sleep &gt;/dev/null 2&gt;&amp;1 &amp;&amp; s() {</div>
-<div class="line">    TTY=$(tty)</div>
-<div class="line">    /bin/grep -v &quot;inferior-tty&quot; &quot;$HOME&quot;/.gdbinit &gt;/tmp/.gdbinit.$$ 2&gt;&amp;1</div>
-<div class="line">    echo &quot;set inferior-tty $TTY&quot; &gt;&gt;/tmp/.gdbinit.$$</div>
-<div class="line">    mv /tmp/.gdbinit.$$ &quot;$HOME&quot;/.gdbinit</div>
-<div class="line">    echo &quot;sleeping&quot;</div>
-<div class="line">    sleep 50000</div>
-<div class="line">}</div>
-<div class="line">which gdb &gt;/dev/null 2&gt;&amp;1 &amp;&amp; gdb() { /usr/bin/gdb --silent &quot;$@&quot;; }</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="if-you-cant-stop-typing-vi"></a>
-If You Can't Stop Typing "vi"</h3>
-<div class="fragment"><div class="line">which nvim &gt;/dev/null 2&gt;&amp;1 &amp;&amp; vi() { nvim &quot;$@&quot;; }</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="c-menu-startup-with-mm"></a>
-C-Menu Startup with "mm"</h3>
-<p>You must prepend $HOME/menuapp/bin to your PATH before (meaning earlier in the .bashrc script) defining the following function.</p>
-<div class="fragment"><div class="line">. &quot;$HOME&quot;/menuapp/bin/cmenu_path</div>
-<div class="line">which menu &gt;/dev/null 2&gt;&amp;1 &amp;&amp; mm() {</div>
-<div class="line">    menu &quot;$@&quot;</div>
-<div class="line">}</div>
-<div class="line">. &quot;$HOME&quot;/.nvim_appname</div>
-<div class="line">kk() { cd /usr/local/src/cmenu/src || return; }</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="curses-escape-delay"></a>
-Curses Escape Delay</h3>
-<p>I use a local computer, so 50ms works fine for me. If you have a slow connection you may need to set this to 300 or 500. The default is 1000.</p>
-<div class="fragment"><div class="line">export ESCDELAY=200</div>
-<div class="line">export ESCDELAY=50</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="use-lsd-or-eza-instead-of-ls"></a>
-Use lsd or eza instead of ls</h3>
-<div class="fragment"><div class="line"># LS=eza</div>
-<div class="line">LS=lsd</div>
-<div class="line">export LS</div>
-<div class="line">ls() {</div>
-<div class="line">    if [ &quot;$LS&quot; = eza ] &amp;&amp; which eza &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">        echo using eza</div>
-<div class="line">        /usr/bin/eza --color=always --icons=always &quot;$@&quot;</div>
-<div class="line">    else</div>
-<div class="line">        if [ &quot;$LS&quot; = &quot;lsd&quot; ] &amp;&amp; which lsd &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">            echo using lsd</div>
-<div class="line">            /usr/bin/lsd --color always --icon always --icon-theme fancy &quot;$@&quot;</div>
-<div class="line">        else</div>
-<div class="line">            if which ls &gt;/dev/null 2&gt;&amp;1; then</div>
-<div class="line">                echo using ls</div>
-<div class="line">                /usr/bin/ls --color=auto &quot;$@&quot;</div>
-<div class="line">            fi</div>
-<div class="line">        fi</div>
-<div class="line">    fi</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="locale-settings"></a>
-Locale Settings</h3>
-<p>If you are in the US, you probably want to set this locale.</p>
-<div class="fragment"><div class="line">export LC_ALL=&quot;en_US.UTF-8&quot;</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="system-specific-environment-variables"></a>
-System Specific Environment Variables</h3>
-<p>Customize these settings for your system.</p>
-<div class="fragment"><div class="line">export JAVA_HOME=/usr/lib64/jvm/java-21-openjdk-21</div>
-<div class="line">export NODE_PATH=&quot;$HOME&quot;/node_modules</div>
-<div class="line">export PKG_CONFIG_PATH=/usr/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig</div>
-<div class="line">export python3_host_prog=/usr/bin/python3</div>
-<div class="line">export XDG_CONFIG_HOME=&quot;$HOME&quot;/.config</div>
-<div class="line">export XDG_DATA_HOME=&quot;$HOME&quot;/.local/share</div>
-<div class="line">export CARGO_HOME=&quot;$HOME&quot;/.cargo</div>
-<div class="line">export RUSTUP_HOME=&quot;$HOME&quot;/.rustup</div>
-<div class="line">export LLVM_LIB_DIR=/usr/lib64</div>
-<div class="line">export MASON=&quot;$HOME/.local/share/lazyvim/mason&quot;</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="c-menu-configuration-1"></a>
-C-Menu Configuration</h2>
-<p>Set the environment variable CMENURC to the path of your C-Menu configuration file. This file is read by C-Menu at startup and contains various settings that control the behavior and appearance of C-Menu. You can customize these settings to suit your preferences and needs. Below is an example of a C-Menu configuration file.</p>
-<div class="fragment"><div class="line"># ~/.minitrc</div>
-<div class="line">cols=0</div>
-<div class="line">lines=0</div>
-<div class="line">begx=0</div>
-<div class="line">begy=0</div>
-<div class="line">begy=0</div>
-<div class="line">help=false</div>
-<div class="line">black=#00020f</div>
-<div class="line">red=#ff0000</div>
-<div class="line">green=#00d07f</div>
-<div class="line">yellow=#ffba00</div>
-<div class="line">blue=#0080ff</div>
-<div class="line">magenta=#f000f0</div>
-<div class="line">cyan=#00dfff</div>
-<div class="line">white=#c0c0c0</div>
-<div class="line">bblack=#000930</div>
-<div class="line">bred=#ff7f00</div>
-<div class="line">bgreen=#00ff87</div>
-<div class="line">byellow=#ffff00</div>
-<div class="line">bblue=#00afff</div>
-<div class="line">bmagenta=#ff00ff</div>
-<div class="line">bcyan=#00ffff</div>
-<div class="line">bwhite=#ffffff</div>
-<div class="line">bg_color=black</div>
-<div class="line">fg_color=white</div>
-<div class="line">bo_color=red</div>
-<div class="line">red_gamma=2.20</div>
-<div class="line">green_gamma=2.20</div>
-<div class="line">blue_gamma=2.20</div>
-<div class="line">gray_gamma=2.20</div>
-<div class="line">brackets=</div>
-<div class="line">cd_mapp_home=false</div>
-<div class="line">f_at_end_clear=true</div>
-<div class="line">f_at_end_remove=false</div>
-<div class="line">f_erase_remainder=true</div>
-<div class="line">fill_char=_</div>
-<div class="line">f_ignore_case=false</div>
-<div class="line">f_squeeze=false</div>
-<div class="line">f_stop_on_error=true</div>
-<div class="line">tab_stop=4</div>
-<div class="line">prompt_type=long</div>
-<div class="line">prompt_str=</div>
-<div class="line">cmd=</div>
-<div class="line">cmd_all=</div>
-<div class="line">provider_cmd=</div>
-<div class="line">receiver_cmd=</div>
-<div class="line">title=</div>
-<div class="line">select_max=0</div>
-<div class="line">black=#00020f</div>
-<div class="line">bg=#000000</div>
-<div class="line">abg=</div>
-<div class="line">mapp_spec=main.m</div>
-<div class="line">help_spec=</div>
-<div class="line">in_spec=</div>
-<div class="line">out_spec=</div>
-<div class="line">mapp_data=~/menuapp/data</div>
-<div class="line">mapp_help=~/menuapp/help</div>
-<div class="line">mapp_home=~/menuapp</div>
-<div class="line">mapp_msrc=~/menuapp/msrc</div>
-<div class="line">mapp_user=~/menuapp/user</div>
-</div><!-- fragment --><hr  />
-<h2 class="doxsection"><a class="anchor" id="terminal-configurations"></a>
-Terminal Configurations</h2>
-<p>Please adjust these terminal configurations for your system. In particular, you should pay attention to the screen dimensions, which I have set to 95 columns and up to 80 lines. Make sure you have the specified fonts installed on your system, or change the font settings to match fonts you do have.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="ghostty-1"></a>
-Ghostty</h3>
-<div class="fragment"><div class="line"># ~/.config/ghostty/config</div>
-<div class="line">#</div>
-<div class="line">command = xsh</div>
-<div class="line">#  -c menu</div>
-<div class="line">title = xsh</div>
-<div class="line"># config-file = fonts/default_font</div>
-<div class="line"># BEGIN_GHOSTTY_FONT</div>
-<div class="line">font-family = &quot;Cascadia Code Medium&quot;</div>
-<div class="line">font-family-bold = &quot;Cascadia Code Bold&quot;</div>
-<div class="line">font-family-italic = &quot;Cascadia Code Italic&quot;</div>
-<div class="line">font-family-bold-italic = &quot;Cascadia Code Bold Italic&quot;</div>
-<div class="line"># END_GHOSTTY_FONT</div>
-<div class="line">font-size = 13</div>
-<div class="line">window-width = 95</div>
-<div class="line">window-height = 80</div>
-<div class="line">background-opacity = 0.99</div>
-<div class="line">window-decoration = server</div>
-<div class="line">keybind = ctrl+r=reload_config</div>
-<div class="line"># config-file = themes/default_theme</div>
-<div class="line"># high_contrast3</div>
-<div class="line"> </div>
-<div class="line">palette=0=#000000</div>
-<div class="line">palette=1=#FF3f3f</div>
-<div class="line">palette=2=#4ff07f</div>
-<div class="line">palette=3=#FFef4f</div>
-<div class="line">palette=4=#5faFff</div>
-<div class="line">palette=5=#f077f0</div>
-<div class="line">palette=6=#8fdFfF</div>
-<div class="line">palette=7=#FF8f5f</div>
-<div class="line">palette=8=#bfbfbf</div>
-<div class="line">palette=9=#FF7f00</div>
-<div class="line">palette=10=#00FFa0</div>
-<div class="line">palette=11=#FFcf00</div>
-<div class="line">palette=12=#005fFF</div>
-<div class="line">palette=13=#FF00FF</div>
-<div class="line">palette=14=#00ffff</div>
-<div class="line">palette=15=#e0d0d0</div>
-<div class="line"> </div>
-<div class="line"># extended colors</div>
-<div class="line">background = #000720</div>
-<div class="line">foreground = #e0d0d0</div>
-<div class="line">cursor-color = #f0f0f0</div>
-<div class="line">selection-background = #e0d0d0</div>
-<div class="line">selection-foreground = #000000</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="kitty"></a>
-Kitty</h3>
-<div class="fragment"><div class="line"># ~/.config/kitty/kitty.conf</div>
-<div class="line">#</div>
-<div class="line">shell xsh</div>
-<div class="line"># include ~/.config/kitty/fonts/default_font</div>
-<div class="line"># BEGIN_KITTY_FONTS</div>
-<div class="line">font_family      JetBrainsMono NFM Medium</div>
-<div class="line">bold_font        JetBrainsMono NFM ExtraBold</div>
-<div class="line">italic_font      JetBrainsMono NFM Italic</div>
-<div class="line">bold_italic_font JetBrainsMono NFM Bold Italic</div>
-<div class="line"># END_KITTY_FONTS</div>
-<div class="line">remember_window_size no</div>
-<div class="line">font_size 15.0</div>
-<div class="line">initial_window_width    95c</div>
-<div class="line">initial_window_height   50c</div>
-<div class="line"># include ~/.config/kitty/themes/default_theme</div>
-<div class="line"># high_contrast3</div>
-<div class="line">#</div>
-<div class="line">url_color               #a0e0ff</div>
-<div class="line">cursor                  #ffffff</div>
-<div class="line">cursor_text_color       #000000</div>
-<div class="line"> </div>
-<div class="line"># Tabs</div>
-<div class="line">active_tab_background   #001e1e</div>
-<div class="line">active_tab_foreground   #afd0ff</div>
-<div class="line">inactive_tab_background #2030a0</div>
-<div class="line">inactive_tab_foreground #c0c0c0</div>
-<div class="line">#tab_bar_background     #313131</div>
-<div class="line"> </div>
-<div class="line"># Windows</div>
-<div class="line">active_border_color     #79a8ff</div>
-<div class="line">inactive_border_color   #646464</div>
-<div class="line"> </div>
-<div class="line">color0    #000000</div>
-<div class="line">color1    #FF3f3f</div>
-<div class="line">color2    #4ff07f</div>
-<div class="line">color3    #FFef4f</div>
-<div class="line">color4    #5faFff</div>
-<div class="line">color5    #f077f0</div>
-<div class="line">color6    #8fdFfF</div>
-<div class="line">color7    #FF8f5f</div>
-<div class="line">color8    #bfbfbf</div>
-<div class="line">color9    #FF7f00</div>
-<div class="line">color10    #00FFa0</div>
-<div class="line">color11    #FFcf00</div>
-<div class="line">color12    #005fFF</div>
-<div class="line">color13    #FF00FF</div>
-<div class="line">color14    #00ffff</div>
-<div class="line">color15    #e0d0d0</div>
-<div class="line"> </div>
-<div class="line"># extended colors</div>
-<div class="line">background              #000720</div>
-<div class="line">foreground              #e0d0d0</div>
-<div class="line">cursor                  #f0f0f0</div>
-<div class="line">selection_background    #e0d0d0</div>
-<div class="line">selection_foreground    #000000</div>
-</div><!-- fragment --><hr  />
-<h3 class="doxsection"><a class="anchor" id="alacritty"></a>
-Alacritty</h3>
-<div class="fragment"><div class="line"># /home/bill/.config/alacritty/alacritty.toml</div>
-<div class="line"># Bill Waller</div>
-<div class="line"> </div>
-<div class="line">[terminal.shell]</div>
-<div class="line">program = &quot;/usr/local/bin/xsh&quot;</div>
-<div class="line"> </div>
-<div class="line">[general]</div>
-<div class="line"> </div>
-<div class="line"># import = [</div>
-<div class="line">#     &quot;~/.config/alacritty/fonts/default_font.toml&quot;,</div>
-<div class="line">#     &quot;~/.config/alacritty/themes/default_theme.toml&quot;,</div>
-<div class="line"># ]</div>
-<div class="line"> </div>
-<div class="line">[font]</div>
-<div class="line"># BEGIN_ALACRITTY_FONT</div>
-<div class="line">normal = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;Regular&quot; }</div>
-<div class="line">bold = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;ExtraBold&quot; }</div>
-<div class="line">italic = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;Italic&quot; }</div>
-<div class="line">bold_italic = { family = &quot;JetBrainsMono NFM&quot;, style = &quot;Bold Italic&quot; }</div>
-<div class="line"># END_ALACRITTY_FONT</div>
-<div class="line">size = 15</div>
-<div class="line"> </div>
-<div class="line"># dynamic_title = true</div>
-<div class="line"># decorations = &quot;Full&quot;</div>
-<div class="line"># decorations_theme_variant = &quot;Dark&quot;</div>
-<div class="line"> </div>
-<div class="line">[window]</div>
-<div class="line">dimensions = { columns = 95, lines = 50 }</div>
-<div class="line"> </div>
-<div class="line">[scrolling]</div>
-<div class="line">history = 10000</div>
-<div class="line"> </div>
-<div class="line">[colors.primary]</div>
-<div class="line">background  = &#39;#000000&#39;</div>
-<div class="line">foreground  = &#39;#c0c0c0&#39;</div>
-<div class="line"> </div>
-<div class="line">[colors.normal]</div>
-<div class="line">black       = &#39;#000000&#39;</div>
-<div class="line">red         = &#39;#FF0000&#39;</div>
-<div class="line">green       = &#39;#00FF8f&#39;</div>
-<div class="line">yellow      = &#39;#FFc700&#39;</div>
-<div class="line">blue        = &#39;#009FFF&#39;</div>
-<div class="line">magenta     = &#39;#e070e0&#39;</div>
-<div class="line">cyan        = &#39;#00CFDF&#39;</div>
-<div class="line">white       = &#39;#FF7f00&#39;</div>
-<div class="line">[colors.bright]</div>
-<div class="line">black       = &#39;#7f7f7f&#39;</div>
-<div class="line">red         = &#39;#FF7F00&#39;</div>
-<div class="line">green       = &#39;#00FFa0&#39;</div>
-<div class="line">yellow      = &#39;#FFEf00&#39;</div>
-<div class="line">blue        = &#39;#0000FF&#39;</div>
-<div class="line">magenta     = &#39;#FF00FF&#39;</div>
-<div class="line">cyan        = &#39;#00ffff&#39;</div>
-<div class="line">white       = &#39;#FFFFFF&#39;</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="tree-sitter-1"></a>
-Tree-Sitter</h2>
-<p>Before you can use Tree-Sitter-CLI, you will need to install the parsers for your file types. Below an example layout for parser installation.</p>
+<div class="textblock"><p><a class="anchor" id="c-menu-start-up-options-1"></a></p>
+<p>All of C-Menu's long options, shown as, &ndash;option_name, in the following ../screen can be can be set on the command line or in the C-Menu configuration file, ~/.minitrc. The "--" prefix is omitted in the configuration file. Options commonly used on the command line also have a single-letter short option equivalent. Command line options override configuration file options, allowing you to customize the behavior of your applications on a per-instance basis.</p>
 <div class="image">
-<img src="../../tree-sitter-parsers.png" alt=""/>
+<img src="../../C-Menu-help.png" alt=""/>
 <div class="caption">
-Tree-Sitter Configuration</div></div>
+C-Menu-Help</div></div>
+    <h2 class="doxsection"><a class="anchor" id="c-menu-menu-1"></a>
+C-Menu Menu</h2>
+<div class="image">
+<img src="../../applications_menu.png" alt=""/>
+<div class="caption">
+Applications Menu</div></div>
+    <p>The menu above is intended to demonstrate a variety of features and techniques that can be applied to your projects. It is not meant to be a practical menu for everyday use, but rather a showcase of what is possible with C-Menu. Think of yourself as an artist and C-Menu as your canvas. What will you create?</p>
+<h2 class="doxsection"><a class="anchor" id="menu-description-file-1"></a>
+Menu Description File</h2>
+<p>Below is an example of source defining the above menu. This is the part you design as the top-level framework for your application.</p>
+<p>This section will break down the Example C-Menu Applications <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> and explain how it works from the perspective of a developer using C-Menu to build applications. With this understanding, you will be ready to create custom software products with C-Menu.</p>
+<p><img src="../../applications_menu.m.png" alt="" class="inline" title="Menu Description File"/>    </p>
+<p>Notice the red highlighted lines in the menu description file above. That is a menu option that demonstrates how to edit the menu description files within C-Menu. You can use C-Menu to edit the menu description files that define your application, allowing you to make changes to your application's menu structure and commands without needing to exit the application. With this feature, you can quickly iterate on your application's design and functionality.</p>
+<p>Lets examine the <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> source above and break down how it works. The source file is a simple text file that contains a series of User Choices and Commands.</p>
+<h3 class="doxsection"><a class="anchor" id="example-application-menu-1"></a>
+Example Application Menu</h3>
+<p>In the C-Menu application directory, you will find an example, ~/menuapp/msrc/main.m. This example is designed to demonstrate a variety of features and techniques that can be applied to your projects. It is not meant to be a practical menu for everyday use, but rather a showcase of what is possible with C-Menu. Think of yourself as an artist and C-Menu as your canvas. What will you create?</p>
+<h4 class="doxsection"><a class="anchor" id="full-screen-root-shell-1"></a>
+Full Screen Root Shell</h4>
+<p>Synopsis: Demonstrates how to use C-Menu to execute an external command, in this case, "rsh", which is a root shell alternative. When the user selects this menu item, C-Menu executes the "rsh" command, providing the user with a full-screen shell with root privileges. This can be useful for performing administrative tasks or troubleshooting issues that require elevated privileges.</p>
+<p>Requirements: rsh owned by root, with setuid permissions.</p>
+<div class="fragment"><div class="line">chown root:root ~/menuapp/bin/rsh</div>
+<div class="line">chmod 4711 ~/menuapp/bin/rsh</div>
+</div><!-- fragment --><h4 class="doxsection"><a class="anchor" id="workstation-configuration-1"></a>
+Workstation Configuration</h4>
+<p>Synopsis: Demonstrates how to create a sub-menu by specifying a menu description file, "workstation_config.m", which will be loaded and displayed when the menu item is selected. This allows you to create a hierarchical menu structure, with multiple levels of sub-menus, to organize your application and provide a more intuitive user experience.</p>
+<p>Requirements: A menu description file, ~/menuapp/msrc/workstation_config.m, normally included with C-Menu. Alternatively, you can create this file with any text editor and populate it with menu items and commands relevant to workstation configuration tasks.</p>
+<h4 class="doxsection"><a class="anchor" id="diagnostic-tools-1"></a>
+Diagnostic Tools</h4>
+<p>Synopsis: Demonstrates how to create a sub-menu by specifying a menu description file, ~/menuapp/msrc/diag.m, which will be loaded and displayed when the menu item is selected. Similar to Workstation Configuration.</p>
+<p>Requirements: A menu description file, ~/menuapp/msrc/diag.m, normally included with C-Menu. Alternatively, you can create this file with any text editor and populate it with menu items and commands relevant to diagnostic tools and tasks.</p>
+<h4 class="doxsection"><a class="anchor" id="installment-loan-calculations-3"></a>
+Installment Loan Calculations</h4>
+<p>Synopsis: Demonstrates how to use C-Menu <a class="el" href="../../d1/dcd/a01351.html">Form</a> to create a form-based interface for performing calculations based on form data. When the user selects this menu item, C-Menu executes the form command with the specified description file, "iloan.f". <a class="el" href="../../d1/dcd/a01351.html">Form</a> opens the input file, "iloan.dat", reads field data, and displays it in the <a class="el" href="../../d1/dcd/a01351.html">Form</a> window. The user edits the data and presses F10 Accept. <a class="el" href="../../d1/dcd/a01351.html">Form</a> then executes the "iloan" executable with the form data as arguments. "iloan" processes the form data and writes the resulting data to standard output. <a class="el" href="../../d1/dcd/a01351.html">Form</a> reads the resulting data from a pipe and displays the updated form data. The user can experiment with the numbers in the form, running as many calculation cycles as necessary. When the user gets the desired results, and presses F10 a second time, ~/menuapp/bin/amort executes with the form data and a loan amortization report is displayed with view.</p>
+<p>Requirements: iloan and amort executables: These are simple programs distributed with C-Menu specifically for the purpose of this demonstration. If you don't have the "iloan" executable distributed with C-Menu, you can create a simple version of it in C or any programming language of your choice that accepts the data as arguments, standard input, or file, performs calculations, and writes the resulting data to standard output. You could even create a shell script or awk script to perform the calculations if you prefer. The point is to demonstrate how to use external executables with C-Menu <a class="el" href="../../d1/dcd/a01351.html">Form</a>, so the specific implementation of "iloan" is not important as long as it can read form data from standard input, perform calculations, and write the resulting data to standard output because that's all you need to integrate an external application with C-Menu <a class="el" href="../../d1/dcd/a01351.html">Form</a>.</p>
+<h4 class="doxsection"><a class="anchor" id="listener-research-1"></a>
+Listener Research</h4>
+<p>Synopsis: This menu item is a placeholder for a future demonstration of how to use C-Menu to create an interface for conducting research on listeners, such as audio or network listeners. The specific implementation and requirements for this menu item will depend on the type of listener research being conducted and the tools and technologies being used.</p>
+<p>Requirements: None.</p>
+<h4 class="doxsection"><a class="anchor" id="cash-receipts-3"></a>
+Cash Receipts</h4>
+<p>Synopsis: Demonstrates how to use C-Menu <a class="el" href="../../d1/dcd/a01351.html">Form</a> to create a form-based interface for entering, editing, validating, processing, and submitting data related to cash receipts. When the user selects this menu item, C-Menu executes the form command with the specified description file, "receipt.f". <a class="el" href="../../d1/dcd/a01351.html">Form</a> opens the input file, "receipt.dat", reads field data, and displays it in the <a class="el" href="../../d1/dcd/a01351.html">Form</a> window. The user edits the data and presses F10 Accept. <a class="el" href="../../d1/dcd/a01351.html">Form</a> then writes the updated data to the specified output file, "receipt.dat". This menu item is not very useful as it stands. It is included here as a challenge in some industrious developer who can write external executables or scripts to provide database interaction and ancillary menu items to track deposit slips and batch numbers and post to general ledger.Synopsis:</p>
+<p>Requirements: None</p>
+<h4 class="doxsection"><a class="anchor" id="form-data-types-3"></a>
+Form Data Types</h4>
+<p>Synopsis: Demonstrates how to create forms using various data types.</p>
+<p>Requirements: None</p>
+<h4 class="doxsection"><a class="anchor" id="rustlings-source-2"></a>
+Rustlings Source</h4>
+<p>Synopsis: Demonstrates how to use C-Menu to streamline a repetitive work flow using lf and C-Menu <a class="el" href="../../dd/d8b/a01363.html" title="Pick data structure.">Pick</a> to automate the process of navigating to a directory, filtering for specific files, and opening those files in an editor. When the user selects this menu item, C-Menu executes the specified command line which launches <a class="el" href="../../dd/d8b/a01363.html" title="Pick data structure.">Pick</a> with the output of the "rust_src" script as its input. The "rust_src" script generates a list of Rust source files from the "exercises" directory, which is part of the Rustlings project. The user can then filter and select a file from the list, and <a class="el" href="../../dd/d8b/a01363.html" title="Pick data structure.">Pick</a> will automatically open the selected file in nvim for editing.</p>
+<p>Requirements:</p>
+<ul>
+<li>A shell script, "rust_src", located in ~/menuapp/bin, which calls lf to create a sorted file list of Rust source files from the "exercises" directory. The "rust_src" script is included with C-Menu, but you can create your own version of it if you prefer. The important thing is that it generates a list of files that can be used as input for <a class="el" href="../../dd/d8b/a01363.html" title="Pick data structure.">Pick</a>.</li>
+<li>Rust development environment with the Rustlings exercises directory. You can set up a Rust development environment and download the Rustlings exercises from the official Rustlings repository on GitHub. See Augmenting C-Menu for details on how to install Rustup, Rust, and Rustlings on your system. The Rustlings directory or a link thereto must be located in your current working directory.</li>
+</ul>
+<h4 class="doxsection"><a class="anchor" id="view-manual-pages-1"></a>
+View Manual Pages</h4>
+<p>Synopsis: Instead of typing man commands, this menu item allows you to select from a group of manual pages residing in ~/menuapp/man.</p>
+<p>Requirements: A group of manual pages stored in the ~/menuapp/man directory.</p>
+<h4 class="doxsection"><a class="anchor" id="edit-c-files-in-current-directory-2"></a>
+Edit .c Files in Current Directory</h4>
+<p>: Edit .c Files in Current Directory !pick -S project*src -T "Project Tree - Select File to Edit" -c nvim.sh %% : <a class="el" href="../../d6/d4d/a01371.html">View</a> C-Menu Source with Tree-Sitter !pick -S project_src -n 1 -T "Select Project Source to Highlight" -c "view -L 60 -C 85 -S \"tree-sitter highlight %%\"" : <a class="el" href="../../d6/d4d/a01371.html">View</a> Source with Tree-Sitter !pick -S "lf -S -d 5 . \".*\.(rs|c|h|sh|lua|py|cpp|js|html|css)$\"" -n 1 -T "Select Source File to Highlight" -c "view -L 60 -C 85 -S \"tree-sitter highlight %%\"" : lf Help !view -Nf -L50 -C86 ~/menuapp/help/lf.help : <a class="el" href="../../d6/d4d/a01371.html">View</a> Data Types Help File !view -Nf -L47 -C85 -S "bat --theme ansi -l Crystal -f ~/menuapp/help/fields.hlp" : <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> Description With Bat Syntax Highlighting !view -Nf -L 39 -C 85 -S "bat --theme ansi -l Crystal -f ~/menuapp/msrc/main.m" : <a class="el" href="../../d6/d4d/a01371.html">View</a> C-Menu Command <a class="el" href="../../d8/d4e/a01355.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Options !view -Nf -L66 -C75 ~/menuapp/help/menu.help : <a class="el" href="../../d6/d4d/a01371.html">View</a> Highlighted <a class="el" href="../../d4/d5d/a01202.html" title="The working part of View.">view_engine.c</a> !view -N -L66 -C85 ~/menuapp/help/view_engine.c : Exit Applications !return</p>
+<h2 class="doxsection"><a class="anchor" id="how-menu-works-1"></a>
+How Menu Works</h2>
+<p>The menu description file is a simple text file that contains a series of User Choices and Commands. The first line of the menu description file is used as the <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> title, which is displayed at the top of the <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> window. Subsequent lines beginning with ":" are user choices that will be displayed in the menu. Lines beginning with "!" are commands to be executed by <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> when the corresponding menu item is selected. Lines beginning with "#" are comments.</p>
+<p>There are no requirements for naming menu description files, but it is common practice to use the ".m" file extension for menu description files. The menu description file can be located anywhere in the file system, but it is common practice to store menu description files in a dedicated directory, such as ~/menuapp/msrc. If you follow this convention, you can simply specify the menu description file name without a path when referencing it in a command line, and <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> will look for the file in the ~/menuapp/msrc directory.</p>
+<h2 class="doxsection"><a class="anchor" id="menu-key-characters-1"></a>
+Menu Key characters</h2>
+<p>Each menu item has a key character that the user can press to select that menu item.</p>
+<p>Earlier versions of C-Menu allowed only upper case letters as menu key characters. This became an impediment for larger menus, so we expanded the range of valid menu key characters to "!" through "~" (0x21 - 0x7e).</p>
+<p><a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> uses a rudamentary algorithm to determine the key characters for menu items. It scans the menu text for the first character that is not a space, not already reserved, and in the valid key character range. If no such character is found, <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> will select the first unreserved letter in the valid range, even though it may not be in the menu text.</p>
+<p>You may specify any character as a key by including it immediately (no space separation) following a dash ("-") as the first non-blank character in the the menu item text.</p>
+<div class="fragment"><div class="line">:      -TDiagnostic Tools</div>
+</div><!-- fragment --><p>The above menu item will be displayed as " T - Diagnostic Tools" and the "T" will be the key character for that menu item.</p>
+<p>Lower case ("q") is reserved as a key for the hidden "Quit", "Exit", "Return", etc. menu item which is part of every menu.</p>
+<p>As an additional visual queue, key characters in the menu text will be displayed using "nt_hl_rev_fg" and "nt_hl_rev_bg" color pair. If you prefer not to use this visual queue, you can set "nt_hl_rev_fg" to the same color as "nt_rev_fg" and "nt_hl_rev_bg" to the same color as "nt_rev_bg" to the same color.</p>
+<p>These colors are defined in the C-Menu configuration as six-digit hex <a class="el" href="../../de/d69/a01311.html">RGB</a> values:</p>
+<div class="fragment"><div class="line"># ~/menuapp/.minitrc</div>
+<div class="line">nt_fg=#d0d0d0</div>
+<div class="line">nt_bg=#000000</div>
+<div class="line">nt_rev_fg=#000000</div>
+<div class="line">nt_rev_bg=#d0d0d0</div>
+<div class="line">nt_hl_fg=#f00000</div>
+<div class="line">nt_hl_bg=#000000</div>
+<div class="line">nt_hl_rev_fg=#a00000</div>
+<div class="line">nt_hl_rev_bg=#f0f0f0</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="user-choices-commands-and-comments-1"></a>
+User Choices, Commands, and comments</h2>
+<p>Lines beginning with ":" are the User Choices.</p>
+<p>Lines beginning with "!" are commands to be executed by <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> when the corresponding menu item is selected. These commands can be used to invoke internal C-Menu functions execute external commands, and run shell scripts.</p>
+<p>Lines beginning with "#" are comments.</p>
+<p>The first text line will be used as the <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> title to be displayed at the top window border.</p>
+<div class="fragment"><div class="line">: APPLICATIONS</div>
+</div><!-- fragment --><p>Subsequent lines beginning with ":" are user choices that will be displayed in the menu.</p>
+<p>The command line, beginning with "!" following each menu choice is executed by C-Menu <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> when the user selects that menu item. The user can click the desired <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> line with the mouse, position the cursor over the desired <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> line by using navigation keys, up and down arrow keys, or j and k, and the pressing enter or pressing the letter on the left of the desired <a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> item.</p>
+<p><a class="el" href="../../dc/d4b/a01359.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> items always consist of the text displayed in the menu and a command to be executed when the menu item is selected. The command can be an internal C-Menu function, an external command, or a shell script. The command can also include options and arguments to customize its behavior.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line">:     Full Screen Shell</div>
+<div class="line">!exec rsh</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="sub-menus-1"></a>
+Sub-Menus</h2>
+<p>The following menu item, Workstation Configuration, demonstrates how to create a sub-menu by specifying a menu description file, "workstation_config.m", which will be loaded and displayed when the menu item is selected. This allows you to create a hierarchical menu structure, with multiple levels of sub-menus, to organize your application and provide a more intuitive user experience.</p>
+<div class="fragment"><div class="line">:     Workstation Configuration</div>
+<div class="line">!menu workstation_config.m</div>
+</div><!-- fragment --><div class="image">
+<img src="../../workstation_config.png" alt=""/>
+<div class="caption">
+Workstation Configuration</div></div>
+    <p>Diagnostic Tools is another menu item that specifies a menu description file, "diag.m", which will be loaded and displayed when the menu item is selected. This demonstrates how you can create multiple menus for different purposes and link them together through menu items.</p>
+<div class="fragment"><div class="line">:   Diagnostic Tools</div>
+<div class="line">!menu diag.m</div>
+</div><!-- fragment --><div class="image">
+<img src="../../Diagnostic_Tools.png" alt=""/>
+<div class="caption">
+Diagnostic Tools</div></div>
     <hr  />
-<h3 class="doxsection"><a class="anchor" id="tree-sitter-configjson"></a>
-Tree-Sitter config.json</h3>
-<div class="fragment"><div class="line">{</div>
-<div class="line">  &quot;parser-directories&quot;: [</div>
-<div class="line">    &quot;/home/bill/src&quot;,</div>
-<div class="line">    &quot;/home/bill/.config/tree-sitter/parsers&quot;</div>
-<div class="line">  ],</div>
-<div class="line">  &quot;theme&quot;: {</div>
-<div class="line">    &quot;attribute&quot;: {</div>
-<div class="line">      &quot;color&quot;: &quot;#f9a080&quot;,</div>
-<div class="line">      &quot;italic&quot;: true</div>
-<div class="line">    },</div>
-<div class="line">    &quot;comment&quot;: {</div>
-<div class="line">      &quot;color&quot;: &quot;#a0a0a0&quot;,</div>
-<div class="line">      &quot;italic&quot;: true</div>
-<div class="line">    },</div>
-<div class="line">    &quot;constant&quot;: &quot;#00b0ff&quot;,</div>
-<div class="line">    &quot;constant.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#f000f0&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;constructor&quot;: &quot;#00ffbf&quot;,</div>
-<div class="line">    &quot;embedded&quot;: null,</div>
-<div class="line">    &quot;function&quot;: &quot;#ff4f00&quot;,</div>
-<div class="line">    &quot;function_definition&quot;: &quot;#f07070&quot;,</div>
-<div class="line">    &quot;function_declaration&quot;: &quot;#70b0f0&quot;,</div>
-<div class="line">    &quot;function.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#d070ff&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;keyword&quot;: &quot;#00b07f&quot;,</div>
-<div class="line">    &quot;module&quot;: &quot;#0000f0&quot;,</div>
-<div class="line">    &quot;number&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ffaf90&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;operator&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ff00ff&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;property&quot;: &quot;#00b0ff&quot;,</div>
-<div class="line">    &quot;property.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ff4f00&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;punctuation&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;punctuation.bracket&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;punctuation.delimiter&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;punctuation.special&quot;: &quot;#f000f0&quot;,</div>
-<div class="line">    &quot;string&quot;: &quot;#90c0ff&quot;,</div>
-<div class="line">    &quot;string.special&quot;: &quot;#f07fff&quot;,</div>
-<div class="line">    &quot;tag&quot;: &quot;#ff0000&quot;,</div>
-<div class="line">    &quot;type&quot;: &quot;#3fefff&quot;,</div>
-<div class="line">    &quot;type.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#ff5070&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;variable&quot;: &quot;#f09040&quot;,</div>
-<div class="line">    &quot;variable.builtin&quot;: {</div>
-<div class="line">      &quot;bold&quot;: true,</div>
-<div class="line">      &quot;color&quot;: &quot;#00d050&quot;</div>
-<div class="line">    },</div>
-<div class="line">    &quot;variable.parameter&quot;: {</div>
-<div class="line">      &quot;color&quot;: &quot;#00d050&quot;,</div>
-<div class="line">      &quot;underline&quot;: true</div>
-<div class="line">    }</div>
-<div class="line">  }</div>
-<div class="line">}</div>
-</div><!-- fragment --><hr  />
  </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
