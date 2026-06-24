@@ -1,27 +1,7 @@
 var a01178 =
 [
-    [ "FALSE", "d8/d11/a01178.html#aa93f0eb578d23995850d61f7d61c55c1", null ],
-    [ "TRUE", "d8/d11/a01178.html#aa8cecfc5c5c054d2875c03e77b7be15d", null ],
-    [ "ABEND", "d8/d11/a01178.html#a4a2db85232c335b75115eb065aa3eb44", null ],
-    [ "accept_i", "d8/d11/a01178.html#a85540e1e56863020c05a2310d704f98d", null ],
-    [ "accept_n", "d8/d11/a01178.html#a1c55350d7b96f1e0cfef3f9effdc06aa", null ],
-    [ "accept_pmt", "d8/d11/a01178.html#a3c03abf25cc705693ee3c074ccfc6cb5", null ],
-    [ "accept_pv", "d8/d11/a01178.html#a487515b67e372105a75db08e8c522492", null ],
-    [ "accept_str", "d8/d11/a01178.html#a7800e5ade94fe5dce9d4092ddb9a10da", null ],
-    [ "calculate_i", "d8/d11/a01178.html#a30ca82382942c5afa41630a5ddb234f3", null ],
-    [ "calculate_n", "d8/d11/a01178.html#aee54aae25366d4a8451167208179b5e2", null ],
-    [ "calculate_pmt", "d8/d11/a01178.html#a5ba79bae83ea46ba59f6d76a7c5f9f3a", null ],
-    [ "calculate_pv", "d8/d11/a01178.html#a7c5b9806af7d2d661bca9716e5066eb1", null ],
-    [ "error_press_any_key", "d8/d11/a01178.html#a699cf5b00c7a752085ff14914d389e9b", null ],
-    [ "format_currency", "d8/d11/a01178.html#aabbf2a4c3b4dd58ccdef4aa97ed27263", null ],
-    [ "format_interest", "d8/d11/a01178.html#a7d543019ae7349ca4cfa3587c218e4c4", null ],
-    [ "is_numeric", "d8/d11/a01178.html#a99d73b85186227ec686f1ba0185476b9", null ],
-    [ "main", "d8/d11/a01178.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "numbers", "d8/d11/a01178.html#a39f5738993e613333dafb2947c1fa799", null ],
-    [ "f_i", "d8/d11/a01178.html#a71053a75a3cb754fcd3d4c3beb3ca700", null ],
-    [ "f_n", "d8/d11/a01178.html#a1a69dc91ad0a848d39598a652e147340", null ],
-    [ "f_pmt", "d8/d11/a01178.html#a9e362f76edf56dd5e77a4a6a8e2f4342", null ],
-    [ "f_pv", "d8/d11/a01178.html#a8a19fd0f5c231eb3fd8eda3419c323e7", null ],
-    [ "f_quiet", "d8/d11/a01178.html#a4497a6c758478afde97da3443ecabee8", null ],
-    [ "in_str", "d8/d11/a01178.html#a0fdf926da32e462b1a7d62c7c891e061", null ]
+    [ "popup_form", "d8/d11/a01178.html#a3730e03ab56c382fc493dca5394e965c", null ],
+    [ "popup_menu", "d8/d11/a01178.html#a138a8bac23cdd5563712224861d74dc9", null ],
+    [ "popup_pick", "d8/d11/a01178.html#a65117e50a2ad97a424524264e30c2d19", null ],
+    [ "popup_view", "d8/d11/a01178.html#a1ac5343473fe2832d14fe14c4e534f21", null ]
 ];

@@ -1,6 +1,7 @@
 var a01369 =
 [
-    [ "capacity", "d1/d17/a01369.html#a16664713f3a2d038c0c6f68ca9475886", null ],
-    [ "items", "d1/d17/a01369.html#a3fade253de43fe0175b33401f35f467a", null ],
-    [ "top", "d1/d17/a01369.html#a1dbe09fba72b4c6cb39d080682a800d3", null ]
+    [ "col", "d1/d17/a01369.html#a5d4a771a0f5b8f8542a2c235001ca70a", null ],
+    [ "len", "d1/d17/a01369.html#a5227944302f4c823078fcc29c8205114", null ],
+    [ "line", "d1/d17/a01369.html#a8fe1ec2a1ec422e83737ccb864bce0da", null ],
+    [ "str", "d1/d17/a01369.html#a639b26c7f0903f268998f88470840ba0", null ]
 ];

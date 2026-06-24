@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: pick_engine.c File Reference</title>
+<title>C-Menu: iloan.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,538 +110,1125 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dc/d70/a01187.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">pick_engine.c File Reference</div></div>
+  <div class="headertitle"><div class="title">iloan.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>pick from a list of choices  
+<p>Installment Loan Calculator.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;fcntl.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/mman.h&gt;</code><br />
-<code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;sys/wait.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for pick_engine.c:</div>
+Include dependency graph for iloan.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d97/a01188.svg" width="100%" height="556"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d97/a01188.svg" width="655" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../dc/d70/a01187_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aa93f0eb578d23995850d61f7d61c55c1" id="r_aa93f0eb578d23995850d61f7d61c55c1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:aa8cecfc5c5c054d2875c03e77b7be15d" id="r_aa8cecfc5c5c054d2875c03e77b7be15d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>&#160;&#160;&#160;1</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga98b36615c0627c4195c40b6c23d6062a" id="r_ga98b36615c0627c4195c40b6c23d6062a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga98b36615c0627c4195c40b6c23d6062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deselects the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:a9882229bc5852eb83de0aafdb99b08e7" id="r_a9882229bc5852eb83de0aafdb99b08e7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9882229bc5852eb83de0aafdb99b08e7">destroy_pick_view</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *)</td></tr>
-<tr class="memitem:gacd6b9991f2aa305f622f5d2515815bba" id="r_gacd6b9991f2aa305f622f5d2515815bba"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gacd6b9991f2aa305f622f5d2515815bba">display_page</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:gacd6b9991f2aa305f622f5d2515815bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
-<tr class="memitem:gaeebc4c0b94ca97d753e10a0cd1798730" id="r_gaeebc4c0b94ca97d753e10a0cd1798730"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gaeebc4c0b94ca97d753e10a0cd1798730">display_pick_help</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaeebc4c0b94ca97d753e10a0cd1798730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the help screen for the pick interface using view.  <br /></td></tr>
-<tr class="memitem:a1f95a0fa1e35211caccf3a6ae9ab93de" id="r_a1f95a0fa1e35211caccf3a6ae9ab93de"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1f95a0fa1e35211caccf3a6ae9ab93de">end_pick_view</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *)</td></tr>
-<tr class="memitem:gaf7fcbb1c8b67a4d11c86ba7209f397c2" id="r_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes specified command with selected objects as arguments.  <br /></td></tr>
-<tr class="memitem:ga0e5b61dc395d1d0e5dacfd857da3de79" id="r_ga0e5b61dc395d1d0e5dacfd857da3de79"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga0e5b61dc395d1d0e5dacfd857da3de79">init_pick</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init, int argc, char **argv, int by, int bx)</td></tr>
-<tr class="memdesc:ga0e5b61dc395d1d0e5dacfd857da3de79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick structure and opens pick input file or pipe.  <br /></td></tr>
-<tr class="memitem:ga91b2cda407803ee4367f7efd5487863c" id="r_ga91b2cda407803ee4367f7efd5487863c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga91b2cda407803ee4367f7efd5487863c">match_objects</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick, char *s)</td></tr>
-<tr class="memdesc:ga91b2cda407803ee4367f7efd5487863c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
-<tr class="memitem:a5e885d06c6a1fd6df61223f806f5ac4a" id="r_a5e885d06c6a1fd6df61223f806f5ac4a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5e885d06c6a1fd6df61223f806f5ac4a">new_pick_view</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *)</td></tr>
-<tr class="memitem:aa55f544851e15ae7851b7a519c1ea521" id="r_aa55f544851e15ae7851b7a519c1ea521"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa55f544851e15ae7851b7a519c1ea521">new_view_file</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *, char *)</td></tr>
-<tr class="memitem:gaf20c847dc030116f9999adbba681000c" id="r_gaf20c847dc030116f9999adbba681000c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gaf20c847dc030116f9999adbba681000c">open_pick_win</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaf20c847dc030116f9999adbba681000c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the pick window based on the parameters specified in the <a class="el" href="../../dd/d8b/a01363.html" title="Pick data structure.">Pick</a> structure.  <br /></td></tr>
-<tr class="memitem:ga8feb6cd586d503a676b831ec722576fb" id="r_ga8feb6cd586d503a676b831ec722576fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga8feb6cd586d503a676b831ec722576fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs selected objects to specified output file.  <br /></td></tr>
-<tr class="memitem:gab97dcab41017c5132f52b682437a151e" id="r_gab97dcab41017c5132f52b682437a151e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gab97dcab41017c5132f52b682437a151e">pick_engine</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gab97dcab41017c5132f52b682437a151e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick interface, calculates window size and position, and enters picker loop.  <br /></td></tr>
-<tr class="memitem:ga0dae7df97392da1a79cba0f852c11f5f" id="r_ga0dae7df97392da1a79cba0f852c11f5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init, char *field)</td></tr>
-<tr class="memdesc:ga0dae7df97392da1a79cba0f852c11f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop for handling user input and interactions in the pick interface.  <br /></td></tr>
-<tr class="memitem:gaabda879000cf8135245ef451de08f780" id="r_gaabda879000cf8135245ef451de08f780"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gaabda879000cf8135245ef451de08f780">read_pick_input</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gaabda879000cf8135245ef451de08f780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads pick input from file pointer and saves objects into pick structure.  <br /></td></tr>
-<tr class="memitem:a969bb5ac3fcb5f3565448e8d0da6efc4" id="r_a969bb5ac3fcb5f3565448e8d0da6efc4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a969bb5ac3fcb5f3565448e8d0da6efc4">read_theme</a> (<a class="el" href="../../d8/d38/a01299.html">Init</a> *)</td></tr>
-<tr class="memitem:gab2173ff8fb800d126c180487744672d5" id="r_gab2173ff8fb800d126c180487744672d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#gab2173ff8fb800d126c180487744672d5">reverse_object</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:gab2173ff8fb800d126c180487744672d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the display of the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:ga02f90007f2422dd2094ab64569e157f0" id="r_ga02f90007f2422dd2094ab64569e157f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga02f90007f2422dd2094ab64569e157f0">save_object</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick, char *s)</td></tr>
-<tr class="memdesc:ga02f90007f2422dd2094ab64569e157f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a string as an object in the pick structure.  <br /></td></tr>
-<tr class="memitem:ga036c2f9cdf302cced4d9b703022664c0" id="r_ga036c2f9cdf302cced4d9b703022664c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga036c2f9cdf302cced4d9b703022664c0">toggle_object</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga036c2f9cdf302cced4d9b703022664c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the selection state of the currently selected object in pick window.  <br /></td></tr>
-<tr class="memitem:ga650262f8279502ebc73607394dd7af13" id="r_ga650262f8279502ebc73607394dd7af13"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../dd/d18/a01284.html#ga650262f8279502ebc73607394dd7af13">unreverse_object</a> (<a class="el" href="../../dd/d8b/a01363.html">Pick</a> *pick)</td></tr>
-<tr class="memdesc:ga650262f8279502ebc73607394dd7af13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unreverses the display of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:a4a2db85232c335b75115eb065aa3eb44" id="r_a4a2db85232c335b75115eb065aa3eb44"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4a2db85232c335b75115eb065aa3eb44">ABEND</a> (int e)</td></tr>
+<tr class="memdesc:a4a2db85232c335b75115eb065aa3eb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ABEND function is a signal handler that is called when the program receives certain signals (e.g., SIGINT, SIGQUIT, SIGHUP). It takes an integer argument representing the signal number and prints an error message indicating that an abnormal end (ABEND) has occurred, along with the signal number. After displaying the message, it exits the program with a failure status.  <br /></td></tr>
+<tr class="memitem:a85540e1e56863020c05a2310d704f98d" id="r_a85540e1e56863020c05a2310d704f98d"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a85540e1e56863020c05a2310d704f98d">accept_i</a> ()</td></tr>
+<tr class="memdesc:a85540e1e56863020c05a2310d704f98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The accept_i function prompts the user to enter the annual interest rate for the loan. It validates the input to ensure it is numeric and non-negative. If the input is invalid, an error message is displayed, and the user is prompted to enter the value again until a valid input is provided.  <br /></td></tr>
+<tr class="memitem:a1c55350d7b96f1e0cfef3f9effdc06aa" id="r_a1c55350d7b96f1e0cfef3f9effdc06aa"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a1c55350d7b96f1e0cfef3f9effdc06aa">accept_n</a> ()</td></tr>
+<tr class="memdesc:a1c55350d7b96f1e0cfef3f9effdc06aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">The accept_n function prompts the user to enter the number of payments for the loan. It validates the input to ensure it is numeric and non-negative. If the input is invalid, an error message is displayed, and the user is prompted to enter the value again until a valid input is provided.  <br /></td></tr>
+<tr class="memitem:a3c03abf25cc705693ee3c074ccfc6cb5" id="r_a3c03abf25cc705693ee3c074ccfc6cb5"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a3c03abf25cc705693ee3c074ccfc6cb5">accept_pmt</a> ()</td></tr>
+<tr class="memitem:a487515b67e372105a75db08e8c522492" id="r_a487515b67e372105a75db08e8c522492"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a487515b67e372105a75db08e8c522492">accept_pv</a> ()</td></tr>
+<tr class="memdesc:a487515b67e372105a75db08e8c522492"><td class="mdescLeft">&#160;</td><td class="mdescRight">The following functions are used to accept user input for the present value, number of payments, interest rate, and payment amount. They validate the input to ensure it is numeric and meets the required conditions (e.g., non-negative). If the input is invalid, an error message is displayed, and the user is prompted to enter the value again.  <br /></td></tr>
+<tr class="memitem:a7800e5ade94fe5dce9d4092ddb9a10da" id="r_a7800e5ade94fe5dce9d4092ddb9a10da"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7800e5ade94fe5dce9d4092ddb9a10da">accept_str</a> (char *s)</td></tr>
+<tr class="memdesc:a7800e5ade94fe5dce9d4092ddb9a10da"><td class="mdescLeft">&#160;</td><td class="mdescRight">The accept_str function prompts the user with a given string and reads input from the standard input into a buffer. It uses the fprintf function to display the prompt and the read function to capture the user's input. The input is stored in the global buffer in_str, which can be used by other functions for further processing.  <br /></td></tr>
+<tr class="memitem:a30ca82382942c5afa41630a5ddb234f3" id="r_a30ca82382942c5afa41630a5ddb234f3"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a30ca82382942c5afa41630a5ddb234f3">calculate_i</a> (double pv, double n, double pmt)</td></tr>
+<tr class="memdesc:a30ca82382942c5afa41630a5ddb234f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calculate_i function calculates the annual interest rate for a loan based on the present value, number of payments, and payment amount. It uses an iterative method to find the interest rate that satisfies the loan equation. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs.  <br /></td></tr>
+<tr class="memitem:aee54aae25366d4a8451167208179b5e2" id="r_aee54aae25366d4a8451167208179b5e2"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#aee54aae25366d4a8451167208179b5e2">calculate_n</a> (double pv, double i, double pmt)</td></tr>
+<tr class="memdesc:aee54aae25366d4a8451167208179b5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calculate_n function calculates the number of payments required to pay off a loan based on the present value, interest rate, and payment amount. It uses logarithmic functions to compute the result. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs.  <br /></td></tr>
+<tr class="memitem:a5ba79bae83ea46ba59f6d76a7c5f9f3a" id="r_a5ba79bae83ea46ba59f6d76a7c5f9f3a"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a5ba79bae83ea46ba59f6d76a7c5f9f3a">calculate_pmt</a> (double pv, double n, double i)</td></tr>
+<tr class="memdesc:a5ba79bae83ea46ba59f6d76a7c5f9f3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calculate_pmt function calculates the payment amount for a loan based on the present value, number of payments, and interest rate. It uses the formula for the payment amount of an annuity to compute the result. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs.  <br /></td></tr>
+<tr class="memitem:a7c5b9806af7d2d661bca9716e5066eb1" id="r_a7c5b9806af7d2d661bca9716e5066eb1"><td class="memItemLeft">double&#160;</td><td class="memItemRight"><a class="el" href="#a7c5b9806af7d2d661bca9716e5066eb1">calculate_pv</a> (double n, double i, double pmt)</td></tr>
+<tr class="memdesc:a7c5b9806af7d2d661bca9716e5066eb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The calculate_pv function calculates the present value of a loan based on the number of payments, interest rate, and payment amount. It uses the formula for the present value of an annuity to compute the result. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs.  <br /></td></tr>
+<tr class="memitem:a699cf5b00c7a752085ff14914d389e9b" id="r_a699cf5b00c7a752085ff14914d389e9b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a> (char *s)</td></tr>
+<tr class="memdesc:a699cf5b00c7a752085ff14914d389e9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The error_press_any_key function is a utility function that displays an error message to the user and waits for them to press any key before continuing. It takes a string argument that contains the error message to be displayed. After the user presses a key, it prints two newlines for formatting.  <br /></td></tr>
+<tr class="memitem:aabbf2a4c3b4dd58ccdef4aa97ed27263" id="r_aabbf2a4c3b4dd58ccdef4aa97ed27263"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a> (float a)</td></tr>
+<tr class="memdesc:aabbf2a4c3b4dd58ccdef4aa97ed27263"><td class="mdescLeft">&#160;</td><td class="mdescRight">The format_currency function takes a floating-point number as input and formats it as a currency string. It adds commas as thousand separators and ensures that the number is displayed with two decimal places. The function uses a static buffer to store the formatted string and returns a pointer to that buffer. The formatted string is right-aligned and padded with spaces if necessary.  <br /></td></tr>
+<tr class="memitem:a7d543019ae7349ca4cfa3587c218e4c4" id="r_a7d543019ae7349ca4cfa3587c218e4c4"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a7d543019ae7349ca4cfa3587c218e4c4">format_interest</a> (float a)</td></tr>
+<tr class="memdesc:a7d543019ae7349ca4cfa3587c218e4c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The format_interest function takes a floating-point number representing an interest rate and formats it as a string with five decimal places. It uses a static buffer to store the formatted string and returns a pointer to that buffer. The formatted string is left-aligned and padded with spaces if necessary.  <br /></td></tr>
+<tr class="memitem:a99d73b85186227ec686f1ba0185476b9" id="r_a99d73b85186227ec686f1ba0185476b9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a99d73b85186227ec686f1ba0185476b9">is_numeric</a> (char *s)</td></tr>
+<tr class="memdesc:a99d73b85186227ec686f1ba0185476b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The is_numeric function checks if a given string consists of numeric characters, including digits, decimal points, and commas. It iterates through each character in the string and returns FALSE if it encounters any character that is not a digit, a decimal point, or a comma. If all characters are valid, it returns TRUE.  <br /></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">iloan is a trivial application to demonstrate how a command-line program can be integrated into C-Menu <a class="el" href="../../d3/dea/a01377.html">Form</a> with simple file, argument, or pipe i-o.  <br /></td></tr>
+<tr class="memitem:a39f5738993e613333dafb2947c1fa799" id="r_a39f5738993e613333dafb2947c1fa799"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a39f5738993e613333dafb2947c1fa799">numbers</a> (char *d, char *s)</td></tr>
+<tr class="memdesc:a39f5738993e613333dafb2947c1fa799"><td class="mdescLeft">&#160;</td><td class="mdescRight">The numbers function takes two character pointers as arguments: a destination pointer (d) and a source pointer (s). It iterates through the characters in the source string (s) and copies only the numeric characters (digits, decimal points, and minus signs) to the destination string (d). The function effectively filters out any non-numeric characters from the source string and constructs a new string containing only the valid numeric characters. Finally, it null-terminates the destination string.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:acdb9de82d81b176784185dea9063b57c" id="r_acdb9de82d81b176784185dea9063b57c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdb9de82d81b176784185dea9063b57c">calculated_idx</a></td></tr>
-<tr class="memitem:a4a50bfe3f8460978b34566ec3dff7adb" id="r_a4a50bfe3f8460978b34566ec3dff7adb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4a50bfe3f8460978b34566ec3dff7adb">obj_idx</a></td></tr>
-<tr class="memitem:a8f93294009502446912fa64f33731029" id="r_a8f93294009502446912fa64f33731029"><td class="memItemLeft">char const&#160;</td><td class="memItemRight"><a class="el" href="#a8f93294009502446912fa64f33731029">pagers_editors</a> [12][10]</td></tr>
-<tr class="memitem:ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" id="r_ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">pg_lines</a></td></tr>
-<tr class="memitem:ac7ac4adf3c3409d847a57c140700f334" id="r_ac7ac4adf3c3409d847a57c140700f334"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac7ac4adf3c3409d847a57c140700f334">pipe_fd</a> [2]</td></tr>
-<tr class="memitem:ab57f05e19e1e81af17fbbd3a766c405a" id="r_ab57f05e19e1e81af17fbbd3a766c405a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab57f05e19e1e81af17fbbd3a766c405a">tbl_col</a></td></tr>
-<tr class="memitem:a7df4e526a3af8e113bbc05ca011c2341" id="r_a7df4e526a3af8e113bbc05ca011c2341"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7df4e526a3af8e113bbc05ca011c2341">tbl_cols</a></td></tr>
-<tr class="memitem:a25fe2a76cfd155c51a46c99d6a1cf4d9" id="r_a25fe2a76cfd155c51a46c99d6a1cf4d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">tbl_line</a></td></tr>
-<tr class="memitem:ae7c3abf692920540a78bc3322d02828a" id="r_ae7c3abf692920540a78bc3322d02828a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae7c3abf692920540a78bc3322d02828a">tbl_page</a></td></tr>
-<tr class="memitem:acbe29ef30ea713ef47f3cd892310ca50" id="r_acbe29ef30ea713ef47f3cd892310ca50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acbe29ef30ea713ef47f3cd892310ca50">tbl_pages</a></td></tr>
+<tr class="memitem:a71053a75a3cb754fcd3d4c3beb3ca700" id="r_a71053a75a3cb754fcd3d4c3beb3ca700"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a> = 0</td></tr>
+<tr class="memitem:a1a69dc91ad0a848d39598a652e147340" id="r_a1a69dc91ad0a848d39598a652e147340"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1a69dc91ad0a848d39598a652e147340">f_n</a> = 0</td></tr>
+<tr class="memitem:a9e362f76edf56dd5e77a4a6a8e2f4342" id="r_a9e362f76edf56dd5e77a4a6a8e2f4342"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a> = 0</td></tr>
+<tr class="memitem:a8a19fd0f5c231eb3fd8eda3419c323e7" id="r_a8a19fd0f5c231eb3fd8eda3419c323e7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a> = 0</td></tr>
+<tr class="memitem:a4497a6c758478afde97da3443ecabee8" id="r_a4497a6c758478afde97da3443ecabee8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a> = false</td></tr>
+<tr class="memitem:a0fdf926da32e462b1a7d62c7c891e061" id="r_a0fdf926da32e462b1a7d62c7c891e061"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a> [<a class="el" href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>+1]</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>pick from a list of choices </p>
+<div class="textblock"><p>Installment Loan Calculator. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a9882229bc5852eb83de0aafdb99b08e7" name="a9882229bc5852eb83de0aafdb99b08e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9882229bc5852eb83de0aafdb99b08e7">&#9670;&#160;</a></span>destroy_pick_view()</h2>
+<p class="definition">Definition in file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="aa93f0eb578d23995850d61f7d61c55c1" name="aa93f0eb578d23995850d61f7d61c55c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93f0eb578d23995850d61f7d61c55c1">&#9670;&#160;</a></span>FALSE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void destroy_pick_view </td>
+          <td class="memname">#define FALSE&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00018">18</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+
+</div>
+</div>
+<a id="aa8cecfc5c5c054d2875c03e77b7be15d" name="aa8cecfc5c5c054d2875c03e77b7be15d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cecfc5c5c054d2875c03e77b7be15d">&#9670;&#160;</a></span>TRUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TRUE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00019">19</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a4a2db85232c335b75115eb065aa3eb44" name="a4a2db85232c335b75115eb065aa3eb44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2db85232c335b75115eb065aa3eb44">&#9670;&#160;</a></span>ABEND()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ABEND </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d8/d38/a01299.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00255">255</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  255</span>                                   {</div>
-<div class="line"><span class="lineno">  256</span>    <a class="code hl_struct" href="../../dd/d8b/a01363.html">Pick</a> *<a class="code hl_variable" href="../../d6/db6/a01172.html#aa0984c16af72bfdf57c5d88de1d314f9">pick</a> = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#af3104cb96c60806b3e75cebad2d09ed9">pick</a>;</div>
-<div class="line"><span class="lineno">  257</span>    <a class="code hl_struct" href="../../d6/d4d/a01371.html">View</a> *<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#aacef1d241555eb2516a58cd6b496746b">view</a>;</div>
-<div class="line"><span class="lineno">  258</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/db6/a01172.html#aa0984c16af72bfdf57c5d88de1d314f9">pick</a>-&gt;p_view_files) {</div>
-<div class="line"><span class="lineno">  259</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  260</span>            munmap(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf, <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size);</div>
-<div class="line"><span class="lineno">  261</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf = <span class="keyword">nullptr</span>;</div>
+<p>The ABEND function is a signal handler that is called when the program receives certain signals (e.g., SIGINT, SIGQUIT, SIGHUP). It takes an integer argument representing the signal number and prints an error message indicating that an abnormal end (ABEND) has occurred, along with the signal number. After displaying the message, it exits the program with a failure status. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00419">419</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  419</span>                  {</div>
+<div class="line"><span class="lineno">  420</span>    printf(<span class="stringliteral">&quot;ABEND: Error %d:\n&quot;</span>, e);</div>
+<div class="line"><span class="lineno">  421</span>    exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  422</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a4a2db85232c335b75115eb065aa3eb44_icgraph.svg" width="180" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a85540e1e56863020c05a2310d704f98d" name="a85540e1e56863020c05a2310d704f98d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85540e1e56863020c05a2310d704f98d">&#9670;&#160;</a></span>accept_i()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double accept_i </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The accept_i function prompts the user to enter the annual interest rate for the loan. It validates the input to ensure it is numeric and non-negative. If the input is invalid, an error message is displayed, and the user is prompted to enter the value again until a valid input is provided. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00227">227</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  227</span>                  {</div>
+<div class="line"><span class="lineno">  228</span>    <span class="keywordtype">double</span> i;</div>
+<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">  230</span>        <a class="code hl_function" href="#a7800e5ade94fe5dce9d4092ddb9a10da">accept_str</a>(<span class="stringliteral">&quot;Rate (annual) - - -&gt; &quot;</span>);</div>
+<div class="line"><span class="lineno">  231</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  232</span>            i = 0;</div>
+<div class="line"><span class="lineno">  233</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  234</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  235</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="#a99d73b85186227ec686f1ba0185476b9">is_numeric</a>(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>)) {</div>
+<div class="line"><span class="lineno">  236</span>                i = atof(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>);</div>
+<div class="line"><span class="lineno">  237</span>                <span class="keywordflow">if</span> (i &lt; 0)</div>
+<div class="line"><span class="lineno">  238</span>                    <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;interest Rate can&#39;t be less than 0&quot;</span>);</div>
+<div class="line"><span class="lineno">  239</span>                <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  240</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  241</span>            } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  242</span>                <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Interest Rate must be numeric&quot;</span>);</div>
+<div class="line"><span class="lineno">  243</span>        }</div>
+<div class="line"><span class="lineno">  244</span>    }</div>
+<div class="line"><span class="lineno">  245</span>    <span class="keywordflow">return</span> (i);</div>
+<div class="line"><span class="lineno">  246</span>}</div>
+<div class="ttc" id="aa01187_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa01187_html_a699cf5b00c7a752085ff14914d389e9b"><div class="ttname"><a href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a></div><div class="ttdeci">void error_press_any_key(char *)</div><div class="ttdoc">The error_press_any_key function is a utility function that displays an error message to the user and...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00268">iloan.c:268</a></div></div>
+<div class="ttc" id="aa01187_html_a7800e5ade94fe5dce9d4092ddb9a10da"><div class="ttname"><a href="#a7800e5ade94fe5dce9d4092ddb9a10da">accept_str</a></div><div class="ttdeci">void accept_str(char *s)</div><div class="ttdoc">The accept_str function prompts the user with a given string and reads input from the standard input ...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00363">iloan.c:363</a></div></div>
+<div class="ttc" id="aa01187_html_a99d73b85186227ec686f1ba0185476b9"><div class="ttname"><a href="#a99d73b85186227ec686f1ba0185476b9">is_numeric</a></div><div class="ttdeci">int is_numeric(char *)</div><div class="ttdoc">The is_numeric function checks if a given string consists of numeric characters, including digits,...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00353">iloan.c:353</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00363">accept_str()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00020">in_str</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00353">is_numeric()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a85540e1e56863020c05a2310d704f98d_cgraph.svg" width="290" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a85540e1e56863020c05a2310d704f98d_icgraph.svg" width="188" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a1c55350d7b96f1e0cfef3f9effdc06aa" name="a1c55350d7b96f1e0cfef3f9effdc06aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c55350d7b96f1e0cfef3f9effdc06aa">&#9670;&#160;</a></span>accept_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double accept_n </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The accept_n function prompts the user to enter the number of payments for the loan. It validates the input to ensure it is numeric and non-negative. If the input is invalid, an error message is displayed, and the user is prompted to enter the value again until a valid input is provided. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00210">210</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  210</span>                  {</div>
+<div class="line"><span class="lineno">  211</span>    <span class="keywordtype">double</span> n;</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">  213</span>        <a class="code hl_function" href="#a7800e5ade94fe5dce9d4092ddb9a10da">accept_str</a>(<span class="stringliteral">&quot;Number of Payments &gt; &quot;</span>);</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="#a99d73b85186227ec686f1ba0185476b9">is_numeric</a>(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>)) {</div>
+<div class="line"><span class="lineno">  215</span>            n = atof(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>);</div>
+<div class="line"><span class="lineno">  216</span>            <span class="keywordflow">if</span> (n &lt; 0)</div>
+<div class="line"><span class="lineno">  217</span>                <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Number of Payments can&#39;t be less than 0&quot;</span>);</div>
+<div class="line"><span class="lineno">  218</span>            <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  219</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  220</span>        } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  221</span>            <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Number of Payments must be numeric&quot;</span>);</div>
+<div class="line"><span class="lineno">  222</span>    }</div>
+<div class="line"><span class="lineno">  223</span>    <span class="keywordflow">return</span> (n);</div>
+<div class="line"><span class="lineno">  224</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00363">accept_str()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00020">in_str</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00353">is_numeric()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a1c55350d7b96f1e0cfef3f9effdc06aa_cgraph.svg" width="294" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a1c55350d7b96f1e0cfef3f9effdc06aa_icgraph.svg" width="192" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3c03abf25cc705693ee3c074ccfc6cb5" name="a3c03abf25cc705693ee3c074ccfc6cb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c03abf25cc705693ee3c074ccfc6cb5">&#9670;&#160;</a></span>accept_pmt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double accept_pmt </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>brief The accept_pmt function prompts the user to enter the payment amount for the loan. It validates the input to ensure it is numeric and non-negative. If the input is invalid, an error message is displayed, and the user is prompted to enter the value again until a valid input is provided. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00249">249</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  249</span>                    {</div>
+<div class="line"><span class="lineno">  250</span>    <span class="keywordtype">double</span> pmt;</div>
+<div class="line"><span class="lineno">  251</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">  252</span>        <a class="code hl_function" href="#a7800e5ade94fe5dce9d4092ddb9a10da">accept_str</a>(<span class="stringliteral">&quot;Payment Amount  - -&gt; &quot;</span>);</div>
+<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  254</span>            pmt = 0;</div>
+<div class="line"><span class="lineno">  255</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  256</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  257</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="#a99d73b85186227ec686f1ba0185476b9">is_numeric</a>(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>)) {</div>
+<div class="line"><span class="lineno">  258</span>                pmt = atof(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>);</div>
+<div class="line"><span class="lineno">  259</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  260</span>            } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  261</span>                <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Payment Amount must be numeric&quot;</span>);</div>
 <div class="line"><span class="lineno">  262</span>        }</div>
 <div class="line"><span class="lineno">  263</span>    }</div>
-<div class="line"><span class="lineno">  264</span>    <a class="code hl_function" href="../../d5/d6f/a01281.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a>(init);</div>
+<div class="line"><span class="lineno">  264</span>    <span class="keywordflow">return</span> (pmt);</div>
 <div class="line"><span class="lineno">  265</span>}</div>
-<div class="ttc" id="aa01172_html_aa0984c16af72bfdf57c5d88de1d314f9"><div class="ttname"><a href="../../d6/db6/a01172.html#aa0984c16af72bfdf57c5d88de1d314f9">pick</a></div><div class="ttdeci">Pick * pick</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00046">mem.c:46</a></div></div>
-<div class="ttc" id="aa01172_html_af2dd70d8b95c32fb670ac6f9cc8df201"><div class="ttname"><a href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a></div><div class="ttdeci">View * view</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00048">mem.c:48</a></div></div>
-<div class="ttc" id="aa01281_html_ga519762bc6148577dc96caf851c3ebfe9"><div class="ttname"><a href="../../d5/d6f/a01281.html#ga519762bc6148577dc96caf851c3ebfe9">destroy_view</a></div><div class="ttdeci">View * destroy_view(Init *init)</div><div class="ttdoc">Destroy View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00359">mem.c:359</a></div></div>
-<div class="ttc" id="aa01299_html_aacef1d241555eb2516a58cd6b496746b"><div class="ttname"><a href="../../d8/d38/a01299.html#aacef1d241555eb2516a58cd6b496746b">Init::view</a></div><div class="ttdeci">View * view</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00190">common.h:190</a></div></div>
-<div class="ttc" id="aa01299_html_af3104cb96c60806b3e75cebad2d09ed9"><div class="ttname"><a href="../../d8/d38/a01299.html#af3104cb96c60806b3e75cebad2d09ed9">Init::pick</a></div><div class="ttdeci">Pick * pick</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00188">common.h:188</a></div></div>
-<div class="ttc" id="aa01363_html"><div class="ttname"><a href="../../dd/d8b/a01363.html">Pick</a></div><div class="ttdoc">Pick data structure.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d7c/a00722_source.html#l00025">pick.h:25</a></div></div>
-<div class="ttc" id="aa01371_html"><div class="ttname"><a href="../../d6/d4d/a01371.html">View</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/db2/a00737_source.html#l00047">view.h:47</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/db2/a00737_source.html#l00160">View::buf</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00359">destroy_view()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00144">View::file_size</a>, <a class="el" href="../../db/d7c/a00722_source.html#l00061">Pick::p_view_files</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00188">Init::pick</a>, and <a class="el" href="../../dd/dd8/a00719_source.html#l00190">Init::view</a>.</p>
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00363">accept_str()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00020">in_str</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00353">is_numeric()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00065">init_pick()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a9882229bc5852eb83de0aafdb99b08e7_cgraph.svg" width="464" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a3c03abf25cc705693ee3c074ccfc6cb5_cgraph.svg" width="312" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a9882229bc5852eb83de0aafdb99b08e7_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a3c03abf25cc705693ee3c074ccfc6cb5_icgraph.svg" width="211" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a1f95a0fa1e35211caccf3a6ae9ab93de" name="a1f95a0fa1e35211caccf3a6ae9ab93de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f95a0fa1e35211caccf3a6ae9ab93de">&#9670;&#160;</a></span>end_pick_view()</h2>
+<a id="a487515b67e372105a75db08e8c522492" name="a487515b67e372105a75db08e8c522492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487515b67e372105a75db08e8c522492">&#9670;&#160;</a></span>accept_pv()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void end_pick_view </td>
+          <td class="memname">double accept_pv </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d8/d38/a01299.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>The following functions are used to accept user input for the present value, number of payments, interest rate, and payment amount. They validate the input to ensure it is numeric and meets the required conditions (e.g., non-negative). If the input is invalid, an error message is displayed, and the user is prompted to enter the value again. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00188">188</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  188</span>                   {</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keywordtype">double</span> pv;</div>
+<div class="line"><span class="lineno">  190</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">  191</span>        <a class="code hl_function" href="#a7800e5ade94fe5dce9d4092ddb9a10da">accept_str</a>(<span class="stringliteral">&quot;Present Value - - -&gt; &quot;</span>);</div>
+<div class="line"><span class="lineno">  192</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  193</span>            pv = 0;</div>
+<div class="line"><span class="lineno">  194</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  195</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  196</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="#a99d73b85186227ec686f1ba0185476b9">is_numeric</a>(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>)) {</div>
+<div class="line"><span class="lineno">  197</span>                pv = atof(<a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>);</div>
+<div class="line"><span class="lineno">  198</span>                <span class="keywordflow">if</span> (pv &lt; 0)</div>
+<div class="line"><span class="lineno">  199</span>                    <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Present Value can&#39;t be less than 0&quot;</span>);</div>
+<div class="line"><span class="lineno">  200</span>                <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  201</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  202</span>            } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  203</span>                <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Present Value must be numeric&quot;</span>);</div>
+<div class="line"><span class="lineno">  204</span>        }</div>
+<div class="line"><span class="lineno">  205</span>    }</div>
+<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">return</span> (pv);</div>
+<div class="line"><span class="lineno">  207</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00363">accept_str()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00020">in_str</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00353">is_numeric()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a487515b67e372105a75db08e8c522492_cgraph.svg" width="302" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a487515b67e372105a75db08e8c522492_icgraph.svg" width="200" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
 </div>
 </div>
-<a id="a5e885d06c6a1fd6df61223f806f5ac4a" name="a5e885d06c6a1fd6df61223f806f5ac4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e885d06c6a1fd6df61223f806f5ac4a">&#9670;&#160;</a></span>new_pick_view()</h2>
+<a id="a7800e5ade94fe5dce9d4092ddb9a10da" name="a7800e5ade94fe5dce9d4092ddb9a10da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7800e5ade94fe5dce9d4092ddb9a10da">&#9670;&#160;</a></span>accept_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int new_pick_view </td>
+          <td class="memname">void accept_str </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d8/d38/a01299.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l01423">1423</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1423</span>                              {</div>
-<div class="line"><span class="lineno"> 1424</span>    <span class="keywordtype">char</span> *e;</div>
-<div class="line"><span class="lineno"> 1425</span>    <span class="comment">// if (init-&gt;view != nullptr)</span></div>
-<div class="line"><span class="lineno"> 1426</span>    <span class="comment">// view_stack_push(&amp;view_stack, *init-&gt;view);</span></div>
-<div class="line"><span class="lineno"> 1427</span>    init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#aacef1d241555eb2516a58cd6b496746b">view</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1428</span>    <a class="code hl_function" href="../../d5/d37/a01276.html#ga10b60618e5fef6711dbe90389d60c049">destroy_argv</a>(init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a394616f810da879963bdffa6d57b0d90">argc</a>, init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#ab6900a934df57e5b9971da7f6484eb41">argv</a>);</div>
-<div class="line"><span class="lineno"> 1429</span>    <a class="code hl_struct" href="../../d6/d4d/a01371.html">View</a> *<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#aacef1d241555eb2516a58cd6b496746b">view</a>;</div>
-<div class="line"><span class="lineno"> 1430</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = <a class="code hl_function" href="../../d5/d6f/a01281.html#gaa46e79b1ded1c4de3bfabc5508c914c3">new_view</a>(init); <span class="comment">// View struct allocation</span></div>
-<div class="line"><span class="lineno"> 1431</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;lines = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#ac4bf0f10f3b4af5f9bb1bf8fac26b1a5">lines</a>;</div>
-<div class="line"><span class="lineno"> 1432</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;cols = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a46836b8913a0bc9e458372ca749ebae4">cols</a>;</div>
-<div class="line"><span class="lineno"> 1433</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begy = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a67b93629afab1e40bcb4bc3649faf5cf">begy</a>;</div>
-<div class="line"><span class="lineno"> 1434</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;begx = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a0d978afa855525ab58010653ef1678db">begx</a>;</div>
-<div class="line"><span class="lineno"> 1435</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;receiver_cmd[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1436</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_ignore_case = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#ab29fa356b7d623b17dd6d6a0b6bc4f7f">f_ignore_case</a>;</div>
-<div class="line"><span class="lineno"> 1437</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_at_end_remove = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#aaebe4d0db0e02f8297deed28a198dbd3">f_at_end_remove</a>;</div>
-<div class="line"><span class="lineno"> 1438</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_squeeze = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a5a986fb36713f21240f1abd180cd621c">f_squeeze</a>;</div>
-<div class="line"><span class="lineno"> 1439</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;tab_stop = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a47e988b16995148c1379b3911f0d9d22">tab_stop</a>;</div>
-<div class="line"><span class="lineno"> 1440</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_ln = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a9f788bec0f83386ec50ecda2651bcaea">f_ln</a>;</div>
-<div class="line"><span class="lineno"> 1441</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;h_shift = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a7317d0dfcb829f829574266afdb1ca32">h_shift</a>;</div>
-<div class="line"><span class="lineno"> 1442</span>    e = getenv(<span class="stringliteral">&quot;VIEW_HELP_FILE&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1443</span>    <span class="keywordflow">if</span> (e &amp;&amp; e[0] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno"> 1444</span>        <a class="code hl_function" href="../../d5/d37/a01276.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, e, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1445</span>    }</div>
-<div class="line"><span class="lineno"> 1446</span>    <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_help_spec =</div>
-<div class="line"><span class="lineno"> 1447</span>        <a class="code hl_function" href="../../d5/d6f/a01281.html#ga75ce293fe4e007a3337a190647408000">verify_spec_arg</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a078a4ca42e67fc6f7cfbb9c1b2620bce">mapp_help</a>,</div>
-<div class="line"><span class="lineno"> 1448</span>                        <span class="stringliteral">&quot;~/menuapp/help&quot;</span>, R_OK);</div>
-<div class="line"><span class="lineno"> 1449</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_help_spec) {</div>
-<div class="line"><span class="lineno"> 1450</span>        <a class="code hl_function" href="../../d5/d37/a01276.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a56c12b9201787b668f60cdc5851d441a">mapp_home</a>, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1451</span>        <a class="code hl_function" href="../../d5/d37/a01276.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <span class="stringliteral">&quot;/help/&quot;</span>, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1452</span>        <a class="code hl_function" href="../../d5/d37/a01276.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;help_spec, <a class="code hl_define" href="../../dd/dd8/a00719.html#ad204138a3f2767514dbe0dfe548a28f9">VIEW_HELP_FILE</a>, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1453</span>    }</div>
-<div class="line"><span class="lineno"> 1454</span>    <span class="keywordtype">int</span> rc = <a class="code hl_function" href="../../d8/d0d/a01280.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a>(init, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><span class="lineno"> 1455</span>    <span class="keywordflow">return</span> rc;</div>
-<div class="line"><span class="lineno"> 1456</span>}</div>
-<div class="ttc" id="aa00719_html_ad204138a3f2767514dbe0dfe548a28f9"><div class="ttname"><a href="../../dd/dd8/a00719.html#ad204138a3f2767514dbe0dfe548a28f9">VIEW_HELP_FILE</a></div><div class="ttdeci">#define VIEW_HELP_FILE</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00037">common.h:37</a></div></div>
-<div class="ttc" id="aa01184_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d35/a01184_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa01276_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d5/d37/a01276.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00537">futil.c:537</a></div></div>
-<div class="ttc" id="aa01276_html_ga10b60618e5fef6711dbe90389d60c049"><div class="ttname"><a href="../../d5/d37/a01276.html#ga10b60618e5fef6711dbe90389d60c049">destroy_argv</a></div><div class="ttdeci">int destroy_argv(int argc, char **argv)</div><div class="ttdoc">Deallocates memory allocated for argument strings in argv.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00487">futil.c:487</a></div></div>
-<div class="ttc" id="aa01276_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../d5/d37/a01276.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00566">futil.c:566</a></div></div>
-<div class="ttc" id="aa01280_html_ga8dd32c1a4c961ec715f63625a6f87b61"><div class="ttname"><a href="../../d8/d0d/a01280.html#ga8dd32c1a4c961ec715f63625a6f87b61">init_view_boxwin</a></div><div class="ttdeci">int init_view_boxwin(Init *, char *)</div><div class="ttdoc">Initialize the C-Menu View in box window mode.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/df2/a01175_source.html#l00184">init_view.c:184</a></div></div>
-<div class="ttc" id="aa01281_html_ga75ce293fe4e007a3337a190647408000"><div class="ttname"><a href="../../d5/d6f/a01281.html#ga75ce293fe4e007a3337a190647408000">verify_spec_arg</a></div><div class="ttdeci">bool verify_spec_arg(char *, char *, char *, char *, int)</div><div class="ttdoc">Verify file specification argument.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00421">mem.c:421</a></div></div>
-<div class="ttc" id="aa01281_html_gaa46e79b1ded1c4de3bfabc5508c914c3"><div class="ttname"><a href="../../d5/d6f/a01281.html#gaa46e79b1ded1c4de3bfabc5508c914c3">new_view</a></div><div class="ttdeci">View * new_view(Init *)</div><div class="ttdoc">Create and initialize View structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/db6/a01172_source.html#l00313">mem.c:313</a></div></div>
-<div class="ttc" id="aa01299_html_a078a4ca42e67fc6f7cfbb9c1b2620bce"><div class="ttname"><a href="../../d8/d38/a01299.html#a078a4ca42e67fc6f7cfbb9c1b2620bce">Init::mapp_help</a></div><div class="ttdeci">char mapp_help[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00150">common.h:150</a></div></div>
-<div class="ttc" id="aa01299_html_a0d978afa855525ab58010653ef1678db"><div class="ttname"><a href="../../d8/d38/a01299.html#a0d978afa855525ab58010653ef1678db">Init::begx</a></div><div class="ttdeci">int begx</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00120">common.h:120</a></div></div>
-<div class="ttc" id="aa01299_html_a394616f810da879963bdffa6d57b0d90"><div class="ttname"><a href="../../d8/d38/a01299.html#a394616f810da879963bdffa6d57b0d90">Init::argc</a></div><div class="ttdeci">int argc</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00132">common.h:132</a></div></div>
-<div class="ttc" id="aa01299_html_a46836b8913a0bc9e458372ca749ebae4"><div class="ttname"><a href="../../d8/d38/a01299.html#a46836b8913a0bc9e458372ca749ebae4">Init::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00118">common.h:118</a></div></div>
-<div class="ttc" id="aa01299_html_a47e988b16995148c1379b3911f0d9d22"><div class="ttname"><a href="../../d8/d38/a01299.html#a47e988b16995148c1379b3911f0d9d22">Init::tab_stop</a></div><div class="ttdeci">int tab_stop</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00182">common.h:182</a></div></div>
-<div class="ttc" id="aa01299_html_a56c12b9201787b668f60cdc5851d441a"><div class="ttname"><a href="../../d8/d38/a01299.html#a56c12b9201787b668f60cdc5851d441a">Init::mapp_home</a></div><div class="ttdeci">char mapp_home[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00148">common.h:148</a></div></div>
-<div class="ttc" id="aa01299_html_a5a986fb36713f21240f1abd180cd621c"><div class="ttname"><a href="../../d8/d38/a01299.html#a5a986fb36713f21240f1abd180cd621c">Init::f_squeeze</a></div><div class="ttdeci">bool f_squeeze</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00139">common.h:139</a></div></div>
-<div class="ttc" id="aa01299_html_a67b93629afab1e40bcb4bc3649faf5cf"><div class="ttname"><a href="../../d8/d38/a01299.html#a67b93629afab1e40bcb4bc3649faf5cf">Init::begy</a></div><div class="ttdeci">int begy</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00119">common.h:119</a></div></div>
-<div class="ttc" id="aa01299_html_a7317d0dfcb829f829574266afdb1ca32"><div class="ttname"><a href="../../d8/d38/a01299.html#a7317d0dfcb829f829574266afdb1ca32">Init::h_shift</a></div><div class="ttdeci">int h_shift</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00183">common.h:183</a></div></div>
-<div class="ttc" id="aa01299_html_a9f788bec0f83386ec50ecda2651bcaea"><div class="ttname"><a href="../../d8/d38/a01299.html#a9f788bec0f83386ec50ecda2651bcaea">Init::f_ln</a></div><div class="ttdeci">bool f_ln</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00145">common.h:145</a></div></div>
-<div class="ttc" id="aa01299_html_aaebe4d0db0e02f8297deed28a198dbd3"><div class="ttname"><a href="../../d8/d38/a01299.html#aaebe4d0db0e02f8297deed28a198dbd3">Init::f_at_end_remove</a></div><div class="ttdeci">bool f_at_end_remove</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00137">common.h:137</a></div></div>
-<div class="ttc" id="aa01299_html_ab29fa356b7d623b17dd6d6a0b6bc4f7f"><div class="ttname"><a href="../../d8/d38/a01299.html#ab29fa356b7d623b17dd6d6a0b6bc4f7f">Init::f_ignore_case</a></div><div class="ttdeci">bool f_ignore_case</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00135">common.h:135</a></div></div>
-<div class="ttc" id="aa01299_html_ab6900a934df57e5b9971da7f6484eb41"><div class="ttname"><a href="../../d8/d38/a01299.html#ab6900a934df57e5b9971da7f6484eb41">Init::argv</a></div><div class="ttdeci">char ** argv</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00133">common.h:133</a></div></div>
-<div class="ttc" id="aa01299_html_ac4bf0f10f3b4af5f9bb1bf8fac26b1a5"><div class="ttname"><a href="../../d8/d38/a01299.html#ac4bf0f10f3b4af5f9bb1bf8fac26b1a5">Init::lines</a></div><div class="ttdeci">int lines</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00117">common.h:117</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/dd8/a00719_source.html#l00132">Init::argc</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00133">Init::argv</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00120">Init::begx</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00061">View::begx</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00119">Init::begy</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00060">View::begy</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00118">Init::cols</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00059">View::cols</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00487">destroy_argv()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00137">Init::f_at_end_remove</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00072">View::f_at_end_remove</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00140">View::f_help_spec</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00135">Init::f_ignore_case</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00071">View::f_ignore_case</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00145">Init::f_ln</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00170">View::f_ln</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00139">Init::f_squeeze</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00073">View::f_squeeze</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00183">Init::h_shift</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00091">View::h_shift</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00137">View::help_spec</a>, <a class="el" href="../../d6/df2/a01175_source.html#l00184">init_view_boxwin()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00117">Init::lines</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00058">View::lines</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00150">Init::mapp_help</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00148">Init::mapp_home</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00313">new_view()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00063">View::receiver_cmd</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00566">strnz__cat()</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00537">strnz__cpy()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00182">Init::tab_stop</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00090">View::tab_stop</a>, <a class="el" href="../../d6/db6/a01172_source.html#l00421">verify_spec_arg()</a>, and <a class="el" href="../../dd/dd8/a00719_source.html#l00190">Init::view</a>.</p>
+<p>The accept_str function prompts the user with a given string and reads input from the standard input into a buffer. It uses the fprintf function to display the prompt and the read function to capture the user's input. The input is stored in the global buffer in_str, which can be used by other functions for further processing. </p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00829">open_pick_win()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a5e885d06c6a1fd6df61223f806f5ac4a_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00363">363</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  363</span>                         {</div>
+<div class="line"><span class="lineno">  364</span>    fprintf(stderr, <span class="stringliteral">&quot;%s&quot;</span>, s);</div>
+<div class="line"><span class="lineno">  365</span>    read(0, <a class="code hl_variable" href="#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>);</div>
+<div class="line"><span class="lineno">  366</span>}</div>
+<div class="ttc" id="aa00737_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../dd/db2/a00737_source.html#l00031">view.h:31</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00020">in_str</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00227">accept_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00210">accept_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00249">accept_pmt()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00188">accept_pv()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a5e885d06c6a1fd6df61223f806f5ac4a_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a7800e5ade94fe5dce9d4092ddb9a10da_icgraph.svg" width="347" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="aa55f544851e15ae7851b7a519c1ea521" name="aa55f544851e15ae7851b7a519c1ea521"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa55f544851e15ae7851b7a519c1ea521">&#9670;&#160;</a></span>new_view_file()</h2>
+<a id="a30ca82382942c5afa41630a5ddb234f3" name="a30ca82382942c5afa41630a5ddb234f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30ca82382942c5afa41630a5ddb234f3">&#9670;&#160;</a></span>calculate_i()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void new_view_file </td>
+          <td class="memname">double calculate_i </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d8/d38/a01299.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>pv</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>&#160;)</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>pmt</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l01458">1458</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1458</span>                                           {</div>
-<div class="line"><span class="lineno"> 1459</span>    <a class="code hl_struct" href="../../d6/d4d/a01371.html">View</a> *<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a> = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#aacef1d241555eb2516a58cd6b496746b">view</a>;</div>
-<div class="line"><span class="lineno"> 1460</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno"> 1461</span>        munmap(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf, <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_size);</div>
-<div class="line"><span class="lineno"> 1462</span>        <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno"> 1463</span>    }</div>
-<div class="line"><span class="lineno"> 1464</span>    <a class="code hl_function" href="../../d5/d37/a01276.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;provider_cmd, <span class="stringliteral">&quot;tree-sitter highlight &quot;</span>, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1465</span>    <a class="code hl_function" href="../../d5/d37/a01276.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;provider_cmd, file, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1466</span>    <a class="code hl_function" href="../../d5/d37/a01276.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;title, file, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno"> 1467</span>    <a class="code hl_function" href="../../d3/d07/a01241.html#a7de60019ff86cc64c93ce105b610b29b">box_title</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;box.win, <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;title);</div>
-<div class="line"><span class="lineno"> 1468</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d8/d0d/a01280.html#gab050f5482419339e9207dbdc65a7b49e">view_init_input</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, file) == 0) {</div>
-<div class="line"><span class="lineno"> 1469</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;buf) {</div>
-<div class="line"><span class="lineno"> 1470</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_eod = 0;</div>
-<div class="line"><span class="lineno"> 1471</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;f_bod = 0;</div>
-<div class="line"><span class="lineno"> 1472</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;maxcol = 0;</div>
-<div class="line"><span class="lineno"> 1473</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_pos = 0;</div>
-<div class="line"><span class="lineno"> 1474</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_top_ln = 0;</div>
-<div class="line"><span class="lineno"> 1475</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_ln = 0;</div>
-<div class="line"><span class="lineno"> 1476</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln_max_pos = 0;</div>
-<div class="line"><span class="lineno"> 1477</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;ln = 0;</div>
-<div class="line"><span class="lineno"> 1478</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;page_bot_pos = 0;</div>
-<div class="line"><span class="lineno"> 1479</span>            <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;file_pos = 0;</div>
-<div class="line"><span class="lineno"> 1480</span>            <a class="code hl_function" href="../../d7/d8d/a01288.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1481</span>            <a class="code hl_function" href="../../d7/d8d/a01288.html#gacf1bfbd6d2fd4ad9a0385009ef25015c">next_page</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1482</span>            <a class="code hl_function" href="../../d7/da4/a01287.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1483</span>            <a class="code hl_function" href="../../d9/dda/a01289.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>, <a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>-&gt;prompt_str);</div>
-<div class="line"><span class="lineno"> 1484</span>            <a class="code hl_function" href="../../d9/dda/a01289.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a>(<a class="code hl_variable" href="../../d6/db6/a01172.html#af2dd70d8b95c32fb670ac6f9cc8df201">view</a>);</div>
-<div class="line"><span class="lineno"> 1485</span>            update_panels();</div>
-<div class="line"><span class="lineno"> 1486</span>            doupdate();</div>
-<div class="line"><span class="lineno"> 1487</span>        }</div>
-<div class="line"><span class="lineno"> 1488</span>    }</div>
-<div class="line"><span class="lineno"> 1489</span>}</div>
-<div class="ttc" id="aa01241_html_a7de60019ff86cc64c93ce105b610b29b"><div class="ttname"><a href="../../d3/d07/a01241.html#a7de60019ff86cc64c93ce105b610b29b">box_title</a></div><div class="ttdeci">int box_title(WINDOW *box, char *wtitle)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d07/a01241_source.html#l00968">dwin.c:968</a></div></div>
-<div class="ttc" id="aa01280_html_gab050f5482419339e9207dbdc65a7b49e"><div class="ttname"><a href="../../d8/d0d/a01280.html#gab050f5482419339e9207dbdc65a7b49e">view_init_input</a></div><div class="ttdeci">int view_init_input(View *, char *)</div><div class="ttdoc">Initialize the input for a C-Menu View.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/df2/a01175_source.html#l00473">init_view.c:473</a></div></div>
-<div class="ttc" id="aa01287_html_gaf01721a6369d49d9f1eebfc4ba6d0a95"><div class="ttname"><a href="../../d7/da4/a01287.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a></div><div class="ttdeci">void build_prompt(View *)</div><div class="ttdoc">Build Prompt String.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l00849">view_engine.c:849</a></div></div>
-<div class="ttc" id="aa01288_html_gaa260d59836439e16d00ad5a6bc4b4829"><div class="ttname"><a href="../../d7/d8d/a01288.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a></div><div class="ttdeci">void initialize_line_table(View *)</div><div class="ttdoc">Initialize Line Table.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01552">view_engine.c:1552</a></div></div>
-<div class="ttc" id="aa01288_html_gacf1bfbd6d2fd4ad9a0385009ef25015c"><div class="ttname"><a href="../../d7/d8d/a01288.html#gacf1bfbd6d2fd4ad9a0385009ef25015c">next_page</a></div><div class="ttdeci">void next_page(View *)</div><div class="ttdoc">Advance to Next Page.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01235">view_engine.c:1235</a></div></div>
-<div class="ttc" id="aa01289_html_ga1a2aaed7961f7ff0b171ee01801fcadf"><div class="ttname"><a href="../../d9/dda/a01289.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a></div><div class="ttdeci">int pad_refresh(View *)</div><div class="ttdoc">Refresh Pad and Line Number Window.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01190">view_engine.c:1190</a></div></div>
-<div class="ttc" id="aa01289_html_ga3d81b9c4dd32748b26cd0fd94224d21c"><div class="ttname"><a href="../../d9/dda/a01289.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a></div><div class="ttdeci">int display_prompt(View *, char *)</div><div class="ttdoc">Display Command Line Prompt.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d5d/a01202_source.html#l01944">view_engine.c:1944</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dd/db2/a00737_source.html#l00077">View::box</a>, <a class="el" href="../../d3/d07/a01241_source.html#l00968">box_title()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00160">View::buf</a>, <a class="el" href="../../d4/d5d/a01202_source.html#l00849">build_prompt()</a>, <a class="el" href="../../d4/d5d/a01202_source.html#l01944">display_prompt()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00094">View::f_bod</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00095">View::f_eod</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00145">View::file_pos</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00144">View::file_size</a>, <a class="el" href="../../d4/d5d/a01202_source.html#l01552">initialize_line_table()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00171">View::ln</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00176">View::ln_max_pos</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00120">View::maxcol</a>, <a class="el" href="../../d4/d5d/a01202_source.html#l01235">next_page()</a>, <a class="el" href="../../d4/d5d/a01202_source.html#l01190">pad_refresh()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00178">View::page_bot_ln</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00148">View::page_bot_pos</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00177">View::page_top_ln</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00147">View::page_top_pos</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00066">View::prompt_str</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00062">View::provider_cmd</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00566">strnz__cat()</a>, <a class="el" href="../../d0/d67/a01232_source.html#l00537">strnz__cpy()</a>, <a class="el" href="../../dd/db2/a00737_source.html#l00067">View::title</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00190">Init::view</a>, <a class="el" href="../../d6/df2/a01175_source.html#l00473">view_init_input()</a>, and <a class="el" href="../../dd/db2/a00737_source.html#l00043">Panel::win</a>.</p>
+<p>The calculate_i function calculates the annual interest rate for a loan based on the present value, number of payments, and payment amount. It uses an iterative method to find the interest rate that satisfies the loan equation. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs. </p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00898">picker()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00302">302</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  302</span>                                                    {</div>
+<div class="line"><span class="lineno">  303</span>    <span class="keywordtype">double</span> i1 = 0, i;</div>
+<div class="line"><span class="lineno">  304</span>    <span class="keywordtype">double</span> delta = 0.0000001;</div>
+<div class="line"><span class="lineno">  305</span>    <span class="keywordtype">double</span> xdelta;</div>
+<div class="line"><span class="lineno">  306</span>    <span class="keywordtype">double</span> fdelta;</div>
+<div class="line"><span class="lineno">  307</span>    <span class="keywordtype">double</span> fprimi;</div>
+<div class="line"><span class="lineno">  308</span>    <span class="keywordtype">double</span> ffact;</div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordtype">double</span> fi;</div>
+<div class="line"><span class="lineno">  310</span>    <span class="keywordtype">double</span> fman;</div>
+<div class="line"><span class="lineno">  311</span>    <span class="keywordtype">double</span> fmann;</div>
+<div class="line"><span class="lineno">  312</span>    <span class="keywordflow">if</span> (pv == 0 || n == 0 || pmt == 0)</div>
+<div class="line"><span class="lineno">  313</span>        <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(</div>
+<div class="line"><span class="lineno">  314</span>            <span class="stringliteral">&quot;3 non-zero values required to calculate Interest Rate&quot;</span>);</div>
+<div class="line"><span class="lineno">  315</span>    ffact = pv / pmt;</div>
+<div class="line"><span class="lineno">  316</span>    xdelta = 0;</div>
+<div class="line"><span class="lineno">  317</span>    <span class="keywordflow">if</span> (ffact &lt; n) {</div>
+<div class="line"><span class="lineno">  318</span>        i1 = 0.0125;</div>
+<div class="line"><span class="lineno">  319</span>        xdelta = 0.9;</div>
+<div class="line"><span class="lineno">  320</span>    }</div>
+<div class="line"><span class="lineno">  321</span>    <span class="keywordflow">while</span> (xdelta &gt; delta) {</div>
+<div class="line"><span class="lineno">  322</span>        fman = 1 / (1 + i1);</div>
+<div class="line"><span class="lineno">  323</span>        fmann = pow(fman, n);</div>
+<div class="line"><span class="lineno">  324</span>        fi = ffact * i1 + fmann - 1;</div>
+<div class="line"><span class="lineno">  325</span>        fprimi = ffact - n * fmann * fman;</div>
+<div class="line"><span class="lineno">  326</span>        fdelta = fi / fprimi;</div>
+<div class="line"><span class="lineno">  327</span>        i1 = i1 - fdelta;</div>
+<div class="line"><span class="lineno">  328</span>        <span class="keywordflow">if</span> (fdelta &lt; 0)</div>
+<div class="line"><span class="lineno">  329</span>            xdelta = -fdelta;</div>
+<div class="line"><span class="lineno">  330</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  331</span>            xdelta = fdelta;</div>
+<div class="line"><span class="lineno">  332</span>    }</div>
+<div class="line"><span class="lineno">  333</span>    i = i1 * 1200;</div>
+<div class="line"><span class="lineno">  334</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a>)</div>
+<div class="line"><span class="lineno">  335</span>        printf(<span class="stringliteral">&quot;interest Rate - - - - - -&gt; %s\n&quot;</span>, <a class="code hl_function" href="#a7d543019ae7349ca4cfa3587c218e4c4">format_interest</a>(i));</div>
+<div class="line"><span class="lineno">  336</span>    <span class="keywordflow">return</span> (i);</div>
+<div class="line"><span class="lineno">  337</span>}</div>
+<div class="ttc" id="aa01187_html_a4497a6c758478afde97da3443ecabee8"><div class="ttname"><a href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a></div><div class="ttdeci">bool f_quiet</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00041">iloan.c:41</a></div></div>
+<div class="ttc" id="aa01187_html_a7d543019ae7349ca4cfa3587c218e4c4"><div class="ttname"><a href="#a7d543019ae7349ca4cfa3587c218e4c4">format_interest</a></div><div class="ttdeci">char * format_interest(float)</div><div class="ttdoc">The format_interest function takes a floating-point number representing an interest rate and formats ...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00409">iloan.c:409</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00041">f_quiet</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00409">format_interest()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_aa55f544851e15ae7851b7a519c1ea521_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a30ca82382942c5afa41630a5ddb234f3_cgraph.svg" width="306" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_aa55f544851e15ae7851b7a519c1ea521_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a30ca82382942c5afa41630a5ddb234f3_icgraph.svg" width="204" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
-<a id="a969bb5ac3fcb5f3565448e8d0da6efc4" name="a969bb5ac3fcb5f3565448e8d0da6efc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a969bb5ac3fcb5f3565448e8d0da6efc4">&#9670;&#160;</a></span>read_theme()</h2>
+<a id="aee54aae25366d4a8451167208179b5e2" name="aee54aae25366d4a8451167208179b5e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee54aae25366d4a8451167208179b5e2">&#9670;&#160;</a></span>calculate_n()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int read_theme </td>
+          <td class="memname">double calculate_n </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d8/d38/a01299.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>pv</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>i</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>pmt</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The calculate_n function calculates the number of payments required to pay off a loan based on the present value, interest rate, and payment amount. It uses logarithmic functions to compute the result. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00289">289</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  289</span>                                                    {</div>
+<div class="line"><span class="lineno">  290</span>    <span class="keywordtype">double</span> i1, n;</div>
+<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">if</span> (pv == 0 || i == 0 || pmt == 0)</div>
+<div class="line"><span class="lineno">  292</span>        <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;3 non-zero values required to calculate &quot;</span></div>
+<div class="line"><span class="lineno">  293</span>                            <span class="stringliteral">&quot;Number of Payments&quot;</span>);</div>
+<div class="line"><span class="lineno">  294</span>    i1 = i / 1200;</div>
+<div class="line"><span class="lineno">  295</span>    n = -log(1 - pv * i1 / pmt) / log(1 + i1);</div>
+<div class="line"><span class="lineno">  296</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a>)</div>
+<div class="line"><span class="lineno">  297</span>        printf(<span class="stringliteral">&quot;Number of Payments  - - -&gt; %s\n&quot;</span>, <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(n));</div>
+<div class="line"><span class="lineno">  298</span>    <span class="keywordflow">return</span> (n);</div>
+<div class="line"><span class="lineno">  299</span>}</div>
+<div class="ttc" id="aa01187_html_aabbf2a4c3b4dd58ccdef4aa97ed27263"><div class="ttname"><a href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a></div><div class="ttdeci">char * format_currency(float)</div><div class="ttdoc">The format_currency function takes a floating-point number as input and formats it as a currency stri...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00369">iloan.c:369</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00041">f_quiet</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00369">format_currency()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_aee54aae25366d4a8451167208179b5e2_cgraph.svg" width="310" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_aee54aae25366d4a8451167208179b5e2_icgraph.svg" width="208" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a5ba79bae83ea46ba59f6d76a7c5f9f3a" name="a5ba79bae83ea46ba59f6d76a7c5f9f3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba79bae83ea46ba59f6d76a7c5f9f3a">&#9670;&#160;</a></span>calculate_pmt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double calculate_pmt </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>pv</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>i</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The calculate_pmt function calculates the payment amount for a loan based on the present value, number of payments, and interest rate. It uses the formula for the payment amount of an annuity to compute the result. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00340">340</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  340</span>                                                    {</div>
+<div class="line"><span class="lineno">  341</span>    <span class="keywordtype">double</span> i1, pmt;</div>
+<div class="line"><span class="lineno">  342</span>    <span class="keywordflow">if</span> (pv == 0 || n == 0 || i == 0)</div>
+<div class="line"><span class="lineno">  343</span>        <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(</div>
+<div class="line"><span class="lineno">  344</span>            <span class="stringliteral">&quot;3 non-zero values required to calculate Payment Amount&quot;</span>);</div>
+<div class="line"><span class="lineno">  345</span>    i1 = i / 1200;</div>
+<div class="line"><span class="lineno">  346</span>    pmt = pv * i1 / (1 - pow(1 + i1, -n));</div>
+<div class="line"><span class="lineno">  347</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a>)</div>
+<div class="line"><span class="lineno">  348</span>        printf(<span class="stringliteral">&quot;Payment Amount  - - - - -&gt; %s\n&quot;</span>, <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(pmt));</div>
+<div class="line"><span class="lineno">  349</span>    <span class="keywordflow">return</span> (pmt);</div>
+<div class="line"><span class="lineno">  350</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00041">f_quiet</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00369">format_currency()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a5ba79bae83ea46ba59f6d76a7c5f9f3a_cgraph.svg" width="328" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a5ba79bae83ea46ba59f6d76a7c5f9f3a_icgraph.svg" width="227" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a7c5b9806af7d2d661bca9716e5066eb1" name="a7c5b9806af7d2d661bca9716e5066eb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c5b9806af7d2d661bca9716e5066eb1">&#9670;&#160;</a></span>calculate_pv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double calculate_pv </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>n</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>i</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>pmt</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The calculate_pv function calculates the present value of a loan based on the number of payments, interest rate, and payment amount. It uses the formula for the present value of an annuity to compute the result. If any of the input values are zero, it displays an error message and prompts the user to provide valid inputs. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00275">275</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  275</span>                                                    {</div>
+<div class="line"><span class="lineno">  276</span>    <span class="keywordtype">double</span> i1, pv;</div>
+<div class="line"><span class="lineno">  277</span> </div>
+<div class="line"><span class="lineno">  278</span>    <span class="keywordflow">if</span> (n == 0 || i == 0 || pmt == 0)</div>
+<div class="line"><span class="lineno">  279</span>        <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(</div>
+<div class="line"><span class="lineno">  280</span>            <span class="stringliteral">&quot;3 non-zero values required to calculate Present Value&quot;</span>);</div>
+<div class="line"><span class="lineno">  281</span>    i1 = i / 1200;</div>
+<div class="line"><span class="lineno">  282</span>    pv = pmt * (1 - pow(1 + i1, -n)) / i1;</div>
+<div class="line"><span class="lineno">  283</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a>)</div>
+<div class="line"><span class="lineno">  284</span>        printf(<span class="stringliteral">&quot;Present Value - - - - - -&gt; %s\n&quot;</span>, <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(pv));</div>
+<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">return</span> (pv);</div>
+<div class="line"><span class="lineno">  286</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00041">f_quiet</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00369">format_currency()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a7c5b9806af7d2d661bca9716e5066eb1_cgraph.svg" width="318" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a7c5b9806af7d2d661bca9716e5066eb1_icgraph.svg" width="216" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a699cf5b00c7a752085ff14914d389e9b" name="a699cf5b00c7a752085ff14914d389e9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a699cf5b00c7a752085ff14914d389e9b">&#9670;&#160;</a></span>error_press_any_key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void error_press_any_key </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00601">601</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  601</span>                           {</div>
-<div class="line"><span class="lineno">  602</span>    <span class="keywordtype">int</span> rc;</div>
-<div class="line"><span class="lineno">  603</span>    <a class="code hl_function" href="../../d5/d37/a01276.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a>(init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#acd8f36c2465e877388885166636d9978">mapp_theme</a>, <a class="code hl_define" href="../../d1/d35/a01184.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  604</span>    rc = <a class="code hl_function" href="../../dd/dd8/a00719.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a>(init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#acd8f36c2465e877388885166636d9978">mapp_theme</a>, init);</div>
-<div class="line"><span class="lineno">  605</span>    <span class="keywordflow">if</span> (rc)</div>
-<div class="line"><span class="lineno">  606</span>        <span class="keywordflow">return</span> rc;</div>
-<div class="line"><span class="lineno">  607</span>    <a class="code hl_struct" href="../../dd/d6e/a01339.html">SIO</a> *sio = init-&gt;<a class="code hl_variable" href="../../d8/d38/a01299.html#a1c8d511fb38a59bbd882552e2d7f6058">sio</a>;</div>
-<div class="line"><span class="lineno">  608</span>    <a class="code hl_function" href="../../da/d00/a01270.html#ga23328c9c90961fc59a2061749fd87466">initialize_local_colors</a>(sio);</div>
-<div class="line"><span class="lineno">  609</span>    update_panels();</div>
-<div class="line"><span class="lineno">  610</span>    doupdate();</div>
-<div class="line"><span class="lineno">  611</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  612</span>}</div>
-<div class="ttc" id="aa00719_html_a50e5693f7cfa423d5e728cb7319e69df"><div class="ttname"><a href="../../dd/dd8/a00719.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a></div><div class="ttdeci">int process_config_file(char *, Init *)</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d9e/a01226_source.html#l00614">init.c:614</a></div></div>
-<div class="ttc" id="aa01270_html_ga23328c9c90961fc59a2061749fd87466"><div class="ttname"><a href="../../da/d00/a01270.html#ga23328c9c90961fc59a2061749fd87466">initialize_local_colors</a></div><div class="ttdeci">void initialize_local_colors(SIO *)</div><div class="ttdoc">Initialize local color variables and color pairs based on SIO settings.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d07/a01241_source.html#l00300">dwin.c:300</a></div></div>
-<div class="ttc" id="aa01276_html_ga646c47b288ba3b43714f0c0e1f88c981"><div class="ttname"><a href="../../d5/d37/a01276.html#ga646c47b288ba3b43714f0c0e1f88c981">expand_tilde</a></div><div class="ttdeci">bool expand_tilde(char *, int)</div><div class="ttdoc">Replaces &quot;~/&quot; in string with the user&#39;s home directory.</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d67/a01232_source.html#l00963">futil.c:963</a></div></div>
-<div class="ttc" id="aa01299_html_a1c8d511fb38a59bbd882552e2d7f6058"><div class="ttname"><a href="../../d8/d38/a01299.html#a1c8d511fb38a59bbd882552e2d7f6058">Init::sio</a></div><div class="ttdeci">SIO * sio</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00116">common.h:116</a></div></div>
-<div class="ttc" id="aa01299_html_acd8f36c2465e877388885166636d9978"><div class="ttname"><a href="../../d8/d38/a01299.html#acd8f36c2465e877388885166636d9978">Init::mapp_theme</a></div><div class="ttdeci">char mapp_theme[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd8/a00719_source.html#l00153">common.h:153</a></div></div>
-<div class="ttc" id="aa01339_html"><div class="ttname"><a href="../../dd/d6e/a01339.html">SIO</a></div><div class="ttdoc">The SIO structure encapsulates various aspects of the terminal&#39;s state and configuration,...</div><div class="ttdef"><b>Definition</b> <a href="../../d8/db9/a00725_source.html#l00773">cm.h:773</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d67/a01232_source.html#l00963">expand_tilde()</a>, <a class="el" href="../../d3/d07/a01241_source.html#l00300">initialize_local_colors()</a>, <a class="el" href="../../dd/dd8/a00719_source.html#l00153">Init::mapp_theme</a>, <a class="el" href="../../dd/d9e/a01226_source.html#l00614">process_config_file()</a>, and <a class="el" href="../../dd/dd8/a00719_source.html#l00116">Init::sio</a>.</p>
+<p>The error_press_any_key function is a utility function that displays an error message to the user and waits for them to press any key before continuing. It takes a string argument that contains the error message to be displayed. After the user presses a key, it prints two newlines for formatting. </p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00305">pick_engine()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a969bb5ac3fcb5f3565448e8d0da6efc4_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00268">268</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  268</span>                                  {</div>
+<div class="line"><span class="lineno">  269</span>    printf(<span class="stringliteral">&quot;%s&quot;</span>, s);</div>
+<div class="line"><span class="lineno">  270</span>    getc(stdin);</div>
+<div class="line"><span class="lineno">  271</span>    printf(<span class="stringliteral">&quot;\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  272</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00227">accept_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00210">accept_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00249">accept_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00188">accept_pv()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00302">calculate_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00289">calculate_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00340">calculate_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00275">calculate_pv()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a969bb5ac3fcb5f3565448e8d0da6efc4_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a699cf5b00c7a752085ff14914d389e9b_icgraph.svg" width="430" height="452"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aabbf2a4c3b4dd58ccdef4aa97ed27263" name="aabbf2a4c3b4dd58ccdef4aa97ed27263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">&#9670;&#160;</a></span>format_currency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * format_currency </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The format_currency function takes a floating-point number as input and formats it as a currency string. It adds commas as thousand separators and ensures that the number is displayed with two decimal places. The function uses a static buffer to store the formatted string and returns a pointer to that buffer. The formatted string is right-aligned and padded with spaces if necessary. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00369">369</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  369</span>                               {</div>
+<div class="line"><span class="lineno">  370</span>    <span class="keywordtype">int</span> digit_count, left_of_point;</div>
+<div class="line"><span class="lineno">  371</span>    <span class="keyword">static</span> <span class="keywordtype">char</span> sstr[80];</div>
+<div class="line"><span class="lineno">  372</span>    <span class="keyword">static</span> <span class="keywordtype">char</span> fstr[80];</div>
+<div class="line"><span class="lineno">  373</span>    <span class="keywordtype">char</span> *src_ptr, *dst_ptr, *sptr, *FPtr;</div>
+<div class="line"><span class="lineno">  374</span> </div>
+<div class="line"><span class="lineno">  375</span>    sprintf(sstr, <span class="stringliteral">&quot;%-18.2f&quot;</span>, a);</div>
+<div class="line"><span class="lineno">  376</span>    sptr = sstr;</div>
+<div class="line"><span class="lineno">  377</span>    src_ptr = sstr;</div>
+<div class="line"><span class="lineno">  378</span>    FPtr = fstr;</div>
+<div class="line"><span class="lineno">  379</span>    dst_ptr = fstr;</div>
+<div class="line"><span class="lineno">  380</span>    <span class="keywordflow">while</span> (*src_ptr++ != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  381</span>        ;</div>
+<div class="line"><span class="lineno">  382</span>    src_ptr -= 2;</div>
+<div class="line"><span class="lineno">  383</span>    left_of_point = <a class="code hl_define" href="#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>;</div>
+<div class="line"><span class="lineno">  384</span>    digit_count = 0;</div>
+<div class="line"><span class="lineno">  385</span>    <span class="keywordflow">while</span> (src_ptr &gt;= sptr) {</div>
+<div class="line"><span class="lineno">  386</span>        <span class="keywordflow">if</span> (left_of_point) {</div>
+<div class="line"><span class="lineno">  387</span>            <span class="keywordflow">if</span> (*src_ptr &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; *src_ptr &lt;= <span class="charliteral">&#39;9&#39;</span>) {</div>
+<div class="line"><span class="lineno">  388</span>                <span class="keywordflow">if</span> (digit_count == 3) {</div>
+<div class="line"><span class="lineno">  389</span>                    *dst_ptr++ = <span class="charliteral">&#39;,&#39;</span>;</div>
+<div class="line"><span class="lineno">  390</span>                    digit_count = 1;</div>
+<div class="line"><span class="lineno">  391</span>                } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  392</span>                    digit_count++;</div>
+<div class="line"><span class="lineno">  393</span>            }</div>
+<div class="line"><span class="lineno">  394</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*src_ptr == <span class="charliteral">&#39;.&#39;</span>)</div>
+<div class="line"><span class="lineno">  395</span>            left_of_point = <a class="code hl_define" href="#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>;</div>
+<div class="line"><span class="lineno">  396</span>        *dst_ptr++ = *src_ptr--;</div>
+<div class="line"><span class="lineno">  397</span>    }</div>
+<div class="line"><span class="lineno">  398</span>    src_ptr = dst_ptr - 1;</div>
+<div class="line"><span class="lineno">  399</span>    dst_ptr = sptr;</div>
+<div class="line"><span class="lineno">  400</span>    <span class="keywordflow">while</span> (src_ptr &gt;= FPtr)</div>
+<div class="line"><span class="lineno">  401</span>        *dst_ptr++ = *src_ptr--;</div>
+<div class="line"><span class="lineno">  402</span>    <span class="keywordflow">while</span> (*--dst_ptr == <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><span class="lineno">  403</span>        ;</div>
+<div class="line"><span class="lineno">  404</span>    *++dst_ptr = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  405</span>    <span class="keywordflow">return</span> (sptr);</div>
+<div class="line"><span class="lineno">  406</span>}</div>
+<div class="ttc" id="aa01187_html_aa8cecfc5c5c054d2875c03e77b7be15d"><div class="ttname"><a href="#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a></div><div class="ttdeci">#define TRUE</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00019">iloan.c:19</a></div></div>
+<div class="ttc" id="aa01187_html_aa93f0eb578d23995850d61f7d61c55c1"><div class="ttname"><a href="#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a></div><div class="ttdeci">#define FALSE</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00018">iloan.c:18</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00289">calculate_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00340">calculate_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00275">calculate_pv()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_aabbf2a4c3b4dd58ccdef4aa97ed27263_icgraph.svg" width="403" height="192"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a7d543019ae7349ca4cfa3587c218e4c4" name="a7d543019ae7349ca4cfa3587c218e4c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d543019ae7349ca4cfa3587c218e4c4">&#9670;&#160;</a></span>format_interest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * format_interest </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>a</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The format_interest function takes a floating-point number representing an interest rate and formats it as a string with five decimal places. It uses a static buffer to store the formatted string and returns a pointer to that buffer. The formatted string is left-aligned and padded with spaces if necessary. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00409">409</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  409</span>                               {</div>
+<div class="line"><span class="lineno">  410</span>    <span class="keyword">static</span> <span class="keywordtype">char</span> sstr[80];</div>
+<div class="line"><span class="lineno">  411</span>    <span class="keywordtype">char</span> *s;</div>
+<div class="line"><span class="lineno">  412</span> </div>
+<div class="line"><span class="lineno">  413</span>    sprintf(sstr, <span class="stringliteral">&quot;%-3.5f&quot;</span>, a);</div>
+<div class="line"><span class="lineno">  414</span>    s = sstr;</div>
+<div class="line"><span class="lineno">  415</span>    <span class="keywordflow">return</span> (s);</div>
+<div class="line"><span class="lineno">  416</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00302">calculate_i()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a7d543019ae7349ca4cfa3587c218e4c4_icgraph.svg" width="375" height="64"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a99d73b85186227ec686f1ba0185476b9" name="a99d73b85186227ec686f1ba0185476b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99d73b85186227ec686f1ba0185476b9">&#9670;&#160;</a></span>is_numeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int is_numeric </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The is_numeric function checks if a given string consists of numeric characters, including digits, decimal points, and commas. It iterates through each character in the string and returns FALSE if it encounters any character that is not a digit, a decimal point, or a comma. If all characters are valid, it returns TRUE. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00353">353</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  353</span>                        {</div>
+<div class="line"><span class="lineno">  354</span>    <span class="keywordtype">char</span> c;</div>
+<div class="line"><span class="lineno">  355</span> </div>
+<div class="line"><span class="lineno">  356</span>    <span class="keywordflow">while</span> ((c = *s++) != <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; c != <span class="charliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><span class="lineno">  357</span>        <span class="keywordflow">if</span> ((c &lt; <span class="charliteral">&#39;0&#39;</span> || c &gt; <span class="charliteral">&#39;9&#39;</span>) &amp;&amp; c != <span class="charliteral">&#39;.&#39;</span> &amp;&amp; c != <span class="charliteral">&#39;,&#39;</span>)</div>
+<div class="line"><span class="lineno">  358</span>            <span class="keywordflow">return</span> (<a class="code hl_define" href="#aa93f0eb578d23995850d61f7d61c55c1">FALSE</a>);</div>
+<div class="line"><span class="lineno">  359</span>    <span class="keywordflow">return</span> (<a class="code hl_define" href="#aa8cecfc5c5c054d2875c03e77b7be15d">TRUE</a>);</div>
+<div class="line"><span class="lineno">  360</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00227">accept_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00210">accept_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00249">accept_pmt()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00188">accept_pv()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a99d73b85186227ec686f1ba0185476b9_icgraph.svg" width="351" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>iloan is a trivial application to demonstrate how a command-line program can be integrated into C-Menu <a class="el" href="../../d3/dea/a01377.html">Form</a> with simple file, argument, or pipe i-o. </p>
+<p>Positional arguments: present_value The present value of the loan (the amount borrowed). number_of_payments The total number of payments to be made. interest_rate The annual interest rate (as a percentage). payment_amount The amount of each payment. The program calculates the missing value based on the three provided values. For example, if the present value, number of payments, and interest rate are provided, it will calculate the payment amount. If the present value, interest rate, and payment amount are provided, it will calculate the number of payments, and so on. The program can be used in a non-interactive way by passing the four values as arguments, with the value to be calculated set to 0. For example, to calculate the payment amount for a $10,000 loan with a 5% annual interest rate and 60 monthly payments, you could run: </p><div class="fragment"><div class="line">iloan 10000 60 5 0</div>
+</div><!-- fragment --><p> This is proof-of-concept code, and is not intended for production use. It is not designed to be robust, and does not handle all edge cases or input errors. It is intended solely to demonstrate how a simple command-line program can be integrated into C-Menu <a class="el" href="../../d3/dea/a01377.html">Form</a>. In the future, more sophisticated abstractions, such as async event handlers, serialization, rpc, database, and a standardized plugin interface will be integrated into C-Menu. Feel free to modify and enhance this code as needed, but please do not use it in production without proper testing and validation. It is provided as-is without any warranty or support. Use at your own risk. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00074">74</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   74</span>                                {</div>
+<div class="line"><span class="lineno">   75</span>    <span class="keywordtype">double</span> pv = 0, pmt = 0, i = 0, n = 0;</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordtype">char</span> tmp_str[<a class="code hl_define" href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span>    signal(SIGINT, <a class="code hl_function" href="#a4a2db85232c335b75115eb065aa3eb44">ABEND</a>);</div>
+<div class="line"><span class="lineno">   79</span>    signal(SIGQUIT, <a class="code hl_function" href="#a4a2db85232c335b75115eb065aa3eb44">ABEND</a>);</div>
+<div class="line"><span class="lineno">   80</span>    signal(SIGHUP, <a class="code hl_function" href="#a4a2db85232c335b75115eb065aa3eb44">ABEND</a>);</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>    <span class="keywordflow">if</span> (argc &gt; 1 &amp;&amp;</div>
+<div class="line"><span class="lineno">   83</span>        ((strcmp(argv[1], <span class="stringliteral">&quot;--help&quot;</span>) == 0 || strcmp(argv[1], <span class="stringliteral">&quot;-h&quot;</span>) == 0) ||</div>
+<div class="line"><span class="lineno">   84</span>         argc &lt; 4)) {</div>
+<div class="line"><span class="lineno">   85</span>        printf(<span class="stringliteral">&quot;Usage: iloan [present_value number_of_payments &quot;</span></div>
+<div class="line"><span class="lineno">   86</span>               <span class="stringliteral">&quot;interest_rate payment_amount]\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">   87</span>        exit(EXIT_SUCCESS);</div>
+<div class="line"><span class="lineno">   88</span>    }</div>
+<div class="line"><span class="lineno">   89</span>    <span class="keywordflow">if</span> (argc &gt; 4) {</div>
+<div class="line"><span class="lineno">   90</span>        <a class="code hl_function" href="#a39f5738993e613333dafb2947c1fa799">numbers</a>(tmp_str, argv[1]);</div>
+<div class="line"><span class="lineno">   91</span>        sscanf(tmp_str, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;pv);</div>
+<div class="line"><span class="lineno">   92</span>        sscanf(argv[2], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;n);</div>
+<div class="line"><span class="lineno">   93</span>        sscanf(argv[3], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;i);</div>
+<div class="line"><span class="lineno">   94</span>        <a class="code hl_function" href="#a39f5738993e613333dafb2947c1fa799">numbers</a>(tmp_str, argv[4]);</div>
+<div class="line"><span class="lineno">   95</span>        sscanf(tmp_str, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;pmt);</div>
+<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">if</span> (pv != 0)</div>
+<div class="line"><span class="lineno">   97</span>            <a class="code hl_variable" href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a> = 1;</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">if</span> (n != 0)</div>
+<div class="line"><span class="lineno">   99</span>            <a class="code hl_variable" href="#a1a69dc91ad0a848d39598a652e147340">f_n</a> = 1;</div>
+<div class="line"><span class="lineno">  100</span>        <span class="keywordflow">if</span> (i != 0)</div>
+<div class="line"><span class="lineno">  101</span>            <a class="code hl_variable" href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a> = 1;</div>
+<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> (pmt != 0)</div>
+<div class="line"><span class="lineno">  103</span>            <a class="code hl_variable" href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a> = 1;</div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a> + <a class="code hl_variable" href="#a1a69dc91ad0a848d39598a652e147340">f_n</a> + <a class="code hl_variable" href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a> + <a class="code hl_variable" href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a> &lt; 3) {</div>
+<div class="line"><span class="lineno">  105</span>            <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(</div>
+<div class="line"><span class="lineno">  106</span>                <span class="stringliteral">&quot;Error: At least three values must be greater than zero.&quot;</span>);</div>
+<div class="line"><span class="lineno">  107</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  108</span>        }</div>
+<div class="line"><span class="lineno">  109</span>        <a class="code hl_variable" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  110</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">if</span> (argc != 1) {</div>
+<div class="line"><span class="lineno">  112</span>            printf(<span class="stringliteral">&quot;Usage: iloan [present_value number_of_payments &quot;</span></div>
+<div class="line"><span class="lineno">  113</span>                   <span class="stringliteral">&quot;interest_rate payment_amount]\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  114</span>            exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  115</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  116</span>            <span class="keywordflow">if</span> (argc == 1) {</div>
+<div class="line"><span class="lineno">  117</span>                printf(<span class="stringliteral">&quot;\nInstallment Loan Calculator\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  118</span>                printf(<span class="stringliteral">&quot;Three of these values must be greater than 0.  The &quot;</span></div>
+<div class="line"><span class="lineno">  119</span>                       <span class="stringliteral">&quot;field\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  120</span>                printf(<span class="stringliteral">&quot;with a value of 0 will be calculated.\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  121</span>                <span class="keywordflow">while</span> (<a class="code hl_variable" href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a> + <a class="code hl_variable" href="#a1a69dc91ad0a848d39598a652e147340">f_n</a> + <a class="code hl_variable" href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a> + <a class="code hl_variable" href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a> &lt; 3) {</div>
+<div class="line"><span class="lineno">  122</span>                    <span class="keywordflow">if</span> (pv == 0) {</div>
+<div class="line"><span class="lineno">  123</span>                        pv = <a class="code hl_function" href="#a487515b67e372105a75db08e8c522492">accept_pv</a>();</div>
+<div class="line"><span class="lineno">  124</span>                        <span class="keywordflow">if</span> (pv != 0)</div>
+<div class="line"><span class="lineno">  125</span>                            <a class="code hl_variable" href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a> = 1;</div>
+<div class="line"><span class="lineno">  126</span>                    }</div>
+<div class="line"><span class="lineno">  127</span>                    <span class="keywordflow">if</span> (n == 0) {</div>
+<div class="line"><span class="lineno">  128</span>                        n = <a class="code hl_function" href="#a1c55350d7b96f1e0cfef3f9effdc06aa">accept_n</a>();</div>
+<div class="line"><span class="lineno">  129</span>                        <span class="keywordflow">if</span> (n != 0)</div>
+<div class="line"><span class="lineno">  130</span>                            <a class="code hl_variable" href="#a1a69dc91ad0a848d39598a652e147340">f_n</a> = 1;</div>
+<div class="line"><span class="lineno">  131</span>                    }</div>
+<div class="line"><span class="lineno">  132</span>                    <span class="keywordflow">if</span> (i == 0) {</div>
+<div class="line"><span class="lineno">  133</span>                        i = <a class="code hl_function" href="#a85540e1e56863020c05a2310d704f98d">accept_i</a>();</div>
+<div class="line"><span class="lineno">  134</span>                        <span class="keywordflow">if</span> (i != 0)</div>
+<div class="line"><span class="lineno">  135</span>                            <a class="code hl_variable" href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a> = 1;</div>
+<div class="line"><span class="lineno">  136</span>                    }</div>
+<div class="line"><span class="lineno">  137</span>                    <span class="keywordflow">if</span> (pmt == 0) {</div>
+<div class="line"><span class="lineno">  138</span>                        pmt = <a class="code hl_function" href="#a3c03abf25cc705693ee3c074ccfc6cb5">accept_pmt</a>();</div>
+<div class="line"><span class="lineno">  139</span>                        <span class="keywordflow">if</span> (pmt != 0)</div>
+<div class="line"><span class="lineno">  140</span>                            <a class="code hl_variable" href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a> = 1;</div>
+<div class="line"><span class="lineno">  141</span>                    }</div>
+<div class="line"><span class="lineno">  142</span>                    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a> + <a class="code hl_variable" href="#a1a69dc91ad0a848d39598a652e147340">f_n</a> + <a class="code hl_variable" href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a> + <a class="code hl_variable" href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a> &lt; 3) {</div>
+<div class="line"><span class="lineno">  143</span>                        <a class="code hl_function" href="#a699cf5b00c7a752085ff14914d389e9b">error_press_any_key</a>(<span class="stringliteral">&quot;Error: At least three values must &quot;</span></div>
+<div class="line"><span class="lineno">  144</span>                                            <span class="stringliteral">&quot;be greater than zero.&quot;</span>);</div>
+<div class="line"><span class="lineno">  145</span>                    }</div>
+<div class="line"><span class="lineno">  146</span>                }</div>
+<div class="line"><span class="lineno">  147</span>                printf(<span class="stringliteral">&quot;\nYou entered:\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  148</span>                <span class="keywordflow">if</span> (pv != 0)</div>
+<div class="line"><span class="lineno">  149</span>                    printf(<span class="stringliteral">&quot;Present Value - - - - - -&gt; %s\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  150</span>                           <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(pv));</div>
+<div class="line"><span class="lineno">  151</span>                <span class="keywordflow">if</span> (n != 0)</div>
+<div class="line"><span class="lineno">  152</span>                    printf(<span class="stringliteral">&quot;Number of Payments  - - -&gt; %s\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  153</span>                           <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(n));</div>
+<div class="line"><span class="lineno">  154</span>                <span class="keywordflow">if</span> (i != 0)</div>
+<div class="line"><span class="lineno">  155</span>                    printf(<span class="stringliteral">&quot;Interest Rate - - - - - -&gt; %s\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  156</span>                           <a class="code hl_function" href="#a7d543019ae7349ca4cfa3587c218e4c4">format_interest</a>(i));</div>
+<div class="line"><span class="lineno">  157</span>                <span class="keywordflow">if</span> (pmt != 0)</div>
+<div class="line"><span class="lineno">  158</span>                    printf(<span class="stringliteral">&quot;Payment Amount  - - - - -&gt; %s\n&quot;</span>,</div>
+<div class="line"><span class="lineno">  159</span>                           <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(pmt));</div>
+<div class="line"><span class="lineno">  160</span>                printf(<span class="stringliteral">&quot;\n\nCalculation result:\n\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  161</span>            }</div>
+<div class="line"><span class="lineno">  162</span>        }</div>
+<div class="line"><span class="lineno">  163</span>    }</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">if</span> (pv == 0)</div>
+<div class="line"><span class="lineno">  165</span>        pv = <a class="code hl_function" href="#a7c5b9806af7d2d661bca9716e5066eb1">calculate_pv</a>(n, i, pmt);</div>
+<div class="line"><span class="lineno">  166</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (n == 0)</div>
+<div class="line"><span class="lineno">  167</span>        n = <a class="code hl_function" href="#aee54aae25366d4a8451167208179b5e2">calculate_n</a>(pv, i, pmt);</div>
+<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (i == 0)</div>
+<div class="line"><span class="lineno">  169</span>        i = <a class="code hl_function" href="#a30ca82382942c5afa41630a5ddb234f3">calculate_i</a>(pv, n, pmt);</div>
+<div class="line"><span class="lineno">  170</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pmt == 0)</div>
+<div class="line"><span class="lineno">  171</span>        pmt = <a class="code hl_function" href="#a5ba79bae83ea46ba59f6d76a7c5f9f3a">calculate_pmt</a>(pv, n, i);</div>
+<div class="line"><span class="lineno">  172</span> </div>
+<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a4497a6c758478afde97da3443ecabee8">f_quiet</a>) {</div>
+<div class="line"><span class="lineno">  174</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(pv));</div>
+<div class="line"><span class="lineno">  175</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(n));</div>
+<div class="line"><span class="lineno">  176</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_function" href="#a7d543019ae7349ca4cfa3587c218e4c4">format_interest</a>(i));</div>
+<div class="line"><span class="lineno">  177</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_function" href="#aabbf2a4c3b4dd58ccdef4aa97ed27263">format_currency</a>(pmt));</div>
+<div class="line"><span class="lineno">  178</span>    }</div>
+<div class="line"><span class="lineno">  179</span>    signal(SIGINT, SIG_DFL);</div>
+<div class="line"><span class="lineno">  180</span>    signal(SIGQUIT, SIG_DFL);</div>
+<div class="line"><span class="lineno">  181</span>    signal(SIGHUP, SIG_DFL);</div>
+<div class="line"><span class="lineno">  182</span>}</div>
+<div class="ttc" id="aa01187_html_a1a69dc91ad0a848d39598a652e147340"><div class="ttname"><a href="#a1a69dc91ad0a848d39598a652e147340">f_n</a></div><div class="ttdeci">int f_n</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00038">iloan.c:38</a></div></div>
+<div class="ttc" id="aa01187_html_a1c55350d7b96f1e0cfef3f9effdc06aa"><div class="ttname"><a href="#a1c55350d7b96f1e0cfef3f9effdc06aa">accept_n</a></div><div class="ttdeci">double accept_n()</div><div class="ttdoc">The accept_n function prompts the user to enter the number of payments for the loan....</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00210">iloan.c:210</a></div></div>
+<div class="ttc" id="aa01187_html_a30ca82382942c5afa41630a5ddb234f3"><div class="ttname"><a href="#a30ca82382942c5afa41630a5ddb234f3">calculate_i</a></div><div class="ttdeci">double calculate_i(double, double, double)</div><div class="ttdoc">The calculate_i function calculates the annual interest rate for a loan based on the present value,...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00302">iloan.c:302</a></div></div>
+<div class="ttc" id="aa01187_html_a39f5738993e613333dafb2947c1fa799"><div class="ttname"><a href="#a39f5738993e613333dafb2947c1fa799">numbers</a></div><div class="ttdeci">void numbers(char *d, char *s)</div><div class="ttdoc">The numbers function takes two character pointers as arguments: a destination pointer (d) and a sourc...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00425">iloan.c:425</a></div></div>
+<div class="ttc" id="aa01187_html_a3c03abf25cc705693ee3c074ccfc6cb5"><div class="ttname"><a href="#a3c03abf25cc705693ee3c074ccfc6cb5">accept_pmt</a></div><div class="ttdeci">double accept_pmt()</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00249">iloan.c:249</a></div></div>
+<div class="ttc" id="aa01187_html_a487515b67e372105a75db08e8c522492"><div class="ttname"><a href="#a487515b67e372105a75db08e8c522492">accept_pv</a></div><div class="ttdeci">double accept_pv()</div><div class="ttdoc">The following functions are used to accept user input for the present value, number of payments,...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00188">iloan.c:188</a></div></div>
+<div class="ttc" id="aa01187_html_a4a2db85232c335b75115eb065aa3eb44"><div class="ttname"><a href="#a4a2db85232c335b75115eb065aa3eb44">ABEND</a></div><div class="ttdeci">void ABEND(int)</div><div class="ttdoc">The ABEND function is a signal handler that is called when the program receives certain signals (e....</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00419">iloan.c:419</a></div></div>
+<div class="ttc" id="aa01187_html_a5ba79bae83ea46ba59f6d76a7c5f9f3a"><div class="ttname"><a href="#a5ba79bae83ea46ba59f6d76a7c5f9f3a">calculate_pmt</a></div><div class="ttdeci">double calculate_pmt(double, double, double)</div><div class="ttdoc">The calculate_pmt function calculates the payment amount for a loan based on the present value,...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00340">iloan.c:340</a></div></div>
+<div class="ttc" id="aa01187_html_a71053a75a3cb754fcd3d4c3beb3ca700"><div class="ttname"><a href="#a71053a75a3cb754fcd3d4c3beb3ca700">f_i</a></div><div class="ttdeci">int f_i</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00039">iloan.c:39</a></div></div>
+<div class="ttc" id="aa01187_html_a7c5b9806af7d2d661bca9716e5066eb1"><div class="ttname"><a href="#a7c5b9806af7d2d661bca9716e5066eb1">calculate_pv</a></div><div class="ttdeci">double calculate_pv(double, double, double)</div><div class="ttdoc">The calculate_pv function calculates the present value of a loan based on the number of payments,...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00275">iloan.c:275</a></div></div>
+<div class="ttc" id="aa01187_html_a85540e1e56863020c05a2310d704f98d"><div class="ttname"><a href="#a85540e1e56863020c05a2310d704f98d">accept_i</a></div><div class="ttdeci">double accept_i()</div><div class="ttdoc">The accept_i function prompts the user to enter the annual interest rate for the loan....</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00227">iloan.c:227</a></div></div>
+<div class="ttc" id="aa01187_html_a8a19fd0f5c231eb3fd8eda3419c323e7"><div class="ttname"><a href="#a8a19fd0f5c231eb3fd8eda3419c323e7">f_pv</a></div><div class="ttdeci">int f_pv</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00037">iloan.c:37</a></div></div>
+<div class="ttc" id="aa01187_html_a9e362f76edf56dd5e77a4a6a8e2f4342"><div class="ttname"><a href="#a9e362f76edf56dd5e77a4a6a8e2f4342">f_pmt</a></div><div class="ttdeci">int f_pmt</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00040">iloan.c:40</a></div></div>
+<div class="ttc" id="aa01187_html_aee54aae25366d4a8451167208179b5e2"><div class="ttname"><a href="#aee54aae25366d4a8451167208179b5e2">calculate_n</a></div><div class="ttdeci">double calculate_n(double, double, double)</div><div class="ttdoc">The calculate_n function calculates the number of payments required to pay off a loan based on the pr...</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d70/a01187_source.html#l00289">iloan.c:289</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dc/d70/a01187_source.html#l00419">ABEND()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00227">accept_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00210">accept_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00249">accept_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00188">accept_pv()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00302">calculate_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00289">calculate_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00340">calculate_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00275">calculate_pv()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00268">error_press_any_key()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00039">f_i</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00038">f_n</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00040">f_pmt</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00037">f_pv</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00041">f_quiet</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00369">format_currency()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00409">format_interest()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00425">numbers()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a39f5738993e613333dafb2947c1fa799" name="a39f5738993e613333dafb2947c1fa799"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39f5738993e613333dafb2947c1fa799">&#9670;&#160;</a></span>numbers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void numbers </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The numbers function takes two character pointers as arguments: a destination pointer (d) and a source pointer (s). It iterates through the characters in the source string (s) and copies only the numeric characters (digits, decimal points, and minus signs) to the destination string (d). The function effectively filters out any non-numeric characters from the source string and constructs a new string containing only the valid numeric characters. Finally, it null-terminates the destination string. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00425">425</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  425</span>                               {</div>
+<div class="line"><span class="lineno">  426</span>    <span class="keywordflow">while</span> (*s != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  427</span>        <span class="keywordflow">if</span> (*s == <span class="charliteral">&#39;-&#39;</span> || *s == <span class="charliteral">&#39;.&#39;</span> || (*s &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; *s &lt;= <span class="charliteral">&#39;9&#39;</span>))</div>
+<div class="line"><span class="lineno">  428</span>            *d++ = *s++;</div>
+<div class="line"><span class="lineno">  429</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  430</span>            s++;</div>
+<div class="line"><span class="lineno">  431</span>    }</div>
+<div class="line"><span class="lineno">  432</span>    *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  433</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d70/a01187_a39f5738993e613333dafb2947c1fa799_icgraph.svg" width="192" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="acdb9de82d81b176784185dea9063b57c" name="acdb9de82d81b176784185dea9063b57c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acdb9de82d81b176784185dea9063b57c">&#9670;&#160;</a></span>calculated_idx</h2>
+<a id="a71053a75a3cb754fcd3d4c3beb3ca700" name="a71053a75a3cb754fcd3d4c3beb3ca700"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71053a75a3cb754fcd3d4c3beb3ca700">&#9670;&#160;</a></span>f_i</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int calculated_idx</td>
+          <td class="memname">int f_i = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00025">25</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00039">39</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 
 </div>
 </div>
-<a id="a4a50bfe3f8460978b34566ec3dff7adb" name="a4a50bfe3f8460978b34566ec3dff7adb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a50bfe3f8460978b34566ec3dff7adb">&#9670;&#160;</a></span>obj_idx</h2>
+<a id="a1a69dc91ad0a848d39598a652e147340" name="a1a69dc91ad0a848d39598a652e147340"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a69dc91ad0a848d39598a652e147340">&#9670;&#160;</a></span>f_n</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int obj_idx</td>
+          <td class="memname">int f_n = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00025">25</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00038">38</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 
 </div>
 </div>
-<a id="a8f93294009502446912fa64f33731029" name="a8f93294009502446912fa64f33731029"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f93294009502446912fa64f33731029">&#9670;&#160;</a></span>pagers_editors</h2>
+<a id="a9e362f76edf56dd5e77a4a6a8e2f4342" name="a9e362f76edf56dd5e77a4a6a8e2f4342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e362f76edf56dd5e77a4a6a8e2f4342">&#9670;&#160;</a></span>f_pmt</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char const pagers_editors[12][10]</td>
+          <td class="memname">int f_pmt = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
-<div class="line">           <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
-<div class="line">           <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00047">47</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   47</span>                                  {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
-<div class="line"><span class="lineno">   48</span>                                     <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
-<div class="line"><span class="lineno">   49</span>                                     <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
-</div><!-- fragment -->
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00040">40</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
+
 </div>
 </div>
-<a id="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" name="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">&#9670;&#160;</a></span>pg_lines</h2>
+<a id="a8a19fd0f5c231eb3fd8eda3419c323e7" name="a8a19fd0f5c231eb3fd8eda3419c323e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a19fd0f5c231eb3fd8eda3419c323e7">&#9670;&#160;</a></span>f_pv</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int pg_lines</td>
+          <td class="memname">int f_pv = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00024">24</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00037">37</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 
 </div>
 </div>
-<a id="ac7ac4adf3c3409d847a57c140700f334" name="ac7ac4adf3c3409d847a57c140700f334"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7ac4adf3c3409d847a57c140700f334">&#9670;&#160;</a></span>pipe_fd</h2>
+<a id="a4497a6c758478afde97da3443ecabee8" name="a4497a6c758478afde97da3443ecabee8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4497a6c758478afde97da3443ecabee8">&#9670;&#160;</a></span>f_quiet</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int pipe_fd[2]</td>
+          <td class="memname">bool f_quiet = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00045">45</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00041">41</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00065">init_pick()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00302">calculate_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00289">calculate_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00340">calculate_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00275">calculate_pv()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00074">main()</a>.</p>
 
 </div>
 </div>
-<a id="ab57f05e19e1e81af17fbbd3a766c405a" name="ab57f05e19e1e81af17fbbd3a766c405a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab57f05e19e1e81af17fbbd3a766c405a">&#9670;&#160;</a></span>tbl_col</h2>
+<a id="a0fdf926da32e462b1a7d62c7c891e061" name="a0fdf926da32e462b1a7d62c7c891e061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fdf926da32e462b1a7d62c7c891e061">&#9670;&#160;</a></span>in_str</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int tbl_col</td>
+          <td class="memname">char in_str[<a class="el" href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>+1]</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d2/d95/a01449.html#_a1">/usr/local/src/C-Menu/src/enterstr.c</a>.</dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00024">24</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00020">20</a> of file <a class="el" href="../../dc/d70/a01187_source.html">iloan.c</a>.</p>
 
-</div>
-</div>
-<a id="a7df4e526a3af8e113bbc05ca011c2341" name="a7df4e526a3af8e113bbc05ca011c2341"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7df4e526a3af8e113bbc05ca011c2341">&#9670;&#160;</a></span>tbl_cols</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_cols</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00024">24</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="a25fe2a76cfd155c51a46c99d6a1cf4d9" name="a25fe2a76cfd155c51a46c99d6a1cf4d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">&#9670;&#160;</a></span>tbl_line</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_line</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00024">24</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="ae7c3abf692920540a78bc3322d02828a" name="ae7c3abf692920540a78bc3322d02828a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c3abf692920540a78bc3322d02828a">&#9670;&#160;</a></span>tbl_page</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_page</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00024">24</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
-
-</div>
-</div>
-<a id="acbe29ef30ea713ef47f3cd892310ca50" name="acbe29ef30ea713ef47f3cd892310ca50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbe29ef30ea713ef47f3cd892310ca50">&#9670;&#160;</a></span>tbl_pages</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int tbl_pages</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d70/a01187_source.html#l00024">24</a> of file <a class="el" href="../../dc/d70/a01187_source.html">pick_engine.c</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../dc/d70/a01187_source.html#l00227">accept_i()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00210">accept_n()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00249">accept_pmt()</a>, <a class="el" href="../../dc/d70/a01187_source.html#l00188">accept_pv()</a>, and <a class="el" href="../../dc/d70/a01187_source.html#l00363">accept_str()</a>.</p>
 
 </div>
 </div>
@@ -658,7 +1245,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dc/d70/a01187.html">pick_engine.c</a></li>
+    <li class="navelem"><a href="../../dc/d70/a01187.html">iloan.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

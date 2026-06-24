@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_5fopt_5fargs_0',['zero_opt_args',['../d9/de7/a01279.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *):&#160;init.c'],['../d9/de7/a01279.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *init):&#160;init.c']]]
+  ['zero_5fopt_5fargs_0',['zero_opt_args',['../d0/d00/a01286.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *):&#160;init.c'],['../d0/d00/a01286.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *init):&#160;init.c']]]
 ];

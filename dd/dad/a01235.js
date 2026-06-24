@@ -1,7 +1,5 @@
 var a01235 =
 [
-    [ "_GNU_SOURCE", "dd/dad/a01235.html#a369266c24eacffb87046522897a570d5", null ],
-    [ "main", "dd/dad/a01235.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
-    [ "print_totals", "dd/dad/a01235.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
-    [ "month", "dd/dad/a01235.html#afd34f9817ea7498cdc5d76058dac3a5f", null ]
+    [ "fork_detach_execvp", "d8/d0d/a01280.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "main", "dd/dad/a01235.html#a0ddf1224851353fc92bfbff6f499fa97", null ]
 ];

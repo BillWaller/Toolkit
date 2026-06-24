@@ -1,5 +1,5 @@
 var a01217 =
 [
-    [ "menu_cmd_processor", "d8/d17/a01282.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
-    [ "menu_engine", "d8/d17/a01282.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
+    [ "get_command_type", "dc/ded/a01290.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "dc/ded/a01290.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];
