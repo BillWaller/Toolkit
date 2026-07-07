@@ -1,13 +1,22 @@
 var a01336 =
 [
-    [ "accept_s", "df/d93/a01336.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "df/d93/a01336.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_cc", "df/d93/a01336.html#abffe323f69ca8f112987e1886cd0885e", null ],
-    [ "display_s", "df/d93/a01336.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "df/d93/a01336.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_cc", "df/d93/a01336.html#aa3e505e5c866dcbd20a1c518944294b6", null ],
-    [ "filler_s", "df/d93/a01336.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "df/d93/a01336.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "df/d93/a01336.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "df/d93/a01336.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "deselect_object", "df/d93/a01336.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
+    [ "destroy_pick_view", "df/d93/a01336.html#ga6d6cf40c6027df6af085adaf52f35130", null ],
+    [ "display_pick_help", "df/d93/a01336.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
+    [ "display_pick_page", "df/d93/a01336.html#gabdcc916b6e3ac452000c280ec5f0d3cc", null ],
+    [ "exec_objects", "df/d93/a01336.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
+    [ "init_pick", "df/d93/a01336.html#ga0e5b61dc395d1d0e5dacfd857da3de79", null ],
+    [ "match_objects", "df/d93/a01336.html#ga91b2cda407803ee4367f7efd5487863c", null ],
+    [ "new_pick_view", "df/d93/a01336.html#ga41d1534c1e985c35c7ca725f0b184e17", null ],
+    [ "new_view_file", "df/d93/a01336.html#gac22ea664b7423900ca62515098d8841a", null ],
+    [ "open_pick_win", "df/d93/a01336.html#gaf20c847dc030116f9999adbba681000c", null ],
+    [ "output_objects", "df/d93/a01336.html#ga8feb6cd586d503a676b831ec722576fb", null ],
+    [ "pick_engine", "df/d93/a01336.html#gab97dcab41017c5132f52b682437a151e", null ],
+    [ "pick_std_chyron", "df/d93/a01336.html#ga6e4762c27b7409e55dcc20ff27aa30d5", null ],
+    [ "picker", "df/d93/a01336.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
+    [ "read_pick_input", "df/d93/a01336.html#gaabda879000cf8135245ef451de08f780", null ],
+    [ "reverse_object", "df/d93/a01336.html#gab2173ff8fb800d126c180487744672d5", null ],
+    [ "save_object", "df/d93/a01336.html#ga02f90007f2422dd2094ab64569e157f0", null ],
+    [ "toggle_object", "df/d93/a01336.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
+    [ "unreverse_object", "df/d93/a01336.html#ga650262f8279502ebc73607394dd7af13", null ]
 ];

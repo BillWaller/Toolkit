@@ -1,6 +1,7 @@
 var a01346 =
 [
-    [ "capacity", "d9/de4/a01346.html#a16664713f3a2d038c0c6f68ca9475886", null ],
-    [ "items", "d9/de4/a01346.html#a3fade253de43fe0175b33401f35f467a", null ],
-    [ "top", "d9/de4/a01346.html#a1dbe09fba72b4c6cb39d080682a800d3", null ]
+    [ "cols", "d9/de4/a01346.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02", null ],
+    [ "rows", "d9/de4/a01346.html#af4d5171be36dee026ccd770bb1bcf948", null ],
+    [ "x", "d9/de4/a01346.html#a8ca5369f3caee4a1aca2d295b2a3d95b", null ],
+    [ "y", "d9/de4/a01346.html#a03824f3c5073f5bde5ad401eb9dcc449", null ]
 ];

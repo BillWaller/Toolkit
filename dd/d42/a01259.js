@@ -1,5 +1,5 @@
 var a01259 =
 [
-    [ "ui_framed_surface_destroy", "d9/de7/a01279.html#gafa5c28ac5692fdbb5931d41a4e76b572", null ],
-    [ "ui_framed_surface_new", "d9/de7/a01279.html#gac053420e4eeb1d4e9031bf2c5a8c646f", null ]
+    [ "get_command_type", "d4/d04/a01335.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d4/d04/a01335.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

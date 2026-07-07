@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: themes</title>
+<title>C-Menu: UiSurface Struct Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,77 +109,208 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d8/d7b/a01478.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">themes </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">UiSurface Struct Reference<div class="ingroups"><a class="el" href="../../d5/d53/a01324.html">UI Backend</a></div></div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md153"></a> <img src="../../themes_hdr.png" alt="" class="inline" title="C-Menu Themes"/>    </p>
-<h1 class="doxsection"><a class="anchor" id="c-menu-themes"></a>
-C-Menu Themes</h1>
-<p>C-Menu supports themes, which allow you to customize the appearance of the menu. You can create your own themes or use one of the built-in themes.</p>
-<h2 class="doxsection"><a class="anchor" id="selecting-themes"></a>
-Selecting Themes</h2>
-<p>To select a theme, go to the C-Menu Workstation Configuration <a class="el" href="../../d5/d78/a01330.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> and select the Select C-Menu Theme option. This will display a list of available themes. Select the theme you want. Either click it, or move the selector over it with the arrow keys and press the spacebar.</p>
-<div class="image">
-<img src="../../green_dark.png" alt=""/>
-<div class="caption">
-Select Theme</div></div>
-    <p>That's it. C-Menu will instantly render open C-Menu windows with the theme you selected.</p>
-<h2 class="doxsection"><a class="anchor" id="creating-new-themes"></a>
-Creating New Themes</h2>
-<p>To create a new theme, select "Create C-Menu Theme" from the C-Menu Workstation Configuration <a class="el" href="../../d5/d78/a01330.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>. C-Menu <a class="el" href="../../d4/dd1/a01334.html" title="Pick data structure.">Pick</a> will open a screen similar to the one used for selecting themes, but the title will be "Choose Theme Template". Select a theme template to use as a starting point for you new theme.</p>
-<p>When you select a theme template, C-Menu <a class="el" href="../../d4/dd1/a01334.html" title="Pick data structure.">Pick</a> will make a copy of the file you selected as a template and open it in your default text editor. Below, you can see how the file looks when opened in Neovim with the Norcalli Colorizer plugin enabled. The Colorizer plugin will display the colors and update them as you edit the file, making it easier to see the changes you are making to the theme.</p>
-<p><a href="https://github.com/norcalli/nvim-colorizer.lua">Neovim Colorizer on github</a></p>
-<p>The C-Menu theme files are extensions of the C-Menu configuration file. Any key value pair recognized by the C-Menu configuration file parser may be placed in either the C-Menu main configuration, (generally ~/menuapp/.minitrc) or a theme file. See C-Menu Configuration Files below for more information on the C-Menu configuration file format and parsing rules.</p>
-<div class="image">
-<img src="../../edit_theme.png" alt=""/>
-<div class="caption">
-Edit C-Menu Theme</div></div>
-    <h2 class="doxsection"><a class="anchor" id="c-menu-configuration-files"></a>
-C-Menu Configuration Files</h2>
-<p>C-Menu configuration files are text files that contain key value pairs that configure the appearance and behavior of C-Menu. The main C-Menu configuration file is normally located at ~/menuapp/.minitrc, but you can include additional configuration files with include statements such as the following:</p>
-<div class="fragment"><div class="line">include = ~/menuapp/themes/default</div>
-</div><!-- fragment --><p>The same information that can be included in the main configuration file can also be included in theme files and vice versa. The difference is that theme files are kept in ~/menuapp/themes as a convenience. The main C-Menu Configuration file normally includes all of the entries needed for a complete theme, so it is not necessary to include theme files in the main configuration file. The Theme file is just a supplementary configuration file, the key values of which override those in the main configuration file positioned before the include statement. C-Menu uses only the last occurrence of a key and its value.</p>
-<h2 class="doxsection"><a class="anchor" id="theme-files"></a>
-Theme Files</h2>
-<p>Theme files are just supplemental configuration files that configure the appearance of C-Menu. Theme files are kept separately to facilitate coherent organization of theme components, to make it easier to create and manage themes, and most importantly, to allow the user to activate themes without reloading the main C-Menu Configuration. That's because a user may have started C-Menu with specific command line options that override the main configuration file, and reloading the main configuration file would override those command line options. By keeping themes in separate files, users can activate themes without reloading the main configuration file and overriding any command line options they may have used when starting C-Menu.</p>
-<p>Theme files are included in the main C-Menu configuration file with include statements such as the following:</p>
-<div class="fragment"><div class="line">include = ~/menuapp/themes/default</div>
-</div><!-- fragment --><p>The placement of the include statement in the main configuration file is significant because C-Menu processes key value pairs in reading order, so the key value pairs in the included file will override any duplicate key values in the main configuration file that are positioned before the include statement. Conversely, if you want to use a supplemental configuration as the default, include it first.</p>
-<h2 class="doxsection"><a class="anchor" id="key-value-pairs"></a>
-Key Value Pairs</h2>
-<p>Key value pairs consist of a key, text from the beginning of a line delimited by an '=' character, and a value after the '=' character delimited by whitespace or including syntactically valid hex color codes. Values may be enclosed in single or double quotes to preserve leading and trailing whitespace, which will otherwise be stripped.</p>
-<h3 class="doxsection"><a class="anchor" id="colors"></a>
-Colors</h3>
-<p>Colors are standard six-digit html-style hex color codes in the format '#RRGGBB', where RR, GG, and BB are two-digit hexadecimal numbers representing the red, green, and blue components of the color, respectively. For example, '#FF0000' represents pure red, '#00FF00' represents pure green, and '#0000FF' represents pure blue.</p>
-<p>The hex color codes must begin with a '#" character, followed by exactly six hexadecimal digits.
 
-@subsubsection comments Comments
+<p>Opaque structure representing a drawable surface in the UI.  
+ <a href="#details">More...</a></p>
 
-A '#' character that is not part of a value is treated as a comment character,
-and the rest of the line is ignored. This allows you to add comments documenting
-your entries in the theme file.
+<p><code>#include &lt;<a class="el" href="../../d4/d34/a01298_source.html">/usr/local/src/C-Menu/src/ui/ui_ncurses_internal.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for UiSurface:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d0/d38/a01476.svg" width="510" height="350"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:ad918e8067683c4edfed3495c6ec46d0d" id="r_ad918e8067683c4edfed3495c6ec46d0d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad918e8067683c4edfed3495c6ec46d0d">cols</a></td></tr>
+<tr class="memitem:a19a156d558185080c1599f705a80ca94" id="r_a19a156d558185080c1599f705a80ca94"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a19a156d558185080c1599f705a80ca94">hidden</a></td></tr>
+<tr class="memitem:ab1fc031b0c523de12a70d77f30d79a28" id="r_ab1fc031b0c523de12a70d77f30d79a28"><td class="memItemLeft">PANEL *&#160;</td><td class="memItemRight"><a class="el" href="#ab1fc031b0c523de12a70d77f30d79a28">pan</a></td></tr>
+<tr class="memitem:a3ff958d01cb09528c05d424b670bcb01" id="r_a3ff958d01cb09528c05d424b670bcb01"><td class="memItemLeft">struct <a class="el" href="../../d8/d7b/a01478.html">UiSurface</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a3ff958d01cb09528c05d424b670bcb01">parent</a></td></tr>
+<tr class="memitem:ae73f10e684cbef3db4a4eea8ec37e4ab" id="r_ae73f10e684cbef3db4a4eea8ec37e4ab"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae73f10e684cbef3db4a4eea8ec37e4ab">rows</a></td></tr>
+<tr class="memitem:af75f738eaa479f42876845ff028dfa21" id="r_af75f738eaa479f42876845ff028dfa21"><td class="memItemLeft">struct <a class="el" href="../../df/d2f/a01474.html">UiRuntime</a> *&#160;</td><td class="memItemRight"><a class="el" href="#af75f738eaa479f42876845ff028dfa21">runtime</a></td></tr>
+<tr class="memitem:aeeda1c9db595926ab7c950eb7d069e6e" id="r_aeeda1c9db595926ab7c950eb7d069e6e"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#aeeda1c9db595926ab7c950eb7d069e6e">win</a></td></tr>
+<tr class="memitem:af1b64930cac7948219a8437126893898" id="r_af1b64930cac7948219a8437126893898"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af1b64930cac7948219a8437126893898">x</a></td></tr>
+<tr class="memitem:aafd826fc271ae353a4013bf5f1cad120" id="r_aafd826fc271ae353a4013bf5f1cad120"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aafd826fc271ae353a4013bf5f1cad120">y</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Opaque structure representing a drawable surface in the UI. </p>
+<p>Represents a surface in the ncurses UI backend. This structure represents a drawable surface in the ncurses UI, which may correspond to a window or panel. It holds references to the underlying ncurses WINDOW and PANEL, as well as its position, size, and visibility state.</p>
+<p>The <a class="el" href="../../d8/d7b/a01478.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a> structure represents a drawable area within the UI. It is created using the ui_surface_new function and should be destroyed using ui_surface_destroy to free any associated resources. A <a class="el" href="../../d8/d7b/a01478.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a> can be thought of as a canvas on which you can draw text, lines, borders, and other UI elements. Surfaces can be nested, allowing for complex layouts and hierarchies. Each surface has its own position and size, and can be shown or hidden as needed. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="../../d5/da0/a01342.html#ga167278003ecb19e2eb778b134913b504" title="Create a new UI surface.">ui_surface_new</a> </dd>
+<dd>
+<a class="el" href="../../d5/da0/a01342.html#ga6af7c6c514535d5998f7a762374bc370" title="Destroy a UI surface and free its resources.">ui_surface_destroy</a> </dd></dl>
 
-@subsection saving-the-theme-file Saving the Theme File
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00043">43</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="ad918e8067683c4edfed3495c6ec46d0d" name="ad918e8067683c4edfed3495c6ec46d0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad918e8067683c4edfed3495c6ec46d0d">&#9670;&#160;</a></span>cols</h2>
 
-When you are finished editing the theme file, save it and close the text editor. You may use the name assigned, which will be in the form, "New.XXXXX", where "XXXXX" is a random string of characters, or you can rename the file to something more descriptive.
-There is no restriction on the names of theme files except that "default" is
-reserved for the default theme. The new theme will be available for selection in the "Select C-Menu Theme" menu.
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
-@subsection setting-the-new-theme-as-the-default Setting the New Theme as the Default
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00051">51</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
 
-If you use the C-Menu Workstation Configuration Menu to select the new theme,
-C-Menu will automatically create a symbolic link named "default" that points to the theme file you selected, so you don't need to do anything else. However, if you want to set the new theme as the default without using the C-Menu Workstation Configuration Menu, you can create a symbolic link named "default" that points to your new theme file with the following command:</p>
-<div class="fragment"><div class="line">ln -s Red default</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="parsing-rules"></a>
-Parsing Rules</h3>
-<p>Parsing: Lines beginning with # are comments and are ignored. Lines containing key=value pairs are parsed and the key and value are extracted. Lines without an '=' are ignored. Values are stripped of leading and trailing whitespace and quotes. Values can be enclosed in single or double quotes to preserve leading and trailing whitespace. Values can also be specified as hex color codes such as #ff0000 for red. If a value is specified as a hex color code, it is parsed and stored as a hex color code in the configuration. An unquoted '#' that is not part of a six digit hex color code and after key values have been extracted is the beginning of a comment.</p>
-<h2 class="doxsection"><a class="anchor" id="conclusion-2"></a>
-Conclusion</h2>
-<p>C-Menu themes allow you to customize the appearance of C-Menu to your liking. You can create your own themes or use one of the built-in themes. By using themes, you can easily switch between different appearances for C-Menu without having to edit the main configuration file or restart C-Menu. Themes are a powerful way to personalize your C-Menu experience and make it more enjoyable to use. Whether you prefer a dark theme, a light theme, or something in between, C-Menu has you covered with its flexible theming system.</p>
-<p>With this knowledge, go forth and create your own custom themes to make C-Menu look exactly how you want it to! </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>, and <a class="el" href="../../de/d90/a01313_source.html#l00106">ui_surface_resize()</a>.</p>
+
+</div>
+</div>
+<a id="a19a156d558185080c1599f705a80ca94" name="a19a156d558185080c1599f705a80ca94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19a156d558185080c1599f705a80ca94">&#9670;&#160;</a></span>hidden</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UiSurface::hidden</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00052">52</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00155">ui_surface_hide()</a>, and <a class="el" href="../../de/d90/a01313_source.html#l00143">ui_surface_show()</a>.</p>
+
+</div>
+</div>
+<a id="ab1fc031b0c523de12a70d77f30d79a28" name="ab1fc031b0c523de12a70d77f30d79a28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1fc031b0c523de12a70d77f30d79a28">&#9670;&#160;</a></span>pan</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PANEL* UiSurface::pan</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00045">45</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00074">ui_surface_destroy()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00155">ui_surface_hide()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00091">ui_surface_move()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>, and <a class="el" href="../../de/d90/a01313_source.html#l00143">ui_surface_show()</a>.</p>
+
+</div>
+</div>
+<a id="a3ff958d01cb09528c05d424b670bcb01" name="a3ff958d01cb09528c05d424b670bcb01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ff958d01cb09528c05d424b670bcb01">&#9670;&#160;</a></span>parent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../d8/d7b/a01478.html">UiSurface</a>* UiSurface::parent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00047">47</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<a id="ae73f10e684cbef3db4a4eea8ec37e4ab" name="ae73f10e684cbef3db4a4eea8ec37e4ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73f10e684cbef3db4a4eea8ec37e4ab">&#9670;&#160;</a></span>rows</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::rows</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00050">50</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>, and <a class="el" href="../../de/d90/a01313_source.html#l00106">ui_surface_resize()</a>.</p>
+
+</div>
+</div>
+<a id="af75f738eaa479f42876845ff028dfa21" name="af75f738eaa479f42876845ff028dfa21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af75f738eaa479f42876845ff028dfa21">&#9670;&#160;</a></span>runtime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../df/d2f/a01474.html">UiRuntime</a>* UiSurface::runtime</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00046">46</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<a id="aeeda1c9db595926ab7c950eb7d069e6e" name="aeeda1c9db595926ab7c950eb7d069e6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeda1c9db595926ab7c950eb7d069e6e">&#9670;&#160;</a></span>win</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* UiSurface::win</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00044">44</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00330">ui_bkgrnd()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00338">ui_bkgrnd_set()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00170">ui_cursor_move()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00194">ui_draw_border()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00226">ui_draw_box_title()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00153">ui_draw_hline()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00109">ui_draw_text()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00132">ui_draw_text_n()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00174">ui_draw_vline()</a>, <a class="el" href="../../d2/d4c/a01307_source.html#l00108">ui_get_event()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00119">ui_surface_clear()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00074">ui_surface_destroy()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00131">ui_surface_erase()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>, <a class="el" href="../../de/d90/a01313_source.html#l00106">ui_surface_resize()</a>, <a class="el" href="../../d4/d49/a01316_source.html#l00088">ui_surface_set_base()</a>, and <a class="el" href="../../d4/d49/a01316_source.html#l00072">ui_surface_set_style()</a>.</p>
+
+</div>
+</div>
+<a id="af1b64930cac7948219a8437126893898" name="af1b64930cac7948219a8437126893898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1b64930cac7948219a8437126893898">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00049">49</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00091">ui_surface_move()</a>, and <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<a id="aafd826fc271ae353a4013bf5f1cad120" name="aafd826fc271ae353a4013bf5f1cad120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd826fc271ae353a4013bf5f1cad120">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UiSurface::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d34/a01298_source.html#l00048">48</a> of file <a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/d90/a01313_source.html#l00091">ui_surface_move()</a>, and <a class="el" href="../../de/d90/a01313_source.html#l00037">ui_surface_new()</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>ui/<a class="el" href="../../d4/d34/a01298_source.html">ui_ncurses_internal.h</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -192,6 +323,7 @@ Conclusion</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../d8/d7b/a01478.html">UiSurface</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

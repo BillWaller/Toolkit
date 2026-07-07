@@ -1,15 +1,19 @@
 var searchData=
 [
-  ['in_5fbuf_0',['in_buf',['../d0/d95/a01389.html#aa15a16ca1ad0ee20987c5bb8c739c6c1',1,'Pick']]],
-  ['in_5ffd_1',['in_fd',['../d3/dea/a01377.html#af842c03e821da7bd570853c691a1d202',1,'Form::in_fd'],['../d0/d95/a01389.html#aafcf7b0c39eaeb2832c931f4e386a255',1,'Pick::in_fd'],['../d7/d1c/a01397.html#a27ab6fcf34d0d582ad9c4df627f940b0',1,'View::in_fd']]],
-  ['in_5ffp_2',['in_fp',['../d3/dea/a01377.html#a8f6a814fc9bbb37ba3034c708ac839e3',1,'Form::in_fp'],['../d0/d95/a01389.html#a655cf2ddf525d99ac416009db8710747',1,'Pick::in_fp'],['../d7/d1c/a01397.html#a2e908a64131c7a68ae615532ece64479',1,'View::in_fp']]],
-  ['in_5fspec_3',['in_spec',['../dc/d9e/a01305.html#a2932f12ebd52c4391ca9974f5e572527',1,'Init::in_spec'],['../d3/dea/a01377.html#ac788f41caf6c9e123dee28817577f5f5',1,'Form::in_spec'],['../d0/d95/a01389.html#ad1e75e9ace5f0a493630a00e3fef2ed6',1,'Pick::in_spec'],['../d7/d1c/a01397.html#a08624064d21169a092f13ebd882ec18f',1,'View::in_spec']]],
-  ['in_5fstr_4',['in_str',['../dc/d70/a01187.html#a0fdf926da32e462b1a7d62c7c891e061',1,'iloan.c']]],
-  ['index_5',['index',['../de/d6c/a01349.html#a59f19ed1a9b4da7f76ae25cf9859e10b',1,'UiColor']]],
-  ['init_5fcnt_6',['init_cnt',['../dd/dd8/a00719.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32',1,'init_cnt:&#160;mem.c'],['../de/db5/a01181.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32',1,'init_cnt:&#160;mem.c']]],
-  ['inner_7',['inner',['../d9/db0/a01437.html#a9c4324332c5f305d3b5090023448b534',1,'UiFramedSurface']]],
-  ['input_5fs_8',['input_s',['../d7/d38/a01373.html#a977c015992c0cf877017eff6326f1979',1,'Field']]],
-  ['italic_9',['italic',['../d4/dad/a01353.html#aa24e056b9b250b844f4c979ebbecab09',1,'UiStyle']]],
-  ['item_5fcount_10',['item_count',['../df/d68/a01385.html#a999d70e9f9225e3c3ed2f5742a87d0b9',1,'Menu']]],
-  ['items_11',['items',['../dc/df4/a01401.html#a3fade253de43fe0175b33401f35f467a',1,'ViewStack']]]
+  ['idx_0',['idx',['../db/d44/a02564.html#a2ddf5b0e1f5877687e494ea0821f4614',1,'UiColorPair::idx'],['../da/dc4/a02548.html#a878c0ff2fad9cadddc4f81ef1efd077c',1,'UiColor::idx']]],
+  ['in_5fbuf_1',['in_buf',['../d6/d24/a02536.html#aa15a16ca1ad0ee20987c5bb8c739c6c1',1,'Pick']]],
+  ['in_5ffd_2',['in_fd',['../de/dec/a02524.html#af842c03e821da7bd570853c691a1d202',1,'Form::in_fd'],['../d6/d24/a02536.html#aafcf7b0c39eaeb2832c931f4e386a255',1,'Pick::in_fd'],['../d4/db0/a02540.html#a27ab6fcf34d0d582ad9c4df627f940b0',1,'View::in_fd']]],
+  ['in_5ffp_3',['in_fp',['../de/dec/a02524.html#a8f6a814fc9bbb37ba3034c708ac839e3',1,'Form::in_fp'],['../d6/d24/a02536.html#a655cf2ddf525d99ac416009db8710747',1,'Pick::in_fp'],['../d4/db0/a02540.html#a2e908a64131c7a68ae615532ece64479',1,'View::in_fp']]],
+  ['in_5fspec_4',['in_spec',['../d3/d19/a02464.html#a2932f12ebd52c4391ca9974f5e572527',1,'Init::in_spec'],['../de/dec/a02524.html#ac788f41caf6c9e123dee28817577f5f5',1,'Form::in_spec'],['../d6/d24/a02536.html#ad1e75e9ace5f0a493630a00e3fef2ed6',1,'Pick::in_spec'],['../d4/db0/a02540.html#a08624064d21169a092f13ebd882ec18f',1,'View::in_spec']]],
+  ['in_5fstr_5',['in_str',['../d8/d26/a02357.html#a0fdf926da32e462b1a7d62c7c891e061',1,'iloan.c']]],
+  ['ind_5fbg_6',['ind_bg',['../db/da2/a02512.html#afa245ba1258204765a2807524160ba9b',1,'SIO']]],
+  ['ind_5ffg_7',['ind_fg',['../db/da2/a02512.html#a4cda39f592d69fdaf43823c0169a5be6',1,'SIO']]],
+  ['index_8',['index',['../da/dc4/a02548.html#aedde926d044b85d053c28c3d9ab0055a',1,'UiColor']]],
+  ['init_5fcnt_9',['init_cnt',['../d6/dbd/a01829.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32',1,'init_cnt:&#160;mem.c'],['../dd/d1b/a02351.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32',1,'init_cnt:&#160;mem.c']]],
+  ['inner_10',['inner',['../d4/d7d/a02628.html#a9c4324332c5f305d3b5090023448b534',1,'UiFramedSurface']]],
+  ['input_5fs_11',['input_s',['../dc/dbb/a02520.html#a977c015992c0cf877017eff6326f1979',1,'Field']]],
+  ['invis_12',['invis',['../dc/d81/a02568.html#a6a42c3be0eb3e39b6bd65a02d796ea7d',1,'UiStyle']]],
+  ['italic_13',['italic',['../dc/d81/a02568.html#aa24e056b9b250b844f4c979ebbecab09',1,'UiStyle']]],
+  ['item_5fcount_14',['item_count',['../d2/d08/a02532.html#a999d70e9f9225e3c3ed2f5742a87d0b9',1,'Menu']]],
+  ['items_15',['items',['../d1/df6/a02544.html#a3fade253de43fe0175b33401f35f467a',1,'ViewStack']]]
 ];

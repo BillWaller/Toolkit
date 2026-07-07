@@ -1,9 +1,18 @@
 var a01284 =
 [
-    [ "free_string", "dd/d18/a01284.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
-    [ "string_cat", "dd/d18/a01284.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
-    [ "string_cpy", "dd/d18/a01284.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
-    [ "string_ncat", "dd/d18/a01284.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
-    [ "string_ncpy", "dd/d18/a01284.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
-    [ "to_string", "dd/d18/a01284.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
+    [ "box2_new", "dd/d18/a01284.html#gaff477cb0dfbe4bf5e94ed619237e0b8f", null ],
+    [ "box_new", "dd/d18/a01284.html#gab71e58b333c549562d66cad43ae33e37", null ],
+    [ "cbox_hsplit", "dd/d18/a01284.html#ga773056ca6ba7c2f9d5de8fe253e67b7b", null ],
+    [ "destroy_curses", "dd/d18/a01284.html#gafc0985a403e3eac0b2cd8f0fab500256", null ],
+    [ "mvwaddstr_fill", "dd/d18/a01284.html#gaaf79b6e287507d6c4ae505f1cd174760", null ],
+    [ "open_curses", "dd/d18/a01284.html#ga02c9f554eaa3f1d6599e75838da3cee6", null ],
+    [ "restore_wins", "dd/d18/a01284.html#ga40858af5b0d68549fb483f77c97eb82c", null ],
+    [ "view_full_screen_resize", "dd/d18/a01284.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_win_resize", "dd/d18/a01284.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
+    [ "win_del", "dd/d18/a01284.html#gacb381ce786061f6123957f5fd1aa98c0", null ],
+    [ "win_init_attrs", "dd/d18/a01284.html#ga8f16f794ffa769e134d2a2fe07a35592", null ],
+    [ "win_new", "dd/d18/a01284.html#ga84e02ea4b1a3c2da71b7f7dc1f78d31b", null ],
+    [ "win_redraw", "dd/d18/a01284.html#gafe05b547e64abc42a760ec6c9470bbbf", null ],
+    [ "win_resize", "dd/d18/a01284.html#gaedecb8bdc3f4f521877caf0134124fc8", null ],
+    [ "xwgetch", "dd/d18/a01284.html#ga2feaacf50ca2c7d00b73e21faca59702", null ]
 ];

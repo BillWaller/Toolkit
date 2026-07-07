@@ -1,7 +1,9 @@
 var a01293 =
 [
-    [ "handle_signal", "dc/dd5/a01293.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "dc/dd5/a01293.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "dc/dd5/a01293.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "dc/dd5/a01293.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
+    [ "free_string", "dc/dd5/a01293.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "dc/dd5/a01293.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "dc/dd5/a01293.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "dc/dd5/a01293.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "dc/dd5/a01293.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "dc/dd5/a01293.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];

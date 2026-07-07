@@ -1,11 +1,23 @@
 var a01184 =
 [
-    [ "init_view_boxwin", "d7/da4/a01287.html#ga8dd32c1a4c961ec715f63625a6f87b61", null ],
-    [ "init_view_full_screen", "d7/da4/a01287.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_full_screen_dimensions", "d7/da4/a01287.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_calc_win_dimensions", "d7/da4/a01287.html#ga0715aa3077a3c6ad7b2f7a86b30db967", null ],
-    [ "view_full_screen_resize", "d3/d42/a01275.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
-    [ "view_init_input", "d7/da4/a01287.html#gab050f5482419339e9207dbdc65a7b49e", null ],
-    [ "view_win_resize", "d3/d42/a01275.html#ga06d7686a3523351e9a2cfb3092a1e8b6", null ],
-    [ "view_stack", "d1/d35/a01184.html#ac7f5b6614c7f476026767c4f3e1bde23", null ]
+    [ "destroy_form", "dc/d8c/a01297.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "dc/d8c/a01297.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "dc/d8c/a01297.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "dc/d8c/a01297.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "dc/d8c/a01297.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "dc/d8c/a01297.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "dc/d8c/a01297.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "dc/d8c/a01297.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "dc/d8c/a01297.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "dc/d8c/a01297.html#ga625c89a0ff0ede7fbac1b40c7ac9dbda", null ],
+    [ "new_init", "dc/d8c/a01297.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "dc/d8c/a01297.html#ga861e6162a19e089468fdc2a1479b547f", null ],
+    [ "new_pick", "dc/d8c/a01297.html#gaa7928f3771536aa0e27d88479be2cbc8", null ],
+    [ "new_view", "dc/d8c/a01297.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "dc/d8c/a01297.html#ga75ce293fe4e007a3337a190647408000", null ],
+    [ "form", "d1/d35/a01184.html#adb98384f3771d341017b7b3add874515", null ],
+    [ "init_cnt", "d1/d35/a01184.html#aebf4d07ed1f6b95d160f8a2f5a4d2e32", null ],
+    [ "menu", "d1/d35/a01184.html#a529b480d3d81a86e882c4d6ab8afa8bb", null ],
+    [ "pick", "d1/d35/a01184.html#aa0984c16af72bfdf57c5d88de1d314f9", null ],
+    [ "view", "d1/d35/a01184.html#af2dd70d8b95c32fb670ac6f9cc8df201", null ]
 ];

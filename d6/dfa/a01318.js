@@ -1,13 +1,11 @@
 var a01318 =
 [
-    [ "accept_s", "d6/dfa/a01318.html#a259801946ce7b016e71fee1b90139fcf", null ],
-    [ "col", "d6/dfa/a01318.html#a8bd4963ac0722be3f5732bf1cb6ce150", null ],
-    [ "display_cc", "d6/dfa/a01318.html#abffe323f69ca8f112987e1886cd0885e", null ],
-    [ "display_s", "d6/dfa/a01318.html#a18d2c5754ac6b197cee2426c7da8ce16", null ],
-    [ "ff", "d6/dfa/a01318.html#a680e7cfa27a7c7ab3e91ddd9a2395924", null ],
-    [ "filler_cc", "d6/dfa/a01318.html#aa3e505e5c866dcbd20a1c518944294b6", null ],
-    [ "filler_s", "d6/dfa/a01318.html#aeb21dc3ca54d5787eea676e40b78e1fc", null ],
-    [ "input_s", "d6/dfa/a01318.html#a977c015992c0cf877017eff6326f1979", null ],
-    [ "len", "d6/dfa/a01318.html#ae63c50f9ea7ea1af0778d3eb78a4f50a", null ],
-    [ "line", "d6/dfa/a01318.html#a04e622df503776af67f8abd30d97a4a2", null ]
+    [ "a", "d6/dfa/a01318.html#af84b27755ac079830298b9e1d776ad82", null ],
+    [ "b", "d6/dfa/a01318.html#ad7a2c8b8af8ad82115ba59d8e870d9b6", null ],
+    [ "g", "d6/dfa/a01318.html#ac68d9a20a9e5bb05d540b0277c1a21bb", null ],
+    [ "idx", "d6/dfa/a01318.html#a878c0ff2fad9cadddc4f81ef1efd077c", null ],
+    [ "index", "d6/dfa/a01318.html#aedde926d044b85d053c28c3d9ab0055a", null ],
+    [ "r", "d6/dfa/a01318.html#aca9ef37fda78d6cc94dbf5f0294c04b6", null ],
+    [ "rgba", "d6/dfa/a01318.html#a7cf661bd87edff7cf11f6dc87bb56337", null ],
+    [ "use_rgb", "d6/dfa/a01318.html#ab1d136b78509282c757feee8e1c32245", null ]
 ];

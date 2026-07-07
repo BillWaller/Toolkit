@@ -1,9 +1,10 @@
 var dir_abb87e5dad931daeb938036aca53b5d1 =
 [
-    [ "ui_layout.h", "dd/d42/a01259.html", "dd/d42/a01259" ],
-    [ "ui_ncurses.c", "dc/dd9/a01268.html", "dc/dd9/a01268" ],
-    [ "ui_ncurses_draw.c", "dd/d39/a01271.html", "dd/d39/a01271" ],
-    [ "ui_ncurses_input.c", "d3/d53/a01262.html", "d3/d53/a01262" ],
-    [ "ui_ncurses_internal.h", "d6/d0f/a01256.html", "d6/d0f/a01256" ],
-    [ "ui_theme.h", "da/dd8/a01265.html", "da/dd8/a01265" ]
+    [ "ui_colors.c", "d3/dce/a01859.html", "d3/dce/a01859" ],
+    [ "ui_layout.h", "da/d66/a01856.html", "da/d66/a01856" ],
+    [ "ui_ncurses.c", "dd/de7/a01868.html", "dd/de7/a01868" ],
+    [ "ui_ncurses_draw.c", "da/d8b/a01871.html", "da/d8b/a01871" ],
+    [ "ui_ncurses_input.c", "d0/d4a/a01862.html", "d0/d4a/a01862" ],
+    [ "ui_ncurses_internal.h", "db/d6b/a01853.html", "db/d6b/a01853" ],
+    [ "ui_theme.h", "d5/da8/a01865.html", "d5/da8/a01865" ]
 ];

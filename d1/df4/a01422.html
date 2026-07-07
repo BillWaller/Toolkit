@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: DATE/TIME CONUNDRUM</title>
-<link rel="icon" href="../../decision.svg" type="image/x-icon" />
+<title>C-Menu: Menu Struct Reference</title>
+<link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
 <link href="../../navtree.css" rel="stylesheet" type="text/css"/>
@@ -109,187 +109,546 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d1/df4/a01422.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">DATE/TIME CONUNDRUM </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">Menu Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="datetime-conundrum"></a></p>
-<p>Bill Waller Copyright (c) 2026 <br  />
- 2026-05-25 <br  />
- MIT License <br  />
- <a href="../../email@billxwaller@gmail.com">bill waller email</a></p>
-<h1 class="doxsection"><a class="anchor" id="overview"></a>
-Overview</h1>
-<p>This note documents an issue encountered while parsing local date/time text with <span class="tt">strptime()</span>, converting the result to <span class="tt">time_t</span> with <span class="tt">mktime()</span>, and then formatting the resulting value after conversion back to local time with <span class="tt">localtime_r()</span>.</p>
-<p>I am including this documentation because the behavior can be confusing at first, and it is easy to misattribute the problem to <span class="tt">localtime_r()</span> when the real issue is usually an uninitialized <span class="tt">struct tm</span> field that affects how <span class="tt">mktime()</span> interprets the input.</p>
-<p>At first glance, the behavior can look like a GNU <span class="tt">gmtime_r()</span> or <span class="tt">localtime_r()</span> bug because the formatted output appears to shift by one hour depending on whether the <span class="tt">struct tm</span> was first cleared with <span class="tt">memset()</span>. In practice, the real problem is usually the value of <span class="tt">tm_isdst</span> before calling <span class="tt">mktime()</span>.</p>
-<p><span class="tt">strptime()</span> fills only the fields specified by the format string. It does <b>not</b> guarantee that the rest of the <span class="tt">struct tm</span> is initialized to useful values. One of the most important remaining fields is <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">tm_isdst = 0</span> means standard time is in effect.</li>
-<li><span class="tt">tm_isdst = 1</span> means daylight saving time is in effect.</li>
-<li><span class="tt">tm_isdst = -1</span> means "determine DST automatically."</li>
+
+<p>The <a class="el" href="../../d1/df4/a01422.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> structure is the main data structure for the menu application, containing all the information about the menu, its lines, and its display properties.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="../../df/df7/a00731_source.html">menu.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Menu:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d0/d05/a01420.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a1a9cb8c933f8daee80d275fcae7bbb82" id="r_a1a9cb8c933f8daee80d275fcae7bbb82"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1a9cb8c933f8daee80d275fcae7bbb82">argc</a></td></tr>
+<tr class="memitem:aefb3580ad8effc5bc4d18272dda1d8c1" id="r_aefb3580ad8effc5bc4d18272dda1d8c1"><td class="memItemLeft">char **&#160;</td><td class="memItemRight"><a class="el" href="#aefb3580ad8effc5bc4d18272dda1d8c1">argv</a></td></tr>
+<tr class="memitem:af993204eff9ce22a781a2acea521d5e1" id="r_af993204eff9ce22a781a2acea521d5e1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af993204eff9ce22a781a2acea521d5e1">begx</a></td></tr>
+<tr class="memitem:a77d1b0a62fb29de721363d07477bfc68" id="r_a77d1b0a62fb29de721363d07477bfc68"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a77d1b0a62fb29de721363d07477bfc68">begy</a></td></tr>
+<tr class="memitem:ab15cbaaf7cfed77ecc3a0cc7ec10d956" id="r_ab15cbaaf7cfed77ecc3a0cc7ec10d956"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab15cbaaf7cfed77ecc3a0cc7ec10d956">bg_clr_idx</a></td></tr>
+<tr class="memitem:a664f3c9c44cf2ecfbbd913c723d5f1d0" id="r_a664f3c9c44cf2ecfbbd913c723d5f1d0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a664f3c9c44cf2ecfbbd913c723d5f1d0">bo_clr_idx</a></td></tr>
+<tr class="memitem:a2c4659773a201c01a5a6c19f4b7f83cc" id="r_a2c4659773a201c01a5a6c19f4b7f83cc"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#a2c4659773a201c01a5a6c19f4b7f83cc">box</a></td></tr>
+<tr class="memitem:aa4f64b4a48f488bfa7e64c2966c5db56" id="r_aa4f64b4a48f488bfa7e64c2966c5db56"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa4f64b4a48f488bfa7e64c2966c5db56">choice_max_len</a></td></tr>
+<tr class="memitem:a54de460c3cff50a338a658f039588d7b" id="r_a54de460c3cff50a338a658f039588d7b"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a54de460c3cff50a338a658f039588d7b">cmd</a> [<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a083f4025aa2d86510a1bf6e6a81e6b61" id="r_a083f4025aa2d86510a1bf6e6a81e6b61"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a083f4025aa2d86510a1bf6e6a81e6b61">cols</a></td></tr>
+<tr class="memitem:abeac01782bfd4822533c4de5d11b020c" id="r_abeac01782bfd4822533c4de5d11b020c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abeac01782bfd4822533c4de5d11b020c">f_cmd</a></td></tr>
+<tr class="memitem:a274319cb0d5ccabbd48105a5db38298d" id="r_a274319cb0d5ccabbd48105a5db38298d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a274319cb0d5ccabbd48105a5db38298d">f_help_spec</a></td></tr>
+<tr class="memitem:a88b3b7d9aeb982b80a2b2ac00305db83" id="r_a88b3b7d9aeb982b80a2b2ac00305db83"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a88b3b7d9aeb982b80a2b2ac00305db83">f_mapp_spec</a></td></tr>
+<tr class="memitem:a5df190bfb6018ea0f73f55b7499c3efd" id="r_a5df190bfb6018ea0f73f55b7499c3efd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5df190bfb6018ea0f73f55b7499c3efd">f_provider_cmd</a></td></tr>
+<tr class="memitem:aa0ba964c16b116524c64603becf5fdab" id="r_aa0ba964c16b116524c64603becf5fdab"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa0ba964c16b116524c64603becf5fdab">f_receiver_cmd</a></td></tr>
+<tr class="memitem:a7668a643c4d6f85dd86323b4ea6fbee3" id="r_a7668a643c4d6f85dd86323b4ea6fbee3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7668a643c4d6f85dd86323b4ea6fbee3">fg_clr_idx</a></td></tr>
+<tr class="memitem:ada47854331f8ae621f8aa2075c8950f7" id="r_ada47854331f8ae621f8aa2075c8950f7"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ada47854331f8ae621f8aa2075c8950f7">help_spec</a> [<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a999d70e9f9225e3c3ed2f5742a87d0b9" id="r_a999d70e9f9225e3c3ed2f5742a87d0b9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a999d70e9f9225e3c3ed2f5742a87d0b9">item_count</a></td></tr>
+<tr class="memitem:a2218d7db25938e8b1ece65be418eb26c" id="r_a2218d7db25938e8b1ece65be418eb26c"><td class="memItemLeft"><a class="el" href="../../d4/d3c/a01418.html">Line</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a2218d7db25938e8b1ece65be418eb26c">line</a> [<a class="el" href="../../df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1">MAX_MENU_LINES</a>]</td></tr>
+<tr class="memitem:acdbfede3a378c73fcee7b174a8e41a4f" id="r_acdbfede3a378c73fcee7b174a8e41a4f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdbfede3a378c73fcee7b174a8e41a4f">line_idx</a></td></tr>
+<tr class="memitem:ae0407bd7b1dd2c0c91ba10ec0e3813d9" id="r_ae0407bd7b1dd2c0c91ba10ec0e3813d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae0407bd7b1dd2c0c91ba10ec0e3813d9">lines</a></td></tr>
+<tr class="memitem:a1a90724742b6bc7d4378e9f51744f8b7" id="r_a1a90724742b6bc7d4378e9f51744f8b7"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a1a90724742b6bc7d4378e9f51744f8b7">mapp_spec</a> [<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a033fe4ccdd7f83d51824b4649f933848" id="r_a033fe4ccdd7f83d51824b4649f933848"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a033fe4ccdd7f83d51824b4649f933848">provider_cmd</a> [<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a950711fc29da5549a7d8311632a69e68" id="r_a950711fc29da5549a7d8311632a69e68"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a950711fc29da5549a7d8311632a69e68">receiver_cmd</a> [<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a830f9a3ce81b56e60e9c56765be6aef6" id="r_a830f9a3ce81b56e60e9c56765be6aef6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a830f9a3ce81b56e60e9c56765be6aef6">text_max_len</a></td></tr>
+<tr class="memitem:af7f87761d323bc3a126687956e2b5211" id="r_af7f87761d323bc3a126687956e2b5211"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#af7f87761d323bc3a126687956e2b5211">title</a> [<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:a2a5dff828fba2f8c0dda0fe4f7f7ca36" id="r_a2a5dff828fba2f8c0dda0fe4f7f7ca36"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#a2a5dff828fba2f8c0dda0fe4f7f7ca36">win</a></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="../../d1/df4/a01422.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a> structure is the main data structure for the menu application, containing all the information about the menu, its lines, and its display properties. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00106">106</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
+<a id="a1a9cb8c933f8daee80d275fcae7bbb82" name="a1a9cb8c933f8daee80d275fcae7bbb82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a9cb8c933f8daee80d275fcae7bbb82">&#9670;&#160;</a></span>argc</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::argc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of arguments on the command line, used to determine how many arguments were passed to the menu application when it was executed </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00134">134</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="aefb3580ad8effc5bc4d18272dda1d8c1" name="aefb3580ad8effc5bc4d18272dda1d8c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefb3580ad8effc5bc4d18272dda1d8c1">&#9670;&#160;</a></span>argv</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** Menu::argv</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The argument vector from the command line, used to access the specific arguments passed to the menu application when it was executed </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00137">137</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="af993204eff9ce22a781a2acea521d5e1" name="af993204eff9ce22a781a2acea521d5e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af993204eff9ce22a781a2acea521d5e1">&#9670;&#160;</a></span>begx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::begx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The screen column for the upper left corner of the menu window, used to determine the horizontal position of the menu display on the screen </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00122">122</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../da/d19/a01217_source.html#l00145">new_menu()</a>.</p>
+
+</div>
+</div>
+<a id="a77d1b0a62fb29de721363d07477bfc68" name="a77d1b0a62fb29de721363d07477bfc68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77d1b0a62fb29de721363d07477bfc68">&#9670;&#160;</a></span>begy</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::begy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The screen line for the upper left corner of the menu window, used to determine the vertical position of the menu display on the screen </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00119">119</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../da/d19/a01217_source.html#l00145">new_menu()</a>.</p>
+
+</div>
+</div>
+<a id="ab15cbaaf7cfed77ecc3a0cc7ec10d956" name="ab15cbaaf7cfed77ecc3a0cc7ec10d956"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab15cbaaf7cfed77ecc3a0cc7ec10d956">&#9670;&#160;</a></span>bg_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::bg_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00110">110</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a664f3c9c44cf2ecfbbd913c723d5f1d0" name="a664f3c9c44cf2ecfbbd913c723d5f1d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a664f3c9c44cf2ecfbbd913c723d5f1d0">&#9670;&#160;</a></span>bo_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::bo_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>&lt;The background color for the menu display, used to determine the color of the background in the menu display The color for the box around the menu, used to determine the color of the box in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00113">113</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a2c4659773a201c01a5a6c19f4b7f83cc" name="a2c4659773a201c01a5a6c19f4b7f83cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c4659773a201c01a5a6c19f4b7f83cc">&#9670;&#160;</a></span>box</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* Menu::box</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The ncurses window structure for the box around the menu, used to manage the display of the box around the menu on the screen </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00128">128</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="aa4f64b4a48f488bfa7e64c2966c5db56" name="aa4f64b4a48f488bfa7e64c2966c5db56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f64b4a48f488bfa7e64c2966c5db56">&#9670;&#160;</a></span>choice_max_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::choice_max_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The longest choice text string of all menu lines, used to determine the width of the menu window, calculated based on the length of the choice_text for all menu lines and used to ensure that the menu window is wide enough to accommodate the longest choice text without truncation or wrapping </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00200">200</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a54de460c3cff50a338a658f039588d7b" name="a54de460c3cff50a338a658f039588d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54de460c3cff50a338a658f039588d7b">&#9670;&#160;</a></span>cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::cmd[<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A command that can be executed in the foreground, possibly taking control of the screen, by the menu application, such as an editor or other program that is called by the menu application, used to specify a command that can be run in the foreground when selected from the menu, which may take control of the screen and require user interaction </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00166">166</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a083f4025aa2d86510a1bf6e6a81e6b61" name="a083f4025aa2d86510a1bf6e6a81e6b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a083f4025aa2d86510a1bf6e6a81e6b61">&#9670;&#160;</a></span>cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of columns for the menu window size, used to determine the width of the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00117">117</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="abeac01782bfd4822533c4de5d11b020c" name="abeac01782bfd4822533c4de5d11b020c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeac01782bfd4822533c4de5d11b020c">&#9670;&#160;</a></span>f_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the foreground command has been verified, used to indicate whether the command specified by cmd has been successfully verified and can be executed in the foreground when selected from the menu </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00196">196</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a274319cb0d5ccabbd48105a5db38298d" name="a274319cb0d5ccabbd48105a5db38298d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a274319cb0d5ccabbd48105a5db38298d">&#9670;&#160;</a></span>f_help_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_help_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the menu application help file has been verified, used to indicate whether the help file specified by help_spec has been successfully verified and can be used to provide help information for the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00178">178</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00502">init_menu_files()</a>, and <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>.</p>
+
+</div>
+</div>
+<a id="a88b3b7d9aeb982b80a2b2ac00305db83" name="a88b3b7d9aeb982b80a2b2ac00305db83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88b3b7d9aeb982b80a2b2ac00305db83">&#9670;&#160;</a></span>f_mapp_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_mapp_spec</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the menu application description file has been verified, used to indicate whether the menu description file specified by mapp_spec has been successfully verified and can be used to populate the menu lines and their properties </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00173">173</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00502">init_menu_files()</a>.</p>
+
+</div>
+</div>
+<a id="a5df190bfb6018ea0f73f55b7499c3efd" name="a5df190bfb6018ea0f73f55b7499c3efd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df190bfb6018ea0f73f55b7499c3efd">&#9670;&#160;</a></span>f_provider_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_provider_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the provider command has been verified, used to indicate whether the provider command specified by provider_cmd has been successfully verified and can be executed in the background to provide dynamic content for the menu display or for a program called by the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00183">183</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="aa0ba964c16b116524c64603becf5fdab" name="aa0ba964c16b116524c64603becf5fdab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0ba964c16b116524c64603becf5fdab">&#9670;&#160;</a></span>f_receiver_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Menu::f_receiver_cmd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>A flag to indicate whether the receiver command has been verified, used to indicate whether the receiver command specified by receiver_cmd has been successfully verified and can be executed in the background to process the output of a program called by the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00190">190</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a7668a643c4d6f85dd86323b4ea6fbee3" name="a7668a643c4d6f85dd86323b4ea6fbee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7668a643c4d6f85dd86323b4ea6fbee3">&#9670;&#160;</a></span>fg_clr_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::fg_clr_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The foreground color for the menu display, used to determine the color of the text and other elements in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00107">107</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="ada47854331f8ae621f8aa2075c8950f7" name="ada47854331f8ae621f8aa2075c8950f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada47854331f8ae621f8aa2075c8950f7">&#9670;&#160;</a></span>help_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::help_spec[<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The menu application help file spec, which may be a file name or a fully qualified path to a file, used to specify the location of the help file that contains the information about the menu application and how to use it </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00146">146</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00502">init_menu_files()</a>, and <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>.</p>
+
+</div>
+</div>
+<a id="a999d70e9f9225e3c3ed2f5742a87d0b9" name="a999d70e9f9225e3c3ed2f5742a87d0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a999d70e9f9225e3c3ed2f5742a87d0b9">&#9670;&#160;</a></span>item_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::item_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of menu lines in this menu, used to determine how many lines are currently defined in the menu and to manage the array of menu lines </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00212">212</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00166">destroy_menu()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a2218d7db25938e8b1ece65be418eb26c" name="a2218d7db25938e8b1ece65be418eb26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2218d7db25938e8b1ece65be418eb26c">&#9670;&#160;</a></span>line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d4/d3c/a01418.html">Line</a>* Menu::line[<a class="el" href="../../df/df7/a00731.html#ac4aac8afc8815b715cd68c7f4c31cde1">MAX_MENU_LINES</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An array of pointers to the menu line structures in this menu, used to store the information about each menu line, including its type, text, choice letter, command type, and command string, and to manage the menu lines in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00219">219</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00166">destroy_menu()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="acdbfede3a378c73fcee7b174a8e41a4f" name="acdbfede3a378c73fcee7b174a8e41a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdbfede3a378c73fcee7b174a8e41a4f">&#9670;&#160;</a></span>line_idx</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::line_idx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The index of the currently selected menu line, used for highlighting and selection purposes, updated based on user input to indicate which menu line is currently selected and should be highlighted in the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00215">215</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00166">destroy_menu()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00133">menu_cmd_processor()</a>, <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="ae0407bd7b1dd2c0c91ba10ec0e3813d9" name="ae0407bd7b1dd2c0c91ba10ec0e3813d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0407bd7b1dd2c0c91ba10ec0e3813d9">&#9670;&#160;</a></span>lines</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::lines</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The number of lines for the menu window size, used to determine the height of the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00115">115</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a1a90724742b6bc7d4378e9f51744f8b7" name="a1a90724742b6bc7d4378e9f51744f8b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a90724742b6bc7d4378e9f51744f8b7">&#9670;&#160;</a></span>mapp_spec</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::mapp_spec[<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The menu application description file spec, which may be a file name or a fully qualified path to a file, used to specify the location of the menu description file that contains the information about the menu lines and their properties </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00140">140</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../da/d19/a01217_source.html#l00502">init_menu_files()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a033fe4ccdd7f83d51824b4649f933848" name="a033fe4ccdd7f83d51824b4649f933848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033fe4ccdd7f83d51824b4649f933848">&#9670;&#160;</a></span>provider_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::provider_cmd[<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The provider command, which can be executed in the background to provide dynamic content for a program called by the menu application, used to specify a command that can be run in the background to generate dynamic content for the menu display or for a program that is called by the menu application </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00151">151</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a950711fc29da5549a7d8311632a69e68" name="a950711fc29da5549a7d8311632a69e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a950711fc29da5549a7d8311632a69e68">&#9670;&#160;</a></span>receiver_cmd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::receiver_cmd[<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The receiver command, which can be executed in the background to process the output of a program called by the menu application, used to specify a command that can be run in the background to process the output of a program that is called by the menu application, such as parsing the output and updating the menu display or performing some other action based on the output </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00158">158</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<a id="a830f9a3ce81b56e60e9c56765be6aef6" name="a830f9a3ce81b56e60e9c56765be6aef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a830f9a3ce81b56e60e9c56765be6aef6">&#9670;&#160;</a></span>text_max_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Menu::text_max_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The longest text string of all menu lines, used to determine the width of the menu window, calculated based on the length of the raw_text for all menu lines and used to ensure that the menu window is wide enough to accommodate the longest text without truncation or wrapping </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00206">206</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="af7f87761d323bc3a126687956e2b5211" name="af7f87761d323bc3a126687956e2b5211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7f87761d323bc3a126687956e2b5211">&#9670;&#160;</a></span>title</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char Menu::title[<a class="el" href="../../db/d1c/a01229.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The title to display on the top line of the box window, used to provide a title or header for the menu display </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00131">131</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../dc/dd9/a01268_source.html#l00038">menu_engine()</a>, and <a class="el" href="../../dd/d42/a01259_source.html#l00029">parse_menu_description()</a>.</p>
+
+</div>
+</div>
+<a id="a2a5dff828fba2f8c0dda0fe4f7f7ca36" name="a2a5dff828fba2f8c0dda0fe4f7f7ca36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a5dff828fba2f8c0dda0fe4f7f7ca36">&#9670;&#160;</a></span>win</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW* Menu::win</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The ncurses window structure for the menu display, used to manage the display of the menu on the screen and handle user input </p>
+
+<p class="definition">Definition at line <a class="el" href="../../df/df7/a00731_source.html#l00125">125</a> of file <a class="el" href="../../df/df7/a00731_source.html">menu.h</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>include/<a class="el" href="../../df/df7/a00731_source.html">menu.h</a></li>
 </ul>
-<p>That means:</p>
-<ul>
-<li>If the structure is zeroed with <span class="tt">memset()</span>, then <span class="tt">tm_isdst</span> becomes <span class="tt">0</span>, which forces <span class="tt">mktime()</span> to interpret the input as standard time even when the date falls in CDT.</li>
-<li>If the structure is <b>not</b> initialized first, <span class="tt">tm_isdst</span> may retain leftover data from prior use, which can accidentally make one test case appear correct and another appear incorrect.</li>
-</ul>
-<p>So the one-hour discrepancy is not caused by <span class="tt">localtime_r()</span> itself. The incorrect value is usually created earlier by <span class="tt">mktime()</span> when it receives an incompletely initialized <span class="tt">struct tm</span>.</p>
-<h1 class="doxsection"><a class="anchor" id="correct-workaround"></a>
-Correct workaround</h1>
-<p>The safe pattern is:</p>
-<ol type="1">
-<li>Clear the full <span class="tt">struct tm</span>.</li>
-<li>Set <span class="tt">tm_isdst = -1</span>.</li>
-<li>Call <span class="tt">strptime()</span>.</li>
-<li>Call <span class="tt">mktime()</span>.</li>
-</ol>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm tm1;</div>
-<div class="line">memset(&amp;tm1, 0, <span class="keyword">sizeof</span> tm1);</div>
-<div class="line">tm1.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1) == NULL) {</div>
-<div class="line">    <span class="comment">/* parse error */</span></div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line">time_t t1 = mktime(&amp;tm1);</div>
-</div><!-- fragment --><p>Then format for display using a separate output structure:</p>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>tm out;</div>
-<div class="line">localtime_r(&amp;t1, &amp;out);</div>
-<div class="line">strftime(buf, <span class="keyword">sizeof</span> buf, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;out);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="why-the-previous-results-looked-contradictory"></a>
-Why the previous results looked contradictory</h1>
-<p>The earlier examples showed this pattern:</p>
-<ul>
-<li>Zeroing the structure appeared to break CDT dates.</li>
-<li>Not zeroing the structure appeared to break CST dates.</li>
-</ul>
-<p>That happens because the tests were effectively toggling the initial value of <span class="tt">tm_isdst</span>:</p>
-<ul>
-<li><span class="tt">memset(..., 0, ...)</span> forced <span class="tt">tm_isdst = 0</span>, i.e. standard time.</li>
-<li>Reusing the same structure without reinitializing it allowed <span class="tt">tm_isdst</span> to carry stale state from earlier operations.</li>
-</ul>
-<p>As a result, the code was not consistently asking <span class="tt">mktime()</span> to determine DST from the input date. Once <span class="tt">tm_isdst</span> is explicitly set to <span class="tt">-1</span>, both standard-time and daylight-time dates should round-trip correctly in the local timezone.</p>
-<h1 class="doxsection"><a class="anchor" id="important-note-about-gmtime_r"></a>
-Important note about <span class="tt">gmtime_r()</span></h1>
-<p><span class="tt">gmtime_r()</span> converts a <span class="tt">time_t</span> to UTC. It does not use the local timezone rules to decide whether the original parsed time was CST or CDT. If the UTC result appears to be off by one hour, that usually means the <span class="tt">time_t</span> value produced by <span class="tt">mktime()</span> was already wrong.</p>
-<h1 class="doxsection"><a class="anchor" id="recommended-helper"></a>
-Recommended helper</h1>
-<p>A simple helper for parsing local timestamps safely:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">bool</span> <a class="code hl_function" href="../../d5/d39/a01219.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, time_t *out)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    memset(&amp;tmv, 0, <span class="keyword">sizeof</span> tmv);</div>
-<div class="line">    tmv.tm_isdst = -1;</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (strptime(s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv) == NULL)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    time_t t = mktime(&amp;tmv);</div>
-<div class="line">    <span class="keywordflow">if</span> (t == (time_t)-1)</div>
-<div class="line">        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"> </div>
-<div class="line">    *out = t;</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01219_html_ga1ee26caf58dfc798273ba095a394cde8"><div class="ttname"><a href="../../d5/d39/a01219.html#ga1ee26caf58dfc798273ba095a394cde8">parse_local_timestamp</a></div><div class="ttdeci">bool parse_local_timestamp(const char *, time_t *)</div><div class="ttdoc">Parses an ISO 8601 timestamp string in local time and converts it to time_t.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00273">futil.c:273</a></div></div>
-</div><!-- fragment --><p>And a matching formatter:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="../../d5/d39/a01219.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a>(time_t t, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> n)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">struct </span>tm tmv;</div>
-<div class="line">    localtime_r(&amp;t, &amp;tmv);</div>
-<div class="line">    strftime(buf, n, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tmv);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01219_html_gaee5521bb387211a2d16e3d56585f144d"><div class="ttname"><a href="../../d5/d39/a01219.html#gaee5521bb387211a2d16e3d56585f144d">format_local_timestamp</a></div><div class="ttdeci">char * format_local_timestamp(time_t, char *, size_t)</div><div class="ttdoc">Formats a time_t as an ISO 8601 string in local time.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d43/a01193_source.html#l00296">futil.c:296</a></div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="revised-interpretation-of-the-original-test-cases"></a>
-Revised interpretation of the original test cases</h1>
-<p>The original test cases are still useful because they show that leaving <span class="tt">tm_isdst</span> uncontrolled produces different behavior across DST boundaries. However, they do <b>not</b> demonstrate a <span class="tt">localtime_r()</span> or <span class="tt">gmtime_r()</span> bug. They demonstrate that <span class="tt">mktime()</span> needs a fully initialized <span class="tt">struct tm</span>, with <span class="tt">tm_isdst</span> set appropriately.</p>
-<h1 class="doxsection"><a class="anchor" id="original-demonstration-code"></a>
-Original demonstration code</h1>
-<div class="fragment"><div class="line"></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#define _GNU_SOURCE</span></div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="../../d2/d22/a01196.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>() {</div>
-<div class="line">    <span class="keywordtype">char</span> buf[100];</div>
-<div class="line">    <span class="keywordtype">char</span> time_s[32];</div>
-<div class="line">    <span class="keyword">struct </span>tm tm1;</div>
-<div class="line">    time_t t1 = time(NULL);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    printf(<span class="stringliteral">&quot;with memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// CDT &amp;&amp; NOT MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-06-01T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; NOT MEMSET - INCORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;without memset(&amp;tm1)\n&quot;</span>);</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    <span class="comment">// NOT CDT &amp;&amp; MEMSET - CORRECT</span></div>
-<div class="line">    strcpy(time_s, <span class="stringliteral">&quot;2026-03-07T00:00:00&quot;</span>);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;input:     %s\n&quot;</span>, time_s);</div>
-<div class="line">    memset(&amp;tm1, 0, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> tm));</div>
-<div class="line">    strptime(time_s, <span class="stringliteral">&quot;%Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    t1 = mktime(&amp;tm1);</div>
-<div class="line"> </div>
-<div class="line">    gmtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;gmtime     %Y-%m-%dT%H:%M:%SZ&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n&quot;</span>, buf);</div>
-<div class="line"> </div>
-<div class="line">    localtime_r(&amp;t1, &amp;tm1);</div>
-<div class="line">    strftime(buf, 100, <span class="stringliteral">&quot;localtime  %Y-%m-%dT%H:%M:%S&quot;</span>, &amp;tm1);</div>
-<div class="line">    printf(<span class="stringliteral">&quot;%s\n\n&quot;</span>, buf);</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01196_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d2/d22/a01196.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d22/a01196_source.html#l00034">amort.c:34</a></div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
-</div><!-- PageDoc -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -302,6 +661,7 @@ Original demonstration code</h1>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="../../d1/df4/a01422.html">Menu</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

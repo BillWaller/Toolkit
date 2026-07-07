@@ -1,5 +1,8 @@
 var a01325 =
 [
-    [ "l", "dd/d5d/a01325.html#a8cffb4a348d6d6f90ce1c9efd99ad557", null ],
-    [ "s", "dd/d5d/a01325.html#a1270cae1cd57356ffc567eed342b5d97", null ]
+    [ "fork_detach_execvp", "dd/d5d/a01325.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_exec", "dd/d5d/a01325.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "dd/d5d/a01325.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "dd/d5d/a01325.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "dd/d5d/a01325.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

@@ -1,12 +1,13 @@
 var a01326 =
 [
-    [ "choice_letter", "d1/d54/a01326.html#ad244e20485560be4e557528c8fa1321c", null ],
-    [ "choice_text", "d1/d54/a01326.html#a1588ee0394f3e3076e6b03b8afab5cc9", null ],
-    [ "command_str", "d1/d54/a01326.html#a5caaf06576322b837ebfbce757377455", null ],
-    [ "command_type", "d1/d54/a01326.html#acce58adaa7cf043f8f905d3d69a7f3a0", null ],
-    [ "letter_pos", "d1/d54/a01326.html#a928bd3d2b73020b5529f9da018ce5e2f", null ],
-    [ "raw_text", "d1/d54/a01326.html#a514130f5368bc6edaa5928f08be2bd4f", null ],
-    [ "type", "d1/d54/a01326.html#a6d158be9cbd3c4180df373ddf462330d", null ],
-    [ "ui_runtime", "d1/d54/a01326.html#a3d70a46d748818bf6b6d5f31b87f82d7", null ],
-    [ "ui_surface", "d1/d54/a01326.html#a2f744b8180b28d89da78d31b9a863f11", null ]
+    [ "field_editor", "d1/d54/a01326.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
+    [ "form_display_field", "d1/d54/a01326.html#gabd1710f59277202b0a58f840d4da322e", null ],
+    [ "form_display_field_n", "d1/d54/a01326.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
+    [ "form_fmt_field", "d1/d54/a01326.html#ga07a8d9311c88786e7310fef638d34a41", null ],
+    [ "form_validate_field", "d1/d54/a01326.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
+    [ "is_valid_date", "d1/d54/a01326.html#ga353546f4d99ef7ec908d371187f033de", null ],
+    [ "is_valid_time", "d1/d54/a01326.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
+    [ "left_justify", "d1/d54/a01326.html#ga425021d4c87474159a36d395e4dcdf65", null ],
+    [ "numeric", "d1/d54/a01326.html#ga18db59e4c79e823f79310378183ac25c", null ],
+    [ "right_justify", "d1/d54/a01326.html#gaa356032a372a136c06dbcb1c0493a02b", null ]
 ];

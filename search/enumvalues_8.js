@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['nt_5fbg_0',['NT_BG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994a0984bc2726d86f85c8e1a35c610de050',1,'init.c']]],
-  ['nt_5ffg_1',['NT_FG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994aa3b522bcdbab9b54eadbb889b2a51fcb',1,'init.c']]],
-  ['nt_5fhl_5fbg_2',['NT_HL_BG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994acf91ce81ff0573af20a54b9bed7c8afb',1,'init.c']]],
-  ['nt_5fhl_5ffg_3',['NT_HL_FG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994a38333893374a119619daa9ed3c4471bc',1,'init.c']]],
-  ['nt_5fhl_5frev_5fbg_4',['NT_HL_REV_BG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994abcee01e2b8a23fd2b8b30d56abb12075',1,'init.c']]],
-  ['nt_5fhl_5frev_5ffg_5',['NT_HL_REV_FG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994af7ffc5501db5025b45354822751d05d0',1,'init.c']]],
-  ['nt_5frev_5fbg_6',['NT_REV_BG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994a278d292888d1a91823c7dbf788952918',1,'init.c']]],
-  ['nt_5frev_5ffg_7',['NT_REV_FG',['../d0/d67/a01232.html#a964fa61be5e30597c14ae6b1e24a7994a91919295a8b36351c446af7d368c803e',1,'init.c']]]
+  ['ma_5fcontinue_0',['MA_CONTINUE',['../d2/dbd/a01844.html#ab99074a1f6b7e8ff7730342913aae3a3a85817b54c63ad5e17df7654cecfb7dec',1,'menu.h']]],
+  ['ma_5fdisplay_5fmenu_1',['MA_DISPLAY_MENU',['../d2/dbd/a01844.html#ab99074a1f6b7e8ff7730342913aae3a3a497247adf6602bc01c2c2a5046b90d59',1,'menu.h']]],
+  ['ma_5fnew_2',['MA_NEW',['../d2/dbd/a01844.html#ab99074a1f6b7e8ff7730342913aae3a3a5967abe3643398691f224c1af8cf764b',1,'menu.h']]],
+  ['ma_5freset_5fmenu_3',['MA_RESET_MENU',['../d2/dbd/a01844.html#ab99074a1f6b7e8ff7730342913aae3a3a554f121e673d58ff179ee1af75d9cdc8',1,'menu.h']]],
+  ['ma_5freturn_4',['MA_RETURN',['../d2/dbd/a01844.html#ab99074a1f6b7e8ff7730342913aae3a3a0257fbb7ea37631df403c2e885af7da8',1,'menu.h']]],
+  ['mapp_5fdata_5',['MAPP_DATA',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994a23c28b83bda4333be9f85635b544210b',1,'init.c']]],
+  ['mapp_5fhelp_6',['MAPP_HELP',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994afcd9e9db3f541b8b1cd36332e2ae4154',1,'init.c']]],
+  ['mapp_5fhome_7',['MAPP_HOME',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994a13d1b98dd78f810cab5685ddfdf4d3dc',1,'init.c']]],
+  ['mapp_5fmsrc_8',['MAPP_MSRC',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994abe512cb25e936e19605f30ea962473de',1,'init.c']]],
+  ['mapp_5fspec_9',['MAPP_SPEC',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994a398973374baa4d523fe470c5550f74b6',1,'init.c']]],
+  ['mapp_5ftheme_10',['MAPP_THEME',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994aae3301f5b103079004dad27a8c038d70',1,'init.c']]],
+  ['mapp_5fuser_11',['MAPP_USER',['../dd/d31/a02405.html#a964fa61be5e30597c14ae6b1e24a7994aae63f5d0210a353a6bd7cbf508e17e50',1,'init.c']]],
+  ['menu_12',['MENU',['../d6/dbd/a01829.html#a5abe1ba66f71bb3a1bc22393854d33dfa4c40e60bc71a32b924ce1f08d57f9721',1,'common.h']]],
+  ['mt_5fchoice_13',['MT_CHOICE',['../d2/dbd/a01844.html#a76a655b009bde19236e4bbc30df8ceeca95865ba7b6fd4876e243bffae44a5761',1,'menu.h']]],
+  ['mt_5fnull_14',['MT_NULL',['../d2/dbd/a01844.html#a76a655b009bde19236e4bbc30df8ceecae3c66e194f40f54236bc3525966ef18f',1,'menu.h']]],
+  ['mt_5ftext_15',['MT_TEXT',['../d2/dbd/a01844.html#a76a655b009bde19236e4bbc30df8ceeca796ca2ffa9f8624c116934255064874d',1,'menu.h']]]
 ];

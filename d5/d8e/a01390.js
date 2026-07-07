@@ -1,6 +1,5 @@
 var a01390 =
 [
-    [ "cursor_visible", "d5/d8e/a01390.html#a6aa31a10e62f22bc154ccaf9765196ce", null ],
-    [ "enable_alt_screen", "d5/d8e/a01390.html#afc37edba9295b089b1dad90eb0d4b8aa", null ],
-    [ "enable_mouse", "d5/d8e/a01390.html#acdeb10ab4306706434b460279c4d9c4e", null ]
+    [ "l", "d5/d8e/a01390.html#a4aa4561aec0c1fdce969da7953bb7848", null ],
+    [ "s", "d5/d8e/a01390.html#a8904978bb99a49a64f7e146a4ab7ff4d", null ]
 ];

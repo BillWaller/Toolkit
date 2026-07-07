@@ -1,9 +1,6 @@
 var a01378 =
 [
-    [ "bg", "db/d74/a01378.html#a31bbaffb9a0d243d7b5d61ed5daeee2c", null ],
-    [ "bold", "db/d74/a01378.html#afcfa411165bb3208f82730c1259501b7", null ],
-    [ "fg", "db/d74/a01378.html#a57bf3ffa64210db977a80acef3e1c672", null ],
-    [ "italic", "db/d74/a01378.html#aa24e056b9b250b844f4c979ebbecab09", null ],
-    [ "reverse", "db/d74/a01378.html#aed90271dc6219ca9b7b54be75286bd2f", null ],
-    [ "underline", "db/d74/a01378.html#a3b2cbf397bc08d68184bf5bfdcd654a3", null ]
+    [ "bg", "db/d74/a01378.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
+    [ "fg", "db/d74/a01378.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
+    [ "pair_id", "db/d74/a01378.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
 ];

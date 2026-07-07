@@ -1,0 +1,28 @@
+var dir_25a36bb4a908b91c14517715a3b7d475 =
+[
+    [ "00_intro", "dir_1d6b623925f3fa8c1158f9b59d41d39d.html", null ],
+    [ "01_variables", "dir_3031e9ef5a8544817e657392081bb422.html", null ],
+    [ "02_functions", "dir_d865b289af9e77d9f4aa03c446cab325.html", null ],
+    [ "03_if", "dir_1bb8aae0628f32e0159f4d3ff44c96e0.html", null ],
+    [ "04_primitive_types", "dir_6cf4d4dd9014252b1602461fde7c9fc8.html", null ],
+    [ "05_vecs", "dir_b10304b711f05c3115f21e5bead4b2d1.html", null ],
+    [ "06_move_semantics", "dir_80fb8c195ea10a9fc0cef6d2cff1f686.html", null ],
+    [ "07_structs", "dir_f64855391cd59f69813868dcae1eef35.html", null ],
+    [ "08_enums", "dir_33fe98773feff1c1ca2db49f5676acd7.html", null ],
+    [ "09_strings", "dir_01d977b938d8e542537e16f52e6231dd.html", null ],
+    [ "10_modules", "dir_b03c23b8fdc8f05a9a758b05832f4b87.html", null ],
+    [ "11_hashmaps", "dir_3e34da7f711790ed0054c963a22af7d8.html", null ],
+    [ "12_options", "dir_39991307ef56a295688a572074403198.html", null ],
+    [ "13_error_handling", "dir_b9621cae655e3264b7e674d18d5eecd6.html", null ],
+    [ "14_generics", "dir_d9088041ac03de5de325adbc7044dfd7.html", null ],
+    [ "15_traits", "dir_e30b4c4cb63eb006f48583bc7883e519.html", null ],
+    [ "16_lifetimes", "dir_79732602d4bec3c2679606f1e54d6889.html", null ],
+    [ "17_tests", "dir_d21dd367af3e0f2fdaaffee3cccb67dc.html", null ],
+    [ "18_iterators", "dir_ad372b9771288133bea9043f635a7110.html", null ],
+    [ "19_smart_pointers", "dir_c42b3e073ec5f657f4a9102968a74e45.html", null ],
+    [ "20_threads", "dir_c465af2e7cce145c9fd50f2da9b0df88.html", null ],
+    [ "21_macros", "dir_f2eb354b11d10f62667d9166090cc1dd.html", null ],
+    [ "22_clippy", "dir_b2a735eba728312aaf83a887b3ee7763.html", null ],
+    [ "23_conversions", "dir_f9f5672597f99ef816607fafc56a7f0a.html", null ],
+    [ "quizzes", "dir_1d25675500fd887aa136ed6d06f2e33f.html", null ]
+];

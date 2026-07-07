@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_ncurses_draw.c File Reference</title>
+<title>C-Menu: stripansi.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,50 +110,100 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dd/d39/a01271.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_ncurses_draw.c File Reference<div class="ingroups"><a class="el" href="../../dc/d8c/a01297.html">Ncurses UI Implementation</a></div></div></div>
+  <div class="headertitle"><div class="title">stripansi.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of drawing functions for the ncurses UI backend.  
+<p>removes ansi escape sequences beginning with "\033["" and ending in
+"m" or "K"  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../d6/d0f/a01256_source.html">ui_ncurses_internal.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../d8/db9/a00725_source.html">cm.h</a>&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_ncurses_draw.c:</div>
+Include dependency graph for stripansi.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/d0e/a01272.svg" width="579" height="266"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d4/d0e/a01272.svg" width="100%" height="499"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../dd/d39/a01271_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga2a4b66406ca8fdaae18b9e4d5e36d581" id="r_ga2a4b66406ca8fdaae18b9e4d5e36d581"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#ga2a4b66406ca8fdaae18b9e4d5e36d581">ui_draw_border</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, <a class="el" href="../../d9/de7/a01279.html#gaeb489b99dbf37b489c68b6281563c1a8">UiBorderKind</a> kind, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style)</td></tr>
-<tr class="memdesc:ga2a4b66406ca8fdaae18b9e4d5e36d581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a border around a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function draws a border around the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>'s window based on the specified <a class="el" href="../../d9/de7/a01279.html#gaeb489b99dbf37b489c68b6281563c1a8" title="Enumeration of possible border styles for UI surfaces.">UiBorderKind</a>. It uses the ncurses box function to draw the border with the appropriate characters. If a style is provided, it applies that style before drawing the border.  <br /></td></tr>
-<tr class="memitem:gaca44263e5a2802ca111c6211b532c50e" id="r_gaca44263e5a2802ca111c6211b532c50e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gaca44263e5a2802ca111c6211b532c50e">ui_draw_box_title</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, int x, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style, const char *title)</td></tr>
-<tr class="memdesc:gaca44263e5a2802ca111c6211b532c50e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a title on the top border of a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function draws the provided title string at the specified x-coordinate on the top border of the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>'s window. It uses the ncurses mvwaddstr function to place the title. If a style is provided, it applies that style before drawing the title.  <br /></td></tr>
-<tr class="memitem:gaf435ec21d1e804c5266f1878f756cf14" id="r_gaf435ec21d1e804c5266f1878f756cf14"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gaf435ec21d1e804c5266f1878f756cf14">ui_draw_hline</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, int y, int x, int len, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style)</td></tr>
-<tr class="memdesc:gaf435ec21d1e804c5266f1878f756cf14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a horizontal line on a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function uses the ncurses mvwhline function to draw a horizontal line of a specified length at the given (y, x) coordinates on the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>'s window. If a style is provided, it applies that style before drawing the line.  <br /></td></tr>
-<tr class="memitem:gad8dfcde97d6b2c89103e9d44d2feb0b1" id="r_gad8dfcde97d6b2c89103e9d44d2feb0b1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gad8dfcde97d6b2c89103e9d44d2feb0b1">ui_draw_text</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, int y, int x, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style, const char *text)</td></tr>
-<tr class="memdesc:gad8dfcde97d6b2c89103e9d44d2feb0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw text on a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a> at a specified position with a given style.This function uses the ncurses mvwaddstr function to draw the provided text at the specified (y, x) coordinates on the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>'s window. If a style is provided, it applies that style before drawing the text.  <br /></td></tr>
-<tr class="memitem:gad07c4b1ea059d6b7f656a803bbf75e1e" id="r_gad07c4b1ea059d6b7f656a803bbf75e1e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gad07c4b1ea059d6b7f656a803bbf75e1e">ui_draw_text_n</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, int y, int x, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style, const char *text, size_t n)</td></tr>
-<tr class="memdesc:gad07c4b1ea059d6b7f656a803bbf75e1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a specified number of characters from a string on a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function is similar to ui_draw_text but allows specifying the number of characters to draw from the provided string. It uses the ncurses mvwaddnstr function to achieve this. If a style is provided, it applies that style before drawing the text.  <br /></td></tr>
-<tr class="memitem:ga00a0f7871e6ea99bd76555cb04f228c5" id="r_ga00a0f7871e6ea99bd76555cb04f228c5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#ga00a0f7871e6ea99bd76555cb04f228c5">ui_draw_vline</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, int y, int x, int len, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style)</td></tr>
-<tr class="memdesc:ga00a0f7871e6ea99bd76555cb04f228c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a vertical line on a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function uses the ncurses mvwvline function to draw a vertical line of a specified length at the given (y, x) coordinates on the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>'s window. If a style is provided, it applies that style before drawing the line.  <br /></td></tr>
-<tr class="memitem:gaf21ce5ccc76232c9e59007aadd6c0e7c" id="r_gaf21ce5ccc76232c9e59007aadd6c0e7c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gaf21ce5ccc76232c9e59007aadd6c0e7c">ui_ncurses_color_pair_from_style</a> (const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style)</td></tr>
-<tr class="memdesc:gaf21ce5ccc76232c9e59007aadd6c0e7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a> to an ncurses color pair index.This function maps the foreground and background colors from a <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a> to an ncurses color pair index. For simplicity, this example assumes a limited set of colors and does not handle all possible combinations.  <br /></td></tr>
-<tr class="memitem:ga7340721e819b16b9e37bb999e19d0c60" id="r_ga7340721e819b16b9e37bb999e19d0c60"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#ga7340721e819b16b9e37bb999e19d0c60">ui_ncurses_style_apply</a> (WINDOW *win, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style)</td></tr>
-<tr class="memdesc:ga7340721e819b16b9e37bb999e19d0c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply a <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a> to an ncurses window.This function sets the appropriate attributes (bold, underline, reverse) on the given ncurses window based on the properties of the <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a>.  <br /></td></tr>
-<tr class="memitem:gab640de44654a656fb3fd9aa060854988" id="r_gab640de44654a656fb3fd9aa060854988"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gab640de44654a656fb3fd9aa060854988">ui_surface_set_base</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style, uint32_t fill_ch)</td></tr>
-<tr class="memdesc:gab640de44654a656fb3fd9aa060854988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the base fill character and style for a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function sets the background fill character for the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>'s ncurses window and applies the given <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a>. If fill_ch is 0, it defaults to a space character.  <br /></td></tr>
-<tr class="memitem:gadb6c336da546adb736fc2414cb50f35c" id="r_gadb6c336da546adb736fc2414cb50f35c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../dc/d8c/a01297.html#gadb6c336da546adb736fc2414cb50f35c">ui_surface_set_style</a> (<a class="el" href="../../d2/d9b/a01433.html">UiSurface</a> *s, const <a class="el" href="../../d4/dad/a01353.html">UiStyle</a> *style)</td></tr>
-<tr class="memdesc:gadb6c336da546adb736fc2414cb50f35c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the style for a <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>.This function applies the given <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a> to the ncurses window associated with the <a class="el" href="../../d2/d9b/a01433.html" title="Opaque structure representing a drawable surface in the UI.">UiSurface</a>. It uses the ui_ncurses_style_apply function to set the appropriate attributes on the window.  <br /></td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">strip ANSI SGR sequences  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of drawing functions for the ncurses UI backend. </p>
-<p>This file contains the implementation of various drawing functions that utilize the ncurses library to render text, lines, borders, and other UI elements on the terminal. The functions take into account the styles defined in <a class="el" href="../../d4/dad/a01353.html" title="Structure representing the style attributes for UI elements.">UiStyle</a> and apply them accordingly when drawing. </p>
+<div class="textblock"><p>removes ansi escape sequences beginning with "\033["" and ending in
+"m" or "K" </p>
+<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025, 2026 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../dd/d39/a01271_source.html">ui_ncurses_draw.c</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../dd/d39/a01271_source.html">stripansi.c</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>strip ANSI SGR sequences </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>Argument count (should be 2 for the program name and input file) </td></tr>
+    <tr><td class="paramname">argv</td><td>Argument vector (argv[1] should be the input file name)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function iterates through the input string, copying characters to the output buffer while skipping over any ANSI escape sequences. It looks for sequences that start with "\033[" and end with "m" or "K", and removes them from the output. </p>
+<p>&lt; Buffer to hold the input string read from the file</p>
+<p>&lt; Buffer to hold the cleaned output string</p>
+
+<p class="definition">Definition at line <a class="el" href="../../dd/d39/a01271_source.html#l00021">21</a> of file <a class="el" href="../../dd/d39/a01271_source.html">stripansi.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>                                 {</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keywordtype">char</span></div>
+<div class="line"><span class="lineno">   23</span>        in_buf[2048]; </div>
+<div class="line"><span class="lineno">   24</span>    <span class="keywordtype">char</span> out_buf[2048]; </div>
+<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">if</span> (argc != 2) {</div>
+<div class="line"><span class="lineno">   26</span>        fprintf(stderr, <span class="stringliteral">&quot;Usage: %s [file_with_ansi_codes]\n&quot;</span>, argv[0]);</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">   28</span>    }</div>
+<div class="line"><span class="lineno">   29</span>    FILE *in_fp = fopen(argv[1], <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><span class="lineno">   30</span>    <span class="keywordflow">if</span> (!in_fp) {</div>
+<div class="line"><span class="lineno">   31</span>        perror(<span class="stringliteral">&quot;Error opening file&quot;</span>);</div>
+<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">   33</span>    }</div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">while</span> (fgets(in_buf, <span class="keyword">sizeof</span>(in_buf), in_fp)) {</div>
+<div class="line"><span class="lineno">   35</span>        <a class="code hl_function" href="../../dc/dd9/a01328.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a>(out_buf, in_buf);</div>
+<div class="line"><span class="lineno">   36</span>        fputs(out_buf, stdout);</div>
+<div class="line"><span class="lineno">   37</span>    }</div>
+<div class="line"><span class="lineno">   38</span>    fclose(in_fp);</div>
+<div class="line"><span class="lineno">   39</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   40</span>}</div>
+<div class="ttc" id="aa01328_html_ga82896df8e50776b7e7b0cede4e45b523"><div class="ttname"><a href="../../dc/dd9/a01328.html#ga82896df8e50776b7e7b0cede4e45b523">strip_ansi</a></div><div class="ttdeci">size_t strip_ansi(char *, char *)</div><div class="ttdoc">Strips ANSI SGR escape sequences (ending in &#39;m&#39;) from string s to d.</div><div class="ttdef"><b>Definition</b> <a href="../../d8/d0d/a01280_source.html#l00829">futil.c:829</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d8/d0d/a01280_source.html#l00829">strip_ansi()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dd/d39/a01271_a0ddf1224851353fc92bfbff6f499fa97_cgraph.svg" width="198" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -166,7 +216,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../dd/d39/a01271.html">ui_ncurses_draw.c</a></li>
+    <li class="navelem"><a href="../../dd/d39/a01271.html">stripansi.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

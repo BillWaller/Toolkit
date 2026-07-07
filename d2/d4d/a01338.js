@@ -1,5 +1,7 @@
 var a01338 =
 [
-    [ "pan", "d2/d4d/a01338.html#ad37016cf3de9005aabd2d5b7d4418792", null ],
-    [ "win", "d2/d4d/a01338.html#a0804eee6017d3ed62e339bc632ef13a1", null ]
+    [ "handle_signal", "d2/d4d/a01338.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d2/d4d/a01338.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d2/d4d/a01338.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d2/d4d/a01338.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
 ];

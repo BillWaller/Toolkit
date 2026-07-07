@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: BUILD</title>
+<title>C-Menu: /usr/local/src/C-Menu/src/enterstr.c</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,189 +109,65 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d7/d90/a01530.
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">BUILD </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">/usr/local/src/C-Menu/src/enterstr.c</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md4"></a> <img src="../../Build.png" alt="" class="inline" title="Installation Guide"/>    </p>
-<ul>
-<li><a class="el" href="../../db/dce/a01529.html#introduction" title="Introduction">Introduction</a><ul>
-<li><a class="el" href="#build-tool-choices" title="Build Tool Choices">Build Tool Choices</a></li>
-<li><a class="el" href="#build-type-choices" title="Build Type Choices">Build Type Choices</a></li>
-<li><a class="el" href="#prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li><a class="el" href="#preparing" title="Preparing">Preparing</a></li>
-</ul>
-</li>
-<li><a class="el" href="#build" title="Build">Build</a><ul>
-<li><a class="el" href="#gnu-makefile" title="GNU Makefile">GNU Makefile</a></li>
-<li><a class="el" href="#cmake" title="CMake">CMake</a></li>
-</ul>
-</li>
-<li><a class="el" href="#install" title="Install">Install</a></li>
-<li><a class="el" href="#post-install" title="Post Install">Post Install</a><ul>
-<li><a class="el" href="#check-the-installation" title="Check the Installation">Check the Installation</a></li>
-<li><a class="el" href="#c-menu-libraries" title="C-Menu Libraries">C-Menu Libraries</a></li>
-<li><a class="el" href="#c-menu-binaries" title="C-Menu Binaries">C-Menu Binaries</a></li>
-<li><a class="el" href="#set-up-your-environment" title="Set Up Your Environment">Set Up Your Environment</a></li>
-<li><a class="el" href="#running-c-menu" title="Running C-Menu">Running C-Menu</a></li>
-</ul>
-</li>
-<li><a class="el" href="#conclusion" title="Conclusion">Conclusion</a></li>
-</ul>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="introduction-1"></a>
-Introduction</h2>
-<p>The instructions below will guide you through building and installing C-Menu from source.</p>
-<h3 class="doxsection"><a class="anchor" id="build-tool-choices"></a>
-Build Tool Choices</h3>
-<ol type="1">
-<li>GNU Makefile</li>
-<li>CMake</li>
-</ol>
-<p>If you plan to develop C-Menu, use the build tool you are most comfortable with, as both are fully supported and will produce similar results.</p>
-<h3 class="doxsection"><a class="anchor" id="build-type-choices"></a>
-Build Type Choices</h3>
-<ol type="1">
-<li>Debug (default)</li>
-<li>Release</li>
-</ol>
-<p>If you are building C-Menu for development or debugging purposes, use the default Debug build type. This creates unstripped executables with debugging symbols. As of C-Menu 0.2.9, the Debug binaries are about 6.5 Mb.</p>
-<p>If you are building C-Menu for deployment or want to optimize for size and performance, use the Release build type. As of C-Menu 0.2.9, the Release binaries are about 1.4 Mb.</p>
-<h3 class="doxsection"><a class="anchor" id="prerequisites"></a>
-Prerequisites</h3>
-<ul>
-<li>One of:<ul>
-<li>CMake 3.20 or higher, or</li>
-<li>GNU Make 4.3 or higher</li>
-</ul>
-</li>
-<li>A C compiler that supports C23 or later (e.g., GCC 13 or later, Clang 15 or later)</li>
-<li>NCursesw development libraries 6.5 or later</li>
-<li>GNU GLIBC development files</li>
-<li>GNU Math Library (libm) development files</li>
-</ul>
-<h3 class="doxsection"><a class="anchor" id="preparing"></a>
-Preparing</h3>
-<p>It is strongly recommended that you build C-Menu as a regular user and only use root privileges for the installation step.</p>
-<p>Clone the C-Menu repository and change to the C-Menu/src directory.</p>
-<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
-</div><!-- fragment --><p>Change to the C-Menu/src directory.</p>
-<div class="fragment"><div class="line">cd C-Menu/src</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="build"></a>
-Build</h2>
-<h3 class="doxsection"><a class="anchor" id="gnu-makefile"></a>
-GNU Makefile</h3>
-<p>CAUTION: In the CMenu build system, C-Menu/src/Makefile is a temporary file which will be overwritten by CMake. It will be used for the GNU Makefile build and the CMake build, and CMake will overwrite it. This shouldn't be a problem because the original GNU Makefile is in C-Menu/src/GNUMakefile.</p>
-<p>What you don't want to do is spend time editing C-Menu/src/Makefile and then have CMake overwrite your changes. To avoid this, if you make changes to C-Menu/src/Makefile, copy it to C-Menu/src/GNUMakefile.XXX, where XXX is a descriptive suffix or version number.</p>
-<p>So you don't have to type "-f GNUMakefile" with every make command, copy C-Menu/src/GNUMakefile to Makefile</p>
-<div class="fragment"><div class="line">cp GNUMakefile Makefile</div>
-</div><!-- fragment --><p>To build the Debug version:</p>
-<div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><p>To build the Release version:</p>
-<div class="fragment"><div class="line">make BUILD_TYPE=Release</div>
-</div><!-- fragment --><p>If you want to run the build in a separate build directory (recommended), you can use the following commands:</p>
-<div class="fragment"><div class="line">mkdir build</div>
-<div class="line">cd build</div>
-<div class="line">cp ../GNUMakefile Makefile</div>
-<div class="line">ln -sf ../include .</div>
-<div class="line">make VPATH=.. BUILD_TYPE=Release</div>
-<div class="line">sudo make install</div>
-</div><!-- fragment --><p>Choosing the above method obviates the need for the install step below, as the last command completes the install.</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="cmake"></a>
-CMake</h3>
-<p>CAUTION: In the CMenu build system, C-Menu/src/Makefile is a temporary file which will be overwritten by CMake. It will be used for the GNU Makefile build and the CMake build, and CMake will overwrite it. This shouldn't be a problem because the original GNU Makefile is in C-Menu/src/GNUMakefile.</p>
-<p>What you don't want to do is spend time editing C-Menu/src/Makefile and then have CMake overwrite your changes. To avoid this, if you make changes to C-Menu/src/Makefile while you are building with GNU Makefile make, copy the Makefile to C-Menu/src/GNUMakefile.XXX, where XXX is a descriptive suffix or version number.</p>
-<p>You don't need to protect the CMake Makefile because it is generated by CMake from another file, C-Menu/src/CMakeLists.txt.</p>
-<p>To build with C-Make:</p>
-<div class="fragment"><div class="line">cmake .</div>
-</div><!-- fragment --><p>This will generate the necessary build files for your system. By default, CMake will configure the project to build the Debug variants of the C-Menu binaries. If you want to build the Release variants, specify the build type when configuring CMake:</p>
-<div class="fragment"><div class="line">cmake . -DCMAKE_BUILD_TYPE=Release</div>
-</div><!-- fragment --><p>You will now have a CMake makefile in C-Menu/src/Makefile. Build the project using the following command:</p>
-<div class="fragment"><div class="line">make</div>
-</div><!-- fragment --><p>If you want to run the build in a separate build directory (recommended), you can use the following commands:</p>
-<div class="fragment"><div class="line">cmake -S . -B build -DCMAKE_BUILD_TYPE=Release</div>
-<div class="line">cmake --build build</div>
-<div class="line">sudo cmake --install build</div>
-</div><!-- fragment --><p>Choosing the above method obviates the need for the install step below, as the last command completes the install.</p>
-<h2 class="doxsection"><a class="anchor" id="install"></a>
-Install</h2>
-<p>To install C-Menu binaries, run the following command with root privileges:</p>
-<div class="fragment"><div class="line">sudo make install</div>
-</div><!-- fragment --><p>This will install the C-Menu binaries and libraries to the specified PREFIX directory (e.g., /home/your_user_name/menuapp) and set the appropriate permissions.</p>
-<h2 class="doxsection"><a class="anchor" id="post-install"></a>
-Post Install</h2>
-<h3 class="doxsection"><a class="anchor" id="check-the-installation"></a>
-Check the Installation</h3>
-<p>After installation, you can verify that the C-Menu binaries and libraries have been installed to the correct directories (e.g., /home/your_user_name/menuapp/lib64 and /home/your_user_name/menuapp/bin) and that the permissions are set correctly. You can do this by running the following command:</p>
-<div class="fragment"><div class="line">cat manifest.txt</div>
-</div><!-- fragment --><p>This will display a list of all the files that were installed, along with their permissions and sizes. You should see entries for the C-Menu binaries in /home/your_user_name/menuapp/bin and the C-Menu libraries in /home/your_user_name/menuapp/lib64, as well as the configuration file for the dynamic linker in /etc/ld.so.conf.d/CMenu.conf.</p>
-<div class="fragment"><div class="line">-rwxrr-xr-x 1 root root      25 260613 0936 /etc/ld.so.conf.d/CMenu.conf*</div>
-<div class="line">lrwxrwxrwx 1 root root      22 260613 0948 /etc/pam.d/rsh-auth -&gt; /etc/pam.d/rsh-auth-pc</div>
-<div class="line">-rw-r--r-- 1 root root      28 260611 1729 /etc/pam.d/rsh-auth-pc</div>
-<div class="line">-rwxr-xr-x 1 root root   74720 260613 0947 /home/bill/menuapp/bin/amort*</div>
-<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/ckeys -&gt; /home/bill/menuapp/bin/menu*</div>
-<div class="line">-rwxr-xr-x 1 root root   77576 260613 0947 /home/bill/menuapp/bin/detach*</div>
-<div class="line">-rwxr-xr-x 1 root root  149888 260613 0947 /home/bill/menuapp/bin/enterchr*</div>
-<div class="line">-rwxr-xr-x 1 root root  142728 260613 0947 /home/bill/menuapp/bin/enterstr*</div>
-<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/form -&gt; /home/bill/menuapp/bin/menu*</div>
-<div class="line">-rwxr-xr-x 1 root root  100576 260613 0947 /home/bill/menuapp/bin/iloan*</div>
-<div class="line">-rwxr-xr-x 1 root root  566224 260613 0947 /home/bill/menuapp/bin/menu*</div>
-<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/pick -&gt; /home/bill/menuapp/bin/menu*</div>
-<div class="line">-rws--s--x 1 root root  140248 260613 0947 /home/bill/menuapp/bin/rsh*</div>
-<div class="line">-rws--s--x 1 root root  149168 260613 0947 /home/bill/menuapp/bin/rsh_pam*</div>
-<div class="line">-rws--s--x 1 root root 3529616 260613 0947 /home/bill/menuapp/bin/rsh_static*</div>
-<div class="line">-rwxr-xr-x 1 root root  129520 260613 0947 /home/bill/menuapp/bin/stripansi*</div>
-<div class="line">lrwxrwxrwx 1 root root      27 260613 0948 /home/bill/menuapp/bin/view -&gt; /home/bill/menuapp/bin/menu*</div>
-<div class="line">-rwxr-xr-x 1 root root  145280 260613 0947 /home/bill/menuapp/bin/whence*</div>
-<div class="line">-rwxr-xr-x 1 root root   40626 260612 1706 /home/bill/menuapp/include/cm.h*</div>
-<div class="line">-rwxr-xr-x 1 root root    8567 260610 1530 /home/bill/menuapp/include/common.h*</div>
-<div class="line">-rwxr-xr-x 1 root root   26927 260602 1412 /home/bill/menuapp/include/form.h*</div>
-<div class="line">-rwxr-xr-x 1 root root   12761 260601 1356 /home/bill/menuapp/include/menu.h*</div>
-<div class="line">-rwxr-xr-x 1 root root    4682 260613 0848 /home/bill/menuapp/include/pick.h*</div>
-<div class="line">-rwxr-xr-x 1 root root   10400 260610 1531 /home/bill/menuapp/include/view.h*</div>
-<div class="line">-rwxr-xr-x 1 root root 1131618 260613 0947 /home/bill/menuapp/lib64/libcm.a*</div>
-<div class="line">lrwxrwxrwx 1 root root      39 260613 0948 /home/bill/menuapp/lib64/libcm.so -&gt; /home/bill/menuapp/lib64/libcm.so.0.2.9*</div>
-<div class="line">lrwxrwxrwx 1 root root      39 260613 0948 /home/bill/menuapp/lib64/libcm.so.0 -&gt; /home/bill/menuapp/lib64/libcm.so.0.2.9*</div>
-<div class="line">-rwxr-xr-x 1 root root  347880 260613 0947 /home/bill/menuapp/lib64/libcm.so.0.2.9*</div>
-<div class="line">-rwxr-xr-x 1 bill bill    6598 260604 1548 /home/bill/menuapp/man/man1/cmenu.1.gz*</div>
-<div class="line">-rwxr-xr-x 1 bill bill    3416 260604 1548 /home/bill/menuapp/man/man1/lf.1.gz*</div>
-<div class="line">-rwxr-xr-x 1 bill bill    3027 260604 1548 /home/bill/menuapp/man/man1/rsh.1.gz*</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="c-menu-libraries"></a>
-C-Menu Libraries</h3>
-<p>The C-Menu build system installs C-Menu libraries in:</p>
-<div class="fragment"><div class="line">$HOME/menuapp/lib64</div>
-</div><!-- fragment --><p>To run the C-Menu binaries, you need to ensure that the dynamic linker can find the C-Menu libraries. The build system installs a configuration file for the dynamic linker in:</p>
-<div class="fragment"><div class="line">/etc/ld.so.conf.d/CMenu.conf</div>
-</div><!-- fragment --><p>The contents of CMenu.conf should include the path to the C-Menu libraries, which is:</p>
-<div class="fragment"><div class="line">/home/your_user_name/menuapp/lib64</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="c-menu-binaries"></a>
-C-Menu Binaries</h3>
-<p>The C-Menu binaries are installed in:</p>
-<div class="fragment"><div class="line">$HOME/menuapp/bin</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="set-up-your-environment"></a>
-Set Up Your Environment</h3>
-<p>Put the following lines in your shell profile (e.g., ~/.bashrc, ~/.zshrc) to set up your environment for running C-Menu binaries:</p>
-<div class="fragment"><div class="line">export PATH=&quot;$HOME/menuapp/bin:$PATH&quot;</div>
-<div class="line">export LD_LIBRARY_PATH=&quot;$HOME/menuapp/lib64:$LD_LIBRARY_PATH&quot;</div>
-<div class="line">export CMENU_HOME=&quot;$HOME&quot;/menuapp</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="running-c-menu"></a>
-Running C-Menu</h3>
-<p>After setting up your environment, you can run the C-Menu binaries from any terminal. For example, to run the <span class="tt"><a class="el" href="../../dc/dee/a01166.html#a529b480d3d81a86e882c4d6ab8afa8bb">menu</a></span> binary, simply type:</p>
-<div class="fragment"><div class="line">menu</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="conclusion"></a>
-Conclusion</h2>
-<p>You have successfully built and installed C-Menu from source. You can now use the C-Menu binaries and libraries in your projects or run the C-Menu applications as needed. If you encounter any issues during the build or installation process, please refer to the documentation or seek help from the C-Menu community. </p>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+<div class="fragment"><div class="line">USERNAME=$(enterstr <span class="stringliteral">&quot;Enter your username: &quot;</span>)</div>
+<div class="line">PASSWORD=$(enterstr <span class="stringliteral">&quot;Enter your password: &quot;</span>)</div>
+<div class="line">echo <span class="stringliteral">&quot;Username: $USERNAME&quot;</span></div>
+<div class="line">echo <span class="stringliteral">&quot;Password: $PASSWORD&quot;</span></div>
+</div><!-- fragment --><div class="fragment"><div class="line"></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../d8/db9/a00725.html">cm.h</a>&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;sys/ioctl.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;termios.h&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keywordtype">int</span> <a id="a0" name="a0"></a><a class="code hl_function" href="../../d5/da7/a01283.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> **argv) {</div>
+<div class="line">    <span class="keyword">struct </span>termios new_tioctl;</div>
+<div class="line">    <span class="keywordtype">char</span> <a id="_a1" name="_a1"></a><a class="code hl_variable" href="../../d7/ddd/a01223.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>[<a id="_a2" name="_a2"></a><a class="code hl_define" href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>];</div>
+<div class="line">    <span class="keywordtype">char</span> *in_ptr = <a class="code hl_variable" href="../../d7/ddd/a01223.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>;</div>
+<div class="line">    <span class="keywordtype">char</span> *msg;</div>
+<div class="line">    <span class="keywordtype">char</span> emsg[128];</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span> (argc &lt; 2)</div>
+<div class="line">        strcpy(emsg, <span class="stringliteral">&quot;input:&quot;</span>);</div>
+<div class="line">    <span class="keywordflow">else</span></div>
+<div class="line">        strcpy(emsg, argv[1]);</div>
+<div class="line">    <a id="a3" name="a3"></a><a class="code hl_function" href="../../db/dec/a01337.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a>();</div>
+<div class="line">    <a id="a4" name="a4"></a><a class="code hl_function" href="../../d2/d4d/a01338.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a>();</div>
+<div class="line">    new_tioctl = <a id="_a5" name="_a5"></a><a class="code hl_variable" href="../../d2/d68/a01295.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>;</div>
+<div class="line">    new_tioctl.c_lflag |= ICANON;</div>
+<div class="line">    tcsetattr(2, TCSAFLUSH, &amp;new_tioctl);</div>
+<div class="line">    <span class="keywordflow">while</span> (1) {</div>
+<div class="line">        msg = emsg;</div>
+<div class="line">        <span class="keywordflow">while</span> (*msg)</div>
+<div class="line">            write(2, msg++, 1);</div>
+<div class="line">        <span class="keywordflow">if</span> (read(2, <a class="code hl_variable" href="../../d7/ddd/a01223.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a>, <a class="code hl_define" href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>) &gt; -1)</div>
+<div class="line">            <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">    <span class="keywordflow">while</span> (*in_ptr)</div>
+<div class="line">        write(1, in_ptr++, 1);</div>
+<div class="line">    <a id="a6" name="a6"></a><a class="code hl_function" href="../../d2/d4d/a01338.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a>();</div>
+<div class="line">    <a id="a7" name="a7"></a><a class="code hl_function" href="../../db/dec/a01337.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
+<div class="line">    exit(0);</div>
+<div class="line">}</div>
+<div class="ttc" id="aa00725_html"><div class="ttname"><a href="../../d8/db9/a00725.html">cm.h</a></div><div class="ttdoc">Headder for C-Menu API library, libcm.so.</div></div>
+<div class="ttc" id="aa00737_html_a72a591cf0a96cf23c63df5c78712dabe"><div class="ttname"><a href="../../dd/db2/a00737.html#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a></div><div class="ttdeci">#define BUFSIZ</div><div class="ttdef"><b>Definition</b> <a href="../../dd/db2/a00737_source.html#l00031">view.h:31</a></div></div>
+<div class="ttc" id="aa01223_html_a0fdf926da32e462b1a7d62c7c891e061"><div class="ttname"><a href="../../d7/ddd/a01223.html#a0fdf926da32e462b1a7d62c7c891e061">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../d7/ddd/a01223_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa01283_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d5/da7/a01283.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da7/a01283_source.html#l00030">amort.c:30</a></div></div>
+<div class="ttc" id="aa01295_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../d2/d68/a01295.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d68/a01295_source.html#l00022">scriou.c:22</a></div></div>
+<div class="ttc" id="aa01337_html_ga0d6d5d9834cd5c2a9d14349bf7ab6274"><div class="ttname"><a href="../../db/dec/a01337.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274">capture_shell_tioctl</a></div><div class="ttdeci">bool capture_shell_tioctl()</div><div class="ttdoc">capture_shell_tioctl() - capture shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d68/a01295_source.html#l00043">scriou.c:43</a></div></div>
+<div class="ttc" id="aa01337_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../db/dec/a01337.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d68/a01295_source.html#l00056">scriou.c:56</a></div></div>
+<div class="ttc" id="aa01338_html_ga06c1eb6cf3649dc187115565409f91af"><div class="ttname"><a href="../../d2/d4d/a01338.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a></div><div class="ttdeci">void sig_dfl_mode()</div><div class="ttdoc">Set signal handlers to default behavior.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d0f/a01256_source.html#l00042">sig.c:42</a></div></div>
+<div class="ttc" id="aa01338_html_gaca2de03f6d52d4b11237990e4e605177"><div class="ttname"><a href="../../d2/d4d/a01338.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a></div><div class="ttdeci">void sig_prog_mode()</div><div class="ttdoc">Set up signal handlers for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d0f/a01256_source.html#l00062">sig.c:62</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

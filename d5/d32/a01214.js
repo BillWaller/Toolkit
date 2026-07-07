@@ -1,10 +1,7 @@
 var a01214 =
 [
-    [ "MAX_FRAMES", "d5/d32/a01214.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "dc/dd5/a01293.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "dc/dd5/a01293.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "dc/dd5/a01293.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "dc/dd5/a01293.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "d5/d32/a01214.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "d5/d32/a01214.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "popup_form", "d5/d32/a01214.html#a3730e03ab56c382fc493dca5394e965c", null ],
+    [ "popup_menu", "d5/d32/a01214.html#a138a8bac23cdd5563712224861d74dc9", null ],
+    [ "popup_pick", "d5/d32/a01214.html#a65117e50a2ad97a424524264e30c2d19", null ],
+    [ "popup_view", "d5/d32/a01214.html#a1ac5343473fe2832d14fe14c4e534f21", null ]
 ];

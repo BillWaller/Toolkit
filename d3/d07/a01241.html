@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: amort.c File Reference</title>
+<title>C-Menu: form_engine.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,213 +110,307 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d3/d07/a01241.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">amort.c File Reference</div></div>
+  <div class="headertitle"><div class="title">form_engine.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Installment Loan Amortization.  
+<p>The working part of C-Menu <a class="el" href="../../d8/df1/a01414.html">Form</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;locale.h&gt;</code><br />
-<code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="../../dd/dd8/a00719_source.html">common.h</a>&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wait.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for amort.c:</div>
+Include dependency graph for form_engine.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d7/dc5/a01242.svg" width="651" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d7/dc5/a01242.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d3/d07/a01241_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+<tr class="memitem:a4bee8ff1d56707e8d62039c449eb5112" id="r_a4bee8ff1d56707e8d62039c449eb5112"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4bee8ff1d56707e8d62039c449eb5112">D_CALC</a>&#160;&#160;&#160;'C'</td></tr>
+<tr class="memitem:a2d8c742d9f48c28a95f7a8a143db9b22" id="r_a2d8c742d9f48c28a95f7a8a143db9b22"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a2d8c742d9f48c28a95f7a8a143db9b22">D_CMD</a>&#160;&#160;&#160;'!'</td></tr>
+<tr class="memitem:a9bde875ceaf7176146f8c1a05a5724e8" id="r_a9bde875ceaf7176146f8c1a05a5724e8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a9bde875ceaf7176146f8c1a05a5724e8">D_COMMENT</a>&#160;&#160;&#160;'#'</td></tr>
+<tr class="memitem:a43348dafdbc52ee02edb0652d644130e" id="r_a43348dafdbc52ee02edb0652d644130e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a43348dafdbc52ee02edb0652d644130e">D_FIELD</a>&#160;&#160;&#160;'F'</td></tr>
+<tr class="memitem:aff901b214de5a981faa612ea3e7ebbc1" id="r_aff901b214de5a981faa612ea3e7ebbc1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aff901b214de5a981faa612ea3e7ebbc1">D_GETTER</a>&#160;&#160;&#160;'G'</td></tr>
+<tr class="memitem:afb32f9ec171fac7ce0a9c7b68236e21a" id="r_afb32f9ec171fac7ce0a9c7b68236e21a"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#afb32f9ec171fac7ce0a9c7b68236e21a">D_HEADER</a>&#160;&#160;&#160;'H'</td></tr>
+<tr class="memitem:a89b314cf8c48acb2b0f084023efe43cd" id="r_a89b314cf8c48acb2b0f084023efe43cd"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a89b314cf8c48acb2b0f084023efe43cd">D_HELP</a>&#160;&#160;&#160;'?'</td></tr>
+<tr class="memitem:a8dde2b17da1845d674f44135895994a5" id="r_a8dde2b17da1845d674f44135895994a5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8dde2b17da1845d674f44135895994a5">D_QUERY</a>&#160;&#160;&#160;'Q'</td></tr>
+<tr class="memitem:a582a134ae58dbe280e34e0a1d6a1e26d" id="r_a582a134ae58dbe280e34e0a1d6a1e26d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a582a134ae58dbe280e34e0a1d6a1e26d">D_TEXT</a>&#160;&#160;&#160;'T'</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memitem:abbfae4c10b55e300ca22e10fdc9e84ff" id="r_abbfae4c10b55e300ca22e10fdc9e84ff"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a> (Amort *)</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:afd34f9817ea7498cdc5d76058dac3a5f" id="r_afd34f9817ea7498cdc5d76058dac3a5f"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#afd34f9817ea7498cdc5d76058dac3a5f">month</a> [12][4]</td></tr>
+<tr class="memitem:gaff3b11b68ec51ef3034ce5498913a211" id="r_gaff3b11b68ec51ef3034ce5498913a211"><td class="memItemLeft">unsigned int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gaff3b11b68ec51ef3034ce5498913a211">display_form</a> (<a class="el" href="../../d7/dc4/a01354.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaff3b11b68ec51ef3034ce5498913a211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display the form on the screen, including text elements and fields, and set up the form window based on the form configuration.  <br /></td></tr>
+<tr class="memitem:gae570c2569ffef8c9d38184b6d9446812" id="r_gae570c2569ffef8c9d38184b6d9446812"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gae570c2569ffef8c9d38184b6d9446812">field_navigator</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gae570c2569ffef8c9d38184b6d9446812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle user input for field entry, allowing navigation between fields and looping until an exit action is selected.  <br /></td></tr>
+<tr class="memitem:ga1532be56dda18daf874a3928c2f50a79" id="r_ga1532be56dda18daf874a3928c2f50a79"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#ga1532be56dda18daf874a3928c2f50a79">form_desc_error</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form, int in_line_num, char *in_buf, char *em)</td></tr>
+<tr class="memdesc:ga1532be56dda18daf874a3928c2f50a79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle errors encountered while parsing the form description file, providing detailed error messages that include the file name, line number, and the specific error encountered.  <br /></td></tr>
+<tr class="memitem:gadd0fa69826228ae8e3c50c9b5eed57f8" id="r_gadd0fa69826228ae8e3c50c9b5eed57f8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gadd0fa69826228ae8e3c50c9b5eed57f8">form_display_fields</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gadd0fa69826228ae8e3c50c9b5eed57f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display form fields on the screen, populating field values and formatting them according to the form configuration.  <br /></td></tr>
+<tr class="memitem:gada302551bf41bf8ed6132fd34328a47e" id="r_gada302551bf41bf8ed6132fd34328a47e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gada302551bf41bf8ed6132fd34328a47e">form_engine</a> (<a class="el" href="../../d7/dc4/a01354.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gada302551bf41bf8ed6132fd34328a47e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="../../d8/df1/a01414.html">Form</a> main processing loop.  <br /></td></tr>
+<tr class="memitem:gab2e6e35d9dba586838b91f54a6dd41a2" id="r_gab2e6e35d9dba586838b91f54a6dd41a2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gab2e6e35d9dba586838b91f54a6dd41a2">form_exec_cmd</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gab2e6e35d9dba586838b91f54a6dd41a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command specified in the form description file, passing form field values as arguments, and optionally redirecting output to a file.  <br /></td></tr>
+<tr class="memitem:ga0fb740802cbc6c8ba386f4751139f0a0" id="r_ga0fb740802cbc6c8ba386f4751139f0a0"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#ga0fb740802cbc6c8ba386f4751139f0a0">form_exec_receiver</a> (<a class="el" href="../../d7/dc4/a01354.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga0fb740802cbc6c8ba386f4751139f0a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute a command specified by the -R option on the form command line.  <br /></td></tr>
+<tr class="memitem:ga23739f53779b30a5d3da63b0a97be85b" id="r_ga23739f53779b30a5d3da63b0a97be85b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#ga23739f53779b30a5d3da63b0a97be85b">form_parse_desc</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga23739f53779b30a5d3da63b0a97be85b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the form description file to populate the <a class="el" href="../../d8/df1/a01414.html">Form</a> data structure with field definitions, text elements, and other configuration specified in the description file.  <br /></td></tr>
+<tr class="memitem:gac63d5f05787a038d4ae5f4741eafbe50" id="r_gac63d5f05787a038d4ae5f4741eafbe50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gac63d5f05787a038d4ae5f4741eafbe50">form_post</a> (<a class="el" href="../../d7/dc4/a01354.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gac63d5f05787a038d4ae5f4741eafbe50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle post-processing after field entry, allowing user to edit data, execute a provider command, or write data to an output file.  <br /></td></tr>
+<tr class="memitem:ga7b01ef5c3435083eeec419451b61aa85" id="r_ga7b01ef5c3435083eeec419451b61aa85"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#ga7b01ef5c3435083eeec419451b61aa85">form_process</a> (<a class="el" href="../../d7/dc4/a01354.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga7b01ef5c3435083eeec419451b61aa85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle integration with a getter program which will provide field data.  <br /></td></tr>
+<tr class="memitem:ga15e4844b5dff35fd08e47d8379328d55" id="r_ga15e4844b5dff35fd08e47d8379328d55"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#ga15e4844b5dff35fd08e47d8379328d55">form_read_data</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga15e4844b5dff35fd08e47d8379328d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read initial data for form fields from a specified input source, such as a file or standard input, and populate the form fields with the data.  <br /></td></tr>
+<tr class="memitem:a55ea39040ce4618476ee3fada6a0c417" id="r_a55ea39040ce4618476ee3fada6a0c417"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a55ea39040ce4618476ee3fada6a0c417">form_usage</a> ()</td></tr>
+<tr class="memitem:ga2839acac3143be9233fbf99458b77e64" id="r_ga2839acac3143be9233fbf99458b77e64"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#ga2839acac3143be9233fbf99458b77e64">form_write</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga2839acac3143be9233fbf99458b77e64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write form field values to a specified output destination, such as a file or standard output, based on the form configuration and user input.  <br /></td></tr>
+<tr class="memitem:a3c66bd6b1987c79ef5a31bb28227c65b" id="r_a3c66bd6b1987c79ef5a31bb28227c65b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c66bd6b1987c79ef5a31bb28227c65b">form_yx_to_fidx</a> (<a class="el" href="../../d8/df1/a01414.html">Form</a> *, int, int)</td></tr>
+<tr class="memitem:gabf1be20a8aad5f7ba09172ac1434a110" id="r_gabf1be20a8aad5f7ba09172ac1434a110"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/d2c/a01327.html#gabf1be20a8aad5f7ba09172ac1434a110">init_form</a> (<a class="el" href="../../d7/dc4/a01354.html">Init</a> *init, int argc, char **argv, int begy, int begx)</td></tr>
+<tr class="memdesc:gabf1be20a8aad5f7ba09172ac1434a110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize form data structure and parse description file.  <br /></td></tr>
+<tr class="memitem:a11104307c9f64ef0c4b0587c3398c6d8" id="r_a11104307c9f64ef0c4b0587c3398c6d8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a11104307c9f64ef0c4b0587c3398c6d8">mk_filler</a> (char *, int)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Installment Loan Amortization. </p>
-<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2026 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2026-05-05 </dd></dl>
+<div class="textblock"><p>The working part of C-Menu <a class="el" href="../../d8/df1/a01414.html">Form</a>. </p>
+<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d3/d07/a01241_source.html">amort.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
+<a id="a4bee8ff1d56707e8d62039c449eb5112" name="a4bee8ff1d56707e8d62039c449eb5112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bee8ff1d56707e8d62039c449eb5112">&#9670;&#160;</a></span>D_CALC</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _GNU_SOURCE</td>
+          <td class="memname">#define D_CALC&#160;&#160;&#160;'C'</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00009">9</a> of file <a class="el" href="../../d3/d07/a01241_source.html">amort.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00031">31</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a2d8c742d9f48c28a95f7a8a143db9b22" name="a2d8c742d9f48c28a95f7a8a143db9b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d8c742d9f48c28a95f7a8a143db9b22">&#9670;&#160;</a></span>D_CMD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_CMD&#160;&#160;&#160;'!'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00026">26</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a9bde875ceaf7176146f8c1a05a5724e8" name="a9bde875ceaf7176146f8c1a05a5724e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bde875ceaf7176146f8c1a05a5724e8">&#9670;&#160;</a></span>D_COMMENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_COMMENT&#160;&#160;&#160;'#'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00025">25</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a43348dafdbc52ee02edb0652d644130e" name="a43348dafdbc52ee02edb0652d644130e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43348dafdbc52ee02edb0652d644130e">&#9670;&#160;</a></span>D_FIELD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_FIELD&#160;&#160;&#160;'F'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00027">27</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="aff901b214de5a981faa612ea3e7ebbc1" name="aff901b214de5a981faa612ea3e7ebbc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff901b214de5a981faa612ea3e7ebbc1">&#9670;&#160;</a></span>D_GETTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_GETTER&#160;&#160;&#160;'G'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00033">33</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="afb32f9ec171fac7ce0a9c7b68236e21a" name="afb32f9ec171fac7ce0a9c7b68236e21a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb32f9ec171fac7ce0a9c7b68236e21a">&#9670;&#160;</a></span>D_HEADER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_HEADER&#160;&#160;&#160;'H'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00030">30</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a89b314cf8c48acb2b0f084023efe43cd" name="a89b314cf8c48acb2b0f084023efe43cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89b314cf8c48acb2b0f084023efe43cd">&#9670;&#160;</a></span>D_HELP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_HELP&#160;&#160;&#160;'?'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00029">29</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a8dde2b17da1845d674f44135895994a5" name="a8dde2b17da1845d674f44135895994a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dde2b17da1845d674f44135895994a5">&#9670;&#160;</a></span>D_QUERY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_QUERY&#160;&#160;&#160;'Q'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00032">32</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a582a134ae58dbe280e34e0a1d6a1e26d" name="a582a134ae58dbe280e34e0a1d6a1e26d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a582a134ae58dbe280e34e0a1d6a1e26d">&#9670;&#160;</a></span>D_TEXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define D_TEXT&#160;&#160;&#160;'T'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00028">28</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+<a id="a55ea39040ce4618476ee3fada6a0c417" name="a55ea39040ce4618476ee3fada6a0c417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55ea39040ce4618476ee3fada6a0c417">&#9670;&#160;</a></span>form_usage()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">void form_usage </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c66bd6b1987c79ef5a31bb28227c65b" name="a3c66bd6b1987c79ef5a31bb28227c65b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c66bd6b1987c79ef5a31bb28227c65b">&#9670;&#160;</a></span>form_yx_to_fidx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int form_yx_to_fidx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/df1/a01414.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../df/d75/a01447.html#a0">/usr/local/src/C-Menu/src/enterchr.c</a>, and <a class="el" href="../../d2/d95/a01449.html#a0">/usr/local/src/C-Menu/src/enterstr.c</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00030">30</a> of file <a class="el" href="../../d3/d07/a01241_source.html">amort.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   30</span>                                {</div>
-<div class="line"><span class="lineno">   31</span>    setlocale(LC_NUMERIC, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">if</span> (argc &gt; 1 &amp;&amp;</div>
-<div class="line"><span class="lineno">   33</span>        ((strcmp(argv[1], <span class="stringliteral">&quot;--help&quot;</span>) == 0 || strcmp(argv[1], <span class="stringliteral">&quot;-h&quot;</span>) == 0) ||</div>
-<div class="line"><span class="lineno">   34</span>         argc &lt; 5)) {</div>
-<div class="line"><span class="lineno">   35</span>        printf(<span class="stringliteral">&quot;Usage: amort [present_value][number_of_payments]&quot;</span></div>
-<div class="line"><span class="lineno">   36</span>               <span class="stringliteral">&quot;[interest_rate][payment_amount][yyyy-mm-dd]\n\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   37</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><span class="lineno">   38</span>    }</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keyword">struct </span>tm tm;</div>
-<div class="line"><span class="lineno">   40</span>    Amort *amort = malloc(<span class="keyword">sizeof</span>(Amort));</div>
-<div class="line"><span class="lineno">   41</span>    sscanf(argv[1], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;pv);</div>
-<div class="line"><span class="lineno">   42</span>    sscanf(argv[2], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;n);</div>
-<div class="line"><span class="lineno">   43</span>    sscanf(argv[3], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;i);</div>
-<div class="line"><span class="lineno">   44</span>    sscanf(argv[4], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;pmt);</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">if</span> (amort-&gt;pv == 0 || amort-&gt;n == 0 || amort-&gt;i == 0 || amort-&gt;pmt == 0 ||</div>
-<div class="line"><span class="lineno">   46</span>        argv[5][0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">   47</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: All arguments must be non-zero.\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   48</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   49</span>    }</div>
-<div class="line"><span class="lineno">   50</span>    amort-&gt;interest = amort-&gt;pv * amort-&gt;i / 1200;</div>
-<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">if</span> (amort-&gt;interest &gt; amort-&gt;pmt) {</div>
-<div class="line"><span class="lineno">   52</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: Payment amount less than interest\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   53</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    memset(&amp;tm, 0, <span class="keyword">sizeof</span>(tm));</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">if</span> (strptime(argv[5], <span class="stringliteral">&quot;%Y-%m-%d&quot;</span>, &amp;tm) == NULL)</div>
-<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">if</span> (strptime(argv[5], <span class="stringliteral">&quot;%Y%m%d&quot;</span>, &amp;tm) == NULL)</div>
-<div class="line"><span class="lineno">   58</span>            printf(<span class="stringliteral">&quot;Error: Invalid date format. Use yyyy-mm-dd or yyyymmdd.\n&quot;</span>),</div>
-<div class="line"><span class="lineno">   59</span>                exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   60</span>    amort-&gt;year_total_interest = 0;</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>    printf(<span class="stringliteral">&quot;First Payment: %04d-%02d-%02d\n\n&quot;</span>, tm.tm_year + 1900,</div>
-<div class="line"><span class="lineno">   63</span>           tm.tm_mon + 1, tm.tm_mday);</div>
-<div class="line"><span class="lineno">   64</span>    printf(<span class="stringliteral">&quot; Per  Mth Year    Balance     Payment   Principal  Interest\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   65</span>    printf(<span class="stringliteral">&quot;----  --- ---- ------------ ---------- ---------- ----------\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   66</span>    <span class="keywordtype">int</span> m = 0;</div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; amort-&gt;n; x++) {</div>
-<div class="line"><span class="lineno">   68</span>        <span class="keywordflow">if</span> (amort-&gt;pv &lt;= 0)</div>
-<div class="line"><span class="lineno">   69</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   70</span>        m = (x + tm.tm_mon) % 12;</div>
-<div class="line"><span class="lineno">   71</span>        <span class="keywordtype">int</span> y = ((x + tm.tm_mon) / 12) + tm.tm_year + 1900;</div>
-<div class="line"><span class="lineno">   72</span>        amort-&gt;interest = amort-&gt;pv * amort-&gt;i / 1200;</div>
-<div class="line"><span class="lineno">   73</span>        amort-&gt;year_total_interest += amort-&gt;interest;</div>
-<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">if</span> (amort-&gt;pv + amort-&gt;interest &lt; amort-&gt;pmt) {</div>
-<div class="line"><span class="lineno">   75</span>            amort-&gt;pmt = amort-&gt;pv + amort-&gt;interest;</div>
-<div class="line"><span class="lineno">   76</span>            amort-&gt;principal = amort-&gt;pv;</div>
-<div class="line"><span class="lineno">   77</span>        } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   78</span>            amort-&gt;principal = amort-&gt;pmt - amort-&gt;interest;</div>
-<div class="line"><span class="lineno">   79</span>        amort-&gt;pv -= amort-&gt;principal;</div>
-<div class="line"><span class="lineno">   80</span>        printf(<span class="stringliteral">&quot;%4d %4s %4d %&#39;12.2f %&#39;10.2f %&#39;10.2f %&#39;10.2f\n&quot;</span>, x + 1, <a class="code hl_variable" href="#afd34f9817ea7498cdc5d76058dac3a5f">month</a>[m],</div>
-<div class="line"><span class="lineno">   81</span>               y, amort-&gt;pv, amort-&gt;pmt, amort-&gt;principal, amort-&gt;interest);</div>
-<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> (m == 11)</div>
-<div class="line"><span class="lineno">   83</span>            <a class="code hl_function" href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a>(amort);</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (m != 11)</div>
-<div class="line"><span class="lineno">   86</span>        <a class="code hl_function" href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a>(amort);</div>
-<div class="line"><span class="lineno">   87</span>    free(amort);</div>
-<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
-<div class="line"><span class="lineno">   89</span>}</div>
-<div class="ttc" id="aa01241_html_abbfae4c10b55e300ca22e10fdc9e84ff"><div class="ttname"><a href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a></div><div class="ttdeci">void print_totals(Amort *)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d07/a01241_source.html#l00090">amort.c:90</a></div></div>
-<div class="ttc" id="aa01241_html_afd34f9817ea7498cdc5d76058dac3a5f"><div class="ttname"><a href="#afd34f9817ea7498cdc5d76058dac3a5f">month</a></div><div class="ttdeci">char month[12][4]</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d07/a01241_source.html#l00017">amort.c:17</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d3/d07/a01241_source.html#l00017">month</a>, and <a class="el" href="../../d3/d07/a01241_source.html#l00090">print_totals()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d07/a01241_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="208" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="abbfae4c10b55e300ca22e10fdc9e84ff" name="abbfae4c10b55e300ca22e10fdc9e84ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbfae4c10b55e300ca22e10fdc9e84ff">&#9670;&#160;</a></span>print_totals()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">void print_totals </td>
-          <td>(</td>
-          <td class="paramtype">Amort *</td>          <td class="paramname"><span class="paramname"><em>amort</em></span></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00090">90</a> of file <a class="el" href="../../d3/d07/a01241_source.html">amort.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>                                {</div>
-<div class="line"><span class="lineno">   91</span>    printf(<span class="stringliteral">&quot;                                                  &quot;</span></div>
-<div class="line"><span class="lineno">   92</span>           <span class="stringliteral">&quot;----------\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   93</span>    printf(<span class="stringliteral">&quot;                                                  %&#39;10.2f\n&quot;</span>,</div>
-<div class="line"><span class="lineno">   94</span>           amort-&gt;year_total_interest);</div>
-<div class="line"><span class="lineno">   95</span>    printf(<span class="stringliteral">&quot;                                                  &quot;</span></div>
-<div class="line"><span class="lineno">   96</span>           <span class="stringliteral">&quot;==========\n\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   97</span>    amort-&gt;year_total_interest = 0;</div>
-<div class="line"><span class="lineno">   98</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00509">509</a> of file <a class="el" href="../../d3/d07/a01241_source.html">form_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  509</span>                                              {</div>
+<div class="line"><span class="lineno">  510</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_variable" href="../../da/d19/a01217.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;fcnt; i++) {</div>
+<div class="line"><span class="lineno">  511</span>        <span class="keywordflow">if</span> (y == <a class="code hl_variable" href="../../da/d19/a01217.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;field[i]-&gt;line &amp;&amp; x &gt;= <a class="code hl_variable" href="../../da/d19/a01217.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;field[i]-&gt;col &amp;&amp;</div>
+<div class="line"><span class="lineno">  512</span>            x &lt; form-&gt;field[i]-&gt;col + <a class="code hl_variable" href="../../da/d19/a01217.html#adb98384f3771d341017b7b3add874515">form</a>-&gt;field[i]-&gt;len) {</div>
+<div class="line"><span class="lineno">  513</span>            <span class="keywordflow">return</span> i;</div>
+<div class="line"><span class="lineno">  514</span>        }</div>
+<div class="line"><span class="lineno">  515</span>    }</div>
+<div class="line"><span class="lineno">  516</span>    <span class="keywordflow">return</span> -1; <span class="comment">// No field found at the given coordinates</span></div>
+<div class="line"><span class="lineno">  517</span>}</div>
+<div class="ttc" id="aa01217_html_adb98384f3771d341017b7b3add874515"><div class="ttname"><a href="../../da/d19/a01217.html#adb98384f3771d341017b7b3add874515">form</a></div><div class="ttdeci">Form * form</div><div class="ttdef"><b>Definition</b> <a href="../../da/d19/a01217_source.html#l00048">mem.c:48</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d3/d07/a01241_source.html#l00030">main()</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/d94/a00716_source.html#l00115">Field::col</a>, <a class="el" href="../../d2/d94/a00716_source.html#l00316">Form::fcnt</a>, <a class="el" href="../../d2/d94/a00716_source.html#l00351">Form::field</a>, <a class="el" href="../../d2/d94/a00716_source.html#l00117">Field::len</a>, and <a class="el" href="../../d2/d94/a00716_source.html#l00113">Field::line</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d8/d7a/a01292_source.html#l00055">field_editor()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d07/a01241_abbfae4c10b55e300ca22e10fdc9e84ff_icgraph.svg" width="208" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d07/a01241_a3c66bd6b1987c79ef5a31bb28227c65b_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="afd34f9817ea7498cdc5d76058dac3a5f" name="afd34f9817ea7498cdc5d76058dac3a5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd34f9817ea7498cdc5d76058dac3a5f">&#9670;&#160;</a></span>month</h2>
+<a id="a11104307c9f64ef0c4b0587c3398c6d8" name="a11104307c9f64ef0c4b0587c3398c6d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11104307c9f64ef0c4b0587c3398c6d8">&#9670;&#160;</a></span>mk_filler()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char month[12][4]</td>
+          <td class="memname">void mk_filler </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;Jan&quot;</span>, <span class="stringliteral">&quot;Feb&quot;</span>, <span class="stringliteral">&quot;Mar&quot;</span>, <span class="stringliteral">&quot;Apr&quot;</span>, <span class="stringliteral">&quot;May&quot;</span>, <span class="stringliteral">&quot;Jun&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;Jul&quot;</span>, <span class="stringliteral">&quot;Aug&quot;</span>, <span class="stringliteral">&quot;Sep&quot;</span>, <span class="stringliteral">&quot;Oct&quot;</span>, <span class="stringliteral">&quot;Nov&quot;</span>, <span class="stringliteral">&quot;Dec&quot;</span>}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../d3/d07/a01241_source.html#l00017">17</a> of file <a class="el" href="../../d3/d07/a01241_source.html">amort.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>                  {<span class="stringliteral">&quot;Jan&quot;</span>, <span class="stringliteral">&quot;Feb&quot;</span>, <span class="stringliteral">&quot;Mar&quot;</span>, <span class="stringliteral">&quot;Apr&quot;</span>, <span class="stringliteral">&quot;May&quot;</span>, <span class="stringliteral">&quot;Jun&quot;</span>,</div>
-<div class="line"><span class="lineno">   18</span>                     <span class="stringliteral">&quot;Jul&quot;</span>, <span class="stringliteral">&quot;Aug&quot;</span>, <span class="stringliteral">&quot;Sep&quot;</span>, <span class="stringliteral">&quot;Oct&quot;</span>, <span class="stringliteral">&quot;Nov&quot;</span>, <span class="stringliteral">&quot;Dec&quot;</span>};</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d3/d07/a01241_source.html#l00030">main()</a>.</p>
 
 </div>
 </div>
@@ -333,7 +427,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d3/d07/a01241.html">amort.c</a></li>
+    <li class="navelem"><a href="../../d3/d07/a01241.html">form_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

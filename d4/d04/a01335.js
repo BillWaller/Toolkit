@@ -1,5 +1,5 @@
 var a01335 =
 [
-    [ "l", "d4/d04/a01335.html#abf3dc917629596185d4d5615de0ee58f", null ],
-    [ "s", "d4/d04/a01335.html#af571d78b72396279aa4420c8bbe3ece9", null ]
+    [ "get_command_type", "d4/d04/a01335.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d4/d04/a01335.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

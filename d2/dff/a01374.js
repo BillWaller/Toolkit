@@ -1,8 +1,9 @@
 var a01374 =
 [
-    [ "b", "d2/dff/a01374.html#ad7a2c8b8af8ad82115ba59d8e870d9b6", null ],
-    [ "g", "d2/dff/a01374.html#ac68d9a20a9e5bb05d540b0277c1a21bb", null ],
-    [ "index", "d2/dff/a01374.html#a59f19ed1a9b4da7f76ae25cf9859e10b", null ],
-    [ "r", "d2/dff/a01374.html#aca9ef37fda78d6cc94dbf5f0294c04b6", null ],
-    [ "use_rgb", "d2/dff/a01374.html#ab1d136b78509282c757feee8e1c32245", null ]
+    [ "b", "d2/dff/a01374.html#a823a1befc95c064e6d179723edb056fa", null ],
+    [ "b", "d2/dff/a01374.html#abe4c6992a197eff41d9b4dedfb251c87", null ],
+    [ "g", "d2/dff/a01374.html#ab49e03f25cd24170f9cd31b5696c7d1f", null ],
+    [ "g", "d2/dff/a01374.html#af970a72243681add6fdab6f215568b05", null ],
+    [ "r", "d2/dff/a01374.html#a43e48de3e3cf8c8fa9120830ffac424e", null ],
+    [ "r", "d2/dff/a01374.html#ac06dc5fdbe17be3b71a5ba8866f23fea", null ]
 ];
