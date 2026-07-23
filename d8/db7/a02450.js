@@ -1,20 +1,13 @@
 var a02450 =
 [
-    [ "get_next_line", "d8/db7/a02450.html#ga395b27e6a9716bf49e3fc04d53987b33", null ],
-    [ "get_pos_next_line", "d8/db7/a02450.html#gaf692bba071d771ceea47707fc26127bd", null ],
-    [ "get_pos_prev_line", "d8/db7/a02450.html#gaaf8cff992778d85e44351a834ad2b81a", null ],
-    [ "get_prev_line", "d8/db7/a02450.html#gab49fb9f9417c7cf790cea1679e4e5edc", null ],
-    [ "go_to_eof", "d8/db7/a02450.html#ga46145f1d3680a48cb9391a8ae95db9ad", null ],
-    [ "go_to_line", "d8/db7/a02450.html#gac81796e830049e74987a6b526cfc296f", null ],
-    [ "go_to_mark", "d8/db7/a02450.html#gada77a15a548ce444426d43fd39a1cce4", null ],
-    [ "go_to_percent", "d8/db7/a02450.html#gae6623cc4892a014fc9c40b3bca1db7d9", null ],
-    [ "go_to_position", "d8/db7/a02450.html#ga5f74dca8730faaa3ff362fc1e01b12ce", null ],
-    [ "increment_ln", "d8/db7/a02450.html#gadd75615038c32b4c07a6842dfe2fc37a", null ],
-    [ "initialize_line_table", "d8/db7/a02450.html#gaa260d59836439e16d00ad5a6bc4b4829", null ],
-    [ "next_page", "d8/db7/a02450.html#gacf1bfbd6d2fd4ad9a0385009ef25015c", null ],
-    [ "prev_page", "d8/db7/a02450.html#ga5dbc34981815690a92812e34d1cf478f", null ],
-    [ "scroll_down_n_lines", "d8/db7/a02450.html#gaa79b8294ebf98c84d4a844fd7d9e4862", null ],
-    [ "scroll_up_n_lines", "d8/db7/a02450.html#gab08fc8983cc3bdb21b438c82ece16346", null ],
-    [ "search", "d8/db7/a02450.html#gaa5f3994ba79fc02afc19b6b76b2a645f", null ],
-    [ "sync_ln", "d8/db7/a02450.html#ga03bfb3d8d09d33f4f59930485f283ead", null ]
+    [ "field_editor", "d8/db7/a02450.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
+    [ "form_display_field", "d8/db7/a02450.html#gabd1710f59277202b0a58f840d4da322e", null ],
+    [ "form_display_field_n", "d8/db7/a02450.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
+    [ "form_fmt_field", "d8/db7/a02450.html#ga07a8d9311c88786e7310fef638d34a41", null ],
+    [ "form_validate_field", "d8/db7/a02450.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
+    [ "is_valid_date", "d8/db7/a02450.html#ga353546f4d99ef7ec908d371187f033de", null ],
+    [ "is_valid_time", "d8/db7/a02450.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
+    [ "left_justify", "d8/db7/a02450.html#ga425021d4c87474159a36d395e4dcdf65", null ],
+    [ "numeric", "d8/db7/a02450.html#ga18db59e4c79e823f79310378183ac25c", null ],
+    [ "right_justify", "d8/db7/a02450.html#gaa356032a372a136c06dbcb1c0493a02b", null ]
 ];

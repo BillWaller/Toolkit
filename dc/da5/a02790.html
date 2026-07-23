@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: C-Menu View</title>
+<title>C-Menu: Contributing to C-Menu</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,84 +110,84 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dc/da5/a02790.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">C-Menu View </div></div>
+  <div class="headertitle"><div class="title">Contributing to C-Menu </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="c-menu-view-1"></a></p>
-<p><a class="el" href="../../d4/db0/a02540.html">View</a> has Unicode support, line numbering, regular expression searching, and a large virtual pad for horizontal scrolling. <a class="el" href="../../d4/db0/a02540.html">View</a> works great with tree-sitter, source-highlight, pygments, bat, manual pages, and other syntax highlighters. <a class="el" href="../../d4/db0/a02540.html">View</a> doesn't alter the file you are viewing. It uses the highlighter in a pipe, and reads the output, so the original file is never changed. And, if you happen to have a file that has been highlighted by another application, view can strip the ANSI codes for convenient editing. <a class="el" href="../../d4/db0/a02540.html">View</a> is lightning fast, especially with huge log files.</p>
-<p>Throughout C-Menu, and especially <a class="el" href="../../d4/db0/a02540.html">View</a>, you will find many optimizations that contribute to it's efficiency and speed. Traditionally, large file I-O has relied on user-space buffering schemes in which chunks of data are copied from mass storage into local buffers using seek and read operations. The application must keep track of buffer contents, manage buffer lifecycles, and handle edge cases such as partial reads, end-of-file conditions, and error handling. This approach can be complex, error-prone, and inefficient, especially when dealing with large files or high-throughput applications. C-Menu's view takes a different approach to large file I-O by leveraging the operating system's virtual memory management capabilities to provide direct access to file data through memory mapping. Instead of relying on user-space buffering, C-Menu's view provides a direct-to-kernel, demand paged, memory mapped virtual address space for file access. This eliminates the overhead and complexity associated with user-space buffering, and allows for more efficient and reliable access to large files. With C-Menu's view, applications can access any part of a multi-gigabyte file instantly without the need for copying data into user-space buffers or managing buffer lifecycles. This results in unmatched reliability and performance when working with large files, making C-Menu's view ideal for applications that require high-throughput file access or need to work with large datasets.</p>
-<p>If you work with large datasets, you will love view. No fluff, no bloat, no nonsense, just blazing fast performance.</p>
-<div class="image">
-<img src="../../tree-sitter5.png" alt=""/>
-<div class="caption">
-C-Menu View with Syntax Highlighting</div></div>
-    <h1 class="doxsection"><a class="anchor" id="rsh---a-root-shell-alternative-1"></a>
-RSH - A Root Shell Alternative</h1>
-<p><b><em>RSH</em></b> - RSH provides an alternative to su and sudo for executing commands with elevated privileges. It allows developers and system administrators to get in and out of root shells and execute commands with root privileges without the need for a password, for example, by authenticating with an ssh key as you would on gethub.</p>
-<p>In the following example, make install requires root privilege, so the user types xx, is authenticated with an ssh key, and then types make install. When the make install is finished, the user types x to exit the root shell and relinquish root privilege.</p>
-<div class="image">
-<img src="../../Makefile-out.png" alt=""/>
-<div class="caption">
-RSH SSH Authentication</div></div>
-    <ul>
-<li>The Green prompt indicates user privilege, and Red indicates root privilege.</li>
-</ul>
-<h1 class="doxsection"><a class="anchor" id="lf---a-regular-expression-file-finder-1"></a>
-lf - A Regular Expression File Finder</h1>
-<p><b><em>lf</em></b> - is a sleek, easy-to-use, and fast file finder. The name, lf, can be thought of in the imperative sense as "list files", or in the noun sense, "lightweight find."</p>
-<div class="image">
-<img src="../../lf-help.png" alt=""/>
-<div class="caption">
-lf help</div></div>
-    <p>The ../screenshot above is the help output of lf piped through bat and displayed in <a class="el" href="../../d4/db0/a02540.html">View</a>.</p>
-<p>Note: lf's default behavior of including hidden files has been changed and the default is now to exclude hidden files. Before this update, the "-n" option directed lf to exclude hidden files, but that is no longer necessary and a new "-H" option has been added to direct lf to include hidden files. This change was made to align with the behavior of other popular file finders such as fd and find.</p>
-<p>Find's built-in -exec is one of its most often used options and conspicuously, lf doesn't have a built-in -exec option. However, lf achieves identical results in a fraction of the time by piping the output of lf into xargs. There would be no benefit to adding an -exec option to lf because xargs leaves nothing to be desired.</p>
-<p>time find . -maxdepth 5 -type f -exec ls -l {} \; &gt;find.out</p>
-<p>time lf -d 4 -t f | xargs ls -l &gt;lf.out</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m0.469s  </td><td class="markdownTableBodyNone">0m0.160s  </td><td class="markdownTableBodyNone">0m0.288s  </td><td class="markdownTableBodyNone">142  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.008s  </td><td class="markdownTableBodyNone">0m0.004s  </td><td class="markdownTableBodyNone">0m0.006s  </td><td class="markdownTableBodyNone">142  </td></tr>
-</table>
-<p>time find . -maxdepth 4 -type f -exec ls -l {} \; &gt;find.out</p>
-<p>time lf -d 4 -t f | xargs ls -l &gt;lf.out</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m2.123s  </td><td class="markdownTableBodyNone">0m0.788s  </td><td class="markdownTableBodyNone">0m0.281s  </td><td class="markdownTableBodyNone">598  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.014s  </td><td class="markdownTableBodyNone">0m0.007s  </td><td class="markdownTableBodyNone">0m0.009s  </td><td class="markdownTableBodyNone">598  </td></tr>
-</table>
-<p>The results were unequivocal. lf with xargs is significantly faster than find with its built-in exec option.</p>
-<p>The command lines below are simple and straightforward, with no complex options or filters. Benchmark comparisons are notoriously subject to manipulation, so take them with a grain of salt. There are so many variations in hardware, file systems, the actual data, and system caching states that can skew results. You wouldn't buy a new Corvette without a test drive, so take C-Menu for a spin, do your own comparisons, and decide for yourself. (Why does it feel so sneaky to say that? (-: (-: )</p>
-<p>time find . -type f | wc</p>
-<p>time lf . -t f | wc</p>
-<p>time fd . -H -t f | wc</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Command  </th><th class="markdownTableHeadNone">real  </th><th class="markdownTableHeadNone">user  </th><th class="markdownTableHeadNone">sys  </th><th class="markdownTableHeadNone">files found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0m0.793s  </td><td class="markdownTableBodyNone">0m0.470s  </td><td class="markdownTableBodyNone">0m0.453s  </td><td class="markdownTableBodyNone">307440  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">lf  </td><td class="markdownTableBodyNone">0m0.214s  </td><td class="markdownTableBodyNone">0m0.036s  </td><td class="markdownTableBodyNone">0m0.214s  </td><td class="markdownTableBodyNone">307440  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">fd  </td><td class="markdownTableBodyNone">0m0.221s  </td><td class="markdownTableBodyNone">0m0.319s  </td><td class="markdownTableBodyNone">0m0.821s  </td><td class="markdownTableBodyNone">291969  </td></tr>
-</table>
-<p>Even without its speed advantage, lf would still be a compelling alternative due to its simplicity, portability, and ease of use. With fewer options and a more intuitive syntax, lf is a breeze to learn and use for the most common file searching tasks.</p>
-<p>Here's an example of how easy it is to use lf to find files modified between two dates. The command line below uses lf to find files modified after 2024-01-01 and before 2024-06-01, and then pipes the output to xargs to execute ls -l on the found files.</p>
+<div class="textblock"><p><a class="anchor" id="contributing-to-c-menu"></a></p>
+<p>First, thank you for stopping by as you consider contributing to C-Menu! 🎉</p>
+<p>All types of contributions are welcome: reporting bugs, suggesting features, writing documentation, or fixing code. The highest compliment you can give to an open source project is to get involved. This guide will walk you through the process of contributing to C-Menu, ensuring that your efforts are recognized and appreciated.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md-code-of-conduct"></a>
+📜 Code of Conduct</h1>
+<p>By participating in this project, you agree to abide by our <b><a class="el" href="../../db/d38/a02789.html" title="Community Code of Conduct">Code of Conduct</a></b>. Please report any unacceptable behavior to <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a>.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md-how-to-report-a-bug"></a>
+🐛 How to Report a Bug</h1>
+<p>Before submitting a bug report, please search our <b><a href="https://github.com">Issues Tab</a></b> to see if the problem has already been reported.</p>
+<p>If it hasn't, please open a new issue and include:</p>
 <ul>
-<li>You don't have to enter the T00:00:00 time component if you just want to include files modified between two dates. Keep in mind that the time will default to 00:00:00 if you specify a date without a time component, so -b 2026-06-01 will include files modified through the end of the day on 2026-05-31, but will exclude files modified on 2026-06-01.</li>
+<li><b>A clear summary</b> of the problem in the title.</li>
+<li><b>Steps to reproduce</b> the behavior.</li>
+<li><b>Expected vs. actual results</b>.</li>
+<li><b>Screenshots or GIFs</b> if the bug is visual.</li>
+<li><b>Your environment details</b> (Operating System, browser, language/framework versions).</li>
 </ul>
-<div class="fragment"><div class="line">lf -d 5 -t f -a 2024-01-01 -b 2024-06-01 | xargs ls -l</div>
-</div><!-- fragment --><div class="image">
-<img src="../../lf-dates.png" alt=""/>
-<div class="caption">
-lf File Finder</div></div>
-    <p>The ../screenshot above shows how you might use the date-time options of lf to list files between two date-times (after and before) and the sample output. We believe you will find this format intuitive and easy to use. </p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md-how-to-suggest-a-feature"></a>
+💡 How to Suggest a Feature</h1>
+<p>We use GitHub Issues to track feature requests. To suggest an enhancement:</p>
+<ol type="1">
+<li>Check if the feature has already been proposed in the existing issues.</li>
+<li>Open a new issue and select the "Feature Request" template (if available).</li>
+<li>Explain the <b>use case</b> and why this feature would be useful to most users.</li>
+<li>Describe how the feature should work or provide mockup ideas.</li>
+</ol>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="️-how-to-submit-code-pull-request-process"></a>
+🛠️ How to Submit Code (Pull Request Process)</h1>
+<p>To make code or documentation changes, follow these steps:</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md1-set-up-your-environment"></a>
+1. Set Up Your Environment</h2>
+<ol type="1">
+<li>Fork the repository to your own GitHub account.</li>
+<li><p class="startli">Clone your fork locally:</p>
+<div class="fragment"><div class="line">git clone https://github.com</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Create a new branch for your work. Keep the name short and descriptive (e.g., <span class="tt">fix-login-validation</span> or <span class="tt">feat-dark-mode</span>):</p>
+<div class="fragment"><div class="line">git checkout -b your-branch-name</div>
+</div><!-- fragment --></li>
+</ol>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2-make-your-changes"></a>
+2. Make Your Changes</h2>
+<ul>
+<li>Adhere to the project's existing code styling and standards.</li>
+<li>Write clean, commented, and readable code.</li>
+<li>Add unit or integration tests for any new logic.</li>
+<li>Ensure all existing tests still pass.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3-commit-and-push"></a>
+3. Commit and Push</h2>
+<ul>
+<li>Write clear, concise commit messages in the imperative mood (e.g., <span class="tt">Add user authentication module</span>).</li>
+<li>Push the changes to your remote fork:</li>
+</ul>
+<div class="fragment"><div class="line">git push origin your-branch-name</div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md4-open-a-pull-request"></a>
+4. Open a Pull Request</h2>
+<ol type="1">
+<li>Navigate back to the original repository on GitHub.</li>
+<li>Click <b>Compare &amp; pull request</b>.</li>
+<li>Fill out the Pull Request (PR) template:<ul>
+<li>Explain <b>what</b> changed and <b>why</b>.</li>
+<li>Link any relevant issues (e.g., <span class="tt">Closes #123</span>).</li>
+</ul>
+</li>
+<li>Wait for the maintainers to review your code. Be open to constructive feedback!</li>
+</ol>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md-recognition"></a>
+🚀 Recognition</h1>
+<p>Contributors are the lifeblood of open source. Your profile will be added to our contributors list in the <span class="tt">README.md</span> once your pull request is merged! </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

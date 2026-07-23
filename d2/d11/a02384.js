@@ -1,5 +1,5 @@
 var a02384 =
 [
-    [ "cf_accept", "d2/d11/a02384.html#a29f9e74ab7f4cb360c1373af0e66103d", null ],
-    [ "f_erase_remainder", "d2/d11/a02384.html#abe85022880b5f1c87c325d742e646d2c", null ]
+    [ "_GNU_SOURCE", "d2/d11/a02384.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "main", "d2/d11/a02384.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
 ];

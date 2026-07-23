@@ -12,5 +12,5 @@ var searchData=
   ['key_5faltpgup_9',['KEY_ALTPGUP',['../db/d09/a01838.html#aad065eab63ceb77e0e601dfdc9968d70',1,'cm.h']]],
   ['key_5faltright_10',['KEY_ALTRIGHT',['../db/d09/a01838.html#a8bfe766d44a69587427b117680587450',1,'cm.h']]],
   ['key_5faltup_11',['KEY_ALTUP',['../db/d09/a01838.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b',1,'cm.h']]],
-  ['kstrlen_12',['KSTRLEN',['../d9/d27/a02363.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
+  ['kstrlen_12',['KSTRLEN',['../d5/d43/a02378.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
 ];

@@ -1,10 +1,16 @@
 var a02451 =
 [
-    [ "display_line", "da/d74/a02451.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_prompt", "da/d74/a02451.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "fmt_line", "da/d74/a02451.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "pad_refresh", "da/d74/a02451.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "da/d74/a02451.html#ga9fc984ba8ce6c4059b33a915d526357f", null ],
-    [ "view_display_help", "da/d74/a02451.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "da/d74/a02451.html#gae6f141401cf9f104dbe14f09603d5178", null ]
+    [ "display_form", "da/d74/a02451.html#gaff3b11b68ec51ef3034ce5498913a211", null ],
+    [ "field_navigator", "da/d74/a02451.html#gae570c2569ffef8c9d38184b6d9446812", null ],
+    [ "form_desc_error", "da/d74/a02451.html#ga1532be56dda18daf874a3928c2f50a79", null ],
+    [ "form_display_fields", "da/d74/a02451.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
+    [ "form_engine", "da/d74/a02451.html#gada302551bf41bf8ed6132fd34328a47e", null ],
+    [ "form_exec_cmd", "da/d74/a02451.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
+    [ "form_exec_receiver", "da/d74/a02451.html#ga0fb740802cbc6c8ba386f4751139f0a0", null ],
+    [ "form_parse_desc", "da/d74/a02451.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
+    [ "form_post", "da/d74/a02451.html#gac63d5f05787a038d4ae5f4741eafbe50", null ],
+    [ "form_process", "da/d74/a02451.html#ga7b01ef5c3435083eeec419451b61aa85", null ],
+    [ "form_read_data", "da/d74/a02451.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
+    [ "form_write", "da/d74/a02451.html#ga2839acac3143be9233fbf99458b77e64", null ],
+    [ "init_form", "da/d74/a02451.html#gabf1be20a8aad5f7ba09172ac1434a110", null ]
 ];

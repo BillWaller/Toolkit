@@ -1,10 +1,10 @@
 var a02387 =
 [
-    [ "MAX_FRAMES", "d8/deb/a02387.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "d0/dbb/a02448.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "d0/dbb/a02448.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "d0/dbb/a02448.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "d0/dbb/a02448.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "d8/deb/a02387.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "d8/deb/a02387.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "fork_detach_execvp", "dc/d4e/a02449.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_detach_execvp", "dc/d4e/a02449.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_exec", "dc/d4e/a02449.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "dc/d4e/a02449.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "dc/d4e/a02449.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d8/d9a/a02447.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "dc/d4e/a02449.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

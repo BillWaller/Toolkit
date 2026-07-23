@@ -1,6 +1,7 @@
 var a02363 =
 [
-    [ "KSTRLEN", "d9/d27/a02363.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
-    [ "MAXLEN", "d9/d27/a02363.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
-    [ "popup_ckeys", "d9/d27/a02363.html#a483e450445eab0cfdef426ba3f027c6f", null ]
+    [ "popup_form", "d9/d27/a02363.html#a3730e03ab56c382fc493dca5394e965c", null ],
+    [ "popup_menu", "d9/d27/a02363.html#a138a8bac23cdd5563712224861d74dc9", null ],
+    [ "popup_pick", "d9/d27/a02363.html#a65117e50a2ad97a424524264e30c2d19", null ],
+    [ "popup_view", "d9/d27/a02363.html#a1ac5343473fe2832d14fe14c4e534f21", null ]
 ];

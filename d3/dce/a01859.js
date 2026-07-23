@@ -1,8 +1,8 @@
 var a01859 =
 [
-    [ "RGB", "de/d4e/a02484.html", "de/d4e/a02484" ],
-    [ "UiColorPair", "db/d44/a02564.html", "db/d44/a02564" ],
+    [ "RGB", "d0/d7c/a02499.html", "d0/d7c/a02499" ],
+    [ "UiColorPair", "db/d39/a02575.html", "db/d39/a02575" ],
     [ "ui_color_to_rgb", "d3/dce/a01859.html#add9ba9f49e638fcb305782a6bd479dbb", null ],
-    [ "ui_color", "d3/dce/a01859.html#ae6c1636e147a1a56ef9f738f5c8bee57", null ],
-    [ "ui_color_pair", "d3/dce/a01859.html#afe617cfab4a1f3d324206f4c0f1f5ddb", null ]
+    [ "ui_color", "d3/dce/a01859.html#a7da5be25f8179281f00835b078b4c47f", null ],
+    [ "ui_color_pair", "d3/dce/a01859.html#a9625adb78629e72c93bc35dfa2e5cb95", null ]
 ];
