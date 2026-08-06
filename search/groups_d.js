@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['ui_20backend_0',['UI Backend',['../de/d91/a02458.html',1,'']]],
-  ['ui_20implementation_1',['Ncurses UI Implementation',['../da/dae/a02467.html',1,'']]],
-  ['utility_20functions_2',['Utility functions',['../da/d23/a02452.html',1,'']]]
+  ['view_20display_0',['Manage View Display',['../dd/dd4/a02498.html',1,'']]],
+  ['view_20engine_1',['View Engine',['../d1/df5/a02496.html',1,'']]],
+  ['view_20i_20o_2',['Initializing View I/O',['../da/dbe/a02489.html',1,'']]],
+  ['view_20navigation_3',['View Navigation',['../d1/d73/a02497.html',1,'']]]
 ];

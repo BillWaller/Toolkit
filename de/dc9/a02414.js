@@ -1,5 +1,10 @@
 var a02414 =
 [
-    [ "menu_cmd_processor", "dc/d5c/a02459.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
-    [ "menu_engine", "dc/d5c/a02459.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
+    [ "fork_detach_execvp", "d2/df5/a02482.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_detach_execvp", "d2/df5/a02482.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_exec", "d2/df5/a02482.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d2/df5/a02482.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d2/df5/a02482.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "nf_error", "d2/d35/a02480.html#ga2f2e1496a7c253b2d58446154c98a0bf", null ],
+    [ "shell", "d2/df5/a02482.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: amort.c File Reference</title>
+<title>C-Menu: sig.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,238 +110,106 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dc/d09/a02429.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">amort.c File Reference</div></div>
+  <div class="headertitle"><div class="title">sig.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Installment Loan Amortization.  
+<p>signal handling for interrupt signals  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;locale.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d2/d5b/a01841_source.html">cm.h</a>&quot;</code><br />
+<code>#include &lt;execinfo.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for amort.c:</div>
+Include dependency graph for sig.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d07/a02430.svg" width="651" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d6/d07/a02430.svg" width="100%" height="499"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../dc/d09/a02429_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+<tr class="memitem:a5b4055201d2d8170e179b1ceaa438b9c" id="r_a5b4055201d2d8170e179b1ceaa438b9c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5b4055201d2d8170e179b1ceaa438b9c">MAX_FRAMES</a>&#160;&#160;&#160;64</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Capture the current terminal settings for later restoration.  <br /></td></tr>
-<tr class="memitem:abbfae4c10b55e300ca22e10fdc9e84ff" id="r_abbfae4c10b55e300ca22e10fdc9e84ff"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a> (Amort *)</td></tr>
+<tr class="memitem:ga79c3e22498eb2346543aa9c86fd22e58" id="r_ga79c3e22498eb2346543aa9c86fd22e58"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d5/d56/a02495.html#ga79c3e22498eb2346543aa9c86fd22e58">handle_signal</a> (int sig_num)</td></tr>
+<tr class="memdesc:ga79c3e22498eb2346543aa9c86fd22e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle received signals and prompt user for action.  <br /></td></tr>
+<tr class="memitem:ga06c1eb6cf3649dc187115565409f91af" id="r_ga06c1eb6cf3649dc187115565409f91af"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d5/d56/a02495.html#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a> ()</td></tr>
+<tr class="memdesc:ga06c1eb6cf3649dc187115565409f91af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set signal handlers to default behavior.  <br /></td></tr>
+<tr class="memitem:gaca2de03f6d52d4b11237990e4e605177" id="r_gaca2de03f6d52d4b11237990e4e605177"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d5/d56/a02495.html#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a> ()</td></tr>
+<tr class="memdesc:gaca2de03f6d52d4b11237990e4e605177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up signal handlers for interrupt signals.  <br /></td></tr>
+<tr class="memitem:gaa08a9a8dede37c66c81c3f51a0f338a9" id="r_gaa08a9a8dede37c66c81c3f51a0f338a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d5/d56/a02495.html#gaa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a> (int sig_num)</td></tr>
+<tr class="memdesc:gaa08a9a8dede37c66c81c3f51a0f338a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal handler for interrupt signals.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac8f3e76eebe6c45cac2c928ac6ef2e8e" id="r_ac8f3e76eebe6c45cac2c928ac6ef2e8e"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ac8f3e76eebe6c45cac2c928ac6ef2e8e">month</a> [12][4]</td></tr>
+<tr class="memitem:a44f81ebcc5b6c685cbdfe388eb420313" id="r_a44f81ebcc5b6c685cbdfe388eb420313"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a> = false</td></tr>
+<tr class="memitem:a01a99fc32bd5b471123f6223503c9616" id="r_a01a99fc32bd5b471123f6223503c9616"><td class="memItemLeft">volatile sig_atomic_t&#160;</td><td class="memItemRight"><a class="el" href="#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Installment Loan Amortization. </p>
-<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2026 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>2026-05-05 </dd></dl>
+<div class="textblock"><p>signal handling for interrupt signals </p>
+<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../dc/d09/a02429_source.html">amort.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../dc/d09/a02429_source.html">sig.c</a>.</p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
+<a id="a5b4055201d2d8170e179b1ceaa438b9c" name="a5b4055201d2d8170e179b1ceaa438b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b4055201d2d8170e179b1ceaa438b9c">&#9670;&#160;</a></span>MAX_FRAMES</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _GNU_SOURCE</td>
+          <td class="memname">#define MAX_FRAMES&#160;&#160;&#160;64</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00009">9</a> of file <a class="el" href="../../dc/d09/a02429_source.html">amort.c</a>.</p>
-
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Capture the current terminal settings for later restoration. </p>
-<p>Main function for rsh.</p>
-<p>iloan is a trivial application to demonstrate how a command-line program can be integrated into C-Menu <a class="el" href="../../d1/d23/a02603.html">Form</a> with simple file, argument, or pipe i-o.</p>
-<p>allows the user to enter a string in cooked mode</p>
-<p>can be used in scripts to get a single character response from a user. For example: response=$(./enterchr "Enter Y or N: ") if [ "$response" = "Y" ]; then echo "You entered Yes" else echo "You entered No" fi This function saves the current terminal settings into a global variable so that they can be restored later. It should be called before modifying the terminal settings to ensure that the original settings can be restored when the program exits or is interrupted.</p>
-<p>allows line editing and other features writes the prompt to stderr and the user's input to stdout handles signals to ensure that the terminal settings are restored if the program is interrupted.</p>
-<p>Positional arguments: present_value The present value of the loan (the amount borrowed). number_of_payments The total number of payments to be made. interest_rate The annual interest rate (as a percentage). payment_amount The amount of each payment. The program calculates the missing value based on the three provided values. For example, if the present value, number of payments, and interest rate are provided, it will calculate the payment amount. If the present value, interest rate, and payment amount are provided, it will calculate the number of payments, and so on. The program can be used in a non-interactive way by passing the four values as arguments, with the value to be calculated set to 0. For example, to calculate the payment amount for a $10,000 loan with a 5% annual interest rate and 60 monthly payments, you could run: </p><div class="fragment"><div class="line">iloan 10000 60 5 0</div>
-</div><!-- fragment --><p> This is proof-of-concept code, and is not intended for production use. It is not designed to be robust, and does not handle all edge cases or input errors. It is intended solely to demonstrate how a simple command-line program can be integrated into C-Menu <a class="el" href="../../d1/d23/a02603.html">Form</a>. In the future, more sophisticated abstractions, such as async event handlers, serialization, rpc, database, and a standardized plugin interface will be integrated into C-Menu. Feel free to modify and enhance this code as needed, but please do not use it in production without proper testing and validation. It is provided as-is without any warranty or support. Use at your own risk.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>Argument count </td></tr>
-    <tr><td class="paramname">argv</td><td>Argument vector</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>If executed as 'rsh', this program sets the user ID and group ID to 0 (root) and then executes the user's default shell (or /usr/bin/bash if SHELL is not set) with the provided arguments. If no arguments are given, it runs the shell in interactive mode. To work properly, this program must be compiled and set with the setuid bit: </p><div class="fragment"><div class="line">$ sudo -s</div>
-<div class="line">cc rsh.c -o rsh</div>
-<div class="line">sudo chown root:root rsh</div>
-<div class="line">sudo chmod 4755 rsh</div>
-<div class="line">exit</div>
-</div><!-- fragment --><p> to verify proper operation: </p><div class="fragment"><div class="line">$ rsh</div>
-<div class="line">$ whoami</div>
-<div class="line">root</div>
-</div><!-- fragment --> <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../db/d0d/a02653.html#a0">/usr/local/src/C-Menu/src/enterchr.c</a>, and <a class="el" href="../../dd/dd8/a02655.html#a0">/usr/local/src/C-Menu/src/enterstr.c</a>.</dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00030">30</a> of file <a class="el" href="../../dc/d09/a02429_source.html">amort.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   30</span>                                {</div>
-<div class="line"><span class="lineno">   31</span>    setlocale(LC_NUMERIC, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">if</span> (argc &gt; 1 &amp;&amp;</div>
-<div class="line"><span class="lineno">   33</span>        ((strcmp(argv[1], <span class="stringliteral">&quot;--help&quot;</span>) == 0 || strcmp(argv[1], <span class="stringliteral">&quot;-h&quot;</span>) == 0) ||</div>
-<div class="line"><span class="lineno">   34</span>         argc &lt; 5)) {</div>
-<div class="line"><span class="lineno">   35</span>        printf(<span class="stringliteral">&quot;Usage: amort [present_value][number_of_payments]&quot;</span></div>
-<div class="line"><span class="lineno">   36</span>               <span class="stringliteral">&quot;[interest_rate][payment_amount][yyyy-mm-dd]\n\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   37</span>        exit(EXIT_SUCCESS);</div>
-<div class="line"><span class="lineno">   38</span>    }</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keyword">struct </span>tm tm;</div>
-<div class="line"><span class="lineno">   40</span>    Amort *amort = malloc(<span class="keyword">sizeof</span>(Amort));</div>
-<div class="line"><span class="lineno">   41</span>    sscanf(argv[1], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;pv);</div>
-<div class="line"><span class="lineno">   42</span>    sscanf(argv[2], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;n);</div>
-<div class="line"><span class="lineno">   43</span>    sscanf(argv[3], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;i);</div>
-<div class="line"><span class="lineno">   44</span>    sscanf(argv[4], <span class="stringliteral">&quot;%lf&quot;</span>, &amp;amort-&gt;pmt);</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">if</span> (amort-&gt;pv == 0 || amort-&gt;n == 0 || amort-&gt;i == 0 || amort-&gt;pmt == 0 ||</div>
-<div class="line"><span class="lineno">   46</span>        argv[5][0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">   47</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: All arguments must be non-zero.\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   48</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   49</span>    }</div>
-<div class="line"><span class="lineno">   50</span>    amort-&gt;interest = amort-&gt;pv * amort-&gt;i / 1200;</div>
-<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">if</span> (amort-&gt;interest &gt; amort-&gt;pmt) {</div>
-<div class="line"><span class="lineno">   52</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: Payment amount less than interest\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   53</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   54</span>    }</div>
-<div class="line"><span class="lineno">   55</span>    memset(&amp;tm, 0, <span class="keyword">sizeof</span>(tm));</div>
-<div class="line"><span class="lineno">   56</span>    <span class="keywordflow">if</span> (strptime(argv[5], <span class="stringliteral">&quot;%Y-%m-%d&quot;</span>, &amp;tm) == NULL)</div>
-<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">if</span> (strptime(argv[5], <span class="stringliteral">&quot;%Y%m%d&quot;</span>, &amp;tm) == NULL)</div>
-<div class="line"><span class="lineno">   58</span>            printf(<span class="stringliteral">&quot;Error: Invalid date format. Use yyyy-mm-dd or yyyymmdd.\n&quot;</span>),</div>
-<div class="line"><span class="lineno">   59</span>                exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   60</span>    amort-&gt;year_total_interest = 0;</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span>    printf(<span class="stringliteral">&quot;First Payment: %04d-%02d-%02d\n\n&quot;</span>, tm.tm_year + 1900,</div>
-<div class="line"><span class="lineno">   63</span>           tm.tm_mon + 1, tm.tm_mday);</div>
-<div class="line"><span class="lineno">   64</span>    printf(<span class="stringliteral">&quot; Per  Mth Year    Balance     Payment   Principal  Interest\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   65</span>    printf(<span class="stringliteral">&quot;----  --- ---- ------------ ---------- ---------- ----------\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   66</span>    <span class="keywordtype">int</span> m = 0;</div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; amort-&gt;n; x++) {</div>
-<div class="line"><span class="lineno">   68</span>        <span class="keywordflow">if</span> (amort-&gt;pv &lt;= 0)</div>
-<div class="line"><span class="lineno">   69</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">   70</span>        m = (x + tm.tm_mon) % 12;</div>
-<div class="line"><span class="lineno">   71</span>        <span class="keywordtype">int</span> y = ((x + tm.tm_mon) / 12) + tm.tm_year + 1900;</div>
-<div class="line"><span class="lineno">   72</span>        amort-&gt;interest = amort-&gt;pv * amort-&gt;i / 1200;</div>
-<div class="line"><span class="lineno">   73</span>        amort-&gt;year_total_interest += amort-&gt;interest;</div>
-<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">if</span> (amort-&gt;pv + amort-&gt;interest &lt; amort-&gt;pmt) {</div>
-<div class="line"><span class="lineno">   75</span>            amort-&gt;pmt = amort-&gt;pv + amort-&gt;interest;</div>
-<div class="line"><span class="lineno">   76</span>            amort-&gt;principal = amort-&gt;pv;</div>
-<div class="line"><span class="lineno">   77</span>        } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">   78</span>            amort-&gt;principal = amort-&gt;pmt - amort-&gt;interest;</div>
-<div class="line"><span class="lineno">   79</span>        amort-&gt;pv -= amort-&gt;principal;</div>
-<div class="line"><span class="lineno">   80</span>        printf(<span class="stringliteral">&quot;%4d %4s %4d %&#39;12.2f %&#39;10.2f %&#39;10.2f %&#39;10.2f\n&quot;</span>, x + 1, <a class="code hl_variable" href="#ac8f3e76eebe6c45cac2c928ac6ef2e8e">month</a>[m],</div>
-<div class="line"><span class="lineno">   81</span>               y, amort-&gt;pv, amort-&gt;pmt, amort-&gt;principal, amort-&gt;interest);</div>
-<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> (m == 11)</div>
-<div class="line"><span class="lineno">   83</span>            <a class="code hl_function" href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a>(amort);</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (m != 11)</div>
-<div class="line"><span class="lineno">   86</span>        <a class="code hl_function" href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a>(amort);</div>
-<div class="line"><span class="lineno">   87</span>    free(amort);</div>
-<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">return</span> EXIT_SUCCESS;</div>
-<div class="line"><span class="lineno">   89</span>}</div>
-<div class="ttc" id="aa02429_html_abbfae4c10b55e300ca22e10fdc9e84ff"><div class="ttname"><a href="#abbfae4c10b55e300ca22e10fdc9e84ff">print_totals</a></div><div class="ttdeci">void print_totals(Amort *)</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d09/a02429_source.html#l00090">amort.c:90</a></div></div>
-<div class="ttc" id="aa02429_html_ac8f3e76eebe6c45cac2c928ac6ef2e8e"><div class="ttname"><a href="#ac8f3e76eebe6c45cac2c928ac6ef2e8e">month</a></div><div class="ttdeci">char month[12][4]</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d09/a02429_source.html#l00017">amort.c:17</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/d09/a02429_source.html#l00017">month</a>, and <a class="el" href="../../dc/d09/a02429_source.html#l00090">print_totals()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d09/a02429_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="208" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="abbfae4c10b55e300ca22e10fdc9e84ff" name="abbfae4c10b55e300ca22e10fdc9e84ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbfae4c10b55e300ca22e10fdc9e84ff">&#9670;&#160;</a></span>print_totals()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void print_totals </td>
-          <td>(</td>
-          <td class="paramtype">Amort *</td>          <td class="paramname"><span class="paramname"><em>amort</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00090">90</a> of file <a class="el" href="../../dc/d09/a02429_source.html">amort.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>                                {</div>
-<div class="line"><span class="lineno">   91</span>    printf(<span class="stringliteral">&quot;                                                  &quot;</span></div>
-<div class="line"><span class="lineno">   92</span>           <span class="stringliteral">&quot;----------\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   93</span>    printf(<span class="stringliteral">&quot;                                                  %&#39;10.2f\n&quot;</span>,</div>
-<div class="line"><span class="lineno">   94</span>           amort-&gt;year_total_interest);</div>
-<div class="line"><span class="lineno">   95</span>    printf(<span class="stringliteral">&quot;                                                  &quot;</span></div>
-<div class="line"><span class="lineno">   96</span>           <span class="stringliteral">&quot;==========\n\n&quot;</span>);</div>
-<div class="line"><span class="lineno">   97</span>    amort-&gt;year_total_interest = 0;</div>
-<div class="line"><span class="lineno">   98</span>}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../dc/d09/a02429_source.html#l00030">main()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d09/a02429_abbfae4c10b55e300ca22e10fdc9e84ff_icgraph.svg" width="208" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00029">29</a> of file <a class="el" href="../../dc/d09/a02429_source.html">sig.c</a>.</p>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="ac8f3e76eebe6c45cac2c928ac6ef2e8e" name="ac8f3e76eebe6c45cac2c928ac6ef2e8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8f3e76eebe6c45cac2c928ac6ef2e8e">&#9670;&#160;</a></span>month</h2>
+<a id="a44f81ebcc5b6c685cbdfe388eb420313" name="a44f81ebcc5b6c685cbdfe388eb420313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f81ebcc5b6c685cbdfe388eb420313">&#9670;&#160;</a></span>f_curses_open</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char month</td>
+          <td class="memname">bool f_curses_open = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;Jan&quot;</span>, <span class="stringliteral">&quot;Feb&quot;</span>, <span class="stringliteral">&quot;Mar&quot;</span>, <span class="stringliteral">&quot;Apr&quot;</span>, <span class="stringliteral">&quot;May&quot;</span>, <span class="stringliteral">&quot;Jun&quot;</span>,</div>
-<div class="line">          <span class="stringliteral">&quot;Jul&quot;</span>, <span class="stringliteral">&quot;Aug&quot;</span>, <span class="stringliteral">&quot;Sep&quot;</span>, <span class="stringliteral">&quot;Oct&quot;</span>, <span class="stringliteral">&quot;Nov&quot;</span>, <span class="stringliteral">&quot;Dec&quot;</span>}</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00017">17</a> of file <a class="el" href="../../dc/d09/a02429_source.html">amort.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>                  {<span class="stringliteral">&quot;Jan&quot;</span>, <span class="stringliteral">&quot;Feb&quot;</span>, <span class="stringliteral">&quot;Mar&quot;</span>, <span class="stringliteral">&quot;Apr&quot;</span>, <span class="stringliteral">&quot;May&quot;</span>, <span class="stringliteral">&quot;Jun&quot;</span>,</div>
-<div class="line"><span class="lineno">   18</span>                     <span class="stringliteral">&quot;Jul&quot;</span>, <span class="stringliteral">&quot;Aug&quot;</span>, <span class="stringliteral">&quot;Sep&quot;</span>, <span class="stringliteral">&quot;Oct&quot;</span>, <span class="stringliteral">&quot;Nov&quot;</span>, <span class="stringliteral">&quot;Dec&quot;</span>};</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../dc/d09/a02429_source.html#l00030">main()</a>.</p>
+<p>curses mode is active </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00033">33</a> of file <a class="el" href="../../dc/d09/a02429_source.html">sig.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d4/d73/a02465_source.html#l01183">action_disposition()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l01010">answer_yn()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00660">destroy_curses()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l01071">display_error()</a>, <a class="el" href="../../dc/d09/a02429_source.html#l00147">handle_signal()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00220">open_curses()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l01132">Perror()</a>, <a class="el" href="../../de/dfb/a01874_source.html#l00097">ui_init()</a>, and <a class="el" href="../../de/dfb/a01874_source.html#l00168">ui_shutdown()</a>.</p>
+
+</div>
+</div>
+<a id="a01a99fc32bd5b471123f6223503c9616" name="a01a99fc32bd5b471123f6223503c9616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01a99fc32bd5b471123f6223503c9616">&#9670;&#160;</a></span>sig_received</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile sig_atomic_t sig_received = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/a02429_source.html#l00031">31</a> of file <a class="el" href="../../dc/d09/a02429_source.html">sig.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d4/d73/a02465_source.html#l01620">dxwgetch()</a>, <a class="el" href="../../dc/d09/a02429_source.html#l00147">handle_signal()</a>, <a class="el" href="../../dd/d31/a02405_source.html#l00025">popup_ckeys()</a>, <a class="el" href="../../dc/d09/a02429_source.html#l00095">signal_handler()</a>, and <a class="el" href="../../d4/d73/a02465_source.html#l01534">xwgetch()</a>.</p>
 
 </div>
 </div>
@@ -358,7 +226,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dc/d09/a02429.html">amort.c</a></li>
+    <li class="navelem"><a href="../../dc/d09/a02429.html">sig.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

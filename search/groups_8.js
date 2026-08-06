@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['navigation_0',['View Navigation',['../d4/d73/a02465.html',1,'']]],
-  ['ncurses_20ui_20implementation_1',['Ncurses UI Implementation',['../da/dae/a02467.html',1,'']]]
+  ['o_0',['Initializing View I/O',['../da/dbe/a02489.html',1,'']]],
+  ['object_20selection_1',['Object Selection',['../dc/de1/a02493.html',1,'']]],
+  ['objects_2',['String Objects',['../dc/d2b/a02486.html',1,'']]]
 ];

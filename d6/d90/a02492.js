@@ -1,5 +1,5 @@
 var a02492 =
 [
-    [ "l", "d6/d90/a02492.html#a8cffb4a348d6d6f90ce1c9efd99ad557", null ],
-    [ "s", "d6/d90/a02492.html#a1270cae1cd57356ffc567eed342b5d97", null ]
+    [ "get_command_type", "d6/d90/a02492.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "d6/d90/a02492.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

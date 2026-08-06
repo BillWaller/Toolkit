@@ -1,12 +1,29 @@
 var a01853 =
 [
-    [ "XLEN", "db/d6b/a01853.html#a72d8ee9cacfc10194a32f9af09d2e47e", null ],
-    [ "ui_bkgrnd", "db/d6b/a01853.html#a7950b2d09182efa2ccd538c3ad036ce1", null ],
-    [ "ui_bkgrnd_set", "db/d6b/a01853.html#a40267602f466bb3e3f0ca1c2e4421efa", null ],
-    [ "ui_ncurses_color_pair_from_style", "da/dae/a02467.html#gaf21ce5ccc76232c9e59007aadd6c0e7c", null ],
-    [ "ui_ncurses_style_apply", "da/dae/a02467.html#ga7340721e819b16b9e37bb999e19d0c60", null ],
-    [ "ui_style_destroy", "db/d6b/a01853.html#a64435729af790c9dd0dd6e4fa443e73f", null ],
-    [ "ui_style_from_cch", "db/d6b/a01853.html#a9840b6112656adf4251e89caee6214a2", null ],
-    [ "ui_style_new", "db/d6b/a01853.html#ae11c3285fc8f288480e701bb0a04076b", null ],
-    [ "ui_style_to_cch", "db/d6b/a01853.html#af1ff348e54af956ef63ade37da7a660d", null ]
+    [ "SplitLine", "dc/d64/a02678.html", "dc/d64/a02678" ],
+    [ "View", "df/dad/a02682.html", "df/dad/a02682" ],
+    [ "ViewStack", "db/d84/a02686.html", "db/d84/a02686" ],
+    [ "_GNU_SOURCE", "db/d6b/a01853.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "BUFSIZ", "db/d6b/a01853.html#a72a591cf0a96cf23c63df5c78712dabe", null ],
+    [ "COLOR_LEN", "db/d6b/a01853.html#ab5557ed18d83facb69dd68b30629c37e", null ],
+    [ "LINE_TBL_INCR", "db/d6b/a01853.html#a19bdbce530a383c51614a22810676b3b", null ],
+    [ "MAXLEN", "db/d6b/a01853.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "NCURSES_WIDECHAR", "db/d6b/a01853.html#aa16fa3d6aa4e0d8100f2919690417da7", null ],
+    [ "NMARKS", "db/d6b/a01853.html#a1c02ca83443513a6ab1c93dcb316ac7e", null ],
+    [ "NPOS", "db/d6b/a01853.html#a4da1373308859dfe96570032c5a3c6eb", null ],
+    [ "NULL_POSITION", "db/d6b/a01853.html#ae668ecfa1856b197ccc8bbd228836b70", null ],
+    [ "NULSL", "db/d6b/a01853.html#a3f15836bdfb0ecbf8ed781532654a435", null ],
+    [ "PAD_COLS", "db/d6b/a01853.html#adc3d88deb82e66426d66e559bba7ef1e", null ],
+    [ "VBUFSIZ", "db/d6b/a01853.html#a5259eafdce2c5489c29df7b44a782b88", null ],
+    [ "PromptType", "db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808c", [
+      [ "PT_NONE", "db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398", null ],
+      [ "PT_SHORT", "db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490", null ],
+      [ "PT_LONG", "db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a", null ],
+      [ "PT_STRING", "db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef", null ]
+    ] ],
+    [ "cat_file", "d1/df5/a02496.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "get_cmd_spec", "db/d6b/a01853.html#a92b33aa9664abadbfbf0a51737d68af2", null ],
+    [ "go_to_position", "db/d6b/a01853.html#abb914e12c6340c1b5a3d887cdf4ddc31", null ],
+    [ "view_accept_cmd", "db/d6b/a01853.html#a9afdff2eba36c5e25c79cdba8ffc25a7", null ],
+    [ "err_msg", "db/d6b/a01853.html#a2020a87ae37e9432d224e4902049e181", null ]
 ];

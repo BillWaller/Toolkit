@@ -1,10 +1,8 @@
 var a02402 =
 [
-    [ "MAX_FRAMES", "df/d79/a02402.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "dc/d6a/a02463.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "dc/d6a/a02463.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "dc/d6a/a02463.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "dc/d6a/a02463.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "df/d79/a02402.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "df/d79/a02402.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "_GNU_SOURCE", "df/d79/a02402.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "HOST", "df/d79/a02402.html#abbbcf3c42c997889127cc676754a6fea", null ],
+    [ "ABEND", "df/d79/a02402.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "df/d79/a02402.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "F_VERBOSE", "df/d79/a02402.html#a9ea122171989176bc07376ae1eefc5c7", null ]
 ];

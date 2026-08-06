@@ -1,8 +1,6 @@
 var a01859 =
 [
-    [ "RGB", "d0/d7c/a02499.html", "d0/d7c/a02499" ],
-    [ "UiColorPair", "db/d39/a02575.html", "db/d39/a02575" ],
-    [ "ui_color_to_rgb", "d3/dce/a01859.html#add9ba9f49e638fcb305782a6bd479dbb", null ],
-    [ "ui_color", "d3/dce/a01859.html#a7da5be25f8179281f00835b078b4c47f", null ],
-    [ "ui_color_pair", "d3/dce/a01859.html#a9625adb78629e72c93bc35dfa2e5cb95", null ]
+    [ "UiFramedSurface", "d6/d50/a02694.html", "d6/d50/a02694" ],
+    [ "ui_framed_surface_destroy", "d3/dce/a01859.html#afa5c28ac5692fdbb5931d41a4e76b572", null ],
+    [ "ui_framed_surface_new", "d3/dce/a01859.html#ac053420e4eeb1d4e9031bf2c5a8c646f", null ]
 ];
