@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_layout.c File Reference</title>
+<title>C-Menu: ui/egc.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,161 +110,168 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('dc/d31/a01892.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_layout.c File Reference</div></div>
+  <div class="headertitle"><div class="title">egc.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Backend-agnostic layout helpers.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../d3/dce/a01859_source.html">../ui/ui_layout.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../da/d18/a01850_source.html">../include/ui_backend.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;locale.h&gt;</code><br />
+<code>#include &lt;notcurses/notcurses.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;wchar.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_layout.c:</div>
+Include dependency graph for egc.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dd/d80/a01893.svg" width="310" height="266"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dd/d80/a01893.svg" width="651" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../dc/d31/a01892_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a8773045a81f883f2ab00761f45e8642c" id="r_a8773045a81f883f2ab00761f45e8642c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8773045a81f883f2ab00761f45e8642c">__USE_XOPEN</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:ac7b30cf7f83588cb6bc1c716be66f5a2" id="r_ac7b30cf7f83588cb6bc1c716be66f5a2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac7b30cf7f83588cb6bc1c716be66f5a2">_XOPEN_SOURCE_EXTENDED</a>&#160;&#160;&#160;1</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afa5c28ac5692fdbb5931d41a4e76b572" id="r_afa5c28ac5692fdbb5931d41a4e76b572"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afa5c28ac5692fdbb5931d41a4e76b572">ui_framed_surface_destroy</a> (<a class="el" href="../../d6/d50/a02694.html">UiFramedSurface</a> *fs)</td></tr>
-<tr class="memdesc:afa5c28ac5692fdbb5931d41a4e76b572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a framed surface and release its resources.  <br /></td></tr>
-<tr class="memitem:ac053420e4eeb1d4e9031bf2c5a8c646f" id="r_ac053420e4eeb1d4e9031bf2c5a8c646f"><td class="memItemLeft"><a class="el" href="../../d6/d50/a02694.html">UiFramedSurface</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac053420e4eeb1d4e9031bf2c5a8c646f">ui_framed_surface_new</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui, <a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *parent, <a class="el" href="../../d8/dab/a02638.html">UiRect</a> rect)</td></tr>
-<tr class="memdesc:ac053420e4eeb1d4e9031bf2c5a8c646f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a framed surface (outer border + inner content area).  <br /></td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4" id="r_ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memitem:adc5f56a8b8aa89b726a773b0b115b8a2" id="r_adc5f56a8b8aa89b726a773b0b115b8a2"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#adc5f56a8b8aa89b726a773b0b115b8a2">ui_nccells_from_text</a> (struct ncplane *stdn, const char *text, struct <a class="el" href="../../de/d09/a02861.html">nccell</a> *cell)</td></tr>
 </table>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Backend-agnostic layout helpers. </p>
-<p>Implements utility functions that build higher-level layout concepts (framed surfaces, etc.) entirely through the portable UALUI API so they work with any compiled-in backend. </p>
-
-<p class="definition">Definition in file <a class="el" href="../../dc/d31/a01892_source.html">ui_layout.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="afa5c28ac5692fdbb5931d41a4e76b572" name="afa5c28ac5692fdbb5931d41a4e76b572"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa5c28ac5692fdbb5931d41a4e76b572">&#9670;&#160;</a></span>ui_framed_surface_destroy()</h2>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a8773045a81f883f2ab00761f45e8642c" name="a8773045a81f883f2ab00761f45e8642c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8773045a81f883f2ab00761f45e8642c">&#9670;&#160;</a></span>__USE_XOPEN</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ui_framed_surface_destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d6/d50/a02694.html">UiFramedSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>fs</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">#define __USE_XOPEN&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroy a framed surface and release its resources. </p>
-<p>Destroys a framed surface and releases its resources.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">fs</td><td>Pointer to the <a class="el" href="../../d6/d50/a02694.html">UiFramedSurface</a> to destroy. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="../../dc/d31/a01892_source.html#l00056">56</a> of file <a class="el" href="../../dc/d31/a01892_source.html">ui_layout.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   56</span>                                                    {</div>
-<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">if</span> (!fs)</div>
-<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">   59</span>    <span class="comment">/* Destroy inner before outer (child before parent). */</span></div>
-<div class="line"><span class="lineno">   60</span>    <span class="keywordflow">if</span> (fs-&gt;<a class="code hl_variable" href="../../d6/d50/a02694.html#a9c4324332c5f305d3b5090023448b534">inner</a>)</div>
-<div class="line"><span class="lineno">   61</span>        <a class="code hl_function" href="../../da/d18/a01850.html#a6af7c6c514535d5998f7a762374bc370">ui_surface_destroy</a>(fs-&gt;<a class="code hl_variable" href="../../d6/d50/a02694.html#a9c4324332c5f305d3b5090023448b534">inner</a>);</div>
-<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">if</span> (fs-&gt;<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a>)</div>
-<div class="line"><span class="lineno">   63</span>        <a class="code hl_function" href="../../da/d18/a01850.html#a6af7c6c514535d5998f7a762374bc370">ui_surface_destroy</a>(fs-&gt;<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a>);</div>
-<div class="line"><span class="lineno">   64</span>    fs-&gt;<a class="code hl_variable" href="../../d6/d50/a02694.html#a9c4324332c5f305d3b5090023448b534">inner</a> = NULL;</div>
-<div class="line"><span class="lineno">   65</span>    fs-&gt;<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a> = NULL;</div>
-<div class="line"><span class="lineno">   66</span>}</div>
-<div class="ttc" id="aa01850_html_a6af7c6c514535d5998f7a762374bc370"><div class="ttname"><a href="../../da/d18/a01850.html#a6af7c6c514535d5998f7a762374bc370">ui_surface_destroy</a></div><div class="ttdeci">void ui_surface_destroy(UiSurface *s)</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00432">ui_ncurses.c:432</a></div></div>
-<div class="ttc" id="aa02694_html_a9c4324332c5f305d3b5090023448b534"><div class="ttname"><a href="../../d6/d50/a02694.html#a9c4324332c5f305d3b5090023448b534">UiFramedSurface::inner</a></div><div class="ttdeci">UiSurface * inner</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dce/a01859_source.html#l00020">ui_layout.h:20</a></div></div>
-<div class="ttc" id="aa02694_html_ab9acd9902a56a8627117a5cd927af38f"><div class="ttname"><a href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">UiFramedSurface::outer</a></div><div class="ttdeci">UiSurface * outer</div><div class="ttdef"><b>Definition</b> <a href="../../d3/dce/a01859_source.html#l00019">ui_layout.h:19</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d3/dce/a01859_source.html#l00020">UiFramedSurface::inner</a>, <a class="el" href="../../d3/dce/a01859_source.html#l00019">UiFramedSurface::outer</a>, and <a class="el" href="../../de/dfb/a01874_source.html#l00432">ui_surface_destroy()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d31/a01892_afa5c28ac5692fdbb5931d41a4e76b572_cgraph.svg" width="532" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../dc/d31/a01892_source.html#l00004">4</a> of file <a class="el" href="../../dc/d31/a01892_source.html">egc.c</a>.</p>
 
 </div>
 </div>
-<a id="ac053420e4eeb1d4e9031bf2c5a8c646f" name="ac053420e4eeb1d4e9031bf2c5a8c646f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac053420e4eeb1d4e9031bf2c5a8c646f">&#9670;&#160;</a></span>ui_framed_surface_new()</h2>
+<a id="ac7b30cf7f83588cb6bc1c716be66f5a2" name="ac7b30cf7f83588cb6bc1c716be66f5a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7b30cf7f83588cb6bc1c716be66f5a2">&#9670;&#160;</a></span>_XOPEN_SOURCE_EXTENDED</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d6/d50/a02694.html">UiFramedSurface</a> ui_framed_surface_new </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d8/dab/a02638.html">UiRect</a></td>          <td class="paramname"><span class="paramname"><em>rect</em></span>&#160;)</td>
+          <td class="memname">#define _XOPEN_SOURCE_EXTENDED&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create a framed surface (outer border + inner content area). </p>
-<p>Creates a new framed surface with the specified parent and rectangle.</p>
-<p>The returned <a class="el" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">UiFramedSurface.outer</a> is the frame panel; .inner is one row and one column smaller on each side (the drawable content area). The caller is responsible for destroying the framed surface with <a class="el" href="../../d3/dce/a01859.html#afa5c28ac5692fdbb5931d41a4e76b572" title="Destroys a framed surface and releases its resources.">ui_framed_surface_destroy()</a> when it is no longer needed.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ui</td><td>The <a class="el" href="../../df/d23/a02558.html" title="Runtime state for the NCurses UI backend.">UiRuntime</a> context. </td></tr>
-    <tr><td class="paramname">parent</td><td>Parent surface, or NULL to make the frame a top-level panel. </td></tr>
-    <tr><td class="paramname">rect</td><td>Position and size of the outer frame (including the border). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="../../d6/d50/a02694.html">UiFramedSurface</a>; both fields are NULL on failure. </dd></dl>
+<p class="definition">Definition at line <a class="el" href="../../dc/d31/a01892_source.html#l00003">3</a> of file <a class="el" href="../../dc/d31/a01892_source.html">egc.c</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d31/a01892_source.html#l00026">26</a> of file <a class="el" href="../../dc/d31/a01892_source.html">ui_layout.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   27</span>                                                   {</div>
-<div class="line"><span class="lineno">   28</span>    <a class="code hl_struct" href="../../d6/d50/a02694.html">UiFramedSurface</a> fs = {NULL, NULL};</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    <span class="keywordflow">if</span> (!ui || rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">lines</a> &lt; 3 || rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">cols</a> &lt; 3)</div>
-<div class="line"><span class="lineno">   31</span>        <span class="keywordflow">return</span> fs;</div>
-<div class="line"><span class="lineno">   32</span> </div>
-<div class="line"><span class="lineno">   33</span>    <span class="keywordtype">char</span> title[64] = {0};</div>
-<div class="line"><span class="lineno">   34</span>    fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a> = <a class="code hl_function" href="../../da/d18/a01850.html#ad138401b140619abc59daf1843f14594">ui_surface_new</a>(ui, parent, 0, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">lines</a>, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">cols</a>, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a03824f3c5073f5bde5ad401eb9dcc449">y</a>, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8ca5369f3caee4a1aca2d295b2a3d95b">x</a>);</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">if</span> (!fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a>)</div>
-<div class="line"><span class="lineno">   36</span>        <span class="keywordflow">return</span> fs;</div>
-<div class="line"><span class="lineno">   37</span> </div>
-<div class="line"><span class="lineno">   38</span>    <a class="code hl_struct" href="../../d8/dab/a02638.html">UiRect</a> inner_rect = {</div>
-<div class="line"><span class="lineno">   39</span>        .y = 1,</div>
-<div class="line"><span class="lineno">   40</span>        .x = 1,</div>
-<div class="line"><span class="lineno">   41</span>        .lines = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">lines</a> - 2,</div>
-<div class="line"><span class="lineno">   42</span>        .cols = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">cols</a> - 2,</div>
-<div class="line"><span class="lineno">   43</span>    };</div>
-<div class="line"><span class="lineno">   44</span>    fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#a9c4324332c5f305d3b5090023448b534">inner</a> = <a class="code hl_function" href="../../da/d18/a01850.html#ad138401b140619abc59daf1843f14594">ui_surface_new</a>(ui, fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a>, 0, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">lines</a>, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">cols</a>, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a03824f3c5073f5bde5ad401eb9dcc449">y</a>, rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8ca5369f3caee4a1aca2d295b2a3d95b">x</a>);</div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">if</span> (!fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#a9c4324332c5f305d3b5090023448b534">inner</a>) {</div>
-<div class="line"><span class="lineno">   46</span>        <a class="code hl_function" href="../../da/d18/a01850.html#a6af7c6c514535d5998f7a762374bc370">ui_surface_destroy</a>(fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a>);</div>
-<div class="line"><span class="lineno">   47</span>        fs.<a class="code hl_variable" href="../../d6/d50/a02694.html#ab9acd9902a56a8627117a5cd927af38f">outer</a> = NULL;</div>
-<div class="line"><span class="lineno">   48</span>    }</div>
-<div class="line"><span class="lineno">   49</span> </div>
-<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">return</span> fs;</div>
-<div class="line"><span class="lineno">   51</span>}</div>
-<div class="ttc" id="aa01850_html_ad138401b140619abc59daf1843f14594"><div class="ttname"><a href="../../da/d18/a01850.html#ad138401b140619abc59daf1843f14594">ui_surface_new</a></div><div class="ttdeci">UiSurface * ui_surface_new(UiRuntime *ui, UiSurface *parent, int w, int lines, int cols, int y, int x)</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00272">ui_ncurses.c:272</a></div></div>
-<div class="ttc" id="aa02638_html"><div class="ttname"><a href="../../d8/dab/a02638.html">UiRect</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00109">ui_backend.h:109</a></div></div>
-<div class="ttc" id="aa02638_html_a03824f3c5073f5bde5ad401eb9dcc449"><div class="ttname"><a href="../../d8/dab/a02638.html#a03824f3c5073f5bde5ad401eb9dcc449">UiRect::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00110">ui_backend.h:110</a></div></div>
-<div class="ttc" id="aa02638_html_a8ca5369f3caee4a1aca2d295b2a3d95b"><div class="ttname"><a href="../../d8/dab/a02638.html#a8ca5369f3caee4a1aca2d295b2a3d95b">UiRect::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00111">ui_backend.h:111</a></div></div>
-<div class="ttc" id="aa02638_html_a8e6e4f04b9f1f0aa48eaef2a6f0a6d02"><div class="ttname"><a href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">UiRect::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00113">ui_backend.h:113</a></div></div>
-<div class="ttc" id="aa02638_html_ae745796aba96efedaa20c80f08e16ab4"><div class="ttname"><a href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">UiRect::lines</a></div><div class="ttdeci">int lines</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00112">ui_backend.h:112</a></div></div>
-<div class="ttc" id="aa02694_html"><div class="ttname"><a href="../../d6/d50/a02694.html">UiFramedSurface</a></div><div class="ttdef"><b>Definition</b> <a href="../../d3/dce/a01859_source.html#l00018">ui_layout.h:18</a></div></div>
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4" name="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d31/a01892_source.html#l00013">13</a> of file <a class="el" href="../../dc/d31/a01892_source.html">egc.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   13</span>           {</div>
+<div class="line"><span class="lineno">   14</span>    <span class="keywordtype">size_t</span> count = 0;</div>
+<div class="line"><span class="lineno">   15</span>    setlocale(LC_ALL, <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><span class="lineno">   16</span>    <span class="keyword">struct </span>notcurses_options opts = {0};</div>
+<div class="line"><span class="lineno">   17</span>    <span class="keyword">struct </span>notcurses *<a class="code hl_variable" href="../../dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c">nc</a> = notcurses_init(&amp;opts, stdout);</div>
+<div class="line"><span class="lineno">   18</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c">nc</a>)</div>
+<div class="line"><span class="lineno">   19</span>        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keyword">struct </span>ncplane *stdn = notcurses_stdplane(<a class="code hl_variable" href="../../dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c">nc</a>);</div>
+<div class="line"><span class="lineno">   21</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *text = <span class="stringliteral">&quot;Hi!&quot;</span>;</div>
+<div class="line"><span class="lineno">   22</span> </div>
+<div class="line"><span class="lineno">   23</span>    <span class="keywordtype">size_t</span> len = strlen(text);</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keyword">struct </span><a class="code hl_struct" href="../../de/d09/a02861.html">nccell</a> *cell_buf = calloc(len, <span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code hl_struct" href="../../de/d09/a02861.html">nccell</a>));</div>
+<div class="line"><span class="lineno">   25</span>    count = <a class="code hl_function" href="#adc5f56a8b8aa89b726a773b0b115b8a2">ui_nccells_from_text</a>(stdn, text, cell_buf);</div>
+<div class="line"><span class="lineno">   26</span> </div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; count; i++) {</div>
+<div class="line"><span class="lineno">   28</span>        ncplane_putc(stdn, &amp;cell_buf[i]);</div>
+<div class="line"><span class="lineno">   29</span>        nccell_release(stdn, &amp;cell_buf[i]);</div>
+<div class="line"><span class="lineno">   30</span>    }</div>
+<div class="line"><span class="lineno">   31</span>    notcurses_render(<a class="code hl_variable" href="../../dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c">nc</a>);</div>
+<div class="line"><span class="lineno">   32</span>    free(cell_buf);</div>
+<div class="line"><span class="lineno">   33</span>    notcurses_stop(<a class="code hl_variable" href="../../dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c">nc</a>);</div>
+<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   35</span>}</div>
+<div class="ttc" id="aa01892_html_adc5f56a8b8aa89b726a773b0b115b8a2"><div class="ttname"><a href="#adc5f56a8b8aa89b726a773b0b115b8a2">ui_nccells_from_text</a></div><div class="ttdeci">size_t ui_nccells_from_text(struct ncplane *stdn, const char *text, struct nccell *cell)</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d31/a01892_source.html#l00037">egc.c:37</a></div></div>
+<div class="ttc" id="aa01898_html_a918f90ce8324689bd8f5df8fb4ba9c4c"><div class="ttname"><a href="../../dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c">nc</a></div><div class="ttdeci">NotCurses * nc</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d8e/a01898_source.html#l00045">nckeys.c:45</a></div></div>
+<div class="ttc" id="aa02861_html"><div class="ttname"><a href="../../de/d09/a02861.html">nccell</a></div><div class="ttdef"><b>Definition</b> <a href="../../dd/d19/a01922_source.html#l00003">nccell.h:3</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d18/a01850_source.html#l00113">UiRect::cols</a>, <a class="el" href="../../d3/dce/a01859_source.html#l00020">UiFramedSurface::inner</a>, <a class="el" href="../../da/d18/a01850_source.html#l00112">UiRect::lines</a>, <a class="el" href="../../d3/dce/a01859_source.html#l00019">UiFramedSurface::outer</a>, <a class="el" href="../../de/dfb/a01874_source.html#l00432">ui_surface_destroy()</a>, <a class="el" href="../../de/dfb/a01874_source.html#l00272">ui_surface_new()</a>, <a class="el" href="../../da/d18/a01850_source.html#l00111">UiRect::x</a>, and <a class="el" href="../../da/d18/a01850_source.html#l00110">UiRect::y</a>.</p>
+<p class="reference">References <a class="el" href="../../dc/d31/a01892_source.html#l00037">ui_nccells_from_text()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d31/a01892_ac053420e4eeb1d4e9031bf2c5a8c646f_cgraph.svg" width="510" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d31/a01892_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="adc5f56a8b8aa89b726a773b0b115b8a2" name="adc5f56a8b8aa89b726a773b0b115b8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc5f56a8b8aa89b726a773b0b115b8a2">&#9670;&#160;</a></span>ui_nccells_from_text()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t ui_nccells_from_text </td>
+          <td>(</td>
+          <td class="paramtype">struct ncplane *</td>          <td class="paramname"><span class="paramname"><em>stdn</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="../../de/d09/a02861.html">nccell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d31/a01892_source.html#l00037">37</a> of file <a class="el" href="../../dc/d31/a01892_source.html">egc.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   37</span>                                                                                             {</div>
+<div class="line"><span class="lineno">   38</span>    uint64_t <a class="code hl_variable" href="../../dd/d8e/a01898.html#a5cd27454b681f4bce32e4cd18c8b46c5">channels</a> = 0;</div>
+<div class="line"><span class="lineno">   39</span>    ncchannels_set_fg_rgb8(&amp;<a class="code hl_variable" href="../../dd/d8e/a01898.html#a5cd27454b681f4bce32e4cd18c8b46c5">channels</a>, 255, 255, 0); <span class="comment">// Yellow</span></div>
+<div class="line"><span class="lineno">   40</span>    <span class="keywordtype">size_t</span> count = 0;</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *p = text;</div>
+<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">while</span> (*p) {</div>
+<div class="line"><span class="lineno">   43</span>        nccell_init(&amp;cell_buf[count]);</div>
+<div class="line"><span class="lineno">   44</span>        <span class="keywordtype">int</span> bytes = nccell_load(stdn, &amp;cell_buf[count], p);</div>
+<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">if</span> (bytes &lt; 0)</div>
+<div class="line"><span class="lineno">   46</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">   47</span>        nccell_set_styles(&amp;cell_buf[count], NCSTYLE_NONE);</div>
+<div class="line"><span class="lineno">   48</span>        nccell_set_channels(&amp;cell_buf[count], <a class="code hl_variable" href="../../dd/d8e/a01898.html#a5cd27454b681f4bce32e4cd18c8b46c5">channels</a>);</div>
+<div class="line"><span class="lineno">   49</span>        p += bytes;</div>
+<div class="line"><span class="lineno">   50</span>        count++;</div>
+<div class="line"><span class="lineno">   51</span>    }</div>
+<div class="line"><span class="lineno">   52</span>    <span class="keywordflow">return</span> count;</div>
+<div class="line"><span class="lineno">   53</span>}</div>
+<div class="ttc" id="aa01898_html_a5cd27454b681f4bce32e4cd18c8b46c5"><div class="ttname"><a href="../../dd/d8e/a01898.html#a5cd27454b681f4bce32e4cd18c8b46c5">channels</a></div><div class="ttdeci">uint64_t channels</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d8e/a01898_source.html#l00042">nckeys.c:42</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../dc/d31/a01892_source.html#l00013">main()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../dc/d31/a01892_adc5f56a8b8aa89b726a773b0b115b8a2_icgraph.svg" width="270" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -282,7 +289,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../dc/d31/a01892.html">ui_layout.c</a></li>
+    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../dc/d31/a01892.html">egc.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

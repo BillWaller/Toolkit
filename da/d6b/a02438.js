@@ -1,16 +1,7 @@
 var a02438 =
 [
-    [ "display_field", "da/d6b/a02438.html#ae2f17af33bc02171e3a8f891034a08df", null ],
-    [ "field_editor", "d8/db7/a02450.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
-    [ "form_display_accept_field", "da/d6b/a02438.html#ae2b27166cf72b7a8d45dffef9cba8a55", null ],
-    [ "form_display_field", "d8/db7/a02450.html#gabd1710f59277202b0a58f840d4da322e", null ],
-    [ "form_display_field_n", "d8/db7/a02450.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
-    [ "form_fmt_field", "d8/db7/a02450.html#ga07a8d9311c88786e7310fef638d34a41", null ],
-    [ "form_validate_field", "d8/db7/a02450.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
-    [ "is_valid_date", "d8/db7/a02450.html#ga353546f4d99ef7ec908d371187f033de", null ],
-    [ "is_valid_time", "d8/db7/a02450.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
-    [ "left_justify", "d8/db7/a02450.html#ga425021d4c87474159a36d395e4dcdf65", null ],
-    [ "numeric", "d8/db7/a02450.html#ga18db59e4c79e823f79310378183ac25c", null ],
-    [ "right_justify", "d8/db7/a02450.html#gaa356032a372a136c06dbcb1c0493a02b", null ],
-    [ "ff_tbl", "da/d6b/a02438.html#ac367b59c32b05bc7a1a832832ddc1248", null ]
+    [ "KSTRLEN", "da/d6b/a02438.html#aa63e34e0555c7f92e84b59ec1a63fa3c", null ],
+    [ "MAXLEN", "da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "notcurses_input", "da/d6b/a02438.html#a2eb73591d93778a59609052b2307f2e8", null ],
+    [ "popup_ckeys", "da/d6b/a02438.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

@@ -1,5 +1,23 @@
 var searchData=
 [
-  ['ual_5flegacy_5fcompat_0',['UAL_LEGACY_COMPAT',['../de/dfb/a01874.html#af97488535d3d1fbca87b5bc65fc97ed1',1,'UAL_LEGACY_COMPAT:&#160;ui_ncurses.c'],['../d9/d7d/a01880.html#af97488535d3d1fbca87b5bc65fc97ed1',1,'UAL_LEGACY_COMPAT:&#160;ui_ncurses_draw.c']]],
-  ['use_5fpad_1',['USE_PAD',['../dc/d06/a01832.html#a6b031c2ddbdc2045667b4ed0c555d0c1',1,'common.h']]]
+  ['u_5fve_0',['U_VE',['../dd/d8e/a01898.html#a256c73ac5a32444a37f64ad4eed0a82a',1,'U_VE:&#160;nckeys.c'],['../de/dfb/a01874.html#a256c73ac5a32444a37f64ad4eed0a82a',1,'U_VE:&#160;ui_notcurses_internal.h']]],
+  ['ui_5faltcharset_1',['UI_ALTCHARSET',['../dd/de7/a01868.html#ac39873e45adb7ff5a277de7bcb5a689c',1,'UI_ALTCHARSET:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#ac39873e45adb7ff5a277de7bcb5a689c',1,'UI_ALTCHARSET:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fblink_2',['UI_BLINK',['../dd/de7/a01868.html#a7ebe0ed9bceaaeb9ad348999f071be5b',1,'UI_BLINK:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a7ebe0ed9bceaaeb9ad348999f071be5b',1,'UI_BLINK:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fbold_3',['UI_BOLD',['../dd/de7/a01868.html#accd1b75c9352fc137d5c7d7542c786a9',1,'UI_BOLD:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#accd1b75c9352fc137d5c7d7542c786a9',1,'UI_BOLD:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fcolors_4',['UI_COLORS',['../d0/d4a/a01862.html#adb809b1166d2bcce889d9833f28ae5aa',1,'ui_backend.h']]],
+  ['ui_5fdim_5',['UI_DIM',['../dd/de7/a01868.html#aeb47e047c438d0ac294db4983564255a',1,'UI_DIM:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#aeb47e047c438d0ac294db4983564255a',1,'UI_DIM:&#160;ui_notcurses_internal.h']]],
+  ['ui_5finvis_6',['UI_INVIS',['../dd/de7/a01868.html#ac65734326829e3caa9eda0cc5efafb57',1,'UI_INVIS:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#ac65734326829e3caa9eda0cc5efafb57',1,'UI_INVIS:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fitalic_7',['UI_ITALIC',['../dd/de7/a01868.html#acc1b2d2e7e16ce9c235af84a076c7639',1,'UI_ITALIC:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#acc1b2d2e7e16ce9c235af84a076c7639',1,'UI_ITALIC:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fmask_8',['UI_MASK',['../dd/de7/a01868.html#a481cf99f3f33892ca7c4916a9bf5243f',1,'UI_MASK:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a481cf99f3f33892ca7c4916a9bf5243f',1,'UI_MASK:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fnone_9',['UI_NONE',['../dd/de7/a01868.html#ad91b9851339c4fc40bf3fa646c9c4401',1,'UI_NONE:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#ad91b9851339c4fc40bf3fa646c9c4401',1,'UI_NONE:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fnormal_10',['UI_NORMAL',['../dd/de7/a01868.html#a76550fdac53e8c357690b30cb2a2cd31',1,'UI_NORMAL:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a76550fdac53e8c357690b30cb2a2cd31',1,'UI_NORMAL:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fpairs_11',['UI_PAIRS',['../d0/d4a/a01862.html#a64facee1b37b4941599b19418ac1edb2',1,'ui_backend.h']]],
+  ['ui_5fprotect_12',['UI_PROTECT',['../dd/de7/a01868.html#af8cd3915c4f4ea0db1e01ba5d293c87c',1,'UI_PROTECT:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#af8cd3915c4f4ea0db1e01ba5d293c87c',1,'UI_PROTECT:&#160;ui_notcurses_internal.h']]],
+  ['ui_5freverse_13',['UI_REVERSE',['../dd/de7/a01868.html#a95abb2045c4494d4948685d6c1dadd9d',1,'UI_REVERSE:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a95abb2045c4494d4948685d6c1dadd9d',1,'UI_REVERSE:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fsfc_5fmax_14',['UI_SFC_MAX',['../d0/d4a/a01862.html#a599c3dd8e86587c74cc324133eb4e645',1,'ui_backend.h']]],
+  ['ui_5fstandout_15',['UI_STANDOUT',['../dd/de7/a01868.html#a5f41f2ce22d00fdd463910e347c2ad15',1,'UI_STANDOUT:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a5f41f2ce22d00fdd463910e347c2ad15',1,'UI_STANDOUT:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fstruck_16',['UI_STRUCK',['../dd/de7/a01868.html#a87150858ba8397dfd8d64891a3f71e26',1,'UI_STRUCK:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a87150858ba8397dfd8d64891a3f71e26',1,'UI_STRUCK:&#160;ui_notcurses_internal.h']]],
+  ['ui_5fundercurl_17',['UI_UNDERCURL',['../dd/de7/a01868.html#a2ce055f3bcf8edd7be432466a19bff76',1,'UI_UNDERCURL:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a2ce055f3bcf8edd7be432466a19bff76',1,'UI_UNDERCURL:&#160;ui_notcurses_internal.h']]],
+  ['ui_5funderline_18',['UI_UNDERLINE',['../dd/de7/a01868.html#a8526318fb90d83d7bff1225f96f79c28',1,'UI_UNDERLINE:&#160;ui_ncurses_internal.h'],['../de/dfb/a01874.html#a8526318fb90d83d7bff1225f96f79c28',1,'UI_UNDERLINE:&#160;ui_notcurses_internal.h']]],
+  ['use_5fpad_19',['USE_PAD',['../d2/dbd/a01844.html#a6b031c2ddbdc2045667b4ed0c555d0c1',1,'common.h']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_notcurses.c File Reference</title>
+<title>C-Menu: include/view.h File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,1224 +110,413 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/da8/a01865.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_notcurses.c File Reference</div></div>
+  <div class="headertitle"><div class="title">view.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>NotCurses UI backend — lifecycle, surface management, and capabilities.  
+<p><a class="el" href="../../db/d38/a02789.html">View</a> data structures, enums, types, end external declarations.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../d9/dd5/a01886_source.html">ui_notcurses_compat.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../d0/d4a/a01862_source.html">ui_notcurses_internal.h</a>&quot;</code><br />
-<code>#include &lt;locale.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../de/dfb/a01874_source.html">../ui/ui_notcurses_internal.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d0/d4a/a01862_source.html">ui_backend.h</a>&quot;</code><br />
+<code>#include &lt;notcurses/notcurses.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_notcurses.c:</div>
+Include dependency graph for view.h:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d7e/a01866.svg" width="100%" height="499"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d7e/a01866.svg" width="635" height="207"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/de6/a01867.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d5/da8/a01865_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:SplitLine" id="r_SplitLine"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="../../da/d7d/a02785.html">SplitLine</a></td></tr>
+<tr class="memitem:View" id="r_View"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="../../db/d38/a02789.html">View</a></td></tr>
+<tr class="memitem:ViewStack" id="r_ViewStack"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="../../df/d9c/a02793.html">ViewStack</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+<tr class="memitem:a72a591cf0a96cf23c63df5c78712dabe" id="r_a72a591cf0a96cf23c63df5c78712dabe"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a72a591cf0a96cf23c63df5c78712dabe">BUFSIZ</a>&#160;&#160;&#160;8192</td></tr>
+<tr class="memitem:ab5557ed18d83facb69dd68b30629c37e" id="r_ab5557ed18d83facb69dd68b30629c37e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ab5557ed18d83facb69dd68b30629c37e">COLOR_LEN</a>&#160;&#160;&#160;8</td></tr>
+<tr class="memitem:a19bdbce530a383c51614a22810676b3b" id="r_a19bdbce530a383c51614a22810676b3b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a19bdbce530a383c51614a22810676b3b">LINE_TBL_INCR</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="memitem:ae6648cd71a8bd49d58ae8ed33ba910d1" id="r_ae6648cd71a8bd49d58ae8ed33ba910d1"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>&#160;&#160;&#160;256</td></tr>
+<tr class="memitem:aa16fa3d6aa4e0d8100f2919690417da7" id="r_aa16fa3d6aa4e0d8100f2919690417da7"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aa16fa3d6aa4e0d8100f2919690417da7">NCURSES_WIDECHAR</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:a1c02ca83443513a6ab1c93dcb316ac7e" id="r_a1c02ca83443513a6ab1c93dcb316ac7e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a1c02ca83443513a6ab1c93dcb316ac7e">NMARKS</a>&#160;&#160;&#160;256</td></tr>
+<tr class="memitem:a4da1373308859dfe96570032c5a3c6eb" id="r_a4da1373308859dfe96570032c5a3c6eb"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a4da1373308859dfe96570032c5a3c6eb">NPOS</a>&#160;&#160;&#160;256</td></tr>
+<tr class="memitem:ae668ecfa1856b197ccc8bbd228836b70" id="r_ae668ecfa1856b197ccc8bbd228836b70"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae668ecfa1856b197ccc8bbd228836b70">NULL_POSITION</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memitem:a3f15836bdfb0ecbf8ed781532654a435" id="r_a3f15836bdfb0ecbf8ed781532654a435"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3f15836bdfb0ecbf8ed781532654a435">NULSL</a></td></tr>
+<tr class="memitem:adc3d88deb82e66426d66e559bba7ef1e" id="r_adc3d88deb82e66426d66e559bba7ef1e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#adc3d88deb82e66426d66e559bba7ef1e">PAD_COLS</a>&#160;&#160;&#160;4096</td></tr>
+<tr class="memitem:a5259eafdce2c5489c29df7b44a782b88" id="r_a5259eafdce2c5489c29df7b44a782b88"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a5259eafdce2c5489c29df7b44a782b88">VBUFSIZ</a>&#160;&#160;&#160;65536</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a311c8b4e7650091e39cc1fc7ca93808c" id="r_a311c8b4e7650091e39cc1fc7ca93808c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a311c8b4e7650091e39cc1fc7ca93808c">PromptType</a> { <a class="el" href="#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398">PT_NONE</a>
+, <a class="el" href="#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490">PT_SHORT</a>
+, <a class="el" href="#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a">PT_LONG</a>
+, <a class="el" href="#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef">PT_STRING</a>
+ }</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a922b75472fb0c6f6a54c785a49083b71" id="r_a922b75472fb0c6f6a54c785a49083b71"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a922b75472fb0c6f6a54c785a49083b71">ui_bkgd_set</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *style, const char *c)</td></tr>
-<tr class="memitem:aa35e4ae303f01427fac84670ae231de4" id="r_aa35e4ae303f01427fac84670ae231de4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa35e4ae303f01427fac84670ae231de4">ui_bkgrnd</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *style, const char *c)</td></tr>
-<tr class="memitem:a93aa953ffdffb65d10c9745bc19603d7" id="r_a93aa953ffdffb65d10c9745bc19603d7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a93aa953ffdffb65d10c9745bc19603d7">ui_clear_screen</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
-<tr class="memitem:af610af67da19dac8446bd2f543534b63" id="r_af610af67da19dac8446bd2f543534b63"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af610af67da19dac8446bd2f543534b63">ui_cursor_enable</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui, bool visible)</td></tr>
-<tr class="memitem:ab8f1d850d756921883a7304beca43088" id="r_ab8f1d850d756921883a7304beca43088"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab8f1d850d756921883a7304beca43088">ui_cursor_move</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, int y, int x)</td></tr>
-<tr class="memitem:a0c4e1dc659c1e2199861e19b55bdb072" id="r_a0c4e1dc659c1e2199861e19b55bdb072"><td class="memItemLeft"><a class="el" href="../../da/d18/a01850.html#ae2619ca413d40178cb364e1d4a8e3fff">UiBackend</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0c4e1dc659c1e2199861e19b55bdb072">ui_get_backend</a> (const <a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
-<tr class="memdesc:a0c4e1dc659c1e2199861e19b55bdb072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return which backend is powering this runtime.  <br /></td></tr>
-<tr class="memitem:a5f391aec4ccff06822a73227f6dfe624" id="r_a5f391aec4ccff06822a73227f6dfe624"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5f391aec4ccff06822a73227f6dfe624">ui_get_caps</a> (const <a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui, <a class="el" href="../../d3/d23/a02646.html">UiCaps</a> *caps)</td></tr>
-<tr class="memdesc:a5f391aec4ccff06822a73227f6dfe624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the capabilities of the active backend.  <br /></td></tr>
-<tr class="memitem:a59b4a90c3749097c4f1c7caa4542d815" id="r_a59b4a90c3749097c4f1c7caa4542d815"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a59b4a90c3749097c4f1c7caa4542d815">ui_get_screen_size</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui, int *lines, int *cols)</td></tr>
-<tr class="memitem:aa41d4760f359879d38791a9c558b6928" id="r_aa41d4760f359879d38791a9c558b6928"><td class="memItemLeft"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aa41d4760f359879d38791a9c558b6928">ui_init</a> (const <a class="el" href="../../d5/d96/a02642.html">UiConfig</a> *cfg)</td></tr>
-<tr class="memitem:a95e1d8de5d6f68b4ea129cad60455537" id="r_a95e1d8de5d6f68b4ea129cad60455537"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a95e1d8de5d6f68b4ea129cad60455537">ui_notcurses_attrs_from_style</a> (const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *style)</td></tr>
-<tr class="memitem:a47d6b411bd1e7632f6f2d4252e5f92c4" id="r_a47d6b411bd1e7632f6f2d4252e5f92c4"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#a47d6b411bd1e7632f6f2d4252e5f92c4">ui_notcurses_channels_from_style</a> (const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *style)</td></tr>
-<tr class="memitem:aad302ec916a501d0640f33e3d9724278" id="r_aad302ec916a501d0640f33e3d9724278"><td class="memItemLeft">struct notcurses *&#160;</td><td class="memItemRight"><a class="el" href="#aad302ec916a501d0640f33e3d9724278">ui_notcurses_get_nc</a> (const <a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
-<tr class="memdesc:aad302ec916a501d0640f33e3d9724278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the raw <code>struct</code> notcurses* for the NotCurses session.  <br /></td></tr>
-<tr class="memitem:ac8c3a17593125421dab9a17210610b51" id="r_ac8c3a17593125421dab9a17210610b51"><td class="memItemLeft">struct ncplane *&#160;</td><td class="memItemRight"><a class="el" href="#ac8c3a17593125421dab9a17210610b51">ui_notcurses_surface_get_plane</a> (const <a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s)</td></tr>
-<tr class="memdesc:ac8c3a17593125421dab9a17210610b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the raw <code>struct</code> ncplane* underlying a surface.  <br /></td></tr>
-<tr class="memitem:a5ef47b9e3365c44869d26e2391fed39d" id="r_a5ef47b9e3365c44869d26e2391fed39d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5ef47b9e3365c44869d26e2391fed39d">ui_render</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
-<tr class="memitem:adba2866ac13b9d39898ecca5369f12a5" id="r_adba2866ac13b9d39898ecca5369f12a5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#adba2866ac13b9d39898ecca5369f12a5">ui_resume</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
-<tr class="memitem:a8fa465e92c3f0bf755b938d09aabf474" id="r_a8fa465e92c3f0bf755b938d09aabf474"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8fa465e92c3f0bf755b938d09aabf474">ui_shutdown</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
-<tr class="memitem:a23e848384f5f7f1cd84ed24a5395ef0b" id="r_a23e848384f5f7f1cd84ed24a5395ef0b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a23e848384f5f7f1cd84ed24a5395ef0b">ui_surface_clear</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s)</td></tr>
-<tr class="memitem:a6af7c6c514535d5998f7a762374bc370" id="r_a6af7c6c514535d5998f7a762374bc370"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6af7c6c514535d5998f7a762374bc370">ui_surface_destroy</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s)</td></tr>
-<tr class="memitem:a96dd35cc737ad4ad1df00be412f1f1fb" id="r_a96dd35cc737ad4ad1df00be412f1f1fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a96dd35cc737ad4ad1df00be412f1f1fb">ui_surface_erase</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s)</td></tr>
-<tr class="memitem:a234f78eee651b5a68d810a6ca3d05b59" id="r_a234f78eee651b5a68d810a6ca3d05b59"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a234f78eee651b5a68d810a6ca3d05b59">ui_surface_hide</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s)</td></tr>
-<tr class="memitem:add807a747f2b70d3642b9d45e697da7c" id="r_add807a747f2b70d3642b9d45e697da7c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#add807a747f2b70d3642b9d45e697da7c">ui_surface_move</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, int y, int x)</td></tr>
-<tr class="memitem:a167278003ecb19e2eb778b134913b504" id="r_a167278003ecb19e2eb778b134913b504"><td class="memItemLeft"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a167278003ecb19e2eb778b134913b504">ui_surface_new</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui, <a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *parent, <a class="el" href="../../d8/dab/a02638.html">UiRect</a> rect)</td></tr>
-<tr class="memitem:a55c8c716294781a374e744b3a703db4b" id="r_a55c8c716294781a374e744b3a703db4b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a55c8c716294781a374e744b3a703db4b">ui_surface_resize</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, int lines, int cols)</td></tr>
-<tr class="memitem:ab640de44654a656fb3fd9aa060854988" id="r_ab640de44654a656fb3fd9aa060854988"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab640de44654a656fb3fd9aa060854988">ui_surface_set_base</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *style, uint32_t fill_ch)</td></tr>
-<tr class="memitem:adb6c336da546adb736fc2414cb50f35c" id="r_adb6c336da546adb736fc2414cb50f35c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#adb6c336da546adb736fc2414cb50f35c">ui_surface_set_style</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s, const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *style)</td></tr>
-<tr class="memitem:a7ecb5254d5bcb79b25c92ea346d8a572" id="r_a7ecb5254d5bcb79b25c92ea346d8a572"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7ecb5254d5bcb79b25c92ea346d8a572">ui_surface_show</a> (<a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *s)</td></tr>
-<tr class="memitem:ac31772949760230c556ccb3b5f99714b" id="r_ac31772949760230c556ccb3b5f99714b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac31772949760230c556ccb3b5f99714b">ui_suspend</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui)</td></tr>
+<tr class="memitem:ga6543444a87ef174a7b63fa3adcb16c58" id="r_ga6543444a87ef174a7b63fa3adcb16c58"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/dc8/a02531.html#ga6543444a87ef174a7b63fa3adcb16c58">cat_file</a> (<a class="el" href="../../db/d38/a02789.html">View</a> *)</td></tr>
+<tr class="memdesc:ga6543444a87ef174a7b63fa3adcb16c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate File to Standard Output.  <br /></td></tr>
+<tr class="memitem:a92b33aa9664abadbfbf0a51737d68af2" id="r_a92b33aa9664abadbfbf0a51737d68af2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a92b33aa9664abadbfbf0a51737d68af2">get_cmd_spec</a> (<a class="el" href="../../db/d38/a02789.html">View</a> *, char *)</td></tr>
+<tr class="memitem:abb914e12c6340c1b5a3d887cdf4ddc31" id="r_abb914e12c6340c1b5a3d887cdf4ddc31"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abb914e12c6340c1b5a3d887cdf4ddc31">go_to_position</a> (<a class="el" href="../../db/d38/a02789.html">View</a> *, long)</td></tr>
+<tr class="memitem:a9afdff2eba36c5e25c79cdba8ffc25a7" id="r_a9afdff2eba36c5e25c79cdba8ffc25a7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9afdff2eba36c5e25c79cdba8ffc25a7">view_accept_cmd</a> (<a class="el" href="../../db/d38/a02789.html">View</a> *)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a4f6ed87ca3a9f2ab4af43fcdb95af3d4" id="r_a4f6ed87ca3a9f2ab4af43fcdb95af3d4"><td class="memItemLeft"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a4f6ed87ca3a9f2ab4af43fcdb95af3d4">ui_surface_box</a> [<a class="el" href="../../d2/d5b/a01841.html#a0882b20213d1ebf14d860e611d06cf36">MAXWIN</a>]</td></tr>
-<tr class="memitem:a43ac29dca7a2cf725223c4c9eb93a223" id="r_a43ac29dca7a2cf725223c4c9eb93a223"><td class="memItemLeft"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a43ac29dca7a2cf725223c4c9eb93a223">ui_surface_win</a> [<a class="el" href="../../d2/d5b/a01841.html#a0882b20213d1ebf14d860e611d06cf36">MAXWIN</a>]</td></tr>
-<tr class="memitem:a0738d104af72ae665b4fccc5b76c7961" id="r_a0738d104af72ae665b4fccc5b76c7961"><td class="memItemLeft"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a0738d104af72ae665b4fccc5b76c7961">ui_surface_win2</a> [<a class="el" href="../../d2/d5b/a01841.html#a0882b20213d1ebf14d860e611d06cf36">MAXWIN</a>]</td></tr>
+<tr class="memitem:ab01cd88e27f549b782cb4220d1742373" id="r_ab01cd88e27f549b782cb4220d1742373"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ab01cd88e27f549b782cb4220d1742373">err_msg</a> [<a class="el" href="#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>NotCurses UI backend — lifecycle, surface management, and capabilities. </p>
-<p>Implements all <a class="el" href="../../df/d23/a02558.html" title="Runtime state for the NCurses UI backend.">UiRuntime</a> and <a class="el" href="../../d9/d66/a02562.html" title="A drawable surface in the NCurses backend. Wraps an NCurses WINDOW and its associated PANEL.">UiSurface</a> operations declared in <a class="el" href="../../da/d18/a01850.html" title="Backend API for terminal UI library.">ui_backend.h</a> using the NotCurses library. </p>
+<div class="textblock"><p><a class="el" href="../../db/d38/a02789.html">View</a> data structures, enums, types, end external declarations. </p>
+<dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a922b75472fb0c6f6a54c785a49083b71" name="a922b75472fb0c6f6a54c785a49083b71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a922b75472fb0c6f6a54c785a49083b71">&#9670;&#160;</a></span>ui_bkgd_set()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_bkgd_set </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *</td>          <td class="paramname"><span class="paramname"><em>style</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00283">283</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  283</span>                                                                   {</div>
-<div class="line"><span class="lineno">  284</span>    <span class="comment">/* NotCurses has no separate &quot;set without fill&quot; operation; delegate to</span></div>
-<div class="line"><span class="lineno">  285</span><span class="comment">       bkgrnd which sets channels and re-fills the plane background. */</span></div>
-<div class="line"><span class="lineno">  286</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="#aa35e4ae303f01427fac84670ae231de4">ui_bkgrnd</a>(s, style, c);</div>
-<div class="line"><span class="lineno">  287</span>}</div>
-<div class="ttc" id="aa01865_html_aa35e4ae303f01427fac84670ae231de4"><div class="ttname"><a href="#aa35e4ae303f01427fac84670ae231de4">ui_bkgrnd</a></div><div class="ttdeci">int ui_bkgrnd(UiSurface *s, const UiStyle *style, const char *c)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00273">ui_notcurses.c:273</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../de/dfb/a01874_source.html#l00511">ui_bkgrnd()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a922b75472fb0c6f6a54c785a49083b71_cgraph.svg" width="414" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="aa35e4ae303f01427fac84670ae231de4" name="aa35e4ae303f01427fac84670ae231de4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa35e4ae303f01427fac84670ae231de4">&#9670;&#160;</a></span>ui_bkgrnd()</h2>
+<p class="definition">Definition in file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ui_bkgrnd </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *</td>          <td class="paramname"><span class="paramname"><em>style</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+          <td class="memname">#define _GNU_SOURCE</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00273">273</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  273</span>                                                                 {</div>
-<div class="line"><span class="lineno">  274</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  275</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  276</span>    uint64_t channels = <a class="code hl_function" href="#a47d6b411bd1e7632f6f2d4252e5f92c4">ui_notcurses_channels_from_style</a>(style);</div>
-<div class="line"><span class="lineno">  277</span>    uint32_t attrs = <a class="code hl_function" href="#a95e1d8de5d6f68b4ea129cad60455537">ui_notcurses_attrs_from_style</a>(style);</div>
-<div class="line"><span class="lineno">  278</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *fill = (c &amp;&amp; *c) ? c : <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><span class="lineno">  279</span>    ncplane_set_base(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, fill, attrs, channels);</div>
-<div class="line"><span class="lineno">  280</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  281</span>}</div>
-<div class="ttc" id="aa01865_html_a47d6b411bd1e7632f6f2d4252e5f92c4"><div class="ttname"><a href="#a47d6b411bd1e7632f6f2d4252e5f92c4">ui_notcurses_channels_from_style</a></div><div class="ttdeci">uint64_t ui_notcurses_channels_from_style(const UiStyle *style)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00293">ui_notcurses.c:293</a></div></div>
-<div class="ttc" id="aa01865_html_a95e1d8de5d6f68b4ea129cad60455537"><div class="ttname"><a href="#a95e1d8de5d6f68b4ea129cad60455537">ui_notcurses_attrs_from_style</a></div><div class="ttdeci">uint32_t ui_notcurses_attrs_from_style(const UiStyle *style)</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00302">ui_notcurses.c:302</a></div></div>
-<div class="ttc" id="aa02562_html_a78f48706e2d6c6d5083112849370c1f1"><div class="ttname"><a href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">UiSurface::plane</a></div><div class="ttdeci">struct ncplane * plane</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d4a/a01862_source.html#l00044">ui_notcurses_internal.h:44</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../d5/da8/a01865_source.html#l00302">ui_notcurses_attrs_from_style()</a>, and <a class="el" href="../../d5/da8/a01865_source.html#l00293">ui_notcurses_channels_from_style()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_aa35e4ae303f01427fac84670ae231de4_cgraph.svg" width="312" height="126"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00013">13</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
 
 </div>
 </div>
-<a id="a93aa953ffdffb65d10c9745bc19603d7" name="a93aa953ffdffb65d10c9745bc19603d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93aa953ffdffb65d10c9745bc19603d7">&#9670;&#160;</a></span>ui_clear_screen()</h2>
+<a id="a72a591cf0a96cf23c63df5c78712dabe" name="a72a591cf0a96cf23c63df5c78712dabe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a591cf0a96cf23c63df5c78712dabe">&#9670;&#160;</a></span>BUFSIZ</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ui_clear_screen </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">#define BUFSIZ&#160;&#160;&#160;8192</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00108">108</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  108</span>                                   {</div>
-<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  110</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  111</span>    <span class="keyword">struct </span>ncplane *stdn = notcurses_stdplane(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  112</span>    ncplane_erase(stdn);</div>
-<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  114</span>}</div>
-<div class="ttc" id="aa02558_html_a5553a1629187286a644cfd1422633f2a"><div class="ttname"><a href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">UiRuntime::nc</a></div><div class="ttdeci">struct notcurses * nc</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d4a/a01862_source.html#l00028">ui_notcurses_internal.h:28</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
-
-</div>
-</div>
-<a id="af610af67da19dac8446bd2f543534b63" name="af610af67da19dac8446bd2f543534b63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af610af67da19dac8446bd2f543534b63">&#9670;&#160;</a></span>ui_cursor_enable()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_cursor_enable </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>visible</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00131">131</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  131</span>                                                  {</div>
-<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  134</span>    ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#aa2dc7999656d86dc35f695d6f23af43c">cursor_visible</a> = visible;</div>
-<div class="line"><span class="lineno">  135</span>    <span class="keywordflow">if</span> (visible)</div>
-<div class="line"><span class="lineno">  136</span>        <span class="keywordflow">return</span> notcurses_cursor_enable(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>, 0, 0) == 0 ? 0 : -1;</div>
-<div class="line"><span class="lineno">  137</span>    notcurses_cursor_disable(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  139</span>}</div>
-<div class="ttc" id="aa02558_html_aa2dc7999656d86dc35f695d6f23af43c"><div class="ttname"><a href="../../df/d23/a02558.html#aa2dc7999656d86dc35f695d6f23af43c">UiRuntime::cursor_visible</a></div><div class="ttdeci">bool cursor_visible</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00039">ui_ncurses_internal.h:39</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00039">UiRuntime::cursor_visible</a>, and <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
-
-</div>
-</div>
-<a id="ab8f1d850d756921883a7304beca43088" name="ab8f1d850d756921883a7304beca43088"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8f1d850d756921883a7304beca43088">&#9670;&#160;</a></span>ui_cursor_move()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_cursor_move </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00267">267</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  267</span>                                               {</div>
-<div class="line"><span class="lineno">  268</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  269</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  270</span>    <span class="keywordflow">return</span> ncplane_cursor_move_yx(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, y, x) == 0 ? 0 : -1;</div>
-<div class="line"><span class="lineno">  271</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>.</p>
-
-</div>
-</div>
-<a id="a0c4e1dc659c1e2199861e19b55bdb072" name="a0c4e1dc659c1e2199861e19b55bdb072"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c4e1dc659c1e2199861e19b55bdb072">&#9670;&#160;</a></span>ui_get_backend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../da/d18/a01850.html#ae2619ca413d40178cb364e1d4a8e3fff">UiBackend</a> ui_get_backend </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return which backend is powering this runtime. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ui</td><td>The <a class="el" href="../../df/d23/a02558.html" title="Runtime state for the NCurses UI backend.">UiRuntime</a> returned by <a class="el" href="../../da/d18/a01850.html#aa41d4760f359879d38791a9c558b6928">ui_init()</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="../../da/d18/a01850.html#ae2619ca413d40178cb364e1d4a8e3fff" title="Identifies which terminal library is powering the UI runtime.">UiBackend</a> enum value for the compiled-in backend. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00145">145</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  145</span>                                              {</div>
-<div class="line"><span class="lineno">  146</span>    (void)ui;</div>
-<div class="line"><span class="lineno">  147</span>    <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="../../da/d18/a01850.html#ae2619ca413d40178cb364e1d4a8e3fffac4e803f0794ecd3c0ccb6eac7e2f9453">UI_BACKEND_NOTCURSES</a>;</div>
-<div class="line"><span class="lineno">  148</span>}</div>
-<div class="ttc" id="aa01850_html_ae2619ca413d40178cb364e1d4a8e3fffac4e803f0794ecd3c0ccb6eac7e2f9453"><div class="ttname"><a href="../../da/d18/a01850.html#ae2619ca413d40178cb364e1d4a8e3fffac4e803f0794ecd3c0ccb6eac7e2f9453">UI_BACKEND_NOTCURSES</a></div><div class="ttdeci">@ UI_BACKEND_NOTCURSES</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00147">ui_backend.h:147</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d18/a01850_source.html#l00146">UI_BACKEND_NCURSES</a>, and <a class="el" href="../../da/d18/a01850_source.html#l00147">UI_BACKEND_NOTCURSES</a>.</p>
-
-</div>
-</div>
-<a id="a5f391aec4ccff06822a73227f6dfe624" name="a5f391aec4ccff06822a73227f6dfe624"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f391aec4ccff06822a73227f6dfe624">&#9670;&#160;</a></span>ui_get_caps()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui_get_caps </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d3/d23/a02646.html">UiCaps</a> *</td>          <td class="paramname"><span class="paramname"><em>caps</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Query the capabilities of the active backend. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ui</td><td>The <a class="el" href="../../df/d23/a02558.html" title="Runtime state for the NCurses UI backend.">UiRuntime</a> returned by <a class="el" href="../../da/d18/a01850.html#aa41d4760f359879d38791a9c558b6928">ui_init()</a>. </td></tr>
-    <tr><td class="paramname">caps</td><td>Output structure filled with capability flags. </td></tr>
-  </table>
-  </dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="../../d4/d69/a02869.html#_a2">/usr/local/src/C-Menu/src/enterstr.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00150">150</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  150</span>                                                    {</div>
-<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">if</span> (!caps)</div>
-<div class="line"><span class="lineno">  152</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  153</span>    memset(caps, 0, <span class="keyword">sizeof</span>(*caps));</div>
-<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  155</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  156</span>    caps-&gt;<a class="code hl_variable" href="../../d3/d23/a02646.html#aba1f766c6d1357c46f2497099b61ec59">truecolor</a> = notcurses_cantruecolor(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  157</span>    caps-&gt;<a class="code hl_variable" href="../../d3/d23/a02646.html#a39bee1dcb7c6daa189aa1e6c236446a8">palette256</a> = <span class="keyword">true</span>; <span class="comment">/* NotCurses always manages its own palette */</span></div>
-<div class="line"><span class="lineno">  158</span>    caps-&gt;<a class="code hl_variable" href="../../d3/d23/a02646.html#a3daacae1fd6133ff0a03d14eff2f48d3">mouse</a> = ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af08332810a017306df606e3e2c0bb607">mouse_enabled</a>;</div>
-<div class="line"><span class="lineno">  159</span>    caps-&gt;<a class="code hl_variable" href="../../d3/d23/a02646.html#adab3332ad70a03519b3af0fe08eb95ab">unicode</a> = notcurses_canutf8(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  160</span>    caps-&gt;<a class="code hl_variable" href="../../d3/d23/a02646.html#ae8d0e88761c5960620aeefbfe29872ae">resize</a> = <span class="keyword">true</span>;   <span class="comment">/* NCKEY_RESIZE is delivered as a normal event */</span></div>
-<div class="line"><span class="lineno">  161</span>    caps-&gt;<a class="code hl_variable" href="../../d3/d23/a02646.html#aa56a3f1781839d74b6b868d0a8f8cf67">color_pairs</a> = 0; <span class="comment">/* unlimited — NotCurses uses direct RGB */</span></div>
-<div class="line"><span class="lineno">  162</span>}</div>
-<div class="ttc" id="aa02558_html_af08332810a017306df606e3e2c0bb607"><div class="ttname"><a href="../../df/d23/a02558.html#af08332810a017306df606e3e2c0bb607">UiRuntime::mouse_enabled</a></div><div class="ttdeci">bool mouse_enabled</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00037">ui_ncurses_internal.h:37</a></div></div>
-<div class="ttc" id="aa02646_html_a39bee1dcb7c6daa189aa1e6c236446a8"><div class="ttname"><a href="../../d3/d23/a02646.html#a39bee1dcb7c6daa189aa1e6c236446a8">UiCaps::palette256</a></div><div class="ttdeci">bool palette256</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00160">ui_backend.h:160</a></div></div>
-<div class="ttc" id="aa02646_html_a3daacae1fd6133ff0a03d14eff2f48d3"><div class="ttname"><a href="../../d3/d23/a02646.html#a3daacae1fd6133ff0a03d14eff2f48d3">UiCaps::mouse</a></div><div class="ttdeci">bool mouse</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00161">ui_backend.h:161</a></div></div>
-<div class="ttc" id="aa02646_html_aa56a3f1781839d74b6b868d0a8f8cf67"><div class="ttname"><a href="../../d3/d23/a02646.html#aa56a3f1781839d74b6b868d0a8f8cf67">UiCaps::color_pairs</a></div><div class="ttdeci">int color_pairs</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00164">ui_backend.h:164</a></div></div>
-<div class="ttc" id="aa02646_html_aba1f766c6d1357c46f2497099b61ec59"><div class="ttname"><a href="../../d3/d23/a02646.html#aba1f766c6d1357c46f2497099b61ec59">UiCaps::truecolor</a></div><div class="ttdeci">bool truecolor</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00159">ui_backend.h:159</a></div></div>
-<div class="ttc" id="aa02646_html_adab3332ad70a03519b3af0fe08eb95ab"><div class="ttname"><a href="../../d3/d23/a02646.html#adab3332ad70a03519b3af0fe08eb95ab">UiCaps::unicode</a></div><div class="ttdeci">bool unicode</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00162">ui_backend.h:162</a></div></div>
-<div class="ttc" id="aa02646_html_ae8d0e88761c5960620aeefbfe29872ae"><div class="ttname"><a href="../../d3/d23/a02646.html#ae8d0e88761c5960620aeefbfe29872ae">UiCaps::resize</a></div><div class="ttdeci">bool resize</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00163">ui_backend.h:163</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d18/a01850_source.html#l00164">UiCaps::color_pairs</a>, <a class="el" href="../../da/d18/a01850_source.html#l00161">UiCaps::mouse</a>, <a class="el" href="../../da/d66/a01856_source.html#l00037">UiRuntime::mouse_enabled</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>, <a class="el" href="../../da/d18/a01850_source.html#l00160">UiCaps::palette256</a>, <a class="el" href="../../da/d18/a01850_source.html#l00163">UiCaps::resize</a>, <a class="el" href="../../da/d18/a01850_source.html#l00159">UiCaps::truecolor</a>, and <a class="el" href="../../da/d18/a01850_source.html#l00162">UiCaps::unicode</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00040">40</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
 
 </div>
 </div>
-<a id="a59b4a90c3749097c4f1c7caa4542d815" name="a59b4a90c3749097c4f1c7caa4542d815"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59b4a90c3749097c4f1c7caa4542d815">&#9670;&#160;</a></span>ui_get_screen_size()</h2>
+<a id="ab5557ed18d83facb69dd68b30629c37e" name="ab5557ed18d83facb69dd68b30629c37e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5557ed18d83facb69dd68b30629c37e">&#9670;&#160;</a></span>COLOR_LEN</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ui_get_screen_size </td>
+          <td class="memname">#define COLOR_LEN&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00033">33</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="a19bdbce530a383c51614a22810676b3b" name="a19bdbce530a383c51614a22810676b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19bdbce530a383c51614a22810676b3b">&#9670;&#160;</a></span>LINE_TBL_INCR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LINE_TBL_INCR&#160;&#160;&#160;1024</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00048">48</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span><span class="preprocessor">#define LINE_TBL_INCR \</span></div>
+<div class="line"><span class="lineno">   49</span><span class="preprocessor">    1024 </span><span class="comment">// number of entries to add to line_tbl when reallocating</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae6648cd71a8bd49d58ae8ed33ba910d1" name="ae6648cd71a8bd49d58ae8ed33ba910d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6648cd71a8bd49d58ae8ed33ba910d1">&#9670;&#160;</a></span>MAXLEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAXLEN&#160;&#160;&#160;256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00036">36</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="aa16fa3d6aa4e0d8100f2919690417da7" name="aa16fa3d6aa4e0d8100f2919690417da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa16fa3d6aa4e0d8100f2919690417da7">&#9670;&#160;</a></span>NCURSES_WIDECHAR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NCURSES_WIDECHAR&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00015">15</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="a1c02ca83443513a6ab1c93dcb316ac7e" name="a1c02ca83443513a6ab1c93dcb316ac7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c02ca83443513a6ab1c93dcb316ac7e">&#9670;&#160;</a></span>NMARKS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NMARKS&#160;&#160;&#160;256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00035">35</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="a4da1373308859dfe96570032c5a3c6eb" name="a4da1373308859dfe96570032c5a3c6eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da1373308859dfe96570032c5a3c6eb">&#9670;&#160;</a></span>NPOS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NPOS&#160;&#160;&#160;256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00034">34</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="ae668ecfa1856b197ccc8bbd228836b70" name="ae668ecfa1856b197ccc8bbd228836b70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae668ecfa1856b197ccc8bbd228836b70">&#9670;&#160;</a></span>NULL_POSITION</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NULL_POSITION&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00038">38</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="a3f15836bdfb0ecbf8ed781532654a435" name="a3f15836bdfb0ecbf8ed781532654a435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f15836bdfb0ecbf8ed781532654a435">&#9670;&#160;</a></span>NULSL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NULSL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00037">37</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="adc3d88deb82e66426d66e559bba7ef1e" name="adc3d88deb82e66426d66e559bba7ef1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc3d88deb82e66426d66e559bba7ef1e">&#9670;&#160;</a></span>PAD_COLS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PAD_COLS&#160;&#160;&#160;4096</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00041">41</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a id="a5259eafdce2c5489c29df7b44a782b88" name="a5259eafdce2c5489c29df7b44a782b88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5259eafdce2c5489c29df7b44a782b88">&#9670;&#160;</a></span>VBUFSIZ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define VBUFSIZ&#160;&#160;&#160;65536</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00039">39</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a311c8b4e7650091e39cc1fc7ca93808c" name="a311c8b4e7650091e39cc1fc7ca93808c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a311c8b4e7650091e39cc1fc7ca93808c">&#9670;&#160;</a></span>PromptType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a311c8b4e7650091e39cc1fc7ca93808c">PromptType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398" name="a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398"></a>PT_NONE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490" name="a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490"></a>PT_SHORT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a" name="a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a"></a>PT_LONG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef" name="a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef"></a>PT_STRING&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00043">43</a> of file <a class="el" href="../../d5/da8/a01865_source.html">view.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span>             { <a class="code hl_enumvalue" href="#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398">PT_NONE</a>,</div>
+<div class="line"><span class="lineno">   44</span>               <a class="code hl_enumvalue" href="#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490">PT_SHORT</a>,</div>
+<div class="line"><span class="lineno">   45</span>               <a class="code hl_enumvalue" href="#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a">PT_LONG</a>,</div>
+<div class="line"><span class="lineno">   46</span>               <a class="code hl_enumvalue" href="#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef">PT_STRING</a> } <a class="code hl_enumeration" href="#a311c8b4e7650091e39cc1fc7ca93808c">PromptType</a>;</div>
+<div class="ttc" id="aa01865_html_a311c8b4e7650091e39cc1fc7ca93808c"><div class="ttname"><a href="#a311c8b4e7650091e39cc1fc7ca93808c">PromptType</a></div><div class="ttdeci">PromptType</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00043">view.h:43</a></div></div>
+<div class="ttc" id="aa01865_html_a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef"><div class="ttname"><a href="#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef">PT_STRING</a></div><div class="ttdeci">@ PT_STRING</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00046">view.h:46</a></div></div>
+<div class="ttc" id="aa01865_html_a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398"><div class="ttname"><a href="#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398">PT_NONE</a></div><div class="ttdeci">@ PT_NONE</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00043">view.h:43</a></div></div>
+<div class="ttc" id="aa01865_html_a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490"><div class="ttname"><a href="#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490">PT_SHORT</a></div><div class="ttdeci">@ PT_SHORT</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00044">view.h:44</a></div></div>
+<div class="ttc" id="aa01865_html_a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a"><div class="ttname"><a href="#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a">PT_LONG</a></div><div class="ttdeci">@ PT_LONG</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00045">view.h:45</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a92b33aa9664abadbfbf0a51737d68af2" name="a92b33aa9664abadbfbf0a51737d68af2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b33aa9664abadbfbf0a51737d68af2">&#9670;&#160;</a></span>get_cmd_spec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_cmd_spec </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../db/d38/a02789.html">View</a> *</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>lines</em></span>, </td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb914e12c6340c1b5a3d887cdf4ddc31" name="abb914e12c6340c1b5a3d887cdf4ddc31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb914e12c6340c1b5a3d887cdf4ddc31">&#9670;&#160;</a></span>go_to_position()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void go_to_position </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../db/d38/a02789.html">View</a> *</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>cols</em></span>&#160;)</td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00089">89</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   89</span>                                                              {</div>
-<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">   91</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">   92</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> r = 0, c = 0;</div>
-<div class="line"><span class="lineno">   93</span>    notcurses_stddim_yx(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>, &amp;r, &amp;c);</div>
-<div class="line"><span class="lineno">   94</span>    ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a81f379dcde964fbd68136efa7af3f679">lines</a> = (int)r;</div>
-<div class="line"><span class="lineno">   95</span>    ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#ad778d37d973acf63781810dcbcee815e">cols</a> = (int)c;</div>
-<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">if</span> (lines)</div>
-<div class="line"><span class="lineno">   97</span>        *lines = ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a81f379dcde964fbd68136efa7af3f679">lines</a>;</div>
-<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> (cols)</div>
-<div class="line"><span class="lineno">   99</span>        *cols = ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#ad778d37d973acf63781810dcbcee815e">cols</a>;</div>
-<div class="line"><span class="lineno">  100</span>}</div>
-<div class="ttc" id="aa02558_html_a81f379dcde964fbd68136efa7af3f679"><div class="ttname"><a href="../../df/d23/a02558.html#a81f379dcde964fbd68136efa7af3f679">UiRuntime::lines</a></div><div class="ttdeci">int lines</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00040">ui_ncurses_internal.h:40</a></div></div>
-<div class="ttc" id="aa02558_html_ad778d37d973acf63781810dcbcee815e"><div class="ttname"><a href="../../df/d23/a02558.html#ad778d37d973acf63781810dcbcee815e">UiRuntime::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00041">ui_ncurses_internal.h:41</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00041">UiRuntime::cols</a>, <a class="el" href="../../da/d66/a01856_source.html#l00040">UiRuntime::lines</a>, and <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d4/d73/a02465_source.html#l00799">box_win_new()</a>, <a class="el" href="../../dd/d31/a02405_source.html#l00025">popup_ckeys()</a>, and <a class="el" href="../../d5/d10/a02396_source.html#l00116">view_calc_full_screen_dimensions()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a59b4a90c3749097c4f1c7caa4542d815_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
 </div>
 </div>
-<a id="aa41d4760f359879d38791a9c558b6928" name="aa41d4760f359879d38791a9c558b6928"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa41d4760f359879d38791a9c558b6928">&#9670;&#160;</a></span>ui_init()</h2>
+<a id="a9afdff2eba36c5e25c79cdba8ffc25a7" name="a9afdff2eba36c5e25c79cdba8ffc25a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9afdff2eba36c5e25c79cdba8ffc25a7">&#9670;&#160;</a></span>view_accept_cmd()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> * ui_init </td>
+          <td class="memname">int view_accept_cmd </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d5/d96/a02642.html">UiConfig</a> *</td>          <td class="paramname"><span class="paramname"><em>cfg</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../db/d38/a02789.html">View</a> *</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00027">27</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   27</span>                                        {</div>
-<div class="line"><span class="lineno">   28</span>    setlocale(LC_ALL, <span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><span class="lineno">   29</span> </div>
-<div class="line"><span class="lineno">   30</span>    <a class="code hl_struct" href="../../df/d23/a02558.html">UiRuntime</a> *ui = calloc(1, <span class="keyword">sizeof</span>(*ui));</div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   33</span> </div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordflow">if</span> (cfg) {</div>
-<div class="line"><span class="lineno">   35</span>        ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af08332810a017306df606e3e2c0bb607">mouse_enabled</a> = cfg-&gt;<a class="code hl_variable" href="../../d5/d96/a02642.html#acdeb10ab4306706434b460279c4d9c4e">enable_mouse</a>;</div>
-<div class="line"><span class="lineno">   36</span>        ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af0287deabe80d42c2dcba575e7668cee">alt_screen</a> = cfg-&gt;<a class="code hl_variable" href="../../d5/d96/a02642.html#afc37edba9295b089b1dad90eb0d4b8aa">enable_alt_screen</a>;</div>
-<div class="line"><span class="lineno">   37</span>        ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#aa2dc7999656d86dc35f695d6f23af43c">cursor_visible</a> = cfg-&gt;<a class="code hl_variable" href="../../d5/d96/a02642.html#a6aa31a10e62f22bc154ccaf9765196ce">cursor_visible</a>;</div>
-<div class="line"><span class="lineno">   38</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   39</span>        ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#aa2dc7999656d86dc35f695d6f23af43c">cursor_visible</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   40</span>        ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af0287deabe80d42c2dcba575e7668cee">alt_screen</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">   41</span>    }</div>
-<div class="line"><span class="lineno">   42</span> </div>
-<div class="line"><span class="lineno">   43</span>    FILE *tty = NULL;</div>
-<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">if</span> (cfg &amp;&amp; cfg-&gt;<a class="code hl_variable" href="../../d5/d96/a02642.html#ab671c38066aca983cf609aeee0f9f5df">tty_path</a>) {</div>
-<div class="line"><span class="lineno">   45</span>        tty = fopen(cfg-&gt;<a class="code hl_variable" href="../../d5/d96/a02642.html#ab671c38066aca983cf609aeee0f9f5df">tty_path</a>, <span class="stringliteral">&quot;r+&quot;</span>);</div>
-<div class="line"><span class="lineno">   46</span>        <span class="keywordflow">if</span> (!tty) {</div>
-<div class="line"><span class="lineno">   47</span>            free(ui);</div>
-<div class="line"><span class="lineno">   48</span>            <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   49</span>        }</div>
-<div class="line"><span class="lineno">   50</span>    }</div>
-<div class="line"><span class="lineno">   51</span> </div>
-<div class="line"><span class="lineno">   52</span>    <span class="keyword">struct </span>notcurses_options opts = {</div>
-<div class="line"><span class="lineno">   53</span>        .flags = NCOPTION_SUPPRESS_BANNERS | (ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af0287deabe80d42c2dcba575e7668cee">alt_screen</a> ? 0 : NCOPTION_NO_ALTERNATE_SCREEN),</div>
-<div class="line"><span class="lineno">   54</span>    };</div>
-<div class="line"><span class="lineno">   55</span> </div>
-<div class="line"><span class="lineno">   56</span>    ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a> = notcurses_init(&amp;opts, tty);</div>
-<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">if</span> (!ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>) {</div>
-<div class="line"><span class="lineno">   58</span>        <span class="keywordflow">if</span> (tty)</div>
-<div class="line"><span class="lineno">   59</span>            fclose(tty);</div>
-<div class="line"><span class="lineno">   60</span>        free(ui);</div>
-<div class="line"><span class="lineno">   61</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">   62</span>    }</div>
-<div class="line"><span class="lineno">   63</span> </div>
-<div class="line"><span class="lineno">   64</span>    <span class="keywordflow">if</span> (ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af08332810a017306df606e3e2c0bb607">mouse_enabled</a>)</div>
-<div class="line"><span class="lineno">   65</span>        notcurses_mice_enable(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>, NCMICE_ALL_EVENTS);</div>
-<div class="line"><span class="lineno">   66</span> </div>
-<div class="line"><span class="lineno">   67</span>    <span class="keywordflow">if</span> (!ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#aa2dc7999656d86dc35f695d6f23af43c">cursor_visible</a>)</div>
-<div class="line"><span class="lineno">   68</span>        notcurses_cursor_disable(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> r = 0, c = 0;</div>
-<div class="line"><span class="lineno">   71</span>    notcurses_stddim_yx(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>, &amp;r, &amp;c);</div>
-<div class="line"><span class="lineno">   72</span>    ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a81f379dcde964fbd68136efa7af3f679">lines</a> = (int)r;</div>
-<div class="line"><span class="lineno">   73</span>    ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#ad778d37d973acf63781810dcbcee815e">cols</a> = (int)c;</div>
-<div class="line"><span class="lineno">   74</span> </div>
-<div class="line"><span class="lineno">   75</span>    <span class="keywordflow">return</span> ui;</div>
-<div class="line"><span class="lineno">   76</span>}</div>
-<div class="ttc" id="aa02558_html"><div class="ttname"><a href="../../df/d23/a02558.html">UiRuntime</a></div><div class="ttdoc">Runtime state for the NCurses UI backend.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00034">ui_ncurses_internal.h:34</a></div></div>
-<div class="ttc" id="aa02558_html_af0287deabe80d42c2dcba575e7668cee"><div class="ttname"><a href="../../df/d23/a02558.html#af0287deabe80d42c2dcba575e7668cee">UiRuntime::alt_screen</a></div><div class="ttdeci">bool alt_screen</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00038">ui_ncurses_internal.h:38</a></div></div>
-<div class="ttc" id="aa02642_html_a6aa31a10e62f22bc154ccaf9765196ce"><div class="ttname"><a href="../../d5/d96/a02642.html#a6aa31a10e62f22bc154ccaf9765196ce">UiConfig::cursor_visible</a></div><div class="ttdeci">bool cursor_visible</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00137">ui_backend.h:137</a></div></div>
-<div class="ttc" id="aa02642_html_ab671c38066aca983cf609aeee0f9f5df"><div class="ttname"><a href="../../d5/d96/a02642.html#ab671c38066aca983cf609aeee0f9f5df">UiConfig::tty_path</a></div><div class="ttdeci">const char * tty_path</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00138">ui_backend.h:138</a></div></div>
-<div class="ttc" id="aa02642_html_acdeb10ab4306706434b460279c4d9c4e"><div class="ttname"><a href="../../d5/d96/a02642.html#acdeb10ab4306706434b460279c4d9c4e">UiConfig::enable_mouse</a></div><div class="ttdeci">bool enable_mouse</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00135">ui_backend.h:135</a></div></div>
-<div class="ttc" id="aa02642_html_afc37edba9295b089b1dad90eb0d4b8aa"><div class="ttname"><a href="../../d5/d96/a02642.html#afc37edba9295b089b1dad90eb0d4b8aa">UiConfig::enable_alt_screen</a></div><div class="ttdeci">bool enable_alt_screen</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00136">ui_backend.h:136</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00038">UiRuntime::alt_screen</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00131">CC_NT</a>, <a class="el" href="../../da/d66/a01856_source.html#l00041">UiRuntime::cols</a>, <a class="el" href="../../da/d18/a01850_source.html#l00137">UiConfig::cursor_visible</a>, <a class="el" href="../../da/d66/a01856_source.html#l00039">UiRuntime::cursor_visible</a>, <a class="el" href="../../da/d18/a01850_source.html#l00136">UiConfig::enable_alt_screen</a>, <a class="el" href="../../da/d18/a01850_source.html#l00135">UiConfig::enable_mouse</a>, <a class="el" href="../../dc/d09/a02429_source.html#l00033">f_curses_open</a>, <a class="el" href="../../da/d66/a01856_source.html#l00040">UiRuntime::lines</a>, <a class="el" href="../../da/d66/a01856_source.html#l00037">UiRuntime::mouse_enabled</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>, <a class="el" href="../../da/d66/a01856_source.html#l00042">UiRuntime::panel_main</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00036">screen</a>, <a class="el" href="../../da/d66/a01856_source.html#l00035">UiRuntime::screen</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00170">sfc_ptr</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00037">tty_fp</a>, <a class="el" href="../../da/d66/a01856_source.html#l00036">UiRuntime::tty_fp</a>, <a class="el" href="../../da/d18/a01850_source.html#l00138">UiConfig::tty_path</a>, and <a class="el" href="../../de/dfb/a01874_source.html#l00168">ui_shutdown()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_aa41d4760f359879d38791a9c558b6928_cgraph.svg" width="547" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a95e1d8de5d6f68b4ea129cad60455537" name="a95e1d8de5d6f68b4ea129cad60455537"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95e1d8de5d6f68b4ea129cad60455537">&#9670;&#160;</a></span>ui_notcurses_attrs_from_style()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t ui_notcurses_attrs_from_style </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *</td>          <td class="paramname"><span class="paramname"><em>style</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00302">302</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  302</span>                                                             {</div>
-<div class="line"><span class="lineno">  303</span>    <span class="keywordflow">if</span> (!style)</div>
-<div class="line"><span class="lineno">  304</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  305</span>    uint32_t attrs = 0;</div>
-<div class="line"><span class="lineno">  306</span>    <span class="keywordflow">if</span> (style-&gt;bold)</div>
-<div class="line"><span class="lineno">  307</span>        attrs |= NCSTYLE_BOLD;</div>
-<div class="line"><span class="lineno">  308</span>    <span class="keywordflow">if</span> (style-&gt;italic)</div>
-<div class="line"><span class="lineno">  309</span>        attrs |= NCSTYLE_ITALIC;</div>
-<div class="line"><span class="lineno">  310</span>    <span class="keywordflow">if</span> (style-&gt;underline)</div>
-<div class="line"><span class="lineno">  311</span>        attrs |= NCSTYLE_UNDERLINE;</div>
-<div class="line"><span class="lineno">  312</span>    <span class="comment">// if (style-&gt;blink)     attrs |= NCSTYLE_BLINK;</span></div>
-<div class="line"><span class="lineno">  313</span>    <span class="comment">// if (style-&gt;reverse)   attrs |= NCSTYLE_REVERSE;</span></div>
-<div class="line"><span class="lineno">  314</span>    <span class="comment">// if (style-&gt;invis)     attrs |= NCSTYLE_INVIS;</span></div>
-<div class="line"><span class="lineno">  315</span>    <span class="keywordflow">return</span> attrs;</div>
-<div class="line"><span class="lineno">  316</span>}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d5/da8/a01865_source.html#l00273">ui_bkgrnd()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00077">ui_draw_border()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00114">ui_draw_box_title()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00047">ui_draw_hline()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00017">ui_draw_text()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00030">ui_draw_text_n()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00060">ui_draw_vline()</a>, <a class="el" href="../../d5/da8/a01865_source.html#l00331">ui_surface_set_base()</a>, and <a class="el" href="../../d5/da8/a01865_source.html#l00322">ui_surface_set_style()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a95e1d8de5d6f68b4ea129cad60455537_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a47d6b411bd1e7632f6f2d4252e5f92c4" name="a47d6b411bd1e7632f6f2d4252e5f92c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47d6b411bd1e7632f6f2d4252e5f92c4">&#9670;&#160;</a></span>ui_notcurses_channels_from_style()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint64_t ui_notcurses_channels_from_style </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *</td>          <td class="paramname"><span class="paramname"><em>style</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00293">293</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  293</span>                                                                {</div>
-<div class="line"><span class="lineno">  294</span>    uint64_t channels = 0;</div>
-<div class="line"><span class="lineno">  295</span>    <span class="keywordflow">if</span> (!style)</div>
-<div class="line"><span class="lineno">  296</span>        <span class="keywordflow">return</span> channels;</div>
-<div class="line"><span class="lineno">  297</span>    ncchannels_set_fg_rgb8(&amp;channels, style-&gt;<a class="code hl_variable" href="../../d0/d3f/a02630.html#a57bf3ffa64210db977a80acef3e1c672">fg</a>.<a class="code hl_variable" href="../../de/d3b/a02610.html#aca9ef37fda78d6cc94dbf5f0294c04b6">r</a>, style-&gt;<a class="code hl_variable" href="../../d0/d3f/a02630.html#a57bf3ffa64210db977a80acef3e1c672">fg</a>.<a class="code hl_variable" href="../../de/d3b/a02610.html#ac68d9a20a9e5bb05d540b0277c1a21bb">g</a>, style-&gt;<a class="code hl_variable" href="../../d0/d3f/a02630.html#a57bf3ffa64210db977a80acef3e1c672">fg</a>.<a class="code hl_variable" href="../../de/d3b/a02610.html#ad7a2c8b8af8ad82115ba59d8e870d9b6">b</a>);</div>
-<div class="line"><span class="lineno">  298</span>    ncchannels_set_bg_rgb8(&amp;channels, style-&gt;<a class="code hl_variable" href="../../d0/d3f/a02630.html#a31bbaffb9a0d243d7b5d61ed5daeee2c">bg</a>.<a class="code hl_variable" href="../../de/d3b/a02610.html#aca9ef37fda78d6cc94dbf5f0294c04b6">r</a>, style-&gt;<a class="code hl_variable" href="../../d0/d3f/a02630.html#a31bbaffb9a0d243d7b5d61ed5daeee2c">bg</a>.<a class="code hl_variable" href="../../de/d3b/a02610.html#ac68d9a20a9e5bb05d540b0277c1a21bb">g</a>, style-&gt;<a class="code hl_variable" href="../../d0/d3f/a02630.html#a31bbaffb9a0d243d7b5d61ed5daeee2c">bg</a>.<a class="code hl_variable" href="../../de/d3b/a02610.html#ad7a2c8b8af8ad82115ba59d8e870d9b6">b</a>);</div>
-<div class="line"><span class="lineno">  299</span>    <span class="keywordflow">return</span> channels;</div>
-<div class="line"><span class="lineno">  300</span>}</div>
-<div class="ttc" id="aa02610_html_ac68d9a20a9e5bb05d540b0277c1a21bb"><div class="ttname"><a href="../../de/d3b/a02610.html#ac68d9a20a9e5bb05d540b0277c1a21bb">UiColor::g</a></div><div class="ttdeci">uint8_t g</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00073">ui_backend.h:73</a></div></div>
-<div class="ttc" id="aa02610_html_aca9ef37fda78d6cc94dbf5f0294c04b6"><div class="ttname"><a href="../../de/d3b/a02610.html#aca9ef37fda78d6cc94dbf5f0294c04b6">UiColor::r</a></div><div class="ttdeci">uint8_t r</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00074">ui_backend.h:74</a></div></div>
-<div class="ttc" id="aa02610_html_ad7a2c8b8af8ad82115ba59d8e870d9b6"><div class="ttname"><a href="../../de/d3b/a02610.html#ad7a2c8b8af8ad82115ba59d8e870d9b6">UiColor::b</a></div><div class="ttdeci">uint8_t b</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00072">ui_backend.h:72</a></div></div>
-<div class="ttc" id="aa02630_html_a31bbaffb9a0d243d7b5d61ed5daeee2c"><div class="ttname"><a href="../../d0/d3f/a02630.html#a31bbaffb9a0d243d7b5d61ed5daeee2c">UiStyle::bg</a></div><div class="ttdeci">UiColor bg</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00089">ui_backend.h:89</a></div></div>
-<div class="ttc" id="aa02630_html_a57bf3ffa64210db977a80acef3e1c672"><div class="ttname"><a href="../../d0/d3f/a02630.html#a57bf3ffa64210db977a80acef3e1c672">UiStyle::fg</a></div><div class="ttdeci">UiColor fg</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00088">ui_backend.h:88</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d18/a01850_source.html#l00089">UiStyle::bg</a>, and <a class="el" href="../../da/d18/a01850_source.html#l00088">UiStyle::fg</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d5/da8/a01865_source.html#l00273">ui_bkgrnd()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00077">ui_draw_border()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00114">ui_draw_box_title()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00047">ui_draw_hline()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00017">ui_draw_text()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00030">ui_draw_text_n()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00060">ui_draw_vline()</a>, <a class="el" href="../../d5/da8/a01865_source.html#l00331">ui_surface_set_base()</a>, and <a class="el" href="../../d5/da8/a01865_source.html#l00322">ui_surface_set_style()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a47d6b411bd1e7632f6f2d4252e5f92c4_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="aad302ec916a501d0640f33e3d9724278" name="aad302ec916a501d0640f33e3d9724278"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad302ec916a501d0640f33e3d9724278">&#9670;&#160;</a></span>ui_notcurses_get_nc()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct notcurses * ui_notcurses_get_nc </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the raw <code>struct</code> notcurses* for the NotCurses session. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ui</td><td>The <a class="el" href="../../df/d23/a02558.html" title="Runtime state for the NCurses UI backend.">UiRuntime</a> returned by <a class="el" href="../../da/d18/a01850.html#aa41d4760f359879d38791a9c558b6928">ui_init()</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The NotCurses context pointer, or NULL if <code class="param">ui</code> is NULL. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00367">367</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  367</span>                                                           {</div>
-<div class="line"><span class="lineno">  368</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  369</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  370</span>    <span class="keywordflow">return</span> ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>;</div>
-<div class="line"><span class="lineno">  371</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
-
-</div>
-</div>
-<a id="ac8c3a17593125421dab9a17210610b51" name="ac8c3a17593125421dab9a17210610b51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8c3a17593125421dab9a17210610b51">&#9670;&#160;</a></span>ui_notcurses_surface_get_plane()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct ncplane * ui_notcurses_surface_get_plane </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Return the raw <code>struct</code> ncplane* underlying a surface. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>The <a class="el" href="../../d9/d66/a02562.html" title="A drawable surface in the NCurses backend. Wraps an NCurses WINDOW and its associated PANEL.">UiSurface</a> to inspect. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The ncplane pointer, or NULL if <code class="param">s</code> is NULL. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00373">373</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  373</span>                                                                   {</div>
-<div class="line"><span class="lineno">  374</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  375</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  376</span>    <span class="keywordflow">return</span> s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>;</div>
-<div class="line"><span class="lineno">  377</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>.</p>
-
-</div>
-</div>
-<a id="a5ef47b9e3365c44869d26e2391fed39d" name="a5ef47b9e3365c44869d26e2391fed39d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ef47b9e3365c44869d26e2391fed39d">&#9670;&#160;</a></span>ui_render()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_render </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00102">102</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  102</span>                             {</div>
-<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">return</span> notcurses_render(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>) == 0 ? 0 : -1;</div>
-<div class="line"><span class="lineno">  106</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d4/d73/a02465_source.html#l00799">box_win_new()</a>, <a class="el" href="../../d2/d35/a02468_source.html#l00057">field_editor()</a>, <a class="el" href="../../de/d76/a02417_source.html#l00227">form_post()</a>, <a class="el" href="../../de/d76/a02417_source.html#l00326">form_process()</a>, <a class="el" href="../../d5/d10/a02396_source.html#l00047">init_view_full_screen()</a>, <a class="el" href="../../d4/da8/a02444_source.html#l00124">menu_cmd_processor()</a>, <a class="el" href="../../dd/d31/a02405_source.html#l00025">popup_ckeys()</a>, <a class="el" href="../../d4/d2d/a02408_source.html#l00581">read_theme()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00874">restore_wins()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00820">split_box_win_new()</a>, <a class="el" href="../../de/dfb/a01874_source.html#l00432">ui_surface_destroy()</a>, <a class="el" href="../../d5/d10/a02396_source.html#l00183">view_boxwin_resize()</a>, and <a class="el" href="../../d5/d10/a02396_source.html#l00100">view_full_screen_resize()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a5ef47b9e3365c44869d26e2391fed39d_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="adba2866ac13b9d39898ecca5369f12a5" name="adba2866ac13b9d39898ecca5369f12a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adba2866ac13b9d39898ecca5369f12a5">&#9670;&#160;</a></span>ui_resume()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_resume </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00123">123</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  123</span>                             {</div>
-<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  126</span>    notcurses_enter_alternate_screen(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  127</span>    notcurses_render(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  129</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
-
-</div>
-</div>
-<a id="a8fa465e92c3f0bf755b938d09aabf474" name="a8fa465e92c3f0bf755b938d09aabf474"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fa465e92c3f0bf755b938d09aabf474">&#9670;&#160;</a></span>ui_shutdown()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui_shutdown </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00078">78</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   78</span>                                {</div>
-<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">   80</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">if</span> (ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>) {</div>
-<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> (ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#af08332810a017306df606e3e2c0bb607">mouse_enabled</a>)</div>
-<div class="line"><span class="lineno">   83</span>            notcurses_mice_disable(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">   84</span>        notcurses_stop(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">   85</span>    }</div>
-<div class="line"><span class="lineno">   86</span>    free(ui);</div>
-<div class="line"><span class="lineno">   87</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/d09/a02429_source.html#l00033">f_curses_open</a>, <a class="el" href="../../da/d66/a01856_source.html#l00037">UiRuntime::mouse_enabled</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00036">screen</a>, <a class="el" href="../../da/d66/a01856_source.html#l00035">UiRuntime::screen</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00170">sfc_ptr</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00037">tty_fp</a>, <a class="el" href="../../da/d66/a01856_source.html#l00036">UiRuntime::tty_fp</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00040">ui_surface</a>, and <a class="el" href="../../de/dfb/a01874_source.html#l00432">ui_surface_destroy()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d4/d73/a02465_source.html#l00660">destroy_curses()</a>, and <a class="el" href="../../de/dfb/a01874_source.html#l00097">ui_init()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a8fa465e92c3f0bf755b938d09aabf474_cgraph.svg" width="438" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a8fa465e92c3f0bf755b938d09aabf474_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a23e848384f5f7f1cd84ed24a5395ef0b" name="a23e848384f5f7f1cd84ed24a5395ef0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23e848384f5f7f1cd84ed24a5395ef0b">&#9670;&#160;</a></span>ui_surface_clear()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_clear </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00232">232</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  232</span>                                   {</div>
-<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  234</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  235</span>    ncplane_erase(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>);</div>
-<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  237</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>.</p>
-
-</div>
-</div>
-<a id="a6af7c6c514535d5998f7a762374bc370" name="a6af7c6c514535d5998f7a762374bc370"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6af7c6c514535d5998f7a762374bc370">&#9670;&#160;</a></span>ui_surface_destroy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ui_surface_destroy </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00203">203</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  203</span>                                      {</div>
-<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  205</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  206</span>    <span class="keywordflow">if</span> (s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>)</div>
-<div class="line"><span class="lineno">  207</span>        ncplane_destroy(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>);</div>
-<div class="line"><span class="lineno">  208</span>    free(s);</div>
-<div class="line"><span class="lineno">  209</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../de/dfb/a01874_source.html#l00210">ui_render()</a>, and <a class="el" href="../../d4/d73/a02465_source.html#l00038">ui_runtime</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d4/d73/a02465_source.html#l00857">cm_surface_destroy()</a>, <a class="el" href="../../d4/d2d/a02408_source.html#l00197">destroy_pick_view()</a>, <a class="el" href="../../dd/d31/a02405_source.html#l00025">popup_ckeys()</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00056">ui_framed_surface_destroy()</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00026">ui_framed_surface_new()</a>, <a class="el" href="../../de/dfb/a01874_source.html#l00168">ui_shutdown()</a>, <a class="el" href="../../d5/d10/a02396_source.html#l00183">view_boxwin_resize()</a>, <a class="el" href="../../d5/d73/a02423_source.html#l00157">view_file()</a>, and <a class="el" href="../../d5/d10/a02396_source.html#l00100">view_full_screen_resize()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a6af7c6c514535d5998f7a762374bc370_cgraph.svg" width="286" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_a6af7c6c514535d5998f7a762374bc370_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="a96dd35cc737ad4ad1df00be412f1f1fb" name="a96dd35cc737ad4ad1df00be412f1f1fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96dd35cc737ad4ad1df00be412f1f1fb">&#9670;&#160;</a></span>ui_surface_erase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_erase </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00239">239</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  239</span>                                   {</div>
-<div class="line"><span class="lineno">  240</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  241</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  242</span>    ncplane_erase(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>);</div>
-<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  244</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>.</p>
-
-</div>
-</div>
-<a id="a234f78eee651b5a68d810a6ca3d05b59" name="a234f78eee651b5a68d810a6ca3d05b59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a234f78eee651b5a68d810a6ca3d05b59">&#9670;&#160;</a></span>ui_surface_hide()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_hide </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00256">256</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  256</span>                                  {</div>
-<div class="line"><span class="lineno">  257</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  258</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keywordflow">if</span> (!s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a19a156d558185080c1599f705a80ca94">hidden</a>) {</div>
-<div class="line"><span class="lineno">  260</span>        s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a19a156d558185080c1599f705a80ca94">hidden</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  261</span>        <span class="comment">/* Move far off-screen so the plane does not obscure anything. */</span></div>
-<div class="line"><span class="lineno">  262</span>        ncplane_move_yx(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, -s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a181ede29e0b3e0bc4128c67894a32d0f">lines</a> - 1, 0);</div>
-<div class="line"><span class="lineno">  263</span>    }</div>
-<div class="line"><span class="lineno">  264</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  265</span>}</div>
-<div class="ttc" id="aa02562_html_a181ede29e0b3e0bc4128c67894a32d0f"><div class="ttname"><a href="../../d9/d66/a02562.html#a181ede29e0b3e0bc4128c67894a32d0f">UiSurface::lines</a></div><div class="ttdeci">int lines</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00116">ui_ncurses_internal.h:116</a></div></div>
-<div class="ttc" id="aa02562_html_a19a156d558185080c1599f705a80ca94"><div class="ttname"><a href="../../d9/d66/a02562.html#a19a156d558185080c1599f705a80ca94">UiSurface::hidden</a></div><div class="ttdeci">bool hidden</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00120">ui_ncurses_internal.h:120</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00120">UiSurface::hidden</a>, <a class="el" href="../../da/d66/a01856_source.html#l00116">UiSurface::lines</a>, and <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>.</p>
-
-</div>
-</div>
-<a id="add807a747f2b70d3642b9d45e697da7c" name="add807a747f2b70d3642b9d45e697da7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add807a747f2b70d3642b9d45e697da7c">&#9670;&#160;</a></span>ui_surface_move()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_move </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00211">211</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  211</span>                                                {</div>
-<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  213</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  214</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#aafd826fc271ae353a4013bf5f1cad120">y</a> = y;</div>
-<div class="line"><span class="lineno">  215</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#af1b64930cac7948219a8437126893898">x</a> = x;</div>
-<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">if</span> (!s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a19a156d558185080c1599f705a80ca94">hidden</a>)</div>
-<div class="line"><span class="lineno">  217</span>        <span class="keywordflow">return</span> ncplane_move_yx(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, y, x) == 0 ? 0 : -1;</div>
-<div class="line"><span class="lineno">  218</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  219</span>}</div>
-<div class="ttc" id="aa02562_html_aafd826fc271ae353a4013bf5f1cad120"><div class="ttname"><a href="../../d9/d66/a02562.html#aafd826fc271ae353a4013bf5f1cad120">UiSurface::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00114">ui_ncurses_internal.h:114</a></div></div>
-<div class="ttc" id="aa02562_html_af1b64930cac7948219a8437126893898"><div class="ttname"><a href="../../d9/d66/a02562.html#af1b64930cac7948219a8437126893898">UiSurface::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00115">ui_ncurses_internal.h:115</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00120">UiSurface::hidden</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../da/d66/a01856_source.html#l00115">UiSurface::x</a>, and <a class="el" href="../../da/d66/a01856_source.html#l00114">UiSurface::y</a>.</p>
-
-</div>
-</div>
-<a id="a167278003ecb19e2eb778b134913b504" name="a167278003ecb19e2eb778b134913b504"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a167278003ecb19e2eb778b134913b504">&#9670;&#160;</a></span>ui_surface_new()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> * ui_surface_new </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>parent</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d8/dab/a02638.html">UiRect</a></td>          <td class="paramname"><span class="paramname"><em>rect</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00168">168</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  168</span>                                                                         {</div>
-<div class="line"><span class="lineno">  169</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  170</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  171</span> </div>
-<div class="line"><span class="lineno">  172</span>    <a class="code hl_struct" href="../../d9/d66/a02562.html">UiSurface</a> *s = calloc(1, <span class="keyword">sizeof</span>(*s));</div>
-<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  174</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  175</span> </div>
-<div class="line"><span class="lineno">  176</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#ae77d141cf4be4fd982255ca9d3478cae">runtime</a> = ui;</div>
-<div class="line"><span class="lineno">  177</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a04f2004ff2bb52e2f90b6148e76a37c4">parent</a> = parent;</div>
-<div class="line"><span class="lineno">  178</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#aafd826fc271ae353a4013bf5f1cad120">y</a> = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a03824f3c5073f5bde5ad401eb9dcc449">y</a>;</div>
-<div class="line"><span class="lineno">  179</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#af1b64930cac7948219a8437126893898">x</a> = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8ca5369f3caee4a1aca2d295b2a3d95b">x</a>;</div>
-<div class="line"><span class="lineno">  180</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a181ede29e0b3e0bc4128c67894a32d0f">lines</a> = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">lines</a>;</div>
-<div class="line"><span class="lineno">  181</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#ad918e8067683c4edfed3495c6ec46d0d">cols</a> = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">cols</a>;</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>    <span class="keyword">struct </span>ncplane *parent_plane =</div>
-<div class="line"><span class="lineno">  184</span>        parent ? parent-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a> : notcurses_stdplane(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  185</span> </div>
-<div class="line"><span class="lineno">  186</span>    <span class="keyword">struct </span>ncplane_options plane_opts = {</div>
-<div class="line"><span class="lineno">  187</span>        .y = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a03824f3c5073f5bde5ad401eb9dcc449">y</a>,</div>
-<div class="line"><span class="lineno">  188</span>        .x = rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8ca5369f3caee4a1aca2d295b2a3d95b">x</a>,</div>
-<div class="line"><span class="lineno">  189</span>        .lines = (<span class="keywordtype">unsigned</span> int)rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">lines</a>,</div>
-<div class="line"><span class="lineno">  190</span>        .cols = (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)rect.<a class="code hl_variable" href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">cols</a>,</div>
-<div class="line"><span class="lineno">  191</span>        .name = NULL,</div>
-<div class="line"><span class="lineno">  192</span>    };</div>
-<div class="line"><span class="lineno">  193</span> </div>
-<div class="line"><span class="lineno">  194</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a> = ncplane_create(parent_plane, &amp;plane_opts);</div>
-<div class="line"><span class="lineno">  195</span>    <span class="keywordflow">if</span> (!s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>) {</div>
-<div class="line"><span class="lineno">  196</span>        free(s);</div>
-<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  198</span>    }</div>
-<div class="line"><span class="lineno">  199</span> </div>
-<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">return</span> s;</div>
-<div class="line"><span class="lineno">  201</span>}</div>
-<div class="ttc" id="aa02562_html"><div class="ttname"><a href="../../d9/d66/a02562.html">UiSurface</a></div><div class="ttdoc">A drawable surface in the NCurses backend. Wraps an NCurses WINDOW and its associated PANEL.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00085">ui_ncurses_internal.h:85</a></div></div>
-<div class="ttc" id="aa02562_html_a04f2004ff2bb52e2f90b6148e76a37c4"><div class="ttname"><a href="../../d9/d66/a02562.html#a04f2004ff2bb52e2f90b6148e76a37c4">UiSurface::parent</a></div><div class="ttdeci">struct UiSurface * parent</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00113">ui_ncurses_internal.h:113</a></div></div>
-<div class="ttc" id="aa02562_html_ad918e8067683c4edfed3495c6ec46d0d"><div class="ttname"><a href="../../d9/d66/a02562.html#ad918e8067683c4edfed3495c6ec46d0d">UiSurface::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00117">ui_ncurses_internal.h:117</a></div></div>
-<div class="ttc" id="aa02562_html_ae77d141cf4be4fd982255ca9d3478cae"><div class="ttname"><a href="../../d9/d66/a02562.html#ae77d141cf4be4fd982255ca9d3478cae">UiSurface::runtime</a></div><div class="ttdeci">struct UiRuntime * runtime</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00112">ui_ncurses_internal.h:112</a></div></div>
-<div class="ttc" id="aa02638_html_a03824f3c5073f5bde5ad401eb9dcc449"><div class="ttname"><a href="../../d8/dab/a02638.html#a03824f3c5073f5bde5ad401eb9dcc449">UiRect::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00110">ui_backend.h:110</a></div></div>
-<div class="ttc" id="aa02638_html_a8ca5369f3caee4a1aca2d295b2a3d95b"><div class="ttname"><a href="../../d8/dab/a02638.html#a8ca5369f3caee4a1aca2d295b2a3d95b">UiRect::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00111">ui_backend.h:111</a></div></div>
-<div class="ttc" id="aa02638_html_a8e6e4f04b9f1f0aa48eaef2a6f0a6d02"><div class="ttname"><a href="../../d8/dab/a02638.html#a8e6e4f04b9f1f0aa48eaef2a6f0a6d02">UiRect::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00113">ui_backend.h:113</a></div></div>
-<div class="ttc" id="aa02638_html_ae745796aba96efedaa20c80f08e16ab4"><div class="ttname"><a href="../../d8/dab/a02638.html#ae745796aba96efedaa20c80f08e16ab4">UiRect::lines</a></div><div class="ttdeci">int lines</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00112">ui_backend.h:112</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d18/a01850_source.html#l00113">UiRect::cols</a>, <a class="el" href="../../da/d66/a01856_source.html#l00117">UiSurface::cols</a>, <a class="el" href="../../da/d18/a01850_source.html#l00112">UiRect::lines</a>, <a class="el" href="../../da/d66/a01856_source.html#l00116">UiSurface::lines</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>, <a class="el" href="../../da/d66/a01856_source.html#l00113">UiSurface::parent</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../da/d66/a01856_source.html#l00112">UiSurface::runtime</a>, <a class="el" href="../../da/d18/a01850_source.html#l00111">UiRect::x</a>, <a class="el" href="../../da/d66/a01856_source.html#l00115">UiSurface::x</a>, <a class="el" href="../../da/d18/a01850_source.html#l00110">UiRect::y</a>, and <a class="el" href="../../da/d66/a01856_source.html#l00114">UiSurface::y</a>.</p>
-
-</div>
-</div>
-<a id="a55c8c716294781a374e744b3a703db4b" name="a55c8c716294781a374e744b3a703db4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55c8c716294781a374e744b3a703db4b">&#9670;&#160;</a></span>ui_surface_resize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_resize </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>lines</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>cols</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00221">221</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>                                                         {</div>
-<div class="line"><span class="lineno">  222</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  223</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  224</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a181ede29e0b3e0bc4128c67894a32d0f">lines</a> = lines;</div>
-<div class="line"><span class="lineno">  225</span>    s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#ad918e8067683c4edfed3495c6ec46d0d">cols</a> = cols;</div>
-<div class="line"><span class="lineno">  226</span>    <span class="keywordflow">return</span> ncplane_resize_simple(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)lines,</div>
-<div class="line"><span class="lineno">  227</span>                                 (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>)cols) == 0</div>
-<div class="line"><span class="lineno">  228</span>               ? 0</div>
-<div class="line"><span class="lineno">  229</span>               : -1;</div>
-<div class="line"><span class="lineno">  230</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00117">UiSurface::cols</a>, <a class="el" href="../../da/d66/a01856_source.html#l00116">UiSurface::lines</a>, and <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>.</p>
-
-</div>
-</div>
-<a id="ab640de44654a656fb3fd9aa060854988" name="ab640de44654a656fb3fd9aa060854988"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab640de44654a656fb3fd9aa060854988">&#9670;&#160;</a></span>ui_surface_set_base()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_set_base </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *</td>          <td class="paramname"><span class="paramname"><em>style</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>fill_ch</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00331">331</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  331</span>                                                                              {</div>
-<div class="line"><span class="lineno">  332</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  333</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  334</span>    uint64_t channels = <a class="code hl_function" href="#a47d6b411bd1e7632f6f2d4252e5f92c4">ui_notcurses_channels_from_style</a>(style);</div>
-<div class="line"><span class="lineno">  335</span>    uint32_t attrs = <a class="code hl_function" href="#a95e1d8de5d6f68b4ea129cad60455537">ui_notcurses_attrs_from_style</a>(style);</div>
-<div class="line"><span class="lineno">  336</span>    <span class="keywordtype">char</span> utf8[5] = <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><span class="lineno">  337</span>    <span class="keywordflow">if</span> (fill_ch &gt;= 0x20) {</div>
-<div class="line"><span class="lineno">  338</span>        <span class="comment">/* Encode the Unicode codepoint as UTF-8. */</span></div>
-<div class="line"><span class="lineno">  339</span>        <span class="keywordflow">if</span> (fill_ch &lt; 0x80) {</div>
-<div class="line"><span class="lineno">  340</span>            utf8[0] = (char)fill_ch;</div>
-<div class="line"><span class="lineno">  341</span>            utf8[1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  342</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fill_ch &lt; 0x800) {</div>
-<div class="line"><span class="lineno">  343</span>            utf8[0] = (char)(0xC0 | (fill_ch &gt;&gt; 6));</div>
-<div class="line"><span class="lineno">  344</span>            utf8[1] = (char)(0x80 | (fill_ch &amp; 0x3F));</div>
-<div class="line"><span class="lineno">  345</span>            utf8[2] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  346</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (fill_ch &lt; 0x10000) {</div>
-<div class="line"><span class="lineno">  347</span>            utf8[0] = (char)(0xE0 | (fill_ch &gt;&gt; 12));</div>
-<div class="line"><span class="lineno">  348</span>            utf8[1] = (char)(0x80 | ((fill_ch &gt;&gt; 6) &amp; 0x3F));</div>
-<div class="line"><span class="lineno">  349</span>            utf8[2] = (char)(0x80 | (fill_ch &amp; 0x3F));</div>
-<div class="line"><span class="lineno">  350</span>            utf8[3] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  351</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  352</span>            utf8[0] = (char)(0xF0 | (fill_ch &gt;&gt; 18));</div>
-<div class="line"><span class="lineno">  353</span>            utf8[1] = (char)(0x80 | ((fill_ch &gt;&gt; 12) &amp; 0x3F));</div>
-<div class="line"><span class="lineno">  354</span>            utf8[2] = (char)(0x80 | ((fill_ch &gt;&gt; 6) &amp; 0x3F));</div>
-<div class="line"><span class="lineno">  355</span>            utf8[3] = (char)(0x80 | (fill_ch &amp; 0x3F));</div>
-<div class="line"><span class="lineno">  356</span>            utf8[4] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  357</span>        }</div>
-<div class="line"><span class="lineno">  358</span>    }</div>
-<div class="line"><span class="lineno">  359</span>    ncplane_set_base(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, utf8, attrs, channels);</div>
-<div class="line"><span class="lineno">  360</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  361</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../d5/da8/a01865_source.html#l00302">ui_notcurses_attrs_from_style()</a>, and <a class="el" href="../../d5/da8/a01865_source.html#l00293">ui_notcurses_channels_from_style()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_ab640de44654a656fb3fd9aa060854988_cgraph.svg" width="380" height="126"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="adb6c336da546adb736fc2414cb50f35c" name="adb6c336da546adb736fc2414cb50f35c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb6c336da546adb736fc2414cb50f35c">&#9670;&#160;</a></span>ui_surface_set_style()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_set_style </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="../../d0/d3f/a02630.html">UiStyle</a> *</td>          <td class="paramname"><span class="paramname"><em>style</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00322">322</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  322</span>                                                             {</div>
-<div class="line"><span class="lineno">  323</span>    <span class="keywordflow">if</span> (!s || !style)</div>
-<div class="line"><span class="lineno">  324</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  325</span>    uint64_t channels = <a class="code hl_function" href="#a47d6b411bd1e7632f6f2d4252e5f92c4">ui_notcurses_channels_from_style</a>(style);</div>
-<div class="line"><span class="lineno">  326</span>    ncplane_set_channels(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, channels);</div>
-<div class="line"><span class="lineno">  327</span>    ncplane_set_styles(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, <a class="code hl_function" href="#a95e1d8de5d6f68b4ea129cad60455537">ui_notcurses_attrs_from_style</a>(style));</div>
-<div class="line"><span class="lineno">  328</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  329</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../d5/da8/a01865_source.html#l00302">ui_notcurses_attrs_from_style()</a>, and <a class="el" href="../../d5/da8/a01865_source.html#l00293">ui_notcurses_channels_from_style()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/da8/a01865_adb6c336da546adb736fc2414cb50f35c_cgraph.svg" width="382" height="126"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a7ecb5254d5bcb79b25c92ea346d8a572" name="a7ecb5254d5bcb79b25c92ea346d8a572"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ecb5254d5bcb79b25c92ea346d8a572">&#9670;&#160;</a></span>ui_surface_show()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_surface_show </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00246">246</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  246</span>                                  {</div>
-<div class="line"><span class="lineno">  247</span>    <span class="keywordflow">if</span> (!s)</div>
-<div class="line"><span class="lineno">  248</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">if</span> (s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a19a156d558185080c1599f705a80ca94">hidden</a>) {</div>
-<div class="line"><span class="lineno">  250</span>        s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a19a156d558185080c1599f705a80ca94">hidden</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  251</span>        ncplane_move_yx(s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#a78f48706e2d6c6d5083112849370c1f1">plane</a>, s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#aafd826fc271ae353a4013bf5f1cad120">y</a>, s-&gt;<a class="code hl_variable" href="../../d9/d66/a02562.html#af1b64930cac7948219a8437126893898">x</a>);</div>
-<div class="line"><span class="lineno">  252</span>    }</div>
-<div class="line"><span class="lineno">  253</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  254</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d66/a01856_source.html#l00120">UiSurface::hidden</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00044">UiSurface::plane</a>, <a class="el" href="../../da/d66/a01856_source.html#l00115">UiSurface::x</a>, and <a class="el" href="../../da/d66/a01856_source.html#l00114">UiSurface::y</a>.</p>
-
-</div>
-</div>
-<a id="ac31772949760230c556ccb3b5f99714b" name="ac31772949760230c556ccb3b5f99714b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac31772949760230c556ccb3b5f99714b">&#9670;&#160;</a></span>ui_suspend()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_suspend </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00116">116</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  116</span>                              {</div>
-<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">if</span> (!ui)</div>
-<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  119</span>    notcurses_leave_alternate_screen(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>);</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  121</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>.</p>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="a4f6ed87ca3a9f2ab4af43fcdb95af3d4" name="a4f6ed87ca3a9f2ab4af43fcdb95af3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f6ed87ca3a9f2ab4af43fcdb95af3d4">&#9670;&#160;</a></span>ui_surface_box</h2>
+<a id="ab01cd88e27f549b782cb4220d1742373" name="ab01cd88e27f549b782cb4220d1742373"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab01cd88e27f549b782cb4220d1742373">&#9670;&#160;</a></span>err_msg</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> * ui_surface_box</td>
+          <td class="memname">char err_msg[<a class="el" href="#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00019">19</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-
-</div>
-</div>
-<a id="a43ac29dca7a2cf725223c4c9eb93a223" name="a43ac29dca7a2cf725223c4c9eb93a223"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43ac29dca7a2cf725223c4c9eb93a223">&#9670;&#160;</a></span>ui_surface_win</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> * ui_surface_win</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00020">20</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
-
-</div>
-</div>
-<a id="a0738d104af72ae665b4fccc5b76c7961" name="a0738d104af72ae665b4fccc5b76c7961"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0738d104af72ae665b4fccc5b76c7961">&#9670;&#160;</a></span>ui_surface_win2</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> * ui_surface_win2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d5/da8/a01865_source.html#l00021">21</a> of file <a class="el" href="../../d5/da8/a01865_source.html">ui_notcurses.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/dcb/a02456_source.html#l00150">150</a> of file <a class="el" href="../../d5/dcb/a02456_source.html">view_engine.c</a>.</p>
 
 </div>
 </div>
@@ -1344,7 +533,7 @@ Here is the call graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d5/da8/a01865.html">ui_notcurses.c</a></li>
+    <li class="navelem"><a href="../../dir_a658a36887900285b7200981081fa8e9.html">include</a></li><li class="navelem"><a href="../../d5/da8/a01865.html">view.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

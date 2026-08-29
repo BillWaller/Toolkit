@@ -1,6 +1,5 @@
 var a02526 =
 [
-    [ "bg", "d9/d76/a02526.html#aa282a356ecb5ccffa17838618a9dffd9", null ],
-    [ "fg", "d9/d76/a02526.html#a9946ca4082c3d11f87bfca165a23c2ba", null ],
-    [ "pair_id", "d9/d76/a02526.html#a2142551c7e81b33dcc0012f8c38aead0", null ]
+    [ "menu_cmd_processor", "d9/d76/a02526.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
+    [ "menu_engine", "d9/d76/a02526.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
 ];

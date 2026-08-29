@@ -1,4 +1,29 @@
 var a01895 =
 [
-    [ "ui_get_event", "db/d29/a01895.html#af250dbf909f22474b80da86f7bacd4bd", null ]
+    [ "_XOPEN_SOURCE_EXTENDED", "db/d29/a01895.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
+    [ "mbstr_to_cc", "db/d29/a01895.html#a40a9c02a1f9104eda9765ba8ac3b99e6", null ],
+    [ "parse_ansi", "db/d29/a01895.html#ac3f90a10f800762f702882efac02ab27", null ],
+    [ "ui_draw_ch_yx", "db/d29/a01895.html#a0e17f34c93ab594a9f2d8f5ef686becc", null ],
+    [ "ui_draw_text", "db/d29/a01895.html#a5ea3fa5de6a0aa44ee10468b384cc6cc", null ],
+    [ "ui_draw_text_fill", "db/d29/a01895.html#aa405026cc19fc635c1cb9faa51a6b75a", null ],
+    [ "ui_draw_text_n", "db/d29/a01895.html#a7218745bf7c00527160725145d955ffb", null ],
+    [ "ui_mvaddstr", "db/d29/a01895.html#a76218efbb41a8487134a74130c2952fa", null ],
+    [ "ui_mvwadd_wch", "db/d29/a01895.html#ae0af07a419cf34d91cfafd2de3557ca7", null ],
+    [ "ui_mvwadd_wchnstr", "db/d29/a01895.html#a9664e69c96b4620290e7f3b7f33ebd3c", null ],
+    [ "ui_mvwadd_wchstr", "db/d29/a01895.html#a24969ad9749b224b5efc7ee04a28f228", null ],
+    [ "ui_mvwaddch", "db/d29/a01895.html#a3eef8e9b767732a0f73225b329f5dc56", null ],
+    [ "ui_mvwaddnstr", "db/d29/a01895.html#a13be9eaa7c284df5eb0c192bf18801c6", null ],
+    [ "ui_mvwaddnwstr", "db/d29/a01895.html#a30d3a9a42c16580ddb3cc2d1f65be871", null ],
+    [ "ui_mvwaddstr", "db/d29/a01895.html#a262476e2b98b0583f647feb08ef525c9", null ],
+    [ "ui_mvwaddstr_fill", "db/d29/a01895.html#af518154f1dd12f964d10bf824984b4cc", null ],
+    [ "ui_mvwaddwstr", "db/d29/a01895.html#af41e1b741c7876e8e2e1164eaf6add30", null ],
+    [ "ui_restore_wins", "db/d29/a01895.html#a73d0d8cf6bc75336815ecb41fa28ce53", null ],
+    [ "ui_wadd_wch", "db/d29/a01895.html#a0daa445dfb65f38179babcc62bc0296b", null ],
+    [ "ui_wadd_wchnstr", "db/d29/a01895.html#a96e094752c1eef64b7c15acf838a2239", null ],
+    [ "ui_wadd_wchstr", "db/d29/a01895.html#a5c81f35e88c6d9ed0dc5a6355f01a689", null ],
+    [ "ui_waddnwstr", "db/d29/a01895.html#a70bae2de760868f978cfe72c60c99759", null ],
+    [ "ui_waddstr", "db/d29/a01895.html#aa2e7c08a7fb5c2627eca7c399773cf41", null ],
+    [ "ui_waddwstr", "db/d29/a01895.html#afa7233ad4951321b05a18cd7a1d4748e", null ],
+    [ "ui_wclrtobot", "db/d29/a01895.html#a0e68d440b5e1d421e8a64014ad371827", null ],
+    [ "ui_wclrtoeol", "db/d29/a01895.html#aa3fd06d636e450f25efafec4d1078e64", null ]
 ];

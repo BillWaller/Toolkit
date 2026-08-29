@@ -1,0 +1,28 @@
+var a02777 =
+[
+    [ "argc", "d5/db0/a02777.html#a1a9cb8c933f8daee80d275fcae7bbb82", null ],
+    [ "argv", "d5/db0/a02777.html#aefb3580ad8effc5bc4d18272dda1d8c1", null ],
+    [ "begx", "d5/db0/a02777.html#adddd38ee171489f0230853e403b98db0", null ],
+    [ "begy", "d5/db0/a02777.html#a869e0b17617ed2d95d1e91698338cb77", null ],
+    [ "bg_clr_idx", "d5/db0/a02777.html#a0f23e8536f7bf2b55becb9a1a2363c0f", null ],
+    [ "bo_clr_idx", "d5/db0/a02777.html#a9921be5dc57df4c6c4cb345a5888d22e", null ],
+    [ "choice_max_len", "d5/db0/a02777.html#ad7a672aa424be529c4355829b859cdc0", null ],
+    [ "cmd", "d5/db0/a02777.html#a54de460c3cff50a338a658f039588d7b", null ],
+    [ "cols", "d5/db0/a02777.html#a8cc898e1e6bb8725e09a863b1257f545", null ],
+    [ "f_cmd", "d5/db0/a02777.html#abeac01782bfd4822533c4de5d11b020c", null ],
+    [ "f_help_spec", "d5/db0/a02777.html#a274319cb0d5ccabbd48105a5db38298d", null ],
+    [ "f_mapp_spec", "d5/db0/a02777.html#a88b3b7d9aeb982b80a2b2ac00305db83", null ],
+    [ "f_provider_cmd", "d5/db0/a02777.html#a5df190bfb6018ea0f73f55b7499c3efd", null ],
+    [ "f_receiver_cmd", "d5/db0/a02777.html#aa0ba964c16b116524c64603becf5fdab", null ],
+    [ "fg_clr_idx", "d5/db0/a02777.html#a625882dcf2ec0941af1a615feefcf698", null ],
+    [ "help_spec", "d5/db0/a02777.html#ada47854331f8ae621f8aa2075c8950f7", null ],
+    [ "item_count", "d5/db0/a02777.html#af4bff11133d885b9077c02c70c1803a7", null ],
+    [ "line", "d5/db0/a02777.html#a2218d7db25938e8b1ece65be418eb26c", null ],
+    [ "line_idx", "d5/db0/a02777.html#ae3096e92a3587567848809f22df183a1", null ],
+    [ "lines", "d5/db0/a02777.html#aeea2186ce63b59b89e669ca338b68633", null ],
+    [ "mapp_spec", "d5/db0/a02777.html#a1a90724742b6bc7d4378e9f51744f8b7", null ],
+    [ "provider_cmd", "d5/db0/a02777.html#a033fe4ccdd7f83d51824b4649f933848", null ],
+    [ "receiver_cmd", "d5/db0/a02777.html#a950711fc29da5549a7d8311632a69e68", null ],
+    [ "text_max_len", "d5/db0/a02777.html#a70956c5fd50355b9ed9dd266015eb706", null ],
+    [ "title", "d5/db0/a02777.html#af7f87761d323bc3a126687956e2b5211", null ]
+];

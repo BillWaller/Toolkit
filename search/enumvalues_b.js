@@ -1,9 +1,14 @@
 var searchData=
 [
-  ['pad_0',['PAD',['../da/d66/a01856.html#a69c79d84e5fd3819288e6213ff91dd52a58a4470bc0f9a4fcaf059b26e95ab9c2',1,'ui_ncurses_internal.h']]],
-  ['pick_1',['PICK',['../dc/d06/a01832.html#a5abe1ba66f71bb3a1bc22393854d33dfaea7ca0b8e1db4da5be02642b79cc64fc',1,'common.h']]],
-  ['pt_5flong_2',['PT_LONG',['../db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a',1,'view.h']]],
-  ['pt_5fnone_3',['PT_NONE',['../db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398',1,'view.h']]],
-  ['pt_5fshort_4',['PT_SHORT',['../db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490',1,'view.h']]],
-  ['pt_5fstring_5',['PT_STRING',['../db/d6b/a01853.html#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef',1,'view.h']]]
+  ['og_5fcol_0',['OG_COL',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2baecce67e7c270c27504ddb432a7299225',1,'common.h']]],
+  ['og_5fdirs_1',['OG_DIRS',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2ba4971d3fbdb21a264329759054eb84002',1,'common.h']]],
+  ['og_5ffiles_2',['OG_FILES',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2ba08fcbc8e3e88dd046292cff9c21a6c96',1,'common.h']]],
+  ['og_5fflags_3',['OG_FLAGS',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2bab527a75110a2beaeabfb2f5628b893d7',1,'common.h']]],
+  ['og_5fmisc_4',['OG_MISC',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2ba5d203c76a8476bf010288cbf8171e274',1,'common.h']]],
+  ['og_5fparms_5',['OG_PARMS',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2bac2d9cbf298ccb263c457b59df5c436e3',1,'common.h']]],
+  ['og_5fspecs_6',['OG_SPECS',['../d2/dbd/a01844.html#a87b22b8c9213bcf6c0fae14e67950b2ba5c89fc31a5847c678eecc7e0a440981b',1,'common.h']]],
+  ['ot_5fbool_7',['OT_BOOL',['../d2/dbd/a01844.html#a2809124eff04ad302ca62f63f9408f1ea30473fa5899c093415cef07c8b24446e',1,'common.h']]],
+  ['ot_5fhex_8',['OT_HEX',['../d2/dbd/a01844.html#a2809124eff04ad302ca62f63f9408f1ea4ac37d9404063befbfa42c1e147dbc81',1,'common.h']]],
+  ['ot_5fint_9',['OT_INT',['../d2/dbd/a01844.html#a2809124eff04ad302ca62f63f9408f1ea1de8b1decd952e86b118da732e540127',1,'common.h']]],
+  ['ot_5fstring_10',['OT_STRING',['../d2/dbd/a01844.html#a2809124eff04ad302ca62f63f9408f1eab0e3a540885bf86d020346911e3764b6',1,'common.h']]]
 ];

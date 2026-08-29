@@ -1,0 +1,27 @@
+var a01898 =
+[
+    [ "RGB", "dd/d20/a02605.html", "dd/d20/a02605" ],
+    [ "_XOPEN_SOURCE", "dd/d8e/a01898.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
+    [ "MAXLEN", "dd/d8e/a01898.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "MAXPLANE", "dd/d8e/a01898.html#a8e099b89c8248483961774a6da5b2302", null ],
+    [ "MAXSFC", "dd/d8e/a01898.html#a314a20c1eb8bc06bb44ee42eefcb4e2a", null ],
+    [ "U_VE", "dd/d8e/a01898.html#a256c73ac5a32444a37f64ad4eed0a82a", null ],
+    [ "NcSurface", "dd/d8e/a01898.html#a6b778b483662d0edeffd8af4f0be3fa5", null ],
+    [ "compat_mvwprintw", "dd/d8e/a01898.html#a4ecaf0bb8f6668a56a635246078d2a2c", null ],
+    [ "handle_input", "dd/d8e/a01898.html#ad80566753c17bfc45cb702766ab77a82", null ],
+    [ "hex_clr_str_to_rgb", "dd/d8e/a01898.html#a9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "main", "dd/d8e/a01898.html#a840291bc02cba5474a4cb46a9b9566fe", null ],
+    [ "ncplane_clicked", "dd/d8e/a01898.html#a072f039d9370af70cdd6fc551c60d403", null ],
+    [ "ncplane_move_yx_clrtoeol", "dd/d8e/a01898.html#ab0db43bd25d6d957fa49b664ac5d30c3", null ],
+    [ "ncplane_printf_yx_clrtoeol", "dd/d8e/a01898.html#af90f85b3d4e39b5999b9125d9ffb5bbd", null ],
+    [ "notcurses_key_str", "dd/d8e/a01898.html#a54ad43c9b63895395fd989f1a031618d", null ],
+    [ "plane_new", "dd/d8e/a01898.html#a11a0bfbfbc74a2108fbb2787fdeb1a68", null ],
+    [ "surface_new", "dd/d8e/a01898.html#add738ead5d7f23ff89618d81e56d1862", null ],
+    [ "ui_getch", "dd/d8e/a01898.html#a9e28b00f7c6be0aeae4d1625e4f73abd", null ],
+    [ "ui_notcurses_init", "dd/d8e/a01898.html#adbfe5987780daf0cfba472b61065ede0", null ],
+    [ "channels", "dd/d8e/a01898.html#a5cd27454b681f4bce32e4cd18c8b46c5", null ],
+    [ "nc", "dd/d8e/a01898.html#a918f90ce8324689bd8f5df8fb4ba9c4c", null ],
+    [ "nc_surface", "dd/d8e/a01898.html#a3fbf566430852c9d51de8eedd3e21254", null ],
+    [ "nc_surface_cnt", "dd/d8e/a01898.html#ab4a8c2829fe047b111bc2481c0d6684f", null ],
+    [ "sfc_ptr", "dd/d8e/a01898.html#aadb95339d79605a820662ff77af6b652", null ]
+];

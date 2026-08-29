@@ -1,7 +1,7 @@
 var a02495 =
 [
-    [ "handle_signal", "d5/d56/a02495.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "d5/d56/a02495.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "d5/d56/a02495.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "d5/d56/a02495.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ]
+    [ "_GNU_SOURCE", "d5/d56/a02495.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "main", "d5/d56/a02495.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "print_totals", "d5/d56/a02495.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
+    [ "month", "d5/d56/a02495.html#ac8f3e76eebe6c45cac2c928ac6ef2e8e", null ]
 ];

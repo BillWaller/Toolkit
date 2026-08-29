@@ -1,13 +1,5 @@
 var a02483 =
 [
-    [ "field_editor", "d3/de3/a02483.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
-    [ "form_display_field", "d3/de3/a02483.html#gabd1710f59277202b0a58f840d4da322e", null ],
-    [ "form_display_field_n", "d3/de3/a02483.html#ga95c3fea1ca130a8386408cdb450c2069", null ],
-    [ "form_fmt_field", "d3/de3/a02483.html#ga07a8d9311c88786e7310fef638d34a41", null ],
-    [ "form_validate_field", "d3/de3/a02483.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
-    [ "is_valid_date", "d3/de3/a02483.html#ga353546f4d99ef7ec908d371187f033de", null ],
-    [ "is_valid_time", "d3/de3/a02483.html#ga56bbb25c4d0944e1b96b9a723cde2ae9", null ],
-    [ "left_justify", "d3/de3/a02483.html#ga425021d4c87474159a36d395e4dcdf65", null ],
-    [ "numeric", "d3/de3/a02483.html#ga18db59e4c79e823f79310378183ac25c", null ],
-    [ "right_justify", "d3/de3/a02483.html#gaa356032a372a136c06dbcb1c0493a02b", null ]
+    [ "GCluster", "d2/ddf/a02573.html", "d2/ddf/a02573" ],
+    [ "main", "d3/de3/a02483.html#ae66f6b31b5ad750f1fe042a706a4e3d4", null ]
 ];

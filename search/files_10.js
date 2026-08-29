@@ -1,20 +1,4 @@
 var searchData=
 [
-  ['ualui_2emd_0',['UALUI.md',['../da/d6b/a02438.html',1,'']]],
-  ['ui_5fbackend_2eh_1',['ui_backend.h',['../da/d18/a01850.html',1,'']]],
-  ['ui_5fconformance_5ftest_2ec_2',['ui_conformance_test.c',['../d9/d63/a01877.html',1,'']]],
-  ['ui_5flayout_2ec_3',['ui_layout.c',['../dc/d31/a01892.html',1,'']]],
-  ['ui_5flayout_2eh_4',['ui_layout.h',['../d3/dce/a01859.html',1,'']]],
-  ['ui_5fncurses_2ec_5',['ui_ncurses.c',['../de/dfb/a01874.html',1,'']]],
-  ['ui_5fncurses_2emd_6',['UI_NCURSES.md',['../dd/d8e/a01898.html',1,'']]],
-  ['ui_5fncurses_5fcompat_2eh_7',['ui_ncurses_compat.h',['../db/d4b/a01883.html',1,'']]],
-  ['ui_5fncurses_5fdraw_2ec_8',['ui_ncurses_draw.c',['../d9/d7d/a01880.html',1,'']]],
-  ['ui_5fncurses_5finput_2ec_9',['ui_ncurses_input.c',['../dd/de7/a01868.html',1,'']]],
-  ['ui_5fncurses_5finternal_2eh_10',['ui_ncurses_internal.h',['../da/d66/a01856.html',1,'']]],
-  ['ui_5fnotcurses_2ec_11',['ui_notcurses.c',['../d5/da8/a01865.html',1,'']]],
-  ['ui_5fnotcurses_2emd_12',['UI_NOTCURSES.md',['../da/d8b/a01871.html',1,'']]],
-  ['ui_5fnotcurses_5fcompat_2eh_13',['ui_notcurses_compat.h',['../d9/dd5/a01886.html',1,'']]],
-  ['ui_5fnotcurses_5fdraw_2ec_14',['ui_notcurses_draw.c',['../d9/d9b/a01889.html',1,'']]],
-  ['ui_5fnotcurses_5finput_2ec_15',['ui_notcurses_input.c',['../db/d29/a01895.html',1,'']]],
-  ['ui_5fnotcurses_5finternal_2eh_16',['ui_notcurses_internal.h',['../d0/d4a/a01862.html',1,'']]]
+  ['themes_2emd_0',['themes.md',['../de/d76/a02417.html',1,'']]]
 ];

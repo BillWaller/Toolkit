@@ -1,10 +1,11 @@
 var a02429 =
 [
-    [ "MAX_FRAMES", "dc/d09/a02429.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
-    [ "handle_signal", "d5/d56/a02495.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
-    [ "sig_dfl_mode", "d5/d56/a02495.html#ga06c1eb6cf3649dc187115565409f91af", null ],
-    [ "sig_prog_mode", "d5/d56/a02495.html#gaca2de03f6d52d4b11237990e4e605177", null ],
-    [ "signal_handler", "d5/d56/a02495.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
-    [ "f_curses_open", "dc/d09/a02429.html#a44f81ebcc5b6c685cbdfe388eb420313", null ],
-    [ "sig_received", "dc/d09/a02429.html#a01a99fc32bd5b471123f6223503c9616", null ]
+    [ "init_view_boxwin", "de/dec/a02524.html#ga5f2cb12614d84281e8141fb66153240c", null ],
+    [ "init_view_full_screen", "de/dec/a02524.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
+    [ "view_boxwin_resize", "df/d9b/a02514.html#ga6a25dfdf332647ee271a731fd6556459", null ],
+    [ "view_calc_boxwin_dimensions", "de/dec/a02524.html#ga3995fd111304871f3379610fc4efed3c", null ],
+    [ "view_calc_full_screen_dimensions", "de/dec/a02524.html#gaa64cfaf51c250788f093130763495ac4", null ],
+    [ "view_full_screen_resize", "df/d9b/a02514.html#ga62d3266bd187c1e3cc267b6cbb60982e", null ],
+    [ "view_init_input", "de/dec/a02524.html#gaf5c0f5ce53c064b0017d3de1d1d649ad", null ],
+    [ "view_stack", "dc/d09/a02429.html#ac7f5b6614c7f476026767c4f3e1bde23", null ]
 ];

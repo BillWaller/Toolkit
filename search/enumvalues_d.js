@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['sub_5fsfc_5fmax_0',['SUB_SFC_MAX',['../da/d66/a01856.html#a69c79d84e5fd3819288e6213ff91dd52abb28c40d8caba86df68bfc14d867ab1b',1,'ui_ncurses_internal.h']]]
+  ['ran_5fbg_0',['RAN_BG',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a1eb9a04a3266fa189d545668c166ec07',1,'init.c']]],
+  ['ran_5ffg_1',['RAN_FG',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994ad5f64f62c3b075223625b3c8b1f42670',1,'init.c']]]
 ];

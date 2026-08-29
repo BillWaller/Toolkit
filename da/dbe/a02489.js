@@ -1,9 +1,5 @@
 var a02489 =
 [
-    [ "init_view.c", "d5/d10/a02396.html", null ],
-    [ "init_view_boxwin", "da/dbe/a02489.html#ga5f2cb12614d84281e8141fb66153240c", null ],
-    [ "init_view_full_screen", "da/dbe/a02489.html#ga5d69ccbd704b60891cdc788693d436d4", null ],
-    [ "view_calc_boxwin_dimensions", "da/dbe/a02489.html#ga3995fd111304871f3379610fc4efed3c", null ],
-    [ "view_calc_full_screen_dimensions", "da/dbe/a02489.html#gaa64cfaf51c250788f093130763495ac4", null ],
-    [ "view_init_input", "da/dbe/a02489.html#gaf5c0f5ce53c064b0017d3de1d1d649ad", null ]
+    [ "fork_detach_execvp", "d4/db4/a02517.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "main", "da/dbe/a02489.html#a0ddf1224851353fc92bfbff6f499fa97", null ]
 ];

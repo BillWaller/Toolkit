@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_notcurses_input.c File Reference</title>
+<title>C-Menu: ui/ui_ncurses_draw.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,135 +110,1361 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('db/d29/a01895.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_notcurses_input.c File Reference</div></div>
+  <div class="headertitle"><div class="title">ui_ncurses_draw.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>NotCurses UI backend — input handling.  
+<p>NCurses UI backend — drawing functions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../d0/d4a/a01862_source.html">ui_notcurses_internal.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../db/d6b/a01853_source.html">cm.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d0/d4a/a01862_source.html">ui_backend.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dd/de7/a01868_source.html">ui_ncurses_internal.h</a>&quot;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;wchar.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_notcurses_input.c:</div>
+Include dependency graph for ui_ncurses_draw.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d63/a01896.svg" width="487" height="266"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d9/d63/a01896.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../db/d29/a01895_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ac7b30cf7f83588cb6bc1c716be66f5a2" id="r_ac7b30cf7f83588cb6bc1c716be66f5a2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac7b30cf7f83588cb6bc1c716be66f5a2">_XOPEN_SOURCE_EXTENDED</a>&#160;&#160;&#160;1</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af250dbf909f22474b80da86f7bacd4bd" id="r_af250dbf909f22474b80da86f7bacd4bd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af250dbf909f22474b80da86f7bacd4bd">ui_get_event</a> (<a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *ui, <a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *target, <a class="el" href="../../df/d0c/a02634.html">UiEvent</a> *ev, int timeout_ms)</td></tr>
-<tr class="memdesc:af250dbf909f22474b80da86f7bacd4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an input event from the NotCurses context.  <br /></td></tr>
+<tr class="memitem:a40a9c02a1f9104eda9765ba8ac3b99e6" id="r_a40a9c02a1f9104eda9765ba8ac3b99e6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a40a9c02a1f9104eda9765ba8ac3b99e6">mbstr_to_cc</a> (char *in_str, <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cmplx_buf_s)</td></tr>
+<tr class="memdesc:a40a9c02a1f9104eda9765ba8ac3b99e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a multibyte string to a complex character array.  <br /></td></tr>
+<tr class="memitem:ac3f90a10f800762f702882efac02ab27" id="r_ac3f90a10f800762f702882efac02ab27"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac3f90a10f800762f702882efac02ab27">parse_ansi</a> (char *ansi_str, <a class="el" href="../../d0/d4a/a01862.html#a4e0d5999f05d5d98291245accf2bd6b9">attr_t</a> *attr, uint *cpx)</td></tr>
+<tr class="memdesc:ac3f90a10f800762f702882efac02ab27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse an ANSI SGR sequence and update attributes and color pair index.  <br /></td></tr>
+<tr class="memitem:a0e17f34c93ab594a9f2d8f5ef686becc" id="r_a0e17f34c93ab594a9f2d8f5ef686becc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0e17f34c93ab594a9f2d8f5ef686becc">ui_draw_ch_yx</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char c)</td></tr>
+<tr class="memitem:a5ea3fa5de6a0aa44ee10468b384cc6cc" id="r_a5ea3fa5de6a0aa44ee10468b384cc6cc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5ea3fa5de6a0aa44ee10468b384cc6cc">ui_draw_text</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *text)</td></tr>
+<tr class="memitem:aa405026cc19fc635c1cb9faa51a6b75a" id="r_aa405026cc19fc635c1cb9faa51a6b75a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa405026cc19fc635c1cb9faa51a6b75a">ui_draw_text_fill</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *text, int n)</td></tr>
+<tr class="memitem:a7218745bf7c00527160725145d955ffb" id="r_a7218745bf7c00527160725145d955ffb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7218745bf7c00527160725145d955ffb">ui_draw_text_n</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *text, int n)</td></tr>
+<tr class="memitem:a76218efbb41a8487134a74130c2952fa" id="r_a76218efbb41a8487134a74130c2952fa"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a76218efbb41a8487134a74130c2952fa">ui_mvaddstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *text)</td></tr>
+<tr class="memitem:ae0af07a419cf34d91cfafd2de3557ca7" id="r_ae0af07a419cf34d91cfafd2de3557ca7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae0af07a419cf34d91cfafd2de3557ca7">ui_mvwadd_wch</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cell)</td></tr>
+<tr class="memitem:a9664e69c96b4620290e7f3b7f33ebd3c" id="r_a9664e69c96b4620290e7f3b7f33ebd3c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9664e69c96b4620290e7f3b7f33ebd3c">ui_mvwadd_wchnstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cmplx_buf, uint n)</td></tr>
+<tr class="memitem:a24969ad9749b224b5efc7ee04a28f228" id="r_a24969ad9749b224b5efc7ee04a28f228"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a24969ad9749b224b5efc7ee04a28f228">ui_mvwadd_wchstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cmplx_buf)</td></tr>
+<tr class="memitem:a3eef8e9b767732a0f73225b329f5dc56" id="r_a3eef8e9b767732a0f73225b329f5dc56"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3eef8e9b767732a0f73225b329f5dc56">ui_mvwaddch</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char c)</td></tr>
+<tr class="memitem:a13be9eaa7c284df5eb0c192bf18801c6" id="r_a13be9eaa7c284df5eb0c192bf18801c6"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a13be9eaa7c284df5eb0c192bf18801c6">ui_mvwaddnstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *text, int m)</td></tr>
+<tr class="memitem:a30d3a9a42c16580ddb3cc2d1f65be871" id="r_a30d3a9a42c16580ddb3cc2d1f65be871"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a30d3a9a42c16580ddb3cc2d1f65be871">ui_mvwaddnwstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const wchar_t *wstr, int m)</td></tr>
+<tr class="memitem:a262476e2b98b0583f647feb08ef525c9" id="r_a262476e2b98b0583f647feb08ef525c9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a262476e2b98b0583f647feb08ef525c9">ui_mvwaddstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *text)</td></tr>
+<tr class="memitem:af518154f1dd12f964d10bf824984b4cc" id="r_af518154f1dd12f964d10bf824984b4cc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af518154f1dd12f964d10bf824984b4cc">ui_mvwaddstr_fill</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const char *str, int m)</td></tr>
+<tr class="memitem:af41e1b741c7876e8e2e1164eaf6add30" id="r_af41e1b741c7876e8e2e1164eaf6add30"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#af41e1b741c7876e8e2e1164eaf6add30">ui_mvwaddwstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, uint y, uint x, const wchar_t *wstr)</td></tr>
+<tr class="memitem:a73d0d8cf6bc75336815ecb41fa28ce53" id="r_a73d0d8cf6bc75336815ecb41fa28ce53"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a73d0d8cf6bc75336815ecb41fa28ce53">ui_restore_wins</a> ()</td></tr>
+<tr class="memitem:a0daa445dfb65f38179babcc62bc0296b" id="r_a0daa445dfb65f38179babcc62bc0296b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0daa445dfb65f38179babcc62bc0296b">ui_wadd_wch</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cell)</td></tr>
+<tr class="memitem:a96e094752c1eef64b7c15acf838a2239" id="r_a96e094752c1eef64b7c15acf838a2239"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a96e094752c1eef64b7c15acf838a2239">ui_wadd_wchnstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cmplx_buf, uint n)</td></tr>
+<tr class="memitem:a5c81f35e88c6d9ed0dc5a6355f01a689" id="r_a5c81f35e88c6d9ed0dc5a6355f01a689"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5c81f35e88c6d9ed0dc5a6355f01a689">ui_wadd_wchstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *cmplx_buf)</td></tr>
+<tr class="memitem:a70bae2de760868f978cfe72c60c99759" id="r_a70bae2de760868f978cfe72c60c99759"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a70bae2de760868f978cfe72c60c99759">ui_waddnwstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, const wchar_t *wstr, int m)</td></tr>
+<tr class="memitem:aa2e7c08a7fb5c2627eca7c399773cf41" id="r_aa2e7c08a7fb5c2627eca7c399773cf41"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa2e7c08a7fb5c2627eca7c399773cf41">ui_waddstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, const char *text)</td></tr>
+<tr class="memitem:afa7233ad4951321b05a18cd7a1d4748e" id="r_afa7233ad4951321b05a18cd7a1d4748e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#afa7233ad4951321b05a18cd7a1d4748e">ui_waddwstr</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w, const wchar_t *wstr)</td></tr>
+<tr class="memitem:a0e68d440b5e1d421e8a64014ad371827" id="r_a0e68d440b5e1d421e8a64014ad371827"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0e68d440b5e1d421e8a64014ad371827">ui_wclrtobot</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w)</td></tr>
+<tr class="memitem:aa3fd06d636e450f25efafec4d1078e64" id="r_aa3fd06d636e450f25efafec4d1078e64"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa3fd06d636e450f25efafec4d1078e64">ui_wclrtoeol</a> (<a class="el" href="../../de/d48/a02589.html">UiSurface</a> *s, uint w)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>NotCurses UI backend — input handling. </p>
-<p>Translates NotCurses <code>ncinput</code> events into the portable <a class="el" href="../../df/d0c/a02634.html">UiEvent</a> representation defined in <a class="el" href="../../da/d18/a01850.html" title="Backend API for terminal UI library.">ui_backend.h</a>. </p>
+<div class="textblock"><p>NCurses UI backend — drawing functions. </p>
+<p>Implements the drawing operations declared in <a class="el" href="../../d0/d4a/a01862.html" title="Backend API for terminal UI library.">ui_backend.h</a> using the NCurses wide-character API. </p>
 
-<p class="definition">Definition in file <a class="el" href="../../db/d29/a01895_source.html">ui_notcurses_input.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="af250dbf909f22474b80da86f7bacd4bd" name="af250dbf909f22474b80da86f7bacd4bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af250dbf909f22474b80da86f7bacd4bd">&#9670;&#160;</a></span>ui_get_event()</h2>
+<p class="definition">Definition in file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="ac7b30cf7f83588cb6bc1c716be66f5a2" name="ac7b30cf7f83588cb6bc1c716be66f5a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7b30cf7f83588cb6bc1c716be66f5a2">&#9670;&#160;</a></span>_XOPEN_SOURCE_EXTENDED</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ui_get_event </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d23/a02558.html">UiRuntime</a> *</td>          <td class="paramname"><span class="paramname"><em>ui</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d9/d66/a02562.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../df/d0c/a02634.html">UiEvent</a> *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span>&#160;)</td>
+          <td class="memname">#define _XOPEN_SOURCE_EXTENDED&#160;&#160;&#160;1</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wait for an input event from the NotCurses context. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ui</td><td>UI runtime context. </td></tr>
-    <tr><td class="paramname">target</td><td>Unused for NotCurses (events are global to the context). </td></tr>
-    <tr><td class="paramname">ev</td><td>Output <a class="el" href="../../df/d0c/a02634.html">UiEvent</a> structure. </td></tr>
-    <tr><td class="paramname">timeout_ms</td><td>Milliseconds to wait; -1 = block indefinitely. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if <code class="param">ui</code> or <code class="param">ev</code> is NULL. </dd></dl>
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00009">9</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00073">73</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   74</span>                                 {</div>
-<div class="line"><span class="lineno">   75</span>    (void)target;</div>
-<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">if</span> (!ui || !ev)</div>
-<div class="line"><span class="lineno">   77</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">   78</span>    memset(ev, 0, <span class="keyword">sizeof</span>(*ev));</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>    ncinput ni;</div>
-<div class="line"><span class="lineno">   81</span>    uint32_t id;</div>
-<div class="line"><span class="lineno">   82</span> </div>
-<div class="line"><span class="lineno">   83</span>    <span class="keywordflow">if</span> (timeout_ms &lt; 0) {</div>
-<div class="line"><span class="lineno">   84</span>        <span class="keywordtype">id</span> = notcurses_get_blocking(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>, &amp;ni);</div>
-<div class="line"><span class="lineno">   85</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">   86</span>        <span class="keyword">struct </span>timespec <a class="code hl_variable" href="../../d4/d73/a02465.html#ac22bc675ebd47ac5a251f9fb269fd13f">ts</a> = {</div>
-<div class="line"><span class="lineno">   87</span>            .tv_sec  = timeout_ms / 1000,</div>
-<div class="line"><span class="lineno">   88</span>            .tv_nsec = (long)(timeout_ms % 1000) * 1000000L,</div>
-<div class="line"><span class="lineno">   89</span>        };</div>
-<div class="line"><span class="lineno">   90</span>        <span class="keywordtype">id</span> = notcurses_get(ui-&gt;<a class="code hl_variable" href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">nc</a>, &amp;<a class="code hl_variable" href="../../d4/d73/a02465.html#ac22bc675ebd47ac5a251f9fb269fd13f">ts</a>, &amp;ni);</div>
-<div class="line"><span class="lineno">   91</span>    }</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>    ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a9c0eb18f5d71125266c5662511f09bd8">key</a>   = translate_nckey(<span class="keywordtype">id</span>, &amp;ni);</div>
-<div class="line"><span class="lineno">   94</span>    ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#ade92c3f0584d0fd7738b27d2a5cdbd44">alt</a>   = ncinput_alt_p(&amp;ni);</div>
-<div class="line"><span class="lineno">   95</span>    ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a8c975ef5d23642307ec2f5897128029a">ctrl</a>  = ncinput_ctrl_p(&amp;ni);</div>
-<div class="line"><span class="lineno">   96</span>    ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a2fabd5214af990a4cc94a6bd95a2daa9">shift</a> = ncinput_shift_p(&amp;ni);</div>
-<div class="line"><span class="lineno">   97</span> </div>
-<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_enumvalue" href="../../da/d18/a01850.html#a3ca2b6a10186035b35b260c8da9b1277a507d019c3e61dac006052aafd4f62e1c">UI_KEY_CHAR</a>) {</div>
-<div class="line"><span class="lineno">   99</span>        ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a1bdc934f63956460595a1a366cf5fe1a">ch</a> = id; <span class="comment">/* Unicode codepoint */</span></div>
-<div class="line"><span class="lineno">  100</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_enumvalue" href="../../da/d18/a01850.html#a3ca2b6a10186035b35b260c8da9b1277a589e21cd416b5595f0de837f48729fb6">UI_KEY_MOUSE</a>) {</div>
-<div class="line"><span class="lineno">  101</span>        ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a75ad6768342f5d07f68cad17254d9650">y</a> = ni.y;</div>
-<div class="line"><span class="lineno">  102</span>        ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#ad57a037607e4507d3dc7cc3474463fb3">x</a> = ni.x;</div>
-<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == NCKEY_BUTTON4)</div>
-<div class="line"><span class="lineno">  104</span>            ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_enumvalue" href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0a5223948b39f369698b2552249eca4adf">UI_MOUSE_SCROLL_UP</a>;</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == NCKEY_BUTTON5)</div>
-<div class="line"><span class="lineno">  106</span>            ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_enumvalue" href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0a24373ba3a87a4fa08acb1ba92bca0abb">UI_MOUSE_SCROLL_DOWN</a>;</div>
-<div class="line"><span class="lineno">  107</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ni.evtype == NCTYPE_PRESS)</div>
-<div class="line"><span class="lineno">  108</span>            ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_enumvalue" href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0a3e963a1678d502b12cbab0c95675c65b">UI_MOUSE_PRESS</a>;</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ni.evtype == NCTYPE_RELEASE)</div>
-<div class="line"><span class="lineno">  110</span>            ev-&gt;<a class="code hl_variable" href="../../df/d0c/a02634.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_enumvalue" href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0ad9d328ee18526423b6c593715c0b14f7">UI_MOUSE_RELEASE</a>;</div>
-<div class="line"><span class="lineno">  111</span>    }</div>
-<div class="line"><span class="lineno">  112</span> </div>
-<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  114</span>}</div>
-<div class="ttc" id="aa01850_html_a3ca2b6a10186035b35b260c8da9b1277a507d019c3e61dac006052aafd4f62e1c"><div class="ttname"><a href="../../da/d18/a01850.html#a3ca2b6a10186035b35b260c8da9b1277a507d019c3e61dac006052aafd4f62e1c">UI_KEY_CHAR</a></div><div class="ttdeci">@ UI_KEY_CHAR</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00020">ui_backend.h:20</a></div></div>
-<div class="ttc" id="aa01850_html_a3ca2b6a10186035b35b260c8da9b1277a589e21cd416b5595f0de837f48729fb6"><div class="ttname"><a href="../../da/d18/a01850.html#a3ca2b6a10186035b35b260c8da9b1277a589e21cd416b5595f0de837f48729fb6">UI_KEY_MOUSE</a></div><div class="ttdeci">@ UI_KEY_MOUSE</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00037">ui_backend.h:37</a></div></div>
-<div class="ttc" id="aa01850_html_ae6ce556aca51dfaed5454fe001433be0a24373ba3a87a4fa08acb1ba92bca0abb"><div class="ttname"><a href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0a24373ba3a87a4fa08acb1ba92bca0abb">UI_MOUSE_SCROLL_DOWN</a></div><div class="ttdeci">@ UI_MOUSE_SCROLL_DOWN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00058">ui_backend.h:58</a></div></div>
-<div class="ttc" id="aa01850_html_ae6ce556aca51dfaed5454fe001433be0a3e963a1678d502b12cbab0c95675c65b"><div class="ttname"><a href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0a3e963a1678d502b12cbab0c95675c65b">UI_MOUSE_PRESS</a></div><div class="ttdeci">@ UI_MOUSE_PRESS</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00054">ui_backend.h:54</a></div></div>
-<div class="ttc" id="aa01850_html_ae6ce556aca51dfaed5454fe001433be0a5223948b39f369698b2552249eca4adf"><div class="ttname"><a href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0a5223948b39f369698b2552249eca4adf">UI_MOUSE_SCROLL_UP</a></div><div class="ttdeci">@ UI_MOUSE_SCROLL_UP</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00057">ui_backend.h:57</a></div></div>
-<div class="ttc" id="aa01850_html_ae6ce556aca51dfaed5454fe001433be0ad9d328ee18526423b6c593715c0b14f7"><div class="ttname"><a href="../../da/d18/a01850.html#ae6ce556aca51dfaed5454fe001433be0ad9d328ee18526423b6c593715c0b14f7">UI_MOUSE_RELEASE</a></div><div class="ttdeci">@ UI_MOUSE_RELEASE</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00055">ui_backend.h:55</a></div></div>
-<div class="ttc" id="aa02465_html_ac22bc675ebd47ac5a251f9fb269fd13f"><div class="ttname"><a href="../../d4/d73/a02465.html#ac22bc675ebd47ac5a251f9fb269fd13f">ts</a></div><div class="ttdeci">cchar_t ts</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d73/a02465_source.html#l00094">dwin.c:94</a></div></div>
-<div class="ttc" id="aa02558_html_a5553a1629187286a644cfd1422633f2a"><div class="ttname"><a href="../../df/d23/a02558.html#a5553a1629187286a644cfd1422633f2a">UiRuntime::nc</a></div><div class="ttdeci">struct notcurses * nc</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d4a/a01862_source.html#l00028">ui_notcurses_internal.h:28</a></div></div>
-<div class="ttc" id="aa02634_html_a1bdc934f63956460595a1a366cf5fe1a"><div class="ttname"><a href="../../df/d0c/a02634.html#a1bdc934f63956460595a1a366cf5fe1a">UiEvent::ch</a></div><div class="ttdeci">uint32_t ch</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00096">ui_backend.h:96</a></div></div>
-<div class="ttc" id="aa02634_html_a231f86f2260e925351ef3e655d57bad3"><div class="ttname"><a href="../../df/d0c/a02634.html#a231f86f2260e925351ef3e655d57bad3">UiEvent::mouse_action</a></div><div class="ttdeci">UiMouseAction mouse_action</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00104">ui_backend.h:104</a></div></div>
-<div class="ttc" id="aa02634_html_a2fabd5214af990a4cc94a6bd95a2daa9"><div class="ttname"><a href="../../df/d0c/a02634.html#a2fabd5214af990a4cc94a6bd95a2daa9">UiEvent::shift</a></div><div class="ttdeci">bool shift</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00099">ui_backend.h:99</a></div></div>
-<div class="ttc" id="aa02634_html_a75ad6768342f5d07f68cad17254d9650"><div class="ttname"><a href="../../df/d0c/a02634.html#a75ad6768342f5d07f68cad17254d9650">UiEvent::y</a></div><div class="ttdeci">int y</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00100">ui_backend.h:100</a></div></div>
-<div class="ttc" id="aa02634_html_a8c975ef5d23642307ec2f5897128029a"><div class="ttname"><a href="../../df/d0c/a02634.html#a8c975ef5d23642307ec2f5897128029a">UiEvent::ctrl</a></div><div class="ttdeci">bool ctrl</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00098">ui_backend.h:98</a></div></div>
-<div class="ttc" id="aa02634_html_a9c0eb18f5d71125266c5662511f09bd8"><div class="ttname"><a href="../../df/d0c/a02634.html#a9c0eb18f5d71125266c5662511f09bd8">UiEvent::key</a></div><div class="ttdeci">UiKey key</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00095">ui_backend.h:95</a></div></div>
-<div class="ttc" id="aa02634_html_ad57a037607e4507d3dc7cc3474463fb3"><div class="ttname"><a href="../../df/d0c/a02634.html#ad57a037607e4507d3dc7cc3474463fb3">UiEvent::x</a></div><div class="ttdeci">int x</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00101">ui_backend.h:101</a></div></div>
-<div class="ttc" id="aa02634_html_ade92c3f0584d0fd7738b27d2a5cdbd44"><div class="ttname"><a href="../../df/d0c/a02634.html#ade92c3f0584d0fd7738b27d2a5cdbd44">UiEvent::alt</a></div><div class="ttdeci">bool alt</div><div class="ttdef"><b>Definition</b> <a href="../../da/d18/a01850_source.html#l00097">ui_backend.h:97</a></div></div>
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a40a9c02a1f9104eda9765ba8ac3b99e6" name="a40a9c02a1f9104eda9765ba8ac3b99e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a9c02a1f9104eda9765ba8ac3b99e6">&#9670;&#160;</a></span>mbstr_to_cc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mbstr_to_cc </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>in_str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cmplx_buf_s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a multibyte string to a complex character array. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00224">224</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  224</span>                                                   {</div>
+<div class="line"><span class="lineno">  225</span>    <span class="keywordtype">char</span> ansi_tok[<a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  226</span>    uint i = 0, j = 0, x = 0;</div>
+<div class="line"><span class="lineno">  227</span>    uint len = 0;</div>
+<div class="line"><span class="lineno">  228</span>    uint tab_stop = 4;</div>
+<div class="line"><span class="lineno">  229</span>    uint tab_spaces = 0;</div>
+<div class="line"><span class="lineno">  230</span>    uint char_width;</div>
+<div class="line"><span class="lineno">  231</span>    <a class="code hl_typedef" href="../../d0/d4a/a01862.html#a4e0d5999f05d5d98291245accf2bd6b9">attr_t</a> attr = <a class="code hl_define" href="../../de/dfb/a01874.html#a0fff23e979f8a43bdcff7ea22fa13c9d">WA_NORMAL</a>;</div>
+<div class="line"><span class="lineno">  232</span>    uint cpx = <a class="code hl_variable" href="../../d1/df7/a02501.html#a127ba3f21c9f1ab9e839c38cd469e0a4">cp_nt</a>;</div>
+<div class="line"><span class="lineno">  233</span>    <a class="code hl_struct" href="../../de/d4c/a02641.html">UiCell</a> cc = {0};</div>
+<div class="line"><span class="lineno">  234</span>    <span class="keywordtype">wchar_t</span> wstr[2] = {L<span class="charliteral">&#39;\0&#39;</span>, L<span class="charliteral">&#39;\0&#39;</span>};</div>
+<div class="line"><span class="lineno">  235</span>    <a class="code hl_struct" href="../../de/d4c/a02641.html">UiCell</a> *cmplx_buf = cmplx_buf_s;</div>
+<div class="line"><span class="lineno">  236</span>    mbstate_t mbstate;</div>
+<div class="line"><span class="lineno">  237</span>    memset(&amp;mbstate, 0, <span class="keyword">sizeof</span>(mbstate));</div>
+<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">while</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i] != <span class="charliteral">&#39;\0&#39;</span>) {        <span class="comment">// line</span></div>
+<div class="line"><span class="lineno">  239</span>        <span class="keywordflow">while</span> (1) {                    <span class="comment">// ANSI SGR, Character, and Word</span></div>
+<div class="line"><span class="lineno">  240</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i] == <span class="charliteral">&#39;\033&#39;</span>) { <span class="comment">// ANSI SGR</span></div>
+<div class="line"><span class="lineno">  241</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i + 1] == <span class="charliteral">&#39;[&#39;</span>) {</div>
+<div class="line"><span class="lineno">  242</span>                    len = strcspn(&amp;<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i], <span class="stringliteral">&quot;mK &quot;</span>) + 1;</div>
+<div class="line"><span class="lineno">  243</span>                    memcpy(ansi_tok, &amp;<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i], len + 1);</div>
+<div class="line"><span class="lineno">  244</span>                    ansi_tok[len] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  245</span>                    <span class="keywordflow">if</span> (ansi_tok[0] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  246</span>                        <span class="keywordflow">if</span> (i + 2 &lt; <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>)</div>
+<div class="line"><span class="lineno">  247</span>                            i += 2;</div>
+<div class="line"><span class="lineno">  248</span>                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  249</span>                    }</div>
+<div class="line"><span class="lineno">  250</span>                    <span class="keywordflow">if</span> (len == 0 || <a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i + len - 1] == <span class="charliteral">&#39; &#39;</span>) {</div>
+<div class="line"><span class="lineno">  251</span>                        i += 2;</div>
+<div class="line"><span class="lineno">  252</span>                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  253</span>                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i + len - 1] == <span class="charliteral">&#39;K&#39;</span>) {</div>
+<div class="line"><span class="lineno">  254</span>                        i += len;</div>
+<div class="line"><span class="lineno">  255</span>                        <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  256</span>                    }</div>
+<div class="line"><span class="lineno">  257</span>                    <a class="code hl_function" href="#ac3f90a10f800762f702882efac02ab27">parse_ansi</a>(ansi_tok, &amp;attr, &amp;cpx);</div>
+<div class="line"><span class="lineno">  258</span>                    i += len;</div>
+<div class="line"><span class="lineno">  259</span>                } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  260</span>                    i++;</div>
+<div class="line"><span class="lineno">  261</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  262</span>                }</div>
+<div class="line"><span class="lineno">  263</span>            } <span class="keywordflow">else</span> { <span class="comment">// Characters</span></div>
+<div class="line"><span class="lineno">  264</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i] == <span class="charliteral">&#39; &#39;</span>) {</div>
+<div class="line"><span class="lineno">  265</span>                    wstr[0] = L<span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  266</span>                    wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  267</span>                    setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  268</span>                    cmplx_buf[j++] = cc;</div>
+<div class="line"><span class="lineno">  269</span>                    x++;</div>
+<div class="line"><span class="lineno">  270</span>                    i++;</div>
+<div class="line"><span class="lineno">  271</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  272</span>                }</div>
+<div class="line"><span class="lineno">  273</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i] == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  274</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  275</span>                }</div>
+<div class="line"><span class="lineno">  276</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i] == <span class="charliteral">&#39;\t&#39;</span>) {</div>
+<div class="line"><span class="lineno">  277</span>                    tab_spaces = tab_stop - j % tab_stop;</div>
+<div class="line"><span class="lineno">  278</span>                    wstr[0] = L<span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  279</span>                    wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  280</span>                    setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  281</span>                    <span class="keywordflow">for</span> (uint z = 0; z &lt; tab_spaces; z++) {</div>
+<div class="line"><span class="lineno">  282</span>                        cmplx_buf[j++] = cc;</div>
+<div class="line"><span class="lineno">  283</span>                        x++;</div>
+<div class="line"><span class="lineno">  284</span>                    }</div>
+<div class="line"><span class="lineno">  285</span>                    i++;</div>
+<div class="line"><span class="lineno">  286</span>                    <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  287</span>                }</div>
+<div class="line"><span class="lineno">  288</span>                wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  289</span>                len = mbrtowc(wstr, &amp;<a class="code hl_variable" href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a>[i], MB_CUR_MAX, &amp;mbstate);</div>
+<div class="line"><span class="lineno">  290</span>                <span class="keywordflow">if</span> (len &lt;= 0) {</div>
+<div class="line"><span class="lineno">  291</span>                    wstr[0] = L<span class="charliteral">&#39;?&#39;</span>;</div>
+<div class="line"><span class="lineno">  292</span>                    wstr[1] = L<span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  293</span>                    len = 1;</div>
+<div class="line"><span class="lineno">  294</span>                }</div>
+<div class="line"><span class="lineno">  295</span>                char_width = wcwidth(wstr[0]);</div>
+<div class="line"><span class="lineno">  296</span>                x += char_width;</div>
+<div class="line"><span class="lineno">  297</span>                setcchar(&amp;cc, wstr, attr, cpx, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  298</span>                cmplx_buf[j++] = cc;</div>
+<div class="line"><span class="lineno">  299</span>                i += len;</div>
+<div class="line"><span class="lineno">  300</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  301</span>            } <span class="comment">// END Character and Word</span></div>
+<div class="line"><span class="lineno">  302</span>        } <span class="comment">// END WHILE - ANSI SGR, Character, and Word</span></div>
+<div class="line"><span class="lineno">  303</span>    } <span class="comment">// END WHILE - line</span></div>
+<div class="line"><span class="lineno">  304</span>    wstr[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  305</span>    wstr[1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  306</span>    setcchar(&amp;cc, wstr, <a class="code hl_define" href="../../de/dfb/a01874.html#a0fff23e979f8a43bdcff7ea22fa13c9d">WA_NORMAL</a>, cpx, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  307</span>    cmplx_buf[j] = cc;</div>
+<div class="line"><span class="lineno">  308</span>    <span class="keywordflow">return</span> x;</div>
+<div class="line"><span class="lineno">  309</span>}</div>
+<div class="ttc" id="aa01862_html_a4e0d5999f05d5d98291245accf2bd6b9"><div class="ttname"><a href="../../d0/d4a/a01862.html#a4e0d5999f05d5d98291245accf2bd6b9">attr_t</a></div><div class="ttdeci">uint16_t attr_t</div><div class="ttdef"><b>Definition</b> <a href="../../d0/d4a/a01862_source.html#l00256">ui_backend.h:256</a></div></div>
+<div class="ttc" id="aa01874_html_a0fff23e979f8a43bdcff7ea22fa13c9d"><div class="ttname"><a href="../../de/dfb/a01874.html#a0fff23e979f8a43bdcff7ea22fa13c9d">WA_NORMAL</a></div><div class="ttdeci">#define WA_NORMAL</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00239">ui_notcurses_internal.h:239</a></div></div>
+<div class="ttc" id="aa01895_html_ac3f90a10f800762f702882efac02ab27"><div class="ttname"><a href="#ac3f90a10f800762f702882efac02ab27">parse_ansi</a></div><div class="ttdeci">void parse_ansi(char *ansi_str, attr_t *attr, uint *cpx)</div><div class="ttdoc">Parse an ANSI SGR sequence and update attributes and color pair index.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00311">ui_ncurses_draw.c:311</a></div></div>
+<div class="ttc" id="aa02432_html_ad9854984c9ecaa7cda3ee0a55c168df3"><div class="ttname"><a href="../../da/d5c/a02432.html#ad9854984c9ecaa7cda3ee0a55c168df3">in_str</a></div><div class="ttdeci">char in_str[BUFSIZ+1]</div><div class="ttdef"><b>Definition</b> <a href="../../da/d5c/a02432_source.html#l00020">iloan.c:20</a></div></div>
+<div class="ttc" id="aa02438_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d6b/a02438_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa02501_html_a127ba3f21c9f1ab9e839c38cd469e0a4"><div class="ttname"><a href="../../d1/df7/a02501.html#a127ba3f21c9f1ab9e839c38cd469e0a4">cp_nt</a></div><div class="ttdeci">ushort cp_nt</div><div class="ttdef"><b>Definition</b> <a href="../../d1/df7/a02501_source.html#l00151">dwin.c:151</a></div></div>
+<div class="ttc" id="aa02641_html"><div class="ttname"><a href="../../de/d4c/a02641.html">UiCell</a></div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00177">ui_notcurses_internal.h:177</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d18/a01850_source.html#l00097">UiEvent::alt</a>, <a class="el" href="../../da/d18/a01850_source.html#l00096">UiEvent::ch</a>, <a class="el" href="../../da/d18/a01850_source.html#l00098">UiEvent::ctrl</a>, <a class="el" href="../../da/d18/a01850_source.html#l00095">UiEvent::key</a>, <a class="el" href="../../da/d18/a01850_source.html#l00104">UiEvent::mouse_action</a>, <a class="el" href="../../d0/d4a/a01862_source.html#l00028">UiRuntime::nc</a>, <a class="el" href="../../da/d18/a01850_source.html#l00099">UiEvent::shift</a>, <a class="el" href="../../da/d18/a01850_source.html#l00020">UI_KEY_CHAR</a>, <a class="el" href="../../da/d18/a01850_source.html#l00037">UI_KEY_MOUSE</a>, <a class="el" href="../../da/d18/a01850_source.html#l00054">UI_MOUSE_PRESS</a>, <a class="el" href="../../da/d18/a01850_source.html#l00055">UI_MOUSE_RELEASE</a>, <a class="el" href="../../da/d18/a01850_source.html#l00058">UI_MOUSE_SCROLL_DOWN</a>, <a class="el" href="../../da/d18/a01850_source.html#l00057">UI_MOUSE_SCROLL_UP</a>, <a class="el" href="../../da/d18/a01850_source.html#l00101">UiEvent::x</a>, and <a class="el" href="../../da/d18/a01850_source.html#l00100">UiEvent::y</a>.</p>
+<p class="reference">References <a class="el" href="../../d1/df7/a02501_source.html#l00151">cp_nt</a>, and <a class="el" href="../../db/d29/a01895_source.html#l00311">parse_ansi()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d29/a01895_a40a9c02a1f9104eda9765ba8ac3b99e6_cgraph.svg" width="635" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
+</div>
+</div>
+<a id="ac3f90a10f800762f702882efac02ab27" name="ac3f90a10f800762f702882efac02ab27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3f90a10f800762f702882efac02ab27">&#9670;&#160;</a></span>parse_ansi()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void parse_ansi </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>ansi_str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d0/d4a/a01862.html#a4e0d5999f05d5d98291245accf2bd6b9">attr_t</a> *</td>          <td class="paramname"><span class="paramname"><em>attr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint *</td>          <td class="paramname"><span class="paramname"><em>cpx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse an ANSI SGR sequence and update attributes and color pair index. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00311">311</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  311</span>                                                         {</div>
+<div class="line"><span class="lineno">  312</span>    <span class="keywordtype">char</span> *tok;</div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordtype">char</span> t0, t1;</div>
+<div class="line"><span class="lineno">  314</span>    <span class="keywordtype">char</span> tstr[3];</div>
+<div class="line"><span class="lineno">  315</span>    uint len, x_idx;</div>
+<div class="line"><span class="lineno">  316</span>    uint fg, bg;</div>
+<div class="line"><span class="lineno">  317</span>    <span class="keywordtype">int</span> _fg_clr, _bg_clr;</div>
+<div class="line"><span class="lineno">  318</span>    uint fg_clr, bg_clr;</div>
+<div class="line"><span class="lineno">  319</span>    <span class="keywordtype">char</span> *ansi_p = ansi_str + 2;</div>
+<div class="line"><span class="lineno">  320</span>    extended_pair_content(*cpx, &amp;_fg_clr, &amp;_bg_clr);</div>
+<div class="line"><span class="lineno">  321</span>    fg = fg_clr = (uint)_fg_clr;</div>
+<div class="line"><span class="lineno">  322</span>    bg = fg_clr = (uint)_bg_clr;</div>
+<div class="line"><span class="lineno">  323</span>    <a class="code hl_struct" href="../../dd/d20/a02605.html">RGB</a> rgb;</div>
+<div class="line"><span class="lineno">  324</span>    tok = strtok((<span class="keywordtype">char</span> *)ansi_p, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  325</span>    <span class="keywordtype">bool</span> a_toi_error = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  326</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">  327</span>        <span class="keywordflow">if</span> (tok == <span class="keyword">nullptr</span> || *tok == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  328</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  329</span>        len = strlen(tok);</div>
+<div class="line"><span class="lineno">  330</span>        <span class="keywordflow">if</span> (len == 2) {</div>
+<div class="line"><span class="lineno">  331</span>            t0 = tok[0];</div>
+<div class="line"><span class="lineno">  332</span>            t1 = tok[1];</div>
+<div class="line"><span class="lineno">  333</span>            <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;3&#39;</span> || t0 == <span class="charliteral">&#39;4&#39;</span>) {</div>
+<div class="line"><span class="lineno">  334</span>                <span class="keywordflow">if</span> (t1 == <span class="charliteral">&#39;8&#39;</span>) {</div>
+<div class="line"><span class="lineno">  335</span>                    tok = strtok(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  336</span>                    <span class="keywordflow">if</span> (tok != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  337</span>                        <span class="keywordflow">if</span> (*tok == <span class="charliteral">&#39;5&#39;</span>) {</div>
+<div class="line"><span class="lineno">  338</span>                            tok = strtok(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  339</span>                            <span class="keywordflow">if</span> (tok != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  340</span>                                x_idx = <a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tok, &amp;a_toi_error);</div>
+<div class="line"><span class="lineno">  341</span>                                rgb = <a class="code hl_function" href="../../d1/df7/a02501.html#aa465f03c7701414c15727c8206e9e9f8">xterm256_idx_to_rgb</a>(x_idx);</div>
+<div class="line"><span class="lineno">  342</span>                            }</div>
+<div class="line"><span class="lineno">  343</span>                        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (*tok == <span class="charliteral">&#39;2&#39;</span>) {</div>
+<div class="line"><span class="lineno">  344</span>                            tok = strtok(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  345</span>                            rgb.<a class="code hl_variable" href="../../dd/d20/a02605.html#a5e45e40a4c1af118ead0a8c137834328">r</a> = <a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tok, &amp;a_toi_error);</div>
+<div class="line"><span class="lineno">  346</span>                            tok = strtok(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  347</span>                            rgb.<a class="code hl_variable" href="../../dd/d20/a02605.html#a792ca07575c4ac7775494a16a1d3787e">g</a> = <a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tok, &amp;a_toi_error);</div>
+<div class="line"><span class="lineno">  348</span>                            tok = strtok(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  349</span>                            rgb.<a class="code hl_variable" href="../../dd/d20/a02605.html#a61ce532b0be55169bc659b6d3d96bb20">b</a> = <a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tok, &amp;a_toi_error);</div>
+<div class="line"><span class="lineno">  350</span>                        }</div>
+<div class="line"><span class="lineno">  351</span>                    }</div>
+<div class="line"><span class="lineno">  352</span>                    <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;3&#39;</span>)</div>
+<div class="line"><span class="lineno">  353</span>                        fg_clr = <a class="code hl_function" href="../../d0/d4a/a01862.html#a2fb093c00ef55379a6725b1bef4f5698">ui_add_color_rgb</a>(&amp;rgb);</div>
+<div class="line"><span class="lineno">  354</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;4&#39;</span>)</div>
+<div class="line"><span class="lineno">  355</span>                        bg_clr = <a class="code hl_function" href="../../d0/d4a/a01862.html#a2fb093c00ef55379a6725b1bef4f5698">ui_add_color_rgb</a>(&amp;rgb);</div>
+<div class="line"><span class="lineno">  356</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t1 == <span class="charliteral">&#39;9&#39;</span>) {</div>
+<div class="line"><span class="lineno">  357</span>                    <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;3&#39;</span>)</div>
+<div class="line"><span class="lineno">  358</span>                        fg_clr = <a class="code hl_enumvalue" href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2a1efcef769c90e7834b0ffdd5af9be947">CLR_NT_FG</a>;</div>
+<div class="line"><span class="lineno">  359</span>                    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;4&#39;</span>)</div>
+<div class="line"><span class="lineno">  360</span>                        bg_clr = <a class="code hl_enumvalue" href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2ab5cf02b232d2903ab3f5259e4addaced">CLR_NT_BG</a>;</div>
+<div class="line"><span class="lineno">  361</span>                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t1 &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; t1 &lt;= <span class="charliteral">&#39;7&#39;</span>) {</div>
+<div class="line"><span class="lineno">  362</span>                    <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;3&#39;</span>) {</div>
+<div class="line"><span class="lineno">  363</span>                        tstr[0] = t1;</div>
+<div class="line"><span class="lineno">  364</span>                        tstr[1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  365</span>                        x_idx = <a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tstr, &amp;a_toi_error);</div>
+<div class="line"><span class="lineno">  366</span>                        rgb = <a class="code hl_function" href="../../d1/df7/a02501.html#aa465f03c7701414c15727c8206e9e9f8">xterm256_idx_to_rgb</a>(x_idx);</div>
+<div class="line"><span class="lineno">  367</span>                        fg_clr = <a class="code hl_function" href="../../d0/d4a/a01862.html#a2fb093c00ef55379a6725b1bef4f5698">ui_add_color_rgb</a>(&amp;rgb);</div>
+<div class="line"><span class="lineno">  368</span>                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;4&#39;</span>) {</div>
+<div class="line"><span class="lineno">  369</span>                        tstr[0] = t1;</div>
+<div class="line"><span class="lineno">  370</span>                        tstr[1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  371</span>                        x_idx = <a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tstr, &amp;a_toi_error);</div>
+<div class="line"><span class="lineno">  372</span>                        rgb = <a class="code hl_function" href="../../d1/df7/a02501.html#aa465f03c7701414c15727c8206e9e9f8">xterm256_idx_to_rgb</a>(x_idx);</div>
+<div class="line"><span class="lineno">  373</span>                        bg_clr = <a class="code hl_function" href="../../d0/d4a/a01862.html#a2fb093c00ef55379a6725b1bef4f5698">ui_add_color_rgb</a>(&amp;rgb);</div>
+<div class="line"><span class="lineno">  374</span>                    }</div>
+<div class="line"><span class="lineno">  375</span>                }</div>
+<div class="line"><span class="lineno">  376</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (t0 == <span class="charliteral">&#39;0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  377</span>                *tok = t1;</div>
+<div class="line"><span class="lineno">  378</span>                len = 1;</div>
+<div class="line"><span class="lineno">  379</span>            }</div>
+<div class="line"><span class="lineno">  380</span>        }</div>
+<div class="line"><span class="lineno">  381</span>        <span class="keywordflow">if</span> (len == 1) {</div>
+<div class="line"><span class="lineno">  382</span>            <span class="keywordflow">if</span> (*tok == <span class="charliteral">&#39;0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  383</span>                *attr = <a class="code hl_define" href="../../de/dfb/a01874.html#a0fff23e979f8a43bdcff7ea22fa13c9d">WA_NORMAL</a>;</div>
+<div class="line"><span class="lineno">  384</span>                fg_clr = <a class="code hl_enumvalue" href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2a1efcef769c90e7834b0ffdd5af9be947">CLR_NT_FG</a>;</div>
+<div class="line"><span class="lineno">  385</span>                bg_clr = <a class="code hl_enumvalue" href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2ab5cf02b232d2903ab3f5259e4addaced">CLR_NT_BG</a>;</div>
+<div class="line"><span class="lineno">  386</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  387</span>                <span class="keywordflow">switch</span> (<a class="code hl_function" href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a>(tok, &amp;a_toi_error)) {</div>
+<div class="line"><span class="lineno">  388</span>                <span class="keywordflow">case</span> 1:</div>
+<div class="line"><span class="lineno">  389</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#a52139d39aa56c0da8ab4ef2b98d4acb5">WA_BOLD</a>;</div>
+<div class="line"><span class="lineno">  390</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  391</span>                <span class="keywordflow">case</span> 2:</div>
+<div class="line"><span class="lineno">  392</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#a419d274063ad6fb81ebfb2c0e9ac624c">WA_DIM</a>;</div>
+<div class="line"><span class="lineno">  393</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  394</span>                <span class="keywordflow">case</span> 3:</div>
+<div class="line"><span class="lineno">  395</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#a365748f9e897a63a7d676a1d1ba60bd9">WA_ITALIC</a>;</div>
+<div class="line"><span class="lineno">  396</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  397</span>                <span class="keywordflow">case</span> 4:</div>
+<div class="line"><span class="lineno">  398</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#ad05ab8d518b6621db95c3dd1157a24df">WA_UNDERLINE</a>;</div>
+<div class="line"><span class="lineno">  399</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  400</span>                <span class="keywordflow">case</span> 5:</div>
+<div class="line"><span class="lineno">  401</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#a1bddfe168a9ee1ce2eec0ddb150c542d">WA_BLINK</a>;</div>
+<div class="line"><span class="lineno">  402</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  403</span>                <span class="keywordflow">case</span> 7:</div>
+<div class="line"><span class="lineno">  404</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#a8c4efd3d51191f49afaa7df9715934b2">WA_REVERSE</a>;</div>
+<div class="line"><span class="lineno">  405</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  406</span>                <span class="keywordflow">case</span> 8:</div>
+<div class="line"><span class="lineno">  407</span>                    *attr |= <a class="code hl_define" href="../../de/dfb/a01874.html#a4a662d02b636d7498478e303c9fcbffb">WA_INVIS</a>;</div>
+<div class="line"><span class="lineno">  408</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  409</span>                <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  410</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  411</span>                }</div>
+<div class="line"><span class="lineno">  412</span>            }</div>
+<div class="line"><span class="lineno">  413</span>        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (len == 0) {</div>
+<div class="line"><span class="lineno">  414</span>            *attr = <a class="code hl_define" href="../../de/dfb/a01874.html#a0fff23e979f8a43bdcff7ea22fa13c9d">WA_NORMAL</a>;</div>
+<div class="line"><span class="lineno">  415</span>            fg_clr = <a class="code hl_enumvalue" href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2a1efcef769c90e7834b0ffdd5af9be947">CLR_NT_FG</a>;</div>
+<div class="line"><span class="lineno">  416</span>            bg_clr = <a class="code hl_enumvalue" href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2ab5cf02b232d2903ab3f5259e4addaced">CLR_NT_BG</a>;</div>
+<div class="line"><span class="lineno">  417</span>        }</div>
+<div class="line"><span class="lineno">  418</span>        tok = strtok(<span class="keyword">nullptr</span>, <span class="stringliteral">&quot;;m&quot;</span>);</div>
+<div class="line"><span class="lineno">  419</span>    }</div>
+<div class="line"><span class="lineno">  420</span>    <span class="keywordflow">if</span> (!a_toi_error &amp;&amp; (fg_clr != fg || bg_clr != bg))</div>
+<div class="line"><span class="lineno">  421</span>        *cpx = <a class="code hl_function" href="../../d0/d4a/a01862.html#a79f44b36b1028e6f250584768221cd77">ui_add_pair</a>(fg_clr, bg_clr);</div>
+<div class="line"><span class="lineno">  422</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><span class="lineno">  423</span>}</div>
+<div class="ttc" id="aa01853_html_aac6fa7b0395b95cc528deaad0ce884a2a1efcef769c90e7834b0ffdd5af9be947"><div class="ttname"><a href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2a1efcef769c90e7834b0ffdd5af9be947">CLR_NT_FG</a></div><div class="ttdeci">@ CLR_NT_FG</div><div class="ttdef"><b>Definition</b> <a href="../../db/d6b/a01853_source.html#l00198">cm.h:198</a></div></div>
+<div class="ttc" id="aa01853_html_aac6fa7b0395b95cc528deaad0ce884a2ab5cf02b232d2903ab3f5259e4addaced"><div class="ttname"><a href="../../db/d6b/a01853.html#aac6fa7b0395b95cc528deaad0ce884a2ab5cf02b232d2903ab3f5259e4addaced">CLR_NT_BG</a></div><div class="ttdeci">@ CLR_NT_BG</div><div class="ttdef"><b>Definition</b> <a href="../../db/d6b/a01853_source.html#l00199">cm.h:199</a></div></div>
+<div class="ttc" id="aa01862_html_a2fb093c00ef55379a6725b1bef4f5698"><div class="ttname"><a href="../../d0/d4a/a01862.html#a2fb093c00ef55379a6725b1bef4f5698">ui_add_color_rgb</a></div><div class="ttdeci">int ui_add_color_rgb(RGB *rgb)</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00138">ui_ncurses.c:138</a></div></div>
+<div class="ttc" id="aa01862_html_a79f44b36b1028e6f250584768221cd77"><div class="ttname"><a href="../../d0/d4a/a01862.html#a79f44b36b1028e6f250584768221cd77">ui_add_pair</a></div><div class="ttdeci">uint ui_add_pair(uint fg, uint bg)</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00105">ui_ncurses.c:105</a></div></div>
+<div class="ttc" id="aa01874_html_a1bddfe168a9ee1ce2eec0ddb150c542d"><div class="ttname"><a href="../../de/dfb/a01874.html#a1bddfe168a9ee1ce2eec0ddb150c542d">WA_BLINK</a></div><div class="ttdeci">#define WA_BLINK</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00243">ui_notcurses_internal.h:243</a></div></div>
+<div class="ttc" id="aa01874_html_a365748f9e897a63a7d676a1d1ba60bd9"><div class="ttname"><a href="../../de/dfb/a01874.html#a365748f9e897a63a7d676a1d1ba60bd9">WA_ITALIC</a></div><div class="ttdeci">#define WA_ITALIC</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00251">ui_notcurses_internal.h:251</a></div></div>
+<div class="ttc" id="aa01874_html_a419d274063ad6fb81ebfb2c0e9ac624c"><div class="ttname"><a href="../../de/dfb/a01874.html#a419d274063ad6fb81ebfb2c0e9ac624c">WA_DIM</a></div><div class="ttdeci">#define WA_DIM</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00244">ui_notcurses_internal.h:244</a></div></div>
+<div class="ttc" id="aa01874_html_a4a662d02b636d7498478e303c9fcbffb"><div class="ttname"><a href="../../de/dfb/a01874.html#a4a662d02b636d7498478e303c9fcbffb">WA_INVIS</a></div><div class="ttdeci">#define WA_INVIS</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00247">ui_notcurses_internal.h:247</a></div></div>
+<div class="ttc" id="aa01874_html_a52139d39aa56c0da8ab4ef2b98d4acb5"><div class="ttname"><a href="../../de/dfb/a01874.html#a52139d39aa56c0da8ab4ef2b98d4acb5">WA_BOLD</a></div><div class="ttdeci">#define WA_BOLD</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00245">ui_notcurses_internal.h:245</a></div></div>
+<div class="ttc" id="aa01874_html_a8c4efd3d51191f49afaa7df9715934b2"><div class="ttname"><a href="../../de/dfb/a01874.html#a8c4efd3d51191f49afaa7df9715934b2">WA_REVERSE</a></div><div class="ttdeci">#define WA_REVERSE</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00242">ui_notcurses_internal.h:242</a></div></div>
+<div class="ttc" id="aa01874_html_ad05ab8d518b6621db95c3dd1157a24df"><div class="ttname"><a href="../../de/dfb/a01874.html#ad05ab8d518b6621db95c3dd1157a24df">WA_UNDERLINE</a></div><div class="ttdeci">#define WA_UNDERLINE</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00241">ui_notcurses_internal.h:241</a></div></div>
+<div class="ttc" id="aa02501_html_aa465f03c7701414c15727c8206e9e9f8"><div class="ttname"><a href="../../d1/df7/a02501.html#aa465f03c7701414c15727c8206e9e9f8">xterm256_idx_to_rgb</a></div><div class="ttdeci">RGB xterm256_idx_to_rgb(uint idx)</div><div class="ttdoc">Convert XTerm 256 color index to RGB.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/df7/a02501_source.html#l00274">dwin.c:274</a></div></div>
+<div class="ttc" id="aa02520_html_gab96e4c73a7b3ba1310044b479733cdd9"><div class="ttname"><a href="../../dc/dbb/a02520.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a></div><div class="ttdeci">int a_toi(char *, bool *)</div><div class="ttdoc">a safer alternative to atoi() for converting ASCII strings to integers.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d90/a02492_source.html#l00762">futil.c:762</a></div></div>
+<div class="ttc" id="aa02605_html"><div class="ttname"><a href="../../dd/d20/a02605.html">RGB</a></div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00150">ui_notcurses_internal.h:150</a></div></div>
+<div class="ttc" id="aa02605_html_a5e45e40a4c1af118ead0a8c137834328"><div class="ttname"><a href="../../dd/d20/a02605.html#a5e45e40a4c1af118ead0a8c137834328">RGB::r</a></div><div class="ttdeci">uint8_t r</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00153">ui_notcurses_internal.h:153</a></div></div>
+<div class="ttc" id="aa02605_html_a61ce532b0be55169bc659b6d3d96bb20"><div class="ttname"><a href="../../dd/d20/a02605.html#a61ce532b0be55169bc659b6d3d96bb20">RGB::b</a></div><div class="ttdeci">uint8_t b</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00153">ui_notcurses_internal.h:153</a></div></div>
+<div class="ttc" id="aa02605_html_a792ca07575c4ac7775494a16a1d3787e"><div class="ttname"><a href="../../dd/d20/a02605.html#a792ca07575c4ac7775494a16a1d3787e">RGB::g</a></div><div class="ttdeci">uint8_t g</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00153">ui_notcurses_internal.h:153</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d6/d90/a02492_source.html#l00762">a_toi()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00199">CLR_NT_BG</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00198">CLR_NT_FG</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00138">ui_add_color_rgb()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00105">ui_add_pair()</a>, and <a class="el" href="../../d1/df7/a02501_source.html#l00274">xterm256_idx_to_rgb()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/d29/a01895_source.html#l00224">mbstr_to_cc()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d29/a01895_ac3f90a10f800762f702882efac02ab27_cgraph.svg" width="486" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../db/d29/a01895_ac3f90a10f800762f702882efac02ab27_icgraph.svg" width="251" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a0e17f34c93ab594a9f2d8f5ef686becc" name="a0e17f34c93ab594a9f2d8f5ef686becc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e17f34c93ab594a9f2d8f5ef686becc">&#9670;&#160;</a></span>ui_draw_ch_yx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_draw_ch_yx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00040">40</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   40</span>                                                                      {</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   43</span>    mvwaddch(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, c);</div>
+<div class="line"><span class="lineno">   44</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   45</span>}</div>
+<div class="ttc" id="aa02589_html_ac8ad8fc9a7ee91b8831821f6d606b9f1"><div class="ttname"><a href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">UiSurface::mwin</a></div><div class="ttdeci">WINDOW * mwin[SUB_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/de7/a01868_source.html#l00111">ui_ncurses_internal.h:111</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5ea3fa5de6a0aa44ee10468b384cc6cc" name="a5ea3fa5de6a0aa44ee10468b384cc6cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea3fa5de6a0aa44ee10468b384cc6cc">&#9670;&#160;</a></span>ui_draw_text()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_draw_text </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00047">47</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   47</span>                                                                         {</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">   49</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   50</span>    mvwaddstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, text);</div>
+<div class="line"><span class="lineno">   51</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   52</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa405026cc19fc635c1cb9faa51a6b75a" name="aa405026cc19fc635c1cb9faa51a6b75a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa405026cc19fc635c1cb9faa51a6b75a">&#9670;&#160;</a></span>ui_draw_text_fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_draw_text_fill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00061">61</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>                                                                                     {</div>
+<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   64</span>    uint l = strlen(text);</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordflow">if</span> (l &lt; (uint)n) {</div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordtype">char</span> *tmp_str = (<span class="keywordtype">char</span> *)malloc(n + 1);</div>
+<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">if</span> (!tmp_str)</div>
+<div class="line"><span class="lineno">   68</span>            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   69</span>        strcpy(tmp_str, text);</div>
+<div class="line"><span class="lineno">   70</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = l; i &lt; (int)n; i++) {</div>
+<div class="line"><span class="lineno">   71</span>            tmp_str[i] = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">   72</span>        }</div>
+<div class="line"><span class="lineno">   73</span>        tmp_str[n] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">   74</span>        mvwaddstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, tmp_str);</div>
+<div class="line"><span class="lineno">   75</span>        free(tmp_str);</div>
+<div class="line"><span class="lineno">   76</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   77</span>        mvwaddnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, text, (<span class="keywordtype">int</span>)n);</div>
+<div class="line"><span class="lineno">   78</span>    }</div>
+<div class="line"><span class="lineno">   79</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   80</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a7218745bf7c00527160725145d955ffb" name="a7218745bf7c00527160725145d955ffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7218745bf7c00527160725145d955ffb">&#9670;&#160;</a></span>ui_draw_text_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_draw_text_n </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00054">54</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   54</span>                                                                                  {</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   57</span>    mvwaddnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, text, (<span class="keywordtype">int</span>)n);</div>
+<div class="line"><span class="lineno">   58</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   59</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a76218efbb41a8487134a74130c2952fa" name="a76218efbb41a8487134a74130c2952fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76218efbb41a8487134a74130c2952fa">&#9670;&#160;</a></span>ui_mvaddstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvaddstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00118">118</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  118</span>                                                                        {</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  120</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  121</span>    mvwaddstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, text);</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  123</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae0af07a419cf34d91cfafd2de3557ca7" name="ae0af07a419cf34d91cfafd2de3557ca7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0af07a419cf34d91cfafd2de3557ca7">&#9670;&#160;</a></span>ui_mvwadd_wch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwadd_wch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00175">175</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  175</span>                                                                            {</div>
+<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  178</span>    mvwadd_wch(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, cell);</div>
+<div class="line"><span class="lineno">  179</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  180</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9664e69c96b4620290e7f3b7f33ebd3c" name="a9664e69c96b4620290e7f3b7f33ebd3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9664e69c96b4620290e7f3b7f33ebd3c">&#9670;&#160;</a></span>ui_mvwadd_wchnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwadd_wchnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cmplx_buf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00201">201</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  201</span>                                                                                             {</div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">if</span> (!s || !cmplx_buf)</div>
+<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  204</span>    mvwadd_wchnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, cmplx_buf, n);</div>
+<div class="line"><span class="lineno">  205</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  206</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a24969ad9749b224b5efc7ee04a28f228" name="a24969ad9749b224b5efc7ee04a28f228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24969ad9749b224b5efc7ee04a28f228">&#9670;&#160;</a></span>ui_mvwadd_wchstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwadd_wchstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cmplx_buf</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00188">188</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  188</span>                                                                                    {</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keywordflow">if</span> (!s || !cmplx_buf)</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  191</span>    mvwadd_wchstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, cmplx_buf);</div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  193</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3eef8e9b767732a0f73225b329f5dc56" name="a3eef8e9b767732a0f73225b329f5dc56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3eef8e9b767732a0f73225b329f5dc56">&#9670;&#160;</a></span>ui_mvwaddch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00125">125</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  125</span>                                                                    {</div>
+<div class="line"><span class="lineno">  126</span>    <span class="keywordflow">if</span> (!s || !c)</div>
+<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  128</span>    mvwaddch(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, c);</div>
+<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  130</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a13be9eaa7c284df5eb0c192bf18801c6" name="a13be9eaa7c284df5eb0c192bf18801c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13be9eaa7c284df5eb0c192bf18801c6">&#9670;&#160;</a></span>ui_mvwaddnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00138">138</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  138</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  139</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  140</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  141</span>    mvwaddnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, text, m);</div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  143</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a30d3a9a42c16580ddb3cc2d1f65be871" name="a30d3a9a42c16580ddb3cc2d1f65be871"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30d3a9a42c16580ddb3cc2d1f65be871">&#9670;&#160;</a></span>ui_mvwaddnwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddnwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00102">102</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  102</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">  104</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  105</span>    mvwaddnwstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, wstr, m);</div>
+<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  107</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a262476e2b98b0583f647feb08ef525c9" name="a262476e2b98b0583f647feb08ef525c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a262476e2b98b0583f647feb08ef525c9">&#9670;&#160;</a></span>ui_mvwaddstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00132">132</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  132</span>                                                                         {</div>
+<div class="line"><span class="lineno">  133</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  134</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  135</span>    mvwaddstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, text);</div>
+<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  137</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af518154f1dd12f964d10bf824984b4cc" name="af518154f1dd12f964d10bf824984b4cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af518154f1dd12f964d10bf824984b4cc">&#9670;&#160;</a></span>ui_mvwaddstr_fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddstr_fill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00145">145</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  145</span>                                                                                    {</div>
+<div class="line"><span class="lineno">  146</span>    <span class="keywordtype">char</span> *d, *e;</div>
+<div class="line"><span class="lineno">  147</span>    uint maxy, maxx;</div>
+<div class="line"><span class="lineno">  148</span>    <span class="keywordtype">char</span> tmp_str[<a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  149</span>    getmaxyx(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], maxy, maxx);</div>
+<div class="line"><span class="lineno">  150</span>    y = <a class="code hl_define" href="../../db/d6b/a01853.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(y, maxy);</div>
+<div class="line"><span class="lineno">  151</span>    m = <a class="code hl_define" href="../../db/d6b/a01853.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(m, maxx);</div>
+<div class="line"><span class="lineno">  152</span>    m = <a class="code hl_define" href="../../db/d6b/a01853.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(m, (uint)<a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  153</span>    e = d = tmp_str;</div>
+<div class="line"><span class="lineno">  154</span>    e += m;</div>
+<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">while</span> (d &lt; e) {</div>
+<div class="line"><span class="lineno">  156</span>        <span class="keywordflow">if</span> (*str == <span class="charliteral">&#39;\0&#39;</span> || *str == <span class="charliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><span class="lineno">  157</span>            *d++ = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  158</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  159</span>            *d++ = *str++;</div>
+<div class="line"><span class="lineno">  160</span>    }</div>
+<div class="line"><span class="lineno">  161</span>    *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  162</span>    m = strlen(tmp_str);</div>
+<div class="line"><span class="lineno">  163</span>    mvwaddnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, tmp_str, m);</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  165</span>}</div>
+<div class="ttc" id="aa01853_html_abb702d8b501669a23aa0ab3b281b9384"><div class="ttname"><a href="../../db/d6b/a01853.html#abb702d8b501669a23aa0ab3b281b9384">min</a></div><div class="ttdeci">#define min(x, y)</div><div class="ttdoc">min macro evaluates two expressions, returning least result</div><div class="ttdef"><b>Definition</b> <a href="../../db/d6b/a01853_source.html#l00091">cm.h:91</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="af41e1b741c7876e8e2e1164eaf6add30" name="af41e1b741c7876e8e2e1164eaf6add30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af41e1b741c7876e8e2e1164eaf6add30">&#9670;&#160;</a></span>ui_mvwaddwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00090">90</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   90</span>                                                                             {</div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   93</span>    mvwaddwstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], y, x, wstr);</div>
+<div class="line"><span class="lineno">   94</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   95</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a73d0d8cf6bc75336815ecb41fa28ce53" name="a73d0d8cf6bc75336815ecb41fa28ce53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d0d8cf6bc75336815ecb41fa28ce53">&#9670;&#160;</a></span>ui_restore_wins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_restore_wins </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00210">210</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  210</span>                       {</div>
+<div class="line"><span class="lineno">  211</span>    touchwin(stdscr);</div>
+<div class="line"><span class="lineno">  212</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s = 0; s &lt;= <a class="code hl_variable" href="../../d0/d4a/a01862.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a>; s++) {</div>
+<div class="line"><span class="lineno">  213</span>        <span class="keywordflow">for</span> (uint w = 0; w &lt; <a class="code hl_enumvalue" href="../../de/dfb/a01874.html#a69c79d84e5fd3819288e6213ff91dd52abb28c40d8caba86df68bfc14d867ab1b">SUB_SFC_MAX</a>; w++)</div>
+<div class="line"><span class="lineno">  214</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d0/d4a/a01862.html#a8165e12a754304d517313c134485944a">ui_surface</a>[s]-&gt;mwin[w] != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  215</span>                touchwin(<a class="code hl_variable" href="../../d0/d4a/a01862.html#a8165e12a754304d517313c134485944a">ui_surface</a>[s]-&gt;mwin[w]);</div>
+<div class="line"><span class="lineno">  216</span>    }</div>
+<div class="line"><span class="lineno">  217</span>    <a class="code hl_function" href="../../d0/d4a/a01862.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">  218</span>}</div>
+<div class="ttc" id="aa01862_html_a0a06ae7bae8563b699ce712ec266fe6f"><div class="ttname"><a href="../../d0/d4a/a01862.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a></div><div class="ttdeci">void ui_render()</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00800">ui_ncurses.c:800</a></div></div>
+<div class="ttc" id="aa01862_html_a8165e12a754304d517313c134485944a"><div class="ttname"><a href="../../d0/d4a/a01862.html#a8165e12a754304d517313c134485944a">ui_surface</a></div><div class="ttdeci">UiSurface * ui_surface[UI_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00028">ui_ncurses.c:28</a></div></div>
+<div class="ttc" id="aa01862_html_aadb95339d79605a820662ff77af6b652"><div class="ttname"><a href="../../d0/d4a/a01862.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a></div><div class="ttdeci">int sfc_ptr</div><div class="ttdef"><b>Definition</b> <a href="../../dd/d8e/a01898_source.html#l00047">nckeys.c:47</a></div></div>
+<div class="ttc" id="aa01874_html_a69c79d84e5fd3819288e6213ff91dd52abb28c40d8caba86df68bfc14d867ab1b"><div class="ttname"><a href="../../de/dfb/a01874.html#a69c79d84e5fd3819288e6213ff91dd52abb28c40d8caba86df68bfc14d867ab1b">SUB_SFC_MAX</a></div><div class="ttdeci">@ SUB_SFC_MAX</div><div class="ttdef"><b>Definition</b> <a href="../../de/dfb/a01874_source.html#l00105">ui_notcurses_internal.h:105</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0daa445dfb65f38179babcc62bc0296b" name="a0daa445dfb65f38179babcc62bc0296b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0daa445dfb65f38179babcc62bc0296b">&#9670;&#160;</a></span>ui_wadd_wch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wadd_wch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00169">169</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  169</span>                                                          {</div>
+<div class="line"><span class="lineno">  170</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  171</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  172</span>    wadd_wchnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], cell, 1);</div>
+<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  174</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a96e094752c1eef64b7c15acf838a2239" name="a96e094752c1eef64b7c15acf838a2239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e094752c1eef64b7c15acf838a2239">&#9670;&#160;</a></span>ui_wadd_wchnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wadd_wchnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cmplx_buf</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00195">195</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  195</span>                                                                           {</div>
+<div class="line"><span class="lineno">  196</span>    <span class="keywordflow">if</span> (!s || !cmplx_buf)</div>
+<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  198</span>    wadd_wchnstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], cmplx_buf, n);</div>
+<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  200</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5c81f35e88c6d9ed0dc5a6355f01a689" name="a5c81f35e88c6d9ed0dc5a6355f01a689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c81f35e88c6d9ed0dc5a6355f01a689">&#9670;&#160;</a></span>ui_wadd_wchstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wadd_wchstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/d4c/a02641.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cmplx_buf</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00181">181</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  181</span>                                                                  {</div>
+<div class="line"><span class="lineno">  182</span>    <span class="keywordflow">if</span> (!s || !cmplx_buf)</div>
+<div class="line"><span class="lineno">  183</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  184</span>    wadd_wchstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], cmplx_buf);</div>
+<div class="line"><span class="lineno">  185</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  186</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a70bae2de760868f978cfe72c60c99759" name="a70bae2de760868f978cfe72c60c99759"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70bae2de760868f978cfe72c60c99759">&#9670;&#160;</a></span>ui_waddnwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddnwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00096">96</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   96</span>                                                                   {</div>
+<div class="line"><span class="lineno">   97</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">   98</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   99</span>    waddnwstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], wstr, m);</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  101</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa2e7c08a7fb5c2627eca7c399773cf41" name="aa2e7c08a7fb5c2627eca7c399773cf41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e7c08a7fb5c2627eca7c399773cf41">&#9670;&#160;</a></span>ui_waddstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00111">111</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  111</span>                                                       {</div>
+<div class="line"><span class="lineno">  112</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  113</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  114</span>    waddstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], text);</div>
+<div class="line"><span class="lineno">  115</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  116</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="afa7233ad4951321b05a18cd7a1d4748e" name="afa7233ad4951321b05a18cd7a1d4748e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa7233ad4951321b05a18cd7a1d4748e">&#9670;&#160;</a></span>ui_waddwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00084">84</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   84</span>                                                           {</div>
+<div class="line"><span class="lineno">   85</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   87</span>    waddwstr(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w], wstr);</div>
+<div class="line"><span class="lineno">   88</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   89</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0e68d440b5e1d421e8a64014ad371827" name="a0e68d440b5e1d421e8a64014ad371827"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e68d440b5e1d421e8a64014ad371827">&#9670;&#160;</a></span>ui_wclrtobot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wclrtobot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00025">25</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   25</span>                                       {</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   28</span>    wclrtobot(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w]);</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   30</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa3fd06d636e450f25efafec4d1078e64" name="aa3fd06d636e450f25efafec4d1078e64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3fd06d636e450f25efafec4d1078e64">&#9670;&#160;</a></span>ui_wclrtoeol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wclrtoeol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d48/a02589.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../db/d29/a01895_source.html#l00031">31</a> of file <a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   31</span>                                       {</div>
+<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">   33</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   34</span>    wclrtoeol(s-&gt;<a class="code hl_variable" href="../../de/d48/a02589.html#ac8ad8fc9a7ee91b8831821f6d606b9f1">mwin</a>[w]);</div>
+<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   36</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
@@ -254,7 +1480,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../db/d29/a01895.html">ui_notcurses_input.c</a></li>
+    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../db/d29/a01895.html">ui_ncurses_draw.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

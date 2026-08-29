@@ -1,5 +1,8 @@
 var a02515 =
 [
-    [ "l", "d5/d6a/a02515.html#a4aa4561aec0c1fdce969da7953bb7848", null ],
-    [ "s", "d5/d6a/a02515.html#a8904978bb99a49a64f7e146a4ab7ff4d", null ]
+    [ "abend", "d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a", null ],
+    [ "action_disposition", "d5/d6a/a02515.html#ga251bd97abc13e656e92e0ad484d1725d", null ],
+    [ "answer_yn", "d5/d6a/a02515.html#ga419792ccc6d058f03c63c0a454da7c14", null ],
+    [ "display_error", "d5/d6a/a02515.html#gace6da1791caec4c3aa1246533f4d974a", null ],
+    [ "Perror", "d5/d6a/a02515.html#ga61b4f28456257f68ed042bed7f187efd", null ]
 ];

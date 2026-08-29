@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['xbblack_0',['XBBLACK',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a00ea7fecfc0df03a16c0d6853a022fb8',1,'init.c']]],
+  ['xbblue_1',['XBBLUE',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a6af147ca20dcef9cd9e8cd30e6f8bc3a',1,'init.c']]],
+  ['xbcyan_2',['XBCYAN',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a027cdc5e9928773c9728b0f1cd121b42',1,'init.c']]],
+  ['xbgreen_3',['XBGREEN',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994ac36f9b351cc626da0c7198c1fed5fd72',1,'init.c']]],
+  ['xblack_4',['XBLACK',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a26a72b3ffba87a763277b8de7b8beaf2',1,'init.c']]],
+  ['xblue_5',['XBLUE',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a3d34958043426053d9ab81a8b39207d5',1,'init.c']]],
+  ['xbmagenta_6',['XBMAGENTA',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994aa47946f07fe8b66556c1af42938d2dfe',1,'init.c']]],
+  ['xbred_7',['XBRED',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994aea2d4ae19442520a3c9a0c4fb8b92e7a',1,'init.c']]],
+  ['xbwhite_8',['XBWHITE',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a3c0f1eefda85a3061a92d1bbe2975fc6',1,'init.c']]],
+  ['xbyellow_9',['XBYELLOW',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a7132722ccd9d579e868b51aed2208291',1,'init.c']]],
+  ['xcyan_10',['XCYAN',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a7a015b3273a6e58461d737341c821c40',1,'init.c']]],
+  ['xgreen_11',['XGREEN',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a586a659ac5c0dfa8014dc18295e1d41a',1,'init.c']]],
+  ['xmagenta_12',['XMAGENTA',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994add3ac8dd504ef7f8fb71353f8d801d6c',1,'init.c']]],
+  ['xred_13',['XRED',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a2031775eca9afc4b0da3cb79acb1cab8',1,'init.c']]],
+  ['xwhite_14',['XWHITE',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994ad197306ecc023420647d238effb4d792',1,'init.c']]],
+  ['xyellow_15',['XYELLOW',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a1e8f5351b676469647f570002e75bb2d',1,'init.c']]]
+];
