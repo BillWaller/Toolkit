@@ -1,9 +1,8 @@
 var a02447 =
 [
-    [ "fork_detach_execvp", "d4/db4/a02517.html#gaf878519c68b24567c915493739b6e979", null ],
-    [ "fork_detach_execvp", "d4/db4/a02517.html#gaf878519c68b24567c915493739b6e979", null ],
-    [ "fork_exec", "d4/db4/a02517.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "d4/db4/a02517.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "d4/db4/a02517.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "shell", "d4/db4/a02517.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "_GNU_SOURCE", "d8/d9a/a02447.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "HOST", "d8/d9a/a02447.html#abbbcf3c42c997889127cc676754a6fea", null ],
+    [ "ABEND", "d8/d9a/a02447.html#a1a86fc228ccdbf7d9cd46d250ecf9bd4", null ],
+    [ "main", "d8/d9a/a02447.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "F_VERBOSE", "d8/d9a/a02447.html#a9ea122171989176bc07376ae1eefc5c7", null ]
 ];

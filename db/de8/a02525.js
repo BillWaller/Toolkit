@@ -1,18 +1,17 @@
 var a02525 =
 [
-    [ "destroy_form", "db/de8/a02525.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
-    [ "destroy_init", "db/de8/a02525.html#gaac196563b2f701fba2d1580ac8813de7", null ],
-    [ "destroy_menu", "db/de8/a02525.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
-    [ "destroy_pick", "db/de8/a02525.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
-    [ "destroy_view", "db/de8/a02525.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
-    [ "init_form_files", "db/de8/a02525.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
-    [ "init_menu_files", "db/de8/a02525.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
-    [ "init_pick_files", "db/de8/a02525.html#gab40bb77758b149f33cbde8063f341b00", null ],
-    [ "init_view_files", "db/de8/a02525.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
-    [ "new_form", "db/de8/a02525.html#gabea148e77436a6475ea63438e5c921b8", null ],
-    [ "new_init", "db/de8/a02525.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
-    [ "new_menu", "db/de8/a02525.html#ga53c1b7dfa61a627b874094a12da2d40e", null ],
-    [ "new_pick", "db/de8/a02525.html#ga2fe0f8ed8c8996826b6167aa109cd08a", null ],
-    [ "new_view", "db/de8/a02525.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
-    [ "verify_spec_arg", "db/de8/a02525.html#ga19e3bccd331a201ea6df17139be9b34c", null ]
+    [ "capture_program_tioctl", "de/dd4/a02541.html#gaf29f9113aec5a5113e3087de7ef81b40", null ],
+    [ "capture_shell_tioctl", "de/dd4/a02541.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "de/dd4/a02541.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "de/dd4/a02541.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_program_tioctl", "de/dd4/a02541.html#ga0469f8a2361eaac0cf09c9d86c1ff12c", null ],
+    [ "restore_shell_tioctl", "de/dd4/a02541.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "de/dd4/a02541.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ],
+    [ "f_have_program_tioctl", "db/de8/a02525.html#aebd44e04e42a44e5c91a05b36725c6de", null ],
+    [ "f_have_shell_tioctl", "db/de8/a02525.html#a1e8b2f4dea5e88e7af17541140207df0", null ],
+    [ "program_err_tioctl", "db/de8/a02525.html#ab4b3ca30aaab94a99506600275aca23b", null ],
+    [ "program_in_tioctl", "db/de8/a02525.html#a8f6264cba18350ec30b5143bef256ce2", null ],
+    [ "program_out_tioctl", "db/de8/a02525.html#a2b3c6ce8c6eb4db1e423c4438258a66d", null ],
+    [ "program_tioctl", "db/de8/a02525.html#a5cbc4b5707e37e008d294f9fcb36cee5", null ],
+    [ "shell_tioctl", "db/de8/a02525.html#a6683c571cfe7d874546506ebf41fc3d3", null ]
 ];

@@ -1,12 +1,12 @@
 var a02666 =
 [
-    [ "choice_letter", "d1/d0c/a02666.html#ad244e20485560be4e557528c8fa1321c", null ],
-    [ "choice_text", "d1/d0c/a02666.html#a1588ee0394f3e3076e6b03b8afab5cc9", null ],
-    [ "command_str", "d1/d0c/a02666.html#a5caaf06576322b837ebfbce757377455", null ],
-    [ "command_type", "d1/d0c/a02666.html#acce58adaa7cf043f8f905d3d69a7f3a0", null ],
-    [ "letter_pos", "d1/d0c/a02666.html#a928bd3d2b73020b5529f9da018ce5e2f", null ],
-    [ "raw_text", "d1/d0c/a02666.html#a514130f5368bc6edaa5928f08be2bd4f", null ],
-    [ "type", "d1/d0c/a02666.html#a6d158be9cbd3c4180df373ddf462330d", null ],
-    [ "ui_runtime", "d1/d0c/a02666.html#a3d70a46d748818bf6b6d5f31b87f82d7", null ],
-    [ "ui_surface", "d1/d0c/a02666.html#a2f744b8180b28d89da78d31b9a863f11", null ]
+    [ "alt_screen", "d1/d0c/a02666.html#af0287deabe80d42c2dcba575e7668cee", null ],
+    [ "border_style", "d1/d0c/a02666.html#a91f3ab49728e4ba809f0796d42291066", null ],
+    [ "cols", "d1/d0c/a02666.html#a7df5fc3adde69b1d5d6dd8b6a738c17f", null ],
+    [ "cursor_visible", "d1/d0c/a02666.html#aa2dc7999656d86dc35f695d6f23af43c", null ],
+    [ "lines", "d1/d0c/a02666.html#ac4640ad255ce92e58a3a10d5daa3ad81", null ],
+    [ "mouse_enabled", "d1/d0c/a02666.html#af08332810a017306df606e3e2c0bb607", null ],
+    [ "nc", "d1/d0c/a02666.html#a5553a1629187286a644cfd1422633f2a", null ],
+    [ "sio", "d1/d0c/a02666.html#a3c481c5dd395d332b218ae98b03f27c5", null ],
+    [ "tty_fp", "d1/d0c/a02666.html#acc3b3cf50d6e8a4d02be8b3692160298", null ]
 ];

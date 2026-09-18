@@ -1,6 +1,9 @@
 var a02580 =
 [
-    [ "cursor_visible", "d7/d66/a02580.html#a6aa31a10e62f22bc154ccaf9765196ce", null ],
-    [ "enable_alt_screen", "d7/d66/a02580.html#afc37edba9295b089b1dad90eb0d4b8aa", null ],
-    [ "enable_mouse", "d7/d66/a02580.html#acdeb10ab4306706434b460279c4d9c4e", null ]
+    [ "cf_erase_remainder", "d7/d66/a02580.html#ad46407b34b3e180d31105c789593daba", null ],
+    [ "fcol", "d7/d66/a02580.html#ab6ba6e8afebf444396b0a7f4988e3711", null ],
+    [ "ff", "d7/d66/a02580.html#a39a4146c3bedeaae9059d8439bdbbbc2", null ],
+    [ "fill_char", "d7/d66/a02580.html#a352e44d275e8fbd5c382587b98ad7c4e", null ],
+    [ "flen", "d7/d66/a02580.html#a7c8228aab898dc1e5f020d55e5f710ee", null ],
+    [ "flin", "d7/d66/a02580.html#acde6b745653faf70be6d8a91c34bed46", null ]
 ];

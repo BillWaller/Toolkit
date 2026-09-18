@@ -1,7 +1,27 @@
 var a01904 =
 [
-    [ "__USE_XOPEN", "d4/d0d/a01904.html#a8773045a81f883f2ab00761f45e8642c", null ],
-    [ "_XOPEN_SOURCE_EXTENDED", "d4/d0d/a01904.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
-    [ "main", "d4/d0d/a01904.html#ae66f6b31b5ad750f1fe042a706a4e3d4", null ],
-    [ "ui_nccells_from_text", "d4/d0d/a01904.html#adc5f56a8b8aa89b726a773b0b115b8a2", null ]
+    [ "RGB", "d2/d7d/a02656.html", "d2/d7d/a02656" ],
+    [ "_XOPEN_SOURCE", "d4/d0d/a01904.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
+    [ "MAXLEN", "d4/d0d/a01904.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
+    [ "MAXPLANE", "d4/d0d/a01904.html#a8e099b89c8248483961774a6da5b2302", null ],
+    [ "MAXSFC", "d4/d0d/a01904.html#a314a20c1eb8bc06bb44ee42eefcb4e2a", null ],
+    [ "U_VE", "d4/d0d/a01904.html#a256c73ac5a32444a37f64ad4eed0a82a", null ],
+    [ "NcSurface", "d4/d0d/a01904.html#a6b778b483662d0edeffd8af4f0be3fa5", null ],
+    [ "compat_mvwprintw", "d4/d0d/a01904.html#a4ecaf0bb8f6668a56a635246078d2a2c", null ],
+    [ "handle_input", "d4/d0d/a01904.html#ad80566753c17bfc45cb702766ab77a82", null ],
+    [ "hex_clr_str_to_rgb", "d4/d0d/a01904.html#a9916a18055fdcf1f0aac0f61b946eaf9", null ],
+    [ "main", "d4/d0d/a01904.html#a840291bc02cba5474a4cb46a9b9566fe", null ],
+    [ "ncplane_clicked", "d4/d0d/a01904.html#a072f039d9370af70cdd6fc551c60d403", null ],
+    [ "ncplane_move_yx_clrtoeol", "d4/d0d/a01904.html#ab0db43bd25d6d957fa49b664ac5d30c3", null ],
+    [ "ncplane_printf_yx_clrtoeol", "d4/d0d/a01904.html#af90f85b3d4e39b5999b9125d9ffb5bbd", null ],
+    [ "notcurses_key_str", "d4/d0d/a01904.html#a54ad43c9b63895395fd989f1a031618d", null ],
+    [ "plane_new", "d4/d0d/a01904.html#a11a0bfbfbc74a2108fbb2787fdeb1a68", null ],
+    [ "surface_new", "d4/d0d/a01904.html#add738ead5d7f23ff89618d81e56d1862", null ],
+    [ "ui_getch", "d4/d0d/a01904.html#a9e28b00f7c6be0aeae4d1625e4f73abd", null ],
+    [ "ui_notcurses_init", "d4/d0d/a01904.html#adbfe5987780daf0cfba472b61065ede0", null ],
+    [ "channels", "d4/d0d/a01904.html#a5cd27454b681f4bce32e4cd18c8b46c5", null ],
+    [ "nc", "d4/d0d/a01904.html#a918f90ce8324689bd8f5df8fb4ba9c4c", null ],
+    [ "nc_surface", "d4/d0d/a01904.html#a3fbf566430852c9d51de8eedd3e21254", null ],
+    [ "nc_surface_cnt", "d4/d0d/a01904.html#ab4a8c2829fe047b111bc2481c0d6684f", null ],
+    [ "sfc_ptr", "d4/d0d/a01904.html#aadb95339d79605a820662ff77af6b652", null ]
 ];

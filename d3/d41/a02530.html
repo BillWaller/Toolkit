@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Signal Handling</title>
+<title>C-Menu: Field Editor</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,304 +110,964 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d3/d41/a02530.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Signal Handling </div></div>
+  <div class="headertitle"><div class="title">Field Editor </div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Handles signals such as SIGINT, SIGTERM, SIGQUIT, SIGUSR1, and SIGSEGV.  
+<p>File mapping, user input, command processing, and display logic.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga79c3e22498eb2346543aa9c86fd22e58" id="r_ga79c3e22498eb2346543aa9c86fd22e58"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga79c3e22498eb2346543aa9c86fd22e58">handle_signal</a> (int sig_num)</td></tr>
-<tr class="memdesc:ga79c3e22498eb2346543aa9c86fd22e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle received signals and prompt user for action.  <br /></td></tr>
-<tr class="memitem:ga06c1eb6cf3649dc187115565409f91af" id="r_ga06c1eb6cf3649dc187115565409f91af"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga06c1eb6cf3649dc187115565409f91af">sig_dfl_mode</a> ()</td></tr>
-<tr class="memdesc:ga06c1eb6cf3649dc187115565409f91af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set signal handlers to default behavior.  <br /></td></tr>
-<tr class="memitem:gaca2de03f6d52d4b11237990e4e605177" id="r_gaca2de03f6d52d4b11237990e4e605177"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaca2de03f6d52d4b11237990e4e605177">sig_prog_mode</a> ()</td></tr>
-<tr class="memdesc:gaca2de03f6d52d4b11237990e4e605177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set up signal handlers for interrupt signals.  <br /></td></tr>
-<tr class="memitem:gaa08a9a8dede37c66c81c3f51a0f338a9" id="r_gaa08a9a8dede37c66c81c3f51a0f338a9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a> (int sig_num)</td></tr>
-<tr class="memdesc:gaa08a9a8dede37c66c81c3f51a0f338a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal handler for interrupt signals.  <br /></td></tr>
+<tr class="memitem:ga14cc8bd865f05bcd5b9e59edb5ddf18e" id="r_ga14cc8bd865f05bcd5b9e59edb5ddf18e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga14cc8bd865f05bcd5b9e59edb5ddf18e">field_editor</a> (<a class="el" href="../../df/de4/a02780.html">Form</a> *form)</td></tr>
+<tr class="memdesc:ga14cc8bd865f05bcd5b9e59edb5ddf18e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accept input for a field.  <br /></td></tr>
+<tr class="memitem:gabd1710f59277202b0a58f840d4da322e" id="r_gabd1710f59277202b0a58f840d4da322e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a> (<a class="el" href="../../df/de4/a02780.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gabd1710f59277202b0a58f840d4da322e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display current field.  <br /></td></tr>
+<tr class="memitem:ga807531da295fd09484bc01e5aa81d97e" id="r_ga807531da295fd09484bc01e5aa81d97e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga807531da295fd09484bc01e5aa81d97e">form_display_field_n</a> (<a class="el" href="../../df/de4/a02780.html">Form</a> *form, uint n)</td></tr>
+<tr class="memdesc:ga807531da295fd09484bc01e5aa81d97e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display field n.  <br /></td></tr>
+<tr class="memitem:ga07a8d9311c88786e7310fef638d34a41" id="r_ga07a8d9311c88786e7310fef638d34a41"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a> (<a class="el" href="../../df/de4/a02780.html">Form</a> *form, char *s)</td></tr>
+<tr class="memdesc:ga07a8d9311c88786e7310fef638d34a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format field according to its format type.  <br /></td></tr>
+<tr class="memitem:gad2a5cf5a784d70bcd15fcd82ecc13185" id="r_gad2a5cf5a784d70bcd15fcd82ecc13185"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#gad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a> (<a class="el" href="../../df/de4/a02780.html">Form</a> *form)</td></tr>
+<tr class="memdesc:gad2a5cf5a784d70bcd15fcd82ecc13185"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validate current field based on flags.  <br /></td></tr>
+<tr class="memitem:ga0a88f74830d629ed3304a68dc94349da" id="r_ga0a88f74830d629ed3304a68dc94349da"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga0a88f74830d629ed3304a68dc94349da">is_valid_date</a> (uint yyyy, uint mm, uint dd)</td></tr>
+<tr class="memdesc:ga0a88f74830d629ed3304a68dc94349da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given date is valid, including leap years.  <br /></td></tr>
+<tr class="memitem:ga39f3d8e17547c1a92649f7909dcb3551" id="r_ga39f3d8e17547c1a92649f7909dcb3551"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga39f3d8e17547c1a92649f7909dcb3551">is_valid_time</a> (uint hh, uint mm, uint ss)</td></tr>
+<tr class="memdesc:ga39f3d8e17547c1a92649f7909dcb3551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a given time is valid.  <br /></td></tr>
+<tr class="memitem:ga425021d4c87474159a36d395e4dcdf65" id="r_ga425021d4c87474159a36d395e4dcdf65"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga425021d4c87474159a36d395e4dcdf65">left_justify</a> (char *s)</td></tr>
+<tr class="memdesc:ga425021d4c87474159a36d395e4dcdf65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Left justify string by removing leading spaces.  <br /></td></tr>
+<tr class="memitem:ga18db59e4c79e823f79310378183ac25c" id="r_ga18db59e4c79e823f79310378183ac25c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga18db59e4c79e823f79310378183ac25c">numeric</a> (char *d, char *s)</td></tr>
+<tr class="memdesc:ga18db59e4c79e823f79310378183ac25c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract numeric characters from source string to destination string.  <br /></td></tr>
+<tr class="memitem:ga3e691d040bc1f3d91824295cc562820c" id="r_ga3e691d040bc1f3d91824295cc562820c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a> (char *, uint)</td></tr>
+<tr class="memdesc:ga3e691d040bc1f3d91824295cc562820c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Right justify string by removing trailing spaces and adding leadingspaces.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Handles signals such as SIGINT, SIGTERM, SIGQUIT, SIGUSR1, and SIGSEGV. </p>
-<p>This module provides functions to set up signal handlers for various signals, handle received signals, and reset signal handlers to their default behavior. It allows the program to respond to interrupt signals by prompting the user for action and ensuring proper cleanup before exiting or continuing execution. </p>
+<div class="textblock"><p>File mapping, user input, command processing, and display logic. </p>
+<p>Main loop for field editing and entry</p>
+<p>This function handles the main loop for field editing and entry. It processes user input, including character input, navigation keys, and mouse events, to allow the user to edit the content of a field. The function validates input based on the field's specified format and updates the display accordingly. It returns the key code of the action taken, such as accepting the field, tabbing to the next field, or breaking out of the input loop. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ga79c3e22498eb2346543aa9c86fd22e58" name="ga79c3e22498eb2346543aa9c86fd22e58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga79c3e22498eb2346543aa9c86fd22e58">&#9670;&#160;</a></span>handle_signal()</h2>
+<a id="ga14cc8bd865f05bcd5b9e59edb5ddf18e" name="ga14cc8bd865f05bcd5b9e59edb5ddf18e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga14cc8bd865f05bcd5b9e59edb5ddf18e">&#9670;&#160;</a></span>field_editor()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool handle_signal </td>
+          <td class="memname">int field_editor </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sig_num</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../df/de4/a02780.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handle received signals and prompt user for action. </p>
+<p>Accept input for a field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sig_num</td><td>The signal number received </td></tr>
+    <tr><td class="paramname">form</td><td>Pointer to <a class="el" href="../../df/de4/a02780.html">Form</a> structure </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>int Key code of action taken</dd></dl>
+<p>Handles character input, navigation keys, and mouse events for field editing. Validates input based on field format and updates display. Returns key code of action taken (e.g., accept field, tab to next field, break out of input loop). </p>
+<p>UIKEY_F10 is the default key for accepting the field and moving to the next field</p>
+<p>UIKEY_F09 Cancels the current operation</p>
+<p>UIKEY_UP, UIKEY_BTAB moves to the previous field</p>
+<p>UIKEY_DOWN, TAB moves to the next field</p>
+<p>UIKEY_END moves cursor to end of field</p>
+<p>&lt; Enter accepts the field and moves to the next field if form-&gt;f_erase_remainder is set, it will clear the remaining characters above and after the current cursor location</p>
+<p>UIKEY_IC toggles insert mode</p>
+<p>UIKEY_DC deletes character at cursor</p>
+<p>UIKEY_HOME moves cursor to start of field</p>
+<p>UIKEY_BACKSPACE deletes character before cursor</p>
+<p>UIKEY_LEFT moves cursor left one character</p>
+<p>UIKEY_RIGHT moves cursor right one character</p>
+<p>Handles mouse events for field editing</p>
+<p>Validates fields based on format</p>
+<p>FF_STRING accepts all printable characters and spaces</p>
+<p>FF_DECIMAL_INT accepts digits 0 through 9 and decimal point ('.')</p>
+<p>FF_HEX_INT accepts digits 0 through 9 and letters A through F (case-insensitive)</p>
+<p>FF_FLOAT accepts digits 0 through 9 and decimal point ('.') and negative operator ('-') at the start of the field</p>
+<p>FF_DOUBLE accepts digits 0 through 9 and decimal point ('.') and negative operator ('-') at the start of the field</p>
+<p>FF_CURRENCY accepts digits 0 through 9 and decimal point ('.') and negative operator ('-') at the start of the field</p>
+<p>FF_YYYYMMDD accepts digits 0 through 9</p>
+<p>FF_HHMMSS accepts digits 0 through 9</p>
+<p>FF_APR accepts digits 0 through 9 and decimal point ('.')</p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/d89/a02462_source.html#l00147">147</a> of file <a class="el" href="../../df/d89/a02462_source.html">sig.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  147</span>                                {</div>
-<div class="line"><span class="lineno">  148</span>    <span class="keywordflow">switch</span> (sig_num) {</div>
-<div class="line"><span class="lineno">  149</span>    <span class="keywordflow">case</span> SIGINT:</div>
-<div class="line"><span class="lineno">  150</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="stringliteral">&quot;SIGINT - Interrupt from keyboard&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  151</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">case</span> SIGTERM:</div>
-<div class="line"><span class="lineno">  153</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="stringliteral">&quot;SIGTERM - Termination signal&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  154</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">case</span> SIGQUIT:</div>
-<div class="line"><span class="lineno">  156</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="stringliteral">&quot;SIGQUIT - Quit from keyboard&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  157</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  158</span>    <span class="keywordflow">case</span> SIGSEGV:</div>
-<div class="line"><span class="lineno">  159</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="stringliteral">&quot;SIGSEGV - Segmentation fault&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">case</span> SIGUSR1:</div>
-<div class="line"><span class="lineno">  162</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="stringliteral">&quot;SIGUSR1 - User Signal 1&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  163</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  165</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="stringliteral">&quot;unknown signal&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  166</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  167</span>    }</div>
-<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../db/d6b/a01853.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a>)</div>
-<div class="line"><span class="lineno">  169</span>        <a class="code hl_function" href="../../dd/dd9/a02529.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a>();</div>
-<div class="line"><span class="lineno">  170</span>    <a class="code hl_variable" href="../../d1/df7/a02501.html#abd472199e7a5be1df55e04807ece4878">em0</a>[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  171</span>    <a class="code hl_function" href="../../dc/dbb/a02520.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#abd472199e7a5be1df55e04807ece4878">em0</a>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;Caught signal %d\n&quot;</span>, sig_num);</div>
-<div class="line"><span class="lineno">  172</span><span class="preprocessor">#ifdef DEBUG_LOG</span></div>
-<div class="line"><span class="lineno">  173</span>    <a class="code hl_function" href="../../dc/dbb/a02520.html#ga32c0e93e47af5ea782230648fcf60ad7">write_cmenu_log</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#abd472199e7a5be1df55e04807ece4878">em0</a>);</div>
-<div class="line"><span class="lineno">  174</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  175</span>    <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../d1/df7/a02501.html#a3ccac42aaedcc05eddba5d59ca3d6e71">em2</a>, <span class="stringliteral">&quot;Press &#39;q&#39; or F9 to exit, any other key to continue&quot;</span>,</div>
-<div class="line"><span class="lineno">  176</span>               <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  177</span>    <a class="code hl_variable" href="../../db/d6b/a01853.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0;</div>
-<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  179</span>}</div>
-<div class="ttc" id="aa01853_html_a01a99fc32bd5b471123f6223503c9616"><div class="ttname"><a href="../../db/d6b/a01853.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a></div><div class="ttdeci">volatile sig_atomic_t sig_received</div><div class="ttdef"><b>Definition</b> <a href="../../df/d89/a02462_source.html#l00031">sig.c:31</a></div></div>
-<div class="ttc" id="aa01853_html_a44f81ebcc5b6c685cbdfe388eb420313"><div class="ttname"><a href="../../db/d6b/a01853.html#a44f81ebcc5b6c685cbdfe388eb420313">f_curses_open</a></div><div class="ttdeci">bool f_curses_open</div><div class="ttdef"><b>Definition</b> <a href="../../df/d89/a02462_source.html#l00033">sig.c:33</a></div></div>
-<div class="ttc" id="aa02438_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d6b/a02438_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa02501_html_a2520ab854da7c70c815ef23b3bd2f43a"><div class="ttname"><a href="../../d1/df7/a02501.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d1/df7/a02501_source.html#l00143">dwin.c:143</a></div></div>
-<div class="ttc" id="aa02501_html_a3ccac42aaedcc05eddba5d59ca3d6e71"><div class="ttname"><a href="../../d1/df7/a02501.html#a3ccac42aaedcc05eddba5d59ca3d6e71">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d1/df7/a02501_source.html#l00144">dwin.c:144</a></div></div>
-<div class="ttc" id="aa02501_html_abd472199e7a5be1df55e04807ece4878"><div class="ttname"><a href="../../d1/df7/a02501.html#abd472199e7a5be1df55e04807ece4878">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d1/df7/a02501_source.html#l00142">dwin.c:142</a></div></div>
-<div class="ttc" id="aa02520_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d90/a02492_source.html#l00537">futil.c:537</a></div></div>
-<div class="ttc" id="aa02520_html_ga32c0e93e47af5ea782230648fcf60ad7"><div class="ttname"><a href="../../dc/dbb/a02520.html#ga32c0e93e47af5ea782230648fcf60ad7">write_cmenu_log</a></div><div class="ttdeci">void write_cmenu_log(char *)</div><div class="ttdoc">Write message to C-Menu log file without timestamp.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d90/a02492_source.html#l01684">futil.c:1684</a></div></div>
-<div class="ttc" id="aa02520_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../dc/dbb/a02520.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d90/a02492_source.html#l00413">futil.c:413</a></div></div>
-<div class="ttc" id="aa02529_html_gac5e3adb304b78910fc77761ef6a743f0"><div class="ttname"><a href="../../dd/dd9/a02529.html#gac5e3adb304b78910fc77761ef6a743f0">restore_shell_tioctl</a></div><div class="ttdeci">bool restore_shell_tioctl()</div><div class="ttdoc">restore_shell_tioctl() - restore shell terminal settings</div><div class="ttdef"><b>Definition</b> <a href="../../de/dbd/a02507_source.html#l00057">scriou.c:57</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00048">48</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   48</span>                             {</div>
+<div class="line"><span class="lineno">   49</span>    <span class="keywordtype">bool</span> f_insert = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordtype">int</span> in_key;</div>
+<div class="line"><span class="lineno">   51</span>    <span class="keywordtype">char</span> *s, *d;</div>
+<div class="line"><span class="lineno">   52</span>    <a class="code hl_struct" href="../../df/d97/a02676.html">UiSurface</a> *sfc = <a class="code hl_variable" href="../../d9/d9b/a01889.html#a8165e12a754304d517313c134485944a">ui_surface</a>[<a class="code hl_variable" href="../../d5/da8/a01865.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a>];</div>
+<div class="line"><span class="lineno">   53</span>    UiEvent event;</div>
+<div class="line"><span class="lineno">   54</span>    uint maxy;</div>
+<div class="line"><span class="lineno">   55</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx &gt;= <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fcnt)</div>
+<div class="line"><span class="lineno">   56</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fcnt = 0;</div>
+<div class="line"><span class="lineno">   57</span>    uint flin = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;line;</div>
+<div class="line"><span class="lineno">   58</span>    uint fcol = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;col;</div>
+<div class="line"><span class="lineno">   59</span>    uint flen = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len;</div>
+<div class="line"><span class="lineno">   60</span>    uint ff = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;ff;</div>
+<div class="line"><span class="lineno">   61</span>    <span class="keywordtype">char</span> *accept_s = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;accept_s;</div>
+<div class="line"><span class="lineno">   62</span>    <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">   63</span>    <a class="code hl_variable" href="../../d5/da8/a01865.html#a89aa1c1525f82269298a01d552e60037">click_x</a> = <a class="code hl_variable" href="../../d5/da8/a01865.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a> = -1;</div>
+<div class="line"><span class="lineno">   64</span>    <span class="keywordtype">char</span> *fstart = accept_s;</div>
+<div class="line"><span class="lineno">   65</span>    <span class="keywordtype">char</span> *fend = fstart + flen;</div>
+<div class="line"><span class="lineno">   66</span>    uint x = fcol;</div>
+<div class="line"><span class="lineno">   67</span>    <span class="keywordtype">char</span> *p = fstart = accept_s;</div>
+<div class="line"><span class="lineno">   68</span>    <span class="keywordtype">char</span> *str_end = p + strlen(p);</div>
+<div class="line"><span class="lineno">   69</span>    in_key = 0;</div>
+<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">if</span> (f_insert)</div>
+<div class="line"><span class="lineno">   71</span>        <a class="code hl_function" href="../../d9/dd5/a01886.html#a7cb9d1a305e5c62b5288043905293521">ui_set_chyron_key_cb</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, 18, <span class="stringliteral">&quot;INS&quot;</span>, <a class="code hl_define" href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a>, <a class="code hl_variable" href="../../d5/da8/a01865.html#a223ee050c77655126a42461b9d32987c">cell_nt_hl_rev</a>);</div>
+<div class="line"><span class="lineno">   72</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">   73</span>        <a class="code hl_function" href="../../d9/dd5/a01886.html#a7cb9d1a305e5c62b5288043905293521">ui_set_chyron_key_cb</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, 18, <span class="stringliteral">&quot;INS&quot;</span>, <a class="code hl_define" href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a>, <a class="code hl_variable" href="../../d5/da8/a01865.html#af8e9cd9ee2a25a3b53cefd88af4f3b5a">cell_nt_rev</a>);</div>
+<div class="line"><span class="lineno">   74</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#ae7e998534ea17601ca473206547f1c15">ui_compile_chyron</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron);</div>
+<div class="line"><span class="lineno">   75</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a6b49882bc95f73a3465cbab9252bb1ab">ui_display_chyron</a>(sfc, 1, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;lines - 1, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron-&gt;l);</div>
+<div class="line"><span class="lineno">   76</span> </div>
+<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><span class="lineno">   78</span>        <span class="keywordflow">if</span> (in_key == 0) {</div>
+<div class="line"><span class="lineno">   79</span>            <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">   80</span>            <a class="code hl_function" href="../../d7/da8/a02522.html#ae2b27166cf72b7a8d45dffef9cba8a55">form_display_accept_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">   81</span>            tcflush(0, TCIFLUSH);</div>
+<div class="line"><span class="lineno">   82</span> </div>
+<div class="line"><span class="lineno">   83</span>            <a class="code hl_function" href="../../d5/da8/a01865.html#a39facb01e96e2fee14862c7e4864fe92">ui_cursor_enable_yx</a>(sfc, WIN, flin, x, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">   84</span>            <a class="code hl_function" href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">   85</span>            in_key = <a class="code hl_function" href="../../db/d4b/a01883.html#aad0095bc404840ab14e69eb07615819a">ui_get_event</a>(sfc, WIN, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, &amp;event, -1);</div>
+<div class="line"><span class="lineno">   86</span>            <a class="code hl_function" href="../../d5/da8/a01865.html#a39facb01e96e2fee14862c7e4864fe92">ui_cursor_enable_yx</a>(sfc, WIN, flin, x, <span class="keyword">false</span>);</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span>            maxy = <a class="code hl_function" href="../../d5/da8/a01865.html#a7af68559ec8a06ee9dd0ea473736e9b1">ui_getmaxy</a>(sfc, WIN);</div>
+<div class="line"><span class="lineno">   89</span>            <span class="keywordflow">if</span> (event.in_win == WIN &amp;&amp; event.y == maxy - 1)</div>
+<div class="line"><span class="lineno">   90</span>                in_key = <a class="code hl_function" href="../../d9/dd5/a01886.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, event.x);</div>
+<div class="line"><span class="lineno">   91</span>        }</div>
+<div class="line"><span class="lineno">   92</span>        <a class="code hl_function" href="../../d5/da8/a01865.html#ab0bf57230becfbf85aeb2cfeac8db81b">ui_curs_set</a>(0);</div>
+<div class="line"><span class="lineno">   93</span>        <span class="keywordflow">switch</span> (in_key) {</div>
+<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a9b514c25f7172ce9664f3bd21d0c9c19">UIKEY_F10</a>:</div>
+<div class="line"><span class="lineno">   97</span>            <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">   98</span>            <a class="code hl_function" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">   99</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="#gad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>) != 0)</div>
+<div class="line"><span class="lineno">  100</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  101</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a>:</div>
+<div class="line"><span class="lineno">  104</span>            <a class="code hl_function" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">  105</span>            in_key = <a class="code hl_define" href="../../da/d8b/a01871.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a>;</div>
+<div class="line"><span class="lineno">  106</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><span class="lineno">  108</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;H&#39;</span>:</div>
+<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a829edebd2b32037d809c36b80d476a3c">UIKEY_F01</a>:</div>
+<div class="line"><span class="lineno">  110</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a99b2ef4b064511b592c3726693584e20">UIKEY_UP</a>:</div>
+<div class="line"><span class="lineno">  112</span>            <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">  113</span>            <a class="code hl_function" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">  114</span>            in_key = <a class="code hl_define" href="../../da/d8b/a01871.html#a99b2ef4b064511b592c3726693584e20">UIKEY_UP</a>;</div>
+<div class="line"><span class="lineno">  115</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><span class="lineno">  117</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;\t&#39;</span>:</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#ae69fd8e9ee166952fe2ebca361463733">UIKEY_DOWN</a>:</div>
+<div class="line"><span class="lineno">  119</span>            <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">  120</span>            <a class="code hl_function" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">  121</span>            in_key = <a class="code hl_define" href="../../da/d8b/a01871.html#ae69fd8e9ee166952fe2ebca361463733">UIKEY_DOWN</a>;</div>
+<div class="line"><span class="lineno">  122</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a80b0a6a4f8219059c02771656239d3c0">UIKEY_END</a>:</div>
+<div class="line"><span class="lineno">  125</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d66/a01856.html#af475c4649f5ac3f8f9901d7a7b9c1b93">Ctrl</a>(<span class="charliteral">&#39;e&#39;</span>):</div>
+<div class="line"><span class="lineno">  126</span>            while (*p != <span class="stringliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  127</span>                p++;</div>
+<div class="line"><span class="lineno">  128</span>            x = fcol + (p - fstart);</div>
+<div class="line"><span class="lineno">  129</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  134</span>        <span class="keywordflow">case</span> <span class="charliteral">&#39;\n&#39;</span>:</div>
+<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#ab80963120ec48563cd69805b06695584">UIKEY_ENTER</a>:</div>
+<div class="line"><span class="lineno">  136</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;f_erase_remainder)</div>
+<div class="line"><span class="lineno">  137</span>                *p = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  138</span>            <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">  139</span>            <a class="code hl_function" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">  140</span>            in_key = <a class="code hl_define" href="../../da/d8b/a01871.html#ab80963120ec48563cd69805b06695584">UIKEY_ENTER</a>;</div>
+<div class="line"><span class="lineno">  141</span>            <span class="keywordflow">return</span> (in_key);</div>
+<div class="line"><span class="lineno">  143</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a>:</div>
+<div class="line"><span class="lineno">  144</span>            <span class="keywordflow">if</span> (f_insert) {</div>
+<div class="line"><span class="lineno">  145</span>                f_insert = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  146</span>                <a class="code hl_function" href="../../d9/dd5/a01886.html#a7cb9d1a305e5c62b5288043905293521">ui_set_chyron_key_cb</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, 18, <span class="stringliteral">&quot;INS&quot;</span>, <a class="code hl_define" href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a>, <a class="code hl_variable" href="../../d5/da8/a01865.html#af8e9cd9ee2a25a3b53cefd88af4f3b5a">cell_nt_rev</a>);</div>
+<div class="line"><span class="lineno">  147</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  148</span>                f_insert = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  149</span>                <a class="code hl_function" href="../../d9/dd5/a01886.html#a7cb9d1a305e5c62b5288043905293521">ui_set_chyron_key_cb</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, 18, <span class="stringliteral">&quot;INS&quot;</span>, <a class="code hl_define" href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a>,</div>
+<div class="line"><span class="lineno">  150</span>                                     <a class="code hl_variable" href="../../d5/da8/a01865.html#a223ee050c77655126a42461b9d32987c">cell_nt_hl_rev</a>);</div>
+<div class="line"><span class="lineno">  151</span>            }</div>
+<div class="line"><span class="lineno">  152</span>            <a class="code hl_function" href="../../d9/dd5/a01886.html#ae7e998534ea17601ca473206547f1c15">ui_compile_chyron</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron);</div>
+<div class="line"><span class="lineno">  153</span>            <a class="code hl_function" href="../../d9/dd5/a01886.html#a6b49882bc95f73a3465cbab9252bb1ab">ui_display_chyron</a>(sfc, 1, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;lines - 1,</div>
+<div class="line"><span class="lineno">  154</span>                              <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;chyron-&gt;l);</div>
+<div class="line"><span class="lineno">  155</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  156</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  158</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a0ec984e0327e2285a4508d20c782a020">UIKEY_DC</a>:</div>
+<div class="line"><span class="lineno">  159</span>            s = p + 1;</div>
+<div class="line"><span class="lineno">  160</span>            d = p;</div>
+<div class="line"><span class="lineno">  161</span>            <span class="keywordflow">while</span> (*s != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  162</span>                *d++ = *s++;</div>
+<div class="line"><span class="lineno">  163</span>            *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  164</span>            str_end = d;</div>
+<div class="line"><span class="lineno">  165</span>            f_insert = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  166</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  167</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  169</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#ab6573a5ee4c4d1167dd67aacfb7e148a">UIKEY_HOME</a>:</div>
+<div class="line"><span class="lineno">  170</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d66/a01856.html#af475c4649f5ac3f8f9901d7a7b9c1b93">Ctrl</a>(<span class="charliteral">&#39;a&#39;</span>):</div>
+<div class="line"><span class="lineno">  171</span>            p = fstart;</div>
+<div class="line"><span class="lineno">  172</span>            x = fcol;</div>
+<div class="line"><span class="lineno">  173</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  174</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  176</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a0ef121fb8ad55dd42f3e4ce12f6f804a">UIKEY_BACKSPACE</a>:</div>
+<div class="line"><span class="lineno">  177</span>            <span class="keywordflow">if</span> (p &gt; fstart) {</div>
+<div class="line"><span class="lineno">  178</span>                p--;</div>
+<div class="line"><span class="lineno">  179</span>                x--;</div>
+<div class="line"><span class="lineno">  180</span>            }</div>
+<div class="line"><span class="lineno">  181</span>            s = p + 1;</div>
+<div class="line"><span class="lineno">  182</span>            d = p;</div>
+<div class="line"><span class="lineno">  183</span>            <span class="keywordflow">while</span> (*s != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  184</span>                *d++ = *s++;</div>
+<div class="line"><span class="lineno">  185</span>            *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  186</span>            str_end = d;</div>
+<div class="line"><span class="lineno">  187</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  188</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a4bc9edf22f74c36042ffc374a1674ecf">UIKEY_LEFT</a>:</div>
+<div class="line"><span class="lineno">  191</span>            <span class="keywordflow">if</span> (p &gt; fstart) {</div>
+<div class="line"><span class="lineno">  192</span>                p--;</div>
+<div class="line"><span class="lineno">  193</span>                x--;</div>
+<div class="line"><span class="lineno">  194</span>            }</div>
+<div class="line"><span class="lineno">  195</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  196</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  198</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a9946169a60e9d70d78c10d9ed1505398">UIKEY_RIGHT</a>:</div>
+<div class="line"><span class="lineno">  199</span>            <span class="keywordflow">if</span> (p &lt; fend &amp;&amp; p &lt; str_end) {</div>
+<div class="line"><span class="lineno">  200</span>                p++;</div>
+<div class="line"><span class="lineno">  201</span>                x++;</div>
+<div class="line"><span class="lineno">  202</span>            }</div>
+<div class="line"><span class="lineno">  203</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  204</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  206</span>        <span class="keywordflow">case</span> <a class="code hl_define" href="../../da/d8b/a01871.html#a87640bafe9dff45165747dbc39ac9583">UIKEY_BUTTON1</a>:</div>
+<div class="line"><span class="lineno">  207</span>            <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx = <a class="code hl_function" href="../../df/d89/a02462.html#aa6adc686b12bc060e2806ca380273058">form_yx_to_fidx</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, <a class="code hl_variable" href="../../d5/da8/a01865.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a>, <a class="code hl_variable" href="../../d5/da8/a01865.html#a89aa1c1525f82269298a01d552e60037">click_x</a>);</div>
+<div class="line"><span class="lineno">  208</span>            x = <a class="code hl_variable" href="../../d5/da8/a01865.html#a89aa1c1525f82269298a01d552e60037">click_x</a>;</div>
+<div class="line"><span class="lineno">  209</span>            flin = <a class="code hl_variable" href="../../d5/da8/a01865.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a>;</div>
+<div class="line"><span class="lineno">  210</span>            flen = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len;</div>
+<div class="line"><span class="lineno">  211</span>            ff = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;ff; <span class="comment">/* ff - field forat */</span></div>
+<div class="line"><span class="lineno">  212</span>            accept_s = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;accept_s;</div>
+<div class="line"><span class="lineno">  213</span>            <span class="comment">// filler_s = form-&gt;field[form-&gt;fidx]-&gt;filler_s;</span></div>
+<div class="line"><span class="lineno">  214</span>            <a class="code hl_function" href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>, accept_s);</div>
+<div class="line"><span class="lineno">  215</span>            fstart = accept_s;</div>
+<div class="line"><span class="lineno">  216</span>            fend = fstart + flen;</div>
+<div class="line"><span class="lineno">  217</span>            str_end = fstart + strlen(fstart);</div>
+<div class="line"><span class="lineno">  218</span>            p = fstart + (x - <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;col);</div>
+<div class="line"><span class="lineno">  219</span>            <span class="keywordflow">if</span> (p &gt; str_end)</div>
+<div class="line"><span class="lineno">  220</span>                x -= p - str_end;</div>
+<div class="line"><span class="lineno">  221</span>            p = <a class="code hl_define" href="../../da/d66/a01856.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(p, str_end);</div>
+<div class="line"><span class="lineno">  222</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  223</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  224</span>        <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  225</span>            <span class="keywordflow">if</span> (p &gt;= fend) {</div>
+<div class="line"><span class="lineno">  226</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  227</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  228</span>            }</div>
+<div class="line"><span class="lineno">  230</span>            <span class="keywordflow">switch</span> (ff) {</div>
+<div class="line"><span class="lineno">  232</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a16d0b76d2287afb9c99b501f10d10d30">FF_STRING</a>:</div>
+<div class="line"><span class="lineno">  233</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  236</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a0600867dce6a7a8fdbfd12977e920bd3">FF_DECIMAL_INT</a>:</div>
+<div class="line"><span class="lineno">  237</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>) || in_key == <span class="charliteral">&#39;.&#39;</span>)</div>
+<div class="line"><span class="lineno">  238</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  239</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  240</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  243</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a29237ab7fae71f977634734a899db3c8">FF_HEX_INT</a>:</div>
+<div class="line"><span class="lineno">  244</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>) ||</div>
+<div class="line"><span class="lineno">  245</span>                    (in_key &gt;= <span class="charliteral">&#39;A&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;F&#39;</span>) ||</div>
+<div class="line"><span class="lineno">  246</span>                    (in_key &gt;= <span class="charliteral">&#39;a&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;f&#39;</span>))</div>
+<div class="line"><span class="lineno">  247</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  248</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  249</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  252</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a8133bf5259a53f3dc35f4e53759523c2">FF_FLOAT</a>:</div>
+<div class="line"><span class="lineno">  253</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>) || in_key == <span class="charliteral">&#39;.&#39;</span> ||</div>
+<div class="line"><span class="lineno">  254</span>                    (in_key == <span class="charliteral">&#39;-&#39;</span> &amp;&amp; p == fstart))</div>
+<div class="line"><span class="lineno">  255</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  256</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  257</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  260</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55ad0d11878fc447832cb198ba3ffea47fd">FF_DOUBLE</a>:</div>
+<div class="line"><span class="lineno">  261</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>) || in_key == <span class="charliteral">&#39;.&#39;</span> ||</div>
+<div class="line"><span class="lineno">  262</span>                    (in_key == <span class="charliteral">&#39;-&#39;</span> &amp;&amp; p == fstart))</div>
+<div class="line"><span class="lineno">  263</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  264</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  265</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  269</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a72455d6bd0cd34c5c99fcb975aaf4d5d">FF_CURRENCY</a>:</div>
+<div class="line"><span class="lineno">  270</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>) || in_key == <span class="charliteral">&#39;.&#39;</span> ||</div>
+<div class="line"><span class="lineno">  271</span>                    (in_key == <span class="charliteral">&#39;-&#39;</span> &amp;&amp; p == fstart))</div>
+<div class="line"><span class="lineno">  272</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  273</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  274</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  276</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a390c81c702e6e15430fb291417a3deb1">FF_YYYYMMDD</a>:</div>
+<div class="line"><span class="lineno">  277</span>                <span class="keywordflow">if</span> (in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>)</div>
+<div class="line"><span class="lineno">  278</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  279</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  280</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  282</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a6be668a04adbcf9d86e2b161060d7742">FF_HHMMSS</a>:</div>
+<div class="line"><span class="lineno">  283</span>                <span class="keywordflow">if</span> (in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>)</div>
+<div class="line"><span class="lineno">  284</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  285</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  286</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  288</span>            <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55af8346e29b3bb06510cdba6d949f00640">FF_APR</a>:</div>
+<div class="line"><span class="lineno">  289</span>                <span class="keywordflow">if</span> ((in_key &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; in_key &lt;= <span class="charliteral">&#39;9&#39;</span>) || in_key == <span class="charliteral">&#39;.&#39;</span>)</div>
+<div class="line"><span class="lineno">  290</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  291</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  292</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  293</span>            <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  294</span>                <a class="code hl_function" href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a>(<span class="stringliteral">&quot;field_editor() invalid format&quot;</span>);</div>
+<div class="line"><span class="lineno">  295</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  296</span>            }</div>
+<div class="line"><span class="lineno">  297</span>            <span class="keywordflow">if</span> (in_key &lt; <span class="charliteral">&#39; &#39;</span> || in_key &gt; <span class="charliteral">&#39;~&#39;</span>) {</div>
+<div class="line"><span class="lineno">  298</span>                in_key = 0;</div>
+<div class="line"><span class="lineno">  299</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  300</span>            }</div>
+<div class="line"><span class="lineno">  301</span>            <span class="keywordflow">if</span> (f_insert) {</div>
+<div class="line"><span class="lineno">  302</span>                <span class="keywordflow">if</span> (str_end &lt; fend) {</div>
+<div class="line"><span class="lineno">  303</span>                    s = str_end - 1;</div>
+<div class="line"><span class="lineno">  304</span>                    d = str_end;</div>
+<div class="line"><span class="lineno">  305</span>                    <span class="keywordflow">while</span> (s &gt;= p)</div>
+<div class="line"><span class="lineno">  306</span>                        *d-- = *s--;</div>
+<div class="line"><span class="lineno">  307</span>                    *p++ = in_key;</div>
+<div class="line"><span class="lineno">  308</span>                    str_end++;</div>
+<div class="line"><span class="lineno">  309</span>                    x++;</div>
+<div class="line"><span class="lineno">  310</span>                }</div>
+<div class="line"><span class="lineno">  311</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  312</span>                <span class="keywordflow">if</span> (p &lt; fend) {</div>
+<div class="line"><span class="lineno">  313</span>                    <span class="keywordflow">if</span> (p &lt; str_end) {</div>
+<div class="line"><span class="lineno">  314</span>                        <span class="keywordflow">if</span> (p == accept_s &amp;&amp; in_key == <span class="charliteral">&#39; &#39;</span>) {</div>
+<div class="line"><span class="lineno">  315</span>                            d = accept_s;</div>
+<div class="line"><span class="lineno">  316</span>                            s = accept_s + 1;</div>
+<div class="line"><span class="lineno">  317</span>                            <span class="keywordflow">while</span> (*s != <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  318</span>                                *d++ = *s++;</div>
+<div class="line"><span class="lineno">  319</span>                            *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  320</span>                            in_key = 0;</div>
+<div class="line"><span class="lineno">  321</span>                            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  322</span>                        }</div>
+<div class="line"><span class="lineno">  323</span>                        *p++ = in_key;</div>
+<div class="line"><span class="lineno">  324</span>                        x++;</div>
+<div class="line"><span class="lineno">  325</span>                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (p == str_end) {</div>
+<div class="line"><span class="lineno">  326</span>                        *p++ = in_key;</div>
+<div class="line"><span class="lineno">  327</span>                        *p = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  328</span>                        str_end = p;</div>
+<div class="line"><span class="lineno">  329</span>                        x++;</div>
+<div class="line"><span class="lineno">  330</span>                    }</div>
+<div class="line"><span class="lineno">  331</span>                }</div>
+<div class="line"><span class="lineno">  332</span>            }</div>
+<div class="line"><span class="lineno">  333</span>            in_key = 0;</div>
+<div class="line"><span class="lineno">  334</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  335</span>        }</div>
+<div class="line"><span class="lineno">  336</span>    }</div>
+<div class="line"><span class="lineno">  337</span>}</div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a0600867dce6a7a8fdbfd12977e920bd3"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a0600867dce6a7a8fdbfd12977e920bd3">FF_DECIMAL_INT</a></div><div class="ttdeci">@ FF_DECIMAL_INT</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00055">form.h:55</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a16d0b76d2287afb9c99b501f10d10d30"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a16d0b76d2287afb9c99b501f10d10d30">FF_STRING</a></div><div class="ttdeci">@ FF_STRING</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00053">form.h:53</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a29237ab7fae71f977634734a899db3c8"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a29237ab7fae71f977634734a899db3c8">FF_HEX_INT</a></div><div class="ttdeci">@ FF_HEX_INT</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00057">form.h:57</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a390c81c702e6e15430fb291417a3deb1"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a390c81c702e6e15430fb291417a3deb1">FF_YYYYMMDD</a></div><div class="ttdeci">@ FF_YYYYMMDD</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00066">form.h:66</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a6be668a04adbcf9d86e2b161060d7742"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a6be668a04adbcf9d86e2b161060d7742">FF_HHMMSS</a></div><div class="ttdeci">@ FF_HHMMSS</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00068">form.h:68</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a72455d6bd0cd34c5c99fcb975aaf4d5d"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a72455d6bd0cd34c5c99fcb975aaf4d5d">FF_CURRENCY</a></div><div class="ttdeci">@ FF_CURRENCY</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00063">form.h:63</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55a8133bf5259a53f3dc35f4e53759523c2"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a8133bf5259a53f3dc35f4e53759523c2">FF_FLOAT</a></div><div class="ttdeci">@ FF_FLOAT</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00059">form.h:59</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55ad0d11878fc447832cb198ba3ffea47fd"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55ad0d11878fc447832cb198ba3ffea47fd">FF_DOUBLE</a></div><div class="ttdeci">@ FF_DOUBLE</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00061">form.h:61</a></div></div>
+<div class="ttc" id="aa01844_html_a5f05b2e7f2944a6b3e8fec73da1f4a55af8346e29b3bb06510cdba6d949f00640"><div class="ttname"><a href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55af8346e29b3bb06510cdba6d949f00640">FF_APR</a></div><div class="ttdeci">@ FF_APR</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00070">form.h:70</a></div></div>
+<div class="ttc" id="aa01856_html_abb702d8b501669a23aa0ab3b281b9384"><div class="ttname"><a href="../../da/d66/a01856.html#abb702d8b501669a23aa0ab3b281b9384">min</a></div><div class="ttdeci">#define min(x, y)</div><div class="ttdoc">min macro evaluates two expressions, returning least result</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00092">cm.h:92</a></div></div>
+<div class="ttc" id="aa01856_html_af475c4649f5ac3f8f9901d7a7b9c1b93"><div class="ttname"><a href="../../da/d66/a01856.html#af475c4649f5ac3f8f9901d7a7b9c1b93">Ctrl</a></div><div class="ttdeci">#define Ctrl(c)</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00055">cm.h:55</a></div></div>
+<div class="ttc" id="aa01865_html_a0a06ae7bae8563b699ce712ec266fe6f"><div class="ttname"><a href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a></div><div class="ttdeci">void ui_render()</div><div class="ttdoc">Render the UI by updating panels and refreshing the display.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00880">ui_ncurses.c:880</a></div></div>
+<div class="ttc" id="aa01865_html_a223ee050c77655126a42461b9d32987c"><div class="ttname"><a href="../../d5/da8/a01865.html#a223ee050c77655126a42461b9d32987c">cell_nt_hl_rev</a></div><div class="ttdeci">UiCell cell_nt_hl_rev</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00099">ui_common.c:99</a></div></div>
+<div class="ttc" id="aa01865_html_a39facb01e96e2fee14862c7e4864fe92"><div class="ttname"><a href="../../d5/da8/a01865.html#a39facb01e96e2fee14862c7e4864fe92">ui_cursor_enable_yx</a></div><div class="ttdeci">int ui_cursor_enable_yx(UiSurface *s, ss_t w, uint y, uint x, bool visible)</div><div class="ttdoc">Enable or disable the cursor at a specific position within a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00851">ui_ncurses.c:851</a></div></div>
+<div class="ttc" id="aa01865_html_a7af68559ec8a06ee9dd0ea473736e9b1"><div class="ttname"><a href="../../d5/da8/a01865.html#a7af68559ec8a06ee9dd0ea473736e9b1">ui_getmaxy</a></div><div class="ttdeci">int ui_getmaxy(UiSurface *s, ss_t w)</div><div class="ttdoc">Get the maximum number of lines (rows) of a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00700">ui_ncurses.c:700</a></div></div>
+<div class="ttc" id="aa01865_html_a89aa1c1525f82269298a01d552e60037"><div class="ttname"><a href="../../d5/da8/a01865.html#a89aa1c1525f82269298a01d552e60037">click_x</a></div><div class="ttdeci">int click_x</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00028">ui_common.c:28</a></div></div>
+<div class="ttc" id="aa01865_html_aadb95339d79605a820662ff77af6b652"><div class="ttname"><a href="../../d5/da8/a01865.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a></div><div class="ttdeci">int sfc_ptr</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d0d/a01904_source.html#l00047">nckeys.c:47</a></div></div>
+<div class="ttc" id="aa01865_html_ab0bf57230becfbf85aeb2cfeac8db81b"><div class="ttname"><a href="../../d5/da8/a01865.html#ab0bf57230becfbf85aeb2cfeac8db81b">ui_curs_set</a></div><div class="ttdeci">int ui_curs_set(int visibility)</div><div class="ttdoc">Set the visibility of the cursor.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00836">ui_ncurses.c:836</a></div></div>
+<div class="ttc" id="aa01865_html_aba43294be5cc34c20fa3d3a58af45f0d"><div class="ttname"><a href="../../d5/da8/a01865.html#aba43294be5cc34c20fa3d3a58af45f0d">click_y</a></div><div class="ttdeci">int click_y</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00027">ui_common.c:27</a></div></div>
+<div class="ttc" id="aa01865_html_af8e9cd9ee2a25a3b53cefd88af4f3b5a"><div class="ttname"><a href="../../d5/da8/a01865.html#af8e9cd9ee2a25a3b53cefd88af4f3b5a">cell_nt_rev</a></div><div class="ttdeci">UiCell cell_nt_rev</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00097">ui_common.c:97</a></div></div>
+<div class="ttc" id="aa01871_html_a0ec984e0327e2285a4508d20c782a020"><div class="ttname"><a href="../../da/d8b/a01871.html#a0ec984e0327e2285a4508d20c782a020">UIKEY_DC</a></div><div class="ttdeci">#define UIKEY_DC</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00031">ui_ncurses_internal.h:31</a></div></div>
+<div class="ttc" id="aa01871_html_a0ef121fb8ad55dd42f3e4ce12f6f804a"><div class="ttname"><a href="../../da/d8b/a01871.html#a0ef121fb8ad55dd42f3e4ce12f6f804a">UIKEY_BACKSPACE</a></div><div class="ttdeci">#define UIKEY_BACKSPACE</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00032">ui_ncurses_internal.h:32</a></div></div>
+<div class="ttc" id="aa01871_html_a4bc9edf22f74c36042ffc374a1674ecf"><div class="ttname"><a href="../../da/d8b/a01871.html#a4bc9edf22f74c36042ffc374a1674ecf">UIKEY_LEFT</a></div><div class="ttdeci">#define UIKEY_LEFT</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00029">ui_ncurses_internal.h:29</a></div></div>
+<div class="ttc" id="aa01871_html_a60a2a6a06eb94ebea4d601584600c1f8"><div class="ttname"><a href="../../da/d8b/a01871.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a></div><div class="ttdeci">#define UIKEY_F09</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00045">ui_ncurses_internal.h:45</a></div></div>
+<div class="ttc" id="aa01871_html_a68b7a95c70f3533312c422c9db80114d"><div class="ttname"><a href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a></div><div class="ttdeci">#define UIKEY_IC</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00030">ui_ncurses_internal.h:30</a></div></div>
+<div class="ttc" id="aa01871_html_a80b0a6a4f8219059c02771656239d3c0"><div class="ttname"><a href="../../da/d8b/a01871.html#a80b0a6a4f8219059c02771656239d3c0">UIKEY_END</a></div><div class="ttdeci">#define UIKEY_END</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00036">ui_ncurses_internal.h:36</a></div></div>
+<div class="ttc" id="aa01871_html_a829edebd2b32037d809c36b80d476a3c"><div class="ttname"><a href="../../da/d8b/a01871.html#a829edebd2b32037d809c36b80d476a3c">UIKEY_F01</a></div><div class="ttdeci">#define UIKEY_F01</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00037">ui_ncurses_internal.h:37</a></div></div>
+<div class="ttc" id="aa01871_html_a87640bafe9dff45165747dbc39ac9583"><div class="ttname"><a href="../../da/d8b/a01871.html#a87640bafe9dff45165747dbc39ac9583">UIKEY_BUTTON1</a></div><div class="ttdeci">#define UIKEY_BUTTON1</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00121">ui_ncurses_internal.h:121</a></div></div>
+<div class="ttc" id="aa01871_html_a9946169a60e9d70d78c10d9ed1505398"><div class="ttname"><a href="../../da/d8b/a01871.html#a9946169a60e9d70d78c10d9ed1505398">UIKEY_RIGHT</a></div><div class="ttdeci">#define UIKEY_RIGHT</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00027">ui_ncurses_internal.h:27</a></div></div>
+<div class="ttc" id="aa01871_html_a99b2ef4b064511b592c3726693584e20"><div class="ttname"><a href="../../da/d8b/a01871.html#a99b2ef4b064511b592c3726693584e20">UIKEY_UP</a></div><div class="ttdeci">#define UIKEY_UP</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00026">ui_ncurses_internal.h:26</a></div></div>
+<div class="ttc" id="aa01871_html_a9b514c25f7172ce9664f3bd21d0c9c19"><div class="ttname"><a href="../../da/d8b/a01871.html#a9b514c25f7172ce9664f3bd21d0c9c19">UIKEY_F10</a></div><div class="ttdeci">#define UIKEY_F10</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00046">ui_ncurses_internal.h:46</a></div></div>
+<div class="ttc" id="aa01871_html_ab6573a5ee4c4d1167dd67aacfb7e148a"><div class="ttname"><a href="../../da/d8b/a01871.html#ab6573a5ee4c4d1167dd67aacfb7e148a">UIKEY_HOME</a></div><div class="ttdeci">#define UIKEY_HOME</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00035">ui_ncurses_internal.h:35</a></div></div>
+<div class="ttc" id="aa01871_html_ab80963120ec48563cd69805b06695584"><div class="ttname"><a href="../../da/d8b/a01871.html#ab80963120ec48563cd69805b06695584">UIKEY_ENTER</a></div><div class="ttdeci">#define UIKEY_ENTER</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00049">ui_ncurses_internal.h:49</a></div></div>
+<div class="ttc" id="aa01871_html_ae69fd8e9ee166952fe2ebca361463733"><div class="ttname"><a href="../../da/d8b/a01871.html#ae69fd8e9ee166952fe2ebca361463733">UIKEY_DOWN</a></div><div class="ttdeci">#define UIKEY_DOWN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00028">ui_ncurses_internal.h:28</a></div></div>
+<div class="ttc" id="aa01883_html_aad0095bc404840ab14e69eb07615819a"><div class="ttname"><a href="../../db/d4b/a01883.html#aad0095bc404840ab14e69eb07615819a">ui_get_event</a></div><div class="ttdeci">int ui_get_event(UiSurface *s, ss_t w, UiChyron *chyron, UiEvent *ev, int timeout_ms)</div><div class="ttdoc">Wait for an input event on target (or stdscr if NULL).</div><div class="ttdef"><b>Definition</b> <a href="../../db/d4b/a01883_source.html#l00109">ui_ncurses_input.c:109</a></div></div>
+<div class="ttc" id="aa01886_html_a6b49882bc95f73a3465cbab9252bb1ab"><div class="ttname"><a href="../../d9/dd5/a01886.html#a6b49882bc95f73a3465cbab9252bb1ab">ui_display_chyron</a></div><div class="ttdeci">void ui_display_chyron(UiSurface *sfc, ss_t w, UiChyron *chyron, uint line, uint col)</div><div class="ttdoc">Display chyron on the specified line and column of the surface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00954">ui_common.c:954</a></div></div>
+<div class="ttc" id="aa01886_html_a7cb9d1a305e5c62b5288043905293521"><div class="ttname"><a href="../../d9/dd5/a01886.html#a7cb9d1a305e5c62b5288043905293521">ui_set_chyron_key_cb</a></div><div class="ttdeci">void ui_set_chyron_key_cb(UiChyron *chyron, uint k, char *s, uint kc, UiCell cell_base)</div><div class="ttdoc">Set chyron key with color pair (cp).</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00810">ui_common.c:810</a></div></div>
+<div class="ttc" id="aa01886_html_ac50923021890fb1a1895392312872150"><div class="ttname"><a href="../../d9/dd5/a01886.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a></div><div class="ttdeci">int ui_get_chyron_key(UiChyron *chyron, uint x)</div><div class="ttdoc">Get keycode from chyron.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00977">ui_common.c:977</a></div></div>
+<div class="ttc" id="aa01886_html_ae7e998534ea17601ca473206547f1c15"><div class="ttname"><a href="../../d9/dd5/a01886.html#ae7e998534ea17601ca473206547f1c15">ui_compile_chyron</a></div><div class="ttdeci">void ui_compile_chyron(UiChyron *chyron)</div><div class="ttdoc">construct the chyron string from the chyron structure</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00899">ui_common.c:899</a></div></div>
+<div class="ttc" id="aa01889_html_a8165e12a754304d517313c134485944a"><div class="ttname"><a href="../../d9/d9b/a01889.html#a8165e12a754304d517313c134485944a">ui_surface</a></div><div class="ttdeci">UiSurface * ui_surface[UI_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00040">ui_ncurses.c:40</a></div></div>
+<div class="ttc" id="aa02438_html_a1d9b6214fb1f6074eac081a477f67f24"><div class="ttname"><a href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a></div><div class="ttdeci">Form * form</div><div class="ttdef"><b>Definition</b> <a href="../../da/d6b/a02438_source.html#l00037">mem.c:37</a></div></div>
+<div class="ttc" id="aa02462_html_aa6adc686b12bc060e2806ca380273058"><div class="ttname"><a href="../../df/d89/a02462.html#aa6adc686b12bc060e2806ca380273058">form_yx_to_fidx</a></div><div class="ttdeci">uint form_yx_to_fidx(Form *, uint, uint)</div><div class="ttdef"><b>Definition</b> <a href="../../df/d89/a02462_source.html#l00516">form_engine.c:516</a></div></div>
+<div class="ttc" id="aa02522_html_ae2b27166cf72b7a8d45dffef9cba8a55"><div class="ttname"><a href="../../d7/da8/a02522.html#ae2b27166cf72b7a8d45dffef9cba8a55">form_display_accept_field</a></div><div class="ttdeci">int form_display_accept_field(Form *)</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00389">fields.c:389</a></div></div>
+<div class="ttc" id="aa02530_html_ga07a8d9311c88786e7310fef638d34a41"><div class="ttname"><a href="#ga07a8d9311c88786e7310fef638d34a41">form_fmt_field</a></div><div class="ttdeci">int form_fmt_field(Form *form, char *s)</div><div class="ttdoc">Format field according to its format type.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00450">fields.c:450</a></div></div>
+<div class="ttc" id="aa02530_html_gabd1710f59277202b0a58f840d4da322e"><div class="ttname"><a href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a></div><div class="ttdeci">int form_display_field(Form *)</div><div class="ttdoc">Display current field.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00371">fields.c:371</a></div></div>
+<div class="ttc" id="aa02530_html_gad2a5cf5a784d70bcd15fcd82ecc13185"><div class="ttname"><a href="#gad2a5cf5a784d70bcd15fcd82ecc13185">form_validate_field</a></div><div class="ttdeci">int form_validate_field(Form *)</div><div class="ttdoc">Validate current field based on flags.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00546">fields.c:546</a></div></div>
+<div class="ttc" id="aa02547_html_ga4116e1ddb027fa6ecdad8c438e1aa244"><div class="ttname"><a href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a></div><div class="ttdeci">int ui_perror(char *emsg_str)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l01204">ui_common.c:1204</a></div></div>
+<div class="ttc" id="aa02676_html"><div class="ttname"><a href="../../df/d97/a02676.html">UiSurface</a></div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00311">ui_backend.h:311</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d1/df7/a02501_source.html#l00142">em0</a>, <a class="el" href="../../d1/df7/a02501_source.html#l00143">em1</a>, <a class="el" href="../../d1/df7/a02501_source.html#l00144">em2</a>, <a class="el" href="../../df/d89/a02462_source.html#l00033">f_curses_open</a>, <a class="el" href="../../de/dbd/a02507_source.html#l00057">restore_shell_tioctl()</a>, <a class="el" href="../../df/d89/a02462_source.html#l00031">sig_received</a>, <a class="el" href="../../d6/d90/a02492_source.html#l00413">ssnprintf()</a>, and <a class="el" href="../../d6/d90/a02492_source.html#l00537">strnz__cpy()</a>.</p>
+<p class="reference">References <a class="el" href="../../d2/dbd/a01844_source.html#l00131">Field::accept_s</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00099">cell_nt_hl_rev</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00097">cell_nt_rev</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00370">Form::chyron</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00028">click_x</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00027">click_y</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00120">Field::col</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00242">Form::f_erase_remainder</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00323">Form::fcnt</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00124">Field::ff</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00070">FF_APR</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00063">FF_CURRENCY</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00055">FF_DECIMAL_INT</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00061">FF_DOUBLE</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00059">FF_FLOAT</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00057">FF_HEX_INT</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00068">FF_HHMMSS</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00053">FF_STRING</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00066">FF_YYYYMMDD</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00315">Form::fidx</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00358">Form::field</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00389">form_display_accept_field()</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00371">form_display_field()</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00450">form_fmt_field()</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00546">form_validate_field()</a>, <a class="el" href="../../df/d89/a02462_source.html#l00516">form_yx_to_fidx()</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00122">Field::len</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00118">Field::line</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00155">Form::lines</a>, <a class="el" href="../../d4/d0d/a01904_source.html#l00047">sfc_ptr</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00899">ui_compile_chyron()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00836">ui_curs_set()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00851">ui_cursor_enable_yx()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00954">ui_display_chyron()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00977">ui_get_chyron_key()</a>, <a class="el" href="../../db/d4b/a01883_source.html#l00109">ui_get_event()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00700">ui_getmaxy()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l01204">ui_perror()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00880">ui_render()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00810">ui_set_chyron_key_cb()</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00040">ui_surface</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../df/d89/a02462_source.html#l00471">field_navigator()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga79c3e22498eb2346543aa9c86fd22e58_cgraph.svg" width="316" height="143"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="ga06c1eb6cf3649dc187115565409f91af" name="ga06c1eb6cf3649dc187115565409f91af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga06c1eb6cf3649dc187115565409f91af">&#9670;&#160;</a></span>sig_dfl_mode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void sig_dfl_mode </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set signal handlers to default behavior. </p>
-<p>This function sets the signal handlers for SIGINT, SIGTERM, SIGQUIT, SIGUSR1, and SIGSEGV to their default behavior. This is typically used when the program needs to exit or reset its signal handling to the default state. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../df/d89/a02462_source.html#l00042">42</a> of file <a class="el" href="../../df/d89/a02462_source.html">sig.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   42</span>                    {</div>
-<div class="line"><span class="lineno">   43</span>    <span class="keyword">struct </span>sigaction sa;</div>
-<div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>    sa.sa_handler = SIG_DFL;</div>
-<div class="line"><span class="lineno">   46</span>    sigemptyset(&amp;sa.sa_mask);</div>
-<div class="line"><span class="lineno">   47</span>    sa.sa_flags = SA_RESTART;</div>
-<div class="line"><span class="lineno">   48</span>    sigaction(SIGINT, &amp;sa, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">   49</span>    sigaction(SIGTERM, &amp;sa, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">   50</span>    sigaction(SIGQUIT, &amp;sa, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">   51</span>    sigaction(SIGUSR1, &amp;sa, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">   52</span>    sa.sa_flags = SA_SIGINFO;</div>
-<div class="line"><span class="lineno">   53</span>    sigaction(SIGSEGV, &amp;sa, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">   54</span>}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d1/df7/a02501_source.html#l01204">abend()</a>, <a class="el" href="../../d1/df7/a02501_source.html#l00384">destroy_curses()</a>, <a class="el" href="../../d8/d9a/a02447_source.html#l00122">fork_exec()</a>, and <a class="el" href="../../d5/d61/a02474_source.html#l00032">main()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga06c1eb6cf3649dc187115565409f91af_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
-</div>
-</div>
-<a id="gaca2de03f6d52d4b11237990e4e605177" name="gaca2de03f6d52d4b11237990e4e605177"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaca2de03f6d52d4b11237990e4e605177">&#9670;&#160;</a></span>sig_prog_mode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void sig_prog_mode </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set up signal handlers for interrupt signals. </p>
-<p>Upon receiving an interrupt signal (SIGINT, SIGTERM, SIGQUIT), the program will prompt the user to either exit the program or continue execution. If the user chooses to exit, a confirmation prompt will be displayed. If the user opts to continue, the program will resume normal operation. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../df/d89/a02462_source.html#l00062">62</a> of file <a class="el" href="../../df/d89/a02462_source.html">sig.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>                     {</div>
-<div class="line"><span class="lineno">   63</span>    <span class="keyword">struct </span>sigaction sa;</div>
-<div class="line"><span class="lineno">   64</span> </div>
-<div class="line"><span class="lineno">   65</span>    memset(&amp;sa, 0, <span class="keyword">sizeof</span>(sa));</div>
-<div class="line"><span class="lineno">   66</span>    sa.sa_handler = <a class="code hl_function" href="#gaa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a>;</div>
-<div class="line"><span class="lineno">   67</span>    sigemptyset(&amp;sa.sa_mask);</div>
-<div class="line"><span class="lineno">   68</span>    sa.sa_flags = SA_RESTART;</div>
-<div class="line"><span class="lineno">   69</span>    <span class="keywordflow">if</span> (sigaction(SIGINT, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
-<div class="line"><span class="lineno">   70</span>        <a class="code hl_function" href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGINT failed&quot;</span>);</div>
-<div class="line"><span class="lineno">   71</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   72</span>    }</div>
-<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">if</span> (sigaction(SIGTERM, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
-<div class="line"><span class="lineno">   74</span>        <a class="code hl_function" href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGTERM failed&quot;</span>);</div>
-<div class="line"><span class="lineno">   75</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   76</span>    };</div>
-<div class="line"><span class="lineno">   77</span>    <span class="keywordflow">if</span> (sigaction(SIGQUIT, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
-<div class="line"><span class="lineno">   78</span>        <a class="code hl_function" href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGQUIT failed&quot;</span>);</div>
-<div class="line"><span class="lineno">   79</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   80</span>    }</div>
-<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">if</span> (sigaction(SIGUSR1, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
-<div class="line"><span class="lineno">   82</span>        <a class="code hl_function" href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGUSR1 failed&quot;</span>);</div>
-<div class="line"><span class="lineno">   83</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   84</span>    }</div>
-<div class="line"><span class="lineno">   85</span>    sa.sa_flags = SA_SIGINFO; <span class="comment">// Set the flag to receive siginfo_t</span></div>
-<div class="line"><span class="lineno">   86</span>    <span class="keywordflow">if</span> (sigaction(SIGSEGV, &amp;sa, <span class="keyword">nullptr</span>) == -1) {</div>
-<div class="line"><span class="lineno">   87</span>        <a class="code hl_function" href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;sigaction SIGSEGV failed&quot;</span>);</div>
-<div class="line"><span class="lineno">   88</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">   89</span>    }</div>
-<div class="line"><span class="lineno">   90</span>}</div>
-<div class="ttc" id="aa02515_html_ga8f6c45ca4a7f6a41c4c88314e697565a"><div class="ttname"><a href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a></div><div class="ttdeci">void abend(int ec, char *s)</div><div class="ttdoc">Abnormal program termination.</div><div class="ttdef"><b>Definition</b> <a href="../../d1/df7/a02501_source.html#l01204">dwin.c:1204</a></div></div>
-<div class="ttc" id="aa02530_html_gaa08a9a8dede37c66c81c3f51a0f338a9"><div class="ttname"><a href="#gaa08a9a8dede37c66c81c3f51a0f338a9">signal_handler</a></div><div class="ttdeci">void signal_handler(int)</div><div class="ttdoc">Signal handler for interrupt signals.</div><div class="ttdef"><b>Definition</b> <a href="../../df/d89/a02462_source.html#l00095">sig.c:95</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d1/df7/a02501_source.html#l01204">abend()</a>, and <a class="el" href="../../df/d89/a02462_source.html#l00095">signal_handler()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d8/d9a/a02447_source.html#l00122">fork_exec()</a>, <a class="el" href="../../d8/db7/a02450_source.html#l00936">form_exec_receiver()</a>, <a class="el" href="../../d5/d61/a02474_source.html#l00032">main()</a>, and <a class="el" href="../../dc/d09/a02429_source.html#l00279">view_init_input()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gaca2de03f6d52d4b11237990e4e605177_cgraph.svg" width="100%" height="446"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga14cc8bd865f05bcd5b9e59edb5ddf18e_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gaca2de03f6d52d4b11237990e4e605177_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga14cc8bd865f05bcd5b9e59edb5ddf18e_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="gaa08a9a8dede37c66c81c3f51a0f338a9" name="gaa08a9a8dede37c66c81c3f51a0f338a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa08a9a8dede37c66c81c3f51a0f338a9">&#9670;&#160;</a></span>signal_handler()</h2>
+<a id="gabd1710f59277202b0a58f840d4da322e" name="gabd1710f59277202b0a58f840d4da322e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabd1710f59277202b0a58f840d4da322e">&#9670;&#160;</a></span>form_display_field()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void signal_handler </td>
+          <td class="memname">int form_display_field </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sig_num</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="../../df/de4/a02780.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Signal handler for interrupt signals. </p>
+<p>Display current field. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sig_num</td><td>The signal number received </td></tr>
+    <tr><td class="paramname">form</td><td>Pointer to <a class="el" href="../../df/de4/a02780.html">Form</a> structure </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on error</dd></dl>
+<p>This function displays the current field based on the form's current field index (fidx). It retrieves the line and column information for the current field, displays any brackets if set, and then displays the field's content using the display_s string. The function ensures that the field is displayed correctly within the form's window and refreshes the display to show the updated field content. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../df/d89/a02462_source.html#l00095">95</a> of file <a class="el" href="../../df/d89/a02462_source.html">sig.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   95</span>                                 {</div>
-<div class="line"><span class="lineno">   96</span>    <span class="keywordflow">switch</span> (sig_num) {</div>
-<div class="line"><span class="lineno">   97</span>    <span class="keywordflow">case</span> SIGINT:</div>
-<div class="line"><span class="lineno">   98</span>        <a class="code hl_variable" href="../../db/d6b/a01853.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGINT;</div>
-<div class="line"><span class="lineno">   99</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">case</span> SIGTERM:</div>
-<div class="line"><span class="lineno">  101</span>        <a class="code hl_variable" href="../../db/d6b/a01853.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGTERM;</div>
-<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">case</span> SIGQUIT:</div>
-<div class="line"><span class="lineno">  104</span>        <a class="code hl_variable" href="../../db/d6b/a01853.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGQUIT;</div>
-<div class="line"><span class="lineno">  105</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  106</span>    <span class="keywordflow">case</span> SIGSEGV:</div>
-<div class="line"><span class="lineno">  107</span>        <a class="code hl_function" href="../../dd/dd9/a02529.html#gab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a>(&amp;<a class="code hl_variable" href="../../de/dbd/a02507.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a>);</div>
-<div class="line"><span class="lineno">  108</span>        <span class="keywordtype">char</span> *msg1 = <span class="stringliteral">&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  109</span>        write(STDERR_FILENO, msg1, strlen(msg1));</div>
-<div class="line"><span class="lineno">  110</span>        <span class="keywordtype">char</span> *msg2 = <span class="stringliteral">&quot;SIGSEGV - Segmentation fault - Stack trace\n\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  111</span>        write(STDERR_FILENO, msg2, strlen(msg2));</div>
-<div class="line"><span class="lineno">  112</span>        <span class="keywordtype">void</span> *addrlist[<a class="code hl_define" href="../../df/d89/a02462.html#a5b4055201d2d8170e179b1ceaa438b9c">MAX_FRAMES</a>];</div>
-<div class="line"><span class="lineno">  113</span>        <span class="keywordtype">char</span> **symbols;</div>
-<div class="line"><span class="lineno">  114</span>        <span class="keywordtype">int</span> frames;</div>
-<div class="line"><span class="lineno">  115</span>        frames = backtrace(addrlist, <a class="code hl_define" href="../../df/d89/a02462.html#a5b4055201d2d8170e179b1ceaa438b9c">MAX_FRAMES</a>);</div>
-<div class="line"><span class="lineno">  116</span>        symbols = backtrace_symbols(addrlist, frames);</div>
-<div class="line"><span class="lineno">  117</span>        <span class="keywordflow">if</span> (symbols == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  118</span>            <a class="code hl_function" href="../../d5/d6a/a02515.html#ga8f6c45ca4a7f6a41c4c88314e697565a">abend</a>(-1, <span class="stringliteral">&quot;backtrace_symbols failed&quot;</span>);</div>
-<div class="line"><span class="lineno">  119</span>            exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  120</span>        }</div>
-<div class="line"><span class="lineno">  121</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; frames; i++) {</div>
-<div class="line"><span class="lineno">  122</span>            <span class="keywordtype">char</span> buf[256];</div>
-<div class="line"><span class="lineno">  123</span>            <a class="code hl_function" href="../../dc/dbb/a02520.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(buf, <span class="keyword">sizeof</span>(buf), <span class="stringliteral">&quot;%s\n&quot;</span>, symbols[i]);</div>
-<div class="line"><span class="lineno">  124</span>            write(STDERR_FILENO, buf, strlen(buf));</div>
-<div class="line"><span class="lineno">  125</span>        }</div>
-<div class="line"><span class="lineno">  126</span>        free(symbols);</div>
-<div class="line"><span class="lineno">  127</span>        msg2 = <span class="stringliteral">&quot;\nSIGSEGV Segmentation fault - Writing core to file\n\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  128</span>        write(STDERR_FILENO, msg2, strlen(msg2));</div>
-<div class="line"><span class="lineno">  129</span>        <span class="keyword">struct </span>sigaction sa;</div>
-<div class="line"><span class="lineno">  130</span>        sa.sa_handler = SIG_DFL;</div>
-<div class="line"><span class="lineno">  131</span>        sigemptyset(&amp;sa.sa_mask);</div>
-<div class="line"><span class="lineno">  132</span>        sa.sa_flags = 0;</div>
-<div class="line"><span class="lineno">  133</span>        sigaction(SIGSEGV, &amp;sa, NULL);</div>
-<div class="line"><span class="lineno">  134</span>        kill(getpid(), SIGSEGV); <span class="comment">// Re-raise the signal</span></div>
-<div class="line"><span class="lineno">  135</span>        exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  136</span>    <span class="keywordflow">case</span> SIGUSR1:</div>
-<div class="line"><span class="lineno">  137</span>        <a class="code hl_variable" href="../../db/d6b/a01853.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = SIGUSR1;</div>
-<div class="line"><span class="lineno">  138</span>        <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  139</span>    <span class="keywordflow">default</span>:</div>
-<div class="line"><span class="lineno">  140</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno">  141</span>    }</div>
-<div class="line"><span class="lineno">  142</span>}</div>
-<div class="ttc" id="aa02462_html_a5b4055201d2d8170e179b1ceaa438b9c"><div class="ttname"><a href="../../df/d89/a02462.html#a5b4055201d2d8170e179b1ceaa438b9c">MAX_FRAMES</a></div><div class="ttdeci">#define MAX_FRAMES</div><div class="ttdef"><b>Definition</b> <a href="../../df/d89/a02462_source.html#l00029">sig.c:29</a></div></div>
-<div class="ttc" id="aa02507_html_a6683c571cfe7d874546506ebf41fc3d3"><div class="ttname"><a href="../../de/dbd/a02507.html#a6683c571cfe7d874546506ebf41fc3d3">shell_tioctl</a></div><div class="ttdeci">struct termios shell_tioctl</div><div class="ttdef"><b>Definition</b> <a href="../../de/dbd/a02507_source.html#l00022">scriou.c:22</a></div></div>
-<div class="ttc" id="aa02529_html_gab69b11814964ea732c1e8e0ca6d22c1c"><div class="ttname"><a href="../../dd/dd9/a02529.html#gab69b11814964ea732c1e8e0ca6d22c1c">set_sane_tioctl</a></div><div class="ttdeci">bool set_sane_tioctl(struct termios *)</div><div class="ttdoc">set_sane_tioctl() - set terminal to sane settings for C-MENU</div><div class="ttdef"><b>Definition</b> <a href="../../de/dbd/a02507_source.html#l00099">scriou.c:99</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00371">371</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  371</span>                                   {</div>
+<div class="line"><span class="lineno">  372</span>    <a class="code hl_struct" href="../../df/d97/a02676.html">UiSurface</a> *sfc = <a class="code hl_variable" href="../../d9/d9b/a01889.html#a8165e12a754304d517313c134485944a">ui_surface</a>[<a class="code hl_variable" href="../../d5/da8/a01865.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a>];</div>
+<div class="line"><span class="lineno">  373</span>    uint y = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;line;</div>
+<div class="line"><span class="lineno">  374</span>    uint x = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;col;</div>
+<div class="line"><span class="lineno">  375</span> </div>
+<div class="line"><span class="lineno">  376</span>    uint pos = 0;</div>
+<div class="line"><span class="lineno">  377</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#aedad4ccdad1dcca88a3dbcfaba5bfa66">ui_mbstr_to_cellstr</a>(sfc, WIN, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;filler_cc, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;filler_s, &amp;<a class="code hl_variable" href="../../d5/da8/a01865.html#a1b6d137939d05fabf47ec6d38f7324dc">cell_nt</a>, &amp;pos,</div>
+<div class="line"><span class="lineno">  378</span>                        <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len + 1);</div>
+<div class="line"><span class="lineno">  379</span>    <a class="code hl_function" href="../../d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30">ui_mvwadd_wchnstr</a>(sfc, WIN, y, x, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;filler_cc, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len);</div>
+<div class="line"><span class="lineno">  380</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">  381</span> </div>
+<div class="line"><span class="lineno">  382</span>    pos = 0;</div>
+<div class="line"><span class="lineno">  383</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#aedad4ccdad1dcca88a3dbcfaba5bfa66">ui_mbstr_to_cellstr</a>(sfc, WIN, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;display_cc, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;display_s, &amp;<a class="code hl_variable" href="../../d5/da8/a01865.html#a1b6d137939d05fabf47ec6d38f7324dc">cell_nt</a>, &amp;pos,</div>
+<div class="line"><span class="lineno">  384</span>                        <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len + 1);</div>
+<div class="line"><span class="lineno">  385</span>    <a class="code hl_function" href="../../d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30">ui_mvwadd_wchnstr</a>(sfc, WIN, y, x, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;display_cc, <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len);</div>
+<div class="line"><span class="lineno">  386</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">  387</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  388</span>}</div>
+<div class="ttc" id="aa01865_html_a1b6d137939d05fabf47ec6d38f7324dc"><div class="ttname"><a href="../../d5/da8/a01865.html#a1b6d137939d05fabf47ec6d38f7324dc">cell_nt</a></div><div class="ttdeci">UiCell cell_nt</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00096">ui_common.c:96</a></div></div>
+<div class="ttc" id="aa01886_html_aedad4ccdad1dcca88a3dbcfaba5bfa66"><div class="ttname"><a href="../../d9/dd5/a01886.html#aedad4ccdad1dcca88a3dbcfaba5bfa66">ui_mbstr_to_cellstr</a></div><div class="ttdeci">uint ui_mbstr_to_cellstr(UiSurface *sfc, ss_t w, UiCell *cmplx_buf, const char *str, const UiCell *cell_base, uint *p, const uint atmost)</div><div class="ttdoc">Convert multibyte string to complex character array.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00430">ui_common.c:430</a></div></div>
+<div class="ttc" id="aa01901_html_a006027addada2f643f4d240d153b5d30"><div class="ttname"><a href="../../d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30">ui_mvwadd_wchnstr</a></div><div class="ttdeci">int ui_mvwadd_wchnstr(UiSurface *s, ss_t w, uint y, uint x, const UiCell *cmplx_buf, uint n)</div><div class="ttdoc">Draw a complex character string at a specific position in a surface window, with a maximum length.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d99/a01901_source.html#l00359">ui_ncurses_draw.c:359</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d1/df7/a02501_source.html#l01204">abend()</a>, <a class="el" href="../../de/dbd/a02507_source.html#l00099">set_sane_tioctl()</a>, <a class="el" href="../../de/dbd/a02507_source.html#l00022">shell_tioctl</a>, <a class="el" href="../../df/d89/a02462_source.html#l00031">sig_received</a>, and <a class="el" href="../../d6/d90/a02492_source.html#l00413">ssnprintf()</a>.</p>
+<p class="reference">References <a class="el" href="../../d9/dd5/a01886_source.html#l00096">cell_nt</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00120">Field::col</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00140">Field::display_cc</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00135">Field::display_s</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00315">Form::fidx</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00358">Form::field</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00146">Field::filler_cc</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00141">Field::filler_s</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00122">Field::len</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00118">Field::line</a>, <a class="el" href="../../d4/d0d/a01904_source.html#l00047">sfc_ptr</a>, <a class="el" href="../../d5/d99/a01901_source.html#l00359">ui_mvwadd_wchnstr()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00880">ui_render()</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00040">ui_surface</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../df/d89/a02462_source.html#l00062">sig_prog_mode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d7/da8/a02522_source.html#l00048">field_editor()</a>, and <a class="el" href="../../d7/da8/a02522_source.html#l00349">form_display_field_n()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gaa08a9a8dede37c66c81c3f51a0f338a9_cgraph.svg" width="100%" height="446"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gabd1710f59277202b0a58f840d4da322e_cgraph.svg" width="356" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gaa08a9a8dede37c66c81c3f51a0f338a9_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gabd1710f59277202b0a58f840d4da322e_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
+</div>
+</div>
+<a id="ga807531da295fd09484bc01e5aa81d97e" name="ga807531da295fd09484bc01e5aa81d97e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga807531da295fd09484bc01e5aa81d97e">&#9670;&#160;</a></span>form_display_field_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int form_display_field_n </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/de4/a02780.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display field n. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">form</td><td>Pointer to <a class="el" href="../../df/de4/a02780.html">Form</a> structure </td></tr>
+    <tr><td class="paramname">n</td><td><a class="el" href="../../d5/dba/a02776.html" title="structure for form fields">Field</a> index to display </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on error</dd></dl>
+<p>This function temporarily sets the form's current field index (fidx) to n, calls <a class="el" href="#gabd1710f59277202b0a58f840d4da322e" title="Display current field.">form_display_field()</a> to display that field, and then restores the original fidx value. This allows for displaying a specific field without permanently changing the form's current field index. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00349">349</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  349</span>                                             {</div>
+<div class="line"><span class="lineno">  350</span>    uint fidx = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx;</div>
+<div class="line"><span class="lineno">  351</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx = n;</div>
+<div class="line"><span class="lineno">  352</span>    <a class="code hl_function" href="#gabd1710f59277202b0a58f840d4da322e">form_display_field</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>);</div>
+<div class="line"><span class="lineno">  353</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx = fidx;</div>
+<div class="line"><span class="lineno">  354</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  355</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d2/dbd/a01844_source.html#l00315">Form::fidx</a>, and <a class="el" href="../../d7/da8/a02522_source.html#l00371">form_display_field()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga807531da295fd09484bc01e5aa81d97e_cgraph.svg" width="562" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="ga07a8d9311c88786e7310fef638d34a41" name="ga07a8d9311c88786e7310fef638d34a41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga07a8d9311c88786e7310fef638d34a41">&#9670;&#160;</a></span>form_fmt_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int form_fmt_field </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/de4/a02780.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Format field according to its format type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">form</td><td>Pointer to <a class="el" href="../../df/de4/a02780.html">Form</a> structure </td></tr>
+    <tr><td class="paramname">s</td><td>Input string to format </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, non-zero on error</dd></dl>
+<p>takes the input string for the current field and formats it according to the field's specified format type (ff). It updates the accept_s and display_s strings for the field based on the formatted value. Handles various format types, including strings, decimal integers, hexadecimal integers, floating-point numbers, currency, dates, and times. Uses helper functions for validation and formatting, such as <a class="el" href="#ga0a88f74830d629ed3304a68dc94349da" title="Check if a given date is valid, including leap years.">is_valid_date()</a>, <a class="el" href="#ga39f3d8e17547c1a92649f7909dcb3551" title="Check if a given time is valid.">is_valid_time()</a>, <a class="el" href="#ga18db59e4c79e823f79310378183ac25c" title="Extract numeric characters from source string to destination string.">numeric()</a>, <a class="el" href="#ga3e691d040bc1f3d91824295cc562820c" title="Right justify string by removing trailing spaces and adding leadingspaces.">right_justify()</a>, <a class="el" href="#ga425021d4c87474159a36d395e4dcdf65" title="Left justify string by removing leading spaces.">left_justify()</a>, and strnzcpy(). The function ensures that the formatted output fits within the field's length and creates a filler string for the field as needed. The function also handles error cases, such as invalid formats, and provides feedback through error messages. It is designed to be extensible, allowing for additional format types to be added in the future as needed. Assumes that the input string is well-formed and does not contain malicious content. Input validation and sanitization should be performed at a higher level in the application to ensure security and robustness. The function currently does not handle localization or internationalization of number formats, such as different decimal separators or currency symbols. Future enhancements may include support for locale-specific formatting. Error handling is basic; future versions may include more detailed error reporting and logging mechanisms. Performance optimizations may be considered for handling large volumes of data or high-frequency updates in real-time applications. The following variables and structures are used in this function: </p><div class="fragment"><div class="line"><span class="keywordtype">char</span> field_s[<a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>];</div>
+<div class="line"><span class="keywordtype">int</span> decimal_int_n = 0;</div>
+<div class="line"><span class="keywordtype">int</span> hex_int_n = 0;</div>
+<div class="line"><span class="keywordtype">float</span> float_n = 0.0;</div>
+<div class="line"><span class="keywordtype">double</span> double_n = 0.0;</div>
+<div class="line"><span class="keywordtype">double</span> currency_n = 0.0;</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="../../dc/d32/a02556.html">Date</a> { <span class="keywordtype">int</span> <a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a>; <span class="keywordtype">int</span> <a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a>; <span class="keywordtype">int</span> <a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a>; };</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="../../d1/d03/a02560.html">Time</a> { <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a>; <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a>; <span class="keywordtype">int</span> <a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a>; };</div>
+<div class="ttc" id="aa01844_html_a4a357448de00e5c771821a3aa1ece717"><div class="ttname"><a href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a></div><div class="ttdeci">#define FIELD_MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00023">form.h:23</a></div></div>
+<div class="ttc" id="aa02556_html"><div class="ttname"><a href="../../dc/d32/a02556.html">Date</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00058">cm.h:58</a></div></div>
+<div class="ttc" id="aa02556_html_a440ee701d2e2715c6034893d47f06a6a"><div class="ttname"><a href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">Date::mm</a></div><div class="ttdeci">uint mm</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00060">cm.h:60</a></div></div>
+<div class="ttc" id="aa02556_html_a4cf82071cf577ce863eb708c733e8f88"><div class="ttname"><a href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">Date::dd</a></div><div class="ttdeci">uint dd</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00061">cm.h:61</a></div></div>
+<div class="ttc" id="aa02556_html_ae1211f3e54dfb60f12092c58ff86f344"><div class="ttname"><a href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">Date::yyyy</a></div><div class="ttdeci">uint yyyy</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00059">cm.h:59</a></div></div>
+<div class="ttc" id="aa02560_html"><div class="ttname"><a href="../../d1/d03/a02560.html">Time</a></div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00064">cm.h:64</a></div></div>
+<div class="ttc" id="aa02560_html_a0af4ad09c1ac0a32164a679aa24ba2b7"><div class="ttname"><a href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">Time::hh</a></div><div class="ttdeci">uint hh</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00065">cm.h:65</a></div></div>
+<div class="ttc" id="aa02560_html_abb1262fdb791db428832c331878c27de"><div class="ttname"><a href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">Time::mm</a></div><div class="ttdeci">uint mm</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00066">cm.h:66</a></div></div>
+<div class="ttc" id="aa02560_html_ae14cc11b9517d2db42f1438f1d2bce2b"><div class="ttname"><a href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">Time::ss</a></div><div class="ttdeci">uint ss</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00067">cm.h:67</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00450">450</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  450</span>                                        {</div>
+<div class="line"><span class="lineno">  451</span>    <a class="code hl_function" href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;input_s, s, <a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  452</span>    <span class="keywordtype">char</span> *input_s = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;input_s;</div>
+<div class="line"><span class="lineno">  453</span>    <span class="keywordtype">char</span> *accept_s = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;accept_s;</div>
+<div class="line"><span class="lineno">  454</span>    <span class="keywordtype">char</span> *display_s = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;display_s;</div>
+<div class="line"><span class="lineno">  455</span>    <span class="comment">// char *filler_s = form-&gt;field[form-&gt;fidx]-&gt;filler_s;</span></div>
+<div class="line"><span class="lineno">  456</span>    uint ff = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;ff;</div>
+<div class="line"><span class="lineno">  457</span>    uint fl = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx]-&gt;len;</div>
+<div class="line"><span class="lineno">  458</span> </div>
+<div class="line"><span class="lineno">  459</span>    <span class="keywordtype">char</span> field_s[<a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  460</span>    uint decimal_int_n = 0;</div>
+<div class="line"><span class="lineno">  461</span>    uint hex_int_n = 0;</div>
+<div class="line"><span class="lineno">  462</span>    <span class="keywordtype">float</span> float_n = 0.0;</div>
+<div class="line"><span class="lineno">  463</span>    <span class="keywordtype">double</span> double_n = 0.0;</div>
+<div class="line"><span class="lineno">  464</span>    <span class="keywordtype">double</span> currency_n = 0.0;</div>
+<div class="line"><span class="lineno">  465</span>    <a class="code hl_struct" href="../../dc/d32/a02556.html">Date</a> date;</div>
+<div class="line"><span class="lineno">  466</span>    date.<a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a> = date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a> = date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a> = 0;</div>
+<div class="line"><span class="lineno">  467</span>    <a class="code hl_struct" href="../../d1/d03/a02560.html">Time</a> time;</div>
+<div class="line"><span class="lineno">  468</span>    time.<a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a> = time.<a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a> = time.<a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a> = 0;</div>
+<div class="line"><span class="lineno">  469</span> </div>
+<div class="line"><span class="lineno">  470</span>    <a class="code hl_function" href="../../d2/d08/a02532.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(accept_s, fl);</div>
+<div class="line"><span class="lineno">  471</span>    <span class="keywordflow">switch</span> (ff) {</div>
+<div class="line"><span class="lineno">  472</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a16d0b76d2287afb9c99b501f10d10d30">FF_STRING</a>:</div>
+<div class="line"><span class="lineno">  473</span>        <a class="code hl_function" href="#ga425021d4c87474159a36d395e4dcdf65">left_justify</a>(s);</div>
+<div class="line"><span class="lineno">  474</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga34703756fd5be0fde758400f320db047">trim</a>(s);</div>
+<div class="line"><span class="lineno">  475</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(input_s, s, <a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  476</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(accept_s, s, <a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  477</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(display_s, s, <a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  478</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  479</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a0600867dce6a7a8fdbfd12977e920bd3">FF_DECIMAL_INT</a>:</div>
+<div class="line"><span class="lineno">  480</span>        sscanf(input_s, <span class="stringliteral">&quot;%d&quot;</span>, &amp;decimal_int_n);</div>
+<div class="line"><span class="lineno">  481</span>        sprintf(accept_s, <span class="stringliteral">&quot;%d&quot;</span>, decimal_int_n);</div>
+<div class="line"><span class="lineno">  482</span>        sprintf(display_s, <span class="stringliteral">&quot;%d&quot;</span>, decimal_int_n);</div>
+<div class="line"><span class="lineno">  483</span>        <a class="code hl_function" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a>(display_s, fl);</div>
+<div class="line"><span class="lineno">  484</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  485</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a29237ab7fae71f977634734a899db3c8">FF_HEX_INT</a>:</div>
+<div class="line"><span class="lineno">  486</span>        sscanf(input_s, <span class="stringliteral">&quot;%x&quot;</span>, &amp;hex_int_n);</div>
+<div class="line"><span class="lineno">  487</span>        sprintf(accept_s, <span class="stringliteral">&quot;%d&quot;</span>, hex_int_n);</div>
+<div class="line"><span class="lineno">  488</span>        sprintf(display_s, <span class="stringliteral">&quot;%x&quot;</span>, hex_int_n);</div>
+<div class="line"><span class="lineno">  489</span>        <a class="code hl_function" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a>(display_s, fl);</div>
+<div class="line"><span class="lineno">  490</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  491</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a8133bf5259a53f3dc35f4e53759523c2">FF_FLOAT</a>:</div>
+<div class="line"><span class="lineno">  492</span>        sscanf(input_s, <span class="stringliteral">&quot;%f&quot;</span>, &amp;float_n);</div>
+<div class="line"><span class="lineno">  493</span>        sprintf(accept_s, <span class="stringliteral">&quot;%f&quot;</span>, float_n);</div>
+<div class="line"><span class="lineno">  494</span>        sprintf(display_s, <span class="stringliteral">&quot;%f&quot;</span>, float_n);</div>
+<div class="line"><span class="lineno">  495</span>        <a class="code hl_function" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a>(display_s, fl);</div>
+<div class="line"><span class="lineno">  496</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  497</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55ad0d11878fc447832cb198ba3ffea47fd">FF_DOUBLE</a>:</div>
+<div class="line"><span class="lineno">  498</span>        sscanf(input_s, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;double_n);</div>
+<div class="line"><span class="lineno">  499</span>        sprintf(accept_s, <span class="stringliteral">&quot;%lf&quot;</span>, double_n);</div>
+<div class="line"><span class="lineno">  500</span>        sprintf(display_s, <span class="stringliteral">&quot;%lf&quot;</span>, double_n);</div>
+<div class="line"><span class="lineno">  501</span>        <a class="code hl_function" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a>(display_s, fl);</div>
+<div class="line"><span class="lineno">  502</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  503</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a72455d6bd0cd34c5c99fcb975aaf4d5d">FF_CURRENCY</a>:</div>
+<div class="line"><span class="lineno">  504</span>        <a class="code hl_function" href="#ga18db59e4c79e823f79310378183ac25c">numeric</a>(field_s, input_s);</div>
+<div class="line"><span class="lineno">  505</span>        sscanf(field_s, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;currency_n);</div>
+<div class="line"><span class="lineno">  506</span>        sprintf(accept_s, <span class="stringliteral">&quot;%.2lf&quot;</span>, currency_n);</div>
+<div class="line"><span class="lineno">  507</span>        sprintf(display_s, <span class="stringliteral">&quot;%&#39;.2lf&quot;</span>, currency_n);</div>
+<div class="line"><span class="lineno">  508</span>        <a class="code hl_function" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a>(display_s, fl);</div>
+<div class="line"><span class="lineno">  509</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  510</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a390c81c702e6e15430fb291417a3deb1">FF_YYYYMMDD</a>:</div>
+<div class="line"><span class="lineno">  511</span>        date.<a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a> = date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a> = date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a> = 0;</div>
+<div class="line"><span class="lineno">  512</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(field_s, input_s, <a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  513</span>        sscanf(field_s, <span class="stringliteral">&quot;%4d%2d%2d&quot;</span>, &amp;date.<a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a>, &amp;date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a>, &amp;date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a>);</div>
+<div class="line"><span class="lineno">  514</span>        sprintf(accept_s, <span class="stringliteral">&quot;%04d%02d%02d&quot;</span>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a>);</div>
+<div class="line"><span class="lineno">  515</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="#ga0a88f74830d629ed3304a68dc94349da">is_valid_date</a>(date.<a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a>))</div>
+<div class="line"><span class="lineno">  516</span>            sprintf(display_s, <span class="stringliteral">&quot;%04d-%02d-%02d&quot;</span>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#ae1211f3e54dfb60f12092c58ff86f344">yyyy</a>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a440ee701d2e2715c6034893d47f06a6a">mm</a>, date.<a class="code hl_variable" href="../../dc/d32/a02556.html#a4cf82071cf577ce863eb708c733e8f88">dd</a>);</div>
+<div class="line"><span class="lineno">  517</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  518</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55a6be668a04adbcf9d86e2b161060d7742">FF_HHMMSS</a>:</div>
+<div class="line"><span class="lineno">  519</span>        time.<a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a> = time.<a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a> = time.<a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a> = 0;</div>
+<div class="line"><span class="lineno">  520</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(field_s, input_s, <a class="code hl_define" href="../../d2/dbd/a01844.html#a4a357448de00e5c771821a3aa1ece717">FIELD_MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  521</span>        sscanf(field_s, <span class="stringliteral">&quot;%2d%2d%2d&quot;</span>, &amp;time.<a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a>, &amp;time.<a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a>, &amp;time.<a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a>);</div>
+<div class="line"><span class="lineno">  522</span>        sprintf(accept_s, <span class="stringliteral">&quot;%02d%02d%02d&quot;</span>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a>);</div>
+<div class="line"><span class="lineno">  523</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="#ga39f3d8e17547c1a92649f7909dcb3551">is_valid_time</a>(time.<a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a>))</div>
+<div class="line"><span class="lineno">  524</span>            sprintf(display_s, <span class="stringliteral">&quot;%02d:%02d:%02d&quot;</span>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#a0af4ad09c1ac0a32164a679aa24ba2b7">hh</a>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#abb1262fdb791db428832c331878c27de">mm</a>, time.<a class="code hl_variable" href="../../d1/d03/a02560.html#ae14cc11b9517d2db42f1438f1d2bce2b">ss</a>);</div>
+<div class="line"><span class="lineno">  525</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  526</span>    <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="../../d2/dbd/a01844.html#a5f05b2e7f2944a6b3e8fec73da1f4a55af8346e29b3bb06510cdba6d949f00640">FF_APR</a>:</div>
+<div class="line"><span class="lineno">  527</span>        sscanf(input_s, <span class="stringliteral">&quot;%lf&quot;</span>, &amp;double_n);</div>
+<div class="line"><span class="lineno">  528</span>        sprintf(accept_s, <span class="stringliteral">&quot;%lf&quot;</span>, double_n);</div>
+<div class="line"><span class="lineno">  529</span>        sprintf(display_s, <span class="stringliteral">&quot;%0.3lf&quot;</span>, double_n);</div>
+<div class="line"><span class="lineno">  530</span>        <a class="code hl_function" href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a>(display_s, fl);</div>
+<div class="line"><span class="lineno">  531</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  532</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><span class="lineno">  533</span>        <a class="code hl_function" href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a>(<span class="stringliteral">&quot;form_fmt_field() invalid format&quot;</span>);</div>
+<div class="line"><span class="lineno">  534</span>        <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  535</span>    }</div>
+<div class="line"><span class="lineno">  536</span>    <a class="code hl_function" href="../../d2/d08/a02532.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a>(accept_s, fl);</div>
+<div class="line"><span class="lineno">  537</span>    <a class="code hl_function" href="#ga425021d4c87474159a36d395e4dcdf65">left_justify</a>(accept_s);</div>
+<div class="line"><span class="lineno">  538</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  539</span>}</div>
+<div class="ttc" id="aa02530_html_ga0a88f74830d629ed3304a68dc94349da"><div class="ttname"><a href="#ga0a88f74830d629ed3304a68dc94349da">is_valid_date</a></div><div class="ttdeci">bool is_valid_date(uint yyyy, uint mm, uint dd)</div><div class="ttdoc">Check if a given date is valid, including leap years.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00613">fields.c:613</a></div></div>
+<div class="ttc" id="aa02530_html_ga18db59e4c79e823f79310378183ac25c"><div class="ttname"><a href="#ga18db59e4c79e823f79310378183ac25c">numeric</a></div><div class="ttdeci">void numeric(char *d, char *s)</div><div class="ttdoc">Extract numeric characters from source string to destination string.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00650">fields.c:650</a></div></div>
+<div class="ttc" id="aa02530_html_ga39f3d8e17547c1a92649f7909dcb3551"><div class="ttname"><a href="#ga39f3d8e17547c1a92649f7909dcb3551">is_valid_time</a></div><div class="ttdeci">bool is_valid_time(uint hh, uint mm, uint ss)</div><div class="ttdoc">Check if a given time is valid.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00634">fields.c:634</a></div></div>
+<div class="ttc" id="aa02530_html_ga3e691d040bc1f3d91824295cc562820c"><div class="ttname"><a href="#ga3e691d040bc1f3d91824295cc562820c">right_justify</a></div><div class="ttdeci">void right_justify(char *, uint)</div><div class="ttdoc">Right justify string by removing trailing spaces and adding leadingspaces.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00587">fields.c:587</a></div></div>
+<div class="ttc" id="aa02530_html_ga425021d4c87474159a36d395e4dcdf65"><div class="ttname"><a href="#ga425021d4c87474159a36d395e4dcdf65">left_justify</a></div><div class="ttdeci">void left_justify(char *s)</div><div class="ttdoc">Left justify string by removing leading spaces.</div><div class="ttdef"><b>Definition</b> <a href="../../d7/da8/a02522_source.html#l00574">fields.c:574</a></div></div>
+<div class="ttc" id="aa02532_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d2/d08/a02532.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d73/a02465_source.html#l00283">whence.c:283</a></div></div>
+<div class="ttc" id="aa02532_html_ga34703756fd5be0fde758400f320db047"><div class="ttname"><a href="../../d2/d08/a02532.html#ga34703756fd5be0fde758400f320db047">trim</a></div><div class="ttdeci">size_t trim(char *)</div><div class="ttdoc">Trims leading and trailing spaces from string s in place.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df4/a02510_source.html#l00360">futil.c:360</a></div></div>
+<div class="ttc" id="aa02532_html_ga636608f26d1193b5d860f2312cd8ee49"><div class="ttname"><a href="../../d2/d08/a02532.html#ga636608f26d1193b5d860f2312cd8ee49">strnz</a></div><div class="ttdeci">size_t strnz(char *, size_t)</div><div class="ttdoc">terminates string at New Line, Carriage Return, or max_len</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df4/a02510_source.html#l00592">futil.c:592</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d2/dbd/a01844_source.html#l00131">Field::accept_s</a>, <a class="el" href="../../da/d66/a01856_source.html#l00061">Date::dd</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00135">Field::display_s</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00124">Field::ff</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00070">FF_APR</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00063">FF_CURRENCY</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00055">FF_DECIMAL_INT</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00061">FF_DOUBLE</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00059">FF_FLOAT</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00057">FF_HEX_INT</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00068">FF_HHMMSS</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00053">FF_STRING</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00066">FF_YYYYMMDD</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00315">Form::fidx</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00358">Form::field</a>, <a class="el" href="../../da/d66/a01856_source.html#l00065">Time::hh</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00128">Field::input_s</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00613">is_valid_date()</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00634">is_valid_time()</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00574">left_justify()</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00122">Field::len</a>, <a class="el" href="../../da/d66/a01856_source.html#l00060">Date::mm</a>, <a class="el" href="../../da/d66/a01856_source.html#l00066">Time::mm</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00650">numeric()</a>, <a class="el" href="../../d7/da8/a02522_source.html#l00587">right_justify()</a>, <a class="el" href="../../da/d66/a01856_source.html#l00067">Time::ss</a>, <a class="el" href="../../dd/df4/a02510_source.html#l00592">strnz()</a>, <a class="el" href="../../d4/d73/a02465_source.html#l00283">strnz__cpy()</a>, <a class="el" href="../../dd/df4/a02510_source.html#l00360">trim()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l01204">ui_perror()</a>, and <a class="el" href="../../da/d66/a01856_source.html#l00059">Date::yyyy</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d7/da8/a02522_source.html#l00048">field_editor()</a>, and <a class="el" href="../../df/d89/a02462_source.html#l00871">form_read_data()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga07a8d9311c88786e7310fef638d34a41_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_ga07a8d9311c88786e7310fef638d34a41_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="gad2a5cf5a784d70bcd15fcd82ecc13185" name="gad2a5cf5a784d70bcd15fcd82ecc13185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad2a5cf5a784d70bcd15fcd82ecc13185">&#9670;&#160;</a></span>form_validate_field()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int form_validate_field </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../df/de4/a02780.html">Form</a> *</td>          <td class="paramname"><span class="paramname"><em>form</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Validate current field based on flags. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">form</td><td>Pointer to <a class="el" href="../../df/de4/a02780.html">Form</a> structure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 if valid, 1 if invalid</dd></dl>
+<p>Very underdeveloped - only checks F_NOTBLANK and F_NOMETAS </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00546">546</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  546</span>                                    {</div>
+<div class="line"><span class="lineno">  547</span>    uint n = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;fidx;</div>
+<div class="line"><span class="lineno">  548</span>    <span class="keywordtype">char</span> *p = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[n]-&gt;accept_s;</div>
+<div class="line"><span class="lineno">  549</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[n]-&gt;ff &amp; <a class="code hl_define" href="../../d2/dbd/a01844.html#aa3db304b6367a47cf4e413079b33afd3">F_NOTBLANK</a>) {</div>
+<div class="line"><span class="lineno">  550</span>        <span class="keywordtype">char</span> *s = <a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[n]-&gt;accept_s;</div>
+<div class="line"><span class="lineno">  551</span>        <span class="keywordflow">while</span> (*s++ == <span class="charliteral">&#39; &#39;</span>)</div>
+<div class="line"><span class="lineno">  552</span>            ;</div>
+<div class="line"><span class="lineno">  553</span>        <span class="keywordflow">if</span> (*s == <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  554</span>            <a class="code hl_function" href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a>(<span class="stringliteral">&quot;blank field not allowed&quot;</span>);</div>
+<div class="line"><span class="lineno">  555</span>            <span class="keywordflow">return</span> (1);</div>
+<div class="line"><span class="lineno">  556</span>        }</div>
+<div class="line"><span class="lineno">  557</span>    }</div>
+<div class="line"><span class="lineno">  558</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#a1d9b6214fb1f6074eac081a477f67f24">form</a>-&gt;field[n]-&gt;ff &amp; <a class="code hl_define" href="../../d2/dbd/a01844.html#ae4f429345c64aa5296369825e05a4cc0">F_NOMETAS</a>) {</div>
+<div class="line"><span class="lineno">  559</span>        <span class="keywordflow">if</span> (strpbrk(p, <span class="stringliteral">&quot;*?[]&quot;</span>) != 0) {</div>
+<div class="line"><span class="lineno">  560</span>            <a class="code hl_function" href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a>(<span class="stringliteral">&quot;metacharacters not allowed&quot;</span>);</div>
+<div class="line"><span class="lineno">  561</span>            <span class="keywordflow">return</span> (1);</div>
+<div class="line"><span class="lineno">  562</span>        }</div>
+<div class="line"><span class="lineno">  563</span>    }</div>
+<div class="line"><span class="lineno">  564</span>    <span class="keywordflow">return</span> (0);</div>
+<div class="line"><span class="lineno">  565</span>}</div>
+<div class="ttc" id="aa01844_html_aa3db304b6367a47cf4e413079b33afd3"><div class="ttname"><a href="../../d2/dbd/a01844.html#aa3db304b6367a47cf4e413079b33afd3">F_NOTBLANK</a></div><div class="ttdeci">#define F_NOTBLANK</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00026">form.h:26</a></div></div>
+<div class="ttc" id="aa01844_html_ae4f429345c64aa5296369825e05a4cc0"><div class="ttname"><a href="../../d2/dbd/a01844.html#ae4f429345c64aa5296369825e05a4cc0">F_NOMETAS</a></div><div class="ttdeci">#define F_NOMETAS</div><div class="ttdef"><b>Definition</b> <a href="../../d2/dbd/a01844_source.html#l00025">form.h:25</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d2/dbd/a01844_source.html#l00131">Field::accept_s</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00124">Field::ff</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00315">Form::fidx</a>, <a class="el" href="../../d2/dbd/a01844_source.html#l00358">Form::field</a>, and <a class="el" href="../../d9/dd5/a01886_source.html#l01204">ui_perror()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d7/da8/a02522_source.html#l00048">field_editor()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gad2a5cf5a784d70bcd15fcd82ecc13185_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d41/a02530_gad2a5cf5a784d70bcd15fcd82ecc13185_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ga0a88f74830d629ed3304a68dc94349da" name="ga0a88f74830d629ed3304a68dc94349da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0a88f74830d629ed3304a68dc94349da">&#9670;&#160;</a></span>is_valid_date()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_valid_date </td>
+          <td>(</td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>yyyy</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>mm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>dd</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if a given date is valid, including leap years. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">yyyy</td><td>Year </td></tr>
+    <tr><td class="paramname">mm</td><td>Month </td></tr>
+    <tr><td class="paramname">dd</td><td>Day </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the date is valid, false otherwise</dd></dl>
+<p>This function checks if the provided year, month, and day constitute a valid date. It accounts for leap years when determining the number of days in February. The function returns true if the date is valid and false if it is not. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00613">613</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  613</span>                                                {</div>
+<div class="line"><span class="lineno">  614</span>    <span class="keywordflow">if</span> (yyyy &lt; 1 || mm &lt; 1 || mm &gt; 12 || dd &lt; 1)</div>
+<div class="line"><span class="lineno">  615</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  616</span>    uint days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};</div>
+<div class="line"><span class="lineno">  617</span>    <span class="keywordflow">if</span> ((yyyy % 4 == 0 &amp;&amp; yyyy % 100 != 0) || (yyyy % 400 == 0))</div>
+<div class="line"><span class="lineno">  618</span>        days_in_month[2] = 29;</div>
+<div class="line"><span class="lineno">  619</span>    <span class="keywordflow">if</span> (dd &gt; days_in_month[mm])</div>
+<div class="line"><span class="lineno">  620</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  621</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  622</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga39f3d8e17547c1a92649f7909dcb3551" name="ga39f3d8e17547c1a92649f7909dcb3551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga39f3d8e17547c1a92649f7909dcb3551">&#9670;&#160;</a></span>is_valid_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool is_valid_time </td>
+          <td>(</td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>hh</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>mm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>ss</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if a given time is valid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hh</td><td>Hour </td></tr>
+    <tr><td class="paramname">mm</td><td>Minute </td></tr>
+    <tr><td class="paramname">ss</td><td>Second </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the time is valid, false otherwise</dd></dl>
+<p>This function checks if the provided hour, minute, and second constitute a valid time. It ensures that hours are between 0 and 23, minutes and seconds are between 0 and 59. The function returns true if the time is valid and false if it is not. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00634">634</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  634</span>                                              {</div>
+<div class="line"><span class="lineno">  635</span>    <span class="keywordflow">if</span> (hh &gt; 23 || mm &gt; 59 || ss &gt; 59)</div>
+<div class="line"><span class="lineno">  636</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  637</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  638</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga425021d4c87474159a36d395e4dcdf65" name="ga425021d4c87474159a36d395e4dcdf65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga425021d4c87474159a36d395e4dcdf65">&#9670;&#160;</a></span>left_justify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void left_justify </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Left justify string by removing leading spaces. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="../../d9/de7/a02572.html">String</a> to left justify</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function takes a string s and removes any leading spaces, effectively left-justifying the text. It does this by finding the first non-space character and shifting the string to the left, overwriting the leading spaces. The resulting string is null-terminated. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00574">574</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  574</span>{ <a class="code hl_function" href="../../d2/d08/a02532.html#ga34703756fd5be0fde758400f320db047">trim</a>(s); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga18db59e4c79e823f79310378183ac25c" name="ga18db59e4c79e823f79310378183ac25c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga18db59e4c79e823f79310378183ac25c">&#9670;&#160;</a></span>numeric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void numeric </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>d</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract numeric characters from source string to destination string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">d</td><td>Destination string </td></tr>
+    <tr><td class="paramname">s</td><td>Source string</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function takes a source string s and extracts only the numeric characters (digits 0-9), as well as dashes ('-') and periods ('.'), copying them into the destination string d. The resulting string in d is null-terminated. This is useful for processing input that may contain non-numeric characters, allowing the application to focus on the numeric content for further processing or validation. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00650">650</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  650</span>                               {</div>
+<div class="line"><span class="lineno">  651</span>    <span class="keywordflow">while</span> (*s != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  652</span>        <span class="keywordflow">if</span> (*s == <span class="charliteral">&#39;-&#39;</span> || *s == <span class="charliteral">&#39;.&#39;</span> || (*s &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; *s &lt;= <span class="charliteral">&#39;9&#39;</span>))</div>
+<div class="line"><span class="lineno">  653</span>            *d++ = *s++;</div>
+<div class="line"><span class="lineno">  654</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  655</span>            s++;</div>
+<div class="line"><span class="lineno">  656</span>    }</div>
+<div class="line"><span class="lineno">  657</span>    *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  658</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ga3e691d040bc1f3d91824295cc562820c" name="ga3e691d040bc1f3d91824295cc562820c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3e691d040bc1f3d91824295cc562820c">&#9670;&#160;</a></span>right_justify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void right_justify </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>fl</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Right justify string by removing trailing spaces and adding leadingspaces. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td><a class="el" href="../../d9/de7/a02572.html">String</a> to right justify </td></tr>
+    <tr><td class="paramname">fl</td><td><a class="el" href="../../d5/dba/a02776.html" title="structure for form fields">Field</a> length</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function takes a string s and right-justifies it within a field of length fl. It first removes any trailing spaces from the string, then shifts the characters to the right end of the field, filling the left side with spaces. The resulting string is null-terminated and fits within the specified field length. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d7/da8/a02522_source.html#l00587">587</a> of file <a class="el" href="../../d7/da8/a02522_source.html">fields.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  587</span>                                     {</div>
+<div class="line"><span class="lineno">  588</span>    <span class="keywordtype">char</span> *p = s;</div>
+<div class="line"><span class="lineno">  589</span>    <span class="keywordtype">char</span> *d = s + fl;</div>
+<div class="line"><span class="lineno">  590</span>    <a class="code hl_function" href="../../d2/d08/a02532.html#ga34703756fd5be0fde758400f320db047">trim</a>(s);</div>
+<div class="line"><span class="lineno">  591</span>    *d = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  592</span>    <span class="keywordflow">while</span> (*s != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  593</span>        s++;</div>
+<div class="line"><span class="lineno">  594</span>    }</div>
+<div class="line"><span class="lineno">  595</span>    <span class="keywordflow">while</span> (s != p) {</div>
+<div class="line"><span class="lineno">  596</span>        *(--d) = *(--s);</div>
+<div class="line"><span class="lineno">  597</span>    }</div>
+<div class="line"><span class="lineno">  598</span>    <span class="keywordflow">while</span> (d != p) {</div>
+<div class="line"><span class="lineno">  599</span>        *(--d) = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  600</span>    }</div>
+<div class="line"><span class="lineno">  601</span>}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

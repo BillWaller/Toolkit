@@ -1,5 +1,5 @@
 var a01913 =
 [
-    [ "ui_notcurses_get_nc", "d4/d07/a01913.html#a845998d0d7f28756baf2757b7b25c883", null ],
-    [ "ui_notcurses_surface_get_plane", "d4/d07/a01913.html#a3d0d0d59f531c2d04a3318928a9457a8", null ]
+    [ "ui_ncurses_surface_get_panel", "d4/d07/a01913.html#ab87387927bda06e308f66f371d33bc69", null ],
+    [ "ui_ncurses_surface_get_win", "d4/d07/a01913.html#aa4de9531b6434fd09d2fd8a9d5d2ad58", null ]
 ];

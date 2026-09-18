@@ -1,28 +1,6 @@
 var a02450 =
 [
-    [ "D_CALC", "d8/db7/a02450.html#a4bee8ff1d56707e8d62039c449eb5112", null ],
-    [ "D_CMD", "d8/db7/a02450.html#a2d8c742d9f48c28a95f7a8a143db9b22", null ],
-    [ "D_COMMENT", "d8/db7/a02450.html#a9bde875ceaf7176146f8c1a05a5724e8", null ],
-    [ "D_FIELD", "d8/db7/a02450.html#a43348dafdbc52ee02edb0652d644130e", null ],
-    [ "D_GETTER", "d8/db7/a02450.html#aff901b214de5a981faa612ea3e7ebbc1", null ],
-    [ "D_HEADER", "d8/db7/a02450.html#afb32f9ec171fac7ce0a9c7b68236e21a", null ],
-    [ "D_HELP", "d8/db7/a02450.html#a89b314cf8c48acb2b0f084023efe43cd", null ],
-    [ "D_QUERY", "d8/db7/a02450.html#a8dde2b17da1845d674f44135895994a5", null ],
-    [ "D_TEXT", "d8/db7/a02450.html#a582a134ae58dbe280e34e0a1d6a1e26d", null ],
-    [ "display_form", "d9/dce/a02519.html#gaff3b11b68ec51ef3034ce5498913a211", null ],
-    [ "field_navigator", "d9/dce/a02519.html#gae570c2569ffef8c9d38184b6d9446812", null ],
-    [ "form_desc_error", "d9/dce/a02519.html#ga1532be56dda18daf874a3928c2f50a79", null ],
-    [ "form_display_fields", "d9/dce/a02519.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
-    [ "form_engine", "d9/dce/a02519.html#gada302551bf41bf8ed6132fd34328a47e", null ],
-    [ "form_exec_cmd", "d9/dce/a02519.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
-    [ "form_exec_receiver", "d9/dce/a02519.html#ga0fb740802cbc6c8ba386f4751139f0a0", null ],
-    [ "form_parse_desc", "d9/dce/a02519.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
-    [ "form_post", "d9/dce/a02519.html#gac63d5f05787a038d4ae5f4741eafbe50", null ],
-    [ "form_process", "d9/dce/a02519.html#ga7b01ef5c3435083eeec419451b61aa85", null ],
-    [ "form_read_data", "d9/dce/a02519.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
-    [ "form_usage", "d8/db7/a02450.html#a55ea39040ce4618476ee3fada6a0c417", null ],
-    [ "form_write", "d9/dce/a02519.html#ga2839acac3143be9233fbf99458b77e64", null ],
-    [ "form_yx_to_fidx", "d8/db7/a02450.html#aa6adc686b12bc060e2806ca380273058", null ],
-    [ "init_form", "d9/dce/a02519.html#gae097ab59e3fbc4d861b04b076dfa8a3d", null ],
-    [ "mk_filler", "d8/db7/a02450.html#a625cbcfea0ff711a7c0544e27a75db7a", null ]
+    [ "ncurses_input", "d8/db7/a02450.html#ac56572bda2ebdde565aa3597c3221e0e", null ],
+    [ "notcurses_input", "d8/db7/a02450.html#a2eb73591d93778a59609052b2307f2e8", null ],
+    [ "popup_ckeys", "d8/db7/a02450.html#a483e450445eab0cfdef426ba3f027c6f", null ]
 ];

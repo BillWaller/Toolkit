@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🐛_20how_20to_20report_20a_20bug_0',['🐛 How to Report a Bug',['../da/d72/a03140.html#autotoc_md-how-to-report-a-bug',1,'']]]
+  ['zero_5fopt_5fargs_0',['zero_opt_args',['../d6/d51/a02535.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *init):&#160;init.c'],['../d6/d51/a02535.html#gae9b71868d00a28cdcf5f4514e662edfe',1,'zero_opt_args(Init *):&#160;init.c']]]
 ];

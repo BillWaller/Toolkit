@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['title_5fbg_0',['TITLE_BG',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994a809f9c5c478b1ef1a2d4b96478257d60',1,'init.c']]],
-  ['title_5ffg_1',['TITLE_FG',['../dc/d2b/a02486.html#a964fa61be5e30597c14ae6b1e24a7994af12453f7cce4c719b51ebfdad96d7cff',1,'init.c']]]
+  ['ui_5fbackend_5fncurses_0',['UI_BACKEND_NCURSES',['../d5/da8/a01865.html#ae2619ca413d40178cb364e1d4a8e3fffaa0b9f5c3aac83c30bfa2f626a5679e8f',1,'ui_backend.h']]],
+  ['ui_5fbackend_5fnotcurses_1',['UI_BACKEND_NOTCURSES',['../d5/da8/a01865.html#ae2619ca413d40178cb364e1d4a8e3fffac4e803f0794ecd3c0ccb6eac7e2f9453',1,'ui_backend.h']]]
 ];

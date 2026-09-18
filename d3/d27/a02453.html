@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: whence.c File Reference</title>
+<title>C-Menu: pick_engine.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,628 +110,643 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d3/d27/a02453.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">whence.c File Reference</div></div>
+  <div class="headertitle"><div class="title">pick_engine.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Find the full path of a file in the directories specified by the.  
+<p>pick from a list of choices  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../db/d6b/a01853_source.html">cm.h</a>&quot;</code><br />
-<code>#include &lt;argp.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d3/d19/a01847_source.html">common.h</a>&quot;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;limits.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
-<code>#include &lt;stddef.h&gt;</code><br />
-<code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;termios.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for whence.c:</div>
+Include dependency graph for pick_engine.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/d9a/a02454.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/d9a/a02454.svg" width="100%" height="569"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d3/d27/a02453_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr class="memitem:abee6bb472179eda34f888dd556d60f1c" id="r_abee6bb472179eda34f888dd556d60f1c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a> { <br />
-&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
-, <br />
-&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
-<br />
- }</td></tr>
-<tr class="memitem:abee6bb472179eda34f888dd556d60f1c" id="r_abee6bb472179eda34f888dd556d60f1c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a> { <br />
-&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
-, <br />
-&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
-, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
-<br />
- }</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4f226af0b5469cf62b0f04d52813c800" id="r_a4f226af0b5469cf62b0f04d52813c800"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4f226af0b5469cf62b0f04d52813c800">ABEND</a> (char *pgmid, int rc, char *err_msg)</td></tr>
-<tr class="memdesc:a4f226af0b5469cf62b0f04d52813c800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit the program with an error message.  <br /></td></tr>
-<tr class="memitem:ab7a6465a15ab53a9885da8d4db187066" id="r_ab7a6465a15ab53a9885da8d4db187066"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab7a6465a15ab53a9885da8d4db187066">file_spec_parts</a> (char *file_spec, char *file_path, char *file_name)</td></tr>
-<tr class="memdesc:ab7a6465a15ab53a9885da8d4db187066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split a file specification into directory and file name components.  <br /></td></tr>
-<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
-<tr class="memitem:a3ad751d49315b1fd623601a1cac6cb6b" id="r_a3ad751d49315b1fd623601a1cac6cb6b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a> (char *dp, char **pp)</td></tr>
-<tr class="memdesc:a3ad751d49315b1fd623601a1cac6cb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next directory path from a colon-separated list of paths.  <br /></td></tr>
-<tr class="memitem:gaa0145c044cfdde3a1c83323410a59f25" id="r_gaa0145c044cfdde3a1c83323410a59f25"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a> (char *, const char *, size_t)</td></tr>
-<tr class="memdesc:gaa0145c044cfdde3a1c83323410a59f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncat  <br /></td></tr>
-<tr class="memitem:gaa0145c044cfdde3a1c83323410a59f25" id="r_gaa0145c044cfdde3a1c83323410a59f25"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a> (char *d, const char *s, size_t max_len)</td></tr>
-<tr class="memdesc:gaa0145c044cfdde3a1c83323410a59f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncat  <br /></td></tr>
-<tr class="memitem:ga0de2e40df9bd7efc8fd9afb8ad2257e6" id="r_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a> (char *, const char *, size_t)</td></tr>
-<tr class="memdesc:ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncpy  <br /></td></tr>
-<tr class="memitem:ga0de2e40df9bd7efc8fd9afb8ad2257e6" id="r_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a> (char *d, const char *s, size_t max_len)</td></tr>
-<tr class="memdesc:ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncpy  <br /></td></tr>
-<tr class="memitem:a30a98b14290abe0a82e381bb22f21236" id="r_a30a98b14290abe0a82e381bb22f21236"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a30a98b14290abe0a82e381bb22f21236">whence</a> (char *file_spec_p, int flags)</td></tr>
-<tr class="memdesc:a30a98b14290abe0a82e381bb22f21236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the full path of a file in the directories specified by the PATH environment variable.  <br /></td></tr>
+<tr class="memitem:ga98b36615c0627c4195c40b6c23d6062a" id="r_ga98b36615c0627c4195c40b6c23d6062a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga98b36615c0627c4195c40b6c23d6062a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deselects the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga6d6cf40c6027df6af085adaf52f35130" id="r_ga6d6cf40c6027df6af085adaf52f35130"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga6d6cf40c6027df6af085adaf52f35130">destroy_pick_view</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga6d6cf40c6027df6af085adaf52f35130"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys pick view, unmaps file buffer, and cleans up resources.  <br /></td></tr>
+<tr class="memitem:gaeebc4c0b94ca97d753e10a0cd1798730" id="r_gaeebc4c0b94ca97d753e10a0cd1798730"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gaeebc4c0b94ca97d753e10a0cd1798730">display_pick_help</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaeebc4c0b94ca97d753e10a0cd1798730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the help screen for the pick interface using view.  <br /></td></tr>
+<tr class="memitem:gabdcc916b6e3ac452000c280ec5f0d3cc" id="r_gabdcc916b6e3ac452000c280ec5f0d3cc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gabdcc916b6e3ac452000c280ec5f0d3cc">display_pick_page</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gabdcc916b6e3ac452000c280ec5f0d3cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
+<tr class="memitem:a1f95a0fa1e35211caccf3a6ae9ab93de" id="r_a1f95a0fa1e35211caccf3a6ae9ab93de"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1f95a0fa1e35211caccf3a6ae9ab93de">end_pick_view</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *)</td></tr>
+<tr class="memitem:gaf7fcbb1c8b67a4d11c86ba7209f397c2" id="r_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaf7fcbb1c8b67a4d11c86ba7209f397c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes specified command with selected objects as arguments.  <br /></td></tr>
+<tr class="memitem:gaa4c8245bdd9e9c767f83eea931804c10" id="r_gaa4c8245bdd9e9c767f83eea931804c10"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gaa4c8245bdd9e9c767f83eea931804c10">init_pick</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init, int argc, char **argv, uint by, uint bx)</td></tr>
+<tr class="memdesc:gaa4c8245bdd9e9c767f83eea931804c10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes pick structure and opens pick input file or pipe.  <br /></td></tr>
+<tr class="memitem:ga91b2cda407803ee4367f7efd5487863c" id="r_ga91b2cda407803ee4367f7efd5487863c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga91b2cda407803ee4367f7efd5487863c">match_objects</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick, char *s)</td></tr>
+<tr class="memdesc:ga91b2cda407803ee4367f7efd5487863c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays current page of objects in pick window.  <br /></td></tr>
+<tr class="memitem:ga41d1534c1e985c35c7ca725f0b184e17" id="r_ga41d1534c1e985c35c7ca725f0b184e17"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga41d1534c1e985c35c7ca725f0b184e17">new_pick_view</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init)</td></tr>
+<tr class="memdesc:ga41d1534c1e985c35c7ca725f0b184e17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new view for displaying file contents in the pick interface.  <br /></td></tr>
+<tr class="memitem:gac22ea664b7423900ca62515098d8841a" id="r_gac22ea664b7423900ca62515098d8841a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gac22ea664b7423900ca62515098d8841a">new_view_file</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init, char *file)</td></tr>
+<tr class="memdesc:gac22ea664b7423900ca62515098d8841a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new view for displaying the contents of a specified file in the pick interface.  <br /></td></tr>
+<tr class="memitem:a1746b889bc7fa07bbfa70ab65619f140" id="r_a1746b889bc7fa07bbfa70ab65619f140"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1746b889bc7fa07bbfa70ab65619f140">open_pick_win</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *)</td></tr>
+<tr class="memitem:ga8feb6cd586d503a676b831ec722576fb" id="r_ga8feb6cd586d503a676b831ec722576fb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga8feb6cd586d503a676b831ec722576fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs selected objects to specified output file.  <br /></td></tr>
+<tr class="memitem:ac128d5d082b52050e2e0b7fc0d611ab3" id="r_ac128d5d082b52050e2e0b7fc0d611ab3"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ac128d5d082b52050e2e0b7fc0d611ab3">pick_engine</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *)</td></tr>
+<tr class="memitem:ga6e4762c27b7409e55dcc20ff27aa30d5" id="r_ga6e4762c27b7409e55dcc20ff27aa30d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga6e4762c27b7409e55dcc20ff27aa30d5">pick_std_chyron</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga6e4762c27b7409e55dcc20ff27aa30d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets standard chyron key states based on pick structure.  <br /></td></tr>
+<tr class="memitem:ga0dae7df97392da1a79cba0f852c11f5f" id="r_ga0dae7df97392da1a79cba0f852c11f5f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init, char *field)</td></tr>
+<tr class="memdesc:ga0dae7df97392da1a79cba0f852c11f5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop for handling user input and interactions in the pick interface.  <br /></td></tr>
+<tr class="memitem:gaabda879000cf8135245ef451de08f780" id="r_gaabda879000cf8135245ef451de08f780"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gaabda879000cf8135245ef451de08f780">read_pick_input</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *init)</td></tr>
+<tr class="memdesc:gaabda879000cf8135245ef451de08f780"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads pick input from file pointer and saves objects into pick structure.  <br /></td></tr>
+<tr class="memitem:a969bb5ac3fcb5f3565448e8d0da6efc4" id="r_a969bb5ac3fcb5f3565448e8d0da6efc4"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a969bb5ac3fcb5f3565448e8d0da6efc4">read_theme</a> (<a class="el" href="../../d8/d09/a02624.html">Init</a> *)</td></tr>
+<tr class="memitem:af8679455ae5abbc5160b15a3c065e451" id="r_af8679455ae5abbc5160b15a3c065e451"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af8679455ae5abbc5160b15a3c065e451">remove_right_angle</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *)</td></tr>
+<tr class="memitem:gab2173ff8fb800d126c180487744672d5" id="r_gab2173ff8fb800d126c180487744672d5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#gab2173ff8fb800d126c180487744672d5">reverse_object</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:gab2173ff8fb800d126c180487744672d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverses the display of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga02f90007f2422dd2094ab64569e157f0" id="r_ga02f90007f2422dd2094ab64569e157f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga02f90007f2422dd2094ab64569e157f0">save_object</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick, char *s)</td></tr>
+<tr class="memdesc:ga02f90007f2422dd2094ab64569e157f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves a string as an object in the pick structure.  <br /></td></tr>
+<tr class="memitem:ga036c2f9cdf302cced4d9b703022664c0" id="r_ga036c2f9cdf302cced4d9b703022664c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga036c2f9cdf302cced4d9b703022664c0">toggle_object</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga036c2f9cdf302cced4d9b703022664c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the selection state of the currently selected object in pick window.  <br /></td></tr>
+<tr class="memitem:ga650262f8279502ebc73607394dd7af13" id="r_ga650262f8279502ebc73607394dd7af13"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d4/db0/a02540.html#ga650262f8279502ebc73607394dd7af13">unreverse_object</a> (<a class="el" href="../../d0/d5a/a02784.html">Pick</a> *pick)</td></tr>
+<tr class="memdesc:ga650262f8279502ebc73607394dd7af13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unreverses the display of the currently selected object in pick window.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aaa037e59f26a80a8a2e35e6f2364004d" id="r_aaa037e59f26a80a8a2e35e6f2364004d"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#aaa037e59f26a80a8a2e35e6f2364004d">argp_program_bug_address</a> = &quot;billxwaller@gmail.com&quot;</td></tr>
-<tr class="memitem:a62f73ea01c816f1996aed4c66f57c4fb" id="r_a62f73ea01c816f1996aed4c66f57c4fb"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a62f73ea01c816f1996aed4c66f57c4fb">argp_program_version</a> = <a class="el" href="../../da/d66/a01856.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td></tr>
-<tr class="memitem:a35d5df8f21a07ab7777cb4c441d757b6" id="r_a35d5df8f21a07ab7777cb4c441d757b6"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a></td></tr>
-<tr class="memitem:ad3f59f6d050f131c1565e4696e81b1a8" id="r_ad3f59f6d050f131c1565e4696e81b1a8"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a> [<a class="el" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
-<tr class="memitem:ab217e2b668a36cdc1589ea893f1fcef9" id="r_ab217e2b668a36cdc1589ea893f1fcef9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab217e2b668a36cdc1589ea893f1fcef9">wh_flags</a> = 0</td></tr>
+<tr class="memitem:acdb9de82d81b176784185dea9063b57c" id="r_acdb9de82d81b176784185dea9063b57c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acdb9de82d81b176784185dea9063b57c">calculated_idx</a></td></tr>
+<tr class="memitem:a4a50bfe3f8460978b34566ec3dff7adb" id="r_a4a50bfe3f8460978b34566ec3dff7adb"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4a50bfe3f8460978b34566ec3dff7adb">obj_idx</a></td></tr>
+<tr class="memitem:a75032ed794a050729806b69714945c38" id="r_a75032ed794a050729806b69714945c38"><td class="memItemLeft">char const&#160;</td><td class="memItemRight"><a class="el" href="#a75032ed794a050729806b69714945c38">pagers_editors</a> [12][10]</td></tr>
+<tr class="memitem:ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" id="r_ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">pg_lines</a></td></tr>
+<tr class="memitem:afc201616d29b57b342b47a962dc4a2e1" id="r_afc201616d29b57b342b47a962dc4a2e1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#afc201616d29b57b342b47a962dc4a2e1">pipe_fd</a> [2]</td></tr>
+<tr class="memitem:ab57f05e19e1e81af17fbbd3a766c405a" id="r_ab57f05e19e1e81af17fbbd3a766c405a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab57f05e19e1e81af17fbbd3a766c405a">tbl_col</a></td></tr>
+<tr class="memitem:a7df4e526a3af8e113bbc05ca011c2341" id="r_a7df4e526a3af8e113bbc05ca011c2341"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a7df4e526a3af8e113bbc05ca011c2341">tbl_cols</a></td></tr>
+<tr class="memitem:a25fe2a76cfd155c51a46c99d6a1cf4d9" id="r_a25fe2a76cfd155c51a46c99d6a1cf4d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">tbl_line</a></td></tr>
+<tr class="memitem:ae7c3abf692920540a78bc3322d02828a" id="r_ae7c3abf692920540a78bc3322d02828a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae7c3abf692920540a78bc3322d02828a">tbl_page</a></td></tr>
+<tr class="memitem:acbe29ef30ea713ef47f3cd892310ca50" id="r_acbe29ef30ea713ef47f3cd892310ca50"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#acbe29ef30ea713ef47f3cd892310ca50">tbl_pages</a></td></tr>
+<tr class="memitem:ad59d4e161acf3d7b4aaf250f6fece32d" id="r_ad59d4e161acf3d7b4aaf250f6fece32d"><td class="memItemLeft"><a class="el" href="../../d3/d7e/a02768.html">UiMultiMedia</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad59d4e161acf3d7b4aaf250f6fece32d">ui_mm</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Find the full path of a file in the directories specified by the. </p>
+<div class="textblock"><p>pick from a list of choices </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
+<p class="definition">Definition in file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a1f95a0fa1e35211caccf3a6ae9ab93de" name="a1f95a0fa1e35211caccf3a6ae9ab93de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f95a0fa1e35211caccf3a6ae9ab93de">&#9670;&#160;</a></span>end_pick_view()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _GNU_SOURCE</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00010">10</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-
-</div>
-</div>
-<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
-<a id="abee6bb472179eda34f888dd556d60f1c" name="abee6bb472179eda34f888dd556d60f1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abee6bb472179eda34f888dd556d60f1c">&#9670;&#160;</a></span>WhenceFlags <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00034">34</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>             { <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1,</div>
-<div class="line"><span class="lineno">   35</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2,</div>
-<div class="line"><span class="lineno">   36</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4,</div>
-<div class="line"><span class="lineno">   37</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8 } <a class="code hl_enumeration" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a>;</div>
-<div class="ttc" id="aa02453_html_abee6bb472179eda34f888dd556d60f1c"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a></div><div class="ttdeci">WhenceFlags</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00034">whence.c:34</a></div></div>
-<div class="ttc" id="aa02453_html_abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a></div><div class="ttdeci">@ WH_SETUID</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00037">whence.c:37</a></div></div>
-<div class="ttc" id="aa02453_html_abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a></div><div class="ttdeci">@ WH_ALL</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00034">whence.c:34</a></div></div>
-<div class="ttc" id="aa02453_html_abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a></div><div class="ttdeci">@ WH_VERBOSE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00035">whence.c:35</a></div></div>
-<div class="ttc" id="aa02453_html_abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a></div><div class="ttdeci">@ WH_EXECUTABLE</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00036">whence.c:36</a></div></div>
-</div><!-- fragment -->
-</div>
-</div>
-<a id="abee6bb472179eda34f888dd556d60f1c" name="abee6bb472179eda34f888dd556d60f1c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abee6bb472179eda34f888dd556d60f1c">&#9670;&#160;</a></span>WhenceFlags <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00034">34</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>             { <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1,</div>
-<div class="line"><span class="lineno">   35</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2,</div>
-<div class="line"><span class="lineno">   36</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4,</div>
-<div class="line"><span class="lineno">   37</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8 } <a class="code hl_enumeration" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a>;</div>
-</div><!-- fragment -->
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a4f226af0b5469cf62b0f04d52813c800" name="a4f226af0b5469cf62b0f04d52813c800"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f226af0b5469cf62b0f04d52813c800">&#9670;&#160;</a></span>ABEND()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ABEND </td>
+          <td class="memname">void end_pick_view </td>
           <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>pgmid</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="../../d8/d09/a02624.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>rc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>err_msg</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Exit the program with an error message. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pgmid</td><td>The name of the program </td></tr>
-    <tr><td class="paramname">rc</td><td>The return code to exit with </td></tr>
-    <tr><td class="paramname">err_msg</td><td>The error message to display</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function is called to exit the program with an error status. It prints the program name, return code, and error message to the standard error stream, and then exits with the specified return code. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00266">266</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  266</span>                                               {</div>
-<div class="line"><span class="lineno">  267</span>    fprintf(stderr, <span class="stringliteral">&quot;%s; error %d; %s\n&quot;</span>, pgmid, rc, <a class="code hl_variable" href="../../d5/dcb/a02456.html#a2020a87ae37e9432d224e4902049e181">err_msg</a>);</div>
-<div class="line"><span class="lineno">  268</span>    exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  269</span>}</div>
-<div class="ttc" id="aa02456_html_a2020a87ae37e9432d224e4902049e181"><div class="ttname"><a href="../../d5/dcb/a02456.html#a2020a87ae37e9432d224e4902049e181">err_msg</a></div><div class="ttdeci">char err_msg[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/dcb/a02456_source.html#l00150">view_engine.c:150</a></div></div>
-</div><!-- fragment -->
 </div>
 </div>
-<a id="ab7a6465a15ab53a9885da8d4db187066" name="ab7a6465a15ab53a9885da8d4db187066"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7a6465a15ab53a9885da8d4db187066">&#9670;&#160;</a></span>file_spec_parts()</h2>
+<a id="a1746b889bc7fa07bbfa70ab65619f140" name="a1746b889bc7fa07bbfa70ab65619f140"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1746b889bc7fa07bbfa70ab65619f140">&#9670;&#160;</a></span>open_pick_win()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int file_spec_parts </td>
+          <td class="memname">int open_pick_win </td>
           <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_spec</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="../../d8/d09/a02624.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_path</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Split a file specification into directory and file name components. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">file_spec</td><td>The full file specification to split </td></tr>
-    <tr><td class="paramname">file_path</td><td>A buffer to store the extracted directory path </td></tr>
-    <tr><td class="paramname">file_name</td><td>A buffer to store the extracted file name </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success</dd></dl>
-<p>This function takes a file specification, checks if it is a directory, and if so, it sets the file path accordingly. If the file specification is empty, it defaults to the current directory. Otherwise, it splits the file specification into the directory and file name components based on the last occurrence of a slash ('/'). </p>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00209">209</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  209</span>                                                                       {</div>
-<div class="line"><span class="lineno">  210</span>    <span class="keywordtype">int</span> i, last_slash;</div>
-<div class="line"><span class="lineno">  211</span>    <span class="keywordtype">char</span> tmp_file_spec[PATH_MAX];</div>
-<div class="line"><span class="lineno">  212</span>    <span class="keywordtype">int</span> file_spec_l;</div>
-<div class="line"><span class="lineno">  213</span>    <span class="keyword">struct </span>stat stat_struct;</div>
-<div class="line"><span class="lineno">  214</span> </div>
-<div class="line"><span class="lineno">  215</span>    <span class="keywordflow">if</span> (stat(file_spec, &amp;stat_struct) != -1)</div>
-<div class="line"><span class="lineno">  216</span>        <span class="keywordflow">if</span> ((stat_struct.st_mode &amp; S_IFMT) == S_IFDIR) {</div>
-<div class="line"><span class="lineno">  217</span>            <span class="keywordflow">if</span> (file_spec[strlen(file_path)] != <span class="charliteral">&#39;/&#39;</span>)</div>
-<div class="line"><span class="lineno">  218</span>                <a class="code hl_function" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  219</span>            <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_path, file_spec, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  220</span>            file_name[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  221</span>            <span class="keywordflow">return</span> (0);</div>
-<div class="line"><span class="lineno">  222</span>        }</div>
-<div class="line"><span class="lineno">  223</span>    <span class="keywordflow">if</span> (strlen(file_spec) == 0) {</div>
-<div class="line"><span class="lineno">  224</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, <span class="stringliteral">&quot;./&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  225</span>        file_name[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  226</span>        <span class="keywordflow">return</span> (0);</div>
-<div class="line"><span class="lineno">  227</span>    }</div>
-<div class="line"><span class="lineno">  228</span>    <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_file_spec, file_spec, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  229</span>    last_slash = -1;</div>
-<div class="line"><span class="lineno">  230</span>    file_spec_l = strlen(tmp_file_spec);</div>
-<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">if</span> (file_spec_l &gt; 0) {</div>
-<div class="line"><span class="lineno">  232</span>        i = 0;</div>
-<div class="line"><span class="lineno">  233</span>        <span class="keywordflow">while</span> (i &lt; file_spec_l &amp;&amp; tmp_file_spec[i] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
-<div class="line"><span class="lineno">  234</span>            <span class="keywordflow">if</span> (tmp_file_spec[i] == <span class="charliteral">&#39;/&#39;</span>) {</div>
-<div class="line"><span class="lineno">  235</span>                last_slash = i;</div>
-<div class="line"><span class="lineno">  236</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  237</span>            }</div>
-<div class="line"><span class="lineno">  238</span>            i++;</div>
-<div class="line"><span class="lineno">  239</span>        }</div>
-<div class="line"><span class="lineno">  240</span>    }</div>
-<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">if</span> (last_slash &lt; 0) {</div>
-<div class="line"><span class="lineno">  242</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_path, <span class="stringliteral">&quot;./&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  243</span>        <span class="keywordflow">if</span> (strcmp(file_spec, <span class="stringliteral">&quot;.&quot;</span>) == 0)</div>
-<div class="line"><span class="lineno">  244</span>            file_name[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  246</span>            <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_name, tmp_file_spec, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  247</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, file_path, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  248</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, file_name, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  249</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  250</span>        tmp_file_spec[last_slash] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  251</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_path, tmp_file_spec, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  252</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_path, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">if</span> (last_slash &lt; file_spec_l)</div>
-<div class="line"><span class="lineno">  254</span>            last_slash++;</div>
-<div class="line"><span class="lineno">  255</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_name, tmp_file_spec + last_slash, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  256</span>    }</div>
-<div class="line"><span class="lineno">  257</span>    <span class="keywordflow">return</span> (0);</div>
-<div class="line"><span class="lineno">  258</span>}</div>
-<div class="ttc" id="aa02438_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d6b/a02438_source.html#l00015">curskeys.c:15</a></div></div>
-<div class="ttc" id="aa02520_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d90/a02492_source.html#l00537">futil.c:537</a></div></div>
-<div class="ttc" id="aa02520_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../d6/d90/a02492_source.html#l00566">futil.c:566</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00247">247</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  247</span>                              {</div>
+<div class="line"><span class="lineno">  248</span>    uint maxy, maxx;</div>
+<div class="line"><span class="lineno">  249</span>    uint whitespace_ratio = 15;</div>
+<div class="line"><span class="lineno">  250</span>    uint usable_lines;</div>
+<div class="line"><span class="lineno">  251</span>    uint pick_ratio = 50;</div>
+<div class="line"><span class="lineno">  252</span>    uint tbl_max_cols, pg_max_objs;</div>
+<div class="line"><span class="lineno">  253</span> </div>
+<div class="line"><span class="lineno">  254</span>    <a class="code hl_struct" href="../../d0/d5a/a02784.html">Pick</a> *<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a> = init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#af3104cb96c60806b3e75cebad2d09ed9">pick</a>;</div>
+<div class="line"><span class="lineno">  255</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a995c30e2a903c8a14657cce90c4356b6">ui_get_screen_size</a>(&amp;maxy, &amp;maxx);</div>
+<div class="line"><span class="lineno">  256</span>    <span class="comment">// Screen Geometry</span></div>
+<div class="line"><span class="lineno">  257</span>    <span class="comment">// Calculate pick window size and position based on terminal size and pick</span></div>
+<div class="line"><span class="lineno">  258</span>    <span class="comment">// parameters</span></div>
+<div class="line"><span class="lineno">  259</span>    <span class="comment">//</span></div>
+<div class="line"><span class="lineno">  260</span>    <span class="comment">// Calculate line usage:</span></div>
+<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begy == 0)</div>
+<div class="line"><span class="lineno">  262</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begy = (maxy * whitespace_ratio) / 200;</div>
+<div class="line"><span class="lineno">  263</span>    usable_lines = maxy - (maxy * whitespace_ratio) / 100;</div>
+<div class="line"><span class="lineno">  264</span>    usable_lines -= <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begy;</div>
+<div class="line"><span class="lineno">  265</span>    usable_lines -= 5; <span class="comment">// Pick overhead lines</span></div>
+<div class="line"><span class="lineno">  266</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;p_view_files) {</div>
+<div class="line"><span class="lineno">  267</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines == 0) {</div>
+<div class="line"><span class="lineno">  268</span>            <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines = usable_lines * pick_ratio / 100;</div>
+<div class="line"><span class="lineno">  269</span>            usable_lines -= <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines;</div>
+<div class="line"><span class="lineno">  270</span>        }</div>
+<div class="line"><span class="lineno">  271</span>        init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#a67b93629afab1e40bcb4bc3649faf5cf">begy</a> = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begy + 5 + <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines;</div>
+<div class="line"><span class="lineno">  272</span>        init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#a0d978afa855525ab58010653ef1678db">begx</a> = 0;</div>
+<div class="line"><span class="lineno">  273</span>        usable_lines -= 3; <span class="comment">// View overhead lines</span></div>
+<div class="line"><span class="lineno">  274</span>        init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#ac4bf0f10f3b4af5f9bb1bf8fac26b1a5">lines</a> = usable_lines;</div>
+<div class="line"><span class="lineno">  275</span>        init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#a46836b8913a0bc9e458372ca749ebae4">cols</a> = maxx - 2;</div>
+<div class="line"><span class="lineno">  276</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines == 0)</div>
+<div class="line"><span class="lineno">  277</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines = usable_lines;</div>
+<div class="line"><span class="lineno">  278</span> </div>
+<div class="line"><span class="lineno">  279</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col_width = <a class="code hl_define" href="../../da/d66/a01856.html#affe776513b24d84b39af8ab0930fef7f">max</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col_width, 4);</div>
+<div class="line"><span class="lineno">  280</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col_width = <a class="code hl_define" href="../../da/d66/a01856.html#abb702d8b501669a23aa0ab3b281b9384">min</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col_width, (maxx - (2 + <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begx)));</div>
+<div class="line"><span class="lineno">  281</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;m_idx = 0; <span class="comment">// master index</span></div>
+<div class="line"><span class="lineno">  282</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx = 0; <span class="comment">// display index</span></div>
+<div class="line"><span class="lineno">  283</span>    <span class="keywordflow">while</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;m_idx &lt; <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;m_cnt)</div>
+<div class="line"><span class="lineno">  284</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_object[<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx++] = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;m_object[<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;m_idx++];</div>
+<div class="line"><span class="lineno">  285</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx;</div>
+<div class="line"><span class="lineno">  286</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt &lt;= <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines) {</div>
+<div class="line"><span class="lineno">  287</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_lines = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt;</div>
+<div class="line"><span class="lineno">  288</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt;</div>
+<div class="line"><span class="lineno">  289</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_cols = 1;</div>
+<div class="line"><span class="lineno">  290</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  291</span>        tbl_max_cols = ((maxx - (2 + <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begx)) / (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col_width + 1));</div>
+<div class="line"><span class="lineno">  292</span>        pg_max_objs = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines * tbl_max_cols;</div>
+<div class="line"><span class="lineno">  293</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt &gt; pg_max_objs)</div>
+<div class="line"><span class="lineno">  294</span>            <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_cols = tbl_max_cols;</div>
+<div class="line"><span class="lineno">  295</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  296</span>            <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_cols = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt / <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines;</div>
+<div class="line"><span class="lineno">  297</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_lines = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt / tbl_max_cols;</div>
+<div class="line"><span class="lineno">  298</span>    }</div>
+<div class="line"><span class="lineno">  299</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_pages = (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_lines / (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines - 1)) + 1;</div>
+<div class="line"><span class="lineno">  300</span>    <span class="comment">// pick-&gt;lines = (pick-&gt;tbl_lines + pick-&gt;tbl_pages - 1) / pick-&gt;tbl_pages;</span></div>
+<div class="line"><span class="lineno">  301</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_page = 0;</div>
+<div class="line"><span class="lineno">  302</span>    <span class="comment">// if (pick-&gt;begy == 0)</span></div>
+<div class="line"><span class="lineno">  303</span>    <span class="comment">//     pick-&gt;begy = (LINES - pick-&gt;lines) / 5;</span></div>
+<div class="line"><span class="lineno">  304</span>    <span class="comment">// else if (pick-&gt;begy + pick-&gt;lines &gt; LINES - 4)</span></div>
+<div class="line"><span class="lineno">  305</span>    <span class="comment">//     pick-&gt;begy = LINES - pick-&gt;lines - 2;</span></div>
+<div class="line"><span class="lineno">  306</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;width = (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col_width + 1) * <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_cols;</div>
+<div class="line"><span class="lineno">  307</span> </div>
+<div class="line"><span class="lineno">  308</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;width = <a class="code hl_define" href="../../da/d66/a01856.html#affe776513b24d84b39af8ab0930fef7f">max</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;width, 60);</div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordtype">char</span> tmp_str[<a class="code hl_define" href="../../da/d66/a01856.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  310</span> </div>
+<div class="line"><span class="lineno">  311</span>    <span class="keywordtype">int</span> ui_split_win_lines = 2;</div>
+<div class="line"><span class="lineno">  312</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d5/da8/a01865.html#a1e2b4505fa2ecccaffb8d06d65935c3b">ui_tracked_sfc_split_box</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;width, ui_split_win_lines, 0, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begy, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begx, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;title)) {</div>
+<div class="line"><span class="lineno">  313</span>        <a class="code hl_function" href="../../d2/d08/a02532.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a>(tmp_str, <a class="code hl_define" href="../../da/d66/a01856.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <span class="stringliteral">&quot;ui_tracked_sfc_split_box(%d, %d, %d, %d, %d, %d, %s) failed&quot;</span>,</div>
+<div class="line"><span class="lineno">  314</span>                  <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;width, ui_split_win_lines, 0, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begy, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;begx, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;title);</div>
+<div class="line"><span class="lineno">  315</span>        <a class="code hl_function" href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a>(tmp_str);</div>
+<div class="line"><span class="lineno">  316</span>        <span class="keywordflow">return</span> (1);</div>
+<div class="line"><span class="lineno">  317</span>    }</div>
+<div class="line"><span class="lineno">  318</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;surface = <a class="code hl_variable" href="../../d9/d9b/a01889.html#a8165e12a754304d517313c134485944a">ui_surface</a>[<a class="code hl_variable" href="../../d5/da8/a01865.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a>];</div>
+<div class="line"><span class="lineno">  319</span>    <a class="code hl_struct" href="../../df/d97/a02676.html">UiSurface</a> *sfc = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;surface;</div>
+<div class="line"><span class="lineno">  320</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a26405767c81d97ce8cd4c5e5d08f3bfb">ui_setscrreg</a>(sfc, WIN, 0, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines - 1);</div>
+<div class="line"><span class="lineno">  321</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#ad1cd7e4b0fdb0aa358ee36081fba2331">ui_scrollok</a>(sfc, WIN, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  322</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#afcd0cba0c62f0fee4adb4d081e728797">ui_keypad</a>(sfc, WIN, <span class="keyword">true</span>);</div>
+<div class="line"><span class="lineno">  323</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;separator_line = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines + 1;</div>
+<div class="line"><span class="lineno">  324</span> </div>
+<div class="line"><span class="lineno">  325</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;x = 1;</div>
+<div class="line"><span class="lineno">  326</span> </div>
+<div class="line"><span class="lineno">  327</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron = <a class="code hl_function" href="../../d9/dd5/a01886.html#a3c26ced65607d420aeca166b6b33ae47">ui_new_chyron</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;surface, WIN2);</div>
+<div class="line"><span class="lineno">  328</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 1, <span class="stringliteral">&quot;F1 Help&quot;</span>, <a class="code hl_define" href="../../da/d8b/a01871.html#a829edebd2b32037d809c36b80d476a3c">UIKEY_F01</a>);</div>
+<div class="line"><span class="lineno">  329</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 2, <span class="stringliteral">&quot;F9 Cancel&quot;</span>,</div>
+<div class="line"><span class="lineno">  330</span>                      <a class="code hl_define" href="../../da/d8b/a01871.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a>);</div>
+<div class="line"><span class="lineno">  331</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 3, <span class="stringliteral">&quot;F10 Accept&quot;</span>,</div>
+<div class="line"><span class="lineno">  332</span>                      <a class="code hl_define" href="../../da/d8b/a01871.html#a9b514c25f7172ce9664f3bd21d0c9c19">UIKEY_F10</a>);</div>
+<div class="line"><span class="lineno">  333</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 4, <span class="stringliteral">&quot;F11 View&quot;</span>,</div>
+<div class="line"><span class="lineno">  334</span>                      <a class="code hl_define" href="../../da/d8b/a01871.html#adbc90fc3c702e8eba7fb2195536b820c">UIKEY_F11</a>);</div>
+<div class="line"><span class="lineno">  335</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 5, <span class="stringliteral">&quot;&lt;q&gt; Quit View&quot;</span>,</div>
+<div class="line"><span class="lineno">  336</span>                      <span class="charliteral">&#39;q&#39;</span>);</div>
+<div class="line"><span class="lineno">  337</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 6, <span class="stringliteral">&quot;&lt;Sp&gt; Process&quot;</span>, <span class="charliteral">&#39; &#39;</span>);</div>
+<div class="line"><span class="lineno">  338</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 7, <span class="stringliteral">&quot;&lt;Sp&gt; Edit&quot;</span>, <span class="charliteral">&#39; &#39;</span>);</div>
+<div class="line"><span class="lineno">  339</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 9, <span class="stringliteral">&quot;&lt;Tab&gt; Search&quot;</span>,</div>
+<div class="line"><span class="lineno">  340</span>                      <span class="charliteral">&#39;\t&#39;</span>);</div>
+<div class="line"><span class="lineno">  341</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 10, <span class="stringliteral">&quot;&lt;Tab&gt; Select&quot;</span>,</div>
+<div class="line"><span class="lineno">  342</span>                      <span class="charliteral">&#39;\t&#39;</span>);</div>
+<div class="line"><span class="lineno">  343</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 11, <span class="stringliteral">&quot;PgUp&quot;</span>,</div>
+<div class="line"><span class="lineno">  344</span>                      <a class="code hl_define" href="../../da/d8b/a01871.html#a6c9ae61520f9da1d121f40b0c6b77f42">UIKEY_PPAGE</a>);</div>
+<div class="line"><span class="lineno">  345</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 12, <span class="stringliteral">&quot;PgDn&quot;</span>,</div>
+<div class="line"><span class="lineno">  346</span>                      <a class="code hl_define" href="../../da/d8b/a01871.html#af84d760f284b95fd4bd0a0b38c6ff2ab">UIKEY_NPAGE</a>);</div>
+<div class="line"><span class="lineno">  347</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron, 13, <span class="stringliteral">&quot;INS&quot;</span>, <a class="code hl_define" href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a>);</div>
+<div class="line"><span class="lineno">  348</span>    <a class="code hl_function" href="../../d4/db0/a02540.html#ga6e4762c27b7409e55dcc20ff27aa30d5">pick_std_chyron</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>);</div>
+<div class="line"><span class="lineno">  349</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#ae7e998534ea17601ca473206547f1c15">ui_compile_chyron</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron);</div>
+<div class="line"><span class="lineno">  350</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  351</span>}</div>
+<div class="ttc" id="aa01856_html_abb702d8b501669a23aa0ab3b281b9384"><div class="ttname"><a href="../../da/d66/a01856.html#abb702d8b501669a23aa0ab3b281b9384">min</a></div><div class="ttdeci">#define min(x, y)</div><div class="ttdoc">min macro evaluates two expressions, returning least result</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00092">cm.h:92</a></div></div>
+<div class="ttc" id="aa01856_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../da/d66/a01856.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00051">cm.h:51</a></div></div>
+<div class="ttc" id="aa01856_html_affe776513b24d84b39af8ab0930fef7f"><div class="ttname"><a href="../../da/d66/a01856.html#affe776513b24d84b39af8ab0930fef7f">max</a></div><div class="ttdeci">#define max(a, b)</div><div class="ttdoc">max macro evaluates two expressions, returning greatest result.</div><div class="ttdef"><b>Definition</b> <a href="../../da/d66/a01856_source.html#l00085">cm.h:85</a></div></div>
+<div class="ttc" id="aa01865_html_a1e2b4505fa2ecccaffb8d06d65935c3b"><div class="ttname"><a href="../../d5/da8/a01865.html#a1e2b4505fa2ecccaffb8d06d65935c3b">ui_tracked_sfc_split_box</a></div><div class="ttdeci">int ui_tracked_sfc_split_box(uint wlines, uint wcols, uint split_y, uint split_x, uint wbegy, uint wbegx, const char *wtitle)</div><div class="ttdoc">Create a new surface with a split box window.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00542">ui_common.c:542</a></div></div>
+<div class="ttc" id="aa01865_html_a26405767c81d97ce8cd4c5e5d08f3bfb"><div class="ttname"><a href="../../d5/da8/a01865.html#a26405767c81d97ce8cd4c5e5d08f3bfb">ui_setscrreg</a></div><div class="ttdeci">int ui_setscrreg(UiSurface *s, ss_t w, uint top, uint bottom)</div><div class="ttdoc">Set the scrolling region for a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00819">ui_ncurses.c:819</a></div></div>
+<div class="ttc" id="aa01865_html_a995c30e2a903c8a14657cce90c4356b6"><div class="ttname"><a href="../../d5/da8/a01865.html#a995c30e2a903c8a14657cce90c4356b6">ui_get_screen_size</a></div><div class="ttdeci">void ui_get_screen_size(uint *lines, uint *cols)</div><div class="ttdoc">Get the current screen size (number of lines and columns).</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00721">ui_ncurses.c:721</a></div></div>
+<div class="ttc" id="aa01865_html_aadb95339d79605a820662ff77af6b652"><div class="ttname"><a href="../../d5/da8/a01865.html#aadb95339d79605a820662ff77af6b652">sfc_ptr</a></div><div class="ttdeci">int sfc_ptr</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d0d/a01904_source.html#l00047">nckeys.c:47</a></div></div>
+<div class="ttc" id="aa01865_html_ad1cd7e4b0fdb0aa358ee36081fba2331"><div class="ttname"><a href="../../d5/da8/a01865.html#ad1cd7e4b0fdb0aa358ee36081fba2331">ui_scrollok</a></div><div class="ttdeci">int ui_scrollok(UiSurface *s, ss_t w, bool enable)</div><div class="ttdoc">Enable or disable scrolling for a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00754">ui_ncurses.c:754</a></div></div>
+<div class="ttc" id="aa01865_html_afcd0cba0c62f0fee4adb4d081e728797"><div class="ttname"><a href="../../d5/da8/a01865.html#afcd0cba0c62f0fee4adb4d081e728797">ui_keypad</a></div><div class="ttdeci">int ui_keypad(UiSurface *s, ss_t w, bool enable)</div><div class="ttdoc">Enable or disable the keypad for a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00770">ui_ncurses.c:770</a></div></div>
+<div class="ttc" id="aa01871_html_a60a2a6a06eb94ebea4d601584600c1f8"><div class="ttname"><a href="../../da/d8b/a01871.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a></div><div class="ttdeci">#define UIKEY_F09</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00045">ui_ncurses_internal.h:45</a></div></div>
+<div class="ttc" id="aa01871_html_a68b7a95c70f3533312c422c9db80114d"><div class="ttname"><a href="../../da/d8b/a01871.html#a68b7a95c70f3533312c422c9db80114d">UIKEY_IC</a></div><div class="ttdeci">#define UIKEY_IC</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00030">ui_ncurses_internal.h:30</a></div></div>
+<div class="ttc" id="aa01871_html_a6c9ae61520f9da1d121f40b0c6b77f42"><div class="ttname"><a href="../../da/d8b/a01871.html#a6c9ae61520f9da1d121f40b0c6b77f42">UIKEY_PPAGE</a></div><div class="ttdeci">#define UIKEY_PPAGE</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00034">ui_ncurses_internal.h:34</a></div></div>
+<div class="ttc" id="aa01871_html_a829edebd2b32037d809c36b80d476a3c"><div class="ttname"><a href="../../da/d8b/a01871.html#a829edebd2b32037d809c36b80d476a3c">UIKEY_F01</a></div><div class="ttdeci">#define UIKEY_F01</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00037">ui_ncurses_internal.h:37</a></div></div>
+<div class="ttc" id="aa01871_html_a9b514c25f7172ce9664f3bd21d0c9c19"><div class="ttname"><a href="../../da/d8b/a01871.html#a9b514c25f7172ce9664f3bd21d0c9c19">UIKEY_F10</a></div><div class="ttdeci">#define UIKEY_F10</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00046">ui_ncurses_internal.h:46</a></div></div>
+<div class="ttc" id="aa01871_html_adbc90fc3c702e8eba7fb2195536b820c"><div class="ttname"><a href="../../da/d8b/a01871.html#adbc90fc3c702e8eba7fb2195536b820c">UIKEY_F11</a></div><div class="ttdeci">#define UIKEY_F11</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00047">ui_ncurses_internal.h:47</a></div></div>
+<div class="ttc" id="aa01871_html_af84d760f284b95fd4bd0a0b38c6ff2ab"><div class="ttname"><a href="../../da/d8b/a01871.html#af84d760f284b95fd4bd0a0b38c6ff2ab">UIKEY_NPAGE</a></div><div class="ttdeci">#define UIKEY_NPAGE</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00033">ui_ncurses_internal.h:33</a></div></div>
+<div class="ttc" id="aa01886_html_a0b2193e0b21a5c8d5952b4783c239b3c"><div class="ttname"><a href="../../d9/dd5/a01886.html#a0b2193e0b21a5c8d5952b4783c239b3c">ui_set_chyron_key</a></div><div class="ttdeci">void ui_set_chyron_key(UiChyron *chyron, uint k, char *s, uint kc)</div><div class="ttdoc">Set chyron key with default color pair (cp_nt_rev).</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00834">ui_common.c:834</a></div></div>
+<div class="ttc" id="aa01886_html_a3c26ced65607d420aeca166b6b33ae47"><div class="ttname"><a href="../../d9/dd5/a01886.html#a3c26ced65607d420aeca166b6b33ae47">ui_new_chyron</a></div><div class="ttdeci">UiChyron * ui_new_chyron(UiSurface *sfc, ss_t w)</div><div class="ttdoc">Create new chyron structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00718">ui_common.c:718</a></div></div>
+<div class="ttc" id="aa01886_html_ae7e998534ea17601ca473206547f1c15"><div class="ttname"><a href="../../d9/dd5/a01886.html#ae7e998534ea17601ca473206547f1c15">ui_compile_chyron</a></div><div class="ttdeci">void ui_compile_chyron(UiChyron *chyron)</div><div class="ttdoc">construct the chyron string from the chyron structure</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00899">ui_common.c:899</a></div></div>
+<div class="ttc" id="aa01889_html_a8165e12a754304d517313c134485944a"><div class="ttname"><a href="../../d9/d9b/a01889.html#a8165e12a754304d517313c134485944a">ui_surface</a></div><div class="ttdeci">UiSurface * ui_surface[UI_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00040">ui_ncurses.c:40</a></div></div>
+<div class="ttc" id="aa02438_html_ab3af3b483170c93daaa938e5ef9c8b07"><div class="ttname"><a href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a></div><div class="ttdeci">Pick * pick</div><div class="ttdef"><b>Definition</b> <a href="../../da/d6b/a02438_source.html#l00036">mem.c:36</a></div></div>
+<div class="ttc" id="aa02532_html_ga63eb94756fb011a456a3dec900709cd8"><div class="ttname"><a href="../../d2/d08/a02532.html#ga63eb94756fb011a456a3dec900709cd8">ssnprintf</a></div><div class="ttdeci">size_t ssnprintf(char *, size_t, const char *,...)</div><div class="ttdoc">ssnprintf was designed to be a safer alternative to snprintf.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df4/a02510_source.html#l00389">futil.c:389</a></div></div>
+<div class="ttc" id="aa02540_html_ga6e4762c27b7409e55dcc20ff27aa30d5"><div class="ttname"><a href="../../d4/db0/a02540.html#ga6e4762c27b7409e55dcc20ff27aa30d5">pick_std_chyron</a></div><div class="ttdeci">void pick_std_chyron(Pick *)</div><div class="ttdoc">Sets standard chyron key states based on pick structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00402">pick_engine.c:402</a></div></div>
+<div class="ttc" id="aa02547_html_ga4116e1ddb027fa6ecdad8c438e1aa244"><div class="ttname"><a href="../../da/d96/a02547.html#ga4116e1ddb027fa6ecdad8c438e1aa244">ui_perror</a></div><div class="ttdeci">int ui_perror(char *emsg_str)</div><div class="ttdoc">Display a simple error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l01204">ui_common.c:1204</a></div></div>
+<div class="ttc" id="aa02624_html_a0d978afa855525ab58010653ef1678db"><div class="ttname"><a href="../../d8/d09/a02624.html#a0d978afa855525ab58010653ef1678db">Init::begx</a></div><div class="ttdeci">int begx</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00122">common.h:122</a></div></div>
+<div class="ttc" id="aa02624_html_a46836b8913a0bc9e458372ca749ebae4"><div class="ttname"><a href="../../d8/d09/a02624.html#a46836b8913a0bc9e458372ca749ebae4">Init::cols</a></div><div class="ttdeci">int cols</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00120">common.h:120</a></div></div>
+<div class="ttc" id="aa02624_html_a67b93629afab1e40bcb4bc3649faf5cf"><div class="ttname"><a href="../../d8/d09/a02624.html#a67b93629afab1e40bcb4bc3649faf5cf">Init::begy</a></div><div class="ttdeci">int begy</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00121">common.h:121</a></div></div>
+<div class="ttc" id="aa02624_html_ac4bf0f10f3b4af5f9bb1bf8fac26b1a5"><div class="ttname"><a href="../../d8/d09/a02624.html#ac4bf0f10f3b4af5f9bb1bf8fac26b1a5">Init::lines</a></div><div class="ttdeci">int lines</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00119">common.h:119</a></div></div>
+<div class="ttc" id="aa02624_html_af3104cb96c60806b3e75cebad2d09ed9"><div class="ttname"><a href="../../d8/d09/a02624.html#af3104cb96c60806b3e75cebad2d09ed9">Init::pick</a></div><div class="ttdeci">Pick * pick</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00193">common.h:193</a></div></div>
+<div class="ttc" id="aa02676_html"><div class="ttname"><a href="../../df/d97/a02676.html">UiSurface</a></div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00311">ui_backend.h:311</a></div></div>
+<div class="ttc" id="aa02784_html"><div class="ttname"><a href="../../d0/d5a/a02784.html">Pick</a></div><div class="ttdoc">Pick data structure.</div><div class="ttdef"><b>Definition</b> <a href="../../db/d6b/a01853_source.html#l00030">pick.h:30</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d6/d90/a02492_source.html#l00566">strnz__cat()</a>, and <a class="el" href="../../d6/d90/a02492_source.html#l00537">strnz__cpy()</a>.</p>
+<p class="reference">References <a class="el" href="../../d3/d19/a01847_source.html#l00122">Init::begx</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00037">Pick::begx</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00121">Init::begy</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00036">Pick::begy</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00099">Pick::chyron</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00120">Init::cols</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00081">Pick::d_cnt</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00083">Pick::d_idx</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00084">Pick::d_object</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00119">Init::lines</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00034">Pick::lines</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00080">Pick::m_cnt</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00082">Pick::m_idx</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00076">Pick::m_object</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00069">Pick::p_view_files</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00193">Init::pick</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00402">pick_std_chyron()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00097">Pick::separator_line</a>, <a class="el" href="../../d4/d0d/a01904_source.html#l00047">sfc_ptr</a>, <a class="el" href="../../dd/df4/a02510_source.html#l00389">ssnprintf()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00045">Pick::surface</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00096">Pick::tbl_col_width</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00094">Pick::tbl_cols</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00093">Pick::tbl_lines</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00091">Pick::tbl_page</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00090">Pick::tbl_pages</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00046">Pick::title</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00899">ui_compile_chyron()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00721">ui_get_screen_size()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00770">ui_keypad()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00718">ui_new_chyron()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l01204">ui_perror()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00754">ui_scrollok()</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00834">ui_set_chyron_key()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00819">ui_setscrreg()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00040">ui_surface</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00542">ui_tracked_sfc_split_box()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00035">Pick::width</a>, and <a class="el" href="../../db/d6b/a01853_source.html#l00039">Pick::x</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00119">whence()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00068">init_pick()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_ab7a6465a15ab53a9885da8d4db187066_cgraph.svg" width="268" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a1746b889bc7fa07bbfa70ab65619f140_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_ab7a6465a15ab53a9885da8d4db187066_icgraph.svg" width="352" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a1746b889bc7fa07bbfa70ab65619f140_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+<a id="ac128d5d082b52050e2e0b7fc0d611ab3" name="ac128d5d082b52050e2e0b7fc0d611ab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac128d5d082b52050e2e0b7fc0d611ab3">&#9670;&#160;</a></span>pick_engine()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int main </td>
+          <td class="memname">int pick_engine </td>
           <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="../../d8/d09/a02624.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Enter picker loop to handle user input and interactions</p>
+<p>&lt; Buffer for user input in the field</p>
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00090">90</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   90</span>                                {</div>
-<div class="line"><span class="lineno">   91</span>    <span class="keyword">struct </span>wh_opts wh_opts = {0};</div>
-<div class="line"><span class="lineno">   92</span>    wh_opts.flags = 0;</div>
-<div class="line"><span class="lineno">   93</span>    wh_opts.argv[0] = <span class="keyword">nullptr</span>;</div>
-<div class="line"><span class="lineno">   94</span>    <span class="keywordtype">int</span> i = 0;</div>
-<div class="line"><span class="lineno">   95</span>    <span class="keywordtype">int</span> found = 0;</div>
-<div class="line"><span class="lineno">   96</span>    argp_parse(&amp;argp, argc, argv, 0, 0, &amp;wh_opts);</div>
-<div class="line"><span class="lineno">   97</span>    <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> = getenv(<span class="stringliteral">&quot;PATH&quot;</span>);</div>
-<div class="line"><span class="lineno">   98</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> == <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">   99</span>        <a class="code hl_function" href="#a4f226af0b5469cf62b0f04d52813c800">ABEND</a>(argv[0], 0, <span class="stringliteral">&quot;PATH environment variable not set&quot;</span>);</div>
-<div class="line"><span class="lineno">  100</span>    <span class="keywordflow">if</span> (wh_opts.flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a>)</div>
-<div class="line"><span class="lineno">  101</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  102</span>    <span class="keywordflow">while</span> (i &lt; wh_opts.argc) {</div>
-<div class="line"><span class="lineno">  103</span>        found = <a class="code hl_function" href="#a30a98b14290abe0a82e381bb22f21236">whence</a>(wh_opts.argv[i++], wh_opts.flags);</div>
-<div class="line"><span class="lineno">  104</span>    }</div>
-<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">if</span> (found == 0)</div>
-<div class="line"><span class="lineno">  106</span>        exit(1);</div>
-<div class="line"><span class="lineno">  107</span>    exit(0);</div>
-<div class="line"><span class="lineno">  108</span>}</div>
-<div class="ttc" id="aa02453_html_a30a98b14290abe0a82e381bb22f21236"><div class="ttname"><a href="#a30a98b14290abe0a82e381bb22f21236">whence</a></div><div class="ttdeci">int whence(char *, int)</div><div class="ttdoc">Find the full path of a file in the directories specified by the PATH environment variable.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00119">whence.c:119</a></div></div>
-<div class="ttc" id="aa02453_html_a35d5df8f21a07ab7777cb4c441d757b6"><div class="ttname"><a href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a></div><div class="ttdeci">char * path_p</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00024">whence.c:24</a></div></div>
-<div class="ttc" id="aa02453_html_a4f226af0b5469cf62b0f04d52813c800"><div class="ttname"><a href="#a4f226af0b5469cf62b0f04d52813c800">ABEND</a></div><div class="ttdeci">void ABEND(char *, int, char *)</div><div class="ttdoc">Exit the program with an error message.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00266">whence.c:266</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00353">353</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  353</span>                            {</div>
+<div class="line"><span class="lineno">  354</span>    <span class="keywordtype">int</span> rc = 0;</div>
+<div class="line"><span class="lineno">  355</span>    <span class="keywordtype">bool</span> f_processed = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  356</span>    <a class="code hl_struct" href="../../d0/d5a/a02784.html">Pick</a> *<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a> = init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#af3104cb96c60806b3e75cebad2d09ed9">pick</a>;</div>
+<div class="line"><span class="lineno">  359</span>    <span class="keywordtype">char</span> field[<a class="code hl_define" href="../../da/d66/a01856.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]; </div>
+<div class="line"><span class="lineno">  360</span>    field[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  361</span>    <a class="code hl_function" href="../../d4/db0/a02540.html#gabdcc916b6e3ac452000c280ec5f0d3cc">display_pick_page</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>);</div>
+<div class="line"><span class="lineno">  362</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><span class="lineno">  363</span>        rc = <a class="code hl_function" href="../../d4/db0/a02540.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a>(init, field);</div>
+<div class="line"><span class="lineno">  364</span>        <span class="keywordflow">if</span> (rc == <a class="code hl_define" href="../../da/d8b/a01871.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a>)</div>
+<div class="line"><span class="lineno">  365</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  366</span>        <span class="keywordflow">if</span> (rc == -1)</div>
+<div class="line"><span class="lineno">  367</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  368</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  369</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;select_cnt &gt; 0) {</div>
+<div class="line"><span class="lineno">  370</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;f_out_spec &amp;&amp; <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;out_spec[0]) {</div>
+<div class="line"><span class="lineno">  371</span>                    <a class="code hl_function" href="../../d4/db0/a02540.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>);</div>
+<div class="line"><span class="lineno">  372</span>                    f_processed = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  373</span>                }</div>
+<div class="line"><span class="lineno">  374</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;f_cmd &amp;&amp; <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;cmd[0]) {</div>
+<div class="line"><span class="lineno">  375</span>                    <a class="code hl_function" href="../../d4/db0/a02540.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a>(init);</div>
+<div class="line"><span class="lineno">  376</span>                    f_processed = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  377</span>                }</div>
+<div class="line"><span class="lineno">  378</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;f_read_theme) {</div>
+<div class="line"><span class="lineno">  379</span>                    <a class="code hl_function" href="#a969bb5ac3fcb5f3565448e8d0da6efc4">read_theme</a>(init);</div>
+<div class="line"><span class="lineno">  380</span>                    f_processed = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  381</span>                }</div>
+<div class="line"><span class="lineno">  382</span>                <span class="keywordflow">if</span> (f_processed) {</div>
+<div class="line"><span class="lineno">  383</span>                    <a class="code hl_function" href="../../d5/d99/a01901.html#a86f4a553274bdacdf7e4cd98d6dc3e17">ui_mvwaddstr</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;surface, WIN2, 0, 0, <span class="stringliteral">&quot;Selection Processed&quot;</span>);</div>
+<div class="line"><span class="lineno">  384</span>                    <a class="code hl_function" href="../../d5/da8/a01865.html#ad6aa95dfbb37afc2abaca3f46248c5af">ui_wclrtoeol</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;surface, WIN2);</div>
+<div class="line"><span class="lineno">  385</span>                }</div>
+<div class="line"><span class="lineno">  386</span>            }</div>
+<div class="line"><span class="lineno">  387</span>        }</div>
+<div class="line"><span class="lineno">  388</span>        <a class="code hl_function" href="../../d4/db0/a02540.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>);</div>
+<div class="line"><span class="lineno">  389</span>    } <span class="keywordflow">while</span> (1);</div>
+<div class="line"><span class="lineno">  390</span>    <a class="code hl_function" href="../../d9/dd5/a01886.html#ac1c60440992fcf0d19a88aa52303625b">ui_destroy_chyron</a>(<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;chyron);</div>
+<div class="line"><span class="lineno">  391</span>    <span class="keywordflow">return</span> (rc);</div>
+<div class="line"><span class="lineno">  392</span>}</div>
+<div class="ttc" id="aa01865_html_ad6aa95dfbb37afc2abaca3f46248c5af"><div class="ttname"><a href="../../d5/da8/a01865.html#ad6aa95dfbb37afc2abaca3f46248c5af">ui_wclrtoeol</a></div><div class="ttdeci">int ui_wclrtoeol(UiSurface *s, ss_t w)</div><div class="ttdoc">Clear to the end of the line in a surface window.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d99/a01901_source.html#l00038">ui_ncurses_draw.c:38</a></div></div>
+<div class="ttc" id="aa01886_html_ac1c60440992fcf0d19a88aa52303625b"><div class="ttname"><a href="../../d9/dd5/a01886.html#ac1c60440992fcf0d19a88aa52303625b">ui_destroy_chyron</a></div><div class="ttdeci">UiChyron * ui_destroy_chyron(UiChyron *chyron)</div><div class="ttdoc">Destroy UiChyron structure.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00773">ui_common.c:773</a></div></div>
+<div class="ttc" id="aa01901_html_a86f4a553274bdacdf7e4cd98d6dc3e17"><div class="ttname"><a href="../../d5/d99/a01901.html#a86f4a553274bdacdf7e4cd98d6dc3e17">ui_mvwaddstr</a></div><div class="ttdeci">int ui_mvwaddstr(UiSurface *s, ss_t w, uint y, uint x, const char *text)</div><div class="ttdoc">Draw a text string at a specific position in a surface window.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d99/a01901_source.html#l00174">ui_ncurses_draw.c:174</a></div></div>
+<div class="ttc" id="aa02453_html_a969bb5ac3fcb5f3565448e8d0da6efc4"><div class="ttname"><a href="#a969bb5ac3fcb5f3565448e8d0da6efc4">read_theme</a></div><div class="ttdeci">int read_theme(Init *)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00616">pick_engine.c:616</a></div></div>
+<div class="ttc" id="aa02540_html_ga0dae7df97392da1a79cba0f852c11f5f"><div class="ttname"><a href="../../d4/db0/a02540.html#ga0dae7df97392da1a79cba0f852c11f5f">picker</a></div><div class="ttdeci">int picker(Init *, char *field)</div><div class="ttdoc">Main loop for handling user input and interactions in the pick interface.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00881">pick_engine.c:881</a></div></div>
+<div class="ttc" id="aa02540_html_ga8feb6cd586d503a676b831ec722576fb"><div class="ttname"><a href="../../d4/db0/a02540.html#ga8feb6cd586d503a676b831ec722576fb">output_objects</a></div><div class="ttdeci">int output_objects(Pick *)</div><div class="ttdoc">Outputs selected objects to specified output file.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00637">pick_engine.c:637</a></div></div>
+<div class="ttc" id="aa02540_html_ga98b36615c0627c4195c40b6c23d6062a"><div class="ttname"><a href="../../d4/db0/a02540.html#ga98b36615c0627c4195c40b6c23d6062a">deselect_object</a></div><div class="ttdeci">void deselect_object(Pick *)</div><div class="ttdoc">Deselects the currently selected object in pick window.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00607">pick_engine.c:607</a></div></div>
+<div class="ttc" id="aa02540_html_gabdcc916b6e3ac452000c280ec5f0d3cc"><div class="ttname"><a href="../../d4/db0/a02540.html#gabdcc916b6e3ac452000c280ec5f0d3cc">display_pick_page</a></div><div class="ttdeci">void display_pick_page(Pick *)</div><div class="ttdoc">Displays current page of objects in pick window.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00461">pick_engine.c:461</a></div></div>
+<div class="ttc" id="aa02540_html_gaf7fcbb1c8b67a4d11c86ba7209f397c2"><div class="ttname"><a href="../../d4/db0/a02540.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2">exec_objects</a></div><div class="ttdeci">int exec_objects(Init *)</div><div class="ttdoc">Executes specified command with selected objects as arguments.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00689">pick_engine.c:689</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../da/d5c/a02432_source.html#l00419">ABEND()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00024">path_p</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00035">WH_VERBOSE</a>, and <a class="el" href="../../d3/d27/a02453_source.html#l00119">whence()</a>.</p>
+<p class="reference">References <a class="el" href="../../db/d6b/a01853_source.html#l00099">Pick::chyron</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00059">Pick::cmd</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00607">deselect_object()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00461">display_pick_page()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00689">exec_objects()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00074">Pick::f_cmd</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00063">Pick::f_out_spec</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00067">Pick::f_read_theme</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00055">Pick::out_spec</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00637">output_objects()</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00193">Init::pick</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00881">picker()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00616">read_theme()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00078">Pick::select_cnt</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00045">Pick::surface</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00773">ui_destroy_chyron()</a>, <a class="el" href="../../d5/d99/a01901_source.html#l00174">ui_mvwaddstr()</a>, and <a class="el" href="../../d5/d99/a01901_source.html#l00038">ui_wclrtoeol()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00068">init_pick()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="491" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a3ad751d49315b1fd623601a1cac6cb6b" name="a3ad751d49315b1fd623601a1cac6cb6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ad751d49315b1fd623601a1cac6cb6b">&#9670;&#160;</a></span>next_path()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int next_path </td>
-          <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>dp</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>pp</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the next directory path from a colon-separated list of paths. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">dp</td><td>A buffer to store the extracted directory path </td></tr>
-    <tr><td class="paramname">pp</td><td>A pointer to the current position in the path string </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The length of the extracted directory path</dd></dl>
-<p>This function takes a pointer to a colon-separated list of paths and extracts the next directory path from it. If the current character is a colon, it retrieves the current working directory instead. The extracted directory path is stored in the provided buffer, and the function returns the length of the extracted path. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00180">180</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  180</span>                                   {</div>
-<div class="line"><span class="lineno">  181</span>    <span class="keywordtype">int</span> dl;</div>
-<div class="line"><span class="lineno">  182</span> </div>
-<div class="line"><span class="lineno">  183</span>    <span class="keywordflow">if</span> (**pp == <span class="charliteral">&#39;:&#39;</span>) {</div>
-<div class="line"><span class="lineno">  184</span>        (*pp)++;</div>
-<div class="line"><span class="lineno">  185</span>        getcwd(dp, PATH_MAX);</div>
-<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">return</span> (strlen(dp));</div>
-<div class="line"><span class="lineno">  187</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  188</span>        dl = 0;</div>
-<div class="line"><span class="lineno">  189</span>        <span class="keywordflow">while</span> (**pp != <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; **pp != <span class="charliteral">&#39;\n&#39;</span> &amp;&amp; **pp != <span class="charliteral">&#39;\r&#39;</span> &amp;&amp; **pp != <span class="charliteral">&#39;:&#39;</span>) {</div>
-<div class="line"><span class="lineno">  190</span>            *dp++ = *(*pp)++;</div>
-<div class="line"><span class="lineno">  191</span>            dl++;</div>
-<div class="line"><span class="lineno">  192</span>        }</div>
-<div class="line"><span class="lineno">  193</span>        *dp = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno">  194</span>        <span class="keywordflow">if</span> (**pp == <span class="charliteral">&#39;:&#39;</span> &amp;&amp; *++(*pp) == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno">  195</span>            (*pp)--;</div>
-<div class="line"><span class="lineno">  196</span>        <span class="keywordflow">return</span> (dl);</div>
-<div class="line"><span class="lineno">  197</span>    }</div>
-<div class="line"><span class="lineno">  198</span>}</div>
-</div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00119">whence()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a3ad751d49315b1fd623601a1cac6cb6b_icgraph.svg" width="319" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
-</div>
-</div>
-<a id="a30a98b14290abe0a82e381bb22f21236" name="a30a98b14290abe0a82e381bb22f21236"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a30a98b14290abe0a82e381bb22f21236">&#9670;&#160;</a></span>whence()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int whence </td>
-          <td>(</td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_spec_p</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>flags</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Find the full path of a file in the directories specified by the PATH environment variable. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">file_spec_p</td><td>The file specification to search for </td></tr>
-    <tr><td class="paramname">flags</td><td>Flags to control the behavior of the search (e.g., verbose mode, list all matches)</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>This function takes a file specification, extracts the directory and file name components, and searches through the directories specified in the PATH environment variable to find matches. It prints the full path of each match found, and if verbose mode is enabled, it also indicates whether each attempted path was found or not. </p>
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00119">119</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  119</span>                                         {</div>
-<div class="line"><span class="lineno">  120</span>    <span class="keywordtype">char</span> file_spec[PATH_MAX];</div>
-<div class="line"><span class="lineno">  121</span>    <span class="keywordtype">char</span> file_dir[PATH_MAX];</div>
-<div class="line"><span class="lineno">  122</span>    <span class="keywordtype">char</span> file_name[PATH_MAX];</div>
-<div class="line"><span class="lineno">  123</span>    <span class="keywordtype">char</span> try_spec[PATH_MAX];</div>
-<div class="line"><span class="lineno">  124</span>    <span class="keywordtype">char</span> try_dir[PATH_MAX];</div>
-<div class="line"><span class="lineno">  125</span>    <span class="keywordtype">int</span> path_l;</div>
-<div class="line"><span class="lineno">  126</span>    <span class="keywordtype">int</span> found = 0;</div>
-<div class="line"><span class="lineno">  127</span>    <span class="keyword">struct </span>stat stat_struct;</div>
-<div class="line"><span class="lineno">  128</span> </div>
-<div class="line"><span class="lineno">  129</span>    <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, file_spec_p, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  130</span>    <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a>, <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  131</span>    <a class="code hl_function" href="#ab7a6465a15ab53a9885da8d4db187066">file_spec_parts</a>(file_spec, file_dir, file_name);</div>
-<div class="line"><span class="lineno">  132</span>    <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> = <a class="code hl_variable" href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a>;</div>
-<div class="line"><span class="lineno">  133</span>    path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">while</span> (path_l != 0) {</div>
-<div class="line"><span class="lineno">  135</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(try_spec, try_dir, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  136</span>        <span class="keywordflow">if</span> (try_spec[path_l] != <span class="charliteral">&#39;/&#39;</span>)</div>
-<div class="line"><span class="lineno">  137</span>            <a class="code hl_function" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(try_spec, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  138</span>        <a class="code hl_function" href="../../dc/dbb/a02520.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(try_spec, file_name, <a class="code hl_define" href="../../da/d6b/a02438.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
-<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">if</span> (stat(try_spec, &amp;stat_struct) != 0) {</div>
-<div class="line"><span class="lineno">  140</span>            <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a>)</div>
-<div class="line"><span class="lineno">  141</span>                printf(<span class="stringliteral">&quot;-      %s\n&quot;</span>, try_spec);</div>
-<div class="line"><span class="lineno">  142</span>            path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  143</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  144</span>        }</div>
-<div class="line"><span class="lineno">  145</span>        <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a>)</div>
-<div class="line"><span class="lineno">  146</span>            <span class="keywordflow">if</span> (!(stat_struct.st_mode &amp; S_ISUID)) {</div>
-<div class="line"><span class="lineno">  147</span>                path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  148</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  149</span>            }</div>
-<div class="line"><span class="lineno">  150</span>        <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a>)</div>
-<div class="line"><span class="lineno">  151</span>            <span class="keywordflow">if</span> (!(stat_struct.st_mode &amp; S_ISUID)) {</div>
-<div class="line"><span class="lineno">  152</span>                path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  153</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  154</span>            }</div>
-<div class="line"><span class="lineno">  155</span>        <span class="keywordflow">if</span> (!(stat_struct.st_mode &amp; S_IXUSR)) {</div>
-<div class="line"><span class="lineno">  156</span>            path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  157</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  158</span>        }</div>
-<div class="line"><span class="lineno">  159</span>        found++;</div>
-<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a>)</div>
-<div class="line"><span class="lineno">  161</span>            printf(<span class="stringliteral">&quot;found  %s\n&quot;</span>, try_spec);</div>
-<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  163</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, try_spec);</div>
-<div class="line"><span class="lineno">  164</span>            <span class="keywordflow">if</span> (!(flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a>))</div>
-<div class="line"><span class="lineno">  165</span>                <span class="keywordflow">return</span> found;</div>
-<div class="line"><span class="lineno">  166</span>        }</div>
-<div class="line"><span class="lineno">  167</span>        path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
-<div class="line"><span class="lineno">  168</span>    }</div>
-<div class="line"><span class="lineno">  169</span>    <span class="keywordflow">return</span> found;</div>
-<div class="line"><span class="lineno">  170</span>}</div>
-<div class="ttc" id="aa02453_html_a3ad751d49315b1fd623601a1cac6cb6b"><div class="ttname"><a href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a></div><div class="ttdeci">int next_path(char *, char **)</div><div class="ttdoc">Get the next directory path from a colon-separated list of paths.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00180">whence.c:180</a></div></div>
-<div class="ttc" id="aa02453_html_ab7a6465a15ab53a9885da8d4db187066"><div class="ttname"><a href="#ab7a6465a15ab53a9885da8d4db187066">file_spec_parts</a></div><div class="ttdeci">int file_spec_parts(char *, char *, char *)</div><div class="ttdoc">Split a file specification into directory and file name components.</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00209">whence.c:209</a></div></div>
-<div class="ttc" id="aa02453_html_ad3f59f6d050f131c1565e4696e81b1a8"><div class="ttname"><a href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a></div><div class="ttdeci">char path_s[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d27/a02453_source.html#l00025">whence.c:25</a></div></div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d3/d27/a02453_source.html#l00209">file_spec_parts()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00180">next_path()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00024">path_p</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00025">path_s</a>, <a class="el" href="../../d6/d90/a02492_source.html#l00566">strnz__cat()</a>, <a class="el" href="../../d6/d90/a02492_source.html#l00537">strnz__cpy()</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00034">WH_ALL</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00036">WH_EXECUTABLE</a>, <a class="el" href="../../d3/d27/a02453_source.html#l00037">WH_SETUID</a>, and <a class="el" href="../../d3/d27/a02453_source.html#l00035">WH_VERBOSE</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00090">main()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a30a98b14290abe0a82e381bb22f21236_cgraph.svg" width="388" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_ac128d5d082b52050e2e0b7fc0d611ab3_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a30a98b14290abe0a82e381bb22f21236_icgraph.svg" width="184" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_ac128d5d082b52050e2e0b7fc0d611ab3_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a969bb5ac3fcb5f3565448e8d0da6efc4" name="a969bb5ac3fcb5f3565448e8d0da6efc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a969bb5ac3fcb5f3565448e8d0da6efc4">&#9670;&#160;</a></span>read_theme()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int read_theme </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/d09/a02624.html">Init</a> *</td>          <td class="paramname"><span class="paramname"><em>init</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00616">616</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  616</span>                           {</div>
+<div class="line"><span class="lineno">  617</span>    <span class="keywordtype">int</span> rc;</div>
+<div class="line"><span class="lineno">  618</span>    <a class="code hl_function" href="../../d2/d08/a02532.html#ga7ca67564069cf6340f80974451e029fb">expand_tilde</a>(init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#acd8f36c2465e877388885166636d9978">mapp_theme</a>, <a class="code hl_define" href="../../da/d66/a01856.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  619</span>    rc = <a class="code hl_function" href="../../d3/df4/a02504.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a>(init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#acd8f36c2465e877388885166636d9978">mapp_theme</a>, init);</div>
+<div class="line"><span class="lineno">  620</span>    <span class="keywordflow">if</span> (rc)</div>
+<div class="line"><span class="lineno">  621</span>        <span class="keywordflow">return</span> rc;</div>
+<div class="line"><span class="lineno">  622</span>    <a class="code hl_struct" href="../../df/d25/a02764.html">SIO</a> *sio = init-&gt;<a class="code hl_variable" href="../../d8/d09/a02624.html#a1c8d511fb38a59bbd882552e2d7f6058">sio</a>;</div>
+<div class="line"><span class="lineno">  623</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#aac6710be4b09e91557943595f8d1ce00">ui_initialize_sio</a>(sio);</div>
+<div class="line"><span class="lineno">  624</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">  625</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  626</span>}</div>
+<div class="ttc" id="aa01865_html_a0a06ae7bae8563b699ce712ec266fe6f"><div class="ttname"><a href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a></div><div class="ttdeci">void ui_render()</div><div class="ttdoc">Render the UI by updating panels and refreshing the display.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00880">ui_ncurses.c:880</a></div></div>
+<div class="ttc" id="aa01865_html_aac6710be4b09e91557943595f8d1ce00"><div class="ttname"><a href="../../d5/da8/a01865.html#aac6710be4b09e91557943595f8d1ce00">ui_initialize_sio</a></div><div class="ttdeci">void ui_initialize_sio(SIO *sio)</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00172">ui_common.c:172</a></div></div>
+<div class="ttc" id="aa02504_html_a50e5693f7cfa423d5e728cb7319e69df"><div class="ttname"><a href="../../d3/df4/a02504.html#a50e5693f7cfa423d5e728cb7319e69df">process_config_file</a></div><div class="ttdeci">int process_config_file(char *, Init *)</div><div class="ttdef"><b>Definition</b> <a href="../../d3/df4/a02504_source.html#l00690">init.c:690</a></div></div>
+<div class="ttc" id="aa02532_html_ga7ca67564069cf6340f80974451e029fb"><div class="ttname"><a href="../../d2/d08/a02532.html#ga7ca67564069cf6340f80974451e029fb">expand_tilde</a></div><div class="ttdeci">bool expand_tilde(char *, uint)</div><div class="ttdoc">Replaces &quot;~/&quot; in string with the user&#39;s home directory.</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df4/a02510_source.html#l00982">futil.c:982</a></div></div>
+<div class="ttc" id="aa02624_html_a1c8d511fb38a59bbd882552e2d7f6058"><div class="ttname"><a href="../../d8/d09/a02624.html#a1c8d511fb38a59bbd882552e2d7f6058">Init::sio</a></div><div class="ttdeci">SIO * sio</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00118">common.h:118</a></div></div>
+<div class="ttc" id="aa02624_html_acd8f36c2465e877388885166636d9978"><div class="ttname"><a href="../../d8/d09/a02624.html#acd8f36c2465e877388885166636d9978">Init::mapp_theme</a></div><div class="ttdeci">char mapp_theme[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d3/d19/a01847_source.html#l00156">common.h:156</a></div></div>
+<div class="ttc" id="aa02764_html"><div class="ttname"><a href="../../df/d25/a02764.html">SIO</a></div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00664">ui_backend.h:664</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../dd/df4/a02510_source.html#l00982">expand_tilde()</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00156">Init::mapp_theme</a>, <a class="el" href="../../d3/df4/a02504_source.html#l00690">process_config_file()</a>, <a class="el" href="../../d3/d19/a01847_source.html#l00118">Init::sio</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00172">ui_initialize_sio()</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00880">ui_render()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00353">pick_engine()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a969bb5ac3fcb5f3565448e8d0da6efc4_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_a969bb5ac3fcb5f3565448e8d0da6efc4_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="af8679455ae5abbc5160b15a3c065e451" name="af8679455ae5abbc5160b15a3c065e451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8679455ae5abbc5160b15a3c065e451">&#9670;&#160;</a></span>remove_right_angle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void remove_right_angle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d0/d5a/a02784.html">Pick</a> *</td>          <td class="paramname"><span class="paramname"><em>pick</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00565">565</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  565</span>                                    {</div>
+<div class="line"><span class="lineno">  566</span>    <a class="code hl_struct" href="../../df/d97/a02676.html">UiSurface</a> *sfc = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;surface;</div>
+<div class="line"><span class="lineno">  567</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx &gt;= <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt)</div>
+<div class="line"><span class="lineno">  568</span>        <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_cnt - 1;</div>
+<div class="line"><span class="lineno">  569</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_line = (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx / <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_cols) % <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines;</div>
+<div class="line"><span class="lineno">  570</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;y = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_line + <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;y_offset;</div>
+<div class="line"><span class="lineno">  571</span>    <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx = <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_page * <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines * <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_cols + <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_col * <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;lines + <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;tbl_line;</div>
+<div class="line"><span class="lineno">  572</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;f_selected[<a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;d_idx])</div>
+<div class="line"><span class="lineno">  573</span>        <a class="code hl_function" href="../../d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30">ui_mvwadd_wchnstr</a>(sfc, WIN, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;y, 0, &amp;<a class="code hl_variable" href="../../d5/da8/a01865.html#af78f6d9fbf7720842877cc39c1dd1975">cell_chk</a>, 1);</div>
+<div class="line"><span class="lineno">  574</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  575</span>        <a class="code hl_function" href="../../d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30">ui_mvwadd_wchnstr</a>(sfc, WIN, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;y, 0, &amp;<a class="code hl_variable" href="../../d5/da8/a01865.html#a07a7bdff27eff9dd5ce8bc47a10f123d">cell_sp</a>, 1);</div>
+<div class="line"><span class="lineno">  576</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a59231dfa736bd1b8d43c716a22a75a47">ui_cursor_move</a>(sfc, WIN, <a class="code hl_variable" href="../../da/d6b/a02438.html#ab3af3b483170c93daaa938e5ef9c8b07">pick</a>-&gt;y, 0);</div>
+<div class="line"><span class="lineno">  577</span>}</div>
+<div class="ttc" id="aa01865_html_a07a7bdff27eff9dd5ce8bc47a10f123d"><div class="ttname"><a href="../../d5/da8/a01865.html#a07a7bdff27eff9dd5ce8bc47a10f123d">cell_sp</a></div><div class="ttdeci">UiCell cell_sp</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00122">ui_common.c:122</a></div></div>
+<div class="ttc" id="aa01865_html_a59231dfa736bd1b8d43c716a22a75a47"><div class="ttname"><a href="../../d5/da8/a01865.html#a59231dfa736bd1b8d43c716a22a75a47">ui_cursor_move</a></div><div class="ttdeci">int ui_cursor_move(UiSurface *s, ss_t w, uint y, uint x)</div><div class="ttdoc">Move the cursor to a specified position within a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00665">ui_ncurses.c:665</a></div></div>
+<div class="ttc" id="aa01865_html_af78f6d9fbf7720842877cc39c1dd1975"><div class="ttname"><a href="../../d5/da8/a01865.html#af78f6d9fbf7720842877cc39c1dd1975">cell_chk</a></div><div class="ttdeci">UiCell cell_chk</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00106">ui_common.c:106</a></div></div>
+<div class="ttc" id="aa01901_html_a006027addada2f643f4d240d153b5d30"><div class="ttname"><a href="../../d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30">ui_mvwadd_wchnstr</a></div><div class="ttdeci">int ui_mvwadd_wchnstr(UiSurface *s, ss_t w, uint y, uint x, const UiCell *cmplx_buf, uint n)</div><div class="ttdoc">Draw a complex character string at a specific position in a surface window, with a maximum length.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d99/a01901_source.html#l00359">ui_ncurses_draw.c:359</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d9/dd5/a01886_source.html#l00106">cell_chk</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00122">cell_sp</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00081">Pick::d_cnt</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00083">Pick::d_idx</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00070">Pick::f_selected</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00034">Pick::lines</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00045">Pick::surface</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00095">Pick::tbl_col</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00094">Pick::tbl_cols</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00092">Pick::tbl_line</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00091">Pick::tbl_page</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00665">ui_cursor_move()</a>, <a class="el" href="../../d5/d99/a01901_source.html#l00359">ui_mvwadd_wchnstr()</a>, <a class="el" href="../../db/d6b/a01853_source.html#l00038">Pick::y</a>, and <a class="el" href="../../db/d6b/a01853_source.html#l00085">Pick::y_offset</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00881">picker()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_af8679455ae5abbc5160b15a3c065e451_cgraph.svg" width="364" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d3/d27/a02453_af8679455ae5abbc5160b15a3c065e451_icgraph.svg" width="100%" height="377"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="aaa037e59f26a80a8a2e35e6f2364004d" name="aaa037e59f26a80a8a2e35e6f2364004d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa037e59f26a80a8a2e35e6f2364004d">&#9670;&#160;</a></span>argp_program_bug_address</h2>
+<a id="acdb9de82d81b176784185dea9063b57c" name="acdb9de82d81b176784185dea9063b57c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb9de82d81b176784185dea9063b57c">&#9670;&#160;</a></span>calculated_idx</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* argp_program_bug_address = &quot;billxwaller@gmail.com&quot;</td>
+          <td class="memname">int calculated_idx</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00040">40</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00024">24</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
 
 </div>
 </div>
-<a id="a62f73ea01c816f1996aed4c66f57c4fb" name="a62f73ea01c816f1996aed4c66f57c4fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62f73ea01c816f1996aed4c66f57c4fb">&#9670;&#160;</a></span>argp_program_version</h2>
+<a id="a4a50bfe3f8460978b34566ec3dff7adb" name="a4a50bfe3f8460978b34566ec3dff7adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a50bfe3f8460978b34566ec3dff7adb">&#9670;&#160;</a></span>obj_idx</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const char* argp_program_version = <a class="el" href="../../da/d66/a01856.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td>
+          <td class="memname">int obj_idx</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00039">39</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00024">24</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
 
 </div>
 </div>
-<a id="a35d5df8f21a07ab7777cb4c441d757b6" name="a35d5df8f21a07ab7777cb4c441d757b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35d5df8f21a07ab7777cb4c441d757b6">&#9670;&#160;</a></span>path_p</h2>
+<a id="a75032ed794a050729806b69714945c38" name="a75032ed794a050729806b69714945c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75032ed794a050729806b69714945c38">&#9670;&#160;</a></span>pagers_editors</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char * path_p</td>
+          <td class="memname">char const pagers_editors</td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00024">24</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00090">main()</a>, and <a class="el" href="../../d3/d27/a02453_source.html#l00119">whence()</a>.</p>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
+<div class="line">           <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00050">50</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   50</span>                                  {<span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;view&quot;</span>, <span class="stringliteral">&quot;less&quot;</span>, <span class="stringliteral">&quot;more&quot;</span>,</div>
+<div class="line"><span class="lineno">   51</span>                                     <span class="stringliteral">&quot;vi&quot;</span>, <span class="stringliteral">&quot;vim&quot;</span>, <span class="stringliteral">&quot;nano&quot;</span>, <span class="stringliteral">&quot;nvim&quot;</span>,</div>
+<div class="line"><span class="lineno">   52</span>                                     <span class="stringliteral">&quot;pico&quot;</span>, <span class="stringliteral">&quot;emacs&quot;</span>, <span class="stringliteral">&quot;edit&quot;</span>, <span class="stringliteral">&quot;&quot;</span>};</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="ad3f59f6d050f131c1565e4696e81b1a8" name="ad3f59f6d050f131c1565e4696e81b1a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3f59f6d050f131c1565e4696e81b1a8">&#9670;&#160;</a></span>path_s</h2>
+<a id="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d" name="ad1fb9a0ad82da1ad86d4b05b3f0b1f5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1fb9a0ad82da1ad86d4b05b3f0b1f5d">&#9670;&#160;</a></span>pg_lines</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char path_s</td>
+          <td class="memname">int pg_lines</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00025">25</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00119">whence()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00023">23</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
 
 </div>
 </div>
-<a id="ab217e2b668a36cdc1589ea893f1fcef9" name="ab217e2b668a36cdc1589ea893f1fcef9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab217e2b668a36cdc1589ea893f1fcef9">&#9670;&#160;</a></span>wh_flags</h2>
+<a id="afc201616d29b57b342b47a962dc4a2e1" name="afc201616d29b57b342b47a962dc4a2e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc201616d29b57b342b47a962dc4a2e1">&#9670;&#160;</a></span>pipe_fd</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int wh_flags = 0</td>
+          <td class="memname">int pipe_fd</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00038">38</a> of file <a class="el" href="../../d3/d27/a02453_source.html">whence.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00046">46</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d3/d27/a02453_source.html#l00068">init_pick()</a>.</p>
+
+</div>
+</div>
+<a id="ab57f05e19e1e81af17fbbd3a766c405a" name="ab57f05e19e1e81af17fbbd3a766c405a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab57f05e19e1e81af17fbbd3a766c405a">&#9670;&#160;</a></span>tbl_col</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_col</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00023">23</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a7df4e526a3af8e113bbc05ca011c2341" name="a7df4e526a3af8e113bbc05ca011c2341"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df4e526a3af8e113bbc05ca011c2341">&#9670;&#160;</a></span>tbl_cols</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_cols</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00023">23</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="a25fe2a76cfd155c51a46c99d6a1cf4d9" name="a25fe2a76cfd155c51a46c99d6a1cf4d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25fe2a76cfd155c51a46c99d6a1cf4d9">&#9670;&#160;</a></span>tbl_line</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_line</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00023">23</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="ae7c3abf692920540a78bc3322d02828a" name="ae7c3abf692920540a78bc3322d02828a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7c3abf692920540a78bc3322d02828a">&#9670;&#160;</a></span>tbl_page</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_page</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00023">23</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="acbe29ef30ea713ef47f3cd892310ca50" name="acbe29ef30ea713ef47f3cd892310ca50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbe29ef30ea713ef47f3cd892310ca50">&#9670;&#160;</a></span>tbl_pages</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tbl_pages</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00023">23</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
+
+</div>
+</div>
+<a id="ad59d4e161acf3d7b4aaf250f6fece32d" name="ad59d4e161acf3d7b4aaf250f6fece32d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad59d4e161acf3d7b4aaf250f6fece32d">&#9670;&#160;</a></span>ui_mm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d3/d7e/a02768.html">UiMultiMedia</a> ui_mm</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d3/d27/a02453_source.html#l00048">48</a> of file <a class="el" href="../../d3/d27/a02453_source.html">pick_engine.c</a>.</p>
 
 </div>
 </div>
@@ -748,7 +763,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d3/d27/a02453.html">whence.c</a></li>
+    <li class="navelem"><a href="../../d3/d27/a02453.html">pick_engine.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

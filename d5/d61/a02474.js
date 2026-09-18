@@ -1,4 +1,5 @@
 var a02474 =
 [
-    [ "main", "d5/d61/a02474.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
+    [ "cf_accept", "d5/d61/a02474.html#a3459eabfe414ff0494244b91708a750c", null ],
+    [ "f_erase_remainder", "d5/d61/a02474.html#abe85022880b5f1c87c325d742e646d2c", null ]
 ];

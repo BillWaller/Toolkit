@@ -1,6 +1,28 @@
 var a01901 =
 [
-    [ "_GNU_SOURCE", "d5/d99/a01901.html#a369266c24eacffb87046522897a570d5", null ],
     [ "_XOPEN_SOURCE_EXTENDED", "d5/d99/a01901.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
-    [ "main", "d5/d99/a01901.html#a840291bc02cba5474a4cb46a9b9566fe", null ]
+    [ "ui_draw_ch", "d5/d99/a01901.html#a8a0a37e0b91a21b13dca68982688b3db", null ],
+    [ "ui_draw_ch_yx", "d5/d99/a01901.html#a01e5bc87154c4470d34ae2518e0bcdbf", null ],
+    [ "ui_draw_text", "d5/d99/a01901.html#a2e6cc68fddaf64cc6da4eff5c8d33837", null ],
+    [ "ui_draw_text_fill", "d5/d99/a01901.html#aff2cb9fa56972ad61b58ba28a4421707", null ],
+    [ "ui_draw_text_n", "d5/d99/a01901.html#a40bec6d96dd35806b01e3ad8dfd4ab92", null ],
+    [ "ui_mvwadd_wch", "d5/d99/a01901.html#a9017feda04eb4cf15f615177ba0c8d0c", null ],
+    [ "ui_mvwadd_wchnstr", "d5/d99/a01901.html#a006027addada2f643f4d240d153b5d30", null ],
+    [ "ui_mvwadd_wchstr", "d5/d99/a01901.html#a49b5c7162723a248fa8191d291d8103c", null ],
+    [ "ui_mvwaddch", "d5/d99/a01901.html#a2d15814abd90a688e2460e88d20806e7", null ],
+    [ "ui_mvwaddnstr", "d5/d99/a01901.html#a42880f1f9d6e3a6011e9a8243057c2e9", null ],
+    [ "ui_mvwaddnwstr", "d5/d99/a01901.html#a1a71b5cc78bcadc07f8d40ec959ce969", null ],
+    [ "ui_mvwaddstr", "d5/d99/a01901.html#a86f4a553274bdacdf7e4cd98d6dc3e17", null ],
+    [ "ui_mvwaddstr_fill", "d5/d99/a01901.html#ab454ade9f74c87c5b53b67c8559c51c3", null ],
+    [ "ui_mvwaddwstr", "d5/d99/a01901.html#a834814d38610b774657bf45e4ba6a01a", null ],
+    [ "ui_restore_wins", "d5/d99/a01901.html#a73d0d8cf6bc75336815ecb41fa28ce53", null ],
+    [ "ui_wadd_wch", "d5/d99/a01901.html#ad3465de218c61320615de6790eebcfa8", null ],
+    [ "ui_wadd_wchnstr", "d5/d99/a01901.html#afe1b0259c13d846636a65f86721d6918", null ],
+    [ "ui_wadd_wchstr", "d5/d99/a01901.html#aedffbf110d620f0bc9a0ee4532a1382d", null ],
+    [ "ui_waddnstr", "d5/d99/a01901.html#a42693be9627906ef280785d843c11cc1", null ],
+    [ "ui_waddnwstr", "d5/d99/a01901.html#ae1ebd63ac77fbbad0fe9d78475e6f8d2", null ],
+    [ "ui_waddstr", "d5/d99/a01901.html#a05b2fa115f67a3258f234ba44dbfed1c", null ],
+    [ "ui_waddwstr", "d5/d99/a01901.html#a22957b30a82d9e2209e86442fc406e63", null ],
+    [ "ui_wclrtobot", "d5/d99/a01901.html#aadd3e1f3bd3d5ce37c70e8336c977681", null ],
+    [ "ui_wclrtoeol", "d5/d99/a01901.html#ad6aa95dfbb37afc2abaca3f46248c5af", null ]
 ];

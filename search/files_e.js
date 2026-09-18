@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../d7/d19/a03166.html',1,'(Global Namespace)'],['../dc/d10/a03169.html',1,'(Global Namespace)']]],
-  ['roadmap_2emd_1',['ROADMAP.md',['../dd/d31/a02405.html',1,'']]],
-  ['rsh_2ec_2',['rsh.c',['../d1/de1/a02435.html',1,'']]],
-  ['rsh_2emd_3',['rsh.md',['../d2/d11/a02384.html',1,'']]]
+  ['safe_5fstrerror_2eh_0',['safe_strerror.h',['../da/d18/a01850.html',1,'']]],
+  ['scriou_2ec_1',['scriou.c',['../db/de8/a02525.html',1,'']]],
+  ['sig_2ec_2',['sig.c',['../d3/de3/a02483.html',1,'']]],
+  ['snippets_2emd_3',['snippets.md',['../d8/deb/a02387.html',1,'']]],
+  ['stripansi_2ec_4',['stripansi.c',['../d1/df7/a02501.html',1,'']]]
 ];
