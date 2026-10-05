@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['line_0',['Line',['../dd/dbf/a02788.html',1,'']]]
+  ['init_0',['Init',['../dc/d28/a02584.html',1,'']]]
 ];

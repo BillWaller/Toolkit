@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/putnccells.c Source File</title>
+<title>C-Menu: ui/ui_notcurses_img.c Source File</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,27 +110,62 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('de/d90/a01919_
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">putnccells.c</div></div>
+  <div class="headertitle"><div class="title">ui_notcurses_img.c</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="../../de/d90/a01919.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">notcurses</span><span class="preprocessor">/</span><span class="preprocessor">notcurses</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#ac9d4bedb5aa1eb494f9e0e58fefc087d">    3</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../de/d90/a01919.html#ac9d4bedb5aa1eb494f9e0e58fefc087d">write_cell_array</a>(<span class="keyword">struct</span> ncplane *n, <span class="keywordtype">int</span> starty, <span class="keywordtype">int</span> startx, <span class="keyword">const</span> nccell *cells, <span class="keywordtype">int</span> count) {</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; count; i++) {</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>        <span class="keywordflow">if</span> (ncplane_putc_yx(n, starty, startx + i, &amp;cells[i]) &lt; 0) {</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>        }</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    }</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>}</div>
-<div class="ttc" id="aa01919_html_ac9d4bedb5aa1eb494f9e0e58fefc087d"><div class="ttname"><a href="../../de/d90/a01919.html#ac9d4bedb5aa1eb494f9e0e58fefc087d">write_cell_array</a></div><div class="ttdeci">int write_cell_array(struct ncplane *n, int starty, int startx, const nccell *cells, int count)</div><div class="ttdef"><b>Definition</b> <a href="#l00003">putnccells.c:3</a></div></div>
+<a href="../../de/d90/a01919.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#a78c99ffd76a7bb3c8c74db76207e9ab4">    1</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">_XOPEN_SOURCE</span> 600</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">notcurses</span><span class="preprocessor">/</span><span class="preprocessor">notcurses</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">stdio</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unistd</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#</span><span class="preprocessor">ifdef</span> <span class="preprocessor">__USE_GNU_GETTEXT</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">libintl</span><span class="preprocessor">.</span><span class="preprocessor">h</span><span class="preprocessor">&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">_</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span> <span class="preprocessor">gettext</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">gettext_noop</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span> <span class="preprocessor">String</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">N_</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span> <span class="preprocessor">gettext_noop</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#</span><span class="preprocessor">else</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#a32a3cf3d9dd914f5aeeca5423c157934">   12</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">_</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span> <span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#a75278405e7f034d2b1af80bfd94675fe">   13</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">N_</span><span class="preprocessor">(</span><span class="preprocessor">String</span><span class="preprocessor">)</span> <span class="preprocessor">String</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#a3adff4c69f0a5613a459ff23d749166c">   14</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">textdomain</span><span class="preprocessor">(</span><span class="preprocessor">Domain</span><span class="preprocessor">)</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#a19d270d34b833dec51cd00fd788010da">   15</a></span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">bindtextdomain</span><span class="preprocessor">(</span><span class="preprocessor">Package</span><span class="preprocessor">,</span> <span class="preprocessor">Directory</span><span class="preprocessor">)</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#</span><span class="preprocessor">endif</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="../../de/d90/a01919.html#ae66f6b31b5ad750f1fe042a706a4e3d4">   18</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="../../d4/db0/a02540.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a>() {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">struct</span> notcurses_options nopts = {};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">struct</span> notcurses *nc = notcurses_init(&amp;nopts, NULL);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (!nc) {</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        fprintf(stderr, <a class="code hl_define" href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a>(<span class="stringliteral">&quot;Error: Unable to initialize notcurses.\n&quot;</span>));</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">struct</span> ncvisual *ncv = ncvisual_from_file(<span class="stringliteral">&quot;test.png&quot;</span>);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">if</span> (!ncv) {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        fprintf(stderr, <a class="code hl_define" href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a>(<span class="stringliteral">&quot;Error: Could not load image file.\n&quot;</span>));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="keywordflow">goto</span> end;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">struct</span> ncvisual_options vopts = {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        .n = notcurses_stdplane(nc),</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        .blitter = NCBLIT_PIXEL,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        .flags = NCVISUAL_OPTION_CHILDPLANE,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    };</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">struct</span> ncplane *cn = ncvisual_blit(nc, ncv, &amp;vopts);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">if</span> (!cn)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordflow">goto</span> end;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    notcurses_render(nc);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    sleep(2);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>end:</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    ncvisual_destroy(ncv);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    notcurses_stop(nc);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>}</div>
+<div class="ttc" id="aa02540_html_a32a3cf3d9dd914f5aeeca5423c157934"><div class="ttname"><a href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a></div><div class="ttdeci">#define _(String)</div><div class="ttdef"><b>Definition</b> <a href="../../d4/db0/a02540_source.html#l00023">amort.c:23</a></div></div>
+<div class="ttc" id="aa02540_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="../../d4/db0/a02540.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdoc">Capture the current terminal settings for later restoration.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/db0/a02540_source.html#l00041">amort.c:41</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../de/d90/a01919.html">putnccells.c</a></li>
+    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../de/d90/a01919.html">ui_notcurses_img.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

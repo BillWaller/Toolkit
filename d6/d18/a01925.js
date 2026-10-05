@@ -1,5 +1,5 @@
 var a01925 =
 [
-    [ "ui_framed_surface_destroy", "d1/d57/a02543.html#gafa5c28ac5692fdbb5931d41a4e76b572", null ],
-    [ "ui_framed_surface_new", "d1/d57/a02543.html#ga951fca51a2cf4181d2297fa985087536", null ]
+    [ "ui_ncurses_surface_get_panel", "d6/d18/a01925.html#ab87387927bda06e308f66f371d33bc69", null ],
+    [ "ui_ncurses_surface_get_win", "d6/d18/a01925.html#aa4de9531b6434fd09d2fd8a9d5d2ad58", null ]
 ];

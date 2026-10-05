@@ -1,5 +1,5 @@
 var a02566 =
 [
-    [ "l", "db/d0b/a02566.html#a8cffb4a348d6d6f90ce1c9efd99ad557", null ],
-    [ "s", "db/d0b/a02566.html#a1270cae1cd57356ffc567eed342b5d97", null ]
+    [ "get_command_type", "db/d0b/a02566.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
+    [ "parse_menu_description", "db/d0b/a02566.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_layout.c File Reference</title>
+<title>C-Menu: ui/ui_ncurses_compat.h File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,36 +110,123 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d6/d18/a01925.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_layout.c File Reference<div class="ingroups"><a class="el" href="../../d1/d57/a02543.html">Ui Backend</a></div></div></div>
+  <div class="headertitle"><div class="title">ui_ncurses_compat.h File Reference<div class="ingroups"><a class="el" href="../../dc/db2/a02574.html">Ui Backend</a> &raquo; <a class="el" href="../../db/d39/a02575.html">Ui_ncurses</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Backend-agnostic layout helpers.  
+<p>Non-portable escape hatch for the NCurses backend.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../de/dfb/a01874_source.html">ui_layout.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../d5/da8/a01865_source.html">ui_backend.h</a>&quot;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d9/d9b/a01889_source.html">ui_backend.h</a>&quot;</code><br />
+<code>#include &lt;ncursesw/ncurses.h&gt;</code><br />
+<code>#include &lt;ncursesw/panel.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_layout.c:</div>
+Include dependency graph for ui_ncurses_compat.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/db9/a01926.svg" width="303" height="266"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d2/db9/a01926.svg" width="538" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../d6/d18/a01925_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gafa5c28ac5692fdbb5931d41a4e76b572" id="r_gafa5c28ac5692fdbb5931d41a4e76b572"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d57/a02543.html#gafa5c28ac5692fdbb5931d41a4e76b572">ui_framed_surface_destroy</a> (<a class="el" href="../../d4/d97/a02816.html">UiFramedSurface</a> *fs)</td></tr>
-<tr class="memdesc:gafa5c28ac5692fdbb5931d41a4e76b572"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a framed surface and release its resources.  <br /></td></tr>
-<tr class="memitem:ga951fca51a2cf4181d2297fa985087536" id="r_ga951fca51a2cf4181d2297fa985087536"><td class="memItemLeft"><a class="el" href="../../d4/d97/a02816.html">UiFramedSurface</a>&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d57/a02543.html#ga951fca51a2cf4181d2297fa985087536">ui_framed_surface_new</a> (<a class="el" href="../../df/d97/a02676.html">UiSurface</a> *parent, <a class="el" href="../../dc/dcb/a02648.html">UiRect</a> rect)</td></tr>
-<tr class="memdesc:ga951fca51a2cf4181d2297fa985087536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a framed surface (outer border + inner content area).  <br /></td></tr>
+<tr class="memitem:ab87387927bda06e308f66f371d33bc69" id="r_ab87387927bda06e308f66f371d33bc69"><td class="memItemLeft">PANEL *&#160;</td><td class="memItemRight"><a class="el" href="#ab87387927bda06e308f66f371d33bc69">ui_ncurses_surface_get_panel</a> (const <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w)</td></tr>
+<tr class="memdesc:ab87387927bda06e308f66f371d33bc69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the raw NCurses <code>PANEL*</code> underlying a surface.  <br /></td></tr>
+<tr class="memitem:aa4de9531b6434fd09d2fd8a9d5d2ad58" id="r_aa4de9531b6434fd09d2fd8a9d5d2ad58"><td class="memItemLeft">WINDOW *&#160;</td><td class="memItemRight"><a class="el" href="#aa4de9531b6434fd09d2fd8a9d5d2ad58">ui_ncurses_surface_get_win</a> (const <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w)</td></tr>
+<tr class="memdesc:aa4de9531b6434fd09d2fd8a9d5d2ad58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the raw NCurses <code>WINDOW*</code> underlying a surface.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Backend-agnostic layout helpers. </p>
-<p>Implements utility functions that build higher-level layout concepts (framed surfaces, etc.) entirely through the portable UALUI API so they work with any compiled-in backend. </p>
+<div class="textblock"><p>Non-portable escape hatch for the NCurses backend. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Including this header couples application code to the NCurses backend. Use only when NCurses-specific functionality is required and portability to other backends (e.g., <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a>) is not needed. These functions are intentionally not declared in <a class="el" href="../../d9/d9b/a01889.html" title="Backend API for terminal UI library.">ui_backend.h</a>. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d6/d18/a01925_source.html">ui_layout.c</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition in file <a class="el" href="../../d6/d18/a01925_source.html">ui_ncurses_compat.h</a>.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ab87387927bda06e308f66f371d33bc69" name="ab87387927bda06e308f66f371d33bc69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab87387927bda06e308f66f371d33bc69">&#9670;&#160;</a></span>ui_ncurses_surface_get_panel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PANEL * ui_ncurses_surface_get_panel </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the raw NCurses <code>PANEL*</code> underlying a surface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>The <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> to inspect. </td></tr>
+    <tr><td class="paramname">w</td><td><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> window </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The PANEL pointer, or NULL if <code class="param">s</code> is NULL.</dd></dl>
+<p>Return the raw NCurses <code>PANEL*</code> underlying a surface.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Pointer to the <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> containing the window. </td></tr>
+    <tr><td class="paramname">w</td><td>The index of the window within the surface for which to retrieve the PANEL pointer. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The PANEL pointer for the specified window, or NULL if the <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> is NULL. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d07/a01913_source.html#l01215">1215</a> of file <a class="el" href="../../d4/d07/a01913_source.html">ui_ncurses.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1215</span>                                                                {</div>
+<div class="line"><span class="lineno"> 1216</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno"> 1217</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno"> 1218</span>    <span class="keywordflow">return</span> s-&gt;mpan[w];</div>
+<div class="line"><span class="lineno"> 1219</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa4de9531b6434fd09d2fd8a9d5d2ad58" name="aa4de9531b6434fd09d2fd8a9d5d2ad58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4de9531b6434fd09d2fd8a9d5d2ad58">&#9670;&#160;</a></span>ui_ncurses_surface_get_win()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WINDOW * ui_ncurses_surface_get_win </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return the raw NCurses <code>WINDOW*</code> underlying a surface. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>The <a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> to inspect. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The WINDOW pointer, or NULL if <code class="param">s</code> is NULL.</dd></dl>
+<p>Return the raw NCurses <code>WINDOW*</code> underlying a surface.</p>
+<dl class="section return"><dt>Returns</dt><dd>The FILE pointer for the TTY if the UI is initialized, or NULL if the UI is not initialized. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d4/d07/a01913_source.html#l01204">1204</a> of file <a class="el" href="../../d4/d07/a01913_source.html">ui_ncurses.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno"> 1204</span>                                                               {</div>
+<div class="line"><span class="lineno"> 1205</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno"> 1206</span>        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><span class="lineno"> 1207</span>    <span class="keywordflow">return</span> s-&gt;mwin[w];</div>
+<div class="line"><span class="lineno"> 1208</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -152,7 +239,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d6/d18/a01925.html">ui_layout.c</a></li>
+    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d6/d18/a01925.html">ui_ncurses_compat.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

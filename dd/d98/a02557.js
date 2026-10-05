@@ -1,9 +1,13 @@
 var a02557 =
 [
-    [ "color_pairs", "dd/d98/a02557.html#aa56a3f1781839d74b6b868d0a8f8cf67", null ],
-    [ "mouse", "dd/d98/a02557.html#a3daacae1fd6133ff0a03d14eff2f48d3", null ],
-    [ "palette256", "dd/d98/a02557.html#a39bee1dcb7c6daa189aa1e6c236446a8", null ],
-    [ "resize", "dd/d98/a02557.html#ae8d0e88761c5960620aeefbfe29872ae", null ],
-    [ "truecolor", "dd/d98/a02557.html#aba1f766c6d1357c46f2497099b61ec59", null ],
-    [ "unicode", "dd/d98/a02557.html#adab3332ad70a03519b3af0fe08eb95ab", null ]
+    [ "field_editor", "dd/d98/a02557.html#ga14cc8bd865f05bcd5b9e59edb5ddf18e", null ],
+    [ "form_display_field", "dd/d98/a02557.html#gabd1710f59277202b0a58f840d4da322e", null ],
+    [ "form_display_field_n", "dd/d98/a02557.html#ga807531da295fd09484bc01e5aa81d97e", null ],
+    [ "form_fmt_field", "dd/d98/a02557.html#ga07a8d9311c88786e7310fef638d34a41", null ],
+    [ "form_validate_field", "dd/d98/a02557.html#gad2a5cf5a784d70bcd15fcd82ecc13185", null ],
+    [ "is_valid_date", "dd/d98/a02557.html#ga0a88f74830d629ed3304a68dc94349da", null ],
+    [ "is_valid_time", "dd/d98/a02557.html#ga39f3d8e17547c1a92649f7909dcb3551", null ],
+    [ "left_justify", "dd/d98/a02557.html#ga425021d4c87474159a36d395e4dcdf65", null ],
+    [ "numeric", "dd/d98/a02557.html#ga18db59e4c79e823f79310378183ac25c", null ],
+    [ "right_justify", "dd/d98/a02557.html#ga3e691d040bc1f3d91824295cc562820c", null ]
 ];

@@ -1,6 +1,7 @@
 var a01907 =
 [
-    [ "_GNU_SOURCE", "de/dca/a01907.html#a369266c24eacffb87046522897a570d5", null ],
-    [ "_XOPEN_SOURCE_EXTENDED", "de/dca/a01907.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
-    [ "main", "de/dca/a01907.html#a840291bc02cba5474a4cb46a9b9566fe", null ]
+    [ "ui_get_event", "de/dca/a01907.html#aad0095bc404840ab14e69eb07615819a", null ],
+    [ "ui_get_event_no_mouse", "de/dca/a01907.html#a10e0060bcd94b6d54f24dec45527aacd", null ],
+    [ "ui_mice_enable", "de/dca/a01907.html#a25b4acfd10ea4adf8584b7e9cc547c60", null ],
+    [ "ui_mousemask", "de/dca/a01907.html#aa98dc9d036d3178b9cd4dd81e167d474", null ]
 ];

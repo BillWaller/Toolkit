@@ -1,5 +1,5 @@
 var a01898 =
 [
-    [ "_XOPEN_SOURCE", "dd/d8e/a01898.html#a78c99ffd76a7bb3c8c74db76207e9ab4", null ],
-    [ "main", "dd/d8e/a01898.html#ae66f6b31b5ad750f1fe042a706a4e3d4", null ]
+    [ "ui_framed_surface_destroy", "dc/db2/a02574.html#gafa5c28ac5692fdbb5931d41a4e76b572", null ],
+    [ "ui_framed_surface_new", "dc/db2/a02574.html#ga951fca51a2cf4181d2297fa985087536", null ]
 ];

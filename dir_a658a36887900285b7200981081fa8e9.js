@@ -1,12 +1,13 @@
 var dir_a658a36887900285b7200981081fa8e9 =
 [
-    [ "cm.h", "da/d66/a01856.html", "da/d66/a01856" ],
-    [ "common.h", "d3/d19/a01847.html", "d3/d19/a01847" ],
-    [ "form.h", "d2/dbd/a01844.html", "d2/dbd/a01844" ],
-    [ "menu.h", "d0/d4a/a01862.html", "d0/d4a/a01862" ],
-    [ "pick.h", "db/d6b/a01853.html", "db/d6b/a01853" ],
-    [ "safe_strerror.h", "da/d18/a01850.html", null ],
-    [ "ui_backend.h", "d5/da8/a01865.html", "d5/da8/a01865" ],
-    [ "version.h", "d3/dce/a01859.html", "d3/dce/a01859" ],
-    [ "view.h", "dd/de7/a01868.html", "dd/de7/a01868" ]
+    [ "cm.h", "d9/d7d/a01880.html", "d9/d7d/a01880" ],
+    [ "cmenu_help.h", "dd/de7/a01868.html", "dd/de7/a01868" ],
+    [ "common.h", "da/d8b/a01871.html", "da/d8b/a01871" ],
+    [ "form.h", "d5/da8/a01865.html", "d5/da8/a01865" ],
+    [ "menu.h", "d9/dd5/a01886.html", "d9/dd5/a01886" ],
+    [ "pick.h", "d9/d63/a01877.html", "d9/d63/a01877" ],
+    [ "safe_strerror.h", "de/dfb/a01874.html", null ],
+    [ "ui_backend.h", "d9/d9b/a01889.html", "d9/d9b/a01889" ],
+    [ "version.h", "db/d4b/a01883.html", "db/d4b/a01883" ],
+    [ "view.h", "dc/d31/a01892.html", "dc/d31/a01892" ]
 ];

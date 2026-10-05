@@ -1,20 +1,11 @@
 var a02540 =
 [
-    [ "deselect_object", "d4/db0/a02540.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
-    [ "destroy_pick_view", "d4/db0/a02540.html#ga6d6cf40c6027df6af085adaf52f35130", null ],
-    [ "display_pick_help", "d4/db0/a02540.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
-    [ "display_pick_page", "d4/db0/a02540.html#gabdcc916b6e3ac452000c280ec5f0d3cc", null ],
-    [ "exec_objects", "d4/db0/a02540.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
-    [ "init_pick", "d4/db0/a02540.html#gaa4c8245bdd9e9c767f83eea931804c10", null ],
-    [ "match_objects", "d4/db0/a02540.html#ga91b2cda407803ee4367f7efd5487863c", null ],
-    [ "new_pick_view", "d4/db0/a02540.html#ga41d1534c1e985c35c7ca725f0b184e17", null ],
-    [ "new_view_file", "d4/db0/a02540.html#gac22ea664b7423900ca62515098d8841a", null ],
-    [ "output_objects", "d4/db0/a02540.html#ga8feb6cd586d503a676b831ec722576fb", null ],
-    [ "pick_std_chyron", "d4/db0/a02540.html#ga6e4762c27b7409e55dcc20ff27aa30d5", null ],
-    [ "picker", "d4/db0/a02540.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
-    [ "read_pick_input", "d4/db0/a02540.html#gaabda879000cf8135245ef451de08f780", null ],
-    [ "reverse_object", "d4/db0/a02540.html#gab2173ff8fb800d126c180487744672d5", null ],
-    [ "save_object", "d4/db0/a02540.html#ga02f90007f2422dd2094ab64569e157f0", null ],
-    [ "toggle_object", "d4/db0/a02540.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
-    [ "unreverse_object", "d4/db0/a02540.html#ga650262f8279502ebc73607394dd7af13", null ]
+    [ "_", "d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934", null ],
+    [ "_GNU_SOURCE", "d4/db0/a02540.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "bindtextdomain", "d4/db0/a02540.html#a19d270d34b833dec51cd00fd788010da", null ],
+    [ "N_", "d4/db0/a02540.html#a75278405e7f034d2b1af80bfd94675fe", null ],
+    [ "textdomain", "d4/db0/a02540.html#a3adff4c69f0a5613a459ff23d749166c", null ],
+    [ "main", "d4/db0/a02540.html#a3c04138a5bfe5d72780bb7e82a18e627", null ],
+    [ "print_totals", "d4/db0/a02540.html#abbfae4c10b55e300ca22e10fdc9e84ff", null ],
+    [ "month", "d4/db0/a02540.html#ac8f3e76eebe6c45cac2c928ac6ef2e8e", null ]
 ];

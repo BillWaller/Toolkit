@@ -1,7 +1,7 @@
 var a01883 =
 [
-    [ "ui_get_event", "db/d4b/a01883.html#aad0095bc404840ab14e69eb07615819a", null ],
-    [ "ui_get_event_no_mouse", "db/d4b/a01883.html#a10e0060bcd94b6d54f24dec45527aacd", null ],
-    [ "ui_mice_enable", "db/d4b/a01883.html#a25b4acfd10ea4adf8584b7e9cc547c60", null ],
-    [ "ui_mousemask", "db/d4b/a01883.html#aa98dc9d036d3178b9cd4dd81e167d474", null ]
+    [ "CM_VERSION", "db/d4b/a01883.html#ac9eb2084c3924fce14851a3c9d00e49e", null ],
+    [ "CM_VERSION_MAJOR", "db/d4b/a01883.html#a9221f7c04c58c841c83097b214577c84", null ],
+    [ "CM_VERSION_MINOR", "db/d4b/a01883.html#a2e9d471d43efb8c60c06d7da6cd2db01", null ],
+    [ "CM_VERSION_PATCH", "db/d4b/a01883.html#a856a7dfd8aa120cc86b55a421d35021c", null ]
 ];

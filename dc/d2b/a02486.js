@@ -1,5 +1,9 @@
 var a02486 =
 [
-    [ "get_command_type", "d3/d09/a02539.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "d3/d09/a02539.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "fork_detach_execvp", "dc/d32/a02556.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_detach_execvp", "dc/d32/a02556.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_exec", "dc/d32/a02556.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "dc/d32/a02556.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "dc/d32/a02556.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "dc/d32/a02556.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

@@ -1,11 +1,10 @@
 var a02656 =
 [
-    [ "a", "d2/d7d/a02656.html#a7680d17785b0c02981806e549f2981cb", null ],
-    [ "b", "d2/d7d/a02656.html#a61ce532b0be55169bc659b6d3d96bb20", null ],
-    [ "b", "d2/d7d/a02656.html#a61ce532b0be55169bc659b6d3d96bb20", null ],
-    [ "color", "d2/d7d/a02656.html#a73312f771c3256312d5f03c11f1b7af9", null ],
-    [ "g", "d2/d7d/a02656.html#a792ca07575c4ac7775494a16a1d3787e", null ],
-    [ "g", "d2/d7d/a02656.html#a792ca07575c4ac7775494a16a1d3787e", null ],
-    [ "r", "d2/d7d/a02656.html#a5e45e40a4c1af118ead0a8c137834328", null ],
-    [ "r", "d2/d7d/a02656.html#a5e45e40a4c1af118ead0a8c137834328", null ]
+    [ "sl_cc", "d2/d7d/a02656.html#aa541bc013b4b808262ee26bf3382354a", null ],
+    [ "sl_cells", "d2/d7d/a02656.html#ac36ec62b31c40714c75ad0ed7e445de3", null ],
+    [ "sl_cnt", "d2/d7d/a02656.html#a1a85d5dca1c0f71f0214d1645a552807", null ],
+    [ "sl_cols", "d2/d7d/a02656.html#a44a3e2f37d5fc3dab3ce807437d6cde1", null ],
+    [ "sl_idx", "d2/d7d/a02656.html#a6a1eaaa11b23afec7fa7309fd1df251f", null ],
+    [ "sl_ln_no", "d2/d7d/a02656.html#a060e1dfe836b0124c9aecbecd64433a3", null ],
+    [ "sl_s", "d2/d7d/a02656.html#ae78ccff231c4252aa0b070e4c6a6ba62", null ]
 ];

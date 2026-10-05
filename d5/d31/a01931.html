@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: ui/ui_notcurses_input.c File Reference</title>
+<title>C-Menu: ui/ui_notcurses_draw.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,286 +110,1241 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/d31/a01931.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_notcurses_input.c File Reference</div></div>
+  <div class="headertitle"><div class="title">ui_notcurses_draw.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> UI backend — input handling.  
+<p><a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> UI backend — drawing functions.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../d5/da8/a01865_source.html">ui_backend.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="../../d9/d63/a01877_source.html">ui_notcurses_internal.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d9/d9b/a01889_source.html">ui_backend.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../d5/d99/a01901_source.html">ui_notcurses_internal.h</a>&quot;</code><br />
 <code>#include &lt;notcurses/notcurses.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ui_notcurses_input.c:</div>
+Include dependency graph for ui_notcurses_draw.c:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d22/a01932.svg" width="606" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d8/d22/a01932.svg" width="610" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="../../d5/d31/a01931_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+<tr class="memitem:ac7b30cf7f83588cb6bc1c716be66f5a2" id="r_ac7b30cf7f83588cb6bc1c716be66f5a2"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ac7b30cf7f83588cb6bc1c716be66f5a2">_XOPEN_SOURCE_EXTENDED</a>&#160;&#160;&#160;1</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aad0095bc404840ab14e69eb07615819a" id="r_aad0095bc404840ab14e69eb07615819a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aad0095bc404840ab14e69eb07615819a">ui_get_event</a> (<a class="el" href="../../df/d97/a02676.html">UiSurface</a> *s, <a class="el" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, UiChyron *chyron, UiEvent *ev, int timeout_ms)</td></tr>
-<tr class="memdesc:aad0095bc404840ab14e69eb07615819a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an input event from the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context.  <br /></td></tr>
-<tr class="memitem:ab0f25450d3cb25b2f8ac01261715607d" id="r_ab0f25450d3cb25b2f8ac01261715607d"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab0f25450d3cb25b2f8ac01261715607d">ui_get_event_no_mouse</a> (<a class="el" href="../../df/d97/a02676.html">UiSurface</a> *target, <a class="el" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, UiEvent *ev)</td></tr>
-<tr class="memdesc:ab0f25450d3cb25b2f8ac01261715607d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an input event from the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context, ignoring mouse events.  <br /></td></tr>
-<tr class="memitem:ab45ba8f124fbe34ff19d140f36898545" id="r_ab45ba8f124fbe34ff19d140f36898545"><td class="memItemLeft">uint&#160;</td><td class="memItemRight"><a class="el" href="#ab45ba8f124fbe34ff19d140f36898545">ui_get_plane_idx</a> (<a class="el" href="../../df/d97/a02676.html">UiSurface</a> *s, struct ncplane *plane)</td></tr>
-<tr class="memdesc:ab45ba8f124fbe34ff19d140f36898545"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the index of a given ncplane in the <a class="el" href="../../df/d97/a02676.html">UiSurface</a>'s plane array.  <br /></td></tr>
-<tr class="memitem:a9e28b00f7c6be0aeae4d1625e4f73abd" id="r_a9e28b00f7c6be0aeae4d1625e4f73abd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9e28b00f7c6be0aeae4d1625e4f73abd">ui_getch</a> ()</td></tr>
-<tr class="memdesc:a9e28b00f7c6be0aeae4d1625e4f73abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for a single input character from the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context.  <br /></td></tr>
-<tr class="memitem:a25b4acfd10ea4adf8584b7e9cc547c60" id="r_a25b4acfd10ea4adf8584b7e9cc547c60"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25b4acfd10ea4adf8584b7e9cc547c60">ui_mice_enable</a> (int mask)</td></tr>
-<tr class="memdesc:a25b4acfd10ea4adf8584b7e9cc547c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable mouse events for the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context.  <br /></td></tr>
-<tr class="memitem:aa98dc9d036d3178b9cd4dd81e167d474" id="r_aa98dc9d036d3178b9cd4dd81e167d474"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aa98dc9d036d3178b9cd4dd81e167d474">ui_mousemask</a> (int mask)</td></tr>
-<tr class="memdesc:aa98dc9d036d3178b9cd4dd81e167d474"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the mouse event mask for the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context.  <br /></td></tr>
-<tr class="memitem:a77acc85600a7606b6ad1fb69491ed719" id="r_a77acc85600a7606b6ad1fb69491ed719"><td class="memItemLeft"><a class="el" href="../../d5/da8/a01865.html#ab31594aa8700b9bacbac1fabcd416565">NcPlane</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a77acc85600a7606b6ad1fb69491ed719">ui_ncplane_clicked</a> (<a class="el" href="../../df/d97/a02676.html">UiSurface</a> *s, <a class="el" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, ncinput *ni)</td></tr>
-<tr class="memdesc:a77acc85600a7606b6ad1fb69491ed719"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine which ncplane was clicked based on the mouse event coordinates.  <br /></td></tr>
+<tr class="memitem:a4c22515d7a71486fbc576bdff6baf6b5" id="r_a4c22515d7a71486fbc576bdff6baf6b5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4c22515d7a71486fbc576bdff6baf6b5">mk_chimera</a> (<a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell, char c)</td></tr>
+<tr class="memdesc:a4c22515d7a71486fbc576bdff6baf6b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">create a cell with specified character, using background cell style and channels  <br /></td></tr>
+<tr class="memitem:a7eb8bd1bcd93c9c747e2470a52ea2e3e" id="r_a7eb8bd1bcd93c9c747e2470a52ea2e3e"><td class="memItemLeft">struct ncvisual *&#160;</td><td class="memItemRight"><a class="el" href="#a7eb8bd1bcd93c9c747e2470a52ea2e3e">ui_display_image</a> (struct notcurses *nc, <a class="el" href="../../df/de1/a02844.html">UiMultiMedia</a> *mm, const char *image_file, int y, int x, int begy, int begx)</td></tr>
+<tr class="memdesc:a7eb8bd1bcd93c9c747e2470a52ea2e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">display an image on the terminal using <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a>  <br /></td></tr>
+<tr class="memitem:a5ff9db512c95f84962273612cd4edb3b" id="r_a5ff9db512c95f84962273612cd4edb3b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a5ff9db512c95f84962273612cd4edb3b">ui_draw_ch</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, char c)</td></tr>
+<tr class="memdesc:a5ff9db512c95f84962273612cd4edb3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add character  <br /></td></tr>
+<tr class="memitem:a3877e7572f71e023681dac3d216d78d5" id="r_a3877e7572f71e023681dac3d216d78d5"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3877e7572f71e023681dac3d216d78d5">ui_draw_ch_yx</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, char c)</td></tr>
+<tr class="memdesc:a3877e7572f71e023681dac3d216d78d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add character  <br /></td></tr>
+<tr class="memitem:a2e6cc68fddaf64cc6da4eff5c8d33837" id="r_a2e6cc68fddaf64cc6da4eff5c8d33837"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2e6cc68fddaf64cc6da4eff5c8d33837">ui_draw_text</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char *text)</td></tr>
+<tr class="memdesc:a2e6cc68fddaf64cc6da4eff5c8d33837"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string  <br /></td></tr>
+<tr class="memitem:a1511d0847feb1af9442e3911de7f2bbc" id="r_a1511d0847feb1af9442e3911de7f2bbc"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1511d0847feb1af9442e3911de7f2bbc">ui_draw_text_fill</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char *text, int m)</td></tr>
+<tr class="memdesc:a1511d0847feb1af9442e3911de7f2bbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string, at most m columns, fill with spaces if text is shorter than m  <br /></td></tr>
+<tr class="memitem:a0f36e442ae94628d7fbe153793ad1f9b" id="r_a0f36e442ae94628d7fbe153793ad1f9b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0f36e442ae94628d7fbe153793ad1f9b">ui_draw_text_n</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char *text, int m)</td></tr>
+<tr class="memdesc:a0f36e442ae94628d7fbe153793ad1f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string, at most m columns  <br /></td></tr>
+<tr class="memitem:a9017feda04eb4cf15f615177ba0c8d0c" id="r_a9017feda04eb4cf15f615177ba0c8d0c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a9017feda04eb4cf15f615177ba0c8d0c">ui_mvwadd_wch</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell)</td></tr>
+<tr class="memdesc:a9017feda04eb4cf15f615177ba0c8d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add cell  <br /></td></tr>
+<tr class="memitem:a0ee03238cd237be8a6d9450eaac2c205" id="r_a0ee03238cd237be8a6d9450eaac2c205"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a0ee03238cd237be8a6d9450eaac2c205">ui_mvwadd_wchnstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell, uint m)</td></tr>
+<tr class="memdesc:a0ee03238cd237be8a6d9450eaac2c205"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add cell string, at most m columns  <br /></td></tr>
+<tr class="memitem:aad20608f0a00a5358286058ba6971b07" id="r_aad20608f0a00a5358286058ba6971b07"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aad20608f0a00a5358286058ba6971b07">ui_mvwadd_wchstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell)</td></tr>
+<tr class="memdesc:aad20608f0a00a5358286058ba6971b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add cell string  <br /></td></tr>
+<tr class="memitem:a2d15814abd90a688e2460e88d20806e7" id="r_a2d15814abd90a688e2460e88d20806e7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2d15814abd90a688e2460e88d20806e7">ui_mvwaddch</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char c)</td></tr>
+<tr class="memdesc:a2d15814abd90a688e2460e88d20806e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add character  <br /></td></tr>
+<tr class="memitem:a42880f1f9d6e3a6011e9a8243057c2e9" id="r_a42880f1f9d6e3a6011e9a8243057c2e9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a42880f1f9d6e3a6011e9a8243057c2e9">ui_mvwaddnstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char *text, int m)</td></tr>
+<tr class="memdesc:a42880f1f9d6e3a6011e9a8243057c2e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string, at most m columns  <br /></td></tr>
+<tr class="memitem:a1a71b5cc78bcadc07f8d40ec959ce969" id="r_a1a71b5cc78bcadc07f8d40ec959ce969"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a1a71b5cc78bcadc07f8d40ec959ce969">ui_mvwaddnwstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const wchar_t *wstr, int m)</td></tr>
+<tr class="memdesc:a1a71b5cc78bcadc07f8d40ec959ce969"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string, at most m columns  <br /></td></tr>
+<tr class="memitem:a86f4a553274bdacdf7e4cd98d6dc3e17" id="r_a86f4a553274bdacdf7e4cd98d6dc3e17"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a86f4a553274bdacdf7e4cd98d6dc3e17">ui_mvwaddstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char *text)</td></tr>
+<tr class="memdesc:a86f4a553274bdacdf7e4cd98d6dc3e17"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string  <br /></td></tr>
+<tr class="memitem:a3c7f98a1eca63989c97e5692d7cde0ab" id="r_a3c7f98a1eca63989c97e5692d7cde0ab"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c7f98a1eca63989c97e5692d7cde0ab">ui_mvwaddstr_fill</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const char *text, int m)</td></tr>
+<tr class="memdesc:a3c7f98a1eca63989c97e5692d7cde0ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add string, at most m columns, fill with spaces if text is shorter than m  <br /></td></tr>
+<tr class="memitem:a834814d38610b774657bf45e4ba6a01a" id="r_a834814d38610b774657bf45e4ba6a01a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a834814d38610b774657bf45e4ba6a01a">ui_mvwaddwstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, uint y, uint x, const wchar_t *wstr)</td></tr>
+<tr class="memdesc:a834814d38610b774657bf45e4ba6a01a"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, move to y, x, add wchar_t string  <br /></td></tr>
+<tr class="memitem:a73d0d8cf6bc75336815ecb41fa28ce53" id="r_a73d0d8cf6bc75336815ecb41fa28ce53"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a73d0d8cf6bc75336815ecb41fa28ce53">ui_restore_wins</a> ()</td></tr>
+<tr class="memdesc:a73d0d8cf6bc75336815ecb41fa28ce53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore the state of all windows in the UI. This function refreshes the standard screen and all surface windows, ensuring that their contents are displayed correctly.  <br /></td></tr>
+<tr class="memitem:ad3465de218c61320615de6790eebcfa8" id="r_ad3465de218c61320615de6790eebcfa8"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad3465de218c61320615de6790eebcfa8">ui_wadd_wch</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell)</td></tr>
+<tr class="memdesc:ad3465de218c61320615de6790eebcfa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add cell  <br /></td></tr>
+<tr class="memitem:abeae3e3c6b19f4fb711ba473414599d9" id="r_abeae3e3c6b19f4fb711ba473414599d9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#abeae3e3c6b19f4fb711ba473414599d9">ui_wadd_wchnstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell, uint m)</td></tr>
+<tr class="memdesc:abeae3e3c6b19f4fb711ba473414599d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, add cell string, at most m columns  <br /></td></tr>
+<tr class="memitem:a6b336f444f84f36c55b919478c02dac9" id="r_a6b336f444f84f36c55b919478c02dac9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6b336f444f84f36c55b919478c02dac9">ui_wadd_wchstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *cell)</td></tr>
+<tr class="memdesc:a6b336f444f84f36c55b919478c02dac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add cell string  <br /></td></tr>
+<tr class="memitem:a872cdcb4aa6232dfbc3640f8b47fc12e" id="r_a872cdcb4aa6232dfbc3640f8b47fc12e"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a872cdcb4aa6232dfbc3640f8b47fc12e">ui_waddch</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const char c)</td></tr>
+<tr class="memdesc:a872cdcb4aa6232dfbc3640f8b47fc12e"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add character  <br /></td></tr>
+<tr class="memitem:a42693be9627906ef280785d843c11cc1" id="r_a42693be9627906ef280785d843c11cc1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a42693be9627906ef280785d843c11cc1">ui_waddnstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const char *text, int m)</td></tr>
+<tr class="memdesc:a42693be9627906ef280785d843c11cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add string, at most m columns  <br /></td></tr>
+<tr class="memitem:ae1ebd63ac77fbbad0fe9d78475e6f8d2" id="r_ae1ebd63ac77fbbad0fe9d78475e6f8d2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae1ebd63ac77fbbad0fe9d78475e6f8d2">ui_waddnwstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const wchar_t *wstr, int m)</td></tr>
+<tr class="memdesc:ae1ebd63ac77fbbad0fe9d78475e6f8d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add wchar_t string, at most m columns  <br /></td></tr>
+<tr class="memitem:a05b2fa115f67a3258f234ba44dbfed1c" id="r_a05b2fa115f67a3258f234ba44dbfed1c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a05b2fa115f67a3258f234ba44dbfed1c">ui_waddstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const char *text)</td></tr>
+<tr class="memdesc:a05b2fa115f67a3258f234ba44dbfed1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add string  <br /></td></tr>
+<tr class="memitem:a22957b30a82d9e2209e86442fc406e63" id="r_a22957b30a82d9e2209e86442fc406e63"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a22957b30a82d9e2209e86442fc406e63">ui_waddwstr</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, const wchar_t *wstr)</td></tr>
+<tr class="memdesc:a22957b30a82d9e2209e86442fc406e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">on specified window, at current location, add wchar_t string  <br /></td></tr>
+<tr class="memitem:aadd3e1f3bd3d5ce37c70e8336c977681" id="r_aadd3e1f3bd3d5ce37c70e8336c977681"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aadd3e1f3bd3d5ce37c70e8336c977681">ui_wclrtobot</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w)</td></tr>
+<tr class="memdesc:aadd3e1f3bd3d5ce37c70e8336c977681"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear from current cursor position to bottom of window  <br /></td></tr>
+<tr class="memitem:ad6aa95dfbb37afc2abaca3f46248c5af" id="r_ad6aa95dfbb37afc2abaca3f46248c5af"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ad6aa95dfbb37afc2abaca3f46248c5af">ui_wclrtoeol</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w)</td></tr>
+<tr class="memdesc:ad6aa95dfbb37afc2abaca3f46248c5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">clear the window from the current cursor position to the end of the window  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> UI backend — input handling. </p>
-<p>Translates <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> <code>ncinput</code> events into the portable UiEvent representation defined in <a class="el" href="../../d5/da8/a01865.html" title="Backend API for terminal UI library.">ui_backend.h</a>. </p>
+<div class="textblock"><p><a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> UI backend — drawing functions. </p>
+<p>Implements the drawing operations declared in <a class="el" href="../../d9/d9b/a01889.html" title="Backend API for terminal UI library.">ui_backend.h</a> using the <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> API. </p>
 
-<p class="definition">Definition in file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="aad0095bc404840ab14e69eb07615819a" name="aad0095bc404840ab14e69eb07615819a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad0095bc404840ab14e69eb07615819a">&#9670;&#160;</a></span>ui_get_event()</h2>
+<p class="definition">Definition in file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+</div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ui_get_event </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d97/a02676.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">UiChyron *</td>          <td class="paramname"><span class="paramname"><em>chyron</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">UiEvent *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span>&#160;)</td>
+          <td class="memname">#define _GNU_SOURCE</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wait for an input event from the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context. </p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00008">8</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+
+</div>
+</div>
+<a id="ac7b30cf7f83588cb6bc1c716be66f5a2" name="ac7b30cf7f83588cb6bc1c716be66f5a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7b30cf7f83588cb6bc1c716be66f5a2">&#9670;&#160;</a></span>_XOPEN_SOURCE_EXTENDED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _XOPEN_SOURCE_EXTENDED&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00009">9</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a4c22515d7a71486fbc576bdff6baf6b5" name="a4c22515d7a71486fbc576bdff6baf6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c22515d7a71486fbc576bdff6baf6b5">&#9670;&#160;</a></span>mk_chimera()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int mk_chimera </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>create a cell with specified character, using background cell style and channels </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ui</td><td>UI runtime context. </td></tr>
-    <tr><td class="paramname">target</td><td>Unused for <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> (events are global to the context). </td></tr>
-    <tr><td class="paramname">ev</td><td>Output UiEvent structure. </td></tr>
-    <tr><td class="paramname">timeout_ms</td><td>Milliseconds to wait; -1 = block indefinitely. </td></tr>
+    <tr><td class="paramname">cell</td><td>pointer to <a class="el" href="../../de/db6/a02792.html">UiCell</a> </td></tr>
+    <tr><td class="paramname">c</td><td>character </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if <code class="param">ui</code> or <code class="param">ev</code> is NULL. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00107">107</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  107</span>                                                                                      {</div>
-<div class="line"><span class="lineno">  108</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a> || !ev)</div>
-<div class="line"><span class="lineno">  109</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  110</span>    memset(ev, 0, <span class="keyword">sizeof</span>(*ev));</div>
-<div class="line"><span class="lineno">  111</span>    ncinput ni;</div>
-<div class="line"><span class="lineno">  112</span>    <a class="code hl_function" href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
-<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">if</span> (timeout_ms &lt; 0) {</div>
-<div class="line"><span class="lineno">  114</span>        <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  115</span>            notcurses_get_blocking(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, &amp;ni);</div>
-<div class="line"><span class="lineno">  116</span>        } <span class="keywordflow">while</span> (ni.evtype == NCTYPE_RELEASE ||</div>
-<div class="line"><span class="lineno">  117</span>                 ni.id == NCKEY_INVALID || ni.id == NCKEY_MOTION || ni.id == NCKEY_SIGNAL);</div>
-<div class="line"><span class="lineno">  118</span> </div>
-<div class="line"><span class="lineno">  119</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  120</span>        <span class="keyword">struct </span>timespec ts = {</div>
-<div class="line"><span class="lineno">  121</span>            .tv_sec = timeout_ms / 1000,</div>
-<div class="line"><span class="lineno">  122</span>            .tv_nsec = (long)(timeout_ms % 1000) * 1000000L,</div>
-<div class="line"><span class="lineno">  123</span>        };</div>
-<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  125</span>            notcurses_get(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, &amp;ts, &amp;ni);</div>
-<div class="line"><span class="lineno">  126</span>        } <span class="keywordflow">while</span> (ni.evtype == NCTYPE_RELEASE || ni.id == NCKEY_INVALID);</div>
-<div class="line"><span class="lineno">  127</span>    }</div>
-<div class="line"><span class="lineno">  128</span>    ev-&gt;key = translate_nckey(ni.id, &amp;ni);</div>
-<div class="line"><span class="lineno">  129</span>    ev-&gt;alt = ncinput_alt_p(&amp;ni);</div>
-<div class="line"><span class="lineno">  130</span>    ev-&gt;ctrl = ncinput_ctrl_p(&amp;ni);</div>
-<div class="line"><span class="lineno">  131</span>    ev-&gt;shift = ncinput_shift_p(&amp;ni);</div>
-<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">if</span> (ev-&gt;key == <a class="code hl_define" href="../../da/d8b/a01871.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a>)</div>
-<div class="line"><span class="lineno">  133</span>        ev-&gt;ch = ni.id; <span class="comment">/* Unicode codepoint */</span></div>
-<div class="line"><span class="lineno">  134</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ev-&gt;key == <a class="code hl_define" href="../../da/d8b/a01871.html#a2ccd72de1dd9409e8f0827cbaee18f6a">UIKEY_MOUSE</a>) {</div>
-<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">if</span> (ni.id == NCKEY_BUTTON4)</div>
-<div class="line"><span class="lineno">  136</span>            ev-&gt;mouse_action = <a class="code hl_define" href="../../da/d8b/a01871.html#aa08bfc431294b6a8f2d50b08b62704df">UIKEY_SCROLL_UP</a>;</div>
-<div class="line"><span class="lineno">  137</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ni.id == NCKEY_BUTTON5)</div>
-<div class="line"><span class="lineno">  138</span>            ev-&gt;mouse_action = <a class="code hl_define" href="../../da/d8b/a01871.html#ac8303efbb05af01aec4ae002cd9294a3">UIKEY_SCROLL_DOWN</a>;</div>
-<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ni.id == NCKEY_BUTTON1 &amp;&amp; ni.evtype == NCTYPE_PRESS) {</div>
-<div class="line"><span class="lineno">  140</span>            ev-&gt;mouse_action = <a class="code hl_define" href="../../da/d8b/a01871.html#a4381d838f062fd70feada6d8cab2f573">UIKEY_BUTTON1_PRESSED</a>;</div>
-<div class="line"><span class="lineno">  141</span>            <span class="keyword">struct </span>ncplane *clicked = <a class="code hl_function" href="#a77acc85600a7606b6ad1fb69491ed719">ui_ncplane_clicked</a>(s, w, &amp;ni);</div>
-<div class="line"><span class="lineno">  142</span>            ev-&gt;y = ni.y;</div>
-<div class="line"><span class="lineno">  143</span>            ev-&gt;x = ni.x;</div>
-<div class="line"><span class="lineno">  144</span>            ev-&gt;in_win = <a class="code hl_function" href="#ab45ba8f124fbe34ff19d140f36898545">ui_get_plane_idx</a>(s, clicked);</div>
-<div class="line"><span class="lineno">  145</span>            <span class="keywordflow">if</span> (chyron) {</div>
-<div class="line"><span class="lineno">  146</span>                <span class="keywordflow">if</span> (ev-&gt;in_win == chyron-&gt;w &amp;&amp; ev-&gt;y == chyron-&gt;y) {</div>
-<div class="line"><span class="lineno">  147</span>                    ev-&gt;mouse_action = <a class="code hl_define" href="../../da/d8b/a01871.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>;</div>
-<div class="line"><span class="lineno">  148</span>                    ev-&gt;key = <a class="code hl_function" href="../../d9/dd5/a01886.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a>(chyron, ev-&gt;x);</div>
-<div class="line"><span class="lineno">  149</span>                    <span class="keywordflow">return</span> ev-&gt;key;</div>
-<div class="line"><span class="lineno">  150</span>                } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  151</span>                    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  152</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  153</span>                <span class="keywordflow">if</span> (ev-&gt;in_win == w) {</div>
-<div class="line"><span class="lineno">  154</span>                    ev-&gt;mouse_action = <a class="code hl_define" href="../../da/d8b/a01871.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>;</div>
-<div class="line"><span class="lineno">  155</span>                    ev-&gt;key = ev-&gt;y;</div>
-<div class="line"><span class="lineno">  156</span>                    <span class="keywordflow">return</span> ev-&gt;key;</div>
-<div class="line"><span class="lineno">  157</span>                } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  158</span>                    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  159</span>            }</div>
-<div class="line"><span class="lineno">  160</span>        }</div>
-<div class="line"><span class="lineno">  161</span>    }</div>
-<div class="line"><span class="lineno">  162</span>    <span class="keywordflow">return</span> ev-&gt;ch;</div>
-<div class="line"><span class="lineno">  163</span>}</div>
-<div class="ttc" id="aa01865_html_a0a06ae7bae8563b699ce712ec266fe6f"><div class="ttname"><a href="../../d5/da8/a01865.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a></div><div class="ttdeci">void ui_render()</div><div class="ttdoc">Render the UI by updating panels and refreshing the display.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00880">ui_ncurses.c:880</a></div></div>
-<div class="ttc" id="aa01871_html_a2ccd72de1dd9409e8f0827cbaee18f6a"><div class="ttname"><a href="../../da/d8b/a01871.html#a2ccd72de1dd9409e8f0827cbaee18f6a">UIKEY_MOUSE</a></div><div class="ttdeci">#define UIKEY_MOUSE</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00059">ui_ncurses_internal.h:59</a></div></div>
-<div class="ttc" id="aa01871_html_a4381d838f062fd70feada6d8cab2f573"><div class="ttname"><a href="../../da/d8b/a01871.html#a4381d838f062fd70feada6d8cab2f573">UIKEY_BUTTON1_PRESSED</a></div><div class="ttdeci">#define UIKEY_BUTTON1_PRESSED</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00107">ui_ncurses_internal.h:107</a></div></div>
-<div class="ttc" id="aa01871_html_aa08bfc431294b6a8f2d50b08b62704df"><div class="ttname"><a href="../../da/d8b/a01871.html#aa08bfc431294b6a8f2d50b08b62704df">UIKEY_SCROLL_UP</a></div><div class="ttdeci">#define UIKEY_SCROLL_UP</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00104">ui_ncurses_internal.h:104</a></div></div>
-<div class="ttc" id="aa01871_html_aa6518075770a53b025f02ed6e35cd0df"><div class="ttname"><a href="../../da/d8b/a01871.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a></div><div class="ttdeci">#define UIKEY_BUTTON1_CLICKED</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00106">ui_ncurses_internal.h:106</a></div></div>
-<div class="ttc" id="aa01871_html_aa6add16c29b7f1e35441d98036a2d2ac"><div class="ttname"><a href="../../da/d8b/a01871.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a></div><div class="ttdeci">#define UIKEY_CHAR</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00102">ui_ncurses_internal.h:102</a></div></div>
-<div class="ttc" id="aa01871_html_ac8303efbb05af01aec4ae002cd9294a3"><div class="ttname"><a href="../../da/d8b/a01871.html#ac8303efbb05af01aec4ae002cd9294a3">UIKEY_SCROLL_DOWN</a></div><div class="ttdeci">#define UIKEY_SCROLL_DOWN</div><div class="ttdef"><b>Definition</b> <a href="../../da/d8b/a01871_source.html#l00105">ui_ncurses_internal.h:105</a></div></div>
-<div class="ttc" id="aa01886_html_ac50923021890fb1a1895392312872150"><div class="ttname"><a href="../../d9/dd5/a01886.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a></div><div class="ttdeci">int ui_get_chyron_key(UiChyron *chyron, uint x)</div><div class="ttdoc">Get keycode from chyron.</div><div class="ttdef"><b>Definition</b> <a href="../../d9/dd5/a01886_source.html#l00977">ui_common.c:977</a></div></div>
-<div class="ttc" id="aa01889_html_a9ecaf8df0a838e8587a8f370b18702f9"><div class="ttname"><a href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a></div><div class="ttdeci">UiRuntime * ui</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00039">ui_ncurses.c:39</a></div></div>
-<div class="ttc" id="aa01931_html_a77acc85600a7606b6ad1fb69491ed719"><div class="ttname"><a href="#a77acc85600a7606b6ad1fb69491ed719">ui_ncplane_clicked</a></div><div class="ttdeci">NcPlane * ui_ncplane_clicked(UiSurface *s, ss_t w, ncinput *ni)</div><div class="ttdoc">Determine which ncplane was clicked based on the mouse event coordinates.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d31/a01931_source.html#l00221">ui_notcurses_input.c:221</a></div></div>
-<div class="ttc" id="aa01931_html_ab45ba8f124fbe34ff19d140f36898545"><div class="ttname"><a href="#ab45ba8f124fbe34ff19d140f36898545">ui_get_plane_idx</a></div><div class="ttdeci">uint ui_get_plane_idx(UiSurface *s, struct ncplane *plane)</div><div class="ttdoc">Get the index of a given ncplane in the UiSurface&#39;s plane array.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d31/a01931_source.html#l00208">ui_notcurses_input.c:208</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00066">66</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   66</span>                                     {</div>
+<div class="line"><span class="lineno">   67</span>    cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#afeda1f31ac5f1c0ee8dd9eecb6ec2a44">gcluster</a> = c;</div>
+<div class="line"><span class="lineno">   68</span>    cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#ac7c9726fe73a29edb6e92873615181fa">gcluster_backstop</a> = 0;</div>
+<div class="line"><span class="lineno">   69</span>    cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#a213e55c491d18e28b41757438ec69c3c">stylemask</a> = <a class="code hl_variable" href="../../d4/d0d/a01904.html#a39bd5a1551671a4c88a50adfb319ff33">bkgd_cell</a>.stylemask;</div>
+<div class="line"><span class="lineno">   70</span>    cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#a32a6d2df2c98a70a0a47df61c663bfef">channels</a> = <a class="code hl_variable" href="../../d4/d0d/a01904.html#a39bd5a1551671a4c88a50adfb319ff33">bkgd_cell</a>.channels;</div>
+<div class="line"><span class="lineno">   71</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   72</span>}</div>
+<div class="ttc" id="aa01904_html_a39bd5a1551671a4c88a50adfb319ff33"><div class="ttname"><a href="../../d4/d0d/a01904.html#a39bd5a1551671a4c88a50adfb319ff33">bkgd_cell</a></div><div class="ttdeci">UiCell bkgd_cell</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d0d/a01904_source.html#l00034">ui_notcurses.c:34</a></div></div>
+<div class="ttc" id="aa02792_html_a213e55c491d18e28b41757438ec69c3c"><div class="ttname"><a href="../../de/db6/a02792.html#a213e55c491d18e28b41757438ec69c3c">UiCell::stylemask</a></div><div class="ttdeci">uint16_t stylemask</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00390">ui_backend.h:390</a></div></div>
+<div class="ttc" id="aa02792_html_a32a6d2df2c98a70a0a47df61c663bfef"><div class="ttname"><a href="../../de/db6/a02792.html#a32a6d2df2c98a70a0a47df61c663bfef">UiCell::channels</a></div><div class="ttdeci">uint64_t channels</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00407">ui_backend.h:407</a></div></div>
+<div class="ttc" id="aa02792_html_ac7c9726fe73a29edb6e92873615181fa"><div class="ttname"><a href="../../de/db6/a02792.html#ac7c9726fe73a29edb6e92873615181fa">UiCell::gcluster_backstop</a></div><div class="ttdeci">char gcluster_backstop</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00388">ui_backend.h:388</a></div></div>
+<div class="ttc" id="aa02792_html_afeda1f31ac5f1c0ee8dd9eecb6ec2a44"><div class="ttname"><a href="../../de/db6/a02792.html#afeda1f31ac5f1c0ee8dd9eecb6ec2a44">UiCell::gcluster</a></div><div class="ttdeci">uint32_t gcluster</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00382">ui_backend.h:382</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00039">ui</a>, <a class="el" href="../../d9/dd5/a01886_source.html#l00977">ui_get_chyron_key()</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00880">ui_render()</a>.</p>
+</div>
+</div>
+<a id="a7eb8bd1bcd93c9c747e2470a52ea2e3e" name="a7eb8bd1bcd93c9c747e2470a52ea2e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7eb8bd1bcd93c9c747e2470a52ea2e3e">&#9670;&#160;</a></span>ui_display_image()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct ncvisual * ui_display_image </td>
+          <td>(</td>
+          <td class="paramtype">struct notcurses *</td>          <td class="paramname"><span class="paramname"><em>nc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../df/de1/a02844.html">UiMultiMedia</a> *</td>          <td class="paramname"><span class="paramname"><em>mm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>image_file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>begy</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>begx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>display an image on the terminal using <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nc</td><td><a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context </td></tr>
+    <tr><td class="paramname">mm</td><td><a class="el" href="../../df/de1/a02844.html">UiMultiMedia</a> structure to hold the image and surface </td></tr>
+    <tr><td class="paramname">image_file</td><td>path to the image file </td></tr>
+    <tr><td class="paramname">y</td><td>height of the image display area (or -1 for full height) </td></tr>
+    <tr><td class="paramname">x</td><td>width of the image display area (or -1 for full width) </td></tr>
+    <tr><td class="paramname">begy</td><td>starting row for the image display area (or -1 for top) </td></tr>
+    <tr><td class="paramname">begx</td><td>starting column for the image display area (or -1 for left) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pointer to the ncvisual structure on success, nullptr on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00466">466</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  466</span>                                                                                                                                    {</div>
+<div class="line"><span class="lineno">  467</span>    <span class="keyword">struct </span>ncplane *stdn = notcurses_stdplane(nc);</div>
+<div class="line"><span class="lineno">  468</span>    <span class="keywordtype">unsigned</span> term_rows, term_cols;</div>
+<div class="line"><span class="lineno">  469</span>    ncplane_dim_yx(stdn, &amp;term_rows, &amp;term_cols);</div>
+<div class="line"><span class="lineno">  470</span>    mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a> = ncvisual_from_file(image_file);</div>
+<div class="line"><span class="lineno">  471</span>    <span class="keywordflow">if</span> (!mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>) {</div>
+<div class="line"><span class="lineno">  472</span>        fprintf(stderr, <span class="stringliteral">&quot;Error: Could not load image file.\n&quot;</span>);</div>
+<div class="line"><span class="lineno">  473</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  474</span>    }</div>
+<div class="line"><span class="lineno">  475</span>    <span class="keyword">struct </span>ncvgeom geom;</div>
+<div class="line"><span class="lineno">  476</span>    <span class="keywordflow">if</span> (ncvisual_geom(nc, mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>, NULL, &amp;geom) &lt; 0) {</div>
+<div class="line"><span class="lineno">  477</span>        ncvisual_destroy(mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>);</div>
+<div class="line"><span class="lineno">  478</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  479</span>    }</div>
+<div class="line"><span class="lineno">  480</span>    <span class="keywordflow">if</span> (begy == -1)</div>
+<div class="line"><span class="lineno">  481</span>        begy = 0;</div>
+<div class="line"><span class="lineno">  482</span>    <span class="keywordflow">if</span> (begx == -1)</div>
+<div class="line"><span class="lineno">  483</span>        begx = 0;</div>
+<div class="line"><span class="lineno">  484</span>    <span class="keywordflow">if</span> (y == -1)</div>
+<div class="line"><span class="lineno">  485</span>        y = (int)term_rows - begy;</div>
+<div class="line"><span class="lineno">  486</span>    <span class="keywordflow">if</span> (x == -1)</div>
+<div class="line"><span class="lineno">  487</span>        x = (int)term_cols - begx;</div>
+<div class="line"><span class="lineno">  488</span>    <span class="keywordflow">if</span> (begy + y &gt; (<span class="keywordtype">int</span>)term_rows)</div>
+<div class="line"><span class="lineno">  489</span>        y = (int)term_rows - begy;</div>
+<div class="line"><span class="lineno">  490</span>    <span class="keywordflow">if</span> (begx + x &gt; (<span class="keywordtype">int</span>)term_cols)</div>
+<div class="line"><span class="lineno">  491</span>        x = (int)term_cols - begx;</div>
+<div class="line"><span class="lineno">  492</span>    <span class="keywordtype">int</span> max_rows = y - 2;</div>
+<div class="line"><span class="lineno">  493</span>    <span class="keywordtype">int</span> max_cols = x - 2;</div>
+<div class="line"><span class="lineno">  494</span>    <span class="keywordflow">if</span> (max_rows &lt;= 0) {</div>
+<div class="line"><span class="lineno">  495</span>        ncvisual_destroy(mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>);</div>
+<div class="line"><span class="lineno">  496</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  497</span>    }</div>
+<div class="line"><span class="lineno">  498</span>    <span class="keyword">struct </span>ncvisual_options vopts_calc = {</div>
+<div class="line"><span class="lineno">  499</span>        .scaling = NCSCALE_SCALE_HIRES,</div>
+<div class="line"><span class="lineno">  500</span>        .blitter = NCBLIT_PIXEL,</div>
+<div class="line"><span class="lineno">  501</span>    };</div>
+<div class="line"><span class="lineno">  502</span>    <span class="keyword">struct </span>ncplane_options nopts = {</div>
+<div class="line"><span class="lineno">  503</span>        .y = begy,</div>
+<div class="line"><span class="lineno">  504</span>        .x = x,</div>
+<div class="line"><span class="lineno">  505</span>        .rows = max_rows,</div>
+<div class="line"><span class="lineno">  506</span>        .cols = max_cols,</div>
+<div class="line"><span class="lineno">  507</span>    };</div>
+<div class="line"><span class="lineno">  508</span>    <span class="keyword">struct </span>ncplane *tmp_bound_plane = ncplane_create(stdn, &amp;nopts);</div>
+<div class="line"><span class="lineno">  509</span>    <span class="keywordflow">if</span> (!tmp_bound_plane) {</div>
+<div class="line"><span class="lineno">  510</span>        ncvisual_destroy(mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>);</div>
+<div class="line"><span class="lineno">  511</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  512</span>    }</div>
+<div class="line"><span class="lineno">  513</span>    vopts_calc.n = tmp_bound_plane;</div>
+<div class="line"><span class="lineno">  514</span>    <span class="keywordflow">if</span> (ncvisual_geom(nc, mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>, &amp;vopts_calc, &amp;geom) &lt; 0) {</div>
+<div class="line"><span class="lineno">  515</span>        ncplane_destroy(tmp_bound_plane);</div>
+<div class="line"><span class="lineno">  516</span>        ncvisual_destroy(mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>);</div>
+<div class="line"><span class="lineno">  517</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  518</span>    }</div>
+<div class="line"><span class="lineno">  519</span>    <span class="keywordtype">unsigned</span> rows = geom.rcelly;</div>
+<div class="line"><span class="lineno">  520</span>    <span class="keywordtype">unsigned</span> cols = geom.rcellx;</div>
+<div class="line"><span class="lineno">  521</span>    <span class="comment">// dimensions</span></div>
+<div class="line"><span class="lineno">  522</span>    ncplane_destroy(tmp_bound_plane);</div>
+<div class="line"><span class="lineno">  523</span>    mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#ab64fba44dafc546bc09b6e48f0cf8b0a">sfc</a> = <a class="code hl_function" href="../../d9/d9b/a01889.html#a8b45e6cfb9c6b2a5106a50bcece5b64c">ui_surface_box</a>(<a class="code hl_variable" href="../../d9/d9b/a01889.html#aacba38b150a75da1c0c1057a20247eb5">stdsfc</a>, BOX, rows + 2, cols + 2, begy, 0, image_file);</div>
+<div class="line"><span class="lineno">  524</span>    <a class="code hl_function" href="../../d9/d9b/a01889.html#a036347fcf14e35de3afe2e28b6fff3d0">ui_surface_addwin</a>(mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#ab64fba44dafc546bc09b6e48f0cf8b0a">sfc</a>, WIN, BOX, rows, cols, 1, 1);</div>
+<div class="line"><span class="lineno">  525</span>    <span class="keyword">struct </span>ncvisual_options vopts = {</div>
+<div class="line"><span class="lineno">  526</span>        .n = mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#ab64fba44dafc546bc09b6e48f0cf8b0a">sfc</a>-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[WIN],</div>
+<div class="line"><span class="lineno">  527</span>        .scaling = NCSCALE_SCALE_HIRES,</div>
+<div class="line"><span class="lineno">  528</span>        .blitter = NCBLIT_PIXEL,</div>
+<div class="line"><span class="lineno">  529</span>    };</div>
+<div class="line"><span class="lineno">  530</span>    ncvisual_blit(nc, mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>, &amp;vopts);</div>
+<div class="line"><span class="lineno">  531</span>    notcurses_render(nc);</div>
+<div class="line"><span class="lineno">  532</span>    <span class="keywordflow">return</span> mm-&gt;<a class="code hl_variable" href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">ncv</a>;</div>
+<div class="line"><span class="lineno">  533</span>}</div>
+<div class="ttc" id="aa01889_html_a036347fcf14e35de3afe2e28b6fff3d0"><div class="ttname"><a href="../../d9/d9b/a01889.html#a036347fcf14e35de3afe2e28b6fff3d0">ui_surface_addwin</a></div><div class="ttdeci">int ui_surface_addwin(UiSurface *s, ss_t w, uint p, uint lines, uint cols, uint y, uint x)</div><div class="ttdoc">Add a new window to the specified UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00395">ui_ncurses.c:395</a></div></div>
+<div class="ttc" id="aa01889_html_a8b45e6cfb9c6b2a5106a50bcece5b64c"><div class="ttname"><a href="../../d9/d9b/a01889.html#a8b45e6cfb9c6b2a5106a50bcece5b64c">ui_surface_box</a></div><div class="ttdeci">UiSurface * ui_surface_box(UiSurface *parent, uint p, uint lines, uint cols, uint y, uint x, const char *title)</div><div class="ttdoc">Create a new UI surface with a border box and optional title.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00288">ui_ncurses.c:288</a></div></div>
+<div class="ttc" id="aa01889_html_aacba38b150a75da1c0c1057a20247eb5"><div class="ttname"><a href="../../d9/d9b/a01889.html#aacba38b150a75da1c0c1057a20247eb5">stdsfc</a></div><div class="ttdeci">UiSurface * stdsfc</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00046">ui_ncurses.c:46</a></div></div>
+<div class="ttc" id="aa02752_html_a5a0ee55953ea845de46ab20599223f1f"><div class="ttname"><a href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">UiSurface::mplane</a></div><div class="ttdeci">struct ncplane * mplane[SUB_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00352">ui_backend.h:352</a></div></div>
+<div class="ttc" id="aa02844_html_aaeff8c4b2b3d439d03d8f77b9ae72f29"><div class="ttname"><a href="../../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29">UiMultiMedia::ncv</a></div><div class="ttdeci">NcVisual * ncv</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00777">ui_backend.h:777</a></div></div>
+<div class="ttc" id="aa02844_html_ab64fba44dafc546bc09b6e48f0cf8b0a"><div class="ttname"><a href="../../df/de1/a02844.html#ab64fba44dafc546bc09b6e48f0cf8b0a">UiMultiMedia::sfc</a></div><div class="ttdeci">UiSurface * sfc</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00778">ui_backend.h:778</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00777">UiMultiMedia::ncv</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00778">UiMultiMedia::sfc</a>, <a class="el" href="../../d4/d07/a01913_source.html#l00046">stdsfc</a>, <a class="el" href="../../d4/d07/a01913_source.html#l00395">ui_surface_addwin()</a>, and <a class="el" href="../../d4/d07/a01913_source.html#l00288">ui_surface_box()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_aad0095bc404840ab14e69eb07615819a_cgraph.svg" width="307" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a7eb8bd1bcd93c9c747e2470a52ea2e3e_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="ab0f25450d3cb25b2f8ac01261715607d" name="ab0f25450d3cb25b2f8ac01261715607d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0f25450d3cb25b2f8ac01261715607d">&#9670;&#160;</a></span>ui_get_event_no_mouse()</h2>
+<a id="a5ff9db512c95f84962273612cd4edb3b" name="a5ff9db512c95f84962273612cd4edb3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ff9db512c95f84962273612cd4edb3b">&#9670;&#160;</a></span>ui_draw_ch()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ui_get_event_no_mouse </td>
+          <td class="memname">int ui_draw_ch </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d97/a02676.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>target</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">UiEvent *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>&#160;)</td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Wait for an input event from the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context, ignoring mouse events. </p>
-<p>Wait for an input event on <code class="param">target</code> (or stdscr if NULL) without mouse support.</p>
+<p>on specified window, at current location, add character </p>
+<p>Draw a character in a surface window.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target</td><td>Unused for <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> (events are global to the context). </td></tr>
-    <tr><td class="paramname">ev</td><td>Output UiEvent structure. </td></tr>
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">c</td><td>character </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> key code, or -1 if <code class="param">ui</code> or <code class="param">ev</code> is NULL. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00184">184</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  184</span>                                                                  {</div>
-<div class="line"><span class="lineno">  185</span>    (void)target;</div>
-<div class="line"><span class="lineno">  186</span>    (void)w;</div>
-<div class="line"><span class="lineno">  187</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a> || !ev)</div>
-<div class="line"><span class="lineno">  188</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  189</span>    memset(ev, 0, <span class="keyword">sizeof</span>(*ev));</div>
-<div class="line"><span class="lineno">  190</span>    ncinput ni;</div>
-<div class="line"><span class="lineno">  191</span>    <span class="comment">// notcurses_mice_disable(ui-&gt;nc);</span></div>
-<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  193</span>        notcurses_get(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, NULL, &amp;ni);</div>
-<div class="line"><span class="lineno">  194</span>    } <span class="keywordflow">while</span> (ni.id == NCKEY_INVALID);</div>
-<div class="line"><span class="lineno">  195</span>    ev-&gt;key = translate_nckey(ni.id, &amp;ni);</div>
-<div class="line"><span class="lineno">  196</span>    ev-&gt;alt = ncinput_alt_p(&amp;ni);</div>
-<div class="line"><span class="lineno">  197</span>    ev-&gt;ctrl = ncinput_ctrl_p(&amp;ni);</div>
-<div class="line"><span class="lineno">  198</span>    ev-&gt;shift = ncinput_shift_p(&amp;ni);</div>
-<div class="line"><span class="lineno">  199</span>    <span class="keywordflow">if</span> (ev-&gt;key == <a class="code hl_define" href="../../da/d8b/a01871.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a>)</div>
-<div class="line"><span class="lineno">  200</span>        ev-&gt;ch = ni.id;</div>
-<div class="line"><span class="lineno">  201</span>    <span class="keywordflow">return</span> ni.id;</div>
-<div class="line"><span class="lineno">  202</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00079">79</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   79</span>                                             {</div>
+<div class="line"><span class="lineno">   80</span>    <span class="keywordflow">if</span> (!s || !c)</div>
+<div class="line"><span class="lineno">   81</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   82</span>    nccell cell = <a class="code hl_define" href="../../d9/d9b/a01889.html#aef7560b1592ae6b2be278735436beb07">CELL_INITIALIZER</a>(c, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.stylemask, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.channels);</div>
+<div class="line"><span class="lineno">   83</span>    ncplane_putc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], -1, -1, &amp;cell);</div>
+<div class="line"><span class="lineno">   84</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   85</span>}</div>
+<div class="ttc" id="aa01889_html_aef7560b1592ae6b2be278735436beb07"><div class="ttname"><a href="../../d9/d9b/a01889.html#aef7560b1592ae6b2be278735436beb07">CELL_INITIALIZER</a></div><div class="ttdeci">#define CELL_INITIALIZER(c, s, chan)</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00435">ui_backend.h:435</a></div></div>
+<div class="ttc" id="aa02748_html_a7428bdff38e1e4e0a4ce980e43e238d5"><div class="ttname"><a href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">UiSurfaceMeta::bkgd_cell</a></div><div class="ttdeci">struct nccell bkgd_cell</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00333">ui_backend.h:333</a></div></div>
+<div class="ttc" id="aa02752_html_af39356128cae012e8bb5710bf7442007"><div class="ttname"><a href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">UiSurface::meta</a></div><div class="ttdeci">struct UiSurfaceMeta meta[SUB_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00355">ui_backend.h:355</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00039">ui</a>.</p>
-
 </div>
 </div>
-<a id="ab45ba8f124fbe34ff19d140f36898545" name="ab45ba8f124fbe34ff19d140f36898545"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab45ba8f124fbe34ff19d140f36898545">&#9670;&#160;</a></span>ui_get_plane_idx()</h2>
+<a id="a3877e7572f71e023681dac3d216d78d5" name="a3877e7572f71e023681dac3d216d78d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3877e7572f71e023681dac3d216d78d5">&#9670;&#160;</a></span>ui_draw_ch_yx()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint ui_get_plane_idx </td>
+          <td class="memname">int ui_draw_ch_yx </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d97/a02676.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct ncplane *</td>          <td class="paramname"><span class="paramname"><em>plane</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the index of a given ncplane in the <a class="el" href="../../df/d97/a02676.html">UiSurface</a>'s plane array. </p>
+<p>on specified window, move to y, x, add character </p>
+<p>Draw a character at a specific position in a surface window.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>The <a class="el" href="../../df/d97/a02676.html">UiSurface</a> containing the planes. </td></tr>
-    <tr><td class="paramname">plane</td><td>The ncplane to find. </td></tr>
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">c</td><td>character </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The index of the plane in the <a class="el" href="../../df/d97/a02676.html">UiSurface</a>'s mplane array, or -1 if not found. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00208">208</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  208</span>                                                           {</div>
-<div class="line"><span class="lineno">  209</span>    <span class="keywordflow">for</span> (<a class="code hl_enumeration" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w = BOX; w &lt; <a class="code hl_enumvalue" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693a1bba5412f6bfcda3674b0813631f8275">SUB_SFC_MAX</a>; ++w) {</div>
-<div class="line"><span class="lineno">  210</span>        <span class="keywordflow">if</span> (s-&gt;<a class="code hl_variable" href="../../df/d97/a02676.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w] == plane)</div>
-<div class="line"><span class="lineno">  211</span>            <span class="keywordflow">return</span> w;</div>
-<div class="line"><span class="lineno">  212</span>    }</div>
-<div class="line"><span class="lineno">  213</span>    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  214</span>}</div>
-<div class="ttc" id="aa02477_html_a6dc60e77356ba69cd41021c3f937f693"><div class="ttname"><a href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></div><div class="ttdeci">ss_t</div><div class="ttdef"><b>Definition</b> <a href="../../d0/dc2/a02477_source.html#l00010">notes.c:10</a></div></div>
-<div class="ttc" id="aa02477_html_a6dc60e77356ba69cd41021c3f937f693a1bba5412f6bfcda3674b0813631f8275"><div class="ttname"><a href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693a1bba5412f6bfcda3674b0813631f8275">SUB_SFC_MAX</a></div><div class="ttdeci">@ SUB_SFC_MAX</div><div class="ttdef"><b>Definition</b> <a href="../../d0/dc2/a02477_source.html#l00012">notes.c:12</a></div></div>
-<div class="ttc" id="aa02676_html_a5a0ee55953ea845de46ab20599223f1f"><div class="ttname"><a href="../../df/d97/a02676.html#a5a0ee55953ea845de46ab20599223f1f">UiSurface::mplane</a></div><div class="ttdeci">struct ncplane * mplane[SUB_SFC_MAX]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00324">ui_backend.h:324</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00094">94</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   94</span>                                                                {</div>
+<div class="line"><span class="lineno">   95</span>    <span class="keywordflow">if</span> (!s || !c)</div>
+<div class="line"><span class="lineno">   96</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   97</span>    nccell cell = <a class="code hl_define" href="../../d9/d9b/a01889.html#aef7560b1592ae6b2be278735436beb07">CELL_INITIALIZER</a>(c, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.stylemask, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.channels);</div>
+<div class="line"><span class="lineno">   98</span>    ncplane_putc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, &amp;cell);</div>
+<div class="line"><span class="lineno">   99</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  100</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d0/dc2/a02477_source.html#l00012">SUB_SFC_MAX</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../db/de8/a02525_source.html#l00121">menu_cmd_processor()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a3877e7572f71e023681dac3d216d78d5_icgraph.svg" width="651" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 
 </div>
 </div>
-<a id="a9e28b00f7c6be0aeae4d1625e4f73abd" name="a9e28b00f7c6be0aeae4d1625e4f73abd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e28b00f7c6be0aeae4d1625e4f73abd">&#9670;&#160;</a></span>ui_getch()</h2>
+<a id="a2e6cc68fddaf64cc6da4eff5c8d33837" name="a2e6cc68fddaf64cc6da4eff5c8d33837"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6cc68fddaf64cc6da4eff5c8d33837">&#9670;&#160;</a></span>ui_draw_text()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int ui_getch </td>
+          <td class="memname">int ui_draw_text </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00109">109</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  109</span>                                                                         {</div>
+<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  112</span>    ncplane_putstr_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, text);</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  114</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d4/dff/a01910_source.html#l01305">ui_action_disposition()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01091">ui_answer_yn()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01149">ui_display_error()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01251">ui_perror()</a>, and <a class="el" href="../../d4/dff/a01910_source.html#l01202">ui_timeout_prompt()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a2e6cc68fddaf64cc6da4eff5c8d33837_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="a1511d0847feb1af9442e3911de7f2bbc" name="a1511d0847feb1af9442e3911de7f2bbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1511d0847feb1af9442e3911de7f2bbc">&#9670;&#160;</a></span>ui_draw_text_fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_draw_text_fill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string, at most m columns, fill with spaces if text is shorter than m </p>
+<p>Draw a text string at a specific position in a surface window, filling the remaining space with spaces if the string is shorter than n.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00139">139</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  139</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  140</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  141</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordtype">char</span> tmp_str[<a class="code hl_define" href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>];</div>
+<div class="line"><span class="lineno">  143</span>    strncpy(tmp_str, text, m);</div>
+<div class="line"><span class="lineno">  144</span>    <span class="keywordtype">int</span> l = strlen(text);</div>
+<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = l; i &lt; m; i++) {</div>
+<div class="line"><span class="lineno">  146</span>        tmp_str[i] = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  147</span>    }</div>
+<div class="line"><span class="lineno">  148</span>    tmp_str[m] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  149</span>    ncplane_putnstr_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, m, tmp_str);</div>
+<div class="line"><span class="lineno">  150</span>    <a class="code hl_function" href="../../d9/d9b/a01889.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  152</span>}</div>
+<div class="ttc" id="aa01889_html_a0a06ae7bae8563b699ce712ec266fe6f"><div class="ttname"><a href="../../d9/d9b/a01889.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a></div><div class="ttdeci">void ui_render()</div><div class="ttdoc">Render the UI by updating panels and refreshing the display.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00884">ui_ncurses.c:884</a></div></div>
+<div class="ttc" id="aa02474_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d61/a02474_source.html#l00042">rsh.c:42</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d4/d07/a01913_source.html#l00884">ui_render()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../db/de8/a02525_source.html#l00121">menu_cmd_processor()</a>, and <a class="el" href="../../db/de8/a02525_source.html#l00036">menu_engine()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a1511d0847feb1af9442e3911de7f2bbc_cgraph.svg" width="271" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a1511d0847feb1af9442e3911de7f2bbc_icgraph.svg" width="663" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a0f36e442ae94628d7fbe153793ad1f9b" name="a0f36e442ae94628d7fbe153793ad1f9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f36e442ae94628d7fbe153793ad1f9b">&#9670;&#160;</a></span>ui_draw_text_n()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_draw_text_n </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string, at most m columns </p>
+<p>Draw a text string at a specific position in a surface window.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00124">124</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  124</span>                                                                                  {</div>
+<div class="line"><span class="lineno">  125</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  127</span>    ncplane_putnstr_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, m, text);</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  129</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9017feda04eb4cf15f615177ba0c8d0c" name="a9017feda04eb4cf15f615177ba0c8d0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9017feda04eb4cf15f615177ba0c8d0c">&#9670;&#160;</a></span>ui_mvwadd_wch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwadd_wch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add cell </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">cell</td><td>cell string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00363">363</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  363</span>                                                                            {</div>
+<div class="line"><span class="lineno">  364</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  365</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  366</span>    ncplane_putc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, cell);</div>
+<div class="line"><span class="lineno">  367</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  368</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a0ee03238cd237be8a6d9450eaac2c205" name="a0ee03238cd237be8a6d9450eaac2c205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ee03238cd237be8a6d9450eaac2c205">&#9670;&#160;</a></span>ui_mvwadd_wchnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwadd_wchnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add cell string, at most m columns </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">cell</td><td>cell string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00430">430</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  430</span>                                                                                        {</div>
+<div class="line"><span class="lineno">  431</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  432</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  433</span>    <a class="code hl_function" href="../../d9/d9b/a01889.html#a3872087d678ed8f3e85e1cef41da598a">ui_wmove</a>(s, w, y, x);</div>
+<div class="line"><span class="lineno">  434</span>    uint cols = 0;</div>
+<div class="line"><span class="lineno">  435</span>    <span class="keywordflow">while</span> (cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#afeda1f31ac5f1c0ee8dd9eecb6ec2a44">gcluster</a> != 0 &amp;&amp; cols &lt; m) {</div>
+<div class="line"><span class="lineno">  436</span>        ncplane_putc(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], cell);</div>
+<div class="line"><span class="lineno">  437</span>        cols += cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#a00f0601b0f3ce4bb742bfb9396bd5656">width</a>;</div>
+<div class="line"><span class="lineno">  438</span>        cell++;</div>
+<div class="line"><span class="lineno">  439</span>    }</div>
+<div class="line"><span class="lineno">  440</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  441</span>}</div>
+<div class="ttc" id="aa01889_html_a3872087d678ed8f3e85e1cef41da598a"><div class="ttname"><a href="../../d9/d9b/a01889.html#a3872087d678ed8f3e85e1cef41da598a">ui_wmove</a></div><div class="ttdeci">int ui_wmove(UiSurface *s, ss_t w, uint y, uint x)</div><div class="ttdoc">Move the cursor to a specified position within a UiSurface.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00653">ui_ncurses.c:653</a></div></div>
+<div class="ttc" id="aa02792_html_a00f0601b0f3ce4bb742bfb9396bd5656"><div class="ttname"><a href="../../de/db6/a02792.html#a00f0601b0f3ce4bb742bfb9396bd5656">UiCell::width</a></div><div class="ttdeci">uint8_t width</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00389">ui_backend.h:389</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d4/d07/a01913_source.html#l00653">ui_wmove()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a0ee03238cd237be8a6d9450eaac2c205_cgraph.svg" width="302" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="aad20608f0a00a5358286058ba6971b07" name="aad20608f0a00a5358286058ba6971b07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad20608f0a00a5358286058ba6971b07">&#9670;&#160;</a></span>ui_mvwadd_wchstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwadd_wchstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add cell string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">cell</td><td>cell string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00393">393</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  393</span>                                                                               {</div>
+<div class="line"><span class="lineno">  394</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  395</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  396</span>    <a class="code hl_function" href="../../d9/d9b/a01889.html#a3872087d678ed8f3e85e1cef41da598a">ui_wmove</a>(s, w, y, x);</div>
+<div class="line"><span class="lineno">  397</span>    <span class="keywordflow">while</span> (cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#afeda1f31ac5f1c0ee8dd9eecb6ec2a44">gcluster</a> != 0) {</div>
+<div class="line"><span class="lineno">  398</span>        ncplane_putc(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], cell);</div>
+<div class="line"><span class="lineno">  399</span>        cell++;</div>
+<div class="line"><span class="lineno">  400</span>    }</div>
+<div class="line"><span class="lineno">  401</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  402</span>}</div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d4/d07/a01913_source.html#l00653">ui_wmove()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_aad20608f0a00a5358286058ba6971b07_cgraph.svg" width="294" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a2d15814abd90a688e2460e88d20806e7" name="a2d15814abd90a688e2460e88d20806e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d15814abd90a688e2460e88d20806e7">&#9670;&#160;</a></span>ui_mvwaddch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add character </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">c</td><td>character </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00175">175</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  175</span>                                                                    {</div>
+<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">if</span> (!s || !c)</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  178</span>    nccell cell = <a class="code hl_define" href="../../d9/d9b/a01889.html#aef7560b1592ae6b2be278735436beb07">CELL_INITIALIZER</a>(c, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.stylemask, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.channels);</div>
+<div class="line"><span class="lineno">  179</span>    ncplane_putc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, &amp;cell);</div>
+<div class="line"><span class="lineno">  180</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  181</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a42880f1f9d6e3a6011e9a8243057c2e9" name="a42880f1f9d6e3a6011e9a8243057c2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42880f1f9d6e3a6011e9a8243057c2e9">&#9670;&#160;</a></span>ui_mvwaddnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string, at most m columns </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00230">230</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  230</span>                                                                                 {</div>
+<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  232</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  233</span>    ncplane_putnstr_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, m, text);</div>
+<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  235</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a1a71b5cc78bcadc07f8d40ec959ce969" name="a1a71b5cc78bcadc07f8d40ec959ce969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a71b5cc78bcadc07f8d40ec959ce969">&#9670;&#160;</a></span>ui_mvwaddnwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddnwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string, at most m columns </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">wchar_t</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00324">324</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  324</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  325</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">  326</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  327</span>    <span class="keywordtype">int</span> cols = 0;</div>
+<div class="line"><span class="lineno">  328</span>    <span class="keywordtype">int</span> width;</div>
+<div class="line"><span class="lineno">  329</span>    <span class="keywordflow">while</span> (*wstr != L<span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  330</span>        width = wcwidth(*wstr);</div>
+<div class="line"><span class="lineno">  331</span>        <span class="keywordflow">if</span> (width &lt; 0)</div>
+<div class="line"><span class="lineno">  332</span>            width = 0;</div>
+<div class="line"><span class="lineno">  333</span>        <span class="keywordflow">if</span> (cols + width &gt; m)</div>
+<div class="line"><span class="lineno">  334</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  335</span>        ncplane_putwc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x++, *wstr++);</div>
+<div class="line"><span class="lineno">  336</span>        cols += wcwidth(*wstr);</div>
+<div class="line"><span class="lineno">  337</span>    }</div>
+<div class="line"><span class="lineno">  338</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  339</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a86f4a553274bdacdf7e4cd98d6dc3e17" name="a86f4a553274bdacdf7e4cd98d6dc3e17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86f4a553274bdacdf7e4cd98d6dc3e17">&#9670;&#160;</a></span>ui_mvwaddstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00215">215</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  215</span>                                                                         {</div>
+<div class="line"><span class="lineno">  216</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  217</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  218</span>    ncplane_putstr_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, text);</div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  220</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a3c7f98a1eca63989c97e5692d7cde0ab" name="a3c7f98a1eca63989c97e5692d7cde0ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c7f98a1eca63989c97e5692d7cde0ab">&#9670;&#160;</a></span>ui_mvwaddstr_fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddstr_fill </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add string, at most m columns, fill with spaces if text is shorter than m </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">y</td><td>row </td></tr>
+    <tr><td class="paramname">x</td><td>column </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00245">245</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  245</span>                                                                                     {</div>
+<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  247</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  248</span>    <span class="keywordtype">int</span> l = strlen(text);</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">if</span> (l &lt;= m) {</div>
+<div class="line"><span class="lineno">  250</span>        <span class="keywordtype">char</span> *tmp_str = (<span class="keywordtype">char</span> *)malloc(m + 1);</div>
+<div class="line"><span class="lineno">  251</span>        <span class="keywordflow">if</span> (!tmp_str)</div>
+<div class="line"><span class="lineno">  252</span>            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  253</span>        strcpy(tmp_str, text);</div>
+<div class="line"><span class="lineno">  254</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = l; i &lt; (int)m; i++) {</div>
+<div class="line"><span class="lineno">  255</span>            tmp_str[i] = <span class="charliteral">&#39; &#39;</span>;</div>
+<div class="line"><span class="lineno">  256</span>        }</div>
+<div class="line"><span class="lineno">  257</span>        tmp_str[m] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  258</span>        ncplane_putnstr_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, m, tmp_str);</div>
+<div class="line"><span class="lineno">  259</span>        free(tmp_str);</div>
+<div class="line"><span class="lineno">  260</span>    }</div>
+<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  262</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a834814d38610b774657bf45e4ba6a01a" name="a834814d38610b774657bf45e4ba6a01a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a834814d38610b774657bf45e4ba6a01a">&#9670;&#160;</a></span>ui_mvwaddwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_mvwaddwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, move to y, x, add wchar_t string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">wchar_t</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00285">285</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  285</span>                                                                             {</div>
+<div class="line"><span class="lineno">  286</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">  287</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  288</span>    <span class="keywordflow">while</span> (*wstr != L<span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  289</span>        ncplane_putwc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x++, *wstr++);</div>
+<div class="line"><span class="lineno">  290</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  291</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a73d0d8cf6bc75336815ecb41fa28ce53" name="a73d0d8cf6bc75336815ecb41fa28ce53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73d0d8cf6bc75336815ecb41fa28ce53">&#9670;&#160;</a></span>ui_restore_wins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_restore_wins </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -397,164 +1352,536 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Wait for a single input character from the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context. </p>
-<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> key code, or -1 if <code class="param">ui</code> is NULL. </dd></dl>
+<p>Restore the state of all windows in the UI. This function refreshes the standard screen and all surface windows, ensuring that their contents are displayed correctly. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00167">167</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  167</span>               {</div>
-<div class="line"><span class="lineno">  168</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>)</div>
-<div class="line"><span class="lineno">  169</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  170</span>    ncinput ni;</div>
-<div class="line"><span class="lineno">  171</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  172</span>        notcurses_get(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, NULL, &amp;ni);</div>
-<div class="line"><span class="lineno">  173</span>    } <span class="keywordflow">while</span> (ni.evtype == NCTYPE_RELEASE ||</div>
-<div class="line"><span class="lineno">  174</span>             ni.id == NCKEY_INVALID ||</div>
-<div class="line"><span class="lineno">  175</span>             ni.id == NCKEY_MOTION ||</div>
-<div class="line"><span class="lineno">  176</span>             ni.id == NCKEY_SIGNAL);</div>
-<div class="line"><span class="lineno">  177</span>    <span class="keywordflow">return</span> ni.id;</div>
-<div class="line"><span class="lineno">  178</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00445">445</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  445</span>                       {</div>
+<div class="line"><span class="lineno">  446</span>    <span class="comment">//  for (int s = 0; s &lt;= sfc_ptr; s++) {</span></div>
+<div class="line"><span class="lineno">  447</span>    <span class="comment">//      for (int w = 0; w &lt; 8; w++)</span></div>
+<div class="line"><span class="lineno">  448</span>    <span class="comment">//          if (ui_surface[s]-&gt;mplane[w] != nullptr)</span></div>
+<div class="line"><span class="lineno">  449</span>    <span class="comment">//      touchwin(ui_surface[s]-&gt;mplane[w]);</span></div>
+<div class="line"><span class="lineno">  450</span>    <span class="comment">//  }</span></div>
+<div class="line"><span class="lineno">  451</span>    <span class="comment">//  ui_render(ui);</span></div>
+<div class="line"><span class="lineno">  452</span>}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d4/d0d/a01904_source.html#l00045">nc</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00039">ui</a>.</p>
+<p class="reference">References <a class="el" href="../../d4/d07/a01913_source.html#l00042">sfc_ptr</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00046">SUB_SFC_MAX</a>, <a class="el" href="../../d4/d07/a01913_source.html#l00884">ui_render()</a>, and <a class="el" href="../../d4/d07/a01913_source.html#l00040">ui_surface</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l02653">enter_file_spec()</a>, <a class="el" href="../../d2/d35/a02480_source.html#l00689">exec_objects()</a>, <a class="el" href="../../dc/d2b/a02486_source.html#l00122">fork_exec()</a>, <a class="el" href="../../da/dbe/a02489_source.html#l00940">form_exec_receiver()</a>, <a class="el" href="../../dc/d2b/a02486_source.html#l00058">full_screen_shell()</a>, <a class="el" href="../../db/de8/a02525_source.html#l00121">menu_cmd_processor()</a>, <a class="el" href="../../db/de8/a02525_source.html#l00036">menu_engine()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00214">view_cmd_processor()</a>, <a class="el" href="../../d2/d35/a02468_source.html#l00299">view_init_input()</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l00985">write_view_buffer()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a73d0d8cf6bc75336815ecb41fa28ce53_cgraph.svg" width="264" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
-</div>
-<a id="a25b4acfd10ea4adf8584b7e9cc547c60" name="a25b4acfd10ea4adf8584b7e9cc547c60"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25b4acfd10ea4adf8584b7e9cc547c60">&#9670;&#160;</a></span>ui_mice_enable()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_mice_enable </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mask</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Enable or disable mouse events for the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context. </p>
-<p>Enable or disable mouse support.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mask</td><td>The mouse event mask to enable. If 0, all mouse events are enabled. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, or -1 if <code class="param">ui</code> is NULL. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00256">256</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  256</span>                             {</div>
-<div class="line"><span class="lineno">  257</span>    <span class="keywordflow">if</span> (mask)</div>
-<div class="line"><span class="lineno">  258</span>        notcurses_mice_enable(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, mask);</div>
-<div class="line"><span class="lineno">  259</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  260</span>        notcurses_mice_enable(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, NCMICE_ALL_EVENTS);</div>
-<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  262</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00039">ui</a>.</p>
-
-</div>
-</div>
-<a id="aa98dc9d036d3178b9cd4dd81e167d474" name="aa98dc9d036d3178b9cd4dd81e167d474"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa98dc9d036d3178b9cd4dd81e167d474">&#9670;&#160;</a></span>ui_mousemask()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int ui_mousemask </td>
-          <td>(</td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mask</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set the mouse event mask for the <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context. </p>
-<p>Enable or disable mouse support.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">mask</td><td>The mouse event mask to set. If 0, all mouse events are enabled. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>0 on success, or -1 if <code class="param">ui</code> is NULL. </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00243">243</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  243</span>                           {</div>
-<div class="line"><span class="lineno">  244</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>)</div>
-<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">if</span> (mask)</div>
-<div class="line"><span class="lineno">  247</span>        notcurses_mice_enable(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, mask);</div>
-<div class="line"><span class="lineno">  248</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  249</span>        notcurses_mice_enable(<a class="code hl_variable" href="../../d9/d9b/a01889.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;nc, NCMICE_ALL_EVENTS);</div>
-<div class="line"><span class="lineno">  250</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  251</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00039">ui</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../dd/dd4/a02498_source.html#l00121">menu_cmd_processor()</a>, and <a class="el" href="../../d3/d27/a02453_source.html#l00881">picker()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_aa98dc9d036d3178b9cd4dd81e167d474_icgraph.svg" width="100%" height="378"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_a73d0d8cf6bc75336815ecb41fa28ce53_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
 </div>
-<a id="a77acc85600a7606b6ad1fb69491ed719" name="a77acc85600a7606b6ad1fb69491ed719"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77acc85600a7606b6ad1fb69491ed719">&#9670;&#160;</a></span>ui_ncplane_clicked()</h2>
+<a id="ad3465de218c61320615de6790eebcfa8" name="ad3465de218c61320615de6790eebcfa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3465de218c61320615de6790eebcfa8">&#9670;&#160;</a></span>ui_wadd_wch()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../d5/da8/a01865.html#ab31594aa8700b9bacbac1fabcd416565">NcPlane</a> * ui_ncplane_clicked </td>
+          <td class="memname">int ui_wadd_wch </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../df/d97/a02676.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../d0/dc2/a02477.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ncinput *</td>          <td class="paramname"><span class="paramname"><em>ni</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Determine which ncplane was clicked based on the mouse event coordinates. </p>
+<p>on specified window, at current location, add cell </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>The <a class="el" href="../../df/d97/a02676.html">UiSurface</a> containing the planes. </td></tr>
-    <tr><td class="paramname">w</td><td>The index of the plane to check for clicks. </td></tr>
-    <tr><td class="paramname">ni</td><td>The <a class="el" href="../../d5/da8/a01865.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> input event containing mouse coordinates. </td></tr>
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">cell</td><td>cell string </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The ncplane that was clicked, or NULL if no plane was clicked. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00221">221</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  221</span>                                                               {</div>
-<div class="line"><span class="lineno">  222</span>    <a class="code hl_typedef" href="../../d5/da8/a01865.html#ab31594aa8700b9bacbac1fabcd416565">NcPlane</a> *pile_member = s-&gt;<a class="code hl_variable" href="../../df/d97/a02676.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w];</div>
-<div class="line"><span class="lineno">  223</span>    <span class="keyword">struct </span>ncplane *cur = ncpile_top(pile_member);</div>
-<div class="line"><span class="lineno">  224</span>    <span class="keywordflow">while</span> (cur != NULL) {</div>
-<div class="line"><span class="lineno">  225</span>        <span class="keywordtype">int</span> y = ni-&gt;y, x = ni-&gt;x;</div>
-<div class="line"><span class="lineno">  226</span>        <span class="keywordflow">if</span> (ncplane_translate_abs(cur, &amp;y, &amp;x)) {</div>
-<div class="line"><span class="lineno">  227</span>            ni-&gt;y = y;</div>
-<div class="line"><span class="lineno">  228</span>            ni-&gt;x = x;</div>
-<div class="line"><span class="lineno">  229</span>            <span class="keywordflow">return</span> cur;</div>
-<div class="line"><span class="lineno">  230</span>        }</div>
-<div class="line"><span class="lineno">  231</span>        cur = ncplane_below(cur);</div>
-<div class="line"><span class="lineno">  232</span>    }</div>
-<div class="line"><span class="lineno">  233</span>    <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><span class="lineno">  234</span>}</div>
-<div class="ttc" id="aa01865_html_ab31594aa8700b9bacbac1fabcd416565"><div class="ttname"><a href="../../d5/da8/a01865.html#ab31594aa8700b9bacbac1fabcd416565">NcPlane</a></div><div class="ttdeci">struct ncplane NcPlane</div><div class="ttdef"><b>Definition</b> <a href="../../d5/da8/a01865_source.html#l00392">ui_backend.h:392</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00349">349</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  349</span>                                                          {</div>
+<div class="line"><span class="lineno">  350</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  351</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  352</span>    ncplane_putc(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], cell);</div>
+<div class="line"><span class="lineno">  353</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  354</span>}</div>
 </div><!-- fragment -->
+</div>
+</div>
+<a id="abeae3e3c6b19f4fb711ba473414599d9" name="abeae3e3c6b19f4fb711ba473414599d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeae3e3c6b19f4fb711ba473414599d9">&#9670;&#160;</a></span>ui_wadd_wchnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wadd_wchnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, add cell string, at most m columns </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">cell</td><td>cell string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00410">410</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  410</span>                                                                      {</div>
+<div class="line"><span class="lineno">  411</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  412</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  413</span>    uint cols = 0;</div>
+<div class="line"><span class="lineno">  414</span>    <span class="keywordflow">while</span> (cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#afeda1f31ac5f1c0ee8dd9eecb6ec2a44">gcluster</a> != 0 &amp;&amp; cols &lt; m) {</div>
+<div class="line"><span class="lineno">  415</span>        ncplane_putc(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], cell);</div>
+<div class="line"><span class="lineno">  416</span>        cols += cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#a00f0601b0f3ce4bb742bfb9396bd5656">width</a>;</div>
+<div class="line"><span class="lineno">  417</span>        cell++;</div>
+<div class="line"><span class="lineno">  418</span>    }</div>
+<div class="line"><span class="lineno">  419</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  420</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6b336f444f84f36c55b919478c02dac9" name="a6b336f444f84f36c55b919478c02dac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b336f444f84f36c55b919478c02dac9">&#9670;&#160;</a></span>ui_wadd_wchstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wadd_wchstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../de/db6/a02792.html">UiCell</a> *</td>          <td class="paramname"><span class="paramname"><em>cell</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, at current location, add cell string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">cell</td><td>cell string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00376">376</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  376</span>                                                             {</div>
+<div class="line"><span class="lineno">  377</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">  378</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  379</span>    <span class="keywordflow">while</span> (cell-&gt;<a class="code hl_variable" href="../../de/db6/a02792.html#afeda1f31ac5f1c0ee8dd9eecb6ec2a44">gcluster</a> != 0) {</div>
+<div class="line"><span class="lineno">  380</span>        ncplane_putc(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], cell);</div>
+<div class="line"><span class="lineno">  381</span>        cell++;</div>
+<div class="line"><span class="lineno">  382</span>    }</div>
+<div class="line"><span class="lineno">  383</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  384</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a872cdcb4aa6232dfbc3640f8b47fc12e" name="a872cdcb4aa6232dfbc3640f8b47fc12e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a872cdcb4aa6232dfbc3640f8b47fc12e">&#9670;&#160;</a></span>ui_waddch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char</td>          <td class="paramname"><span class="paramname"><em>c</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, at current location, add character </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">c</td><td>character </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00160">160</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  160</span>                                                  {</div>
+<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">if</span> (!s || !c)</div>
+<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  163</span>    nccell cell = <a class="code hl_define" href="../../d9/d9b/a01889.html#aef7560b1592ae6b2be278735436beb07">CELL_INITIALIZER</a>(c, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.stylemask, s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007">meta</a>[w].<a class="code hl_variable" href="../../d0/d1f/a02748.html#a7428bdff38e1e4e0a4ce980e43e238d5">bkgd_cell</a>.channels);</div>
+<div class="line"><span class="lineno">  164</span>    ncplane_putc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], -1, -1, &amp;cell);</div>
+<div class="line"><span class="lineno">  165</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  166</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a42693be9627906ef280785d843c11cc1" name="a42693be9627906ef280785d843c11cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42693be9627906ef280785d843c11cc1">&#9670;&#160;</a></span>ui_waddnstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddnstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, at current location, add string, at most m columns </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00201">201</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  201</span>                                                               {</div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  203</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  204</span>    ncplane_putnstr(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], m, text);</div>
+<div class="line"><span class="lineno">  205</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  206</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae1ebd63ac77fbbad0fe9d78475e6f8d2" name="ae1ebd63ac77fbbad0fe9d78475e6f8d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1ebd63ac77fbbad0fe9d78475e6f8d2">&#9670;&#160;</a></span>ui_waddnwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddnwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>m</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, at current location, add wchar_t string, at most m columns </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">wchar_t</td><td>string </td></tr>
+    <tr><td class="paramname">m</td><td>maximum number of columns to write </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00300">300</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  300</span>                                                                   {</div>
+<div class="line"><span class="lineno">  301</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">  302</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  303</span>    <span class="keywordtype">int</span> cols = 0;</div>
+<div class="line"><span class="lineno">  304</span>    <span class="keywordtype">int</span> width;</div>
+<div class="line"><span class="lineno">  305</span>    <span class="keywordflow">while</span> (*wstr != L<span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  306</span>        width = wcwidth(*wstr);</div>
+<div class="line"><span class="lineno">  307</span>        <span class="keywordflow">if</span> (width &lt; 0)</div>
+<div class="line"><span class="lineno">  308</span>            width = 0;</div>
+<div class="line"><span class="lineno">  309</span>        <span class="keywordflow">if</span> (cols + width &gt; m)</div>
+<div class="line"><span class="lineno">  310</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  311</span>        ncplane_putwc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], -1, -1, *wstr++);</div>
+<div class="line"><span class="lineno">  312</span>    }</div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  314</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a05b2fa115f67a3258f234ba44dbfed1c" name="a05b2fa115f67a3258f234ba44dbfed1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05b2fa115f67a3258f234ba44dbfed1c">&#9670;&#160;</a></span>ui_waddstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, at current location, add string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">text</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00188">188</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  188</span>                                                       {</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keywordflow">if</span> (!s || !text)</div>
+<div class="line"><span class="lineno">  190</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  191</span>    ncplane_putstr(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], text);</div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  193</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a22957b30a82d9e2209e86442fc406e63" name="a22957b30a82d9e2209e86442fc406e63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22957b30a82d9e2209e86442fc406e63">&#9670;&#160;</a></span>ui_waddwstr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_waddwstr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const wchar_t *</td>          <td class="paramname"><span class="paramname"><em>wstr</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on specified window, at current location, add wchar_t string </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+    <tr><td class="paramname">wchar_t</td><td>string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00272">272</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  272</span>                                                           {</div>
+<div class="line"><span class="lineno">  273</span>    <span class="keywordflow">if</span> (!s || !wstr)</div>
+<div class="line"><span class="lineno">  274</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  275</span>    <span class="keywordflow">while</span> (*wstr != L<span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  276</span>        ncplane_putwc_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], -1, -1, *wstr++);</div>
+<div class="line"><span class="lineno">  277</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  278</span>}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aadd3e1f3bd3d5ce37c70e8336c977681" name="aadd3e1f3bd3d5ce37c70e8336c977681"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd3e1f3bd3d5ce37c70e8336c977681">&#9670;&#160;</a></span>ui_wclrtobot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wclrtobot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>clear from current cursor position to bottom of window </p>
+<p>Set the style of a surface window.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00042">42</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   42</span>                                       {</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">   44</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   45</span>    uint y, x, ylen, xlen, maxy, maxx;</div>
+<div class="line"><span class="lineno">   46</span>    ncplane_cursor_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], &amp;y, &amp;x);</div>
+<div class="line"><span class="lineno">   47</span>    ncplane_dim_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], &amp;maxy, &amp;maxx);</div>
+<div class="line"><span class="lineno">   48</span>    xlen = maxx - x;</div>
+<div class="line"><span class="lineno">   49</span>    ylen = 1;</div>
+<div class="line"><span class="lineno">   50</span>    ncplane_erase_region(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, ylen, xlen);</div>
+<div class="line"><span class="lineno">   51</span>    ylen = maxy - y - 1;</div>
+<div class="line"><span class="lineno">   52</span>    xlen = maxx;</div>
+<div class="line"><span class="lineno">   53</span>    ncplane_erase_region(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y + 1, x = 0, ylen, maxx);</div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   55</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l01503">display_line_eod()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01521">scroll_next()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01658">scroll_prev()</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l01102">search()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_aadd3e1f3bd3d5ce37c70e8336c977681_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
+<a id="ad6aa95dfbb37afc2abaca3f46248c5af" name="ad6aa95dfbb37afc2abaca3f46248c5af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6aa95dfbb37afc2abaca3f46248c5af">&#9670;&#160;</a></span>ui_wclrtoeol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ui_wclrtoeol </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></td>          <td class="paramname"><span class="paramname"><em>w</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>clear the window from the current cursor position to the end of the window </p>
+<p>Clear to the end of the line in a surface window.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>surface </td></tr>
+    <tr><td class="paramname">w</td><td>window </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success, -1 on error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d31/a01931_source.html#l00026">26</a> of file <a class="el" href="../../d5/d31/a01931_source.html">ui_notcurses_draw.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   26</span>                                       {</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordflow">if</span> (!s)</div>
+<div class="line"><span class="lineno">   28</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">   29</span>    uint y, x, ylen, xlen, maxy, maxx;</div>
+<div class="line"><span class="lineno">   30</span>    ncplane_cursor_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], &amp;y, &amp;x);</div>
+<div class="line"><span class="lineno">   31</span>    ncplane_dim_yx(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], &amp;maxy, &amp;maxx);</div>
+<div class="line"><span class="lineno">   32</span>    xlen = maxx - x;</div>
+<div class="line"><span class="lineno">   33</span>    ylen = 1;</div>
+<div class="line"><span class="lineno">   34</span>    ncplane_erase_region(s-&gt;<a class="code hl_variable" href="../../dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f">mplane</a>[w], y, x, ylen, xlen);</div>
+<div class="line"><span class="lineno">   35</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   36</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d1/df7/a02501_source.html#l00041">cf_accept()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01412">display_line()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l02577">display_prompt()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01454">display_split_line()</a>, <a class="el" href="../../da/dbe/a02489_source.html#l00223">form_post()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00871">get_cmd_arg()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00731">get_cmd_char()</a>, <a class="el" href="../../d0/dc2/a02477_source.html#l00062">ncurses_input()</a>, <a class="el" href="../../d2/d35/a02480_source.html#l00353">pick_engine()</a>, <a class="el" href="../../d2/d35/a02480_source.html#l00882">picker()</a>, and <a class="el" href="../../d4/dff/a01910_source.html#l00957">ui_display_chyron()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d31/a01931_ad6aa95dfbb37afc2abaca3f46248c5af_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -570,7 +1897,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d5/d31/a01931.html">ui_notcurses_input.c</a></li>
+    <li class="navelem"><a href="../../dir_abb87e5dad931daeb938036aca53b5d1.html">ui</a></li><li class="navelem"><a href="../../d5/d31/a01931.html">ui_notcurses_draw.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

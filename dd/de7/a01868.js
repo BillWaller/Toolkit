@@ -1,29 +1,12 @@
 var a01868 =
 [
-    [ "SplitLine", "d3/dac/a02796.html", "d3/dac/a02796" ],
-    [ "View", "d9/dd1/a02800.html", "d9/dd1/a02800" ],
-    [ "ViewStack", "df/dd0/a02804.html", "df/dd0/a02804" ],
-    [ "_GNU_SOURCE", "dd/de7/a01868.html#a369266c24eacffb87046522897a570d5", null ],
-    [ "BUFSIZ", "dd/de7/a01868.html#a72a591cf0a96cf23c63df5c78712dabe", null ],
-    [ "COLOR_LEN", "dd/de7/a01868.html#ab5557ed18d83facb69dd68b30629c37e", null ],
-    [ "LINE_TBL_INCR", "dd/de7/a01868.html#a19bdbce530a383c51614a22810676b3b", null ],
-    [ "MAXLEN", "dd/de7/a01868.html#ae6648cd71a8bd49d58ae8ed33ba910d1", null ],
-    [ "NCURSES_WIDECHAR", "dd/de7/a01868.html#aa16fa3d6aa4e0d8100f2919690417da7", null ],
-    [ "NMARKS", "dd/de7/a01868.html#a1c02ca83443513a6ab1c93dcb316ac7e", null ],
-    [ "NPOS", "dd/de7/a01868.html#a4da1373308859dfe96570032c5a3c6eb", null ],
-    [ "NULL_POSITION", "dd/de7/a01868.html#ae668ecfa1856b197ccc8bbd228836b70", null ],
-    [ "NULSL", "dd/de7/a01868.html#a3f15836bdfb0ecbf8ed781532654a435", null ],
-    [ "PAD_COLS", "dd/de7/a01868.html#adc3d88deb82e66426d66e559bba7ef1e", null ],
-    [ "VBUFSIZ", "dd/de7/a01868.html#a5259eafdce2c5489c29df7b44a782b88", null ],
-    [ "PromptType", "dd/de7/a01868.html#a311c8b4e7650091e39cc1fc7ca93808c", [
-      [ "PT_NONE", "dd/de7/a01868.html#a311c8b4e7650091e39cc1fc7ca93808ca5e8a3bf54d8aa3d0e50d59ef9b2f1398", null ],
-      [ "PT_SHORT", "dd/de7/a01868.html#a311c8b4e7650091e39cc1fc7ca93808caaa481826e984e7266a1f7c20896b2490", null ],
-      [ "PT_LONG", "dd/de7/a01868.html#a311c8b4e7650091e39cc1fc7ca93808cab5ab669b6988ceb66aac8500c3ccfa0a", null ],
-      [ "PT_STRING", "dd/de7/a01868.html#a311c8b4e7650091e39cc1fc7ca93808ca2bd50da1a59fe6894d91a88928bdcbef", null ]
-    ] ],
-    [ "cat_file", "d1/df6/a02544.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "get_cmd_spec", "dd/de7/a01868.html#a92b33aa9664abadbfbf0a51737d68af2", null ],
-    [ "go_to_position", "dd/de7/a01868.html#abb914e12c6340c1b5a3d887cdf4ddc31", null ],
-    [ "view_accept_cmd", "dd/de7/a01868.html#a9afdff2eba36c5e25c79cdba8ffc25a7", null ],
-    [ "err_msg", "dd/de7/a01868.html#a2020a87ae37e9432d224e4902049e181", null ]
+    [ "cmenu_help_node_t", "d6/dbe/a02848.html", "d6/dbe/a02848" ],
+    [ "cmenu_ui_backend_t", "da/de8/a02852.html", "da/de8/a02852" ],
+    [ "CMENU_HELP_NONE", "dd/de7/a01868.html#ad47b5b65d2fb80e09a5b76fda3c75de8", null ],
+    [ "cmenu_help_id_t", "dd/de7/a01868.html#a37f94aab851d6b0fea2a8a6e6918c9d2", null ],
+    [ "cmenu_help_free", "dd/de7/a01868.html#a957dc24c8ccedc623160129d89f2a820", null ],
+    [ "cmenu_help_init", "dd/de7/a01868.html#ae59c2cb988ba8c57ccaaed35bf0296fd", null ],
+    [ "cmenu_help_lookup", "dd/de7/a01868.html#aa38489cd265fef95f4a4276b7646c39a", null ],
+    [ "cmenu_trigger_f1_help", "dd/de7/a01868.html#ac470fea192e8a5260708279c8d6c745a", null ],
+    [ "cmenu_trigger_hover_help", "dd/de7/a01868.html#a95b9136dd0192f87fdc6e5a2e5639f53", null ]
 ];
