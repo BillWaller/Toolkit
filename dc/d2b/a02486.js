@@ -1,9 +1,7 @@
 var a02486 =
 [
-    [ "fork_detach_execvp", "dc/d32/a02556.html#gaf878519c68b24567c915493739b6e979", null ],
-    [ "fork_detach_execvp", "dc/d32/a02556.html#gaf878519c68b24567c915493739b6e979", null ],
-    [ "fork_exec", "dc/d32/a02556.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "dc/d32/a02556.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "dc/d32/a02556.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "shell", "dc/d32/a02556.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "_GNU_SOURCE", "dc/d2b/a02486.html#a369266c24eacffb87046522897a570d5", null ],
+    [ "cmenu_abend", "dc/d2b/a02486.html#abc56200e6d1c24f57cce2b9a57c9a089", null ],
+    [ "cmenu_shutdown", "dc/d2b/a02486.html#a9cec77430b2bd33719d503aa5f51cbf5", null ],
+    [ "main", "dc/d2b/a02486.html#a3c04138a5bfe5d72780bb7e82a18e627", null ]
 ];

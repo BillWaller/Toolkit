@@ -1,19 +1,14 @@
 var a02571 =
 [
-    [ "destroy_line_table", "d7/d12/a02571.html#gab47072beeeb9c3ca9a7133e1209dbc59", null ],
-    [ "go_to_eof", "d7/d12/a02571.html#ga46145f1d3680a48cb9391a8ae95db9ad", null ],
-    [ "go_to_line", "d7/d12/a02571.html#gac81796e830049e74987a6b526cfc296f", null ],
-    [ "go_to_mark", "d7/d12/a02571.html#ga71c989aca1d2113d32285ea04738ab51", null ],
-    [ "go_to_percent", "d7/d12/a02571.html#ga199876923d587e8a9adf5e8139c6b9d4", null ],
-    [ "go_to_position", "d7/d12/a02571.html#ga89447d379a90ef2520a8c7bec52e8384", null ],
-    [ "increment_ln", "d7/d12/a02571.html#gadd75615038c32b4c07a6842dfe2fc37a", null ],
-    [ "initialize_line_table", "d7/d12/a02571.html#gaa260d59836439e16d00ad5a6bc4b4829", null ],
-    [ "line_number", "d7/d12/a02571.html#ga20387bbb58db085686c2c5f5b77e49d8", null ],
-    [ "page_next", "d7/d12/a02571.html#gacaf97f85a80c4cd5ea89f748fe2fb24a", null ],
-    [ "page_prev", "d7/d12/a02571.html#ga79a3b99666f62774079c6b9ac43c3320", null ],
-    [ "scroll_next", "d7/d12/a02571.html#gad7970bc5a1552794438b80555f7e48b6", null ],
-    [ "scroll_prev", "d7/d12/a02571.html#gae070d33d24cfaa1e1ea05bd657c1cbc7", null ],
-    [ "search", "d7/d12/a02571.html#gaa5f3994ba79fc02afc19b6b76b2a645f", null ],
-    [ "sync_ln", "d7/d12/a02571.html#ga03bfb3d8d09d33f4f59930485f283ead", null ],
-    [ "sync_ln", "d7/d12/a02571.html#gaf7ff75efdf19c2ce9f426098a79af55c", null ]
+    [ "get_next_char", "d7/d12/a02571.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
+    [ "get_prev_char", "d7/d12/a02571.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
+    [ "build_prompt", "d7/d12/a02571.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
+    [ "cat_file", "d7/d12/a02571.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "enter_file_spec", "d7/d12/a02571.html#ga2ffea5674e85f124a70e19f745a66583", null ],
+    [ "get_cmd_arg", "d7/d12/a02571.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
+    [ "get_cmd_char", "d7/d12/a02571.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
+    [ "lp", "d7/d12/a02571.html#ga4e2304ed84ba722af119774caef42090", null ],
+    [ "view_cmd_processor", "d7/d12/a02571.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
+    [ "view_file", "d7/d12/a02571.html#ga0bd4dc056ab5010547129bb87819789b", null ],
+    [ "write_view_buffer", "d7/d12/a02571.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
 ];

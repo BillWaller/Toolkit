@@ -1,17 +1,5 @@
 var a02752 =
 [
-    [ "box", "dc/d3d/a02752.html#aa95d191dfe4d4ed90e7558902c92e970", null ],
-    [ "cmdln", "dc/d3d/a02752.html#a2ddfe1efff2c6427d19423f72fab1df8", null ],
-    [ "lnno", "dc/d3d/a02752.html#a6ddadbaa39fedc91205fc30c46c94213", null ],
-    [ "meta", "dc/d3d/a02752.html#af39356128cae012e8bb5710bf7442007", null ],
-    [ "mplane", "dc/d3d/a02752.html#a5a0ee55953ea845de46ab20599223f1f", null ],
-    [ "pad", "dc/d3d/a02752.html#abb5d1f8c7bcd5a36a0b63588c47142c8", null ],
-    [ "parent", "dc/d3d/a02752.html#a3ff958d01cb09528c05d424b670bcb01", null ],
-    [ "plane1", "dc/d3d/a02752.html#a0763f8e3c7f0d5667fd3aa2ce8cf4613", null ],
-    [ "plane2", "dc/d3d/a02752.html#aaa462bf117cfe360586fb64d4e09718a", null ],
-    [ "runtime", "dc/d3d/a02752.html#af75f738eaa479f42876845ff028dfa21", null ],
-    [ "sfc_idx", "dc/d3d/a02752.html#ac2eec2406e529f003773857490188690", null ],
-    [ "sub_cnt", "dc/d3d/a02752.html#a87d7aaf73bf418178f6f03dbbc332656", null ],
-    [ "win", "dc/d3d/a02752.html#afa229d8f7bfc3de219096013e87f77f1", null ],
-    [ "win2", "dc/d3d/a02752.html#aafcf9e71d7e190a903c0d0125e096017", null ]
+    [ "l", "dc/d3d/a02752.html#a0abc07539a0d5498685724a288b5c8ea", null ],
+    [ "s", "dc/d3d/a02752.html#af1074a6d91bbf6295121a724a437f46e", null ]
 ];

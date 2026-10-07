@@ -1,5 +1,6 @@
 var a01937 =
 [
+    [ "ui_flush_input", "d9/d17/a01937.html#a4b663e4593a265aefada937ac536ee38", null ],
     [ "ui_get_event", "d9/d17/a01937.html#aad0095bc404840ab14e69eb07615819a", null ],
     [ "ui_get_event_no_mouse", "d9/d17/a01937.html#ab0f25450d3cb25b2f8ac01261715607d", null ],
     [ "ui_get_plane_idx", "d9/d17/a01937.html#ab45ba8f124fbe34ff19d140f36898545", null ],

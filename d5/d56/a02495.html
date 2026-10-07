@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: view_engine.c File Reference</title>
+<title>C-Menu: whence.c File Reference</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,418 +110,632 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d5/d56/a02495.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">view_engine.c File Reference</div></div>
+  <div class="headertitle"><div class="title">whence.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>The working part of <a class="el" href="../../de/d7b/a02660.html">View</a>.  
+<p>Find the full path of a file in the directories specified by the.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;<a class="el" href="../../da/d8b/a01871_source.html">common.h</a>&gt;</code><br />
-<code>#include &lt;errno.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="../../d9/d7d/a01880_source.html">cm.h</a>&quot;</code><br />
+<code>#include &lt;argp.h&gt;</code><br />
 <code>#include &lt;fcntl.h&gt;</code><br />
-<code>#include &lt;iso646.h&gt;</code><br />
-<code>#include &lt;regex.h&gt;</code><br />
+<code>#include &lt;limits.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;sys/mman.h&gt;</code><br />
-<code>#include &lt;sys/param.h&gt;</code><br />
 <code>#include &lt;sys/stat.h&gt;</code><br />
-<code>#include &lt;termios.h&gt;</code><br />
-<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for view_engine.c:</div>
+Include dependency graph for whence.c:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/df5/a02496.svg" width="100%" height="569"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d1/df5/a02496.svg" width="100%" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="../../d5/d56/a02495_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a48d3a3a1a607d528f5aa34cf3c55a98e" id="r_a48d3a3a1a607d528f5aa34cf3c55a98e"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a48d3a3a1a607d528f5aa34cf3c55a98e">_Refresh</a>(<a class="el" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>)</td></tr>
-<tr class="memitem:a73e144be2bb3e0dee9793913a35b5a8c" id="r_a73e144be2bb3e0dee9793913a35b5a8c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a73e144be2bb3e0dee9793913a35b5a8c">_ui_perror</a>(msg)</td></tr>
-<tr class="memitem:ad299a87acfce8bb92a50f93fbfad2112" id="r_ad299a87acfce8bb92a50f93fbfad2112"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ad299a87acfce8bb92a50f93fbfad2112">confirm</a>()</td></tr>
-<tr class="memitem:gafa98387c57104e28e438d8bbc23b26eb" id="r_gafa98387c57104e28e438d8bbc23b26eb"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>()</td></tr>
-<tr class="memdesc:gafa98387c57104e28e438d8bbc23b26eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the next characater from the virtual file  <br /></td></tr>
-<tr class="memitem:ga56a278d5d4b1808207f550ee3a61c476" id="r_ga56a278d5d4b1808207f550ee3a61c476"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga56a278d5d4b1808207f550ee3a61c476">get_prev_char</a>()</td></tr>
-<tr class="memdesc:ga56a278d5d4b1808207f550ee3a61c476"><td class="mdescLeft">&#160;</td><td class="mdescRight">read the previous characater from the virtual fileThere is no need to track line numbers when moving backwards as they are stored in the line table and accessed as needed. When reading in reverse, the Beginning of Data (BOD) flag is set when the file position is zero, and cleared when the position or reading direction changes. Carriage-returns are ignored as they should be.  <br /></td></tr>
+<tr class="memitem:a369266c24eacffb87046522897a570d5" id="r_a369266c24eacffb87046522897a570d5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a369266c24eacffb87046522897a570d5">_GNU_SOURCE</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:abee6bb472179eda34f888dd556d60f1c" id="r_abee6bb472179eda34f888dd556d60f1c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a> { <br />
+&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
+, <br />
+&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
+<br />
+ }</td></tr>
+<tr class="memitem:abee6bb472179eda34f888dd556d60f1c" id="r_abee6bb472179eda34f888dd556d60f1c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a> { <br />
+&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
+, <br />
+&#160;&#160;<a class="el" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4
+, <a class="el" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8
+<br />
+ }</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gab96e4c73a7b3ba1310044b479733cdd9" id="r_gab96e4c73a7b3ba1310044b479733cdd9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d3/d80/a02559.html#gab96e4c73a7b3ba1310044b479733cdd9">a_toi</a> (char *, bool *)</td></tr>
-<tr class="memdesc:gab96e4c73a7b3ba1310044b479733cdd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">a safer alternative to atoi() for converting ASCII strings to integers.  <br /></td></tr>
-<tr class="memitem:gaf01721a6369d49d9f1eebfc4ba6d0a95" id="r_gaf01721a6369d49d9f1eebfc4ba6d0a95"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#gaf01721a6369d49d9f1eebfc4ba6d0a95">build_prompt</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gaf01721a6369d49d9f1eebfc4ba6d0a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build Prompt <a class="el" href="../../d7/d13/a02604.html">String</a>.  <br /></td></tr>
-<tr class="memitem:ga6543444a87ef174a7b63fa3adcb16c58" id="r_ga6543444a87ef174a7b63fa3adcb16c58"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga6543444a87ef174a7b63fa3adcb16c58">cat_file</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga6543444a87ef174a7b63fa3adcb16c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate File to Standard Output.  <br /></td></tr>
-<tr class="memitem:gab47072beeeb9c3ca9a7133e1209dbc59" id="r_gab47072beeeb9c3ca9a7133e1209dbc59"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gab47072beeeb9c3ca9a7133e1209dbc59">destroy_line_table</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gab47072beeeb9c3ca9a7133e1209dbc59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
-<tr class="memitem:ga16a4b855ead8402d4744e77a5504082a" id="r_ga16a4b855ead8402d4744e77a5504082a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga16a4b855ead8402d4744e77a5504082a">display_line</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga16a4b855ead8402d4744e77a5504082a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> on Padparam <a class="el" href="../../de/d7b/a02660.html">View</a> *view data structure.  <br /></td></tr>
-<tr class="memitem:ga1d9ab5876c745e7a0c1e30c99e1c0058" id="r_ga1d9ab5876c745e7a0c1e30c99e1c0058"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga1d9ab5876c745e7a0c1e30c99e1c0058">display_line_eod</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga1d9ab5876c745e7a0c1e30c99e1c0058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display End of Data.  <br /></td></tr>
-<tr class="memitem:ga3d81b9c4dd32748b26cd0fd94224d21c" id="r_ga3d81b9c4dd32748b26cd0fd94224d21c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga3d81b9c4dd32748b26cd0fd94224d21c">display_prompt</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, char *s)</td></tr>
-<tr class="memdesc:ga3d81b9c4dd32748b26cd0fd94224d21c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Command <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Prompt.  <br /></td></tr>
-<tr class="memitem:ga9cae659a86233460c31401a8f77ed861" id="r_ga9cae659a86233460c31401a8f77ed861"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga9cae659a86233460c31401a8f77ed861">display_split_line</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga9cae659a86233460c31401a8f77ed861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Split <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> on Pad.  <br /></td></tr>
-<tr class="memitem:ga2ffea5674e85f124a70e19f745a66583" id="r_ga2ffea5674e85f124a70e19f745a66583"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga2ffea5674e85f124a70e19f745a66583">enter_file_spec</a> (<a class="el" href="../../dc/d28/a02584.html">Init</a> *init, char *file_spec)</td></tr>
-<tr class="memdesc:ga2ffea5674e85f124a70e19f745a66583"><td class="mdescLeft">&#160;</td><td class="mdescRight">use form to enter a file specification  <br /></td></tr>
-<tr class="memitem:ga747411d59b020ad11d4567ab0b3db8c2" id="r_ga747411d59b020ad11d4567ab0b3db8c2"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga747411d59b020ad11d4567ab0b3db8c2">fmt_line</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga747411d59b020ad11d4567ab0b3db8c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> for Display.  <br /></td></tr>
-<tr class="memitem:ga8e98d9f33c5f6aa78ea2fbc13c75b3a9" id="r_ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9">get_cmd_arg</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, char *prompt)</td></tr>
-<tr class="memdesc:ga8e98d9f33c5f6aa78ea2fbc13c75b3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Command Argument from User Input.  <br /></td></tr>
-<tr class="memitem:gab3d3c80c5b7bb6dc461a8e5746be7690" id="r_gab3d3c80c5b7bb6dc461a8e5746be7690"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#gab3d3c80c5b7bb6dc461a8e5746be7690">get_cmd_char</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, off_t *n)</td></tr>
-<tr class="memdesc:gab3d3c80c5b7bb6dc461a8e5746be7690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Command Character from User Input.  <br /></td></tr>
-<tr class="memitem:ab3b574fd6a4e4b0c053f1ca18218f331" id="r_ab3b574fd6a4e4b0c053f1ca18218f331"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab3b574fd6a4e4b0c053f1ca18218f331">get_line</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *, off_t)</td></tr>
-<tr class="memitem:ga46145f1d3680a48cb9391a8ae95db9ad" id="r_ga46145f1d3680a48cb9391a8ae95db9ad"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#ga46145f1d3680a48cb9391a8ae95db9ad">go_to_eof</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga46145f1d3680a48cb9391a8ae95db9ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to End of File.  <br /></td></tr>
-<tr class="memitem:gac81796e830049e74987a6b526cfc296f" id="r_gac81796e830049e74987a6b526cfc296f"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gac81796e830049e74987a6b526cfc296f">go_to_line</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, off_t line_idx)</td></tr>
-<tr class="memdesc:gac81796e830049e74987a6b526cfc296f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Specific <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a>.  <br /></td></tr>
-<tr class="memitem:ga71c989aca1d2113d32285ea04738ab51" id="r_ga71c989aca1d2113d32285ea04738ab51"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#ga71c989aca1d2113d32285ea04738ab51">go_to_mark</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, uint c)</td></tr>
-<tr class="memdesc:ga71c989aca1d2113d32285ea04738ab51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Mark.  <br /></td></tr>
-<tr class="memitem:ga199876923d587e8a9adf5e8139c6b9d4" id="r_ga199876923d587e8a9adf5e8139c6b9d4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#ga199876923d587e8a9adf5e8139c6b9d4">go_to_percent</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, uint percent)</td></tr>
-<tr class="memdesc:ga199876923d587e8a9adf5e8139c6b9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Percent of File.  <br /></td></tr>
-<tr class="memitem:ga89447d379a90ef2520a8c7bec52e8384" id="r_ga89447d379a90ef2520a8c7bec52e8384"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#ga89447d379a90ef2520a8c7bec52e8384">go_to_position</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, off_t pos)</td></tr>
-<tr class="memdesc:ga89447d379a90ef2520a8c7bec52e8384"><td class="mdescLeft">&#160;</td><td class="mdescRight">Go to Specific File Position.  <br /></td></tr>
-<tr class="memitem:gadd75615038c32b4c07a6842dfe2fc37a" id="r_gadd75615038c32b4c07a6842dfe2fc37a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gadd75615038c32b4c07a6842dfe2fc37a">increment_ln</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gadd75615038c32b4c07a6842dfe2fc37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increment <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Index and Update <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
-<tr class="memitem:gaa260d59836439e16d00ad5a6bc4b4829" id="r_gaa260d59836439e16d00ad5a6bc4b4829"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gaa260d59836439e16d00ad5a6bc4b4829">initialize_line_table</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gaa260d59836439e16d00ad5a6bc4b4829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table.  <br /></td></tr>
-<tr class="memitem:ga20387bbb58db085686c2c5f5b77e49d8" id="r_ga20387bbb58db085686c2c5f5b77e49d8"><td class="memItemLeft">off_t&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#ga20387bbb58db085686c2c5f5b77e49d8">line_number</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, off_t position)</td></tr>
-<tr class="memdesc:ga20387bbb58db085686c2c5f5b77e49d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Number for a Given File Position.  <br /></td></tr>
-<tr class="memitem:ga03e19cccb4b31085554b27ba13e9b738" id="r_ga03e19cccb4b31085554b27ba13e9b738"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga03e19cccb4b31085554b27ba13e9b738">log_cc_buf</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga03e19cccb4b31085554b27ba13e9b738"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log Complex Character Buffer.  <br /></td></tr>
-<tr class="memitem:ga0f4cf79e1d0a01c04facb0738e0a679f" id="r_ga0f4cf79e1d0a01c04facb0738e0a679f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga0f4cf79e1d0a01c04facb0738e0a679f">log_split_lines</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga0f4cf79e1d0a01c04facb0738e0a679f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log Split Lines.  <br /></td></tr>
-<tr class="memitem:gaf0953007a3c1b5a5eb695488e0ddddf5" id="r_gaf0953007a3c1b5a5eb695488e0ddddf5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#gaf0953007a3c1b5a5eb695488e0ddddf5">log_stripped_line_out</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gaf0953007a3c1b5a5eb695488e0ddddf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log Stripped <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Output.  <br /></td></tr>
-<tr class="memitem:ga6e061fda16bfd8f35a0abdb70557a42a" id="r_ga6e061fda16bfd8f35a0abdb70557a42a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga6e061fda16bfd8f35a0abdb70557a42a">log_strnz</a> (char *str, uint len)</td></tr>
-<tr class="memdesc:ga6e061fda16bfd8f35a0abdb70557a42a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log <a class="el" href="../../d7/d13/a02604.html">String</a> with Specified Length.  <br /></td></tr>
-<tr class="memitem:ga4e2304ed84ba722af119774caef42090" id="r_ga4e2304ed84ba722af119774caef42090"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga4e2304ed84ba722af119774caef42090">lp</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, char *PrintFile)</td></tr>
-<tr class="memdesc:ga4e2304ed84ba722af119774caef42090"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send File to Print Queue.  <br /></td></tr>
-<tr class="memitem:ga1a2aaed7961f7ff0b171ee01801fcadf" id="r_ga1a2aaed7961f7ff0b171ee01801fcadf"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga1a2aaed7961f7ff0b171ee01801fcadf">pad_refresh</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga1a2aaed7961f7ff0b171ee01801fcadf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Refresh Pad and <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Number Window.  <br /></td></tr>
-<tr class="memitem:gacaf97f85a80c4cd5ea89f748fe2fb24a" id="r_gacaf97f85a80c4cd5ea89f748fe2fb24a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gacaf97f85a80c4cd5ea89f748fe2fb24a">page_next</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gacaf97f85a80c4cd5ea89f748fe2fb24a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advance to Next Page.  <br /></td></tr>
-<tr class="memitem:ga79a3b99666f62774079c6b9ac43c3320" id="r_ga79a3b99666f62774079c6b9ac43c3320"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#ga79a3b99666f62774079c6b9ac43c3320">page_prev</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:ga79a3b99666f62774079c6b9ac43c3320"><td class="mdescLeft">&#160;</td><td class="mdescRight">display previous page  <br /></td></tr>
-<tr class="memitem:ga629d3919a040f6deb3b539dfdc6a1cdd" id="r_ga629d3919a040f6deb3b539dfdc6a1cdd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#ga629d3919a040f6deb3b539dfdc6a1cdd">parse_ansi_str</a> (char *ansi_str, <a class="el" href="../../d9/d9b/a01889.html#a4e0d5999f05d5d98291245accf2bd6b9">attr_t</a> *attrs, ushort *cpx)</td></tr>
-<tr class="memdesc:ga629d3919a040f6deb3b539dfdc6a1cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse ANSI SGR Escape Sequence.  <br /></td></tr>
-<tr class="memitem:gad7970bc5a1552794438b80555f7e48b6" id="r_gad7970bc5a1552794438b80555f7e48b6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gad7970bc5a1552794438b80555f7e48b6">scroll_next</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, uint n)</td></tr>
-<tr class="memdesc:gad7970bc5a1552794438b80555f7e48b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scroll Down by n Lines.  <br /></td></tr>
-<tr class="memitem:gae070d33d24cfaa1e1ea05bd657c1cbc7" id="r_gae070d33d24cfaa1e1ea05bd657c1cbc7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gae070d33d24cfaa1e1ea05bd657c1cbc7">scroll_prev</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, uint n)</td></tr>
-<tr class="memdesc:gae070d33d24cfaa1e1ea05bd657c1cbc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the view scope n lines toward the beginning of the file.  <br /></td></tr>
-<tr class="memitem:gaa5f3994ba79fc02afc19b6b76b2a645f" id="r_gaa5f3994ba79fc02afc19b6b76b2a645f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gaa5f3994ba79fc02afc19b6b76b2a645f">search</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, int search_cmd, char *regex_pattern)</td></tr>
-<tr class="memdesc:gaa5f3994ba79fc02afc19b6b76b2a645f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Search for Regular Expression Pattern.  <br /></td></tr>
-<tr class="memitem:gaf7ff75efdf19c2ce9f426098a79af55c" id="r_gaf7ff75efdf19c2ce9f426098a79af55c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d7/d12/a02571.html#gaf7ff75efdf19c2ce9f426098a79af55c">sync_ln</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view, off_t ln_no)</td></tr>
-<tr class="memdesc:gaf7ff75efdf19c2ce9f426098a79af55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronize <a class="el" href="../../d5/d6a/a02680.html" title="The Line strutures are attached to the Menu main structure.">Line</a> Table with Current File Position.  <br /></td></tr>
-<tr class="memitem:ac12629dcd0351687cf64aa1d53bccf0a" id="r_ac12629dcd0351687cf64aa1d53bccf0a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac12629dcd0351687cf64aa1d53bccf0a">sync_pos</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *, off_t pos)</td></tr>
-<tr class="memitem:ga9c4b3ba5f73c18b486646c62b933972a" id="r_ga9c4b3ba5f73c18b486646c62b933972a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga9c4b3ba5f73c18b486646c62b933972a">view_cmd_processor</a> (<a class="el" href="../../dc/d28/a02584.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga9c4b3ba5f73c18b486646c62b933972a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main Command Processing Loop for <a class="el" href="../../de/d7b/a02660.html">View</a>.  <br /></td></tr>
-<tr class="memitem:gad997ba9f8591568c77291fb1b44601b2" id="r_gad997ba9f8591568c77291fb1b44601b2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#gad997ba9f8591568c77291fb1b44601b2">view_display_help</a> (<a class="el" href="../../dc/d28/a02584.html">Init</a> *init)</td></tr>
-<tr class="memdesc:gad997ba9f8591568c77291fb1b44601b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display <a class="el" href="../../de/d7b/a02660.html">View</a> Help File.  <br /></td></tr>
-<tr class="memitem:gae6f141401cf9f104dbe14f09603d5178" id="r_gae6f141401cf9f104dbe14f09603d5178"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="../../d9/de7/a02572.html#gae6f141401cf9f104dbe14f09603d5178">view_display_page</a> (<a class="el" href="../../de/d7b/a02660.html">View</a> *view)</td></tr>
-<tr class="memdesc:gae6f141401cf9f104dbe14f09603d5178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display Current Page.  <br /></td></tr>
-<tr class="memitem:ga0bd4dc056ab5010547129bb87819789b" id="r_ga0bd4dc056ab5010547129bb87819789b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga0bd4dc056ab5010547129bb87819789b">view_file</a> (<a class="el" href="../../dc/d28/a02584.html">Init</a> *init)</td></tr>
-<tr class="memdesc:ga0bd4dc056ab5010547129bb87819789b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start view.  <br /></td></tr>
-<tr class="memitem:ga30ab3b4282eabd18619c5b053ff8b0b1" id="r_ga30ab3b4282eabd18619c5b053ff8b0b1"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d0c/a02570.html#ga30ab3b4282eabd18619c5b053ff8b0b1">write_view_buffer</a> (<a class="el" href="../../dc/d28/a02584.html">Init</a> *init, bool f_strip_ansi)</td></tr>
-<tr class="memdesc:ga30ab3b4282eabd18619c5b053ff8b0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write buffer contents to files.  <br /></td></tr>
+<tr class="memitem:a4f226af0b5469cf62b0f04d52813c800" id="r_a4f226af0b5469cf62b0f04d52813c800"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4f226af0b5469cf62b0f04d52813c800">ABEND</a> (char *pgmid, int rc, char *err_msg)</td></tr>
+<tr class="memdesc:a4f226af0b5469cf62b0f04d52813c800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit the program with an error message.  <br /></td></tr>
+<tr class="memitem:ab7a6465a15ab53a9885da8d4db187066" id="r_ab7a6465a15ab53a9885da8d4db187066"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab7a6465a15ab53a9885da8d4db187066">file_spec_parts</a> (char *file_spec, char *file_path, char *file_name)</td></tr>
+<tr class="memdesc:ab7a6465a15ab53a9885da8d4db187066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split a file specification into directory and file name components.  <br /></td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627" id="r_a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memitem:a3ad751d49315b1fd623601a1cac6cb6b" id="r_a3ad751d49315b1fd623601a1cac6cb6b"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a> (char *dp, char **pp)</td></tr>
+<tr class="memdesc:a3ad751d49315b1fd623601a1cac6cb6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the next directory path from a colon-separated list of paths.  <br /></td></tr>
+<tr class="memitem:gaa0145c044cfdde3a1c83323410a59f25" id="r_gaa0145c044cfdde3a1c83323410a59f25"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a> (char *, const char *, size_t)</td></tr>
+<tr class="memdesc:gaa0145c044cfdde3a1c83323410a59f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncat  <br /></td></tr>
+<tr class="memitem:gaa0145c044cfdde3a1c83323410a59f25" id="r_gaa0145c044cfdde3a1c83323410a59f25"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a> (char *d, const char *s, size_t max_len)</td></tr>
+<tr class="memdesc:gaa0145c044cfdde3a1c83323410a59f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncat  <br /></td></tr>
+<tr class="memitem:ga0de2e40df9bd7efc8fd9afb8ad2257e6" id="r_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a> (char *, const char *, size_t)</td></tr>
+<tr class="memdesc:ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncpy  <br /></td></tr>
+<tr class="memitem:ga0de2e40df9bd7efc8fd9afb8ad2257e6" id="r_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a> (char *d, const char *s, size_t max_len)</td></tr>
+<tr class="memdesc:ga0de2e40df9bd7efc8fd9afb8ad2257e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">safer alternative to strncpy  <br /></td></tr>
+<tr class="memitem:a30a98b14290abe0a82e381bb22f21236" id="r_a30a98b14290abe0a82e381bb22f21236"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a30a98b14290abe0a82e381bb22f21236">whence</a> (char *file_spec_p, int flags)</td></tr>
+<tr class="memdesc:a30a98b14290abe0a82e381bb22f21236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the full path of a file in the directories specified by the PATH environment variable.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a0d2021aec2119835899fa46bd5eaf599" id="r_a0d2021aec2119835899fa46bd5eaf599"><td class="memItemLeft">FILE *&#160;</td><td class="memItemRight"><a class="el" href="#a0d2021aec2119835899fa46bd5eaf599">dbgfp</a></td></tr>
-<tr class="memitem:ab01cd88e27f549b782cb4220d1742373" id="r_ab01cd88e27f549b782cb4220d1742373"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ab01cd88e27f549b782cb4220d1742373">err_msg</a> [<a class="el" href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
-<tr class="memitem:a019f075679338aa122d9b3b4ca81e68d" id="r_a019f075679338aa122d9b3b4ca81e68d"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#a019f075679338aa122d9b3b4ca81e68d">prev_regex_pattern</a> [<a class="el" href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:aaa037e59f26a80a8a2e35e6f2364004d" id="r_aaa037e59f26a80a8a2e35e6f2364004d"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#aaa037e59f26a80a8a2e35e6f2364004d">argp_program_bug_address</a> = &quot;billxwaller@gmail.com&quot;</td></tr>
+<tr class="memitem:a62f73ea01c816f1996aed4c66f57c4fb" id="r_a62f73ea01c816f1996aed4c66f57c4fb"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a62f73ea01c816f1996aed4c66f57c4fb">argp_program_version</a> = <a class="el" href="../../db/d4b/a01883.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td></tr>
+<tr class="memitem:a35d5df8f21a07ab7777cb4c441d757b6" id="r_a35d5df8f21a07ab7777cb4c441d757b6"><td class="memItemLeft">char *&#160;</td><td class="memItemRight"><a class="el" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a></td></tr>
+<tr class="memitem:ad3f59f6d050f131c1565e4696e81b1a8" id="r_ad3f59f6d050f131c1565e4696e81b1a8"><td class="memItemLeft">char&#160;</td><td class="memItemRight"><a class="el" href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a> [<a class="el" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td></tr>
+<tr class="memitem:ab217e2b668a36cdc1589ea893f1fcef9" id="r_ab217e2b668a36cdc1589ea893f1fcef9"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ab217e2b668a36cdc1589ea893f1fcef9">wh_flags</a> = 0</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The working part of <a class="el" href="../../de/d7b/a02660.html">View</a>. </p>
+<div class="textblock"><p>Find the full path of a file in the directories specified by the. </p>
 <dl class="section author"><dt>Author</dt><dd>Bill Waller Copyright (c) 2025 MIT License <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a> </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2026-02-09 </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
+<p class="definition">Definition in file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
-<a id="a48d3a3a1a607d528f5aa34cf3c55a98e" name="a48d3a3a1a607d528f5aa34cf3c55a98e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48d3a3a1a607d528f5aa34cf3c55a98e">&#9670;&#160;</a></span>_Refresh</h2>
+<a id="a369266c24eacffb87046522897a570d5" name="a369266c24eacffb87046522897a570d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a369266c24eacffb87046522897a570d5">&#9670;&#160;</a></span>_GNU_SOURCE</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _Refresh</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a></em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">#define _GNU_SOURCE</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">{                      \</div>
-<div class="line">    pad_refresh(<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>); \</div>
-<div class="line">}</div>
-<div class="ttc" id="aa02465_html_a0526d3d7efdca175914b95c2a86286de"><div class="ttname"><a href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a></div><div class="ttdeci">View * view</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d73/a02465_source.html#l00038">mem.c:38</a></div></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00103">103</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  103</span><span class="preprocessor">#define _Refresh(view)     \</span></div>
-<div class="line"><span class="lineno">  104</span><span class="preprocessor">    {                      \</span></div>
-<div class="line"><span class="lineno">  105</span><span class="preprocessor">        pad_refresh(view); \</span></div>
-<div class="line"><span class="lineno">  106</span><span class="preprocessor">    }</span></div>
-</div><!-- fragment -->
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00010">10</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+
 </div>
 </div>
-<a id="a73e144be2bb3e0dee9793913a35b5a8c" name="a73e144be2bb3e0dee9793913a35b5a8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73e144be2bb3e0dee9793913a35b5a8c">&#9670;&#160;</a></span>_ui_perror</h2>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="abee6bb472179eda34f888dd556d60f1c" name="abee6bb472179eda34f888dd556d60f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee6bb472179eda34f888dd556d60f1c">&#9670;&#160;</a></span>WhenceFlags <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define _ui_perror</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>msg</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">enum <a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">{                                                                          \</div>
-<div class="line">    ssnprintf(<a class="code hl_variable" href="../../d4/dff/a01910.html#abd472199e7a5be1df55e04807ece4878">em0</a>, <a class="code hl_define" href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1, <a class="code hl_define" href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a>(<span class="stringliteral">&quot;%s, line: %d&quot;</span>), __FILE__, __LINE__ - 2); \</div>
-<div class="line">    strnz__cpy(<a class="code hl_variable" href="../../d4/dff/a01910.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, msg, <a class="code hl_define" href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);                                      \</div>
-<div class="line">    ui_display_error(<a class="code hl_variable" href="../../d4/dff/a01910.html#abd472199e7a5be1df55e04807ece4878">em0</a>, <a class="code hl_variable" href="../../d4/dff/a01910.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>);                          \</div>
-<div class="line">}</div>
-<div class="ttc" id="aa01910_html_a2520ab854da7c70c815ef23b3bd2f43a"><div class="ttname"><a href="../../d4/dff/a01910.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00048">ui_common.c:48</a></div></div>
-<div class="ttc" id="aa01910_html_abd472199e7a5be1df55e04807ece4878"><div class="ttname"><a href="../../d4/dff/a01910.html#abd472199e7a5be1df55e04807ece4878">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00047">ui_common.c:47</a></div></div>
-<div class="ttc" id="aa02474_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d61/a02474_source.html#l00042">rsh.c:42</a></div></div>
-<div class="ttc" id="aa02540_html_a32a3cf3d9dd914f5aeeca5423c157934"><div class="ttname"><a href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a></div><div class="ttdeci">#define _(String)</div><div class="ttdef"><b>Definition</b> <a href="../../d4/db0/a02540_source.html#l00023">amort.c:23</a></div></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00096">96</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   96</span><span class="preprocessor">#define _ui_perror(msg)                                                        \</span></div>
-<div class="line"><span class="lineno">   97</span><span class="preprocessor">    {                                                                          \</span></div>
-<div class="line"><span class="lineno">   98</span><span class="preprocessor">        ssnprintf(em0, MAXLEN - 1, _(&quot;%s, line: %d&quot;), __FILE__, __LINE__ - 2); \</span></div>
-<div class="line"><span class="lineno">   99</span><span class="preprocessor">        strnz__cpy(em1, msg, MAXLEN - 1);                                      \</span></div>
-<div class="line"><span class="lineno">  100</span><span class="preprocessor">        ui_display_error(em0, em1, nullptr, nullptr);                          \</span></div>
-<div class="line"><span class="lineno">  101</span><span class="preprocessor">    }</span></div>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00034">34</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>             { <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1,</div>
+<div class="line"><span class="lineno">   35</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2,</div>
+<div class="line"><span class="lineno">   36</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4,</div>
+<div class="line"><span class="lineno">   37</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8 } <a class="code hl_enumeration" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a>;</div>
+<div class="ttc" id="aa02495_html_abee6bb472179eda34f888dd556d60f1c"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a></div><div class="ttdeci">WhenceFlags</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00034">whence.c:34</a></div></div>
+<div class="ttc" id="aa02495_html_abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a></div><div class="ttdeci">@ WH_SETUID</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00037">whence.c:37</a></div></div>
+<div class="ttc" id="aa02495_html_abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a></div><div class="ttdeci">@ WH_ALL</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00034">whence.c:34</a></div></div>
+<div class="ttc" id="aa02495_html_abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a></div><div class="ttdeci">@ WH_VERBOSE</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00035">whence.c:35</a></div></div>
+<div class="ttc" id="aa02495_html_abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"><div class="ttname"><a href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a></div><div class="ttdeci">@ WH_EXECUTABLE</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00036">whence.c:36</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ad299a87acfce8bb92a50f93fbfad2112" name="ad299a87acfce8bb92a50f93fbfad2112"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad299a87acfce8bb92a50f93fbfad2112">&#9670;&#160;</a></span>confirm</h2>
+<a id="abee6bb472179eda34f888dd556d60f1c" name="abee6bb472179eda34f888dd556d60f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee6bb472179eda34f888dd556d60f1c">&#9670;&#160;</a></span>WhenceFlags <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define confirm</td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">enum <a class="el" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">{                                                            \</div>
-<div class="line">    if ((c = <a class="code hl_function" href="../../d1/d0c/a02570.html#gab3d3c80c5b7bb6dc461a8e5746be7690">get_cmd_char</a>(<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>, &amp;n_cmd)) == <span class="charliteral">&#39;y&#39;</span> || c == <span class="charliteral">&#39;Y&#39;</span>) \</div>
-<div class="line">        ans = <span class="keyword">true</span>;                                          \</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;n&#39;</span> || c == <span class="charliteral">&#39;N&#39;</span>)                           \</div>
-<div class="line">        ans = <span class="keyword">false</span>;                                         \</div>
-<div class="line">}</div>
-<div class="ttc" id="aa02570_html_gab3d3c80c5b7bb6dc461a8e5746be7690"><div class="ttname"><a href="../../d1/d0c/a02570.html#gab3d3c80c5b7bb6dc461a8e5746be7690">get_cmd_char</a></div><div class="ttdeci">int get_cmd_char(View *, off_t *)</div><div class="ttdoc">Get Command Character from User Input.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00731">view_engine.c:731</a></div></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00088">88</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   88</span><span class="preprocessor">#define confirm()                                                \</span></div>
-<div class="line"><span class="lineno">   89</span><span class="preprocessor">    {                                                            \</span></div>
-<div class="line"><span class="lineno">   90</span><span class="preprocessor">        if ((c = get_cmd_char(view, &amp;n_cmd)) == &#39;y&#39; || c == &#39;Y&#39;) \</span></div>
-<div class="line"><span class="lineno">   91</span><span class="preprocessor">            ans = true;                                          \</span></div>
-<div class="line"><span class="lineno">   92</span><span class="preprocessor">        else if (c == &#39;n&#39; || c == &#39;N&#39;)                           \</span></div>
-<div class="line"><span class="lineno">   93</span><span class="preprocessor">            ans = false;                                         \</span></div>
-<div class="line"><span class="lineno">   94</span><span class="preprocessor">    }</span></div>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1" name="abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1"></a>WH_ALL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063" name="abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063"></a>WH_VERBOSE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe" name="abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe"></a>WH_EXECUTABLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a" name="abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a"></a>WH_SETUID&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00034">34</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   34</span>             { <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a> = 1,</div>
+<div class="line"><span class="lineno">   35</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a> = 2,</div>
+<div class="line"><span class="lineno">   36</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a> = 4,</div>
+<div class="line"><span class="lineno">   37</span>               <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a> = 8 } <a class="code hl_enumeration" href="#abee6bb472179eda34f888dd556d60f1c">WhenceFlags</a>;</div>
 </div><!-- fragment -->
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ab3b574fd6a4e4b0c053f1ca18218f331" name="ab3b574fd6a4e4b0c053f1ca18218f331"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3b574fd6a4e4b0c053f1ca18218f331">&#9670;&#160;</a></span>get_line()</h2>
+<a id="a4f226af0b5469cf62b0f04d52813c800" name="a4f226af0b5469cf62b0f04d52813c800"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f226af0b5469cf62b0f04d52813c800">&#9670;&#160;</a></span>ABEND()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void get_line </td>
+          <td class="memname">void ABEND </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../de/d7b/a02660.html">View</a> *</td>          <td class="paramname"><span class="paramname"><em>view</em></span>, </td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>pgmid</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">off_t</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>rc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>err_msg</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>__get_line </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l01801">1801</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 1801</span>                                      {</div>
-<div class="line"><span class="lineno"> 1802</span>    <span class="keywordtype">char</span> c;</div>
-<div class="line"><span class="lineno"> 1803</span>    <span class="keywordtype">char</span> *line_in_p;</div>
-<div class="line"><span class="lineno"> 1804</span> </div>
-<div class="line"><span class="lineno"> 1805</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no = line;</div>
-<div class="line"><span class="lineno"> 1806</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;file_pos = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_tbl[<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no];</div>
-<div class="line"><span class="lineno"> 1807</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_eod = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno"> 1808</span>    <a class="code hl_define" href="../../d1/d0c/a02570.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>();</div>
-<div class="line"><span class="lineno"> 1809</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_eod) {</div>
-<div class="line"><span class="lineno"> 1810</span>        <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no = line;</div>
-<div class="line"><span class="lineno"> 1811</span>        <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no_max = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no;</div>
-<div class="line"><span class="lineno"> 1812</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno"> 1813</span>    }</div>
-<div class="line"><span class="lineno"> 1814</span>    line_in_p = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;line_in_s;</div>
-<div class="line"><span class="lineno"> 1815</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;line_in_beg_p = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;line_in_s;</div>
-<div class="line"><span class="lineno"> 1816</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;line_in_end_p = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;line_in_s + <a class="code hl_define" href="../../dc/d31/a01892.html#adc3d88deb82e66426d66e559bba7ef1e">PAD_COLS</a>;</div>
-<div class="line"><span class="lineno"> 1817</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno"> 1818</span>        <span class="keywordflow">if</span> (c == <span class="charliteral">&#39;\n&#39;</span> || c == <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1819</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1820</span>        <span class="keywordflow">if</span> (line_in_p &gt;= <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;line_in_end_p)</div>
-<div class="line"><span class="lineno"> 1821</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1822</span>        *line_in_p++ = c;</div>
-<div class="line"><span class="lineno"> 1823</span>        <a class="code hl_define" href="../../d1/d0c/a02570.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>();</div>
-<div class="line"><span class="lineno"> 1824</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_eod) {</div>
-<div class="line"><span class="lineno"> 1825</span>            <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no = line;</div>
-<div class="line"><span class="lineno"> 1826</span>            <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no_max = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no;</div>
-<div class="line"><span class="lineno"> 1827</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno"> 1828</span>        }</div>
-<div class="line"><span class="lineno"> 1829</span>    }</div>
-<div class="line"><span class="lineno"> 1830</span>    *line_in_p = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><span class="lineno"> 1831</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_squeeze) {</div>
-<div class="line"><span class="lineno"> 1832</span>        <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><span class="lineno"> 1833</span>            <a class="code hl_define" href="../../d1/d0c/a02570.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>();</div>
-<div class="line"><span class="lineno"> 1834</span>            <span class="keywordflow">if</span> (c != <span class="charliteral">&#39;\n&#39;</span> &amp;&amp; c != <span class="charliteral">&#39;\0&#39;</span>)</div>
-<div class="line"><span class="lineno"> 1835</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1836</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_eod) {</div>
-<div class="line"><span class="lineno"> 1837</span>                <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no = line;</div>
-<div class="line"><span class="lineno"> 1838</span>                <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no_max = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no;</div>
-<div class="line"><span class="lineno"> 1839</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 1840</span>            }</div>
-<div class="line"><span class="lineno"> 1841</span>        }</div>
-<div class="line"><span class="lineno"> 1842</span>        <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_eod) {</div>
-<div class="line"><span class="lineno"> 1843</span>            <a class="code hl_define" href="../../d1/d0c/a02570.html#ga56a278d5d4b1808207f550ee3a61c476">get_prev_char</a>();</div>
-<div class="line"><span class="lineno"> 1844</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno"> 1845</span>        }</div>
-<div class="line"><span class="lineno"> 1846</span>    }</div>
-<div class="line"><span class="lineno"> 1847</span> </div>
-<div class="line"><span class="lineno"> 1848</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no = line;</div>
-<div class="line"><span class="lineno"> 1849</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><span class="lineno"> 1850</span>}</div>
-<div class="ttc" id="aa01892_html_adc3d88deb82e66426d66e559bba7ef1e"><div class="ttname"><a href="../../dc/d31/a01892.html#adc3d88deb82e66426d66e559bba7ef1e">PAD_COLS</a></div><div class="ttdeci">#define PAD_COLS</div><div class="ttdef"><b>Definition</b> <a href="../../dc/d31/a01892_source.html#l00039">view.h:39</a></div></div>
-<div class="ttc" id="aa02570_html_ga56a278d5d4b1808207f550ee3a61c476"><div class="ttname"><a href="../../d1/d0c/a02570.html#ga56a278d5d4b1808207f550ee3a61c476">get_prev_char</a></div><div class="ttdeci">#define get_prev_char()</div><div class="ttdoc">read the previous characater from the virtual fileThere is no need to track line numbers when moving ...</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00075">view_engine.c:75</a></div></div>
-<div class="ttc" id="aa02570_html_gafa98387c57104e28e438d8bbc23b26eb"><div class="ttname"><a href="../../d1/d0c/a02570.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a></div><div class="ttdeci">#define get_next_char()</div><div class="ttdoc">read the next characater from the virtual file</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00052">view_engine.c:52</a></div></div>
+<p>Exit the program with an error message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pgmid</td><td>The name of the program </td></tr>
+    <tr><td class="paramname">rc</td><td>The return code to exit with </td></tr>
+    <tr><td class="paramname">err_msg</td><td>The error message to display</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function is called to exit the program with an error status. It prints the program name, return code, and error message to the standard error stream, and then exits with the specified return code. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00274">274</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  274</span>                                               {</div>
+<div class="line"><span class="lineno">  275</span>    fprintf(stderr, <a class="code hl_define" href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a>(<span class="stringliteral">&quot;%s; error %d; %s\n&quot;</span>), pgmid, rc, <a class="code hl_variable" href="../../dc/d31/a01892.html#a2020a87ae37e9432d224e4902049e181">err_msg</a>);</div>
+<div class="line"><span class="lineno">  276</span>    exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  277</span>}</div>
+<div class="ttc" id="aa01892_html_a2020a87ae37e9432d224e4902049e181"><div class="ttname"><a href="../../dc/d31/a01892.html#a2020a87ae37e9432d224e4902049e181">err_msg</a></div><div class="ttdeci">char err_msg[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../dd/dd4/a02498_source.html#l00150">view_engine.c:150</a></div></div>
+<div class="ttc" id="aa02540_html_a32a3cf3d9dd914f5aeeca5423c157934"><div class="ttname"><a href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a></div><div class="ttdeci">#define _(String)</div><div class="ttdef"><b>Definition</b> <a href="../../d4/db0/a02540_source.html#l00023">amort.c:23</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/d31/a01892_source.html#l00100">View::f_eod</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00085">View::f_squeeze</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00150">View::file_pos</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00119">View::line_in_beg_p</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00120">View::line_in_end_p</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00114">View::line_in_s</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00182">View::ln_no</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00186">View::ln_no_max</a>, and <a class="el" href="../../dc/d31/a01892_source.html#l00184">View::ln_tbl</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l01280">page_prev()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01521">scroll_next()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01658">scroll_prev()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01102">search()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l01364">view_display_page()</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l00985">write_view_buffer()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_ab3b574fd6a4e4b0c053f1ca18218f331_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
-</div>
-
 </div>
 </div>
-<a id="ac12629dcd0351687cf64aa1d53bccf0a" name="ac12629dcd0351687cf64aa1d53bccf0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac12629dcd0351687cf64aa1d53bccf0a">&#9670;&#160;</a></span>sync_pos()</h2>
+<a id="ab7a6465a15ab53a9885da8d4db187066" name="ab7a6465a15ab53a9885da8d4db187066"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a6465a15ab53a9885da8d4db187066">&#9670;&#160;</a></span>file_spec_parts()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void sync_pos </td>
+          <td class="memname">int file_spec_parts </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../de/d7b/a02660.html">View</a> *</td>          <td class="paramname"><span class="paramname"><em>view</em></span>, </td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_spec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">off_t</td>          <td class="paramname"><span class="paramname"><em>pos</em></span>&#160;)</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_name</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l02038">2038</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno"> 2038</span>                                     {</div>
-<div class="line"><span class="lineno"> 2039</span>    <span class="keywordtype">int</span> c = 0;</div>
-<div class="line"><span class="lineno"> 2040</span>    <span class="comment">// Advance view-&gt;ln_tbl[view-&gt;ln_no] to view-&gt;file_pos if necessary</span></div>
-<div class="line"><span class="lineno"> 2041</span>    <span class="keywordflow">while</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_tbl[<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no] &lt; pos) {</div>
-<div class="line"><span class="lineno"> 2042</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no &gt;= <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no_max) {</div>
-<div class="line"><span class="lineno"> 2043</span>            <a class="code hl_define" href="../../d1/d0c/a02570.html#gafa98387c57104e28e438d8bbc23b26eb">get_next_char</a>();</div>
-<div class="line"><span class="lineno"> 2044</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;f_eod)</div>
-<div class="line"><span class="lineno"> 2045</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 2046</span>        } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno"> 2047</span>            <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no++;</div>
-<div class="line"><span class="lineno"> 2048</span>    }</div>
-<div class="line"><span class="lineno"> 2049</span>    <span class="keywordflow">while</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_tbl[<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no] &gt; pos) {</div>
-<div class="line"><span class="lineno"> 2050</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no == 0)</div>
-<div class="line"><span class="lineno"> 2051</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno"> 2052</span>        <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no--;</div>
-<div class="line"><span class="lineno"> 2053</span>    }</div>
-<div class="line"><span class="lineno"> 2054</span>    <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;file_pos = <a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_tbl[<a class="code hl_variable" href="../../d4/d73/a02465.html#a0526d3d7efdca175914b95c2a86286de">view</a>-&gt;ln_no];</div>
-<div class="line"><span class="lineno"> 2055</span>}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../dc/d31/a01892_source.html#l00100">View::f_eod</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00150">View::file_pos</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00182">View::ln_no</a>, <a class="el" href="../../dc/d31/a01892_source.html#l00186">View::ln_no_max</a>, and <a class="el" href="../../dc/d31/a01892_source.html#l00184">View::ln_tbl</a>.</p>
+<p>Split a file specification into directory and file name components. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_spec</td><td>The full file specification to split </td></tr>
+    <tr><td class="paramname">file_path</td><td>A buffer to store the extracted directory path </td></tr>
+    <tr><td class="paramname">file_name</td><td>A buffer to store the extracted file name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>0 on success</dd></dl>
+<p>This function takes a file specification, checks if it is a directory, and if so, it sets the file path accordingly. If the file specification is empty, it defaults to the current directory. Otherwise, it splits the file specification into the directory and file name components based on the last occurrence of a slash ('/'). </p>
 
-<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l01856">go_to_eof()</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l01915">go_to_position()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00217">217</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  217</span>                                                                       {</div>
+<div class="line"><span class="lineno">  218</span>    <span class="keywordtype">int</span> i, last_slash;</div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordtype">char</span> tmp_file_spec[PATH_MAX];</div>
+<div class="line"><span class="lineno">  220</span>    <span class="keywordtype">int</span> file_spec_l;</div>
+<div class="line"><span class="lineno">  221</span>    <span class="keyword">struct </span>stat stat_struct;</div>
+<div class="line"><span class="lineno">  222</span> </div>
+<div class="line"><span class="lineno">  223</span>    <span class="keywordflow">if</span> (stat(file_spec, &amp;stat_struct) != -1)</div>
+<div class="line"><span class="lineno">  224</span>        <span class="keywordflow">if</span> ((stat_struct.st_mode &amp; S_IFMT) == S_IFDIR) {</div>
+<div class="line"><span class="lineno">  225</span>            <span class="keywordflow">if</span> (file_spec[strlen(file_path)] != <span class="charliteral">&#39;/&#39;</span>)</div>
+<div class="line"><span class="lineno">  226</span>                <a class="code hl_function" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  227</span>            <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_path, file_spec, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  228</span>            file_name[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  229</span>            <span class="keywordflow">return</span> (0);</div>
+<div class="line"><span class="lineno">  230</span>        }</div>
+<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">if</span> (strlen(file_spec) == 0) {</div>
+<div class="line"><span class="lineno">  232</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, <span class="stringliteral">&quot;./&quot;</span>, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  233</span>        file_name[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  234</span>        <span class="keywordflow">return</span> (0);</div>
+<div class="line"><span class="lineno">  235</span>    }</div>
+<div class="line"><span class="lineno">  236</span>    <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(tmp_file_spec, file_spec, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  237</span>    last_slash = -1;</div>
+<div class="line"><span class="lineno">  238</span>    file_spec_l = strlen(tmp_file_spec);</div>
+<div class="line"><span class="lineno">  239</span>    <span class="keywordflow">if</span> (file_spec_l &gt; 0) {</div>
+<div class="line"><span class="lineno">  240</span>        i = 0;</div>
+<div class="line"><span class="lineno">  241</span>        <span class="keywordflow">while</span> (i &lt; file_spec_l &amp;&amp; tmp_file_spec[i] != <span class="charliteral">&#39;\0&#39;</span>) {</div>
+<div class="line"><span class="lineno">  242</span>            <span class="keywordflow">if</span> (tmp_file_spec[i] == <span class="charliteral">&#39;/&#39;</span>) {</div>
+<div class="line"><span class="lineno">  243</span>                last_slash = i;</div>
+<div class="line"><span class="lineno">  244</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  245</span>            }</div>
+<div class="line"><span class="lineno">  246</span>            i++;</div>
+<div class="line"><span class="lineno">  247</span>        }</div>
+<div class="line"><span class="lineno">  248</span>    }</div>
+<div class="line"><span class="lineno">  249</span>    <span class="keywordflow">if</span> (last_slash &lt; 0) {</div>
+<div class="line"><span class="lineno">  250</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_path, <span class="stringliteral">&quot;./&quot;</span>, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  251</span>        <span class="keywordflow">if</span> (strcmp(file_spec, <span class="stringliteral">&quot;.&quot;</span>) == 0)</div>
+<div class="line"><span class="lineno">  252</span>            file_name[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  254</span>            <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_name, tmp_file_spec, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  255</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, file_path, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  256</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_spec, file_name, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  257</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  258</span>        tmp_file_spec[last_slash] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  259</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_path, tmp_file_spec, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  260</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(file_path, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  261</span>        <span class="keywordflow">if</span> (last_slash &lt; file_spec_l)</div>
+<div class="line"><span class="lineno">  262</span>            last_slash++;</div>
+<div class="line"><span class="lineno">  263</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_name, tmp_file_spec + last_slash, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  264</span>    }</div>
+<div class="line"><span class="lineno">  265</span>    <span class="keywordflow">return</span> (0);</div>
+<div class="line"><span class="lineno">  266</span>}</div>
+<div class="ttc" id="aa02480_html_ae6648cd71a8bd49d58ae8ed33ba910d1"><div class="ttname"><a href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a></div><div class="ttdeci">#define MAXLEN</div><div class="ttdef"><b>Definition</b> <a href="../../d2/d35/a02480_source.html#l00015">curskeys.c:15</a></div></div>
+<div class="ttc" id="aa02560_html_ga0de2e40df9bd7efc8fd9afb8ad2257e6"><div class="ttname"><a href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a></div><div class="ttdeci">size_t strnz__cpy(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncpy</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d2e/a02537_source.html#l00518">futil.c:518</a></div></div>
+<div class="ttc" id="aa02560_html_gaa0145c044cfdde3a1c83323410a59f25"><div class="ttname"><a href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a></div><div class="ttdeci">size_t strnz__cat(char *, const char *, size_t)</div><div class="ttdoc">safer alternative to strncat</div><div class="ttdef"><b>Definition</b> <a href="../../d1/d2e/a02537_source.html#l00549">futil.c:549</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d5/d56/a02495_source.html#l00320">strnz__cat()</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l00291">strnz__cpy()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l00127">whence()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_ab7a6465a15ab53a9885da8d4db187066_cgraph.svg" width="268" height="91"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_ac12629dcd0351687cf64aa1d53bccf0a_icgraph.svg" width="100%" height="575"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_ab7a6465a15ab53a9885da8d4db187066_icgraph.svg" width="352" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627" name="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00095">95</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   95</span>                                {</div>
+<div class="line"><span class="lineno">   96</span>    <span class="keyword">struct </span>wh_opts wh_opts = {};</div>
+<div class="line"><span class="lineno">   97</span>    wh_opts.flags = 0;</div>
+<div class="line"><span class="lineno">   98</span>    wh_opts.argv[0] = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">   99</span>    wh_opts.path_env = <span class="keyword">nullptr</span>;</div>
+<div class="line"><span class="lineno">  100</span>    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordtype">int</span> found = 0;</div>
+<div class="line"><span class="lineno">  102</span>    argp_parse(&amp;argp, argc, argv, 0, 0, &amp;wh_opts);</div>
+<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">if</span> (wh_opts.path_env != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  104</span>        <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> = getenv(wh_opts.path_env);</div>
+<div class="line"><span class="lineno">  105</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  106</span>        <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> = getenv(<span class="stringliteral">&quot;PATH&quot;</span>);</div>
+<div class="line"><span class="lineno">  107</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  108</span>        <a class="code hl_function" href="#a4f226af0b5469cf62b0f04d52813c800">ABEND</a>(argv[0], 0, <a class="code hl_define" href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a>(<span class="stringliteral">&quot;Search PATH not set&quot;</span>));</div>
+<div class="line"><span class="lineno">  109</span>    <span class="keywordflow">if</span> (wh_opts.flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a>)</div>
+<div class="line"><span class="lineno">  110</span>        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keywordflow">while</span> (i &lt; wh_opts.argc)</div>
+<div class="line"><span class="lineno">  112</span>        found = <a class="code hl_function" href="#a30a98b14290abe0a82e381bb22f21236">whence</a>(wh_opts.argv[i++], wh_opts.flags);</div>
+<div class="line"><span class="lineno">  113</span>    <span class="keywordflow">if</span> (found == 0)</div>
+<div class="line"><span class="lineno">  114</span>        exit(1);</div>
+<div class="line"><span class="lineno">  115</span>    exit(0);</div>
+<div class="line"><span class="lineno">  116</span>}</div>
+<div class="ttc" id="aa02495_html_a30a98b14290abe0a82e381bb22f21236"><div class="ttname"><a href="#a30a98b14290abe0a82e381bb22f21236">whence</a></div><div class="ttdeci">int whence(char *, int)</div><div class="ttdoc">Find the full path of a file in the directories specified by the PATH environment variable.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00127">whence.c:127</a></div></div>
+<div class="ttc" id="aa02495_html_a35d5df8f21a07ab7777cb4c441d757b6"><div class="ttname"><a href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a></div><div class="ttdeci">char * path_p</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00024">whence.c:24</a></div></div>
+<div class="ttc" id="aa02495_html_a4f226af0b5469cf62b0f04d52813c800"><div class="ttname"><a href="#a4f226af0b5469cf62b0f04d52813c800">ABEND</a></div><div class="ttdeci">void ABEND(char *, int, char *)</div><div class="ttdoc">Exit the program with an error message.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00274">whence.c:274</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d5/d61/a02474_source.html#l00429">ABEND()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00024">path_p</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00035">WH_VERBOSE</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l00127">whence()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_a3c04138a5bfe5d72780bb7e82a18e627_cgraph.svg" width="491" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a3ad751d49315b1fd623601a1cac6cb6b" name="a3ad751d49315b1fd623601a1cac6cb6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ad751d49315b1fd623601a1cac6cb6b">&#9670;&#160;</a></span>next_path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int next_path </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>dp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>pp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the next directory path from a colon-separated list of paths. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dp</td><td>A buffer to store the extracted directory path </td></tr>
+    <tr><td class="paramname">pp</td><td>A pointer to the current position in the path string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The length of the extracted directory path</dd></dl>
+<p>This function takes a pointer to a colon-separated list of paths and extracts the next directory path from it. If the current character is a colon, it retrieves the current working directory instead. The extracted directory path is stored in the provided buffer, and the function returns the length of the extracted path. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00188">188</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  188</span>                                   {</div>
+<div class="line"><span class="lineno">  189</span>    <span class="keywordtype">int</span> dl;</div>
+<div class="line"><span class="lineno">  190</span> </div>
+<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">if</span> (**pp == <span class="charliteral">&#39;:&#39;</span>) {</div>
+<div class="line"><span class="lineno">  192</span>        (*pp)++;</div>
+<div class="line"><span class="lineno">  193</span>        getcwd(dp, PATH_MAX);</div>
+<div class="line"><span class="lineno">  194</span>        <span class="keywordflow">return</span> (strlen(dp));</div>
+<div class="line"><span class="lineno">  195</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  196</span>        dl = 0;</div>
+<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">while</span> (**pp != <span class="charliteral">&#39;\0&#39;</span> &amp;&amp; **pp != <span class="charliteral">&#39;\n&#39;</span> &amp;&amp; **pp != <span class="charliteral">&#39;\r&#39;</span> &amp;&amp; **pp != <span class="charliteral">&#39;:&#39;</span>) {</div>
+<div class="line"><span class="lineno">  198</span>            *dp++ = *(*pp)++;</div>
+<div class="line"><span class="lineno">  199</span>            dl++;</div>
+<div class="line"><span class="lineno">  200</span>        }</div>
+<div class="line"><span class="lineno">  201</span>        *dp = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><span class="lineno">  202</span>        <span class="keywordflow">if</span> (**pp == <span class="charliteral">&#39;:&#39;</span> &amp;&amp; *++(*pp) == <span class="charliteral">&#39;\0&#39;</span>)</div>
+<div class="line"><span class="lineno">  203</span>            (*pp)--;</div>
+<div class="line"><span class="lineno">  204</span>        <span class="keywordflow">return</span> (dl);</div>
+<div class="line"><span class="lineno">  205</span>    }</div>
+<div class="line"><span class="lineno">  206</span>}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l00127">whence()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_a3ad751d49315b1fd623601a1cac6cb6b_icgraph.svg" width="319" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+
+</div>
+</div>
+<a id="a30a98b14290abe0a82e381bb22f21236" name="a30a98b14290abe0a82e381bb22f21236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30a98b14290abe0a82e381bb22f21236">&#9670;&#160;</a></span>whence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int whence </td>
+          <td>(</td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>file_spec_p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>flags</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Find the full path of a file in the directories specified by the PATH environment variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_spec_p</td><td>The file specification to search for </td></tr>
+    <tr><td class="paramname">flags</td><td>Flags to control the behavior of the search (e.g., verbose mode, list all matches)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This function takes a file specification, extracts the directory and file name components, and searches through the directories specified in the PATH environment variable to find matches. It prints the full path of each match found, and if verbose mode is enabled, it also indicates whether each attempted path was found or not. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00127">127</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  127</span>                                         {</div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordtype">char</span> file_spec[PATH_MAX];</div>
+<div class="line"><span class="lineno">  129</span>    <span class="keywordtype">char</span> file_dir[PATH_MAX];</div>
+<div class="line"><span class="lineno">  130</span>    <span class="keywordtype">char</span> file_name[PATH_MAX];</div>
+<div class="line"><span class="lineno">  131</span>    <span class="keywordtype">char</span> try_spec[PATH_MAX];</div>
+<div class="line"><span class="lineno">  132</span>    <span class="keywordtype">char</span> try_dir[PATH_MAX];</div>
+<div class="line"><span class="lineno">  133</span>    <span class="keywordtype">int</span> path_l;</div>
+<div class="line"><span class="lineno">  134</span>    <span class="keywordtype">int</span> found = 0;</div>
+<div class="line"><span class="lineno">  135</span>    <span class="keyword">struct </span>stat stat_struct;</div>
+<div class="line"><span class="lineno">  136</span> </div>
+<div class="line"><span class="lineno">  137</span>    <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(file_spec, file_spec_p, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  138</span>    <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(<a class="code hl_variable" href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a>, <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  139</span>    <a class="code hl_function" href="#ab7a6465a15ab53a9885da8d4db187066">file_spec_parts</a>(file_spec, file_dir, file_name);</div>
+<div class="line"><span class="lineno">  140</span>    <a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a> = <a class="code hl_variable" href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a>;</div>
+<div class="line"><span class="lineno">  141</span>    path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">while</span> (path_l != 0) {</div>
+<div class="line"><span class="lineno">  143</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#ga0de2e40df9bd7efc8fd9afb8ad2257e6">strnz__cpy</a>(try_spec, try_dir, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  144</span>        <span class="keywordflow">if</span> (try_spec[path_l] != <span class="charliteral">&#39;/&#39;</span>)</div>
+<div class="line"><span class="lineno">  145</span>            <a class="code hl_function" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(try_spec, <span class="stringliteral">&quot;/&quot;</span>, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  146</span>        <a class="code hl_function" href="../../d1/d03/a02560.html#gaa0145c044cfdde3a1c83323410a59f25">strnz__cat</a>(try_spec, file_name, <a class="code hl_define" href="../../d2/d35/a02480.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a> - 1);</div>
+<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">if</span> (stat(try_spec, &amp;stat_struct) != 0) {</div>
+<div class="line"><span class="lineno">  148</span>            <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a>)</div>
+<div class="line"><span class="lineno">  149</span>                printf(<span class="stringliteral">&quot;-      %s\n&quot;</span>, try_spec);</div>
+<div class="line"><span class="lineno">  150</span>            path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  151</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  152</span>        }</div>
+<div class="line"><span class="lineno">  153</span>        <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca552030cc6de0ea87b5ad3149e8c6611a">WH_SETUID</a>)</div>
+<div class="line"><span class="lineno">  154</span>            <span class="keywordflow">if</span> (!(stat_struct.st_mode &amp; S_ISUID)) {</div>
+<div class="line"><span class="lineno">  155</span>                path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  156</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  157</span>            }</div>
+<div class="line"><span class="lineno">  158</span>        <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca7560d181899ba3b1374326ecd7e6f3fe">WH_EXECUTABLE</a>)</div>
+<div class="line"><span class="lineno">  159</span>            <span class="keywordflow">if</span> (!(stat_struct.st_mode &amp; S_ISUID)) {</div>
+<div class="line"><span class="lineno">  160</span>                path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  161</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  162</span>            }</div>
+<div class="line"><span class="lineno">  163</span>        <span class="keywordflow">if</span> (!(stat_struct.st_mode &amp; S_IXUSR)) {</div>
+<div class="line"><span class="lineno">  164</span>            path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  165</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  166</span>        }</div>
+<div class="line"><span class="lineno">  167</span>        found++;</div>
+<div class="line"><span class="lineno">  168</span>        <span class="keywordflow">if</span> (flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca73cdd9896fac48ee15a9673e75941063">WH_VERBOSE</a>)</div>
+<div class="line"><span class="lineno">  169</span>            printf(<a class="code hl_define" href="../../d4/db0/a02540.html#a32a3cf3d9dd914f5aeeca5423c157934">_</a>(<span class="stringliteral">&quot;found  %s\n&quot;</span>), try_spec);</div>
+<div class="line"><span class="lineno">  170</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  171</span>            printf(<span class="stringliteral">&quot;%s\n&quot;</span>, try_spec);</div>
+<div class="line"><span class="lineno">  172</span>            <span class="keywordflow">if</span> (!(flags &amp; <a class="code hl_enumvalue" href="#abee6bb472179eda34f888dd556d60f1ca566189e9bb794537e26be05fb91f1dc1">WH_ALL</a>))</div>
+<div class="line"><span class="lineno">  173</span>                <span class="keywordflow">return</span> found;</div>
+<div class="line"><span class="lineno">  174</span>        }</div>
+<div class="line"><span class="lineno">  175</span>        path_l = <a class="code hl_function" href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a>(try_dir, &amp;<a class="code hl_variable" href="#a35d5df8f21a07ab7777cb4c441d757b6">path_p</a>);</div>
+<div class="line"><span class="lineno">  176</span>    }</div>
+<div class="line"><span class="lineno">  177</span>    <span class="keywordflow">return</span> found;</div>
+<div class="line"><span class="lineno">  178</span>}</div>
+<div class="ttc" id="aa02495_html_a3ad751d49315b1fd623601a1cac6cb6b"><div class="ttname"><a href="#a3ad751d49315b1fd623601a1cac6cb6b">next_path</a></div><div class="ttdeci">int next_path(char *, char **)</div><div class="ttdoc">Get the next directory path from a colon-separated list of paths.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00188">whence.c:188</a></div></div>
+<div class="ttc" id="aa02495_html_ab7a6465a15ab53a9885da8d4db187066"><div class="ttname"><a href="#ab7a6465a15ab53a9885da8d4db187066">file_spec_parts</a></div><div class="ttdeci">int file_spec_parts(char *, char *, char *)</div><div class="ttdoc">Split a file specification into directory and file name components.</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00217">whence.c:217</a></div></div>
+<div class="ttc" id="aa02495_html_ad3f59f6d050f131c1565e4696e81b1a8"><div class="ttname"><a href="#ad3f59f6d050f131c1565e4696e81b1a8">path_s</a></div><div class="ttdeci">char path_s[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d5/d56/a02495_source.html#l00025">whence.c:25</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d5/d56/a02495_source.html#l00217">file_spec_parts()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00188">next_path()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00024">path_p</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00025">path_s</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00320">strnz__cat()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00291">strnz__cpy()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00034">WH_ALL</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00036">WH_EXECUTABLE</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00037">WH_SETUID</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l00035">WH_VERBOSE</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l00095">main()</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_a30a98b14290abe0a82e381bb22f21236_cgraph.svg" width="388" height="178"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../d5/d56/a02495_a30a98b14290abe0a82e381bb22f21236_icgraph.svg" width="184" height="39"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="a0d2021aec2119835899fa46bd5eaf599" name="a0d2021aec2119835899fa46bd5eaf599"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d2021aec2119835899fa46bd5eaf599">&#9670;&#160;</a></span>dbgfp</h2>
+<a id="aaa037e59f26a80a8a2e35e6f2364004d" name="aaa037e59f26a80a8a2e35e6f2364004d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa037e59f26a80a8a2e35e6f2364004d">&#9670;&#160;</a></span>argp_program_bug_address</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">FILE * dbgfp</td>
+          <td class="memname">const char* argp_program_bug_address = &quot;billxwaller@gmail.com&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00109">109</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00040">40</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
 
 </div>
 </div>
-<a id="ab01cd88e27f549b782cb4220d1742373" name="ab01cd88e27f549b782cb4220d1742373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab01cd88e27f549b782cb4220d1742373">&#9670;&#160;</a></span>err_msg</h2>
+<a id="a62f73ea01c816f1996aed4c66f57c4fb" name="a62f73ea01c816f1996aed4c66f57c4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62f73ea01c816f1996aed4c66f57c4fb">&#9670;&#160;</a></span>argp_program_version</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char err_msg[<a class="el" href="../../d5/d61/a02474.html#ae6648cd71a8bd49d58ae8ed33ba910d1">MAXLEN</a>]</td>
+          <td class="memname">const char* argp_program_version = <a class="el" href="../../db/d4b/a01883.html#ac9eb2084c3924fce14851a3c9d00e49e">CM_VERSION</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00150">150</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00039">39</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
 
 </div>
 </div>
-<a id="a019f075679338aa122d9b3b4ca81e68d" name="a019f075679338aa122d9b3b4ca81e68d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a019f075679338aa122d9b3b4ca81e68d">&#9670;&#160;</a></span>prev_regex_pattern</h2>
+<a id="a35d5df8f21a07ab7777cb4c441d757b6" name="a35d5df8f21a07ab7777cb4c441d757b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35d5df8f21a07ab7777cb4c441d757b6">&#9670;&#160;</a></span>path_p</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char prev_regex_pattern</td>
+          <td class="memname">char * path_p</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00108">108</a> of file <a class="el" href="../../d5/d56/a02495_source.html">view_engine.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00024">24</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l00214">view_cmd_processor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l00095">main()</a>, and <a class="el" href="../../d5/d56/a02495_source.html#l00127">whence()</a>.</p>
+
+</div>
+</div>
+<a id="ad3f59f6d050f131c1565e4696e81b1a8" name="ad3f59f6d050f131c1565e4696e81b1a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3f59f6d050f131c1565e4696e81b1a8">&#9670;&#160;</a></span>path_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char path_s</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00025">25</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../d5/d56/a02495_source.html#l00127">whence()</a>.</p>
+
+</div>
+</div>
+<a id="ab217e2b668a36cdc1589ea893f1fcef9" name="ab217e2b668a36cdc1589ea893f1fcef9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab217e2b668a36cdc1589ea893f1fcef9">&#9670;&#160;</a></span>wh_flags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int wh_flags = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d5/d56/a02495_source.html#l00038">38</a> of file <a class="el" href="../../d5/d56/a02495_source.html">whence.c</a>.</p>
 
 </div>
 </div>
@@ -538,7 +752,7 @@ Here is the caller graph for this function:</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d5/d56/a02495.html">view_engine.c</a></li>
+    <li class="navelem"><a href="../../d5/d56/a02495.html">whence.c</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

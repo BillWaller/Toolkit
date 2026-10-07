@@ -1,5 +1,9 @@
 var a02510 =
 [
-    [ "get_command_type", "db/d0b/a02566.html#ga1989771e09ef0e00c4cec786094d1d26", null ],
-    [ "parse_menu_description", "db/d0b/a02566.html#gadd4bd5f0e9c89c717e460b2eb9952e6a", null ]
+    [ "MAX_FRAMES", "dd/df4/a02510.html#a5b4055201d2d8170e179b1ceaa438b9c", null ],
+    [ "handle_signal", "d1/d0c/a02570.html#ga79c3e22498eb2346543aa9c86fd22e58", null ],
+    [ "sig_dfl_mode", "d1/d0c/a02570.html#ga06c1eb6cf3649dc187115565409f91af", null ],
+    [ "sig_prog_mode", "d1/d0c/a02570.html#gaca2de03f6d52d4b11237990e4e605177", null ],
+    [ "signal_handler", "d1/d0c/a02570.html#gaa08a9a8dede37c66c81c3f51a0f338a9", null ],
+    [ "sig_received", "dd/df4/a02510.html#a01a99fc32bd5b471123f6223503c9616", null ]
 ];

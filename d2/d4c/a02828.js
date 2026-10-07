@@ -1,9 +1,10 @@
 var a02828 =
 [
-    [ "color_pairs", "d2/d4c/a02828.html#aa56a3f1781839d74b6b868d0a8f8cf67", null ],
-    [ "mouse", "d2/d4c/a02828.html#a3daacae1fd6133ff0a03d14eff2f48d3", null ],
-    [ "palette256", "d2/d4c/a02828.html#a39bee1dcb7c6daa189aa1e6c236446a8", null ],
-    [ "resize", "d2/d4c/a02828.html#ae8d0e88761c5960620aeefbfe29872ae", null ],
-    [ "truecolor", "d2/d4c/a02828.html#aba1f766c6d1357c46f2497099b61ec59", null ],
-    [ "unicode", "d2/d4c/a02828.html#adab3332ad70a03519b3af0fe08eb95ab", null ]
+    [ "sl_cc", "d2/d4c/a02828.html#aa541bc013b4b808262ee26bf3382354a", null ],
+    [ "sl_cells", "d2/d4c/a02828.html#ac36ec62b31c40714c75ad0ed7e445de3", null ],
+    [ "sl_cnt", "d2/d4c/a02828.html#a1a85d5dca1c0f71f0214d1645a552807", null ],
+    [ "sl_cols", "d2/d4c/a02828.html#a44a3e2f37d5fc3dab3ce807437d6cde1", null ],
+    [ "sl_idx", "d2/d4c/a02828.html#a6a1eaaa11b23afec7fa7309fd1df251f", null ],
+    [ "sl_ln_no", "d2/d4c/a02828.html#a060e1dfe836b0124c9aecbecd64433a3", null ],
+    [ "sl_s", "d2/d4c/a02828.html#ae78ccff231c4252aa0b070e4c6a6ba62", null ]
 ];

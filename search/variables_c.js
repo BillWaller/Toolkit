@@ -1,19 +1,19 @@
 var searchData=
 [
-  ['n_0',['n',['../d1/d88/a02600.html#ac4631c83bda44884c03470b9ed22cf7e',1,'Argv']]],
+  ['n_0',['n',['../d5/dc7/a02744.html#ac4631c83bda44884c03470b9ed22cf7e',1,'Argv']]],
   ['n_5fcols_1',['n_cols',['../d9/d7d/a01880.html#a748d644fe5e7cd87d4a846fc32da5a4f',1,'cm.h']]],
   ['n_5flines_2',['n_lines',['../d9/d7d/a01880.html#a3e123bc1b1277e9c070f9b57109fc776',1,'cm.h']]],
-  ['name_3',['name',['../d0/d1f/a02748.html#aea00bafb75da02f68447f018bb6f00fa',1,'UiSurfaceMeta']]],
-  ['nc_4',['nc',['../d5/dc7/a02744.html#a5553a1629187286a644cfd1422633f2a',1,'UiRuntime']]],
-  ['ncv_5',['ncv',['../df/de1/a02844.html#aaeff8c4b2b3d439d03d8f77b9ae72f29',1,'UiMultiMedia']]],
-  ['next_5fcmd_5fchar_6',['next_cmd_char',['../de/d7b/a02660.html#a1efd676de2bf4edac66ba3ecd11ad5ec',1,'View']]],
-  ['next_5ffile_5fspec_5fptr_7',['next_file_spec_ptr',['../de/d7b/a02660.html#a5825c638a89d4f637393f0fde83b770d',1,'View']]],
-  ['nt_5fbg_8',['nt_bg',['../d9/d4d/a02840.html#abaa9d866202db614de707b2867c959e3',1,'SIO']]],
-  ['nt_5ffg_9',['nt_fg',['../d9/d4d/a02840.html#a5ba7f976eb6ef29220c9b058397161fd',1,'SIO']]],
-  ['nt_5fhl_5fbg_10',['nt_hl_bg',['../d9/d4d/a02840.html#af225ee6294ec1c7c75edfd22067ca94f',1,'SIO']]],
-  ['nt_5fhl_5ffg_11',['nt_hl_fg',['../d9/d4d/a02840.html#ae68b67eac26d22b96143f3cd514e551e',1,'SIO']]],
-  ['nt_5fhl_5frev_5fbg_12',['nt_hl_rev_bg',['../d9/d4d/a02840.html#aa2d7c18339b29a6744976efd4cec5e55',1,'SIO']]],
-  ['nt_5fhl_5frev_5ffg_13',['nt_hl_rev_fg',['../d9/d4d/a02840.html#a3dc5d253ed02f7e71fc4478d923c689c',1,'SIO']]],
-  ['nt_5frev_5fbg_14',['nt_rev_bg',['../d9/d4d/a02840.html#ab251427f7460fdb4c6b25e48f0b7dc15',1,'SIO']]],
-  ['nt_5frev_5ffg_15',['nt_rev_fg',['../d9/d4d/a02840.html#aed89055879848ea33cbebfe190269b42',1,'SIO']]]
+  ['name_3',['name',['../dd/dc4/a02632.html#aea00bafb75da02f68447f018bb6f00fa',1,'UiSurfaceMeta']]],
+  ['nc_4',['nc',['../d4/d7d/a02628.html#a5553a1629187286a644cfd1422633f2a',1,'UiRuntime']]],
+  ['ncv_5',['ncv',['../db/d59/a02728.html#aaeff8c4b2b3d439d03d8f77b9ae72f29',1,'UiMultiMedia']]],
+  ['next_5fcmd_5fchar_6',['next_cmd_char',['../dd/d9b/a02832.html#a1efd676de2bf4edac66ba3ecd11ad5ec',1,'View']]],
+  ['next_5ffile_5fspec_5fptr_7',['next_file_spec_ptr',['../dd/d9b/a02832.html#a5825c638a89d4f637393f0fde83b770d',1,'View']]],
+  ['nt_5fbg_8',['nt_bg',['../d7/deb/a02724.html#abaa9d866202db614de707b2867c959e3',1,'SIO']]],
+  ['nt_5ffg_9',['nt_fg',['../d7/deb/a02724.html#a5ba7f976eb6ef29220c9b058397161fd',1,'SIO']]],
+  ['nt_5fhl_5fbg_10',['nt_hl_bg',['../d7/deb/a02724.html#af225ee6294ec1c7c75edfd22067ca94f',1,'SIO']]],
+  ['nt_5fhl_5ffg_11',['nt_hl_fg',['../d7/deb/a02724.html#ae68b67eac26d22b96143f3cd514e551e',1,'SIO']]],
+  ['nt_5fhl_5frev_5fbg_12',['nt_hl_rev_bg',['../d7/deb/a02724.html#aa2d7c18339b29a6744976efd4cec5e55',1,'SIO']]],
+  ['nt_5fhl_5frev_5ffg_13',['nt_hl_rev_fg',['../d7/deb/a02724.html#a3dc5d253ed02f7e71fc4478d923c689c',1,'SIO']]],
+  ['nt_5frev_5fbg_14',['nt_rev_bg',['../d7/deb/a02724.html#ab251427f7460fdb4c6b25e48f0b7dc15',1,'SIO']]],
+  ['nt_5frev_5ffg_15',['nt_rev_fg',['../d7/deb/a02724.html#aed89055879848ea33cbebfe190269b42',1,'SIO']]]
 ];

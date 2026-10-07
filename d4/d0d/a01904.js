@@ -38,6 +38,7 @@ var a01904 =
     [ "ui_init_color_hex", "d4/d0d/a01904.html#a62c9bdcaf7eadae3d97b4d8c19705484", null ],
     [ "ui_init_pair", "d4/d0d/a01904.html#a48c739ec79a8dfc7f91d837676f0d7b7", null ],
     [ "ui_keypad", "d4/d0d/a01904.html#afcd0cba0c62f0fee4adb4d081e728797", null ],
+    [ "ui_mbstr_to_cellstr", "d4/d0d/a01904.html#aedad4ccdad1dcca88a3dbcfaba5bfa66", null ],
     [ "ui_notcurses_get_nc", "d4/d0d/a01904.html#a845998d0d7f28756baf2757b7b25c883", null ],
     [ "ui_notcurses_surface_get_plane", "d4/d0d/a01904.html#af4c6579469f76e4f3fc86a6573bdbc40", null ],
     [ "ui_pair_content", "d4/d0d/a01904.html#a18759fa08ef5c33844ecb596c852cf50", null ],

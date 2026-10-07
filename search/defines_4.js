@@ -3,7 +3,7 @@ var searchData=
   ['defaulteditor_0',['DEFAULTEDITOR',['../da/d8b/a01871.html#aa691586ba10f51c1cf67f7e9398d3207',1,'common.h']]],
   ['defaultshell_1',['DEFAULTSHELL',['../d9/d7d/a01880.html#a15eda0f69d9c3b732ff2a1420513031a',1,'cm.h']]],
   ['destroy_5fcmenu_2',['destroy_cmenu',['../da/d8b/a01871.html#abf7c9cb0b1721bf2863dcf5cf645eeb3',1,'common.h']]],
-  ['dir_5fbuf_5fsize_3',['DIR_BUF_SIZE',['../dc/de1/a02513.html#a1e10e5a76e64f157f54cdca736621599',1,'lf.c']]],
+  ['dir_5fbuf_5fsize_3',['DIR_BUF_SIZE',['../d2/dab/a02516.html#a1e10e5a76e64f157f54cdca736621599',1,'lf.c']]],
   ['div_5fround_5fup_4',['DIV_ROUND_UP',['../d9/d7d/a01880.html#ae664e7492e37d324831caf2321ddda37',1,'cm.h']]],
-  ['dt_5flnk_5fdir_5',['DT_LNK_DIR',['../dc/de1/a02513.html#a4c9a92c30f8978b057032622be0f16ec',1,'lf.c']]]
+  ['dt_5flnk_5fdir_5',['DT_LNK_DIR',['../d2/dab/a02516.html#a4c9a92c30f8978b057032622be0f16ec',1,'lf.c']]]
 ];

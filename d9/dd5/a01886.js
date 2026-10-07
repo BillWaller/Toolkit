@@ -1,7 +1,7 @@
 var a01886 =
 [
-    [ "Line", "d5/d6a/a02680.html", "d5/d6a/a02680" ],
-    [ "Menu", "de/db4/a02684.html", "de/db4/a02684" ],
+    [ "Line", "d4/d97/a02816.html", "d4/d97/a02816" ],
+    [ "Menu", "d8/deb/a02820.html", "d8/deb/a02820" ],
     [ "MAX_MENU_LINES", "d9/dd5/a01886.html#ac4aac8afc8815b715cd68c7f4c31cde1", null ],
     [ "MenuAction", "d9/dd5/a01886.html#ab99074a1f6b7e8ff7730342913aae3a3", [
       [ "MA_NEW", "d9/dd5/a01886.html#ab99074a1f6b7e8ff7730342913aae3a3a5967abe3643398691f224c1af8cf764b", null ],
@@ -34,5 +34,5 @@ var a01886 =
       [ "MT_CHOICE", "d9/dd5/a01886.html#a76a655b009bde19236e4bbc30df8ceeca95865ba7b6fd4876e243bffae44a5761", null ]
     ] ],
     [ "free_menu_line", "d9/dd5/a01886.html#a9751cef6e3e322c8aac50c78e4f70089", null ],
-    [ "get_command_type", "db/d0b/a02566.html#ga1989771e09ef0e00c4cec786094d1d26", null ]
+    [ "get_command_type", "db/dab/a02567.html#ga1989771e09ef0e00c4cec786094d1d26", null ]
 ];

@@ -1,5 +1,9 @@
 var a02712 =
 [
-    [ "fd", "df/dc7/a02712.html#a9de134d1dc6e6e64d92fe3839d509ebc", null ],
-    [ "token_id", "df/dc7/a02712.html#a7e7a65da93418cbf2a67728aaa585944", null ]
+    [ "color_pairs", "df/dc7/a02712.html#aa56a3f1781839d74b6b868d0a8f8cf67", null ],
+    [ "mouse", "df/dc7/a02712.html#a3daacae1fd6133ff0a03d14eff2f48d3", null ],
+    [ "palette256", "df/dc7/a02712.html#a39bee1dcb7c6daa189aa1e6c236446a8", null ],
+    [ "resize", "df/dc7/a02712.html#ae8d0e88761c5960620aeefbfe29872ae", null ],
+    [ "truecolor", "df/dc7/a02712.html#aba1f766c6d1357c46f2497099b61ec59", null ],
+    [ "unicode", "df/dc7/a02712.html#adab3332ad70a03519b3af0fe08eb95ab", null ]
 ];

@@ -1,8 +1,14 @@
 var a02556 =
 [
-    [ "fork_detach_execvp", "dc/d32/a02556.html#gaf878519c68b24567c915493739b6e979", null ],
-    [ "fork_exec", "dc/d32/a02556.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
-    [ "full_screen_fork_exec", "dc/d32/a02556.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
-    [ "full_screen_shell", "dc/d32/a02556.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
-    [ "shell", "dc/d32/a02556.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
+    [ "Ui_ncurses", "db/d39/a02575.html", "db/d39/a02575" ],
+    [ "ui_backend.h", "d9/d9b/a01889.html", null ],
+    [ "ui_conformance_test.c", "d0/d36/a01916.html", null ],
+    [ "ui_layout.c", "de/da9/a01934.html", null ],
+    [ "ui_layout.h", "dd/d8e/a01898.html", null ],
+    [ "UiFramedSurface", "df/de1/a02844.html", [
+      [ "inner", "df/de1/a02844.html#a9c4324332c5f305d3b5090023448b534", null ],
+      [ "outer", "df/de1/a02844.html#ab9acd9902a56a8627117a5cd927af38f", null ]
+    ] ],
+    [ "ui_framed_surface_destroy", "dc/d32/a02556.html#gafa5c28ac5692fdbb5931d41a4e76b572", null ],
+    [ "ui_framed_surface_new", "dc/d32/a02556.html#ga951fca51a2cf4181d2297fa985087536", null ]
 ];

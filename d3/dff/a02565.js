@@ -1,5 +1,18 @@
 var a02565 =
 [
-    [ "menu_cmd_processor", "d3/dff/a02565.html#gaa5d0e30e7036b72b51c843d0a7e486a1", null ],
-    [ "menu_engine", "d3/dff/a02565.html#ga7d7973d7aac92759dcc86ec52bb038f4", null ]
+    [ "destroy_form", "d3/dff/a02565.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "d3/dff/a02565.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "d3/dff/a02565.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "d3/dff/a02565.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "d3/dff/a02565.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "d3/dff/a02565.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "d3/dff/a02565.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "d3/dff/a02565.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "d3/dff/a02565.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "d3/dff/a02565.html#gabea148e77436a6475ea63438e5c921b8", null ],
+    [ "new_init", "d3/dff/a02565.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "d3/dff/a02565.html#ga53c1b7dfa61a627b874094a12da2d40e", null ],
+    [ "new_pick", "d3/dff/a02565.html#ga2fe0f8ed8c8996826b6167aa109cd08a", null ],
+    [ "new_view", "d3/dff/a02565.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "d3/dff/a02565.html#ga19e3bccd331a201ea6df17139be9b34c", null ]
 ];

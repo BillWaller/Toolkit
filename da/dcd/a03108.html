@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: Performance</title>
+<title>C-Menu: lf</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -110,104 +110,226 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('da/dcd/a03108.
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Performance </div></div>
+  <div class="headertitle"><div class="title">lf </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md51"></a> <img src="../../Performance.png" alt="" class="inline" title="C-Menu Performance"/>    </p>
-<p><b><em>NEW</em></b> C-Menu Installation Guide</p>
-<p><a class="el" href="../../da/dbe/a03091.html" title="C-Menu-UG">C-Menu User Guide</a></p>
-<p><a class="el" href="../../d0/d9b/a03103.html" title="C-Menu - A User Interface Toolkit">C-Menu Installation Guide</a></p>
-<h1 class="doxsection"><a class="anchor" id="design-philosophy-and-optimizations"></a>
-Design Philosophy and Optimizations</h1>
-<p>To build truly outstanding applications with C-Menu, it is essential to understand the design philosophy and optimizations that C-Menu provides and how to leverage them.</p>
-<p>C-Menu was not meant to replace GUI or shell-based applications, but to compliment them by providing an alternative to users who demand the performance and efficiency possible with terminal-based interfaces. C-Menu's design philosophy is centered around simplicity, efficiency, and directness.</p>
-<p>C-Menu provides a powerful set of internal functions that allow you to create complex and responsive applications while minimizing the need for external executables or shells. By using C-Menu's internal functions and direct execution capabilities, you can achieve performance levels that are orders of magnitude beyond than traditional shell and GUI based menu systems.</p>
-<p>Hard-core, veteran programmers tend to prefer the black screen terminal over flashy GUIs for good reason. It's not just a matter of aesthetics, but a reflection of the underlying design philosophy and optimizations that terminal-based applications can provide. Terminal applications have a more direct and efficient interface to the underlying operating system, resulting in exceptional performance and greater control over resources.</p>
-<p>Understandably, less experienced users prefer a GUI interface because a raw terminal interface, while powerful, can be terse and unforgiving. Becoming truly proficient with the terminal environment requires a significant investment of time and effort. In contrast, GUI interfaces are generally more intuitive and user-friendly, especially for those who are not familiar with the Unix command-line. A GUI provides visual cues and interactive elements that can make it easier for users to navigate and perform tasks without needing to remember complex commands or syntax.</p>
-<p>C-Menu's design objective is to provide the best of both worlds by combining the speed and efficiency of terminal-based applications with an attractive, intuitive, and user-friendly framework. C-Menu's internal functions and direct execution capabilities allow you to create applications that are fast and responsive, while its menu system provides a more accessible, intuitive, and visually appealing interface.</p>
-<p>With the C-Menu applications you create, intelligent users will discover a new sense of freedom, unbridled by slugish response times that wreck continuity of thought.</p>
-<h1 class="doxsection"><a class="anchor" id="lf4-test---using-find-and-fd-for-baseline-comparison"></a>
-lf4 test - using find and fd for baseline comparison</h1>
-<h2 class="doxsection"><a class="anchor" id="performance-comparison---file-finders"></a>
-Performance Comparison - File Finders</h2>
-<p>A file finder is one of the most often used utilities, so it's speed and efficiency can make a significant difference in the overall performance of an application, especially if it is called repetitively.</p>
-<p>The following is a performance comparison of three file finders: <span class="tt">find</span>, <span class="tt">fd</span>, and <span class="tt">lf</span>. The test was conducted on a directory containing 517,821 files. The elapsed time for each file finder to complete the search is recorded below.</p>
-<p>find /home/bill 0.37user 0.48system 0:00.86elapsed 99CPU (0avgtext+0avgdata 35076maxresident)k 0inputs+105400outputs (0major+12106minor)pagefaults 0swaps find found 517821 files</p>
-<p>fd . -H -I /home/bill 0.69user 0.61system 0:00.15elapsed 874CPU (0avgtext+0avgdata 159452maxresident)k 0inputs+105464outputs (0major+4233minor)pagefaults 0swaps fd found 517821 files</p>
-<p>lf -H -T7 /home/bill 0.15user 0.34system 0:00.08elapsed 607CPU (0avgtext+0avgdata 38288maxresident)k 0inputs+105464outputs (0major+1482minor)pagefaults 0swaps lf4 found 517821 files</p>
-<hr  />
-<h3 class="doxsection"><a class="anchor" id="summary"></a>
-Summary</h3>
-<p>All 3 file finders found the same number of files, a testament to the accuracy of each. However, only one was the fastest, and that was C-Menu's lf. The operative word is "was".</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">File Finder  </th><th class="markdownTableHeadNone">Elapsed <a class="el" href="../../d1/df5/a02592.html">Time</a>  </th><th class="markdownTableHeadNone">Files Found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0.87 seconds  </td><td class="markdownTableBodyNone">517,821  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">fd  </td><td class="markdownTableBodyNone">0.16 seconds  </td><td class="markdownTableBodyNone">517,821  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">lf4  </td><td class="markdownTableBodyNone">0.08 seconds  </td><td class="markdownTableBodyNone">517,821  </td></tr>
-</table>
-<p>The best laid plans of mice and men often go awry, and so it was with lf4 (RIP). In testing, it was discovered that lf was dropping files due to a QUEUE_FULL condition when run on directory trees with many more directories than files. In the interest of reliability, we decided to make the it fully asynchronous so that it would be impossible to lose files due to queue overruns. As you can see lf5 is very fast, maybe not as fast as lf4, but it has proven to be reliable on the most difficult cases. So, we're ditching lf4 in favor of lf5.</p>
-<p>Revised benchmarks for lf5::</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">File Finder  </th><th class="markdownTableHeadNone">Elapsed <a class="el" href="../../d1/df5/a02592.html">Time</a>  </th><th class="markdownTableHeadNone">Files Found  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">find  </td><td class="markdownTableBodyNone">0.86 seconds  </td><td class="markdownTableBodyNone">518,477  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">fd  </td><td class="markdownTableBodyNone">0.15 seconds  </td><td class="markdownTableBodyNone">518,477  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">lf5  </td><td class="markdownTableBodyNone">0.11 seconds  </td><td class="markdownTableBodyNone">518,477  </td></tr>
-</table>
-<p>The timings were obtained using the following script:</p>
-<div class="fragment"><div class="line">#!/bin/bash</div>
-<div class="line"># lf_tests.sh</div>
-<div class="line">directory=&quot;/home/bill&quot;</div>
-<div class="line">echo find &quot;$directory&quot;</div>
-<div class="line">/bin/time -o time.out find &quot;$directory&quot; | wc -l &gt;find.out 2&gt;/dev/null</div>
-<div class="line">grep -v &quot;^Command&quot; time.out</div>
-<div class="line">echo &quot;find found &quot;$(cat find.out)&quot; files&quot;</div>
-<div class="line">echo</div>
-<div class="line">echo fd . -H -I &quot;$directory&quot;</div>
-<div class="line">/bin/time -o time.out fd . -H -I &quot;$directory&quot; | wc -l &gt;fd.out 2&gt;/dev/null</div>
-<div class="line">grep -v &quot;^Command&quot; time.out</div>
-<div class="line">echo &quot;fd found &quot;$(cat fd.out)&quot; files&quot;</div>
-<div class="line">echo</div>
-<div class="line">echo lf5 -H -T9 &quot;$directory&quot;</div>
-<div class="line">/bin/time -o time.out ./lf5 -H -T9 &quot;$directory&quot; | wc -l &gt;lf.out 2&gt;/dev/null</div>
-<div class="line">grep -v &quot;^Command&quot; time.out</div>
-<div class="line">echo &quot;lf found &quot;$(cat lf.out)&quot; files&quot;</div>
-</div><!-- fragment --><p>The benchmarks between fd and lf5 are too close to call a winner. That's okay because fd and lf5 are both insanely fast.</p>
-<h2 class="doxsection"><a class="anchor" id="c-menu-launcher"></a>
-C-Menu Launcher</h2>
-<p>When you use C-Menu's Example Application <a class="el" href="../../de/db4/a02684.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, you will notice that most menu selections respond instantaneously with no perceptible delay. It just snaps. That level of optimization is achieved in part by avoiding the overhead and unpredictability of using a shell to execute command lines. C-Menu provides direct execution, which results in start-up times an order of magnitude faster than traditional shell-based menu systems. But, C-Menu has something even faster. You can take C-Menu performance to the next level by letting C-Menu call it's internal functions directly, bypassing the start-up overhead of external executables. <a class="el" href="../../de/db4/a02684.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../df/d97/a02676.html">Form</a>, <a class="el" href="../../d4/dfe/a02688.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../de/d7b/a02660.html">View</a>, and CKeys are internal functions. In the Example Applications <a class="el" href="../../de/db4/a02684.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, all except the first command line are internal function calls, which execute in nanoseconds compared to the milliseconds it takes to launch an external executable.</p>
-<p>Here's a breakdown of the performance levels you can expect when using C-Menu:</p>
-<p>Relative performance:</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Performance level  </th><th class="markdownTableHeadNone">Description  </th><th class="markdownTableHeadNone">Elapsed <a class="el" href="../../d1/df5/a02592.html">Time</a>  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Somewhat Slugish  </td><td class="markdownTableBodyNone">Shell based execution  </td><td class="markdownTableBodyNone">10-100 ms  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Fast  </td><td class="markdownTableBodyNone">Direct execution  </td><td class="markdownTableBodyNone">1-10 ms  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Instantaneous  </td><td class="markdownTableBodyNone">Internal function calls  </td><td class="markdownTableBodyNone">0.001 ms  </td></tr>
-</table>
-<p>At 200 ms response, a user will perceive an application as sluggish. At 20 ms, the user will perceive a smooth and responsive experience. At 1 ms, the user will perceive an instantaneous response. Admittedly, no one really cares whether a program loads in 0.001 ms or 1,000 times slower at 1 ms, but in practical applications iterative processes often take thousands of cycles to complete.</p>
-<p>Sometimes it is expedient to use a shell to execute a command line, such as when you want to use shell features like globbing, variable expansion, or complex command pipelines. In those cases, you can explicitly invoke a shell by including "sh -c" or a shell script on the command line.</p>
-<p>When designing with C-Menu, you should select a method in the following order:</p>
-<ul>
-<li>C-Menu internals, such as <a class="el" href="../../de/db4/a02684.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../df/d97/a02676.html">Form</a>, <a class="el" href="../../d4/dfe/a02688.html" title="Pick data structure.">Pick</a>, and <a class="el" href="../../de/d7b/a02660.html">View</a></li>
-<li>direct execution</li>
-<li>shell</li>
-</ul>
-<p>If an internal function call will work, use an internal function call. If not, consider direct execution. Finally, if you need features provided by a shell, use a shell. There is nothing wrong with using a shell when it is appropriate, but you should be aware of the performance implications and use it judiciously.</p>
-<p>C-Menu was designed to support internal function calls and direct execution, so it provides the most commonly needed conveniences such as tilde expansion, file location based on the environment, and piped input and output.</p>
-<p>For piped input and output with internal function calls and direct execution, C-Menu allows the specification of providers and receivers for pipe I-O. Instead of using I/O redirection on the command line with pipe symbols, C-Menu provides more controllable alternatives such as "-S" for specifying a command to execute as a provider (source) of input to a form, pick, or view, "-R" for specifying a command to receive standard output from a form, pick, or view, and "-c" for specifying a command to execute with the selected item as an argument. These features allow you to create powerful and flexible menu items that can interact with other applications and scripts in a more controlled and efficient manner.</p>
-<hr  />
- </div></div><!-- contents -->
+<div class="textblock"><h2 class="doxsection"><a class="anchor" id="ianchor-autotoc_md26ilinebr"></a>
+ianchor-autotoc_md26ilinebr</h2>
+<p>title: "lf" section: 1 header: User Manuals footer: C-Menu Version 0.2.9 author: Bill Waller </p>
+<h2 class="doxsection"><a class="anchor" id="date-june-2026-3"></a>
+date: June 2026</h2>
+<h1 class="doxsection"><a class="anchor" id="name-1"></a>
+NAME</h1>
+<p>lf - lightning find</p>
+<h1 class="doxsection"><a class="anchor" id="synopsis-3"></a>
+SYNOPSIS</h1>
+<p>lf [-iLRS?V] [-a time] [-b time] [-c[s]] [-d number] [-D 123456789] [-e regex] [-E file_spec] [-H[o]] [-p sgrwx] [-r regex] [-s size] [-t pcdbflsu] [-T threads] [-u user name] [&ndash;after=time] [&ndash;before=time] [&ndash;count[=s]] [&ndash;max_depth=number] [&ndash;debug=123456789] [&ndash;ere=regex] [&ndash;error_file_spec=file_spec] [&ndash;include_hidden[=o]] [&ndash;ignore_case] [&ndash;follow_links] [&ndash;include_perms=sgrwx] [&ndash;re=regex] [&ndash;sort_reverse] [&ndash;file_size_min=size] [&ndash;sort] [&ndash;include_types=pcdbflsu] [&ndash;nthreads=threads] [&ndash;user=user name] [&ndash;help] [&ndash;usage] [&ndash;version] [DIRECTORY] [REGULAR_EXPRESSION]</p>
+<h1 class="doxsection"><a class="anchor" id="description-3"></a>
+DESCRIPTION</h1>
+<p>lf recursively reads directories, listing files that match the specified criteria.</p>
+<p>Processing is concurrent on systems with multi-threading support, resulting in significant performance improvements when searching large directory trees.</p>
+<p>lf is easy to use, with a simple and intuitive command-line interface, providing a variety of options for customizing the search criteria.</p>
+<h1 class="doxsection"><a class="anchor" id="options-2"></a>
+OPTIONS</h1>
+<p>-a, &ndash;after=Modified after YYYY-MM-DDTHH:MM:SS</p>
+<p>-b, &ndash;before=Modified before YYYY-MM-DDTHH:MM:SS </p><pre class="fragment">Dates use the ISO 8601 format. The T is a separator between the date and
+time. If the time is not specified, it defaults to 00:00:00. If the date
+is not specified, it defaults to the current date.
+</pre><p>-d, &ndash;max_depth=Depth into directory tree </p><pre class="fragment">Default depth is 0, which means no limit. A depth of 1 means only the
+specified directory, 2 means the specified directory and its immediate
+subdirectories, and so on.
+</pre><p>-D, &ndash;debug=12345678 </p><pre class="fragment">The debug option can be used to print various levels of debugging
+information. The levels are as follows:
+
+1-config        Print the configuration settings.
+2-info          Print informational messages about the program execution.
+3-warnings      Print warning messages about potential issues.
+4-errors        Print error messages about problems encountered during
+                execution.
+5-badlinks      Print messages about broken symbolic links.
+6-trace         Trace ancestor scans for cyclic links.
+7-all           Print all debugging information (config, info, warnings,
+                errors and badlinks).
+8-only_errors:  Print only error messages. This is useful for
+                examining a directory tree for errors.
+
+Debug option arguments may be combined in any order. For example, if
+you want to examine a directory tree for bad and problem links, you
+would use -D5 or -D58.
+</pre><p>-e, &ndash;ere=Exclude regular expression </p><pre class="fragment">The regular expression should be a properly formatted regular expression
+for which matching files will be excluded from the results.
+</pre><p>-H, &ndash;include_hidden Include hidden files </p><pre class="fragment">Use -H to include hidden files and directories, which lf excludes
+by default.
+</pre><p>-i, &ndash;ignore_case ignore case in search </p><pre class="fragment">Use -i to ignore case when searching for files that match the regular
+expression. By default, lf is case-sensitive.
+</pre><p>-L, &ndash;follow_links Follow symbolic links </p><pre class="fragment">Use -L to follow symbolic links. By default, lf does not follow symbolic
+links.
+</pre><p>-p, &ndash;include_perms=sgrwx </p><pre class="fragment">Use -p to include only files with the specified permissions.
+
+x-execute
+w-write
+r-read
+s-setuid
+g-setgid
+
+For example, if you want to include only files that have read and write
+permissions you would use -prw.
+
+To list all files with the setuid bit, you would use -ps.
+</pre><p>-r, &ndash;re=Regular expression to search for </p><pre class="fragment">The regular expression should be a properly formatted regular expression
+for which matching files will be listed in the results. By default, lf
+lists all files that match the other criteria specified by the options.
+If you specify a regular expression, only files that match the regular
+expression will be listed. A regular expression may be specified
+as the second non-option positional argument on the command line or
+as an argument to the -r option.
+</pre><p>-R, &ndash;sort_reverse Sort in Reverse order </p><pre class="fragment">Use -R to sort the results in reverse order. By default, results
+are not sorted.
+</pre><p>-s, &ndash;file_size_min=minimum size </p><pre class="fragment">No Suffix-bytes
+K-kilobytes
+M-Megabytes, or
+G-Gigabytes
+
+Use -s to include only files that are at least the specified size. A
+suffix may be used to specify the size in bytes, kilobytes, megabytes or
+gigabytes. For example, -s10M would include only files that are at least
+10 megabytes in size.
+</pre><p>-S, &ndash;sort Sort in Ascending order </p><pre class="fragment">Use -R to sort the results in ascending order. By default, results
+are not sorted.
+
+Note: This option invokes the sort command internallay. It is likely
+that the user can obtain better results by piping the output of lf through
+a custom sort command taylored to the specific needs of the application.
+
+Example: lf -H | LC_ALL=C sort --parallel=4 --buffer_size=4G
+</pre><p>-t, &ndash;include_types=pcdbflsu </p><pre class="fragment">p-pipe
+c-character_dev
+d-directory
+b-block_dev
+f-regular_file
+l-link
+s-socket
+u-unknown
+
+Use -t to include only files of the specified types. To include only
+regular files and directories, you would use -tdf.
+</pre><p>-T, &ndash;nthreads=Number of threads to use for searching </p><pre class="fragment">Use -T to specify the number of threads to use for searching. By default,
+lf queries the operating system for the number of CPU cores and uses
+about 40% of that value as the number of threads. The optimal number of
+threads to use depends on the number of files in the directory tree and
+the speed of the storage device. If you are searching a directory tree
+with a large number of files, you may want to increase the number of
+threads. If you are searching a directory tree with a small number of
+files, you may want to decrease the number of threads.
+</pre><p>-u, &ndash;user=User Name of file owner </p><pre class="fragment">Use -u to include only files owned by the specified user. The user name
+should be the login name of the user, not the user ID number.
+</pre><p>-?, &ndash;help </p><pre class="fragment">Give this help list
+</pre><p>&ndash;usage </p><pre class="fragment">Give a short usage message
+</pre><p>-V, &ndash;version </p><pre class="fragment">Print program version
+</pre><h1 class="doxsection"><a class="anchor" id="usage-tips"></a>
+USAGE TIPS</h1>
+<p>A space after short options is optional. For example, -s10M and -s 10M are both valid.</p>
+<p>Option arguments may be ganged. For example, to list all files, directories, and links, you can use -t f -t d -t l or -tfdl.</p>
+<p>Mandatory or optional arguments to long options are also mandatory or optional for any corresponding short options.</p>
+<p>If specified, DIRECTORY is the top-level directory to search. REGULAR_EXPRESSION is a properly formatted regular expression for which matching files will be listed.</p>
+<p>Although lf has "-S" and "-R" options for sorting, it is likely that the user can obtain better results by passing the output of lf through a custom sort command taylored to the specific needs of the application. For example, if you want to sort the results in ascending order by file size, you can use the following command adjusted for your system: </p><pre class="fragment">Example: lf -H | LC_ALL=C sort --parallel=4 --buffer_size=4G
+</pre><p>lf does not have an "-exec" option like find. The preferred method for executing commands on files found is to pipe the output lf through xargs. For example, to delete all files found, you can use: </p><pre class="fragment">lf -r '.*\.tmp$' | xargs rm -f
+</pre><p>USE EXTREME CAUTION when using xargs with commands that modify or delete files. Always verify the output of lf before executing any commands that modify or delete files.</p>
+<p>xargs is a standard unix command that reads items from standard input and executes a command with those items as arguments. xargs is a powerful and highly optimized tool for processing large numbers of files. xargs may also be used with find and lf. In fact, we found that passing the output of find through xargs was significantly faster than using the exec option of find.</p>
+<p>If you are replacing find with lf in a script, you should consider that lf omits hidden files and directories by default. Use the "-H" option to include hidden files and directories. Both lf and fd omit the top-level base path from the output, don't prefix file paths, and indicate directories by appending "/".</p>
+<h1 class="doxsection"><a class="anchor" id="examples-4"></a>
+EXAMPLES</h1>
+<p>List all files in the current directory and its subdirectories that have a .txt extension: </p><pre class="fragment">lf -r '.*\.txt$'
+</pre><p>List all C source files in the /usr/src directory that were modified after January 1, 2025: </p><pre class="fragment">lf -r '.*\.[ch]$' -a 2025-01-01T00:00:00 /usr/src
+</pre><p>List all files in the /var/log directory that are larger than 100 megabytes: </p><pre class="fragment">lf -s 100M /var/log
+</pre><p>List all files in the /home directory that were modified after January 1, 2025: </p><pre class="fragment">lf -a 2025-01-01T00:00:00 /home
+</pre><p>List all files in the /usr directory that are owned by the user "bill": </p><pre class="fragment">lf -u bill /usr
+</pre><p>List only broken or cyclic symbolic links: </p><pre class="fragment">-D5 tells lf to print messages about broken symbolic links.
+-D8 tells lf to print only error messages.
+Option arguments may be combined in any order. For example:
+
+lf -L -D85 /path/to/directory
+
+Sample output:
+
+STAT_FAIL,XXXX,No such file or directory
+CYCLIC LINK:./FlameGraph/test/TEST_CYCLIC_LINK==&gt;../../FlameGraph
+Errors: 2
+
+Always delete the link listed on the left, not the target on the right.
+-D58 is the preferred way to find broken or cyclic symbolic links.
+The 5 tells lf to report bad links and 8 to only report errors.
+</pre><p>List all files in the /tmp directory that are symbolic links: </p><pre class="fragment">lf -t l /tmp
+</pre><p>List all files in the /var directory that have read and write permissions for the owner: </p><pre class="fragment">lf -p rw /var
+</pre><p>List all files in the /home directory that have a .log extension and were modified before June 1, 2025: </p><pre class="fragment">lf -r '.*\.log$' -b 2025-06-01T00:00:00 /home
+</pre><p>Count the number of files in a directory tree using only 2 threads: </p><pre class="fragment">lf -L -H -T2 /path/to/directory | wc -l
+
+If you don't specify the number of threads, lf will use a reasonable value.
+</pre><p>Compare number of files found in the current working directory by find, fd, and lf: </p><pre class="fragment">find . | wc -l
+581
+
+fd . -H -I | wc -l
+580
+
+lf -H | wc -l
+580
+
+Note: Subtract 1 from the count reported by find as it includes the top-level
+base path. fd and lf do not include the top-level base path as that would be
+tautilogical.
+</pre><p>List all man pages that begin with "view" in MANPATH. </p><pre class="fragment">Using the script, ~/menuapp/bin/lf_path_str.sh, type:
+
+lf_path_str.sh $MANPATH '\/view.*$'
+
+Output:
+
+/home/bill/menuapp/man/man1/view.1.gz
+/usr/share/man/de/man1/view.1.gz
+/usr/share/man/da/man1/view.1.gz
+/usr/share/man/ru/man1/view.1.gz
+/usr/share/man/ja/man1/view.1.gz
+/usr/share/man/tr/man1/view.1.gz
+/usr/share/man/fr/man1/view.1.gz
+/usr/share/man/pl/man1/view.1.gz
+/usr/share/man/sv/man1/view.1.gz
+/usr/share/man/it/man1/view.1.gz
+/usr/share/man/man1/view.1.gz
+
+NOTE: Only the first file listed is C-Menu view's manual page. I suspect the
+remainder are symbolic links to vim.
+
+This can be verified with the two following commands:
+
+lf_path_str.sh $PATH '\/view$'
+
+Output:
+
+/home/bill/menuapp/bin/view
+/usr/bin/view
+/bin/view
+
+Then type:
+
+/bin/view --version | head -1
+
+Output:
+
+VIM - Vi IMproved 9.2 (2026 Feb 14)
+</pre><h1 class="doxsection"><a class="anchor" id="reporting-bugs"></a>
+REPORTING BUGS</h1>
+<p>Report bugs to <a href="#" onclick="location.href='mai'+'lto:'+'bil'+'lx'+'wal'+'le'+'r@g'+'ma'+'il.'+'co'+'m'; return false;">billx<span class="obfuscator">.nosp@m.</span>wall<span class="obfuscator">.nosp@m.</span>er@gm<span class="obfuscator">.nosp@m.</span>ail.<span class="obfuscator">.nosp@m.</span>com</a>.</p>
+<h1 class="doxsection"><a class="anchor" id="copyright-2"></a>
+COPYRIGHT</h1>
+<p>Copyright © 2026 Bill Waller.</p>
+<h1 class="doxsection"><a class="anchor" id="license-2"></a>
+LICENSE</h1>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<h1 class="doxsection"><a class="anchor" id="see-also-3"></a>
+SEE ALSO</h1>
+<p>C-Menu <a class="el" href="../../d8/deb/a02820.html" title="The Menu structure is the main data structure for the menu application, containing all the informatio...">Menu</a>, <a class="el" href="../../d1/d19/a02812.html">Form</a>, <a class="el" href="../../dd/dfa/a02824.html" title="Pick data structure.">Pick</a>, <a class="el" href="../../dd/d9b/a02832.html">View</a>, RSH, C-Keys </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

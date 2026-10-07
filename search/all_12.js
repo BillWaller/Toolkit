@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['key_0',['key',['../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8',1,'UiEvent']]],
-  ['key_20characters_1',['Menu Key characters',['../d9/dc2/a03106.html#menu-key-characters',1,'']]],
-  ['key_20features_2',['Key Features',['../da/d4a/a03107.html#form-key-features',1,'Form Key Features'],['../da/d4a/a03107.html#key-features',1,'Key Features']]],
-  ['key_20value_20pairs_3',['Key Value Pairs',['../d2/d7a/a03115.html#key-value-pairs',1,'']]],
+  ['key_0',['key',['../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8',1,'UiEvent']]],
+  ['key_20characters_1',['Menu Key characters',['../df/d64/a03110.html#menu-key-characters',1,'']]],
+  ['key_20features_2',['Key Features',['../df/d9e/a03111.html#form-key-features',1,'Form Key Features'],['../df/d9e/a03111.html#key-features',1,'Key Features']]],
+  ['key_20value_20pairs_3',['Key Value Pairs',['../d2/df0/a03119.html#key-value-pairs',1,'']]],
   ['key_5faltdel_4',['KEY_ALTDEL',['../d9/d9b/a01889.html#a994bc87be1eb918768f1ab7f9f325f1c',1,'ui_backend.h']]],
   ['key_5faltdown_5',['KEY_ALTDOWN',['../d9/d9b/a01889.html#a199a6d2613c848c2d31b6b63997afdf2',1,'ui_backend.h']]],
   ['key_5faltend_6',['KEY_ALTEND',['../d9/d9b/a01889.html#a109cb8d491e7b42b53b2ece262cd213a',1,'ui_backend.h']]],
@@ -16,11 +16,12 @@ var searchData=
   ['key_5faltpgup_13',['KEY_ALTPGUP',['../d9/d9b/a01889.html#aad065eab63ceb77e0e601dfdc9968d70',1,'ui_backend.h']]],
   ['key_5faltright_14',['KEY_ALTRIGHT',['../d9/d9b/a01889.html#a8bfe766d44a69587427b117680587450',1,'ui_backend.h']]],
   ['key_5faltup_15',['KEY_ALTUP',['../d9/d9b/a01889.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b',1,'ui_backend.h']]],
-  ['keyboard_20mouse_20input_16',['C-Keys - Diagnose Keyboard/Mouse Input',['../da/d4a/a03107.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keybound_17',['keybound',['../dd/dee/a02700.html#a72d84bc244fee4d28cea262d54109f21',1,'UiEvent']]],
-  ['keys_18',['Motion Keys',['../d7/d54/a03089.html#motion-keys',1,'']]],
-  ['keys_20diagnose_20keyboard_20mouse_20input_19',['C-Keys - Diagnose Keyboard/Mouse Input',['../da/d4a/a03107.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
-  ['keys_20rsh_20and_20lf_20',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../da/d4a/a03107.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
-  ['kitty_21',['Kitty',['../d8/db1/a03098.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../da/dbe/a03091.html#htop-in-kitty',1,'HTOP (in Kitty)'],['../db/dbc/a03114.html#kitty',1,'Kitty']]],
-  ['kitty_20configuration_22',['Kitty Configuration',['../d9/d5e/a03086.html#kitty-configuration',1,'Kitty Configuration'],['../d4/d6e/a03099.html#kitty-configuration-1',1,'Kitty Configuration']]]
+  ['keyboard_20mouse_20input_16',['C-Keys - Diagnose Keyboard/Mouse Input',['../df/d9e/a03111.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keybound_17',['keybound',['../dc/d28/a02584.html#a72d84bc244fee4d28cea262d54109f21',1,'UiEvent']]],
+  ['keys_18',['Motion Keys',['../d8/d4b/a03093.html#motion-keys',1,'']]],
+  ['keys_20diagnose_20keyboard_20mouse_20input_19',['C-Keys - Diagnose Keyboard/Mouse Input',['../df/d9e/a03111.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keys_20rsh_20and_20lf_20',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../df/d9e/a03111.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
+  ['kitty_21',['Kitty',['../d8/d4f/a03102.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../d0/d2b/a03095.html#htop-in-kitty',1,'HTOP (in Kitty)'],['../dc/d00/a03118.html#kitty',1,'Kitty']]],
+  ['kitty_20configuration_22',['Kitty Configuration',['../d2/d8b/a03090.html#kitty-configuration-1',1,'Kitty Configuration'],['../d0/d9b/a03103.html#kitty-configuration',1,'Kitty Configuration']]],
+  ['kstrlen_23',['KSTRLEN',['../d2/d35/a02480.html#aa63e34e0555c7f92e84b59ec1a63fa3c',1,'curskeys.c']]]
 ];

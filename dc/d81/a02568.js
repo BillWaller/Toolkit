@@ -1,10 +1,20 @@
 var a02568 =
 [
-    [ "capture_program_tioctl", "dc/d81/a02568.html#gaf29f9113aec5a5113e3087de7ef81b40", null ],
-    [ "capture_shell_tioctl", "dc/d81/a02568.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
-    [ "di_getch", "dc/d81/a02568.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
-    [ "mk_raw_tioctl", "dc/d81/a02568.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
-    [ "restore_program_tioctl", "dc/d81/a02568.html#ga0469f8a2361eaac0cf09c9d86c1ff12c", null ],
-    [ "restore_shell_tioctl", "dc/d81/a02568.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
-    [ "set_sane_tioctl", "dc/d81/a02568.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
+    [ "deselect_object", "dc/d81/a02568.html#ga98b36615c0627c4195c40b6c23d6062a", null ],
+    [ "destroy_pick_view", "dc/d81/a02568.html#ga6d6cf40c6027df6af085adaf52f35130", null ],
+    [ "display_pick_help", "dc/d81/a02568.html#gaeebc4c0b94ca97d753e10a0cd1798730", null ],
+    [ "display_pick_page", "dc/d81/a02568.html#gabdcc916b6e3ac452000c280ec5f0d3cc", null ],
+    [ "exec_objects", "dc/d81/a02568.html#gaf7fcbb1c8b67a4d11c86ba7209f397c2", null ],
+    [ "init_pick", "dc/d81/a02568.html#gaa4c8245bdd9e9c767f83eea931804c10", null ],
+    [ "match_objects", "dc/d81/a02568.html#ga91b2cda407803ee4367f7efd5487863c", null ],
+    [ "new_pick_view", "dc/d81/a02568.html#ga41d1534c1e985c35c7ca725f0b184e17", null ],
+    [ "new_view_file", "dc/d81/a02568.html#gac22ea664b7423900ca62515098d8841a", null ],
+    [ "output_objects", "dc/d81/a02568.html#ga8feb6cd586d503a676b831ec722576fb", null ],
+    [ "pick_std_chyron", "dc/d81/a02568.html#ga6e4762c27b7409e55dcc20ff27aa30d5", null ],
+    [ "picker", "dc/d81/a02568.html#ga0dae7df97392da1a79cba0f852c11f5f", null ],
+    [ "read_pick_input", "dc/d81/a02568.html#gaabda879000cf8135245ef451de08f780", null ],
+    [ "reverse_object", "dc/d81/a02568.html#gab2173ff8fb800d126c180487744672d5", null ],
+    [ "save_object", "dc/d81/a02568.html#ga02f90007f2422dd2094ab64569e157f0", null ],
+    [ "toggle_object", "dc/d81/a02568.html#ga036c2f9cdf302cced4d9b703022664c0", null ],
+    [ "unreverse_object", "dc/d81/a02568.html#ga650262f8279502ebc73607394dd7af13", null ]
 ];

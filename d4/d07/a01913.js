@@ -2,6 +2,7 @@ var a01913 =
 [
     [ "_XOPEN_SOURCE_EXTENDED", "d4/d07/a01913.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
     [ "fast_exit", "d4/d07/a01913.html#a9bdd6decf7baf81956762eba1368b7c6", null ],
+    [ "ui__mbstr_to_cellstr", "d4/d07/a01913.html#a2f94337a08d97f0e203d850352ab28ce", null ],
     [ "ui_add_pair", "d4/d07/a01913.html#a79f44b36b1028e6f250584768221cd77", null ],
     [ "ui_bkgd", "d4/d07/a01913.html#a735246250c367d2d9a24e618d934eead", null ],
     [ "ui_bkgdset", "d4/d07/a01913.html#add25c2e9b07739569639a3e9263cb71c", null ],
@@ -18,6 +19,7 @@ var a01913 =
     [ "ui_cursor_enable_yx", "d4/d07/a01913.html#a39facb01e96e2fee14862c7e4864fe92", null ],
     [ "ui_cursor_move", "d4/d07/a01913.html#a59231dfa736bd1b8d43c716a22a75a47", null ],
     [ "ui_def_prog_mode", "d4/d07/a01913.html#adf7c5584066b9eff13ffead0469df309", null ],
+    [ "ui_destroy_curses", "d4/d07/a01913.html#aad29c13406ec216ae96e73229f1ee22b", null ],
     [ "ui_doupdate", "d4/d07/a01913.html#ade5b2a2690427e9de8ac3451088b2868", null ],
     [ "ui_endwin", "d4/d07/a01913.html#abfda5a0a0772a2f5dc0baf9d9a196232", null ],
     [ "ui_erase", "d4/d07/a01913.html#a9ebc52f9edce95d47a2b8d5c959b9a86", null ],

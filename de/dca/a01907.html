@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('de/dca/a01907.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ui_ncurses_input.c File Reference<div class="ingroups"><a class="el" href="../../dc/db2/a02574.html">Ui Backend</a> &raquo; <a class="el" href="../../db/d39/a02575.html">Ui_ncurses</a></div></div></div>
+  <div class="headertitle"><div class="title">ui_ncurses_input.c File Reference<div class="ingroups"><a class="el" href="../../dc/d32/a02556.html">Ui Backend</a> &raquo; <a class="el" href="../../db/d39/a02575.html">Ui_ncurses</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('de/dca/a01907.
 <div class="textblock"><code>#include &quot;<a class="el" href="../../d9/d7d/a01880_source.html">cm.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d9/d9b/a01889_source.html">ui_backend.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../db/d29/a01895_source.html">ui_ncurses_internal.h</a>&quot;</code><br />
+<code>#include &lt;poll.h&gt;</code><br />
 <code>#include &lt;stddef.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;termios.h&gt;</code><br />
@@ -132,9 +133,11 @@ Include dependency graph for ui_ncurses_input.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aad0095bc404840ab14e69eb07615819a" id="r_aad0095bc404840ab14e69eb07615819a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aad0095bc404840ab14e69eb07615819a">ui_get_event</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, UiChyron *chyron, <a class="el" href="../../dd/dee/a02700.html">UiEvent</a> *ev, int timeout_ms)</td></tr>
+<tr class="memitem:a4b663e4593a265aefada937ac536ee38" id="r_a4b663e4593a265aefada937ac536ee38"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4b663e4593a265aefada937ac536ee38">ui_flush_input</a> ()</td></tr>
+<tr class="memdesc:a4b663e4593a265aefada937ac536ee38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush any pending input events from the <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context. This function discards any input events that have been queued but not yet processed.  <br /></td></tr>
+<tr class="memitem:aad0095bc404840ab14e69eb07615819a" id="r_aad0095bc404840ab14e69eb07615819a"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#aad0095bc404840ab14e69eb07615819a">ui_get_event</a> (<a class="el" href="../../dd/d32/a02636.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, UiChyron *chyron, <a class="el" href="../../dc/d28/a02584.html">UiEvent</a> *ev, int timeout_ms)</td></tr>
 <tr class="memdesc:aad0095bc404840ab14e69eb07615819a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read input events.  <br /></td></tr>
-<tr class="memitem:a10e0060bcd94b6d54f24dec45527aacd" id="r_a10e0060bcd94b6d54f24dec45527aacd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a10e0060bcd94b6d54f24dec45527aacd">ui_get_event_no_mouse</a> (<a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, <a class="el" href="../../dd/dee/a02700.html">UiEvent</a> *ev)</td></tr>
+<tr class="memitem:a10e0060bcd94b6d54f24dec45527aacd" id="r_a10e0060bcd94b6d54f24dec45527aacd"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a10e0060bcd94b6d54f24dec45527aacd">ui_get_event_no_mouse</a> (<a class="el" href="../../dd/d32/a02636.html">UiSurface</a> *s, <a class="el" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> w, <a class="el" href="../../dc/d28/a02584.html">UiEvent</a> *ev)</td></tr>
 <tr class="memdesc:a10e0060bcd94b6d54f24dec45527aacd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for an input event on <code class="param">target</code> (or stdscr if NULL) without mouse support.  <br /></td></tr>
 <tr class="memitem:a25b4acfd10ea4adf8584b7e9cc547c60" id="r_a25b4acfd10ea4adf8584b7e9cc547c60"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a25b4acfd10ea4adf8584b7e9cc547c60">ui_mice_enable</a> (int mask)</td></tr>
 <tr class="memdesc:a25b4acfd10ea4adf8584b7e9cc547c60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable mouse support.  <br /></td></tr>
@@ -143,10 +146,46 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>NCurses UI backend — input handling. </p>
-<p>Translates raw NCurses key codes and mouse events into the portable <a class="el" href="../../dd/dee/a02700.html">UiEvent</a> representation defined in <a class="el" href="../../d9/d9b/a01889.html" title="Backend API for terminal UI library.">ui_backend.h</a>. </p>
+<p>Translates raw NCurses key codes and mouse events into the portable <a class="el" href="../../dc/d28/a02584.html">UiEvent</a> representation defined in <a class="el" href="../../d9/d9b/a01889.html" title="Backend API for terminal UI library.">ui_backend.h</a>. </p>
 
 <p class="definition">Definition in file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a4b663e4593a265aefada937ac536ee38" name="a4b663e4593a265aefada937ac536ee38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b663e4593a265aefada937ac536ee38">&#9670;&#160;</a></span>ui_flush_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ui_flush_input </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Flush any pending input events from the <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> context. This function discards any input events that have been queued but not yet processed. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00102">102</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  102</span>                      {</div>
+<div class="line"><span class="lineno">  103</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a> &amp;&amp; <a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;tty_fd &gt;= 0) {</div>
+<div class="line"><span class="lineno">  104</span>        tcflush(<a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;tty_fd, TCIFLUSH);</div>
+<div class="line"><span class="lineno">  105</span>    }</div>
+<div class="line"><span class="lineno">  106</span>}</div>
+<div class="ttc" id="aa01913_html_a9ecaf8df0a838e8587a8f370b18702f9"><div class="ttname"><a href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a></div><div class="ttdeci">UiRuntime * ui</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00039">ui_ncurses.c:39</a></div></div>
+</div><!-- fragment -->
+<p class="reference">References <a class="el" href="../../d4/d07/a01913_source.html#l00039">ui</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="../../de/dca/a01907_source.html#l00116">ui_get_event()</a>, <a class="el" href="../../de/dca/a01907_source.html#l00234">ui_get_event_no_mouse()</a>, and <a class="el" href="../../d1/ded/a02471_source.html#l00299">view_init_input()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="../../de/dca/a01907_a4b663e4593a265aefada937ac536ee38_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+
+</div>
+</div>
 <a id="aad0095bc404840ab14e69eb07615819a" name="aad0095bc404840ab14e69eb07615819a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad0095bc404840ab14e69eb07615819a">&#9670;&#160;</a></span>ui_get_event()</h2>
 
@@ -156,7 +195,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int ui_get_event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../dd/d32/a02636.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -171,7 +210,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../dd/dee/a02700.html">UiEvent</a> *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../dc/d28/a02584.html">UiEvent</a> *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -198,118 +237,160 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">ui</td><td>UI runtime context. </td></tr>
     <tr><td class="paramname">target</td><td>Unused for <a class="el" href="../../d9/d9b/a01889.html#a677ce080db3173ae8fafb812e8fbaaaa">NotCurses</a> (events are global to the context). </td></tr>
-    <tr><td class="paramname">ev</td><td>Output <a class="el" href="../../dd/dee/a02700.html">UiEvent</a> structure. </td></tr>
+    <tr><td class="paramname">ev</td><td>Output <a class="el" href="../../dc/d28/a02584.html">UiEvent</a> structure. </td></tr>
     <tr><td class="paramname">timeout_ms</td><td>Milliseconds to wait; -1 = block indefinitely. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if <code class="param">ui</code> or <code class="param">ev</code> is NULL. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00109">109</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  109</span>                                                                                      {</div>
-<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">if</span> (!ev)</div>
-<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  112</span>    memset(ev, 0, <span class="keyword">sizeof</span>(*ev));</div>
-<div class="line"><span class="lineno">  113</span>    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);</div>
-<div class="line"><span class="lineno">  114</span>    <span class="keywordflow">if</span> (timeout_ms &lt;= 0) {</div>
-<div class="line"><span class="lineno">  115</span>        timeout_ms = -1;</div>
-<div class="line"><span class="lineno">  116</span>    } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  117</span>        wtimeout(s-&gt;mwin[w], timeout_ms);</div>
-<div class="line"><span class="lineno">  118</span>    <span class="keywordtype">int</span> ch;</div>
-<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  120</span>        <span class="comment">// qiflush();</span></div>
-<div class="line"><span class="lineno">  121</span>        tcflush(0, TCIOFLUSH);</div>
-<div class="line"><span class="lineno">  122</span>        curs_set(2);</div>
-<div class="line"><span class="lineno">  123</span>        ch = wgetch(s-&gt;mwin[w]);</div>
-<div class="line"><span class="lineno">  124</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> != 0) {</div>
-<div class="line"><span class="lineno">  125</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d9/d7d/a01880.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal</a>(<a class="code hl_variable" href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a>))</div>
-<div class="line"><span class="lineno">  126</span>                ch = <a class="code hl_function" href="../../d2/ddf/a02573.html#gadbb5af31188d993cc9346275116bc4ba">ui_display_error</a>(<a class="code hl_variable" href="../../d4/dff/a01910.html#abd472199e7a5be1df55e04807ece4878">em0</a>, <a class="code hl_variable" href="../../d4/dff/a01910.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <a class="code hl_variable" href="../../d4/dff/a01910.html#a3ccac42aaedcc05eddba5d59ca3d6e71">em2</a>, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">  127</span>            <span class="keywordflow">if</span> (ch == <span class="charliteral">&#39;q&#39;</span> || ch == <span class="charliteral">&#39;Q&#39;</span> || ch == <a class="code hl_define" href="../../db/d29/a01895.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a>)</div>
-<div class="line"><span class="lineno">  128</span>                exit(EXIT_FAILURE);</div>
-<div class="line"><span class="lineno">  129</span>            <a class="code hl_variable" href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0;</div>
-<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  131</span>        }</div>
-<div class="line"><span class="lineno">  132</span>        <span class="keywordflow">if</span> (timeout_ms &gt; 0 &amp;&amp; ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>) {</div>
-<div class="line"><span class="lineno">  133</span>            ch = 0;</div>
-<div class="line"><span class="lineno">  134</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  135</span>        }</div>
-<div class="line"><span class="lineno">  136</span>        <span class="keywordflow">if</span> (ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>)</div>
-<div class="line"><span class="lineno">  137</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  138</span>        ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> = translate_key(ch);</div>
-<div class="line"><span class="lineno">  139</span>        <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_define" href="../../db/d29/a01895.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a>)</div>
-<div class="line"><span class="lineno">  140</span>            ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a1bdc934f63956460595a1a366cf5fe1a">ch</a> = (uint32_t)ch; <span class="comment">/* Unicode codepoint */</span></div>
-<div class="line"><span class="lineno">  141</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_define" href="../../db/d29/a01895.html#a2ccd72de1dd9409e8f0827cbaee18f6a">UIKEY_MOUSE</a>) {</div>
-<div class="line"><span class="lineno">  142</span>            MEVENT me;</div>
-<div class="line"><span class="lineno">  143</span>            <span class="keywordflow">if</span> (getmouse(&amp;me) != OK) {</div>
-<div class="line"><span class="lineno">  144</span>                ch = 0;</div>
-<div class="line"><span class="lineno">  145</span>                <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">  146</span>            }</div>
-<div class="line"><span class="lineno">  147</span>            ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a532d6e82825a07b60de3ebde403d3133">bstate</a> = me.bstate;</div>
-<div class="line"><span class="lineno">  148</span>            ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a672605a27ab0de7bb229dab49a9b892a">y</a> = me.y;</div>
-<div class="line"><span class="lineno">  149</span>            ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#ab94334ecc966cb3af9d51cd363b4acda">x</a> = me.x;</div>
-<div class="line"><span class="lineno">  150</span>            <span class="keywordflow">if</span> (me.bstate == <a class="code hl_define" href="../../db/d29/a01895.html#a2f75a9fc5a25f8be640373909b89b477">UIKEY_BUTTON4_PRESSED</a>)</div>
-<div class="line"><span class="lineno">  151</span>                ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#aa08bfc431294b6a8f2d50b08b62704df">UIKEY_SCROLL_UP</a>;</div>
-<div class="line"><span class="lineno">  152</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (me.bstate == <a class="code hl_define" href="../../db/d29/a01895.html#a54820d6d70fdefc22706a400696de229">UIKEY_BUTTON5_PRESSED</a>)</div>
-<div class="line"><span class="lineno">  153</span>                ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#ac8303efbb05af01aec4ae002cd9294a3">UIKEY_SCROLL_DOWN</a>;</div>
-<div class="line"><span class="lineno">  154</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (me.bstate == <a class="code hl_define" href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>)</div>
-<div class="line"><span class="lineno">  155</span>                ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>;</div>
-<div class="line"><span class="lineno">  156</span>            <span class="keywordflow">for</span> (<a class="code hl_enumeration" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> i = WIN; i &lt; <a class="code hl_enumvalue" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693abb28c40d8caba86df68bfc14d867ab1b">SUB_SFC_MAX</a>; i++) {</div>
-<div class="line"><span class="lineno">  157</span>                <span class="keywordflow">if</span> (s-&gt;mwin[i] != NULL &amp;&amp;</div>
-<div class="line"><span class="lineno">  158</span>                    wenclose(s-&gt;mwin[i], me.y, me.x) &amp;&amp;</div>
-<div class="line"><span class="lineno">  159</span>                    wmouse_trafo(s-&gt;mwin[i], &amp;me.y, &amp;me.x, <span class="keyword">false</span>)) {</div>
-<div class="line"><span class="lineno">  160</span>                    ch = ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a>;</div>
-<div class="line"><span class="lineno">  161</span>                    ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a532d6e82825a07b60de3ebde403d3133">bstate</a> = me.bstate;</div>
-<div class="line"><span class="lineno">  162</span>                    ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a7c3740af17212322015843a47ab3a64b">in_win</a> = i;</div>
-<div class="line"><span class="lineno">  163</span>                    ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a672605a27ab0de7bb229dab49a9b892a">y</a> = me.y;</div>
-<div class="line"><span class="lineno">  164</span>                    ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#ab94334ecc966cb3af9d51cd363b4acda">x</a> = me.x;</div>
-<div class="line"><span class="lineno">  165</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  166</span>                }</div>
-<div class="line"><span class="lineno">  167</span>            }</div>
-<div class="line"><span class="lineno">  168</span>            <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a7c3740af17212322015843a47ab3a64b">in_win</a> == w)</div>
-<div class="line"><span class="lineno">  169</span>                ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#aff08a9b47830423c166d4bf0064b6c0e">mouse_inside</a> = <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  170</span>            <span class="keywordflow">if</span> (chyron) {</div>
-<div class="line"><span class="lineno">  171</span>                <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a7c3740af17212322015843a47ab3a64b">in_win</a> == chyron-&gt;w &amp;&amp; ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a672605a27ab0de7bb229dab49a9b892a">y</a> == chyron-&gt;y) {</div>
-<div class="line"><span class="lineno">  172</span>                    ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>;</div>
-<div class="line"><span class="lineno">  173</span>                    ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> = <a class="code hl_function" href="../../d4/dff/a01910.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a>(chyron, ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#ab94334ecc966cb3af9d51cd363b4acda">x</a>);</div>
-<div class="line"><span class="lineno">  174</span>                    <span class="keywordflow">return</span> ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a>;</div>
-<div class="line"><span class="lineno">  175</span>                } <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  176</span>                    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  177</span>            }</div>
-<div class="line"><span class="lineno">  178</span>        }</div>
-<div class="line"><span class="lineno">  179</span>    } <span class="keywordflow">while</span> (ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>);</div>
-<div class="line"><span class="lineno">  180</span>    curs_set(0);</div>
-<div class="line"><span class="lineno">  181</span>    <span class="keywordflow">return</span> ch;</div>
-<div class="line"><span class="lineno">  182</span>}</div>
-<div class="ttc" id="aa01880_html_a01a99fc32bd5b471123f6223503c9616"><div class="ttname"><a href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a></div><div class="ttdeci">volatile sig_atomic_t sig_received</div><div class="ttdef"><b>Definition</b> <a href="../../de/dbd/a02507_source.html#l00032">sig.c:32</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00116">116</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  116</span>                                                                                      {</div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordflow">if</span> (!ev)</div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordtype">int</span> ch;</div>
+<div class="line"><span class="lineno">  120</span>    <a class="code hl_function" href="#a4b663e4593a265aefada937ac536ee38">ui_flush_input</a>();</div>
+<div class="line"><span class="lineno">  121</span>    <a class="code hl_function" href="../../d9/d9b/a01889.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a>();</div>
+<div class="line"><span class="lineno">  122</span>    <span class="keywordflow">if</span> (timeout_ms &lt; 0)</div>
+<div class="line"><span class="lineno">  123</span>        timeout_ms = -1; <span class="comment">// Block waiting for input</span></div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">if</span> (timeout_ms &gt; 0) {</div>
+<div class="line"><span class="lineno">  125</span>        <span class="comment">// ------------------------------------------------------------</span></div>
+<div class="line"><span class="lineno">  126</span>        <span class="comment">// Poll for input on the TTY and any registered external files</span></div>
+<div class="line"><span class="lineno">  127</span>        <span class="comment">// ------------------------------------------------------------</span></div>
+<div class="line"><span class="lineno">  128</span>        <span class="keyword">struct </span>pollfd fds[1 + <a class="code hl_define" href="../../d9/d9b/a01889.html#a3d28c360dec30f01763ff080a157399e">MAX_EXT_FDS</a>];</div>
+<div class="line"><span class="lineno">  129</span>        <span class="keywordtype">int</span> token_id;</div>
+<div class="line"><span class="lineno">  130</span>        <span class="keywordtype">int</span> reg_idx;</div>
+<div class="line"><span class="lineno">  131</span>        memset(fds, 0, <span class="keyword">sizeof</span>(fds));</div>
+<div class="line"><span class="lineno">  132</span>        fds[0].fd = <a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>-&gt;tty_fd;</div>
+<div class="line"><span class="lineno">  133</span>        fds[0].events = POLLIN; <span class="comment">// also POLLERR | POLLHUP | POLLNVAL</span></div>
+<div class="line"><span class="lineno">  134</span>        nfds_t nfds = 1;</div>
+<div class="line"><span class="lineno">  135</span>        nfds_t ext_start_idx = nfds;</div>
+<div class="line"><span class="lineno">  136</span>        <span class="keywordflow">for</span> (nfds_t i = 0; i &lt; <a class="code hl_variable" href="../../d9/d9b/a01889.html#a4516127c5edbc6addb4b5db01b9e6600">ui_ctx</a>.ext_nfds; i++) {</div>
+<div class="line"><span class="lineno">  137</span>            fds[nfds].fd = <a class="code hl_variable" href="../../d9/d9b/a01889.html#a4516127c5edbc6addb4b5db01b9e6600">ui_ctx</a>.ext_fds[i].fd;</div>
+<div class="line"><span class="lineno">  138</span>            fds[nfds].events = POLLIN; <span class="comment">// also POLLERR | POLLHUP | POLLNVAL</span></div>
+<div class="line"><span class="lineno">  139</span>            nfds++;</div>
+<div class="line"><span class="lineno">  140</span>        }</div>
+<div class="line"><span class="lineno">  141</span>        <span class="keywordtype">int</span> poll_rc = poll(fds, nfds, timeout_ms);</div>
+<div class="line"><span class="lineno">  142</span>        <span class="keywordflow">if</span> (poll_rc &lt; 0) {</div>
+<div class="line"><span class="lineno">  143</span>            <span class="keywordflow">if</span> (errno == EINTR)</div>
+<div class="line"><span class="lineno">  144</span>                <span class="keywordflow">return</span> 0; <span class="comment">// continue</span></div>
+<div class="line"><span class="lineno">  145</span>            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  146</span>        }</div>
+<div class="line"><span class="lineno">  147</span>        <span class="keywordflow">if</span> (poll_rc == 0) { <span class="comment">// timed out with no input</span></div>
+<div class="line"><span class="lineno">  148</span>            token_id = <a class="code hl_define" href="../../db/d29/a01895.html#a0fbe956799129687b62e86e837351c49">UIKEY_TIMEOUT</a>;</div>
+<div class="line"><span class="lineno">  149</span>            <span class="keywordflow">return</span> token_id;</div>
+<div class="line"><span class="lineno">  150</span>        }</div>
+<div class="line"><span class="lineno">  151</span>        <span class="keywordtype">bool</span> ui_ready = (fds[0].revents &amp; POLLIN);</div>
+<div class="line"><span class="lineno">  152</span>        <span class="keywordflow">if</span> (!ui_ready) {</div>
+<div class="line"><span class="lineno">  153</span>            <span class="keywordflow">for</span> (nfds_t i = ext_start_idx; i &lt; nfds; i++) {</div>
+<div class="line"><span class="lineno">  154</span>                <span class="keywordflow">if</span> (fds[i].revents &amp; (POLLIN | POLLHUP | POLLERR)) {</div>
+<div class="line"><span class="lineno">  155</span>                    reg_idx = i - ext_start_idx;</div>
+<div class="line"><span class="lineno">  156</span>                    token_id = <a class="code hl_variable" href="../../d9/d9b/a01889.html#a4516127c5edbc6addb4b5db01b9e6600">ui_ctx</a>.ext_fds[reg_idx].token_id;</div>
+<div class="line"><span class="lineno">  157</span>                    <span class="keywordflow">return</span> token_id;</div>
+<div class="line"><span class="lineno">  158</span>                }</div>
+<div class="line"><span class="lineno">  159</span>            }</div>
+<div class="line"><span class="lineno">  160</span>        } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  161</span>            timeout_ms = -1;</div>
+<div class="line"><span class="lineno">  162</span>    }</div>
+<div class="line"><span class="lineno">  163</span>    memset(ev, 0, <span class="keyword">sizeof</span>(*ev));</div>
+<div class="line"><span class="lineno">  164</span>    mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, NULL);</div>
+<div class="line"><span class="lineno">  165</span>    wtimeout(s-&gt;mwin[w], timeout_ms);</div>
+<div class="line"><span class="lineno">  166</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><span class="lineno">  167</span>        curs_set(2);</div>
+<div class="line"><span class="lineno">  168</span>        ch = wgetch(s-&gt;mwin[w]);</div>
+<div class="line"><span class="lineno">  169</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> != 0) {</div>
+<div class="line"><span class="lineno">  170</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="../../d9/d7d/a01880.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal</a>(<a class="code hl_variable" href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a>))</div>
+<div class="line"><span class="lineno">  171</span>                ch = <a class="code hl_function" href="../../dc/db2/a02574.html#gadbb5af31188d993cc9346275116bc4ba">ui_display_error</a>(<a class="code hl_variable" href="../../d9/d9b/a01889.html#abd472199e7a5be1df55e04807ece4878">em0</a>, <a class="code hl_variable" href="../../d9/d9b/a01889.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a>, <a class="code hl_variable" href="../../d9/d9b/a01889.html#a3ccac42aaedcc05eddba5d59ca3d6e71">em2</a>, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  172</span>            <span class="keywordflow">if</span> (ch == <span class="charliteral">&#39;q&#39;</span> || ch == <span class="charliteral">&#39;Q&#39;</span> || ch == <a class="code hl_define" href="../../db/d29/a01895.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a>)</div>
+<div class="line"><span class="lineno">  173</span>                exit(EXIT_FAILURE);</div>
+<div class="line"><span class="lineno">  174</span>            <a class="code hl_variable" href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a> = 0;</div>
+<div class="line"><span class="lineno">  175</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  176</span>        }</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keywordflow">if</span> (timeout_ms &gt; 0 &amp;&amp; ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>) {</div>
+<div class="line"><span class="lineno">  178</span>            ch = 0;</div>
+<div class="line"><span class="lineno">  179</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  180</span>        }</div>
+<div class="line"><span class="lineno">  181</span>        <span class="keywordflow">if</span> (ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>)</div>
+<div class="line"><span class="lineno">  182</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  183</span>        ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> = translate_key(ch);</div>
+<div class="line"><span class="lineno">  184</span>        <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_define" href="../../db/d29/a01895.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a>)</div>
+<div class="line"><span class="lineno">  185</span>            ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a1bdc934f63956460595a1a366cf5fe1a">ch</a> = (uint32_t)ch; <span class="comment">/* Unicode codepoint */</span></div>
+<div class="line"><span class="lineno">  186</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_define" href="../../db/d29/a01895.html#a2ccd72de1dd9409e8f0827cbaee18f6a">UIKEY_MOUSE</a>) {</div>
+<div class="line"><span class="lineno">  187</span>            MEVENT me;</div>
+<div class="line"><span class="lineno">  188</span>            <span class="keywordflow">if</span> (getmouse(&amp;me) != OK) {</div>
+<div class="line"><span class="lineno">  189</span>                ch = 0;</div>
+<div class="line"><span class="lineno">  190</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  191</span>            }</div>
+<div class="line"><span class="lineno">  192</span>            ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a532d6e82825a07b60de3ebde403d3133">bstate</a> = me.bstate;</div>
+<div class="line"><span class="lineno">  193</span>            ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a672605a27ab0de7bb229dab49a9b892a">y</a> = me.y;</div>
+<div class="line"><span class="lineno">  194</span>            ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#ab94334ecc966cb3af9d51cd363b4acda">x</a> = me.x;</div>
+<div class="line"><span class="lineno">  195</span>            <span class="keywordflow">if</span> (me.bstate == <a class="code hl_define" href="../../db/d29/a01895.html#a2f75a9fc5a25f8be640373909b89b477">UIKEY_BUTTON4_PRESSED</a>)</div>
+<div class="line"><span class="lineno">  196</span>                ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#aa08bfc431294b6a8f2d50b08b62704df">UIKEY_SCROLL_UP</a>;</div>
+<div class="line"><span class="lineno">  197</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (me.bstate == <a class="code hl_define" href="../../db/d29/a01895.html#a54820d6d70fdefc22706a400696de229">UIKEY_BUTTON5_PRESSED</a>)</div>
+<div class="line"><span class="lineno">  198</span>                ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#ac8303efbb05af01aec4ae002cd9294a3">UIKEY_SCROLL_DOWN</a>;</div>
+<div class="line"><span class="lineno">  199</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (me.bstate == <a class="code hl_define" href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>)</div>
+<div class="line"><span class="lineno">  200</span>                ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> = <a class="code hl_define" href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>;</div>
+<div class="line"><span class="lineno">  201</span>            <span class="keywordflow">for</span> (<a class="code hl_enumeration" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a> i = WIN; i &lt; <a class="code hl_enumvalue" href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693abb28c40d8caba86df68bfc14d867ab1b">SUB_SFC_MAX</a>; i++) {</div>
+<div class="line"><span class="lineno">  202</span>                <span class="keywordflow">if</span> (s-&gt;mwin[i] != NULL &amp;&amp;</div>
+<div class="line"><span class="lineno">  203</span>                    wenclose(s-&gt;mwin[i], me.y, me.x) &amp;&amp;</div>
+<div class="line"><span class="lineno">  204</span>                    wmouse_trafo(s-&gt;mwin[i], &amp;me.y, &amp;me.x, <span class="keyword">false</span>)) {</div>
+<div class="line"><span class="lineno">  205</span>                    ch = ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a>;</div>
+<div class="line"><span class="lineno">  206</span>                    ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a532d6e82825a07b60de3ebde403d3133">bstate</a> = me.bstate;</div>
+<div class="line"><span class="lineno">  207</span>                    ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a7c3740af17212322015843a47ab3a64b">in_win</a> = i;</div>
+<div class="line"><span class="lineno">  208</span>                    ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a672605a27ab0de7bb229dab49a9b892a">y</a> = me.y;</div>
+<div class="line"><span class="lineno">  209</span>                    ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#ab94334ecc966cb3af9d51cd363b4acda">x</a> = me.x;</div>
+<div class="line"><span class="lineno">  210</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  211</span>                }</div>
+<div class="line"><span class="lineno">  212</span>            }</div>
+<div class="line"><span class="lineno">  213</span>            <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a7c3740af17212322015843a47ab3a64b">in_win</a> == w)</div>
+<div class="line"><span class="lineno">  214</span>                ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#aff08a9b47830423c166d4bf0064b6c0e">mouse_inside</a> = <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  215</span>            <span class="keywordflow">if</span> (chyron &amp;&amp; ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a231f86f2260e925351ef3e655d57bad3">mouse_action</a> == <a class="code hl_define" href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a>) {</div>
+<div class="line"><span class="lineno">  216</span>                <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a7c3740af17212322015843a47ab3a64b">in_win</a> == chyron-&gt;w &amp;&amp; ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a672605a27ab0de7bb229dab49a9b892a">y</a> == chyron-&gt;y) {</div>
+<div class="line"><span class="lineno">  217</span>                    ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> = <a class="code hl_function" href="../../d4/dff/a01910.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a>(chyron, ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#ab94334ecc966cb3af9d51cd363b4acda">x</a>);</div>
+<div class="line"><span class="lineno">  218</span>                    <span class="keywordflow">return</span> ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a>;</div>
+<div class="line"><span class="lineno">  219</span>                } <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  220</span>                    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  221</span>            }</div>
+<div class="line"><span class="lineno">  222</span>        }</div>
+<div class="line"><span class="lineno">  223</span>    } <span class="keywordflow">while</span> (ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>);</div>
+<div class="line"><span class="lineno">  224</span>    curs_set(0);</div>
+<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">return</span> ch;</div>
+<div class="line"><span class="lineno">  226</span>}</div>
+<div class="ttc" id="aa01880_html_a01a99fc32bd5b471123f6223503c9616"><div class="ttname"><a href="../../d9/d7d/a01880.html#a01a99fc32bd5b471123f6223503c9616">sig_received</a></div><div class="ttdeci">volatile sig_atomic_t sig_received</div><div class="ttdef"><b>Definition</b> <a href="../../dd/df4/a02510_source.html#l00032">sig.c:32</a></div></div>
 <div class="ttc" id="aa01880_html_a0667873879b5846c3fe2fa2cc96059d6"><div class="ttname"><a href="../../d9/d7d/a01880.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal</a></div><div class="ttdeci">bool handle_signal(sig_atomic_t)</div></div>
-<div class="ttc" id="aa01889_html_a6dc60e77356ba69cd41021c3f937f693"><div class="ttname"><a href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></div><div class="ttdeci">ss_t</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00044">ui_backend.h:44</a></div></div>
-<div class="ttc" id="aa01889_html_a6dc60e77356ba69cd41021c3f937f693abb28c40d8caba86df68bfc14d867ab1b"><div class="ttname"><a href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693abb28c40d8caba86df68bfc14d867ab1b">SUB_SFC_MAX</a></div><div class="ttdeci">@ SUB_SFC_MAX</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00046">ui_backend.h:46</a></div></div>
-<div class="ttc" id="aa01889_html_a735563036dced0b7d6cc98f97ea4978b"><div class="ttname"><a href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a></div><div class="ttdeci">#define ERR</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00428">ui_backend.h:428</a></div></div>
+<div class="ttc" id="aa01889_html_a0a06ae7bae8563b699ce712ec266fe6f"><div class="ttname"><a href="../../d9/d9b/a01889.html#a0a06ae7bae8563b699ce712ec266fe6f">ui_render</a></div><div class="ttdeci">void ui_render()</div><div class="ttdoc">Render the UI by updating panels and refreshing the display.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00884">ui_ncurses.c:884</a></div></div>
+<div class="ttc" id="aa01889_html_a2520ab854da7c70c815ef23b3bd2f43a"><div class="ttname"><a href="../../d9/d9b/a01889.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00047">ui_common.c:47</a></div></div>
+<div class="ttc" id="aa01889_html_a3ccac42aaedcc05eddba5d59ca3d6e71"><div class="ttname"><a href="../../d9/d9b/a01889.html#a3ccac42aaedcc05eddba5d59ca3d6e71">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00048">ui_common.c:48</a></div></div>
+<div class="ttc" id="aa01889_html_a3d28c360dec30f01763ff080a157399e"><div class="ttname"><a href="../../d9/d9b/a01889.html#a3d28c360dec30f01763ff080a157399e">MAX_EXT_FDS</a></div><div class="ttdeci">#define MAX_EXT_FDS</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00131">ui_backend.h:131</a></div></div>
+<div class="ttc" id="aa01889_html_a4516127c5edbc6addb4b5db01b9e6600"><div class="ttname"><a href="../../d9/d9b/a01889.html#a4516127c5edbc6addb4b5db01b9e6600">ui_ctx</a></div><div class="ttdeci">ui_context_t ui_ctx</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00059">ui_common.c:59</a></div></div>
+<div class="ttc" id="aa01889_html_a6dc60e77356ba69cd41021c3f937f693"><div class="ttname"><a href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693">ss_t</a></div><div class="ttdeci">ss_t</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00045">ui_backend.h:45</a></div></div>
+<div class="ttc" id="aa01889_html_a6dc60e77356ba69cd41021c3f937f693abb28c40d8caba86df68bfc14d867ab1b"><div class="ttname"><a href="../../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693abb28c40d8caba86df68bfc14d867ab1b">SUB_SFC_MAX</a></div><div class="ttdeci">@ SUB_SFC_MAX</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00047">ui_backend.h:47</a></div></div>
+<div class="ttc" id="aa01889_html_a735563036dced0b7d6cc98f97ea4978b"><div class="ttname"><a href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a></div><div class="ttdeci">#define ERR</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00427">ui_backend.h:427</a></div></div>
+<div class="ttc" id="aa01889_html_abd472199e7a5be1df55e04807ece4878"><div class="ttname"><a href="../../d9/d9b/a01889.html#abd472199e7a5be1df55e04807ece4878">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00046">ui_common.c:46</a></div></div>
+<div class="ttc" id="aa01895_html_a0fbe956799129687b62e86e837351c49"><div class="ttname"><a href="../../db/d29/a01895.html#a0fbe956799129687b62e86e837351c49">UIKEY_TIMEOUT</a></div><div class="ttdeci">#define UIKEY_TIMEOUT</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00125">ui_ncurses_internal.h:125</a></div></div>
 <div class="ttc" id="aa01895_html_a2ccd72de1dd9409e8f0827cbaee18f6a"><div class="ttname"><a href="../../db/d29/a01895.html#a2ccd72de1dd9409e8f0827cbaee18f6a">UIKEY_MOUSE</a></div><div class="ttdeci">#define UIKEY_MOUSE</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00058">ui_ncurses_internal.h:58</a></div></div>
-<div class="ttc" id="aa01895_html_a2f75a9fc5a25f8be640373909b89b477"><div class="ttname"><a href="../../db/d29/a01895.html#a2f75a9fc5a25f8be640373909b89b477">UIKEY_BUTTON4_PRESSED</a></div><div class="ttdeci">#define UIKEY_BUTTON4_PRESSED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00114">ui_ncurses_internal.h:114</a></div></div>
-<div class="ttc" id="aa01895_html_a54820d6d70fdefc22706a400696de229"><div class="ttname"><a href="../../db/d29/a01895.html#a54820d6d70fdefc22706a400696de229">UIKEY_BUTTON5_PRESSED</a></div><div class="ttdeci">#define UIKEY_BUTTON5_PRESSED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00117">ui_ncurses_internal.h:117</a></div></div>
+<div class="ttc" id="aa01895_html_a2f75a9fc5a25f8be640373909b89b477"><div class="ttname"><a href="../../db/d29/a01895.html#a2f75a9fc5a25f8be640373909b89b477">UIKEY_BUTTON4_PRESSED</a></div><div class="ttdeci">#define UIKEY_BUTTON4_PRESSED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00113">ui_ncurses_internal.h:113</a></div></div>
+<div class="ttc" id="aa01895_html_a54820d6d70fdefc22706a400696de229"><div class="ttname"><a href="../../db/d29/a01895.html#a54820d6d70fdefc22706a400696de229">UIKEY_BUTTON5_PRESSED</a></div><div class="ttdeci">#define UIKEY_BUTTON5_PRESSED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00116">ui_ncurses_internal.h:116</a></div></div>
 <div class="ttc" id="aa01895_html_a60a2a6a06eb94ebea4d601584600c1f8"><div class="ttname"><a href="../../db/d29/a01895.html#a60a2a6a06eb94ebea4d601584600c1f8">UIKEY_F09</a></div><div class="ttdeci">#define UIKEY_F09</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00044">ui_ncurses_internal.h:44</a></div></div>
-<div class="ttc" id="aa01895_html_aa08bfc431294b6a8f2d50b08b62704df"><div class="ttname"><a href="../../db/d29/a01895.html#aa08bfc431294b6a8f2d50b08b62704df">UIKEY_SCROLL_UP</a></div><div class="ttdeci">#define UIKEY_SCROLL_UP</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00102">ui_ncurses_internal.h:102</a></div></div>
-<div class="ttc" id="aa01895_html_aa6518075770a53b025f02ed6e35cd0df"><div class="ttname"><a href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a></div><div class="ttdeci">#define UIKEY_BUTTON1_CLICKED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00104">ui_ncurses_internal.h:104</a></div></div>
-<div class="ttc" id="aa01895_html_aa6add16c29b7f1e35441d98036a2d2ac"><div class="ttname"><a href="../../db/d29/a01895.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a></div><div class="ttdeci">#define UIKEY_CHAR</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00100">ui_ncurses_internal.h:100</a></div></div>
-<div class="ttc" id="aa01895_html_ac8303efbb05af01aec4ae002cd9294a3"><div class="ttname"><a href="../../db/d29/a01895.html#ac8303efbb05af01aec4ae002cd9294a3">UIKEY_SCROLL_DOWN</a></div><div class="ttdeci">#define UIKEY_SCROLL_DOWN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00103">ui_ncurses_internal.h:103</a></div></div>
-<div class="ttc" id="aa01910_html_a2520ab854da7c70c815ef23b3bd2f43a"><div class="ttname"><a href="../../d4/dff/a01910.html#a2520ab854da7c70c815ef23b3bd2f43a">em1</a></div><div class="ttdeci">char em1[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00048">ui_common.c:48</a></div></div>
-<div class="ttc" id="aa01910_html_a3ccac42aaedcc05eddba5d59ca3d6e71"><div class="ttname"><a href="../../d4/dff/a01910.html#a3ccac42aaedcc05eddba5d59ca3d6e71">em2</a></div><div class="ttdeci">char em2[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00049">ui_common.c:49</a></div></div>
-<div class="ttc" id="aa01910_html_abd472199e7a5be1df55e04807ece4878"><div class="ttname"><a href="../../d4/dff/a01910.html#abd472199e7a5be1df55e04807ece4878">em0</a></div><div class="ttdeci">char em0[MAXLEN]</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00047">ui_common.c:47</a></div></div>
-<div class="ttc" id="aa01910_html_ac50923021890fb1a1895392312872150"><div class="ttname"><a href="../../d4/dff/a01910.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a></div><div class="ttdeci">int ui_get_chyron_key(UiChyron *chyron, uint x)</div><div class="ttdoc">Get keycode from chyron.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00980">ui_common.c:980</a></div></div>
-<div class="ttc" id="aa02573_html_gadbb5af31188d993cc9346275116bc4ba"><div class="ttname"><a href="../../d2/ddf/a02573.html#gadbb5af31188d993cc9346275116bc4ba">ui_display_error</a></div><div class="ttdeci">int ui_display_error(char *msg0, char *msg1, char *msg2, char *msg3)</div><div class="ttdoc">Display an error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l01149">ui_common.c:1149</a></div></div>
-<div class="ttc" id="aa02700_html_a1bdc934f63956460595a1a366cf5fe1a"><div class="ttname"><a href="../../dd/dee/a02700.html#a1bdc934f63956460595a1a366cf5fe1a">UiEvent::ch</a></div><div class="ttdeci">uint32_t ch</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00103">ui_backend.h:103</a></div></div>
-<div class="ttc" id="aa02700_html_a231f86f2260e925351ef3e655d57bad3"><div class="ttname"><a href="../../dd/dee/a02700.html#a231f86f2260e925351ef3e655d57bad3">UiEvent::mouse_action</a></div><div class="ttdeci">UiMouseAction mouse_action</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00113">ui_backend.h:113</a></div></div>
-<div class="ttc" id="aa02700_html_a532d6e82825a07b60de3ebde403d3133"><div class="ttname"><a href="../../dd/dee/a02700.html#a532d6e82825a07b60de3ebde403d3133">UiEvent::bstate</a></div><div class="ttdeci">int bstate</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00112">ui_backend.h:112</a></div></div>
-<div class="ttc" id="aa02700_html_a672605a27ab0de7bb229dab49a9b892a"><div class="ttname"><a href="../../dd/dee/a02700.html#a672605a27ab0de7bb229dab49a9b892a">UiEvent::y</a></div><div class="ttdeci">uint y</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00107">ui_backend.h:107</a></div></div>
-<div class="ttc" id="aa02700_html_a7c3740af17212322015843a47ab3a64b"><div class="ttname"><a href="../../dd/dee/a02700.html#a7c3740af17212322015843a47ab3a64b">UiEvent::in_win</a></div><div class="ttdeci">ss_t in_win</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00111">ui_backend.h:111</a></div></div>
-<div class="ttc" id="aa02700_html_a9c0eb18f5d71125266c5662511f09bd8"><div class="ttname"><a href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">UiEvent::key</a></div><div class="ttdeci">UiKey key</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00102">ui_backend.h:102</a></div></div>
-<div class="ttc" id="aa02700_html_ab94334ecc966cb3af9d51cd363b4acda"><div class="ttname"><a href="../../dd/dee/a02700.html#ab94334ecc966cb3af9d51cd363b4acda">UiEvent::x</a></div><div class="ttdeci">uint x</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00108">ui_backend.h:108</a></div></div>
-<div class="ttc" id="aa02700_html_aff08a9b47830423c166d4bf0064b6c0e"><div class="ttname"><a href="../../dd/dee/a02700.html#aff08a9b47830423c166d4bf0064b6c0e">UiEvent::mouse_inside</a></div><div class="ttdeci">bool mouse_inside</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00114">ui_backend.h:114</a></div></div>
+<div class="ttc" id="aa01895_html_aa08bfc431294b6a8f2d50b08b62704df"><div class="ttname"><a href="../../db/d29/a01895.html#aa08bfc431294b6a8f2d50b08b62704df">UIKEY_SCROLL_UP</a></div><div class="ttdeci">#define UIKEY_SCROLL_UP</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00101">ui_ncurses_internal.h:101</a></div></div>
+<div class="ttc" id="aa01895_html_aa6518075770a53b025f02ed6e35cd0df"><div class="ttname"><a href="../../db/d29/a01895.html#aa6518075770a53b025f02ed6e35cd0df">UIKEY_BUTTON1_CLICKED</a></div><div class="ttdeci">#define UIKEY_BUTTON1_CLICKED</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00103">ui_ncurses_internal.h:103</a></div></div>
+<div class="ttc" id="aa01895_html_aa6add16c29b7f1e35441d98036a2d2ac"><div class="ttname"><a href="../../db/d29/a01895.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a></div><div class="ttdeci">#define UIKEY_CHAR</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00099">ui_ncurses_internal.h:99</a></div></div>
+<div class="ttc" id="aa01895_html_ac8303efbb05af01aec4ae002cd9294a3"><div class="ttname"><a href="../../db/d29/a01895.html#ac8303efbb05af01aec4ae002cd9294a3">UIKEY_SCROLL_DOWN</a></div><div class="ttdeci">#define UIKEY_SCROLL_DOWN</div><div class="ttdef"><b>Definition</b> <a href="../../db/d29/a01895_source.html#l00102">ui_ncurses_internal.h:102</a></div></div>
+<div class="ttc" id="aa01907_html_a4b663e4593a265aefada937ac536ee38"><div class="ttname"><a href="#a4b663e4593a265aefada937ac536ee38">ui_flush_input</a></div><div class="ttdeci">void ui_flush_input()</div><div class="ttdoc">Flush any pending input events from the NotCurses context. This function discards any input events th...</div><div class="ttdef"><b>Definition</b> <a href="../../de/dca/a01907_source.html#l00102">ui_ncurses_input.c:102</a></div></div>
+<div class="ttc" id="aa01910_html_ac50923021890fb1a1895392312872150"><div class="ttname"><a href="../../d4/dff/a01910.html#ac50923021890fb1a1895392312872150">ui_get_chyron_key</a></div><div class="ttdeci">int ui_get_chyron_key(UiChyron *chyron, uint x)</div><div class="ttdoc">Get keycode from chyron.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l00861">ui_common.c:861</a></div></div>
+<div class="ttc" id="aa02574_html_gadbb5af31188d993cc9346275116bc4ba"><div class="ttname"><a href="../../dc/db2/a02574.html#gadbb5af31188d993cc9346275116bc4ba">ui_display_error</a></div><div class="ttdeci">int ui_display_error(char *msg0, char *msg1, char *msg2, char *msg3)</div><div class="ttdoc">Display an error message window or print to stderr.</div><div class="ttdef"><b>Definition</b> <a href="../../d4/dff/a01910_source.html#l01200">ui_common.c:1200</a></div></div>
+<div class="ttc" id="aa02584_html_a1bdc934f63956460595a1a366cf5fe1a"><div class="ttname"><a href="../../dc/d28/a02584.html#a1bdc934f63956460595a1a366cf5fe1a">UiEvent::ch</a></div><div class="ttdeci">uint32_t ch</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00104">ui_backend.h:104</a></div></div>
+<div class="ttc" id="aa02584_html_a231f86f2260e925351ef3e655d57bad3"><div class="ttname"><a href="../../dc/d28/a02584.html#a231f86f2260e925351ef3e655d57bad3">UiEvent::mouse_action</a></div><div class="ttdeci">UiMouseAction mouse_action</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00114">ui_backend.h:114</a></div></div>
+<div class="ttc" id="aa02584_html_a532d6e82825a07b60de3ebde403d3133"><div class="ttname"><a href="../../dc/d28/a02584.html#a532d6e82825a07b60de3ebde403d3133">UiEvent::bstate</a></div><div class="ttdeci">int bstate</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00113">ui_backend.h:113</a></div></div>
+<div class="ttc" id="aa02584_html_a672605a27ab0de7bb229dab49a9b892a"><div class="ttname"><a href="../../dc/d28/a02584.html#a672605a27ab0de7bb229dab49a9b892a">UiEvent::y</a></div><div class="ttdeci">uint y</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00108">ui_backend.h:108</a></div></div>
+<div class="ttc" id="aa02584_html_a7c3740af17212322015843a47ab3a64b"><div class="ttname"><a href="../../dc/d28/a02584.html#a7c3740af17212322015843a47ab3a64b">UiEvent::in_win</a></div><div class="ttdeci">ss_t in_win</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00112">ui_backend.h:112</a></div></div>
+<div class="ttc" id="aa02584_html_a9c0eb18f5d71125266c5662511f09bd8"><div class="ttname"><a href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">UiEvent::key</a></div><div class="ttdeci">UiKey key</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00103">ui_backend.h:103</a></div></div>
+<div class="ttc" id="aa02584_html_ab94334ecc966cb3af9d51cd363b4acda"><div class="ttname"><a href="../../dc/d28/a02584.html#ab94334ecc966cb3af9d51cd363b4acda">UiEvent::x</a></div><div class="ttdeci">uint x</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00109">ui_backend.h:109</a></div></div>
+<div class="ttc" id="aa02584_html_aff08a9b47830423c166d4bf0064b6c0e"><div class="ttname"><a href="../../dc/d28/a02584.html#aff08a9b47830423c166d4bf0064b6c0e">UiEvent::mouse_inside</a></div><div class="ttdeci">bool mouse_inside</div><div class="ttdef"><b>Definition</b> <a href="../../d9/d9b/a01889_source.html#l00115">ui_backend.h:115</a></div></div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00112">UiEvent::bstate</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00103">UiEvent::ch</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00047">em0</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00048">em1</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00049">em2</a>, <a class="el" href="../../d9/d7d/a01880.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00111">UiEvent::in_win</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00102">UiEvent::key</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00113">UiEvent::mouse_action</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00114">UiEvent::mouse_inside</a>, <a class="el" href="../../de/dbd/a02507_source.html#l00032">sig_received</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00046">SUB_SFC_MAX</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01149">ui_display_error()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00980">ui_get_chyron_key()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00108">UiEvent::x</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00107">UiEvent::y</a>.</p>
+<p class="reference">References <a class="el" href="../../d9/d9b/a01889_source.html#l00113">UiEvent::bstate</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00104">UiEvent::ch</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00046">em0</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00047">em1</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00048">em2</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00143">ui_context_t::ext_fds</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00144">ui_context_t::ext_nfds</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00135">ext_fd_reg_t::fd</a>, <a class="el" href="../../d9/d7d/a01880.html#a0667873879b5846c3fe2fa2cc96059d6">handle_signal()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00112">UiEvent::in_win</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00103">UiEvent::key</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00114">UiEvent::mouse_action</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00115">UiEvent::mouse_inside</a>, <a class="el" href="../../dd/df4/a02510_source.html#l00032">sig_received</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00047">SUB_SFC_MAX</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00136">ext_fd_reg_t::token_id</a>, <a class="el" href="../../d4/d07/a01913_source.html#l00039">ui</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00059">ui_ctx</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01200">ui_display_error()</a>, <a class="el" href="../../de/dca/a01907_source.html#l00102">ui_flush_input()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00861">ui_get_chyron_key()</a>, <a class="el" href="../../d4/d07/a01913_source.html#l00884">ui_render()</a>, <a class="el" href="../../d9/d9b/a01889_source.html#l00109">UiEvent::x</a>, and <a class="el" href="../../d9/d9b/a01889_source.html#l00108">UiEvent::y</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="../../d1/df7/a02501_source.html#l00041">cf_accept()</a>, <a class="el" href="../../d0/df5/a02549_source.html#l00047">field_editor()</a>, <a class="el" href="../../da/dbe/a02489_source.html#l00223">form_post()</a>, <a class="el" href="../../da/dbe/a02489_source.html#l00322">form_process()</a>, <a class="el" href="../../d5/d56/a02495_source.html#l00731">get_cmd_char()</a>, <a class="el" href="../../d3/df4/a02504_source.html#l00006">main()</a>, <a class="el" href="../../db/de8/a02525_source.html#l00121">menu_cmd_processor()</a>, <a class="el" href="../../d0/dc2/a02477_source.html#l00062">ncurses_input()</a>, <a class="el" href="../../d2/d35/a02480_source.html#l00882">picker()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01305">ui_action_disposition()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01091">ui_answer_yn()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01149">ui_display_error()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01251">ui_perror()</a>, and <a class="el" href="../../d4/dff/a01910_source.html#l01202">ui_timeout_prompt()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="../../d3/df4/a02504_source.html#l00041">cf_accept()</a>, <a class="el" href="../../d0/df5/a02549_source.html#l00047">field_editor()</a>, <a class="el" href="../../d6/d90/a02492_source.html#l00223">form_post()</a>, <a class="el" href="../../d6/d90/a02492_source.html#l00320">form_process()</a>, <a class="el" href="../../dd/dd4/a02498_source.html#l00731">get_cmd_char()</a>, <a class="el" href="../../de/dbd/a02507_source.html#l00006">main()</a>, <a class="el" href="../../db/de8/a02525_source.html#l00121">menu_cmd_processor()</a>, <a class="el" href="../../d3/de3/a02483_source.html#l00881">picker()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01311">ui_action_disposition()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l00972">ui_answer_yn()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01200">ui_display_error()</a>, <a class="el" href="../../d4/dff/a01910_source.html#l01257">ui_perror()</a>, and <a class="el" href="../../d4/dff/a01910_source.html#l01033">ui_timeout_prompt()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -332,7 +413,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">int ui_get_event_no_mouse </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../dc/d3d/a02752.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
+          <td class="paramtype"><a class="el" href="../../dd/d32/a02636.html">UiSurface</a> *</td>          <td class="paramname"><span class="paramname"><em>s</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -342,7 +423,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../dd/dee/a02700.html">UiEvent</a> *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="../../dc/d28/a02584.html">UiEvent</a> *</td>          <td class="paramname"><span class="paramname"><em>ev</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -352,33 +433,32 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">ui</td><td>UI runtime context (unused — event comes from the window). </td></tr>
     <tr><td class="paramname">target</td><td>Surface to read from, or NULL for stdscr. </td></tr>
-    <tr><td class="paramname">ev</td><td>Output <a class="el" href="../../dd/dee/a02700.html">UiEvent</a> structure. </td></tr>
+    <tr><td class="paramname">ev</td><td>Output <a class="el" href="../../dc/d28/a02584.html">UiEvent</a> structure. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if <code class="param">ev</code> is NULL. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00190">190</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  190</span>                                                             {</div>
-<div class="line"><span class="lineno">  191</span>    <span class="keywordtype">int</span> ch;</div>
-<div class="line"><span class="lineno">  192</span>    mousemask(0, NULL);</div>
-<div class="line"><span class="lineno">  193</span>    curs_set(2);</div>
-<div class="line"><span class="lineno">  194</span>    qiflush();</div>
-<div class="line"><span class="lineno">  195</span>    tcflush(2, TCIFLUSH);</div>
-<div class="line"><span class="lineno">  196</span>    cbreak();</div>
-<div class="line"><span class="lineno">  197</span>    <span class="keywordflow">do</span> {</div>
-<div class="line"><span class="lineno">  198</span>        curs_set(2);</div>
-<div class="line"><span class="lineno">  199</span>        ch = wgetch(s-&gt;mwin[w]);</div>
-<div class="line"><span class="lineno">  200</span>        curs_set(0);</div>
-<div class="line"><span class="lineno">  201</span>        ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> = translate_key(ch);</div>
-<div class="line"><span class="lineno">  202</span>        <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_define" href="../../db/d29/a01895.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a>) {</div>
-<div class="line"><span class="lineno">  203</span>            ev-&gt;<a class="code hl_variable" href="../../dd/dee/a02700.html#a1bdc934f63956460595a1a366cf5fe1a">ch</a> = (uint32_t)ch;</div>
-<div class="line"><span class="lineno">  204</span>            <span class="keywordflow">break</span>;</div>
-<div class="line"><span class="lineno">  205</span>        }</div>
-<div class="line"><span class="lineno">  206</span>    } <span class="keywordflow">while</span> (ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>);</div>
-<div class="line"><span class="lineno">  207</span>    curs_set(0);</div>
-<div class="line"><span class="lineno">  208</span>    <span class="keywordflow">return</span> ch;</div>
-<div class="line"><span class="lineno">  209</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00234">234</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  234</span>                                                             {</div>
+<div class="line"><span class="lineno">  235</span>    <span class="keywordtype">int</span> ch;</div>
+<div class="line"><span class="lineno">  236</span>    mousemask(0, NULL);</div>
+<div class="line"><span class="lineno">  237</span>    curs_set(2);</div>
+<div class="line"><span class="lineno">  238</span>    <a class="code hl_function" href="#a4b663e4593a265aefada937ac536ee38">ui_flush_input</a>();</div>
+<div class="line"><span class="lineno">  239</span>    cbreak();</div>
+<div class="line"><span class="lineno">  240</span>    <span class="keywordflow">do</span> {</div>
+<div class="line"><span class="lineno">  241</span>        curs_set(2);</div>
+<div class="line"><span class="lineno">  242</span>        ch = wgetch(s-&gt;mwin[w]);</div>
+<div class="line"><span class="lineno">  243</span>        curs_set(0);</div>
+<div class="line"><span class="lineno">  244</span>        ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> = translate_key(ch);</div>
+<div class="line"><span class="lineno">  245</span>        <span class="keywordflow">if</span> (ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a9c0eb18f5d71125266c5662511f09bd8">key</a> == <a class="code hl_define" href="../../db/d29/a01895.html#aa6add16c29b7f1e35441d98036a2d2ac">UIKEY_CHAR</a>) {</div>
+<div class="line"><span class="lineno">  246</span>            ev-&gt;<a class="code hl_variable" href="../../dc/d28/a02584.html#a1bdc934f63956460595a1a366cf5fe1a">ch</a> = (uint32_t)ch;</div>
+<div class="line"><span class="lineno">  247</span>            <span class="keywordflow">break</span>;</div>
+<div class="line"><span class="lineno">  248</span>        }</div>
+<div class="line"><span class="lineno">  249</span>    } <span class="keywordflow">while</span> (ch == <a class="code hl_define" href="../../d9/d9b/a01889.html#a735563036dced0b7d6cc98f97ea4978b">ERR</a>);</div>
+<div class="line"><span class="lineno">  250</span>    curs_set(0);</div>
+<div class="line"><span class="lineno">  251</span>    <span class="keywordflow">return</span> ch;</div>
+<div class="line"><span class="lineno">  252</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -406,17 +486,16 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if UI is not initialized. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00231">231</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  231</span>                             {</div>
-<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>)</div>
-<div class="line"><span class="lineno">  233</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">if</span> (mask)</div>
-<div class="line"><span class="lineno">  235</span>        mousemask(mask, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">  236</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  237</span>        mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">  238</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  239</span>}</div>
-<div class="ttc" id="aa01913_html_a9ecaf8df0a838e8587a8f370b18702f9"><div class="ttname"><a href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a></div><div class="ttdeci">UiRuntime * ui</div><div class="ttdef"><b>Definition</b> <a href="../../d4/d07/a01913_source.html#l00039">ui_ncurses.c:39</a></div></div>
+<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00274">274</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  274</span>                             {</div>
+<div class="line"><span class="lineno">  275</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>)</div>
+<div class="line"><span class="lineno">  276</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  277</span>    <span class="keywordflow">if</span> (mask)</div>
+<div class="line"><span class="lineno">  278</span>        mousemask(mask, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  279</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  280</span>        mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  281</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  282</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -444,16 +523,16 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, -1 if UI is not initialized. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00218">218</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  218</span>                           {</div>
-<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>)</div>
-<div class="line"><span class="lineno">  220</span>        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><span class="lineno">  221</span>    <span class="keywordflow">if</span> (mask)</div>
-<div class="line"><span class="lineno">  222</span>        mousemask(mask, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">  223</span>    <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  224</span>        mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, <span class="keyword">nullptr</span>);</div>
-<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  226</span>}</div>
+<p class="definition">Definition at line <a class="el" href="../../de/dca/a01907_source.html#l00261">261</a> of file <a class="el" href="../../de/dca/a01907_source.html">ui_ncurses_input.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  261</span>                           {</div>
+<div class="line"><span class="lineno">  262</span>    <span class="keywordflow">if</span> (!<a class="code hl_variable" href="../../d4/d07/a01913.html#a9ecaf8df0a838e8587a8f370b18702f9">ui</a>)</div>
+<div class="line"><span class="lineno">  263</span>        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><span class="lineno">  264</span>    <span class="keywordflow">if</span> (mask)</div>
+<div class="line"><span class="lineno">  265</span>        mousemask(mask, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  266</span>    <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  267</span>        mousemask(ALL_MOUSE_EVENTS | REPORT_MOUSE_POSITION, <span class="keyword">nullptr</span>);</div>
+<div class="line"><span class="lineno">  268</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  269</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
