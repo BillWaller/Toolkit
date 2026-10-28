@@ -1,6 +1,9 @@
 var a02627 =
 [
-    [ "capacity", "dc/d34/a02627.html#a16664713f3a2d038c0c6f68ca9475886", null ],
-    [ "items", "dc/d34/a02627.html#a3fade253de43fe0175b33401f35f467a", null ],
-    [ "top", "dc/d34/a02627.html#a1dbe09fba72b4c6cb39d080682a800d3", null ]
+    [ "cf_erase_remainder", "dc/d34/a02627.html#ad46407b34b3e180d31105c789593daba", null ],
+    [ "fcol", "dc/d34/a02627.html#ab6ba6e8afebf444396b0a7f4988e3711", null ],
+    [ "ff", "dc/d34/a02627.html#a39a4146c3bedeaae9059d8439bdbbbc2", null ],
+    [ "fill_char", "dc/d34/a02627.html#a352e44d275e8fbd5c382587b98ad7c4e", null ],
+    [ "flen", "dc/d34/a02627.html#a7c8228aab898dc1e5f020d55e5f710ee", null ],
+    [ "flin", "dc/d34/a02627.html#acde6b745653faf70be6d8a91c34bed46", null ]
 ];

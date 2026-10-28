@@ -1,11 +1,10 @@
 var a02583 =
 [
-    [ "alt", "dc/d15/a02583.html#ade92c3f0584d0fd7738b27d2a5cdbd44", null ],
-    [ "ch", "dc/d15/a02583.html#a1bdc934f63956460595a1a366cf5fe1a", null ],
-    [ "ctrl", "dc/d15/a02583.html#a8c975ef5d23642307ec2f5897128029a", null ],
-    [ "key", "dc/d15/a02583.html#a9c0eb18f5d71125266c5662511f09bd8", null ],
-    [ "mouse_action", "dc/d15/a02583.html#a231f86f2260e925351ef3e655d57bad3", null ],
-    [ "shift", "dc/d15/a02583.html#a2fabd5214af990a4cc94a6bd95a2daa9", null ],
-    [ "x", "dc/d15/a02583.html#ad57a037607e4507d3dc7cc3474463fb3", null ],
-    [ "y", "dc/d15/a02583.html#a75ad6768342f5d07f68cad17254d9650", null ]
+    [ "capture_program_tioctl", "dc/d15/a02583.html#gaf29f9113aec5a5113e3087de7ef81b40", null ],
+    [ "capture_shell_tioctl", "dc/d15/a02583.html#ga0d6d5d9834cd5c2a9d14349bf7ab6274", null ],
+    [ "di_getch", "dc/d15/a02583.html#ga11948dfa6be15e54c80072e4b3df0e12", null ],
+    [ "mk_raw_tioctl", "dc/d15/a02583.html#ga9595fce25a583a656ca51a8b8f7494ae", null ],
+    [ "restore_program_tioctl", "dc/d15/a02583.html#ga0469f8a2361eaac0cf09c9d86c1ff12c", null ],
+    [ "restore_shell_tioctl", "dc/d15/a02583.html#gac5e3adb304b78910fc77761ef6a743f0", null ],
+    [ "set_sane_tioctl", "dc/d15/a02583.html#gab69b11814964ea732c1e8e0ca6d22c1c", null ]
 ];

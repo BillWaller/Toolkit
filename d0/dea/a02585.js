@@ -1,10 +1,14 @@
 var a02585 =
 [
-    [ "cols", "d0/dea/a02585.html#a419f2274d4a108adaaa612d2e6d8f67e", null ],
-    [ "hidden", "d0/dea/a02585.html#ab3f5e35c03c0137f2c4691b66f3b842f", null ],
-    [ "lines", "d0/dea/a02585.html#a32a2d48c3977e3df73913be4aa94b90b", null ],
-    [ "name", "d0/dea/a02585.html#a7e5780d6cc4410dcbba9d635f152f86d", null ],
-    [ "title", "d0/dea/a02585.html#a2cba0ee57c127000685c81f8f55a8a1b", null ],
-    [ "x", "d0/dea/a02585.html#a42b307f044b94c4124c7cd43fdf9a3b1", null ],
-    [ "y", "d0/dea/a02585.html#a1a9a0c1c2215f1fb65020b6882050056", null ]
+    [ "get_next_char", "d0/dea/a02585.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
+    [ "get_prev_char", "d0/dea/a02585.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
+    [ "build_prompt", "d0/dea/a02585.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
+    [ "cat_file", "d0/dea/a02585.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
+    [ "enter_file_spec", "d0/dea/a02585.html#ga2ffea5674e85f124a70e19f745a66583", null ],
+    [ "get_cmd_arg", "d0/dea/a02585.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
+    [ "get_cmd_char", "d0/dea/a02585.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
+    [ "lp", "d0/dea/a02585.html#ga4e2304ed84ba722af119774caef42090", null ],
+    [ "view_cmd_processor", "d0/dea/a02585.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
+    [ "view_file", "d0/dea/a02585.html#ga0bd4dc056ab5010547129bb87819789b", null ],
+    [ "write_view_buffer", "d0/dea/a02585.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
 ];

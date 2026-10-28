@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ss_5ft_0',['ss_t',['../d9/d9b/a01889.html#a6dc60e77356ba69cd41021c3f937f693',1,'ui_backend.h']]]
+  ['prompttype_0',['PromptType',['../db/d29/a01895.html#a311c8b4e7650091e39cc1fc7ca93808c',1,'view.h']]]
 ];

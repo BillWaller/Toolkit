@@ -1,6 +1,26 @@
 var searchData=
 [
-  ['json_0',['Tree-Sitter config.json',['../dc/d00/a03118.html#tree-sitter-configjson',1,'']]],
-  ['june_202026_1',['June 2026',['../d0/d75/a03105.html#date-june-2026',1,'date: June 2026'],['../d8/db1/a03098.html#date-june-2026-1',1,'date: June 2026'],['../da/dcd/a03108.html#date-june-2026-3',1,'date: June 2026'],['../d4/d6e/a03099.html#date-june-2026-2',1,'date: June 2026'],['../d9/d5f/a03109.html#date-june-2026-4',1,'date: June 2026'],['../d0/dcd/a03113.html#date-june-2026-5',1,'date: June 2026'],['../d2/da6/a03117.html#date-june-2026-6',1,'date: June 2026'],['../d8/dfb/a03122.html#date-june-2026-7',1,'date: June 2026']]],
-  ['just_20do_20it_2',['Just Do It',['../df/d9e/a03111.html#just-do-it',1,'']]]
+  ['key_0',['key',['../de/dbb/a02679.html#acca331f2b3d90dc6d818c81fb41d6981',1,'log_level::key'],['../de/d8c/a02747.html#a9c0eb18f5d71125266c5662511f09bd8',1,'UiEvent::key']]],
+  ['key_20characters_1',['Menu Key characters',['../dc/d10/a03169.html#menu-key-characters',1,'']]],
+  ['key_20features_2',['Key Features',['../da/de5/a03170.html#form-key-features',1,'Form Key Features'],['../da/de5/a03170.html#key-features',1,'Key Features']]],
+  ['key_20value_20pairs_3',['Key Value Pairs',['../d8/dde/a03178.html#key-value-pairs',1,'']]],
+  ['key_5faltdel_4',['KEY_ALTDEL',['../dc/d31/a01892.html#a994bc87be1eb918768f1ab7f9f325f1c',1,'ui_backend.h']]],
+  ['key_5faltdown_5',['KEY_ALTDOWN',['../dc/d31/a01892.html#a199a6d2613c848c2d31b6b63997afdf2',1,'ui_backend.h']]],
+  ['key_5faltend_6',['KEY_ALTEND',['../dc/d31/a01892.html#a109cb8d491e7b42b53b2ece262cd213a',1,'ui_backend.h']]],
+  ['key_5faltf_7',['KEY_ALTF',['../db/d4b/a01883.html#ac7313ad568317821d17a552906d64dd6',1,'cm.h']]],
+  ['key_5faltf0_8',['KEY_ALTF0',['../db/d4b/a01883.html#a37aa7d966c4b387326f3150cbcd05946',1,'cm.h']]],
+  ['key_5falthome_9',['KEY_ALTHOME',['../dc/d31/a01892.html#a272a96c66d7bfc452b0554680dcd44c9',1,'ui_backend.h']]],
+  ['key_5faltins_10',['KEY_ALTINS',['../dc/d31/a01892.html#aea36fe4dd03774dbbb8e0a17dea982b3',1,'ui_backend.h']]],
+  ['key_5faltleft_11',['KEY_ALTLEFT',['../dc/d31/a01892.html#a1260c2bb8f4151873b53d277321e76bb',1,'ui_backend.h']]],
+  ['key_5faltpgdn_12',['KEY_ALTPGDN',['../dc/d31/a01892.html#a7a22a59d37fe680b6baafb90b5e383ba',1,'ui_backend.h']]],
+  ['key_5faltpgup_13',['KEY_ALTPGUP',['../dc/d31/a01892.html#aad065eab63ceb77e0e601dfdc9968d70',1,'ui_backend.h']]],
+  ['key_5faltright_14',['KEY_ALTRIGHT',['../dc/d31/a01892.html#a8bfe766d44a69587427b117680587450',1,'ui_backend.h']]],
+  ['key_5faltup_15',['KEY_ALTUP',['../dc/d31/a01892.html#aa7b7da4349b0bb40ec04e8de0e9bfd4b',1,'ui_backend.h']]],
+  ['keyboard_20mouse_20input_16',['C-Keys - Diagnose Keyboard/Mouse Input',['../da/de5/a03170.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keybound_17',['keybound',['../de/d8c/a02747.html#a72d84bc244fee4d28cea262d54109f21',1,'UiEvent']]],
+  ['keys_18',['Motion Keys',['../d0/d9f/a03152.html#motion-keys',1,'']]],
+  ['keys_20diagnose_20keyboard_20mouse_20input_19',['C-Keys - Diagnose Keyboard/Mouse Input',['../da/de5/a03170.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keys_20rsh_20and_20lf_20',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../da/de5/a03170.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
+  ['kitty_21',['Kitty',['../d0/d04/a03161.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../d4/d1a/a03154.html#htop-in-kitty',1,'HTOP (in Kitty)'],['../d7/d90/a03177.html#kitty',1,'Kitty']]],
+  ['kitty_20configuration_22',['Kitty Configuration',['../d8/d29/a03162.html#kitty-configuration',1,'Kitty Configuration'],['../d0/d74/a03149.html#kitty-configuration-1',1,'Kitty Configuration']]]
 ];

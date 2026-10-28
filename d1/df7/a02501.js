@@ -1,8 +1,9 @@
 var a02501 =
 [
-    [ "translate_po.ask_ollama", "d0/df5/a02576.html#aa4ba37bdee2e1c97dc1fee50af24ed98", null ],
-    [ "translate_po.parse_and_translate_po", "d0/df5/a02576.html#abd7bac3e2e57ab74dd649dbea094dcc7", null ],
-    [ "translate_po.split_to_po_format", "d0/df5/a02576.html#aa70609ac22677487c5db5ea077aa6973", null ],
-    [ "translate_po.MODEL_NAME", "d0/df5/a02576.html#ae6836a4e8ebb61302b5322fe4ec527da", null ],
-    [ "translate_po.OLLAMA_API_URL", "d0/df5/a02576.html#a4ed585d09e8732c05d1d5800a0021516", null ]
+    [ "fork_detach_execvp", "d7/d12/a02571.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_detach_execvp", "d7/d12/a02571.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_exec", "d7/d12/a02571.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d7/d12/a02571.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d7/d12/a02571.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "d7/d12/a02571.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];

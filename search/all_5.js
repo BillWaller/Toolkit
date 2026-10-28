@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['82_20elapsed_20very_20fast_0',['find - 0.82 elapsed - &quot;Very Fast&quot;',['../index.html#find---082-elapsed---very-fast',1,'']]]
+  ['9_0',['C-Menu-0.2.9',['../d7/da0/a03156.html#c-menu-029',1,'']]],
+  ['9_20pre_20release_1',['0.2.9 - Pre-Release',['../d7/d45/a03175.html#autotoc_md029---pre-release',1,'']]],
+  ['9_20tasks_20to_20complete_20before_200_203_200_2',['0.2.9 Tasks to Complete before 0.3.0',['../d7/d45/a03175.html#autotoc_md029-tasks-to-complete-before-030',1,'']]],
+  ['9_20wrap_20up_3',['0.2.9 Wrap-Up',['../d7/d45/a03175.html#autotoc_md029-wrap-up',1,'']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['text_0',['Text',['../df/dd0/a02804.html',1,'']]],
-  ['time_1',['Time',['../da/dd3/a02736.html',1,'']]]
+  ['sio_0',['SIO',['../dc/d5e/a02891.html',1,'']]],
+  ['splitline_1',['SplitLine',['../de/d3e/a02727.html',1,'']]],
+  ['stdrgb_2',['STDRGB',['../dc/d6a/a02779.html',1,'']]],
+  ['string_3',['String',['../da/dfd/a02619.html',1,'']]]
 ];

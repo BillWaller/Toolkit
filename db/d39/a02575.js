@@ -1,9 +1,9 @@
 var a02575 =
 [
-    [ "ui_ncurses.c", "d4/d07/a01913.html", null ],
-    [ "ui_ncurses_compat.h", "d6/d18/a01925.html", null ],
-    [ "ui_ncurses_draw.c", "dd/d19/a01922.html", null ],
-    [ "ui_ncurses_input.c", "de/dca/a01907.html", null ],
-    [ "ui_ncurses_internal.h", "db/d29/a01895.html", null ],
-    [ "ui_get_backend", "db/d39/a02575.html#gaea30042448fa943f23f9579a20524823", null ]
+    [ "free_string", "db/d39/a02575.html#ga9733005966bd730252e081c3ef9bb2c2", null ],
+    [ "string_cat", "db/d39/a02575.html#ga8e2af68338c74351899a7a35adc6cda0", null ],
+    [ "string_cpy", "db/d39/a02575.html#ga1d8368ef59a9e415c859d20794d6b26d", null ],
+    [ "string_ncat", "db/d39/a02575.html#gae86995f3322d0448e2890ecb7d3624dc", null ],
+    [ "string_ncpy", "db/d39/a02575.html#ga5ea62e2fba431b9cecaac045daff6105", null ],
+    [ "to_string", "db/d39/a02575.html#ga3e61ddee7c9ff9a346d3656d0054615f", null ]
 ];

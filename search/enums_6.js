@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['prompttype_0',['PromptType',['../dc/d31/a01892.html#a311c8b4e7650091e39cc1fc7ca93808c',1,'view.h']]]
+  ['optgroup_0',['OptGroup',['../de/dfb/a01874.html#a87b22b8c9213bcf6c0fae14e67950b2b',1,'common.h']]],
+  ['opttype_1',['OptType',['../de/dfb/a01874.html#a2809124eff04ad302ca62f63f9408f1e',1,'common.h']]]
 ];

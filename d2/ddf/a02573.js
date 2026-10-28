@@ -1,16 +1,16 @@
 var a02573 =
 [
-    [ "display_line", "d2/ddf/a02573.html#ga16a4b855ead8402d4744e77a5504082a", null ],
-    [ "display_line_eod", "d2/ddf/a02573.html#ga1d9ab5876c745e7a0c1e30c99e1c0058", null ],
-    [ "display_prompt", "d2/ddf/a02573.html#ga3d81b9c4dd32748b26cd0fd94224d21c", null ],
-    [ "display_split_line", "d2/ddf/a02573.html#ga9cae659a86233460c31401a8f77ed861", null ],
-    [ "fmt_line", "d2/ddf/a02573.html#ga747411d59b020ad11d4567ab0b3db8c2", null ],
-    [ "log_cc_buf", "d2/ddf/a02573.html#ga03e19cccb4b31085554b27ba13e9b738", null ],
-    [ "log_split_lines", "d2/ddf/a02573.html#ga0f4cf79e1d0a01c04facb0738e0a679f", null ],
-    [ "log_stripped_line_out", "d2/ddf/a02573.html#gaf0953007a3c1b5a5eb695488e0ddddf5", null ],
-    [ "log_strnz", "d2/ddf/a02573.html#ga6e061fda16bfd8f35a0abdb70557a42a", null ],
-    [ "pad_refresh", "d2/ddf/a02573.html#ga1a2aaed7961f7ff0b171ee01801fcadf", null ],
-    [ "parse_ansi_str", "d2/ddf/a02573.html#ga629d3919a040f6deb3b539dfdc6a1cdd", null ],
-    [ "view_display_help", "d2/ddf/a02573.html#gad997ba9f8591568c77291fb1b44601b2", null ],
-    [ "view_display_page", "d2/ddf/a02573.html#gae6f141401cf9f104dbe14f09603d5178", null ]
+    [ "display_form", "d2/ddf/a02573.html#gaff3b11b68ec51ef3034ce5498913a211", null ],
+    [ "field_navigator", "d2/ddf/a02573.html#gae570c2569ffef8c9d38184b6d9446812", null ],
+    [ "form_desc_error", "d2/ddf/a02573.html#ga1532be56dda18daf874a3928c2f50a79", null ],
+    [ "form_display_fields", "d2/ddf/a02573.html#gadd0fa69826228ae8e3c50c9b5eed57f8", null ],
+    [ "form_engine", "d2/ddf/a02573.html#gada302551bf41bf8ed6132fd34328a47e", null ],
+    [ "form_exec_cmd", "d2/ddf/a02573.html#gab2e6e35d9dba586838b91f54a6dd41a2", null ],
+    [ "form_exec_receiver", "d2/ddf/a02573.html#ga0fb740802cbc6c8ba386f4751139f0a0", null ],
+    [ "form_parse_desc", "d2/ddf/a02573.html#ga23739f53779b30a5d3da63b0a97be85b", null ],
+    [ "form_post", "d2/ddf/a02573.html#gac63d5f05787a038d4ae5f4741eafbe50", null ],
+    [ "form_process", "d2/ddf/a02573.html#ga7b01ef5c3435083eeec419451b61aa85", null ],
+    [ "form_read_data", "d2/ddf/a02573.html#ga15e4844b5dff35fd08e47d8379328d55", null ],
+    [ "form_write", "d2/ddf/a02573.html#ga2839acac3143be9233fbf99458b77e64", null ],
+    [ "init_form", "d2/ddf/a02573.html#gae097ab59e3fbc4d861b04b076dfa8a3d", null ]
 ];

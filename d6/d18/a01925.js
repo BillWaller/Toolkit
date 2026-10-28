@@ -1,5 +1,28 @@
 var a01925 =
 [
-    [ "ui_ncurses_surface_get_panel", "d6/d18/a01925.html#ab87387927bda06e308f66f371d33bc69", null ],
-    [ "ui_ncurses_surface_get_win", "d6/d18/a01925.html#aa4de9531b6434fd09d2fd8a9d5d2ad58", null ]
+    [ "_XOPEN_SOURCE_EXTENDED", "d6/d18/a01925.html#ac7b30cf7f83588cb6bc1c716be66f5a2", null ],
+    [ "ui_draw_ch", "d6/d18/a01925.html#a8a0a37e0b91a21b13dca68982688b3db", null ],
+    [ "ui_draw_ch_yx", "d6/d18/a01925.html#a01e5bc87154c4470d34ae2518e0bcdbf", null ],
+    [ "ui_draw_text", "d6/d18/a01925.html#a2e6cc68fddaf64cc6da4eff5c8d33837", null ],
+    [ "ui_draw_text_fill", "d6/d18/a01925.html#aff2cb9fa56972ad61b58ba28a4421707", null ],
+    [ "ui_draw_text_n", "d6/d18/a01925.html#a40bec6d96dd35806b01e3ad8dfd4ab92", null ],
+    [ "ui_mvwadd_wch", "d6/d18/a01925.html#a9017feda04eb4cf15f615177ba0c8d0c", null ],
+    [ "ui_mvwadd_wchnstr", "d6/d18/a01925.html#a006027addada2f643f4d240d153b5d30", null ],
+    [ "ui_mvwadd_wchstr", "d6/d18/a01925.html#a49b5c7162723a248fa8191d291d8103c", null ],
+    [ "ui_mvwaddch", "d6/d18/a01925.html#a2d15814abd90a688e2460e88d20806e7", null ],
+    [ "ui_mvwaddnstr", "d6/d18/a01925.html#a42880f1f9d6e3a6011e9a8243057c2e9", null ],
+    [ "ui_mvwaddnwstr", "d6/d18/a01925.html#a1a71b5cc78bcadc07f8d40ec959ce969", null ],
+    [ "ui_mvwaddstr", "d6/d18/a01925.html#a86f4a553274bdacdf7e4cd98d6dc3e17", null ],
+    [ "ui_mvwaddstr_fill", "d6/d18/a01925.html#ab454ade9f74c87c5b53b67c8559c51c3", null ],
+    [ "ui_mvwaddwstr", "d6/d18/a01925.html#a834814d38610b774657bf45e4ba6a01a", null ],
+    [ "ui_restore_wins", "d6/d18/a01925.html#a73d0d8cf6bc75336815ecb41fa28ce53", null ],
+    [ "ui_wadd_wch", "d6/d18/a01925.html#ad3465de218c61320615de6790eebcfa8", null ],
+    [ "ui_wadd_wchnstr", "d6/d18/a01925.html#afe1b0259c13d846636a65f86721d6918", null ],
+    [ "ui_wadd_wchstr", "d6/d18/a01925.html#aedffbf110d620f0bc9a0ee4532a1382d", null ],
+    [ "ui_waddnstr", "d6/d18/a01925.html#a42693be9627906ef280785d843c11cc1", null ],
+    [ "ui_waddnwstr", "d6/d18/a01925.html#ae1ebd63ac77fbbad0fe9d78475e6f8d2", null ],
+    [ "ui_waddstr", "d6/d18/a01925.html#a05b2fa115f67a3258f234ba44dbfed1c", null ],
+    [ "ui_waddwstr", "d6/d18/a01925.html#a22957b30a82d9e2209e86442fc406e63", null ],
+    [ "ui_wclrtobot", "d6/d18/a01925.html#aadd3e1f3bd3d5ce37c70e8336c977681", null ],
+    [ "ui_wclrtoeol", "d6/d18/a01925.html#ad6aa95dfbb37afc2abaca3f46248c5af", null ]
 ];

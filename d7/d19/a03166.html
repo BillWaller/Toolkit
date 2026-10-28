@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C-Menu: /srv/www/htdocs/C-Menu/docs/README.md File Reference</title>
+<title>C-Menu: C-Menu - A User Interface Toolkit</title>
 <link rel="icon" href="../../decision256.png" type="image/x-icon" />
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../clipboard.js"></script>
@@ -109,11 +109,119 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d7/d19/a03166.
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">/srv/www/htdocs/C-Menu/docs/README.md File Reference</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">C-Menu - A User Interface Toolkit </div></div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p><a class="anchor" id="c-menu---a-user-interface-toolkit"></a></p>
+<div class="image">
+<img src="../../installation-guide.png" alt=""/>
+<div class="caption">
+Installation Guide</div></div>
+    <h1 class="doxsection"><a class="anchor" id="c-menu-installation"></a>
+C-Menu INSTALLATION</h1>
+<p>The instructions below will guide you through the process of installing C-Menu on your Linux system.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="environment-configuration"></a>
+Environment Configuration</h1>
+<ul>
+<li>Configure your environment to use the C-Menu binaries and libraries:</li>
+</ul>
+<p>Prepend the C-Menu bin directory to your PATH environment variable by adding the following line to your shell profile (e.g., ~/.bashrc or ~/.zshrc). Assuming you extracted the menuapp directory to your home directory, the line would look like this:</p>
+<div class="fragment"><div class="line">export PATH=&quot;$HOME&quot;/menuapp/bin:&quot;$PATH&quot;</div>
+</div><!-- fragment --><hr  />
+<h2 class="doxsection"><a class="anchor" id="download-and-install-c-menu-source"></a>
+Download and Install C-Menu Source</h2>
+<p>Currently, building from source is the recommended way to install C-Menu, as it ensures that you have the latest features and bug fixes.</p>
+<div class="fragment"><div class="line">gh repo clone BillWaller/C-Menu</div>
+</div><!-- fragment --><ul>
+<li>Copy the menuapp directory to your desired location:</li>
+</ul>
+<div class="fragment"><div class="line">cp -r C-Menu/src/menuapp /home/yourusername/</div>
+</div><!-- fragment --><hr  />
+<h3 class="doxsection"><a class="anchor" id="prerequisites-1"></a>
+Prerequisites</h3>
+<ul>
+<li>One of:<ul>
+<li>CMake 3.20 or higher, or</li>
+<li>GNU Make 4.3 or higher</li>
+</ul>
+</li>
+<li>A C compiler that supports C23 or later (e.g., GCC 13 or later, Clang 15 or later)</li>
+<li>GNU GLIBC development files</li>
+<li>GNU Math Library (libm) development files</li>
+</ul>
+<p>One or both:</p><ul>
+<li>NCursesw development libraries 6.5 or later</li>
+<li>Notcurses development libraries v3.0.17 or later</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="to-build-the-c-menu-binaries-and-libraries"></a>
+To Build the C-Menu Binaries and Libraries</h1>
+<p>Change to the source directory, C-Menu/src, and type:</p>
+<div class="fragment"><div class="line">./chkui</div>
+</div><!-- fragment --><p>The script should respond with a message similar to the following:</p>
+<div class="fragment"><div class="line">menu linked with ncurses</div>
+<div class="line">CMake - NCURSES</div>
+<div class="line">Makefile - NCURSES</div>
+</div><!-- fragment --><p>If these are the options you want, proceed with the build: To switch from NCURSES to NOTCURSES or vice versa, run the chkui script again with the "-s" option.</p>
+<div class="fragment"><div class="line">./chkui -s</div>
+</div><!-- fragment --><p>The script should respond with a message similar to the following:</p>
+<div class="fragment"><div class="line">menu linked with ncurses</div>
+<div class="line">CMake - NCURSES</div>
+<div class="line">Makefile - NCURSES</div>
+<div class="line">CMake switching to NOTCURSES</div>
+<div class="line">Makefile switching to NOTCURSES</div>
+</div><!-- fragment --><hr  />
+<p>To build with CMake, remain in the source directory, C-Menu/src, and type: </p><div class="fragment"><div class="line">./cmake.sh</div>
+</div><!-- fragment --><p> This will create a build directory if it doesn't already exist. After the cmake.sh script finishes, change to the build directory and type:</p>
+<div class="fragment"><div class="line">make</div>
+<div class="line">make install</div>
+</div><!-- fragment --><hr  />
+<p>To build with GNU Makefile, remain in the source directory, C-Menu/src, and type: </p><div class="fragment"><div class="line">make</div>
+<div class="line">make install</div>
+</div><!-- fragment --><hr  />
+<h2 class="doxsection"><a class="anchor" id="finish-the-installation"></a>
+Finish the installation</h2>
+<ul>
+<li>Vrify that the C-Menu libraries and binaries have been installed to the correct directories (e.g., /home/yourusername/menuapp/lib64 and /home/yourusername/menuapp/bin) and that the permissions are set correctly.</li>
+</ul>
+<div class="fragment"><div class="line">ls -l &quot;$HOME&quot;/menuapp/lib64 &quot;$HOME&quot;/menuapp/bin</div>
+</div><!-- fragment --><div class="image">
+<img src="../../postmakels.png" alt=""/>
+<div class="caption">
+Directory Listing</div></div>
+    <ul>
+<li>Register the C-Menu libraries with the dynamic linker by running the following command:</li>
+</ul>
+<div class="fragment"><div class="line">sudo ldconfig -v &quot;$HOME&quot;/menuapp/lib64</div>
+</div><!-- fragment --><ul>
+<li>Add the C-Menu bin directory to your PATH environment variable by adding the following line to your shell profile (e.g., ~/.bashrc or ~/.zshrc):</li>
+</ul>
+<div class="fragment"><div class="line">export PATH=&quot;/home/yourusername/menuapp/bin:&quot;$PATH&quot;</div>
+</div><!-- fragment --><p>(replace /home/yourusername with the actual path to your menuapp directory) and save the file. 😆</p>
+<ul>
+<li>Copy the sample minitrc from the C-Menu/menuapp directory to your home directory:</li>
+</ul>
+<div class="fragment"><div class="line">cp &quot;$HOME&quot;/menuapp/minitrc &quot;$HOME&quot;/.minitrc</div>
+</div><!-- fragment --><ul>
+<li>Edit the ~/.minitrc file to customize your C-Menu configuration as needed.</li>
+</ul>
+<div class="fragment"><div class="line">vi ~/.minitrc</div>
+</div><!-- fragment --><ul>
+<li>Source your shell profile to apply the changes to your PATH:</li>
+</ul>
+<div class="fragment"><div class="line">source ~/.bashrc</div>
+</div><!-- fragment --><ul>
+<li>Start C-Menu by running the following command in your terminal:</li>
+</ul>
+<div class="fragment"><div class="line">menu</div>
+</div><!-- fragment --><div class="image">
+<img src="../../applications_menu.png" alt=""/>
+<div class="caption">
+C-Menu Running</div></div>
+     </div></div><!-- contents -->
+</div><!-- PageDoc -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>
@@ -126,7 +234,6 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('d7/d19/a03166.
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="../../d7/d19/a03166.html">README.md</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>

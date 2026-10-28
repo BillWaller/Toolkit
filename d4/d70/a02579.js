@@ -1,12 +1,18 @@
 var a02579 =
 [
-    [ "bg", "d4/d70/a02579.html#a31bbaffb9a0d243d7b5d61ed5daeee2c", null ],
-    [ "blink", "d4/d70/a02579.html#a47c61700d9ff0dab543da03e06534fad", null ],
-    [ "bold", "d4/d70/a02579.html#afcfa411165bb3208f82730c1259501b7", null ],
-    [ "dim", "d4/d70/a02579.html#a1f7c494e93ddd6eb4ab4f8520bfe4f38", null ],
-    [ "fg", "d4/d70/a02579.html#a57bf3ffa64210db977a80acef3e1c672", null ],
-    [ "invis", "d4/d70/a02579.html#a6a42c3be0eb3e39b6bd65a02d796ea7d", null ],
-    [ "italic", "d4/d70/a02579.html#aa24e056b9b250b844f4c979ebbecab09", null ],
-    [ "reverse", "d4/d70/a02579.html#aed90271dc6219ca9b7b54be75286bd2f", null ],
-    [ "underline", "d4/d70/a02579.html#a3b2cbf397bc08d68184bf5bfdcd654a3", null ]
+    [ "destroy_form", "d4/d70/a02579.html#ga8e0f566e6ae953068fec9e896ecb0123", null ],
+    [ "destroy_init", "d4/d70/a02579.html#gaac196563b2f701fba2d1580ac8813de7", null ],
+    [ "destroy_menu", "d4/d70/a02579.html#ga8708b20d5d31a2bd82d91d281236ce64", null ],
+    [ "destroy_pick", "d4/d70/a02579.html#gaea01afdf2f6aa68b25d51a4b714ffec2", null ],
+    [ "destroy_view", "d4/d70/a02579.html#ga519762bc6148577dc96caf851c3ebfe9", null ],
+    [ "init_form_files", "d4/d70/a02579.html#ga4da25f98e58860d93b737cdc1997e9e9", null ],
+    [ "init_menu_files", "d4/d70/a02579.html#ga6a3ca11276b38608f15cef7c3962143e", null ],
+    [ "init_pick_files", "d4/d70/a02579.html#gab40bb77758b149f33cbde8063f341b00", null ],
+    [ "init_view_files", "d4/d70/a02579.html#gac5213483d722f8f1bd5c28fbbb55369e", null ],
+    [ "new_form", "d4/d70/a02579.html#gabea148e77436a6475ea63438e5c921b8", null ],
+    [ "new_init", "d4/d70/a02579.html#ga75cffbfad8930c347fa9ae68b69f3bdf", null ],
+    [ "new_menu", "d4/d70/a02579.html#ga53c1b7dfa61a627b874094a12da2d40e", null ],
+    [ "new_pick", "d4/d70/a02579.html#ga2fe0f8ed8c8996826b6167aa109cd08a", null ],
+    [ "new_view", "d4/d70/a02579.html#gaa46e79b1ded1c4de3bfabc5508c914c3", null ],
+    [ "verify_spec_arg", "d4/d70/a02579.html#ga19e3bccd331a201ea6df17139be9b34c", null ]
 ];

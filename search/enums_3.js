@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['lfflags_0',['LFFlags',['../d9/d7d/a01880.html#aac04c5533f2d11a31cc2a30e3a8fef6f',1,'cm.h']]],
-  ['lftypes_1',['LFTypes',['../d9/d7d/a01880.html#ab0c5e0ac4686a0f6bdf399c2de5f6c83',1,'cm.h']]]
+  ['initvariables_0',['InitVariables',['../d1/d1a/a02546.html#a964fa61be5e30597c14ae6b1e24a7994',1,'InitVariables:&#160;init.c'],['../d1/d1a/a02546.html#a964fa61be5e30597c14ae6b1e24a7994',1,'InitVariables:&#160;init.c']]]
 ];

@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['json_0',['Tree-Sitter config.json',['../dc/d00/a03118.html#tree-sitter-configjson',1,'']]],
-  ['june_202026_1',['June 2026',['../d0/d75/a03105.html#date-june-2026',1,'date: June 2026'],['../d8/db1/a03098.html#date-june-2026-1',1,'date: June 2026'],['../da/dcd/a03108.html#date-june-2026-3',1,'date: June 2026'],['../d4/d6e/a03099.html#date-june-2026-2',1,'date: June 2026'],['../d9/d5f/a03109.html#date-june-2026-4',1,'date: June 2026'],['../d0/dcd/a03113.html#date-june-2026-5',1,'date: June 2026'],['../d2/da6/a03117.html#date-june-2026-6',1,'date: June 2026'],['../d8/dfb/a03122.html#date-june-2026-7',1,'date: June 2026']]],
-  ['just_20do_20it_2',['Just Do It',['../df/d9e/a03111.html#just-do-it',1,'']]]
+  ['key_20characters_0',['Menu Key characters',['../dc/d10/a03169.html#menu-key-characters',1,'']]],
+  ['key_20features_1',['Key Features',['../da/de5/a03170.html#form-key-features',1,'Form Key Features'],['../da/de5/a03170.html#key-features',1,'Key Features']]],
+  ['key_20value_20pairs_2',['Key Value Pairs',['../d8/dde/a03178.html#key-value-pairs',1,'']]],
+  ['keyboard_20mouse_20input_3',['C-Keys - Diagnose Keyboard/Mouse Input',['../da/de5/a03170.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keys_4',['Motion Keys',['../d0/d9f/a03152.html#motion-keys',1,'']]],
+  ['keys_20diagnose_20keyboard_20mouse_20input_5',['C-Keys - Diagnose Keyboard/Mouse Input',['../da/de5/a03170.html#c-keys---diagnose-keyboardmouse-input',1,'']]],
+  ['keys_20rsh_20and_20lf_6',['Menu, Form, Pick, View, C-Keys, RSH, and lf',['../da/de5/a03170.html#menu-form-pick-view-c-keys-rsh-and-lf',1,'']]],
+  ['kitty_7',['Kitty',['../d0/d04/a03161.html#alacritty-and-kitty',1,'Alacritty and Kitty'],['../d4/d1a/a03154.html#htop-in-kitty',1,'HTOP (in Kitty)'],['../d7/d90/a03177.html#kitty',1,'Kitty']]],
+  ['kitty_20configuration_8',['Kitty Configuration',['../d8/d29/a03162.html#kitty-configuration',1,'Kitty Configuration'],['../d0/d74/a03149.html#kitty-configuration-1',1,'Kitty Configuration']]]
 ];

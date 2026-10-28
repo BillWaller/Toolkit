@@ -1,14 +1,8 @@
 var a02571 =
 [
-    [ "get_next_char", "d7/d12/a02571.html#gafa98387c57104e28e438d8bbc23b26eb", null ],
-    [ "get_prev_char", "d7/d12/a02571.html#ga56a278d5d4b1808207f550ee3a61c476", null ],
-    [ "build_prompt", "d7/d12/a02571.html#gaf01721a6369d49d9f1eebfc4ba6d0a95", null ],
-    [ "cat_file", "d7/d12/a02571.html#ga6543444a87ef174a7b63fa3adcb16c58", null ],
-    [ "enter_file_spec", "d7/d12/a02571.html#ga2ffea5674e85f124a70e19f745a66583", null ],
-    [ "get_cmd_arg", "d7/d12/a02571.html#ga8e98d9f33c5f6aa78ea2fbc13c75b3a9", null ],
-    [ "get_cmd_char", "d7/d12/a02571.html#gab3d3c80c5b7bb6dc461a8e5746be7690", null ],
-    [ "lp", "d7/d12/a02571.html#ga4e2304ed84ba722af119774caef42090", null ],
-    [ "view_cmd_processor", "d7/d12/a02571.html#ga9c4b3ba5f73c18b486646c62b933972a", null ],
-    [ "view_file", "d7/d12/a02571.html#ga0bd4dc056ab5010547129bb87819789b", null ],
-    [ "write_view_buffer", "d7/d12/a02571.html#ga30ab3b4282eabd18619c5b053ff8b0b1", null ]
+    [ "fork_detach_execvp", "d7/d12/a02571.html#gaf878519c68b24567c915493739b6e979", null ],
+    [ "fork_exec", "d7/d12/a02571.html#ga386fad82c5208c7d3b2a5060882974f3", null ],
+    [ "full_screen_fork_exec", "d7/d12/a02571.html#ga907dc4a5b8c29a03d23bdc87f41b5f1b", null ],
+    [ "full_screen_shell", "d7/d12/a02571.html#gaeb3e7eb282467134ce50fde7d9ebd19d", null ],
+    [ "shell", "d7/d12/a02571.html#ga5c3ffccf49f08359334198f7fce3f9df", null ]
 ];
